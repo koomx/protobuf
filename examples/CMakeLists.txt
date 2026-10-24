@@ -1,48 +1,17 @@
-# Minimum CMake required
-cmake_minimum_required(VERSION 2.8.12)
+# Copyright (C) Kumo inc. and its affiliates.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+#
 
-# Project
-project(protobuf-examples)
-
-# Find required protobuf package
-find_package(protobuf CONFIG REQUIRED)
-
-if(protobuf_VERBOSE)
-  message(STATUS "Using Protocol Buffers ${protobuf_VERSION}")
-endif()
-
-set(CMAKE_INCLUDE_CURRENT_DIR TRUE)
-
-# http://www.cmake.org/Wiki/CMake_FAQ#How_can_I_build_my_MSVC_application_with_a_static_runtime.3F
-if(MSVC AND protobuf_MSVC_STATIC_RUNTIME)
-  foreach(flag_var
-      CMAKE_CXX_FLAGS CMAKE_CXX_FLAGS_DEBUG CMAKE_CXX_FLAGS_RELEASE
-      CMAKE_CXX_FLAGS_MINSIZEREL CMAKE_CXX_FLAGS_RELWITHDEBINFO)
-    if(${flag_var} MATCHES "/MD")
-      string(REGEX REPLACE "/MD" "/MT" ${flag_var} "${${flag_var}}")
-    endif(${flag_var} MATCHES "/MD")
-  endforeach()
-endif()
-
-foreach(example add_person list_people)
-  set(${example}_SRCS ${example}.cc)
-  set(${example}_PROTOS addressbook.proto)
-
-  #Code Generation
-  if(protobuf_MODULE_COMPATIBLE) #Legacy Support
-    protobuf_generate_cpp(${example}_PROTO_SRCS ${example}_PROTO_HDRS ${${example}_PROTOS})
-    list(APPEND ${example}_SRCS ${${example}_PROTO_SRCS} ${${example}_PROTO_HDRS})
-  endif()
-
-  #Executable setup
-  set(executable_name ${example}_cpp)
-  add_executable(${executable_name} ${${example}_SRCS} ${${example}_PROTOS})
-  if(protobuf_MODULE_COMPATIBLE) #Legacy mode
-    target_include_directories(${executable_name} PUBLIC ${PROTOBUF_INCLUDE_DIRS})
-    target_link_libraries(${executable_name} ${PROTOBUF_LIBRARIES})
-  else()
-    target_link_libraries(${executable_name} protobuf::libprotobuf)
-    protobuf_generate(TARGET ${executable_name})
-  endif()
-
-endforeach()
+# Stub. Teaching binaries are in CMakeLists.examples.txt
+# (installed when generating with -DKMCMAKE_GEN_EXAMPLES=ON).
