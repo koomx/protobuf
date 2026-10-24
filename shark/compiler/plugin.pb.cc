@@ -20,7 +20,7 @@ SHARK_PRAGMA_INIT_SEG
 namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-SHARK_NAMESPACE_OPEN
+namespace shark {
 namespace compiler {
 constexpr Version::Version(
     ::_pbi::ConstantInitialized): _impl_{
@@ -90,108 +90,107 @@ struct CodeGeneratorResponseDefaultTypeInternal {
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 CodeGeneratorResponseDefaultTypeInternal _CodeGeneratorResponse_default_instance_;
 }  // namespace compiler
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fcompiler_2fplugin_2eproto[4];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fcompiler_2fplugin_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fcompiler_2fplugin_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2fcompiler_2fplugin_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::Version, _impl_._has_bits_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::Version, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::compiler::Version, _impl_._has_bits_),
+  SHARK_FIELD_OFFSET(::shark::compiler::Version, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::Version, _impl_.major_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::Version, _impl_.minor_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::Version, _impl_.patch_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::Version, _impl_.suffix_),
+  SHARK_FIELD_OFFSET(::shark::compiler::Version, _impl_.major_),
+  SHARK_FIELD_OFFSET(::shark::compiler::Version, _impl_.minor_),
+  SHARK_FIELD_OFFSET(::shark::compiler::Version, _impl_.patch_),
+  SHARK_FIELD_OFFSET(::shark::compiler::Version, _impl_.suffix_),
   1,
   2,
   3,
   0,
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest, _impl_._has_bits_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorRequest, _impl_._has_bits_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorRequest, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest, _impl_.file_to_generate_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest, _impl_.parameter_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest, _impl_.proto_file_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest, _impl_.compiler_version_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorRequest, _impl_.file_to_generate_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorRequest, _impl_.parameter_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorRequest, _impl_.proto_file_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorRequest, _impl_.compiler_version_),
   ~0u,
   0,
   ~0u,
   1,
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File, _impl_._has_bits_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse_File, _impl_._has_bits_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse_File, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File, _impl_.name_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File, _impl_.insertion_point_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File, _impl_.content_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File, _impl_.generated_code_info_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse_File, _impl_.name_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse_File, _impl_.insertion_point_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse_File, _impl_.content_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse_File, _impl_.generated_code_info_),
   0,
   1,
   2,
   3,
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse, _impl_._has_bits_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse, _impl_._has_bits_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse, _impl_.error_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse, _impl_.supported_features_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse, _impl_.file_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse, _impl_.error_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse, _impl_.supported_features_),
+  SHARK_FIELD_OFFSET(::shark::compiler::CodeGeneratorResponse, _impl_.file_),
   0,
   1,
   ~0u,
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 10, -1, sizeof(::SHARK_NAMESPACE_ID::compiler::Version)},
-  { 14, 24, -1, sizeof(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest)},
-  { 28, 38, -1, sizeof(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File)},
-  { 42, 51, -1, sizeof(::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse)},
+  { 0, 10, -1, sizeof(::shark::compiler::Version)},
+  { 14, 24, -1, sizeof(::shark::compiler::CodeGeneratorRequest)},
+  { 28, 38, -1, sizeof(::shark::compiler::CodeGeneratorResponse_File)},
+  { 42, 51, -1, sizeof(::shark::compiler::CodeGeneratorResponse)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::compiler::_Version_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::compiler::_CodeGeneratorRequest_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::compiler::_CodeGeneratorResponse_File_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::compiler::_CodeGeneratorResponse_default_instance_._instance,
+  &::shark::compiler::_Version_default_instance_._instance,
+  &::shark::compiler::_CodeGeneratorRequest_default_instance_._instance,
+  &::shark::compiler::_CodeGeneratorResponse_File_default_instance_._instance,
+  &::shark::compiler::_CodeGeneratorResponse_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2fcompiler_2fplugin_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\033shark/compiler/plugin.proto\022\030google.pr"
-  "otobuf.compiler\032\026shark/descriptor.proto\""
-  "F\n\007Version\022\r\n\005major\030\001 \001(\005\022\r\n\005minor\030\002 \001(\005"
-  "\022\r\n\005patch\030\003 \001(\005\022\016\n\006suffix\030\004 \001(\t\"\272\001\n\024Code"
-  "GeneratorRequest\022\030\n\020file_to_generate\030\001 \003"
-  "(\t\022\021\n\tparameter\030\002 \001(\t\0228\n\nproto_file\030\017 \003("
-  "\0132$.google.protobuf.FileDescriptorProto\022"
-  ";\n\020compiler_version\030\003 \001(\0132!.google.proto"
-  "buf.compiler.Version\"\301\002\n\025CodeGeneratorRe"
-  "sponse\022\r\n\005error\030\001 \001(\t\022\032\n\022supported_featu"
-  "res\030\002 \001(\004\022B\n\004file\030\017 \003(\01324.google.protobu"
-  "f.compiler.CodeGeneratorResponse.File\032\177\n"
+  "\n\033shark/compiler/plugin.proto\022\016shark.com"
+  "piler\032\026shark/descriptor.proto\"F\n\007Version"
+  "\022\r\n\005major\030\001 \001(\005\022\r\n\005minor\030\002 \001(\005\022\r\n\005patch\030"
+  "\003 \001(\005\022\016\n\006suffix\030\004 \001(\t\"\246\001\n\024CodeGeneratorR"
+  "equest\022\030\n\020file_to_generate\030\001 \003(\t\022\021\n\tpara"
+  "meter\030\002 \001(\t\022.\n\nproto_file\030\017 \003(\0132\032.shark."
+  "FileDescriptorProto\0221\n\020compiler_version\030"
+  "\003 \001(\0132\027.shark.compiler.Version\"\255\002\n\025CodeG"
+  "eneratorResponse\022\r\n\005error\030\001 \001(\t\022\032\n\022suppo"
+  "rted_features\030\002 \001(\004\0228\n\004file\030\017 \003(\0132*.shar"
+  "k.compiler.CodeGeneratorResponse.File\032u\n"
   "\004File\022\014\n\004name\030\001 \001(\t\022\027\n\017insertion_point\030\002"
-  " \001(\t\022\017\n\007content\030\017 \001(\t\022\?\n\023generated_code_"
-  "info\030\020 \001(\0132\".google.protobuf.GeneratedCo"
-  "deInfo\"8\n\007Feature\022\020\n\014FEATURE_NONE\020\000\022\033\n\027F"
-  "EATURE_PROTO3_OPTIONAL\020\001BW\n\034com.google.p"
-  "rotobuf.compilerB\014PluginProtosZ)google.g"
-  "olang.org/protobuf/types/pluginpb"
+  " \001(\t\022\017\n\007content\030\017 \001(\t\0225\n\023generated_code_"
+  "info\030\020 \001(\0132\030.shark.GeneratedCodeInfo\"8\n\007"
+  "Feature\022\020\n\014FEATURE_NONE\020\000\022\033\n\027FEATURE_PRO"
+  "TO3_OPTIONAL\020\001BW\n\034com.google.protobuf.co"
+  "mpilerB\014PluginProtosZ)google.golang.org/"
+  "protobuf/types/pluginpb"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fcompiler_2fplugin_2eproto_deps[1] = {
   &::descriptor_table_shark_2fdescriptor_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_shark_2fcompiler_2fplugin_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fcompiler_2fplugin_2eproto = {
-    false, false, 753, descriptor_table_protodef_shark_2fcompiler_2fplugin_2eproto,
+    false, false, 703, descriptor_table_protodef_shark_2fcompiler_2fplugin_2eproto,
     "shark/compiler/plugin.proto",
     &descriptor_table_shark_2fcompiler_2fplugin_2eproto_once, descriptor_table_shark_2fcompiler_2fplugin_2eproto_deps, 1, 4,
     schemas, file_default_instances, TableStruct_shark_2fcompiler_2fplugin_2eproto::offsets,
@@ -204,7 +203,7 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fcom
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fcompiler_2fplugin_2eproto(&descriptor_table_shark_2fcompiler_2fplugin_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 namespace compiler {
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* CodeGeneratorResponse_Feature_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fcompiler_2fplugin_2eproto);
@@ -251,7 +250,7 @@ Version::Version(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.compiler.Version)
+  // @@protoc_insertion_point(arena_constructor:shark.compiler.Version)
 }
 Version::Version(const Version& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -276,7 +275,7 @@ Version::Version(const Version& from)
   ::memcpy(&_impl_.major_, &from._impl_.major_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.patch_) -
     reinterpret_cast<char*>(&_impl_.major_)) + sizeof(_impl_.patch_));
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.compiler.Version)
+  // @@protoc_insertion_point(copy_constructor:shark.compiler.Version)
 }
 
 inline void Version::SharedCtor(
@@ -298,7 +297,7 @@ inline void Version::SharedCtor(
 }
 
 Version::~Version() {
-  // @@protoc_insertion_point(destructor:google.protobuf.compiler.Version)
+  // @@protoc_insertion_point(destructor:shark.compiler.Version)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -316,7 +315,7 @@ void Version::SetCachedSize(int size) const {
 }
 
 void Version::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.compiler.Version)
+// @@protoc_insertion_point(message_clear_start:shark.compiler.Version)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -375,7 +374,7 @@ const char* Version::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.Version.suffix");
+          ::_pbi::VerifyUTF8(str, "shark.compiler.Version.suffix");
           #endif  // !NDEBUG
         } else
           goto handle_unusual;
@@ -406,7 +405,7 @@ failure:
 
 uint8_t* Version::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.compiler.Version)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.compiler.Version)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -434,7 +433,7 @@ uint8_t* Version::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_suffix().data(), static_cast<int>(this->_internal_suffix().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.Version.suffix");
+      "shark.compiler.Version.suffix");
     target = stream->WriteStringMaybeAliased(
         4, this->_internal_suffix(), target);
   }
@@ -443,12 +442,12 @@ uint8_t* Version::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.compiler.Version)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.compiler.Version)
   return target;
 }
 
 size_t Version::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.compiler.Version)
+// @@protoc_insertion_point(message_byte_size_start:shark.compiler.Version)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -493,7 +492,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Version::GetClassData() const { r
 void Version::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Version*>(&to_msg);
   auto& from = static_cast<const Version&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.compiler.Version)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.compiler.Version)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -518,7 +517,7 @@ void Version::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAM
 }
 
 void Version::CopyFrom(const Version& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.compiler.Version)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.compiler.Version)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -560,13 +559,13 @@ class CodeGeneratorRequest::_Internal {
   static void set_has_parameter(HasBits* has_bits) {
     (*has_bits)[0] |= 1u;
   }
-  static const ::SHARK_NAMESPACE_ID::compiler::Version& compiler_version(const CodeGeneratorRequest* msg);
+  static const ::shark::compiler::Version& compiler_version(const CodeGeneratorRequest* msg);
   static void set_has_compiler_version(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
 };
 
-const ::SHARK_NAMESPACE_ID::compiler::Version&
+const ::shark::compiler::Version&
 CodeGeneratorRequest::_Internal::compiler_version(const CodeGeneratorRequest* msg) {
   return *msg->_impl_.compiler_version_;
 }
@@ -577,7 +576,7 @@ CodeGeneratorRequest::CodeGeneratorRequest(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.compiler.CodeGeneratorRequest)
+  // @@protoc_insertion_point(arena_constructor:shark.compiler.CodeGeneratorRequest)
 }
 CodeGeneratorRequest::CodeGeneratorRequest(const CodeGeneratorRequest& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -600,9 +599,9 @@ CodeGeneratorRequest::CodeGeneratorRequest(const CodeGeneratorRequest& from)
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_compiler_version()) {
-    _this->_impl_.compiler_version_ = new ::SHARK_NAMESPACE_ID::compiler::Version(*from._impl_.compiler_version_);
+    _this->_impl_.compiler_version_ = new ::shark::compiler::Version(*from._impl_.compiler_version_);
   }
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.compiler.CodeGeneratorRequest)
+  // @@protoc_insertion_point(copy_constructor:shark.compiler.CodeGeneratorRequest)
 }
 
 inline void CodeGeneratorRequest::SharedCtor(
@@ -624,7 +623,7 @@ inline void CodeGeneratorRequest::SharedCtor(
 }
 
 CodeGeneratorRequest::~CodeGeneratorRequest() {
-  // @@protoc_insertion_point(destructor:google.protobuf.compiler.CodeGeneratorRequest)
+  // @@protoc_insertion_point(destructor:shark.compiler.CodeGeneratorRequest)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -645,7 +644,7 @@ void CodeGeneratorRequest::SetCachedSize(int size) const {
 }
 
 void CodeGeneratorRequest::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.compiler.CodeGeneratorRequest)
+// @@protoc_insertion_point(message_clear_start:shark.compiler.CodeGeneratorRequest)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -683,7 +682,7 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
             ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
             CHK_(ptr);
             #ifndef NDEBUG
-            ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.CodeGeneratorRequest.file_to_generate");
+            ::_pbi::VerifyUTF8(str, "shark.compiler.CodeGeneratorRequest.file_to_generate");
             #endif  // !NDEBUG
             if (!ctx->DataAvailable(ptr)) break;
           } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
@@ -697,12 +696,12 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.CodeGeneratorRequest.parameter");
+          ::_pbi::VerifyUTF8(str, "shark.compiler.CodeGeneratorRequest.parameter");
           #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
-      // optional .google.protobuf.compiler.Version compiler_version = 3;
+      // optional .shark.compiler.Version compiler_version = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr = ctx->ParseMessage(_internal_mutable_compiler_version(), ptr);
@@ -710,7 +709,7 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
         } else
           goto handle_unusual;
         continue;
-      // repeated .google.protobuf.FileDescriptorProto proto_file = 15;
+      // repeated .shark.FileDescriptorProto proto_file = 15;
       case 15:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr -= 1;
@@ -749,7 +748,7 @@ failure:
 
 uint8_t* CodeGeneratorRequest::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.compiler.CodeGeneratorRequest)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.compiler.CodeGeneratorRequest)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -759,7 +758,7 @@ uint8_t* CodeGeneratorRequest::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       s.data(), static_cast<int>(s.length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.CodeGeneratorRequest.file_to_generate");
+      "shark.compiler.CodeGeneratorRequest.file_to_generate");
     target = stream->WriteString(1, s, target);
   }
 
@@ -769,19 +768,19 @@ uint8_t* CodeGeneratorRequest::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_parameter().data(), static_cast<int>(this->_internal_parameter().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.CodeGeneratorRequest.parameter");
+      "shark.compiler.CodeGeneratorRequest.parameter");
     target = stream->WriteStringMaybeAliased(
         2, this->_internal_parameter(), target);
   }
 
-  // optional .google.protobuf.compiler.Version compiler_version = 3;
+  // optional .shark.compiler.Version compiler_version = 3;
   if (cached_has_bits & 0x00000002u) {
     target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(3, _Internal::compiler_version(this),
         _Internal::compiler_version(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .google.protobuf.FileDescriptorProto proto_file = 15;
+  // repeated .shark.FileDescriptorProto proto_file = 15;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_proto_file_size()); i < n; i++) {
     const auto& repfield = this->_internal_proto_file(i);
@@ -793,12 +792,12 @@ uint8_t* CodeGeneratorRequest::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.compiler.CodeGeneratorRequest)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.compiler.CodeGeneratorRequest)
   return target;
 }
 
 size_t CodeGeneratorRequest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.compiler.CodeGeneratorRequest)
+// @@protoc_insertion_point(message_byte_size_start:shark.compiler.CodeGeneratorRequest)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -813,7 +812,7 @@ size_t CodeGeneratorRequest::ByteSizeLong() const {
       _impl_.file_to_generate_.Get(i));
   }
 
-  // repeated .google.protobuf.FileDescriptorProto proto_file = 15;
+  // repeated .shark.FileDescriptorProto proto_file = 15;
   total_size += 1UL * this->_internal_proto_file_size();
   for (const auto& msg : this->_impl_.proto_file_) {
     total_size +=
@@ -829,7 +828,7 @@ size_t CodeGeneratorRequest::ByteSizeLong() const {
           this->_internal_parameter());
     }
 
-    // optional .google.protobuf.compiler.Version compiler_version = 3;
+    // optional .shark.compiler.Version compiler_version = 3;
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -850,7 +849,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*CodeGeneratorRequest::GetClassDat
 void CodeGeneratorRequest::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<CodeGeneratorRequest*>(&to_msg);
   auto& from = static_cast<const CodeGeneratorRequest&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.compiler.CodeGeneratorRequest)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.compiler.CodeGeneratorRequest)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -863,7 +862,7 @@ void CodeGeneratorRequest::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, cons
       _this->_internal_set_parameter(from._internal_parameter());
     }
     if (cached_has_bits & 0x00000002u) {
-      _this->_internal_mutable_compiler_version()->::SHARK_NAMESPACE_ID::compiler::Version::MergeFrom(
+      _this->_internal_mutable_compiler_version()->::shark::compiler::Version::MergeFrom(
           from._internal_compiler_version());
     }
   }
@@ -871,7 +870,7 @@ void CodeGeneratorRequest::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, cons
 }
 
 void CodeGeneratorRequest::CopyFrom(const CodeGeneratorRequest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.compiler.CodeGeneratorRequest)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.compiler.CodeGeneratorRequest)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -918,13 +917,13 @@ class CodeGeneratorResponse_File::_Internal {
   static void set_has_content(HasBits* has_bits) {
     (*has_bits)[0] |= 4u;
   }
-  static const ::SHARK_NAMESPACE_ID::GeneratedCodeInfo& generated_code_info(const CodeGeneratorResponse_File* msg);
+  static const ::shark::GeneratedCodeInfo& generated_code_info(const CodeGeneratorResponse_File* msg);
   static void set_has_generated_code_info(HasBits* has_bits) {
     (*has_bits)[0] |= 8u;
   }
 };
 
-const ::SHARK_NAMESPACE_ID::GeneratedCodeInfo&
+const ::shark::GeneratedCodeInfo&
 CodeGeneratorResponse_File::_Internal::generated_code_info(const CodeGeneratorResponse_File* msg) {
   return *msg->_impl_.generated_code_info_;
 }
@@ -936,7 +935,7 @@ CodeGeneratorResponse_File::CodeGeneratorResponse_File(::SHARK_NAMESPACE_ID::Are
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.compiler.CodeGeneratorResponse.File)
+  // @@protoc_insertion_point(arena_constructor:shark.compiler.CodeGeneratorResponse.File)
 }
 CodeGeneratorResponse_File::CodeGeneratorResponse_File(const CodeGeneratorResponse_File& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -975,9 +974,9 @@ CodeGeneratorResponse_File::CodeGeneratorResponse_File(const CodeGeneratorRespon
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_generated_code_info()) {
-    _this->_impl_.generated_code_info_ = new ::SHARK_NAMESPACE_ID::GeneratedCodeInfo(*from._impl_.generated_code_info_);
+    _this->_impl_.generated_code_info_ = new ::shark::GeneratedCodeInfo(*from._impl_.generated_code_info_);
   }
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.compiler.CodeGeneratorResponse.File)
+  // @@protoc_insertion_point(copy_constructor:shark.compiler.CodeGeneratorResponse.File)
 }
 
 inline void CodeGeneratorResponse_File::SharedCtor(
@@ -1007,7 +1006,7 @@ inline void CodeGeneratorResponse_File::SharedCtor(
 }
 
 CodeGeneratorResponse_File::~CodeGeneratorResponse_File() {
-  // @@protoc_insertion_point(destructor:google.protobuf.compiler.CodeGeneratorResponse.File)
+  // @@protoc_insertion_point(destructor:shark.compiler.CodeGeneratorResponse.File)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1028,7 +1027,7 @@ void CodeGeneratorResponse_File::SetCachedSize(int size) const {
 }
 
 void CodeGeneratorResponse_File::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.compiler.CodeGeneratorResponse.File)
+// @@protoc_insertion_point(message_clear_start:shark.compiler.CodeGeneratorResponse.File)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1067,7 +1066,7 @@ const char* CodeGeneratorResponse_File::_InternalParse(const char* ptr, ::_pbi::
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.CodeGeneratorResponse.File.name");
+          ::_pbi::VerifyUTF8(str, "shark.compiler.CodeGeneratorResponse.File.name");
           #endif  // !NDEBUG
         } else
           goto handle_unusual;
@@ -1079,7 +1078,7 @@ const char* CodeGeneratorResponse_File::_InternalParse(const char* ptr, ::_pbi::
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.CodeGeneratorResponse.File.insertion_point");
+          ::_pbi::VerifyUTF8(str, "shark.compiler.CodeGeneratorResponse.File.insertion_point");
           #endif  // !NDEBUG
         } else
           goto handle_unusual;
@@ -1091,12 +1090,12 @@ const char* CodeGeneratorResponse_File::_InternalParse(const char* ptr, ::_pbi::
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.CodeGeneratorResponse.File.content");
+          ::_pbi::VerifyUTF8(str, "shark.compiler.CodeGeneratorResponse.File.content");
           #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
-      // optional .google.protobuf.GeneratedCodeInfo generated_code_info = 16;
+      // optional .shark.GeneratedCodeInfo generated_code_info = 16;
       case 16:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 130)) {
           ptr = ctx->ParseMessage(_internal_mutable_generated_code_info(), ptr);
@@ -1130,7 +1129,7 @@ failure:
 
 uint8_t* CodeGeneratorResponse_File::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.compiler.CodeGeneratorResponse.File)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.compiler.CodeGeneratorResponse.File)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1140,7 +1139,7 @@ uint8_t* CodeGeneratorResponse_File::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.CodeGeneratorResponse.File.name");
+      "shark.compiler.CodeGeneratorResponse.File.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
   }
@@ -1150,7 +1149,7 @@ uint8_t* CodeGeneratorResponse_File::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_insertion_point().data(), static_cast<int>(this->_internal_insertion_point().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.CodeGeneratorResponse.File.insertion_point");
+      "shark.compiler.CodeGeneratorResponse.File.insertion_point");
     target = stream->WriteStringMaybeAliased(
         2, this->_internal_insertion_point(), target);
   }
@@ -1160,12 +1159,12 @@ uint8_t* CodeGeneratorResponse_File::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_content().data(), static_cast<int>(this->_internal_content().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.CodeGeneratorResponse.File.content");
+      "shark.compiler.CodeGeneratorResponse.File.content");
     target = stream->WriteStringMaybeAliased(
         15, this->_internal_content(), target);
   }
 
-  // optional .google.protobuf.GeneratedCodeInfo generated_code_info = 16;
+  // optional .shark.GeneratedCodeInfo generated_code_info = 16;
   if (cached_has_bits & 0x00000008u) {
     target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(16, _Internal::generated_code_info(this),
@@ -1176,12 +1175,12 @@ uint8_t* CodeGeneratorResponse_File::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.compiler.CodeGeneratorResponse.File)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.compiler.CodeGeneratorResponse.File)
   return target;
 }
 
 size_t CodeGeneratorResponse_File::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.compiler.CodeGeneratorResponse.File)
+// @@protoc_insertion_point(message_byte_size_start:shark.compiler.CodeGeneratorResponse.File)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1211,7 +1210,7 @@ size_t CodeGeneratorResponse_File::ByteSizeLong() const {
           this->_internal_content());
     }
 
-    // optional .google.protobuf.GeneratedCodeInfo generated_code_info = 16;
+    // optional .shark.GeneratedCodeInfo generated_code_info = 16;
     if (cached_has_bits & 0x00000008u) {
       total_size += 2 +
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -1232,7 +1231,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*CodeGeneratorResponse_File::GetCl
 void CodeGeneratorResponse_File::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<CodeGeneratorResponse_File*>(&to_msg);
   auto& from = static_cast<const CodeGeneratorResponse_File&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.compiler.CodeGeneratorResponse.File)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.compiler.CodeGeneratorResponse.File)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1249,7 +1248,7 @@ void CodeGeneratorResponse_File::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg
       _this->_internal_set_content(from._internal_content());
     }
     if (cached_has_bits & 0x00000008u) {
-      _this->_internal_mutable_generated_code_info()->::SHARK_NAMESPACE_ID::GeneratedCodeInfo::MergeFrom(
+      _this->_internal_mutable_generated_code_info()->::shark::GeneratedCodeInfo::MergeFrom(
           from._internal_generated_code_info());
     }
   }
@@ -1257,7 +1256,7 @@ void CodeGeneratorResponse_File::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg
 }
 
 void CodeGeneratorResponse_File::CopyFrom(const CodeGeneratorResponse_File& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.compiler.CodeGeneratorResponse.File)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.compiler.CodeGeneratorResponse.File)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1311,7 +1310,7 @@ CodeGeneratorResponse::CodeGeneratorResponse(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.compiler.CodeGeneratorResponse)
+  // @@protoc_insertion_point(arena_constructor:shark.compiler.CodeGeneratorResponse)
 }
 CodeGeneratorResponse::CodeGeneratorResponse(const CodeGeneratorResponse& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -1333,7 +1332,7 @@ CodeGeneratorResponse::CodeGeneratorResponse(const CodeGeneratorResponse& from)
       _this->GetArenaForAllocation());
   }
   _this->_impl_.supported_features_ = from._impl_.supported_features_;
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.compiler.CodeGeneratorResponse)
+  // @@protoc_insertion_point(copy_constructor:shark.compiler.CodeGeneratorResponse)
 }
 
 inline void CodeGeneratorResponse::SharedCtor(
@@ -1354,7 +1353,7 @@ inline void CodeGeneratorResponse::SharedCtor(
 }
 
 CodeGeneratorResponse::~CodeGeneratorResponse() {
-  // @@protoc_insertion_point(destructor:google.protobuf.compiler.CodeGeneratorResponse)
+  // @@protoc_insertion_point(destructor:shark.compiler.CodeGeneratorResponse)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1373,7 +1372,7 @@ void CodeGeneratorResponse::SetCachedSize(int size) const {
 }
 
 void CodeGeneratorResponse::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.compiler.CodeGeneratorResponse)
+// @@protoc_insertion_point(message_clear_start:shark.compiler.CodeGeneratorResponse)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1402,7 +1401,7 @@ const char* CodeGeneratorResponse::_InternalParse(const char* ptr, ::_pbi::Parse
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
           #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "google.protobuf.compiler.CodeGeneratorResponse.error");
+          ::_pbi::VerifyUTF8(str, "shark.compiler.CodeGeneratorResponse.error");
           #endif  // !NDEBUG
         } else
           goto handle_unusual;
@@ -1416,7 +1415,7 @@ const char* CodeGeneratorResponse::_InternalParse(const char* ptr, ::_pbi::Parse
         } else
           goto handle_unusual;
         continue;
-      // repeated .google.protobuf.compiler.CodeGeneratorResponse.File file = 15;
+      // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
       case 15:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr -= 1;
@@ -1455,7 +1454,7 @@ failure:
 
 uint8_t* CodeGeneratorResponse::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.compiler.CodeGeneratorResponse)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.compiler.CodeGeneratorResponse)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1465,7 +1464,7 @@ uint8_t* CodeGeneratorResponse::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_error().data(), static_cast<int>(this->_internal_error().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "google.protobuf.compiler.CodeGeneratorResponse.error");
+      "shark.compiler.CodeGeneratorResponse.error");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_error(), target);
   }
@@ -1476,7 +1475,7 @@ uint8_t* CodeGeneratorResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_supported_features(), target);
   }
 
-  // repeated .google.protobuf.compiler.CodeGeneratorResponse.File file = 15;
+  // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_file_size()); i < n; i++) {
     const auto& repfield = this->_internal_file(i);
@@ -1488,19 +1487,19 @@ uint8_t* CodeGeneratorResponse::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.compiler.CodeGeneratorResponse)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.compiler.CodeGeneratorResponse)
   return target;
 }
 
 size_t CodeGeneratorResponse::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.compiler.CodeGeneratorResponse)
+// @@protoc_insertion_point(message_byte_size_start:shark.compiler.CodeGeneratorResponse)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .google.protobuf.compiler.CodeGeneratorResponse.File file = 15;
+  // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
   total_size += 1UL * this->_internal_file_size();
   for (const auto& msg : this->_impl_.file_) {
     total_size +=
@@ -1535,7 +1534,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*CodeGeneratorResponse::GetClassDa
 void CodeGeneratorResponse::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<CodeGeneratorResponse*>(&to_msg);
   auto& from = static_cast<const CodeGeneratorResponse&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.compiler.CodeGeneratorResponse)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.compiler.CodeGeneratorResponse)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1555,7 +1554,7 @@ void CodeGeneratorResponse::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, con
 }
 
 void CodeGeneratorResponse::CopyFrom(const CodeGeneratorResponse& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.compiler.CodeGeneratorResponse)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.compiler.CodeGeneratorResponse)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1587,23 +1586,23 @@ void CodeGeneratorResponse::InternalSwap(CodeGeneratorResponse* other) {
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace compiler
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::compiler::Version*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::compiler::Version >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::compiler::Version >(arena);
+template<> SHARK_NOINLINE ::shark::compiler::Version*
+Arena::CreateMaybeMessage< ::shark::compiler::Version >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::compiler::Version >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorRequest >(arena);
+template<> SHARK_NOINLINE ::shark::compiler::CodeGeneratorRequest*
+Arena::CreateMaybeMessage< ::shark::compiler::CodeGeneratorRequest >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::compiler::CodeGeneratorRequest >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse_File >(arena);
+template<> SHARK_NOINLINE ::shark::compiler::CodeGeneratorResponse_File*
+Arena::CreateMaybeMessage< ::shark::compiler::CodeGeneratorResponse_File >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::compiler::CodeGeneratorResponse_File >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::compiler::CodeGeneratorResponse >(arena);
+template<> SHARK_NOINLINE ::shark::compiler::CodeGeneratorResponse*
+Arena::CreateMaybeMessage< ::shark::compiler::CodeGeneratorResponse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::compiler::CodeGeneratorResponse >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

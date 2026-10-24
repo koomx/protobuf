@@ -39,10 +39,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 // An StructuredObjectWriter is an ObjectWriter for writing
 // tree-structured data in a stream of events representing objects
@@ -110,10 +107,7 @@ class SHARK_EXPORT StructuredObjectWriter : public ObjectWriter {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StructuredObjectWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

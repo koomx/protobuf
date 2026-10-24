@@ -544,7 +544,7 @@ message TestIsInitialized {
 }
 
 // Test that groups have disjoint field numbers from their siblings and
-// parents.  This is NOT possible in proto1; only google.protobuf.  When attempting
+// parents.  This is NOT possible in proto1; only shark.  When attempting
 // to compile with proto1, this will emit an error; so we only include it
 // in protobuf_unittest_proto.
 message TestDupFieldNumber {                        // NO_PROTO1

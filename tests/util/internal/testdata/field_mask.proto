@@ -36,14 +36,14 @@ import "shark/field_mask.proto";
 
 message NestedFieldMask {
   string data = 1;
-  google.protobuf.FieldMask single_mask = 2;
-  repeated google.protobuf.FieldMask repeated_mask = 3;
+  shark.FieldMask single_mask = 2;
+  repeated shark.FieldMask repeated_mask = 3;
 }
 
 message FieldMaskTest {
   string id = 1;
-  google.protobuf.FieldMask single_mask = 2;
-  repeated google.protobuf.FieldMask repeated_mask = 3;
+  shark.FieldMask single_mask = 2;
+  repeated shark.FieldMask repeated_mask = 3;
   repeated NestedFieldMask nested_mask = 4;
 }
 
@@ -63,7 +63,7 @@ message FieldMaskTestCases {
 }
 
 message FieldMaskWrapper {
-  google.protobuf.FieldMask mask = 1;
+  shark.FieldMask mask = 1;
 }
 
 service FieldMaskTestService {

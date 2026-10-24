@@ -35,8 +35,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 struct uint128_pod;
 
@@ -378,8 +377,7 @@ inline uint128& uint128::operator--() {
   return *this;
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

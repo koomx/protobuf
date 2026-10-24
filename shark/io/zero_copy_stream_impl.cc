@@ -50,9 +50,7 @@
 #include <shark/stubs/stl_util.h>
 
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 #ifdef _WIN32
 // Win32 lseek is broken:  If invoked on a non-seekable file descriptor, its
@@ -60,11 +58,11 @@ namespace io {
 #define lseek(fd, offset, origin) ((off_t)-1)
 // DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
 // them like we do below.
-using google::protobuf::io::win32::access;
-using google::protobuf::io::win32::close;
-using google::protobuf::io::win32::open;
-using google::protobuf::io::win32::read;
-using google::protobuf::io::win32::write;
+using shark::io::win32::access;
+using shark::io::win32::close;
+using shark::io::win32::open;
+using shark::io::win32::read;
+using shark::io::win32::write;
 #endif
 
 namespace {
@@ -367,6 +365,4 @@ int64_t ConcatenatingInputStream::ByteCount() const {
 
 // ===================================================================
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

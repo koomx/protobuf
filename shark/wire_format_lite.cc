@@ -50,8 +50,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 #if !defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912)
@@ -812,7 +811,6 @@ size_t WireFormatLite::SInt64Size(const RepeatedField<int64_t>& value) {
 #endif
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

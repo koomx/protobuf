@@ -33,10 +33,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class ExtensionGenerator {
  public:
@@ -58,7 +55,4 @@ class ExtensionGenerator {
   const FieldDescriptor* descriptor_;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

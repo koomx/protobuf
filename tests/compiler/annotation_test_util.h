@@ -36,10 +36,7 @@
 
 // Utilities that assist in writing tests for generator annotations.
 // See java/internal/annotation_unittest.cc for an example.
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace annotation_test_util {
+namespace shark::compiler::annotation_test_util {
 
 // Struct that contains the file generated from a .proto file and its
 // GeneratedCodeInfo. For example, the Java generator will fill this struct
@@ -106,8 +103,5 @@ bool AnnotationMatchesSubstring(const std::string& file_content,
                                 const GeneratedCodeInfo::Annotation* annotation,
                                 const std::string& expected_text);
 
-}  // namespace annotation_test_util
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::annotation_test_util
 

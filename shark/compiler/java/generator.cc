@@ -50,10 +50,7 @@
 
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 
 JavaGenerator::JavaGenerator() {}
@@ -206,7 +203,4 @@ bool JavaGenerator::Generate(const FileDescriptor* file,
   return true;
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

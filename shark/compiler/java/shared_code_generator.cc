@@ -44,10 +44,7 @@
 #include <shark/compiler/java/names.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 SharedCodeGenerator::SharedCodeGenerator(const FileDescriptor* file,
                                          const Options& options)
@@ -192,7 +189,4 @@ void SharedCodeGenerator::GenerateDescriptors(io::Printer* printer) {
   printer->Print("    });\n");
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

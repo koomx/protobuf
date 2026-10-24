@@ -34,8 +34,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 TEST(Status, Constructor) {
@@ -274,5 +273,4 @@ TEST(Status, EqualsDifferentMessage) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

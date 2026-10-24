@@ -35,8 +35,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Provides APIs to test protocol buffers reflectively.
 class MapReflectionTester {
@@ -113,8 +112,7 @@ class MapReflectionTester {
   const FieldDescriptor* map_int32_foreign_message_val_;
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

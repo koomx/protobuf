@@ -35,10 +35,7 @@
 #include <shark/compiler/objectivec/objectivec_helpers.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 // MapFieldGenerator uses RepeatedFieldGenerator as the parent because it
 // provides a bunch of things (no has* methods, comments for contained type,
@@ -190,7 +187,4 @@ void MapFieldGenerator::DetermineObjectiveCClassDefinitions(
   }
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

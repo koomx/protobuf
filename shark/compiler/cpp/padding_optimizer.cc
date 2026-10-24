@@ -32,10 +32,7 @@
 
 #include <shark/compiler/cpp/helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 
@@ -222,7 +219,4 @@ void PaddingOptimizer::OptimizeLayout(
   }
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

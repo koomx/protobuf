@@ -72,8 +72,7 @@
 
 namespace std {}
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 // Some of these constants are macros rather than const ints so that they can
@@ -98,7 +97,7 @@ std::string SHARK_EXPORT VersionString(int version);
 // matches the headers you compiled against.  If a version mismatch is
 // detected, the process will abort.
 #define SHARK_VERIFY_VERSION                                              \
-  ::google::protobuf::internal::VerifyVersion(                            \
+  ::shark::internal::VerifyVersion(                            \
     SHARK_VERSION, SHARK_MIN_LIBRARY_VERSION,                             \
     __FILE__)
 
@@ -172,8 +171,7 @@ class FatalException : public std::exception {
 };
 #endif
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

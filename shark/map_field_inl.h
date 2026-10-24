@@ -41,9 +41,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 // UnwrapMapKey template
 template <typename T>
 T UnwrapMapKey(const MapKey& map_key);
@@ -367,7 +365,5 @@ size_t MapField<Derived, Key, T, kKeyFieldType,
 
   return size;
 }
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 

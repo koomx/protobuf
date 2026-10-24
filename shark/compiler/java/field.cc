@@ -55,10 +55,7 @@
 #include <shark/compiler/java/string_field_lite.h>
 
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 namespace {
 
@@ -306,7 +303,4 @@ void PrintExtraFieldInfo(const std::map<std::string, std::string>& variables,
   }
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

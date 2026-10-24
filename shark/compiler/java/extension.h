@@ -39,8 +39,7 @@
 
 #include <shark/stubs/common.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FieldDescriptor;  // descriptor.h
 namespace compiler {
 namespace java {
@@ -51,11 +50,9 @@ class ClassNameResolver;  // name_resolver.h
 namespace io {
 class Printer;  // printer.h
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace java {
 
@@ -108,6 +105,5 @@ class ImmutableExtensionGenerator : public ExtensionGenerator {
 
 }  // namespace java
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

@@ -39,8 +39,7 @@
 // Must be last.
 #include <shark/port_def.inc>  // NOLINT
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Inside Google, this function implements a horrible, disgusting hack in which
 // we reach into the string's private implementation and resize it without
@@ -81,8 +80,7 @@ inline char* string_as_array(std::string* str) {
   return str->empty() ? nullptr : &*str->begin();
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>  // NOLINT
 

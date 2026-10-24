@@ -42,12 +42,10 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 class SHARK_EXPORT FieldMaskUtil {
-  typedef google::protobuf::FieldMask FieldMask;
+  typedef shark::FieldMask FieldMask;
 
  public:
   // Converts FieldMask to/from string, formatted by separating each path
@@ -253,9 +251,7 @@ class SHARK_EXPORT FieldMaskUtil::TrimOptions {
   bool keep_required_fields_;
 };
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util
 
 #include <shark/port_undef.inc>
 

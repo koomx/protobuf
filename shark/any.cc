@@ -38,9 +38,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 bool AnyMetadata::PackFrom(Arena* arena, const Message& message) {
   return PackFrom(arena, message, kTypeGoogleApisComPrefix);
@@ -75,8 +73,6 @@ bool GetAnyFieldDescriptors(const Message& message,
           (*value_field)->type() == FieldDescriptor::TYPE_BYTES);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

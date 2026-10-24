@@ -9,8 +9,7 @@
 // ===================================================================
 // emulates google3/base/callback.h
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Abstract interface for a callback.  When calling an RPC, you must provide
 // a Closure to call when the procedure completes.  See the Service interface
@@ -574,8 +573,7 @@ inline ResultCallback2<R, A1, A2>* NewPermanentCallback(
 //   Closure* nothing = NewCallback(&DoNothing);
 void SHARK_EXPORT DoNothing();
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -42,9 +42,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // This is the representation for messages that support arena allocation. It
 // uses a tagged pointer to either store the owning Arena pointer, if there are
@@ -306,9 +304,7 @@ class SHARK_EXPORT LiteUnknownFieldSetter {
   std::string buffer_;
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

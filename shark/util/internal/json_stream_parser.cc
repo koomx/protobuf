@@ -45,11 +45,7 @@
 #include <shark/util/internal/json_escaping.h>
 
 
-namespace google {
-namespace protobuf {
-namespace util {
-
-namespace converter {
+namespace shark::util::converter {
 
 // Number of digits in an escaped UTF-16 code unit ('\\' 'u' X X X X)
 static const int kUnicodeEscapedLength = 6;
@@ -989,7 +985,4 @@ JsonStreamParser::TokenType JsonStreamParser::GetNextTokenType() {
   return UNKNOWN;
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

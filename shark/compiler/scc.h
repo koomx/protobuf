@@ -39,9 +39,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 // Description of each strongly connected component. Note that the order
 // of both the descriptors in this SCC and the order of children is
@@ -155,9 +153,7 @@ class PROTOC_EXPORT SCCAnalyzer {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(SCCAnalyzer);
 };
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 
 #include <shark/port_undef.inc>
 

@@ -42,10 +42,7 @@
 #include <shark/compiler/csharp/csharp_helpers.h>
 #include <shark/compiler/csharp/csharp_options.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 EnumGenerator::EnumGenerator(const EnumDescriptor* descriptor, const Options* options) :
     SourceGeneratorBase(options),
@@ -93,7 +90,4 @@ void EnumGenerator::Generate(io::Printer* printer) {
   printer->Print("\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

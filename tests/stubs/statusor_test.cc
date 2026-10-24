@@ -36,9 +36,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace {
 
 class Base1 {
@@ -267,6 +265,4 @@ TEST(StatusOr, TestPointerValueConst) {
 }
 
 }  // namespace
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

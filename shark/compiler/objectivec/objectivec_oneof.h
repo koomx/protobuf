@@ -36,10 +36,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class OneofGenerator {
  public:
@@ -67,8 +64,5 @@ class OneofGenerator {
   std::map<std::string, std::string> variables_;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 

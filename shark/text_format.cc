@@ -66,8 +66,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace {
 
@@ -442,7 +441,7 @@ class TextFormat::Parser::ParserImpl {
                   : DefaultFinderFindAnyType(*message, prefix, full_type_name);
       if (value_descriptor == nullptr) {
         ReportError("Could not find type \"" + prefix_and_full_type_name +
-                    "\" stored in google.protobuf.Any.");
+                    "\" stored in shark.Any.");
         return false;
       }
       DO(ConsumeAnyValue(value_descriptor, &serialized_value));
@@ -1224,7 +1223,7 @@ class TextFormat::Parser::ParserImpl {
       if (!value->IsInitialized()) {
         ReportError(
             "Value of type \"" + value_descriptor->full_name() +
-            "\" stored in google.protobuf.Any has missing required fields");
+            "\" stored in shark.Any has missing required fields");
         return false;
       }
       value->AppendToString(serialized_value);
@@ -2740,7 +2739,6 @@ void TextFormat::Printer::PrintUnknownFields(
   }
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

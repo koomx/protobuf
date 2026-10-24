@@ -51,9 +51,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // A ZeroCopyInputStream that reads compressed data through zlib
 class SHARK_EXPORT GzipInputStream SHARK_FUTURE_FINAL
@@ -195,9 +193,7 @@ class SHARK_EXPORT GzipOutputStream SHARK_FUTURE_FINAL
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(GzipOutputStream);
 };
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>
 

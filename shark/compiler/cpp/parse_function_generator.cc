@@ -38,14 +38,11 @@
 #include <shark/wire_format.h>
 #include <shark/compiler/cpp/helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
-using google::protobuf::internal::WireFormat;
-using google::protobuf::internal::WireFormatLite;
+using shark::internal::WireFormat;
+using shark::internal::WireFormatLite;
 
 std::vector<const FieldDescriptor*> GetOrderedFields(
     const Descriptor* descriptor, const Options& options) {
@@ -1294,7 +1291,7 @@ void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
               "  ::$proto_ns$::internal::LazyField> parse_helper(\n"
               "    $1$::default_instance(),\n"
               "    $msg$GetArenaForAllocation(),\n"
-              "    ::google::protobuf::internal::LazyVerifyOption::$2$,\n"
+              "    ::shark::internal::LazyVerifyOption::$2$,\n"
               "    lazy_field);\n"
               "ptr = ctx->ParseMessage(&parse_helper, ptr);\n",
               FieldMessageTypeName(field, options_),
@@ -1719,7 +1716,4 @@ std::string FieldParseFunctionName(
 
 }  // namespace
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

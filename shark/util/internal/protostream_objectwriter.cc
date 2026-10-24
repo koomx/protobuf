@@ -52,10 +52,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 using util::Status;
 using ::SHARK_NAMESPACE_ID::internal::WireFormatLite;
@@ -63,7 +60,7 @@ using std::placeholders::_1;
 
 
 ProtoStreamObjectWriter::ProtoStreamObjectWriter(
-    TypeResolver* type_resolver, const google::protobuf::Type& type,
+    TypeResolver* type_resolver, const shark::Type& type,
     strings::ByteSink* output, ErrorListener* listener,
     const ProtoStreamObjectWriter::Options& options)
     : ProtoWriter(type_resolver, type, output, listener),
@@ -78,7 +75,7 @@ ProtoStreamObjectWriter::ProtoStreamObjectWriter(
 }
 
 ProtoStreamObjectWriter::ProtoStreamObjectWriter(
-    const TypeInfo* typeinfo, const google::protobuf::Type& type,
+    const TypeInfo* typeinfo, const shark::Type& type,
     strings::ByteSink* output, ErrorListener* listener,
     const ProtoStreamObjectWriter::Options& options)
     : ProtoWriter(typeinfo, type, output, listener),
@@ -92,7 +89,7 @@ ProtoStreamObjectWriter::ProtoStreamObjectWriter(
 }
 
 ProtoStreamObjectWriter::ProtoStreamObjectWriter(
-    const TypeInfo* typeinfo, const google::protobuf::Type& type,
+    const TypeInfo* typeinfo, const shark::Type& type,
     strings::ByteSink* output, ErrorListener* listener)
     : ProtoWriter(typeinfo, type, output, listener),
       master_type_(type),
@@ -339,7 +336,7 @@ void ProtoStreamObjectWriter::AnyWriter::StartAny(const DataPiece& value) {
     type_url_ = s.value();
   }
   // Resolve the type url, and report an error if we failed to resolve it.
-  util::StatusOr<const google::protobuf::Type*> resolved_type =
+  util::StatusOr<const shark::Type*> resolved_type =
       parent_->typeinfo()->ResolveTypeUrl(type_url_);
   if (!resolved_type.ok()) {
     parent_->InvalidValue("Any", resolved_type.status().message());
@@ -347,7 +344,7 @@ void ProtoStreamObjectWriter::AnyWriter::StartAny(const DataPiece& value) {
     return;
   }
   // At this point, type is never null.
-  const google::protobuf::Type* type = resolved_type.value();
+  const shark::Type* type = resolved_type.value();
 
   well_known_type_render_ = FindTypeRenderer(type_url_);
   if (well_known_type_render_ != nullptr ||
@@ -367,7 +364,7 @@ void ProtoStreamObjectWriter::AnyWriter::StartAny(const DataPiece& value) {
   // type of actual data, we may not need to call StartObject(). For
   // example:
   // {
-  //   "@type": "type.googleapis.com/google.protobuf.Value",
+  //   "@type": "type.googleapis.com/shark.Value",
   //   "value": [1, 2, 3],
   // }
   // With the above JSON representation, we will only call StartList() on the
@@ -510,7 +507,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
     }
 
     if (master_type_.name() == kStructValueType) {
-      // We got a StartObject call with google.protobuf.Value field. The only
+      // We got a StartObject call with shark.Value field. The only
       // object within that type is a struct type. So start a struct.
       //
       // The struct field in Value type is named "struct_value"
@@ -585,7 +582,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
     return this;
   }
 
-  const google::protobuf::Field* field = BeginNamed(name, false);
+  const shark::Field* field = BeginNamed(name, false);
 
   if (field == nullptr) return this;
 
@@ -632,7 +629,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
   }
 
   if (IsStructValue(*field)) {
-    // We got a StartObject call with google.protobuf.Value field.  The only
+    // We got a StartObject call with shark.Value field.  The only
     // object within that type is a struct type. So start a struct.
     // Render
     // "<name>": {
@@ -644,8 +641,8 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
     return this;
   }
 
-  if (field->kind() != google::protobuf::Field::TYPE_GROUP &&
-      field->kind() != google::protobuf::Field::TYPE_MESSAGE) {
+  if (field->kind() != shark::Field::TYPE_GROUP &&
+      field->kind() != shark::Field::TYPE_MESSAGE) {
     IncrementInvalidDepth();
     if (!options_.suppress_object_to_scalar_error) {
       InvalidValue(field->name(), "Starting an object on a scalar field");
@@ -687,8 +684,8 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
   }
 
   // Since we cannot have a top-level repeated item in protobuf, the only way
-  // this is valid is if we start a special type google.protobuf.ListValue or
-  // google.protobuf.Value.
+  // this is valid is if we start a special type shark.ListValue or
+  // shark.Value.
   if (current_ == nullptr) {
     if (!name.empty()) {
       InvalidName(name, "Root element should not be named.");
@@ -699,8 +696,8 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
     // If master type is a special type that needs extra values to be written to
     // stream, we write those values.
     if (master_type_.name() == kStructValueType) {
-      // We got a StartList with google.protobuf.Value master type. This means
-      // we have to start the "list_value" within google.protobuf.Value.
+      // We got a StartList with shark.Value master type. This means
+      // we have to start the "list_value" within shark.Value.
       //
       // See
       // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/struct.proto
@@ -717,8 +714,8 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
     }
 
     if (master_type_.name() == kStructListValueType) {
-      // We got a StartList with google.protobuf.ListValue master type. This
-      // means we have to start the "values" within google.protobuf.ListValue.
+      // We got a StartList with shark.ListValue master type. This
+      // means we have to start the "values" within shark.ListValue.
       //
       // Render
       // "<name>": {
@@ -747,9 +744,9 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
   // Since map does not allow repeated values, this can only happen when the map
   // value is of a special type that renders a list in JSON.  These can be one
   // of 3 cases:
-  // i. We are rendering a list value within google.protobuf.Struct
-  // ii. We are rendering a list value within google.protobuf.Value
-  // iii. We are rendering a list value with type google.protobuf.ListValue.
+  // i. We are rendering a list value within shark.Struct
+  // ii. We are rendering a list value within shark.Value
+  // iii. We are rendering a list value with type shark.ListValue.
   if (current_->IsMap()) {
     if (!ValidMapKey(name)) {
       IncrementInvalidDepth();
@@ -826,7 +823,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
   }
 
   // name is not empty
-  const google::protobuf::Field* field = Lookup(name);
+  const shark::Field* field = Lookup(name);
 
   if (field == nullptr) {
     IncrementInvalidDepth();
@@ -1034,7 +1031,7 @@ Status ProtoStreamObjectWriter::RenderTimestamp(ProtoStreamObjectWriter* ow,
 
   int64_t seconds;
   int32_t nanos;
-  if (!::google::protobuf::internal::ParseTime(value.ToString(), &seconds,
+  if (!::shark::internal::ParseTime(value.ToString(), &seconds,
                                                &nanos)) {
     return util::InvalidArgumentError(StrCat("Invalid time format: ", value));
   }
@@ -1156,7 +1153,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
     return this;
   }
 
-  const google::protobuf::Field* field = nullptr;
+  const shark::Field* field = nullptr;
   if (current_->IsMap()) {
     if (!ValidMapKey(name)) return this;
 
@@ -1168,7 +1165,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
 
     if (options_.ignore_null_value_map_entry) {
       // If we are rendering explicit null values and the backend proto field is
-      // not of the google.protobuf.NullType type, interpret null as absence.
+      // not of the shark.NullType type, interpret null as absence.
       if (data.type() == DataPiece::TYPE_NULL &&
           field->type_url() != kStructNullValueTypeUrl) {
         return this;
@@ -1198,7 +1195,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
     }
 
     // If we are rendering explicit null values and the backend proto field is
-    // not of the google.protobuf.NullType type, we do nothing.
+    // not of the shark.NullType type, we do nothing.
     if (data.type() == DataPiece::TYPE_NULL &&
         field->type_url() != kStructNullValueTypeUrl) {
       Pop();
@@ -1217,7 +1214,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
   // Check if the field is of special type. Render it accordingly if so.
   const TypeRenderer* type_renderer = FindTypeRenderer(field->type_url());
   if (type_renderer != nullptr) {
-    // Pass through null value only for google.protobuf.Value. For other
+    // Pass through null value only for shark.Value. For other
     // types we ignore null value just like for regular field types.
     if (data.type() != DataPiece::TYPE_NULL ||
         field->type_url() == kStructValueTypeUrl) {
@@ -1233,7 +1230,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
   }
 
   // If we are rendering explicit null values and the backend proto field is
-  // not of the google.protobuf.NullType type, we do nothing.
+  // not of the shark.NullType type, we do nothing.
   if (data.type() == DataPiece::TYPE_NULL &&
       field->type_url() != kStructNullValueTypeUrl) {
     return this;
@@ -1265,51 +1262,51 @@ SHARK_NAMESPACE_ID::internal::once_flag writer_renderers_init_;
 void ProtoStreamObjectWriter::InitRendererMap() {
   renderers_ = new std::unordered_map<std::string,
                                       ProtoStreamObjectWriter::TypeRenderer>();
-  (*renderers_)["type.googleapis.com/google.protobuf.Timestamp"] =
+  (*renderers_)["type.googleapis.com/shark.Timestamp"] =
       &ProtoStreamObjectWriter::RenderTimestamp;
-  (*renderers_)["type.googleapis.com/google.protobuf.Duration"] =
+  (*renderers_)["type.googleapis.com/shark.Duration"] =
       &ProtoStreamObjectWriter::RenderDuration;
-  (*renderers_)["type.googleapis.com/google.protobuf.FieldMask"] =
+  (*renderers_)["type.googleapis.com/shark.FieldMask"] =
       &ProtoStreamObjectWriter::RenderFieldMask;
-  (*renderers_)["type.googleapis.com/google.protobuf.Double"] =
+  (*renderers_)["type.googleapis.com/shark.Double"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Float"] =
+  (*renderers_)["type.googleapis.com/shark.Float"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Int64"] =
+  (*renderers_)["type.googleapis.com/shark.Int64"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.UInt64"] =
+  (*renderers_)["type.googleapis.com/shark.UInt64"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Int32"] =
+  (*renderers_)["type.googleapis.com/shark.Int32"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.UInt32"] =
+  (*renderers_)["type.googleapis.com/shark.UInt32"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Bool"] =
+  (*renderers_)["type.googleapis.com/shark.Bool"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.String"] =
+  (*renderers_)["type.googleapis.com/shark.String"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Bytes"] =
+  (*renderers_)["type.googleapis.com/shark.Bytes"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.DoubleValue"] =
+  (*renderers_)["type.googleapis.com/shark.DoubleValue"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.FloatValue"] =
+  (*renderers_)["type.googleapis.com/shark.FloatValue"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Int64Value"] =
+  (*renderers_)["type.googleapis.com/shark.Int64Value"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.UInt64Value"] =
+  (*renderers_)["type.googleapis.com/shark.UInt64Value"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Int32Value"] =
+  (*renderers_)["type.googleapis.com/shark.Int32Value"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.UInt32Value"] =
+  (*renderers_)["type.googleapis.com/shark.UInt32Value"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.BoolValue"] =
+  (*renderers_)["type.googleapis.com/shark.BoolValue"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.StringValue"] =
+  (*renderers_)["type.googleapis.com/shark.StringValue"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.BytesValue"] =
+  (*renderers_)["type.googleapis.com/shark.BytesValue"] =
       &ProtoStreamObjectWriter::RenderWrapperType;
-  (*renderers_)["type.googleapis.com/google.protobuf.Value"] =
+  (*renderers_)["type.googleapis.com/shark.Value"] =
       &ProtoStreamObjectWriter::RenderStructValue;
-  ::google::protobuf::internal::OnShutdown(&DeleteRendererMap);
+  ::shark::internal::OnShutdown(&DeleteRendererMap);
 }
 
 void ProtoStreamObjectWriter::DeleteRendererMap() {
@@ -1365,37 +1362,34 @@ void ProtoStreamObjectWriter::PopOneElement() {
   current_.reset(current_->pop<Item>());
 }
 
-bool ProtoStreamObjectWriter::IsMap(const google::protobuf::Field& field) {
+bool ProtoStreamObjectWriter::IsMap(const shark::Field& field) {
   if (field.type_url().empty() ||
-      field.kind() != google::protobuf::Field::TYPE_MESSAGE ||
-      field.cardinality() != google::protobuf::Field::CARDINALITY_REPEATED) {
+      field.kind() != shark::Field::TYPE_MESSAGE ||
+      field.cardinality() != shark::Field::CARDINALITY_REPEATED) {
     return false;
   }
-  const google::protobuf::Type* field_type =
+  const shark::Type* field_type =
       typeinfo()->GetTypeByTypeUrl(field.type_url());
 
   return converter::IsMap(field, *field_type);
 }
 
-bool ProtoStreamObjectWriter::IsAny(const google::protobuf::Field& field) {
+bool ProtoStreamObjectWriter::IsAny(const shark::Field& field) {
   return GetTypeWithoutUrl(field.type_url()) == kAnyType;
 }
 
-bool ProtoStreamObjectWriter::IsStruct(const google::protobuf::Field& field) {
+bool ProtoStreamObjectWriter::IsStruct(const shark::Field& field) {
   return GetTypeWithoutUrl(field.type_url()) == kStructType;
 }
 
 bool ProtoStreamObjectWriter::IsStructValue(
-    const google::protobuf::Field& field) {
+    const shark::Field& field) {
   return GetTypeWithoutUrl(field.type_url()) == kStructValueType;
 }
 
 bool ProtoStreamObjectWriter::IsStructListValue(
-    const google::protobuf::Field& field) {
+    const shark::Field& field) {
   return GetTypeWithoutUrl(field.type_url()) == kStructListValueType;
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

@@ -38,9 +38,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 ThreadSafeArenazSampler& GlobalThreadSafeArenazSampler() {
   static auto* sampler = new ThreadSafeArenazSampler();
@@ -172,6 +170,4 @@ void SetThreadSafeArenazMaxSamples(int32_t max) {}
 void SetThreadSafeArenazGlobalNextSample(int64_t next_sample) {}
 #endif  // defined(SHARK_ARENAZ_SAMPLE)
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

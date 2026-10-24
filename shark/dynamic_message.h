@@ -56,8 +56,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Defined in other files.
 class Descriptor;      // descriptor.h
@@ -218,8 +217,7 @@ class SHARK_EXPORT DynamicMapSorter {
   };
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -50,9 +50,7 @@
 #include <shark/port_def.inc>
 
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // To prevent sharing cache lines between threads
 #ifdef __cpp_aligned_new
@@ -676,9 +674,7 @@ class SHARK_EXPORT ThreadSafeArena {
                 "kSerialArenaSize must be a multiple of 8.");
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

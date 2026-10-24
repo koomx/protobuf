@@ -39,9 +39,7 @@
 #include <gtest/gtest.h>
 #include <shark/stubs/mathutil.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace {
 
 using protobuf_unittest::TestAllTypes;
@@ -500,6 +498,4 @@ TEST_F(DefaultFieldComparatorTest, RepeatedFieldComparison) {
 }
 
 }  // namespace
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

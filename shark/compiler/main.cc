@@ -42,9 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 int ProtobufMain(int argc, char* argv[]) {
 
@@ -104,9 +102,7 @@ int ProtobufMain(int argc, char* argv[]) {
   return cli.Run(argc, argv);
 }
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 
 int main(int argc, char* argv[]) {
   return SHARK_NAMESPACE_ID::compiler::ProtobufMain(argc, argv);

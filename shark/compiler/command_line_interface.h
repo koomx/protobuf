@@ -52,8 +52,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Descriptor;           // descriptor.h
 class DescriptorDatabase;   // descriptor_database.h
@@ -80,10 +79,10 @@ class DiskSourceTree;    // importer.h
 // then write a main() procedure like this:
 //
 //   int main(int argc, char* argv[]) {
-//     google::protobuf::compiler::CommandLineInterface cli;
+//     shark::compiler::CommandLineInterface cli;
 //
 //     // Support generation of C++ source and headers.
-//     google::protobuf::compiler::cpp::CppGenerator cpp_generator;
+//     shark::compiler::cpp::CppGenerator cpp_generator;
 //     cli.RegisterGenerator("--cpp_out", &cpp_generator,
 //       "Generate C++ source and header.");
 //
@@ -455,8 +454,7 @@ class PROTOC_EXPORT CommandLineInterface {
 };
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

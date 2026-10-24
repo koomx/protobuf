@@ -32,10 +32,7 @@
 
 #include <shark/compiler/objectivec/objectivec_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class PrimitiveFieldGenerator : public SingleFieldGenerator {
   friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field);
@@ -78,8 +75,5 @@ class RepeatedPrimitiveFieldGenerator : public RepeatedFieldGenerator {
       const RepeatedPrimitiveFieldGenerator&) = delete;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 

@@ -38,10 +38,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 // CodeGenerator implementation which generates a ObjectiveC source file and
 // header.  If you create your own protocol compiler binary and you want it to
@@ -68,10 +65,7 @@ class PROTOC_EXPORT ObjectiveCGenerator : public CodeGenerator {
   }
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 
 #include <shark/port_undef.inc>
 

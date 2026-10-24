@@ -71,19 +71,18 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 
 #if defined(_WIN32)
 // DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
 // them like we do below.
-using google::protobuf::io::win32::access;
-using google::protobuf::io::win32::close;
-using google::protobuf::io::win32::dup;
-using google::protobuf::io::win32::dup2;
-using google::protobuf::io::win32::open;
-using google::protobuf::io::win32::write;
+using shark::io::win32::access;
+using shark::io::win32::close;
+using shark::io::win32::dup;
+using shark::io::win32::dup2;
+using shark::io::win32::open;
+using shark::io::win32::write;
 #endif
 
 // Disable the whole test when we use tcmalloc for "draconian" heap checks, in
@@ -699,7 +698,7 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
   descriptor_file->CopyTo(file_descriptor_set.add_file());
 
   FileDescriptorProto& any_proto = *file_descriptor_set.add_file();
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_proto);
+  shark::Any::descriptor()->file()->CopyTo(&any_proto);
 
   const FileDescriptor* custom_file =
       protobuf_unittest::AggregateMessage::descriptor()->file();
@@ -710,7 +709,7 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
   FieldDescriptorProto* extension_option =
       file_descriptor_proto->add_extension();
   extension_option->set_name("unknown_option");
-  extension_option->set_extendee(".google.protobuf.MessageOptions");
+  extension_option->set_extendee(".shark.MessageOptions");
   extension_option->set_number(1111);
   extension_option->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
   extension_option->set_type(FieldDescriptorProto::TYPE_INT64);
@@ -2783,5 +2782,4 @@ INSTANTIATE_TEST_SUITE_P(FileDescriptorSetSource, EncodeDecodeTest,
 #include <shark/port_undef.inc>
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

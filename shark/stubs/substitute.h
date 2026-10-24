@@ -41,8 +41,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace strings {
 
 // ----------------------------------------------------------------------
@@ -169,8 +168,7 @@ SHARK_EXPORT void SubstituteAndAppend(
     const internal::SubstituteArg& arg9 = internal::SubstituteArg());
 
 }  // namespace strings
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

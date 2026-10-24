@@ -32,10 +32,7 @@
 
 #include "shark/compiler/java/field.h"
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 class ImmutableMapFieldGenerator : public ImmutableFieldGenerator {
  public:
@@ -77,8 +74,5 @@ class ImmutableMapFieldGenerator : public ImmutableFieldGenerator {
   void GenerateMapGetters(io::Printer* printer) const;
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

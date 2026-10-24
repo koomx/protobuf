@@ -54,8 +54,7 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/hash.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 
 using internal::WireFormat;
@@ -2442,5 +2441,4 @@ void SourceLocationTable::AddImport(const Message* descriptor,
 void SourceLocationTable::Clear() { location_map_.clear(); }
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

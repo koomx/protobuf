@@ -46,9 +46,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 class ZeroCopyInputStream;  // zero_copy_stream.h
 
@@ -432,9 +430,7 @@ inline void Tokenizer::ParseString(const std::string& text,
   ParseStringAppend(text, output);
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>
 

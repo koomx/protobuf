@@ -36,11 +36,7 @@
 #include <tests/util/internal/type_info_test_helper.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
-namespace testing {
+namespace shark::util::converter::testing {
 
 using proto_util_converter::testing::DefaultValueTest;
 
@@ -184,8 +180,4 @@ TEST_P(DefaultValueObjectWriterSuppressListTest, Empty) {
   // Actual testing
   testing_->StartObject("")->EndObject();
 }
-}  // namespace testing
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter::testing

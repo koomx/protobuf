@@ -62,10 +62,7 @@
 // Must be last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 
@@ -1593,7 +1590,4 @@ bool HasMessageFieldOrExtension(const Descriptor* desc) {
   return false;
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

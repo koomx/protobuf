@@ -20,7 +20,7 @@ SHARK_PRAGMA_INIT_SEG
 namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-SHARK_NAMESPACE_OPEN
+namespace shark {
 constexpr Struct_FieldsEntry_DoNotUse::Struct_FieldsEntry_DoNotUse(
     ::_pbi::ConstantInitialized) {}
 struct Struct_FieldsEntry_DoNotUseDefaultTypeInternal {
@@ -72,33 +72,33 @@ struct ListValueDefaultTypeInternal {
   };
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 ListValueDefaultTypeInternal _ListValue_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fstruct_2eproto[4];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fstruct_2eproto[1];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fstruct_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2fstruct_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse, _has_bits_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Struct_FieldsEntry_DoNotUse, _has_bits_),
+  SHARK_FIELD_OFFSET(::shark::Struct_FieldsEntry_DoNotUse, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse, key_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse, value_),
+  SHARK_FIELD_OFFSET(::shark::Struct_FieldsEntry_DoNotUse, key_),
+  SHARK_FIELD_OFFSET(::shark::Struct_FieldsEntry_DoNotUse, value_),
   0,
   1,
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Struct, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Struct, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Struct, _impl_.fields_),
+  SHARK_FIELD_OFFSET(::shark::Struct, _impl_.fields_),
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Value, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Value, _internal_metadata_),
   ~0u,  // no _extensions_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Value, _impl_._oneof_case_[0]),
+  SHARK_FIELD_OFFSET(::shark::Value, _impl_._oneof_case_[0]),
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   ::_pbi::kInvalidFieldOffsetTag,
@@ -107,50 +107,48 @@ const uint32_t TableStruct_shark_2fstruct_2eproto::offsets[] SHARK_SECTION_VARIA
   ::_pbi::kInvalidFieldOffsetTag,
   ::_pbi::kInvalidFieldOffsetTag,
   ::_pbi::kInvalidFieldOffsetTag,
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Value, _impl_.kind_),
+  SHARK_FIELD_OFFSET(::shark::Value, _impl_.kind_),
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::ListValue, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::ListValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::ListValue, _impl_.values_),
+  SHARK_FIELD_OFFSET(::shark::ListValue, _impl_.values_),
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, 8, -1, sizeof(::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse)},
-  { 10, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Struct)},
-  { 17, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Value)},
-  { 30, -1, -1, sizeof(::SHARK_NAMESPACE_ID::ListValue)},
+  { 0, 8, -1, sizeof(::shark::Struct_FieldsEntry_DoNotUse)},
+  { 10, -1, -1, sizeof(::shark::Struct)},
+  { 17, -1, -1, sizeof(::shark::Value)},
+  { 30, -1, -1, sizeof(::shark::ListValue)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::_Struct_FieldsEntry_DoNotUse_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::_Struct_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::_Value_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::_ListValue_default_instance_._instance,
+  &::shark::_Struct_FieldsEntry_DoNotUse_default_instance_._instance,
+  &::shark::_Struct_default_instance_._instance,
+  &::shark::_Value_default_instance_._instance,
+  &::shark::_ListValue_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2fstruct_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\022shark/struct.proto\022\017google.protobuf\"\204\001"
-  "\n\006Struct\0223\n\006fields\030\001 \003(\0132#.google.protob"
-  "uf.Struct.FieldsEntry\032E\n\013FieldsEntry\022\013\n\003"
-  "key\030\001 \001(\t\022%\n\005value\030\002 \001(\0132\026.google.protob"
-  "uf.Value:\0028\001\"\352\001\n\005Value\0220\n\nnull_value\030\001 \001"
-  "(\0162\032.google.protobuf.NullValueH\000\022\026\n\014numb"
-  "er_value\030\002 \001(\001H\000\022\026\n\014string_value\030\003 \001(\tH\000"
-  "\022\024\n\nbool_value\030\004 \001(\010H\000\022/\n\014struct_value\030\005"
-  " \001(\0132\027.google.protobuf.StructH\000\0220\n\nlist_"
-  "value\030\006 \001(\0132\032.google.protobuf.ListValueH"
-  "\000B\006\n\004kind\"3\n\tListValue\022&\n\006values\030\001 \003(\0132\026"
-  ".google.protobuf.Value*\033\n\tNullValue\022\016\n\nN"
-  "ULL_VALUE\020\000B\177\n\023com.google.protobufB\013Stru"
-  "ctProtoP\001Z/google.golang.org/protobuf/ty"
-  "pes/known/structpb\370\001\001\242\002\003GPB\252\002\036Google.Pro"
-  "tobuf.WellKnownTypesb\006proto3"
+  "\n\022shark/struct.proto\022\005shark\"p\n\006Struct\022)\n"
+  "\006fields\030\001 \003(\0132\031.shark.Struct.FieldsEntry"
+  "\032;\n\013FieldsEntry\022\013\n\003key\030\001 \001(\t\022\033\n\005value\030\002 "
+  "\001(\0132\014.shark.Value:\0028\001\"\314\001\n\005Value\022&\n\nnull_"
+  "value\030\001 \001(\0162\020.shark.NullValueH\000\022\026\n\014numbe"
+  "r_value\030\002 \001(\001H\000\022\026\n\014string_value\030\003 \001(\tH\000\022"
+  "\024\n\nbool_value\030\004 \001(\010H\000\022%\n\014struct_value\030\005 "
+  "\001(\0132\r.shark.StructH\000\022&\n\nlist_value\030\006 \001(\013"
+  "2\020.shark.ListValueH\000B\006\n\004kind\")\n\tListValu"
+  "e\022\034\n\006values\030\001 \003(\0132\014.shark.Value*\033\n\tNullV"
+  "alue\022\016\n\nNULL_VALUE\020\000B\177\n\023com.google.proto"
+  "bufB\013StructProtoP\001Z/google.golang.org/pr"
+  "otobuf/types/known/structpb\370\001\001\242\002\003GPB\252\002\036G"
+  "oogle.Protobuf.WellKnownTypesb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fstruct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fstruct_2eproto = {
-    false, false, 628, descriptor_table_protodef_shark_2fstruct_2eproto,
+    false, false, 557, descriptor_table_protodef_shark_2fstruct_2eproto,
     "shark/struct.proto",
     &descriptor_table_shark_2fstruct_2eproto_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_shark_2fstruct_2eproto::offsets,
@@ -163,7 +161,7 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fstr
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fstruct_2eproto(&descriptor_table_shark_2fstruct_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* NullValue_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fstruct_2eproto);
   return file_level_enum_descriptors_shark_2fstruct_2eproto[0];
@@ -205,7 +203,7 @@ Struct::Struct(::SHARK_NAMESPACE_ID::Arena* arena,
   if (arena != nullptr && !is_message_owned) {
     arena->OwnCustomDestructor(this, &Struct::ArenaDtor);
   }
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Struct)
+  // @@protoc_insertion_point(arena_constructor:shark.Struct)
 }
 Struct::Struct(const Struct& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -216,7 +214,7 @@ Struct::Struct(const Struct& from)
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.fields_.MergeFrom(from._impl_.fields_);
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Struct)
+  // @@protoc_insertion_point(copy_constructor:shark.Struct)
 }
 
 inline void Struct::SharedCtor(
@@ -230,7 +228,7 @@ inline void Struct::SharedCtor(
 }
 
 Struct::~Struct() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Struct)
+  // @@protoc_insertion_point(destructor:shark.Struct)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     ArenaDtor(this);
@@ -254,7 +252,7 @@ void Struct::SetCachedSize(int size) const {
 }
 
 void Struct::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Struct)
+// @@protoc_insertion_point(message_clear_start:shark.Struct)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -269,7 +267,7 @@ const char* Struct::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // map<string, .google.protobuf.Value> fields = 1;
+      // map<string, .shark.Value> fields = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -307,13 +305,13 @@ failure:
 
 uint8_t* Struct::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Struct)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Struct)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // map<string, .google.protobuf.Value> fields = 1;
+  // map<string, .shark.Value> fields = 1;
   if (!this->_internal_fields().empty()) {
-    using MapType = ::_pb::Map<std::string, ::SHARK_NAMESPACE_ID::Value>;
+    using MapType = ::_pb::Map<std::string, ::shark::Value>;
     using WireHelper = Struct_FieldsEntry_DoNotUse::Funcs;
     const auto& map_field = this->_internal_fields();
     auto check_utf8 = [](const MapType::value_type& entry) {
@@ -321,7 +319,7 @@ uint8_t* Struct::_InternalSerialize(
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
         entry.first.data(), static_cast<int>(entry.first.length()),
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-        "google.protobuf.Struct.FieldsEntry.key");
+        "shark.Struct.FieldsEntry.key");
     };
 
     if (stream->IsSerializationDeterministic() && map_field.size() > 1) {
@@ -341,22 +339,22 @@ uint8_t* Struct::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Struct)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Struct)
   return target;
 }
 
 size_t Struct::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Struct)
+// @@protoc_insertion_point(message_byte_size_start:shark.Struct)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // map<string, .google.protobuf.Value> fields = 1;
+  // map<string, .shark.Value> fields = 1;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(this->_internal_fields_size());
-  for (::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >::const_iterator
+  for (::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >::const_iterator
       it = this->_internal_fields().begin();
       it != this->_internal_fields().end(); ++it) {
     total_size += Struct_FieldsEntry_DoNotUse::Funcs::ByteSizeLong(it->first, it->second);
@@ -375,7 +373,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Struct::GetClassData() const { re
 void Struct::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Struct*>(&to_msg);
   auto& from = static_cast<const Struct&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Struct)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Struct)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -385,7 +383,7 @@ void Struct::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAME
 }
 
 void Struct::CopyFrom(const Struct& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Struct)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Struct)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -411,19 +409,19 @@ void Struct::InternalSwap(Struct* other) {
 
 class Value::_Internal {
  public:
-  static const ::SHARK_NAMESPACE_ID::Struct& struct_value(const Value* msg);
-  static const ::SHARK_NAMESPACE_ID::ListValue& list_value(const Value* msg);
+  static const ::shark::Struct& struct_value(const Value* msg);
+  static const ::shark::ListValue& list_value(const Value* msg);
 };
 
-const ::SHARK_NAMESPACE_ID::Struct&
+const ::shark::Struct&
 Value::_Internal::struct_value(const Value* msg) {
   return *msg->_impl_.kind_.struct_value_;
 }
-const ::SHARK_NAMESPACE_ID::ListValue&
+const ::shark::ListValue&
 Value::_Internal::list_value(const Value* msg) {
   return *msg->_impl_.kind_.list_value_;
 }
-void Value::set_allocated_struct_value(::SHARK_NAMESPACE_ID::Struct* struct_value) {
+void Value::set_allocated_struct_value(::shark::Struct* struct_value) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   clear_kind();
   if (struct_value) {
@@ -436,9 +434,9 @@ void Value::set_allocated_struct_value(::SHARK_NAMESPACE_ID::Struct* struct_valu
     set_has_struct_value();
     _impl_.kind_.struct_value_ = struct_value;
   }
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Value.struct_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.Value.struct_value)
 }
-void Value::set_allocated_list_value(::SHARK_NAMESPACE_ID::ListValue* list_value) {
+void Value::set_allocated_list_value(::shark::ListValue* list_value) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   clear_kind();
   if (list_value) {
@@ -451,13 +449,13 @@ void Value::set_allocated_list_value(::SHARK_NAMESPACE_ID::ListValue* list_value
     set_has_list_value();
     _impl_.kind_.list_value_ = list_value;
   }
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Value.list_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.Value.list_value)
 }
 Value::Value(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Value)
+  // @@protoc_insertion_point(arena_constructor:shark.Value)
 }
 Value::Value(const Value& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -487,12 +485,12 @@ Value::Value(const Value& from)
       break;
     }
     case kStructValue: {
-      _this->_internal_mutable_struct_value()->::SHARK_NAMESPACE_ID::Struct::MergeFrom(
+      _this->_internal_mutable_struct_value()->::shark::Struct::MergeFrom(
           from._internal_struct_value());
       break;
     }
     case kListValue: {
-      _this->_internal_mutable_list_value()->::SHARK_NAMESPACE_ID::ListValue::MergeFrom(
+      _this->_internal_mutable_list_value()->::shark::ListValue::MergeFrom(
           from._internal_list_value());
       break;
     }
@@ -500,7 +498,7 @@ Value::Value(const Value& from)
       break;
     }
   }
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Value)
+  // @@protoc_insertion_point(copy_constructor:shark.Value)
 }
 
 inline void Value::SharedCtor(
@@ -516,7 +514,7 @@ inline void Value::SharedCtor(
 }
 
 Value::~Value() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Value)
+  // @@protoc_insertion_point(destructor:shark.Value)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -536,7 +534,7 @@ void Value::SetCachedSize(int size) const {
 }
 
 void Value::clear_kind() {
-// @@protoc_insertion_point(one_of_clear_start:google.protobuf.Value)
+// @@protoc_insertion_point(one_of_clear_start:shark.Value)
   switch (kind_case()) {
     case kNullValue: {
       // No need to clear
@@ -575,7 +573,7 @@ void Value::clear_kind() {
 
 
 void Value::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Value)
+// @@protoc_insertion_point(message_clear_start:shark.Value)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -590,12 +588,12 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // .google.protobuf.NullValue null_value = 1;
+      // .shark.NullValue null_value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_null_value(static_cast<::SHARK_NAMESPACE_ID::NullValue>(val));
+          _internal_set_null_value(static_cast<::shark::NullValue>(val));
         } else
           goto handle_unusual;
         continue;
@@ -613,7 +611,7 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_string_value();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Value.string_value"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Value.string_value"));
         } else
           goto handle_unusual;
         continue;
@@ -625,7 +623,7 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.Struct struct_value = 5;
+      // .shark.Struct struct_value = 5;
       case 5:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr = ctx->ParseMessage(_internal_mutable_struct_value(), ptr);
@@ -633,7 +631,7 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.ListValue list_value = 6;
+      // .shark.ListValue list_value = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr = ctx->ParseMessage(_internal_mutable_list_value(), ptr);
@@ -666,11 +664,11 @@ failure:
 
 uint8_t* Value::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Value)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Value)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .google.protobuf.NullValue null_value = 1;
+  // .shark.NullValue null_value = 1;
   if (_internal_has_null_value()) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -688,7 +686,7 @@ uint8_t* Value::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_string_value().data(), static_cast<int>(this->_internal_string_value().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Value.string_value");
+      "shark.Value.string_value");
     target = stream->WriteStringMaybeAliased(
         3, this->_internal_string_value(), target);
   }
@@ -699,14 +697,14 @@ uint8_t* Value::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_bool_value(), target);
   }
 
-  // .google.protobuf.Struct struct_value = 5;
+  // .shark.Struct struct_value = 5;
   if (_internal_has_struct_value()) {
     target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(5, _Internal::struct_value(this),
         _Internal::struct_value(this).GetCachedSize(), target, stream);
   }
 
-  // .google.protobuf.ListValue list_value = 6;
+  // .shark.ListValue list_value = 6;
   if (_internal_has_list_value()) {
     target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(6, _Internal::list_value(this),
@@ -717,12 +715,12 @@ uint8_t* Value::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Value)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Value)
   return target;
 }
 
 size_t Value::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Value)
+// @@protoc_insertion_point(message_byte_size_start:shark.Value)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -730,7 +728,7 @@ size_t Value::ByteSizeLong() const {
   (void) cached_has_bits;
 
   switch (kind_case()) {
-    // .google.protobuf.NullValue null_value = 1;
+    // .shark.NullValue null_value = 1;
     case kNullValue: {
       total_size += 1 +
         ::_pbi::WireFormatLite::EnumSize(this->_internal_null_value());
@@ -753,14 +751,14 @@ size_t Value::ByteSizeLong() const {
       total_size += 1 + 1;
       break;
     }
-    // .google.protobuf.Struct struct_value = 5;
+    // .shark.Struct struct_value = 5;
     case kStructValue: {
       total_size += 1 +
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
           *_impl_.kind_.struct_value_);
       break;
     }
-    // .google.protobuf.ListValue list_value = 6;
+    // .shark.ListValue list_value = 6;
     case kListValue: {
       total_size += 1 +
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
@@ -784,7 +782,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Value::GetClassData() const { ret
 void Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Value*>(&to_msg);
   auto& from = static_cast<const Value&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Value)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Value)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -807,12 +805,12 @@ void Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMES
       break;
     }
     case kStructValue: {
-      _this->_internal_mutable_struct_value()->::SHARK_NAMESPACE_ID::Struct::MergeFrom(
+      _this->_internal_mutable_struct_value()->::shark::Struct::MergeFrom(
           from._internal_struct_value());
       break;
     }
     case kListValue: {
-      _this->_internal_mutable_list_value()->::SHARK_NAMESPACE_ID::ListValue::MergeFrom(
+      _this->_internal_mutable_list_value()->::shark::ListValue::MergeFrom(
           from._internal_list_value());
       break;
     }
@@ -824,7 +822,7 @@ void Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMES
 }
 
 void Value::CopyFrom(const Value& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Value)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Value)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -857,7 +855,7 @@ ListValue::ListValue(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.ListValue)
+  // @@protoc_insertion_point(arena_constructor:shark.ListValue)
 }
 ListValue::ListValue(const ListValue& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -867,7 +865,7 @@ ListValue::ListValue(const ListValue& from)
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.ListValue)
+  // @@protoc_insertion_point(copy_constructor:shark.ListValue)
 }
 
 inline void ListValue::SharedCtor(
@@ -881,7 +879,7 @@ inline void ListValue::SharedCtor(
 }
 
 ListValue::~ListValue() {
-  // @@protoc_insertion_point(destructor:google.protobuf.ListValue)
+  // @@protoc_insertion_point(destructor:shark.ListValue)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -899,7 +897,7 @@ void ListValue::SetCachedSize(int size) const {
 }
 
 void ListValue::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.ListValue)
+// @@protoc_insertion_point(message_clear_start:shark.ListValue)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -914,7 +912,7 @@ const char* ListValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .google.protobuf.Value values = 1;
+      // repeated .shark.Value values = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -952,11 +950,11 @@ failure:
 
 uint8_t* ListValue::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.ListValue)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.ListValue)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .google.protobuf.Value values = 1;
+  // repeated .shark.Value values = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_values_size()); i < n; i++) {
     const auto& repfield = this->_internal_values(i);
@@ -968,19 +966,19 @@ uint8_t* ListValue::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.ListValue)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.ListValue)
   return target;
 }
 
 size_t ListValue::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.ListValue)
+// @@protoc_insertion_point(message_byte_size_start:shark.ListValue)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .google.protobuf.Value values = 1;
+  // repeated .shark.Value values = 1;
   total_size += 1UL * this->_internal_values_size();
   for (const auto& msg : this->_impl_.values_) {
     total_size +=
@@ -1000,7 +998,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*ListValue::GetClassData() const {
 void ListValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<ListValue*>(&to_msg);
   auto& from = static_cast<const ListValue&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.ListValue)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.ListValue)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1010,7 +1008,7 @@ void ListValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_N
 }
 
 void ListValue::CopyFrom(const ListValue& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.ListValue)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.ListValue)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1033,23 +1031,23 @@ void ListValue::InternalSwap(ListValue* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse >(arena);
+template<> SHARK_NOINLINE ::shark::Struct_FieldsEntry_DoNotUse*
+Arena::CreateMaybeMessage< ::shark::Struct_FieldsEntry_DoNotUse >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Struct_FieldsEntry_DoNotUse >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Struct*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Struct >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Struct >(arena);
+template<> SHARK_NOINLINE ::shark::Struct*
+Arena::CreateMaybeMessage< ::shark::Struct >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Struct >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Value*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Value >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Value >(arena);
+template<> SHARK_NOINLINE ::shark::Value*
+Arena::CreateMaybeMessage< ::shark::Value >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Value >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::ListValue*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::ListValue >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::ListValue >(arena);
+template<> SHARK_NOINLINE ::shark::ListValue*
+Arena::CreateMaybeMessage< ::shark::ListValue >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::ListValue >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

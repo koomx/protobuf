@@ -122,8 +122,7 @@
 #error "Protobuf requires at least C++11."
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 using ConstStringParam = const std::string &;
 
@@ -404,8 +403,7 @@ class BigEndian {
   }
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -49,9 +49,7 @@
 #include <shark/message.h>
 #include <shark/io/io_win32.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 namespace {
 char* portable_strdup(const char* s) {
@@ -493,6 +491,4 @@ bool Subprocess::Communicate(const Message& input, Message* output,
 
 #endif  // !_WIN32
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler

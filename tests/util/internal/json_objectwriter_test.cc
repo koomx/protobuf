@@ -36,10 +36,7 @@
 #include <gtest/gtest.h>
 #include <shark/util/internal/utility.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 using io::CodedOutputStream;
 using io::StringOutputStream;
@@ -309,7 +306,4 @@ TEST_F(JsonObjectWriterTest, TestWebsafeByteEncoding) {
   EXPECT_EQ("{\"bytes\":\"A-_AEA==\"}", CloseStreamAndGetString());
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

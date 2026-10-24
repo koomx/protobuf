@@ -37,9 +37,7 @@
 #include <shark/stubs/common.h>
 #include <shark/io/zero_copy_stream.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 class ZipWriter {
  public:
@@ -61,7 +59,5 @@ class ZipWriter {
   std::vector<FileInfo> files_;
 };
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 

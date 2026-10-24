@@ -30,7 +30,7 @@
 
 syntax = "proto3";
 
-package google.protobuf;
+package shark;
 
 option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 option go_package = "google.golang.org/protobuf/types/known/anypb";

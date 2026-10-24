@@ -37,10 +37,7 @@
 #include <shark/stubs/strutil.h>
 #include <algorithm> // std::find()
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 EnumGenerator::EnumGenerator(const EnumDescriptor* descriptor)
     : descriptor_(descriptor),
@@ -254,7 +251,4 @@ void EnumGenerator::GenerateSource(io::Printer* printer) {
       "  }\n"
       "}\n\n");
 }
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

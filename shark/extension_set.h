@@ -61,8 +61,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class Arena;
 class Descriptor;       // descriptor.h
 class FieldDescriptor;  // descriptor.h
@@ -76,11 +75,9 @@ namespace internal {
 class FieldSkipper;  // wire_format_lite.h
 enum class LazyVerifyOption;
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 class InternalMetadata;
@@ -509,7 +506,7 @@ class SHARK_EXPORT ExtensionSet {
   template <typename Type, bool IsValid(int)>
   friend class RepeatedEnumTypeTraits;
 
-  friend class google::protobuf::Reflection;
+  friend class shark::Reflection;
 
   const int32_t& GetRefInt32(int number, const int32_t& default_value) const;
   const int64_t& GetRefInt64(int number, const int64_t& default_value) const;
@@ -1432,7 +1429,7 @@ class RepeatedMessageTypeTraits {
     // See notes above in RepeatedEnumTypeTraits::GetRepeated(): same
     // casting hack applies here, because a RepeatedPtrField<MessageLite>
     // cannot naturally become a RepeatedPtrType<Type> even though Type is
-    // presumably a message. google::protobuf::Message goes through similar contortions
+    // presumably a message. shark::Message goes through similar contortions
     // with a reinterpret_cast<>.
     return *reinterpret_cast<const RepeatedPtrField<Type>*>(
         set.GetRawRepeatedField(number, GetDefaultRepeatedField()));
@@ -1525,7 +1522,7 @@ MaybeCreateLazyExtension(Arena* arena);
 // Call this function to ensure that this extensions's reflection is linked into
 // the binary:
 //
-//   google::protobuf::LinkExtensionReflection(Foo::my_extension);
+//   shark::LinkExtensionReflection(Foo::my_extension);
 //
 // This will ensure that the following lookup will succeed:
 //
@@ -1547,13 +1544,12 @@ MaybeCreateLazyExtension(Arena* arena);
 template <typename ExtendeeType, typename TypeTraitsType,
           internal::FieldType field_type, bool is_packed>
 void LinkExtensionReflection(
-    const google::protobuf::internal::ExtensionIdentifier<
+    const shark::internal::ExtensionIdentifier<
         ExtendeeType, TypeTraitsType, field_type, is_packed>& extension) {
   internal::StrongReference(extension);
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

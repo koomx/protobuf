@@ -51,14 +51,12 @@
 #include <shark/io/zero_copy_stream_impl.h>
 
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 #if defined(_WIN32)
 // DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
 // them like we do below.
-using google::protobuf::io::win32::setmode;
+using shark::io::win32::setmode;
 #endif
 
 class GeneratorResponseContext : public GeneratorContext {
@@ -90,7 +88,7 @@ class GeneratorResponseContext : public GeneratorContext {
 
   io::ZeroCopyOutputStream* OpenForInsertWithGeneratedCodeInfo(
       const std::string& filename, const std::string& insertion_point,
-      const google::protobuf::GeneratedCodeInfo& info) override {
+      const shark::GeneratedCodeInfo& info) override {
     CodeGeneratorResponse::File* file = response_->add_file();
     file->set_name(filename);
     file->set_insertion_point(insertion_point);
@@ -196,6 +194,4 @@ int PluginMain(int argc, char* argv[], const CodeGenerator* generator) {
   return 0;
 }
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler

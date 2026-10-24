@@ -55,10 +55,7 @@
 #include <shark/compiler/csharp/csharp_repeated_primitive_field.h>
 #include <shark/compiler/csharp/csharp_wrapper_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 CSharpType GetCSharpType(FieldDescriptor::Type type) {
   switch (type) {
@@ -593,7 +590,4 @@ bool IsNullable(const FieldDescriptor* descriptor) {
   }
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

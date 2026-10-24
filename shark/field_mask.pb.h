@@ -43,20 +43,20 @@ struct TableStruct_shark_2ffield_5fmask_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2ffield_5fmask_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class FieldMask;
 struct FieldMaskDefaultTypeInternal;
 extern FieldMaskDefaultTypeInternal _FieldMask_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::FieldMask* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FieldMask>(Arena*);
+template<> ::shark::FieldMask* Arena::CreateMaybeMessage<::shark::FieldMask>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class FieldMask final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldMask) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FieldMask) */ {
  public:
   inline FieldMask() : FieldMask(nullptr) {}
   ~FieldMask() override;
@@ -159,7 +159,7 @@ class FieldMask final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FieldMask";
+    return "shark.FieldMask";
   }
   protected:
   explicit FieldMask(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -202,7 +202,7 @@ class FieldMask final :
   std::string* _internal_add_paths();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(class_scope:shark.FieldMask)
  private:
   class _Internal;
 
@@ -239,66 +239,66 @@ inline void FieldMask::clear_paths() {
 }
 inline std::string* FieldMask::add_paths() {
   std::string* _s = _internal_add_paths();
-  // @@protoc_insertion_point(field_add_mutable:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_add_mutable:shark.FieldMask.paths)
   return _s;
 }
 inline const std::string& FieldMask::_internal_paths(int index) const {
   return _impl_.paths_.Get(index);
 }
 inline const std::string& FieldMask::paths(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_get:shark.FieldMask.paths)
   return _internal_paths(index);
 }
 inline std::string* FieldMask::mutable_paths(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_mutable:shark.FieldMask.paths)
   return _impl_.paths_.Mutable(index);
 }
 inline void FieldMask::set_paths(int index, const std::string& value) {
   _impl_.paths_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_set:shark.FieldMask.paths)
 }
 inline void FieldMask::set_paths(int index, std::string&& value) {
   _impl_.paths_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_set:shark.FieldMask.paths)
 }
 inline void FieldMask::set_paths(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.paths_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_set_char:shark.FieldMask.paths)
 }
 inline void FieldMask::set_paths(int index, const char* value, size_t size) {
   _impl_.paths_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_set_pointer:shark.FieldMask.paths)
 }
 inline std::string* FieldMask::_internal_add_paths() {
   return _impl_.paths_.Add();
 }
 inline void FieldMask::add_paths(const std::string& value) {
   _impl_.paths_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_add:shark.FieldMask.paths)
 }
 inline void FieldMask::add_paths(std::string&& value) {
   _impl_.paths_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_add:shark.FieldMask.paths)
 }
 inline void FieldMask::add_paths(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.paths_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_add_char:shark.FieldMask.paths)
 }
 inline void FieldMask::add_paths(const char* value, size_t size) {
   _impl_.paths_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_add_pointer:shark.FieldMask.paths)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>&
 FieldMask::paths() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_list:shark.FieldMask.paths)
   return _impl_.paths_;
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 FieldMask::mutable_paths() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FieldMask.paths)
+  // @@protoc_insertion_point(field_mutable_list:shark.FieldMask.paths)
   return &_impl_.paths_;
 }
 
@@ -308,7 +308,7 @@ FieldMask::mutable_paths() {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

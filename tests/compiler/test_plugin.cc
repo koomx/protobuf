@@ -40,18 +40,14 @@
 #include <shark/compiler/mock_code_generator.h>
 #include <shark/compiler/plugin.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 int ProtobufMain(int argc, char* argv[]) {
   MockCodeGenerator generator("test_plugin");
   return PluginMain(argc, argv, &generator);
 }
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 
 int main(int argc, char* argv[]) {
 #ifdef _MSC_VER
@@ -59,5 +55,5 @@ int main(int argc, char* argv[]) {
   // please.
   _set_abort_behavior(0, ~0);
 #endif  // !_MSC_VER
-  return google::protobuf::compiler::ProtobufMain(argc, argv);
+  return shark::compiler::ProtobufMain(argc, argv);
 }

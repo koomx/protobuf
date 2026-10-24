@@ -37,9 +37,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace strings {
+namespace shark::strings {
 namespace {
 
 // We use this class instead of ArrayByteSource to simulate a ByteSource that
@@ -141,6 +139,4 @@ TEST(ByteSinkTest, Flush) {
 }
 
 }  // namespace
-}  // namespace strings
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::strings

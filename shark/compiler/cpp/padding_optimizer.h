@@ -36,10 +36,7 @@
 
 #include <shark/compiler/cpp/message_layout_helper.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 // Rearranges the fields of a message to minimize padding.
 // Fields are grouped by the type and the size.
@@ -56,8 +53,5 @@ class PaddingOptimizer : public MessageLayoutHelper {
                       MessageSCCAnalyzer* scc_analyzer) override;
 };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 

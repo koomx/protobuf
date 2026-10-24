@@ -32,10 +32,7 @@
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 namespace {
 
 TEST(ObjCHelper, TextFormatDecodeData_DecodeDataForString_RawStrings) {
@@ -378,7 +375,4 @@ TEST(ObjCHelper, ParseSimple_RejectLinesNoMessage) {
 // right things are happening.
 
 }  // namespace
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

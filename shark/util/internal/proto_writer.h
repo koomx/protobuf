@@ -54,10 +54,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 
 class ObjectLocationTracker;
@@ -71,7 +68,7 @@ class ObjectLocationTracker;
 class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
  public:
 // Constructor. Does not take ownership of any parameter passed in.
-  ProtoWriter(TypeResolver* type_resolver, const google::protobuf::Type& type,
+  ProtoWriter(TypeResolver* type_resolver, const shark::Type& type,
               strings::ByteSink* output, ErrorListener* listener);
   ~ProtoWriter() override;
 
@@ -171,12 +168,12 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
                                        public LocationTrackerInterface {
    public:
     // Constructor for the root element. No parent nor field.
-    ProtoElement(const TypeInfo* typeinfo, const google::protobuf::Type& type,
+    ProtoElement(const TypeInfo* typeinfo, const shark::Type& type,
                  ProtoWriter* enclosing);
 
     // Constructor for a field of an element.
-    ProtoElement(ProtoElement* parent, const google::protobuf::Field* field,
-                 const google::protobuf::Type& type, bool is_list);
+    ProtoElement(ProtoElement* parent, const shark::Field* field,
+                 const shark::Type& type, bool is_list);
 
     ~ProtoElement() override {}
 
@@ -189,13 +186,13 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
 
     // Accessors
     // parent_field() may be nullptr if we are at root.
-    const google::protobuf::Field* parent_field() const {
+    const shark::Field* parent_field() const {
       return parent_field_;
     }
-    const google::protobuf::Type& type() const { return type_; }
+    const shark::Type& type() const { return type_; }
 
     // Registers field for accounting required fields.
-    void RegisterField(const google::protobuf::Field* field);
+    void RegisterField(const shark::Field* field);
 
     // To report location on error messages.
     std::string ToString() const override;
@@ -220,7 +217,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
 
     // Describes the element as a field in the parent message.
     // parent_field_ is nullptr if and only if this element is the root element.
-    const google::protobuf::Field* parent_field_;
+    const shark::Field* parent_field_;
 
     // TypeInfo to lookup types.
     const TypeInfo* typeinfo_;
@@ -234,8 +231,8 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
     // required_fields_  : set of required fields.
     // size_index_       : index into ProtoWriter::size_insert_
     //                     for later insertion of serialized message length.
-    const google::protobuf::Type& type_;
-    std::unordered_set<const google::protobuf::Field*> required_fields_;
+    const shark::Type& type_;
+    std::unordered_set<const shark::Field*> required_fields_;
     const int size_index_;
 
     // Tracks position in repeated fields, needed for LocationTrackerInterface.
@@ -254,7 +251,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
     int size;
   };
 
-  ProtoWriter(const TypeInfo* typeinfo, const google::protobuf::Type& type,
+  ProtoWriter(const TypeInfo* typeinfo, const shark::Type& type,
               strings::ByteSink* output, ErrorListener* listener);
 
   ProtoElement* element() override { return element_.get(); }
@@ -266,19 +263,19 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
 
   // Common code for BeginObject() and BeginList() that does invalid_depth_
   // bookkeeping associated with name lookup.
-  const google::protobuf::Field* BeginNamed(StringPiece name,
+  const shark::Field* BeginNamed(StringPiece name,
                                             bool is_list);
 
   // Lookup the field in the current element. Looks in the base descriptor
   // and in any extension. This will report an error if the field cannot be
   // found when ignore_unknown_names_ is false or if multiple matching
   // extensions are found.
-  const google::protobuf::Field* Lookup(StringPiece name);
+  const shark::Field* Lookup(StringPiece name);
 
   // Lookup the field type in the type descriptor. Returns nullptr if the type
   // is not known.
-  const google::protobuf::Type* LookupType(
-      const google::protobuf::Field* field);
+  const shark::Type* LookupType(
+      const shark::Field* field);
 
   // Write serialized output to the final output ByteSink, inserting all
   // the size information for nested messages that are missing from the
@@ -286,7 +283,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   void WriteRootMessage();
 
   // Helper method to write proto tags based on the given field.
-  void WriteTag(const google::protobuf::Field& field);
+  void WriteTag(const shark::Field& field);
 
 
   // Returns true if the field for type_ can be set as a oneof. If field is not
@@ -294,29 +291,29 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   // If another field for this oneof is already set, this function returns
   // false. It also calls the appropriate error callback.
   // unnormalized_name is used for error string.
-  bool ValidOneof(const google::protobuf::Field& field,
+  bool ValidOneof(const shark::Field& field,
                   StringPiece unnormalized_name);
 
   // Returns true if the field is repeated.
-  bool IsRepeated(const google::protobuf::Field& field);
+  bool IsRepeated(const shark::Field& field);
 
   // Starts an object given the field and the enclosing type.
-  ProtoWriter* StartObjectField(const google::protobuf::Field& field,
-                                const google::protobuf::Type& type);
+  ProtoWriter* StartObjectField(const shark::Field& field,
+                                const shark::Type& type);
 
   // Starts a list given the field and the enclosing type.
-  ProtoWriter* StartListField(const google::protobuf::Field& field,
-                              const google::protobuf::Type& type);
+  ProtoWriter* StartListField(const shark::Field& field,
+                              const shark::Type& type);
 
   // Renders a primitive field given the field and the enclosing type.
-  ProtoWriter* RenderPrimitiveField(const google::protobuf::Field& field,
-                                    const google::protobuf::Type& type,
+  ProtoWriter* RenderPrimitiveField(const shark::Field& field,
+                                    const shark::Type& type,
                                     const DataPiece& data);
 
  private:
   // Writes an ENUM field, including tag, to the stream.
   static util::Status WriteEnum(int field_number, const DataPiece& data,
-                                const google::protobuf::Enum* enum_type,
+                                const shark::Enum* enum_type,
                                 io::CodedOutputStream* stream,
                                 bool use_lower_camel_for_enums,
                                 bool case_insensitive_enum_parsing,
@@ -325,7 +322,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   // Variables for describing the structure of the input tree:
   // master_type_: descriptor for the whole protobuf message.
   // typeinfo_ : the TypeInfo object to lookup types.
-  const google::protobuf::Type& master_type_;
+  const shark::Type& master_type_;
   const TypeInfo* typeinfo_;
   // Whether we own the typeinfo_ object.
   bool own_typeinfo_;
@@ -378,10 +375,7 @@ class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
   GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

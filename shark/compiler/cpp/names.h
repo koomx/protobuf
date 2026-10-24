@@ -35,16 +35,14 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Descriptor;
 class EnumDescriptor;
 class EnumValueDescriptor;
 class FieldDescriptor;
 
-namespace compiler {
-namespace cpp {
+namespace compiler::cpp {
 
 // Returns the unqualified C++ name.
 //
@@ -86,10 +84,8 @@ std::string EnumValueName(const EnumValueDescriptor* enum_value);
 // Strips ".proto" or ".protodevel" from the end of a filename.
 PROTOC_EXPORT std::string StripProto(const std::string& filename);
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace compiler::cpp
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

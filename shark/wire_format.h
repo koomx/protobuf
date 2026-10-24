@@ -56,16 +56,12 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class MapKey;           // map_field.h
 class UnknownFieldSet;  // unknown_field_set.h
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // This class is for internal use by the protocol buffer library and by
 // protocol-compiler-generated message classes.  It must not be called
@@ -404,9 +400,7 @@ size_t MapKeyDataOnlyByteSize(const FieldDescriptor* field,
 uint8_t* SerializeMapKeyWithCachedSizes(const FieldDescriptor* field,
                                         const MapKey& value, uint8_t* target,
                                         io::EpsCopyOutputStream* stream);
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

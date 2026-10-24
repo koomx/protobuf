@@ -40,17 +40,14 @@
 #include <shark/stubs/common.h>
 #include <shark/compiler/cpp/options.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FieldDescriptor;  // descriptor.h
 namespace io {
 class Printer;  // printer.h
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace cpp {
 
@@ -88,5 +85,4 @@ class ExtensionGenerator {
 
 }  // namespace cpp
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

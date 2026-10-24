@@ -52,16 +52,13 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 class TypeInfo;
 
 // An ObjectSource that can parse a stream of bytes as a protocol buffer.
 // Its WriteTo() method can be given an ObjectWriter.
-// This implementation uses a google.protobuf.Type for tag and name lookup.
+// This implementation uses a shark.Type for tag and name lookup.
 // The field names are converted into lower camel-case when writing to the
 // ObjectWriter.
 //
@@ -69,7 +66,7 @@ class TypeInfo;
 //   ArrayInputStream arr_stream(proto.data(), proto.size());
 //   CodedInputStream in_stream(&arr_stream);
 //   ProtoStreamObjectSource os(&in_stream, /*ServiceTypeInfo*/ typeinfo,
-//                              <your message google::protobuf::Type>);
+//                              <your message shark::Type>);
 //
 //   Status status = os.WriteTo(<some ObjectWriter>);
 class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
@@ -116,11 +113,11 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
   ProtoStreamObjectSource(io::CodedInputStream* stream,
                           TypeResolver* type_resolver,
-                          const google::protobuf::Type& type)
+                          const shark::Type& type)
       : ProtoStreamObjectSource(stream, type_resolver, type, RenderOptions()) {}
   ProtoStreamObjectSource(io::CodedInputStream* stream,
                           TypeResolver* type_resolver,
-                          const google::protobuf::Type& type,
+                          const shark::Type& type,
                           const RenderOptions& render_options);
 
   ~ProtoStreamObjectSource() override;
@@ -141,7 +138,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // nested messages (end with 0) and nested groups (end with group end tag).
   // The include_start_and_end parameter allows this method to be called when
   // already inside of an object, and skip calling StartObject and EndObject.
-  virtual util::Status WriteMessage(const google::protobuf::Type& type,
+  virtual util::Status WriteMessage(const shark::Type& type,
                                     StringPiece name,
                                     const uint32_t end_tag,
                                     bool include_start_and_end,
@@ -151,15 +148,15 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // reading all sequential repeating elements. The caller should use this tag
   // before reading more tags from the stream.
   virtual util::StatusOr<uint32_t> RenderList(
-      const google::protobuf::Field* field, StringPiece name,
+      const shark::Field* field, StringPiece name,
       uint32_t list_tag, ObjectWriter* ow) const;
 
   // Looks up a field and verify its consistency with wire type in tag.
-  const google::protobuf::Field* FindAndVerifyField(
-      const google::protobuf::Type& type, uint32_t tag) const;
+  const shark::Field* FindAndVerifyField(
+      const shark::Type& type, uint32_t tag) const;
 
   // Renders a field value to the ObjectWriter.
-  virtual util::Status RenderField(const google::protobuf::Field* field,
+  virtual util::Status RenderField(const shark::Field* field,
                                    StringPiece field_name,
                                    ObjectWriter* ow) const;
 
@@ -167,7 +164,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // value as string. This only works for primitive datatypes (no message
   // types).
   const std::string ReadFieldValueAsString(
-      const google::protobuf::Field& field) const;
+      const shark::Field& field) const;
 
 
   // Returns the input stream.
@@ -176,11 +173,11 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
  private:
   ProtoStreamObjectSource(io::CodedInputStream* stream,
                           const TypeInfo* typeinfo,
-                          const google::protobuf::Type& type,
+                          const shark::Type& type,
                           const RenderOptions& render_options);
   // Function that renders a well known type with a modified behavior.
   typedef util::Status (*TypeRenderer)(const ProtoStreamObjectSource*,
-                                       const google::protobuf::Type&,
+                                       const shark::Type&,
                                        StringPiece, ObjectWriter*);
 
   // TODO(skarvaje): Mark these methods as non-const as they modify internal
@@ -189,81 +186,81 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   // Renders a NWP map.
   // Returns the next tag after reading all map entries. The caller should use
   // this tag before reading more tags from the stream.
-  util::StatusOr<uint32_t> RenderMap(const google::protobuf::Field* field,
+  util::StatusOr<uint32_t> RenderMap(const shark::Field* field,
                                      StringPiece name, uint32_t list_tag,
                                      ObjectWriter* ow) const;
 
   // Renders a packed repeating field. A packed field is stored as:
   // {tag length item1 item2 item3} instead of the less efficient
   // {tag item1 tag item2 tag item3}.
-  util::Status RenderPacked(const google::protobuf::Field* field,
+  util::Status RenderPacked(const shark::Field* field,
                             ObjectWriter* ow) const;
 
-  // Renders a google.protobuf.Timestamp value to ObjectWriter
+  // Renders a shark.Timestamp value to ObjectWriter
   static util::Status RenderTimestamp(const ProtoStreamObjectSource* os,
-                                      const google::protobuf::Type& type,
+                                      const shark::Type& type,
                                       StringPiece name, ObjectWriter* ow);
 
-  // Renders a google.protobuf.Duration value to ObjectWriter
+  // Renders a shark.Duration value to ObjectWriter
   static util::Status RenderDuration(const ProtoStreamObjectSource* os,
-                                     const google::protobuf::Type& type,
+                                     const shark::Type& type,
                                      StringPiece name, ObjectWriter* ow);
 
   // Following RenderTYPE functions render well known types in
   // google/protobuf/wrappers.proto corresponding to TYPE.
   static util::Status RenderDouble(const ProtoStreamObjectSource* os,
-                                   const google::protobuf::Type& type,
+                                   const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);
   static util::Status RenderFloat(const ProtoStreamObjectSource* os,
-                                  const google::protobuf::Type& type,
+                                  const shark::Type& type,
                                   StringPiece name, ObjectWriter* ow);
   static util::Status RenderInt64(const ProtoStreamObjectSource* os,
-                                  const google::protobuf::Type& type,
+                                  const shark::Type& type,
                                   StringPiece name, ObjectWriter* ow);
   static util::Status RenderUInt64(const ProtoStreamObjectSource* os,
-                                   const google::protobuf::Type& type,
+                                   const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);
   static util::Status RenderInt32(const ProtoStreamObjectSource* os,
-                                  const google::protobuf::Type& type,
+                                  const shark::Type& type,
                                   StringPiece name, ObjectWriter* ow);
   static util::Status RenderUInt32(const ProtoStreamObjectSource* os,
-                                   const google::protobuf::Type& type,
+                                   const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);
   static util::Status RenderBool(const ProtoStreamObjectSource* os,
-                                 const google::protobuf::Type& type,
+                                 const shark::Type& type,
                                  StringPiece name, ObjectWriter* ow);
   static util::Status RenderString(const ProtoStreamObjectSource* os,
-                                   const google::protobuf::Type& type,
+                                   const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);
   static util::Status RenderBytes(const ProtoStreamObjectSource* os,
-                                  const google::protobuf::Type& type,
+                                  const shark::Type& type,
                                   StringPiece name, ObjectWriter* ow);
 
-  // Renders a google.protobuf.Struct to ObjectWriter.
+  // Renders a shark.Struct to ObjectWriter.
   static util::Status RenderStruct(const ProtoStreamObjectSource* os,
-                                   const google::protobuf::Type& type,
+                                   const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);
 
-  // Helper to render google.protobuf.Struct's Value fields to ObjectWriter.
+  // Helper to render shark.Struct's Value fields to ObjectWriter.
   static util::Status RenderStructValue(const ProtoStreamObjectSource* os,
-                                        const google::protobuf::Type& type,
+                                        const shark::Type& type,
                                         StringPiece name,
                                         ObjectWriter* ow);
 
-  // Helper to render google.protobuf.Struct's ListValue fields to ObjectWriter.
+  // Helper to render shark.Struct's ListValue fields to ObjectWriter.
   static util::Status RenderStructListValue(const ProtoStreamObjectSource* os,
-                                            const google::protobuf::Type& type,
+                                            const shark::Type& type,
                                             StringPiece name,
                                             ObjectWriter* ow);
 
   // Render the "Any" type.
   static util::Status RenderAny(const ProtoStreamObjectSource* os,
-                                const google::protobuf::Type& type,
+                                const shark::Type& type,
                                 StringPiece name, ObjectWriter* ow);
 
   // Render the "FieldMask" type.
   static util::Status RenderFieldMask(const ProtoStreamObjectSource* os,
-                                      const google::protobuf::Type& type,
+                                      const shark::Type& type,
                                       StringPiece name, ObjectWriter* ow);
 
   static std::unordered_map<std::string, TypeRenderer>* renderers_;
@@ -273,18 +270,18 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
   // Same as above but renders all non-message field types. Callers don't call
   // this function directly. They just use RenderField.
-  util::Status RenderNonMessageField(const google::protobuf::Field* field,
+  util::Status RenderNonMessageField(const shark::Field* field,
                                      StringPiece field_name,
                                      ObjectWriter* ow) const;
 
 
   // Utility function to detect proto maps. The 'field' MUST be repeated.
-  bool IsMap(const google::protobuf::Field& field) const;
+  bool IsMap(const shark::Field& field) const;
 
   // Utility to read int64 and int32 values from a message type in stream_.
-  // Used for reading google.protobuf.Timestamp and Duration messages.
+  // Used for reading shark.Timestamp and Duration messages.
   std::pair<int64_t, int32_t> ReadSecondsAndNanos(
-      const google::protobuf::Type& type) const;
+      const shark::Type& type) const;
 
   // Helper function to check recursion depth and increment it. It will return
   // OkStatus() if the current depth is allowed. Otherwise an error is returned.
@@ -296,15 +293,15 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   mutable io::CodedInputStream* stream_;
 
   // Type information for all the types used in the descriptor. Used to find
-  // google::protobuf::Type of nested messages/enums.
+  // shark::Type of nested messages/enums.
   const TypeInfo* typeinfo_;
 
   // Whether this class owns the typeinfo_ object. If true the typeinfo_ object
   // should be deleted in the destructor.
   bool own_typeinfo_;
 
-  // google::protobuf::Type of the message source.
-  const google::protobuf::Type& type_;
+  // shark::Type of the message source.
+  const shark::Type& type_;
 
 
   const RenderOptions render_options_;
@@ -318,10 +315,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
   GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoStreamObjectSource);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

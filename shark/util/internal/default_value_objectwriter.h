@@ -47,10 +47,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 // An ObjectWriter that renders non-repeated primitive fields of proto messages
 // with their default values. DefaultValueObjectWriter holds objects, lists and
@@ -70,14 +67,14 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
   // a is the parent message field of b), then the vector should contain { "a",
   // "b", "c" }.
   //
-  // The Field* should point to the google::protobuf::Field of "c".
+  // The Field* should point to the shark::Field of "c".
   typedef std::function<bool(
       const std::vector<std::string>& /*path of the field*/,
-      const google::protobuf::Field* /*field*/)>
+      const shark::Field* /*field*/)>
       FieldScrubCallBack;
 
   DefaultValueObjectWriter(TypeResolver* type_resolver,
-                           const google::protobuf::Type& type,
+                           const shark::Type& type,
                            ObjectWriter* ow);
 
   ~DefaultValueObjectWriter() override;
@@ -147,7 +144,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
   // DefaultValueObjectWriter.
   class SHARK_EXPORT Node {
    public:
-    Node(const std::string& name, const google::protobuf::Type* type,
+    Node(const std::string& name, const shark::Type* type,
          NodeKind kind, const DataPiece& data, bool is_placeholder,
          const std::vector<std::string>& path, bool suppress_empty_list,
          bool preserve_proto_field_names, bool use_ints_for_enums,
@@ -179,9 +176,9 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
     const std::vector<std::string>& path() const { return path_; }
 
-    const google::protobuf::Type* type() const { return type_; }
+    const shark::Type* type() const { return type_; }
 
-    void set_type(const google::protobuf::Type* type) { type_ = type; }
+    void set_type(const shark::Type* type) { type_ = type; }
 
     NodeKind kind() const { return kind_; }
 
@@ -200,16 +197,16 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
    protected:
     // Returns the Value Type of a map given the Type of the map entry and a
     // TypeInfo instance.
-    const google::protobuf::Type* GetMapValueType(
-        const google::protobuf::Type& found_type, const TypeInfo* typeinfo);
+    const shark::Type* GetMapValueType(
+        const shark::Type& found_type, const TypeInfo* typeinfo);
 
     // Calls WriteTo() on every child in children_.
     void WriteChildren(ObjectWriter* ow);
 
     // The name of this node.
     std::string name_;
-    // google::protobuf::Type of this node. Owned by TypeInfo.
-    const google::protobuf::Type* type_;
+    // shark::Type of this node. Owned by TypeInfo.
+    const shark::Type* type_;
     // The kind of this node.
     NodeKind kind_;
     // Whether this is a node for "Any".
@@ -245,7 +242,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
   // Creates a new Node and returns it. Caller owns memory of returned object.
   virtual Node* CreateNewNode(const std::string& name,
-                              const google::protobuf::Type* type, NodeKind kind,
+                              const shark::Type* type, NodeKind kind,
                               const DataPiece& data, bool is_placeholder,
                               const std::vector<std::string>& path,
                               bool suppress_empty_list,
@@ -255,13 +252,13 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
   // Creates a DataPiece containing the default value of the type of the field.
   static DataPiece CreateDefaultDataPieceForField(
-      const google::protobuf::Field& field, const TypeInfo* typeinfo) {
+      const shark::Field& field, const TypeInfo* typeinfo) {
     return CreateDefaultDataPieceForField(field, typeinfo, false);
   }
 
   // Same as the above but with a flag to use ints instead of enum names.
   static DataPiece CreateDefaultDataPieceForField(
-      const google::protobuf::Field& field, const TypeInfo* typeinfo,
+      const shark::Field& field, const TypeInfo* typeinfo,
       bool use_ints_for_enums);
 
  protected:
@@ -283,17 +280,17 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
   // Returns the default enum value as a DataPiece, or the first enum value if
   // there is no default. For proto3, where we cannot specify an explicit
   // default, a zero value will always be returned.
-  static DataPiece FindEnumDefault(const google::protobuf::Field& field,
+  static DataPiece FindEnumDefault(const shark::Field& field,
                                    const TypeInfo* typeinfo,
                                    bool use_ints_for_enums);
 
   // Type information for all the types used in the descriptor. Used to find
-  // google::protobuf::Type of nested messages/enums.
+  // shark::Type of nested messages/enums.
   const TypeInfo* typeinfo_;
   // Whether the TypeInfo object is owned by this class.
   bool own_typeinfo_;
-  // google::protobuf::Type of the root message type.
-  const google::protobuf::Type& type_;
+  // shark::Type of the root message type.
+  const shark::Type& type_;
   // Holds copies of strings passed to RenderString.
   std::vector<std::unique_ptr<std::string>> string_values_;
 
@@ -321,10 +318,7 @@ class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(DefaultValueObjectWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

@@ -44,25 +44,23 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace {
-using google::protobuf::Any;
-using google::protobuf::BoolValue;
-using google::protobuf::BytesValue;
-using google::protobuf::DoubleValue;
-using google::protobuf::Enum;
-using google::protobuf::EnumValue;
-using google::protobuf::Field;
-using google::protobuf::FloatValue;
-using google::protobuf::Int32Value;
-using google::protobuf::Int64Value;
-using google::protobuf::Option;
-using google::protobuf::StringValue;
-using google::protobuf::Type;
-using google::protobuf::UInt32Value;
-using google::protobuf::UInt64Value;
+using shark::Any;
+using shark::BoolValue;
+using shark::BytesValue;
+using shark::DoubleValue;
+using shark::Enum;
+using shark::EnumValue;
+using shark::Field;
+using shark::FloatValue;
+using shark::Int32Value;
+using shark::Int64Value;
+using shark::Option;
+using shark::StringValue;
+using shark::Type;
+using shark::UInt32Value;
+using shark::UInt64Value;
 
 class DescriptorPoolTypeResolver : public TypeResolver {
  public:
@@ -365,6 +363,4 @@ TypeResolver* NewTypeResolverForDescriptorPool(const std::string& url_prefix,
   return new DescriptorPoolTypeResolver(url_prefix, pool);
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

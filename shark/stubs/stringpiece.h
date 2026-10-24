@@ -155,8 +155,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace stringpiece_internal {
 
 class SHARK_EXPORT StringPiece {
@@ -379,10 +378,9 @@ extern std::ostream& operator<<(std::ostream& o, StringPiece piece);
 
 }  // namespace stringpiece_internal
 
-using ::google::protobuf::stringpiece_internal::StringPiece;
+using ::shark::stringpiece_internal::StringPiece;
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 SHARK_HASH_NAMESPACE_DECLARATION_START
 template<> struct hash<StringPiece> {

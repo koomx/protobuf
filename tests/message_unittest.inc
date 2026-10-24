@@ -67,14 +67,13 @@
 #include <tests/test_util2.h>
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 #if defined(_WIN32)
 // DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
 // them like we do below.
-using google::protobuf::io::win32::close;
-using google::protobuf::io::win32::open;
+using shark::io::win32::close;
+using shark::io::win32::open;
 #endif
 
 #ifndef O_BINARY
@@ -1127,5 +1126,4 @@ TEST(MESSAGE_TEST_NAME, PreservesFloatingPointNegative0) {
             std::signbit(out_message.optional_double()));
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

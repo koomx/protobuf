@@ -41,9 +41,7 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/mathutil.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 FieldComparator::FieldComparator() {}
 FieldComparator::~FieldComparator() {}
@@ -205,6 +203,4 @@ FieldComparator::ComparisonResult SimpleFieldComparator::ResultFromBoolean(
   return boolean_result ? FieldComparator::SAME : FieldComparator::DIFFERENT;
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

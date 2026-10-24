@@ -46,12 +46,12 @@ message OneOfsRequest {
     Data message_data = 4;
     MoreData more_data = 5;
     // Well known types
-    google.protobuf.Struct struct_data = 6;
-    google.protobuf.Value value_data = 7;
-    google.protobuf.ListValue list_value_data = 8;
-    google.protobuf.Timestamp ts_data = 9;
+    shark.Struct struct_data = 6;
+    shark.Value value_data = 7;
+    shark.ListValue list_value_data = 8;
+    shark.Timestamp ts_data = 9;
   }
-  google.protobuf.Any any_data = 19;
+  shark.Any any_data = 19;
 }
 
 message RequestWithSimpleOneof {

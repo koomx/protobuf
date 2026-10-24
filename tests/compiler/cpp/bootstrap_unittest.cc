@@ -59,10 +59,7 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 
@@ -189,7 +186,4 @@ TEST(BootstrapTest, OptionNotExist) {
 
 }  // namespace
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

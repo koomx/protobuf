@@ -44,10 +44,7 @@
 // Must be last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 ServiceGenerator::ServiceGenerator(const ServiceDescriptor* descriptor)
     : descriptor_(descriptor) {}
@@ -471,9 +468,6 @@ void ImmutableServiceGenerator::GenerateBlockingMethodSignature(
                  "    throws com.google.protobuf.ServiceException");
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include <shark/port_undef.inc>

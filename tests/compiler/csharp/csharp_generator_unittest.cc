@@ -39,10 +39,7 @@
 
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 namespace {
 
 TEST(CSharpEnumValue, PascalCasedPrefixStripping) {
@@ -65,17 +62,14 @@ TEST(CSharpEnumValue, PascalCasedPrefixStripping) {
 
 TEST(DescriptorProtoHelpers, IsDescriptorProto) {
   EXPECT_TRUE(IsDescriptorProto(DescriptorProto::descriptor()->file()));
-  EXPECT_FALSE(IsDescriptorProto(google::protobuf::Any::descriptor()->file()));
+  EXPECT_FALSE(IsDescriptorProto(shark::Any::descriptor()->file()));
 }
 
 TEST(DescriptorProtoHelpers, IsDescriptorOptionMessage) {
   EXPECT_TRUE(IsDescriptorOptionMessage(FileOptions::descriptor()));
-  EXPECT_FALSE(IsDescriptorOptionMessage(google::protobuf::Any::descriptor()));
+  EXPECT_FALSE(IsDescriptorOptionMessage(shark::Any::descriptor()));
   EXPECT_FALSE(IsDescriptorOptionMessage(DescriptorProto::descriptor()));
 }
 
 }  // namespace
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

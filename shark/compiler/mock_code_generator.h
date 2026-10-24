@@ -37,15 +37,11 @@
 
 #include <shark/compiler/code_generator.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FileDescriptor;
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 // A mock CodeGenerator, used by command_line_interface_unittest.  This is in
 // its own file so that it can be used both directly and as a plugin.
@@ -128,7 +124,5 @@ class MockCodeGenerator : public CodeGenerator {
       const std::string& first_message_name);
 };
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 

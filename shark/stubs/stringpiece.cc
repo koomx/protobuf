@@ -37,9 +37,7 @@
 
 #include <shark/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
-namespace stringpiece_internal {
+namespace shark::stringpiece_internal {
 
 std::ostream& operator<<(std::ostream& o, StringPiece piece) {
   o.write(piece.data(), piece.size());
@@ -251,6 +249,4 @@ StringPiece StringPiece::substr(size_type pos, size_type n) const {
 
 const StringPiece::size_type StringPiece::npos = size_type(-1);
 
-}  // namespace stringpiece_internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::stringpiece_internal

@@ -47,9 +47,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 namespace {
 
 // ===================================================================
@@ -1170,6 +1168,4 @@ TEST_1D(TokenizerTest, BackUpOnDestruction, kBlockSizes) {
 
 
 }  // namespace
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

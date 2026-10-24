@@ -35,10 +35,7 @@
 #include <shark/compiler/objectivec/objectivec_helpers.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 namespace {
 
@@ -117,7 +114,4 @@ void RepeatedMessageFieldGenerator::DetermineObjectiveCClassDefinitions(
   fwd_decls->insert(ObjCClassDeclaration(variable("storage_type")));
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

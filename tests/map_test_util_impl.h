@@ -37,8 +37,7 @@
 
 namespace protobuf_unittest {}  // namespace protobuf_unittest
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace unittest = ::protobuf_unittest;
 
@@ -469,6 +468,5 @@ void MapTestUtilImpl::ExpectMapFieldsModified(const MapMessage& message) {
   EXPECT_EQ(2, message.map_int32_foreign_message().at(1).c());
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

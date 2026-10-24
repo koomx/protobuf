@@ -44,9 +44,7 @@
 
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 namespace {
 
 TEST(ReflectionOpsTest, SanityCheck) {
@@ -541,6 +539,4 @@ TEST(ReflectionOpsTest, GenericSwap) {
 }
 
 }  // namespace
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

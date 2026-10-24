@@ -43,10 +43,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 namespace {
 struct FieldOrderingByNumber {
@@ -627,7 +624,4 @@ void MessageGenerator::GenerateSource(io::Printer* printer) {
   }
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

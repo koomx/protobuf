@@ -79,9 +79,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace statusor_internal {
 
 template<typename T>
@@ -241,11 +239,9 @@ inline const T& StatusOr<T>::value() const {
 
 }  // namespace statusor_internal
 
-using ::google::protobuf::util::statusor_internal::StatusOr;
+using ::shark::util::statusor_internal::StatusOr;
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util
 
 #include <shark/port_undef.inc>
 

@@ -34,10 +34,7 @@
 
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 namespace {
 
 TEST(JavaDocCommentTest, Escaping) {
@@ -50,7 +47,4 @@ TEST(JavaDocCommentTest, Escaping) {
 }
 
 }  // namespace
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

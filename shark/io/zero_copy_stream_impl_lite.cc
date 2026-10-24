@@ -42,9 +42,7 @@
 #include <shark/stubs/casts.h>
 #include <shark/stubs/stl_util.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 namespace {
 
@@ -465,6 +463,4 @@ int64_t LimitingInputStream::ByteCount() const {
 
 // ===================================================================
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

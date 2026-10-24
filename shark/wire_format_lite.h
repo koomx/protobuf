@@ -71,9 +71,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // This class is for internal use by the protocol buffer library and by
 // protocol-compiler-generated message classes.  It must not be called
@@ -1898,9 +1896,7 @@ bool ParseMessageSetItemImpl(io::CodedInputStream* input, MS ms) {
   }
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

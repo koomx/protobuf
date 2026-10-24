@@ -34,9 +34,7 @@
 #include <shark/reflection.h>
 #include <shark/repeated_field.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 // A base class for RepeatedFieldAccessor implementations that can support
 // random-access efficiently. All iterator methods delegates the work to
 // corresponding random-access methods.
@@ -179,7 +177,7 @@ class RepeatedPtrFieldWrapper : public RandomAccessRepeatedFieldAccessor {
   }
 
   // Create a new T instance. For repeated message fields, T can be specified
-  // as google::protobuf::Message so we can't use "new T()" directly. In that case, value
+  // as shark::Message so we can't use "new T()" directly. In that case, value
   // should be a message of the same type (it's ensured by the caller) and a
   // new message object will be created using it.
   virtual T* New(const Value* value) const = 0;
@@ -356,7 +354,5 @@ class RepeatedPtrFieldMessageAccessor final
     return static_cast<const Value*>(&value);
   }
 };
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 

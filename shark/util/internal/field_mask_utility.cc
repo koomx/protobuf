@@ -38,10 +38,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 namespace {
 
@@ -212,7 +209,4 @@ util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
   return util::Status();
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

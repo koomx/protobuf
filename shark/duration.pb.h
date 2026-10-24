@@ -43,20 +43,20 @@ struct TableStruct_shark_2fduration_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fduration_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class Duration;
 struct DurationDefaultTypeInternal;
 extern DurationDefaultTypeInternal _Duration_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::Duration* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Duration>(Arena*);
+template<> ::shark::Duration* Arena::CreateMaybeMessage<::shark::Duration>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class Duration final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Duration) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Duration) */ {
  public:
   inline Duration() : Duration(nullptr) {}
   ~Duration() override;
@@ -159,7 +159,7 @@ class Duration final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Duration";
+    return "shark.Duration";
   }
   protected:
   explicit Duration(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -197,7 +197,7 @@ class Duration final :
   void _internal_set_nanos(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Duration)
+  // @@protoc_insertion_point(class_scope:shark.Duration)
  private:
   class _Internal;
 
@@ -231,7 +231,7 @@ inline int64_t Duration::_internal_seconds() const {
   return _impl_.seconds_;
 }
 inline int64_t Duration::seconds() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Duration.seconds)
+  // @@protoc_insertion_point(field_get:shark.Duration.seconds)
   return _internal_seconds();
 }
 inline void Duration::_internal_set_seconds(int64_t value) {
@@ -240,7 +240,7 @@ inline void Duration::_internal_set_seconds(int64_t value) {
 }
 inline void Duration::set_seconds(int64_t value) {
   _internal_set_seconds(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Duration.seconds)
+  // @@protoc_insertion_point(field_set:shark.Duration.seconds)
 }
 
 // int32 nanos = 2;
@@ -251,7 +251,7 @@ inline int32_t Duration::_internal_nanos() const {
   return _impl_.nanos_;
 }
 inline int32_t Duration::nanos() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Duration.nanos)
+  // @@protoc_insertion_point(field_get:shark.Duration.nanos)
   return _internal_nanos();
 }
 inline void Duration::_internal_set_nanos(int32_t value) {
@@ -260,7 +260,7 @@ inline void Duration::_internal_set_nanos(int32_t value) {
 }
 inline void Duration::set_nanos(int32_t value) {
   _internal_set_nanos(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Duration.nanos)
+  // @@protoc_insertion_point(field_set:shark.Duration.nanos)
 }
 
 #ifdef __GNUC__
@@ -269,7 +269,7 @@ inline void Duration::set_nanos(int32_t value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

@@ -39,9 +39,7 @@
 
 SHARK_PRAGMA_INIT_SEG
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 const char* ImplicitWeakMessage::_InternalParse(const char* ptr,
                                                 ParseContext* ctx) {
@@ -65,8 +63,6 @@ const ImplicitWeakMessage* ImplicitWeakMessage::default_instance() {
       &implicit_weak_message_default_instance);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

@@ -35,10 +35,7 @@
 #include <shark/compiler/objectivec/objectivec_helpers.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 namespace {
 
@@ -145,7 +142,4 @@ void RepeatedEnumFieldGenerator::FinishInitialization(void) {
       "// |" + variables_["name"] + "| contains |" + variables_["storage_type"] + "|\n";
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

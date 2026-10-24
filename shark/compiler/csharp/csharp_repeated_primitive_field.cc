@@ -41,10 +41,7 @@
 #include <shark/compiler/csharp/csharp_helpers.h>
 #include <shark/compiler/csharp/csharp_repeated_primitive_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 RepeatedPrimitiveFieldGenerator::RepeatedPrimitiveFieldGenerator(
     const FieldDescriptor* descriptor, int presenceIndex, const Options *options)
@@ -139,7 +136,4 @@ void RepeatedPrimitiveFieldGenerator::GenerateExtensionCode(io::Printer* printer
     "  new pb::RepeatedExtension<$extended_type$, $type_name$>($number$, pb::FieldCodec.For$capitalized_type_name$($tag$));\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

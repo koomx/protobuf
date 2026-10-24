@@ -48,10 +48,7 @@
 // Must be last.
 #include "shark/port_def.inc"
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 
 namespace {
@@ -1444,9 +1441,6 @@ void RepeatedImmutableMessageFieldGenerator::GenerateKotlinDslMembers(
                  "}\n\n");
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include "shark/port_undef.inc"

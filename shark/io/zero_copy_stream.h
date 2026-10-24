@@ -113,9 +113,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // Defined in this file.
 class ZeroCopyInputStream;
@@ -250,9 +248,7 @@ class SHARK_EXPORT ZeroCopyOutputStream {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ZeroCopyOutputStream);
 };
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>
 

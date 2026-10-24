@@ -43,9 +43,7 @@
 // Must come last:
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // To save code size, protos without any fields are derived from ZeroFieldsBase
 // rather than Message.
@@ -77,9 +75,7 @@ class SHARK_EXPORT ZeroFieldsBase : public Message {
   mutable internal::CachedSize _cached_size_;
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

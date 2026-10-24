@@ -35,10 +35,7 @@
 #include <shark/stubs/common.h>
 #include <shark/util/internal/location_tracker.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 // An empty concrete implementation of LocationTrackerInterface.
 class ObjectLocationTracker : public LocationTrackerInterface {
@@ -55,8 +52,5 @@ class ObjectLocationTracker : public LocationTrackerInterface {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ObjectLocationTracker);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 

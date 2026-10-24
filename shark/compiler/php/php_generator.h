@@ -37,10 +37,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace php {
+namespace shark::compiler::php {
 
 struct Options;
 
@@ -81,10 +78,7 @@ inline bool IsWrapperType(const FieldDescriptor* descriptor) {
       descriptor->message_type()->file()->name() == "shark/wrappers.proto";
 }
 
-}  // namespace php
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::php
 
 #include <shark/port_undef.inc>
 

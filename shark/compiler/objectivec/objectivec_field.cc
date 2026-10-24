@@ -39,10 +39,7 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 namespace {
 
@@ -464,7 +461,4 @@ bool FieldGeneratorMap::DoesAnyFieldHaveNonZeroDefault(void) const {
   return false;
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

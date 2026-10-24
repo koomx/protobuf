@@ -33,8 +33,7 @@
 #include <tests/map_lite_unittest.pb.h>
 #include <tests/map_test_util_impl.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 void MapLiteTestUtil::SetMapFields(unittest::TestMapLite* message) {
   MapTestUtilImpl::SetMapFields<unittest::MapEnumLite,
@@ -90,5 +89,4 @@ void MapLiteTestUtil::ExpectMapFieldsModified(
       message);
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

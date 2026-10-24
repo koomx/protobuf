@@ -47,9 +47,9 @@ message StructTestCases {
   StructWrapper struct_with_list_of_structs = 10;
   StructWrapper struct_with_empty_list = 11;
   StructWrapper struct_with_list_with_empty_struct = 12;
-  google.protobuf.Struct top_level_struct = 13;
-  google.protobuf.Struct top_level_struct_with_empty_list = 14;
-  google.protobuf.Struct top_level_struct_with_list_with_empty_struct = 15;
+  shark.Struct top_level_struct = 13;
+  shark.Struct top_level_struct_with_empty_list = 14;
+  shark.Struct top_level_struct_with_list_with_empty_struct = 15;
   ValueWrapper value_wrapper_simple = 16;
   ValueWrapper value_wrapper_with_struct = 17;
   ValueWrapper value_wrapper_with_list = 18;
@@ -58,14 +58,14 @@ message StructTestCases {
   ListValueWrapper list_value_wrapper = 21;
   ListValueWrapper list_value_wrapper_with_empty_list = 22;
   ListValueWrapper list_value_wrapper_with_list_with_empty_struct = 23;
-  google.protobuf.Value top_level_value_simple = 24;
-  google.protobuf.Value top_level_value_with_struct = 25;
-  google.protobuf.Value top_level_value_with_list = 26;
-  google.protobuf.Value top_level_value_with_empty_list = 27;
-  google.protobuf.Value top_level_value_with_list_with_empty_struct = 28;
-  google.protobuf.ListValue top_level_listvalue = 29;
-  google.protobuf.ListValue top_level_empty_listvalue = 30;
-  google.protobuf.ListValue top_level_listvalue_with_empty_struct = 31;
+  shark.Value top_level_value_simple = 24;
+  shark.Value top_level_value_with_struct = 25;
+  shark.Value top_level_value_with_list = 26;
+  shark.Value top_level_value_with_empty_list = 27;
+  shark.Value top_level_value_with_list_with_empty_struct = 28;
+  shark.ListValue top_level_listvalue = 29;
+  shark.ListValue top_level_empty_listvalue = 30;
+  shark.ListValue top_level_listvalue_with_empty_struct = 31;
   RepeatedValueWrapper repeated_value = 32;
   RepeatedValueWrapper repeated_value_nested_list = 33;
   RepeatedValueWrapper repeated_value_nested_list2 = 34;
@@ -77,29 +77,29 @@ message StructTestCases {
 }
 
 message StructWrapper {
-  google.protobuf.Struct struct = 1;
+  shark.Struct struct = 1;
 }
 
 message ValueWrapper {
-  google.protobuf.Value value = 1;
+  shark.Value value = 1;
 }
 
 message RepeatedValueWrapper {
-  repeated google.protobuf.Value values = 1;
+  repeated shark.Value values = 1;
 }
 
 message ListValueWrapper {
-  google.protobuf.ListValue shopping_list = 1;
+  shark.ListValue shopping_list = 1;
 }
 
 message RepeatedListValueWrapper {
-  repeated google.protobuf.ListValue dimensions = 1;
+  repeated shark.ListValue dimensions = 1;
 }
 
 message MapOfStruct {
-  map<string, google.protobuf.Struct> struct_map = 1;
-  map<string, google.protobuf.Value> value_map = 2;
-  map<string, google.protobuf.ListValue> listvalue_map = 3;
+  map<string, shark.Struct> struct_map = 1;
+  map<string, shark.Value> value_map = 2;
+  map<string, shark.ListValue> listvalue_map = 3;
 }
 
 // Hack to test return types with Struct as top-level message. Struct typers
@@ -113,5 +113,5 @@ service StructTestService {
 }
 
 message StructType {
-  google.protobuf.Struct object = 1;
+  shark.Struct object = 1;
 }

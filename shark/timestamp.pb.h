@@ -43,20 +43,20 @@ struct TableStruct_shark_2ftimestamp_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2ftimestamp_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class Timestamp;
 struct TimestampDefaultTypeInternal;
 extern TimestampDefaultTypeInternal _Timestamp_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::Timestamp* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Timestamp>(Arena*);
+template<> ::shark::Timestamp* Arena::CreateMaybeMessage<::shark::Timestamp>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class Timestamp final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Timestamp) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Timestamp) */ {
  public:
   inline Timestamp() : Timestamp(nullptr) {}
   ~Timestamp() override;
@@ -159,7 +159,7 @@ class Timestamp final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Timestamp";
+    return "shark.Timestamp";
   }
   protected:
   explicit Timestamp(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -197,7 +197,7 @@ class Timestamp final :
   void _internal_set_nanos(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Timestamp)
+  // @@protoc_insertion_point(class_scope:shark.Timestamp)
  private:
   class _Internal;
 
@@ -231,7 +231,7 @@ inline int64_t Timestamp::_internal_seconds() const {
   return _impl_.seconds_;
 }
 inline int64_t Timestamp::seconds() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Timestamp.seconds)
+  // @@protoc_insertion_point(field_get:shark.Timestamp.seconds)
   return _internal_seconds();
 }
 inline void Timestamp::_internal_set_seconds(int64_t value) {
@@ -240,7 +240,7 @@ inline void Timestamp::_internal_set_seconds(int64_t value) {
 }
 inline void Timestamp::set_seconds(int64_t value) {
   _internal_set_seconds(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Timestamp.seconds)
+  // @@protoc_insertion_point(field_set:shark.Timestamp.seconds)
 }
 
 // int32 nanos = 2;
@@ -251,7 +251,7 @@ inline int32_t Timestamp::_internal_nanos() const {
   return _impl_.nanos_;
 }
 inline int32_t Timestamp::nanos() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Timestamp.nanos)
+  // @@protoc_insertion_point(field_get:shark.Timestamp.nanos)
   return _internal_nanos();
 }
 inline void Timestamp::_internal_set_nanos(int32_t value) {
@@ -260,7 +260,7 @@ inline void Timestamp::_internal_set_nanos(int32_t value) {
 }
 inline void Timestamp::set_nanos(int32_t value) {
   _internal_set_nanos(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Timestamp.nanos)
+  // @@protoc_insertion_point(field_set:shark.Timestamp.nanos)
 }
 
 #ifdef __GNUC__
@@ -269,7 +269,7 @@ inline void Timestamp::set_nanos(int32_t value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

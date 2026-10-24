@@ -48,7 +48,7 @@ message TimestampDurationTestCases {
   TimeStampType timeval5 = 9;
   TimeStampType timeval6 = 10;
   TimeStampType timeval7 = 11;
-  google.protobuf.Timestamp timeval8 = 12;
+  shark.Timestamp timeval8 = 12;
 
   // Duration tests
   DurationType zero_duration = 101;
@@ -58,15 +58,15 @@ message TimestampDurationTestCases {
   DurationType duration2 = 105;
   DurationType duration3 = 106;
   DurationType duration4 = 107;
-  google.protobuf.Duration duration5 = 108;
+  shark.Duration duration5 = 108;
 }
 
 message TimeStampType {
-  google.protobuf.Timestamp timestamp = 1;
+  shark.Timestamp timestamp = 1;
 }
 
 message DurationType {
-  google.protobuf.Duration duration = 1;
+  shark.Duration duration = 1;
 }
 
 service TimestampDurationTestService {
@@ -74,7 +74,7 @@ service TimestampDurationTestService {
 }
 
 message TimestampDuration {
-  google.protobuf.Timestamp ts = 1;
-  google.protobuf.Duration dur = 2;
-  repeated google.protobuf.Timestamp rep_ts = 3;
+  shark.Timestamp ts = 1;
+  shark.Duration dur = 2;
+  repeated shark.Timestamp rep_ts = 3;
 }

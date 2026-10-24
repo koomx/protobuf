@@ -54,8 +54,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class DynamicMessage;
 class MapIterator;
 
@@ -272,8 +271,7 @@ class SHARK_EXPORT MapKey {
   FieldDescriptor::CppType type_;
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 namespace std {
 template <>
 struct hash<::SHARK_NAMESPACE_ID::MapKey> {
@@ -317,8 +315,7 @@ struct hash<::SHARK_NAMESPACE_ID::MapKey> {
 };
 }  // namespace std
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 class ContendedMapCleanTest;
@@ -933,8 +930,7 @@ class SHARK_EXPORT MapIterator {
   MapValueRef value_;
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #ifdef _MSC_VER
 #pragma warning(pop)  // restore warning C4265

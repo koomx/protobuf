@@ -41,10 +41,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/status.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 typedef std::function<std::string(StringPiece)> ConverterCallback;
 typedef std::function<util::Status(StringPiece)> PathSinkCallback;
@@ -65,8 +62,5 @@ std::string ConvertFieldMaskPath(const StringPiece path,
 util::Status DecodeCompactFieldMaskPaths(StringPiece paths,
                                          PathSinkCallback path_sink);
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 

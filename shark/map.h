@@ -68,8 +68,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 template <typename Key, typename T>
 class Map;
@@ -1439,8 +1438,7 @@ class Map {
   friend class internal::MapFieldLite;
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

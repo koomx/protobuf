@@ -35,8 +35,7 @@
 #include <shark/dynamic_message.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 void FillMessage(
@@ -286,5 +285,4 @@ TEST(PreserveUnknownEnumTest, SupportsUnknownEnumValuesAPI) {
   EXPECT_FALSE(proto2_reflection->SupportsUnknownEnumValues());
   EXPECT_TRUE(new_reflection->SupportsUnknownEnumValues());
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

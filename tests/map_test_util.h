@@ -34,7 +34,7 @@
 #include <tests/reflection_tester.h>
 
 #define UNITTEST ::protobuf_unittest
-#define BRIDGE_UNITTEST ::google::protobuf::bridge_unittest
+#define BRIDGE_UNITTEST ::shark::bridge_unittest
 
 // Must be included after defining UNITTEST, etc.
 #include <tests/map_test_util.inc>

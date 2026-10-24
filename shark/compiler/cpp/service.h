@@ -40,16 +40,13 @@
 #include <shark/descriptor.h>
 #include <shark/compiler/cpp/options.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace io {
 class Printer;  // printer.h
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace cpp {
 
@@ -116,6 +113,5 @@ class ServiceGenerator {
 
 }  // namespace cpp
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

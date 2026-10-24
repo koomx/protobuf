@@ -48,10 +48,7 @@
 #include "shark/compiler/java/helpers.h"
 #include "shark/compiler/java/name_resolver.h"
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 using internal::WireFormat;
 
@@ -1070,7 +1067,4 @@ std::string RepeatedImmutablePrimitiveFieldGenerator::GetBoxedType() const {
   return BoxedPrimitiveTypeName(GetJavaType(descriptor_));
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

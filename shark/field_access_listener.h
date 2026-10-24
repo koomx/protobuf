@@ -36,8 +36,7 @@
 #include <shark/message_lite.h>
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // A default/no-op implementation of message hooks.
 //
@@ -152,16 +151,13 @@ struct NoOpAccessListener {
                                      const void* field) {}
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #ifndef REPLACE_PROTO_LISTENER_IMPL
-namespace google {
-namespace protobuf {
+namespace shark {
 template <class T>
 using AccessListener = NoOpAccessListener<T>;
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 #else
 // You can put your implementations of hooks/listeners here.
 // All hooks are subject to approval by protobuf-team@.

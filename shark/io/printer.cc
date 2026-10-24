@@ -40,9 +40,7 @@
 #include <shark/stubs/common.h>
 #include <shark/io/zero_copy_stream.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 Printer::Printer(ZeroCopyOutputStream* output, char variable_delimiter)
     : variable_delimiter_(variable_delimiter),
@@ -398,6 +396,4 @@ const char* Printer::WriteVariable(
   return format;
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

@@ -35,9 +35,7 @@
 
 #include <shark/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
-namespace strings {
+namespace shark::strings {
 
 void ByteSource::CopyTo(ByteSink* sink, size_t n) {
   while (n > 0) {
@@ -189,6 +187,4 @@ void LimitByteSource::CopyTo(ByteSink *sink, size_t n) {
   limit_ -= n;
 }
 
-}  // namespace strings
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::strings

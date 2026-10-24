@@ -39,9 +39,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 inline uint64_t BSwap64(uint64_t host_int) {
 #if defined(SHARK_BUILTIN_BSWAP64)
@@ -188,9 +186,7 @@ inline uint64_t ToHost(uint64_t value) {
 
 }  // namespace big_endian
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

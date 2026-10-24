@@ -57,8 +57,7 @@
 #define snprintf _snprintf
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // These are defined as macros on some platforms.  #undef them so that we can
 // redefine them.
@@ -2475,5 +2474,4 @@ double NoLocaleStrtod(const char *str, char **endptr) {
 
 }  // namespace internal
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

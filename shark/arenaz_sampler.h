@@ -38,9 +38,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 #if defined(SHARK_ARENAZ_SAMPLE)
 struct ThreadSafeArenaStats;
@@ -198,8 +196,6 @@ void SetThreadSafeArenazMaxSamples(int32_t max);
 // Sets the current value for when arenas should be next sampled.
 void SetThreadSafeArenazGlobalNextSample(int64_t next_sample);
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

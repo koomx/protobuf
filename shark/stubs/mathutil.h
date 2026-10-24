@@ -36,8 +36,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 // Like std::make_unsigned_t except floating point types map to themselves.
@@ -155,6 +154,5 @@ bool MathUtil::WithinFractionOrMargin(const T x, const T y,
   }
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

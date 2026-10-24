@@ -34,9 +34,7 @@
 #include <shark/arenastring.h>
 #include <shark/generated_message_util.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 std::string GetTypeUrl(StringPiece message_name,
                        StringPiece type_url_prefix) {
@@ -48,7 +46,7 @@ std::string GetTypeUrl(StringPiece message_name,
   }
 }
 
-const char kAnyFullTypeName[] = "google.protobuf.Any";
+const char kAnyFullTypeName[] = "shark.Any";
 const char kTypeGoogleApisComPrefix[] = "type.googleapis.com/";
 const char kTypeGoogleProdComPrefix[] = "type.googleprod.com/";
 
@@ -91,6 +89,4 @@ bool ParseAnyTypeUrl(StringPiece type_url, std::string* full_type_name) {
   return ParseAnyTypeUrl(type_url, nullptr, full_type_name);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

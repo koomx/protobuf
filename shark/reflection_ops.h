@@ -47,9 +47,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // Basic operations that can be performed using reflection.
 // These can be used as a cheap way to implement the corresponding
@@ -82,9 +80,7 @@ class SHARK_EXPORT ReflectionOps {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ReflectionOps);
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

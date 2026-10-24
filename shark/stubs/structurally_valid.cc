@@ -34,9 +34,7 @@
 
 #include <shark/stubs/stringpiece.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // These four-byte entries compactly encode how many bytes 0..255 to delete
 // in making a string replacement, how many bytes to add 0..255, and the offset
@@ -612,6 +610,4 @@ char* UTF8CoerceToStructurallyValid(StringPiece src_str, char* idst,
   return idst;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

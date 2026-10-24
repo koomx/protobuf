@@ -71,8 +71,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Message;
 class Reflection;
@@ -735,7 +734,7 @@ class SHARK_EXPORT RepeatedPtrFieldBase {
   friend class MergePartialFromCodedStreamHelper;
   friend class AccessorHelper;
   template <typename T>
-  friend struct google::protobuf::WeakRepeatedPtrField;
+  friend struct shark::WeakRepeatedPtrField;
   friend class internal::TcParser;  // TODO(jorg): Remove this friend.
 };
 
@@ -1961,8 +1960,7 @@ UnsafeArenaAllocatedRepeatedPtrFieldBackInserter(
 extern template class SHARK_EXPORT_TEMPLATE_DECLARE
     RepeatedPtrField<std::string>;
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

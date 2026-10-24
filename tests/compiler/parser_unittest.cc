@@ -53,8 +53,7 @@
 #include <shark/stubs/substitute.h>
 #include <shark/stubs/map_util.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 
 namespace {
@@ -1901,7 +1900,7 @@ TEST_F(ParserValidationErrorTest, FileOptionValueError) {
   ExpectHasValidationErrors(
       "option java_outer_classname = 5;",
       "0:30: Value must be quoted string for string option "
-      "\"google.protobuf.FileOptions.java_outer_classname\".\n");
+      "\"shark.FileOptions.java_outer_classname\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, FieldOptionNameError) {
@@ -1919,7 +1918,7 @@ TEST_F(ParserValidationErrorTest, FieldOptionValueError) {
       "  optional int32 bar = 1 [ctype=1];\n"
       "}\n",
       "1:32: Value must be identifier for enum-valued option "
-      "\"google.protobuf.FieldOptions.ctype\".\n");
+      "\"shark.FieldOptions.ctype\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, ExtensionRangeNumberError) {
@@ -2121,7 +2120,7 @@ TEST_F(ParserValidationErrorTest, ResovledUndefinedOptionError) {
   extension->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
   extension->set_type(FieldDescriptorProto::TYPE_MESSAGE);
   extension->set_type_name("Bar");
-  extension->set_extendee("google.protobuf.FileOptions");
+  extension->set_extendee("shark.FileOptions");
 
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
 
@@ -2281,7 +2280,7 @@ TEST_F(ParseDescriptorDebugTest, TestCustomOptions) {
   ASSERT_TRUE(pool_.BuildFile(import_proto) != nullptr);
 
   FileDescriptorProto any_import;
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_import);
+  shark::Any::descriptor()->file()->CopyTo(&any_import);
   ASSERT_TRUE(pool_.BuildFile(any_import) != nullptr);
 
   const FileDescriptor* actual = pool_.BuildFile(parsed);
@@ -3681,5 +3680,4 @@ TEST_F(SourceInfoTest, DocCommentsOneof) {
 }  // anonymous namespace
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

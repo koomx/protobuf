@@ -42,9 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 #if defined(SHARK_ARENAZ_SAMPLE)
 class ThreadSafeArenaStatsHandlePeer {
  public:
@@ -318,9 +316,9 @@ TEST(ThreadSafeArenazSamplerTest, Callback) {
 class ThreadSafeArenazSamplerTestThread : public Thread {
  protected:
   void Run() override {
-    google::protobuf::ArenaSafeUniquePtr<
+    shark::ArenaSafeUniquePtr<
         protobuf_test_messages::proto2::TestAllTypesProto2>
-        message = google::protobuf::MakeArenaSafeUnique<
+        message = shark::MakeArenaSafeUnique<
             protobuf_test_messages::proto2::TestAllTypesProto2>(arena_);
     GOOGLE_CHECK(message != nullptr);
     // Signal that a message on the arena has been created.  This should create
@@ -333,12 +331,12 @@ class ThreadSafeArenazSamplerTestThread : public Thread {
  public:
   ThreadSafeArenazSamplerTestThread(const thread::Options& options,
                                     StringPiece name,
-                                    google::protobuf::Arena* arena,
+                                    shark::Arena* arena,
                                     absl::Barrier* barrier)
       : Thread(options, name), arena_(arena), barrier_(barrier) {}
 
  private:
-  google::protobuf::Arena* arena_;
+  shark::Arena* arena_;
   absl::Barrier* barrier_;
 };
 
@@ -353,7 +351,7 @@ TEST(ThreadSafeArenazSamplerTest, MultiThread) {
   for (int i = 0; i < 10; ++i) {
     const int kNumThreads = 10;
     absl::Barrier* barrier = new absl::Barrier(kNumThreads + 1);
-    google::protobuf::Arena arena;
+    shark::Arena arena;
     thread::Options options;
     options.set_joinable(true);
     std::vector<std::unique_ptr<ThreadSafeArenazSamplerTestThread>> threads;
@@ -377,6 +375,4 @@ TEST(ThreadSafeArenazSamplerTest, MultiThread) {
 #endif  // defined(SHARK_ARENAZ_SAMPLE)
 
 }  // namespace
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

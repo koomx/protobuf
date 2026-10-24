@@ -33,10 +33,7 @@
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/csharp/csharp_field_base.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 struct Options;
 
@@ -67,9 +64,6 @@ class RepeatedMessageFieldGenerator : public FieldGeneratorBase {
   virtual void WriteToString(io::Printer* printer) override;
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 

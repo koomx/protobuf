@@ -40,9 +40,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // Used for compile time type selection. MapIf::type will be TrueType if Flag is
 // true and FalseType otherwise.
@@ -728,7 +726,5 @@ struct MapEntryFuncs {
   }
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 

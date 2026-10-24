@@ -41,8 +41,7 @@
 
 #include <shark/stubs/common.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 // Local implementation of RemoveConst to avoid including base/type_traits.h.
 template <class T> struct RemoveConst { typedef T type; };
@@ -762,6 +761,5 @@ void AppendValuesFromMap(const MapContainer& map_container,
   }
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

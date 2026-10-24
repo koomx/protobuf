@@ -58,10 +58,7 @@
 
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
-namespace win32 {
+namespace shark::io::win32 {
 namespace {
 
 const char kUtf8Text[] = {
@@ -622,10 +619,7 @@ TEST_F(IoWin32Test, Utf8Utf16ConversionTest) {
 }
 
 }  // namespace
-}  // namespace win32
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io::win32
 
 #endif  // defined(_WIN32)
 

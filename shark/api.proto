@@ -30,7 +30,7 @@
 
 syntax = "proto3";
 
-package google.protobuf;
+package shark;
 
 import "shark/source_context.proto";
 import "shark/type.proto";

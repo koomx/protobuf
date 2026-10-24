@@ -45,10 +45,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 namespace {
 
 class TestGenerator : public CodeGenerator {
@@ -229,7 +226,4 @@ TEST(CppPluginTest, PluginTest) {
 }
 
 }  // namespace
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

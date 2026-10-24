@@ -38,10 +38,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace ruby {
+namespace shark::compiler::ruby {
 
 // CodeGenerator implementation for generated Ruby protocol buffer classes.
 // If you create your own protocol compiler binary and you want it to support
@@ -56,10 +53,7 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
   }
 };
 
-}  // namespace ruby
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::ruby
 
 #include <shark/port_undef.inc>
 

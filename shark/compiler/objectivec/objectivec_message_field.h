@@ -34,10 +34,7 @@
 #include <string>
 #include <shark/compiler/objectivec/objectivec_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class MessageFieldGenerator : public ObjCObjFieldGenerator {
   friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field);
@@ -76,8 +73,5 @@ class RepeatedMessageFieldGenerator : public RepeatedFieldGenerator {
       std::set<std::string>* fwd_decls) const override;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 

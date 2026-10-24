@@ -43,10 +43,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-
-namespace internal {
+namespace shark::internal {
 
 void** RepeatedPtrFieldBase::InternalExtend(int extend_amount) {
   int new_size = current_size_ + extend_amount;
@@ -144,9 +141,6 @@ MessageLite* RepeatedPtrFieldBase::AddWeak(const MessageLite* prototype) {
   return result;
 }
 
-}  // namespace internal
-
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

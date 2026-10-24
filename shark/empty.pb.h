@@ -44,20 +44,20 @@ struct TableStruct_shark_2fempty_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fempty_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class Empty;
 struct EmptyDefaultTypeInternal;
 extern EmptyDefaultTypeInternal _Empty_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::Empty* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Empty>(Arena*);
+template<> ::shark::Empty* Arena::CreateMaybeMessage<::shark::Empty>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class Empty final :
-    public ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:google.protobuf.Empty) */ {
+    public ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:shark.Empty) */ {
  public:
   inline Empty() : Empty(nullptr) {}
   explicit constexpr Empty(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
@@ -145,7 +145,7 @@ class Empty final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Empty";
+    return "shark.Empty";
   }
   protected:
   explicit Empty(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -161,7 +161,7 @@ class Empty final :
 
   // accessors -------------------------------------------------------
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Empty)
+  // @@protoc_insertion_point(class_scope:shark.Empty)
  private:
   class _Internal;
 
@@ -189,7 +189,7 @@ class Empty final :
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

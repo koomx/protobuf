@@ -34,8 +34,7 @@
 
 #include <string>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class DescriptorPool;
 namespace util {
 class TypeResolver;
@@ -49,8 +48,7 @@ SHARK_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(
     const std::string& url_prefix, const DescriptorPool* pool);
 
 }  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

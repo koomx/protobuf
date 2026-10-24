@@ -57,9 +57,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 namespace {
 
@@ -960,8 +958,6 @@ uint8_t* CodedOutputStream::WriteVarint32ToArrayOutOfLineHelper(uint32_t value,
   return target;
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>

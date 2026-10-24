@@ -35,8 +35,7 @@
 #include <shark/port_def.inc>
 #include <type_traits>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 // Use implicit_cast as a safe version of static_cast or const_cast
@@ -129,8 +128,7 @@ using internal::implicit_cast;
 using internal::down_cast;
 using internal::bit_cast;
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

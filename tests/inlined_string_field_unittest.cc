@@ -47,13 +47,11 @@
 #include <shark/stubs/strutil.h>
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 using internal::ArenaStringPtr;
 using internal::InlinedStringField;
 
 namespace {
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

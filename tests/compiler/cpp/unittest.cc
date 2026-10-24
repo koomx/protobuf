@@ -66,10 +66,7 @@
 // Must include after the above macros.
 #include <tests/compiler/cpp/unittest.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 // Can't use an anonymous namespace here due to brokenness of Tru64 compiler.
 namespace cpp_unittest {
@@ -127,7 +124,4 @@ TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingExtension) {
 }
 
 }  // namespace cpp_unittest
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

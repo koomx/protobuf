@@ -30,12 +30,8 @@
 
 #include <shark/map.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 void* const kGlobalEmptyTable[kGlobalEmptyTableSize] = {nullptr};
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

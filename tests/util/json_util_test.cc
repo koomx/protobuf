@@ -45,9 +45,7 @@
 #include <shark/util/type_resolver.h>
 #include <shark/util/type_resolver_util.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace {
 
 using proto3::BAR;
@@ -667,6 +665,4 @@ TEST_F(JsonUtilTest, HtmlEscape) {
 }
 
 }  // namespace
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

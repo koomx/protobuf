@@ -36,10 +36,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 ExtensionGenerator::ExtensionGenerator(const std::string& root_class_name,
                                        const FieldDescriptor* descriptor)
@@ -150,7 +147,4 @@ void ExtensionGenerator::GenerateRegistrationSource(io::Printer* printer) {
       "root_class_and_method_name", root_class_and_method_name_);
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

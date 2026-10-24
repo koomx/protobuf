@@ -40,10 +40,7 @@
 
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 std::string ReinterpretCast(const std::string& type,
@@ -952,7 +949,4 @@ void RepeatedMessageFieldGenerator::GenerateIsInitialized(
   }
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

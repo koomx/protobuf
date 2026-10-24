@@ -39,10 +39,7 @@
 // Must be last.
 #include "shark/port_def.inc"
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 namespace {
 
@@ -915,9 +912,6 @@ std::string ImmutableMapFieldGenerator::GetBoxedType() const {
   return name_resolver_->GetImmutableClassName(descriptor_->message_type());
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include "shark/port_undef.inc"

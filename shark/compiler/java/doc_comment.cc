@@ -40,10 +40,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 std::string EscapeJavadoc(const std::string& input) {
   std::string result;
@@ -438,7 +435,4 @@ void WriteMethodDocComment(io::Printer* printer,
       "def", EscapeJavadoc(FirstLineOf(method->DebugString())));
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

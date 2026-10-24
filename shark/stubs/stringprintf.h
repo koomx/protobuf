@@ -47,8 +47,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Return a C++ string
 SHARK_EXPORT extern std::string StringPrintf(const char* format, ...);
@@ -76,8 +75,7 @@ SHARK_EXPORT extern const int kStringPrintfVectorMaxArgs;
 SHARK_EXPORT extern std::string StringPrintfVector(
     const char* format, const std::vector<std::string>& v);
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

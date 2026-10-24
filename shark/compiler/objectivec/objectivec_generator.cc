@@ -39,10 +39,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 namespace {
 
@@ -295,7 +292,4 @@ bool ObjectiveCGenerator::GenerateAll(
   return true;
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

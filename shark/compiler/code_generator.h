@@ -45,8 +45,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace io {
 class ZeroCopyOutputStream;
@@ -165,7 +164,7 @@ class PROTOC_EXPORT GeneratorContext {
   // WARNING:  This feature will be REMOVED in the near future.
   virtual io::ZeroCopyOutputStream* OpenForInsertWithGeneratedCodeInfo(
       const std::string& filename, const std::string& insertion_point,
-      const google::protobuf::GeneratedCodeInfo& info);
+      const shark::GeneratedCodeInfo& info);
 
   // Returns a vector of FileDescriptors for all the files being compiled
   // in this run.  Useful for languages, such as Go, that treat files
@@ -198,8 +197,7 @@ PROTOC_EXPORT void ParseGeneratorParameter(
 PROTOC_EXPORT std::string StripProto(const std::string& filename);
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

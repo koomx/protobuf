@@ -42,8 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Descriptor;
 class EnumDescriptor;
@@ -176,8 +175,7 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
 
 }  // namespace python
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

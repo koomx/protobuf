@@ -47,9 +47,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 static const Reflection* GetReflectionOrDie(const Message& m) {
   const Reflection* r = m.GetReflection();
@@ -80,9 +78,9 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
   const Reflection* from_reflection = GetReflectionOrDie(from);
   const Reflection* to_reflection = GetReflectionOrDie(*to);
   bool is_from_generated = (from_reflection->GetMessageFactory() ==
-                            google::protobuf::MessageFactory::generated_factory());
+                            shark::MessageFactory::generated_factory());
   bool is_to_generated = (to_reflection->GetMessageFactory() ==
-                          google::protobuf::MessageFactory::generated_factory());
+                          shark::MessageFactory::generated_factory());
 
   std::vector<const FieldDescriptor*> fields;
   from_reflection->ListFieldsOmitStripped(from, &fields);
@@ -452,8 +450,6 @@ void GenericSwap(Message* lhs, Message* rhs) {
 #endif  // !SHARK_FORCE_COPY_IN_SWAP
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

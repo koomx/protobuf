@@ -36,10 +36,7 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/compiler/cpp/message_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 class MapFieldGenerator : public FieldGenerator {
  public:
@@ -74,8 +71,5 @@ class MapFieldGenerator : public FieldGenerator {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapFieldGenerator);
 };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 

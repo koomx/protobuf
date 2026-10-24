@@ -35,10 +35,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class FieldGenerator {
  public:
@@ -181,8 +178,5 @@ class FieldGeneratorMap {
   std::vector<std::unique_ptr<FieldGenerator>> extension_generators_;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 

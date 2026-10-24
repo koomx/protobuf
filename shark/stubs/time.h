@@ -35,9 +35,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 struct DateTime {
   int year;
@@ -72,9 +70,7 @@ std::string SHARK_EXPORT FormatTime(int64_t seconds, int32_t nanos);
 bool SHARK_EXPORT ParseTime(const std::string& value, int64_t* seconds,
                                int32_t* nanos);
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

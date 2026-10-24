@@ -59,8 +59,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 using ::protobuf_unittest::TestAllTypes;
@@ -983,10 +982,10 @@ std::false_type ValidResolutionPointerRange(void*);
 TEST(RepeatedPtrField, UnambiguousConstructor) {
   struct X {
     static bool f(std::vector<std::string>) { return false; }
-    static bool f(google::protobuf::RepeatedPtrField<std::string>) { return true; }
+    static bool f(shark::RepeatedPtrField<std::string>) { return true; }
 
     static bool g(std::vector<int>) { return false; }
-    static bool g(google::protobuf::RepeatedPtrField<std::string>) { return true; }
+    static bool g(shark::RepeatedPtrField<std::string>) { return true; }
   };
 
   // RepeatedPtrField has no initializer-list constructor, and a constructor
@@ -2142,8 +2141,8 @@ TEST_F(RepeatedPtrFieldPtrsIteratorTest, Sort) {
 
 // -----------------------------------------------------------------------------
 // Unit-tests for the insert iterators
-// google::protobuf::RepeatedFieldBackInserter,
-// google::protobuf::AllocatedRepeatedPtrFieldBackInserter
+// shark::RepeatedFieldBackInserter,
+// shark::AllocatedRepeatedPtrFieldBackInserter
 // Ported from util/gtl/proto-array-iterators_unittest.
 
 class RepeatedFieldInsertionIteratorsTest : public testing::Test {
@@ -2357,7 +2356,6 @@ TEST_F(RepeatedFieldInsertionIteratorsTest, MoveProtos) {
 
 }  // namespace
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

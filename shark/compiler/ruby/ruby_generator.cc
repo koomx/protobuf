@@ -40,10 +40,7 @@
 
 #include <shark/compiler/ruby/ruby_generator.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace ruby {
+namespace shark::compiler::ruby {
 
 // Forward decls.
 template <class numeric_type>
@@ -569,7 +566,4 @@ bool Generator::Generate(
   return GenerateFile(file, &printer, error);
 }
 
-}  // namespace ruby
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::ruby

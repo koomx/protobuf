@@ -34,10 +34,7 @@
 #include <string>
 #include <utility>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace status_internal {
+namespace shark::util::status_internal {
 namespace {
 
 inline std::string StatusCodeToString(StatusCode code) {
@@ -256,7 +253,4 @@ Status UnknownError(StringPiece message) {
   return Status(StatusCode::kUnknown, message);
 }
 
-}  // namespace status_internal
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::status_internal

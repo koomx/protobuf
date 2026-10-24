@@ -61,17 +61,14 @@
 // Always include as last one, otherwise it can break compilation
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-
-namespace util {
+namespace shark::util {
 
 namespace {
 
-std::string PrintShortTextFormat(const google::protobuf::Message& message) {
+std::string PrintShortTextFormat(const shark::Message& message) {
   std::string debug_string;
 
-  google::protobuf::TextFormat::Printer printer;
+  shark::TextFormat::Printer printer;
   printer.SetSingleLineMode(true);
   printer.SetExpandAny(true);
 
@@ -88,7 +85,7 @@ std::string PrintShortTextFormat(const google::protobuf::Message& message) {
 
 // A reporter to report the total number of diffs.
 // TODO(ykzhu): we can improve this to take into account the value differencers.
-class NumDiffsReporter : public google::protobuf::util::MessageDifferencer::Reporter {
+class NumDiffsReporter : public shark::util::MessageDifferencer::Reporter {
  public:
   NumDiffsReporter() : num_diffs_(0) {}
 
@@ -98,27 +95,27 @@ class NumDiffsReporter : public google::protobuf::util::MessageDifferencer::Repo
 
   // Report that a field has been added into Message2.
   void ReportAdded(
-      const google::protobuf::Message& /* message1 */,
-      const google::protobuf::Message& /* message2 */,
-      const std::vector<google::protobuf::util::MessageDifferencer::SpecificField>&
+      const shark::Message& /* message1 */,
+      const shark::Message& /* message2 */,
+      const std::vector<shark::util::MessageDifferencer::SpecificField>&
       /*field_path*/) override {
     ++num_diffs_;
   }
 
   // Report that a field has been deleted from Message1.
   void ReportDeleted(
-      const google::protobuf::Message& /* message1 */,
-      const google::protobuf::Message& /* message2 */,
-      const std::vector<google::protobuf::util::MessageDifferencer::SpecificField>&
+      const shark::Message& /* message1 */,
+      const shark::Message& /* message2 */,
+      const std::vector<shark::util::MessageDifferencer::SpecificField>&
       /*field_path*/) override {
     ++num_diffs_;
   }
 
   // Report that the value of a field has been modified.
   void ReportModified(
-      const google::protobuf::Message& /* message1 */,
-      const google::protobuf::Message& /* message2 */,
-      const std::vector<google::protobuf::util::MessageDifferencer::SpecificField>&
+      const shark::Message& /* message1 */,
+      const shark::Message& /* message2 */,
+      const std::vector<shark::util::MessageDifferencer::SpecificField>&
       /*field_path*/) override {
     ++num_diffs_;
   }
@@ -228,7 +225,7 @@ void MatchIndicesPostProcessorForSmartList(std::vector<int>* match_list1,
 }
 
 void AddSpecificIndex(
-    google::protobuf::util::MessageDifferencer::SpecificField* specific_field,
+    shark::util::MessageDifferencer::SpecificField* specific_field,
     const Message& message, const FieldDescriptor* field, int index) {
   if (field->is_map()) {
     const Reflection* reflection = message.GetReflection();
@@ -239,7 +236,7 @@ void AddSpecificIndex(
 }
 
 void AddSpecificNewIndex(
-    google::protobuf::util::MessageDifferencer::SpecificField* specific_field,
+    shark::util::MessageDifferencer::SpecificField* specific_field,
     const Message& message, const FieldDescriptor* field, int index) {
   if (field->is_map()) {
     const Reflection* reflection = message.GetReflection();
@@ -612,13 +609,13 @@ bool MessageDifferencer::Compare(const Message& message1,
     return false;
   }
 
-  // Expand google.protobuf.Any payload if possible.
+  // Expand shark.Any payload if possible.
   if (descriptor1->full_name() == internal::kAnyFullTypeName) {
     std::unique_ptr<Message> data1;
     std::unique_ptr<Message> data2;
     if (unpack_any_field_.UnpackAny(message1, &data1) &&
         unpack_any_field_.UnpackAny(message2, &data2)) {
-      // Avoid DFATAL for different descriptors in google.protobuf.Any payloads.
+      // Avoid DFATAL for different descriptors in shark.Any payloads.
       if (data1->GetDescriptor() != data2->GetDescriptor()) {
         return false;
       }
@@ -2241,6 +2238,4 @@ MessageDifferencer::CreateMultipleFieldsMapKeyComparator(
   return new MultipleFieldsMapKeyComparator(this, key_field_paths);
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

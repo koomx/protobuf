@@ -46,9 +46,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 #ifndef NDEBUG
 void MapFieldLiteNotDestructed(void* map_field_lite);
@@ -199,9 +197,7 @@ inline SHARK_NOINLINE void MapFieldLiteNotDestructed(void* map_field_lite) {
 }
 #endif
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

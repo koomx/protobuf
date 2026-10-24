@@ -30,8 +30,7 @@
 
 #pragma once
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 #undef GOOGLE_DISALLOW_EVIL_CONSTRUCTORS
 #define GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeName) \
@@ -86,6 +85,5 @@ namespace protobuf {
   ((sizeof(a) / sizeof(*(a))) / \
    static_cast<size_t>(!(sizeof(a) % sizeof(*(a)))))
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

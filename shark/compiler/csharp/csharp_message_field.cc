@@ -44,10 +44,7 @@
 #include <shark/compiler/csharp/csharp_message_field.h>
 #include <shark/compiler/csharp/csharp_options.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 MessageFieldGenerator::MessageFieldGenerator(const FieldDescriptor* descriptor,
                                              int presenceIndex,
@@ -287,7 +284,4 @@ void MessageOneofFieldGenerator::GenerateCloningCode(io::Printer* printer) {
     "$property_name$ = other.$property_name$.Clone();\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

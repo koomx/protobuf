@@ -35,10 +35,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/bytestream.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 class JsonEscaping {
  public:
@@ -89,8 +86,5 @@ class JsonEscaping {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(JsonEscaping);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 

@@ -36,9 +36,7 @@
 
 #define EXPECT_EQ GOOGLE_CHECK_EQ
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 NoHeapChecker::~NoHeapChecker() {
   capture_alloc.Unhook();
@@ -46,6 +44,4 @@ NoHeapChecker::~NoHeapChecker() {
   EXPECT_EQ(0, capture_alloc.free_count());
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

@@ -57,9 +57,7 @@
 #include <shark/port_def.inc>
 
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 namespace {
 
 using TestUtil::EqualsToSerialized;
@@ -547,7 +545,7 @@ TEST(ExtensionSetTest, SerializationToArray) {
   size_t size = source.ByteSizeLong();
   std::string data;
   data.resize(size);
-  uint8_t* target = reinterpret_cast<uint8_t*>(::google::protobuf::string_as_array(&data));
+  uint8_t* target = reinterpret_cast<uint8_t*>(::shark::string_as_array(&data));
   uint8_t* end = source.SerializeWithCachedSizesToArray(target);
   EXPECT_EQ(size, end - target);
   EXPECT_TRUE(destination.ParseFromString(data));
@@ -569,7 +567,7 @@ TEST(ExtensionSetTest, SerializationToStream) {
   std::string data;
   data.resize(size);
   {
-    io::ArrayOutputStream array_stream(::google::protobuf::string_as_array(&data), size, 1);
+    io::ArrayOutputStream array_stream(::shark::string_as_array(&data), size, 1);
     io::CodedOutputStream output_stream(&array_stream);
     source.SerializeWithCachedSizes(&output_stream);
     ASSERT_FALSE(output_stream.HadError());
@@ -591,7 +589,7 @@ TEST(ExtensionSetTest, PackedSerializationToArray) {
   size_t size = source.ByteSizeLong();
   std::string data;
   data.resize(size);
-  uint8_t* target = reinterpret_cast<uint8_t*>(::google::protobuf::string_as_array(&data));
+  uint8_t* target = reinterpret_cast<uint8_t*>(::shark::string_as_array(&data));
   uint8_t* end = source.SerializeWithCachedSizesToArray(target);
   EXPECT_EQ(size, end - target);
   EXPECT_TRUE(destination.ParseFromString(data));
@@ -613,7 +611,7 @@ TEST(ExtensionSetTest, PackedSerializationToStream) {
   std::string data;
   data.resize(size);
   {
-    io::ArrayOutputStream array_stream(::google::protobuf::string_as_array(&data), size, 1);
+    io::ArrayOutputStream array_stream(::shark::string_as_array(&data), size, 1);
     io::CodedOutputStream output_stream(&array_stream);
     source.SerializeWithCachedSizes(&output_stream);
     ASSERT_FALSE(output_stream.HadError());
@@ -1380,6 +1378,4 @@ TEST(ExtensionSetTest, ExtensionSetSpaceUsed) {
 }
 
 }  // namespace
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

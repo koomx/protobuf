@@ -40,10 +40,7 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/compiler/cpp/options.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 // Helper class for generating tailcall parsing functions.
 struct TailCallTableInfo {
@@ -149,7 +146,7 @@ class ParseFunctionGenerator {
 
   // Generates the parsing code for a known field.
   void GenerateFieldBody(Formatter& format,
-                         google::protobuf::internal::WireFormatLite::WireType wiretype,
+                         shark::internal::WireFormatLite::WireType wiretype,
                          const FieldDescriptor* field);
 
   // Generates code to parse the next field from the input stream.
@@ -171,8 +168,5 @@ class ParseFunctionGenerator {
   int num_hasbits_;
 };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 

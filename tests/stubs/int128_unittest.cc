@@ -39,8 +39,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 TEST(Int128, AllTests) {
   uint128 zero(0);
@@ -505,7 +504,6 @@ TEST(Int128, OStream) {
     EXPECT_EQ(cases[i].rep, os.str());
   }
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

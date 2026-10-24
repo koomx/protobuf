@@ -44,11 +44,7 @@
 #include <shark/util/type_resolver.h>
 #include <shark/util/type_resolver_util.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
-namespace testing {
+namespace shark::util::converter::testing {
 
 
 void TypeInfoTestHelper::ResetTypeInfo(
@@ -88,7 +84,7 @@ TypeInfo* TypeInfoTestHelper::GetTypeInfo() { return typeinfo_.get(); }
 ProtoStreamObjectSource* TypeInfoTestHelper::NewProtoSource(
     io::CodedInputStream* coded_input, const std::string& type_url,
     ProtoStreamObjectSource::RenderOptions render_options) {
-  const google::protobuf::Type* type = typeinfo_->GetTypeByTypeUrl(type_url);
+  const shark::Type* type = typeinfo_->GetTypeByTypeUrl(type_url);
   switch (type_) {
     case USE_TYPE_RESOLVER: {
       return new ProtoStreamObjectSource(coded_input, type_resolver_.get(),
@@ -102,7 +98,7 @@ ProtoStreamObjectSource* TypeInfoTestHelper::NewProtoSource(
 ProtoStreamObjectWriter* TypeInfoTestHelper::NewProtoWriter(
     const std::string& type_url, strings::ByteSink* output,
     ErrorListener* listener, const ProtoStreamObjectWriter::Options& options) {
-  const google::protobuf::Type* type = typeinfo_->GetTypeByTypeUrl(type_url);
+  const shark::Type* type = typeinfo_->GetTypeByTypeUrl(type_url);
   switch (type_) {
     case USE_TYPE_RESOLVER: {
       return new ProtoStreamObjectWriter(type_resolver_.get(), *type, output,
@@ -115,7 +111,7 @@ ProtoStreamObjectWriter* TypeInfoTestHelper::NewProtoWriter(
 
 DefaultValueObjectWriter* TypeInfoTestHelper::NewDefaultValueWriter(
     const std::string& type_url, ObjectWriter* writer) {
-  const google::protobuf::Type* type = typeinfo_->GetTypeByTypeUrl(type_url);
+  const shark::Type* type = typeinfo_->GetTypeByTypeUrl(type_url);
   switch (type_) {
     case USE_TYPE_RESOLVER: {
       return new DefaultValueObjectWriter(type_resolver_.get(), *type, writer);
@@ -125,8 +121,4 @@ DefaultValueObjectWriter* TypeInfoTestHelper::NewDefaultValueWriter(
   return nullptr;
 }
 
-}  // namespace testing
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter::testing

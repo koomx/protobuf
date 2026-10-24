@@ -49,10 +49,7 @@
 #include <shark/compiler/csharp/csharp_message.h>
 #include <shark/compiler/csharp/csharp_names.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 bool CompareFieldNumbers(const FieldDescriptor* d1, const FieldDescriptor* d2) {
   return d1->number() < d2->number();
@@ -773,7 +770,4 @@ FieldGeneratorBase* MessageGenerator::CreateFieldGeneratorInternal(
   return CreateFieldGenerator(descriptor, GetPresenceIndex(descriptor), this->options());
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

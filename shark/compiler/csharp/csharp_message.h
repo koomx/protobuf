@@ -37,10 +37,7 @@
 #include <shark/compiler/csharp/csharp_source_generator_base.h>
 #include <shark/compiler/csharp/csharp_helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 class FieldGeneratorBase;
 
@@ -85,8 +82,5 @@ class MessageGenerator : public SourceGeneratorBase {
   const std::vector<const FieldDescriptor*>& fields_by_number();
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 

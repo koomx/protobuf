@@ -53,19 +53,15 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class MapKey;
 class MapValueRef;
 class MessageLayoutInspector;
 class Message;
 struct Metadata;
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 class DefaultEmptyOneof;
 // Defined in other files.
 class ExtensionSet;  // extension_set.h
@@ -116,7 +112,7 @@ class WeakFieldMap;  // weak_field_map.h
 //                  -1.
 struct ReflectionSchema {
  public:
-  // Size of a google::protobuf::Message object of this type.
+  // Size of a shark::Message object of this type.
   uint32_t GetObjectSize() const { return static_cast<uint32_t>(object_size_); }
 
   bool InRealOneof(const FieldDescriptor* field) const {
@@ -344,9 +340,7 @@ struct SHARK_EXPORT AddDescriptorsRunner {
   explicit AddDescriptorsRunner(const DescriptorTable* table);
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

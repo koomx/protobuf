@@ -55,9 +55,7 @@
 #include <shark/port_def.inc>
 
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 namespace {
 
 
@@ -1341,8 +1339,6 @@ TEST_F(CodedStreamTest, InputOver2G) {
 }
 
 }  // namespace
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>

@@ -40,9 +40,7 @@
 
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // This approximately 0x1.ffffffp127, but we don't use 0x1.ffffffp127 because
 // it won't compile in MSVC.
@@ -74,9 +72,7 @@ float SafeDoubleToFloat(double value) {
 }
 
 double NoLocaleStrtod(const char* str, char** endptr) {
-  return google::protobuf::internal::NoLocaleStrtod(str, endptr);
+  return shark::internal::NoLocaleStrtod(str, endptr);
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

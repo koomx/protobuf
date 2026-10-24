@@ -41,10 +41,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 // Get/Set the path to a file to load for objc class prefix lookups.
 std::string PROTOC_EXPORT GetPackageToPrefixMappingsPath();
@@ -342,10 +339,7 @@ class PROTOC_EXPORT ImportWriter {
   std::vector<std::string> other_imports_;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 
 #include <shark/port_undef.inc>
 

@@ -44,10 +44,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 struct Options;
 class FieldGeneratorBase;
@@ -187,10 +184,7 @@ inline bool RequiresPresenceBit(const FieldDescriptor* descriptor) {
     !descriptor->real_containing_oneof();
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 #include <shark/port_undef.inc>
 

@@ -53,10 +53,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 enum class ArenaDtorNeeds { kNone = 0, kOnDemand = 1, kRequired = 2 };
 
@@ -177,7 +174,7 @@ std::string DescriptorTableName(const FileDescriptor* file,
 // dllexport needed for the target file, if any.
 std::string FileDllExport(const FileDescriptor* file, const Options& options);
 
-// Name of the base class: google::protobuf::Message or google::protobuf::MessageLite.
+// Name of the base class: shark::Message or shark::MessageLite.
 std::string SuperClassName(const Descriptor* descriptor,
                            const Options& options);
 
@@ -215,7 +212,7 @@ inline const Descriptor* FieldScope(const FieldDescriptor* field) {
 std::string FieldMessageTypeName(const FieldDescriptor* field,
                                  const Options& options);
 
-// Get the C++ type name for a primitive type (e.g. "double", "::google::protobuf::int32", etc.).
+// Get the C++ type name for a primitive type (e.g. "double", "::shark::int32", etc.).
 const char* PrimitiveTypeName(FieldDescriptor::CppType type);
 std::string PrimitiveTypeName(const Options& options,
                               FieldDescriptor::CppType type);
@@ -433,7 +430,7 @@ inline bool IsProto2MessageSet(const Descriptor* descriptor,
          options.enforce_mode != EnforceOptimizeMode::kLiteRuntime &&
          !options.lite_implicit_weak_fields &&
          descriptor->options().message_set_wire_format() &&
-         descriptor->full_name() == "google.protobuf.bridge.MessageSet";
+         descriptor->full_name() == "shark.bridge.MessageSet";
 }
 
 inline bool IsMapEntryMessage(const Descriptor* descriptor) {
@@ -709,7 +706,7 @@ inline std::string SimpleBaseClass(const Descriptor* desc,
 inline bool HasTracker(const Descriptor* desc, const Options& options) {
   return options.field_listener_options.inject_field_listener_events &&
          desc->file()->options().optimize_for() !=
-             google::protobuf::FileOptions::LITE_RUNTIME;
+             shark::FileOptions::LITE_RUNTIME;
 }
 
 // Returns true if this message needs an Impl_ struct for it's data.
@@ -1025,10 +1022,7 @@ bool IsUtf8String(const FieldDescriptor* field);
 
 bool HasMessageFieldOrExtension(const Descriptor* desc);
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 
 #include <shark/port_undef.inc>
 

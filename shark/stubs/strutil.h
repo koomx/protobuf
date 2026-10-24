@@ -40,8 +40,7 @@
 #include <shark/port_def.inc>
 #include <vector>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 #if defined(_MSC_VER) && _MSC_VER < 1800
 #define strtoll  _strtoi64
@@ -941,8 +940,7 @@ double NoLocaleStrtod(const char* str, char** endptr);
 
 }  // namespace internal
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -51,9 +51,7 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 namespace internal {
 ZeroCopyStreamByteSink::~ZeroCopyStreamByteSink() {
@@ -90,7 +88,7 @@ util::Status BinaryToJsonStream(TypeResolver* resolver,
                                 io::ZeroCopyOutputStream* json_output,
                                 const JsonPrintOptions& options) {
   io::CodedInputStream in_stream(binary_input);
-  google::protobuf::Type type;
+  shark::Type type;
   RETURN_IF_ERROR(resolver->ResolveMessageType(type_url, &type));
   converter::ProtoStreamObjectSource::RenderOptions render_options;
   render_options.use_ints_for_enums = options.always_print_enums_as_ints;
@@ -179,7 +177,7 @@ util::Status JsonToBinaryStream(TypeResolver* resolver,
                                 io::ZeroCopyInputStream* json_input,
                                 io::ZeroCopyOutputStream* binary_output,
                                 const JsonParseOptions& options) {
-  google::protobuf::Type type;
+  shark::Type type;
   RETURN_IF_ERROR(resolver->ResolveMessageType(type_url, &type));
   internal::ZeroCopyStreamByteSink sink(binary_output);
   StatusErrorListener listener;
@@ -233,7 +231,7 @@ void DeleteGeneratedTypeResolver() {  // NOLINT
 void InitGeneratedTypeResolver() {
   generated_type_resolver_ = NewTypeResolverForDescriptorPool(
       kTypeUrlPrefix, DescriptorPool::generated_pool());
-  ::google::protobuf::internal::OnShutdown(&DeleteGeneratedTypeResolver);
+  ::shark::internal::OnShutdown(&DeleteGeneratedTypeResolver);
 }
 
 TypeResolver* GetGeneratedTypeResolver() {
@@ -279,6 +277,4 @@ util::Status JsonStringToMessage(StringPiece input, Message* message,
   return result;
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

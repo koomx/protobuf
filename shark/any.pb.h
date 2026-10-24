@@ -43,20 +43,20 @@ struct TableStruct_shark_2fany_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fany_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class Any;
 struct AnyDefaultTypeInternal;
 extern AnyDefaultTypeInternal _Any_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::Any* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Any>(Arena*);
+template<> ::shark::Any* Arena::CreateMaybeMessage<::shark::Any>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class Any final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Any) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Any) */ {
  public:
   inline Any() : Any(nullptr) {}
   ~Any() override;
@@ -194,7 +194,7 @@ class Any final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Any";
+    return "shark.Any";
   }
   protected:
   explicit Any(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -242,7 +242,7 @@ class Any final :
   std::string* _internal_mutable_value();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Any)
+  // @@protoc_insertion_point(class_scope:shark.Any)
  private:
   class _Internal;
 
@@ -274,7 +274,7 @@ inline void Any::clear_type_url() {
   _impl_.type_url_.ClearToEmpty();
 }
 inline const std::string& Any::type_url() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Any.type_url)
+  // @@protoc_insertion_point(field_get:shark.Any.type_url)
   return _internal_type_url();
 }
 template <typename ArgT0, typename... ArgT>
@@ -282,11 +282,11 @@ inline SHARK_ALWAYS_INLINE
 void Any::set_type_url(ArgT0&& arg0, ArgT... args) {
  
  _impl_.type_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Any.type_url)
+  // @@protoc_insertion_point(field_set:shark.Any.type_url)
 }
 inline std::string* Any::mutable_type_url() {
   std::string* _s = _internal_mutable_type_url();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Any.type_url)
+  // @@protoc_insertion_point(field_mutable:shark.Any.type_url)
   return _s;
 }
 inline const std::string& Any::_internal_type_url() const {
@@ -301,7 +301,7 @@ inline std::string* Any::_internal_mutable_type_url() {
   return _impl_.type_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Any::release_type_url() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Any.type_url)
+  // @@protoc_insertion_point(field_release:shark.Any.type_url)
   return _impl_.type_url_.Release();
 }
 inline void Any::set_allocated_type_url(std::string* type_url) {
@@ -316,7 +316,7 @@ inline void Any::set_allocated_type_url(std::string* type_url) {
     _impl_.type_url_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Any.type_url)
+  // @@protoc_insertion_point(field_set_allocated:shark.Any.type_url)
 }
 
 // bytes value = 2;
@@ -324,7 +324,7 @@ inline void Any::clear_value() {
   _impl_.value_.ClearToEmpty();
 }
 inline const std::string& Any::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Any.value)
+  // @@protoc_insertion_point(field_get:shark.Any.value)
   return _internal_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -332,11 +332,11 @@ inline SHARK_ALWAYS_INLINE
 void Any::set_value(ArgT0&& arg0, ArgT... args) {
  
  _impl_.value_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Any.value)
+  // @@protoc_insertion_point(field_set:shark.Any.value)
 }
 inline std::string* Any::mutable_value() {
   std::string* _s = _internal_mutable_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Any.value)
+  // @@protoc_insertion_point(field_mutable:shark.Any.value)
   return _s;
 }
 inline const std::string& Any::_internal_value() const {
@@ -351,7 +351,7 @@ inline std::string* Any::_internal_mutable_value() {
   return _impl_.value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Any::release_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Any.value)
+  // @@protoc_insertion_point(field_release:shark.Any.value)
   return _impl_.value_.Release();
 }
 inline void Any::set_allocated_value(std::string* value) {
@@ -366,7 +366,7 @@ inline void Any::set_allocated_value(std::string* value) {
     _impl_.value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Any.value)
+  // @@protoc_insertion_point(field_set_allocated:shark.Any.value)
 }
 
 #ifdef __GNUC__
@@ -375,7 +375,7 @@ inline void Any::set_allocated_value(std::string* value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

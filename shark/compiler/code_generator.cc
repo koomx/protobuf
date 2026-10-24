@@ -40,9 +40,7 @@
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 CodeGenerator::~CodeGenerator() {}
 
@@ -87,7 +85,7 @@ io::ZeroCopyOutputStream* GeneratorContext::OpenForInsert(
 
 io::ZeroCopyOutputStream* GeneratorContext::OpenForInsertWithGeneratedCodeInfo(
     const std::string& filename, const std::string& insertion_point,
-    const google::protobuf::GeneratedCodeInfo& /*info*/) {
+    const shark::GeneratedCodeInfo& /*info*/) {
   return OpenForInsert(filename, insertion_point);
 }
 
@@ -132,6 +130,4 @@ std::string StripProto(const std::string& filename) {
   }
 }
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler

@@ -58,8 +58,7 @@
 // Always include as last one, otherwise it can break compilation
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class DynamicMessageFactory;
 class FieldDescriptor;
@@ -110,7 +109,7 @@ typedef std::vector<const FieldDescriptor*> FieldDescriptorArray;
 // Downside: more generated code; maintenance overhead for the additional rule
 // (must be in sync with the original proto_library).
 //
-// Note on handling of google.protobuf.Any: MessageDifferencer automatically
+// Note on handling of shark.Any: MessageDifferencer automatically
 // unpacks Any::value into a Message and compares its individual fields.
 // Messages encoded in a repeated Any cannot be compared using TreatAsMap.
 //
@@ -627,7 +626,7 @@ class SHARK_EXPORT MessageDifferencer {
    public:
     UnpackAnyField() = default;
     ~UnpackAnyField() = default;
-    // If "any" is of type google.protobuf.Any, extract its payload using
+    // If "any" is of type shark.Any, extract its payload using
     // DynamicMessageFactory and store in "data".
     bool UnpackAny(const Message& any, std::unique_ptr<Message>* data);
   };
@@ -971,8 +970,7 @@ class SHARK_EXPORT FieldContext {
 };
 
 }  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

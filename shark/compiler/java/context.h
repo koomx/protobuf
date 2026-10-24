@@ -37,8 +37,7 @@
 #include <shark/stubs/common.h>
 #include <shark/compiler/java/options.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FileDescriptor;
 class FieldDescriptor;
 class OneofDescriptor;
@@ -49,11 +48,9 @@ namespace java {
 class ClassNameResolver;  // name_resolver.h
 }
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace java {
 
@@ -106,6 +103,5 @@ class Context {
 
 }  // namespace java
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

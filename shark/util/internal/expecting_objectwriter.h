@@ -56,10 +56,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/util/internal/object_writer.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 using testing::Eq;
 using testing::IsEmpty;
@@ -241,8 +238,5 @@ class ExpectingObjectWriter : public ObjectWriter {
   GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ExpectingObjectWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 

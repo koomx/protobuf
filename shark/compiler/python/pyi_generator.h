@@ -44,8 +44,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class Descriptor;
 class EnumDescriptor;
 class FieldDescriptor;
@@ -59,7 +58,7 @@ class Printer;
 namespace compiler {
 namespace python {
 
-class PROTOC_EXPORT PyiGenerator : public google::protobuf::compiler::CodeGenerator {
+class PROTOC_EXPORT PyiGenerator : public shark::compiler::CodeGenerator {
  public:
   PyiGenerator();
   ~PyiGenerator() override;
@@ -111,8 +110,7 @@ class PROTOC_EXPORT PyiGenerator : public google::protobuf::compiler::CodeGenera
 
 }  // namespace python
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

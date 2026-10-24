@@ -41,10 +41,7 @@
 #include <shark/compiler/csharp/csharp_options.h>
 #include <shark/compiler/csharp/csharp_enum_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 EnumFieldGenerator::EnumFieldGenerator(const FieldDescriptor* descriptor,
                                        int presenceIndex, const Options *options)
@@ -129,7 +126,4 @@ void EnumOneofFieldGenerator::GenerateSerializedSizeCode(io::Printer* printer) {
     "}\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

@@ -45,10 +45,7 @@
 #include <shark/compiler/csharp/csharp_helpers.h>
 #include <shark/compiler/csharp/csharp_names.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 void FieldGeneratorBase::SetCommonFieldVariables(
     std::map<std::string, std::string>* variables) {
@@ -458,7 +455,4 @@ std::string FieldGeneratorBase::capitalized_type_name() {
   }
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

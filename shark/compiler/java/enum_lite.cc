@@ -46,10 +46,7 @@
 #include <shark/descriptor.pb.h>
 #include <shark/stubs/map_util.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 EnumLiteGenerator::EnumLiteGenerator(const EnumDescriptor* descriptor,
                                      bool immutable_api, Context* context)
@@ -230,7 +227,4 @@ void EnumLiteGenerator::Generate(io::Printer* printer) {
   printer->Print("}\n\n");
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

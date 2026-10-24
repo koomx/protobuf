@@ -42,8 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class DescriptorPool;
 namespace util {
 
@@ -57,19 +56,18 @@ class SHARK_EXPORT TypeResolver {
 
   // Resolves a type url for a message type.
   virtual util::Status ResolveMessageType(
-      const std::string& type_url, google::protobuf::Type* message_type) = 0;
+      const std::string& type_url, shark::Type* message_type) = 0;
 
   // Resolves a type url for an enum type.
   virtual util::Status ResolveEnumType(const std::string& type_url,
-                                       google::protobuf::Enum* enum_type) = 0;
+                                       shark::Enum* enum_type) = 0;
 
  private:
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeResolver);
 };
 
 }  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -40,10 +40,7 @@
 #include <shark/compiler/cpp/field.h>
 #include <shark/compiler/cpp/helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 class MessageFieldGenerator : public FieldGenerator {
  public:
@@ -139,8 +136,5 @@ class RepeatedMessageFieldGenerator : public FieldGenerator {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(RepeatedMessageFieldGenerator);
 };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 

@@ -20,7 +20,7 @@ SHARK_PRAGMA_INIT_SEG
 namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-SHARK_NAMESPACE_OPEN
+namespace shark {
 constexpr Duration::Duration(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.seconds_)*/int64_t{0}
@@ -35,40 +35,40 @@ struct DurationDefaultTypeInternal {
   };
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 DurationDefaultTypeInternal _Duration_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fduration_2eproto[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2fduration_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fduration_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2fduration_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Duration, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Duration, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Duration, _impl_.seconds_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Duration, _impl_.nanos_),
+  SHARK_FIELD_OFFSET(::shark::Duration, _impl_.seconds_),
+  SHARK_FIELD_OFFSET(::shark::Duration, _impl_.nanos_),
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Duration)},
+  { 0, -1, -1, sizeof(::shark::Duration)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::_Duration_default_instance_._instance,
+  &::shark::_Duration_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2fduration_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\024shark/duration.proto\022\017google.protobuf\""
-  "*\n\010Duration\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 "
-  "\001(\005B\203\001\n\023com.google.protobufB\rDurationPro"
-  "toP\001Z1google.golang.org/protobuf/types/k"
-  "nown/durationpb\370\001\001\242\002\003GPB\252\002\036Google.Protob"
-  "uf.WellKnownTypesb\006proto3"
+  "\n\024shark/duration.proto\022\005shark\"*\n\010Duratio"
+  "n\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005B\203\001\n\023co"
+  "m.google.protobufB\rDurationProtoP\001Z1goog"
+  "le.golang.org/protobuf/types/known/durat"
+  "ionpb\370\001\001\242\002\003GPB\252\002\036Google.Protobuf.WellKno"
+  "wnTypesb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fduration_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fduration_2eproto = {
-    false, false, 225, descriptor_table_protodef_shark_2fduration_2eproto,
+    false, false, 215, descriptor_table_protodef_shark_2fduration_2eproto,
     "shark/duration.proto",
     &descriptor_table_shark_2fduration_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fduration_2eproto::offsets,
@@ -81,7 +81,7 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fdur
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fduration_2eproto(&descriptor_table_shark_2fduration_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
@@ -93,7 +93,7 @@ Duration::Duration(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Duration)
+  // @@protoc_insertion_point(arena_constructor:shark.Duration)
 }
 Duration::Duration(const Duration& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -107,7 +107,7 @@ Duration::Duration(const Duration& from)
   ::memcpy(&_impl_.seconds_, &from._impl_.seconds_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.nanos_) -
     reinterpret_cast<char*>(&_impl_.seconds_)) + sizeof(_impl_.nanos_));
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Duration)
+  // @@protoc_insertion_point(copy_constructor:shark.Duration)
 }
 
 inline void Duration::SharedCtor(
@@ -122,7 +122,7 @@ inline void Duration::SharedCtor(
 }
 
 Duration::~Duration() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Duration)
+  // @@protoc_insertion_point(destructor:shark.Duration)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -139,7 +139,7 @@ void Duration::SetCachedSize(int size) const {
 }
 
 void Duration::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Duration)
+// @@protoc_insertion_point(message_clear_start:shark.Duration)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -197,7 +197,7 @@ failure:
 
 uint8_t* Duration::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Duration)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Duration)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -217,12 +217,12 @@ uint8_t* Duration::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Duration)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Duration)
   return target;
 }
 
 size_t Duration::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Duration)
+// @@protoc_insertion_point(message_byte_size_start:shark.Duration)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -252,7 +252,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Duration::GetClassData() const { 
 void Duration::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Duration*>(&to_msg);
   auto& from = static_cast<const Duration&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Duration)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Duration)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -267,7 +267,7 @@ void Duration::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NA
 }
 
 void Duration::CopyFrom(const Duration& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Duration)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Duration)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -295,11 +295,11 @@ void Duration::InternalSwap(Duration* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Duration*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Duration >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Duration >(arena);
+template<> SHARK_NOINLINE ::shark::Duration*
+Arena::CreateMaybeMessage< ::shark::Duration >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Duration >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

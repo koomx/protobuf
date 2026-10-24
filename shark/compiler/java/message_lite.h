@@ -37,10 +37,7 @@
 #include <shark/compiler/java/field.h>
 #include <shark/compiler/java/message.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 class ImmutableMessageLiteGenerator : public MessageGenerator {
  public:
@@ -76,8 +73,5 @@ class ImmutableMessageLiteGenerator : public MessageGenerator {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ImmutableMessageLiteGenerator);
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

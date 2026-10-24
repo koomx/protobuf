@@ -43,10 +43,7 @@
 #include <shark/compiler/csharp/csharp_options.h>
 #include <shark/compiler/csharp/csharp_reflection_class.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 Generator::Generator() {}
 Generator::~Generator() {}
@@ -106,7 +103,4 @@ bool Generator::Generate(const FileDescriptor* file,
   return true;
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

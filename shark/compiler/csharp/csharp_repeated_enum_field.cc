@@ -41,10 +41,7 @@
 #include <shark/compiler/csharp/csharp_helpers.h>
 #include <shark/compiler/csharp/csharp_repeated_enum_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 RepeatedEnumFieldGenerator::RepeatedEnumFieldGenerator(
     const FieldDescriptor* descriptor, int presenceIndex, const Options *options)
@@ -142,7 +139,4 @@ void RepeatedEnumFieldGenerator::GenerateExtensionCode(io::Printer* printer) {
 void RepeatedEnumFieldGenerator::GenerateFreezingCode(io::Printer* printer) {
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

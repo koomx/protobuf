@@ -47,8 +47,7 @@
 // This file is logically internal-only and should only be used by protobuf
 // generated code.
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 // An implementation of MessageLite that treats all data as unknown. This type
@@ -204,8 +203,7 @@ struct WeakRepeatedPtrField {
   };
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -39,10 +39,7 @@
 
 #include <shark/compiler/cpp/field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 class StringFieldGenerator : public FieldGenerator {
  public:
@@ -127,8 +124,5 @@ class RepeatedStringFieldGenerator : public FieldGenerator {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(RepeatedStringFieldGenerator);
 };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 

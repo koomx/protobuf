@@ -36,10 +36,7 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 // Functions to create C# XML documentation comments.
 // Currently this only includes documentation comments containing text specified as comments
@@ -110,7 +107,4 @@ void WriteMethodDocComment(io::Printer* printer, const MethodDescriptor* method)
     WriteDocCommentBody(printer, method);
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

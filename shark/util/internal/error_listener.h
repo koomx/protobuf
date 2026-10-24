@@ -44,10 +44,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 // Interface for error listener.
 class SHARK_EXPORT ErrorListener {
@@ -98,10 +95,7 @@ class SHARK_EXPORT NoopErrorListener : public ErrorListener {
 };
 
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

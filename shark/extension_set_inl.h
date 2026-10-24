@@ -34,9 +34,7 @@
 #include <shark/metadata_lite.h>
 #include <shark/parse_context.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 template <typename T>
 const char* ExtensionSet::ParseFieldWithExtensionInfo(
@@ -277,7 +275,5 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
   return ptr;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 

@@ -64,10 +64,7 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace python {
+namespace shark::compiler::python {
 
 namespace {
 // Returns the alias we assign to the module of the given .proto filename
@@ -102,11 +99,11 @@ void PrintTopBoilerplate(io::Printer* printer, const FileDescriptor* file,
       "\"\"\"Generated protocol buffer code.\"\"\"\n",
       "filename", file->name());
   printer->Print(
-      "from google.protobuf.internal import builder as _builder\n"
-      "from google.protobuf import descriptor as _descriptor\n"
-      "from google.protobuf import descriptor_pool as "
+      "from shark.internal import builder as _builder\n"
+      "from shark import descriptor as _descriptor\n"
+      "from shark import descriptor_pool as "
       "_descriptor_pool\n"
-      "from google.protobuf import symbol_database as "
+      "from shark import symbol_database as "
       "_symbol_database\n");
 
   printer->Print("# @@protoc_insertion_point(imports)\n\n");
@@ -1387,7 +1384,4 @@ void Generator::CopyPublicDependenciesAliases(
   }
 }
 
-}  // namespace python
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::python

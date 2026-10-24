@@ -101,8 +101,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace io {
 namespace {
 
@@ -1233,7 +1232,6 @@ bool Tokenizer::IsIdentifier(const std::string& text) {
 }
 
 }  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

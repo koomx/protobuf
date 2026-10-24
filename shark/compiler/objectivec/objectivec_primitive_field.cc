@@ -36,10 +36,7 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 using internal::WireFormat;
 using internal::WireFormatLite;
@@ -182,7 +179,4 @@ RepeatedPrimitiveFieldGenerator::RepeatedPrimitiveFieldGenerator(
 
 RepeatedPrimitiveFieldGenerator::~RepeatedPrimitiveFieldGenerator() {}
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

@@ -36,9 +36,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/stl_util.h>
 
-namespace google {
-namespace protobuf {
-namespace strings {
+namespace shark::strings {
 
 using internal::SubstituteArg;
 
@@ -131,6 +129,4 @@ void SubstituteAndAppend(std::string* output, const char* format,
   GOOGLE_DCHECK_EQ(target - output->data(), output->size());
 }
 
-}  // namespace strings
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::strings

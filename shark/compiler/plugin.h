@@ -36,7 +36,7 @@
 // CodeGenerator, then create a main() function like:
 //   int main(int argc, char* argv[]) {
 //     MyCodeGenerator generator;
-//     return google::protobuf::compiler::PluginMain(argc, argv, &generator);
+//     return shark::compiler::PluginMain(argc, argv, &generator);
 //   }
 // You must link your plugin against libprotobuf and libprotoc.
 //
@@ -66,9 +66,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 class CodeGenerator;  // code_generator.h
 class CodeGeneratorRequest;
@@ -86,9 +84,7 @@ bool GenerateCode(const CodeGeneratorRequest& request,
                   const CodeGenerator& generator,
                   CodeGeneratorResponse* response, std::string* error_msg);
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 
 #include <shark/port_undef.inc>
 

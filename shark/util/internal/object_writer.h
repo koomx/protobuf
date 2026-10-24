@@ -38,10 +38,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 
 class DataPiece;
@@ -140,10 +137,7 @@ class SHARK_EXPORT ObjectWriter {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ObjectWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

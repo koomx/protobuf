@@ -36,9 +36,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace status_internal {
 
 // These values must match error codes defined in google/rpc/code.proto.
@@ -148,47 +146,45 @@ SHARK_EXPORT Status UnknownError(StringPiece message);
 
 }  // namespace status_internal
 
-using ::google::protobuf::util::status_internal::Status;
-using ::google::protobuf::util::status_internal::StatusCode;
+using ::shark::util::status_internal::Status;
+using ::shark::util::status_internal::StatusCode;
 
-using ::google::protobuf::util::status_internal::IsAborted;
-using ::google::protobuf::util::status_internal::IsAlreadyExists;
-using ::google::protobuf::util::status_internal::IsCancelled;
-using ::google::protobuf::util::status_internal::IsDataLoss;
-using ::google::protobuf::util::status_internal::IsDeadlineExceeded;
-using ::google::protobuf::util::status_internal::IsFailedPrecondition;
-using ::google::protobuf::util::status_internal::IsInternal;
-using ::google::protobuf::util::status_internal::IsInvalidArgument;
-using ::google::protobuf::util::status_internal::IsNotFound;
-using ::google::protobuf::util::status_internal::IsOutOfRange;
-using ::google::protobuf::util::status_internal::IsPermissionDenied;
-using ::google::protobuf::util::status_internal::IsResourceExhausted;
-using ::google::protobuf::util::status_internal::IsUnauthenticated;
-using ::google::protobuf::util::status_internal::IsUnavailable;
-using ::google::protobuf::util::status_internal::IsUnimplemented;
-using ::google::protobuf::util::status_internal::IsUnknown;
+using ::shark::util::status_internal::IsAborted;
+using ::shark::util::status_internal::IsAlreadyExists;
+using ::shark::util::status_internal::IsCancelled;
+using ::shark::util::status_internal::IsDataLoss;
+using ::shark::util::status_internal::IsDeadlineExceeded;
+using ::shark::util::status_internal::IsFailedPrecondition;
+using ::shark::util::status_internal::IsInternal;
+using ::shark::util::status_internal::IsInvalidArgument;
+using ::shark::util::status_internal::IsNotFound;
+using ::shark::util::status_internal::IsOutOfRange;
+using ::shark::util::status_internal::IsPermissionDenied;
+using ::shark::util::status_internal::IsResourceExhausted;
+using ::shark::util::status_internal::IsUnauthenticated;
+using ::shark::util::status_internal::IsUnavailable;
+using ::shark::util::status_internal::IsUnimplemented;
+using ::shark::util::status_internal::IsUnknown;
 
-using ::google::protobuf::util::status_internal::AbortedError;
-using ::google::protobuf::util::status_internal::AlreadyExistsError;
-using ::google::protobuf::util::status_internal::CancelledError;
-using ::google::protobuf::util::status_internal::DataLossError;
-using ::google::protobuf::util::status_internal::DeadlineExceededError;
-using ::google::protobuf::util::status_internal::FailedPreconditionError;
-using ::google::protobuf::util::status_internal::InternalError;
-using ::google::protobuf::util::status_internal::InvalidArgumentError;
-using ::google::protobuf::util::status_internal::NotFoundError;
-using ::google::protobuf::util::status_internal::OkStatus;
-using ::google::protobuf::util::status_internal::OutOfRangeError;
-using ::google::protobuf::util::status_internal::PermissionDeniedError;
-using ::google::protobuf::util::status_internal::ResourceExhaustedError;
-using ::google::protobuf::util::status_internal::UnauthenticatedError;
-using ::google::protobuf::util::status_internal::UnavailableError;
-using ::google::protobuf::util::status_internal::UnimplementedError;
-using ::google::protobuf::util::status_internal::UnknownError;
+using ::shark::util::status_internal::AbortedError;
+using ::shark::util::status_internal::AlreadyExistsError;
+using ::shark::util::status_internal::CancelledError;
+using ::shark::util::status_internal::DataLossError;
+using ::shark::util::status_internal::DeadlineExceededError;
+using ::shark::util::status_internal::FailedPreconditionError;
+using ::shark::util::status_internal::InternalError;
+using ::shark::util::status_internal::InvalidArgumentError;
+using ::shark::util::status_internal::NotFoundError;
+using ::shark::util::status_internal::OkStatus;
+using ::shark::util::status_internal::OutOfRangeError;
+using ::shark::util::status_internal::PermissionDeniedError;
+using ::shark::util::status_internal::ResourceExhaustedError;
+using ::shark::util::status_internal::UnauthenticatedError;
+using ::shark::util::status_internal::UnavailableError;
+using ::shark::util::status_internal::UnimplementedError;
+using ::shark::util::status_internal::UnknownError;
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util
 
 #include <shark/port_undef.inc>
 

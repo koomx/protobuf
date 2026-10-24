@@ -35,10 +35,7 @@
 #include <shark/util/internal/error_listener.h>
 #include <shark/util/internal/location_tracker.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 class MockErrorListener : public ErrorListener {
  public:
@@ -59,8 +56,5 @@ class MockErrorListener : public ErrorListener {
               (override));
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 

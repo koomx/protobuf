@@ -37,9 +37,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 void MapFieldBase::Destruct() {
   if (arena_ == nullptr) {
@@ -647,8 +645,6 @@ size_t DynamicMapField::SpaceUsedExcludingSelfNoLock() const {
   return size;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

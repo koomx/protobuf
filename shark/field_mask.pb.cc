@@ -20,7 +20,7 @@ SHARK_PRAGMA_INIT_SEG
 namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-SHARK_NAMESPACE_OPEN
+namespace shark {
 constexpr FieldMask::FieldMask(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.paths_)*/{}
@@ -34,39 +34,39 @@ struct FieldMaskDefaultTypeInternal {
   };
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 FieldMaskDefaultTypeInternal _FieldMask_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2ffield_5fmask_2eproto[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2ffield_5fmask_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ffield_5fmask_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2ffield_5fmask_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::FieldMask, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::FieldMask, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::FieldMask, _impl_.paths_),
+  SHARK_FIELD_OFFSET(::shark::FieldMask, _impl_.paths_),
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::FieldMask)},
+  { 0, -1, -1, sizeof(::shark::FieldMask)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::_FieldMask_default_instance_._instance,
+  &::shark::_FieldMask_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2ffield_5fmask_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\026shark/field_mask.proto\022\017google.protobu"
-  "f\"\032\n\tFieldMask\022\r\n\005paths\030\001 \003(\tB\205\001\n\023com.go"
-  "ogle.protobufB\016FieldMaskProtoP\001Z2google."
-  "golang.org/protobuf/types/known/fieldmas"
-  "kpb\370\001\001\242\002\003GPB\252\002\036Google.Protobuf.WellKnown"
-  "Typesb\006proto3"
+  "\n\026shark/field_mask.proto\022\005shark\"\032\n\tField"
+  "Mask\022\r\n\005paths\030\001 \003(\tB\205\001\n\023com.google.proto"
+  "bufB\016FieldMaskProtoP\001Z2google.golang.org"
+  "/protobuf/types/known/fieldmaskpb\370\001\001\242\002\003G"
+  "PB\252\002\036Google.Protobuf.WellKnownTypesb\006pro"
+  "to3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ffield_5fmask_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ffield_5fmask_2eproto = {
-    false, false, 213, descriptor_table_protodef_shark_2ffield_5fmask_2eproto,
+    false, false, 203, descriptor_table_protodef_shark_2ffield_5fmask_2eproto,
     "shark/field_mask.proto",
     &descriptor_table_shark_2ffield_5fmask_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ffield_5fmask_2eproto::offsets,
@@ -79,7 +79,7 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ffie
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2ffield_5fmask_2eproto(&descriptor_table_shark_2ffield_5fmask_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
@@ -91,7 +91,7 @@ FieldMask::FieldMask(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(arena_constructor:shark.FieldMask)
 }
 FieldMask::FieldMask(const FieldMask& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -101,7 +101,7 @@ FieldMask::FieldMask(const FieldMask& from)
     , /*decltype(_impl_._cached_size_)*/{}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(copy_constructor:shark.FieldMask)
 }
 
 inline void FieldMask::SharedCtor(
@@ -115,7 +115,7 @@ inline void FieldMask::SharedCtor(
 }
 
 FieldMask::~FieldMask() {
-  // @@protoc_insertion_point(destructor:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(destructor:shark.FieldMask)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -133,7 +133,7 @@ void FieldMask::SetCachedSize(int size) const {
 }
 
 void FieldMask::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.FieldMask)
+// @@protoc_insertion_point(message_clear_start:shark.FieldMask)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -157,7 +157,7 @@ const char* FieldMask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
             auto str = _internal_add_paths();
             ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
             CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.FieldMask.paths"));
+            CHK_(::_pbi::VerifyUTF8(str, "shark.FieldMask.paths"));
             if (!ctx->DataAvailable(ptr)) break;
           } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else
@@ -188,7 +188,7 @@ failure:
 
 uint8_t* FieldMask::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.FieldMask)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -198,7 +198,7 @@ uint8_t* FieldMask::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       s.data(), static_cast<int>(s.length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.FieldMask.paths");
+      "shark.FieldMask.paths");
     target = stream->WriteString(1, s, target);
   }
 
@@ -206,12 +206,12 @@ uint8_t* FieldMask::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.FieldMask)
   return target;
 }
 
 size_t FieldMask::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.FieldMask)
+// @@protoc_insertion_point(message_byte_size_start:shark.FieldMask)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -239,7 +239,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*FieldMask::GetClassData() const {
 void FieldMask::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<FieldMask*>(&to_msg);
   auto& from = static_cast<const FieldMask&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.FieldMask)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.FieldMask)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -249,7 +249,7 @@ void FieldMask::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_N
 }
 
 void FieldMask::CopyFrom(const FieldMask& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.FieldMask)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.FieldMask)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -272,11 +272,11 @@ void FieldMask::InternalSwap(FieldMask* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::FieldMask*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::FieldMask >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::FieldMask >(arena);
+template<> SHARK_NOINLINE ::shark::FieldMask*
+Arena::CreateMaybeMessage< ::shark::FieldMask >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::FieldMask >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

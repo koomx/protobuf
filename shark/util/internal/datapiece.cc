@@ -42,10 +42,7 @@
 #include <shark/util/internal/utility.h>
 #include <shark/stubs/mathutil.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 using util::Status;
 
@@ -287,24 +284,24 @@ util::StatusOr<std::string> DataPiece::ToBytes() const {
   }
 }
 
-util::StatusOr<int> DataPiece::ToEnum(const google::protobuf::Enum* enum_type,
+util::StatusOr<int> DataPiece::ToEnum(const shark::Enum* enum_type,
                                       bool use_lower_camel_for_enums,
                                       bool case_insensitive_enum_parsing,
                                       bool ignore_unknown_enum_values,
                                       bool* is_unknown_enum_value) const {
-  if (type_ == TYPE_NULL) return google::protobuf::NULL_VALUE;
+  if (type_ == TYPE_NULL) return shark::NULL_VALUE;
 
   if (type_ == TYPE_STRING) {
     // First try the given value as a name.
     std::string enum_name = std::string(str_);
-    const google::protobuf::EnumValue* value =
+    const shark::EnumValue* value =
         FindEnumValueByNameOrNull(enum_type, enum_name);
     if (value != nullptr) return value->number();
 
     // Check if int version of enum is sent as string.
     util::StatusOr<int32_t> int_value = ToInt32();
     if (int_value.ok()) {
-      if (const google::protobuf::EnumValue* enum_value =
+      if (const shark::EnumValue* enum_value =
               FindEnumValueByNumberOrNull(enum_type, int_value.value())) {
         return enum_value->number();
       }
@@ -435,7 +432,4 @@ void DataPiece::InternalCopy(const DataPiece& other) {
   }
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

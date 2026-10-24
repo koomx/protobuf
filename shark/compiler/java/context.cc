@@ -37,10 +37,7 @@
 #include <shark/compiler/java/name_resolver.h>
 #include <shark/stubs/map_util.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 Context::Context(const FileDescriptor* file, const Options& options)
     : name_resolver_(new ClassNameResolver), options_(options) {
@@ -196,7 +193,4 @@ bool Context::HasGeneratedMethods(const Descriptor* descriptor) const {
          descriptor->file()->options().optimize_for() != FileOptions::CODE_SIZE;
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

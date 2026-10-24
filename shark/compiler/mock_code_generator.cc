@@ -62,8 +62,7 @@
 #undef minor
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 
 // Returns the list of the names of files in all_files in the form of a
@@ -258,7 +257,7 @@ bool MockCodeGenerator::Generate(const FileDescriptor* file,
 
     for (size_t i = 0; i < insert_into.size(); i++) {
       {
-        google::protobuf::GeneratedCodeInfo info;
+        shark::GeneratedCodeInfo info;
         std::string content =
             GetOutputFileContent(name_, "first_insert", file, context);
         if (insert_endlines) {
@@ -283,7 +282,7 @@ bool MockCodeGenerator::Generate(const FileDescriptor* file,
       }
 
       {
-        google::protobuf::GeneratedCodeInfo info;
+        shark::GeneratedCodeInfo info;
         std::string content =
             GetOutputFileContent(name_, "second_insert", file, context);
         if (insert_endlines) {
@@ -380,5 +379,4 @@ std::string MockCodeGenerator::GetOutputFileContent(
 }
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

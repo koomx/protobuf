@@ -36,10 +36,7 @@
 #include <shark/compiler/java/helpers.h>
 #include <shark/compiler/java/options.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 KotlinGenerator::KotlinGenerator() {}
 KotlinGenerator::~KotlinGenerator() {}
@@ -152,7 +149,4 @@ bool KotlinGenerator::Generate(const FileDescriptor* file,
   return true;
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

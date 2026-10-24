@@ -44,7 +44,7 @@ struct SHARK_EXPORT TableStruct_shark_2fdescriptor_2eproto {
   static const uint32_t offsets[];
 };
 SHARK_EXPORT extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fdescriptor_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class DescriptorProto;
 struct DescriptorProtoDefaultTypeInternal;
 SHARK_EXPORT extern DescriptorProtoDefaultTypeInternal _DescriptorProto_default_instance_;
@@ -126,37 +126,37 @@ SHARK_EXPORT extern UninterpretedOptionDefaultTypeInternal _UninterpretedOption_
 class UninterpretedOption_NamePart;
 struct UninterpretedOption_NamePartDefaultTypeInternal;
 SHARK_EXPORT extern UninterpretedOption_NamePartDefaultTypeInternal _UninterpretedOption_NamePart_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::DescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::DescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::EnumDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::EnumOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumValueDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::EnumValueOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumValueOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::ExtensionRangeOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::FieldDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FieldDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::FieldOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FieldOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::FileDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FileDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::FileDescriptorSet* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FileDescriptorSet>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::FileOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FileOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::GeneratedCodeInfo* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::GeneratedCodeInfo>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::MessageOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::MessageOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::MethodDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::MethodDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::MethodOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::MethodOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::OneofDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::OneofDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::OneofOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::OneofOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::ServiceDescriptorProto>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::ServiceOptions* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::ServiceOptions>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::SourceCodeInfo* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceCodeInfo>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceCodeInfo_Location>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::UninterpretedOption* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::UninterpretedOption>(Arena*);
-template<> SHARK_EXPORT ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart>(Arena*);
+template<> SHARK_EXPORT ::shark::DescriptorProto* Arena::CreateMaybeMessage<::shark::DescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::DescriptorProto_ExtensionRange* Arena::CreateMaybeMessage<::shark::DescriptorProto_ExtensionRange>(Arena*);
+template<> SHARK_EXPORT ::shark::DescriptorProto_ReservedRange* Arena::CreateMaybeMessage<::shark::DescriptorProto_ReservedRange>(Arena*);
+template<> SHARK_EXPORT ::shark::EnumDescriptorProto* Arena::CreateMaybeMessage<::shark::EnumDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::EnumDescriptorProto_EnumReservedRange* Arena::CreateMaybeMessage<::shark::EnumDescriptorProto_EnumReservedRange>(Arena*);
+template<> SHARK_EXPORT ::shark::EnumOptions* Arena::CreateMaybeMessage<::shark::EnumOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::EnumValueDescriptorProto* Arena::CreateMaybeMessage<::shark::EnumValueDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::EnumValueOptions* Arena::CreateMaybeMessage<::shark::EnumValueOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::ExtensionRangeOptions* Arena::CreateMaybeMessage<::shark::ExtensionRangeOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::FieldDescriptorProto* Arena::CreateMaybeMessage<::shark::FieldDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::FieldOptions* Arena::CreateMaybeMessage<::shark::FieldOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::FileDescriptorProto* Arena::CreateMaybeMessage<::shark::FileDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::FileDescriptorSet* Arena::CreateMaybeMessage<::shark::FileDescriptorSet>(Arena*);
+template<> SHARK_EXPORT ::shark::FileOptions* Arena::CreateMaybeMessage<::shark::FileOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::GeneratedCodeInfo* Arena::CreateMaybeMessage<::shark::GeneratedCodeInfo>(Arena*);
+template<> SHARK_EXPORT ::shark::GeneratedCodeInfo_Annotation* Arena::CreateMaybeMessage<::shark::GeneratedCodeInfo_Annotation>(Arena*);
+template<> SHARK_EXPORT ::shark::MessageOptions* Arena::CreateMaybeMessage<::shark::MessageOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::MethodDescriptorProto* Arena::CreateMaybeMessage<::shark::MethodDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::MethodOptions* Arena::CreateMaybeMessage<::shark::MethodOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::OneofDescriptorProto* Arena::CreateMaybeMessage<::shark::OneofDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::OneofOptions* Arena::CreateMaybeMessage<::shark::OneofOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::ServiceDescriptorProto* Arena::CreateMaybeMessage<::shark::ServiceDescriptorProto>(Arena*);
+template<> SHARK_EXPORT ::shark::ServiceOptions* Arena::CreateMaybeMessage<::shark::ServiceOptions>(Arena*);
+template<> SHARK_EXPORT ::shark::SourceCodeInfo* Arena::CreateMaybeMessage<::shark::SourceCodeInfo>(Arena*);
+template<> SHARK_EXPORT ::shark::SourceCodeInfo_Location* Arena::CreateMaybeMessage<::shark::SourceCodeInfo_Location>(Arena*);
+template<> SHARK_EXPORT ::shark::UninterpretedOption* Arena::CreateMaybeMessage<::shark::UninterpretedOption>(Arena*);
+template<> SHARK_EXPORT ::shark::UninterpretedOption_NamePart* Arena::CreateMaybeMessage<::shark::UninterpretedOption_NamePart>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 enum FieldDescriptorProto_Type : int {
   FieldDescriptorProto_Type_TYPE_DOUBLE = 1,
@@ -320,7 +320,7 @@ inline bool MethodOptions_IdempotencyLevel_Parse(
 // ===================================================================
 
 class SHARK_EXPORT FileDescriptorSet final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileDescriptorSet) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FileDescriptorSet) */ {
  public:
   inline FileDescriptorSet() : FileDescriptorSet(nullptr) {}
   ~FileDescriptorSet() override;
@@ -430,7 +430,7 @@ class SHARK_EXPORT FileDescriptorSet final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FileDescriptorSet";
+    return "shark.FileDescriptorSet";
   }
   protected:
   explicit FileDescriptorSet(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -449,25 +449,25 @@ class SHARK_EXPORT FileDescriptorSet final :
   enum : int {
     kFileFieldNumber = 1,
   };
-  // repeated .google.protobuf.FileDescriptorProto file = 1;
+  // repeated .shark.FileDescriptorProto file = 1;
   int file_size() const;
   private:
   int _internal_file_size() const;
   public:
   void clear_file();
-  ::SHARK_NAMESPACE_ID::FileDescriptorProto* mutable_file(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FileDescriptorProto >*
+  ::shark::FileDescriptorProto* mutable_file(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >*
       mutable_file();
   private:
-  const ::SHARK_NAMESPACE_ID::FileDescriptorProto& _internal_file(int index) const;
-  ::SHARK_NAMESPACE_ID::FileDescriptorProto* _internal_add_file();
+  const ::shark::FileDescriptorProto& _internal_file(int index) const;
+  ::shark::FileDescriptorProto* _internal_add_file();
   public:
-  const ::SHARK_NAMESPACE_ID::FileDescriptorProto& file(int index) const;
-  ::SHARK_NAMESPACE_ID::FileDescriptorProto* add_file();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FileDescriptorProto >&
+  const ::shark::FileDescriptorProto& file(int index) const;
+  ::shark::FileDescriptorProto* add_file();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >&
       file() const;
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FileDescriptorSet)
+  // @@protoc_insertion_point(class_scope:shark.FileDescriptorSet)
  private:
   class _Internal;
 
@@ -475,7 +475,7 @@ class SHARK_EXPORT FileDescriptorSet final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FileDescriptorProto > file_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto > file_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -484,7 +484,7 @@ class SHARK_EXPORT FileDescriptorSet final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT FileDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FileDescriptorProto) */ {
  public:
   inline FileDescriptorProto() : FileDescriptorProto(nullptr) {}
   ~FileDescriptorProto() override;
@@ -594,7 +594,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FileDescriptorProto";
+    return "shark.FileDescriptorProto";
   }
   protected:
   explicit FileDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -648,76 +648,76 @@ class SHARK_EXPORT FileDescriptorProto final :
   std::string* _internal_add_dependency();
   public:
 
-  // repeated .google.protobuf.DescriptorProto message_type = 4;
+  // repeated .shark.DescriptorProto message_type = 4;
   int message_type_size() const;
   private:
   int _internal_message_type_size() const;
   public:
   void clear_message_type();
-  ::SHARK_NAMESPACE_ID::DescriptorProto* mutable_message_type(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >*
+  ::shark::DescriptorProto* mutable_message_type(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >*
       mutable_message_type();
   private:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto& _internal_message_type(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto* _internal_add_message_type();
+  const ::shark::DescriptorProto& _internal_message_type(int index) const;
+  ::shark::DescriptorProto* _internal_add_message_type();
   public:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto& message_type(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto* add_message_type();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >&
+  const ::shark::DescriptorProto& message_type(int index) const;
+  ::shark::DescriptorProto* add_message_type();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
       message_type() const;
 
-  // repeated .google.protobuf.EnumDescriptorProto enum_type = 5;
+  // repeated .shark.EnumDescriptorProto enum_type = 5;
   int enum_type_size() const;
   private:
   int _internal_enum_type_size() const;
   public:
   void clear_enum_type();
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* mutable_enum_type(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >*
+  ::shark::EnumDescriptorProto* mutable_enum_type(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >*
       mutable_enum_type();
   private:
-  const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& _internal_enum_type(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* _internal_add_enum_type();
+  const ::shark::EnumDescriptorProto& _internal_enum_type(int index) const;
+  ::shark::EnumDescriptorProto* _internal_add_enum_type();
   public:
-  const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& enum_type(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* add_enum_type();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >&
+  const ::shark::EnumDescriptorProto& enum_type(int index) const;
+  ::shark::EnumDescriptorProto* add_enum_type();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
       enum_type() const;
 
-  // repeated .google.protobuf.ServiceDescriptorProto service = 6;
+  // repeated .shark.ServiceDescriptorProto service = 6;
   int service_size() const;
   private:
   int _internal_service_size() const;
   public:
   void clear_service();
-  ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* mutable_service(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::ServiceDescriptorProto >*
+  ::shark::ServiceDescriptorProto* mutable_service(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >*
       mutable_service();
   private:
-  const ::SHARK_NAMESPACE_ID::ServiceDescriptorProto& _internal_service(int index) const;
-  ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* _internal_add_service();
+  const ::shark::ServiceDescriptorProto& _internal_service(int index) const;
+  ::shark::ServiceDescriptorProto* _internal_add_service();
   public:
-  const ::SHARK_NAMESPACE_ID::ServiceDescriptorProto& service(int index) const;
-  ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* add_service();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::ServiceDescriptorProto >&
+  const ::shark::ServiceDescriptorProto& service(int index) const;
+  ::shark::ServiceDescriptorProto* add_service();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >&
       service() const;
 
-  // repeated .google.protobuf.FieldDescriptorProto extension = 7;
+  // repeated .shark.FieldDescriptorProto extension = 7;
   int extension_size() const;
   private:
   int _internal_extension_size() const;
   public:
   void clear_extension();
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* mutable_extension(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >*
+  ::shark::FieldDescriptorProto* mutable_extension(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
       mutable_extension();
   private:
-  const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& _internal_extension(int index) const;
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* _internal_add_extension();
+  const ::shark::FieldDescriptorProto& _internal_extension(int index) const;
+  ::shark::FieldDescriptorProto* _internal_add_extension();
   public:
-  const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& extension(int index) const;
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* add_extension();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >&
+  const ::shark::FieldDescriptorProto& extension(int index) const;
+  ::shark::FieldDescriptorProto* add_extension();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
       extension() const;
 
   // repeated int32 public_dependency = 10;
@@ -818,43 +818,43 @@ class SHARK_EXPORT FileDescriptorProto final :
   std::string* _internal_mutable_syntax();
   public:
 
-  // optional .google.protobuf.FileOptions options = 8;
+  // optional .shark.FileOptions options = 8;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::FileOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::FileOptions* release_options();
-  ::SHARK_NAMESPACE_ID::FileOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::FileOptions* options);
+  const ::shark::FileOptions& options() const;
+  [[nodiscard]] ::shark::FileOptions* release_options();
+  ::shark::FileOptions* mutable_options();
+  void set_allocated_options(::shark::FileOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::FileOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::FileOptions* _internal_mutable_options();
+  const ::shark::FileOptions& _internal_options() const;
+  ::shark::FileOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::FileOptions* options);
-  ::SHARK_NAMESPACE_ID::FileOptions* unsafe_arena_release_options();
+      ::shark::FileOptions* options);
+  ::shark::FileOptions* unsafe_arena_release_options();
 
-  // optional .google.protobuf.SourceCodeInfo source_code_info = 9;
+  // optional .shark.SourceCodeInfo source_code_info = 9;
   bool has_source_code_info() const;
   private:
   bool _internal_has_source_code_info() const;
   public:
   void clear_source_code_info();
-  const ::SHARK_NAMESPACE_ID::SourceCodeInfo& source_code_info() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::SourceCodeInfo* release_source_code_info();
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo* mutable_source_code_info();
-  void set_allocated_source_code_info(::SHARK_NAMESPACE_ID::SourceCodeInfo* source_code_info);
+  const ::shark::SourceCodeInfo& source_code_info() const;
+  [[nodiscard]] ::shark::SourceCodeInfo* release_source_code_info();
+  ::shark::SourceCodeInfo* mutable_source_code_info();
+  void set_allocated_source_code_info(::shark::SourceCodeInfo* source_code_info);
   private:
-  const ::SHARK_NAMESPACE_ID::SourceCodeInfo& _internal_source_code_info() const;
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo* _internal_mutable_source_code_info();
+  const ::shark::SourceCodeInfo& _internal_source_code_info() const;
+  ::shark::SourceCodeInfo* _internal_mutable_source_code_info();
   public:
   void unsafe_arena_set_allocated_source_code_info(
-      ::SHARK_NAMESPACE_ID::SourceCodeInfo* source_code_info);
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo* unsafe_arena_release_source_code_info();
+      ::shark::SourceCodeInfo* source_code_info);
+  ::shark::SourceCodeInfo* unsafe_arena_release_source_code_info();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FileDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.FileDescriptorProto)
  private:
   class _Internal;
 
@@ -865,17 +865,17 @@ class SHARK_EXPORT FileDescriptorProto final :
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> dependency_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto > message_type_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto > enum_type_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::ServiceDescriptorProto > service_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto > extension_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto > message_type_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto > enum_type_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto > service_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > extension_;
     ::SHARK_NAMESPACE_ID::RepeatedField< int32_t > public_dependency_;
     ::SHARK_NAMESPACE_ID::RepeatedField< int32_t > weak_dependency_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr package_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr syntax_;
-    ::SHARK_NAMESPACE_ID::FileOptions* options_;
-    ::SHARK_NAMESPACE_ID::SourceCodeInfo* source_code_info_;
+    ::shark::FileOptions* options_;
+    ::shark::SourceCodeInfo* source_code_info_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2fdescriptor_2eproto;
@@ -883,7 +883,7 @@ class SHARK_EXPORT FileDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT DescriptorProto_ExtensionRange final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto.ExtensionRange) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.DescriptorProto.ExtensionRange) */ {
  public:
   inline DescriptorProto_ExtensionRange() : DescriptorProto_ExtensionRange(nullptr) {}
   ~DescriptorProto_ExtensionRange() override;
@@ -993,7 +993,7 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.DescriptorProto.ExtensionRange";
+    return "shark.DescriptorProto.ExtensionRange";
   }
   protected:
   explicit DescriptorProto_ExtensionRange(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1014,23 +1014,23 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
     kStartFieldNumber = 1,
     kEndFieldNumber = 2,
   };
-  // optional .google.protobuf.ExtensionRangeOptions options = 3;
+  // optional .shark.ExtensionRangeOptions options = 3;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::ExtensionRangeOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* release_options();
-  ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::ExtensionRangeOptions* options);
+  const ::shark::ExtensionRangeOptions& options() const;
+  [[nodiscard]] ::shark::ExtensionRangeOptions* release_options();
+  ::shark::ExtensionRangeOptions* mutable_options();
+  void set_allocated_options(::shark::ExtensionRangeOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::ExtensionRangeOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* _internal_mutable_options();
+  const ::shark::ExtensionRangeOptions& _internal_options() const;
+  ::shark::ExtensionRangeOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* options);
-  ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* unsafe_arena_release_options();
+      ::shark::ExtensionRangeOptions* options);
+  ::shark::ExtensionRangeOptions* unsafe_arena_release_options();
 
   // optional int32 start = 1;
   bool has_start() const;
@@ -1058,7 +1058,7 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
   void _internal_set_end(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.DescriptorProto.ExtensionRange)
+  // @@protoc_insertion_point(class_scope:shark.DescriptorProto.ExtensionRange)
  private:
   class _Internal;
 
@@ -1068,7 +1068,7 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* options_;
+    ::shark::ExtensionRangeOptions* options_;
     int32_t start_;
     int32_t end_;
   };
@@ -1078,7 +1078,7 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT DescriptorProto_ReservedRange final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto.ReservedRange) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.DescriptorProto.ReservedRange) */ {
  public:
   inline DescriptorProto_ReservedRange() : DescriptorProto_ReservedRange(nullptr) {}
   ~DescriptorProto_ReservedRange() override;
@@ -1188,7 +1188,7 @@ class SHARK_EXPORT DescriptorProto_ReservedRange final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.DescriptorProto.ReservedRange";
+    return "shark.DescriptorProto.ReservedRange";
   }
   protected:
   explicit DescriptorProto_ReservedRange(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1234,7 +1234,7 @@ class SHARK_EXPORT DescriptorProto_ReservedRange final :
   void _internal_set_end(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.DescriptorProto.ReservedRange)
+  // @@protoc_insertion_point(class_scope:shark.DescriptorProto.ReservedRange)
  private:
   class _Internal;
 
@@ -1253,7 +1253,7 @@ class SHARK_EXPORT DescriptorProto_ReservedRange final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT DescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.DescriptorProto) */ {
  public:
   inline DescriptorProto() : DescriptorProto(nullptr) {}
   ~DescriptorProto() override;
@@ -1363,7 +1363,7 @@ class SHARK_EXPORT DescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.DescriptorProto";
+    return "shark.DescriptorProto";
   }
   protected:
   explicit DescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1394,130 +1394,130 @@ class SHARK_EXPORT DescriptorProto final :
     kNameFieldNumber = 1,
     kOptionsFieldNumber = 7,
   };
-  // repeated .google.protobuf.FieldDescriptorProto field = 2;
+  // repeated .shark.FieldDescriptorProto field = 2;
   int field_size() const;
   private:
   int _internal_field_size() const;
   public:
   void clear_field();
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* mutable_field(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >*
+  ::shark::FieldDescriptorProto* mutable_field(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
       mutable_field();
   private:
-  const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& _internal_field(int index) const;
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* _internal_add_field();
+  const ::shark::FieldDescriptorProto& _internal_field(int index) const;
+  ::shark::FieldDescriptorProto* _internal_add_field();
   public:
-  const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& field(int index) const;
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* add_field();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >&
+  const ::shark::FieldDescriptorProto& field(int index) const;
+  ::shark::FieldDescriptorProto* add_field();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
       field() const;
 
-  // repeated .google.protobuf.DescriptorProto nested_type = 3;
+  // repeated .shark.DescriptorProto nested_type = 3;
   int nested_type_size() const;
   private:
   int _internal_nested_type_size() const;
   public:
   void clear_nested_type();
-  ::SHARK_NAMESPACE_ID::DescriptorProto* mutable_nested_type(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >*
+  ::shark::DescriptorProto* mutable_nested_type(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >*
       mutable_nested_type();
   private:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto& _internal_nested_type(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto* _internal_add_nested_type();
+  const ::shark::DescriptorProto& _internal_nested_type(int index) const;
+  ::shark::DescriptorProto* _internal_add_nested_type();
   public:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto& nested_type(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto* add_nested_type();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >&
+  const ::shark::DescriptorProto& nested_type(int index) const;
+  ::shark::DescriptorProto* add_nested_type();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
       nested_type() const;
 
-  // repeated .google.protobuf.EnumDescriptorProto enum_type = 4;
+  // repeated .shark.EnumDescriptorProto enum_type = 4;
   int enum_type_size() const;
   private:
   int _internal_enum_type_size() const;
   public:
   void clear_enum_type();
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* mutable_enum_type(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >*
+  ::shark::EnumDescriptorProto* mutable_enum_type(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >*
       mutable_enum_type();
   private:
-  const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& _internal_enum_type(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* _internal_add_enum_type();
+  const ::shark::EnumDescriptorProto& _internal_enum_type(int index) const;
+  ::shark::EnumDescriptorProto* _internal_add_enum_type();
   public:
-  const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& enum_type(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* add_enum_type();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >&
+  const ::shark::EnumDescriptorProto& enum_type(int index) const;
+  ::shark::EnumDescriptorProto* add_enum_type();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
       enum_type() const;
 
-  // repeated .google.protobuf.DescriptorProto.ExtensionRange extension_range = 5;
+  // repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
   int extension_range_size() const;
   private:
   int _internal_extension_range_size() const;
   public:
   void clear_extension_range();
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* mutable_extension_range(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange >*
+  ::shark::DescriptorProto_ExtensionRange* mutable_extension_range(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange >*
       mutable_extension_range();
   private:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange& _internal_extension_range(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* _internal_add_extension_range();
+  const ::shark::DescriptorProto_ExtensionRange& _internal_extension_range(int index) const;
+  ::shark::DescriptorProto_ExtensionRange* _internal_add_extension_range();
   public:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange& extension_range(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* add_extension_range();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange >&
+  const ::shark::DescriptorProto_ExtensionRange& extension_range(int index) const;
+  ::shark::DescriptorProto_ExtensionRange* add_extension_range();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange >&
       extension_range() const;
 
-  // repeated .google.protobuf.FieldDescriptorProto extension = 6;
+  // repeated .shark.FieldDescriptorProto extension = 6;
   int extension_size() const;
   private:
   int _internal_extension_size() const;
   public:
   void clear_extension();
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* mutable_extension(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >*
+  ::shark::FieldDescriptorProto* mutable_extension(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
       mutable_extension();
   private:
-  const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& _internal_extension(int index) const;
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* _internal_add_extension();
+  const ::shark::FieldDescriptorProto& _internal_extension(int index) const;
+  ::shark::FieldDescriptorProto* _internal_add_extension();
   public:
-  const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& extension(int index) const;
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* add_extension();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >&
+  const ::shark::FieldDescriptorProto& extension(int index) const;
+  ::shark::FieldDescriptorProto* add_extension();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
       extension() const;
 
-  // repeated .google.protobuf.OneofDescriptorProto oneof_decl = 8;
+  // repeated .shark.OneofDescriptorProto oneof_decl = 8;
   int oneof_decl_size() const;
   private:
   int _internal_oneof_decl_size() const;
   public:
   void clear_oneof_decl();
-  ::SHARK_NAMESPACE_ID::OneofDescriptorProto* mutable_oneof_decl(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::OneofDescriptorProto >*
+  ::shark::OneofDescriptorProto* mutable_oneof_decl(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto >*
       mutable_oneof_decl();
   private:
-  const ::SHARK_NAMESPACE_ID::OneofDescriptorProto& _internal_oneof_decl(int index) const;
-  ::SHARK_NAMESPACE_ID::OneofDescriptorProto* _internal_add_oneof_decl();
+  const ::shark::OneofDescriptorProto& _internal_oneof_decl(int index) const;
+  ::shark::OneofDescriptorProto* _internal_add_oneof_decl();
   public:
-  const ::SHARK_NAMESPACE_ID::OneofDescriptorProto& oneof_decl(int index) const;
-  ::SHARK_NAMESPACE_ID::OneofDescriptorProto* add_oneof_decl();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::OneofDescriptorProto >&
+  const ::shark::OneofDescriptorProto& oneof_decl(int index) const;
+  ::shark::OneofDescriptorProto* add_oneof_decl();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto >&
       oneof_decl() const;
 
-  // repeated .google.protobuf.DescriptorProto.ReservedRange reserved_range = 9;
+  // repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
   int reserved_range_size() const;
   private:
   int _internal_reserved_range_size() const;
   public:
   void clear_reserved_range();
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* mutable_reserved_range(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange >*
+  ::shark::DescriptorProto_ReservedRange* mutable_reserved_range(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange >*
       mutable_reserved_range();
   private:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange& _internal_reserved_range(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* _internal_add_reserved_range();
+  const ::shark::DescriptorProto_ReservedRange& _internal_reserved_range(int index) const;
+  ::shark::DescriptorProto_ReservedRange* _internal_add_reserved_range();
   public:
-  const ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange& reserved_range(int index) const;
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* add_reserved_range();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange >&
+  const ::shark::DescriptorProto_ReservedRange& reserved_range(int index) const;
+  ::shark::DescriptorProto_ReservedRange* add_reserved_range();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange >&
       reserved_range() const;
 
   // repeated string reserved_name = 10;
@@ -1562,25 +1562,25 @@ class SHARK_EXPORT DescriptorProto final :
   std::string* _internal_mutable_name();
   public:
 
-  // optional .google.protobuf.MessageOptions options = 7;
+  // optional .shark.MessageOptions options = 7;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::MessageOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::MessageOptions* release_options();
-  ::SHARK_NAMESPACE_ID::MessageOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::MessageOptions* options);
+  const ::shark::MessageOptions& options() const;
+  [[nodiscard]] ::shark::MessageOptions* release_options();
+  ::shark::MessageOptions* mutable_options();
+  void set_allocated_options(::shark::MessageOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::MessageOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::MessageOptions* _internal_mutable_options();
+  const ::shark::MessageOptions& _internal_options() const;
+  ::shark::MessageOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::MessageOptions* options);
-  ::SHARK_NAMESPACE_ID::MessageOptions* unsafe_arena_release_options();
+      ::shark::MessageOptions* options);
+  ::shark::MessageOptions* unsafe_arena_release_options();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.DescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.DescriptorProto)
  private:
   class _Internal;
 
@@ -1590,16 +1590,16 @@ class SHARK_EXPORT DescriptorProto final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto > field_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto > nested_type_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto > enum_type_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange > extension_range_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto > extension_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::OneofDescriptorProto > oneof_decl_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange > reserved_range_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > field_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto > nested_type_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto > enum_type_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange > extension_range_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto > extension_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto > oneof_decl_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange > reserved_range_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> reserved_name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::MessageOptions* options_;
+    ::shark::MessageOptions* options_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2fdescriptor_2eproto;
@@ -1607,7 +1607,7 @@ class SHARK_EXPORT DescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT ExtensionRangeOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ExtensionRangeOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ExtensionRangeOptions) */ {
  public:
   inline ExtensionRangeOptions() : ExtensionRangeOptions(nullptr) {}
   ~ExtensionRangeOptions() override;
@@ -1717,7 +1717,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.ExtensionRangeOptions";
+    return "shark.ExtensionRangeOptions";
   }
   protected:
   explicit ExtensionRangeOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1736,22 +1736,22 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   enum : int {
     kUninterpretedOptionFieldNumber = 999,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
 
@@ -1944,7 +1944,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.ExtensionRangeOptions)
+  // @@protoc_insertion_point(class_scope:shark.ExtensionRangeOptions)
  private:
   class _Internal;
 
@@ -1954,7 +1954,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::ExtensionSet _extensions_;
 
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1963,7 +1963,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT FieldDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FieldDescriptorProto) */ {
  public:
   inline FieldDescriptorProto() : FieldDescriptorProto(nullptr) {}
   ~FieldDescriptorProto() override;
@@ -2073,7 +2073,7 @@ class SHARK_EXPORT FieldDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FieldDescriptorProto";
+    return "shark.FieldDescriptorProto";
   }
   protected:
   explicit FieldDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -2286,23 +2286,23 @@ class SHARK_EXPORT FieldDescriptorProto final :
   std::string* _internal_mutable_json_name();
   public:
 
-  // optional .google.protobuf.FieldOptions options = 8;
+  // optional .shark.FieldOptions options = 8;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::FieldOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::FieldOptions* release_options();
-  ::SHARK_NAMESPACE_ID::FieldOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::FieldOptions* options);
+  const ::shark::FieldOptions& options() const;
+  [[nodiscard]] ::shark::FieldOptions* release_options();
+  ::shark::FieldOptions* mutable_options();
+  void set_allocated_options(::shark::FieldOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::FieldOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::FieldOptions* _internal_mutable_options();
+  const ::shark::FieldOptions& _internal_options() const;
+  ::shark::FieldOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::FieldOptions* options);
-  ::SHARK_NAMESPACE_ID::FieldOptions* unsafe_arena_release_options();
+      ::shark::FieldOptions* options);
+  ::shark::FieldOptions* unsafe_arena_release_options();
 
   // optional int32 number = 3;
   bool has_number() const;
@@ -2343,33 +2343,33 @@ class SHARK_EXPORT FieldDescriptorProto final :
   void _internal_set_proto3_optional(bool value);
   public:
 
-  // optional .google.protobuf.FieldDescriptorProto.Label label = 4;
+  // optional .shark.FieldDescriptorProto.Label label = 4;
   bool has_label() const;
   private:
   bool _internal_has_label() const;
   public:
   void clear_label();
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label label() const;
-  void set_label(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label value);
+  ::shark::FieldDescriptorProto_Label label() const;
+  void set_label(::shark::FieldDescriptorProto_Label value);
   private:
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label _internal_label() const;
-  void _internal_set_label(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label value);
+  ::shark::FieldDescriptorProto_Label _internal_label() const;
+  void _internal_set_label(::shark::FieldDescriptorProto_Label value);
   public:
 
-  // optional .google.protobuf.FieldDescriptorProto.Type type = 5;
+  // optional .shark.FieldDescriptorProto.Type type = 5;
   bool has_type() const;
   private:
   bool _internal_has_type() const;
   public:
   void clear_type();
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type type() const;
-  void set_type(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type value);
+  ::shark::FieldDescriptorProto_Type type() const;
+  void set_type(::shark::FieldDescriptorProto_Type value);
   private:
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type _internal_type() const;
-  void _internal_set_type(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type value);
+  ::shark::FieldDescriptorProto_Type _internal_type() const;
+  void _internal_set_type(::shark::FieldDescriptorProto_Type value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FieldDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.FieldDescriptorProto)
  private:
   class _Internal;
 
@@ -2384,7 +2384,7 @@ class SHARK_EXPORT FieldDescriptorProto final :
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr type_name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr default_value_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr json_name_;
-    ::SHARK_NAMESPACE_ID::FieldOptions* options_;
+    ::shark::FieldOptions* options_;
     int32_t number_;
     int32_t oneof_index_;
     bool proto3_optional_;
@@ -2397,7 +2397,7 @@ class SHARK_EXPORT FieldDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT OneofDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.OneofDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.OneofDescriptorProto) */ {
  public:
   inline OneofDescriptorProto() : OneofDescriptorProto(nullptr) {}
   ~OneofDescriptorProto() override;
@@ -2507,7 +2507,7 @@ class SHARK_EXPORT OneofDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.OneofDescriptorProto";
+    return "shark.OneofDescriptorProto";
   }
   protected:
   explicit OneofDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -2545,25 +2545,25 @@ class SHARK_EXPORT OneofDescriptorProto final :
   std::string* _internal_mutable_name();
   public:
 
-  // optional .google.protobuf.OneofOptions options = 2;
+  // optional .shark.OneofOptions options = 2;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::OneofOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::OneofOptions* release_options();
-  ::SHARK_NAMESPACE_ID::OneofOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::OneofOptions* options);
+  const ::shark::OneofOptions& options() const;
+  [[nodiscard]] ::shark::OneofOptions* release_options();
+  ::shark::OneofOptions* mutable_options();
+  void set_allocated_options(::shark::OneofOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::OneofOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::OneofOptions* _internal_mutable_options();
+  const ::shark::OneofOptions& _internal_options() const;
+  ::shark::OneofOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::OneofOptions* options);
-  ::SHARK_NAMESPACE_ID::OneofOptions* unsafe_arena_release_options();
+      ::shark::OneofOptions* options);
+  ::shark::OneofOptions* unsafe_arena_release_options();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.OneofDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.OneofDescriptorProto)
  private:
   class _Internal;
 
@@ -2574,7 +2574,7 @@ class SHARK_EXPORT OneofDescriptorProto final :
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::OneofOptions* options_;
+    ::shark::OneofOptions* options_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2fdescriptor_2eproto;
@@ -2582,7 +2582,7 @@ class SHARK_EXPORT OneofDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT EnumDescriptorProto_EnumReservedRange final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumDescriptorProto.EnumReservedRange) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumDescriptorProto.EnumReservedRange) */ {
  public:
   inline EnumDescriptorProto_EnumReservedRange() : EnumDescriptorProto_EnumReservedRange(nullptr) {}
   ~EnumDescriptorProto_EnumReservedRange() override;
@@ -2692,7 +2692,7 @@ class SHARK_EXPORT EnumDescriptorProto_EnumReservedRange final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.EnumDescriptorProto.EnumReservedRange";
+    return "shark.EnumDescriptorProto.EnumReservedRange";
   }
   protected:
   explicit EnumDescriptorProto_EnumReservedRange(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -2738,7 +2738,7 @@ class SHARK_EXPORT EnumDescriptorProto_EnumReservedRange final :
   void _internal_set_end(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.EnumDescriptorProto.EnumReservedRange)
+  // @@protoc_insertion_point(class_scope:shark.EnumDescriptorProto.EnumReservedRange)
  private:
   class _Internal;
 
@@ -2757,7 +2757,7 @@ class SHARK_EXPORT EnumDescriptorProto_EnumReservedRange final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT EnumDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumDescriptorProto) */ {
  public:
   inline EnumDescriptorProto() : EnumDescriptorProto(nullptr) {}
   ~EnumDescriptorProto() override;
@@ -2867,7 +2867,7 @@ class SHARK_EXPORT EnumDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.EnumDescriptorProto";
+    return "shark.EnumDescriptorProto";
   }
   protected:
   explicit EnumDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -2892,40 +2892,40 @@ class SHARK_EXPORT EnumDescriptorProto final :
     kNameFieldNumber = 1,
     kOptionsFieldNumber = 3,
   };
-  // repeated .google.protobuf.EnumValueDescriptorProto value = 2;
+  // repeated .shark.EnumValueDescriptorProto value = 2;
   int value_size() const;
   private:
   int _internal_value_size() const;
   public:
   void clear_value();
-  ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* mutable_value(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto >*
+  ::shark::EnumValueDescriptorProto* mutable_value(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValueDescriptorProto >*
       mutable_value();
   private:
-  const ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto& _internal_value(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* _internal_add_value();
+  const ::shark::EnumValueDescriptorProto& _internal_value(int index) const;
+  ::shark::EnumValueDescriptorProto* _internal_add_value();
   public:
-  const ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto& value(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* add_value();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto >&
+  const ::shark::EnumValueDescriptorProto& value(int index) const;
+  ::shark::EnumValueDescriptorProto* add_value();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValueDescriptorProto >&
       value() const;
 
-  // repeated .google.protobuf.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+  // repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
   int reserved_range_size() const;
   private:
   int _internal_reserved_range_size() const;
   public:
   void clear_reserved_range();
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* mutable_reserved_range(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange >*
+  ::shark::EnumDescriptorProto_EnumReservedRange* mutable_reserved_range(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto_EnumReservedRange >*
       mutable_reserved_range();
   private:
-  const ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange& _internal_reserved_range(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* _internal_add_reserved_range();
+  const ::shark::EnumDescriptorProto_EnumReservedRange& _internal_reserved_range(int index) const;
+  ::shark::EnumDescriptorProto_EnumReservedRange* _internal_add_reserved_range();
   public:
-  const ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange& reserved_range(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* add_reserved_range();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange >&
+  const ::shark::EnumDescriptorProto_EnumReservedRange& reserved_range(int index) const;
+  ::shark::EnumDescriptorProto_EnumReservedRange* add_reserved_range();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto_EnumReservedRange >&
       reserved_range() const;
 
   // repeated string reserved_name = 5;
@@ -2970,25 +2970,25 @@ class SHARK_EXPORT EnumDescriptorProto final :
   std::string* _internal_mutable_name();
   public:
 
-  // optional .google.protobuf.EnumOptions options = 3;
+  // optional .shark.EnumOptions options = 3;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::EnumOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::EnumOptions* release_options();
-  ::SHARK_NAMESPACE_ID::EnumOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::EnumOptions* options);
+  const ::shark::EnumOptions& options() const;
+  [[nodiscard]] ::shark::EnumOptions* release_options();
+  ::shark::EnumOptions* mutable_options();
+  void set_allocated_options(::shark::EnumOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::EnumOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::EnumOptions* _internal_mutable_options();
+  const ::shark::EnumOptions& _internal_options() const;
+  ::shark::EnumOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::EnumOptions* options);
-  ::SHARK_NAMESPACE_ID::EnumOptions* unsafe_arena_release_options();
+      ::shark::EnumOptions* options);
+  ::shark::EnumOptions* unsafe_arena_release_options();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.EnumDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.EnumDescriptorProto)
  private:
   class _Internal;
 
@@ -2998,11 +2998,11 @@ class SHARK_EXPORT EnumDescriptorProto final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto > value_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange > reserved_range_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValueDescriptorProto > value_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto_EnumReservedRange > reserved_range_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> reserved_name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::EnumOptions* options_;
+    ::shark::EnumOptions* options_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2fdescriptor_2eproto;
@@ -3010,7 +3010,7 @@ class SHARK_EXPORT EnumDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT EnumValueDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValueDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumValueDescriptorProto) */ {
  public:
   inline EnumValueDescriptorProto() : EnumValueDescriptorProto(nullptr) {}
   ~EnumValueDescriptorProto() override;
@@ -3120,7 +3120,7 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.EnumValueDescriptorProto";
+    return "shark.EnumValueDescriptorProto";
   }
   protected:
   explicit EnumValueDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -3159,23 +3159,23 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
   std::string* _internal_mutable_name();
   public:
 
-  // optional .google.protobuf.EnumValueOptions options = 3;
+  // optional .shark.EnumValueOptions options = 3;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::EnumValueOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::EnumValueOptions* release_options();
-  ::SHARK_NAMESPACE_ID::EnumValueOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::EnumValueOptions* options);
+  const ::shark::EnumValueOptions& options() const;
+  [[nodiscard]] ::shark::EnumValueOptions* release_options();
+  ::shark::EnumValueOptions* mutable_options();
+  void set_allocated_options(::shark::EnumValueOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::EnumValueOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::EnumValueOptions* _internal_mutable_options();
+  const ::shark::EnumValueOptions& _internal_options() const;
+  ::shark::EnumValueOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::EnumValueOptions* options);
-  ::SHARK_NAMESPACE_ID::EnumValueOptions* unsafe_arena_release_options();
+      ::shark::EnumValueOptions* options);
+  ::shark::EnumValueOptions* unsafe_arena_release_options();
 
   // optional int32 number = 2;
   bool has_number() const;
@@ -3190,7 +3190,7 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
   void _internal_set_number(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.EnumValueDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.EnumValueDescriptorProto)
  private:
   class _Internal;
 
@@ -3201,7 +3201,7 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::EnumValueOptions* options_;
+    ::shark::EnumValueOptions* options_;
     int32_t number_;
   };
   union { Impl_ _impl_; };
@@ -3210,7 +3210,7 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT ServiceDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ServiceDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ServiceDescriptorProto) */ {
  public:
   inline ServiceDescriptorProto() : ServiceDescriptorProto(nullptr) {}
   ~ServiceDescriptorProto() override;
@@ -3320,7 +3320,7 @@ class SHARK_EXPORT ServiceDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.ServiceDescriptorProto";
+    return "shark.ServiceDescriptorProto";
   }
   protected:
   explicit ServiceDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -3341,22 +3341,22 @@ class SHARK_EXPORT ServiceDescriptorProto final :
     kNameFieldNumber = 1,
     kOptionsFieldNumber = 3,
   };
-  // repeated .google.protobuf.MethodDescriptorProto method = 2;
+  // repeated .shark.MethodDescriptorProto method = 2;
   int method_size() const;
   private:
   int _internal_method_size() const;
   public:
   void clear_method();
-  ::SHARK_NAMESPACE_ID::MethodDescriptorProto* mutable_method(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::MethodDescriptorProto >*
+  ::shark::MethodDescriptorProto* mutable_method(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto >*
       mutable_method();
   private:
-  const ::SHARK_NAMESPACE_ID::MethodDescriptorProto& _internal_method(int index) const;
-  ::SHARK_NAMESPACE_ID::MethodDescriptorProto* _internal_add_method();
+  const ::shark::MethodDescriptorProto& _internal_method(int index) const;
+  ::shark::MethodDescriptorProto* _internal_add_method();
   public:
-  const ::SHARK_NAMESPACE_ID::MethodDescriptorProto& method(int index) const;
-  ::SHARK_NAMESPACE_ID::MethodDescriptorProto* add_method();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::MethodDescriptorProto >&
+  const ::shark::MethodDescriptorProto& method(int index) const;
+  ::shark::MethodDescriptorProto* add_method();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto >&
       method() const;
 
   // optional string name = 1;
@@ -3377,25 +3377,25 @@ class SHARK_EXPORT ServiceDescriptorProto final :
   std::string* _internal_mutable_name();
   public:
 
-  // optional .google.protobuf.ServiceOptions options = 3;
+  // optional .shark.ServiceOptions options = 3;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::ServiceOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::ServiceOptions* release_options();
-  ::SHARK_NAMESPACE_ID::ServiceOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::ServiceOptions* options);
+  const ::shark::ServiceOptions& options() const;
+  [[nodiscard]] ::shark::ServiceOptions* release_options();
+  ::shark::ServiceOptions* mutable_options();
+  void set_allocated_options(::shark::ServiceOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::ServiceOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::ServiceOptions* _internal_mutable_options();
+  const ::shark::ServiceOptions& _internal_options() const;
+  ::shark::ServiceOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::ServiceOptions* options);
-  ::SHARK_NAMESPACE_ID::ServiceOptions* unsafe_arena_release_options();
+      ::shark::ServiceOptions* options);
+  ::shark::ServiceOptions* unsafe_arena_release_options();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.ServiceDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.ServiceDescriptorProto)
  private:
   class _Internal;
 
@@ -3405,9 +3405,9 @@ class SHARK_EXPORT ServiceDescriptorProto final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::MethodDescriptorProto > method_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto > method_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::ServiceOptions* options_;
+    ::shark::ServiceOptions* options_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2fdescriptor_2eproto;
@@ -3415,7 +3415,7 @@ class SHARK_EXPORT ServiceDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT MethodDescriptorProto final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MethodDescriptorProto) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.MethodDescriptorProto) */ {
  public:
   inline MethodDescriptorProto() : MethodDescriptorProto(nullptr) {}
   ~MethodDescriptorProto() override;
@@ -3525,7 +3525,7 @@ class SHARK_EXPORT MethodDescriptorProto final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.MethodDescriptorProto";
+    return "shark.MethodDescriptorProto";
   }
   protected:
   explicit MethodDescriptorProto(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -3603,23 +3603,23 @@ class SHARK_EXPORT MethodDescriptorProto final :
   std::string* _internal_mutable_output_type();
   public:
 
-  // optional .google.protobuf.MethodOptions options = 4;
+  // optional .shark.MethodOptions options = 4;
   bool has_options() const;
   private:
   bool _internal_has_options() const;
   public:
   void clear_options();
-  const ::SHARK_NAMESPACE_ID::MethodOptions& options() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::MethodOptions* release_options();
-  ::SHARK_NAMESPACE_ID::MethodOptions* mutable_options();
-  void set_allocated_options(::SHARK_NAMESPACE_ID::MethodOptions* options);
+  const ::shark::MethodOptions& options() const;
+  [[nodiscard]] ::shark::MethodOptions* release_options();
+  ::shark::MethodOptions* mutable_options();
+  void set_allocated_options(::shark::MethodOptions* options);
   private:
-  const ::SHARK_NAMESPACE_ID::MethodOptions& _internal_options() const;
-  ::SHARK_NAMESPACE_ID::MethodOptions* _internal_mutable_options();
+  const ::shark::MethodOptions& _internal_options() const;
+  ::shark::MethodOptions* _internal_mutable_options();
   public:
   void unsafe_arena_set_allocated_options(
-      ::SHARK_NAMESPACE_ID::MethodOptions* options);
-  ::SHARK_NAMESPACE_ID::MethodOptions* unsafe_arena_release_options();
+      ::shark::MethodOptions* options);
+  ::shark::MethodOptions* unsafe_arena_release_options();
 
   // optional bool client_streaming = 5 [default = false];
   bool has_client_streaming() const;
@@ -3647,7 +3647,7 @@ class SHARK_EXPORT MethodDescriptorProto final :
   void _internal_set_server_streaming(bool value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.MethodDescriptorProto)
+  // @@protoc_insertion_point(class_scope:shark.MethodDescriptorProto)
  private:
   class _Internal;
 
@@ -3660,7 +3660,7 @@ class SHARK_EXPORT MethodDescriptorProto final :
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr input_type_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr output_type_;
-    ::SHARK_NAMESPACE_ID::MethodOptions* options_;
+    ::shark::MethodOptions* options_;
     bool client_streaming_;
     bool server_streaming_;
   };
@@ -3670,7 +3670,7 @@ class SHARK_EXPORT MethodDescriptorProto final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT FileOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FileOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FileOptions) */ {
  public:
   inline FileOptions() : FileOptions(nullptr) {}
   ~FileOptions() override;
@@ -3780,7 +3780,7 @@ class SHARK_EXPORT FileOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FileOptions";
+    return "shark.FileOptions";
   }
   protected:
   explicit FileOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -3851,22 +3851,22 @@ class SHARK_EXPORT FileOptions final :
     kOptimizeForFieldNumber = 9,
     kCcEnableArenasFieldNumber = 31,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
   // optional string java_package = 1;
@@ -4153,17 +4153,17 @@ class SHARK_EXPORT FileOptions final :
   void _internal_set_deprecated(bool value);
   public:
 
-  // optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
+  // optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
   bool has_optimize_for() const;
   private:
   bool _internal_has_optimize_for() const;
   public:
   void clear_optimize_for();
-  ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode optimize_for() const;
-  void set_optimize_for(::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode value);
+  ::shark::FileOptions_OptimizeMode optimize_for() const;
+  void set_optimize_for(::shark::FileOptions_OptimizeMode value);
   private:
-  ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode _internal_optimize_for() const;
-  void _internal_set_optimize_for(::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode value);
+  ::shark::FileOptions_OptimizeMode _internal_optimize_for() const;
+  void _internal_set_optimize_for(::shark::FileOptions_OptimizeMode value);
   public:
 
   // optional bool cc_enable_arenas = 31 [default = true];
@@ -4369,7 +4369,7 @@ class SHARK_EXPORT FileOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FileOptions)
+  // @@protoc_insertion_point(class_scope:shark.FileOptions)
  private:
   class _Internal;
 
@@ -4381,7 +4381,7 @@ class SHARK_EXPORT FileOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr java_package_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr java_outer_classname_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr go_package_;
@@ -4409,7 +4409,7 @@ class SHARK_EXPORT FileOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT MessageOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MessageOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.MessageOptions) */ {
  public:
   inline MessageOptions() : MessageOptions(nullptr) {}
   ~MessageOptions() override;
@@ -4519,7 +4519,7 @@ class SHARK_EXPORT MessageOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.MessageOptions";
+    return "shark.MessageOptions";
   }
   protected:
   explicit MessageOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -4542,22 +4542,22 @@ class SHARK_EXPORT MessageOptions final :
     kDeprecatedFieldNumber = 3,
     kMapEntryFieldNumber = 7,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
   // optional bool message_set_wire_format = 1 [default = false];
@@ -4802,7 +4802,7 @@ class SHARK_EXPORT MessageOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.MessageOptions)
+  // @@protoc_insertion_point(class_scope:shark.MessageOptions)
  private:
   class _Internal;
 
@@ -4814,7 +4814,7 @@ class SHARK_EXPORT MessageOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     bool message_set_wire_format_;
     bool no_standard_descriptor_accessor_;
     bool deprecated_;
@@ -4826,7 +4826,7 @@ class SHARK_EXPORT MessageOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT FieldOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FieldOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FieldOptions) */ {
  public:
   inline FieldOptions() : FieldOptions(nullptr) {}
   ~FieldOptions() override;
@@ -4936,7 +4936,7 @@ class SHARK_EXPORT FieldOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FieldOptions";
+    return "shark.FieldOptions";
   }
   protected:
   explicit FieldOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -5026,48 +5026,48 @@ class SHARK_EXPORT FieldOptions final :
     kDeprecatedFieldNumber = 3,
     kWeakFieldNumber = 10,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
-  // optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];
+  // optional .shark.FieldOptions.CType ctype = 1 [default = STRING];
   bool has_ctype() const;
   private:
   bool _internal_has_ctype() const;
   public:
   void clear_ctype();
-  ::SHARK_NAMESPACE_ID::FieldOptions_CType ctype() const;
-  void set_ctype(::SHARK_NAMESPACE_ID::FieldOptions_CType value);
+  ::shark::FieldOptions_CType ctype() const;
+  void set_ctype(::shark::FieldOptions_CType value);
   private:
-  ::SHARK_NAMESPACE_ID::FieldOptions_CType _internal_ctype() const;
-  void _internal_set_ctype(::SHARK_NAMESPACE_ID::FieldOptions_CType value);
+  ::shark::FieldOptions_CType _internal_ctype() const;
+  void _internal_set_ctype(::shark::FieldOptions_CType value);
   public:
 
-  // optional .google.protobuf.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
+  // optional .shark.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
   bool has_jstype() const;
   private:
   bool _internal_has_jstype() const;
   public:
   void clear_jstype();
-  ::SHARK_NAMESPACE_ID::FieldOptions_JSType jstype() const;
-  void set_jstype(::SHARK_NAMESPACE_ID::FieldOptions_JSType value);
+  ::shark::FieldOptions_JSType jstype() const;
+  void set_jstype(::shark::FieldOptions_JSType value);
   private:
-  ::SHARK_NAMESPACE_ID::FieldOptions_JSType _internal_jstype() const;
-  void _internal_set_jstype(::SHARK_NAMESPACE_ID::FieldOptions_JSType value);
+  ::shark::FieldOptions_JSType _internal_jstype() const;
+  void _internal_set_jstype(::shark::FieldOptions_JSType value);
   public:
 
   // optional bool packed = 2;
@@ -5325,7 +5325,7 @@ class SHARK_EXPORT FieldOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FieldOptions)
+  // @@protoc_insertion_point(class_scope:shark.FieldOptions)
  private:
   class _Internal;
 
@@ -5337,7 +5337,7 @@ class SHARK_EXPORT FieldOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     int ctype_;
     int jstype_;
     bool packed_;
@@ -5352,7 +5352,7 @@ class SHARK_EXPORT FieldOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT OneofOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.OneofOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.OneofOptions) */ {
  public:
   inline OneofOptions() : OneofOptions(nullptr) {}
   ~OneofOptions() override;
@@ -5462,7 +5462,7 @@ class SHARK_EXPORT OneofOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.OneofOptions";
+    return "shark.OneofOptions";
   }
   protected:
   explicit OneofOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -5481,22 +5481,22 @@ class SHARK_EXPORT OneofOptions final :
   enum : int {
     kUninterpretedOptionFieldNumber = 999,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
 
@@ -5689,7 +5689,7 @@ class SHARK_EXPORT OneofOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.OneofOptions)
+  // @@protoc_insertion_point(class_scope:shark.OneofOptions)
  private:
   class _Internal;
 
@@ -5699,7 +5699,7 @@ class SHARK_EXPORT OneofOptions final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::ExtensionSet _extensions_;
 
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -5708,7 +5708,7 @@ class SHARK_EXPORT OneofOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT EnumOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumOptions) */ {
  public:
   inline EnumOptions() : EnumOptions(nullptr) {}
   ~EnumOptions() override;
@@ -5818,7 +5818,7 @@ class SHARK_EXPORT EnumOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.EnumOptions";
+    return "shark.EnumOptions";
   }
   protected:
   explicit EnumOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -5839,22 +5839,22 @@ class SHARK_EXPORT EnumOptions final :
     kAllowAliasFieldNumber = 2,
     kDeprecatedFieldNumber = 3,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
   // optional bool allow_alias = 2;
@@ -6073,7 +6073,7 @@ class SHARK_EXPORT EnumOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.EnumOptions)
+  // @@protoc_insertion_point(class_scope:shark.EnumOptions)
  private:
   class _Internal;
 
@@ -6085,7 +6085,7 @@ class SHARK_EXPORT EnumOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     bool allow_alias_;
     bool deprecated_;
   };
@@ -6095,7 +6095,7 @@ class SHARK_EXPORT EnumOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT EnumValueOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValueOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumValueOptions) */ {
  public:
   inline EnumValueOptions() : EnumValueOptions(nullptr) {}
   ~EnumValueOptions() override;
@@ -6205,7 +6205,7 @@ class SHARK_EXPORT EnumValueOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.EnumValueOptions";
+    return "shark.EnumValueOptions";
   }
   protected:
   explicit EnumValueOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -6225,22 +6225,22 @@ class SHARK_EXPORT EnumValueOptions final :
     kUninterpretedOptionFieldNumber = 999,
     kDeprecatedFieldNumber = 1,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
   // optional bool deprecated = 1 [default = false];
@@ -6446,7 +6446,7 @@ class SHARK_EXPORT EnumValueOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.EnumValueOptions)
+  // @@protoc_insertion_point(class_scope:shark.EnumValueOptions)
  private:
   class _Internal;
 
@@ -6458,7 +6458,7 @@ class SHARK_EXPORT EnumValueOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     bool deprecated_;
   };
   union { Impl_ _impl_; };
@@ -6467,7 +6467,7 @@ class SHARK_EXPORT EnumValueOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT ServiceOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ServiceOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ServiceOptions) */ {
  public:
   inline ServiceOptions() : ServiceOptions(nullptr) {}
   ~ServiceOptions() override;
@@ -6577,7 +6577,7 @@ class SHARK_EXPORT ServiceOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.ServiceOptions";
+    return "shark.ServiceOptions";
   }
   protected:
   explicit ServiceOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -6597,22 +6597,22 @@ class SHARK_EXPORT ServiceOptions final :
     kUninterpretedOptionFieldNumber = 999,
     kDeprecatedFieldNumber = 33,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
   // optional bool deprecated = 33 [default = false];
@@ -6818,7 +6818,7 @@ class SHARK_EXPORT ServiceOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.ServiceOptions)
+  // @@protoc_insertion_point(class_scope:shark.ServiceOptions)
  private:
   class _Internal;
 
@@ -6830,7 +6830,7 @@ class SHARK_EXPORT ServiceOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     bool deprecated_;
   };
   union { Impl_ _impl_; };
@@ -6839,7 +6839,7 @@ class SHARK_EXPORT ServiceOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT MethodOptions final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.MethodOptions) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.MethodOptions) */ {
  public:
   inline MethodOptions() : MethodOptions(nullptr) {}
   ~MethodOptions() override;
@@ -6949,7 +6949,7 @@ class SHARK_EXPORT MethodOptions final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.MethodOptions";
+    return "shark.MethodOptions";
   }
   protected:
   explicit MethodOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -7002,22 +7002,22 @@ class SHARK_EXPORT MethodOptions final :
     kDeprecatedFieldNumber = 33,
     kIdempotencyLevelFieldNumber = 34,
   };
-  // repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
   public:
   void clear_uninterpreted_option();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* mutable_uninterpreted_option(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+  ::shark::UninterpretedOption* mutable_uninterpreted_option(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
       mutable_uninterpreted_option();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& _internal_uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _internal_add_uninterpreted_option();
+  const ::shark::UninterpretedOption& _internal_uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* _internal_add_uninterpreted_option();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption& uninterpreted_option(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* add_uninterpreted_option();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+  const ::shark::UninterpretedOption& uninterpreted_option(int index) const;
+  ::shark::UninterpretedOption* add_uninterpreted_option();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
   // optional bool deprecated = 33 [default = false];
@@ -7033,17 +7033,17 @@ class SHARK_EXPORT MethodOptions final :
   void _internal_set_deprecated(bool value);
   public:
 
-  // optional .google.protobuf.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
+  // optional .shark.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
   bool has_idempotency_level() const;
   private:
   bool _internal_has_idempotency_level() const;
   public:
   void clear_idempotency_level();
-  ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel idempotency_level() const;
-  void set_idempotency_level(::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel value);
+  ::shark::MethodOptions_IdempotencyLevel idempotency_level() const;
+  void set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value);
   private:
-  ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel _internal_idempotency_level() const;
-  void _internal_set_idempotency_level(::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel value);
+  ::shark::MethodOptions_IdempotencyLevel _internal_idempotency_level() const;
+  void _internal_set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value);
   public:
 
 
@@ -7236,7 +7236,7 @@ class SHARK_EXPORT MethodOptions final :
                                               _is_packed, &_impl_._extensions_);
   }
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.MethodOptions)
+  // @@protoc_insertion_point(class_scope:shark.MethodOptions)
  private:
   class _Internal;
 
@@ -7248,7 +7248,7 @@ class SHARK_EXPORT MethodOptions final :
 
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption > uninterpreted_option_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     bool deprecated_;
     int idempotency_level_;
   };
@@ -7258,7 +7258,7 @@ class SHARK_EXPORT MethodOptions final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT UninterpretedOption_NamePart final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UninterpretedOption.NamePart) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.UninterpretedOption.NamePart) */ {
  public:
   inline UninterpretedOption_NamePart() : UninterpretedOption_NamePart(nullptr) {}
   ~UninterpretedOption_NamePart() override;
@@ -7368,7 +7368,7 @@ class SHARK_EXPORT UninterpretedOption_NamePart final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.UninterpretedOption.NamePart";
+    return "shark.UninterpretedOption.NamePart";
   }
   protected:
   explicit UninterpretedOption_NamePart(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -7419,7 +7419,7 @@ class SHARK_EXPORT UninterpretedOption_NamePart final :
   void _internal_set_is_extension(bool value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.UninterpretedOption.NamePart)
+  // @@protoc_insertion_point(class_scope:shark.UninterpretedOption.NamePart)
  private:
   class _Internal;
 
@@ -7441,7 +7441,7 @@ class SHARK_EXPORT UninterpretedOption_NamePart final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT UninterpretedOption final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UninterpretedOption) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.UninterpretedOption) */ {
  public:
   inline UninterpretedOption() : UninterpretedOption(nullptr) {}
   ~UninterpretedOption() override;
@@ -7551,7 +7551,7 @@ class SHARK_EXPORT UninterpretedOption final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.UninterpretedOption";
+    return "shark.UninterpretedOption";
   }
   protected:
   explicit UninterpretedOption(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -7578,22 +7578,22 @@ class SHARK_EXPORT UninterpretedOption final :
     kNegativeIntValueFieldNumber = 5,
     kDoubleValueFieldNumber = 6,
   };
-  // repeated .google.protobuf.UninterpretedOption.NamePart name = 2;
+  // repeated .shark.UninterpretedOption.NamePart name = 2;
   int name_size() const;
   private:
   int _internal_name_size() const;
   public:
   void clear_name();
-  ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* mutable_name(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart >*
+  ::shark::UninterpretedOption_NamePart* mutable_name(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption_NamePart >*
       mutable_name();
   private:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart& _internal_name(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* _internal_add_name();
+  const ::shark::UninterpretedOption_NamePart& _internal_name(int index) const;
+  ::shark::UninterpretedOption_NamePart* _internal_add_name();
   public:
-  const ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart& name(int index) const;
-  ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* add_name();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart >&
+  const ::shark::UninterpretedOption_NamePart& name(int index) const;
+  ::shark::UninterpretedOption_NamePart* add_name();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption_NamePart >&
       name() const;
 
   // optional string identifier_value = 3;
@@ -7689,7 +7689,7 @@ class SHARK_EXPORT UninterpretedOption final :
   void _internal_set_double_value(double value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.UninterpretedOption)
+  // @@protoc_insertion_point(class_scope:shark.UninterpretedOption)
  private:
   class _Internal;
 
@@ -7699,7 +7699,7 @@ class SHARK_EXPORT UninterpretedOption final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart > name_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption_NamePart > name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr identifier_value_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr string_value_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr aggregate_value_;
@@ -7713,7 +7713,7 @@ class SHARK_EXPORT UninterpretedOption final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT SourceCodeInfo_Location final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceCodeInfo.Location) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.SourceCodeInfo.Location) */ {
  public:
   inline SourceCodeInfo_Location() : SourceCodeInfo_Location(nullptr) {}
   ~SourceCodeInfo_Location() override;
@@ -7823,7 +7823,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.SourceCodeInfo.Location";
+    return "shark.SourceCodeInfo.Location";
   }
   protected:
   explicit SourceCodeInfo_Location(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -7950,7 +7950,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
   std::string* _internal_mutable_trailing_comments();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.SourceCodeInfo.Location)
+  // @@protoc_insertion_point(class_scope:shark.SourceCodeInfo.Location)
  private:
   class _Internal;
 
@@ -7974,7 +7974,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT SourceCodeInfo final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceCodeInfo) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.SourceCodeInfo) */ {
  public:
   inline SourceCodeInfo() : SourceCodeInfo(nullptr) {}
   ~SourceCodeInfo() override;
@@ -8084,7 +8084,7 @@ class SHARK_EXPORT SourceCodeInfo final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.SourceCodeInfo";
+    return "shark.SourceCodeInfo";
   }
   protected:
   explicit SourceCodeInfo(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -8105,25 +8105,25 @@ class SHARK_EXPORT SourceCodeInfo final :
   enum : int {
     kLocationFieldNumber = 1,
   };
-  // repeated .google.protobuf.SourceCodeInfo.Location location = 1;
+  // repeated .shark.SourceCodeInfo.Location location = 1;
   int location_size() const;
   private:
   int _internal_location_size() const;
   public:
   void clear_location();
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* mutable_location(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location >*
+  ::shark::SourceCodeInfo_Location* mutable_location(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::SourceCodeInfo_Location >*
       mutable_location();
   private:
-  const ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location& _internal_location(int index) const;
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* _internal_add_location();
+  const ::shark::SourceCodeInfo_Location& _internal_location(int index) const;
+  ::shark::SourceCodeInfo_Location* _internal_add_location();
   public:
-  const ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location& location(int index) const;
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* add_location();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location >&
+  const ::shark::SourceCodeInfo_Location& location(int index) const;
+  ::shark::SourceCodeInfo_Location* add_location();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::SourceCodeInfo_Location >&
       location() const;
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.SourceCodeInfo)
+  // @@protoc_insertion_point(class_scope:shark.SourceCodeInfo)
  private:
   class _Internal;
 
@@ -8131,7 +8131,7 @@ class SHARK_EXPORT SourceCodeInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location > location_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::SourceCodeInfo_Location > location_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -8140,7 +8140,7 @@ class SHARK_EXPORT SourceCodeInfo final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.GeneratedCodeInfo.Annotation) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.GeneratedCodeInfo.Annotation) */ {
  public:
   inline GeneratedCodeInfo_Annotation() : GeneratedCodeInfo_Annotation(nullptr) {}
   ~GeneratedCodeInfo_Annotation() override;
@@ -8250,7 +8250,7 @@ class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.GeneratedCodeInfo.Annotation";
+    return "shark.GeneratedCodeInfo.Annotation";
   }
   protected:
   explicit GeneratedCodeInfo_Annotation(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -8338,7 +8338,7 @@ class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
   void _internal_set_end(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.GeneratedCodeInfo.Annotation)
+  // @@protoc_insertion_point(class_scope:shark.GeneratedCodeInfo.Annotation)
  private:
   class _Internal;
 
@@ -8360,7 +8360,7 @@ class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
 // -------------------------------------------------------------------
 
 class SHARK_EXPORT GeneratedCodeInfo final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.GeneratedCodeInfo) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.GeneratedCodeInfo) */ {
  public:
   inline GeneratedCodeInfo() : GeneratedCodeInfo(nullptr) {}
   ~GeneratedCodeInfo() override;
@@ -8470,7 +8470,7 @@ class SHARK_EXPORT GeneratedCodeInfo final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.GeneratedCodeInfo";
+    return "shark.GeneratedCodeInfo";
   }
   protected:
   explicit GeneratedCodeInfo(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -8491,25 +8491,25 @@ class SHARK_EXPORT GeneratedCodeInfo final :
   enum : int {
     kAnnotationFieldNumber = 1,
   };
-  // repeated .google.protobuf.GeneratedCodeInfo.Annotation annotation = 1;
+  // repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
   int annotation_size() const;
   private:
   int _internal_annotation_size() const;
   public:
   void clear_annotation();
-  ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* mutable_annotation(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation >*
+  ::shark::GeneratedCodeInfo_Annotation* mutable_annotation(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::GeneratedCodeInfo_Annotation >*
       mutable_annotation();
   private:
-  const ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation& _internal_annotation(int index) const;
-  ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* _internal_add_annotation();
+  const ::shark::GeneratedCodeInfo_Annotation& _internal_annotation(int index) const;
+  ::shark::GeneratedCodeInfo_Annotation* _internal_add_annotation();
   public:
-  const ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation& annotation(int index) const;
-  ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* add_annotation();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation >&
+  const ::shark::GeneratedCodeInfo_Annotation& annotation(int index) const;
+  ::shark::GeneratedCodeInfo_Annotation* add_annotation();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::GeneratedCodeInfo_Annotation >&
       annotation() const;
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.GeneratedCodeInfo)
+  // @@protoc_insertion_point(class_scope:shark.GeneratedCodeInfo)
  private:
   class _Internal;
 
@@ -8517,7 +8517,7 @@ class SHARK_EXPORT GeneratedCodeInfo final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation > annotation_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::GeneratedCodeInfo_Annotation > annotation_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -8534,7 +8534,7 @@ class SHARK_EXPORT GeneratedCodeInfo final :
 #endif  // __GNUC__
 // FileDescriptorSet
 
-// repeated .google.protobuf.FileDescriptorProto file = 1;
+// repeated .shark.FileDescriptorProto file = 1;
 inline int FileDescriptorSet::_internal_file_size() const {
   return _impl_.file_.size();
 }
@@ -8544,33 +8544,33 @@ inline int FileDescriptorSet::file_size() const {
 inline void FileDescriptorSet::clear_file() {
   _impl_.file_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::FileDescriptorProto* FileDescriptorSet::mutable_file(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorSet.file)
+inline ::shark::FileDescriptorProto* FileDescriptorSet::mutable_file(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorSet.file)
   return _impl_.file_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FileDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >*
 FileDescriptorSet::mutable_file() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorSet.file)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorSet.file)
   return &_impl_.file_;
 }
-inline const ::SHARK_NAMESPACE_ID::FileDescriptorProto& FileDescriptorSet::_internal_file(int index) const {
+inline const ::shark::FileDescriptorProto& FileDescriptorSet::_internal_file(int index) const {
   return _impl_.file_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::FileDescriptorProto& FileDescriptorSet::file(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorSet.file)
+inline const ::shark::FileDescriptorProto& FileDescriptorSet::file(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorSet.file)
   return _internal_file(index);
 }
-inline ::SHARK_NAMESPACE_ID::FileDescriptorProto* FileDescriptorSet::_internal_add_file() {
+inline ::shark::FileDescriptorProto* FileDescriptorSet::_internal_add_file() {
   return _impl_.file_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::FileDescriptorProto* FileDescriptorSet::add_file() {
-  ::SHARK_NAMESPACE_ID::FileDescriptorProto* _add = _internal_add_file();
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorSet.file)
+inline ::shark::FileDescriptorProto* FileDescriptorSet::add_file() {
+  ::shark::FileDescriptorProto* _add = _internal_add_file();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorSet.file)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FileDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >&
 FileDescriptorSet::file() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorSet.file)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorSet.file)
   return _impl_.file_;
 }
 
@@ -8591,7 +8591,7 @@ inline void FileDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& FileDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -8599,11 +8599,11 @@ inline SHARK_ALWAYS_INLINE
 void FileDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.name)
 }
 inline std::string* FileDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.name)
   return _s;
 }
 inline const std::string& FileDescriptorProto::_internal_name() const {
@@ -8618,7 +8618,7 @@ inline std::string* FileDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.FileDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -8643,7 +8643,7 @@ inline void FileDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileDescriptorProto.name)
 }
 
 // optional string package = 2;
@@ -8659,7 +8659,7 @@ inline void FileDescriptorProto::clear_package() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& FileDescriptorProto::package() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.package)
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.package)
   return _internal_package();
 }
 template <typename ArgT0, typename... ArgT>
@@ -8667,11 +8667,11 @@ inline SHARK_ALWAYS_INLINE
 void FileDescriptorProto::set_package(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.package)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.package)
 }
 inline std::string* FileDescriptorProto::mutable_package() {
   std::string* _s = _internal_mutable_package();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.package)
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.package)
   return _s;
 }
 inline const std::string& FileDescriptorProto::_internal_package() const {
@@ -8686,7 +8686,7 @@ inline std::string* FileDescriptorProto::_internal_mutable_package() {
   return _impl_.package_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileDescriptorProto::release_package() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.package)
+  // @@protoc_insertion_point(field_release:shark.FileDescriptorProto.package)
   if (!_internal_has_package()) {
     return nullptr;
   }
@@ -8711,7 +8711,7 @@ inline void FileDescriptorProto::set_allocated_package(std::string* package) {
     _impl_.package_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.package)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileDescriptorProto.package)
 }
 
 // repeated string dependency = 3;
@@ -8726,66 +8726,66 @@ inline void FileDescriptorProto::clear_dependency() {
 }
 inline std::string* FileDescriptorProto::add_dependency() {
   std::string* _s = _internal_add_dependency();
-  // @@protoc_insertion_point(field_add_mutable:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_add_mutable:shark.FileDescriptorProto.dependency)
   return _s;
 }
 inline const std::string& FileDescriptorProto::_internal_dependency(int index) const {
   return _impl_.dependency_.Get(index);
 }
 inline const std::string& FileDescriptorProto::dependency(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.dependency)
   return _internal_dependency(index);
 }
 inline std::string* FileDescriptorProto::mutable_dependency(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.dependency)
   return _impl_.dependency_.Mutable(index);
 }
 inline void FileDescriptorProto::set_dependency(int index, const std::string& value) {
   _impl_.dependency_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.dependency)
 }
 inline void FileDescriptorProto::set_dependency(int index, std::string&& value) {
   _impl_.dependency_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.dependency)
 }
 inline void FileDescriptorProto::set_dependency(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.dependency_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_set_char:shark.FileDescriptorProto.dependency)
 }
 inline void FileDescriptorProto::set_dependency(int index, const char* value, size_t size) {
   _impl_.dependency_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_set_pointer:shark.FileDescriptorProto.dependency)
 }
 inline std::string* FileDescriptorProto::_internal_add_dependency() {
   return _impl_.dependency_.Add();
 }
 inline void FileDescriptorProto::add_dependency(const std::string& value) {
   _impl_.dependency_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.dependency)
 }
 inline void FileDescriptorProto::add_dependency(std::string&& value) {
   _impl_.dependency_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.dependency)
 }
 inline void FileDescriptorProto::add_dependency(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.dependency_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_add_char:shark.FileDescriptorProto.dependency)
 }
 inline void FileDescriptorProto::add_dependency(const char* value, size_t size) {
   _impl_.dependency_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_add_pointer:shark.FileDescriptorProto.dependency)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>&
 FileDescriptorProto::dependency() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.dependency)
   return _impl_.dependency_;
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 FileDescriptorProto::mutable_dependency() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.dependency)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.dependency)
   return &_impl_.dependency_;
 }
 
@@ -8803,19 +8803,19 @@ inline int32_t FileDescriptorProto::_internal_public_dependency(int index) const
   return _impl_.public_dependency_.Get(index);
 }
 inline int32_t FileDescriptorProto::public_dependency(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.public_dependency)
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.public_dependency)
   return _internal_public_dependency(index);
 }
 inline void FileDescriptorProto::set_public_dependency(int index, int32_t value) {
   _impl_.public_dependency_.Set(index, value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.public_dependency)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.public_dependency)
 }
 inline void FileDescriptorProto::_internal_add_public_dependency(int32_t value) {
   _impl_.public_dependency_.Add(value);
 }
 inline void FileDescriptorProto::add_public_dependency(int32_t value) {
   _internal_add_public_dependency(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.public_dependency)
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.public_dependency)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 FileDescriptorProto::_internal_public_dependency() const {
@@ -8823,7 +8823,7 @@ FileDescriptorProto::_internal_public_dependency() const {
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 FileDescriptorProto::public_dependency() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.public_dependency)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.public_dependency)
   return _internal_public_dependency();
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
@@ -8832,7 +8832,7 @@ FileDescriptorProto::_internal_mutable_public_dependency() {
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
 FileDescriptorProto::mutable_public_dependency() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.public_dependency)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.public_dependency)
   return _internal_mutable_public_dependency();
 }
 
@@ -8850,19 +8850,19 @@ inline int32_t FileDescriptorProto::_internal_weak_dependency(int index) const {
   return _impl_.weak_dependency_.Get(index);
 }
 inline int32_t FileDescriptorProto::weak_dependency(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.weak_dependency)
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.weak_dependency)
   return _internal_weak_dependency(index);
 }
 inline void FileDescriptorProto::set_weak_dependency(int index, int32_t value) {
   _impl_.weak_dependency_.Set(index, value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.weak_dependency)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.weak_dependency)
 }
 inline void FileDescriptorProto::_internal_add_weak_dependency(int32_t value) {
   _impl_.weak_dependency_.Add(value);
 }
 inline void FileDescriptorProto::add_weak_dependency(int32_t value) {
   _internal_add_weak_dependency(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.weak_dependency)
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.weak_dependency)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 FileDescriptorProto::_internal_weak_dependency() const {
@@ -8870,7 +8870,7 @@ FileDescriptorProto::_internal_weak_dependency() const {
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 FileDescriptorProto::weak_dependency() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.weak_dependency)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.weak_dependency)
   return _internal_weak_dependency();
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
@@ -8879,11 +8879,11 @@ FileDescriptorProto::_internal_mutable_weak_dependency() {
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
 FileDescriptorProto::mutable_weak_dependency() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.weak_dependency)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.weak_dependency)
   return _internal_mutable_weak_dependency();
 }
 
-// repeated .google.protobuf.DescriptorProto message_type = 4;
+// repeated .shark.DescriptorProto message_type = 4;
 inline int FileDescriptorProto::_internal_message_type_size() const {
   return _impl_.message_type_.size();
 }
@@ -8893,37 +8893,37 @@ inline int FileDescriptorProto::message_type_size() const {
 inline void FileDescriptorProto::clear_message_type() {
   _impl_.message_type_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto* FileDescriptorProto::mutable_message_type(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.message_type)
+inline ::shark::DescriptorProto* FileDescriptorProto::mutable_message_type(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.message_type)
   return _impl_.message_type_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >*
 FileDescriptorProto::mutable_message_type() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.message_type)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.message_type)
   return &_impl_.message_type_;
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto& FileDescriptorProto::_internal_message_type(int index) const {
+inline const ::shark::DescriptorProto& FileDescriptorProto::_internal_message_type(int index) const {
   return _impl_.message_type_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto& FileDescriptorProto::message_type(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.message_type)
+inline const ::shark::DescriptorProto& FileDescriptorProto::message_type(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.message_type)
   return _internal_message_type(index);
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto* FileDescriptorProto::_internal_add_message_type() {
+inline ::shark::DescriptorProto* FileDescriptorProto::_internal_add_message_type() {
   return _impl_.message_type_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto* FileDescriptorProto::add_message_type() {
-  ::SHARK_NAMESPACE_ID::DescriptorProto* _add = _internal_add_message_type();
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.message_type)
+inline ::shark::DescriptorProto* FileDescriptorProto::add_message_type() {
+  ::shark::DescriptorProto* _add = _internal_add_message_type();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.message_type)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
 FileDescriptorProto::message_type() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.message_type)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.message_type)
   return _impl_.message_type_;
 }
 
-// repeated .google.protobuf.EnumDescriptorProto enum_type = 5;
+// repeated .shark.EnumDescriptorProto enum_type = 5;
 inline int FileDescriptorProto::_internal_enum_type_size() const {
   return _impl_.enum_type_.size();
 }
@@ -8933,37 +8933,37 @@ inline int FileDescriptorProto::enum_type_size() const {
 inline void FileDescriptorProto::clear_enum_type() {
   _impl_.enum_type_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto* FileDescriptorProto::mutable_enum_type(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.enum_type)
+inline ::shark::EnumDescriptorProto* FileDescriptorProto::mutable_enum_type(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.enum_type)
   return _impl_.enum_type_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >*
 FileDescriptorProto::mutable_enum_type() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.enum_type)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.enum_type)
   return &_impl_.enum_type_;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& FileDescriptorProto::_internal_enum_type(int index) const {
+inline const ::shark::EnumDescriptorProto& FileDescriptorProto::_internal_enum_type(int index) const {
   return _impl_.enum_type_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& FileDescriptorProto::enum_type(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.enum_type)
+inline const ::shark::EnumDescriptorProto& FileDescriptorProto::enum_type(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.enum_type)
   return _internal_enum_type(index);
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto* FileDescriptorProto::_internal_add_enum_type() {
+inline ::shark::EnumDescriptorProto* FileDescriptorProto::_internal_add_enum_type() {
   return _impl_.enum_type_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto* FileDescriptorProto::add_enum_type() {
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* _add = _internal_add_enum_type();
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.enum_type)
+inline ::shark::EnumDescriptorProto* FileDescriptorProto::add_enum_type() {
+  ::shark::EnumDescriptorProto* _add = _internal_add_enum_type();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.enum_type)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
 FileDescriptorProto::enum_type() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.enum_type)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.enum_type)
   return _impl_.enum_type_;
 }
 
-// repeated .google.protobuf.ServiceDescriptorProto service = 6;
+// repeated .shark.ServiceDescriptorProto service = 6;
 inline int FileDescriptorProto::_internal_service_size() const {
   return _impl_.service_.size();
 }
@@ -8973,37 +8973,37 @@ inline int FileDescriptorProto::service_size() const {
 inline void FileDescriptorProto::clear_service() {
   _impl_.service_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* FileDescriptorProto::mutable_service(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.service)
+inline ::shark::ServiceDescriptorProto* FileDescriptorProto::mutable_service(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.service)
   return _impl_.service_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::ServiceDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >*
 FileDescriptorProto::mutable_service() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.service)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.service)
   return &_impl_.service_;
 }
-inline const ::SHARK_NAMESPACE_ID::ServiceDescriptorProto& FileDescriptorProto::_internal_service(int index) const {
+inline const ::shark::ServiceDescriptorProto& FileDescriptorProto::_internal_service(int index) const {
   return _impl_.service_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::ServiceDescriptorProto& FileDescriptorProto::service(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.service)
+inline const ::shark::ServiceDescriptorProto& FileDescriptorProto::service(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.service)
   return _internal_service(index);
 }
-inline ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* FileDescriptorProto::_internal_add_service() {
+inline ::shark::ServiceDescriptorProto* FileDescriptorProto::_internal_add_service() {
   return _impl_.service_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* FileDescriptorProto::add_service() {
-  ::SHARK_NAMESPACE_ID::ServiceDescriptorProto* _add = _internal_add_service();
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.service)
+inline ::shark::ServiceDescriptorProto* FileDescriptorProto::add_service() {
+  ::shark::ServiceDescriptorProto* _add = _internal_add_service();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.service)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::ServiceDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >&
 FileDescriptorProto::service() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.service)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.service)
   return _impl_.service_;
 }
 
-// repeated .google.protobuf.FieldDescriptorProto extension = 7;
+// repeated .shark.FieldDescriptorProto extension = 7;
 inline int FileDescriptorProto::_internal_extension_size() const {
   return _impl_.extension_.size();
 }
@@ -9013,37 +9013,37 @@ inline int FileDescriptorProto::extension_size() const {
 inline void FileDescriptorProto::clear_extension() {
   _impl_.extension_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* FileDescriptorProto::mutable_extension(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.extension)
+inline ::shark::FieldDescriptorProto* FileDescriptorProto::mutable_extension(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.extension)
   return _impl_.extension_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
 FileDescriptorProto::mutable_extension() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileDescriptorProto.extension)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileDescriptorProto.extension)
   return &_impl_.extension_;
 }
-inline const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& FileDescriptorProto::_internal_extension(int index) const {
+inline const ::shark::FieldDescriptorProto& FileDescriptorProto::_internal_extension(int index) const {
   return _impl_.extension_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& FileDescriptorProto::extension(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.extension)
+inline const ::shark::FieldDescriptorProto& FileDescriptorProto::extension(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.extension)
   return _internal_extension(index);
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* FileDescriptorProto::_internal_add_extension() {
+inline ::shark::FieldDescriptorProto* FileDescriptorProto::_internal_add_extension() {
   return _impl_.extension_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* FileDescriptorProto::add_extension() {
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* _add = _internal_add_extension();
-  // @@protoc_insertion_point(field_add:google.protobuf.FileDescriptorProto.extension)
+inline ::shark::FieldDescriptorProto* FileDescriptorProto::add_extension() {
+  ::shark::FieldDescriptorProto* _add = _internal_add_extension();
+  // @@protoc_insertion_point(field_add:shark.FileDescriptorProto.extension)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
 FileDescriptorProto::extension() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileDescriptorProto.extension)
+  // @@protoc_insertion_point(field_list:shark.FileDescriptorProto.extension)
   return _impl_.extension_;
 }
 
-// optional .google.protobuf.FileOptions options = 8;
+// optional .shark.FileOptions options = 8;
 inline bool FileDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -9056,17 +9056,17 @@ inline void FileDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000008u;
 }
-inline const ::SHARK_NAMESPACE_ID::FileOptions& FileDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::FileOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::FileOptions&>(
-      ::SHARK_NAMESPACE_ID::_FileOptions_default_instance_);
+inline const ::shark::FileOptions& FileDescriptorProto::_internal_options() const {
+  const ::shark::FileOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::FileOptions&>(
+      ::shark::_FileOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::FileOptions& FileDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.options)
+inline const ::shark::FileOptions& FileDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.options)
   return _internal_options();
 }
 inline void FileDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::FileOptions* options) {
+    ::shark::FileOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -9076,11 +9076,11 @@ inline void FileDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000008u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.FileDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::FileOptions* FileDescriptorProto::release_options() {
+inline ::shark::FileOptions* FileDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000008u;
-  ::SHARK_NAMESPACE_ID::FileOptions* temp = _impl_.options_;
+  ::shark::FileOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -9093,27 +9093,27 @@ inline ::SHARK_NAMESPACE_ID::FileOptions* FileDescriptorProto::release_options()
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::FileOptions* FileDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.options)
+inline ::shark::FileOptions* FileDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.FileDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000008u;
-  ::SHARK_NAMESPACE_ID::FileOptions* temp = _impl_.options_;
+  ::shark::FileOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::FileOptions* FileDescriptorProto::_internal_mutable_options() {
+inline ::shark::FileOptions* FileDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000008u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::FileOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::FileOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::FileOptions* FileDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::FileOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.options)
+inline ::shark::FileOptions* FileDescriptorProto::mutable_options() {
+  ::shark::FileOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.options)
   return _msg;
 }
-inline void FileDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::FileOptions* options) {
+inline void FileDescriptorProto::set_allocated_options(::shark::FileOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -9130,10 +9130,10 @@ inline void FileDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::Fil
     _impl_._has_bits_[0] &= ~0x00000008u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileDescriptorProto.options)
 }
 
-// optional .google.protobuf.SourceCodeInfo source_code_info = 9;
+// optional .shark.SourceCodeInfo source_code_info = 9;
 inline bool FileDescriptorProto::_internal_has_source_code_info() const {
   bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   SHARK_ASSUME(!value || _impl_.source_code_info_ != nullptr);
@@ -9146,17 +9146,17 @@ inline void FileDescriptorProto::clear_source_code_info() {
   if (_impl_.source_code_info_ != nullptr) _impl_.source_code_info_->Clear();
   _impl_._has_bits_[0] &= ~0x00000010u;
 }
-inline const ::SHARK_NAMESPACE_ID::SourceCodeInfo& FileDescriptorProto::_internal_source_code_info() const {
-  const ::SHARK_NAMESPACE_ID::SourceCodeInfo* p = _impl_.source_code_info_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::SourceCodeInfo&>(
-      ::SHARK_NAMESPACE_ID::_SourceCodeInfo_default_instance_);
+inline const ::shark::SourceCodeInfo& FileDescriptorProto::_internal_source_code_info() const {
+  const ::shark::SourceCodeInfo* p = _impl_.source_code_info_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::SourceCodeInfo&>(
+      ::shark::_SourceCodeInfo_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::SourceCodeInfo& FileDescriptorProto::source_code_info() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.source_code_info)
+inline const ::shark::SourceCodeInfo& FileDescriptorProto::source_code_info() const {
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.source_code_info)
   return _internal_source_code_info();
 }
 inline void FileDescriptorProto::unsafe_arena_set_allocated_source_code_info(
-    ::SHARK_NAMESPACE_ID::SourceCodeInfo* source_code_info) {
+    ::shark::SourceCodeInfo* source_code_info) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_code_info_);
   }
@@ -9166,11 +9166,11 @@ inline void FileDescriptorProto::unsafe_arena_set_allocated_source_code_info(
   } else {
     _impl_._has_bits_[0] &= ~0x00000010u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FileDescriptorProto.source_code_info)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.FileDescriptorProto.source_code_info)
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo* FileDescriptorProto::release_source_code_info() {
+inline ::shark::SourceCodeInfo* FileDescriptorProto::release_source_code_info() {
   _impl_._has_bits_[0] &= ~0x00000010u;
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo* temp = _impl_.source_code_info_;
+  ::shark::SourceCodeInfo* temp = _impl_.source_code_info_;
   _impl_.source_code_info_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -9183,27 +9183,27 @@ inline ::SHARK_NAMESPACE_ID::SourceCodeInfo* FileDescriptorProto::release_source
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo* FileDescriptorProto::unsafe_arena_release_source_code_info() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.source_code_info)
+inline ::shark::SourceCodeInfo* FileDescriptorProto::unsafe_arena_release_source_code_info() {
+  // @@protoc_insertion_point(field_release:shark.FileDescriptorProto.source_code_info)
   _impl_._has_bits_[0] &= ~0x00000010u;
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo* temp = _impl_.source_code_info_;
+  ::shark::SourceCodeInfo* temp = _impl_.source_code_info_;
   _impl_.source_code_info_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo* FileDescriptorProto::_internal_mutable_source_code_info() {
+inline ::shark::SourceCodeInfo* FileDescriptorProto::_internal_mutable_source_code_info() {
   _impl_._has_bits_[0] |= 0x00000010u;
   if (_impl_.source_code_info_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceCodeInfo>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::SourceCodeInfo>(GetArenaForAllocation());
     _impl_.source_code_info_ = p;
   }
   return _impl_.source_code_info_;
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo* FileDescriptorProto::mutable_source_code_info() {
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo* _msg = _internal_mutable_source_code_info();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.source_code_info)
+inline ::shark::SourceCodeInfo* FileDescriptorProto::mutable_source_code_info() {
+  ::shark::SourceCodeInfo* _msg = _internal_mutable_source_code_info();
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.source_code_info)
   return _msg;
 }
-inline void FileDescriptorProto::set_allocated_source_code_info(::SHARK_NAMESPACE_ID::SourceCodeInfo* source_code_info) {
+inline void FileDescriptorProto::set_allocated_source_code_info(::shark::SourceCodeInfo* source_code_info) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.source_code_info_;
@@ -9220,7 +9220,7 @@ inline void FileDescriptorProto::set_allocated_source_code_info(::SHARK_NAMESPAC
     _impl_._has_bits_[0] &= ~0x00000010u;
   }
   _impl_.source_code_info_ = source_code_info;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.source_code_info)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileDescriptorProto.source_code_info)
 }
 
 // optional string syntax = 12;
@@ -9236,7 +9236,7 @@ inline void FileDescriptorProto::clear_syntax() {
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& FileDescriptorProto::syntax() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileDescriptorProto.syntax)
+  // @@protoc_insertion_point(field_get:shark.FileDescriptorProto.syntax)
   return _internal_syntax();
 }
 template <typename ArgT0, typename... ArgT>
@@ -9244,11 +9244,11 @@ inline SHARK_ALWAYS_INLINE
 void FileDescriptorProto::set_syntax(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.syntax_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileDescriptorProto.syntax)
+  // @@protoc_insertion_point(field_set:shark.FileDescriptorProto.syntax)
 }
 inline std::string* FileDescriptorProto::mutable_syntax() {
   std::string* _s = _internal_mutable_syntax();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileDescriptorProto.syntax)
+  // @@protoc_insertion_point(field_mutable:shark.FileDescriptorProto.syntax)
   return _s;
 }
 inline const std::string& FileDescriptorProto::_internal_syntax() const {
@@ -9263,7 +9263,7 @@ inline std::string* FileDescriptorProto::_internal_mutable_syntax() {
   return _impl_.syntax_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileDescriptorProto::release_syntax() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileDescriptorProto.syntax)
+  // @@protoc_insertion_point(field_release:shark.FileDescriptorProto.syntax)
   if (!_internal_has_syntax()) {
     return nullptr;
   }
@@ -9288,7 +9288,7 @@ inline void FileDescriptorProto::set_allocated_syntax(std::string* syntax) {
     _impl_.syntax_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileDescriptorProto.syntax)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileDescriptorProto.syntax)
 }
 
 // -------------------------------------------------------------------
@@ -9311,7 +9311,7 @@ inline int32_t DescriptorProto_ExtensionRange::_internal_start() const {
   return _impl_.start_;
 }
 inline int32_t DescriptorProto_ExtensionRange::start() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ExtensionRange.start)
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.ExtensionRange.start)
   return _internal_start();
 }
 inline void DescriptorProto_ExtensionRange::_internal_set_start(int32_t value) {
@@ -9320,7 +9320,7 @@ inline void DescriptorProto_ExtensionRange::_internal_set_start(int32_t value) {
 }
 inline void DescriptorProto_ExtensionRange::set_start(int32_t value) {
   _internal_set_start(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ExtensionRange.start)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.ExtensionRange.start)
 }
 
 // optional int32 end = 2;
@@ -9339,7 +9339,7 @@ inline int32_t DescriptorProto_ExtensionRange::_internal_end() const {
   return _impl_.end_;
 }
 inline int32_t DescriptorProto_ExtensionRange::end() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ExtensionRange.end)
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.ExtensionRange.end)
   return _internal_end();
 }
 inline void DescriptorProto_ExtensionRange::_internal_set_end(int32_t value) {
@@ -9348,10 +9348,10 @@ inline void DescriptorProto_ExtensionRange::_internal_set_end(int32_t value) {
 }
 inline void DescriptorProto_ExtensionRange::set_end(int32_t value) {
   _internal_set_end(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ExtensionRange.end)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.ExtensionRange.end)
 }
 
-// optional .google.protobuf.ExtensionRangeOptions options = 3;
+// optional .shark.ExtensionRangeOptions options = 3;
 inline bool DescriptorProto_ExtensionRange::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -9364,17 +9364,17 @@ inline void DescriptorProto_ExtensionRange::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline const ::SHARK_NAMESPACE_ID::ExtensionRangeOptions& DescriptorProto_ExtensionRange::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::ExtensionRangeOptions&>(
-      ::SHARK_NAMESPACE_ID::_ExtensionRangeOptions_default_instance_);
+inline const ::shark::ExtensionRangeOptions& DescriptorProto_ExtensionRange::_internal_options() const {
+  const ::shark::ExtensionRangeOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::ExtensionRangeOptions&>(
+      ::shark::_ExtensionRangeOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::ExtensionRangeOptions& DescriptorProto_ExtensionRange::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ExtensionRange.options)
+inline const ::shark::ExtensionRangeOptions& DescriptorProto_ExtensionRange::options() const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.ExtensionRange.options)
   return _internal_options();
 }
 inline void DescriptorProto_ExtensionRange::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* options) {
+    ::shark::ExtensionRangeOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -9384,11 +9384,11 @@ inline void DescriptorProto_ExtensionRange::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.DescriptorProto.ExtensionRange.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.DescriptorProto.ExtensionRange.options)
 }
-inline ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* DescriptorProto_ExtensionRange::release_options() {
+inline ::shark::ExtensionRangeOptions* DescriptorProto_ExtensionRange::release_options() {
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* temp = _impl_.options_;
+  ::shark::ExtensionRangeOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -9401,27 +9401,27 @@ inline ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* DescriptorProto_ExtensionRan
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* DescriptorProto_ExtensionRange::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.DescriptorProto.ExtensionRange.options)
+inline ::shark::ExtensionRangeOptions* DescriptorProto_ExtensionRange::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.DescriptorProto.ExtensionRange.options)
   _impl_._has_bits_[0] &= ~0x00000001u;
-  ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* temp = _impl_.options_;
+  ::shark::ExtensionRangeOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* DescriptorProto_ExtensionRange::_internal_mutable_options() {
+inline ::shark::ExtensionRangeOptions* DescriptorProto_ExtensionRange::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000001u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::ExtensionRangeOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::ExtensionRangeOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* DescriptorProto_ExtensionRange::mutable_options() {
-  ::SHARK_NAMESPACE_ID::ExtensionRangeOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.ExtensionRange.options)
+inline ::shark::ExtensionRangeOptions* DescriptorProto_ExtensionRange::mutable_options() {
+  ::shark::ExtensionRangeOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.ExtensionRange.options)
   return _msg;
 }
-inline void DescriptorProto_ExtensionRange::set_allocated_options(::SHARK_NAMESPACE_ID::ExtensionRangeOptions* options) {
+inline void DescriptorProto_ExtensionRange::set_allocated_options(::shark::ExtensionRangeOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -9438,7 +9438,7 @@ inline void DescriptorProto_ExtensionRange::set_allocated_options(::SHARK_NAMESP
     _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.DescriptorProto.ExtensionRange.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.DescriptorProto.ExtensionRange.options)
 }
 
 // -------------------------------------------------------------------
@@ -9461,7 +9461,7 @@ inline int32_t DescriptorProto_ReservedRange::_internal_start() const {
   return _impl_.start_;
 }
 inline int32_t DescriptorProto_ReservedRange::start() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ReservedRange.start)
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.ReservedRange.start)
   return _internal_start();
 }
 inline void DescriptorProto_ReservedRange::_internal_set_start(int32_t value) {
@@ -9470,7 +9470,7 @@ inline void DescriptorProto_ReservedRange::_internal_set_start(int32_t value) {
 }
 inline void DescriptorProto_ReservedRange::set_start(int32_t value) {
   _internal_set_start(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ReservedRange.start)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.ReservedRange.start)
 }
 
 // optional int32 end = 2;
@@ -9489,7 +9489,7 @@ inline int32_t DescriptorProto_ReservedRange::_internal_end() const {
   return _impl_.end_;
 }
 inline int32_t DescriptorProto_ReservedRange::end() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.ReservedRange.end)
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.ReservedRange.end)
   return _internal_end();
 }
 inline void DescriptorProto_ReservedRange::_internal_set_end(int32_t value) {
@@ -9498,7 +9498,7 @@ inline void DescriptorProto_ReservedRange::_internal_set_end(int32_t value) {
 }
 inline void DescriptorProto_ReservedRange::set_end(int32_t value) {
   _internal_set_end(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.ReservedRange.end)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.ReservedRange.end)
 }
 
 // -------------------------------------------------------------------
@@ -9518,7 +9518,7 @@ inline void DescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& DescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -9526,11 +9526,11 @@ inline SHARK_ALWAYS_INLINE
 void DescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.name)
 }
 inline std::string* DescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.name)
   return _s;
 }
 inline const std::string& DescriptorProto::_internal_name() const {
@@ -9545,7 +9545,7 @@ inline std::string* DescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* DescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.DescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.DescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -9570,10 +9570,10 @@ inline void DescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.DescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.DescriptorProto.name)
 }
 
-// repeated .google.protobuf.FieldDescriptorProto field = 2;
+// repeated .shark.FieldDescriptorProto field = 2;
 inline int DescriptorProto::_internal_field_size() const {
   return _impl_.field_.size();
 }
@@ -9583,37 +9583,37 @@ inline int DescriptorProto::field_size() const {
 inline void DescriptorProto::clear_field() {
   _impl_.field_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* DescriptorProto::mutable_field(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.field)
+inline ::shark::FieldDescriptorProto* DescriptorProto::mutable_field(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.field)
   return _impl_.field_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
 DescriptorProto::mutable_field() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.field)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.field)
   return &_impl_.field_;
 }
-inline const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& DescriptorProto::_internal_field(int index) const {
+inline const ::shark::FieldDescriptorProto& DescriptorProto::_internal_field(int index) const {
   return _impl_.field_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& DescriptorProto::field(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.field)
+inline const ::shark::FieldDescriptorProto& DescriptorProto::field(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.field)
   return _internal_field(index);
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* DescriptorProto::_internal_add_field() {
+inline ::shark::FieldDescriptorProto* DescriptorProto::_internal_add_field() {
   return _impl_.field_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* DescriptorProto::add_field() {
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* _add = _internal_add_field();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.field)
+inline ::shark::FieldDescriptorProto* DescriptorProto::add_field() {
+  ::shark::FieldDescriptorProto* _add = _internal_add_field();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.field)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
 DescriptorProto::field() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.field)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.field)
   return _impl_.field_;
 }
 
-// repeated .google.protobuf.FieldDescriptorProto extension = 6;
+// repeated .shark.FieldDescriptorProto extension = 6;
 inline int DescriptorProto::_internal_extension_size() const {
   return _impl_.extension_.size();
 }
@@ -9623,37 +9623,37 @@ inline int DescriptorProto::extension_size() const {
 inline void DescriptorProto::clear_extension() {
   _impl_.extension_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* DescriptorProto::mutable_extension(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.extension)
+inline ::shark::FieldDescriptorProto* DescriptorProto::mutable_extension(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.extension)
   return _impl_.extension_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >*
 DescriptorProto::mutable_extension() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.extension)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.extension)
   return &_impl_.extension_;
 }
-inline const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& DescriptorProto::_internal_extension(int index) const {
+inline const ::shark::FieldDescriptorProto& DescriptorProto::_internal_extension(int index) const {
   return _impl_.extension_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::FieldDescriptorProto& DescriptorProto::extension(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.extension)
+inline const ::shark::FieldDescriptorProto& DescriptorProto::extension(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.extension)
   return _internal_extension(index);
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* DescriptorProto::_internal_add_extension() {
+inline ::shark::FieldDescriptorProto* DescriptorProto::_internal_add_extension() {
   return _impl_.extension_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto* DescriptorProto::add_extension() {
-  ::SHARK_NAMESPACE_ID::FieldDescriptorProto* _add = _internal_add_extension();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.extension)
+inline ::shark::FieldDescriptorProto* DescriptorProto::add_extension() {
+  ::shark::FieldDescriptorProto* _add = _internal_add_extension();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.extension)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::FieldDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
 DescriptorProto::extension() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.extension)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.extension)
   return _impl_.extension_;
 }
 
-// repeated .google.protobuf.DescriptorProto nested_type = 3;
+// repeated .shark.DescriptorProto nested_type = 3;
 inline int DescriptorProto::_internal_nested_type_size() const {
   return _impl_.nested_type_.size();
 }
@@ -9663,37 +9663,37 @@ inline int DescriptorProto::nested_type_size() const {
 inline void DescriptorProto::clear_nested_type() {
   _impl_.nested_type_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto* DescriptorProto::mutable_nested_type(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.nested_type)
+inline ::shark::DescriptorProto* DescriptorProto::mutable_nested_type(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.nested_type)
   return _impl_.nested_type_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >*
 DescriptorProto::mutable_nested_type() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.nested_type)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.nested_type)
   return &_impl_.nested_type_;
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto& DescriptorProto::_internal_nested_type(int index) const {
+inline const ::shark::DescriptorProto& DescriptorProto::_internal_nested_type(int index) const {
   return _impl_.nested_type_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto& DescriptorProto::nested_type(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.nested_type)
+inline const ::shark::DescriptorProto& DescriptorProto::nested_type(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.nested_type)
   return _internal_nested_type(index);
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto* DescriptorProto::_internal_add_nested_type() {
+inline ::shark::DescriptorProto* DescriptorProto::_internal_add_nested_type() {
   return _impl_.nested_type_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto* DescriptorProto::add_nested_type() {
-  ::SHARK_NAMESPACE_ID::DescriptorProto* _add = _internal_add_nested_type();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.nested_type)
+inline ::shark::DescriptorProto* DescriptorProto::add_nested_type() {
+  ::shark::DescriptorProto* _add = _internal_add_nested_type();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.nested_type)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
 DescriptorProto::nested_type() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.nested_type)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.nested_type)
   return _impl_.nested_type_;
 }
 
-// repeated .google.protobuf.EnumDescriptorProto enum_type = 4;
+// repeated .shark.EnumDescriptorProto enum_type = 4;
 inline int DescriptorProto::_internal_enum_type_size() const {
   return _impl_.enum_type_.size();
 }
@@ -9703,37 +9703,37 @@ inline int DescriptorProto::enum_type_size() const {
 inline void DescriptorProto::clear_enum_type() {
   _impl_.enum_type_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto* DescriptorProto::mutable_enum_type(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.enum_type)
+inline ::shark::EnumDescriptorProto* DescriptorProto::mutable_enum_type(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.enum_type)
   return _impl_.enum_type_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >*
 DescriptorProto::mutable_enum_type() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.enum_type)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.enum_type)
   return &_impl_.enum_type_;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& DescriptorProto::_internal_enum_type(int index) const {
+inline const ::shark::EnumDescriptorProto& DescriptorProto::_internal_enum_type(int index) const {
   return _impl_.enum_type_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumDescriptorProto& DescriptorProto::enum_type(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.enum_type)
+inline const ::shark::EnumDescriptorProto& DescriptorProto::enum_type(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.enum_type)
   return _internal_enum_type(index);
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto* DescriptorProto::_internal_add_enum_type() {
+inline ::shark::EnumDescriptorProto* DescriptorProto::_internal_add_enum_type() {
   return _impl_.enum_type_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto* DescriptorProto::add_enum_type() {
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto* _add = _internal_add_enum_type();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.enum_type)
+inline ::shark::EnumDescriptorProto* DescriptorProto::add_enum_type() {
+  ::shark::EnumDescriptorProto* _add = _internal_add_enum_type();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.enum_type)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
 DescriptorProto::enum_type() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.enum_type)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.enum_type)
   return _impl_.enum_type_;
 }
 
-// repeated .google.protobuf.DescriptorProto.ExtensionRange extension_range = 5;
+// repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
 inline int DescriptorProto::_internal_extension_range_size() const {
   return _impl_.extension_range_.size();
 }
@@ -9743,37 +9743,37 @@ inline int DescriptorProto::extension_range_size() const {
 inline void DescriptorProto::clear_extension_range() {
   _impl_.extension_range_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* DescriptorProto::mutable_extension_range(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.extension_range)
+inline ::shark::DescriptorProto_ExtensionRange* DescriptorProto::mutable_extension_range(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.extension_range)
   return _impl_.extension_range_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange >*
 DescriptorProto::mutable_extension_range() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.extension_range)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.extension_range)
   return &_impl_.extension_range_;
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange& DescriptorProto::_internal_extension_range(int index) const {
+inline const ::shark::DescriptorProto_ExtensionRange& DescriptorProto::_internal_extension_range(int index) const {
   return _impl_.extension_range_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange& DescriptorProto::extension_range(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.extension_range)
+inline const ::shark::DescriptorProto_ExtensionRange& DescriptorProto::extension_range(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.extension_range)
   return _internal_extension_range(index);
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* DescriptorProto::_internal_add_extension_range() {
+inline ::shark::DescriptorProto_ExtensionRange* DescriptorProto::_internal_add_extension_range() {
   return _impl_.extension_range_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* DescriptorProto::add_extension_range() {
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange* _add = _internal_add_extension_range();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.extension_range)
+inline ::shark::DescriptorProto_ExtensionRange* DescriptorProto::add_extension_range() {
+  ::shark::DescriptorProto_ExtensionRange* _add = _internal_add_extension_range();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.extension_range)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ExtensionRange >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange >&
 DescriptorProto::extension_range() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.extension_range)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.extension_range)
   return _impl_.extension_range_;
 }
 
-// repeated .google.protobuf.OneofDescriptorProto oneof_decl = 8;
+// repeated .shark.OneofDescriptorProto oneof_decl = 8;
 inline int DescriptorProto::_internal_oneof_decl_size() const {
   return _impl_.oneof_decl_.size();
 }
@@ -9783,37 +9783,37 @@ inline int DescriptorProto::oneof_decl_size() const {
 inline void DescriptorProto::clear_oneof_decl() {
   _impl_.oneof_decl_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::OneofDescriptorProto* DescriptorProto::mutable_oneof_decl(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.oneof_decl)
+inline ::shark::OneofDescriptorProto* DescriptorProto::mutable_oneof_decl(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.oneof_decl)
   return _impl_.oneof_decl_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::OneofDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto >*
 DescriptorProto::mutable_oneof_decl() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.oneof_decl)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.oneof_decl)
   return &_impl_.oneof_decl_;
 }
-inline const ::SHARK_NAMESPACE_ID::OneofDescriptorProto& DescriptorProto::_internal_oneof_decl(int index) const {
+inline const ::shark::OneofDescriptorProto& DescriptorProto::_internal_oneof_decl(int index) const {
   return _impl_.oneof_decl_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::OneofDescriptorProto& DescriptorProto::oneof_decl(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.oneof_decl)
+inline const ::shark::OneofDescriptorProto& DescriptorProto::oneof_decl(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.oneof_decl)
   return _internal_oneof_decl(index);
 }
-inline ::SHARK_NAMESPACE_ID::OneofDescriptorProto* DescriptorProto::_internal_add_oneof_decl() {
+inline ::shark::OneofDescriptorProto* DescriptorProto::_internal_add_oneof_decl() {
   return _impl_.oneof_decl_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::OneofDescriptorProto* DescriptorProto::add_oneof_decl() {
-  ::SHARK_NAMESPACE_ID::OneofDescriptorProto* _add = _internal_add_oneof_decl();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.oneof_decl)
+inline ::shark::OneofDescriptorProto* DescriptorProto::add_oneof_decl() {
+  ::shark::OneofDescriptorProto* _add = _internal_add_oneof_decl();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.oneof_decl)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::OneofDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto >&
 DescriptorProto::oneof_decl() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.oneof_decl)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.oneof_decl)
   return _impl_.oneof_decl_;
 }
 
-// optional .google.protobuf.MessageOptions options = 7;
+// optional .shark.MessageOptions options = 7;
 inline bool DescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -9826,17 +9826,17 @@ inline void DescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::SHARK_NAMESPACE_ID::MessageOptions& DescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::MessageOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::MessageOptions&>(
-      ::SHARK_NAMESPACE_ID::_MessageOptions_default_instance_);
+inline const ::shark::MessageOptions& DescriptorProto::_internal_options() const {
+  const ::shark::MessageOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::MessageOptions&>(
+      ::shark::_MessageOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::MessageOptions& DescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.options)
+inline const ::shark::MessageOptions& DescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.options)
   return _internal_options();
 }
 inline void DescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::MessageOptions* options) {
+    ::shark::MessageOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -9846,11 +9846,11 @@ inline void DescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.DescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.DescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::MessageOptions* DescriptorProto::release_options() {
+inline ::shark::MessageOptions* DescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::MessageOptions* temp = _impl_.options_;
+  ::shark::MessageOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -9863,27 +9863,27 @@ inline ::SHARK_NAMESPACE_ID::MessageOptions* DescriptorProto::release_options() 
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::MessageOptions* DescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.DescriptorProto.options)
+inline ::shark::MessageOptions* DescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.DescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::MessageOptions* temp = _impl_.options_;
+  ::shark::MessageOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::MessageOptions* DescriptorProto::_internal_mutable_options() {
+inline ::shark::MessageOptions* DescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::MessageOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::MessageOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::MessageOptions* DescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::MessageOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.options)
+inline ::shark::MessageOptions* DescriptorProto::mutable_options() {
+  ::shark::MessageOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.options)
   return _msg;
 }
-inline void DescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::MessageOptions* options) {
+inline void DescriptorProto::set_allocated_options(::shark::MessageOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -9900,10 +9900,10 @@ inline void DescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::Message
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.DescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.DescriptorProto.options)
 }
 
-// repeated .google.protobuf.DescriptorProto.ReservedRange reserved_range = 9;
+// repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
 inline int DescriptorProto::_internal_reserved_range_size() const {
   return _impl_.reserved_range_.size();
 }
@@ -9913,33 +9913,33 @@ inline int DescriptorProto::reserved_range_size() const {
 inline void DescriptorProto::clear_reserved_range() {
   _impl_.reserved_range_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* DescriptorProto::mutable_reserved_range(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.reserved_range)
+inline ::shark::DescriptorProto_ReservedRange* DescriptorProto::mutable_reserved_range(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.reserved_range)
   return _impl_.reserved_range_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange >*
 DescriptorProto::mutable_reserved_range() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.reserved_range)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.reserved_range)
   return &_impl_.reserved_range_;
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange& DescriptorProto::_internal_reserved_range(int index) const {
+inline const ::shark::DescriptorProto_ReservedRange& DescriptorProto::_internal_reserved_range(int index) const {
   return _impl_.reserved_range_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange& DescriptorProto::reserved_range(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.reserved_range)
+inline const ::shark::DescriptorProto_ReservedRange& DescriptorProto::reserved_range(int index) const {
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.reserved_range)
   return _internal_reserved_range(index);
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* DescriptorProto::_internal_add_reserved_range() {
+inline ::shark::DescriptorProto_ReservedRange* DescriptorProto::_internal_add_reserved_range() {
   return _impl_.reserved_range_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* DescriptorProto::add_reserved_range() {
-  ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange* _add = _internal_add_reserved_range();
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.reserved_range)
+inline ::shark::DescriptorProto_ReservedRange* DescriptorProto::add_reserved_range() {
+  ::shark::DescriptorProto_ReservedRange* _add = _internal_add_reserved_range();
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.reserved_range)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::DescriptorProto_ReservedRange >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange >&
 DescriptorProto::reserved_range() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.reserved_range)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.reserved_range)
   return _impl_.reserved_range_;
 }
 
@@ -9955,66 +9955,66 @@ inline void DescriptorProto::clear_reserved_name() {
 }
 inline std::string* DescriptorProto::add_reserved_name() {
   std::string* _s = _internal_add_reserved_name();
-  // @@protoc_insertion_point(field_add_mutable:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add_mutable:shark.DescriptorProto.reserved_name)
   return _s;
 }
 inline const std::string& DescriptorProto::_internal_reserved_name(int index) const {
   return _impl_.reserved_name_.Get(index);
 }
 inline const std::string& DescriptorProto::reserved_name(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_get:shark.DescriptorProto.reserved_name)
   return _internal_reserved_name(index);
 }
 inline std::string* DescriptorProto::mutable_reserved_name(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_mutable:shark.DescriptorProto.reserved_name)
   return _impl_.reserved_name_.Mutable(index);
 }
 inline void DescriptorProto::set_reserved_name(int index, const std::string& value) {
   _impl_.reserved_name_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.reserved_name)
 }
 inline void DescriptorProto::set_reserved_name(int index, std::string&& value) {
   _impl_.reserved_name_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set:shark.DescriptorProto.reserved_name)
 }
 inline void DescriptorProto::set_reserved_name(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.reserved_name_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set_char:shark.DescriptorProto.reserved_name)
 }
 inline void DescriptorProto::set_reserved_name(int index, const char* value, size_t size) {
   _impl_.reserved_name_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set_pointer:shark.DescriptorProto.reserved_name)
 }
 inline std::string* DescriptorProto::_internal_add_reserved_name() {
   return _impl_.reserved_name_.Add();
 }
 inline void DescriptorProto::add_reserved_name(const std::string& value) {
   _impl_.reserved_name_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.reserved_name)
 }
 inline void DescriptorProto::add_reserved_name(std::string&& value) {
   _impl_.reserved_name_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add:shark.DescriptorProto.reserved_name)
 }
 inline void DescriptorProto::add_reserved_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.reserved_name_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add_char:shark.DescriptorProto.reserved_name)
 }
 inline void DescriptorProto::add_reserved_name(const char* value, size_t size) {
   _impl_.reserved_name_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add_pointer:shark.DescriptorProto.reserved_name)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>&
 DescriptorProto::reserved_name() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_list:shark.DescriptorProto.reserved_name)
   return _impl_.reserved_name_;
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 DescriptorProto::mutable_reserved_name() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.DescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_mutable_list:shark.DescriptorProto.reserved_name)
   return &_impl_.reserved_name_;
 }
 
@@ -10022,7 +10022,7 @@ DescriptorProto::mutable_reserved_name() {
 
 // ExtensionRangeOptions
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int ExtensionRangeOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -10032,33 +10032,33 @@ inline int ExtensionRangeOptions::uninterpreted_option_size() const {
 inline void ExtensionRangeOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* ExtensionRangeOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* ExtensionRangeOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ExtensionRangeOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 ExtensionRangeOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.ExtensionRangeOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& ExtensionRangeOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& ExtensionRangeOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& ExtensionRangeOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& ExtensionRangeOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ExtensionRangeOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* ExtensionRangeOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* ExtensionRangeOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* ExtensionRangeOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* ExtensionRangeOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.ExtensionRangeOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 ExtensionRangeOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.ExtensionRangeOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.ExtensionRangeOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -10079,7 +10079,7 @@ inline void FieldDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& FieldDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10087,11 +10087,11 @@ inline SHARK_ALWAYS_INLINE
 void FieldDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.name)
 }
 inline std::string* FieldDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.FieldDescriptorProto.name)
   return _s;
 }
 inline const std::string& FieldDescriptorProto::_internal_name() const {
@@ -10106,7 +10106,7 @@ inline std::string* FieldDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FieldDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.FieldDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -10131,7 +10131,7 @@ inline void FieldDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.FieldDescriptorProto.name)
 }
 
 // optional int32 number = 3;
@@ -10150,7 +10150,7 @@ inline int32_t FieldDescriptorProto::_internal_number() const {
   return _impl_.number_;
 }
 inline int32_t FieldDescriptorProto::number() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.number)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.number)
   return _internal_number();
 }
 inline void FieldDescriptorProto::_internal_set_number(int32_t value) {
@@ -10159,10 +10159,10 @@ inline void FieldDescriptorProto::_internal_set_number(int32_t value) {
 }
 inline void FieldDescriptorProto::set_number(int32_t value) {
   _internal_set_number(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.number)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.number)
 }
 
-// optional .google.protobuf.FieldDescriptorProto.Label label = 4;
+// optional .shark.FieldDescriptorProto.Label label = 4;
 inline bool FieldDescriptorProto::_internal_has_label() const {
   bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
   return value;
@@ -10174,24 +10174,24 @@ inline void FieldDescriptorProto::clear_label() {
   _impl_.label_ = 1;
   _impl_._has_bits_[0] &= ~0x00000200u;
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label FieldDescriptorProto::_internal_label() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label >(_impl_.label_);
+inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::_internal_label() const {
+  return static_cast< ::shark::FieldDescriptorProto_Label >(_impl_.label_);
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label FieldDescriptorProto::label() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.label)
+inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::label() const {
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.label)
   return _internal_label();
 }
-inline void FieldDescriptorProto::_internal_set_label(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label value) {
-  assert(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label_IsValid(value));
+inline void FieldDescriptorProto::_internal_set_label(::shark::FieldDescriptorProto_Label value) {
+  assert(::shark::FieldDescriptorProto_Label_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000200u;
   _impl_.label_ = value;
 }
-inline void FieldDescriptorProto::set_label(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label value) {
+inline void FieldDescriptorProto::set_label(::shark::FieldDescriptorProto_Label value) {
   _internal_set_label(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.label)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.label)
 }
 
-// optional .google.protobuf.FieldDescriptorProto.Type type = 5;
+// optional .shark.FieldDescriptorProto.Type type = 5;
 inline bool FieldDescriptorProto::_internal_has_type() const {
   bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
   return value;
@@ -10203,21 +10203,21 @@ inline void FieldDescriptorProto::clear_type() {
   _impl_.type_ = 1;
   _impl_._has_bits_[0] &= ~0x00000400u;
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type FieldDescriptorProto::_internal_type() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type >(_impl_.type_);
+inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::_internal_type() const {
+  return static_cast< ::shark::FieldDescriptorProto_Type >(_impl_.type_);
 }
-inline ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type FieldDescriptorProto::type() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.type)
+inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::type() const {
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.type)
   return _internal_type();
 }
-inline void FieldDescriptorProto::_internal_set_type(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type value) {
-  assert(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type_IsValid(value));
+inline void FieldDescriptorProto::_internal_set_type(::shark::FieldDescriptorProto_Type value) {
+  assert(::shark::FieldDescriptorProto_Type_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000400u;
   _impl_.type_ = value;
 }
-inline void FieldDescriptorProto::set_type(::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type value) {
+inline void FieldDescriptorProto::set_type(::shark::FieldDescriptorProto_Type value) {
   _internal_set_type(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.type)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.type)
 }
 
 // optional string type_name = 6;
@@ -10233,7 +10233,7 @@ inline void FieldDescriptorProto::clear_type_name() {
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& FieldDescriptorProto::type_name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.type_name)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.type_name)
   return _internal_type_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10241,11 +10241,11 @@ inline SHARK_ALWAYS_INLINE
 void FieldDescriptorProto::set_type_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.type_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.type_name)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.type_name)
 }
 inline std::string* FieldDescriptorProto::mutable_type_name() {
   std::string* _s = _internal_mutable_type_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.type_name)
+  // @@protoc_insertion_point(field_mutable:shark.FieldDescriptorProto.type_name)
   return _s;
 }
 inline const std::string& FieldDescriptorProto::_internal_type_name() const {
@@ -10260,7 +10260,7 @@ inline std::string* FieldDescriptorProto::_internal_mutable_type_name() {
   return _impl_.type_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FieldDescriptorProto::release_type_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.type_name)
+  // @@protoc_insertion_point(field_release:shark.FieldDescriptorProto.type_name)
   if (!_internal_has_type_name()) {
     return nullptr;
   }
@@ -10285,7 +10285,7 @@ inline void FieldDescriptorProto::set_allocated_type_name(std::string* type_name
     _impl_.type_name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.type_name)
+  // @@protoc_insertion_point(field_set_allocated:shark.FieldDescriptorProto.type_name)
 }
 
 // optional string extendee = 2;
@@ -10301,7 +10301,7 @@ inline void FieldDescriptorProto::clear_extendee() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& FieldDescriptorProto::extendee() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.extendee)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.extendee)
   return _internal_extendee();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10309,11 +10309,11 @@ inline SHARK_ALWAYS_INLINE
 void FieldDescriptorProto::set_extendee(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.extendee_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.extendee)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.extendee)
 }
 inline std::string* FieldDescriptorProto::mutable_extendee() {
   std::string* _s = _internal_mutable_extendee();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.extendee)
+  // @@protoc_insertion_point(field_mutable:shark.FieldDescriptorProto.extendee)
   return _s;
 }
 inline const std::string& FieldDescriptorProto::_internal_extendee() const {
@@ -10328,7 +10328,7 @@ inline std::string* FieldDescriptorProto::_internal_mutable_extendee() {
   return _impl_.extendee_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FieldDescriptorProto::release_extendee() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.extendee)
+  // @@protoc_insertion_point(field_release:shark.FieldDescriptorProto.extendee)
   if (!_internal_has_extendee()) {
     return nullptr;
   }
@@ -10353,7 +10353,7 @@ inline void FieldDescriptorProto::set_allocated_extendee(std::string* extendee) 
     _impl_.extendee_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.extendee)
+  // @@protoc_insertion_point(field_set_allocated:shark.FieldDescriptorProto.extendee)
 }
 
 // optional string default_value = 7;
@@ -10369,7 +10369,7 @@ inline void FieldDescriptorProto::clear_default_value() {
   _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const std::string& FieldDescriptorProto::default_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.default_value)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.default_value)
   return _internal_default_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10377,11 +10377,11 @@ inline SHARK_ALWAYS_INLINE
 void FieldDescriptorProto::set_default_value(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000008u;
  _impl_.default_value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.default_value)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.default_value)
 }
 inline std::string* FieldDescriptorProto::mutable_default_value() {
   std::string* _s = _internal_mutable_default_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.default_value)
+  // @@protoc_insertion_point(field_mutable:shark.FieldDescriptorProto.default_value)
   return _s;
 }
 inline const std::string& FieldDescriptorProto::_internal_default_value() const {
@@ -10396,7 +10396,7 @@ inline std::string* FieldDescriptorProto::_internal_mutable_default_value() {
   return _impl_.default_value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FieldDescriptorProto::release_default_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.default_value)
+  // @@protoc_insertion_point(field_release:shark.FieldDescriptorProto.default_value)
   if (!_internal_has_default_value()) {
     return nullptr;
   }
@@ -10421,7 +10421,7 @@ inline void FieldDescriptorProto::set_allocated_default_value(std::string* defau
     _impl_.default_value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.default_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.FieldDescriptorProto.default_value)
 }
 
 // optional int32 oneof_index = 9;
@@ -10440,7 +10440,7 @@ inline int32_t FieldDescriptorProto::_internal_oneof_index() const {
   return _impl_.oneof_index_;
 }
 inline int32_t FieldDescriptorProto::oneof_index() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.oneof_index)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.oneof_index)
   return _internal_oneof_index();
 }
 inline void FieldDescriptorProto::_internal_set_oneof_index(int32_t value) {
@@ -10449,7 +10449,7 @@ inline void FieldDescriptorProto::_internal_set_oneof_index(int32_t value) {
 }
 inline void FieldDescriptorProto::set_oneof_index(int32_t value) {
   _internal_set_oneof_index(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.oneof_index)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.oneof_index)
 }
 
 // optional string json_name = 10;
@@ -10465,7 +10465,7 @@ inline void FieldDescriptorProto::clear_json_name() {
   _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline const std::string& FieldDescriptorProto::json_name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.json_name)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.json_name)
   return _internal_json_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10473,11 +10473,11 @@ inline SHARK_ALWAYS_INLINE
 void FieldDescriptorProto::set_json_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000010u;
  _impl_.json_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.json_name)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.json_name)
 }
 inline std::string* FieldDescriptorProto::mutable_json_name() {
   std::string* _s = _internal_mutable_json_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.json_name)
+  // @@protoc_insertion_point(field_mutable:shark.FieldDescriptorProto.json_name)
   return _s;
 }
 inline const std::string& FieldDescriptorProto::_internal_json_name() const {
@@ -10492,7 +10492,7 @@ inline std::string* FieldDescriptorProto::_internal_mutable_json_name() {
   return _impl_.json_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FieldDescriptorProto::release_json_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.json_name)
+  // @@protoc_insertion_point(field_release:shark.FieldDescriptorProto.json_name)
   if (!_internal_has_json_name()) {
     return nullptr;
   }
@@ -10517,10 +10517,10 @@ inline void FieldDescriptorProto::set_allocated_json_name(std::string* json_name
     _impl_.json_name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.json_name)
+  // @@protoc_insertion_point(field_set_allocated:shark.FieldDescriptorProto.json_name)
 }
 
-// optional .google.protobuf.FieldOptions options = 8;
+// optional .shark.FieldOptions options = 8;
 inline bool FieldDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -10533,17 +10533,17 @@ inline void FieldDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000020u;
 }
-inline const ::SHARK_NAMESPACE_ID::FieldOptions& FieldDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::FieldOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::FieldOptions&>(
-      ::SHARK_NAMESPACE_ID::_FieldOptions_default_instance_);
+inline const ::shark::FieldOptions& FieldDescriptorProto::_internal_options() const {
+  const ::shark::FieldOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::FieldOptions&>(
+      ::shark::_FieldOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::FieldOptions& FieldDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.options)
+inline const ::shark::FieldOptions& FieldDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.options)
   return _internal_options();
 }
 inline void FieldDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::FieldOptions* options) {
+    ::shark::FieldOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -10553,11 +10553,11 @@ inline void FieldDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000020u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.FieldDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.FieldDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions* FieldDescriptorProto::release_options() {
+inline ::shark::FieldOptions* FieldDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000020u;
-  ::SHARK_NAMESPACE_ID::FieldOptions* temp = _impl_.options_;
+  ::shark::FieldOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -10570,27 +10570,27 @@ inline ::SHARK_NAMESPACE_ID::FieldOptions* FieldDescriptorProto::release_options
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions* FieldDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FieldDescriptorProto.options)
+inline ::shark::FieldOptions* FieldDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.FieldDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000020u;
-  ::SHARK_NAMESPACE_ID::FieldOptions* temp = _impl_.options_;
+  ::shark::FieldOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions* FieldDescriptorProto::_internal_mutable_options() {
+inline ::shark::FieldOptions* FieldDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000020u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::FieldOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::FieldOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions* FieldDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::FieldOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldDescriptorProto.options)
+inline ::shark::FieldOptions* FieldDescriptorProto::mutable_options() {
+  ::shark::FieldOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.FieldDescriptorProto.options)
   return _msg;
 }
-inline void FieldDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::FieldOptions* options) {
+inline void FieldDescriptorProto::set_allocated_options(::shark::FieldOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -10607,7 +10607,7 @@ inline void FieldDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::Fi
     _impl_._has_bits_[0] &= ~0x00000020u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FieldDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.FieldDescriptorProto.options)
 }
 
 // optional bool proto3_optional = 17;
@@ -10626,7 +10626,7 @@ inline bool FieldDescriptorProto::_internal_proto3_optional() const {
   return _impl_.proto3_optional_;
 }
 inline bool FieldDescriptorProto::proto3_optional() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldDescriptorProto.proto3_optional)
+  // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.proto3_optional)
   return _internal_proto3_optional();
 }
 inline void FieldDescriptorProto::_internal_set_proto3_optional(bool value) {
@@ -10635,7 +10635,7 @@ inline void FieldDescriptorProto::_internal_set_proto3_optional(bool value) {
 }
 inline void FieldDescriptorProto::set_proto3_optional(bool value) {
   _internal_set_proto3_optional(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldDescriptorProto.proto3_optional)
+  // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.proto3_optional)
 }
 
 // -------------------------------------------------------------------
@@ -10655,7 +10655,7 @@ inline void OneofDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& OneofDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.OneofDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.OneofDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10663,11 +10663,11 @@ inline SHARK_ALWAYS_INLINE
 void OneofDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.OneofDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.OneofDescriptorProto.name)
 }
 inline std::string* OneofDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.OneofDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.OneofDescriptorProto.name)
   return _s;
 }
 inline const std::string& OneofDescriptorProto::_internal_name() const {
@@ -10682,7 +10682,7 @@ inline std::string* OneofDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* OneofDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.OneofDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.OneofDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -10707,10 +10707,10 @@ inline void OneofDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.OneofDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.OneofDescriptorProto.name)
 }
 
-// optional .google.protobuf.OneofOptions options = 2;
+// optional .shark.OneofOptions options = 2;
 inline bool OneofDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -10723,17 +10723,17 @@ inline void OneofDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::SHARK_NAMESPACE_ID::OneofOptions& OneofDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::OneofOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::OneofOptions&>(
-      ::SHARK_NAMESPACE_ID::_OneofOptions_default_instance_);
+inline const ::shark::OneofOptions& OneofDescriptorProto::_internal_options() const {
+  const ::shark::OneofOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::OneofOptions&>(
+      ::shark::_OneofOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::OneofOptions& OneofDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.OneofDescriptorProto.options)
+inline const ::shark::OneofOptions& OneofDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.OneofDescriptorProto.options)
   return _internal_options();
 }
 inline void OneofDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::OneofOptions* options) {
+    ::shark::OneofOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -10743,11 +10743,11 @@ inline void OneofDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.OneofDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.OneofDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::OneofOptions* OneofDescriptorProto::release_options() {
+inline ::shark::OneofOptions* OneofDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::OneofOptions* temp = _impl_.options_;
+  ::shark::OneofOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -10760,27 +10760,27 @@ inline ::SHARK_NAMESPACE_ID::OneofOptions* OneofDescriptorProto::release_options
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::OneofOptions* OneofDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.OneofDescriptorProto.options)
+inline ::shark::OneofOptions* OneofDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.OneofDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::OneofOptions* temp = _impl_.options_;
+  ::shark::OneofOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::OneofOptions* OneofDescriptorProto::_internal_mutable_options() {
+inline ::shark::OneofOptions* OneofDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::OneofOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::OneofOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::OneofOptions* OneofDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::OneofOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.OneofDescriptorProto.options)
+inline ::shark::OneofOptions* OneofDescriptorProto::mutable_options() {
+  ::shark::OneofOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.OneofDescriptorProto.options)
   return _msg;
 }
-inline void OneofDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::OneofOptions* options) {
+inline void OneofDescriptorProto::set_allocated_options(::shark::OneofOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -10797,7 +10797,7 @@ inline void OneofDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::On
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.OneofDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.OneofDescriptorProto.options)
 }
 
 // -------------------------------------------------------------------
@@ -10820,7 +10820,7 @@ inline int32_t EnumDescriptorProto_EnumReservedRange::_internal_start() const {
   return _impl_.start_;
 }
 inline int32_t EnumDescriptorProto_EnumReservedRange::start() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.EnumReservedRange.start)
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.EnumReservedRange.start)
   return _internal_start();
 }
 inline void EnumDescriptorProto_EnumReservedRange::_internal_set_start(int32_t value) {
@@ -10829,7 +10829,7 @@ inline void EnumDescriptorProto_EnumReservedRange::_internal_set_start(int32_t v
 }
 inline void EnumDescriptorProto_EnumReservedRange::set_start(int32_t value) {
   _internal_set_start(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.EnumReservedRange.start)
+  // @@protoc_insertion_point(field_set:shark.EnumDescriptorProto.EnumReservedRange.start)
 }
 
 // optional int32 end = 2;
@@ -10848,7 +10848,7 @@ inline int32_t EnumDescriptorProto_EnumReservedRange::_internal_end() const {
   return _impl_.end_;
 }
 inline int32_t EnumDescriptorProto_EnumReservedRange::end() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.EnumReservedRange.end)
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.EnumReservedRange.end)
   return _internal_end();
 }
 inline void EnumDescriptorProto_EnumReservedRange::_internal_set_end(int32_t value) {
@@ -10857,7 +10857,7 @@ inline void EnumDescriptorProto_EnumReservedRange::_internal_set_end(int32_t val
 }
 inline void EnumDescriptorProto_EnumReservedRange::set_end(int32_t value) {
   _internal_set_end(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.EnumReservedRange.end)
+  // @@protoc_insertion_point(field_set:shark.EnumDescriptorProto.EnumReservedRange.end)
 }
 
 // -------------------------------------------------------------------
@@ -10877,7 +10877,7 @@ inline void EnumDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& EnumDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -10885,11 +10885,11 @@ inline SHARK_ALWAYS_INLINE
 void EnumDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.EnumDescriptorProto.name)
 }
 inline std::string* EnumDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.EnumDescriptorProto.name)
   return _s;
 }
 inline const std::string& EnumDescriptorProto::_internal_name() const {
@@ -10904,7 +10904,7 @@ inline std::string* EnumDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* EnumDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.EnumDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.EnumDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -10929,10 +10929,10 @@ inline void EnumDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.EnumDescriptorProto.name)
 }
 
-// repeated .google.protobuf.EnumValueDescriptorProto value = 2;
+// repeated .shark.EnumValueDescriptorProto value = 2;
 inline int EnumDescriptorProto::_internal_value_size() const {
   return _impl_.value_.size();
 }
@@ -10942,37 +10942,37 @@ inline int EnumDescriptorProto::value_size() const {
 inline void EnumDescriptorProto::clear_value() {
   _impl_.value_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* EnumDescriptorProto::mutable_value(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.value)
+inline ::shark::EnumValueDescriptorProto* EnumDescriptorProto::mutable_value(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumDescriptorProto.value)
   return _impl_.value_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValueDescriptorProto >*
 EnumDescriptorProto::mutable_value() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumDescriptorProto.value)
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumDescriptorProto.value)
   return &_impl_.value_;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto& EnumDescriptorProto::_internal_value(int index) const {
+inline const ::shark::EnumValueDescriptorProto& EnumDescriptorProto::_internal_value(int index) const {
   return _impl_.value_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto& EnumDescriptorProto::value(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.value)
+inline const ::shark::EnumValueDescriptorProto& EnumDescriptorProto::value(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.value)
   return _internal_value(index);
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* EnumDescriptorProto::_internal_add_value() {
+inline ::shark::EnumValueDescriptorProto* EnumDescriptorProto::_internal_add_value() {
   return _impl_.value_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* EnumDescriptorProto::add_value() {
-  ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto* _add = _internal_add_value();
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.value)
+inline ::shark::EnumValueDescriptorProto* EnumDescriptorProto::add_value() {
+  ::shark::EnumValueDescriptorProto* _add = _internal_add_value();
+  // @@protoc_insertion_point(field_add:shark.EnumDescriptorProto.value)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValueDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValueDescriptorProto >&
 EnumDescriptorProto::value() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.EnumDescriptorProto.value)
+  // @@protoc_insertion_point(field_list:shark.EnumDescriptorProto.value)
   return _impl_.value_;
 }
 
-// optional .google.protobuf.EnumOptions options = 3;
+// optional .shark.EnumOptions options = 3;
 inline bool EnumDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -10985,17 +10985,17 @@ inline void EnumDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumOptions& EnumDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::EnumOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::EnumOptions&>(
-      ::SHARK_NAMESPACE_ID::_EnumOptions_default_instance_);
+inline const ::shark::EnumOptions& EnumDescriptorProto::_internal_options() const {
+  const ::shark::EnumOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::EnumOptions&>(
+      ::shark::_EnumOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumOptions& EnumDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.options)
+inline const ::shark::EnumOptions& EnumDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.options)
   return _internal_options();
 }
 inline void EnumDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::EnumOptions* options) {
+    ::shark::EnumOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -11005,11 +11005,11 @@ inline void EnumDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.EnumDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.EnumDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::EnumOptions* EnumDescriptorProto::release_options() {
+inline ::shark::EnumOptions* EnumDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::EnumOptions* temp = _impl_.options_;
+  ::shark::EnumOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -11022,27 +11022,27 @@ inline ::SHARK_NAMESPACE_ID::EnumOptions* EnumDescriptorProto::release_options()
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::EnumOptions* EnumDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.EnumDescriptorProto.options)
+inline ::shark::EnumOptions* EnumDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.EnumDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::EnumOptions* temp = _impl_.options_;
+  ::shark::EnumOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::EnumOptions* EnumDescriptorProto::_internal_mutable_options() {
+inline ::shark::EnumOptions* EnumDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::EnumOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::EnumOptions* EnumDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::EnumOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.options)
+inline ::shark::EnumOptions* EnumDescriptorProto::mutable_options() {
+  ::shark::EnumOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.EnumDescriptorProto.options)
   return _msg;
 }
-inline void EnumDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::EnumOptions* options) {
+inline void EnumDescriptorProto::set_allocated_options(::shark::EnumOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -11059,10 +11059,10 @@ inline void EnumDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::Enu
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.EnumDescriptorProto.options)
 }
 
-// repeated .google.protobuf.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+// repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
 inline int EnumDescriptorProto::_internal_reserved_range_size() const {
   return _impl_.reserved_range_.size();
 }
@@ -11072,33 +11072,33 @@ inline int EnumDescriptorProto::reserved_range_size() const {
 inline void EnumDescriptorProto::clear_reserved_range() {
   _impl_.reserved_range_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::mutable_reserved_range(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.reserved_range)
+inline ::shark::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::mutable_reserved_range(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumDescriptorProto.reserved_range)
   return _impl_.reserved_range_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto_EnumReservedRange >*
 EnumDescriptorProto::mutable_reserved_range() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumDescriptorProto.reserved_range)
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumDescriptorProto.reserved_range)
   return &_impl_.reserved_range_;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange& EnumDescriptorProto::_internal_reserved_range(int index) const {
+inline const ::shark::EnumDescriptorProto_EnumReservedRange& EnumDescriptorProto::_internal_reserved_range(int index) const {
   return _impl_.reserved_range_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange& EnumDescriptorProto::reserved_range(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.reserved_range)
+inline const ::shark::EnumDescriptorProto_EnumReservedRange& EnumDescriptorProto::reserved_range(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.reserved_range)
   return _internal_reserved_range(index);
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::_internal_add_reserved_range() {
+inline ::shark::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::_internal_add_reserved_range() {
   return _impl_.reserved_range_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::add_reserved_range() {
-  ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange* _add = _internal_add_reserved_range();
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.reserved_range)
+inline ::shark::EnumDescriptorProto_EnumReservedRange* EnumDescriptorProto::add_reserved_range() {
+  ::shark::EnumDescriptorProto_EnumReservedRange* _add = _internal_add_reserved_range();
+  // @@protoc_insertion_point(field_add:shark.EnumDescriptorProto.reserved_range)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumDescriptorProto_EnumReservedRange >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto_EnumReservedRange >&
 EnumDescriptorProto::reserved_range() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.EnumDescriptorProto.reserved_range)
+  // @@protoc_insertion_point(field_list:shark.EnumDescriptorProto.reserved_range)
   return _impl_.reserved_range_;
 }
 
@@ -11114,66 +11114,66 @@ inline void EnumDescriptorProto::clear_reserved_name() {
 }
 inline std::string* EnumDescriptorProto::add_reserved_name() {
   std::string* _s = _internal_add_reserved_name();
-  // @@protoc_insertion_point(field_add_mutable:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add_mutable:shark.EnumDescriptorProto.reserved_name)
   return _s;
 }
 inline const std::string& EnumDescriptorProto::_internal_reserved_name(int index) const {
   return _impl_.reserved_name_.Get(index);
 }
 inline const std::string& EnumDescriptorProto::reserved_name(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_get:shark.EnumDescriptorProto.reserved_name)
   return _internal_reserved_name(index);
 }
 inline std::string* EnumDescriptorProto::mutable_reserved_name(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_mutable:shark.EnumDescriptorProto.reserved_name)
   return _impl_.reserved_name_.Mutable(index);
 }
 inline void EnumDescriptorProto::set_reserved_name(int index, const std::string& value) {
   _impl_.reserved_name_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set:shark.EnumDescriptorProto.reserved_name)
 }
 inline void EnumDescriptorProto::set_reserved_name(int index, std::string&& value) {
   _impl_.reserved_name_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set:shark.EnumDescriptorProto.reserved_name)
 }
 inline void EnumDescriptorProto::set_reserved_name(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.reserved_name_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set_char:shark.EnumDescriptorProto.reserved_name)
 }
 inline void EnumDescriptorProto::set_reserved_name(int index, const char* value, size_t size) {
   _impl_.reserved_name_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_set_pointer:shark.EnumDescriptorProto.reserved_name)
 }
 inline std::string* EnumDescriptorProto::_internal_add_reserved_name() {
   return _impl_.reserved_name_.Add();
 }
 inline void EnumDescriptorProto::add_reserved_name(const std::string& value) {
   _impl_.reserved_name_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add:shark.EnumDescriptorProto.reserved_name)
 }
 inline void EnumDescriptorProto::add_reserved_name(std::string&& value) {
   _impl_.reserved_name_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add:shark.EnumDescriptorProto.reserved_name)
 }
 inline void EnumDescriptorProto::add_reserved_name(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.reserved_name_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add_char:shark.EnumDescriptorProto.reserved_name)
 }
 inline void EnumDescriptorProto::add_reserved_name(const char* value, size_t size) {
   _impl_.reserved_name_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_add_pointer:shark.EnumDescriptorProto.reserved_name)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>&
 EnumDescriptorProto::reserved_name() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_list:shark.EnumDescriptorProto.reserved_name)
   return _impl_.reserved_name_;
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 EnumDescriptorProto::mutable_reserved_name() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumDescriptorProto.reserved_name)
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumDescriptorProto.reserved_name)
   return &_impl_.reserved_name_;
 }
 
@@ -11194,7 +11194,7 @@ inline void EnumValueDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& EnumValueDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValueDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.EnumValueDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -11202,11 +11202,11 @@ inline SHARK_ALWAYS_INLINE
 void EnumValueDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumValueDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.EnumValueDescriptorProto.name)
 }
 inline std::string* EnumValueDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValueDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.EnumValueDescriptorProto.name)
   return _s;
 }
 inline const std::string& EnumValueDescriptorProto::_internal_name() const {
@@ -11221,7 +11221,7 @@ inline std::string* EnumValueDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* EnumValueDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.EnumValueDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.EnumValueDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -11246,7 +11246,7 @@ inline void EnumValueDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumValueDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.EnumValueDescriptorProto.name)
 }
 
 // optional int32 number = 2;
@@ -11265,7 +11265,7 @@ inline int32_t EnumValueDescriptorProto::_internal_number() const {
   return _impl_.number_;
 }
 inline int32_t EnumValueDescriptorProto::number() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValueDescriptorProto.number)
+  // @@protoc_insertion_point(field_get:shark.EnumValueDescriptorProto.number)
   return _internal_number();
 }
 inline void EnumValueDescriptorProto::_internal_set_number(int32_t value) {
@@ -11274,10 +11274,10 @@ inline void EnumValueDescriptorProto::_internal_set_number(int32_t value) {
 }
 inline void EnumValueDescriptorProto::set_number(int32_t value) {
   _internal_set_number(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumValueDescriptorProto.number)
+  // @@protoc_insertion_point(field_set:shark.EnumValueDescriptorProto.number)
 }
 
-// optional .google.protobuf.EnumValueOptions options = 3;
+// optional .shark.EnumValueOptions options = 3;
 inline bool EnumValueDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -11290,17 +11290,17 @@ inline void EnumValueDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumValueOptions& EnumValueDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::EnumValueOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::EnumValueOptions&>(
-      ::SHARK_NAMESPACE_ID::_EnumValueOptions_default_instance_);
+inline const ::shark::EnumValueOptions& EnumValueDescriptorProto::_internal_options() const {
+  const ::shark::EnumValueOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::EnumValueOptions&>(
+      ::shark::_EnumValueOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumValueOptions& EnumValueDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValueDescriptorProto.options)
+inline const ::shark::EnumValueOptions& EnumValueDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.EnumValueDescriptorProto.options)
   return _internal_options();
 }
 inline void EnumValueDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::EnumValueOptions* options) {
+    ::shark::EnumValueOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -11310,11 +11310,11 @@ inline void EnumValueDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.EnumValueDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.EnumValueDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueOptions* EnumValueDescriptorProto::release_options() {
+inline ::shark::EnumValueOptions* EnumValueDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::EnumValueOptions* temp = _impl_.options_;
+  ::shark::EnumValueOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -11327,27 +11327,27 @@ inline ::SHARK_NAMESPACE_ID::EnumValueOptions* EnumValueDescriptorProto::release
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueOptions* EnumValueDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.EnumValueDescriptorProto.options)
+inline ::shark::EnumValueOptions* EnumValueDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.EnumValueDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::EnumValueOptions* temp = _impl_.options_;
+  ::shark::EnumValueOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueOptions* EnumValueDescriptorProto::_internal_mutable_options() {
+inline ::shark::EnumValueOptions* EnumValueDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumValueOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::EnumValueOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::EnumValueOptions* EnumValueDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::EnumValueOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValueDescriptorProto.options)
+inline ::shark::EnumValueOptions* EnumValueDescriptorProto::mutable_options() {
+  ::shark::EnumValueOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.EnumValueDescriptorProto.options)
   return _msg;
 }
-inline void EnumValueDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::EnumValueOptions* options) {
+inline void EnumValueDescriptorProto::set_allocated_options(::shark::EnumValueOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -11364,7 +11364,7 @@ inline void EnumValueDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumValueDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.EnumValueDescriptorProto.options)
 }
 
 // -------------------------------------------------------------------
@@ -11384,7 +11384,7 @@ inline void ServiceDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& ServiceDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.ServiceDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -11392,11 +11392,11 @@ inline SHARK_ALWAYS_INLINE
 void ServiceDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.ServiceDescriptorProto.name)
 }
 inline std::string* ServiceDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.ServiceDescriptorProto.name)
   return _s;
 }
 inline const std::string& ServiceDescriptorProto::_internal_name() const {
@@ -11411,7 +11411,7 @@ inline std::string* ServiceDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* ServiceDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.ServiceDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -11436,10 +11436,10 @@ inline void ServiceDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.ServiceDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.ServiceDescriptorProto.name)
 }
 
-// repeated .google.protobuf.MethodDescriptorProto method = 2;
+// repeated .shark.MethodDescriptorProto method = 2;
 inline int ServiceDescriptorProto::_internal_method_size() const {
   return _impl_.method_.size();
 }
@@ -11449,37 +11449,37 @@ inline int ServiceDescriptorProto::method_size() const {
 inline void ServiceDescriptorProto::clear_method() {
   _impl_.method_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::MethodDescriptorProto* ServiceDescriptorProto::mutable_method(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceDescriptorProto.method)
+inline ::shark::MethodDescriptorProto* ServiceDescriptorProto::mutable_method(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ServiceDescriptorProto.method)
   return _impl_.method_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::MethodDescriptorProto >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto >*
 ServiceDescriptorProto::mutable_method() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.ServiceDescriptorProto.method)
+  // @@protoc_insertion_point(field_mutable_list:shark.ServiceDescriptorProto.method)
   return &_impl_.method_;
 }
-inline const ::SHARK_NAMESPACE_ID::MethodDescriptorProto& ServiceDescriptorProto::_internal_method(int index) const {
+inline const ::shark::MethodDescriptorProto& ServiceDescriptorProto::_internal_method(int index) const {
   return _impl_.method_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::MethodDescriptorProto& ServiceDescriptorProto::method(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ServiceDescriptorProto.method)
+inline const ::shark::MethodDescriptorProto& ServiceDescriptorProto::method(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ServiceDescriptorProto.method)
   return _internal_method(index);
 }
-inline ::SHARK_NAMESPACE_ID::MethodDescriptorProto* ServiceDescriptorProto::_internal_add_method() {
+inline ::shark::MethodDescriptorProto* ServiceDescriptorProto::_internal_add_method() {
   return _impl_.method_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::MethodDescriptorProto* ServiceDescriptorProto::add_method() {
-  ::SHARK_NAMESPACE_ID::MethodDescriptorProto* _add = _internal_add_method();
-  // @@protoc_insertion_point(field_add:google.protobuf.ServiceDescriptorProto.method)
+inline ::shark::MethodDescriptorProto* ServiceDescriptorProto::add_method() {
+  ::shark::MethodDescriptorProto* _add = _internal_add_method();
+  // @@protoc_insertion_point(field_add:shark.ServiceDescriptorProto.method)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::MethodDescriptorProto >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::MethodDescriptorProto >&
 ServiceDescriptorProto::method() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.ServiceDescriptorProto.method)
+  // @@protoc_insertion_point(field_list:shark.ServiceDescriptorProto.method)
   return _impl_.method_;
 }
 
-// optional .google.protobuf.ServiceOptions options = 3;
+// optional .shark.ServiceOptions options = 3;
 inline bool ServiceDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -11492,17 +11492,17 @@ inline void ServiceDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline const ::SHARK_NAMESPACE_ID::ServiceOptions& ServiceDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::ServiceOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::ServiceOptions&>(
-      ::SHARK_NAMESPACE_ID::_ServiceOptions_default_instance_);
+inline const ::shark::ServiceOptions& ServiceDescriptorProto::_internal_options() const {
+  const ::shark::ServiceOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::ServiceOptions&>(
+      ::shark::_ServiceOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::ServiceOptions& ServiceDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ServiceDescriptorProto.options)
+inline const ::shark::ServiceOptions& ServiceDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.ServiceDescriptorProto.options)
   return _internal_options();
 }
 inline void ServiceDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::ServiceOptions* options) {
+    ::shark::ServiceOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -11512,11 +11512,11 @@ inline void ServiceDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.ServiceDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.ServiceDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::ServiceOptions* ServiceDescriptorProto::release_options() {
+inline ::shark::ServiceOptions* ServiceDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::ServiceOptions* temp = _impl_.options_;
+  ::shark::ServiceOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -11529,27 +11529,27 @@ inline ::SHARK_NAMESPACE_ID::ServiceOptions* ServiceDescriptorProto::release_opt
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::ServiceOptions* ServiceDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.ServiceDescriptorProto.options)
+inline ::shark::ServiceOptions* ServiceDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.ServiceDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000002u;
-  ::SHARK_NAMESPACE_ID::ServiceOptions* temp = _impl_.options_;
+  ::shark::ServiceOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::ServiceOptions* ServiceDescriptorProto::_internal_mutable_options() {
+inline ::shark::ServiceOptions* ServiceDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::ServiceOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::ServiceOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::ServiceOptions* ServiceDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::ServiceOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceDescriptorProto.options)
+inline ::shark::ServiceOptions* ServiceDescriptorProto::mutable_options() {
+  ::shark::ServiceOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.ServiceDescriptorProto.options)
   return _msg;
 }
-inline void ServiceDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::ServiceOptions* options) {
+inline void ServiceDescriptorProto::set_allocated_options(::shark::ServiceOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -11566,7 +11566,7 @@ inline void ServiceDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::
     _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.ServiceDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.ServiceDescriptorProto.options)
 }
 
 // -------------------------------------------------------------------
@@ -11586,7 +11586,7 @@ inline void MethodDescriptorProto::clear_name() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& MethodDescriptorProto::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.name)
+  // @@protoc_insertion_point(field_get:shark.MethodDescriptorProto.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -11594,11 +11594,11 @@ inline SHARK_ALWAYS_INLINE
 void MethodDescriptorProto::set_name(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.name)
+  // @@protoc_insertion_point(field_set:shark.MethodDescriptorProto.name)
 }
 inline std::string* MethodDescriptorProto::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.name)
+  // @@protoc_insertion_point(field_mutable:shark.MethodDescriptorProto.name)
   return _s;
 }
 inline const std::string& MethodDescriptorProto::_internal_name() const {
@@ -11613,7 +11613,7 @@ inline std::string* MethodDescriptorProto::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* MethodDescriptorProto::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.name)
+  // @@protoc_insertion_point(field_release:shark.MethodDescriptorProto.name)
   if (!_internal_has_name()) {
     return nullptr;
   }
@@ -11638,7 +11638,7 @@ inline void MethodDescriptorProto::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.MethodDescriptorProto.name)
 }
 
 // optional string input_type = 2;
@@ -11654,7 +11654,7 @@ inline void MethodDescriptorProto::clear_input_type() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& MethodDescriptorProto::input_type() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.input_type)
+  // @@protoc_insertion_point(field_get:shark.MethodDescriptorProto.input_type)
   return _internal_input_type();
 }
 template <typename ArgT0, typename... ArgT>
@@ -11662,11 +11662,11 @@ inline SHARK_ALWAYS_INLINE
 void MethodDescriptorProto::set_input_type(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.input_type_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.input_type)
+  // @@protoc_insertion_point(field_set:shark.MethodDescriptorProto.input_type)
 }
 inline std::string* MethodDescriptorProto::mutable_input_type() {
   std::string* _s = _internal_mutable_input_type();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.input_type)
+  // @@protoc_insertion_point(field_mutable:shark.MethodDescriptorProto.input_type)
   return _s;
 }
 inline const std::string& MethodDescriptorProto::_internal_input_type() const {
@@ -11681,7 +11681,7 @@ inline std::string* MethodDescriptorProto::_internal_mutable_input_type() {
   return _impl_.input_type_.Mutable(GetArenaForAllocation());
 }
 inline std::string* MethodDescriptorProto::release_input_type() {
-  // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.input_type)
+  // @@protoc_insertion_point(field_release:shark.MethodDescriptorProto.input_type)
   if (!_internal_has_input_type()) {
     return nullptr;
   }
@@ -11706,7 +11706,7 @@ inline void MethodDescriptorProto::set_allocated_input_type(std::string* input_t
     _impl_.input_type_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.input_type)
+  // @@protoc_insertion_point(field_set_allocated:shark.MethodDescriptorProto.input_type)
 }
 
 // optional string output_type = 3;
@@ -11722,7 +11722,7 @@ inline void MethodDescriptorProto::clear_output_type() {
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& MethodDescriptorProto::output_type() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.output_type)
+  // @@protoc_insertion_point(field_get:shark.MethodDescriptorProto.output_type)
   return _internal_output_type();
 }
 template <typename ArgT0, typename... ArgT>
@@ -11730,11 +11730,11 @@ inline SHARK_ALWAYS_INLINE
 void MethodDescriptorProto::set_output_type(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.output_type_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.output_type)
+  // @@protoc_insertion_point(field_set:shark.MethodDescriptorProto.output_type)
 }
 inline std::string* MethodDescriptorProto::mutable_output_type() {
   std::string* _s = _internal_mutable_output_type();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.output_type)
+  // @@protoc_insertion_point(field_mutable:shark.MethodDescriptorProto.output_type)
   return _s;
 }
 inline const std::string& MethodDescriptorProto::_internal_output_type() const {
@@ -11749,7 +11749,7 @@ inline std::string* MethodDescriptorProto::_internal_mutable_output_type() {
   return _impl_.output_type_.Mutable(GetArenaForAllocation());
 }
 inline std::string* MethodDescriptorProto::release_output_type() {
-  // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.output_type)
+  // @@protoc_insertion_point(field_release:shark.MethodDescriptorProto.output_type)
   if (!_internal_has_output_type()) {
     return nullptr;
   }
@@ -11774,10 +11774,10 @@ inline void MethodDescriptorProto::set_allocated_output_type(std::string* output
     _impl_.output_type_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.output_type)
+  // @@protoc_insertion_point(field_set_allocated:shark.MethodDescriptorProto.output_type)
 }
 
-// optional .google.protobuf.MethodOptions options = 4;
+// optional .shark.MethodOptions options = 4;
 inline bool MethodDescriptorProto::_internal_has_options() const {
   bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   SHARK_ASSUME(!value || _impl_.options_ != nullptr);
@@ -11790,17 +11790,17 @@ inline void MethodDescriptorProto::clear_options() {
   if (_impl_.options_ != nullptr) _impl_.options_->Clear();
   _impl_._has_bits_[0] &= ~0x00000008u;
 }
-inline const ::SHARK_NAMESPACE_ID::MethodOptions& MethodDescriptorProto::_internal_options() const {
-  const ::SHARK_NAMESPACE_ID::MethodOptions* p = _impl_.options_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::MethodOptions&>(
-      ::SHARK_NAMESPACE_ID::_MethodOptions_default_instance_);
+inline const ::shark::MethodOptions& MethodDescriptorProto::_internal_options() const {
+  const ::shark::MethodOptions* p = _impl_.options_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::MethodOptions&>(
+      ::shark::_MethodOptions_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::MethodOptions& MethodDescriptorProto::options() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.options)
+inline const ::shark::MethodOptions& MethodDescriptorProto::options() const {
+  // @@protoc_insertion_point(field_get:shark.MethodDescriptorProto.options)
   return _internal_options();
 }
 inline void MethodDescriptorProto::unsafe_arena_set_allocated_options(
-    ::SHARK_NAMESPACE_ID::MethodOptions* options) {
+    ::shark::MethodOptions* options) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.options_);
   }
@@ -11810,11 +11810,11 @@ inline void MethodDescriptorProto::unsafe_arena_set_allocated_options(
   } else {
     _impl_._has_bits_[0] &= ~0x00000008u;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.MethodDescriptorProto.options)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.MethodDescriptorProto.options)
 }
-inline ::SHARK_NAMESPACE_ID::MethodOptions* MethodDescriptorProto::release_options() {
+inline ::shark::MethodOptions* MethodDescriptorProto::release_options() {
   _impl_._has_bits_[0] &= ~0x00000008u;
-  ::SHARK_NAMESPACE_ID::MethodOptions* temp = _impl_.options_;
+  ::shark::MethodOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -11827,27 +11827,27 @@ inline ::SHARK_NAMESPACE_ID::MethodOptions* MethodDescriptorProto::release_optio
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::MethodOptions* MethodDescriptorProto::unsafe_arena_release_options() {
-  // @@protoc_insertion_point(field_release:google.protobuf.MethodDescriptorProto.options)
+inline ::shark::MethodOptions* MethodDescriptorProto::unsafe_arena_release_options() {
+  // @@protoc_insertion_point(field_release:shark.MethodDescriptorProto.options)
   _impl_._has_bits_[0] &= ~0x00000008u;
-  ::SHARK_NAMESPACE_ID::MethodOptions* temp = _impl_.options_;
+  ::shark::MethodOptions* temp = _impl_.options_;
   _impl_.options_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::MethodOptions* MethodDescriptorProto::_internal_mutable_options() {
+inline ::shark::MethodOptions* MethodDescriptorProto::_internal_mutable_options() {
   _impl_._has_bits_[0] |= 0x00000008u;
   if (_impl_.options_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::MethodOptions>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::MethodOptions>(GetArenaForAllocation());
     _impl_.options_ = p;
   }
   return _impl_.options_;
 }
-inline ::SHARK_NAMESPACE_ID::MethodOptions* MethodDescriptorProto::mutable_options() {
-  ::SHARK_NAMESPACE_ID::MethodOptions* _msg = _internal_mutable_options();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.MethodDescriptorProto.options)
+inline ::shark::MethodOptions* MethodDescriptorProto::mutable_options() {
+  ::shark::MethodOptions* _msg = _internal_mutable_options();
+  // @@protoc_insertion_point(field_mutable:shark.MethodDescriptorProto.options)
   return _msg;
 }
-inline void MethodDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::MethodOptions* options) {
+inline void MethodDescriptorProto::set_allocated_options(::shark::MethodOptions* options) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete _impl_.options_;
@@ -11864,7 +11864,7 @@ inline void MethodDescriptorProto::set_allocated_options(::SHARK_NAMESPACE_ID::M
     _impl_._has_bits_[0] &= ~0x00000008u;
   }
   _impl_.options_ = options;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.MethodDescriptorProto.options)
+  // @@protoc_insertion_point(field_set_allocated:shark.MethodDescriptorProto.options)
 }
 
 // optional bool client_streaming = 5 [default = false];
@@ -11883,7 +11883,7 @@ inline bool MethodDescriptorProto::_internal_client_streaming() const {
   return _impl_.client_streaming_;
 }
 inline bool MethodDescriptorProto::client_streaming() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.client_streaming)
+  // @@protoc_insertion_point(field_get:shark.MethodDescriptorProto.client_streaming)
   return _internal_client_streaming();
 }
 inline void MethodDescriptorProto::_internal_set_client_streaming(bool value) {
@@ -11892,7 +11892,7 @@ inline void MethodDescriptorProto::_internal_set_client_streaming(bool value) {
 }
 inline void MethodDescriptorProto::set_client_streaming(bool value) {
   _internal_set_client_streaming(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.client_streaming)
+  // @@protoc_insertion_point(field_set:shark.MethodDescriptorProto.client_streaming)
 }
 
 // optional bool server_streaming = 6 [default = false];
@@ -11911,7 +11911,7 @@ inline bool MethodDescriptorProto::_internal_server_streaming() const {
   return _impl_.server_streaming_;
 }
 inline bool MethodDescriptorProto::server_streaming() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodDescriptorProto.server_streaming)
+  // @@protoc_insertion_point(field_get:shark.MethodDescriptorProto.server_streaming)
   return _internal_server_streaming();
 }
 inline void MethodDescriptorProto::_internal_set_server_streaming(bool value) {
@@ -11920,7 +11920,7 @@ inline void MethodDescriptorProto::_internal_set_server_streaming(bool value) {
 }
 inline void MethodDescriptorProto::set_server_streaming(bool value) {
   _internal_set_server_streaming(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodDescriptorProto.server_streaming)
+  // @@protoc_insertion_point(field_set:shark.MethodDescriptorProto.server_streaming)
 }
 
 // -------------------------------------------------------------------
@@ -11940,7 +11940,7 @@ inline void FileOptions::clear_java_package() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& FileOptions::java_package() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_package)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.java_package)
   return _internal_java_package();
 }
 template <typename ArgT0, typename... ArgT>
@@ -11948,11 +11948,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_java_package(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.java_package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_package)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.java_package)
 }
 inline std::string* FileOptions::mutable_java_package() {
   std::string* _s = _internal_mutable_java_package();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.java_package)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.java_package)
   return _s;
 }
 inline const std::string& FileOptions::_internal_java_package() const {
@@ -11967,7 +11967,7 @@ inline std::string* FileOptions::_internal_mutable_java_package() {
   return _impl_.java_package_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_java_package() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.java_package)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.java_package)
   if (!_internal_has_java_package()) {
     return nullptr;
   }
@@ -11992,7 +11992,7 @@ inline void FileOptions::set_allocated_java_package(std::string* java_package) {
     _impl_.java_package_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.java_package)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.java_package)
 }
 
 // optional string java_outer_classname = 8;
@@ -12008,7 +12008,7 @@ inline void FileOptions::clear_java_outer_classname() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& FileOptions::java_outer_classname() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_outer_classname)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.java_outer_classname)
   return _internal_java_outer_classname();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12016,11 +12016,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_java_outer_classname(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.java_outer_classname_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_outer_classname)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.java_outer_classname)
 }
 inline std::string* FileOptions::mutable_java_outer_classname() {
   std::string* _s = _internal_mutable_java_outer_classname();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.java_outer_classname)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.java_outer_classname)
   return _s;
 }
 inline const std::string& FileOptions::_internal_java_outer_classname() const {
@@ -12035,7 +12035,7 @@ inline std::string* FileOptions::_internal_mutable_java_outer_classname() {
   return _impl_.java_outer_classname_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_java_outer_classname() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.java_outer_classname)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.java_outer_classname)
   if (!_internal_has_java_outer_classname()) {
     return nullptr;
   }
@@ -12060,7 +12060,7 @@ inline void FileOptions::set_allocated_java_outer_classname(std::string* java_ou
     _impl_.java_outer_classname_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.java_outer_classname)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.java_outer_classname)
 }
 
 // optional bool java_multiple_files = 10 [default = false];
@@ -12079,7 +12079,7 @@ inline bool FileOptions::_internal_java_multiple_files() const {
   return _impl_.java_multiple_files_;
 }
 inline bool FileOptions::java_multiple_files() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_multiple_files)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.java_multiple_files)
   return _internal_java_multiple_files();
 }
 inline void FileOptions::_internal_set_java_multiple_files(bool value) {
@@ -12088,7 +12088,7 @@ inline void FileOptions::_internal_set_java_multiple_files(bool value) {
 }
 inline void FileOptions::set_java_multiple_files(bool value) {
   _internal_set_java_multiple_files(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_multiple_files)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.java_multiple_files)
 }
 
 // optional bool java_generate_equals_and_hash = 20 [deprecated = true];
@@ -12107,7 +12107,7 @@ inline bool FileOptions::_internal_java_generate_equals_and_hash() const {
   return _impl_.java_generate_equals_and_hash_;
 }
 inline bool FileOptions::java_generate_equals_and_hash() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_generate_equals_and_hash)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.java_generate_equals_and_hash)
   return _internal_java_generate_equals_and_hash();
 }
 inline void FileOptions::_internal_set_java_generate_equals_and_hash(bool value) {
@@ -12116,7 +12116,7 @@ inline void FileOptions::_internal_set_java_generate_equals_and_hash(bool value)
 }
 inline void FileOptions::set_java_generate_equals_and_hash(bool value) {
   _internal_set_java_generate_equals_and_hash(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_generate_equals_and_hash)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.java_generate_equals_and_hash)
 }
 
 // optional bool java_string_check_utf8 = 27 [default = false];
@@ -12135,7 +12135,7 @@ inline bool FileOptions::_internal_java_string_check_utf8() const {
   return _impl_.java_string_check_utf8_;
 }
 inline bool FileOptions::java_string_check_utf8() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_string_check_utf8)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.java_string_check_utf8)
   return _internal_java_string_check_utf8();
 }
 inline void FileOptions::_internal_set_java_string_check_utf8(bool value) {
@@ -12144,10 +12144,10 @@ inline void FileOptions::_internal_set_java_string_check_utf8(bool value) {
 }
 inline void FileOptions::set_java_string_check_utf8(bool value) {
   _internal_set_java_string_check_utf8(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_string_check_utf8)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.java_string_check_utf8)
 }
 
-// optional .google.protobuf.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
+// optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
 inline bool FileOptions::_internal_has_optimize_for() const {
   bool value = (_impl_._has_bits_[0] & 0x00040000u) != 0;
   return value;
@@ -12159,21 +12159,21 @@ inline void FileOptions::clear_optimize_for() {
   _impl_.optimize_for_ = 1;
   _impl_._has_bits_[0] &= ~0x00040000u;
 }
-inline ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode FileOptions::_internal_optimize_for() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode >(_impl_.optimize_for_);
+inline ::shark::FileOptions_OptimizeMode FileOptions::_internal_optimize_for() const {
+  return static_cast< ::shark::FileOptions_OptimizeMode >(_impl_.optimize_for_);
 }
-inline ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode FileOptions::optimize_for() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.optimize_for)
+inline ::shark::FileOptions_OptimizeMode FileOptions::optimize_for() const {
+  // @@protoc_insertion_point(field_get:shark.FileOptions.optimize_for)
   return _internal_optimize_for();
 }
-inline void FileOptions::_internal_set_optimize_for(::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode value) {
-  assert(::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode_IsValid(value));
+inline void FileOptions::_internal_set_optimize_for(::shark::FileOptions_OptimizeMode value) {
+  assert(::shark::FileOptions_OptimizeMode_IsValid(value));
   _impl_._has_bits_[0] |= 0x00040000u;
   _impl_.optimize_for_ = value;
 }
-inline void FileOptions::set_optimize_for(::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode value) {
+inline void FileOptions::set_optimize_for(::shark::FileOptions_OptimizeMode value) {
   _internal_set_optimize_for(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.optimize_for)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.optimize_for)
 }
 
 // optional string go_package = 11;
@@ -12189,7 +12189,7 @@ inline void FileOptions::clear_go_package() {
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& FileOptions::go_package() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.go_package)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.go_package)
   return _internal_go_package();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12197,11 +12197,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_go_package(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.go_package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.go_package)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.go_package)
 }
 inline std::string* FileOptions::mutable_go_package() {
   std::string* _s = _internal_mutable_go_package();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.go_package)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.go_package)
   return _s;
 }
 inline const std::string& FileOptions::_internal_go_package() const {
@@ -12216,7 +12216,7 @@ inline std::string* FileOptions::_internal_mutable_go_package() {
   return _impl_.go_package_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_go_package() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.go_package)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.go_package)
   if (!_internal_has_go_package()) {
     return nullptr;
   }
@@ -12241,7 +12241,7 @@ inline void FileOptions::set_allocated_go_package(std::string* go_package) {
     _impl_.go_package_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.go_package)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.go_package)
 }
 
 // optional bool cc_generic_services = 16 [default = false];
@@ -12260,7 +12260,7 @@ inline bool FileOptions::_internal_cc_generic_services() const {
   return _impl_.cc_generic_services_;
 }
 inline bool FileOptions::cc_generic_services() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.cc_generic_services)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.cc_generic_services)
   return _internal_cc_generic_services();
 }
 inline void FileOptions::_internal_set_cc_generic_services(bool value) {
@@ -12269,7 +12269,7 @@ inline void FileOptions::_internal_set_cc_generic_services(bool value) {
 }
 inline void FileOptions::set_cc_generic_services(bool value) {
   _internal_set_cc_generic_services(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.cc_generic_services)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.cc_generic_services)
 }
 
 // optional bool java_generic_services = 17 [default = false];
@@ -12288,7 +12288,7 @@ inline bool FileOptions::_internal_java_generic_services() const {
   return _impl_.java_generic_services_;
 }
 inline bool FileOptions::java_generic_services() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.java_generic_services)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.java_generic_services)
   return _internal_java_generic_services();
 }
 inline void FileOptions::_internal_set_java_generic_services(bool value) {
@@ -12297,7 +12297,7 @@ inline void FileOptions::_internal_set_java_generic_services(bool value) {
 }
 inline void FileOptions::set_java_generic_services(bool value) {
   _internal_set_java_generic_services(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.java_generic_services)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.java_generic_services)
 }
 
 // optional bool py_generic_services = 18 [default = false];
@@ -12316,7 +12316,7 @@ inline bool FileOptions::_internal_py_generic_services() const {
   return _impl_.py_generic_services_;
 }
 inline bool FileOptions::py_generic_services() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.py_generic_services)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.py_generic_services)
   return _internal_py_generic_services();
 }
 inline void FileOptions::_internal_set_py_generic_services(bool value) {
@@ -12325,7 +12325,7 @@ inline void FileOptions::_internal_set_py_generic_services(bool value) {
 }
 inline void FileOptions::set_py_generic_services(bool value) {
   _internal_set_py_generic_services(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.py_generic_services)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.py_generic_services)
 }
 
 // optional bool php_generic_services = 42 [default = false];
@@ -12344,7 +12344,7 @@ inline bool FileOptions::_internal_php_generic_services() const {
   return _impl_.php_generic_services_;
 }
 inline bool FileOptions::php_generic_services() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_generic_services)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.php_generic_services)
   return _internal_php_generic_services();
 }
 inline void FileOptions::_internal_set_php_generic_services(bool value) {
@@ -12353,7 +12353,7 @@ inline void FileOptions::_internal_set_php_generic_services(bool value) {
 }
 inline void FileOptions::set_php_generic_services(bool value) {
   _internal_set_php_generic_services(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_generic_services)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.php_generic_services)
 }
 
 // optional bool deprecated = 23 [default = false];
@@ -12372,7 +12372,7 @@ inline bool FileOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool FileOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.deprecated)
   return _internal_deprecated();
 }
 inline void FileOptions::_internal_set_deprecated(bool value) {
@@ -12381,7 +12381,7 @@ inline void FileOptions::_internal_set_deprecated(bool value) {
 }
 inline void FileOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.deprecated)
 }
 
 // optional bool cc_enable_arenas = 31 [default = true];
@@ -12400,7 +12400,7 @@ inline bool FileOptions::_internal_cc_enable_arenas() const {
   return _impl_.cc_enable_arenas_;
 }
 inline bool FileOptions::cc_enable_arenas() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.cc_enable_arenas)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.cc_enable_arenas)
   return _internal_cc_enable_arenas();
 }
 inline void FileOptions::_internal_set_cc_enable_arenas(bool value) {
@@ -12409,7 +12409,7 @@ inline void FileOptions::_internal_set_cc_enable_arenas(bool value) {
 }
 inline void FileOptions::set_cc_enable_arenas(bool value) {
   _internal_set_cc_enable_arenas(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.cc_enable_arenas)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.cc_enable_arenas)
 }
 
 // optional string objc_class_prefix = 36;
@@ -12425,7 +12425,7 @@ inline void FileOptions::clear_objc_class_prefix() {
   _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const std::string& FileOptions::objc_class_prefix() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.objc_class_prefix)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.objc_class_prefix)
   return _internal_objc_class_prefix();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12433,11 +12433,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_objc_class_prefix(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000008u;
  _impl_.objc_class_prefix_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.objc_class_prefix)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.objc_class_prefix)
 }
 inline std::string* FileOptions::mutable_objc_class_prefix() {
   std::string* _s = _internal_mutable_objc_class_prefix();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.objc_class_prefix)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.objc_class_prefix)
   return _s;
 }
 inline const std::string& FileOptions::_internal_objc_class_prefix() const {
@@ -12452,7 +12452,7 @@ inline std::string* FileOptions::_internal_mutable_objc_class_prefix() {
   return _impl_.objc_class_prefix_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_objc_class_prefix() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.objc_class_prefix)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.objc_class_prefix)
   if (!_internal_has_objc_class_prefix()) {
     return nullptr;
   }
@@ -12477,7 +12477,7 @@ inline void FileOptions::set_allocated_objc_class_prefix(std::string* objc_class
     _impl_.objc_class_prefix_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.objc_class_prefix)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.objc_class_prefix)
 }
 
 // optional string csharp_namespace = 37;
@@ -12493,7 +12493,7 @@ inline void FileOptions::clear_csharp_namespace() {
   _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline const std::string& FileOptions::csharp_namespace() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.csharp_namespace)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.csharp_namespace)
   return _internal_csharp_namespace();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12501,11 +12501,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_csharp_namespace(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000010u;
  _impl_.csharp_namespace_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.csharp_namespace)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.csharp_namespace)
 }
 inline std::string* FileOptions::mutable_csharp_namespace() {
   std::string* _s = _internal_mutable_csharp_namespace();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.csharp_namespace)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.csharp_namespace)
   return _s;
 }
 inline const std::string& FileOptions::_internal_csharp_namespace() const {
@@ -12520,7 +12520,7 @@ inline std::string* FileOptions::_internal_mutable_csharp_namespace() {
   return _impl_.csharp_namespace_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_csharp_namespace() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.csharp_namespace)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.csharp_namespace)
   if (!_internal_has_csharp_namespace()) {
     return nullptr;
   }
@@ -12545,7 +12545,7 @@ inline void FileOptions::set_allocated_csharp_namespace(std::string* csharp_name
     _impl_.csharp_namespace_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.csharp_namespace)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.csharp_namespace)
 }
 
 // optional string swift_prefix = 39;
@@ -12561,7 +12561,7 @@ inline void FileOptions::clear_swift_prefix() {
   _impl_._has_bits_[0] &= ~0x00000020u;
 }
 inline const std::string& FileOptions::swift_prefix() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.swift_prefix)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.swift_prefix)
   return _internal_swift_prefix();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12569,11 +12569,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_swift_prefix(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000020u;
  _impl_.swift_prefix_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.swift_prefix)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.swift_prefix)
 }
 inline std::string* FileOptions::mutable_swift_prefix() {
   std::string* _s = _internal_mutable_swift_prefix();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.swift_prefix)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.swift_prefix)
   return _s;
 }
 inline const std::string& FileOptions::_internal_swift_prefix() const {
@@ -12588,7 +12588,7 @@ inline std::string* FileOptions::_internal_mutable_swift_prefix() {
   return _impl_.swift_prefix_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_swift_prefix() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.swift_prefix)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.swift_prefix)
   if (!_internal_has_swift_prefix()) {
     return nullptr;
   }
@@ -12613,7 +12613,7 @@ inline void FileOptions::set_allocated_swift_prefix(std::string* swift_prefix) {
     _impl_.swift_prefix_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.swift_prefix)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.swift_prefix)
 }
 
 // optional string php_class_prefix = 40;
@@ -12629,7 +12629,7 @@ inline void FileOptions::clear_php_class_prefix() {
   _impl_._has_bits_[0] &= ~0x00000040u;
 }
 inline const std::string& FileOptions::php_class_prefix() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_class_prefix)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.php_class_prefix)
   return _internal_php_class_prefix();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12637,11 +12637,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_php_class_prefix(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000040u;
  _impl_.php_class_prefix_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_class_prefix)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.php_class_prefix)
 }
 inline std::string* FileOptions::mutable_php_class_prefix() {
   std::string* _s = _internal_mutable_php_class_prefix();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.php_class_prefix)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.php_class_prefix)
   return _s;
 }
 inline const std::string& FileOptions::_internal_php_class_prefix() const {
@@ -12656,7 +12656,7 @@ inline std::string* FileOptions::_internal_mutable_php_class_prefix() {
   return _impl_.php_class_prefix_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_php_class_prefix() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.php_class_prefix)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.php_class_prefix)
   if (!_internal_has_php_class_prefix()) {
     return nullptr;
   }
@@ -12681,7 +12681,7 @@ inline void FileOptions::set_allocated_php_class_prefix(std::string* php_class_p
     _impl_.php_class_prefix_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.php_class_prefix)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.php_class_prefix)
 }
 
 // optional string php_namespace = 41;
@@ -12697,7 +12697,7 @@ inline void FileOptions::clear_php_namespace() {
   _impl_._has_bits_[0] &= ~0x00000080u;
 }
 inline const std::string& FileOptions::php_namespace() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_namespace)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.php_namespace)
   return _internal_php_namespace();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12705,11 +12705,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_php_namespace(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000080u;
  _impl_.php_namespace_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_namespace)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.php_namespace)
 }
 inline std::string* FileOptions::mutable_php_namespace() {
   std::string* _s = _internal_mutable_php_namespace();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.php_namespace)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.php_namespace)
   return _s;
 }
 inline const std::string& FileOptions::_internal_php_namespace() const {
@@ -12724,7 +12724,7 @@ inline std::string* FileOptions::_internal_mutable_php_namespace() {
   return _impl_.php_namespace_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_php_namespace() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.php_namespace)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.php_namespace)
   if (!_internal_has_php_namespace()) {
     return nullptr;
   }
@@ -12749,7 +12749,7 @@ inline void FileOptions::set_allocated_php_namespace(std::string* php_namespace)
     _impl_.php_namespace_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.php_namespace)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.php_namespace)
 }
 
 // optional string php_metadata_namespace = 44;
@@ -12765,7 +12765,7 @@ inline void FileOptions::clear_php_metadata_namespace() {
   _impl_._has_bits_[0] &= ~0x00000100u;
 }
 inline const std::string& FileOptions::php_metadata_namespace() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.php_metadata_namespace)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.php_metadata_namespace)
   return _internal_php_metadata_namespace();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12773,11 +12773,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_php_metadata_namespace(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000100u;
  _impl_.php_metadata_namespace_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.php_metadata_namespace)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.php_metadata_namespace)
 }
 inline std::string* FileOptions::mutable_php_metadata_namespace() {
   std::string* _s = _internal_mutable_php_metadata_namespace();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.php_metadata_namespace)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.php_metadata_namespace)
   return _s;
 }
 inline const std::string& FileOptions::_internal_php_metadata_namespace() const {
@@ -12792,7 +12792,7 @@ inline std::string* FileOptions::_internal_mutable_php_metadata_namespace() {
   return _impl_.php_metadata_namespace_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_php_metadata_namespace() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.php_metadata_namespace)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.php_metadata_namespace)
   if (!_internal_has_php_metadata_namespace()) {
     return nullptr;
   }
@@ -12817,7 +12817,7 @@ inline void FileOptions::set_allocated_php_metadata_namespace(std::string* php_m
     _impl_.php_metadata_namespace_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.php_metadata_namespace)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.php_metadata_namespace)
 }
 
 // optional string ruby_package = 45;
@@ -12833,7 +12833,7 @@ inline void FileOptions::clear_ruby_package() {
   _impl_._has_bits_[0] &= ~0x00000200u;
 }
 inline const std::string& FileOptions::ruby_package() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.ruby_package)
+  // @@protoc_insertion_point(field_get:shark.FileOptions.ruby_package)
   return _internal_ruby_package();
 }
 template <typename ArgT0, typename... ArgT>
@@ -12841,11 +12841,11 @@ inline SHARK_ALWAYS_INLINE
 void FileOptions::set_ruby_package(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000200u;
  _impl_.ruby_package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.FileOptions.ruby_package)
+  // @@protoc_insertion_point(field_set:shark.FileOptions.ruby_package)
 }
 inline std::string* FileOptions::mutable_ruby_package() {
   std::string* _s = _internal_mutable_ruby_package();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.ruby_package)
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.ruby_package)
   return _s;
 }
 inline const std::string& FileOptions::_internal_ruby_package() const {
@@ -12860,7 +12860,7 @@ inline std::string* FileOptions::_internal_mutable_ruby_package() {
   return _impl_.ruby_package_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_ruby_package() {
-  // @@protoc_insertion_point(field_release:google.protobuf.FileOptions.ruby_package)
+  // @@protoc_insertion_point(field_release:shark.FileOptions.ruby_package)
   if (!_internal_has_ruby_package()) {
     return nullptr;
   }
@@ -12885,10 +12885,10 @@ inline void FileOptions::set_allocated_ruby_package(std::string* ruby_package) {
     _impl_.ruby_package_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.FileOptions.ruby_package)
+  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.ruby_package)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int FileOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12898,33 +12898,33 @@ inline int FileOptions::uninterpreted_option_size() const {
 inline void FileOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* FileOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FileOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* FileOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FileOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 FileOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FileOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.FileOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& FileOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& FileOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& FileOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FileOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& FileOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FileOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* FileOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* FileOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* FileOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.FileOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* FileOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.FileOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 FileOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FileOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.FileOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -12948,7 +12948,7 @@ inline bool MessageOptions::_internal_message_set_wire_format() const {
   return _impl_.message_set_wire_format_;
 }
 inline bool MessageOptions::message_set_wire_format() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.message_set_wire_format)
+  // @@protoc_insertion_point(field_get:shark.MessageOptions.message_set_wire_format)
   return _internal_message_set_wire_format();
 }
 inline void MessageOptions::_internal_set_message_set_wire_format(bool value) {
@@ -12957,7 +12957,7 @@ inline void MessageOptions::_internal_set_message_set_wire_format(bool value) {
 }
 inline void MessageOptions::set_message_set_wire_format(bool value) {
   _internal_set_message_set_wire_format(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.message_set_wire_format)
+  // @@protoc_insertion_point(field_set:shark.MessageOptions.message_set_wire_format)
 }
 
 // optional bool no_standard_descriptor_accessor = 2 [default = false];
@@ -12976,7 +12976,7 @@ inline bool MessageOptions::_internal_no_standard_descriptor_accessor() const {
   return _impl_.no_standard_descriptor_accessor_;
 }
 inline bool MessageOptions::no_standard_descriptor_accessor() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.no_standard_descriptor_accessor)
+  // @@protoc_insertion_point(field_get:shark.MessageOptions.no_standard_descriptor_accessor)
   return _internal_no_standard_descriptor_accessor();
 }
 inline void MessageOptions::_internal_set_no_standard_descriptor_accessor(bool value) {
@@ -12985,7 +12985,7 @@ inline void MessageOptions::_internal_set_no_standard_descriptor_accessor(bool v
 }
 inline void MessageOptions::set_no_standard_descriptor_accessor(bool value) {
   _internal_set_no_standard_descriptor_accessor(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.no_standard_descriptor_accessor)
+  // @@protoc_insertion_point(field_set:shark.MessageOptions.no_standard_descriptor_accessor)
 }
 
 // optional bool deprecated = 3 [default = false];
@@ -13004,7 +13004,7 @@ inline bool MessageOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool MessageOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.MessageOptions.deprecated)
   return _internal_deprecated();
 }
 inline void MessageOptions::_internal_set_deprecated(bool value) {
@@ -13013,7 +13013,7 @@ inline void MessageOptions::_internal_set_deprecated(bool value) {
 }
 inline void MessageOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.MessageOptions.deprecated)
 }
 
 // optional bool map_entry = 7;
@@ -13032,7 +13032,7 @@ inline bool MessageOptions::_internal_map_entry() const {
   return _impl_.map_entry_;
 }
 inline bool MessageOptions::map_entry() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.map_entry)
+  // @@protoc_insertion_point(field_get:shark.MessageOptions.map_entry)
   return _internal_map_entry();
 }
 inline void MessageOptions::_internal_set_map_entry(bool value) {
@@ -13041,10 +13041,10 @@ inline void MessageOptions::_internal_set_map_entry(bool value) {
 }
 inline void MessageOptions::set_map_entry(bool value) {
   _internal_set_map_entry(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MessageOptions.map_entry)
+  // @@protoc_insertion_point(field_set:shark.MessageOptions.map_entry)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int MessageOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13054,33 +13054,33 @@ inline int MessageOptions::uninterpreted_option_size() const {
 inline void MessageOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* MessageOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.MessageOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* MessageOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.MessageOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 MessageOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.MessageOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.MessageOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& MessageOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& MessageOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& MessageOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MessageOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& MessageOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.MessageOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* MessageOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* MessageOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* MessageOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.MessageOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* MessageOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.MessageOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 MessageOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.MessageOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.MessageOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13088,7 +13088,7 @@ MessageOptions::uninterpreted_option() const {
 
 // FieldOptions
 
-// optional .google.protobuf.FieldOptions.CType ctype = 1 [default = STRING];
+// optional .shark.FieldOptions.CType ctype = 1 [default = STRING];
 inline bool FieldOptions::_internal_has_ctype() const {
   bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
@@ -13100,21 +13100,21 @@ inline void FieldOptions::clear_ctype() {
   _impl_.ctype_ = 0;
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions_CType FieldOptions::_internal_ctype() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::FieldOptions_CType >(_impl_.ctype_);
+inline ::shark::FieldOptions_CType FieldOptions::_internal_ctype() const {
+  return static_cast< ::shark::FieldOptions_CType >(_impl_.ctype_);
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions_CType FieldOptions::ctype() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.ctype)
+inline ::shark::FieldOptions_CType FieldOptions::ctype() const {
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.ctype)
   return _internal_ctype();
 }
-inline void FieldOptions::_internal_set_ctype(::SHARK_NAMESPACE_ID::FieldOptions_CType value) {
-  assert(::SHARK_NAMESPACE_ID::FieldOptions_CType_IsValid(value));
+inline void FieldOptions::_internal_set_ctype(::shark::FieldOptions_CType value) {
+  assert(::shark::FieldOptions_CType_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.ctype_ = value;
 }
-inline void FieldOptions::set_ctype(::SHARK_NAMESPACE_ID::FieldOptions_CType value) {
+inline void FieldOptions::set_ctype(::shark::FieldOptions_CType value) {
   _internal_set_ctype(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.ctype)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.ctype)
 }
 
 // optional bool packed = 2;
@@ -13133,7 +13133,7 @@ inline bool FieldOptions::_internal_packed() const {
   return _impl_.packed_;
 }
 inline bool FieldOptions::packed() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.packed)
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.packed)
   return _internal_packed();
 }
 inline void FieldOptions::_internal_set_packed(bool value) {
@@ -13142,10 +13142,10 @@ inline void FieldOptions::_internal_set_packed(bool value) {
 }
 inline void FieldOptions::set_packed(bool value) {
   _internal_set_packed(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.packed)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.packed)
 }
 
-// optional .google.protobuf.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
+// optional .shark.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
 inline bool FieldOptions::_internal_has_jstype() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
@@ -13157,21 +13157,21 @@ inline void FieldOptions::clear_jstype() {
   _impl_.jstype_ = 0;
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions_JSType FieldOptions::_internal_jstype() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::FieldOptions_JSType >(_impl_.jstype_);
+inline ::shark::FieldOptions_JSType FieldOptions::_internal_jstype() const {
+  return static_cast< ::shark::FieldOptions_JSType >(_impl_.jstype_);
 }
-inline ::SHARK_NAMESPACE_ID::FieldOptions_JSType FieldOptions::jstype() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.jstype)
+inline ::shark::FieldOptions_JSType FieldOptions::jstype() const {
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.jstype)
   return _internal_jstype();
 }
-inline void FieldOptions::_internal_set_jstype(::SHARK_NAMESPACE_ID::FieldOptions_JSType value) {
-  assert(::SHARK_NAMESPACE_ID::FieldOptions_JSType_IsValid(value));
+inline void FieldOptions::_internal_set_jstype(::shark::FieldOptions_JSType value) {
+  assert(::shark::FieldOptions_JSType_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.jstype_ = value;
 }
-inline void FieldOptions::set_jstype(::SHARK_NAMESPACE_ID::FieldOptions_JSType value) {
+inline void FieldOptions::set_jstype(::shark::FieldOptions_JSType value) {
   _internal_set_jstype(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.jstype)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.jstype)
 }
 
 // optional bool lazy = 5 [default = false];
@@ -13190,7 +13190,7 @@ inline bool FieldOptions::_internal_lazy() const {
   return _impl_.lazy_;
 }
 inline bool FieldOptions::lazy() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.lazy)
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.lazy)
   return _internal_lazy();
 }
 inline void FieldOptions::_internal_set_lazy(bool value) {
@@ -13199,7 +13199,7 @@ inline void FieldOptions::_internal_set_lazy(bool value) {
 }
 inline void FieldOptions::set_lazy(bool value) {
   _internal_set_lazy(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.lazy)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.lazy)
 }
 
 // optional bool unverified_lazy = 15 [default = false];
@@ -13218,7 +13218,7 @@ inline bool FieldOptions::_internal_unverified_lazy() const {
   return _impl_.unverified_lazy_;
 }
 inline bool FieldOptions::unverified_lazy() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.unverified_lazy)
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.unverified_lazy)
   return _internal_unverified_lazy();
 }
 inline void FieldOptions::_internal_set_unverified_lazy(bool value) {
@@ -13227,7 +13227,7 @@ inline void FieldOptions::_internal_set_unverified_lazy(bool value) {
 }
 inline void FieldOptions::set_unverified_lazy(bool value) {
   _internal_set_unverified_lazy(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.unverified_lazy)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.unverified_lazy)
 }
 
 // optional bool deprecated = 3 [default = false];
@@ -13246,7 +13246,7 @@ inline bool FieldOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool FieldOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.deprecated)
   return _internal_deprecated();
 }
 inline void FieldOptions::_internal_set_deprecated(bool value) {
@@ -13255,7 +13255,7 @@ inline void FieldOptions::_internal_set_deprecated(bool value) {
 }
 inline void FieldOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.deprecated)
 }
 
 // optional bool weak = 10 [default = false];
@@ -13274,7 +13274,7 @@ inline bool FieldOptions::_internal_weak() const {
   return _impl_.weak_;
 }
 inline bool FieldOptions::weak() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.weak)
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.weak)
   return _internal_weak();
 }
 inline void FieldOptions::_internal_set_weak(bool value) {
@@ -13283,10 +13283,10 @@ inline void FieldOptions::_internal_set_weak(bool value) {
 }
 inline void FieldOptions::set_weak(bool value) {
   _internal_set_weak(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FieldOptions.weak)
+  // @@protoc_insertion_point(field_set:shark.FieldOptions.weak)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int FieldOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13296,33 +13296,33 @@ inline int FieldOptions::uninterpreted_option_size() const {
 inline void FieldOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* FieldOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.FieldOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* FieldOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.FieldOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 FieldOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.FieldOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.FieldOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& FieldOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& FieldOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& FieldOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FieldOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& FieldOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.FieldOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* FieldOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* FieldOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* FieldOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.FieldOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* FieldOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.FieldOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 FieldOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.FieldOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.FieldOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13330,7 +13330,7 @@ FieldOptions::uninterpreted_option() const {
 
 // OneofOptions
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int OneofOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13340,33 +13340,33 @@ inline int OneofOptions::uninterpreted_option_size() const {
 inline void OneofOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* OneofOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.OneofOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* OneofOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.OneofOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 OneofOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.OneofOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.OneofOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& OneofOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& OneofOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& OneofOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.OneofOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& OneofOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.OneofOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* OneofOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* OneofOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* OneofOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.OneofOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* OneofOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.OneofOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 OneofOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.OneofOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.OneofOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13390,7 +13390,7 @@ inline bool EnumOptions::_internal_allow_alias() const {
   return _impl_.allow_alias_;
 }
 inline bool EnumOptions::allow_alias() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumOptions.allow_alias)
+  // @@protoc_insertion_point(field_get:shark.EnumOptions.allow_alias)
   return _internal_allow_alias();
 }
 inline void EnumOptions::_internal_set_allow_alias(bool value) {
@@ -13399,7 +13399,7 @@ inline void EnumOptions::_internal_set_allow_alias(bool value) {
 }
 inline void EnumOptions::set_allow_alias(bool value) {
   _internal_set_allow_alias(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumOptions.allow_alias)
+  // @@protoc_insertion_point(field_set:shark.EnumOptions.allow_alias)
 }
 
 // optional bool deprecated = 3 [default = false];
@@ -13418,7 +13418,7 @@ inline bool EnumOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool EnumOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.EnumOptions.deprecated)
   return _internal_deprecated();
 }
 inline void EnumOptions::_internal_set_deprecated(bool value) {
@@ -13427,10 +13427,10 @@ inline void EnumOptions::_internal_set_deprecated(bool value) {
 }
 inline void EnumOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.EnumOptions.deprecated)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int EnumOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13440,33 +13440,33 @@ inline int EnumOptions::uninterpreted_option_size() const {
 inline void EnumOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* EnumOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* EnumOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 EnumOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& EnumOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& EnumOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& EnumOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& EnumOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* EnumOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* EnumOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* EnumOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* EnumOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.EnumOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 EnumOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.EnumOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.EnumOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13490,7 +13490,7 @@ inline bool EnumValueOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool EnumValueOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValueOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.EnumValueOptions.deprecated)
   return _internal_deprecated();
 }
 inline void EnumValueOptions::_internal_set_deprecated(bool value) {
@@ -13499,10 +13499,10 @@ inline void EnumValueOptions::_internal_set_deprecated(bool value) {
 }
 inline void EnumValueOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumValueOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.EnumValueOptions.deprecated)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int EnumValueOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13512,33 +13512,33 @@ inline int EnumValueOptions::uninterpreted_option_size() const {
 inline void EnumValueOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* EnumValueOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValueOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* EnumValueOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumValueOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 EnumValueOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumValueOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumValueOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& EnumValueOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& EnumValueOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& EnumValueOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValueOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& EnumValueOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumValueOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* EnumValueOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* EnumValueOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* EnumValueOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumValueOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* EnumValueOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.EnumValueOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 EnumValueOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.EnumValueOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.EnumValueOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13562,7 +13562,7 @@ inline bool ServiceOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool ServiceOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ServiceOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.ServiceOptions.deprecated)
   return _internal_deprecated();
 }
 inline void ServiceOptions::_internal_set_deprecated(bool value) {
@@ -13571,10 +13571,10 @@ inline void ServiceOptions::_internal_set_deprecated(bool value) {
 }
 inline void ServiceOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.ServiceOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.ServiceOptions.deprecated)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int ServiceOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13584,33 +13584,33 @@ inline int ServiceOptions::uninterpreted_option_size() const {
 inline void ServiceOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* ServiceOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.ServiceOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* ServiceOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ServiceOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 ServiceOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.ServiceOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.ServiceOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& ServiceOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& ServiceOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& ServiceOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ServiceOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& ServiceOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ServiceOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* ServiceOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* ServiceOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* ServiceOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.ServiceOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* ServiceOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.ServiceOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 ServiceOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.ServiceOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.ServiceOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13634,7 +13634,7 @@ inline bool MethodOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
 }
 inline bool MethodOptions::deprecated() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodOptions.deprecated)
+  // @@protoc_insertion_point(field_get:shark.MethodOptions.deprecated)
   return _internal_deprecated();
 }
 inline void MethodOptions::_internal_set_deprecated(bool value) {
@@ -13643,10 +13643,10 @@ inline void MethodOptions::_internal_set_deprecated(bool value) {
 }
 inline void MethodOptions::set_deprecated(bool value) {
   _internal_set_deprecated(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodOptions.deprecated)
+  // @@protoc_insertion_point(field_set:shark.MethodOptions.deprecated)
 }
 
-// optional .google.protobuf.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
+// optional .shark.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
 inline bool MethodOptions::_internal_has_idempotency_level() const {
   bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
@@ -13658,24 +13658,24 @@ inline void MethodOptions::clear_idempotency_level() {
   _impl_.idempotency_level_ = 0;
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
-inline ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel MethodOptions::_internal_idempotency_level() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel >(_impl_.idempotency_level_);
+inline ::shark::MethodOptions_IdempotencyLevel MethodOptions::_internal_idempotency_level() const {
+  return static_cast< ::shark::MethodOptions_IdempotencyLevel >(_impl_.idempotency_level_);
 }
-inline ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel MethodOptions::idempotency_level() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodOptions.idempotency_level)
+inline ::shark::MethodOptions_IdempotencyLevel MethodOptions::idempotency_level() const {
+  // @@protoc_insertion_point(field_get:shark.MethodOptions.idempotency_level)
   return _internal_idempotency_level();
 }
-inline void MethodOptions::_internal_set_idempotency_level(::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel value) {
-  assert(::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel_IsValid(value));
+inline void MethodOptions::_internal_set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value) {
+  assert(::shark::MethodOptions_IdempotencyLevel_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.idempotency_level_ = value;
 }
-inline void MethodOptions::set_idempotency_level(::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel value) {
+inline void MethodOptions::set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value) {
   _internal_set_idempotency_level(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.MethodOptions.idempotency_level)
+  // @@protoc_insertion_point(field_set:shark.MethodOptions.idempotency_level)
 }
 
-// repeated .google.protobuf.UninterpretedOption uninterpreted_option = 999;
+// repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int MethodOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13685,33 +13685,33 @@ inline int MethodOptions::uninterpreted_option_size() const {
 inline void MethodOptions::clear_uninterpreted_option() {
   _impl_.uninterpreted_option_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* MethodOptions::mutable_uninterpreted_option(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.MethodOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* MethodOptions::mutable_uninterpreted_option(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.MethodOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >*
 MethodOptions::mutable_uninterpreted_option() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.MethodOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_mutable_list:shark.MethodOptions.uninterpreted_option)
   return &_impl_.uninterpreted_option_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& MethodOptions::_internal_uninterpreted_option(int index) const {
+inline const ::shark::UninterpretedOption& MethodOptions::_internal_uninterpreted_option(int index) const {
   return _impl_.uninterpreted_option_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption& MethodOptions::uninterpreted_option(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.MethodOptions.uninterpreted_option)
+inline const ::shark::UninterpretedOption& MethodOptions::uninterpreted_option(int index) const {
+  // @@protoc_insertion_point(field_get:shark.MethodOptions.uninterpreted_option)
   return _internal_uninterpreted_option(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* MethodOptions::_internal_add_uninterpreted_option() {
+inline ::shark::UninterpretedOption* MethodOptions::_internal_add_uninterpreted_option() {
   return _impl_.uninterpreted_option_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption* MethodOptions::add_uninterpreted_option() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption* _add = _internal_add_uninterpreted_option();
-  // @@protoc_insertion_point(field_add:google.protobuf.MethodOptions.uninterpreted_option)
+inline ::shark::UninterpretedOption* MethodOptions::add_uninterpreted_option() {
+  ::shark::UninterpretedOption* _add = _internal_add_uninterpreted_option();
+  // @@protoc_insertion_point(field_add:shark.MethodOptions.uninterpreted_option)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
 MethodOptions::uninterpreted_option() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.MethodOptions.uninterpreted_option)
+  // @@protoc_insertion_point(field_list:shark.MethodOptions.uninterpreted_option)
   return _impl_.uninterpreted_option_;
 }
 
@@ -13732,7 +13732,7 @@ inline void UninterpretedOption_NamePart::clear_name_part() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& UninterpretedOption_NamePart::name_part() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.NamePart.name_part)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.NamePart.name_part)
   return _internal_name_part();
 }
 template <typename ArgT0, typename... ArgT>
@@ -13740,11 +13740,11 @@ inline SHARK_ALWAYS_INLINE
 void UninterpretedOption_NamePart::set_name_part(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_part_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.NamePart.name_part)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.NamePart.name_part)
 }
 inline std::string* UninterpretedOption_NamePart::mutable_name_part() {
   std::string* _s = _internal_mutable_name_part();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.NamePart.name_part)
+  // @@protoc_insertion_point(field_mutable:shark.UninterpretedOption.NamePart.name_part)
   return _s;
 }
 inline const std::string& UninterpretedOption_NamePart::_internal_name_part() const {
@@ -13759,7 +13759,7 @@ inline std::string* UninterpretedOption_NamePart::_internal_mutable_name_part() 
   return _impl_.name_part_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UninterpretedOption_NamePart::release_name_part() {
-  // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.NamePart.name_part)
+  // @@protoc_insertion_point(field_release:shark.UninterpretedOption.NamePart.name_part)
   if (!_internal_has_name_part()) {
     return nullptr;
   }
@@ -13784,7 +13784,7 @@ inline void UninterpretedOption_NamePart::set_allocated_name_part(std::string* n
     _impl_.name_part_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.NamePart.name_part)
+  // @@protoc_insertion_point(field_set_allocated:shark.UninterpretedOption.NamePart.name_part)
 }
 
 // required bool is_extension = 2;
@@ -13803,7 +13803,7 @@ inline bool UninterpretedOption_NamePart::_internal_is_extension() const {
   return _impl_.is_extension_;
 }
 inline bool UninterpretedOption_NamePart::is_extension() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.NamePart.is_extension)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.NamePart.is_extension)
   return _internal_is_extension();
 }
 inline void UninterpretedOption_NamePart::_internal_set_is_extension(bool value) {
@@ -13812,14 +13812,14 @@ inline void UninterpretedOption_NamePart::_internal_set_is_extension(bool value)
 }
 inline void UninterpretedOption_NamePart::set_is_extension(bool value) {
   _internal_set_is_extension(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.NamePart.is_extension)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.NamePart.is_extension)
 }
 
 // -------------------------------------------------------------------
 
 // UninterpretedOption
 
-// repeated .google.protobuf.UninterpretedOption.NamePart name = 2;
+// repeated .shark.UninterpretedOption.NamePart name = 2;
 inline int UninterpretedOption::_internal_name_size() const {
   return _impl_.name_.size();
 }
@@ -13829,33 +13829,33 @@ inline int UninterpretedOption::name_size() const {
 inline void UninterpretedOption::clear_name() {
   _impl_.name_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* UninterpretedOption::mutable_name(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.name)
+inline ::shark::UninterpretedOption_NamePart* UninterpretedOption::mutable_name(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.UninterpretedOption.name)
   return _impl_.name_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption_NamePart >*
 UninterpretedOption::mutable_name() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.UninterpretedOption.name)
+  // @@protoc_insertion_point(field_mutable_list:shark.UninterpretedOption.name)
   return &_impl_.name_;
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart& UninterpretedOption::_internal_name(int index) const {
+inline const ::shark::UninterpretedOption_NamePart& UninterpretedOption::_internal_name(int index) const {
   return _impl_.name_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart& UninterpretedOption::name(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.name)
+inline const ::shark::UninterpretedOption_NamePart& UninterpretedOption::name(int index) const {
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.name)
   return _internal_name(index);
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* UninterpretedOption::_internal_add_name() {
+inline ::shark::UninterpretedOption_NamePart* UninterpretedOption::_internal_add_name() {
   return _impl_.name_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* UninterpretedOption::add_name() {
-  ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart* _add = _internal_add_name();
-  // @@protoc_insertion_point(field_add:google.protobuf.UninterpretedOption.name)
+inline ::shark::UninterpretedOption_NamePart* UninterpretedOption::add_name() {
+  ::shark::UninterpretedOption_NamePart* _add = _internal_add_name();
+  // @@protoc_insertion_point(field_add:shark.UninterpretedOption.name)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::UninterpretedOption_NamePart >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption_NamePart >&
 UninterpretedOption::name() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.UninterpretedOption.name)
+  // @@protoc_insertion_point(field_list:shark.UninterpretedOption.name)
   return _impl_.name_;
 }
 
@@ -13872,7 +13872,7 @@ inline void UninterpretedOption::clear_identifier_value() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& UninterpretedOption::identifier_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.identifier_value)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.identifier_value)
   return _internal_identifier_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -13880,11 +13880,11 @@ inline SHARK_ALWAYS_INLINE
 void UninterpretedOption::set_identifier_value(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.identifier_value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.identifier_value)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.identifier_value)
 }
 inline std::string* UninterpretedOption::mutable_identifier_value() {
   std::string* _s = _internal_mutable_identifier_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.identifier_value)
+  // @@protoc_insertion_point(field_mutable:shark.UninterpretedOption.identifier_value)
   return _s;
 }
 inline const std::string& UninterpretedOption::_internal_identifier_value() const {
@@ -13899,7 +13899,7 @@ inline std::string* UninterpretedOption::_internal_mutable_identifier_value() {
   return _impl_.identifier_value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UninterpretedOption::release_identifier_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.identifier_value)
+  // @@protoc_insertion_point(field_release:shark.UninterpretedOption.identifier_value)
   if (!_internal_has_identifier_value()) {
     return nullptr;
   }
@@ -13924,7 +13924,7 @@ inline void UninterpretedOption::set_allocated_identifier_value(std::string* ide
     _impl_.identifier_value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.identifier_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.UninterpretedOption.identifier_value)
 }
 
 // optional uint64 positive_int_value = 4;
@@ -13943,7 +13943,7 @@ inline uint64_t UninterpretedOption::_internal_positive_int_value() const {
   return _impl_.positive_int_value_;
 }
 inline uint64_t UninterpretedOption::positive_int_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.positive_int_value)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.positive_int_value)
   return _internal_positive_int_value();
 }
 inline void UninterpretedOption::_internal_set_positive_int_value(uint64_t value) {
@@ -13952,7 +13952,7 @@ inline void UninterpretedOption::_internal_set_positive_int_value(uint64_t value
 }
 inline void UninterpretedOption::set_positive_int_value(uint64_t value) {
   _internal_set_positive_int_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.positive_int_value)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.positive_int_value)
 }
 
 // optional int64 negative_int_value = 5;
@@ -13971,7 +13971,7 @@ inline int64_t UninterpretedOption::_internal_negative_int_value() const {
   return _impl_.negative_int_value_;
 }
 inline int64_t UninterpretedOption::negative_int_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.negative_int_value)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.negative_int_value)
   return _internal_negative_int_value();
 }
 inline void UninterpretedOption::_internal_set_negative_int_value(int64_t value) {
@@ -13980,7 +13980,7 @@ inline void UninterpretedOption::_internal_set_negative_int_value(int64_t value)
 }
 inline void UninterpretedOption::set_negative_int_value(int64_t value) {
   _internal_set_negative_int_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.negative_int_value)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.negative_int_value)
 }
 
 // optional double double_value = 6;
@@ -13999,7 +13999,7 @@ inline double UninterpretedOption::_internal_double_value() const {
   return _impl_.double_value_;
 }
 inline double UninterpretedOption::double_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.double_value)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.double_value)
   return _internal_double_value();
 }
 inline void UninterpretedOption::_internal_set_double_value(double value) {
@@ -14008,7 +14008,7 @@ inline void UninterpretedOption::_internal_set_double_value(double value) {
 }
 inline void UninterpretedOption::set_double_value(double value) {
   _internal_set_double_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.double_value)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.double_value)
 }
 
 // optional bytes string_value = 7;
@@ -14024,7 +14024,7 @@ inline void UninterpretedOption::clear_string_value() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& UninterpretedOption::string_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.string_value)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.string_value)
   return _internal_string_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -14032,11 +14032,11 @@ inline SHARK_ALWAYS_INLINE
 void UninterpretedOption::set_string_value(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.string_value_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.string_value)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.string_value)
 }
 inline std::string* UninterpretedOption::mutable_string_value() {
   std::string* _s = _internal_mutable_string_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.string_value)
+  // @@protoc_insertion_point(field_mutable:shark.UninterpretedOption.string_value)
   return _s;
 }
 inline const std::string& UninterpretedOption::_internal_string_value() const {
@@ -14051,7 +14051,7 @@ inline std::string* UninterpretedOption::_internal_mutable_string_value() {
   return _impl_.string_value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UninterpretedOption::release_string_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.string_value)
+  // @@protoc_insertion_point(field_release:shark.UninterpretedOption.string_value)
   if (!_internal_has_string_value()) {
     return nullptr;
   }
@@ -14076,7 +14076,7 @@ inline void UninterpretedOption::set_allocated_string_value(std::string* string_
     _impl_.string_value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.string_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.UninterpretedOption.string_value)
 }
 
 // optional string aggregate_value = 8;
@@ -14092,7 +14092,7 @@ inline void UninterpretedOption::clear_aggregate_value() {
   _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& UninterpretedOption::aggregate_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UninterpretedOption.aggregate_value)
+  // @@protoc_insertion_point(field_get:shark.UninterpretedOption.aggregate_value)
   return _internal_aggregate_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -14100,11 +14100,11 @@ inline SHARK_ALWAYS_INLINE
 void UninterpretedOption::set_aggregate_value(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.aggregate_value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.UninterpretedOption.aggregate_value)
+  // @@protoc_insertion_point(field_set:shark.UninterpretedOption.aggregate_value)
 }
 inline std::string* UninterpretedOption::mutable_aggregate_value() {
   std::string* _s = _internal_mutable_aggregate_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.UninterpretedOption.aggregate_value)
+  // @@protoc_insertion_point(field_mutable:shark.UninterpretedOption.aggregate_value)
   return _s;
 }
 inline const std::string& UninterpretedOption::_internal_aggregate_value() const {
@@ -14119,7 +14119,7 @@ inline std::string* UninterpretedOption::_internal_mutable_aggregate_value() {
   return _impl_.aggregate_value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* UninterpretedOption::release_aggregate_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.UninterpretedOption.aggregate_value)
+  // @@protoc_insertion_point(field_release:shark.UninterpretedOption.aggregate_value)
   if (!_internal_has_aggregate_value()) {
     return nullptr;
   }
@@ -14144,7 +14144,7 @@ inline void UninterpretedOption::set_allocated_aggregate_value(std::string* aggr
     _impl_.aggregate_value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.UninterpretedOption.aggregate_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.UninterpretedOption.aggregate_value)
 }
 
 // -------------------------------------------------------------------
@@ -14165,19 +14165,19 @@ inline int32_t SourceCodeInfo_Location::_internal_path(int index) const {
   return _impl_.path_.Get(index);
 }
 inline int32_t SourceCodeInfo_Location::path(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.path)
+  // @@protoc_insertion_point(field_get:shark.SourceCodeInfo.Location.path)
   return _internal_path(index);
 }
 inline void SourceCodeInfo_Location::set_path(int index, int32_t value) {
   _impl_.path_.Set(index, value);
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.path)
+  // @@protoc_insertion_point(field_set:shark.SourceCodeInfo.Location.path)
 }
 inline void SourceCodeInfo_Location::_internal_add_path(int32_t value) {
   _impl_.path_.Add(value);
 }
 inline void SourceCodeInfo_Location::add_path(int32_t value) {
   _internal_add_path(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.path)
+  // @@protoc_insertion_point(field_add:shark.SourceCodeInfo.Location.path)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 SourceCodeInfo_Location::_internal_path() const {
@@ -14185,7 +14185,7 @@ SourceCodeInfo_Location::_internal_path() const {
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 SourceCodeInfo_Location::path() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.Location.path)
+  // @@protoc_insertion_point(field_list:shark.SourceCodeInfo.Location.path)
   return _internal_path();
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
@@ -14194,7 +14194,7 @@ SourceCodeInfo_Location::_internal_mutable_path() {
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
 SourceCodeInfo_Location::mutable_path() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.Location.path)
+  // @@protoc_insertion_point(field_mutable_list:shark.SourceCodeInfo.Location.path)
   return _internal_mutable_path();
 }
 
@@ -14212,19 +14212,19 @@ inline int32_t SourceCodeInfo_Location::_internal_span(int index) const {
   return _impl_.span_.Get(index);
 }
 inline int32_t SourceCodeInfo_Location::span(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.span)
+  // @@protoc_insertion_point(field_get:shark.SourceCodeInfo.Location.span)
   return _internal_span(index);
 }
 inline void SourceCodeInfo_Location::set_span(int index, int32_t value) {
   _impl_.span_.Set(index, value);
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.span)
+  // @@protoc_insertion_point(field_set:shark.SourceCodeInfo.Location.span)
 }
 inline void SourceCodeInfo_Location::_internal_add_span(int32_t value) {
   _impl_.span_.Add(value);
 }
 inline void SourceCodeInfo_Location::add_span(int32_t value) {
   _internal_add_span(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.span)
+  // @@protoc_insertion_point(field_add:shark.SourceCodeInfo.Location.span)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 SourceCodeInfo_Location::_internal_span() const {
@@ -14232,7 +14232,7 @@ SourceCodeInfo_Location::_internal_span() const {
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 SourceCodeInfo_Location::span() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.Location.span)
+  // @@protoc_insertion_point(field_list:shark.SourceCodeInfo.Location.span)
   return _internal_span();
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
@@ -14241,7 +14241,7 @@ SourceCodeInfo_Location::_internal_mutable_span() {
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
 SourceCodeInfo_Location::mutable_span() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.Location.span)
+  // @@protoc_insertion_point(field_mutable_list:shark.SourceCodeInfo.Location.span)
   return _internal_mutable_span();
 }
 
@@ -14258,7 +14258,7 @@ inline void SourceCodeInfo_Location::clear_leading_comments() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& SourceCodeInfo_Location::leading_comments() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.leading_comments)
+  // @@protoc_insertion_point(field_get:shark.SourceCodeInfo.Location.leading_comments)
   return _internal_leading_comments();
 }
 template <typename ArgT0, typename... ArgT>
@@ -14266,11 +14266,11 @@ inline SHARK_ALWAYS_INLINE
 void SourceCodeInfo_Location::set_leading_comments(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.leading_comments_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.leading_comments)
+  // @@protoc_insertion_point(field_set:shark.SourceCodeInfo.Location.leading_comments)
 }
 inline std::string* SourceCodeInfo_Location::mutable_leading_comments() {
   std::string* _s = _internal_mutable_leading_comments();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.Location.leading_comments)
+  // @@protoc_insertion_point(field_mutable:shark.SourceCodeInfo.Location.leading_comments)
   return _s;
 }
 inline const std::string& SourceCodeInfo_Location::_internal_leading_comments() const {
@@ -14285,7 +14285,7 @@ inline std::string* SourceCodeInfo_Location::_internal_mutable_leading_comments(
   return _impl_.leading_comments_.Mutable(GetArenaForAllocation());
 }
 inline std::string* SourceCodeInfo_Location::release_leading_comments() {
-  // @@protoc_insertion_point(field_release:google.protobuf.SourceCodeInfo.Location.leading_comments)
+  // @@protoc_insertion_point(field_release:shark.SourceCodeInfo.Location.leading_comments)
   if (!_internal_has_leading_comments()) {
     return nullptr;
   }
@@ -14310,7 +14310,7 @@ inline void SourceCodeInfo_Location::set_allocated_leading_comments(std::string*
     _impl_.leading_comments_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.SourceCodeInfo.Location.leading_comments)
+  // @@protoc_insertion_point(field_set_allocated:shark.SourceCodeInfo.Location.leading_comments)
 }
 
 // optional string trailing_comments = 4;
@@ -14326,7 +14326,7 @@ inline void SourceCodeInfo_Location::clear_trailing_comments() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& SourceCodeInfo_Location::trailing_comments() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.trailing_comments)
+  // @@protoc_insertion_point(field_get:shark.SourceCodeInfo.Location.trailing_comments)
   return _internal_trailing_comments();
 }
 template <typename ArgT0, typename... ArgT>
@@ -14334,11 +14334,11 @@ inline SHARK_ALWAYS_INLINE
 void SourceCodeInfo_Location::set_trailing_comments(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.trailing_comments_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.trailing_comments)
+  // @@protoc_insertion_point(field_set:shark.SourceCodeInfo.Location.trailing_comments)
 }
 inline std::string* SourceCodeInfo_Location::mutable_trailing_comments() {
   std::string* _s = _internal_mutable_trailing_comments();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.Location.trailing_comments)
+  // @@protoc_insertion_point(field_mutable:shark.SourceCodeInfo.Location.trailing_comments)
   return _s;
 }
 inline const std::string& SourceCodeInfo_Location::_internal_trailing_comments() const {
@@ -14353,7 +14353,7 @@ inline std::string* SourceCodeInfo_Location::_internal_mutable_trailing_comments
   return _impl_.trailing_comments_.Mutable(GetArenaForAllocation());
 }
 inline std::string* SourceCodeInfo_Location::release_trailing_comments() {
-  // @@protoc_insertion_point(field_release:google.protobuf.SourceCodeInfo.Location.trailing_comments)
+  // @@protoc_insertion_point(field_release:shark.SourceCodeInfo.Location.trailing_comments)
   if (!_internal_has_trailing_comments()) {
     return nullptr;
   }
@@ -14378,7 +14378,7 @@ inline void SourceCodeInfo_Location::set_allocated_trailing_comments(std::string
     _impl_.trailing_comments_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.SourceCodeInfo.Location.trailing_comments)
+  // @@protoc_insertion_point(field_set_allocated:shark.SourceCodeInfo.Location.trailing_comments)
 }
 
 // repeated string leading_detached_comments = 6;
@@ -14393,66 +14393,66 @@ inline void SourceCodeInfo_Location::clear_leading_detached_comments() {
 }
 inline std::string* SourceCodeInfo_Location::add_leading_detached_comments() {
   std::string* _s = _internal_add_leading_detached_comments();
-  // @@protoc_insertion_point(field_add_mutable:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_add_mutable:shark.SourceCodeInfo.Location.leading_detached_comments)
   return _s;
 }
 inline const std::string& SourceCodeInfo_Location::_internal_leading_detached_comments(int index) const {
   return _impl_.leading_detached_comments_.Get(index);
 }
 inline const std::string& SourceCodeInfo_Location::leading_detached_comments(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_get:shark.SourceCodeInfo.Location.leading_detached_comments)
   return _internal_leading_detached_comments(index);
 }
 inline std::string* SourceCodeInfo_Location::mutable_leading_detached_comments(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_mutable:shark.SourceCodeInfo.Location.leading_detached_comments)
   return _impl_.leading_detached_comments_.Mutable(index);
 }
 inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const std::string& value) {
   _impl_.leading_detached_comments_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_set:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, std::string&& value) {
   _impl_.leading_detached_comments_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_set:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.leading_detached_comments_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_set_char:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline void SourceCodeInfo_Location::set_leading_detached_comments(int index, const char* value, size_t size) {
   _impl_.leading_detached_comments_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_set_pointer:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline std::string* SourceCodeInfo_Location::_internal_add_leading_detached_comments() {
   return _impl_.leading_detached_comments_.Add();
 }
 inline void SourceCodeInfo_Location::add_leading_detached_comments(const std::string& value) {
   _impl_.leading_detached_comments_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_add:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline void SourceCodeInfo_Location::add_leading_detached_comments(std::string&& value) {
   _impl_.leading_detached_comments_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_add:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline void SourceCodeInfo_Location::add_leading_detached_comments(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.leading_detached_comments_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_add_char:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline void SourceCodeInfo_Location::add_leading_detached_comments(const char* value, size_t size) {
   _impl_.leading_detached_comments_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_add_pointer:shark.SourceCodeInfo.Location.leading_detached_comments)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>&
 SourceCodeInfo_Location::leading_detached_comments() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_list:shark.SourceCodeInfo.Location.leading_detached_comments)
   return _impl_.leading_detached_comments_;
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 SourceCodeInfo_Location::mutable_leading_detached_comments() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.Location.leading_detached_comments)
+  // @@protoc_insertion_point(field_mutable_list:shark.SourceCodeInfo.Location.leading_detached_comments)
   return &_impl_.leading_detached_comments_;
 }
 
@@ -14460,7 +14460,7 @@ SourceCodeInfo_Location::mutable_leading_detached_comments() {
 
 // SourceCodeInfo
 
-// repeated .google.protobuf.SourceCodeInfo.Location location = 1;
+// repeated .shark.SourceCodeInfo.Location location = 1;
 inline int SourceCodeInfo::_internal_location_size() const {
   return _impl_.location_.size();
 }
@@ -14470,33 +14470,33 @@ inline int SourceCodeInfo::location_size() const {
 inline void SourceCodeInfo::clear_location() {
   _impl_.location_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* SourceCodeInfo::mutable_location(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.SourceCodeInfo.location)
+inline ::shark::SourceCodeInfo_Location* SourceCodeInfo::mutable_location(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.SourceCodeInfo.location)
   return _impl_.location_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::SourceCodeInfo_Location >*
 SourceCodeInfo::mutable_location() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.SourceCodeInfo.location)
+  // @@protoc_insertion_point(field_mutable_list:shark.SourceCodeInfo.location)
   return &_impl_.location_;
 }
-inline const ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location& SourceCodeInfo::_internal_location(int index) const {
+inline const ::shark::SourceCodeInfo_Location& SourceCodeInfo::_internal_location(int index) const {
   return _impl_.location_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location& SourceCodeInfo::location(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceCodeInfo.location)
+inline const ::shark::SourceCodeInfo_Location& SourceCodeInfo::location(int index) const {
+  // @@protoc_insertion_point(field_get:shark.SourceCodeInfo.location)
   return _internal_location(index);
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* SourceCodeInfo::_internal_add_location() {
+inline ::shark::SourceCodeInfo_Location* SourceCodeInfo::_internal_add_location() {
   return _impl_.location_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* SourceCodeInfo::add_location() {
-  ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location* _add = _internal_add_location();
-  // @@protoc_insertion_point(field_add:google.protobuf.SourceCodeInfo.location)
+inline ::shark::SourceCodeInfo_Location* SourceCodeInfo::add_location() {
+  ::shark::SourceCodeInfo_Location* _add = _internal_add_location();
+  // @@protoc_insertion_point(field_add:shark.SourceCodeInfo.location)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::SourceCodeInfo_Location >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::SourceCodeInfo_Location >&
 SourceCodeInfo::location() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.SourceCodeInfo.location)
+  // @@protoc_insertion_point(field_list:shark.SourceCodeInfo.location)
   return _impl_.location_;
 }
 
@@ -14518,19 +14518,19 @@ inline int32_t GeneratedCodeInfo_Annotation::_internal_path(int index) const {
   return _impl_.path_.Get(index);
 }
 inline int32_t GeneratedCodeInfo_Annotation::path(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.path)
+  // @@protoc_insertion_point(field_get:shark.GeneratedCodeInfo.Annotation.path)
   return _internal_path(index);
 }
 inline void GeneratedCodeInfo_Annotation::set_path(int index, int32_t value) {
   _impl_.path_.Set(index, value);
-  // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.path)
+  // @@protoc_insertion_point(field_set:shark.GeneratedCodeInfo.Annotation.path)
 }
 inline void GeneratedCodeInfo_Annotation::_internal_add_path(int32_t value) {
   _impl_.path_.Add(value);
 }
 inline void GeneratedCodeInfo_Annotation::add_path(int32_t value) {
   _internal_add_path(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.GeneratedCodeInfo.Annotation.path)
+  // @@protoc_insertion_point(field_add:shark.GeneratedCodeInfo.Annotation.path)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 GeneratedCodeInfo_Annotation::_internal_path() const {
@@ -14538,7 +14538,7 @@ GeneratedCodeInfo_Annotation::_internal_path() const {
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >&
 GeneratedCodeInfo_Annotation::path() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.GeneratedCodeInfo.Annotation.path)
+  // @@protoc_insertion_point(field_list:shark.GeneratedCodeInfo.Annotation.path)
   return _internal_path();
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
@@ -14547,7 +14547,7 @@ GeneratedCodeInfo_Annotation::_internal_mutable_path() {
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
 GeneratedCodeInfo_Annotation::mutable_path() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.GeneratedCodeInfo.Annotation.path)
+  // @@protoc_insertion_point(field_mutable_list:shark.GeneratedCodeInfo.Annotation.path)
   return _internal_mutable_path();
 }
 
@@ -14564,7 +14564,7 @@ inline void GeneratedCodeInfo_Annotation::clear_source_file() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& GeneratedCodeInfo_Annotation::source_file() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
+  // @@protoc_insertion_point(field_get:shark.GeneratedCodeInfo.Annotation.source_file)
   return _internal_source_file();
 }
 template <typename ArgT0, typename... ArgT>
@@ -14572,11 +14572,11 @@ inline SHARK_ALWAYS_INLINE
 void GeneratedCodeInfo_Annotation::set_source_file(ArgT0&& arg0, ArgT... args) {
  _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.source_file_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
+  // @@protoc_insertion_point(field_set:shark.GeneratedCodeInfo.Annotation.source_file)
 }
 inline std::string* GeneratedCodeInfo_Annotation::mutable_source_file() {
   std::string* _s = _internal_mutable_source_file();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
+  // @@protoc_insertion_point(field_mutable:shark.GeneratedCodeInfo.Annotation.source_file)
   return _s;
 }
 inline const std::string& GeneratedCodeInfo_Annotation::_internal_source_file() const {
@@ -14591,7 +14591,7 @@ inline std::string* GeneratedCodeInfo_Annotation::_internal_mutable_source_file(
   return _impl_.source_file_.Mutable(GetArenaForAllocation());
 }
 inline std::string* GeneratedCodeInfo_Annotation::release_source_file() {
-  // @@protoc_insertion_point(field_release:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
+  // @@protoc_insertion_point(field_release:shark.GeneratedCodeInfo.Annotation.source_file)
   if (!_internal_has_source_file()) {
     return nullptr;
   }
@@ -14616,7 +14616,7 @@ inline void GeneratedCodeInfo_Annotation::set_allocated_source_file(std::string*
     _impl_.source_file_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.GeneratedCodeInfo.Annotation.source_file)
+  // @@protoc_insertion_point(field_set_allocated:shark.GeneratedCodeInfo.Annotation.source_file)
 }
 
 // optional int32 begin = 3;
@@ -14635,7 +14635,7 @@ inline int32_t GeneratedCodeInfo_Annotation::_internal_begin() const {
   return _impl_.begin_;
 }
 inline int32_t GeneratedCodeInfo_Annotation::begin() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.begin)
+  // @@protoc_insertion_point(field_get:shark.GeneratedCodeInfo.Annotation.begin)
   return _internal_begin();
 }
 inline void GeneratedCodeInfo_Annotation::_internal_set_begin(int32_t value) {
@@ -14644,7 +14644,7 @@ inline void GeneratedCodeInfo_Annotation::_internal_set_begin(int32_t value) {
 }
 inline void GeneratedCodeInfo_Annotation::set_begin(int32_t value) {
   _internal_set_begin(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.begin)
+  // @@protoc_insertion_point(field_set:shark.GeneratedCodeInfo.Annotation.begin)
 }
 
 // optional int32 end = 4;
@@ -14663,7 +14663,7 @@ inline int32_t GeneratedCodeInfo_Annotation::_internal_end() const {
   return _impl_.end_;
 }
 inline int32_t GeneratedCodeInfo_Annotation::end() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.Annotation.end)
+  // @@protoc_insertion_point(field_get:shark.GeneratedCodeInfo.Annotation.end)
   return _internal_end();
 }
 inline void GeneratedCodeInfo_Annotation::_internal_set_end(int32_t value) {
@@ -14672,14 +14672,14 @@ inline void GeneratedCodeInfo_Annotation::_internal_set_end(int32_t value) {
 }
 inline void GeneratedCodeInfo_Annotation::set_end(int32_t value) {
   _internal_set_end(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.GeneratedCodeInfo.Annotation.end)
+  // @@protoc_insertion_point(field_set:shark.GeneratedCodeInfo.Annotation.end)
 }
 
 // -------------------------------------------------------------------
 
 // GeneratedCodeInfo
 
-// repeated .google.protobuf.GeneratedCodeInfo.Annotation annotation = 1;
+// repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
 inline int GeneratedCodeInfo::_internal_annotation_size() const {
   return _impl_.annotation_.size();
 }
@@ -14689,33 +14689,33 @@ inline int GeneratedCodeInfo::annotation_size() const {
 inline void GeneratedCodeInfo::clear_annotation() {
   _impl_.annotation_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::mutable_annotation(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.GeneratedCodeInfo.annotation)
+inline ::shark::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::mutable_annotation(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.GeneratedCodeInfo.annotation)
   return _impl_.annotation_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::GeneratedCodeInfo_Annotation >*
 GeneratedCodeInfo::mutable_annotation() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.GeneratedCodeInfo.annotation)
+  // @@protoc_insertion_point(field_mutable_list:shark.GeneratedCodeInfo.annotation)
   return &_impl_.annotation_;
 }
-inline const ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation& GeneratedCodeInfo::_internal_annotation(int index) const {
+inline const ::shark::GeneratedCodeInfo_Annotation& GeneratedCodeInfo::_internal_annotation(int index) const {
   return _impl_.annotation_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation& GeneratedCodeInfo::annotation(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.GeneratedCodeInfo.annotation)
+inline const ::shark::GeneratedCodeInfo_Annotation& GeneratedCodeInfo::annotation(int index) const {
+  // @@protoc_insertion_point(field_get:shark.GeneratedCodeInfo.annotation)
   return _internal_annotation(index);
 }
-inline ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::_internal_add_annotation() {
+inline ::shark::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::_internal_add_annotation() {
   return _impl_.annotation_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::add_annotation() {
-  ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation* _add = _internal_add_annotation();
-  // @@protoc_insertion_point(field_add:google.protobuf.GeneratedCodeInfo.annotation)
+inline ::shark::GeneratedCodeInfo_Annotation* GeneratedCodeInfo::add_annotation() {
+  ::shark::GeneratedCodeInfo_Annotation* _add = _internal_add_annotation();
+  // @@protoc_insertion_point(field_add:shark.GeneratedCodeInfo.annotation)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::GeneratedCodeInfo_Annotation >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::GeneratedCodeInfo_Annotation >&
 GeneratedCodeInfo::annotation() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.GeneratedCodeInfo.annotation)
+  // @@protoc_insertion_point(field_list:shark.GeneratedCodeInfo.annotation)
   return _impl_.annotation_;
 }
 
@@ -14777,39 +14777,39 @@ GeneratedCodeInfo::annotation() const {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::FieldDescriptorProto_Type> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type>() {
-  return ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Type_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::FieldDescriptorProto_Type>() {
+  return ::shark::FieldDescriptorProto_Type_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::FieldDescriptorProto_Label> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label>() {
-  return ::SHARK_NAMESPACE_ID::FieldDescriptorProto_Label_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::FieldDescriptorProto_Label>() {
+  return ::shark::FieldDescriptorProto_Label_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::FileOptions_OptimizeMode> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode>() {
-  return ::SHARK_NAMESPACE_ID::FileOptions_OptimizeMode_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::FileOptions_OptimizeMode>() {
+  return ::shark::FileOptions_OptimizeMode_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::FieldOptions_CType> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::FieldOptions_CType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::FieldOptions_CType>() {
-  return ::SHARK_NAMESPACE_ID::FieldOptions_CType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::FieldOptions_CType>() {
+  return ::shark::FieldOptions_CType_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::FieldOptions_JSType> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::FieldOptions_JSType> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::FieldOptions_JSType>() {
-  return ::SHARK_NAMESPACE_ID::FieldOptions_JSType_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::FieldOptions_JSType>() {
+  return ::shark::FieldOptions_JSType_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::MethodOptions_IdempotencyLevel> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel>() {
-  return ::SHARK_NAMESPACE_ID::MethodOptions_IdempotencyLevel_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::MethodOptions_IdempotencyLevel>() {
+  return ::shark::MethodOptions_IdempotencyLevel_descriptor();
 }
 
 SHARK_NAMESPACE_CLOSE

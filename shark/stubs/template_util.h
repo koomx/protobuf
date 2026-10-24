@@ -49,9 +49,7 @@
 //
 #pragma once
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // Types small_ and big_ are guaranteed such that sizeof(small_) <
 // sizeof(big_)
@@ -130,7 +128,5 @@ struct or_ : public integral_constant<bool, (A::value || B::value)> {
 };
 
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 

@@ -42,10 +42,7 @@
 #include <shark/compiler/java/message_lite.h>
 #include <shark/compiler/java/service.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 GeneratorFactory::GeneratorFactory() {}
 GeneratorFactory::~GeneratorFactory() {}
@@ -80,7 +77,4 @@ ServiceGenerator* ImmutableGeneratorFactory::NewServiceGenerator(
 }
 
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java

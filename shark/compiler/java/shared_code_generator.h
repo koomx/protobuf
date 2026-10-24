@@ -41,8 +41,7 @@
 #include <shark/stubs/common.h>
 #include <shark/compiler/java/options.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FileDescriptor;  // descriptor.h
 namespace compiler {
 class GeneratorContext;  // code_generator.h
@@ -53,11 +52,9 @@ class ClassNameResolver;  // name_resolver.h
 namespace io {
 class Printer;  // printer.h
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace java {
 
@@ -83,6 +80,5 @@ class SharedCodeGenerator {
 
 }  // namespace java
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

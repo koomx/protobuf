@@ -34,7 +34,7 @@
 #include <tests/test_util2.h>
 
 
-#define BRIDGE_UNITTEST ::google::protobuf::bridge_unittest
+#define BRIDGE_UNITTEST ::shark::bridge_unittest
 #define UNITTEST ::protobuf_unittest
 #define UNITTEST_IMPORT ::protobuf_unittest_import
 #define UNITTEST_PACKAGE_NAME "protobuf_unittest"
@@ -49,9 +49,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 namespace {
 
 
@@ -81,6 +79,4 @@ TEST(MapTest, Aligned8OnArena) { MapTest_Aligned<AlignedAs8, true>(); }
 
 
 }  // namespace
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

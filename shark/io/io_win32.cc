@@ -71,10 +71,7 @@
 #include <string>
 #include <vector>
 
-namespace google {
-namespace protobuf {
-namespace io {
-namespace win32 {
+namespace shark::io::win32 {
 namespace {
 
 using std::string;
@@ -463,9 +460,6 @@ bool wcs_to_utf8(const wchar_t* input, string* out) {
 }
 
 }  // namespace strings
-}  // namespace win32
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io::win32
 
 #endif  // defined(_WIN32)

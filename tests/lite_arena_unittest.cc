@@ -32,8 +32,7 @@
 #include <tests/map_lite_test_util.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 class LiteArenaTest : public testing::Test {
@@ -86,5 +85,4 @@ TEST_F(LiteArenaTest, UnknownFieldMemLeak) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

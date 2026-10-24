@@ -44,8 +44,7 @@
 // Must come last:
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Message;
 class UnknownFieldSet;
@@ -544,8 +543,7 @@ class SHARK_EXPORT TcParser final {
 };
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

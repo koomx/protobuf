@@ -53,10 +53,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 class ObjectLocationTracker;
 
@@ -69,9 +66,9 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
  public:
   // Options that control ProtoStreamObjectWriter class's behavior.
   struct Options {
-    // Treats numeric inputs in google.protobuf.Struct as strings. Normally,
+    // Treats numeric inputs in shark.Struct as strings. Normally,
     // numeric values are returned in double field "number_value" of
-    // google.protobuf.Struct. However, this can cause precision loss for
+    // shark.Struct. However, this can cause precision loss for
     // int64/uint64/double inputs. This option is provided for cases that want
     // to preserve number precision.
     //
@@ -95,7 +92,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
     bool case_insensitive_enum_parsing;
 
     // If true, skips rendering the map entry if map value is null unless the
-    // value type is google.protobuf.NullType.
+    // value type is shark.NullType.
     bool ignore_null_value_map_entry;
 
     // If true, accepts repeated key/value pair for a map proto field.
@@ -146,7 +143,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 
   // Constructor. Does not take ownership of any parameter passed in.
   ProtoStreamObjectWriter(TypeResolver* type_resolver,
-                          const google::protobuf::Type& type,
+                          const shark::Type& type,
                           strings::ByteSink* output, ErrorListener* listener,
                           const ProtoStreamObjectWriter::Options& options =
                               ProtoStreamObjectWriter::Options::Defaults());
@@ -271,7 +268,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
     // True if the type is a well-known type. Well-known types in Any
     // has a special formatting:
     // {
-    //   "@type": "type.googleapis.com/google.protobuf.XXX",
+    //   "@type": "type.googleapis.com/shark.XXX",
     //   "value": <JSON representation of the type>,
     // }
     bool is_well_known_type_;
@@ -349,43 +346,43 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   };
 
   ProtoStreamObjectWriter(const TypeInfo* typeinfo,
-                          const google::protobuf::Type& type,
+                          const shark::Type& type,
                           strings::ByteSink* output, ErrorListener* listener);
 
   ProtoStreamObjectWriter(const TypeInfo* typeinfo,
-                          const google::protobuf::Type& type,
+                          const shark::Type& type,
                           strings::ByteSink* output, ErrorListener* listener,
                           const ProtoStreamObjectWriter::Options& options);
 
   // Returns true if the field is a map.
-  inline bool IsMap(const google::protobuf::Field& field);
+  inline bool IsMap(const shark::Field& field);
 
   // Returns true if the field is an any.
-  inline bool IsAny(const google::protobuf::Field& field);
+  inline bool IsAny(const shark::Field& field);
 
-  // Returns true if the field is google.protobuf.Struct.
-  inline bool IsStruct(const google::protobuf::Field& field);
+  // Returns true if the field is shark.Struct.
+  inline bool IsStruct(const shark::Field& field);
 
-  // Returns true if the field is google.protobuf.Value.
-  inline bool IsStructValue(const google::protobuf::Field& field);
+  // Returns true if the field is shark.Value.
+  inline bool IsStructValue(const shark::Field& field);
 
-  // Returns true if the field is google.protobuf.ListValue.
-  inline bool IsStructListValue(const google::protobuf::Field& field);
+  // Returns true if the field is shark.ListValue.
+  inline bool IsStructListValue(const shark::Field& field);
 
-  // Renders google.protobuf.Value in struct.proto. It picks the right oneof
+  // Renders shark.Value in struct.proto. It picks the right oneof
   // type based on value's type.
   static util::Status RenderStructValue(ProtoStreamObjectWriter* ow,
                                         const DataPiece& data);
 
-  // Renders google.protobuf.Timestamp value.
+  // Renders shark.Timestamp value.
   static util::Status RenderTimestamp(ProtoStreamObjectWriter* ow,
                                       const DataPiece& data);
 
-  // Renders google.protobuf.FieldMask value.
+  // Renders shark.FieldMask value.
   static util::Status RenderFieldMask(ProtoStreamObjectWriter* ow,
                                       const DataPiece& data);
 
-  // Renders google.protobuf.Duration value.
+  // Renders shark.Duration value.
   static util::Status RenderDuration(ProtoStreamObjectWriter* ow,
                                      const DataPiece& data);
 
@@ -431,7 +428,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 
   // Variables for describing the structure of the input tree:
   // master_type_: descriptor for the whole protobuf message.
-  const google::protobuf::Type& master_type_;
+  const shark::Type& master_type_;
 
   // The current element, variable for internal state processing.
   std::unique_ptr<Item> current_;
@@ -442,10 +439,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(ProtoStreamObjectWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

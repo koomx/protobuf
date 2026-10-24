@@ -38,8 +38,7 @@
 #include <cerrno>
 #include <string>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 TEST(StringPrintfTest, Empty) {
@@ -151,5 +150,4 @@ TEST(StringPrintfTest, LargeBuf) {
 }
 
 }  // anonymous namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

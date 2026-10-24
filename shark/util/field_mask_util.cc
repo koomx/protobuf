@@ -39,11 +39,9 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
-using google::protobuf::FieldMask;
+using shark::FieldMask;
 
 std::string FieldMaskUtil::ToString(const FieldMask& mask) {
   return Join(mask.paths(), ",");
@@ -715,6 +713,4 @@ bool FieldMaskUtil::TrimMessage(const FieldMask& mask, Message* message,
   return tree.TrimMessage(GOOGLE_CHECK_NOTNULL(message));
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

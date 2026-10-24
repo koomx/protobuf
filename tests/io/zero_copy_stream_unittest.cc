@@ -78,19 +78,17 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 namespace {
 
 #ifdef _WIN32
 #define pipe(fds) _pipe(fds, 4096, O_BINARY)
 // DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
 // them like we do below.
-using google::protobuf::io::win32::access;
-using google::protobuf::io::win32::close;
-using google::protobuf::io::win32::mkdir;
-using google::protobuf::io::win32::open;
+using shark::io::win32::access;
+using shark::io::win32::close;
+using shark::io::win32::mkdir;
+using shark::io::win32::open;
 #endif
 
 #ifndef O_BINARY
@@ -1083,6 +1081,4 @@ TEST(ZeroSizeArray, Output) {
 }
 
 }  // namespace
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

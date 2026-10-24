@@ -36,10 +36,7 @@
 #include <shark/stubs/common.h>
 #include <shark/compiler/java/extension.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 // Generates code for a lite extension, which may be within the scope of some
 // message or may be at file scope.  This is much simpler than FieldGenerator
@@ -66,8 +63,5 @@ class ImmutableExtensionLiteGenerator : public ExtensionGenerator {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ImmutableExtensionLiteGenerator);
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

@@ -55,14 +55,12 @@ struct timeval {
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 // Utility functions for Timestamp and Duration.
 class SHARK_EXPORT TimeUtil {
-  typedef google::protobuf::Timestamp Timestamp;
-  typedef google::protobuf::Duration Duration;
+  typedef shark::Timestamp Timestamp;
+  typedef shark::Duration Duration;
 
  public:
   // The min/max Timestamp/Duration values we support.
@@ -164,12 +162,9 @@ class SHARK_EXPORT TimeUtil {
   static timeval DurationToTimeval(const Duration& value);
 };
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util
 
-namespace google {
-namespace protobuf {
+namespace shark {
 // Overloaded operators for Duration.
 //
 // Assignment operators.
@@ -305,8 +300,7 @@ inline std::ostream& operator<<(std::ostream& out, const Timestamp& t) {
   return out;
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

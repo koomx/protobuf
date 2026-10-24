@@ -34,9 +34,7 @@
 #include <shark/util/delimited_message_util.h>
 #include <shark/io/coded_stream.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 bool SerializeDelimitedToFileDescriptor(const MessageLite& message,
                                         int file_descriptor) {
@@ -123,6 +121,4 @@ bool SerializeDelimitedToCodedStream(const MessageLite& message,
   return true;
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

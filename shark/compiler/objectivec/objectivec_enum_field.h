@@ -34,10 +34,7 @@
 #include <string>
 #include <shark/compiler/objectivec/objectivec_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class EnumFieldGenerator : public SingleFieldGenerator {
   friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field);
@@ -70,7 +67,4 @@ class RepeatedEnumFieldGenerator : public RepeatedFieldGenerator {
   virtual ~RepeatedEnumFieldGenerator();
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

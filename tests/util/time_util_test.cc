@@ -38,12 +38,10 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
-using google::protobuf::Duration;
-using google::protobuf::Timestamp;
+using shark::Duration;
+using shark::Timestamp;
 
 namespace {
 
@@ -379,6 +377,4 @@ TEST(TimeUtilTest, TimestampOperators) {
 }
 
 }  // namespace
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

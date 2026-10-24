@@ -80,8 +80,7 @@
 #endif
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Defined in this file.
 class Descriptor;
@@ -239,7 +238,7 @@ class SHARK_EXPORT LazyDescriptor {
 
 class SHARK_EXPORT SymbolBase {
  private:
-  friend class google::protobuf::Symbol;
+  friend class shark::Symbol;
   uint8_t symbol_type_;
 };
 
@@ -310,24 +309,24 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
     WELLKNOWNTYPE_UNSPECIFIED,  // Not a well-known type.
 
     // Wrapper types.
-    WELLKNOWNTYPE_DOUBLEVALUE,  // google.protobuf.DoubleValue
-    WELLKNOWNTYPE_FLOATVALUE,   // google.protobuf.FloatValue
-    WELLKNOWNTYPE_INT64VALUE,   // google.protobuf.Int64Value
-    WELLKNOWNTYPE_UINT64VALUE,  // google.protobuf.UInt64Value
-    WELLKNOWNTYPE_INT32VALUE,   // google.protobuf.Int32Value
-    WELLKNOWNTYPE_UINT32VALUE,  // google.protobuf.UInt32Value
-    WELLKNOWNTYPE_STRINGVALUE,  // google.protobuf.StringValue
-    WELLKNOWNTYPE_BYTESVALUE,   // google.protobuf.BytesValue
-    WELLKNOWNTYPE_BOOLVALUE,    // google.protobuf.BoolValue
+    WELLKNOWNTYPE_DOUBLEVALUE,  // shark.DoubleValue
+    WELLKNOWNTYPE_FLOATVALUE,   // shark.FloatValue
+    WELLKNOWNTYPE_INT64VALUE,   // shark.Int64Value
+    WELLKNOWNTYPE_UINT64VALUE,  // shark.UInt64Value
+    WELLKNOWNTYPE_INT32VALUE,   // shark.Int32Value
+    WELLKNOWNTYPE_UINT32VALUE,  // shark.UInt32Value
+    WELLKNOWNTYPE_STRINGVALUE,  // shark.StringValue
+    WELLKNOWNTYPE_BYTESVALUE,   // shark.BytesValue
+    WELLKNOWNTYPE_BOOLVALUE,    // shark.BoolValue
 
     // Other well known types.
-    WELLKNOWNTYPE_ANY,        // google.protobuf.Any
-    WELLKNOWNTYPE_FIELDMASK,  // google.protobuf.FieldMask
-    WELLKNOWNTYPE_DURATION,   // google.protobuf.Duration
-    WELLKNOWNTYPE_TIMESTAMP,  // google.protobuf.Timestamp
-    WELLKNOWNTYPE_VALUE,      // google.protobuf.Value
-    WELLKNOWNTYPE_LISTVALUE,  // google.protobuf.ListValue
-    WELLKNOWNTYPE_STRUCT,     // google.protobuf.Struct
+    WELLKNOWNTYPE_ANY,        // shark.Any
+    WELLKNOWNTYPE_FIELDMASK,  // shark.FieldMask
+    WELLKNOWNTYPE_DURATION,   // shark.Duration
+    WELLKNOWNTYPE_TIMESTAMP,  // shark.Timestamp
+    WELLKNOWNTYPE_VALUE,      // shark.Value
+    WELLKNOWNTYPE_LISTVALUE,  // shark.ListValue
+    WELLKNOWNTYPE_STRUCT,     // shark.Struct
 
     // New well-known types may be added in the future.
     // Please make sure any switch() statements have a 'default' case.
@@ -861,7 +860,7 @@ class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
   //
   // A MessageSet extension is defined as an optional message extension
   // whose containing type has the message_set_wire_format option set.
-  // This should be true of extensions of google.protobuf.bridge.MessageSet;
+  // This should be true of extensions of shark.bridge.MessageSet;
   // by convention, such extensions are named "message_set_extension".
   //
   // The opposite operation (looking up an extension's FieldDescriptor given
@@ -1258,8 +1257,8 @@ class SHARK_EXPORT EnumValueDescriptor : private internal::SymbolBaseN<0>,
 
   // The full_name of an enum value is a sibling symbol of the enum type.
   // e.g. the full name of FieldDescriptorProto::TYPE_INT32 is actually
-  // "google.protobuf.FieldDescriptorProto.TYPE_INT32", NOT
-  // "google.protobuf.FieldDescriptorProto.Type.TYPE_INT32".  This is to conform
+  // "shark.FieldDescriptorProto.TYPE_INT32", NOT
+  // "shark.FieldDescriptorProto.Type.TYPE_INT32".  This is to conform
   // with C++ scoping rules for enums.
   const std::string& full_name() const;
 
@@ -1510,7 +1509,7 @@ class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
   // e.g. "foo/bar/baz.proto"
   const std::string& name() const;
 
-  // The package, e.g. "google.protobuf.compiler".
+  // The package, e.g. "shark.compiler".
   const std::string& package() const;
 
   // The DescriptorPool in which this FileDescriptor and all its contents were
@@ -2430,8 +2429,7 @@ inline FileDescriptor::Syntax FileDescriptor::syntax() const {
   return static_cast<Syntax>(syntax_);
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #undef SHARK_INTERNAL_CHECK_CLASS_SIZE
 #include <shark/port_undef.inc>

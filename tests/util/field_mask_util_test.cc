@@ -41,9 +41,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 class SnakeCaseCamelCaseTest : public ::testing::Test {
  protected:
@@ -115,7 +113,7 @@ TEST_F(SnakeCaseCamelCaseTest, RoundTripTest) {
   } while (std::next_permutation(name.begin(), name.end()));
 }
 
-using google::protobuf::FieldMask;
+using shark::FieldMask;
 using protobuf_unittest::NestedTestAllTypes;
 using protobuf_unittest::TestAllTypes;
 using protobuf_unittest::TestRequired;
@@ -831,6 +829,4 @@ TEST(FieldMaskUtilTest, TrimMessageReturnValue) {
 
 
 }  // namespace
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

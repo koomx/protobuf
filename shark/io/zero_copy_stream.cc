@@ -37,9 +37,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 
 bool ZeroCopyOutputStream::WriteAliasedRaw(const void* /* data */,
@@ -50,6 +48,4 @@ bool ZeroCopyOutputStream::WriteAliasedRaw(const void* /* data */,
   return false;
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

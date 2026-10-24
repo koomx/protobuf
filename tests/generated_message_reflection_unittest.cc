@@ -62,8 +62,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class GeneratedMessageReflectionTestHelper {
  public:
@@ -1269,7 +1268,7 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
       reflection->GetInt32(message,
                            descriptor->FindFieldByName("optional_int64")),
       "Protocol Buffer reflection usage error:\n"
-      "  Method      : google::protobuf::Reflection::GetInt32\n"
+      "  Method      : shark::Reflection::GetInt32\n"
       "  Message type: protobuf_unittest\\.TestAllTypes\n"
       "  Field       : protobuf_unittest\\.TestAllTypes\\.optional_int64\n"
       "  Problem     : Field is not the right type for this message:\n"
@@ -1278,7 +1277,7 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
   EXPECT_DEATH(reflection->GetInt32(
                    message, descriptor->FindFieldByName("repeated_int32")),
                "Protocol Buffer reflection usage error:\n"
-               "  Method      : google::protobuf::Reflection::GetInt32\n"
+               "  Method      : shark::Reflection::GetInt32\n"
                "  Message type: protobuf_unittest.TestAllTypes\n"
                "  Field       : protobuf_unittest.TestAllTypes.repeated_int32\n"
                "  Problem     : Field is repeated; the method requires a "
@@ -1288,7 +1287,7 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
           message,
           unittest::ForeignMessage::descriptor()->FindFieldByName("c")),
       "Protocol Buffer reflection usage error:\n"
-      "  Method      : google::protobuf::Reflection::GetInt32\n"
+      "  Method      : shark::Reflection::GetInt32\n"
       "  Message type: protobuf_unittest.TestAllTypes\n"
       "  Field       : protobuf_unittest.ForeignMessage.c\n"
       "  Problem     : Field does not match message type.");
@@ -1297,7 +1296,7 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
           message,
           unittest::ForeignMessage::descriptor()->FindFieldByName("c")),
       "Protocol Buffer reflection usage error:\n"
-      "  Method      : google::protobuf::Reflection::HasField\n"
+      "  Method      : shark::Reflection::HasField\n"
       "  Message type: protobuf_unittest.TestAllTypes\n"
       "  Field       : protobuf_unittest.ForeignMessage.c\n"
       "  Problem     : Field does not match message type.");
@@ -1369,5 +1368,4 @@ TEST(GeneratedMessageReflection, IsDescendantOneof) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

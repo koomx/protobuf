@@ -63,8 +63,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Arena;
 class Message;
@@ -205,8 +204,7 @@ inline void OnShutdownDestroyString(const std::string* ptr) {
 }
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

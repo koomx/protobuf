@@ -46,17 +46,14 @@
 #include <shark/compiler/scc.h>
 #include <shark/compiler/cpp/options.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FileDescriptor;  // descriptor.h
 namespace io {
 class Printer;  // printer.h
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace cpp {
 
@@ -202,6 +199,5 @@ class FileGenerator {
 
 }  // namespace cpp
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

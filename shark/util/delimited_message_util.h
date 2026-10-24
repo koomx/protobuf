@@ -43,9 +43,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 // Write a single size-delimited message from the given stream. Delimited
 // format allows a single file or stream to contain multiple messages,
@@ -99,9 +97,7 @@ bool SHARK_EXPORT SerializeDelimitedToZeroCopyStream(
 bool SHARK_EXPORT SerializeDelimitedToCodedStream(
     const MessageLite& message, io::CodedOutputStream* output);
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util
 
 #include <shark/port_undef.inc>
 

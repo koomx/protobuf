@@ -66,8 +66,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace cpp {
 
@@ -4440,7 +4439,6 @@ void MessageGenerator::GenerateIsInitialized(io::Printer* printer) {
 
 }  // namespace cpp
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

@@ -34,10 +34,7 @@
 
 #include <shark/descriptor.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace python {
+namespace shark::compiler::python {
 
 
 std::string ModuleName(const std::string& filename);
@@ -53,8 +50,5 @@ template <typename DescriptorT>
 std::string NamePrefixedWithNestedTypes(const DescriptorT& descriptor,
                                         const std::string& separator);
 
-}  // namespace python
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::python
 

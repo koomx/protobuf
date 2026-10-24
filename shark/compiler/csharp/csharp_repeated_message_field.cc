@@ -42,10 +42,7 @@
 #include <shark/compiler/csharp/csharp_message_field.h>
 #include <shark/compiler/csharp/csharp_wrapper_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 RepeatedMessageFieldGenerator::RepeatedMessageFieldGenerator(
     const FieldDescriptor* descriptor, int presenceIndex, const Options *options)
@@ -168,7 +165,4 @@ void RepeatedMessageFieldGenerator::GenerateExtensionCode(io::Printer* printer) 
   printer->Print(");\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

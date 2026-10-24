@@ -34,16 +34,10 @@
 #include <shark/io/printer.h>
 #include <shark/descriptor.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
     void WriteMessageDocComment(io::Printer* printer, const Descriptor* message);
     void WritePropertyDocComment(io::Printer* printer, const FieldDescriptor* field);
     void WriteEnumDocComment(io::Printer* printer, const EnumDescriptor* enumDescriptor);
     void WriteEnumValueDocComment(io::Printer* printer, const EnumValueDescriptor* value);
     void WriteMethodDocComment(io::Printer* printer, const MethodDescriptor* method);
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

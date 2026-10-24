@@ -40,10 +40,7 @@
 #include <tests/compiler/annotation_test_util.h>
 #include <shark/compiler/cpp/helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace atu = annotation_test_util;
 
@@ -155,7 +152,4 @@ TEST_F(CppMetadataTest, CapturesMessageNames) {
 }
 
 }  // namespace
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

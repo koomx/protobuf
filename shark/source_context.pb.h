@@ -43,20 +43,20 @@ struct TableStruct_shark_2fsource_5fcontext_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fsource_5fcontext_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class SourceContext;
 struct SourceContextDefaultTypeInternal;
 extern SourceContextDefaultTypeInternal _SourceContext_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::SourceContext* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceContext>(Arena*);
+template<> ::shark::SourceContext* Arena::CreateMaybeMessage<::shark::SourceContext>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class SourceContext final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.SourceContext) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.SourceContext) */ {
  public:
   inline SourceContext() : SourceContext(nullptr) {}
   ~SourceContext() override;
@@ -159,7 +159,7 @@ class SourceContext final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.SourceContext";
+    return "shark.SourceContext";
   }
   protected:
   explicit SourceContext(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -192,7 +192,7 @@ class SourceContext final :
   std::string* _internal_mutable_file_name();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.SourceContext)
+  // @@protoc_insertion_point(class_scope:shark.SourceContext)
  private:
   class _Internal;
 
@@ -222,7 +222,7 @@ inline void SourceContext::clear_file_name() {
   _impl_.file_name_.ClearToEmpty();
 }
 inline const std::string& SourceContext::file_name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.SourceContext.file_name)
+  // @@protoc_insertion_point(field_get:shark.SourceContext.file_name)
   return _internal_file_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -230,11 +230,11 @@ inline SHARK_ALWAYS_INLINE
 void SourceContext::set_file_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.file_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.SourceContext.file_name)
+  // @@protoc_insertion_point(field_set:shark.SourceContext.file_name)
 }
 inline std::string* SourceContext::mutable_file_name() {
   std::string* _s = _internal_mutable_file_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.SourceContext.file_name)
+  // @@protoc_insertion_point(field_mutable:shark.SourceContext.file_name)
   return _s;
 }
 inline const std::string& SourceContext::_internal_file_name() const {
@@ -249,7 +249,7 @@ inline std::string* SourceContext::_internal_mutable_file_name() {
   return _impl_.file_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* SourceContext::release_file_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.SourceContext.file_name)
+  // @@protoc_insertion_point(field_release:shark.SourceContext.file_name)
   return _impl_.file_name_.Release();
 }
 inline void SourceContext::set_allocated_file_name(std::string* file_name) {
@@ -264,7 +264,7 @@ inline void SourceContext::set_allocated_file_name(std::string* file_name) {
     _impl_.file_name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.SourceContext.file_name)
+  // @@protoc_insertion_point(field_set_allocated:shark.SourceContext.file_name)
 }
 
 #ifdef __GNUC__
@@ -273,7 +273,7 @@ inline void SourceContext::set_allocated_file_name(std::string* file_name) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

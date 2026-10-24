@@ -37,10 +37,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 // LocationTrackerInterface is an interface for classes that track
 // the location information for the purpose of error reporting.
@@ -59,10 +56,7 @@ class SHARK_EXPORT LocationTrackerInterface {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(LocationTrackerInterface);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

@@ -40,9 +40,7 @@
 // Must be last:
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // =============================================================================
 // ZeroFieldsBase
@@ -117,8 +115,6 @@ void ZeroFieldsBase::InternalSwap(ZeroFieldsBase* other) {
   _internal_metadata_.Swap<UnknownFieldSet>(&other->_internal_metadata_);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

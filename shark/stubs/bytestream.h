@@ -59,9 +59,7 @@
 
 class CordByteSink;
 
-namespace google {
-namespace protobuf {
-namespace strings {
+namespace shark::strings {
 
 // An abstract interface for an object that consumes a sequence of bytes. This
 // interface offers a way to append data as well as a Flush() function.
@@ -341,9 +339,7 @@ class SHARK_EXPORT LimitByteSource : public ByteSource {
   size_t limit_;
 };
 
-}  // namespace strings
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::strings
 
 #include <shark/port_undef.inc>
 

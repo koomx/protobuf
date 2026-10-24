@@ -39,8 +39,7 @@
 #include <shark/stubs/hash.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 TEST(StringPiece, Ctor) {
   {
@@ -691,5 +690,4 @@ TEST(NonNegativeLenTest, NonNegativeLen) {
 #endif  // SHARK_HAS_DEATH_TEST
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

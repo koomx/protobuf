@@ -53,9 +53,7 @@
 SHARK_PRAGMA_INIT_SEG
 
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 void DestroyMessage(const void* message) {
   static_cast<const MessageLite*>(message)->~MessageLite();
@@ -402,8 +400,6 @@ MessageLite* GetOwnedMessageInternal(Arena* message_arena,
   }
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

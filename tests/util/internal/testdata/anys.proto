@@ -63,26 +63,26 @@ message AnyTestCases {
   AnyWrapper any_with_empty = 18;
   AnyWrapper any_with_default_timestamp = 19;
 
-  google.protobuf.Any top_level_any = 50;
-  google.protobuf.Any top_level_any_with_type_field_at_end = 51;
-  google.protobuf.Any top_level_any_with_pivot_one = 52;
-  google.protobuf.Any top_level_any_with_pivot_two = 53;
-  google.protobuf.Any top_level_any_unordered = 54;
+  shark.Any top_level_any = 50;
+  shark.Any top_level_any_with_type_field_at_end = 51;
+  shark.Any top_level_any_with_pivot_one = 52;
+  shark.Any top_level_any_with_pivot_two = 53;
+  shark.Any top_level_any_unordered = 54;
 }
 
 message AnyWrapper {
-  google.protobuf.Any any = 1;
+  shark.Any any = 1;
 }
 
 // Hack to make sure the types we put into the any are included in the types.
 // Real solution is to add these types to the service config.
 message Imports {
-  google.protobuf.DoubleValue dbl = 1;
-  google.protobuf.Struct struct = 2;
-  google.protobuf.Timestamp timestamp = 3;
-  google.protobuf.Duration duration = 4;
-  google.protobuf.Int32Value i32 = 5;
-  google.protobuf.Empty empty = 6;
+  shark.DoubleValue dbl = 1;
+  shark.Struct struct = 2;
+  shark.Timestamp timestamp = 3;
+  shark.Duration duration = 4;
+  shark.Int32Value i32 = 5;
+  shark.Empty empty = 6;
   Data data = 100;
 }
 
@@ -91,12 +91,12 @@ message Data {
   string str = 2;
   repeated string msgs = 3;
   Data nested_data = 4;
-  google.protobuf.Int32Value int_wrapper = 5;
-  google.protobuf.Timestamp time = 6;
+  shark.Int32Value int_wrapper = 5;
+  shark.Timestamp time = 6;
   map<string, string> map_data = 7;
-  google.protobuf.Struct struct_data = 8;
+  shark.Struct struct_data = 8;
   repeated Data repeated_data = 9;
-  repeated google.protobuf.Any repeated_any = 10;
+  repeated shark.Any repeated_any = 10;
 }
 
 service AnyTestService {
@@ -106,11 +106,11 @@ service AnyTestService {
 
 message AnyIn {
   string something = 1;
-  google.protobuf.Any any = 2;
+  shark.Any any = 2;
 }
 
 message AnyOut {
-  google.protobuf.Any any = 1;
+  shark.Any any = 1;
 }
 
 message AnyM {

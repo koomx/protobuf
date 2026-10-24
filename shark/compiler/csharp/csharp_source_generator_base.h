@@ -35,10 +35,7 @@
 #include <shark/compiler/code_generator.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 struct Options;
 
@@ -61,9 +58,6 @@ class SourceGeneratorBase {
   const Options *options_;
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 

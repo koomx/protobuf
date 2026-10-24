@@ -41,10 +41,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/util/internal/json_escaping.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 
 JsonObjectWriter::~JsonObjectWriter() {
@@ -184,7 +181,4 @@ void JsonObjectWriter::WritePrefix(StringPiece name) {
   }
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

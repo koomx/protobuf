@@ -93,7 +93,7 @@ message Proto3OptionalExtensions {
   option (protobuf_unittest.Proto3OptionalExtensions.ext_no_optional) = 8;
   option (protobuf_unittest.Proto3OptionalExtensions.ext_with_optional) = 16;
 
-  extend google.protobuf.MessageOptions {
+  extend shark.MessageOptions {
     int32 ext_no_optional = 355886728;
     optional int32 ext_with_optional = 355886729;
   }

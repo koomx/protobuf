@@ -40,10 +40,7 @@
 #include <shark/descriptor.pb.h>
 
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 
@@ -951,7 +948,4 @@ void RepeatedStringFieldGenerator::GenerateByteSize(
       "}\n");
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

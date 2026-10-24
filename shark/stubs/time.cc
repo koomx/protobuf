@@ -5,9 +5,7 @@
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 namespace {
 static const int64_t kSecondsPerMinute = 60;
@@ -360,6 +358,4 @@ bool ParseTime(const std::string& value, int64_t* seconds, int32_t* nanos) {
   return *data == 0;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

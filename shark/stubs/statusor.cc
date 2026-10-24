@@ -32,17 +32,11 @@
 
 #include <shark/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace statusor_internal {
+namespace shark::util::statusor_internal {
 
 void StatusOrHelper::Crash(const Status& status) {
   GOOGLE_LOG(FATAL) << "Attempting to fetch value instead of handling error "
                     << status.ToString();
 }
 
-}  // namespace statusor_internal
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::statusor_internal

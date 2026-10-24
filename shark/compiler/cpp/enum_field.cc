@@ -40,10 +40,7 @@
 #include <shark/compiler/cpp/field.h>
 #include <shark/compiler/cpp/helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 
@@ -445,7 +442,4 @@ void RepeatedEnumFieldGenerator::GenerateCopyAggregateInitializer(
   }
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

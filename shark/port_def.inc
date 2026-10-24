@@ -180,14 +180,10 @@
 #if defined(SHARK_NAMESPACE) || defined(SHARK_NAMESPACE_ID)
 #error SHARK_NAMESPACE or SHARK_NAMESPACE_ID was previously defined
 #endif
-#define SHARK_NAMESPACE "google::protobuf"
-#define SHARK_NAMESPACE_ID google::protobuf
-#define SHARK_NAMESPACE_OPEN \
-  namespace google {            \
-  namespace protobuf {
-#define SHARK_NAMESPACE_CLOSE \
-  } /* namespace protobuf */     \
-  } /* namespace google */
+#define SHARK_NAMESPACE "shark"
+#define SHARK_NAMESPACE_ID shark
+#define SHARK_NAMESPACE_OPEN namespace shark {
+#define SHARK_NAMESPACE_CLOSE }  // namespace shark
 
 #ifdef SHARK_ALWAYS_INLINE
 #error SHARK_ALWAYS_INLINE was previously defined
@@ -660,10 +656,10 @@
 #endif
 
 #define SHARK_TC_PARAM_DECL                                 \
-  ::google::protobuf::MessageLite *msg, const char *ptr,                 \
-      ::google::protobuf::internal::ParseContext *ctx,                   \
-      const ::google::protobuf::internal::TcParseTableBase *table,       \
-      uint64_t hasbits, ::google::protobuf::internal::TcFieldData data
+  ::shark::MessageLite *msg, const char *ptr,                 \
+      ::shark::internal::ParseContext *ctx,                   \
+      const ::shark::internal::TcParseTableBase *table,       \
+      uint64_t hasbits, ::shark::internal::TcFieldData data
 
 // ThreadSafeArenaz is turned off completely in opensource builds.
 

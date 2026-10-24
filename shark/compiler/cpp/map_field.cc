@@ -36,10 +36,7 @@
 #include <shark/compiler/cpp/helpers.h>
 
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 bool IsProto3Field(const FieldDescriptor* field_descriptor) {
   const FileDescriptor* file_descriptor = field_descriptor->file();
@@ -332,7 +329,4 @@ ArenaDtorNeeds MapFieldGenerator::NeedsArenaDestructor() const {
              : ArenaDtorNeeds::kNone;
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

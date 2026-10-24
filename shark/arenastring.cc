@@ -44,11 +44,9 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
-namespace  {
+namespace {
 
 // TaggedStringPtr::Flags uses the lower 2 bits as tags.
 // Enforce that allocated data aligns to at least 4 bytes, and that
@@ -173,7 +171,7 @@ std::string* ArenaStringPtr::MutableNoCopy(Arena* arena) {
 }
 
 template <typename... Lazy>
-std::string* ArenaStringPtr::MutableSlow(::google::protobuf::Arena* arena,
+std::string* ArenaStringPtr::MutableSlow(::shark::Arena* arena,
                                          const Lazy&... lazy_default) {
   GOOGLE_DCHECK(IsDefault());
 
@@ -235,7 +233,7 @@ void ArenaStringPtr::ClearToEmpty() {
 }
 
 void ArenaStringPtr::ClearToDefault(const LazyString& default_value,
-                                    ::google::protobuf::Arena* arena) {
+                                    ::shark::Arena* arena) {
   ScopedCheckPtrInvariants check(&tagged_ptr_);
   (void)arena;
   if (IsDefault()) {
@@ -260,8 +258,6 @@ const char* EpsCopyInputStream::ReadArenaString(const char* ptr,
   return ptr;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

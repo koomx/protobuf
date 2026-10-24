@@ -20,7 +20,7 @@ SHARK_PRAGMA_INIT_SEG
 namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-SHARK_NAMESPACE_OPEN
+namespace shark {
 constexpr Api::Api(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.methods_)*/{}
@@ -73,74 +73,72 @@ struct MixinDefaultTypeInternal {
   };
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 MixinDefaultTypeInternal _Mixin_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fapi_2eproto[3];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2fapi_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fapi_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2fapi_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Api, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.name_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.methods_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.options_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.version_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.source_context_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.mixins_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Api, _impl_.syntax_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.name_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.methods_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.options_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.version_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.source_context_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.mixins_),
+  SHARK_FIELD_OFFSET(::shark::Api, _impl_.syntax_),
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Method, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.name_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.request_type_url_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.request_streaming_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.response_type_url_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.response_streaming_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.options_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Method, _impl_.syntax_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.name_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.request_type_url_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.request_streaming_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.response_type_url_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.response_streaming_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.options_),
+  SHARK_FIELD_OFFSET(::shark::Method, _impl_.syntax_),
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Mixin, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Mixin, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Mixin, _impl_.name_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Mixin, _impl_.root_),
+  SHARK_FIELD_OFFSET(::shark::Mixin, _impl_.name_),
+  SHARK_FIELD_OFFSET(::shark::Mixin, _impl_.root_),
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Api)},
-  { 13, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Method)},
-  { 26, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Mixin)},
+  { 0, -1, -1, sizeof(::shark::Api)},
+  { 13, -1, -1, sizeof(::shark::Method)},
+  { 26, -1, -1, sizeof(::shark::Mixin)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::_Api_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::_Method_default_instance_._instance,
-  &::SHARK_NAMESPACE_ID::_Mixin_default_instance_._instance,
+  &::shark::_Api_default_instance_._instance,
+  &::shark::_Method_default_instance_._instance,
+  &::shark::_Mixin_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2fapi_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\017shark/api.proto\022\017google.protobuf\032\032shar"
-  "k/source_context.proto\032\020shark/type.proto"
-  "\"\201\002\n\003Api\022\014\n\004name\030\001 \001(\t\022(\n\007methods\030\002 \003(\0132"
-  "\027.google.protobuf.Method\022(\n\007options\030\003 \003("
-  "\0132\027.google.protobuf.Option\022\017\n\007version\030\004 "
-  "\001(\t\0226\n\016source_context\030\005 \001(\0132\036.google.pro"
-  "tobuf.SourceContext\022&\n\006mixins\030\006 \003(\0132\026.go"
-  "ogle.protobuf.Mixin\022\'\n\006syntax\030\007 \001(\0162\027.go"
-  "ogle.protobuf.Syntax\"\325\001\n\006Method\022\014\n\004name\030"
-  "\001 \001(\t\022\030\n\020request_type_url\030\002 \001(\t\022\031\n\021reque"
-  "st_streaming\030\003 \001(\010\022\031\n\021response_type_url\030"
-  "\004 \001(\t\022\032\n\022response_streaming\030\005 \001(\010\022(\n\007opt"
-  "ions\030\006 \003(\0132\027.google.protobuf.Option\022\'\n\006s"
-  "yntax\030\007 \001(\0162\027.google.protobuf.Syntax\"#\n\005"
+  "\n\017shark/api.proto\022\005shark\032\032shark/source_c"
+  "ontext.proto\032\020shark/type.proto\"\317\001\n\003Api\022\014"
+  "\n\004name\030\001 \001(\t\022\036\n\007methods\030\002 \003(\0132\r.shark.Me"
+  "thod\022\036\n\007options\030\003 \003(\0132\r.shark.Option\022\017\n\007"
+  "version\030\004 \001(\t\022,\n\016source_context\030\005 \001(\0132\024."
+  "shark.SourceContext\022\034\n\006mixins\030\006 \003(\0132\014.sh"
+  "ark.Mixin\022\035\n\006syntax\030\007 \001(\0162\r.shark.Syntax"
+  "\"\301\001\n\006Method\022\014\n\004name\030\001 \001(\t\022\030\n\020request_typ"
+  "e_url\030\002 \001(\t\022\031\n\021request_streaming\030\003 \001(\010\022\031"
+  "\n\021response_type_url\030\004 \001(\t\022\032\n\022response_st"
+  "reaming\030\005 \001(\010\022\036\n\007options\030\006 \003(\0132\r.shark.O"
+  "ption\022\035\n\006syntax\030\007 \001(\0162\r.shark.Syntax\"#\n\005"
   "Mixin\022\014\n\004name\030\001 \001(\t\022\014\n\004root\030\002 \001(\tBv\n\023com"
   ".google.protobufB\010ApiProtoP\001Z,google.gol"
   "ang.org/protobuf/types/known/apipb\242\002\003GPB"
@@ -153,7 +151,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fapi_2eproto
 };
 static ::_pbi::once_flag descriptor_table_shark_2fapi_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fapi_2eproto = {
-    false, false, 721, descriptor_table_protodef_shark_2fapi_2eproto,
+    false, false, 641, descriptor_table_protodef_shark_2fapi_2eproto,
     "shark/api.proto",
     &descriptor_table_shark_2fapi_2eproto_once, descriptor_table_shark_2fapi_2eproto_deps, 2, 3,
     schemas, file_default_instances, TableStruct_shark_2fapi_2eproto::offsets,
@@ -166,16 +164,16 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fapi
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fapi_2eproto(&descriptor_table_shark_2fapi_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class Api::_Internal {
  public:
-  static const ::SHARK_NAMESPACE_ID::SourceContext& source_context(const Api* msg);
+  static const ::shark::SourceContext& source_context(const Api* msg);
 };
 
-const ::SHARK_NAMESPACE_ID::SourceContext&
+const ::shark::SourceContext&
 Api::_Internal::source_context(const Api* msg) {
   return *msg->_impl_.source_context_;
 }
@@ -192,7 +190,7 @@ Api::Api(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Api)
+  // @@protoc_insertion_point(arena_constructor:shark.Api)
 }
 Api::Api(const Api& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -225,10 +223,10 @@ Api::Api(const Api& from)
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_source_context()) {
-    _this->_impl_.source_context_ = new ::SHARK_NAMESPACE_ID::SourceContext(*from._impl_.source_context_);
+    _this->_impl_.source_context_ = new ::shark::SourceContext(*from._impl_.source_context_);
   }
   _this->_impl_.syntax_ = from._impl_.syntax_;
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Api)
+  // @@protoc_insertion_point(copy_constructor:shark.Api)
 }
 
 inline void Api::SharedCtor(
@@ -256,7 +254,7 @@ inline void Api::SharedCtor(
 }
 
 Api::~Api() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Api)
+  // @@protoc_insertion_point(destructor:shark.Api)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -279,7 +277,7 @@ void Api::SetCachedSize(int size) const {
 }
 
 void Api::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Api)
+// @@protoc_insertion_point(message_clear_start:shark.Api)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -309,11 +307,11 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Api.name"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Api.name"));
         } else
           goto handle_unusual;
         continue;
-      // repeated .google.protobuf.Method methods = 2;
+      // repeated .shark.Method methods = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -326,7 +324,7 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .google.protobuf.Option options = 3;
+      // repeated .shark.Option options = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -345,11 +343,11 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_version();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Api.version"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Api.version"));
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.SourceContext source_context = 5;
+      // .shark.SourceContext source_context = 5;
       case 5:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr = ctx->ParseMessage(_internal_mutable_source_context(), ptr);
@@ -357,7 +355,7 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .google.protobuf.Mixin mixins = 6;
+      // repeated .shark.Mixin mixins = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -370,12 +368,12 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.Syntax syntax = 7;
+      // .shark.Syntax syntax = 7;
       case 7:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::SHARK_NAMESPACE_ID::Syntax>(val));
+          _internal_set_syntax(static_cast<::shark::Syntax>(val));
         } else
           goto handle_unusual;
         continue;
@@ -404,7 +402,7 @@ failure:
 
 uint8_t* Api::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Api)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Api)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -413,12 +411,12 @@ uint8_t* Api::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Api.name");
+      "shark.Api.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
   }
 
-  // repeated .google.protobuf.Method methods = 2;
+  // repeated .shark.Method methods = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_methods_size()); i < n; i++) {
     const auto& repfield = this->_internal_methods(i);
@@ -426,7 +424,7 @@ uint8_t* Api::_InternalSerialize(
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .google.protobuf.Option options = 3;
+  // repeated .shark.Option options = 3;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -439,19 +437,19 @@ uint8_t* Api::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_version().data(), static_cast<int>(this->_internal_version().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Api.version");
+      "shark.Api.version");
     target = stream->WriteStringMaybeAliased(
         4, this->_internal_version(), target);
   }
 
-  // .google.protobuf.SourceContext source_context = 5;
+  // .shark.SourceContext source_context = 5;
   if (this->_internal_has_source_context()) {
     target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(5, _Internal::source_context(this),
         _Internal::source_context(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .google.protobuf.Mixin mixins = 6;
+  // repeated .shark.Mixin mixins = 6;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_mixins_size()); i < n; i++) {
     const auto& repfield = this->_internal_mixins(i);
@@ -459,7 +457,7 @@ uint8_t* Api::_InternalSerialize(
         InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // .google.protobuf.Syntax syntax = 7;
+  // .shark.Syntax syntax = 7;
   if (this->_internal_syntax() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -470,33 +468,33 @@ uint8_t* Api::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Api)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Api)
   return target;
 }
 
 size_t Api::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Api)
+// @@protoc_insertion_point(message_byte_size_start:shark.Api)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .google.protobuf.Method methods = 2;
+  // repeated .shark.Method methods = 2;
   total_size += 1UL * this->_internal_methods_size();
   for (const auto& msg : this->_impl_.methods_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .google.protobuf.Option options = 3;
+  // repeated .shark.Option options = 3;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .google.protobuf.Mixin mixins = 6;
+  // repeated .shark.Mixin mixins = 6;
   total_size += 1UL * this->_internal_mixins_size();
   for (const auto& msg : this->_impl_.mixins_) {
     total_size +=
@@ -517,14 +515,14 @@ size_t Api::ByteSizeLong() const {
         this->_internal_version());
   }
 
-  // .google.protobuf.SourceContext source_context = 5;
+  // .shark.SourceContext source_context = 5;
   if (this->_internal_has_source_context()) {
     total_size += 1 +
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.source_context_);
   }
 
-  // .google.protobuf.Syntax syntax = 7;
+  // .shark.Syntax syntax = 7;
   if (this->_internal_syntax() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_syntax());
@@ -543,7 +541,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Api::GetClassData() const { retur
 void Api::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Api*>(&to_msg);
   auto& from = static_cast<const Api&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Api)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Api)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -558,7 +556,7 @@ void Api::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPA
     _this->_internal_set_version(from._internal_version());
   }
   if (from._internal_has_source_context()) {
-    _this->_internal_mutable_source_context()->::SHARK_NAMESPACE_ID::SourceContext::MergeFrom(
+    _this->_internal_mutable_source_context()->::shark::SourceContext::MergeFrom(
         from._internal_source_context());
   }
   if (from._internal_syntax() != 0) {
@@ -568,7 +566,7 @@ void Api::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPA
 }
 
 void Api::CopyFrom(const Api& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Api)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Api)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -621,7 +619,7 @@ Method::Method(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Method)
+  // @@protoc_insertion_point(arena_constructor:shark.Method)
 }
 Method::Method(const Method& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -664,7 +662,7 @@ Method::Method(const Method& from)
   ::memcpy(&_impl_.request_streaming_, &from._impl_.request_streaming_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.syntax_) -
     reinterpret_cast<char*>(&_impl_.request_streaming_)) + sizeof(_impl_.syntax_));
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Method)
+  // @@protoc_insertion_point(copy_constructor:shark.Method)
 }
 
 inline void Method::SharedCtor(
@@ -696,7 +694,7 @@ inline void Method::SharedCtor(
 }
 
 Method::~Method() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Method)
+  // @@protoc_insertion_point(destructor:shark.Method)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -717,7 +715,7 @@ void Method::SetCachedSize(int size) const {
 }
 
 void Method::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Method)
+// @@protoc_insertion_point(message_clear_start:shark.Method)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -744,7 +742,7 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Method.name"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Method.name"));
         } else
           goto handle_unusual;
         continue;
@@ -754,7 +752,7 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_request_type_url();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Method.request_type_url"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Method.request_type_url"));
         } else
           goto handle_unusual;
         continue;
@@ -772,7 +770,7 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_response_type_url();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Method.response_type_url"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Method.response_type_url"));
         } else
           goto handle_unusual;
         continue;
@@ -784,7 +782,7 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .google.protobuf.Option options = 6;
+      // repeated .shark.Option options = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -797,12 +795,12 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // .google.protobuf.Syntax syntax = 7;
+      // .shark.Syntax syntax = 7;
       case 7:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::SHARK_NAMESPACE_ID::Syntax>(val));
+          _internal_set_syntax(static_cast<::shark::Syntax>(val));
         } else
           goto handle_unusual;
         continue;
@@ -831,7 +829,7 @@ failure:
 
 uint8_t* Method::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Method)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Method)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -840,7 +838,7 @@ uint8_t* Method::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Method.name");
+      "shark.Method.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
   }
@@ -850,7 +848,7 @@ uint8_t* Method::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_request_type_url().data(), static_cast<int>(this->_internal_request_type_url().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Method.request_type_url");
+      "shark.Method.request_type_url");
     target = stream->WriteStringMaybeAliased(
         2, this->_internal_request_type_url(), target);
   }
@@ -866,7 +864,7 @@ uint8_t* Method::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_response_type_url().data(), static_cast<int>(this->_internal_response_type_url().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Method.response_type_url");
+      "shark.Method.response_type_url");
     target = stream->WriteStringMaybeAliased(
         4, this->_internal_response_type_url(), target);
   }
@@ -877,7 +875,7 @@ uint8_t* Method::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_response_streaming(), target);
   }
 
-  // repeated .google.protobuf.Option options = 6;
+  // repeated .shark.Option options = 6;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -885,7 +883,7 @@ uint8_t* Method::_InternalSerialize(
         InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // .google.protobuf.Syntax syntax = 7;
+  // .shark.Syntax syntax = 7;
   if (this->_internal_syntax() != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -896,19 +894,19 @@ uint8_t* Method::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Method)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Method)
   return target;
 }
 
 size_t Method::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Method)
+// @@protoc_insertion_point(message_byte_size_start:shark.Method)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .google.protobuf.Option options = 6;
+  // repeated .shark.Option options = 6;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
@@ -946,7 +944,7 @@ size_t Method::ByteSizeLong() const {
     total_size += 1 + 1;
   }
 
-  // .google.protobuf.Syntax syntax = 7;
+  // .shark.Syntax syntax = 7;
   if (this->_internal_syntax() != 0) {
     total_size += 1 +
       ::_pbi::WireFormatLite::EnumSize(this->_internal_syntax());
@@ -965,7 +963,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Method::GetClassData() const { re
 void Method::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Method*>(&to_msg);
   auto& from = static_cast<const Method&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Method)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Method)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -993,7 +991,7 @@ void Method::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAME
 }
 
 void Method::CopyFrom(const Method& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Method)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Method)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1045,7 +1043,7 @@ Mixin::Mixin(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Mixin)
+  // @@protoc_insertion_point(arena_constructor:shark.Mixin)
 }
 Mixin::Mixin(const Mixin& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -1072,7 +1070,7 @@ Mixin::Mixin(const Mixin& from)
     _this->_impl_.root_.Set(from._internal_root(), 
       _this->GetArenaForAllocation());
   }
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Mixin)
+  // @@protoc_insertion_point(copy_constructor:shark.Mixin)
 }
 
 inline void Mixin::SharedCtor(
@@ -1095,7 +1093,7 @@ inline void Mixin::SharedCtor(
 }
 
 Mixin::~Mixin() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Mixin)
+  // @@protoc_insertion_point(destructor:shark.Mixin)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -1114,7 +1112,7 @@ void Mixin::SetCachedSize(int size) const {
 }
 
 void Mixin::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Mixin)
+// @@protoc_insertion_point(message_clear_start:shark.Mixin)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -1136,7 +1134,7 @@ const char* Mixin::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Mixin.name"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Mixin.name"));
         } else
           goto handle_unusual;
         continue;
@@ -1146,7 +1144,7 @@ const char* Mixin::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_root();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Mixin.root"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Mixin.root"));
         } else
           goto handle_unusual;
         continue;
@@ -1175,7 +1173,7 @@ failure:
 
 uint8_t* Mixin::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Mixin)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Mixin)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -1184,7 +1182,7 @@ uint8_t* Mixin::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Mixin.name");
+      "shark.Mixin.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
   }
@@ -1194,7 +1192,7 @@ uint8_t* Mixin::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_root().data(), static_cast<int>(this->_internal_root().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Mixin.root");
+      "shark.Mixin.root");
     target = stream->WriteStringMaybeAliased(
         2, this->_internal_root(), target);
   }
@@ -1203,12 +1201,12 @@ uint8_t* Mixin::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Mixin)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Mixin)
   return target;
 }
 
 size_t Mixin::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Mixin)
+// @@protoc_insertion_point(message_byte_size_start:shark.Mixin)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -1242,7 +1240,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Mixin::GetClassData() const { ret
 void Mixin::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Mixin*>(&to_msg);
   auto& from = static_cast<const Mixin&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Mixin)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Mixin)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1257,7 +1255,7 @@ void Mixin::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMES
 }
 
 void Mixin::CopyFrom(const Mixin& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Mixin)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Mixin)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -1289,19 +1287,19 @@ void Mixin::InternalSwap(Mixin* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Api*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Api >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Api >(arena);
+template<> SHARK_NOINLINE ::shark::Api*
+Arena::CreateMaybeMessage< ::shark::Api >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Api >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Method*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Method >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Method >(arena);
+template<> SHARK_NOINLINE ::shark::Method*
+Arena::CreateMaybeMessage< ::shark::Method >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Method >(arena);
 }
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Mixin*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Mixin >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Mixin >(arena);
+template<> SHARK_NOINLINE ::shark::Mixin*
+Arena::CreateMaybeMessage< ::shark::Mixin >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Mixin >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

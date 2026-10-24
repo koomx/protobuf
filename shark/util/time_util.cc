@@ -42,12 +42,10 @@
 // Must go after other includes.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
-using google::protobuf::Duration;
-using google::protobuf::Timestamp;
+using shark::Duration;
+using shark::Timestamp;
 
 namespace {
 static const int kNanosPerSecond = 1000000000;
@@ -117,15 +115,15 @@ std::string FormatNanos(int32_t nanos) {
 }
 
 std::string FormatTime(int64_t seconds, int32_t nanos) {
-  return ::google::protobuf::internal::FormatTime(seconds, nanos);
+  return ::shark::internal::FormatTime(seconds, nanos);
 }
 
 bool ParseTime(const std::string& value, int64_t* seconds, int32_t* nanos) {
-  return ::google::protobuf::internal::ParseTime(value, seconds, nanos);
+  return ::shark::internal::ParseTime(value, seconds, nanos);
 }
 
 void CurrentTime(int64_t* seconds, int32_t* nanos) {
-  return ::google::protobuf::internal::GetCurrentTime(seconds, nanos);
+  return ::shark::internal::GetCurrentTime(seconds, nanos);
 }
 
 // Truncates the remainder part after division.
@@ -370,12 +368,9 @@ timeval TimeUtil::DurationToTimeval(const Duration& value) {
   return result;
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 using ::SHARK_NAMESPACE_ID::util::CreateNormalized;
 using ::SHARK_NAMESPACE_ID::util::kNanosPerSecond;
@@ -510,5 +505,4 @@ Duration operator-(const Timestamp& t1, const Timestamp& t2) {
   return CreateNormalized<Duration>(t1.seconds() - t2.seconds(),
                                     t1.nanos() - t2.nanos());
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

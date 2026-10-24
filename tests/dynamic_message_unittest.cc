@@ -54,8 +54,7 @@
 #include <gtest/gtest.h>
 #include <tests/test_util.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class DynamicMessageTest : public ::testing::TestWithParam<bool> {
  protected:
@@ -323,5 +322,4 @@ TEST_F(DynamicMessageTest, Proto3) {
 
 INSTANTIATE_TEST_SUITE_P(UseArena, DynamicMessageTest, ::testing::Bool());
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

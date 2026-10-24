@@ -36,8 +36,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 template <typename T, bool use_arena>
 void TestParseCorruptedString(const T& message) {
@@ -105,8 +104,8 @@ class ArenaHolder {
   explicit ArenaHolder(Arena* arena)
       : field_(Arena::CreateMessage<T>(arena)),
         owned_by_arena_(arena != nullptr) {
-    GOOGLE_DCHECK(google::protobuf::Arena::is_arena_constructable<T>::value);
-    GOOGLE_DCHECK(google::protobuf::Arena::is_destructor_skippable<T>::value);
+    GOOGLE_DCHECK(shark::Arena::is_arena_constructable<T>::value);
+    GOOGLE_DCHECK(shark::Arena::is_destructor_skippable<T>::value);
   }
 
   ~ArenaHolder() {
@@ -125,6 +124,5 @@ class ArenaHolder {
 };
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

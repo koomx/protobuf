@@ -49,8 +49,7 @@
 #include <gtest/gtest.h>
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 static void AddToDatabase(SimpleDescriptorDatabase* database,
@@ -808,5 +807,4 @@ TEST_F(MergedDescriptorDatabaseTest, FindAllFileNames) {
 
 
 }  // anonymous namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

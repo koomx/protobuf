@@ -49,8 +49,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 static SerialArena::Memory AllocateMemory(const AllocationPolicy* policy_ptr,
@@ -531,7 +530,6 @@ Arena::AllocateAlignedWithCleanup(size_t n, const std::type_info* type) {
   return impl_.AllocateAlignedWithCleanup(n, type);
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

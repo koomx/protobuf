@@ -42,10 +42,7 @@
 #include <shark/compiler/csharp/csharp_options.h>
 #include <shark/compiler/csharp/csharp_primitive_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 PrimitiveFieldGenerator::PrimitiveFieldGenerator(
     const FieldDescriptor* descriptor, int presenceIndex, const Options *options)
@@ -343,7 +340,4 @@ void PrimitiveOneofFieldGenerator::GenerateCloningCode(io::Printer* printer) {
     "$property_name$ = other.$property_name$;\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

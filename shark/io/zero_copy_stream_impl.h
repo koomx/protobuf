@@ -50,9 +50,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // ===================================================================
 
@@ -326,9 +324,7 @@ class SHARK_EXPORT ConcatenatingInputStream SHARK_FUTURE_FINAL
 
 // ===================================================================
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>
 

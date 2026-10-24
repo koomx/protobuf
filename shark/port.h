@@ -39,9 +39,7 @@
 #include <new>
 
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 inline void SizedDelete(void* p, size_t size) {
 #if defined(__cpp_sized_deallocation)
   ::operator delete(p, size);
@@ -72,7 +70,5 @@ struct ArenaInitialized {
   explicit ArenaInitialized() = default;
 };
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 

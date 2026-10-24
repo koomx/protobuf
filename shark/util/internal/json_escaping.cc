@@ -35,10 +35,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 namespace {
 
@@ -366,7 +363,4 @@ void JsonEscaping::Escape(StringPiece input, strings::ByteSink* output) {
   }
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

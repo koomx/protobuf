@@ -24,7 +24,7 @@ namespace _pbi = _pb::internal;
   #pragma clang diagnostic push
   #pragma clang diagnostic ignored "-Wuninitialized"
 #endif  // __llvm__
-SHARK_NAMESPACE_OPEN
+namespace shark {
 constexpr Any::Any(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.type_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -40,40 +40,39 @@ struct AnyDefaultTypeInternal {
   };
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 AnyDefaultTypeInternal _Any_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fany_2eproto[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2fany_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fany_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2fany_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Any, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Any, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Any, _impl_.type_url_),
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Any, _impl_.value_),
+  SHARK_FIELD_OFFSET(::shark::Any, _impl_.type_url_),
+  SHARK_FIELD_OFFSET(::shark::Any, _impl_.value_),
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Any)},
+  { 0, -1, -1, sizeof(::shark::Any)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::_Any_default_instance_._instance,
+  &::shark::_Any_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2fany_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\017shark/any.proto\022\017google.protobuf\"&\n\003An"
-  "y\022\020\n\010type_url\030\001 \001(\t\022\r\n\005value\030\002 \001(\014Bv\n\023co"
-  "m.google.protobufB\010AnyProtoP\001Z,google.go"
-  "lang.org/protobuf/types/known/anypb\242\002\003GP"
-  "B\252\002\036Google.Protobuf.WellKnownTypesb\006prot"
-  "o3"
+  "\n\017shark/any.proto\022\005shark\"&\n\003Any\022\020\n\010type_"
+  "url\030\001 \001(\t\022\r\n\005value\030\002 \001(\014Bv\n\023com.google.p"
+  "rotobufB\010AnyProtoP\001Z,google.golang.org/p"
+  "rotobuf/types/known/anypb\242\002\003GPB\252\002\036Google"
+  ".Protobuf.WellKnownTypesb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fany_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fany_2eproto = {
-    false, false, 202, descriptor_table_protodef_shark_2fany_2eproto,
+    false, false, 192, descriptor_table_protodef_shark_2fany_2eproto,
     "shark/any.proto",
     &descriptor_table_shark_2fany_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fany_2eproto::offsets,
@@ -86,7 +85,7 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fany
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fany_2eproto(&descriptor_table_shark_2fany_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
@@ -111,7 +110,7 @@ Any::Any(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Any)
+  // @@protoc_insertion_point(arena_constructor:shark.Any)
 }
 Any::Any(const Any& from)
   : ::SHARK_NAMESPACE_ID::Message() {
@@ -139,7 +138,7 @@ Any::Any(const Any& from)
     _this->_impl_.value_.Set(from._internal_value(), 
       _this->GetArenaForAllocation());
   }
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Any)
+  // @@protoc_insertion_point(copy_constructor:shark.Any)
 }
 
 inline void Any::SharedCtor(
@@ -163,7 +162,7 @@ inline void Any::SharedCtor(
 }
 
 Any::~Any() {
-  // @@protoc_insertion_point(destructor:google.protobuf.Any)
+  // @@protoc_insertion_point(destructor:shark.Any)
   if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
@@ -183,7 +182,7 @@ void Any::SetCachedSize(int size) const {
 }
 
 void Any::Clear() {
-// @@protoc_insertion_point(message_clear_start:google.protobuf.Any)
+// @@protoc_insertion_point(message_clear_start:shark.Any)
   uint32_t cached_has_bits = 0;
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
@@ -205,7 +204,7 @@ const char* Any::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_type_url();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Any.type_url"));
+          CHK_(::_pbi::VerifyUTF8(str, "shark.Any.type_url"));
         } else
           goto handle_unusual;
         continue;
@@ -243,7 +242,7 @@ failure:
 
 uint8_t* Any::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Any)
+  // @@protoc_insertion_point(serialize_to_array_start:shark.Any)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
@@ -252,7 +251,7 @@ uint8_t* Any::_InternalSerialize(
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_type_url().data(), static_cast<int>(this->_internal_type_url().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "google.protobuf.Any.type_url");
+      "shark.Any.type_url");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_type_url(), target);
   }
@@ -267,12 +266,12 @@ uint8_t* Any::_InternalSerialize(
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
-  // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Any)
+  // @@protoc_insertion_point(serialize_to_array_end:shark.Any)
   return target;
 }
 
 size_t Any::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:google.protobuf.Any)
+// @@protoc_insertion_point(message_byte_size_start:shark.Any)
   size_t total_size = 0;
 
   uint32_t cached_has_bits = 0;
@@ -306,7 +305,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Any::GetClassData() const { retur
 void Any::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Any*>(&to_msg);
   auto& from = static_cast<const Any&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Any)
+  // @@protoc_insertion_point(class_specific_merge_from_start:shark.Any)
   GOOGLE_DCHECK_NE(&from, _this);
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -321,7 +320,7 @@ void Any::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPA
 }
 
 void Any::CopyFrom(const Any& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:google.protobuf.Any)
+// @@protoc_insertion_point(class_specific_copy_from_start:shark.Any)
   if (&from == this) return;
   Clear();
   MergeFrom(from);
@@ -353,11 +352,11 @@ void Any::InternalSwap(Any* other) {
 }
 
 // @@protoc_insertion_point(namespace_scope)
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Any*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Any >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Any >(arena);
+template<> SHARK_NOINLINE ::shark::Any*
+Arena::CreateMaybeMessage< ::shark::Any >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Any >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

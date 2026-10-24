@@ -37,10 +37,7 @@
 #include <shark/descriptor.h>
 #include <shark/compiler/cpp/options.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 class MessageSCCAnalyzer;
 
@@ -55,8 +52,5 @@ class MessageLayoutHelper {
                               MessageSCCAnalyzer* scc_analyzer) = 0;
 };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp
 

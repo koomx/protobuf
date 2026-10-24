@@ -40,9 +40,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 template <size_t doublewords>
 class HasBits {
@@ -107,9 +105,7 @@ inline bool HasBits<doublewords>::empty() const {
   return true;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

@@ -34,9 +34,7 @@
 
 #include <shark/generated_message_util.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 namespace {
 
 bool EnumCompareByName(const EnumEntry& a, const EnumEntry& b) {
@@ -90,6 +88,4 @@ bool InitializeEnumStrings(
   return true;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

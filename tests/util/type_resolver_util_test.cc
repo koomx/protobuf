@@ -47,18 +47,16 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 namespace {
-using google::protobuf::BoolValue;
-using google::protobuf::Enum;
-using google::protobuf::EnumValue;
-using google::protobuf::Field;
-using google::protobuf::Int32Value;
-using google::protobuf::Option;
-using google::protobuf::Type;
-using google::protobuf::UInt64Value;
+using shark::BoolValue;
+using shark::Enum;
+using shark::EnumValue;
+using shark::Field;
+using shark::Int32Value;
+using shark::Option;
+using shark::Type;
+using shark::UInt64Value;
 
 static const char kUrlPrefix[] = "type.googleapis.com";
 
@@ -433,6 +431,4 @@ TEST_F(DescriptorPoolTypeResolverTest, TestJsonName) {
 }
 
 }  // namespace
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

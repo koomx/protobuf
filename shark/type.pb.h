@@ -46,7 +46,7 @@ struct TableStruct_shark_2ftype_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2ftype_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class Enum;
 struct EnumDefaultTypeInternal;
 extern EnumDefaultTypeInternal _Enum_default_instance_;
@@ -62,15 +62,15 @@ extern OptionDefaultTypeInternal _Option_default_instance_;
 class Type;
 struct TypeDefaultTypeInternal;
 extern TypeDefaultTypeInternal _Type_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::Enum* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Enum>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::EnumValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::EnumValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Field* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Field>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Option* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Option>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Type* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Type>(Arena*);
+template<> ::shark::Enum* Arena::CreateMaybeMessage<::shark::Enum>(Arena*);
+template<> ::shark::EnumValue* Arena::CreateMaybeMessage<::shark::EnumValue>(Arena*);
+template<> ::shark::Field* Arena::CreateMaybeMessage<::shark::Field>(Arena*);
+template<> ::shark::Option* Arena::CreateMaybeMessage<::shark::Option>(Arena*);
+template<> ::shark::Type* Arena::CreateMaybeMessage<::shark::Type>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 enum Field_Kind : int {
   Field_Kind_TYPE_UNKNOWN = 0,
@@ -169,7 +169,7 @@ inline bool Syntax_Parse(
 // ===================================================================
 
 class Type final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Type) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Type) */ {
  public:
   inline Type() : Type(nullptr) {}
   ~Type() override;
@@ -272,7 +272,7 @@ class Type final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Type";
+    return "shark.Type";
   }
   protected:
   explicit Type(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -296,22 +296,22 @@ class Type final :
     kSourceContextFieldNumber = 5,
     kSyntaxFieldNumber = 6,
   };
-  // repeated .google.protobuf.Field fields = 2;
+  // repeated .shark.Field fields = 2;
   int fields_size() const;
   private:
   int _internal_fields_size() const;
   public:
   void clear_fields();
-  ::SHARK_NAMESPACE_ID::Field* mutable_fields(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Field >*
+  ::shark::Field* mutable_fields(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >*
       mutable_fields();
   private:
-  const ::SHARK_NAMESPACE_ID::Field& _internal_fields(int index) const;
-  ::SHARK_NAMESPACE_ID::Field* _internal_add_fields();
+  const ::shark::Field& _internal_fields(int index) const;
+  ::shark::Field* _internal_add_fields();
   public:
-  const ::SHARK_NAMESPACE_ID::Field& fields(int index) const;
-  ::SHARK_NAMESPACE_ID::Field* add_fields();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Field >&
+  const ::shark::Field& fields(int index) const;
+  ::shark::Field* add_fields();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >&
       fields() const;
 
   // repeated string oneofs = 3;
@@ -338,22 +338,22 @@ class Type final :
   std::string* _internal_add_oneofs();
   public:
 
-  // repeated .google.protobuf.Option options = 4;
+  // repeated .shark.Option options = 4;
   int options_size() const;
   private:
   int _internal_options_size() const;
   public:
   void clear_options();
-  ::SHARK_NAMESPACE_ID::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+  ::shark::Option* mutable_options(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
       mutable_options();
   private:
-  const ::SHARK_NAMESPACE_ID::Option& _internal_options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* _internal_add_options();
+  const ::shark::Option& _internal_options(int index) const;
+  ::shark::Option* _internal_add_options();
   public:
-  const ::SHARK_NAMESPACE_ID::Option& options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+  const ::shark::Option& options(int index) const;
+  ::shark::Option* add_options();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
   // string name = 1;
@@ -370,34 +370,34 @@ class Type final :
   std::string* _internal_mutable_name();
   public:
 
-  // .google.protobuf.SourceContext source_context = 5;
+  // .shark.SourceContext source_context = 5;
   bool has_source_context() const;
   private:
   bool _internal_has_source_context() const;
   public:
   void clear_source_context();
-  const ::SHARK_NAMESPACE_ID::SourceContext& source_context() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::SourceContext* release_source_context();
-  ::SHARK_NAMESPACE_ID::SourceContext* mutable_source_context();
-  void set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContext* source_context);
+  const ::shark::SourceContext& source_context() const;
+  [[nodiscard]] ::shark::SourceContext* release_source_context();
+  ::shark::SourceContext* mutable_source_context();
+  void set_allocated_source_context(::shark::SourceContext* source_context);
   private:
-  const ::SHARK_NAMESPACE_ID::SourceContext& _internal_source_context() const;
-  ::SHARK_NAMESPACE_ID::SourceContext* _internal_mutable_source_context();
+  const ::shark::SourceContext& _internal_source_context() const;
+  ::shark::SourceContext* _internal_mutable_source_context();
   public:
   void unsafe_arena_set_allocated_source_context(
-      ::SHARK_NAMESPACE_ID::SourceContext* source_context);
-  ::SHARK_NAMESPACE_ID::SourceContext* unsafe_arena_release_source_context();
+      ::shark::SourceContext* source_context);
+  ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // .google.protobuf.Syntax syntax = 6;
+  // .shark.Syntax syntax = 6;
   void clear_syntax();
-  ::SHARK_NAMESPACE_ID::Syntax syntax() const;
-  void set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax syntax() const;
+  void set_syntax(::shark::Syntax value);
   private:
-  ::SHARK_NAMESPACE_ID::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax _internal_syntax() const;
+  void _internal_set_syntax(::shark::Syntax value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Type)
+  // @@protoc_insertion_point(class_scope:shark.Type)
  private:
   class _Internal;
 
@@ -405,11 +405,11 @@ class Type final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Field > fields_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field > fields_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> oneofs_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option > options_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::SourceContext* source_context_;
+    ::shark::SourceContext* source_context_;
     int syntax_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -419,7 +419,7 @@ class Type final :
 // -------------------------------------------------------------------
 
 class Field final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Field) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Field) */ {
  public:
   inline Field() : Field(nullptr) {}
   ~Field() override;
@@ -522,7 +522,7 @@ class Field final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Field";
+    return "shark.Field";
   }
   protected:
   explicit Field(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -648,22 +648,22 @@ class Field final :
     kOneofIndexFieldNumber = 7,
     kPackedFieldNumber = 8,
   };
-  // repeated .google.protobuf.Option options = 9;
+  // repeated .shark.Option options = 9;
   int options_size() const;
   private:
   int _internal_options_size() const;
   public:
   void clear_options();
-  ::SHARK_NAMESPACE_ID::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+  ::shark::Option* mutable_options(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
       mutable_options();
   private:
-  const ::SHARK_NAMESPACE_ID::Option& _internal_options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* _internal_add_options();
+  const ::shark::Option& _internal_options(int index) const;
+  ::shark::Option* _internal_add_options();
   public:
-  const ::SHARK_NAMESPACE_ID::Option& options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+  const ::shark::Option& options(int index) const;
+  ::shark::Option* add_options();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
   // string name = 4;
@@ -722,22 +722,22 @@ class Field final :
   std::string* _internal_mutable_default_value();
   public:
 
-  // .google.protobuf.Field.Kind kind = 1;
+  // .shark.Field.Kind kind = 1;
   void clear_kind();
-  ::SHARK_NAMESPACE_ID::Field_Kind kind() const;
-  void set_kind(::SHARK_NAMESPACE_ID::Field_Kind value);
+  ::shark::Field_Kind kind() const;
+  void set_kind(::shark::Field_Kind value);
   private:
-  ::SHARK_NAMESPACE_ID::Field_Kind _internal_kind() const;
-  void _internal_set_kind(::SHARK_NAMESPACE_ID::Field_Kind value);
+  ::shark::Field_Kind _internal_kind() const;
+  void _internal_set_kind(::shark::Field_Kind value);
   public:
 
-  // .google.protobuf.Field.Cardinality cardinality = 2;
+  // .shark.Field.Cardinality cardinality = 2;
   void clear_cardinality();
-  ::SHARK_NAMESPACE_ID::Field_Cardinality cardinality() const;
-  void set_cardinality(::SHARK_NAMESPACE_ID::Field_Cardinality value);
+  ::shark::Field_Cardinality cardinality() const;
+  void set_cardinality(::shark::Field_Cardinality value);
   private:
-  ::SHARK_NAMESPACE_ID::Field_Cardinality _internal_cardinality() const;
-  void _internal_set_cardinality(::SHARK_NAMESPACE_ID::Field_Cardinality value);
+  ::shark::Field_Cardinality _internal_cardinality() const;
+  void _internal_set_cardinality(::shark::Field_Cardinality value);
   public:
 
   // int32 number = 3;
@@ -767,7 +767,7 @@ class Field final :
   void _internal_set_packed(bool value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Field)
+  // @@protoc_insertion_point(class_scope:shark.Field)
  private:
   class _Internal;
 
@@ -775,7 +775,7 @@ class Field final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option > options_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr type_url_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr json_name_;
@@ -793,7 +793,7 @@ class Field final :
 // -------------------------------------------------------------------
 
 class Enum final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Enum) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Enum) */ {
  public:
   inline Enum() : Enum(nullptr) {}
   ~Enum() override;
@@ -896,7 +896,7 @@ class Enum final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Enum";
+    return "shark.Enum";
   }
   protected:
   explicit Enum(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -919,40 +919,40 @@ class Enum final :
     kSourceContextFieldNumber = 4,
     kSyntaxFieldNumber = 5,
   };
-  // repeated .google.protobuf.EnumValue enumvalue = 2;
+  // repeated .shark.EnumValue enumvalue = 2;
   int enumvalue_size() const;
   private:
   int _internal_enumvalue_size() const;
   public:
   void clear_enumvalue();
-  ::SHARK_NAMESPACE_ID::EnumValue* mutable_enumvalue(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValue >*
+  ::shark::EnumValue* mutable_enumvalue(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >*
       mutable_enumvalue();
   private:
-  const ::SHARK_NAMESPACE_ID::EnumValue& _internal_enumvalue(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumValue* _internal_add_enumvalue();
+  const ::shark::EnumValue& _internal_enumvalue(int index) const;
+  ::shark::EnumValue* _internal_add_enumvalue();
   public:
-  const ::SHARK_NAMESPACE_ID::EnumValue& enumvalue(int index) const;
-  ::SHARK_NAMESPACE_ID::EnumValue* add_enumvalue();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValue >&
+  const ::shark::EnumValue& enumvalue(int index) const;
+  ::shark::EnumValue* add_enumvalue();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >&
       enumvalue() const;
 
-  // repeated .google.protobuf.Option options = 3;
+  // repeated .shark.Option options = 3;
   int options_size() const;
   private:
   int _internal_options_size() const;
   public:
   void clear_options();
-  ::SHARK_NAMESPACE_ID::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+  ::shark::Option* mutable_options(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
       mutable_options();
   private:
-  const ::SHARK_NAMESPACE_ID::Option& _internal_options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* _internal_add_options();
+  const ::shark::Option& _internal_options(int index) const;
+  ::shark::Option* _internal_add_options();
   public:
-  const ::SHARK_NAMESPACE_ID::Option& options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+  const ::shark::Option& options(int index) const;
+  ::shark::Option* add_options();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
   // string name = 1;
@@ -969,34 +969,34 @@ class Enum final :
   std::string* _internal_mutable_name();
   public:
 
-  // .google.protobuf.SourceContext source_context = 4;
+  // .shark.SourceContext source_context = 4;
   bool has_source_context() const;
   private:
   bool _internal_has_source_context() const;
   public:
   void clear_source_context();
-  const ::SHARK_NAMESPACE_ID::SourceContext& source_context() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::SourceContext* release_source_context();
-  ::SHARK_NAMESPACE_ID::SourceContext* mutable_source_context();
-  void set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContext* source_context);
+  const ::shark::SourceContext& source_context() const;
+  [[nodiscard]] ::shark::SourceContext* release_source_context();
+  ::shark::SourceContext* mutable_source_context();
+  void set_allocated_source_context(::shark::SourceContext* source_context);
   private:
-  const ::SHARK_NAMESPACE_ID::SourceContext& _internal_source_context() const;
-  ::SHARK_NAMESPACE_ID::SourceContext* _internal_mutable_source_context();
+  const ::shark::SourceContext& _internal_source_context() const;
+  ::shark::SourceContext* _internal_mutable_source_context();
   public:
   void unsafe_arena_set_allocated_source_context(
-      ::SHARK_NAMESPACE_ID::SourceContext* source_context);
-  ::SHARK_NAMESPACE_ID::SourceContext* unsafe_arena_release_source_context();
+      ::shark::SourceContext* source_context);
+  ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // .google.protobuf.Syntax syntax = 5;
+  // .shark.Syntax syntax = 5;
   void clear_syntax();
-  ::SHARK_NAMESPACE_ID::Syntax syntax() const;
-  void set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax syntax() const;
+  void set_syntax(::shark::Syntax value);
   private:
-  ::SHARK_NAMESPACE_ID::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax _internal_syntax() const;
+  void _internal_set_syntax(::shark::Syntax value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Enum)
+  // @@protoc_insertion_point(class_scope:shark.Enum)
  private:
   class _Internal;
 
@@ -1004,10 +1004,10 @@ class Enum final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValue > enumvalue_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option > options_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue > enumvalue_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::SourceContext* source_context_;
+    ::shark::SourceContext* source_context_;
     int syntax_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -1017,7 +1017,7 @@ class Enum final :
 // -------------------------------------------------------------------
 
 class EnumValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.EnumValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumValue) */ {
  public:
   inline EnumValue() : EnumValue(nullptr) {}
   ~EnumValue() override;
@@ -1120,7 +1120,7 @@ class EnumValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.EnumValue";
+    return "shark.EnumValue";
   }
   protected:
   explicit EnumValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1141,22 +1141,22 @@ class EnumValue final :
     kNameFieldNumber = 1,
     kNumberFieldNumber = 2,
   };
-  // repeated .google.protobuf.Option options = 3;
+  // repeated .shark.Option options = 3;
   int options_size() const;
   private:
   int _internal_options_size() const;
   public:
   void clear_options();
-  ::SHARK_NAMESPACE_ID::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+  ::shark::Option* mutable_options(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
       mutable_options();
   private:
-  const ::SHARK_NAMESPACE_ID::Option& _internal_options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* _internal_add_options();
+  const ::shark::Option& _internal_options(int index) const;
+  ::shark::Option* _internal_add_options();
   public:
-  const ::SHARK_NAMESPACE_ID::Option& options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+  const ::shark::Option& options(int index) const;
+  ::shark::Option* add_options();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
   // string name = 1;
@@ -1182,7 +1182,7 @@ class EnumValue final :
   void _internal_set_number(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.EnumValue)
+  // @@protoc_insertion_point(class_scope:shark.EnumValue)
  private:
   class _Internal;
 
@@ -1190,7 +1190,7 @@ class EnumValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option > options_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     int32_t number_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -1201,7 +1201,7 @@ class EnumValue final :
 // -------------------------------------------------------------------
 
 class Option final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Option) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Option) */ {
  public:
   inline Option() : Option(nullptr) {}
   ~Option() override;
@@ -1304,7 +1304,7 @@ class Option final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Option";
+    return "shark.Option";
   }
   protected:
   explicit Option(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1338,25 +1338,25 @@ class Option final :
   std::string* _internal_mutable_name();
   public:
 
-  // .google.protobuf.Any value = 2;
+  // .shark.Any value = 2;
   bool has_value() const;
   private:
   bool _internal_has_value() const;
   public:
   void clear_value();
-  const ::SHARK_NAMESPACE_ID::Any& value() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::Any* release_value();
-  ::SHARK_NAMESPACE_ID::Any* mutable_value();
-  void set_allocated_value(::SHARK_NAMESPACE_ID::Any* value);
+  const ::shark::Any& value() const;
+  [[nodiscard]] ::shark::Any* release_value();
+  ::shark::Any* mutable_value();
+  void set_allocated_value(::shark::Any* value);
   private:
-  const ::SHARK_NAMESPACE_ID::Any& _internal_value() const;
-  ::SHARK_NAMESPACE_ID::Any* _internal_mutable_value();
+  const ::shark::Any& _internal_value() const;
+  ::shark::Any* _internal_mutable_value();
   public:
   void unsafe_arena_set_allocated_value(
-      ::SHARK_NAMESPACE_ID::Any* value);
-  ::SHARK_NAMESPACE_ID::Any* unsafe_arena_release_value();
+      ::shark::Any* value);
+  ::shark::Any* unsafe_arena_release_value();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Option)
+  // @@protoc_insertion_point(class_scope:shark.Option)
  private:
   class _Internal;
 
@@ -1365,7 +1365,7 @@ class Option final :
   typedef void DestructorSkippable_;
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::Any* value_;
+    ::shark::Any* value_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -1387,7 +1387,7 @@ inline void Type::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Type::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Type.name)
+  // @@protoc_insertion_point(field_get:shark.Type.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1395,11 +1395,11 @@ inline SHARK_ALWAYS_INLINE
 void Type::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Type.name)
+  // @@protoc_insertion_point(field_set:shark.Type.name)
 }
 inline std::string* Type::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Type.name)
+  // @@protoc_insertion_point(field_mutable:shark.Type.name)
   return _s;
 }
 inline const std::string& Type::_internal_name() const {
@@ -1414,7 +1414,7 @@ inline std::string* Type::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Type::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Type.name)
+  // @@protoc_insertion_point(field_release:shark.Type.name)
   return _impl_.name_.Release();
 }
 inline void Type::set_allocated_name(std::string* name) {
@@ -1429,10 +1429,10 @@ inline void Type::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Type.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Type.name)
 }
 
-// repeated .google.protobuf.Field fields = 2;
+// repeated .shark.Field fields = 2;
 inline int Type::_internal_fields_size() const {
   return _impl_.fields_.size();
 }
@@ -1442,33 +1442,33 @@ inline int Type::fields_size() const {
 inline void Type::clear_fields() {
   _impl_.fields_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Field* Type::mutable_fields(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Type.fields)
+inline ::shark::Field* Type::mutable_fields(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Type.fields)
   return _impl_.fields_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Field >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >*
 Type::mutable_fields() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Type.fields)
+  // @@protoc_insertion_point(field_mutable_list:shark.Type.fields)
   return &_impl_.fields_;
 }
-inline const ::SHARK_NAMESPACE_ID::Field& Type::_internal_fields(int index) const {
+inline const ::shark::Field& Type::_internal_fields(int index) const {
   return _impl_.fields_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Field& Type::fields(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Type.fields)
+inline const ::shark::Field& Type::fields(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Type.fields)
   return _internal_fields(index);
 }
-inline ::SHARK_NAMESPACE_ID::Field* Type::_internal_add_fields() {
+inline ::shark::Field* Type::_internal_add_fields() {
   return _impl_.fields_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Field* Type::add_fields() {
-  ::SHARK_NAMESPACE_ID::Field* _add = _internal_add_fields();
-  // @@protoc_insertion_point(field_add:google.protobuf.Type.fields)
+inline ::shark::Field* Type::add_fields() {
+  ::shark::Field* _add = _internal_add_fields();
+  // @@protoc_insertion_point(field_add:shark.Type.fields)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Field >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >&
 Type::fields() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Type.fields)
+  // @@protoc_insertion_point(field_list:shark.Type.fields)
   return _impl_.fields_;
 }
 
@@ -1484,70 +1484,70 @@ inline void Type::clear_oneofs() {
 }
 inline std::string* Type::add_oneofs() {
   std::string* _s = _internal_add_oneofs();
-  // @@protoc_insertion_point(field_add_mutable:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_add_mutable:shark.Type.oneofs)
   return _s;
 }
 inline const std::string& Type::_internal_oneofs(int index) const {
   return _impl_.oneofs_.Get(index);
 }
 inline const std::string& Type::oneofs(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_get:shark.Type.oneofs)
   return _internal_oneofs(index);
 }
 inline std::string* Type::mutable_oneofs(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_mutable:shark.Type.oneofs)
   return _impl_.oneofs_.Mutable(index);
 }
 inline void Type::set_oneofs(int index, const std::string& value) {
   _impl_.oneofs_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_set:shark.Type.oneofs)
 }
 inline void Type::set_oneofs(int index, std::string&& value) {
   _impl_.oneofs_.Mutable(index)->assign(std::move(value));
-  // @@protoc_insertion_point(field_set:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_set:shark.Type.oneofs)
 }
 inline void Type::set_oneofs(int index, const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.oneofs_.Mutable(index)->assign(value);
-  // @@protoc_insertion_point(field_set_char:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_set_char:shark.Type.oneofs)
 }
 inline void Type::set_oneofs(int index, const char* value, size_t size) {
   _impl_.oneofs_.Mutable(index)->assign(
     reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_set_pointer:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_set_pointer:shark.Type.oneofs)
 }
 inline std::string* Type::_internal_add_oneofs() {
   return _impl_.oneofs_.Add();
 }
 inline void Type::add_oneofs(const std::string& value) {
   _impl_.oneofs_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_add:shark.Type.oneofs)
 }
 inline void Type::add_oneofs(std::string&& value) {
   _impl_.oneofs_.Add(std::move(value));
-  // @@protoc_insertion_point(field_add:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_add:shark.Type.oneofs)
 }
 inline void Type::add_oneofs(const char* value) {
   GOOGLE_DCHECK(value != nullptr);
   _impl_.oneofs_.Add()->assign(value);
-  // @@protoc_insertion_point(field_add_char:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_add_char:shark.Type.oneofs)
 }
 inline void Type::add_oneofs(const char* value, size_t size) {
   _impl_.oneofs_.Add()->assign(reinterpret_cast<const char*>(value), size);
-  // @@protoc_insertion_point(field_add_pointer:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_add_pointer:shark.Type.oneofs)
 }
 inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>&
 Type::oneofs() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_list:shark.Type.oneofs)
   return _impl_.oneofs_;
 }
 inline ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>*
 Type::mutable_oneofs() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Type.oneofs)
+  // @@protoc_insertion_point(field_mutable_list:shark.Type.oneofs)
   return &_impl_.oneofs_;
 }
 
-// repeated .google.protobuf.Option options = 4;
+// repeated .shark.Option options = 4;
 inline int Type::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -1557,54 +1557,54 @@ inline int Type::options_size() const {
 inline void Type::clear_options() {
   _impl_.options_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Type::mutable_options(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Type.options)
+inline ::shark::Option* Type::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Type.options)
   return _impl_.options_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
 Type::mutable_options() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Type.options)
+  // @@protoc_insertion_point(field_mutable_list:shark.Type.options)
   return &_impl_.options_;
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Type::_internal_options(int index) const {
+inline const ::shark::Option& Type::_internal_options(int index) const {
   return _impl_.options_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Type::options(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Type.options)
+inline const ::shark::Option& Type::options(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Type.options)
   return _internal_options(index);
 }
-inline ::SHARK_NAMESPACE_ID::Option* Type::_internal_add_options() {
+inline ::shark::Option* Type::_internal_add_options() {
   return _impl_.options_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Type::add_options() {
-  ::SHARK_NAMESPACE_ID::Option* _add = _internal_add_options();
-  // @@protoc_insertion_point(field_add:google.protobuf.Type.options)
+inline ::shark::Option* Type::add_options() {
+  ::shark::Option* _add = _internal_add_options();
+  // @@protoc_insertion_point(field_add:shark.Type.options)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
 Type::options() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Type.options)
+  // @@protoc_insertion_point(field_list:shark.Type.options)
   return _impl_.options_;
 }
 
-// .google.protobuf.SourceContext source_context = 5;
+// .shark.SourceContext source_context = 5;
 inline bool Type::_internal_has_source_context() const {
   return this != internal_default_instance() && _impl_.source_context_ != nullptr;
 }
 inline bool Type::has_source_context() const {
   return _internal_has_source_context();
 }
-inline const ::SHARK_NAMESPACE_ID::SourceContext& Type::_internal_source_context() const {
-  const ::SHARK_NAMESPACE_ID::SourceContext* p = _impl_.source_context_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::SourceContext&>(
-      ::SHARK_NAMESPACE_ID::_SourceContext_default_instance_);
+inline const ::shark::SourceContext& Type::_internal_source_context() const {
+  const ::shark::SourceContext* p = _impl_.source_context_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::SourceContext&>(
+      ::shark::_SourceContext_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::SourceContext& Type::source_context() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Type.source_context)
+inline const ::shark::SourceContext& Type::source_context() const {
+  // @@protoc_insertion_point(field_get:shark.Type.source_context)
   return _internal_source_context();
 }
 inline void Type::unsafe_arena_set_allocated_source_context(
-    ::SHARK_NAMESPACE_ID::SourceContext* source_context) {
+    ::shark::SourceContext* source_context) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_context_);
   }
@@ -1614,11 +1614,11 @@ inline void Type::unsafe_arena_set_allocated_source_context(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.Type.source_context)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Type.source_context)
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Type::release_source_context() {
+inline ::shark::SourceContext* Type::release_source_context() {
   
-  ::SHARK_NAMESPACE_ID::SourceContext* temp = _impl_.source_context_;
+  ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -1631,27 +1631,27 @@ inline ::SHARK_NAMESPACE_ID::SourceContext* Type::release_source_context() {
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Type::unsafe_arena_release_source_context() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Type.source_context)
+inline ::shark::SourceContext* Type::unsafe_arena_release_source_context() {
+  // @@protoc_insertion_point(field_release:shark.Type.source_context)
   
-  ::SHARK_NAMESPACE_ID::SourceContext* temp = _impl_.source_context_;
+  ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Type::_internal_mutable_source_context() {
+inline ::shark::SourceContext* Type::_internal_mutable_source_context() {
   
   if (_impl_.source_context_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceContext>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::SourceContext>(GetArenaForAllocation());
     _impl_.source_context_ = p;
   }
   return _impl_.source_context_;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Type::mutable_source_context() {
-  ::SHARK_NAMESPACE_ID::SourceContext* _msg = _internal_mutable_source_context();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Type.source_context)
+inline ::shark::SourceContext* Type::mutable_source_context() {
+  ::shark::SourceContext* _msg = _internal_mutable_source_context();
+  // @@protoc_insertion_point(field_mutable:shark.Type.source_context)
   return _msg;
 }
-inline void Type::set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContext* source_context) {
+inline void Type::set_allocated_source_context(::shark::SourceContext* source_context) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_context_);
@@ -1669,71 +1669,71 @@ inline void Type::set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceConte
     
   }
   _impl_.source_context_ = source_context;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Type.source_context)
+  // @@protoc_insertion_point(field_set_allocated:shark.Type.source_context)
 }
 
-// .google.protobuf.Syntax syntax = 6;
+// .shark.Syntax syntax = 6;
 inline void Type::clear_syntax() {
   _impl_.syntax_ = 0;
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Type::_internal_syntax() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::Syntax >(_impl_.syntax_);
+inline ::shark::Syntax Type::_internal_syntax() const {
+  return static_cast< ::shark::Syntax >(_impl_.syntax_);
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Type::syntax() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Type.syntax)
+inline ::shark::Syntax Type::syntax() const {
+  // @@protoc_insertion_point(field_get:shark.Type.syntax)
   return _internal_syntax();
 }
-inline void Type::_internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Type::_internal_set_syntax(::shark::Syntax value) {
   
   _impl_.syntax_ = value;
 }
-inline void Type::set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Type::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Type.syntax)
+  // @@protoc_insertion_point(field_set:shark.Type.syntax)
 }
 
 // -------------------------------------------------------------------
 
 // Field
 
-// .google.protobuf.Field.Kind kind = 1;
+// .shark.Field.Kind kind = 1;
 inline void Field::clear_kind() {
   _impl_.kind_ = 0;
 }
-inline ::SHARK_NAMESPACE_ID::Field_Kind Field::_internal_kind() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::Field_Kind >(_impl_.kind_);
+inline ::shark::Field_Kind Field::_internal_kind() const {
+  return static_cast< ::shark::Field_Kind >(_impl_.kind_);
 }
-inline ::SHARK_NAMESPACE_ID::Field_Kind Field::kind() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.kind)
+inline ::shark::Field_Kind Field::kind() const {
+  // @@protoc_insertion_point(field_get:shark.Field.kind)
   return _internal_kind();
 }
-inline void Field::_internal_set_kind(::SHARK_NAMESPACE_ID::Field_Kind value) {
+inline void Field::_internal_set_kind(::shark::Field_Kind value) {
   
   _impl_.kind_ = value;
 }
-inline void Field::set_kind(::SHARK_NAMESPACE_ID::Field_Kind value) {
+inline void Field::set_kind(::shark::Field_Kind value) {
   _internal_set_kind(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.kind)
+  // @@protoc_insertion_point(field_set:shark.Field.kind)
 }
 
-// .google.protobuf.Field.Cardinality cardinality = 2;
+// .shark.Field.Cardinality cardinality = 2;
 inline void Field::clear_cardinality() {
   _impl_.cardinality_ = 0;
 }
-inline ::SHARK_NAMESPACE_ID::Field_Cardinality Field::_internal_cardinality() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::Field_Cardinality >(_impl_.cardinality_);
+inline ::shark::Field_Cardinality Field::_internal_cardinality() const {
+  return static_cast< ::shark::Field_Cardinality >(_impl_.cardinality_);
 }
-inline ::SHARK_NAMESPACE_ID::Field_Cardinality Field::cardinality() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.cardinality)
+inline ::shark::Field_Cardinality Field::cardinality() const {
+  // @@protoc_insertion_point(field_get:shark.Field.cardinality)
   return _internal_cardinality();
 }
-inline void Field::_internal_set_cardinality(::SHARK_NAMESPACE_ID::Field_Cardinality value) {
+inline void Field::_internal_set_cardinality(::shark::Field_Cardinality value) {
   
   _impl_.cardinality_ = value;
 }
-inline void Field::set_cardinality(::SHARK_NAMESPACE_ID::Field_Cardinality value) {
+inline void Field::set_cardinality(::shark::Field_Cardinality value) {
   _internal_set_cardinality(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.cardinality)
+  // @@protoc_insertion_point(field_set:shark.Field.cardinality)
 }
 
 // int32 number = 3;
@@ -1744,7 +1744,7 @@ inline int32_t Field::_internal_number() const {
   return _impl_.number_;
 }
 inline int32_t Field::number() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.number)
+  // @@protoc_insertion_point(field_get:shark.Field.number)
   return _internal_number();
 }
 inline void Field::_internal_set_number(int32_t value) {
@@ -1753,7 +1753,7 @@ inline void Field::_internal_set_number(int32_t value) {
 }
 inline void Field::set_number(int32_t value) {
   _internal_set_number(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.number)
+  // @@protoc_insertion_point(field_set:shark.Field.number)
 }
 
 // string name = 4;
@@ -1761,7 +1761,7 @@ inline void Field::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Field::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.name)
+  // @@protoc_insertion_point(field_get:shark.Field.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1769,11 +1769,11 @@ inline SHARK_ALWAYS_INLINE
 void Field::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.name)
+  // @@protoc_insertion_point(field_set:shark.Field.name)
 }
 inline std::string* Field::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Field.name)
+  // @@protoc_insertion_point(field_mutable:shark.Field.name)
   return _s;
 }
 inline const std::string& Field::_internal_name() const {
@@ -1788,7 +1788,7 @@ inline std::string* Field::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Field.name)
+  // @@protoc_insertion_point(field_release:shark.Field.name)
   return _impl_.name_.Release();
 }
 inline void Field::set_allocated_name(std::string* name) {
@@ -1803,7 +1803,7 @@ inline void Field::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Field.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Field.name)
 }
 
 // string type_url = 6;
@@ -1811,7 +1811,7 @@ inline void Field::clear_type_url() {
   _impl_.type_url_.ClearToEmpty();
 }
 inline const std::string& Field::type_url() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.type_url)
+  // @@protoc_insertion_point(field_get:shark.Field.type_url)
   return _internal_type_url();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1819,11 +1819,11 @@ inline SHARK_ALWAYS_INLINE
 void Field::set_type_url(ArgT0&& arg0, ArgT... args) {
  
  _impl_.type_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.type_url)
+  // @@protoc_insertion_point(field_set:shark.Field.type_url)
 }
 inline std::string* Field::mutable_type_url() {
   std::string* _s = _internal_mutable_type_url();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Field.type_url)
+  // @@protoc_insertion_point(field_mutable:shark.Field.type_url)
   return _s;
 }
 inline const std::string& Field::_internal_type_url() const {
@@ -1838,7 +1838,7 @@ inline std::string* Field::_internal_mutable_type_url() {
   return _impl_.type_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_type_url() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Field.type_url)
+  // @@protoc_insertion_point(field_release:shark.Field.type_url)
   return _impl_.type_url_.Release();
 }
 inline void Field::set_allocated_type_url(std::string* type_url) {
@@ -1853,7 +1853,7 @@ inline void Field::set_allocated_type_url(std::string* type_url) {
     _impl_.type_url_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Field.type_url)
+  // @@protoc_insertion_point(field_set_allocated:shark.Field.type_url)
 }
 
 // int32 oneof_index = 7;
@@ -1864,7 +1864,7 @@ inline int32_t Field::_internal_oneof_index() const {
   return _impl_.oneof_index_;
 }
 inline int32_t Field::oneof_index() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.oneof_index)
+  // @@protoc_insertion_point(field_get:shark.Field.oneof_index)
   return _internal_oneof_index();
 }
 inline void Field::_internal_set_oneof_index(int32_t value) {
@@ -1873,7 +1873,7 @@ inline void Field::_internal_set_oneof_index(int32_t value) {
 }
 inline void Field::set_oneof_index(int32_t value) {
   _internal_set_oneof_index(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.oneof_index)
+  // @@protoc_insertion_point(field_set:shark.Field.oneof_index)
 }
 
 // bool packed = 8;
@@ -1884,7 +1884,7 @@ inline bool Field::_internal_packed() const {
   return _impl_.packed_;
 }
 inline bool Field::packed() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.packed)
+  // @@protoc_insertion_point(field_get:shark.Field.packed)
   return _internal_packed();
 }
 inline void Field::_internal_set_packed(bool value) {
@@ -1893,10 +1893,10 @@ inline void Field::_internal_set_packed(bool value) {
 }
 inline void Field::set_packed(bool value) {
   _internal_set_packed(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.packed)
+  // @@protoc_insertion_point(field_set:shark.Field.packed)
 }
 
-// repeated .google.protobuf.Option options = 9;
+// repeated .shark.Option options = 9;
 inline int Field::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -1906,33 +1906,33 @@ inline int Field::options_size() const {
 inline void Field::clear_options() {
   _impl_.options_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Field::mutable_options(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Field.options)
+inline ::shark::Option* Field::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Field.options)
   return _impl_.options_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
 Field::mutable_options() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Field.options)
+  // @@protoc_insertion_point(field_mutable_list:shark.Field.options)
   return &_impl_.options_;
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Field::_internal_options(int index) const {
+inline const ::shark::Option& Field::_internal_options(int index) const {
   return _impl_.options_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Field::options(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.options)
+inline const ::shark::Option& Field::options(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Field.options)
   return _internal_options(index);
 }
-inline ::SHARK_NAMESPACE_ID::Option* Field::_internal_add_options() {
+inline ::shark::Option* Field::_internal_add_options() {
   return _impl_.options_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Field::add_options() {
-  ::SHARK_NAMESPACE_ID::Option* _add = _internal_add_options();
-  // @@protoc_insertion_point(field_add:google.protobuf.Field.options)
+inline ::shark::Option* Field::add_options() {
+  ::shark::Option* _add = _internal_add_options();
+  // @@protoc_insertion_point(field_add:shark.Field.options)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
 Field::options() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Field.options)
+  // @@protoc_insertion_point(field_list:shark.Field.options)
   return _impl_.options_;
 }
 
@@ -1941,7 +1941,7 @@ inline void Field::clear_json_name() {
   _impl_.json_name_.ClearToEmpty();
 }
 inline const std::string& Field::json_name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.json_name)
+  // @@protoc_insertion_point(field_get:shark.Field.json_name)
   return _internal_json_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1949,11 +1949,11 @@ inline SHARK_ALWAYS_INLINE
 void Field::set_json_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.json_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.json_name)
+  // @@protoc_insertion_point(field_set:shark.Field.json_name)
 }
 inline std::string* Field::mutable_json_name() {
   std::string* _s = _internal_mutable_json_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Field.json_name)
+  // @@protoc_insertion_point(field_mutable:shark.Field.json_name)
   return _s;
 }
 inline const std::string& Field::_internal_json_name() const {
@@ -1968,7 +1968,7 @@ inline std::string* Field::_internal_mutable_json_name() {
   return _impl_.json_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_json_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Field.json_name)
+  // @@protoc_insertion_point(field_release:shark.Field.json_name)
   return _impl_.json_name_.Release();
 }
 inline void Field::set_allocated_json_name(std::string* json_name) {
@@ -1983,7 +1983,7 @@ inline void Field::set_allocated_json_name(std::string* json_name) {
     _impl_.json_name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Field.json_name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Field.json_name)
 }
 
 // string default_value = 11;
@@ -1991,7 +1991,7 @@ inline void Field::clear_default_value() {
   _impl_.default_value_.ClearToEmpty();
 }
 inline const std::string& Field::default_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Field.default_value)
+  // @@protoc_insertion_point(field_get:shark.Field.default_value)
   return _internal_default_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1999,11 +1999,11 @@ inline SHARK_ALWAYS_INLINE
 void Field::set_default_value(ArgT0&& arg0, ArgT... args) {
  
  _impl_.default_value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Field.default_value)
+  // @@protoc_insertion_point(field_set:shark.Field.default_value)
 }
 inline std::string* Field::mutable_default_value() {
   std::string* _s = _internal_mutable_default_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Field.default_value)
+  // @@protoc_insertion_point(field_mutable:shark.Field.default_value)
   return _s;
 }
 inline const std::string& Field::_internal_default_value() const {
@@ -2018,7 +2018,7 @@ inline std::string* Field::_internal_mutable_default_value() {
   return _impl_.default_value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_default_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Field.default_value)
+  // @@protoc_insertion_point(field_release:shark.Field.default_value)
   return _impl_.default_value_.Release();
 }
 inline void Field::set_allocated_default_value(std::string* default_value) {
@@ -2033,7 +2033,7 @@ inline void Field::set_allocated_default_value(std::string* default_value) {
     _impl_.default_value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Field.default_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.Field.default_value)
 }
 
 // -------------------------------------------------------------------
@@ -2045,7 +2045,7 @@ inline void Enum::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Enum::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Enum.name)
+  // @@protoc_insertion_point(field_get:shark.Enum.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2053,11 +2053,11 @@ inline SHARK_ALWAYS_INLINE
 void Enum::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Enum.name)
+  // @@protoc_insertion_point(field_set:shark.Enum.name)
 }
 inline std::string* Enum::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Enum.name)
+  // @@protoc_insertion_point(field_mutable:shark.Enum.name)
   return _s;
 }
 inline const std::string& Enum::_internal_name() const {
@@ -2072,7 +2072,7 @@ inline std::string* Enum::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Enum::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Enum.name)
+  // @@protoc_insertion_point(field_release:shark.Enum.name)
   return _impl_.name_.Release();
 }
 inline void Enum::set_allocated_name(std::string* name) {
@@ -2087,10 +2087,10 @@ inline void Enum::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Enum.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Enum.name)
 }
 
-// repeated .google.protobuf.EnumValue enumvalue = 2;
+// repeated .shark.EnumValue enumvalue = 2;
 inline int Enum::_internal_enumvalue_size() const {
   return _impl_.enumvalue_.size();
 }
@@ -2100,37 +2100,37 @@ inline int Enum::enumvalue_size() const {
 inline void Enum::clear_enumvalue() {
   _impl_.enumvalue_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::EnumValue* Enum::mutable_enumvalue(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Enum.enumvalue)
+inline ::shark::EnumValue* Enum::mutable_enumvalue(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Enum.enumvalue)
   return _impl_.enumvalue_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValue >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >*
 Enum::mutable_enumvalue() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Enum.enumvalue)
+  // @@protoc_insertion_point(field_mutable_list:shark.Enum.enumvalue)
   return &_impl_.enumvalue_;
 }
-inline const ::SHARK_NAMESPACE_ID::EnumValue& Enum::_internal_enumvalue(int index) const {
+inline const ::shark::EnumValue& Enum::_internal_enumvalue(int index) const {
   return _impl_.enumvalue_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::EnumValue& Enum::enumvalue(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Enum.enumvalue)
+inline const ::shark::EnumValue& Enum::enumvalue(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Enum.enumvalue)
   return _internal_enumvalue(index);
 }
-inline ::SHARK_NAMESPACE_ID::EnumValue* Enum::_internal_add_enumvalue() {
+inline ::shark::EnumValue* Enum::_internal_add_enumvalue() {
   return _impl_.enumvalue_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::EnumValue* Enum::add_enumvalue() {
-  ::SHARK_NAMESPACE_ID::EnumValue* _add = _internal_add_enumvalue();
-  // @@protoc_insertion_point(field_add:google.protobuf.Enum.enumvalue)
+inline ::shark::EnumValue* Enum::add_enumvalue() {
+  ::shark::EnumValue* _add = _internal_add_enumvalue();
+  // @@protoc_insertion_point(field_add:shark.Enum.enumvalue)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::EnumValue >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >&
 Enum::enumvalue() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Enum.enumvalue)
+  // @@protoc_insertion_point(field_list:shark.Enum.enumvalue)
   return _impl_.enumvalue_;
 }
 
-// repeated .google.protobuf.Option options = 3;
+// repeated .shark.Option options = 3;
 inline int Enum::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -2140,54 +2140,54 @@ inline int Enum::options_size() const {
 inline void Enum::clear_options() {
   _impl_.options_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Enum::mutable_options(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Enum.options)
+inline ::shark::Option* Enum::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Enum.options)
   return _impl_.options_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
 Enum::mutable_options() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Enum.options)
+  // @@protoc_insertion_point(field_mutable_list:shark.Enum.options)
   return &_impl_.options_;
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Enum::_internal_options(int index) const {
+inline const ::shark::Option& Enum::_internal_options(int index) const {
   return _impl_.options_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Enum::options(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Enum.options)
+inline const ::shark::Option& Enum::options(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Enum.options)
   return _internal_options(index);
 }
-inline ::SHARK_NAMESPACE_ID::Option* Enum::_internal_add_options() {
+inline ::shark::Option* Enum::_internal_add_options() {
   return _impl_.options_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Enum::add_options() {
-  ::SHARK_NAMESPACE_ID::Option* _add = _internal_add_options();
-  // @@protoc_insertion_point(field_add:google.protobuf.Enum.options)
+inline ::shark::Option* Enum::add_options() {
+  ::shark::Option* _add = _internal_add_options();
+  // @@protoc_insertion_point(field_add:shark.Enum.options)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
 Enum::options() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Enum.options)
+  // @@protoc_insertion_point(field_list:shark.Enum.options)
   return _impl_.options_;
 }
 
-// .google.protobuf.SourceContext source_context = 4;
+// .shark.SourceContext source_context = 4;
 inline bool Enum::_internal_has_source_context() const {
   return this != internal_default_instance() && _impl_.source_context_ != nullptr;
 }
 inline bool Enum::has_source_context() const {
   return _internal_has_source_context();
 }
-inline const ::SHARK_NAMESPACE_ID::SourceContext& Enum::_internal_source_context() const {
-  const ::SHARK_NAMESPACE_ID::SourceContext* p = _impl_.source_context_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::SourceContext&>(
-      ::SHARK_NAMESPACE_ID::_SourceContext_default_instance_);
+inline const ::shark::SourceContext& Enum::_internal_source_context() const {
+  const ::shark::SourceContext* p = _impl_.source_context_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::SourceContext&>(
+      ::shark::_SourceContext_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::SourceContext& Enum::source_context() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Enum.source_context)
+inline const ::shark::SourceContext& Enum::source_context() const {
+  // @@protoc_insertion_point(field_get:shark.Enum.source_context)
   return _internal_source_context();
 }
 inline void Enum::unsafe_arena_set_allocated_source_context(
-    ::SHARK_NAMESPACE_ID::SourceContext* source_context) {
+    ::shark::SourceContext* source_context) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_context_);
   }
@@ -2197,11 +2197,11 @@ inline void Enum::unsafe_arena_set_allocated_source_context(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.Enum.source_context)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Enum.source_context)
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Enum::release_source_context() {
+inline ::shark::SourceContext* Enum::release_source_context() {
   
-  ::SHARK_NAMESPACE_ID::SourceContext* temp = _impl_.source_context_;
+  ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -2214,27 +2214,27 @@ inline ::SHARK_NAMESPACE_ID::SourceContext* Enum::release_source_context() {
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Enum::unsafe_arena_release_source_context() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Enum.source_context)
+inline ::shark::SourceContext* Enum::unsafe_arena_release_source_context() {
+  // @@protoc_insertion_point(field_release:shark.Enum.source_context)
   
-  ::SHARK_NAMESPACE_ID::SourceContext* temp = _impl_.source_context_;
+  ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Enum::_internal_mutable_source_context() {
+inline ::shark::SourceContext* Enum::_internal_mutable_source_context() {
   
   if (_impl_.source_context_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceContext>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::SourceContext>(GetArenaForAllocation());
     _impl_.source_context_ = p;
   }
   return _impl_.source_context_;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Enum::mutable_source_context() {
-  ::SHARK_NAMESPACE_ID::SourceContext* _msg = _internal_mutable_source_context();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Enum.source_context)
+inline ::shark::SourceContext* Enum::mutable_source_context() {
+  ::shark::SourceContext* _msg = _internal_mutable_source_context();
+  // @@protoc_insertion_point(field_mutable:shark.Enum.source_context)
   return _msg;
 }
-inline void Enum::set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContext* source_context) {
+inline void Enum::set_allocated_source_context(::shark::SourceContext* source_context) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_context_);
@@ -2252,27 +2252,27 @@ inline void Enum::set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceConte
     
   }
   _impl_.source_context_ = source_context;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Enum.source_context)
+  // @@protoc_insertion_point(field_set_allocated:shark.Enum.source_context)
 }
 
-// .google.protobuf.Syntax syntax = 5;
+// .shark.Syntax syntax = 5;
 inline void Enum::clear_syntax() {
   _impl_.syntax_ = 0;
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Enum::_internal_syntax() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::Syntax >(_impl_.syntax_);
+inline ::shark::Syntax Enum::_internal_syntax() const {
+  return static_cast< ::shark::Syntax >(_impl_.syntax_);
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Enum::syntax() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Enum.syntax)
+inline ::shark::Syntax Enum::syntax() const {
+  // @@protoc_insertion_point(field_get:shark.Enum.syntax)
   return _internal_syntax();
 }
-inline void Enum::_internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Enum::_internal_set_syntax(::shark::Syntax value) {
   
   _impl_.syntax_ = value;
 }
-inline void Enum::set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Enum::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Enum.syntax)
+  // @@protoc_insertion_point(field_set:shark.Enum.syntax)
 }
 
 // -------------------------------------------------------------------
@@ -2284,7 +2284,7 @@ inline void EnumValue::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& EnumValue::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValue.name)
+  // @@protoc_insertion_point(field_get:shark.EnumValue.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2292,11 +2292,11 @@ inline SHARK_ALWAYS_INLINE
 void EnumValue::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumValue.name)
+  // @@protoc_insertion_point(field_set:shark.EnumValue.name)
 }
 inline std::string* EnumValue::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValue.name)
+  // @@protoc_insertion_point(field_mutable:shark.EnumValue.name)
   return _s;
 }
 inline const std::string& EnumValue::_internal_name() const {
@@ -2311,7 +2311,7 @@ inline std::string* EnumValue::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* EnumValue::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.EnumValue.name)
+  // @@protoc_insertion_point(field_release:shark.EnumValue.name)
   return _impl_.name_.Release();
 }
 inline void EnumValue::set_allocated_name(std::string* name) {
@@ -2326,7 +2326,7 @@ inline void EnumValue::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.EnumValue.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.EnumValue.name)
 }
 
 // int32 number = 2;
@@ -2337,7 +2337,7 @@ inline int32_t EnumValue::_internal_number() const {
   return _impl_.number_;
 }
 inline int32_t EnumValue::number() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValue.number)
+  // @@protoc_insertion_point(field_get:shark.EnumValue.number)
   return _internal_number();
 }
 inline void EnumValue::_internal_set_number(int32_t value) {
@@ -2346,10 +2346,10 @@ inline void EnumValue::_internal_set_number(int32_t value) {
 }
 inline void EnumValue::set_number(int32_t value) {
   _internal_set_number(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.EnumValue.number)
+  // @@protoc_insertion_point(field_set:shark.EnumValue.number)
 }
 
-// repeated .google.protobuf.Option options = 3;
+// repeated .shark.Option options = 3;
 inline int EnumValue::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -2359,33 +2359,33 @@ inline int EnumValue::options_size() const {
 inline void EnumValue::clear_options() {
   _impl_.options_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Option* EnumValue::mutable_options(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.EnumValue.options)
+inline ::shark::Option* EnumValue::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.EnumValue.options)
   return _impl_.options_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
 EnumValue::mutable_options() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.EnumValue.options)
+  // @@protoc_insertion_point(field_mutable_list:shark.EnumValue.options)
   return &_impl_.options_;
 }
-inline const ::SHARK_NAMESPACE_ID::Option& EnumValue::_internal_options(int index) const {
+inline const ::shark::Option& EnumValue::_internal_options(int index) const {
   return _impl_.options_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Option& EnumValue::options(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.EnumValue.options)
+inline const ::shark::Option& EnumValue::options(int index) const {
+  // @@protoc_insertion_point(field_get:shark.EnumValue.options)
   return _internal_options(index);
 }
-inline ::SHARK_NAMESPACE_ID::Option* EnumValue::_internal_add_options() {
+inline ::shark::Option* EnumValue::_internal_add_options() {
   return _impl_.options_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Option* EnumValue::add_options() {
-  ::SHARK_NAMESPACE_ID::Option* _add = _internal_add_options();
-  // @@protoc_insertion_point(field_add:google.protobuf.EnumValue.options)
+inline ::shark::Option* EnumValue::add_options() {
+  ::shark::Option* _add = _internal_add_options();
+  // @@protoc_insertion_point(field_add:shark.EnumValue.options)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
 EnumValue::options() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.EnumValue.options)
+  // @@protoc_insertion_point(field_list:shark.EnumValue.options)
   return _impl_.options_;
 }
 
@@ -2398,7 +2398,7 @@ inline void Option::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Option::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Option.name)
+  // @@protoc_insertion_point(field_get:shark.Option.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -2406,11 +2406,11 @@ inline SHARK_ALWAYS_INLINE
 void Option::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Option.name)
+  // @@protoc_insertion_point(field_set:shark.Option.name)
 }
 inline std::string* Option::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Option.name)
+  // @@protoc_insertion_point(field_mutable:shark.Option.name)
   return _s;
 }
 inline const std::string& Option::_internal_name() const {
@@ -2425,7 +2425,7 @@ inline std::string* Option::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Option::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Option.name)
+  // @@protoc_insertion_point(field_release:shark.Option.name)
   return _impl_.name_.Release();
 }
 inline void Option::set_allocated_name(std::string* name) {
@@ -2440,27 +2440,27 @@ inline void Option::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Option.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Option.name)
 }
 
-// .google.protobuf.Any value = 2;
+// .shark.Any value = 2;
 inline bool Option::_internal_has_value() const {
   return this != internal_default_instance() && _impl_.value_ != nullptr;
 }
 inline bool Option::has_value() const {
   return _internal_has_value();
 }
-inline const ::SHARK_NAMESPACE_ID::Any& Option::_internal_value() const {
-  const ::SHARK_NAMESPACE_ID::Any* p = _impl_.value_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::Any&>(
-      ::SHARK_NAMESPACE_ID::_Any_default_instance_);
+inline const ::shark::Any& Option::_internal_value() const {
+  const ::shark::Any* p = _impl_.value_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::Any&>(
+      ::shark::_Any_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::Any& Option::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Option.value)
+inline const ::shark::Any& Option::value() const {
+  // @@protoc_insertion_point(field_get:shark.Option.value)
   return _internal_value();
 }
 inline void Option::unsafe_arena_set_allocated_value(
-    ::SHARK_NAMESPACE_ID::Any* value) {
+    ::shark::Any* value) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.value_);
   }
@@ -2470,11 +2470,11 @@ inline void Option::unsafe_arena_set_allocated_value(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.Option.value)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Option.value)
 }
-inline ::SHARK_NAMESPACE_ID::Any* Option::release_value() {
+inline ::shark::Any* Option::release_value() {
   
-  ::SHARK_NAMESPACE_ID::Any* temp = _impl_.value_;
+  ::shark::Any* temp = _impl_.value_;
   _impl_.value_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -2487,27 +2487,27 @@ inline ::SHARK_NAMESPACE_ID::Any* Option::release_value() {
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::Any* Option::unsafe_arena_release_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Option.value)
+inline ::shark::Any* Option::unsafe_arena_release_value() {
+  // @@protoc_insertion_point(field_release:shark.Option.value)
   
-  ::SHARK_NAMESPACE_ID::Any* temp = _impl_.value_;
+  ::shark::Any* temp = _impl_.value_;
   _impl_.value_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::Any* Option::_internal_mutable_value() {
+inline ::shark::Any* Option::_internal_mutable_value() {
   
   if (_impl_.value_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::Any>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::Any>(GetArenaForAllocation());
     _impl_.value_ = p;
   }
   return _impl_.value_;
 }
-inline ::SHARK_NAMESPACE_ID::Any* Option::mutable_value() {
-  ::SHARK_NAMESPACE_ID::Any* _msg = _internal_mutable_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Option.value)
+inline ::shark::Any* Option::mutable_value() {
+  ::shark::Any* _msg = _internal_mutable_value();
+  // @@protoc_insertion_point(field_mutable:shark.Option.value)
   return _msg;
 }
-inline void Option::set_allocated_value(::SHARK_NAMESPACE_ID::Any* value) {
+inline void Option::set_allocated_value(::shark::Any* value) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.value_);
@@ -2525,7 +2525,7 @@ inline void Option::set_allocated_value(::SHARK_NAMESPACE_ID::Any* value) {
     
   }
   _impl_.value_ = value;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Option.value)
+  // @@protoc_insertion_point(field_set_allocated:shark.Option.value)
 }
 
 #ifdef __GNUC__
@@ -2542,24 +2542,24 @@ inline void Option::set_allocated_value(::SHARK_NAMESPACE_ID::Any* value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::Field_Kind> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::Field_Kind> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::Field_Kind>() {
-  return ::SHARK_NAMESPACE_ID::Field_Kind_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::Field_Kind>() {
+  return ::shark::Field_Kind_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::Field_Cardinality> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::Field_Cardinality> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::Field_Cardinality>() {
-  return ::SHARK_NAMESPACE_ID::Field_Cardinality_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::Field_Cardinality>() {
+  return ::shark::Field_Cardinality_descriptor();
 }
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::Syntax> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::Syntax> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::Syntax>() {
-  return ::SHARK_NAMESPACE_ID::Syntax_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::Syntax>() {
+  return ::shark::Syntax_descriptor();
 }
 
 SHARK_NAMESPACE_CLOSE

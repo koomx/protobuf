@@ -37,7 +37,5 @@
 #include <tests/proto3_lite_unittest.inc>
 
 // Make extract script happy.
-namespace google {
-namespace protobuf {
-}  // namespace protobuf
-}  // namespace google
+namespace shark {
+}  // namespace shark

@@ -42,10 +42,7 @@
 #include <shark/compiler/java/context.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 // Commonly-used separator comments.  Thick is a line of '=', thin is a line
 // of '-'.
@@ -424,7 +421,7 @@ inline bool IsMapField(const FieldDescriptor* descriptor) {
 }
 
 inline bool IsAnyMessage(const Descriptor* descriptor) {
-  return descriptor->full_name() == "google.protobuf.Any";
+  return descriptor->full_name() == "shark.Any";
 }
 
 inline bool IsWrappersProtoFile(const FileDescriptor* descriptor) {
@@ -465,8 +462,5 @@ int GetExperimentalJavaFieldType(const FieldDescriptor* field);
 // and the first field number that are not in the table part
 std::pair<int, int> GetTableDrivenNumberOfEntriesAndLookUpStartFieldNumber(
     const FieldDescriptor** fields, int count);
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

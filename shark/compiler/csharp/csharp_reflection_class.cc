@@ -46,10 +46,7 @@
 #include <shark/compiler/csharp/csharp_options.h>
 #include <shark/compiler/csharp/csharp_reflection_class.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 ReflectionClassGenerator::ReflectionClassGenerator(const FileDescriptor* file,
                                                    const Options* options)
@@ -324,7 +321,4 @@ void ReflectionClassGenerator::WriteGeneratedCodeInfo(const Descriptor* descript
   printer->Print(last ? ")" : "),\n");
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

@@ -39,8 +39,7 @@
 
 #include <string>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Descriptor;
 class EnumDescriptor;
@@ -48,8 +47,7 @@ class FileDescriptor;
 class FieldDescriptor;
 class ServiceDescriptor;
 
-namespace compiler {
-namespace java {
+namespace compiler::java {
 
 // Requires:
 //   descriptor != NULL
@@ -92,7 +90,5 @@ std::string FileJavaPackage(const FileDescriptor* descriptor);
 //   Capitalized camel case name field name.
 std::string CapitalizedFieldName(const FieldDescriptor* descriptor);
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace compiler::java
+}  // namespace shark

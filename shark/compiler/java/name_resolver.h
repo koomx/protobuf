@@ -38,16 +38,14 @@
 // Must be last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class Descriptor;
 class EnumDescriptor;
 class FieldDescriptor;
 class FileDescriptor;
 class ServiceDescriptor;
 
-namespace compiler {
-namespace java {
+namespace compiler::java {
 
 // Indicates how closely the two class names match.
 enum NameEquality { NO_MATCH, EXACT_EQUAL, EQUAL_IGNORE_CASE };
@@ -148,10 +146,8 @@ class ClassNameResolver {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ClassNameResolver);
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace compiler::java
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

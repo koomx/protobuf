@@ -58,8 +58,7 @@ using type_info = ::type_info;
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 struct ArenaOptions;  // defined below
 class Arena;    // defined below
@@ -842,8 +841,7 @@ class SHARK_EXPORT alignas(8) Arena final {
 // Defined above for supporting environments without RTTI.
 #undef RTTI_TYPE_ID
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

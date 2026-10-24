@@ -42,8 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 
 template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<bool>;
@@ -65,7 +64,6 @@ template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<float>;
 template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<double>;
 }  // namespace internal
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

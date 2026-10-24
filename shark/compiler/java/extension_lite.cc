@@ -40,10 +40,7 @@
 // Must be last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 ImmutableExtensionLiteGenerator::ImmutableExtensionLiteGenerator(
     const FieldDescriptor* descriptor, Context* context)
@@ -112,9 +109,6 @@ int ImmutableExtensionLiteGenerator::GenerateRegistrationCode(
   return 7;
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include <shark/port_undef.inc>

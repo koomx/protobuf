@@ -137,8 +137,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class DescriptorPool;
 class MessageFactory;
@@ -623,8 +622,8 @@ class SHARK_EXPORT CodedInputStream {
 
   static int default_recursion_limit_;  // 100 by default.
 
-  friend class google::protobuf::ZeroCopyCodedInputStream;
-  friend class google::protobuf::internal::EpsCopyByteStream;
+  friend class shark::ZeroCopyCodedInputStream;
+  friend class shark::internal::EpsCopyByteStream;
 };
 
 // EpsCopyOutputStream wraps a ZeroCopyOutputStream and exposes a new stream,
@@ -1786,8 +1785,7 @@ inline uint8_t* CodedOutputStream::WriteStringToArray(const std::string& str,
 }
 
 }  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #if defined(_MSC_VER) && _MSC_VER >= 1300 && !defined(__INTEL_COMPILER)
 #pragma runtime_checks("c", restore)

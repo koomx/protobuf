@@ -53,15 +53,15 @@ message DefaultValueTestCases {
   StructMessage struct_with_list_of_nulls = 207;
   StructMessage struct_with_list_of_lists = 208;
   StructMessage struct_with_list_of_structs = 209;
-  google.protobuf.Struct top_level_struct = 210;
+  shark.Struct top_level_struct = 210;
   ValueMessage value_wrapper_simple = 212;
   ValueMessage value_wrapper_with_struct = 213;
   ValueMessage value_wrapper_with_list = 214;
   ListValueMessage list_value_wrapper = 215;
-  google.protobuf.Value top_level_value_simple = 216;
-  google.protobuf.Value top_level_value_with_struct = 217;
-  google.protobuf.Value top_level_value_with_list = 218;
-  google.protobuf.ListValue top_level_listvalue = 219;
+  shark.Value top_level_value_simple = 216;
+  shark.Value top_level_value_with_struct = 217;
+  shark.Value top_level_value_with_list = 218;
+  shark.ListValue top_level_listvalue = 219;
   AnyMessage empty_any = 301;
   AnyMessage type_only_any = 302;
   AnyMessage recursive_any = 303;
@@ -69,7 +69,7 @@ message DefaultValueTestCases {
   AnyMessage any_with_nested_message = 305;
   AnyMessage any_with_message_containing_map = 306;
   AnyMessage any_with_message_containing_struct = 307;
-  google.protobuf.Any top_level_any = 308;
+  shark.Any top_level_any = 308;
   StringtoIntMap empty_map = 401;
   StringtoIntMap string_to_int = 402;
   IntToStringMap int_to_string = 403;
@@ -88,7 +88,7 @@ message DoubleMessage {
   repeated double repeated_double = 2;
   DoubleMessage nested_message = 3;
   repeated DoubleMessage repeated_nested_message = 4;
-  google.protobuf.DoubleValue double_wrapper = 100;
+  shark.DoubleValue double_wrapper = 100;
   oneof value {
     string str_value = 112;
     int64 num_value = 113;
@@ -96,15 +96,15 @@ message DoubleMessage {
 }
 
 message StructMessage {
-  google.protobuf.Struct struct = 1;
+  shark.Struct struct = 1;
 }
 
 message ValueMessage {
-  google.protobuf.Value value = 1;
+  shark.Value value = 1;
 }
 
 message ListValueMessage {
-  google.protobuf.ListValue shopping_list = 1;
+  shark.ListValue shopping_list = 1;
 }
 message RequestMessage {
   string content = 1;
@@ -117,7 +117,7 @@ service DefaultValueTestService {
 }
 
 message AnyMessage {
-  google.protobuf.Any any = 1;
+  shark.Any any = 1;
   AnyData data = 2;
 }
 
@@ -127,7 +127,7 @@ message AnyData {
   repeated string msgs = 3;
   AnyData nested_data = 4;
   map<string, string> map_data = 7;
-  google.protobuf.Struct struct_data = 8;
+  shark.Struct struct_data = 8;
   repeated AnyData repeated_data = 9;
 }
 
@@ -166,5 +166,5 @@ message MessageMap {
 }
 
 message DoubleValueMessage {
-  google.protobuf.DoubleValue double = 1;
+  shark.DoubleValue double = 1;
 }

@@ -43,8 +43,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Message;
 class EnumValueDescriptor;
@@ -279,8 +278,7 @@ class SHARK_EXPORT DefaultFieldComparator : public SimpleFieldComparator
 };
 
 }  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

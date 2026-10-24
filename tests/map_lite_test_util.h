@@ -32,8 +32,7 @@
 
 #include <tests/map_lite_unittest.pb.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class MapLiteTestUtil {
  public:
@@ -73,6 +72,5 @@ class MapLiteTestUtil {
   static void ExpectClear(const protobuf_unittest::TestMapLite& message);
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

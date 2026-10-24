@@ -41,8 +41,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace io {
 class ZeroCopyInputStream;
 class ZeroCopyOutputStream;
@@ -195,8 +194,7 @@ class SHARK_EXPORT ZeroCopyStreamByteSink : public strings::ByteSink {
 }  // namespace internal
 
 }  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

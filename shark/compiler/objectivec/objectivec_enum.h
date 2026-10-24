@@ -36,10 +36,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class EnumGenerator {
  public:
@@ -62,8 +59,5 @@ class EnumGenerator {
   const std::string name_;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 

@@ -40,8 +40,7 @@
 // ===================================================================
 // emulates google3/base/logging.h
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 enum LogLevel {
   LOGLEVEL_INFO,     // Informational.  This is never actually used by
@@ -141,15 +140,15 @@ inline bool IsOk(bool status) { return status; }
 #undef GOOGLE_DCHECK_GE
 
 #define GOOGLE_LOG(LEVEL)                          \
-  ::google::protobuf::internal::LogFinisher() = \
-      ::google::protobuf::internal::LogMessage( \
-          ::google::protobuf::LOGLEVEL_##LEVEL, __FILE__, __LINE__)
+  ::shark::internal::LogFinisher() = \
+      ::shark::internal::LogMessage( \
+          ::shark::LOGLEVEL_##LEVEL, __FILE__, __LINE__)
 #define GOOGLE_LOG_IF(LEVEL, CONDITION) \
   !(CONDITION) ? (void)0 : GOOGLE_LOG(LEVEL)
 
 #define GOOGLE_CHECK(EXPRESSION) \
   GOOGLE_LOG_IF(FATAL, !(EXPRESSION)) << "CHECK failed: " #EXPRESSION ": "
-#define GOOGLE_CHECK_OK(A) GOOGLE_CHECK(::google::protobuf::internal::IsOk(A))
+#define GOOGLE_CHECK_OK(A) GOOGLE_CHECK(::shark::internal::IsOk(A))
 #define GOOGLE_CHECK_EQ(A, B) GOOGLE_CHECK((A) == (B))
 #define GOOGLE_CHECK_NE(A, B) GOOGLE_CHECK((A) != (B))
 #define GOOGLE_CHECK_LT(A, B) GOOGLE_CHECK((A) <  (B))
@@ -168,7 +167,7 @@ T* CheckNotNull(const char* /* file */, int /* line */,
 }
 }  // namespace internal
 #define GOOGLE_CHECK_NOTNULL(A)               \
-  ::google::protobuf::internal::CheckNotNull( \
+  ::shark::internal::CheckNotNull( \
       __FILE__, __LINE__, "'" #A "' must not be nullptr", (A))
 
 #ifdef NDEBUG
@@ -176,7 +175,7 @@ T* CheckNotNull(const char* /* file */, int /* line */,
 #define GOOGLE_DLOG(LEVEL) GOOGLE_LOG_IF(LEVEL, false)
 
 #define GOOGLE_DCHECK(EXPRESSION) while(false) GOOGLE_CHECK(EXPRESSION)
-#define GOOGLE_DCHECK_OK(E) GOOGLE_DCHECK(::google::protobuf::internal::IsOk(E))
+#define GOOGLE_DCHECK_OK(E) GOOGLE_DCHECK(::shark::internal::IsOk(E))
 #define GOOGLE_DCHECK_EQ(A, B) GOOGLE_DCHECK((A) == (B))
 #define GOOGLE_DCHECK_NE(A, B) GOOGLE_DCHECK((A) != (B))
 #define GOOGLE_DCHECK_LT(A, B) GOOGLE_DCHECK((A) <  (B))
@@ -230,8 +229,7 @@ class SHARK_EXPORT LogSilencer {
   ~LogSilencer();
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

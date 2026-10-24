@@ -35,9 +35,7 @@
 #include <set>
 #include <string>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 class AccessInfoMap;
 
 namespace cpp {
@@ -93,7 +91,5 @@ struct Options {
 };
 
 }  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler
 

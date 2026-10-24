@@ -59,9 +59,7 @@
 
 const size_t kMapEntryTagByteSize = 2;
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // Forward declare static functions
 static size_t MapValueRefDataOnlyByteSize(const FieldDescriptor* field,
@@ -1761,8 +1759,6 @@ size_t ComputeUnknownFieldsSize(const InternalMetadata& metadata,
   return total_size;
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

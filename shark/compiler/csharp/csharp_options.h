@@ -32,10 +32,7 @@
 
 #include <string>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 // Generator options (used by csharp_generator.cc):
 struct Options {
@@ -72,8 +69,5 @@ struct Options {
   bool serializable;
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 

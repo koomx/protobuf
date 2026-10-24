@@ -36,9 +36,7 @@
 #include <shark/stubs/status.h>
 #include <shark/stubs/statusor.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 // Run a command that returns a util::Status.  If the called code returns an
 // error status, return that status up out of this method too.
@@ -81,6 +79,4 @@ Status DoAssignOrReturn(T& lhs, StatusOr<T> result) {
   ASSIGN_OR_RETURN_IMPL( \
       STATUS_MACROS_CONCAT_NAME(_status_or_value, __COUNTER__), lhs, rexpr);
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

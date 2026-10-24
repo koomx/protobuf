@@ -60,39 +60,39 @@ message WrappersTestCases {
 }
 
 message DoubleWrapper {
-  google.protobuf.DoubleValue double = 1;
+  shark.DoubleValue double = 1;
 }
 
 message FloatWrapper {
-  google.protobuf.FloatValue float = 1;
+  shark.FloatValue float = 1;
 }
 
 message Int64Wrapper {
-  google.protobuf.Int64Value int64 = 1;
+  shark.Int64Value int64 = 1;
 }
 
 message UInt64Wrapper {
-  google.protobuf.UInt64Value uint64 = 1;
+  shark.UInt64Value uint64 = 1;
 }
 
 message Int32Wrapper {
-  google.protobuf.Int32Value int32 = 1;
+  shark.Int32Value int32 = 1;
 }
 
 message UInt32Wrapper {
-  google.protobuf.UInt32Value uint32 = 1;
+  shark.UInt32Value uint32 = 1;
 }
 
 message BoolWrapper {
-  google.protobuf.BoolValue bool = 1;
+  shark.BoolValue bool = 1;
 }
 
 message StringWrapper {
-  google.protobuf.StringValue string = 1;
+  shark.StringValue string = 1;
 }
 
 message BytesWrapper {
-  google.protobuf.BytesValue bytes = 1;
+  shark.BytesValue bytes = 1;
 }
 
 service WrappersTestService {

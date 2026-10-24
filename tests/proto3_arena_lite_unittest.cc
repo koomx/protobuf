@@ -39,8 +39,7 @@
 
 using proto3_arena_unittest::TestAllTypes;
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 // We selectively set/check a few representative fields rather than all fields
 // as this test is only expected to cover the basics of arena support.
@@ -148,5 +147,4 @@ TEST(Proto3ArenaLiteTest, ReleaseMessage) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

@@ -40,10 +40,9 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace GOOGLE_NAMESPACE = google::protobuf::internal;
+namespace GOOGLE_NAMESPACE = shark::internal;
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 namespace {
 
@@ -126,5 +125,4 @@ TEST(TemplateUtilTest, TestIdentity) {
 
 }  // anonymous namespace
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

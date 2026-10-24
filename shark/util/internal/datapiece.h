@@ -42,10 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 class ProtoWriter;
 
 // Container for a single piece of data together with its data type.
@@ -167,7 +164,7 @@ class SHARK_EXPORT DataPiece {
 
   // Same as the ToEnum() method above but with additional flag to ignore
   // unknown enum values.
-  util::StatusOr<int> ToEnum(const google::protobuf::Enum* enum_type,
+  util::StatusOr<int> ToEnum(const shark::Enum* enum_type,
                              bool use_lower_camel_for_enums,
                              bool case_insensitive_enum_parsing,
                              bool ignore_unknown_enum_values,
@@ -208,10 +205,7 @@ class SHARK_EXPORT DataPiece {
   bool use_strict_base64_decoding_;
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

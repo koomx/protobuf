@@ -48,8 +48,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace internal {
 
@@ -534,5 +533,4 @@ TEST(MapFieldTest, ConstInit) {
 
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

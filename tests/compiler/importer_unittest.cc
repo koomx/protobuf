@@ -50,9 +50,7 @@
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 namespace {
 
@@ -543,6 +541,4 @@ TEST_F(DiskSourceTreeTest, VirtualFileToDiskFile) {
 
 }  // namespace
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler

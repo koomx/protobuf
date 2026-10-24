@@ -43,9 +43,7 @@
 #include <gtest/gtest.h>
 #include <shark/io/zero_copy_stream_impl.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // Each test repeats over several block sizes in order to test both cases
 // where particular writes cross a buffer boundary and cases where they do
@@ -730,6 +728,4 @@ TEST(Printer, FormatInternal) {
 #endif  // SHARK_HAS_DEATH_TEST
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io

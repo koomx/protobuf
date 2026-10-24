@@ -43,9 +43,7 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 using FieldEntry = TcParseTableBase::FieldEntry;
 
@@ -764,8 +762,8 @@ SHARK_NOINLINE const char* TcParser::SingularVarBigint(
   // code size, but for this heavily-used piece of code, that's fine.
   struct Spill {
     uint64_t field_data;
-    ::google::protobuf::MessageLite* msg;
-    const ::google::protobuf::internal::TcParseTableBase* table;
+    ::shark::MessageLite* msg;
+    const ::shark::internal::TcParseTableBase* table;
     uint64_t hasbits;
   };
   volatile Spill spill = {data.data, msg, table, hasbits};
@@ -1854,6 +1852,4 @@ const char* TcParser::MpMap(SHARK_TC_PARAM_DECL) {
   SHARK_MUSTTAIL return table->fallback(SHARK_TC_PARAM_PASS);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

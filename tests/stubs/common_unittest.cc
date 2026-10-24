@@ -41,8 +41,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 // TODO(kenton):  More tests.
@@ -354,5 +353,4 @@ TEST_F(ClosureTest, TestPermanentClosureDeleteInCallback) {
 }
 
 }  // anonymous namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

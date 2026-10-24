@@ -41,13 +41,10 @@
 #include <shark/stubs/status.h>
 
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 using ParseErrorType =
-    ::google::protobuf::util::converter::JsonStreamParser::ParseErrorType;
+    ::shark::util::converter::JsonStreamParser::ParseErrorType;
 
 
 // Tests for the JSON Stream Parser. These tests are intended to be
@@ -973,7 +970,4 @@ TEST_F(JsonStreamParserTest, DeepNestJsonExceedLimit) {
               "Message too deep. Max recursion depth reached for key 'nest22'");
 }
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

@@ -36,10 +36,7 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 OneofGenerator::OneofGenerator(const OneofDescriptor* descriptor)
     : descriptor_(descriptor) {
@@ -134,7 +131,4 @@ std::string OneofGenerator::HasIndexAsString(void) const {
   return variables_.find("index")->second;
 }
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec

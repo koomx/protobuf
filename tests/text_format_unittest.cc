@@ -66,8 +66,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace internal {
 // Controls insertion of DEBUG_STRING_SILENT_MARKER.
@@ -77,7 +76,7 @@ extern SHARK_EXPORT std::atomic<bool> enable_debug_text_format_marker;
 // Can't use an anonymous namespace here due to brokenness of Tru64 compiler.
 namespace text_format_unittest {
 
-using ::google::protobuf::internal::kDebugStringSilentMarker;
+using ::shark::internal::kDebugStringSilentMarker;
 
 // A basic string with different escapable characters for testing.
 const std::string kEscapeTestString =
@@ -2274,7 +2273,6 @@ TEST(TextFormatFloatingPointTest, PreservesNegative0) {
 }
 
 }  // namespace text_format_unittest
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

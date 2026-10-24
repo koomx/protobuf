@@ -63,8 +63,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace internal {
 
@@ -222,14 +221,14 @@ namespace {
 
 
 #define HASH_MAP std::unordered_map
-#define STR_HASH_FXN hash<::google::protobuf::StringPiece>
+#define STR_HASH_FXN hash<::shark::StringPiece>
 
 
 class GeneratedMessageFactory final : public MessageFactory {
  public:
   static GeneratedMessageFactory* singleton();
 
-  void RegisterFile(const google::protobuf::internal::DescriptorTable* table);
+  void RegisterFile(const shark::internal::DescriptorTable* table);
   void RegisterType(const Descriptor* descriptor, const Message* prototype);
 
   // implements MessageFactory ---------------------------------------
@@ -237,7 +236,7 @@ class GeneratedMessageFactory final : public MessageFactory {
 
  private:
   // Only written at static init time, so does not require locking.
-  HASH_MAP<StringPiece, const google::protobuf::internal::DescriptorTable*,
+  HASH_MAP<StringPiece, const shark::internal::DescriptorTable*,
            STR_HASH_FXN>
       file_map_;
 
@@ -253,7 +252,7 @@ GeneratedMessageFactory* GeneratedMessageFactory::singleton() {
 }
 
 void GeneratedMessageFactory::RegisterFile(
-    const google::protobuf::internal::DescriptorTable* table) {
+    const shark::internal::DescriptorTable* table) {
   if (!InsertIfNotPresent(&file_map_, table->filename, table)) {
     GOOGLE_LOG(FATAL) << "File is already registered: " << table->filename;
   }
@@ -322,7 +321,7 @@ MessageFactory* MessageFactory::generated_factory() {
 }
 
 void MessageFactory::InternalRegisterGeneratedFile(
-    const google::protobuf::internal::DescriptorTable* table) {
+    const shark::internal::DescriptorTable* table) {
   GeneratedMessageFactory::singleton()->RegisterFile(table);
 }
 
@@ -398,7 +397,6 @@ SHARK_NOINLINE
 }
 }  // namespace internal
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

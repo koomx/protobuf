@@ -34,9 +34,7 @@
 
 #pragma once
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // A locale-independent version of the standard strtod(), which always
 // uses a dot as the decimal separator.
@@ -47,7 +45,5 @@ double NoLocaleStrtod(const char* str, char** endptr);
 // infinity.
 float SafeDoubleToFloat(double value);
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 

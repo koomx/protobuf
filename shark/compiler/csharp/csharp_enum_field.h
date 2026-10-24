@@ -33,10 +33,7 @@
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/csharp/csharp_primitive_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 class EnumFieldGenerator : public PrimitiveFieldGenerator {
  public:
@@ -71,9 +68,6 @@ class EnumOneofFieldGenerator : public PrimitiveOneofFieldGenerator {
   virtual void GenerateSerializedSizeCode(io::Printer* printer) override;
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 

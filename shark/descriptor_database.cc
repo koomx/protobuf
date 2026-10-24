@@ -42,8 +42,7 @@
 #include <shark/stubs/stl_util.h>
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace {
 void RecordMessageNames(const DescriptorProto& desc_proto,
@@ -1044,5 +1043,4 @@ bool MergedDescriptorDatabase::FindAllFileNames(
   return implemented;
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

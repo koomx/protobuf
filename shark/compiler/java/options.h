@@ -32,10 +32,7 @@
 
 #include <string>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 // Generator options
 struct Options {
@@ -64,8 +61,5 @@ struct Options {
   std::string output_list_file;
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

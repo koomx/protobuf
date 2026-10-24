@@ -47,7 +47,7 @@ struct TableStruct_shark_2fstruct_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fstruct_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class ListValue;
 struct ListValueDefaultTypeInternal;
 extern ListValueDefaultTypeInternal _ListValue_default_instance_;
@@ -60,14 +60,14 @@ extern Struct_FieldsEntry_DoNotUseDefaultTypeInternal _Struct_FieldsEntry_DoNotU
 class Value;
 struct ValueDefaultTypeInternal;
 extern ValueDefaultTypeInternal _Value_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::ListValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::ListValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Struct* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Struct>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Struct_FieldsEntry_DoNotUse>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Value* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Value>(Arena*);
+template<> ::shark::ListValue* Arena::CreateMaybeMessage<::shark::ListValue>(Arena*);
+template<> ::shark::Struct* Arena::CreateMaybeMessage<::shark::Struct>(Arena*);
+template<> ::shark::Struct_FieldsEntry_DoNotUse* Arena::CreateMaybeMessage<::shark::Struct_FieldsEntry_DoNotUse>(Arena*);
+template<> ::shark::Value* Arena::CreateMaybeMessage<::shark::Value>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 enum NullValue : int {
   NULL_VALUE = 0,
@@ -96,12 +96,12 @@ inline bool NullValue_Parse(
 // ===================================================================
 
 class Struct_FieldsEntry_DoNotUse : public ::SHARK_NAMESPACE_ID::internal::MapEntry<Struct_FieldsEntry_DoNotUse, 
-    std::string, ::SHARK_NAMESPACE_ID::Value,
+    std::string, ::shark::Value,
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> {
 public:
   typedef ::SHARK_NAMESPACE_ID::internal::MapEntry<Struct_FieldsEntry_DoNotUse, 
-    std::string, ::SHARK_NAMESPACE_ID::Value,
+    std::string, ::shark::Value,
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
     ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> SuperType;
   Struct_FieldsEntry_DoNotUse();
@@ -111,7 +111,7 @@ public:
   void MergeFrom(const Struct_FieldsEntry_DoNotUse& other);
   static const Struct_FieldsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Struct_FieldsEntry_DoNotUse*>(&_Struct_FieldsEntry_DoNotUse_default_instance_); }
   static bool ValidateKey(std::string* s) {
-    return ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::SHARK_NAMESPACE_ID::internal::WireFormatLite::PARSE, "google.protobuf.Struct.FieldsEntry.key");
+    return ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::SHARK_NAMESPACE_ID::internal::WireFormatLite::PARSE, "shark.Struct.FieldsEntry.key");
  }
   static bool ValidateValue(void*) { return true; }
   using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
@@ -122,7 +122,7 @@ public:
 // -------------------------------------------------------------------
 
 class Struct final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Struct) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Struct) */ {
  public:
   inline Struct() : Struct(nullptr) {}
   ~Struct() override;
@@ -225,7 +225,7 @@ class Struct final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Struct";
+    return "shark.Struct";
   }
   protected:
   explicit Struct(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -247,24 +247,24 @@ class Struct final :
   enum : int {
     kFieldsFieldNumber = 1,
   };
-  // map<string, .google.protobuf.Value> fields = 1;
+  // map<string, .shark.Value> fields = 1;
   int fields_size() const;
   private:
   int _internal_fields_size() const;
   public:
   void clear_fields();
   private:
-  const ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >&
+  const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
       _internal_fields() const;
-  ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >*
+  ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
       _internal_mutable_fields();
   public:
-  const ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >&
+  const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
       fields() const;
-  ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >*
+  ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
       mutable_fields();
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Struct)
+  // @@protoc_insertion_point(class_scope:shark.Struct)
  private:
   class _Internal;
 
@@ -274,7 +274,7 @@ class Struct final :
   struct Impl_ {
     ::SHARK_NAMESPACE_ID::internal::MapField<
         Struct_FieldsEntry_DoNotUse,
-        std::string, ::SHARK_NAMESPACE_ID::Value,
+        std::string, ::shark::Value,
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> fields_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
@@ -285,7 +285,7 @@ class Struct final :
 // -------------------------------------------------------------------
 
 class Value final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Value) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Value) */ {
  public:
   inline Value() : Value(nullptr) {}
   ~Value() override;
@@ -398,7 +398,7 @@ class Value final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Value";
+    return "shark.Value";
   }
   protected:
   explicit Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -422,17 +422,17 @@ class Value final :
     kStructValueFieldNumber = 5,
     kListValueFieldNumber = 6,
   };
-  // .google.protobuf.NullValue null_value = 1;
+  // .shark.NullValue null_value = 1;
   bool has_null_value() const;
   private:
   bool _internal_has_null_value() const;
   public:
   void clear_null_value();
-  ::SHARK_NAMESPACE_ID::NullValue null_value() const;
-  void set_null_value(::SHARK_NAMESPACE_ID::NullValue value);
+  ::shark::NullValue null_value() const;
+  void set_null_value(::shark::NullValue value);
   private:
-  ::SHARK_NAMESPACE_ID::NullValue _internal_null_value() const;
-  void _internal_set_null_value(::SHARK_NAMESPACE_ID::NullValue value);
+  ::shark::NullValue _internal_null_value() const;
+  void _internal_set_null_value(::shark::NullValue value);
   public:
 
   // double number_value = 2;
@@ -479,45 +479,45 @@ class Value final :
   void _internal_set_bool_value(bool value);
   public:
 
-  // .google.protobuf.Struct struct_value = 5;
+  // .shark.Struct struct_value = 5;
   bool has_struct_value() const;
   private:
   bool _internal_has_struct_value() const;
   public:
   void clear_struct_value();
-  const ::SHARK_NAMESPACE_ID::Struct& struct_value() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::Struct* release_struct_value();
-  ::SHARK_NAMESPACE_ID::Struct* mutable_struct_value();
-  void set_allocated_struct_value(::SHARK_NAMESPACE_ID::Struct* struct_value);
+  const ::shark::Struct& struct_value() const;
+  [[nodiscard]] ::shark::Struct* release_struct_value();
+  ::shark::Struct* mutable_struct_value();
+  void set_allocated_struct_value(::shark::Struct* struct_value);
   private:
-  const ::SHARK_NAMESPACE_ID::Struct& _internal_struct_value() const;
-  ::SHARK_NAMESPACE_ID::Struct* _internal_mutable_struct_value();
+  const ::shark::Struct& _internal_struct_value() const;
+  ::shark::Struct* _internal_mutable_struct_value();
   public:
   void unsafe_arena_set_allocated_struct_value(
-      ::SHARK_NAMESPACE_ID::Struct* struct_value);
-  ::SHARK_NAMESPACE_ID::Struct* unsafe_arena_release_struct_value();
+      ::shark::Struct* struct_value);
+  ::shark::Struct* unsafe_arena_release_struct_value();
 
-  // .google.protobuf.ListValue list_value = 6;
+  // .shark.ListValue list_value = 6;
   bool has_list_value() const;
   private:
   bool _internal_has_list_value() const;
   public:
   void clear_list_value();
-  const ::SHARK_NAMESPACE_ID::ListValue& list_value() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::ListValue* release_list_value();
-  ::SHARK_NAMESPACE_ID::ListValue* mutable_list_value();
-  void set_allocated_list_value(::SHARK_NAMESPACE_ID::ListValue* list_value);
+  const ::shark::ListValue& list_value() const;
+  [[nodiscard]] ::shark::ListValue* release_list_value();
+  ::shark::ListValue* mutable_list_value();
+  void set_allocated_list_value(::shark::ListValue* list_value);
   private:
-  const ::SHARK_NAMESPACE_ID::ListValue& _internal_list_value() const;
-  ::SHARK_NAMESPACE_ID::ListValue* _internal_mutable_list_value();
+  const ::shark::ListValue& _internal_list_value() const;
+  ::shark::ListValue* _internal_mutable_list_value();
   public:
   void unsafe_arena_set_allocated_list_value(
-      ::SHARK_NAMESPACE_ID::ListValue* list_value);
-  ::SHARK_NAMESPACE_ID::ListValue* unsafe_arena_release_list_value();
+      ::shark::ListValue* list_value);
+  ::shark::ListValue* unsafe_arena_release_list_value();
 
   void clear_kind();
   KindCase kind_case() const;
-  // @@protoc_insertion_point(class_scope:google.protobuf.Value)
+  // @@protoc_insertion_point(class_scope:shark.Value)
  private:
   class _Internal;
   void set_has_null_value();
@@ -541,8 +541,8 @@ class Value final :
       double number_value_;
       ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr string_value_;
       bool bool_value_;
-      ::SHARK_NAMESPACE_ID::Struct* struct_value_;
-      ::SHARK_NAMESPACE_ID::ListValue* list_value_;
+      ::shark::Struct* struct_value_;
+      ::shark::ListValue* list_value_;
     } kind_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     uint32_t _oneof_case_[1];
@@ -554,7 +554,7 @@ class Value final :
 // -------------------------------------------------------------------
 
 class ListValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.ListValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ListValue) */ {
  public:
   inline ListValue() : ListValue(nullptr) {}
   ~ListValue() override;
@@ -657,7 +657,7 @@ class ListValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.ListValue";
+    return "shark.ListValue";
   }
   protected:
   explicit ListValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -676,25 +676,25 @@ class ListValue final :
   enum : int {
     kValuesFieldNumber = 1,
   };
-  // repeated .google.protobuf.Value values = 1;
+  // repeated .shark.Value values = 1;
   int values_size() const;
   private:
   int _internal_values_size() const;
   public:
   void clear_values();
-  ::SHARK_NAMESPACE_ID::Value* mutable_values(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Value >*
+  ::shark::Value* mutable_values(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >*
       mutable_values();
   private:
-  const ::SHARK_NAMESPACE_ID::Value& _internal_values(int index) const;
-  ::SHARK_NAMESPACE_ID::Value* _internal_add_values();
+  const ::shark::Value& _internal_values(int index) const;
+  ::shark::Value* _internal_add_values();
   public:
-  const ::SHARK_NAMESPACE_ID::Value& values(int index) const;
-  ::SHARK_NAMESPACE_ID::Value* add_values();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Value >&
+  const ::shark::Value& values(int index) const;
+  ::shark::Value* add_values();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >&
       values() const;
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.ListValue)
+  // @@protoc_insertion_point(class_scope:shark.ListValue)
  private:
   class _Internal;
 
@@ -702,7 +702,7 @@ class ListValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Value > values_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value > values_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
@@ -721,7 +721,7 @@ class ListValue final :
 
 // Struct
 
-// map<string, .google.protobuf.Value> fields = 1;
+// map<string, .shark.Value> fields = 1;
 inline int Struct::_internal_fields_size() const {
   return _impl_.fields_.size();
 }
@@ -731,22 +731,22 @@ inline int Struct::fields_size() const {
 inline void Struct::clear_fields() {
   _impl_.fields_.Clear();
 }
-inline const ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >&
+inline const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
 Struct::_internal_fields() const {
   return _impl_.fields_.GetMap();
 }
-inline const ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >&
+inline const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
 Struct::fields() const {
-  // @@protoc_insertion_point(field_map:google.protobuf.Struct.fields)
+  // @@protoc_insertion_point(field_map:shark.Struct.fields)
   return _internal_fields();
 }
-inline ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >*
+inline ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
 Struct::_internal_mutable_fields() {
   return _impl_.fields_.MutableMap();
 }
-inline ::SHARK_NAMESPACE_ID::Map< std::string, ::SHARK_NAMESPACE_ID::Value >*
+inline ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
 Struct::mutable_fields() {
-  // @@protoc_insertion_point(field_mutable_map:google.protobuf.Struct.fields)
+  // @@protoc_insertion_point(field_mutable_map:shark.Struct.fields)
   return _internal_mutable_fields();
 }
 
@@ -754,7 +754,7 @@ Struct::mutable_fields() {
 
 // Value
 
-// .google.protobuf.NullValue null_value = 1;
+// .shark.NullValue null_value = 1;
 inline bool Value::_internal_has_null_value() const {
   return kind_case() == kNullValue;
 }
@@ -770,26 +770,26 @@ inline void Value::clear_null_value() {
     clear_has_kind();
   }
 }
-inline ::SHARK_NAMESPACE_ID::NullValue Value::_internal_null_value() const {
+inline ::shark::NullValue Value::_internal_null_value() const {
   if (_internal_has_null_value()) {
-    return static_cast< ::SHARK_NAMESPACE_ID::NullValue >(_impl_.kind_.null_value_);
+    return static_cast< ::shark::NullValue >(_impl_.kind_.null_value_);
   }
-  return static_cast< ::SHARK_NAMESPACE_ID::NullValue >(0);
+  return static_cast< ::shark::NullValue >(0);
 }
-inline ::SHARK_NAMESPACE_ID::NullValue Value::null_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Value.null_value)
+inline ::shark::NullValue Value::null_value() const {
+  // @@protoc_insertion_point(field_get:shark.Value.null_value)
   return _internal_null_value();
 }
-inline void Value::_internal_set_null_value(::SHARK_NAMESPACE_ID::NullValue value) {
+inline void Value::_internal_set_null_value(::shark::NullValue value) {
   if (!_internal_has_null_value()) {
     clear_kind();
     set_has_null_value();
   }
   _impl_.kind_.null_value_ = value;
 }
-inline void Value::set_null_value(::SHARK_NAMESPACE_ID::NullValue value) {
+inline void Value::set_null_value(::shark::NullValue value) {
   _internal_set_null_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Value.null_value)
+  // @@protoc_insertion_point(field_set:shark.Value.null_value)
 }
 
 // double number_value = 2;
@@ -822,12 +822,12 @@ inline void Value::_internal_set_number_value(double value) {
   _impl_.kind_.number_value_ = value;
 }
 inline double Value::number_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Value.number_value)
+  // @@protoc_insertion_point(field_get:shark.Value.number_value)
   return _internal_number_value();
 }
 inline void Value::set_number_value(double value) {
   _internal_set_number_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Value.number_value)
+  // @@protoc_insertion_point(field_set:shark.Value.number_value)
 }
 
 // string string_value = 3;
@@ -847,7 +847,7 @@ inline void Value::clear_string_value() {
   }
 }
 inline const std::string& Value::string_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Value.string_value)
+  // @@protoc_insertion_point(field_get:shark.Value.string_value)
   return _internal_string_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -858,11 +858,11 @@ inline void Value::set_string_value(ArgT0&& arg0, ArgT... args) {
     _impl_.kind_.string_value_.InitDefault();
   }
   _impl_.kind_.string_value_.Set( static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Value.string_value)
+  // @@protoc_insertion_point(field_set:shark.Value.string_value)
 }
 inline std::string* Value::mutable_string_value() {
   std::string* _s = _internal_mutable_string_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Value.string_value)
+  // @@protoc_insertion_point(field_mutable:shark.Value.string_value)
   return _s;
 }
 inline const std::string& Value::_internal_string_value() const {
@@ -888,7 +888,7 @@ inline std::string* Value::_internal_mutable_string_value() {
   return _impl_.kind_.string_value_.Mutable(      GetArenaForAllocation());
 }
 inline std::string* Value::release_string_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Value.string_value)
+  // @@protoc_insertion_point(field_release:shark.Value.string_value)
   if (_internal_has_string_value()) {
     clear_has_kind();
     return _impl_.kind_.string_value_.Release();
@@ -904,7 +904,7 @@ inline void Value::set_allocated_string_value(std::string* string_value) {
     set_has_string_value();
     _impl_.kind_.string_value_.InitAllocated(string_value, GetArenaForAllocation());
   }
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Value.string_value)
+  // @@protoc_insertion_point(field_set_allocated:shark.Value.string_value)
 }
 
 // bool bool_value = 4;
@@ -937,15 +937,15 @@ inline void Value::_internal_set_bool_value(bool value) {
   _impl_.kind_.bool_value_ = value;
 }
 inline bool Value::bool_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Value.bool_value)
+  // @@protoc_insertion_point(field_get:shark.Value.bool_value)
   return _internal_bool_value();
 }
 inline void Value::set_bool_value(bool value) {
   _internal_set_bool_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Value.bool_value)
+  // @@protoc_insertion_point(field_set:shark.Value.bool_value)
 }
 
-// .google.protobuf.Struct struct_value = 5;
+// .shark.Struct struct_value = 5;
 inline bool Value::_internal_has_struct_value() const {
   return kind_case() == kStructValue;
 }
@@ -963,11 +963,11 @@ inline void Value::clear_struct_value() {
     clear_has_kind();
   }
 }
-inline ::SHARK_NAMESPACE_ID::Struct* Value::release_struct_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Value.struct_value)
+inline ::shark::Struct* Value::release_struct_value() {
+  // @@protoc_insertion_point(field_release:shark.Value.struct_value)
   if (_internal_has_struct_value()) {
     clear_has_kind();
-    ::SHARK_NAMESPACE_ID::Struct* temp = _impl_.kind_.struct_value_;
+    ::shark::Struct* temp = _impl_.kind_.struct_value_;
     if (GetArenaForAllocation() != nullptr) {
       temp = ::SHARK_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
     }
@@ -977,49 +977,49 @@ inline ::SHARK_NAMESPACE_ID::Struct* Value::release_struct_value() {
     return nullptr;
   }
 }
-inline const ::SHARK_NAMESPACE_ID::Struct& Value::_internal_struct_value() const {
+inline const ::shark::Struct& Value::_internal_struct_value() const {
   return _internal_has_struct_value()
       ? *_impl_.kind_.struct_value_
-      : reinterpret_cast< ::SHARK_NAMESPACE_ID::Struct&>(::SHARK_NAMESPACE_ID::_Struct_default_instance_);
+      : reinterpret_cast< ::shark::Struct&>(::shark::_Struct_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::Struct& Value::struct_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Value.struct_value)
+inline const ::shark::Struct& Value::struct_value() const {
+  // @@protoc_insertion_point(field_get:shark.Value.struct_value)
   return _internal_struct_value();
 }
-inline ::SHARK_NAMESPACE_ID::Struct* Value::unsafe_arena_release_struct_value() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.Value.struct_value)
+inline ::shark::Struct* Value::unsafe_arena_release_struct_value() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:shark.Value.struct_value)
   if (_internal_has_struct_value()) {
     clear_has_kind();
-    ::SHARK_NAMESPACE_ID::Struct* temp = _impl_.kind_.struct_value_;
+    ::shark::Struct* temp = _impl_.kind_.struct_value_;
     _impl_.kind_.struct_value_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void Value::unsafe_arena_set_allocated_struct_value(::SHARK_NAMESPACE_ID::Struct* struct_value) {
+inline void Value::unsafe_arena_set_allocated_struct_value(::shark::Struct* struct_value) {
   clear_kind();
   if (struct_value) {
     set_has_struct_value();
     _impl_.kind_.struct_value_ = struct_value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.Value.struct_value)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Value.struct_value)
 }
-inline ::SHARK_NAMESPACE_ID::Struct* Value::_internal_mutable_struct_value() {
+inline ::shark::Struct* Value::_internal_mutable_struct_value() {
   if (!_internal_has_struct_value()) {
     clear_kind();
     set_has_struct_value();
-    _impl_.kind_.struct_value_ = CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Struct >(GetArenaForAllocation());
+    _impl_.kind_.struct_value_ = CreateMaybeMessage< ::shark::Struct >(GetArenaForAllocation());
   }
   return _impl_.kind_.struct_value_;
 }
-inline ::SHARK_NAMESPACE_ID::Struct* Value::mutable_struct_value() {
-  ::SHARK_NAMESPACE_ID::Struct* _msg = _internal_mutable_struct_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Value.struct_value)
+inline ::shark::Struct* Value::mutable_struct_value() {
+  ::shark::Struct* _msg = _internal_mutable_struct_value();
+  // @@protoc_insertion_point(field_mutable:shark.Value.struct_value)
   return _msg;
 }
 
-// .google.protobuf.ListValue list_value = 6;
+// .shark.ListValue list_value = 6;
 inline bool Value::_internal_has_list_value() const {
   return kind_case() == kListValue;
 }
@@ -1037,11 +1037,11 @@ inline void Value::clear_list_value() {
     clear_has_kind();
   }
 }
-inline ::SHARK_NAMESPACE_ID::ListValue* Value::release_list_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Value.list_value)
+inline ::shark::ListValue* Value::release_list_value() {
+  // @@protoc_insertion_point(field_release:shark.Value.list_value)
   if (_internal_has_list_value()) {
     clear_has_kind();
-    ::SHARK_NAMESPACE_ID::ListValue* temp = _impl_.kind_.list_value_;
+    ::shark::ListValue* temp = _impl_.kind_.list_value_;
     if (GetArenaForAllocation() != nullptr) {
       temp = ::SHARK_NAMESPACE_ID::internal::DuplicateIfNonNull(temp);
     }
@@ -1051,45 +1051,45 @@ inline ::SHARK_NAMESPACE_ID::ListValue* Value::release_list_value() {
     return nullptr;
   }
 }
-inline const ::SHARK_NAMESPACE_ID::ListValue& Value::_internal_list_value() const {
+inline const ::shark::ListValue& Value::_internal_list_value() const {
   return _internal_has_list_value()
       ? *_impl_.kind_.list_value_
-      : reinterpret_cast< ::SHARK_NAMESPACE_ID::ListValue&>(::SHARK_NAMESPACE_ID::_ListValue_default_instance_);
+      : reinterpret_cast< ::shark::ListValue&>(::shark::_ListValue_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::ListValue& Value::list_value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Value.list_value)
+inline const ::shark::ListValue& Value::list_value() const {
+  // @@protoc_insertion_point(field_get:shark.Value.list_value)
   return _internal_list_value();
 }
-inline ::SHARK_NAMESPACE_ID::ListValue* Value::unsafe_arena_release_list_value() {
-  // @@protoc_insertion_point(field_unsafe_arena_release:google.protobuf.Value.list_value)
+inline ::shark::ListValue* Value::unsafe_arena_release_list_value() {
+  // @@protoc_insertion_point(field_unsafe_arena_release:shark.Value.list_value)
   if (_internal_has_list_value()) {
     clear_has_kind();
-    ::SHARK_NAMESPACE_ID::ListValue* temp = _impl_.kind_.list_value_;
+    ::shark::ListValue* temp = _impl_.kind_.list_value_;
     _impl_.kind_.list_value_ = nullptr;
     return temp;
   } else {
     return nullptr;
   }
 }
-inline void Value::unsafe_arena_set_allocated_list_value(::SHARK_NAMESPACE_ID::ListValue* list_value) {
+inline void Value::unsafe_arena_set_allocated_list_value(::shark::ListValue* list_value) {
   clear_kind();
   if (list_value) {
     set_has_list_value();
     _impl_.kind_.list_value_ = list_value;
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.Value.list_value)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Value.list_value)
 }
-inline ::SHARK_NAMESPACE_ID::ListValue* Value::_internal_mutable_list_value() {
+inline ::shark::ListValue* Value::_internal_mutable_list_value() {
   if (!_internal_has_list_value()) {
     clear_kind();
     set_has_list_value();
-    _impl_.kind_.list_value_ = CreateMaybeMessage< ::SHARK_NAMESPACE_ID::ListValue >(GetArenaForAllocation());
+    _impl_.kind_.list_value_ = CreateMaybeMessage< ::shark::ListValue >(GetArenaForAllocation());
   }
   return _impl_.kind_.list_value_;
 }
-inline ::SHARK_NAMESPACE_ID::ListValue* Value::mutable_list_value() {
-  ::SHARK_NAMESPACE_ID::ListValue* _msg = _internal_mutable_list_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Value.list_value)
+inline ::shark::ListValue* Value::mutable_list_value() {
+  ::shark::ListValue* _msg = _internal_mutable_list_value();
+  // @@protoc_insertion_point(field_mutable:shark.Value.list_value)
   return _msg;
 }
 
@@ -1106,7 +1106,7 @@ inline Value::KindCase Value::kind_case() const {
 
 // ListValue
 
-// repeated .google.protobuf.Value values = 1;
+// repeated .shark.Value values = 1;
 inline int ListValue::_internal_values_size() const {
   return _impl_.values_.size();
 }
@@ -1116,33 +1116,33 @@ inline int ListValue::values_size() const {
 inline void ListValue::clear_values() {
   _impl_.values_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Value* ListValue::mutable_values(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.ListValue.values)
+inline ::shark::Value* ListValue::mutable_values(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.ListValue.values)
   return _impl_.values_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Value >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >*
 ListValue::mutable_values() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.ListValue.values)
+  // @@protoc_insertion_point(field_mutable_list:shark.ListValue.values)
   return &_impl_.values_;
 }
-inline const ::SHARK_NAMESPACE_ID::Value& ListValue::_internal_values(int index) const {
+inline const ::shark::Value& ListValue::_internal_values(int index) const {
   return _impl_.values_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Value& ListValue::values(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.ListValue.values)
+inline const ::shark::Value& ListValue::values(int index) const {
+  // @@protoc_insertion_point(field_get:shark.ListValue.values)
   return _internal_values(index);
 }
-inline ::SHARK_NAMESPACE_ID::Value* ListValue::_internal_add_values() {
+inline ::shark::Value* ListValue::_internal_add_values() {
   return _impl_.values_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Value* ListValue::add_values() {
-  ::SHARK_NAMESPACE_ID::Value* _add = _internal_add_values();
-  // @@protoc_insertion_point(field_add:google.protobuf.ListValue.values)
+inline ::shark::Value* ListValue::add_values() {
+  ::shark::Value* _add = _internal_add_values();
+  // @@protoc_insertion_point(field_add:shark.ListValue.values)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Value >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >&
 ListValue::values() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.ListValue.values)
+  // @@protoc_insertion_point(field_list:shark.ListValue.values)
   return _impl_.values_;
 }
 
@@ -1158,14 +1158,14 @@ ListValue::values() const {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::SHARK_NAMESPACE_ID::NullValue> : ::std::true_type {};
+template <> struct is_proto_enum< ::shark::NullValue> : ::std::true_type {};
 template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::SHARK_NAMESPACE_ID::NullValue>() {
-  return ::SHARK_NAMESPACE_ID::NullValue_descriptor();
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::NullValue>() {
+  return ::shark::NullValue_descriptor();
 }
 
 SHARK_NAMESPACE_CLOSE

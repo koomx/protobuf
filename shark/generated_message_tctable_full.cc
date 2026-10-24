@@ -40,14 +40,10 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 const char* TcParser::GenericFallback(SHARK_TC_PARAM_DECL) {
   return GenericFallbackImpl<Message, UnknownFieldSet>(SHARK_TC_PARAM_PASS);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

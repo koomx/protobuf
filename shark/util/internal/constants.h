@@ -36,10 +36,7 @@
 
 // This file contains constants used by //net/proto2/util/converter.
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 // Prefix for type URLs.
 const char kTypeServiceBaseUrl[] = "type.googleapis.com";
 
@@ -50,50 +47,47 @@ const char kRfc3339TimeFormat[] = "%E4Y-%m-%dT%H:%M:%S";
 // timestamps like "1-01-0001T23:59:59Z" instead of "0001-01-0001T23:59:59Z".
 const char kRfc3339TimeFormatNoPadding[] = "%Y-%m-%dT%H:%M:%S";
 
-// Minimum seconds allowed in a google.protobuf.Timestamp value.
+// Minimum seconds allowed in a shark.Timestamp value.
 const int64_t kTimestampMinSeconds = -62135596800LL;
 
-// Maximum seconds allowed in a google.protobuf.Timestamp value.
+// Maximum seconds allowed in a shark.Timestamp value.
 const int64_t kTimestampMaxSeconds = 253402300799LL;
 
-// Minimum seconds allowed in a google.protobuf.Duration value.
+// Minimum seconds allowed in a shark.Duration value.
 const int64_t kDurationMinSeconds = -315576000000LL;
 
-// Maximum seconds allowed in a google.protobuf.Duration value.
+// Maximum seconds allowed in a shark.Duration value.
 const int64_t kDurationMaxSeconds = 315576000000LL;
 
 // Nano seconds in a second.
 const int32_t kNanosPerSecond = 1000000000;
 
-// Type url representing NULL values in google.protobuf.Struct type.
+// Type url representing NULL values in shark.Struct type.
 const char kStructNullValueTypeUrl[] =
-    "type.googleapis.com/google.protobuf.NullValue";
+    "type.googleapis.com/shark.NullValue";
 
-// Type string for google.protobuf.Struct
-const char kStructType[] = "google.protobuf.Struct";
+// Type string for shark.Struct
+const char kStructType[] = "shark.Struct";
 
-// Type string for struct.proto's google.protobuf.Value value type.
-const char kStructValueType[] = "google.protobuf.Value";
+// Type string for struct.proto's shark.Value value type.
+const char kStructValueType[] = "shark.Value";
 
-// Type string for struct.proto's google.protobuf.ListValue value type.
-const char kStructListValueType[] = "google.protobuf.ListValue";
+// Type string for struct.proto's shark.ListValue value type.
+const char kStructListValueType[] = "shark.ListValue";
 
-// Type string for google.protobuf.Timestamp
-const char kTimestampType[] = "google.protobuf.Timestamp";
+// Type string for shark.Timestamp
+const char kTimestampType[] = "shark.Timestamp";
 
-// Type string for google.protobuf.Duration
-const char kDurationType[] = "google.protobuf.Duration";
+// Type string for shark.Duration
+const char kDurationType[] = "shark.Duration";
 
-// Type URL for struct value type google.protobuf.Value
-const char kStructValueTypeUrl[] = "type.googleapis.com/google.protobuf.Value";
+// Type URL for struct value type shark.Value
+const char kStructValueTypeUrl[] = "type.googleapis.com/shark.Value";
 
-// Type string for google.protobuf.Any
-const char kAnyType[] = "google.protobuf.Any";
+// Type string for shark.Any
+const char kAnyType[] = "shark.Any";
 
 // The protobuf option name of jspb.message_id;
 const char kOptionJspbMessageId[] = "jspb.message_id";
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

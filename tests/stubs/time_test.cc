@@ -32,9 +32,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 namespace {
 static const int64 kSecondsPerDay = 3600 * 24;
 
@@ -256,6 +254,4 @@ TEST(DateTimeTest, ParseString) {
 }
 
 }  // namespace
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

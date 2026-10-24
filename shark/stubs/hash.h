@@ -37,13 +37,10 @@
 #include <unordered_map>
 #include <unordered_set>
 
-# define SHARK_HASH_NAMESPACE_DECLARATION_START \
-  namespace google {                                      \
-  namespace protobuf {
-# define SHARK_HASH_NAMESPACE_DECLARATION_END }}
+# define SHARK_HASH_NAMESPACE_DECLARATION_START namespace shark {
+# define SHARK_HASH_NAMESPACE_DECLARATION_END }
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 template <typename Key>
 struct hash : public std::hash<Key> {};
@@ -107,6 +104,5 @@ struct hash<std::pair<First, Second> > {
   }
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

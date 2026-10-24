@@ -51,8 +51,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 const UnknownFieldSet& UnknownFieldSet::default_instance() {
   static auto instance = internal::OnShutdownDelete(new UnknownFieldSet());
@@ -242,16 +241,16 @@ bool UnknownFieldSet::ParseFromArray(const void* data, int size) {
 
 bool UnknownFieldSet::SerializeToString(std::string* output) const {
   const size_t size =
-      google::protobuf::internal::WireFormat::ComputeUnknownFieldsSize(*this);
+      shark::internal::WireFormat::ComputeUnknownFieldsSize(*this);
   STLStringResizeUninitializedAmortized(output, size);
-  google::protobuf::internal::WireFormat::SerializeUnknownFieldsToArray(
+  shark::internal::WireFormat::SerializeUnknownFieldsToArray(
       *this, reinterpret_cast<uint8_t*>(const_cast<char*>(output->data())));
   return true;
 }
 
 bool UnknownFieldSet::SerializeToCodedStream(
     io::CodedOutputStream* output) const {
-  google::protobuf::internal::WireFormat::SerializeUnknownFields(*this, output);
+  shark::internal::WireFormat::SerializeUnknownFields(*this, output);
   return !output->HadError();
 }
 void UnknownField::Delete() {
@@ -344,7 +343,6 @@ const char* UnknownFieldParse(uint64_t tag, UnknownFieldSet* unknown,
 }
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

@@ -43,8 +43,7 @@
 #include <shark/descriptor.h>
 #include <shark/message.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace TestUtil {
 
 // Set every field in the message to a unique value.
@@ -2430,5 +2429,4 @@ inline void TestUtil::ExpectAtMostOneFieldSetInOneof(
 
 // ===================================================================
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

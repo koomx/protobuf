@@ -62,6 +62,6 @@ message LazyMessage {
   optional int32 a = 1;
 }
 
-extend google.protobuf.MessageOptions {
+extend shark.MessageOptions {
   optional LazyEnum lazy_enum_option = 138596335 [default = LAZY_ENUM_1];
 }

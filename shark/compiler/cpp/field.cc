@@ -52,10 +52,7 @@
 #include <shark/compiler/cpp/message_field.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 using internal::WireFormat;
 
@@ -78,9 +75,9 @@ void MaySetAnnotationVariable(const Options& options,
 std::string GenerateTemplateForOneofString(const FieldDescriptor* descriptor,
                                            StringPiece proto_ns,
                                            StringPiece field_member) {
-  std::string field_name = google::protobuf::compiler::cpp::FieldName(descriptor);
+  std::string field_name = shark::compiler::cpp::FieldName(descriptor);
   std::string field_pointer =
-      descriptor->options().ctype() == google::protobuf::FieldOptions::STRING
+      descriptor->options().ctype() == shark::FieldOptions::STRING
           ? "$0.UnsafeGetPointer()"
           : "$0";
 
@@ -90,14 +87,14 @@ std::string GenerateTemplateForOneofString(const FieldDescriptor* descriptor,
                             field_member);
   }
 
-  if (descriptor->options().ctype() == google::protobuf::FieldOptions::STRING_PIECE) {
+  if (descriptor->options().ctype() == shark::FieldOptions::STRING_PIECE) {
     return strings::Substitute(StrCat("_internal_has_", field_name, "() ? ",
                                          field_pointer, ": nullptr"),
                             field_member);
   }
 
   std::string default_value_pointer =
-      descriptor->options().ctype() == google::protobuf::FieldOptions::STRING
+      descriptor->options().ctype() == shark::FieldOptions::STRING
           ? "&$1.get()"
           : "&$1";
   return strings::Substitute(
@@ -112,7 +109,7 @@ std::string GenerateTemplateForSingleString(const FieldDescriptor* descriptor,
     return StrCat("&", field_member);
   }
 
-  if (descriptor->options().ctype() == google::protobuf::FieldOptions::STRING) {
+  if (descriptor->options().ctype() == shark::FieldOptions::STRING) {
     return strings::Substitute(
         "$0.IsDefault() ? &$1.get() : $0.UnsafeGetPointer()", field_member,
         MakeDefaultFieldName(descriptor));
@@ -147,11 +144,11 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     return;
   }
   if (descriptor->file()->options().optimize_for() ==
-      google::protobuf::FileOptions::LITE_RUNTIME) {
+      shark::FileOptions::LITE_RUNTIME) {
     return;
   }
   std::string field_member = (*variables)["field"];
-  const google::protobuf::OneofDescriptor* oneof_member =
+  const shark::OneofDescriptor* oneof_member =
       descriptor->real_containing_oneof();
   const std::string proto_ns = (*variables)["proto_ns"];
   const std::string substitute_template_prefix =
@@ -415,7 +412,4 @@ const FieldGenerator& FieldGeneratorMap::get(
   return *field_generators_[field->index()];
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

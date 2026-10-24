@@ -43,7 +43,7 @@ struct TableStruct_shark_2fwrappers_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fwrappers_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class BoolValue;
 struct BoolValueDefaultTypeInternal;
 extern BoolValueDefaultTypeInternal _BoolValue_default_instance_;
@@ -71,24 +71,24 @@ extern UInt32ValueDefaultTypeInternal _UInt32Value_default_instance_;
 class UInt64Value;
 struct UInt64ValueDefaultTypeInternal;
 extern UInt64ValueDefaultTypeInternal _UInt64Value_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::BoolValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::BoolValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::BytesValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::BytesValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::DoubleValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::DoubleValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::FloatValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::FloatValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Int32Value* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Int32Value>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Int64Value* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Int64Value>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::StringValue* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::StringValue>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::UInt32Value* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::UInt32Value>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::UInt64Value* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::UInt64Value>(Arena*);
+template<> ::shark::BoolValue* Arena::CreateMaybeMessage<::shark::BoolValue>(Arena*);
+template<> ::shark::BytesValue* Arena::CreateMaybeMessage<::shark::BytesValue>(Arena*);
+template<> ::shark::DoubleValue* Arena::CreateMaybeMessage<::shark::DoubleValue>(Arena*);
+template<> ::shark::FloatValue* Arena::CreateMaybeMessage<::shark::FloatValue>(Arena*);
+template<> ::shark::Int32Value* Arena::CreateMaybeMessage<::shark::Int32Value>(Arena*);
+template<> ::shark::Int64Value* Arena::CreateMaybeMessage<::shark::Int64Value>(Arena*);
+template<> ::shark::StringValue* Arena::CreateMaybeMessage<::shark::StringValue>(Arena*);
+template<> ::shark::UInt32Value* Arena::CreateMaybeMessage<::shark::UInt32Value>(Arena*);
+template<> ::shark::UInt64Value* Arena::CreateMaybeMessage<::shark::UInt64Value>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class DoubleValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.DoubleValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.DoubleValue) */ {
  public:
   inline DoubleValue() : DoubleValue(nullptr) {}
   ~DoubleValue() override;
@@ -191,7 +191,7 @@ class DoubleValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.DoubleValue";
+    return "shark.DoubleValue";
   }
   protected:
   explicit DoubleValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -219,7 +219,7 @@ class DoubleValue final :
   void _internal_set_value(double value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.DoubleValue)
+  // @@protoc_insertion_point(class_scope:shark.DoubleValue)
  private:
   class _Internal;
 
@@ -236,7 +236,7 @@ class DoubleValue final :
 // -------------------------------------------------------------------
 
 class FloatValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.FloatValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FloatValue) */ {
  public:
   inline FloatValue() : FloatValue(nullptr) {}
   ~FloatValue() override;
@@ -339,7 +339,7 @@ class FloatValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.FloatValue";
+    return "shark.FloatValue";
   }
   protected:
   explicit FloatValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -367,7 +367,7 @@ class FloatValue final :
   void _internal_set_value(float value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.FloatValue)
+  // @@protoc_insertion_point(class_scope:shark.FloatValue)
  private:
   class _Internal;
 
@@ -384,7 +384,7 @@ class FloatValue final :
 // -------------------------------------------------------------------
 
 class Int64Value final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Int64Value) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Int64Value) */ {
  public:
   inline Int64Value() : Int64Value(nullptr) {}
   ~Int64Value() override;
@@ -487,7 +487,7 @@ class Int64Value final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Int64Value";
+    return "shark.Int64Value";
   }
   protected:
   explicit Int64Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -515,7 +515,7 @@ class Int64Value final :
   void _internal_set_value(int64_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Int64Value)
+  // @@protoc_insertion_point(class_scope:shark.Int64Value)
  private:
   class _Internal;
 
@@ -532,7 +532,7 @@ class Int64Value final :
 // -------------------------------------------------------------------
 
 class UInt64Value final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UInt64Value) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.UInt64Value) */ {
  public:
   inline UInt64Value() : UInt64Value(nullptr) {}
   ~UInt64Value() override;
@@ -635,7 +635,7 @@ class UInt64Value final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.UInt64Value";
+    return "shark.UInt64Value";
   }
   protected:
   explicit UInt64Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -663,7 +663,7 @@ class UInt64Value final :
   void _internal_set_value(uint64_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.UInt64Value)
+  // @@protoc_insertion_point(class_scope:shark.UInt64Value)
  private:
   class _Internal;
 
@@ -680,7 +680,7 @@ class UInt64Value final :
 // -------------------------------------------------------------------
 
 class Int32Value final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Int32Value) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Int32Value) */ {
  public:
   inline Int32Value() : Int32Value(nullptr) {}
   ~Int32Value() override;
@@ -783,7 +783,7 @@ class Int32Value final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Int32Value";
+    return "shark.Int32Value";
   }
   protected:
   explicit Int32Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -811,7 +811,7 @@ class Int32Value final :
   void _internal_set_value(int32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Int32Value)
+  // @@protoc_insertion_point(class_scope:shark.Int32Value)
  private:
   class _Internal;
 
@@ -828,7 +828,7 @@ class Int32Value final :
 // -------------------------------------------------------------------
 
 class UInt32Value final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.UInt32Value) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.UInt32Value) */ {
  public:
   inline UInt32Value() : UInt32Value(nullptr) {}
   ~UInt32Value() override;
@@ -931,7 +931,7 @@ class UInt32Value final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.UInt32Value";
+    return "shark.UInt32Value";
   }
   protected:
   explicit UInt32Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -959,7 +959,7 @@ class UInt32Value final :
   void _internal_set_value(uint32_t value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.UInt32Value)
+  // @@protoc_insertion_point(class_scope:shark.UInt32Value)
  private:
   class _Internal;
 
@@ -976,7 +976,7 @@ class UInt32Value final :
 // -------------------------------------------------------------------
 
 class BoolValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.BoolValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.BoolValue) */ {
  public:
   inline BoolValue() : BoolValue(nullptr) {}
   ~BoolValue() override;
@@ -1079,7 +1079,7 @@ class BoolValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.BoolValue";
+    return "shark.BoolValue";
   }
   protected:
   explicit BoolValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1107,7 +1107,7 @@ class BoolValue final :
   void _internal_set_value(bool value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.BoolValue)
+  // @@protoc_insertion_point(class_scope:shark.BoolValue)
  private:
   class _Internal;
 
@@ -1124,7 +1124,7 @@ class BoolValue final :
 // -------------------------------------------------------------------
 
 class StringValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.StringValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.StringValue) */ {
  public:
   inline StringValue() : StringValue(nullptr) {}
   ~StringValue() override;
@@ -1227,7 +1227,7 @@ class StringValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.StringValue";
+    return "shark.StringValue";
   }
   protected:
   explicit StringValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1260,7 +1260,7 @@ class StringValue final :
   std::string* _internal_mutable_value();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.StringValue)
+  // @@protoc_insertion_point(class_scope:shark.StringValue)
  private:
   class _Internal;
 
@@ -1277,7 +1277,7 @@ class StringValue final :
 // -------------------------------------------------------------------
 
 class BytesValue final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.BytesValue) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.BytesValue) */ {
  public:
   inline BytesValue() : BytesValue(nullptr) {}
   ~BytesValue() override;
@@ -1380,7 +1380,7 @@ class BytesValue final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.BytesValue";
+    return "shark.BytesValue";
   }
   protected:
   explicit BytesValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1413,7 +1413,7 @@ class BytesValue final :
   std::string* _internal_mutable_value();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.BytesValue)
+  // @@protoc_insertion_point(class_scope:shark.BytesValue)
  private:
   class _Internal;
 
@@ -1446,7 +1446,7 @@ inline double DoubleValue::_internal_value() const {
   return _impl_.value_;
 }
 inline double DoubleValue::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.DoubleValue.value)
+  // @@protoc_insertion_point(field_get:shark.DoubleValue.value)
   return _internal_value();
 }
 inline void DoubleValue::_internal_set_value(double value) {
@@ -1455,7 +1455,7 @@ inline void DoubleValue::_internal_set_value(double value) {
 }
 inline void DoubleValue::set_value(double value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.DoubleValue.value)
+  // @@protoc_insertion_point(field_set:shark.DoubleValue.value)
 }
 
 // -------------------------------------------------------------------
@@ -1470,7 +1470,7 @@ inline float FloatValue::_internal_value() const {
   return _impl_.value_;
 }
 inline float FloatValue::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.FloatValue.value)
+  // @@protoc_insertion_point(field_get:shark.FloatValue.value)
   return _internal_value();
 }
 inline void FloatValue::_internal_set_value(float value) {
@@ -1479,7 +1479,7 @@ inline void FloatValue::_internal_set_value(float value) {
 }
 inline void FloatValue::set_value(float value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.FloatValue.value)
+  // @@protoc_insertion_point(field_set:shark.FloatValue.value)
 }
 
 // -------------------------------------------------------------------
@@ -1494,7 +1494,7 @@ inline int64_t Int64Value::_internal_value() const {
   return _impl_.value_;
 }
 inline int64_t Int64Value::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Int64Value.value)
+  // @@protoc_insertion_point(field_get:shark.Int64Value.value)
   return _internal_value();
 }
 inline void Int64Value::_internal_set_value(int64_t value) {
@@ -1503,7 +1503,7 @@ inline void Int64Value::_internal_set_value(int64_t value) {
 }
 inline void Int64Value::set_value(int64_t value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Int64Value.value)
+  // @@protoc_insertion_point(field_set:shark.Int64Value.value)
 }
 
 // -------------------------------------------------------------------
@@ -1518,7 +1518,7 @@ inline uint64_t UInt64Value::_internal_value() const {
   return _impl_.value_;
 }
 inline uint64_t UInt64Value::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UInt64Value.value)
+  // @@protoc_insertion_point(field_get:shark.UInt64Value.value)
   return _internal_value();
 }
 inline void UInt64Value::_internal_set_value(uint64_t value) {
@@ -1527,7 +1527,7 @@ inline void UInt64Value::_internal_set_value(uint64_t value) {
 }
 inline void UInt64Value::set_value(uint64_t value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.UInt64Value.value)
+  // @@protoc_insertion_point(field_set:shark.UInt64Value.value)
 }
 
 // -------------------------------------------------------------------
@@ -1542,7 +1542,7 @@ inline int32_t Int32Value::_internal_value() const {
   return _impl_.value_;
 }
 inline int32_t Int32Value::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Int32Value.value)
+  // @@protoc_insertion_point(field_get:shark.Int32Value.value)
   return _internal_value();
 }
 inline void Int32Value::_internal_set_value(int32_t value) {
@@ -1551,7 +1551,7 @@ inline void Int32Value::_internal_set_value(int32_t value) {
 }
 inline void Int32Value::set_value(int32_t value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Int32Value.value)
+  // @@protoc_insertion_point(field_set:shark.Int32Value.value)
 }
 
 // -------------------------------------------------------------------
@@ -1566,7 +1566,7 @@ inline uint32_t UInt32Value::_internal_value() const {
   return _impl_.value_;
 }
 inline uint32_t UInt32Value::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.UInt32Value.value)
+  // @@protoc_insertion_point(field_get:shark.UInt32Value.value)
   return _internal_value();
 }
 inline void UInt32Value::_internal_set_value(uint32_t value) {
@@ -1575,7 +1575,7 @@ inline void UInt32Value::_internal_set_value(uint32_t value) {
 }
 inline void UInt32Value::set_value(uint32_t value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.UInt32Value.value)
+  // @@protoc_insertion_point(field_set:shark.UInt32Value.value)
 }
 
 // -------------------------------------------------------------------
@@ -1590,7 +1590,7 @@ inline bool BoolValue::_internal_value() const {
   return _impl_.value_;
 }
 inline bool BoolValue::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.BoolValue.value)
+  // @@protoc_insertion_point(field_get:shark.BoolValue.value)
   return _internal_value();
 }
 inline void BoolValue::_internal_set_value(bool value) {
@@ -1599,7 +1599,7 @@ inline void BoolValue::_internal_set_value(bool value) {
 }
 inline void BoolValue::set_value(bool value) {
   _internal_set_value(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.BoolValue.value)
+  // @@protoc_insertion_point(field_set:shark.BoolValue.value)
 }
 
 // -------------------------------------------------------------------
@@ -1611,7 +1611,7 @@ inline void StringValue::clear_value() {
   _impl_.value_.ClearToEmpty();
 }
 inline const std::string& StringValue::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.StringValue.value)
+  // @@protoc_insertion_point(field_get:shark.StringValue.value)
   return _internal_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1619,11 +1619,11 @@ inline SHARK_ALWAYS_INLINE
 void StringValue::set_value(ArgT0&& arg0, ArgT... args) {
  
  _impl_.value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.StringValue.value)
+  // @@protoc_insertion_point(field_set:shark.StringValue.value)
 }
 inline std::string* StringValue::mutable_value() {
   std::string* _s = _internal_mutable_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.StringValue.value)
+  // @@protoc_insertion_point(field_mutable:shark.StringValue.value)
   return _s;
 }
 inline const std::string& StringValue::_internal_value() const {
@@ -1638,7 +1638,7 @@ inline std::string* StringValue::_internal_mutable_value() {
   return _impl_.value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* StringValue::release_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.StringValue.value)
+  // @@protoc_insertion_point(field_release:shark.StringValue.value)
   return _impl_.value_.Release();
 }
 inline void StringValue::set_allocated_value(std::string* value) {
@@ -1653,7 +1653,7 @@ inline void StringValue::set_allocated_value(std::string* value) {
     _impl_.value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.StringValue.value)
+  // @@protoc_insertion_point(field_set_allocated:shark.StringValue.value)
 }
 
 // -------------------------------------------------------------------
@@ -1665,7 +1665,7 @@ inline void BytesValue::clear_value() {
   _impl_.value_.ClearToEmpty();
 }
 inline const std::string& BytesValue::value() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.BytesValue.value)
+  // @@protoc_insertion_point(field_get:shark.BytesValue.value)
   return _internal_value();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1673,11 +1673,11 @@ inline SHARK_ALWAYS_INLINE
 void BytesValue::set_value(ArgT0&& arg0, ArgT... args) {
  
  _impl_.value_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.BytesValue.value)
+  // @@protoc_insertion_point(field_set:shark.BytesValue.value)
 }
 inline std::string* BytesValue::mutable_value() {
   std::string* _s = _internal_mutable_value();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.BytesValue.value)
+  // @@protoc_insertion_point(field_mutable:shark.BytesValue.value)
   return _s;
 }
 inline const std::string& BytesValue::_internal_value() const {
@@ -1692,7 +1692,7 @@ inline std::string* BytesValue::_internal_mutable_value() {
   return _impl_.value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* BytesValue::release_value() {
-  // @@protoc_insertion_point(field_release:google.protobuf.BytesValue.value)
+  // @@protoc_insertion_point(field_release:shark.BytesValue.value)
   return _impl_.value_.Release();
 }
 inline void BytesValue::set_allocated_value(std::string* value) {
@@ -1707,7 +1707,7 @@ inline void BytesValue::set_allocated_value(std::string* value) {
     _impl_.value_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.BytesValue.value)
+  // @@protoc_insertion_point(field_set_allocated:shark.BytesValue.value)
 }
 
 #ifdef __GNUC__
@@ -1732,7 +1732,7 @@ inline void BytesValue::set_allocated_value(std::string* value) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

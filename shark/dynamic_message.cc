@@ -88,8 +88,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 using internal::DynamicMapField;
 using internal::ExtensionSet;
@@ -820,7 +819,6 @@ const Message* DynamicMessageFactory::GetPrototypeNoLock(
   return prototype;
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>  // NOLINT

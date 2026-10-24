@@ -42,9 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 namespace {
 
@@ -541,8 +539,6 @@ const char* UnknownFieldParse(uint32_t tag, std::string* unknown,
   return FieldParser(tag, field_parser, ptr, ctx);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

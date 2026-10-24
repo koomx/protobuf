@@ -38,10 +38,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 // CodeGenerator implementation which generates a C# source file and
 // header.  If you create your own protocol compiler binary and you want
@@ -59,10 +56,7 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
   uint64_t GetSupportedFeatures() const override;
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 #include <shark/port_undef.inc>
 

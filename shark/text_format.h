@@ -56,8 +56,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace internal {
 SHARK_EXPORT extern const char kDebugStringSilentMarker[1];
@@ -327,7 +326,7 @@ class SHARK_EXPORT TextFormat {
           print_message_fields_in_index_order;
     }
 
-    // If expand==true, expand google.protobuf.Any payloads. The output
+    // If expand==true, expand shark.Any payloads. The output
     // will be of form
     //    [type_url] { <value_printed_in_text> }
     //
@@ -472,7 +471,7 @@ class SHARK_EXPORT TextFormat {
   //
   // If you would like to read a protocol buffer serialized in the
   // (non-human-readable) binary wire format, see
-  // google::protobuf::MessageLite::ParseFromString().
+  // shark::MessageLite::ParseFromString().
   static bool Parse(io::ZeroCopyInputStream* input, Message* output);
   // Like Parse(), but reads directly from a string.
   static bool ParseFromString(ConstStringParam input, Message* output);
@@ -684,8 +683,7 @@ inline TextFormat::ParseInfoTree* TextFormat::CreateNested(
   return info_tree->CreateNested(field);
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

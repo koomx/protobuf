@@ -45,7 +45,7 @@ struct TableStruct_shark_2fapi_2eproto {
   static const uint32_t offsets[];
 };
 extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fapi_2eproto;
-SHARK_NAMESPACE_OPEN
+namespace shark {
 class Api;
 struct ApiDefaultTypeInternal;
 extern ApiDefaultTypeInternal _Api_default_instance_;
@@ -55,18 +55,18 @@ extern MethodDefaultTypeInternal _Method_default_instance_;
 class Mixin;
 struct MixinDefaultTypeInternal;
 extern MixinDefaultTypeInternal _Mixin_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> ::SHARK_NAMESPACE_ID::Api* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Api>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Method* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Method>(Arena*);
-template<> ::SHARK_NAMESPACE_ID::Mixin* Arena::CreateMaybeMessage<::SHARK_NAMESPACE_ID::Mixin>(Arena*);
+template<> ::shark::Api* Arena::CreateMaybeMessage<::shark::Api>(Arena*);
+template<> ::shark::Method* Arena::CreateMaybeMessage<::shark::Method>(Arena*);
+template<> ::shark::Mixin* Arena::CreateMaybeMessage<::shark::Mixin>(Arena*);
 SHARK_NAMESPACE_CLOSE
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
 class Api final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Api) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Api) */ {
  public:
   inline Api() : Api(nullptr) {}
   ~Api() override;
@@ -169,7 +169,7 @@ class Api final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Api";
+    return "shark.Api";
   }
   protected:
   explicit Api(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -194,58 +194,58 @@ class Api final :
     kSourceContextFieldNumber = 5,
     kSyntaxFieldNumber = 7,
   };
-  // repeated .google.protobuf.Method methods = 2;
+  // repeated .shark.Method methods = 2;
   int methods_size() const;
   private:
   int _internal_methods_size() const;
   public:
   void clear_methods();
-  ::SHARK_NAMESPACE_ID::Method* mutable_methods(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Method >*
+  ::shark::Method* mutable_methods(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >*
       mutable_methods();
   private:
-  const ::SHARK_NAMESPACE_ID::Method& _internal_methods(int index) const;
-  ::SHARK_NAMESPACE_ID::Method* _internal_add_methods();
+  const ::shark::Method& _internal_methods(int index) const;
+  ::shark::Method* _internal_add_methods();
   public:
-  const ::SHARK_NAMESPACE_ID::Method& methods(int index) const;
-  ::SHARK_NAMESPACE_ID::Method* add_methods();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Method >&
+  const ::shark::Method& methods(int index) const;
+  ::shark::Method* add_methods();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >&
       methods() const;
 
-  // repeated .google.protobuf.Option options = 3;
+  // repeated .shark.Option options = 3;
   int options_size() const;
   private:
   int _internal_options_size() const;
   public:
   void clear_options();
-  ::SHARK_NAMESPACE_ID::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+  ::shark::Option* mutable_options(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
       mutable_options();
   private:
-  const ::SHARK_NAMESPACE_ID::Option& _internal_options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* _internal_add_options();
+  const ::shark::Option& _internal_options(int index) const;
+  ::shark::Option* _internal_add_options();
   public:
-  const ::SHARK_NAMESPACE_ID::Option& options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+  const ::shark::Option& options(int index) const;
+  ::shark::Option* add_options();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
-  // repeated .google.protobuf.Mixin mixins = 6;
+  // repeated .shark.Mixin mixins = 6;
   int mixins_size() const;
   private:
   int _internal_mixins_size() const;
   public:
   void clear_mixins();
-  ::SHARK_NAMESPACE_ID::Mixin* mutable_mixins(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Mixin >*
+  ::shark::Mixin* mutable_mixins(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >*
       mutable_mixins();
   private:
-  const ::SHARK_NAMESPACE_ID::Mixin& _internal_mixins(int index) const;
-  ::SHARK_NAMESPACE_ID::Mixin* _internal_add_mixins();
+  const ::shark::Mixin& _internal_mixins(int index) const;
+  ::shark::Mixin* _internal_add_mixins();
   public:
-  const ::SHARK_NAMESPACE_ID::Mixin& mixins(int index) const;
-  ::SHARK_NAMESPACE_ID::Mixin* add_mixins();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Mixin >&
+  const ::shark::Mixin& mixins(int index) const;
+  ::shark::Mixin* add_mixins();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >&
       mixins() const;
 
   // string name = 1;
@@ -276,34 +276,34 @@ class Api final :
   std::string* _internal_mutable_version();
   public:
 
-  // .google.protobuf.SourceContext source_context = 5;
+  // .shark.SourceContext source_context = 5;
   bool has_source_context() const;
   private:
   bool _internal_has_source_context() const;
   public:
   void clear_source_context();
-  const ::SHARK_NAMESPACE_ID::SourceContext& source_context() const;
-  [[nodiscard]] ::SHARK_NAMESPACE_ID::SourceContext* release_source_context();
-  ::SHARK_NAMESPACE_ID::SourceContext* mutable_source_context();
-  void set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContext* source_context);
+  const ::shark::SourceContext& source_context() const;
+  [[nodiscard]] ::shark::SourceContext* release_source_context();
+  ::shark::SourceContext* mutable_source_context();
+  void set_allocated_source_context(::shark::SourceContext* source_context);
   private:
-  const ::SHARK_NAMESPACE_ID::SourceContext& _internal_source_context() const;
-  ::SHARK_NAMESPACE_ID::SourceContext* _internal_mutable_source_context();
+  const ::shark::SourceContext& _internal_source_context() const;
+  ::shark::SourceContext* _internal_mutable_source_context();
   public:
   void unsafe_arena_set_allocated_source_context(
-      ::SHARK_NAMESPACE_ID::SourceContext* source_context);
-  ::SHARK_NAMESPACE_ID::SourceContext* unsafe_arena_release_source_context();
+      ::shark::SourceContext* source_context);
+  ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // .google.protobuf.Syntax syntax = 7;
+  // .shark.Syntax syntax = 7;
   void clear_syntax();
-  ::SHARK_NAMESPACE_ID::Syntax syntax() const;
-  void set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax syntax() const;
+  void set_syntax(::shark::Syntax value);
   private:
-  ::SHARK_NAMESPACE_ID::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax _internal_syntax() const;
+  void _internal_set_syntax(::shark::Syntax value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Api)
+  // @@protoc_insertion_point(class_scope:shark.Api)
  private:
   class _Internal;
 
@@ -311,12 +311,12 @@ class Api final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Method > methods_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option > options_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Mixin > mixins_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method > methods_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin > mixins_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr version_;
-    ::SHARK_NAMESPACE_ID::SourceContext* source_context_;
+    ::shark::SourceContext* source_context_;
     int syntax_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
@@ -326,7 +326,7 @@ class Api final :
 // -------------------------------------------------------------------
 
 class Method final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Method) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Method) */ {
  public:
   inline Method() : Method(nullptr) {}
   ~Method() override;
@@ -429,7 +429,7 @@ class Method final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Method";
+    return "shark.Method";
   }
   protected:
   explicit Method(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -454,22 +454,22 @@ class Method final :
     kResponseStreamingFieldNumber = 5,
     kSyntaxFieldNumber = 7,
   };
-  // repeated .google.protobuf.Option options = 6;
+  // repeated .shark.Option options = 6;
   int options_size() const;
   private:
   int _internal_options_size() const;
   public:
   void clear_options();
-  ::SHARK_NAMESPACE_ID::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+  ::shark::Option* mutable_options(int index);
+  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
       mutable_options();
   private:
-  const ::SHARK_NAMESPACE_ID::Option& _internal_options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* _internal_add_options();
+  const ::shark::Option& _internal_options(int index) const;
+  ::shark::Option* _internal_add_options();
   public:
-  const ::SHARK_NAMESPACE_ID::Option& options(int index) const;
-  ::SHARK_NAMESPACE_ID::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+  const ::shark::Option& options(int index) const;
+  ::shark::Option* add_options();
+  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
   // string name = 1;
@@ -532,16 +532,16 @@ class Method final :
   void _internal_set_response_streaming(bool value);
   public:
 
-  // .google.protobuf.Syntax syntax = 7;
+  // .shark.Syntax syntax = 7;
   void clear_syntax();
-  ::SHARK_NAMESPACE_ID::Syntax syntax() const;
-  void set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax syntax() const;
+  void set_syntax(::shark::Syntax value);
   private:
-  ::SHARK_NAMESPACE_ID::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value);
+  ::shark::Syntax _internal_syntax() const;
+  void _internal_set_syntax(::shark::Syntax value);
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Method)
+  // @@protoc_insertion_point(class_scope:shark.Method)
  private:
   class _Internal;
 
@@ -549,7 +549,7 @@ class Method final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option > options_;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr request_type_url_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr response_type_url_;
@@ -564,7 +564,7 @@ class Method final :
 // -------------------------------------------------------------------
 
 class Mixin final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:google.protobuf.Mixin) */ {
+    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Mixin) */ {
  public:
   inline Mixin() : Mixin(nullptr) {}
   ~Mixin() override;
@@ -667,7 +667,7 @@ class Mixin final :
   private:
   friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
   static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "google.protobuf.Mixin";
+    return "shark.Mixin";
   }
   protected:
   explicit Mixin(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -715,7 +715,7 @@ class Mixin final :
   std::string* _internal_mutable_root();
   public:
 
-  // @@protoc_insertion_point(class_scope:google.protobuf.Mixin)
+  // @@protoc_insertion_point(class_scope:shark.Mixin)
  private:
   class _Internal;
 
@@ -746,7 +746,7 @@ inline void Api::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Api::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.name)
+  // @@protoc_insertion_point(field_get:shark.Api.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -754,11 +754,11 @@ inline SHARK_ALWAYS_INLINE
 void Api::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Api.name)
+  // @@protoc_insertion_point(field_set:shark.Api.name)
 }
 inline std::string* Api::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Api.name)
+  // @@protoc_insertion_point(field_mutable:shark.Api.name)
   return _s;
 }
 inline const std::string& Api::_internal_name() const {
@@ -773,7 +773,7 @@ inline std::string* Api::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Api::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Api.name)
+  // @@protoc_insertion_point(field_release:shark.Api.name)
   return _impl_.name_.Release();
 }
 inline void Api::set_allocated_name(std::string* name) {
@@ -788,10 +788,10 @@ inline void Api::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Api.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Api.name)
 }
 
-// repeated .google.protobuf.Method methods = 2;
+// repeated .shark.Method methods = 2;
 inline int Api::_internal_methods_size() const {
   return _impl_.methods_.size();
 }
@@ -801,70 +801,70 @@ inline int Api::methods_size() const {
 inline void Api::clear_methods() {
   _impl_.methods_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Method* Api::mutable_methods(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Api.methods)
+inline ::shark::Method* Api::mutable_methods(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Api.methods)
   return _impl_.methods_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Method >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >*
 Api::mutable_methods() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Api.methods)
+  // @@protoc_insertion_point(field_mutable_list:shark.Api.methods)
   return &_impl_.methods_;
 }
-inline const ::SHARK_NAMESPACE_ID::Method& Api::_internal_methods(int index) const {
+inline const ::shark::Method& Api::_internal_methods(int index) const {
   return _impl_.methods_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Method& Api::methods(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.methods)
+inline const ::shark::Method& Api::methods(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Api.methods)
   return _internal_methods(index);
 }
-inline ::SHARK_NAMESPACE_ID::Method* Api::_internal_add_methods() {
+inline ::shark::Method* Api::_internal_add_methods() {
   return _impl_.methods_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Method* Api::add_methods() {
-  ::SHARK_NAMESPACE_ID::Method* _add = _internal_add_methods();
-  // @@protoc_insertion_point(field_add:google.protobuf.Api.methods)
+inline ::shark::Method* Api::add_methods() {
+  ::shark::Method* _add = _internal_add_methods();
+  // @@protoc_insertion_point(field_add:shark.Api.methods)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Method >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >&
 Api::methods() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Api.methods)
+  // @@protoc_insertion_point(field_list:shark.Api.methods)
   return _impl_.methods_;
 }
 
-// repeated .google.protobuf.Option options = 3;
+// repeated .shark.Option options = 3;
 inline int Api::_internal_options_size() const {
   return _impl_.options_.size();
 }
 inline int Api::options_size() const {
   return _internal_options_size();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Api::mutable_options(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Api.options)
+inline ::shark::Option* Api::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Api.options)
   return _impl_.options_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
 Api::mutable_options() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Api.options)
+  // @@protoc_insertion_point(field_mutable_list:shark.Api.options)
   return &_impl_.options_;
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Api::_internal_options(int index) const {
+inline const ::shark::Option& Api::_internal_options(int index) const {
   return _impl_.options_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Api::options(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.options)
+inline const ::shark::Option& Api::options(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Api.options)
   return _internal_options(index);
 }
-inline ::SHARK_NAMESPACE_ID::Option* Api::_internal_add_options() {
+inline ::shark::Option* Api::_internal_add_options() {
   return _impl_.options_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Api::add_options() {
-  ::SHARK_NAMESPACE_ID::Option* _add = _internal_add_options();
-  // @@protoc_insertion_point(field_add:google.protobuf.Api.options)
+inline ::shark::Option* Api::add_options() {
+  ::shark::Option* _add = _internal_add_options();
+  // @@protoc_insertion_point(field_add:shark.Api.options)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
 Api::options() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Api.options)
+  // @@protoc_insertion_point(field_list:shark.Api.options)
   return _impl_.options_;
 }
 
@@ -873,7 +873,7 @@ inline void Api::clear_version() {
   _impl_.version_.ClearToEmpty();
 }
 inline const std::string& Api::version() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.version)
+  // @@protoc_insertion_point(field_get:shark.Api.version)
   return _internal_version();
 }
 template <typename ArgT0, typename... ArgT>
@@ -881,11 +881,11 @@ inline SHARK_ALWAYS_INLINE
 void Api::set_version(ArgT0&& arg0, ArgT... args) {
  
  _impl_.version_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Api.version)
+  // @@protoc_insertion_point(field_set:shark.Api.version)
 }
 inline std::string* Api::mutable_version() {
   std::string* _s = _internal_mutable_version();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Api.version)
+  // @@protoc_insertion_point(field_mutable:shark.Api.version)
   return _s;
 }
 inline const std::string& Api::_internal_version() const {
@@ -900,7 +900,7 @@ inline std::string* Api::_internal_mutable_version() {
   return _impl_.version_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Api::release_version() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Api.version)
+  // @@protoc_insertion_point(field_release:shark.Api.version)
   return _impl_.version_.Release();
 }
 inline void Api::set_allocated_version(std::string* version) {
@@ -915,27 +915,27 @@ inline void Api::set_allocated_version(std::string* version) {
     _impl_.version_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Api.version)
+  // @@protoc_insertion_point(field_set_allocated:shark.Api.version)
 }
 
-// .google.protobuf.SourceContext source_context = 5;
+// .shark.SourceContext source_context = 5;
 inline bool Api::_internal_has_source_context() const {
   return this != internal_default_instance() && _impl_.source_context_ != nullptr;
 }
 inline bool Api::has_source_context() const {
   return _internal_has_source_context();
 }
-inline const ::SHARK_NAMESPACE_ID::SourceContext& Api::_internal_source_context() const {
-  const ::SHARK_NAMESPACE_ID::SourceContext* p = _impl_.source_context_;
-  return p != nullptr ? *p : reinterpret_cast<const ::SHARK_NAMESPACE_ID::SourceContext&>(
-      ::SHARK_NAMESPACE_ID::_SourceContext_default_instance_);
+inline const ::shark::SourceContext& Api::_internal_source_context() const {
+  const ::shark::SourceContext* p = _impl_.source_context_;
+  return p != nullptr ? *p : reinterpret_cast<const ::shark::SourceContext&>(
+      ::shark::_SourceContext_default_instance_);
 }
-inline const ::SHARK_NAMESPACE_ID::SourceContext& Api::source_context() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.source_context)
+inline const ::shark::SourceContext& Api::source_context() const {
+  // @@protoc_insertion_point(field_get:shark.Api.source_context)
   return _internal_source_context();
 }
 inline void Api::unsafe_arena_set_allocated_source_context(
-    ::SHARK_NAMESPACE_ID::SourceContext* source_context) {
+    ::shark::SourceContext* source_context) {
   if (GetArenaForAllocation() == nullptr) {
     delete reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_context_);
   }
@@ -945,11 +945,11 @@ inline void Api::unsafe_arena_set_allocated_source_context(
   } else {
     
   }
-  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:google.protobuf.Api.source_context)
+  // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Api.source_context)
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Api::release_source_context() {
+inline ::shark::SourceContext* Api::release_source_context() {
   
-  ::SHARK_NAMESPACE_ID::SourceContext* temp = _impl_.source_context_;
+  ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
   auto* old =  reinterpret_cast<::SHARK_NAMESPACE_ID::MessageLite*>(temp);
@@ -962,27 +962,27 @@ inline ::SHARK_NAMESPACE_ID::SourceContext* Api::release_source_context() {
 #endif  // !SHARK_FORCE_COPY_IN_RELEASE
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Api::unsafe_arena_release_source_context() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Api.source_context)
+inline ::shark::SourceContext* Api::unsafe_arena_release_source_context() {
+  // @@protoc_insertion_point(field_release:shark.Api.source_context)
   
-  ::SHARK_NAMESPACE_ID::SourceContext* temp = _impl_.source_context_;
+  ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
   return temp;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Api::_internal_mutable_source_context() {
+inline ::shark::SourceContext* Api::_internal_mutable_source_context() {
   
   if (_impl_.source_context_ == nullptr) {
-    auto* p = CreateMaybeMessage<::SHARK_NAMESPACE_ID::SourceContext>(GetArenaForAllocation());
+    auto* p = CreateMaybeMessage<::shark::SourceContext>(GetArenaForAllocation());
     _impl_.source_context_ = p;
   }
   return _impl_.source_context_;
 }
-inline ::SHARK_NAMESPACE_ID::SourceContext* Api::mutable_source_context() {
-  ::SHARK_NAMESPACE_ID::SourceContext* _msg = _internal_mutable_source_context();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Api.source_context)
+inline ::shark::SourceContext* Api::mutable_source_context() {
+  ::shark::SourceContext* _msg = _internal_mutable_source_context();
+  // @@protoc_insertion_point(field_mutable:shark.Api.source_context)
   return _msg;
 }
-inline void Api::set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContext* source_context) {
+inline void Api::set_allocated_source_context(::shark::SourceContext* source_context) {
   ::SHARK_NAMESPACE_ID::Arena* message_arena = GetArenaForAllocation();
   if (message_arena == nullptr) {
     delete reinterpret_cast< ::SHARK_NAMESPACE_ID::MessageLite*>(_impl_.source_context_);
@@ -1000,10 +1000,10 @@ inline void Api::set_allocated_source_context(::SHARK_NAMESPACE_ID::SourceContex
     
   }
   _impl_.source_context_ = source_context;
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Api.source_context)
+  // @@protoc_insertion_point(field_set_allocated:shark.Api.source_context)
 }
 
-// repeated .google.protobuf.Mixin mixins = 6;
+// repeated .shark.Mixin mixins = 6;
 inline int Api::_internal_mixins_size() const {
   return _impl_.mixins_.size();
 }
@@ -1013,54 +1013,54 @@ inline int Api::mixins_size() const {
 inline void Api::clear_mixins() {
   _impl_.mixins_.Clear();
 }
-inline ::SHARK_NAMESPACE_ID::Mixin* Api::mutable_mixins(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Api.mixins)
+inline ::shark::Mixin* Api::mutable_mixins(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Api.mixins)
   return _impl_.mixins_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Mixin >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >*
 Api::mutable_mixins() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Api.mixins)
+  // @@protoc_insertion_point(field_mutable_list:shark.Api.mixins)
   return &_impl_.mixins_;
 }
-inline const ::SHARK_NAMESPACE_ID::Mixin& Api::_internal_mixins(int index) const {
+inline const ::shark::Mixin& Api::_internal_mixins(int index) const {
   return _impl_.mixins_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Mixin& Api::mixins(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.mixins)
+inline const ::shark::Mixin& Api::mixins(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Api.mixins)
   return _internal_mixins(index);
 }
-inline ::SHARK_NAMESPACE_ID::Mixin* Api::_internal_add_mixins() {
+inline ::shark::Mixin* Api::_internal_add_mixins() {
   return _impl_.mixins_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Mixin* Api::add_mixins() {
-  ::SHARK_NAMESPACE_ID::Mixin* _add = _internal_add_mixins();
-  // @@protoc_insertion_point(field_add:google.protobuf.Api.mixins)
+inline ::shark::Mixin* Api::add_mixins() {
+  ::shark::Mixin* _add = _internal_add_mixins();
+  // @@protoc_insertion_point(field_add:shark.Api.mixins)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Mixin >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >&
 Api::mixins() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Api.mixins)
+  // @@protoc_insertion_point(field_list:shark.Api.mixins)
   return _impl_.mixins_;
 }
 
-// .google.protobuf.Syntax syntax = 7;
+// .shark.Syntax syntax = 7;
 inline void Api::clear_syntax() {
   _impl_.syntax_ = 0;
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Api::_internal_syntax() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::Syntax >(_impl_.syntax_);
+inline ::shark::Syntax Api::_internal_syntax() const {
+  return static_cast< ::shark::Syntax >(_impl_.syntax_);
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Api::syntax() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Api.syntax)
+inline ::shark::Syntax Api::syntax() const {
+  // @@protoc_insertion_point(field_get:shark.Api.syntax)
   return _internal_syntax();
 }
-inline void Api::_internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Api::_internal_set_syntax(::shark::Syntax value) {
   
   _impl_.syntax_ = value;
 }
-inline void Api::set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Api::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Api.syntax)
+  // @@protoc_insertion_point(field_set:shark.Api.syntax)
 }
 
 // -------------------------------------------------------------------
@@ -1072,7 +1072,7 @@ inline void Method::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Method::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.name)
+  // @@protoc_insertion_point(field_get:shark.Method.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1080,11 +1080,11 @@ inline SHARK_ALWAYS_INLINE
 void Method::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Method.name)
+  // @@protoc_insertion_point(field_set:shark.Method.name)
 }
 inline std::string* Method::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Method.name)
+  // @@protoc_insertion_point(field_mutable:shark.Method.name)
   return _s;
 }
 inline const std::string& Method::_internal_name() const {
@@ -1099,7 +1099,7 @@ inline std::string* Method::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Method::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Method.name)
+  // @@protoc_insertion_point(field_release:shark.Method.name)
   return _impl_.name_.Release();
 }
 inline void Method::set_allocated_name(std::string* name) {
@@ -1114,7 +1114,7 @@ inline void Method::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Method.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Method.name)
 }
 
 // string request_type_url = 2;
@@ -1122,7 +1122,7 @@ inline void Method::clear_request_type_url() {
   _impl_.request_type_url_.ClearToEmpty();
 }
 inline const std::string& Method::request_type_url() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.request_type_url)
+  // @@protoc_insertion_point(field_get:shark.Method.request_type_url)
   return _internal_request_type_url();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1130,11 +1130,11 @@ inline SHARK_ALWAYS_INLINE
 void Method::set_request_type_url(ArgT0&& arg0, ArgT... args) {
  
  _impl_.request_type_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Method.request_type_url)
+  // @@protoc_insertion_point(field_set:shark.Method.request_type_url)
 }
 inline std::string* Method::mutable_request_type_url() {
   std::string* _s = _internal_mutable_request_type_url();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Method.request_type_url)
+  // @@protoc_insertion_point(field_mutable:shark.Method.request_type_url)
   return _s;
 }
 inline const std::string& Method::_internal_request_type_url() const {
@@ -1149,7 +1149,7 @@ inline std::string* Method::_internal_mutable_request_type_url() {
   return _impl_.request_type_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Method::release_request_type_url() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Method.request_type_url)
+  // @@protoc_insertion_point(field_release:shark.Method.request_type_url)
   return _impl_.request_type_url_.Release();
 }
 inline void Method::set_allocated_request_type_url(std::string* request_type_url) {
@@ -1164,7 +1164,7 @@ inline void Method::set_allocated_request_type_url(std::string* request_type_url
     _impl_.request_type_url_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Method.request_type_url)
+  // @@protoc_insertion_point(field_set_allocated:shark.Method.request_type_url)
 }
 
 // bool request_streaming = 3;
@@ -1175,7 +1175,7 @@ inline bool Method::_internal_request_streaming() const {
   return _impl_.request_streaming_;
 }
 inline bool Method::request_streaming() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.request_streaming)
+  // @@protoc_insertion_point(field_get:shark.Method.request_streaming)
   return _internal_request_streaming();
 }
 inline void Method::_internal_set_request_streaming(bool value) {
@@ -1184,7 +1184,7 @@ inline void Method::_internal_set_request_streaming(bool value) {
 }
 inline void Method::set_request_streaming(bool value) {
   _internal_set_request_streaming(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Method.request_streaming)
+  // @@protoc_insertion_point(field_set:shark.Method.request_streaming)
 }
 
 // string response_type_url = 4;
@@ -1192,7 +1192,7 @@ inline void Method::clear_response_type_url() {
   _impl_.response_type_url_.ClearToEmpty();
 }
 inline const std::string& Method::response_type_url() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.response_type_url)
+  // @@protoc_insertion_point(field_get:shark.Method.response_type_url)
   return _internal_response_type_url();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1200,11 +1200,11 @@ inline SHARK_ALWAYS_INLINE
 void Method::set_response_type_url(ArgT0&& arg0, ArgT... args) {
  
  _impl_.response_type_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Method.response_type_url)
+  // @@protoc_insertion_point(field_set:shark.Method.response_type_url)
 }
 inline std::string* Method::mutable_response_type_url() {
   std::string* _s = _internal_mutable_response_type_url();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Method.response_type_url)
+  // @@protoc_insertion_point(field_mutable:shark.Method.response_type_url)
   return _s;
 }
 inline const std::string& Method::_internal_response_type_url() const {
@@ -1219,7 +1219,7 @@ inline std::string* Method::_internal_mutable_response_type_url() {
   return _impl_.response_type_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Method::release_response_type_url() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Method.response_type_url)
+  // @@protoc_insertion_point(field_release:shark.Method.response_type_url)
   return _impl_.response_type_url_.Release();
 }
 inline void Method::set_allocated_response_type_url(std::string* response_type_url) {
@@ -1234,7 +1234,7 @@ inline void Method::set_allocated_response_type_url(std::string* response_type_u
     _impl_.response_type_url_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Method.response_type_url)
+  // @@protoc_insertion_point(field_set_allocated:shark.Method.response_type_url)
 }
 
 // bool response_streaming = 5;
@@ -1245,7 +1245,7 @@ inline bool Method::_internal_response_streaming() const {
   return _impl_.response_streaming_;
 }
 inline bool Method::response_streaming() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.response_streaming)
+  // @@protoc_insertion_point(field_get:shark.Method.response_streaming)
   return _internal_response_streaming();
 }
 inline void Method::_internal_set_response_streaming(bool value) {
@@ -1254,64 +1254,64 @@ inline void Method::_internal_set_response_streaming(bool value) {
 }
 inline void Method::set_response_streaming(bool value) {
   _internal_set_response_streaming(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Method.response_streaming)
+  // @@protoc_insertion_point(field_set:shark.Method.response_streaming)
 }
 
-// repeated .google.protobuf.Option options = 6;
+// repeated .shark.Option options = 6;
 inline int Method::_internal_options_size() const {
   return _impl_.options_.size();
 }
 inline int Method::options_size() const {
   return _internal_options_size();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Method::mutable_options(int index) {
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Method.options)
+inline ::shark::Option* Method::mutable_options(int index) {
+  // @@protoc_insertion_point(field_mutable:shark.Method.options)
   return _impl_.options_.Mutable(index);
 }
-inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >*
+inline ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
 Method::mutable_options() {
-  // @@protoc_insertion_point(field_mutable_list:google.protobuf.Method.options)
+  // @@protoc_insertion_point(field_mutable_list:shark.Method.options)
   return &_impl_.options_;
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Method::_internal_options(int index) const {
+inline const ::shark::Option& Method::_internal_options(int index) const {
   return _impl_.options_.Get(index);
 }
-inline const ::SHARK_NAMESPACE_ID::Option& Method::options(int index) const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.options)
+inline const ::shark::Option& Method::options(int index) const {
+  // @@protoc_insertion_point(field_get:shark.Method.options)
   return _internal_options(index);
 }
-inline ::SHARK_NAMESPACE_ID::Option* Method::_internal_add_options() {
+inline ::shark::Option* Method::_internal_add_options() {
   return _impl_.options_.Add();
 }
-inline ::SHARK_NAMESPACE_ID::Option* Method::add_options() {
-  ::SHARK_NAMESPACE_ID::Option* _add = _internal_add_options();
-  // @@protoc_insertion_point(field_add:google.protobuf.Method.options)
+inline ::shark::Option* Method::add_options() {
+  ::shark::Option* _add = _internal_add_options();
+  // @@protoc_insertion_point(field_add:shark.Method.options)
   return _add;
 }
-inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::SHARK_NAMESPACE_ID::Option >&
+inline const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
 Method::options() const {
-  // @@protoc_insertion_point(field_list:google.protobuf.Method.options)
+  // @@protoc_insertion_point(field_list:shark.Method.options)
   return _impl_.options_;
 }
 
-// .google.protobuf.Syntax syntax = 7;
+// .shark.Syntax syntax = 7;
 inline void Method::clear_syntax() {
   _impl_.syntax_ = 0;
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Method::_internal_syntax() const {
-  return static_cast< ::SHARK_NAMESPACE_ID::Syntax >(_impl_.syntax_);
+inline ::shark::Syntax Method::_internal_syntax() const {
+  return static_cast< ::shark::Syntax >(_impl_.syntax_);
 }
-inline ::SHARK_NAMESPACE_ID::Syntax Method::syntax() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Method.syntax)
+inline ::shark::Syntax Method::syntax() const {
+  // @@protoc_insertion_point(field_get:shark.Method.syntax)
   return _internal_syntax();
 }
-inline void Method::_internal_set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Method::_internal_set_syntax(::shark::Syntax value) {
   
   _impl_.syntax_ = value;
 }
-inline void Method::set_syntax(::SHARK_NAMESPACE_ID::Syntax value) {
+inline void Method::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
-  // @@protoc_insertion_point(field_set:google.protobuf.Method.syntax)
+  // @@protoc_insertion_point(field_set:shark.Method.syntax)
 }
 
 // -------------------------------------------------------------------
@@ -1323,7 +1323,7 @@ inline void Mixin::clear_name() {
   _impl_.name_.ClearToEmpty();
 }
 inline const std::string& Mixin::name() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Mixin.name)
+  // @@protoc_insertion_point(field_get:shark.Mixin.name)
   return _internal_name();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1331,11 +1331,11 @@ inline SHARK_ALWAYS_INLINE
 void Mixin::set_name(ArgT0&& arg0, ArgT... args) {
  
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Mixin.name)
+  // @@protoc_insertion_point(field_set:shark.Mixin.name)
 }
 inline std::string* Mixin::mutable_name() {
   std::string* _s = _internal_mutable_name();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Mixin.name)
+  // @@protoc_insertion_point(field_mutable:shark.Mixin.name)
   return _s;
 }
 inline const std::string& Mixin::_internal_name() const {
@@ -1350,7 +1350,7 @@ inline std::string* Mixin::_internal_mutable_name() {
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Mixin::release_name() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Mixin.name)
+  // @@protoc_insertion_point(field_release:shark.Mixin.name)
   return _impl_.name_.Release();
 }
 inline void Mixin::set_allocated_name(std::string* name) {
@@ -1365,7 +1365,7 @@ inline void Mixin::set_allocated_name(std::string* name) {
     _impl_.name_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Mixin.name)
+  // @@protoc_insertion_point(field_set_allocated:shark.Mixin.name)
 }
 
 // string root = 2;
@@ -1373,7 +1373,7 @@ inline void Mixin::clear_root() {
   _impl_.root_.ClearToEmpty();
 }
 inline const std::string& Mixin::root() const {
-  // @@protoc_insertion_point(field_get:google.protobuf.Mixin.root)
+  // @@protoc_insertion_point(field_get:shark.Mixin.root)
   return _internal_root();
 }
 template <typename ArgT0, typename... ArgT>
@@ -1381,11 +1381,11 @@ inline SHARK_ALWAYS_INLINE
 void Mixin::set_root(ArgT0&& arg0, ArgT... args) {
  
  _impl_.root_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:google.protobuf.Mixin.root)
+  // @@protoc_insertion_point(field_set:shark.Mixin.root)
 }
 inline std::string* Mixin::mutable_root() {
   std::string* _s = _internal_mutable_root();
-  // @@protoc_insertion_point(field_mutable:google.protobuf.Mixin.root)
+  // @@protoc_insertion_point(field_mutable:shark.Mixin.root)
   return _s;
 }
 inline const std::string& Mixin::_internal_root() const {
@@ -1400,7 +1400,7 @@ inline std::string* Mixin::_internal_mutable_root() {
   return _impl_.root_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Mixin::release_root() {
-  // @@protoc_insertion_point(field_release:google.protobuf.Mixin.root)
+  // @@protoc_insertion_point(field_release:shark.Mixin.root)
   return _impl_.root_.Release();
 }
 inline void Mixin::set_allocated_root(std::string* root) {
@@ -1415,7 +1415,7 @@ inline void Mixin::set_allocated_root(std::string* root) {
     _impl_.root_.Set("", GetArenaForAllocation());
   }
 #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:google.protobuf.Mixin.root)
+  // @@protoc_insertion_point(field_set_allocated:shark.Mixin.root)
 }
 
 #ifdef __GNUC__
@@ -1428,7 +1428,7 @@ inline void Mixin::set_allocated_root(std::string* root) {
 
 // @@protoc_insertion_point(namespace_scope)
 
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

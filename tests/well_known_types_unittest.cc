@@ -34,8 +34,7 @@
 #include <gtest/gtest.h>
 #include <shark/stubs/stl_util.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 // This test only checks whether well-known types are included in protobuf
@@ -56,5 +55,4 @@ TEST(WellKnownTypesTest, AllKnownTypesAreIncluded) {
 
 }  // namespace
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

@@ -34,9 +34,7 @@
 #include <shark/stubs/common.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 namespace {
 
 TEST(StructurallyValidTest, ValidUTF8String) {
@@ -66,6 +64,4 @@ TEST(StructurallyValidTest, InvalidUTF8String) {
 }
 
 }  // namespace
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

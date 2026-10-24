@@ -32,10 +32,7 @@
 
 #include <shark/util/internal/datapiece.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 // static
 void ObjectWriter::RenderDataPieceTo(const DataPiece& data,
@@ -87,7 +84,4 @@ void ObjectWriter::RenderDataPieceTo(const DataPiece& data,
 }
 
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter

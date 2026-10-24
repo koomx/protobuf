@@ -34,10 +34,7 @@
 
 #include <shark/compiler/java/field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 class ImmutableMapFieldLiteGenerator : public ImmutableFieldLiteGenerator {
  public:
@@ -65,8 +62,5 @@ class ImmutableMapFieldLiteGenerator : public ImmutableFieldLiteGenerator {
   ClassNameResolver* name_resolver_;
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

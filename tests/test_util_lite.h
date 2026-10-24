@@ -36,8 +36,7 @@
 
 #include <tests/unittest_lite.pb.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace unittest = protobuf_unittest;
 namespace unittest_import = protobuf_unittest_import;
@@ -94,6 +93,5 @@ class TestUtilLite {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TestUtilLite);
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

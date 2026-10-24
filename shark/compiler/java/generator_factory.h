@@ -34,26 +34,19 @@
 
 #include <shark/stubs/common.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 class FieldDescriptor;    // descriptor.h
 class Descriptor;         // descriptor.h
 class ServiceDescriptor;  // descriptor.h
-namespace compiler {
-namespace java {
+namespace compiler::java {
 class MessageGenerator;    // message.h
 class ExtensionGenerator;  // extension.h
 class ServiceGenerator;    // service.h
 class Context;             // context.h
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace compiler::java
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 class GeneratorFactory {
  public:
@@ -94,8 +87,5 @@ class ImmutableGeneratorFactory : public GeneratorFactory {
 };
 
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

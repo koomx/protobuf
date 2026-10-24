@@ -40,10 +40,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 // Internal helper class for type resolving. Note that this class is not
 // thread-safe and should only be accessed in one thread.
 class SHARK_EXPORT TypeInfo {
@@ -56,26 +53,26 @@ class SHARK_EXPORT TypeInfo {
   // corresponding type cannot be found, returns a NOT_FOUND error status.
   //
   // This TypeInfo class retains the ownership of the returned pointer.
-  virtual util::StatusOr<const google::protobuf::Type*> ResolveTypeUrl(
+  virtual util::StatusOr<const shark::Type*> ResolveTypeUrl(
       StringPiece type_url) const = 0;
 
   // Resolves a type url into a Type. Like ResolveTypeUrl() but returns
   // NULL if the type url is invalid or the type cannot be found.
   //
   // This TypeInfo class retains the ownership of the returned pointer.
-  virtual const google::protobuf::Type* GetTypeByTypeUrl(
+  virtual const shark::Type* GetTypeByTypeUrl(
       StringPiece type_url) const = 0;
 
   // Resolves a type url for an enum. Returns NULL if the type url is
   // invalid or the type cannot be found.
   //
   // This TypeInfo class retains the ownership of the returned pointer.
-  virtual const google::protobuf::Enum* GetEnumByTypeUrl(
+  virtual const shark::Enum* GetEnumByTypeUrl(
       StringPiece type_url) const = 0;
 
   // Looks up a field in the specified type given a CamelCase name.
-  virtual const google::protobuf::Field* FindField(
-      const google::protobuf::Type* type,
+  virtual const shark::Field* FindField(
+      const shark::Type* type,
       StringPiece camel_case_name) const = 0;
 
   // Creates a TypeInfo object that looks up type information from a
@@ -86,10 +83,7 @@ class SHARK_EXPORT TypeInfo {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(TypeInfo);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

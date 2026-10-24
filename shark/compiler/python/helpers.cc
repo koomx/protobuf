@@ -37,10 +37,7 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace python {
+namespace shark::compiler::python {
 
 // Returns the Python module name expected for a given .proto filename.
 std::string ModuleName(const std::string& filename) {
@@ -125,7 +122,4 @@ template std::string NamePrefixedWithNestedTypes<Descriptor>(
 template std::string NamePrefixedWithNestedTypes<EnumDescriptor>(
     const EnumDescriptor& descriptor, const std::string& separator);
 
-}  // namespace python
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::python

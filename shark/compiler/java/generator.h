@@ -42,10 +42,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 // CodeGenerator implementation which generates Java code.  If you create your
 // own protocol compiler binary and you want it to support Java output, you
@@ -66,10 +63,7 @@ class PROTOC_EXPORT JavaGenerator : public CodeGenerator {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(JavaGenerator);
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include <shark/port_undef.inc>
 

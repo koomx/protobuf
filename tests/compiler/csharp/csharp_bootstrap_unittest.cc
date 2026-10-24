@@ -53,10 +53,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 namespace {
 
@@ -189,7 +186,4 @@ TEST(CsharpBootstrapTest, GeneratedCsharpDescriptorMatches) {
 
 }  // namespace
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

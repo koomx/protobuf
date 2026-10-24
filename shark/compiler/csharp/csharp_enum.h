@@ -37,10 +37,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 class EnumGenerator : public SourceGeneratorBase {
  public:
@@ -56,9 +53,6 @@ class EnumGenerator : public SourceGeneratorBase {
   const EnumDescriptor* descriptor_;
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 

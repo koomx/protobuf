@@ -41,9 +41,7 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 // Wraps a variable whose constructor and destructor are explicitly
 // called. It is particularly useful for a global variable, without its
@@ -87,9 +85,7 @@ class ExplicitlyConstructed {
 // which is the minimum requirement of ArenaStringPtr
 using ExplicitlyConstructedArenaString = ExplicitlyConstructed<std::string, 8>;
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

@@ -38,8 +38,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 const uint128_pod kuint128max = {uint64_t{0xFFFFFFFFFFFFFFFFu},
                                  uint64_t{0xFFFFFFFFFFFFFFFFu}};
@@ -187,7 +186,6 @@ std::ostream& operator<<(std::ostream& o, const uint128& b) {
   return o << rep;
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>  // NOLINT

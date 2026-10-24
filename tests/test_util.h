@@ -46,8 +46,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 // This file doesn't use these declarations, but some .cc files do.
 namespace unittest = ::protobuf_unittest;
 namespace unittest_import = ::protobuf_unittest_import;
@@ -1268,8 +1267,7 @@ inline void ExpectAllFieldsAndExtensionsInOrder(const std::string& serialized) {
 }
 
 }  // namespace TestUtil
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

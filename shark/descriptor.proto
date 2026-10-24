@@ -39,7 +39,7 @@
 
 syntax = "proto2";
 
-package google.protobuf;
+package shark;
 
 option go_package = "google.golang.org/protobuf/types/descriptorpb";
 option java_package = "com.google.protobuf";

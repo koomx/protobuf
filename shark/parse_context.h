@@ -52,8 +52,7 @@
 #include <shark/port_def.inc>
 
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class UnknownFieldSet;
 class DescriptorPool;
@@ -1016,8 +1015,7 @@ template <typename T>
     uint32_t tag, std::string* unknown, const char* ptr, ParseContext* ctx);
 
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

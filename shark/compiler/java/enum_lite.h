@@ -38,8 +38,7 @@
 #include <vector>
 #include <shark/descriptor.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace java {
 class Context;            // context.h
@@ -49,11 +48,9 @@ class ClassNameResolver;  // name_resolver.h
 namespace io {
 class Printer;  // printer.h
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 namespace java {
 
@@ -91,6 +88,5 @@ class EnumLiteGenerator {
 
 }  // namespace java
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 

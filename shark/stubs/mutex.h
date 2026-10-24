@@ -64,8 +64,7 @@
 
 // ===================================================================
 // emulates google3/base/mutex.h
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 
 #define SHARK_LINKER_INITIALIZED
@@ -206,8 +205,7 @@ using internal::ReaderMutexLock;
 using internal::WriterMutexLock;
 using internal::MutexLockMaybe;
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #undef SHARK_ACQUIRE
 #undef SHARK_RELEASE

@@ -38,10 +38,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 class FieldGeneratorBase : public SourceGeneratorBase {
  public:
@@ -102,9 +99,6 @@ class FieldGeneratorBase : public SourceGeneratorBase {
   std::string GetBytesDefaultValueInternal(const FieldDescriptor* descriptor);
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 
 

@@ -39,9 +39,7 @@
 
 #include <shark/io/coded_stream.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
+namespace shark::compiler {
 
 // January 1, 1980 as a DOS date.
 // see https://msdn.microsoft.com/en-us/library/9kkf9tah.aspx
@@ -190,6 +188,4 @@ bool ZipWriter::WriteDirectory() {
   return output.HadError();
 }
 
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler

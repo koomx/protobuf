@@ -40,8 +40,7 @@
 #include <gtest/gtest.h>
 #include <tests/test_util.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 using unittest::ForeignMessage;
 using unittest::TestAllExtensions;
@@ -705,5 +704,4 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefDynamicMessage) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

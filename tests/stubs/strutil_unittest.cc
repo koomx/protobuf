@@ -42,8 +42,7 @@
 #define snprintf _snprintf
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 // TODO(kenton):  Copy strutil tests from google3?
@@ -880,5 +879,4 @@ INSTANTIATE_TEST_CASE_P(
                         " no whitespace  ")));  // more trailing than leading
 
 }  // anonymous namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

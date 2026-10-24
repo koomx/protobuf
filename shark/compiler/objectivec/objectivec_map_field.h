@@ -34,10 +34,7 @@
 #include <string>
 #include <shark/compiler/objectivec/objectivec_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace objectivec {
+namespace shark::compiler::objectivec {
 
 class MapFieldGenerator : public RepeatedFieldGenerator {
   friend FieldGenerator* FieldGenerator::Make(const FieldDescriptor* field);
@@ -62,8 +59,5 @@ class MapFieldGenerator : public RepeatedFieldGenerator {
   std::unique_ptr<FieldGenerator> value_field_generator_;
 };
 
-}  // namespace objectivec
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::objectivec
 

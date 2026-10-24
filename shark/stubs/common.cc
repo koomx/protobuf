@@ -59,8 +59,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace internal {
 
@@ -318,7 +317,6 @@ const char* FatalException::what() const throw() {
 }
 #endif
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

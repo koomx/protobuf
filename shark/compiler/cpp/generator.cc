@@ -46,10 +46,7 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/descriptor.pb.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 CppGenerator::CppGenerator() {}
 CppGenerator::~CppGenerator() {}
@@ -273,7 +270,4 @@ bool CppGenerator::Generate(const FileDescriptor* file,
   return true;
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

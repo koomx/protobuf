@@ -58,8 +58,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 class InternalMetadata;           // metadata_lite.h
 class WireFormat;                 // wire_format.h
@@ -399,7 +398,6 @@ inline void UnknownField::SetType(Type type) {
 }
 
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

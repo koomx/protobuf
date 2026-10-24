@@ -42,10 +42,7 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
+namespace shark::util::converter {
 
 
 // An ObjectWriter implementation that outputs JSON. This ObjectWriter
@@ -267,10 +264,7 @@ class SHARK_EXPORT JsonObjectWriter : public StructuredObjectWriter {
   GOOGLE_DISALLOW_IMPLICIT_CONSTRUCTORS(JsonObjectWriter);
 };
 
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter
 
 #include <shark/port_undef.inc>
 

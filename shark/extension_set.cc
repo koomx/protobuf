@@ -54,9 +54,7 @@
 // clang-format off
 #include <shark/port_def.inc>  // must be last.
 // clang-format on
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 namespace {
 
@@ -1960,8 +1958,6 @@ LazyEagerVerifyFnType FindExtensionLazyEagerVerifyFn(
 }
 
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>

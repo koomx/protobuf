@@ -35,9 +35,7 @@
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 namespace {
 
@@ -602,6 +600,4 @@ TEST_F(FindFieldEntryTest, BigMessage) {
   }
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal

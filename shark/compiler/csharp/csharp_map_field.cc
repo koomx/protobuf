@@ -41,10 +41,7 @@
 #include <shark/compiler/csharp/csharp_helpers.h>
 #include <shark/compiler/csharp/csharp_map_field.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 MapFieldGenerator::MapFieldGenerator(const FieldDescriptor* descriptor,
                                      int presenceIndex,
@@ -146,7 +143,4 @@ void MapFieldGenerator::GenerateCloningCode(io::Printer* printer) {
 void MapFieldGenerator::GenerateFreezingCode(io::Printer* printer) {
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

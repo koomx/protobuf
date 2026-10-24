@@ -89,8 +89,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace compiler {
 
 #ifndef O_BINARY
@@ -105,12 +104,12 @@ namespace {
 #if defined(_WIN32)
 // DO NOT include <io.h>, instead create functions in io_win32.{h,cc} and import
 // them like we do below.
-using google::protobuf::io::win32::access;
-using google::protobuf::io::win32::close;
-using google::protobuf::io::win32::mkdir;
-using google::protobuf::io::win32::open;
-using google::protobuf::io::win32::setmode;
-using google::protobuf::io::win32::write;
+using shark::io::win32::access;
+using shark::io::win32::close;
+using shark::io::win32::mkdir;
+using shark::io::win32::open;
+using shark::io::win32::setmode;
+using shark::io::win32::write;
 #endif
 
 static const char* kDefaultDirectDependenciesViolationMsg =
@@ -406,7 +405,7 @@ class CommandLineInterface::GeneratorContextImpl : public GeneratorContext {
       const std::string& filename, const std::string& insertion_point) override;
   io::ZeroCopyOutputStream* OpenForInsertWithGeneratedCodeInfo(
       const std::string& filename, const std::string& insertion_point,
-      const google::protobuf::GeneratedCodeInfo& info) override;
+      const shark::GeneratedCodeInfo& info) override;
   void ListParsedFiles(std::vector<const FileDescriptor*>* output) override {
     *output = parsed_files_;
   }
@@ -433,7 +432,7 @@ class CommandLineInterface::MemoryOutputStream
   MemoryOutputStream(GeneratorContextImpl* directory,
                      const std::string& filename,
                      const std::string& insertion_point,
-                     const google::protobuf::GeneratedCodeInfo& info);
+                     const shark::GeneratedCodeInfo& info);
   ~MemoryOutputStream() override;
 
   // implements ZeroCopyOutputStream ---------------------------------
@@ -460,7 +459,7 @@ class CommandLineInterface::MemoryOutputStream
   // indent_length. insertion_content must end with an endline.
   void InsertShiftedInfo(const std::string& insertion_content,
                          size_t insertion_offset, size_t indent_length,
-                         google::protobuf::GeneratedCodeInfo& target_info);
+                         shark::GeneratedCodeInfo& target_info);
 
   // Where to insert the string when it's done.
   GeneratorContextImpl* directory_;
@@ -477,7 +476,7 @@ class CommandLineInterface::MemoryOutputStream
   std::unique_ptr<io::StringOutputStream> inner_;
 
   // The GeneratedCodeInfo to insert at the insertion point.
-  google::protobuf::GeneratedCodeInfo info_to_insert_;
+  shark::GeneratedCodeInfo info_to_insert_;
 };
 
 // -------------------------------------------------------------------
@@ -639,7 +638,7 @@ CommandLineInterface::GeneratorContextImpl::OpenForInsert(
 io::ZeroCopyOutputStream*
 CommandLineInterface::GeneratorContextImpl::OpenForInsertWithGeneratedCodeInfo(
     const std::string& filename, const std::string& insertion_point,
-    const google::protobuf::GeneratedCodeInfo& info) {
+    const shark::GeneratedCodeInfo& info) {
   return new MemoryOutputStream(this, filename, insertion_point, info);
 }
 
@@ -663,7 +662,7 @@ CommandLineInterface::MemoryOutputStream::MemoryOutputStream(
 
 CommandLineInterface::MemoryOutputStream::MemoryOutputStream(
     GeneratorContextImpl* directory, const std::string& filename,
-    const std::string& insertion_point, const google::protobuf::GeneratedCodeInfo& info)
+    const std::string& insertion_point, const shark::GeneratedCodeInfo& info)
     : directory_(directory),
       filename_(filename),
       insertion_point_(insertion_point),
@@ -672,7 +671,7 @@ CommandLineInterface::MemoryOutputStream::MemoryOutputStream(
 
 void CommandLineInterface::MemoryOutputStream::InsertShiftedInfo(
     const std::string& insertion_content, size_t insertion_offset,
-    size_t indent_length, google::protobuf::GeneratedCodeInfo& target_info) {
+    size_t indent_length, shark::GeneratedCodeInfo& target_info) {
   // Keep track of how much extra data was added for indents before the
   // current annotation being inserted. `pos` and `source_annotation.begin()`
   // are offsets in `insertion_content`. `insertion_offset` is updated so that
@@ -864,7 +863,7 @@ CommandLineInterface::MemoryOutputStream::~MemoryOutputStream() {
 
       // Now copy in the data.
       std::string::size_type data_pos = 0;
-      char* target_ptr = ::google::protobuf::string_as_array(target) + pos;
+      char* target_ptr = ::shark::string_as_array(target) + pos;
       while (data_pos < data_.size()) {
         // Copy indent.
         memcpy(target_ptr, indent_.data(), indent_.size());
@@ -882,7 +881,7 @@ CommandLineInterface::MemoryOutputStream::~MemoryOutputStream() {
       UpdateMetadata(data_, pos, data_.size() + indent_size, indent_.size());
 
       GOOGLE_CHECK_EQ(target_ptr,
-               ::google::protobuf::string_as_array(target) + pos + data_.size() + indent_size);
+               ::shark::string_as_array(target) + pos + data_.size() + indent_size);
     }
   }
 }
@@ -1673,13 +1672,13 @@ CommandLineInterface::InterpretArgument(const std::string& name,
 #if defined(_WIN32)
     // On Windows, the shell (typically cmd.exe) does not expand wildcards in
     // file names (e.g. foo\*.proto), so we do it ourselves.
-    switch (google::protobuf::io::win32::ExpandWildcards(
+    switch (shark::io::win32::ExpandWildcards(
         value, [this](const std::string& path) {
           this->input_files_.push_back(path);
         })) {
-      case google::protobuf::io::win32::ExpandWildcardsResult::kSuccess:
+      case shark::io::win32::ExpandWildcardsResult::kSuccess:
         break;
-      case google::protobuf::io::win32::ExpandWildcardsResult::
+      case shark::io::win32::ExpandWildcardsResult::
           kErrorNoMatchingFile:
         // Path does not exist, is not a file, or it's longer than MAX_PATH and
         // long path handling is disabled.
@@ -2278,7 +2277,7 @@ bool CommandLineInterface::GeneratePluginOutput(
                               &already_seen, request.mutable_proto_file());
   }
 
-  google::protobuf::compiler::Version* version =
+  shark::compiler::Version* version =
       request.mutable_compiler_version();
   version->set_major(SHARK_VERSION / 1000000);
   version->set_minor(SHARK_VERSION / 1000 % 1000);
@@ -2618,5 +2617,4 @@ void CommandLineInterface::PrintFreeFieldNumbers(const Descriptor* descriptor) {
 
 
 }  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

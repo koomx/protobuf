@@ -69,8 +69,7 @@ using protobuf_unittest::TestAllTypes;
 using protobuf_unittest::TestEmptyMessage;
 using protobuf_unittest::TestOneof2;
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Notifier {
  public:
@@ -1628,7 +1627,6 @@ TEST(ArenaTest, ArenaHooksWhenAllocationsNotNeeded) {
 }
 
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

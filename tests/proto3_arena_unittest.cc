@@ -48,8 +48,7 @@
 using proto3_arena_unittest::ForeignMessage;
 using proto3_arena_unittest::TestAllTypes;
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace internal {
 
@@ -360,10 +359,10 @@ TEST(Proto3OptionalTest, OptionalFieldReflection) {
   // We test this more deeply elsewhere by parsing/serializing TextFormat (which
   // doesn't treat synthetic oneofs specially, so reflects over them normally).
   protobuf_unittest::TestProto3Optional msg;
-  const google::protobuf::Descriptor* d = msg.GetDescriptor();
-  const google::protobuf::Reflection* r = msg.GetReflection();
-  const google::protobuf::FieldDescriptor* f = d->FindFieldByName("optional_int32");
-  const google::protobuf::OneofDescriptor* o = d->FindOneofByName("_optional_int32");
+  const shark::Descriptor* d = msg.GetDescriptor();
+  const shark::Reflection* r = msg.GetReflection();
+  const shark::FieldDescriptor* f = d->FindFieldByName("optional_int32");
+  const shark::OneofDescriptor* o = d->FindOneofByName("_optional_int32");
   GOOGLE_CHECK(f);
   GOOGLE_CHECK(o);
   EXPECT_TRUE(o->is_synthetic());
@@ -405,18 +404,18 @@ TEST(Proto3OptionalTest, OptionalFieldReflection) {
 TEST(Proto3OptionalTest, ClearNonOptionalMessageField) {
   protobuf_unittest::TestProto3OptionalMessage msg;
   msg.mutable_nested_message();
-  const google::protobuf::Descriptor* d = msg.GetDescriptor();
-  const google::protobuf::Reflection* r = msg.GetReflection();
-  const google::protobuf::FieldDescriptor* f = d->FindFieldByName("nested_message");
+  const shark::Descriptor* d = msg.GetDescriptor();
+  const shark::Reflection* r = msg.GetReflection();
+  const shark::FieldDescriptor* f = d->FindFieldByName("nested_message");
   r->ClearField(&msg, f);
 }
 
 TEST(Proto3OptionalTest, ClearOptionalMessageField) {
   protobuf_unittest::TestProto3OptionalMessage msg;
   msg.mutable_optional_nested_message();
-  const google::protobuf::Descriptor* d = msg.GetDescriptor();
-  const google::protobuf::Reflection* r = msg.GetReflection();
-  const google::protobuf::FieldDescriptor* f =
+  const shark::Descriptor* d = msg.GetDescriptor();
+  const shark::Reflection* r = msg.GetReflection();
+  const shark::FieldDescriptor* f =
       d->FindFieldByName("optional_nested_message");
   r->ClearField(&msg, f);
 }
@@ -425,9 +424,9 @@ TEST(Proto3OptionalTest, SwapNonOptionalMessageField) {
   protobuf_unittest::TestProto3OptionalMessage msg1;
   protobuf_unittest::TestProto3OptionalMessage msg2;
   msg1.mutable_nested_message();
-  const google::protobuf::Descriptor* d = msg1.GetDescriptor();
-  const google::protobuf::Reflection* r = msg1.GetReflection();
-  const google::protobuf::FieldDescriptor* f = d->FindFieldByName("nested_message");
+  const shark::Descriptor* d = msg1.GetDescriptor();
+  const shark::Reflection* r = msg1.GetReflection();
+  const shark::FieldDescriptor* f = d->FindFieldByName("nested_message");
   r->SwapFields(&msg1, &msg2, {f});
 }
 
@@ -435,9 +434,9 @@ TEST(Proto3OptionalTest, SwapOptionalMessageField) {
   protobuf_unittest::TestProto3OptionalMessage msg1;
   protobuf_unittest::TestProto3OptionalMessage msg2;
   msg1.mutable_optional_nested_message();
-  const google::protobuf::Descriptor* d = msg1.GetDescriptor();
-  const google::protobuf::Reflection* r = msg1.GetReflection();
-  const google::protobuf::FieldDescriptor* f =
+  const shark::Descriptor* d = msg1.GetDescriptor();
+  const shark::Reflection* r = msg1.GetReflection();
+  const shark::FieldDescriptor* f =
       d->FindFieldByName("optional_nested_message");
   r->SwapFields(&msg1, &msg2, {f});
 }
@@ -631,5 +630,4 @@ TEST(Proto3OptionalTest, PlainFields) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

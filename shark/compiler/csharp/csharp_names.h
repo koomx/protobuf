@@ -43,16 +43,14 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Descriptor;
 class EnumDescriptor;
 class FileDescriptor;
 class ServiceDescriptor;
 
-namespace compiler {
-namespace csharp {
+namespace compiler::csharp {
 
 // Requires:
 //   descriptor != NULL
@@ -98,10 +96,8 @@ std::string PROTOC_EXPORT GetOutputFile(const FileDescriptor* descriptor,
                                         const std::string base_namespace,
                                         std::string* error);
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace compiler::csharp
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

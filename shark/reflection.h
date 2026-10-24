@@ -45,8 +45,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace internal {
 template <typename T, typename Enable = void>
 struct RefTypeTraits;
@@ -292,8 +291,8 @@ namespace internal {
 //   CPPTYPE_BOOL         bool                    bool
 //   CPPTYPE_ENUM         generated enum type     int32_t
 //   CPPTYPE_STRING       string                  std::string
-//   CPPTYPE_MESSAGE      generated message type  google::protobuf::Message
-//                        or google::protobuf::Message
+//   CPPTYPE_MESSAGE      generated message type  shark::Message
+//                        or shark::Message
 //
 // Note that for enums we use int32_t in the interface.
 //
@@ -561,8 +560,7 @@ struct RefTypeTraits<
   }
 };
 }  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

@@ -20,7 +20,7 @@ SHARK_PRAGMA_INIT_SEG
 namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-SHARK_NAMESPACE_OPEN
+namespace shark {
 constexpr Empty::Empty(
     ::_pbi::ConstantInitialized) {}
 struct EmptyDefaultTypeInternal {
@@ -32,37 +32,37 @@ struct EmptyDefaultTypeInternal {
   };
 };
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 EmptyDefaultTypeInternal _Empty_default_instance_;
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fempty_2eproto[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2fempty_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fempty_2eproto = nullptr;
 
 const uint32_t TableStruct_shark_2fempty_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Empty, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::shark::Empty, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Empty)},
+  { 0, -1, -1, sizeof(::shark::Empty)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::SHARK_NAMESPACE_ID::_Empty_default_instance_._instance,
+  &::shark::_Empty_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2fempty_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\021shark/empty.proto\022\017google.protobuf\"\007\n\005"
-  "EmptyB}\n\023com.google.protobufB\nEmptyProto"
-  "P\001Z.google.golang.org/protobuf/types/kno"
-  "wn/emptypb\370\001\001\242\002\003GPB\252\002\036Google.Protobuf.We"
-  "llKnownTypesb\006proto3"
+  "\n\021shark/empty.proto\022\005shark\"\007\n\005EmptyB}\n\023c"
+  "om.google.protobufB\nEmptyProtoP\001Z.google"
+  ".golang.org/protobuf/types/known/emptypb"
+  "\370\001\001\242\002\003GPB\252\002\036Google.Protobuf.WellKnownTyp"
+  "esb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fempty_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fempty_2eproto = {
-    false, false, 180, descriptor_table_protodef_shark_2fempty_2eproto,
+    false, false, 170, descriptor_table_protodef_shark_2fempty_2eproto,
     "shark/empty.proto",
     &descriptor_table_shark_2fempty_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fempty_2eproto::offsets,
@@ -75,7 +75,7 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2femp
 
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fempty_2eproto(&descriptor_table_shark_2fempty_2eproto);
-SHARK_NAMESPACE_OPEN
+namespace shark {
 
 // ===================================================================
 
@@ -86,13 +86,13 @@ class Empty::_Internal {
 Empty::Empty(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
   : ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
-  // @@protoc_insertion_point(arena_constructor:google.protobuf.Empty)
+  // @@protoc_insertion_point(arena_constructor:shark.Empty)
 }
 Empty::Empty(const Empty& from)
   : ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase() {
   Empty* const _this = this; (void)_this;
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-  // @@protoc_insertion_point(copy_constructor:google.protobuf.Empty)
+  // @@protoc_insertion_point(copy_constructor:shark.Empty)
 }
 
 
@@ -118,11 +118,11 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { ret
 }
 
 // @@protoc_insertion_point(namespace_scope)
-SHARK_NAMESPACE_CLOSE
+}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Empty*
-Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Empty >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Empty >(arena);
+template<> SHARK_NOINLINE ::shark::Empty*
+Arena::CreateMaybeMessage< ::shark::Empty >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::shark::Empty >(arena);
 }
 SHARK_NAMESPACE_CLOSE
 

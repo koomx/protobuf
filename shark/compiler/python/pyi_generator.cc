@@ -39,10 +39,7 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace python {
+namespace shark::compiler::python {
 
 template <typename DescriptorT>
 struct SortByName {
@@ -98,12 +95,12 @@ struct ImportModules {
 // Checks whether a descriptor name matches a well-known type.
 bool IsWellKnownType(const std::string& name) {
   // LINT.IfChange(wktbases)
-  return (name == "google.protobuf.Any" ||
-          name == "google.protobuf.Duration" ||
-          name == "google.protobuf.FieldMask" ||
-          name == "google.protobuf.ListValue" ||
-          name == "google.protobuf.Struct" ||
-          name == "google.protobuf.Timestamp");
+  return (name == "shark.Any" ||
+          name == "shark.Duration" ||
+          name == "shark.FieldMask" ||
+          name == "shark.ListValue" ||
+          name == "shark.Struct" ||
+          name == "shark.Timestamp");
   // LINT.ThenChange(//depot/google3/net/proto2/python/internal/well_known_types.py:wktbases)
 }
 
@@ -210,34 +207,34 @@ void PyiGenerator::PrintImports(
   // required in the proto file.
   if (import_modules.has_repeated) {
     printer_->Print(
-        "from google.protobuf.internal import containers as "
+        "from shark.internal import containers as "
         "_containers\n");
   }
   if (import_modules.has_enums) {
     printer_->Print(
-        "from google.protobuf.internal import enum_type_wrapper"
+        "from shark.internal import enum_type_wrapper"
         " as _enum_type_wrapper\n");
   }
   if (import_modules.has_extendable) {
     printer_->Print(
-        "from google.protobuf.internal import python_message"
+        "from shark.internal import python_message"
         " as _python_message\n");
   }
   if (import_modules.has_well_known_type) {
     printer_->Print(
-        "from google.protobuf.internal import well_known_types"
+        "from shark.internal import well_known_types"
         " as _well_known_types\n");
   }
   printer_->Print(
-      "from google.protobuf import"
+      "from shark import"
       " descriptor as _descriptor\n");
   if (import_modules.has_messages) {
     printer_->Print(
-        "from google.protobuf import message as _message\n");
+        "from shark import message as _message\n");
   }
   if (HasGenericServices(file_)) {
     printer_->Print(
-        "from google.protobuf import service as"
+        "from shark import service as"
         " _service\n");
   }
   printer_->Print("from typing import ");
@@ -630,7 +627,4 @@ bool PyiGenerator::Generate(const FileDescriptor* file,
   return true;
 }
 
-}  // namespace python
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::python

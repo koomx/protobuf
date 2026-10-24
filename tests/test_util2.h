@@ -37,9 +37,7 @@
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/util/message_differencer.h>
 
-namespace google {
-namespace protobuf {
-namespace TestUtil {
+namespace shark::TestUtil {
 
 // Translate net/proto2/* -> google/protobuf/*
 inline std::string TranslatePathToOpensource(const std::string& google3_path) {
@@ -60,7 +58,7 @@ inline std::string MaybeTranslatePath(const std::string& google3_path) {
 }
 
 inline std::string TestSourceDir() {
-  return google::protobuf::TestSourceDir();
+  return shark::TestSourceDir();
 }
 
 inline std::string GetTestDataPath(const std::string& google3_path) {
@@ -103,7 +101,5 @@ class BoundedArrayInputStream : public io::ZeroCopyInputStream {
   int bound_;
 };
 
-}  // namespace TestUtil
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::TestUtil
 

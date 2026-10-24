@@ -21,71 +21,71 @@ import "shark/wrappers.proto";
 // Each wrapper type is included separately, as languages
 // map handle different wrappers in different ways.
 message TestWellKnownTypes {
-  google.protobuf.Any any_field = 1;
-  google.protobuf.Api api_field = 2;
-  google.protobuf.Duration duration_field = 3;
-  google.protobuf.Empty empty_field = 4;
-  google.protobuf.FieldMask field_mask_field = 5;
-  google.protobuf.SourceContext source_context_field = 6;
-  google.protobuf.Struct struct_field = 7;
-  google.protobuf.Timestamp timestamp_field = 8;
-  google.protobuf.Type type_field = 9;
-  google.protobuf.DoubleValue double_field = 10;
-  google.protobuf.FloatValue float_field = 11;
-  google.protobuf.Int64Value int64_field = 12;
-  google.protobuf.UInt64Value uint64_field = 13;
-  google.protobuf.Int32Value int32_field = 14;
-  google.protobuf.UInt32Value uint32_field = 15;
-  google.protobuf.BoolValue bool_field = 16;
-  google.protobuf.StringValue string_field = 17;
-  google.protobuf.BytesValue bytes_field = 18;
+  shark.Any any_field = 1;
+  shark.Api api_field = 2;
+  shark.Duration duration_field = 3;
+  shark.Empty empty_field = 4;
+  shark.FieldMask field_mask_field = 5;
+  shark.SourceContext source_context_field = 6;
+  shark.Struct struct_field = 7;
+  shark.Timestamp timestamp_field = 8;
+  shark.Type type_field = 9;
+  shark.DoubleValue double_field = 10;
+  shark.FloatValue float_field = 11;
+  shark.Int64Value int64_field = 12;
+  shark.UInt64Value uint64_field = 13;
+  shark.Int32Value int32_field = 14;
+  shark.UInt32Value uint32_field = 15;
+  shark.BoolValue bool_field = 16;
+  shark.StringValue string_field = 17;
+  shark.BytesValue bytes_field = 18;
   // Part of struct, but useful to be able to test separately
-  google.protobuf.Value value_field = 19;
+  shark.Value value_field = 19;
 }
 
 // A repeated field for each well-known type.
 message RepeatedWellKnownTypes {
-  repeated google.protobuf.Any any_field = 1;
-  repeated google.protobuf.Api api_field = 2;
-  repeated google.protobuf.Duration duration_field = 3;
-  repeated google.protobuf.Empty empty_field = 4;
-  repeated google.protobuf.FieldMask field_mask_field = 5;
-  repeated google.protobuf.SourceContext source_context_field = 6;
-  repeated google.protobuf.Struct struct_field = 7;
-  repeated google.protobuf.Timestamp timestamp_field = 8;
-  repeated google.protobuf.Type type_field = 9;
+  repeated shark.Any any_field = 1;
+  repeated shark.Api api_field = 2;
+  repeated shark.Duration duration_field = 3;
+  repeated shark.Empty empty_field = 4;
+  repeated shark.FieldMask field_mask_field = 5;
+  repeated shark.SourceContext source_context_field = 6;
+  repeated shark.Struct struct_field = 7;
+  repeated shark.Timestamp timestamp_field = 8;
+  repeated shark.Type type_field = 9;
   // These don't actually make a lot of sense, but they're not prohibited...
-  repeated google.protobuf.DoubleValue double_field = 10;
-  repeated google.protobuf.FloatValue float_field = 11;
-  repeated google.protobuf.Int64Value int64_field = 12;
-  repeated google.protobuf.UInt64Value uint64_field = 13;
-  repeated google.protobuf.Int32Value int32_field = 14;
-  repeated google.protobuf.UInt32Value uint32_field = 15;
-  repeated google.protobuf.BoolValue bool_field = 16;
-  repeated google.protobuf.StringValue string_field = 17;
-  repeated google.protobuf.BytesValue bytes_field = 18;
+  repeated shark.DoubleValue double_field = 10;
+  repeated shark.FloatValue float_field = 11;
+  repeated shark.Int64Value int64_field = 12;
+  repeated shark.UInt64Value uint64_field = 13;
+  repeated shark.Int32Value int32_field = 14;
+  repeated shark.UInt32Value uint32_field = 15;
+  repeated shark.BoolValue bool_field = 16;
+  repeated shark.StringValue string_field = 17;
+  repeated shark.BytesValue bytes_field = 18;
 }
 
 message OneofWellKnownTypes {
   oneof oneof_field {
-    google.protobuf.Any any_field = 1;
-    google.protobuf.Api api_field = 2;
-    google.protobuf.Duration duration_field = 3;
-    google.protobuf.Empty empty_field = 4;
-    google.protobuf.FieldMask field_mask_field = 5;
-    google.protobuf.SourceContext source_context_field = 6;
-    google.protobuf.Struct struct_field = 7;
-    google.protobuf.Timestamp timestamp_field = 8;
-    google.protobuf.Type type_field = 9;
-    google.protobuf.DoubleValue double_field = 10;
-    google.protobuf.FloatValue float_field = 11;
-    google.protobuf.Int64Value int64_field = 12;
-    google.protobuf.UInt64Value uint64_field = 13;
-    google.protobuf.Int32Value int32_field = 14;
-    google.protobuf.UInt32Value uint32_field = 15;
-    google.protobuf.BoolValue bool_field = 16;
-    google.protobuf.StringValue string_field = 17;
-    google.protobuf.BytesValue bytes_field = 18;
+    shark.Any any_field = 1;
+    shark.Api api_field = 2;
+    shark.Duration duration_field = 3;
+    shark.Empty empty_field = 4;
+    shark.FieldMask field_mask_field = 5;
+    shark.SourceContext source_context_field = 6;
+    shark.Struct struct_field = 7;
+    shark.Timestamp timestamp_field = 8;
+    shark.Type type_field = 9;
+    shark.DoubleValue double_field = 10;
+    shark.FloatValue float_field = 11;
+    shark.Int64Value int64_field = 12;
+    shark.UInt64Value uint64_field = 13;
+    shark.Int32Value int32_field = 14;
+    shark.UInt32Value uint32_field = 15;
+    shark.BoolValue bool_field = 16;
+    shark.StringValue string_field = 17;
+    shark.BytesValue bytes_field = 18;
   }
 }
 
@@ -93,22 +93,22 @@ message OneofWellKnownTypes {
 // need to worry about the value part of the map being the
 // well-known types, as messages can't be map keys.
 message MapWellKnownTypes {
-  map<int32,google.protobuf.Any> any_field = 1;
-  map<int32,google.protobuf.Api> api_field = 2;
-  map<int32,google.protobuf.Duration> duration_field = 3;
-  map<int32,google.protobuf.Empty> empty_field = 4;
-  map<int32,google.protobuf.FieldMask> field_mask_field = 5;
-  map<int32,google.protobuf.SourceContext> source_context_field = 6;
-  map<int32,google.protobuf.Struct> struct_field = 7;
-  map<int32,google.protobuf.Timestamp> timestamp_field = 8;
-  map<int32,google.protobuf.Type> type_field = 9;
-  map<int32,google.protobuf.DoubleValue> double_field = 10;
-  map<int32,google.protobuf.FloatValue> float_field = 11;
-  map<int32,google.protobuf.Int64Value> int64_field = 12;
-  map<int32,google.protobuf.UInt64Value> uint64_field = 13;
-  map<int32,google.protobuf.Int32Value> int32_field = 14;
-  map<int32,google.protobuf.UInt32Value> uint32_field = 15;
-  map<int32,google.protobuf.BoolValue> bool_field = 16;
-  map<int32,google.protobuf.StringValue> string_field = 17;
-  map<int32,google.protobuf.BytesValue> bytes_field = 18;
+  map<int32,shark.Any> any_field = 1;
+  map<int32,shark.Api> api_field = 2;
+  map<int32,shark.Duration> duration_field = 3;
+  map<int32,shark.Empty> empty_field = 4;
+  map<int32,shark.FieldMask> field_mask_field = 5;
+  map<int32,shark.SourceContext> source_context_field = 6;
+  map<int32,shark.Struct> struct_field = 7;
+  map<int32,shark.Timestamp> timestamp_field = 8;
+  map<int32,shark.Type> type_field = 9;
+  map<int32,shark.DoubleValue> double_field = 10;
+  map<int32,shark.FloatValue> float_field = 11;
+  map<int32,shark.Int64Value> int64_field = 12;
+  map<int32,shark.UInt64Value> uint64_field = 13;
+  map<int32,shark.Int32Value> int32_field = 14;
+  map<int32,shark.UInt32Value> uint32_field = 15;
+  map<int32,shark.BoolValue> bool_field = 16;
+  map<int32,shark.StringValue> string_field = 17;
+  map<int32,shark.BytesValue> bytes_field = 18;
 }

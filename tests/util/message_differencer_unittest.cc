@@ -59,8 +59,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace {
 
@@ -1843,7 +1842,7 @@ TEST(MessageDifferencerTest, PrintMapKeysTest) {
       "deleted: item[0].mp[key_c]: 3\n",
       diff);
 
-  google::protobuf::Any any1, any2;
+  shark::Any any1, any2;
   any1.PackFrom(msg1);
   any2.PackFrom(msg2);
   std::string diff_with_any;
@@ -3805,5 +3804,4 @@ TEST(Anytest, TreatAsSet_DifferentType) {
 
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

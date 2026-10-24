@@ -34,12 +34,10 @@
 
 #include <shark/service.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 Service::~Service() {}
 RpcChannel::~RpcChannel() {}
 RpcController::~RpcController() {}
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

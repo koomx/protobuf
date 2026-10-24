@@ -40,8 +40,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 #ifdef _MSC_VER
 #ifndef va_copy
@@ -171,5 +170,4 @@ std::string StringPrintfVector(const char* format,
                       cstr[25], cstr[26], cstr[27], cstr[28], cstr[29],
                       cstr[30], cstr[31]);
 }
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

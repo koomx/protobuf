@@ -48,10 +48,7 @@
 // Must be last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 EnumGenerator::EnumGenerator(const EnumDescriptor* descriptor,
                              bool immutable_api, Context* context)
@@ -389,9 +386,6 @@ bool EnumGenerator::CanUseEnumValues() {
   return true;
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include <shark/port_undef.inc>

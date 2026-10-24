@@ -44,10 +44,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace annotation_test_util {
+namespace shark::compiler::annotation_test_util {
 namespace {
 
 // A CodeGenerator that captures the FileDescriptor it's passed as a
@@ -161,7 +158,4 @@ bool AnnotationMatchesSubstring(const std::string& file_content,
   return AtLeastOneAnnotationMatchesSubstring(file_content, annotations,
                                               expected_text);
 }
-}  // namespace annotation_test_util
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::annotation_test_util

@@ -73,7 +73,7 @@ message TestDiffMessage {
   repeated int32 rv = 11;                          // Test for combinations
   repeated string rw = 10;                         // Test for combinations
   repeated TestField rm = 12 [deprecated = true];  // Test for combinations
-  repeated google.protobuf.Any rany =
+  repeated shark.Any rany =
       16;  // Test for repeated Any type resolution
   extensions 100 to 199;
 }

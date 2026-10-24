@@ -41,11 +41,7 @@
 #include <shark/util/internal/type_info.h>
 #include <shark/util/type_resolver.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
-namespace converter {
-namespace testing {
+namespace shark::util::converter::testing {
 
 enum TypeInfoSource {
   USE_TYPE_RESOLVER,
@@ -86,9 +82,5 @@ class TypeInfoTestHelper {
   std::unique_ptr<TypeInfo> typeinfo_;
   std::unique_ptr<TypeResolver> type_resolver_;
 };
-}  // namespace testing
-}  // namespace converter
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util::converter::testing
 

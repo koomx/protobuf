@@ -39,10 +39,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/cpp/helpers.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 using internal::WireFormatLite;
 
@@ -533,7 +530,4 @@ void RepeatedPrimitiveFieldGenerator::GenerateCopyAggregateInitializer(
   }
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

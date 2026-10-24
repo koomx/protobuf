@@ -57,9 +57,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 // ===================================================================
 
@@ -403,9 +401,7 @@ inline std::pair<char*, bool> as_string_data(std::string* s) {
   return std::make_pair(p, true);
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #include <shark/port_undef.inc>
 

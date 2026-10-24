@@ -40,9 +40,7 @@
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
-namespace util {
+namespace shark::util {
 
 TEST(DelimitedMessageUtilTest, DelimitedMessages) {
   std::stringstream stream;
@@ -111,6 +109,4 @@ TEST(DelimitedMessageUtilTest, FailsAtEndOfStream) {
   }
 }
 
-}  // namespace util
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::util

@@ -36,8 +36,7 @@
 #include <shark/descriptor.h>
 #include <gtest/gtest.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 namespace {
 
 // Helper: checks that all fields have default (zero/empty) values.
@@ -571,5 +570,4 @@ TEST(NoFieldPresenceTest, OneofPresence) {
 }
 
 }  // namespace
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

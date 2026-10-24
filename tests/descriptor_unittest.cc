@@ -68,8 +68,7 @@
 
 using ::testing::AnyOf;
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Can't use an anonymous namespace here due to brokenness of Tru64 compiler.
 namespace descriptor_unittest {
@@ -2128,25 +2127,25 @@ TEST_F(ExtensionDescriptorTest, DuplicateFieldNumber) {
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
   // Add "foo.proto":
   //   import "shark/descriptor.proto";
-  //   extend google.protobuf.FieldOptions {
+  //   extend shark.FieldOptions {
   //     optional int32 option1 = 1000;
   //   }
   file_proto.Clear();
   file_proto.set_name("foo.proto");
   file_proto.add_dependency("shark/descriptor.proto");
-  AddExtension(&file_proto, "google.protobuf.FieldOptions", "option1", 1000,
+  AddExtension(&file_proto, "shark.FieldOptions", "option1", 1000,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_INT32);
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
   // Add "bar.proto":
   //   import "shark/descriptor.proto";
-  //   extend google.protobuf.FieldOptions {
+  //   extend shark.FieldOptions {
   //     optional int32 option2 = 1000;
   //   }
   file_proto.Clear();
   file_proto.set_name("bar.proto");
   file_proto.add_dependency("shark/descriptor.proto");
-  AddExtension(&file_proto, "google.protobuf.FieldOptions", "option2", 1000,
+  AddExtension(&file_proto, "shark.FieldOptions", "option2", 1000,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_INT32);
   // Currently we only generate a warning for conflicting extension numbers.
@@ -3044,7 +3043,7 @@ TEST_P(AllowUnknownDependenciesTest, CustomOption) {
       "name: \"unknown_custom_options.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { "
-      "  extendee: \"google.protobuf.FileOptions\" "
+      "  extendee: \"shark.FileOptions\" "
       "  name: \"some_option\" "
       "  number: 123456 "
       "  label: LABEL_OPTIONAL "
@@ -3330,7 +3329,7 @@ TEST(CustomOptions, OptionsFromOtherFile) {
 
   // We have to import the Any dependency.
   FileDescriptorProto any_proto;
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_proto);
+  shark::Any::descriptor()->file()->CopyTo(&any_proto);
   ASSERT_TRUE(pool.BuildFile(any_proto) != nullptr);
 
   protobuf_unittest::TestMessageWithCustomOptions::descriptor()->file()->CopyTo(
@@ -3392,7 +3391,7 @@ TEST(CustomOptions, MessageOptionThreeFieldsSet) {
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
   FileDescriptorProto any_proto;
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_proto);
+  shark::Any::descriptor()->file()->CopyTo(&any_proto);
   ASSERT_TRUE(pool.BuildFile(any_proto) != nullptr);
 
   protobuf_unittest::TestMessageWithCustomOptions::descriptor()->file()->CopyTo(
@@ -3473,7 +3472,7 @@ TEST(CustomOptions, MessageOptionRepeatedLeafFieldSet) {
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
   FileDescriptorProto any_proto;
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_proto);
+  shark::Any::descriptor()->file()->CopyTo(&any_proto);
   ASSERT_TRUE(pool.BuildFile(any_proto) != nullptr);
 
   protobuf_unittest::TestMessageWithCustomOptions::descriptor()->file()->CopyTo(
@@ -3557,7 +3556,7 @@ TEST(CustomOptions, MessageOptionRepeatedMsgFieldSet) {
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
   FileDescriptorProto any_proto;
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_proto);
+  shark::Any::descriptor()->file()->CopyTo(&any_proto);
   ASSERT_TRUE(pool.BuildFile(any_proto) != nullptr);
 
   protobuf_unittest::TestMessageWithCustomOptions::descriptor()->file()->CopyTo(
@@ -3687,7 +3686,7 @@ TEST(CustomOptions, UnusedImportError) {
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
   FileDescriptorProto any_proto;
-  google::protobuf::Any::descriptor()->file()->CopyTo(&any_proto);
+  shark::Any::descriptor()->file()->CopyTo(&any_proto);
   ASSERT_TRUE(pool.BuildFile(any_proto) != nullptr);
 
   protobuf_unittest::TestMessageWithCustomOptions::descriptor()->file()->CopyTo(
@@ -3774,7 +3773,7 @@ TEST(CustomOptions, DebugString) {
   //   package "protobuf_unittest";
   //   option (protobuf_unittest.cc_option1) = 1;
   //   option (protobuf_unittest.cc_option2) = 2;
-  //   extend google.protobuf.FieldOptions {
+  //   extend shark.FieldOptions {
   //     optional int32 cc_option1 = 7736974;
   //     optional int32 cc_option2 = 7736975;
   //   }
@@ -3800,7 +3799,7 @@ TEST(CustomOptions, DebugString) {
       "} "
       "extension { "
       "  name: \"cc_option1\" "
-      "  extendee: \".google.protobuf.FileOptions\" "
+      "  extendee: \".shark.FileOptions\" "
       // This field number is intentionally chosen to be the same as
       // (.fileopt1) defined in unittest_custom_options.proto (linked
       // in this test binary). This is to test whether we are messing
@@ -3812,7 +3811,7 @@ TEST(CustomOptions, DebugString) {
       "}"
       "extension { "
       "  name: \"cc_option2\" "
-      "  extendee: \".google.protobuf.FileOptions\" "
+      "  extendee: \".shark.FileOptions\" "
       "  number: 7736975 "
       "  label: LABEL_OPTIONAL "
       "  type: TYPE_INT32 "
@@ -3832,7 +3831,7 @@ TEST(CustomOptions, DebugString) {
       "option (.protobuf_unittest.cc_option1) = 1;\n"
       "option (.protobuf_unittest.cc_option2) = 2;\n"
       "\n"
-      "extend .google.protobuf.FileOptions {\n"
+      "extend .shark.FileOptions {\n"
       "  optional int32 cc_option1 = 7736974;\n"
       "  optional int32 cc_option2 = 7736975;\n"
       "}\n"
@@ -5384,7 +5383,7 @@ TEST_F(ValidationErrorTest, OptionWrongType) {
       "}\n",
 
       "foo.proto: TestMessage.foo: OPTION_VALUE: Value must be identifier for "
-      "enum-valued option \"google.protobuf.FieldOptions.ctype\".\n");
+      "enum-valued option \"shark.FieldOptions.ctype\".\n");
 }
 
 TEST_F(ValidationErrorTest, OptionExtendsAtomicType) {
@@ -5456,7 +5455,7 @@ TEST_F(ValidationErrorTest, RepeatedMessageOption) {
       "} "
       "extension { name: \"bar\" number: 7672757 label: LABEL_REPEATED "
       "            type: TYPE_MESSAGE type_name: \"Bar\" "
-      "            extendee: \"google.protobuf.FileOptions\" }"
+      "            extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"bar\" "
       "                                        is_extension: true } "
       "                                 name { name_part: \"foo\" "
@@ -5495,7 +5494,7 @@ TEST_F(ValidationErrorTest, ResolveUndefinedOption) {
       "} "
       "extension { name: \"bar\" number: 7672757 label: LABEL_OPTIONAL "
       "            type: TYPE_MESSAGE type_name: \"Bar\" "
-      "            extendee: \"google.protobuf.FileOptions\" }");
+      "            extendee: \"shark.FileOptions\" }");
 
   BuildFileWithErrors(
       "name: \"moo.proto\" "
@@ -5536,12 +5535,12 @@ TEST_F(ValidationErrorTest, CustomOptionConflictingFieldNumber) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo1\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FieldOptions\" }"
+      "            type: TYPE_INT32 extendee: \"shark.FieldOptions\" }"
       "extension { name: \"foo2\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FieldOptions\" }",
+      "            type: TYPE_INT32 extendee: \"shark.FieldOptions\" }",
 
       "foo.proto: foo2: NUMBER: Extension number 7672757 has already been used "
-      "in \"google.protobuf.FieldOptions\" by extension \"foo1\".\n");
+      "in \"shark.FieldOptions\" by extension \"foo1\".\n");
 }
 
 TEST_F(ValidationErrorTest, Int32OptionValueOutOfPositiveRange) {
@@ -5551,7 +5550,7 @@ TEST_F(ValidationErrorTest, Int32OptionValueOutOfPositiveRange) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_INT32 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 positive_int_value: 0x80000000 } "
@@ -5568,7 +5567,7 @@ TEST_F(ValidationErrorTest, Int32OptionValueOutOfNegativeRange) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_INT32 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 negative_int_value: -0x80000001 } "
@@ -5585,7 +5584,7 @@ TEST_F(ValidationErrorTest, Int32OptionValueIsNotPositiveInt) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_INT32 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 string_value: \"5\" } }",
@@ -5601,7 +5600,7 @@ TEST_F(ValidationErrorTest, Int64OptionValueOutOfRange) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT64 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_INT64 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 positive_int_value: 0x8000000000000000 "
@@ -5619,7 +5618,7 @@ TEST_F(ValidationErrorTest, Int64OptionValueIsNotPositiveInt) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT64 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_INT64 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 identifier_value: \"5\" } }",
@@ -5635,7 +5634,7 @@ TEST_F(ValidationErrorTest, UInt32OptionValueOutOfRange) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_UINT32 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_UINT32 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 positive_int_value: 0x100000000 } }",
@@ -5651,7 +5650,7 @@ TEST_F(ValidationErrorTest, UInt32OptionValueIsNotPositiveInt) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_UINT32 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_UINT32 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 double_value: -5.6 } }",
@@ -5667,7 +5666,7 @@ TEST_F(ValidationErrorTest, UInt64OptionValueIsNotPositiveInt) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_UINT64 extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_UINT64 extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 negative_int_value: -5 } }",
@@ -5683,7 +5682,7 @@ TEST_F(ValidationErrorTest, FloatOptionValueIsNotNumber) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_FLOAT extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_FLOAT extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 string_value: \"bar\" } }",
@@ -5699,7 +5698,7 @@ TEST_F(ValidationErrorTest, DoubleOptionValueIsNotNumber) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_DOUBLE extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_DOUBLE extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 string_value: \"bar\" } }",
@@ -5715,7 +5714,7 @@ TEST_F(ValidationErrorTest, BoolOptionValueIsNotTrueOrFalse) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_BOOL extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_BOOL extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 identifier_value: \"bar\" } }",
@@ -5734,7 +5733,7 @@ TEST_F(ValidationErrorTest, EnumOptionValueIsNotIdentifier) {
       "                              value { name: \"BAZ\" number: 2 } }"
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
       "            type: TYPE_ENUM type_name: \"FooEnum\" "
-      "            extendee: \"google.protobuf.FileOptions\" }"
+      "            extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 string_value: \"MOOO\" } }",
@@ -5753,7 +5752,7 @@ TEST_F(ValidationErrorTest, EnumOptionValueIsNotEnumValueName) {
       "                              value { name: \"BAZ\" number: 2 } }"
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
       "            type: TYPE_ENUM type_name: \"FooEnum\" "
-      "            extendee: \"google.protobuf.FileOptions\" }"
+      "            extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 identifier_value: \"MOOO\" } }",
@@ -5774,7 +5773,7 @@ TEST_F(ValidationErrorTest, EnumOptionValueIsSiblingEnumValueName) {
       "                               value { name: \"MOOO\" number: 2 } }"
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
       "            type: TYPE_ENUM type_name: \"FooEnum1\" "
-      "            extendee: \"google.protobuf.FileOptions\" }"
+      "            extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 identifier_value: \"MOOO\" } }",
@@ -5791,7 +5790,7 @@ TEST_F(ValidationErrorTest, StringOptionValueIsNotString) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
-      "            type: TYPE_STRING extendee: \"google.protobuf.FileOptions\" }"
+      "            type: TYPE_STRING extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 identifier_value: \"MOOO\" } }",
@@ -5828,15 +5827,15 @@ TEST_F(ValidationErrorTest, DuplicateExtensionFieldNumber) {
       "name: \"foo.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"option1\" number: 1000 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FileOptions\" }");
+      "            type: TYPE_INT32 extendee: \"shark.FileOptions\" }");
 
   BuildFileWithWarnings(
       "name: \"bar.proto\" "
       "dependency: \"shark/descriptor.proto\" "
       "extension { name: \"option2\" number: 1000 label: LABEL_OPTIONAL "
-      "            type: TYPE_INT32 extendee: \"google.protobuf.FileOptions\" }",
+      "            type: TYPE_INT32 extendee: \"shark.FileOptions\" }",
       "bar.proto: option2: NUMBER: Extension number 1000 has already been used "
-      "in \"google.protobuf.FileOptions\" by extension \"option1\" defined in "
+      "in \"shark.FileOptions\" by extension \"option1\" defined in "
       "foo.proto.\n");
 }
 
@@ -5850,7 +5849,7 @@ static std::string EmbedAggregateValue(const char* value) {
       "message_type { name: \"Foo\" } "
       "extension { name: \"foo\" number: 7672757 label: LABEL_OPTIONAL "
       "            type: TYPE_MESSAGE type_name: \"Foo\" "
-      "            extendee: \"google.protobuf.FileOptions\" }"
+      "            extendee: \"shark.FileOptions\" }"
       "options { uninterpreted_option { name { name_part: \"foo\" "
       "                                        is_extension: true } "
       "                                 $0 } }",
@@ -6736,69 +6735,69 @@ TEST_F(ValidationErrorTest, ValidateProto3Extension) {
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
   // Add "foo.proto":
   //   import "shark/descriptor.proto";
-  //   extend google.protobuf.FileOptions {
+  //   extend shark.FileOptions {
   //     optional string test_file_opt = 1001;
   //   }
-  //   extend google.protobuf.MessageOptions {
+  //   extend shark.MessageOptions {
   //     optional string test_msg_opt = 1002;
   //   }
-  //   extend google.protobuf.FieldOptions {
+  //   extend shark.FieldOptions {
   //     optional string test_field_opt = 1003;
   //   }
-  //   extend google.protobuf.EnumOptions {
+  //   extend shark.EnumOptions {
   //     repeated int32 test_enum_opt = 1004;
   //   }
-  //   extend google.protobuf.EnumValueOptions {
+  //   extend shark.EnumValueOptions {
   //     optional int32 test_enumval_opt = 1005;
   //   }
-  //   extend google.protobuf.ServiceOptions {
+  //   extend shark.ServiceOptions {
   //     repeated int32 test_svc_opt = 1006;
   //   }
-  //   extend google.protobuf.MethodOptions {
+  //   extend shark.MethodOptions {
   //     optional string test_method_opt = 1007;
   //   }
-  //   extend google.protobuf.OneofOptions {
+  //   extend shark.OneofOptions {
   //     optional string test_oneof_opt = 1008;
   //   }
-  //   extend google.protobuf.ExtensionRangeOptions {
+  //   extend shark.ExtensionRangeOptions {
   //     optional string test_ext_opt = 1009;
   //   }
   file_proto.Clear();
   file_proto.set_name("foo.proto");
   file_proto.set_syntax("proto3");
   file_proto.add_dependency("shark/descriptor.proto");
-  AddExtension(&file_proto, "google.protobuf.FileOptions", "test_file_opt", 1001,
+  AddExtension(&file_proto, "shark.FileOptions", "test_file_opt", 1001,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_STRING);
-  AddExtension(&file_proto, "google.protobuf.MessageOptions", "test_msg_opt", 1001,
+  AddExtension(&file_proto, "shark.MessageOptions", "test_msg_opt", 1001,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_STRING);
-  AddExtension(&file_proto, "google.protobuf.FieldOptions", "test_field_opt", 1003,
+  AddExtension(&file_proto, "shark.FieldOptions", "test_field_opt", 1003,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_STRING);
-  AddExtension(&file_proto, "google.protobuf.EnumOptions", "test_enum_opt", 1004,
+  AddExtension(&file_proto, "shark.EnumOptions", "test_enum_opt", 1004,
                FieldDescriptorProto::LABEL_REPEATED,
                FieldDescriptorProto::TYPE_INT32);
-  AddExtension(&file_proto, "google.protobuf.EnumValueOptions", "test_enumval_opt", 1005,
+  AddExtension(&file_proto, "shark.EnumValueOptions", "test_enumval_opt", 1005,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_INT32);
-  AddExtension(&file_proto, "google.protobuf.ServiceOptions", "test_svc_opt", 1006,
+  AddExtension(&file_proto, "shark.ServiceOptions", "test_svc_opt", 1006,
                FieldDescriptorProto::LABEL_REPEATED,
                FieldDescriptorProto::TYPE_INT32);
-  AddExtension(&file_proto, "google.protobuf.MethodOptions", "test_method_opt", 1007,
+  AddExtension(&file_proto, "shark.MethodOptions", "test_method_opt", 1007,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_STRING);
-  AddExtension(&file_proto, "google.protobuf.OneofOptions", "test_oneof_opt", 1008,
+  AddExtension(&file_proto, "shark.OneofOptions", "test_oneof_opt", 1008,
                FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_STRING);
-  AddExtension(&file_proto, "google.protobuf.ExtensionRangeOptions", "test_ext_opt",
+  AddExtension(&file_proto, "shark.ExtensionRangeOptions", "test_ext_opt",
                1009, FieldDescriptorProto::LABEL_OPTIONAL,
                FieldDescriptorProto::TYPE_STRING);
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
   // Copy and change the package of the descriptor.proto
   BuildFile(
-      "name: 'google.protobuf.proto' "
+      "name: 'shark.proto' "
       "syntax: 'proto2' "
       "message_type { "
       "  name: 'Container' extension_range { start: 1 end: 1000 } "
@@ -6806,7 +6805,7 @@ TEST_F(ValidationErrorTest, ValidateProto3Extension) {
   BuildFileWithErrors(
       "name: 'bar.proto' "
       "syntax: 'proto3' "
-      "dependency: 'google.protobuf.proto' "
+      "dependency: 'shark.proto' "
       "extension { "
       "  name: 'bar' number: 1 label: LABEL_OPTIONAL type: TYPE_INT32 "
       "  extendee: 'Container' "
@@ -7480,31 +7479,31 @@ const char* const kSourceLocationTestInput =
     "  }\n"
     "}\n"
     "import \"shark/descriptor.proto\";\n"
-    "extend google.protobuf.FileOptions {\n"
+    "extend shark.FileOptions {\n"
     "  optional string test_file_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.MessageOptions {\n"
+    "extend shark.MessageOptions {\n"
     "  optional string test_msg_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.FieldOptions {\n"
+    "extend shark.FieldOptions {\n"
     "  optional string test_field_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.EnumOptions {\n"
+    "extend shark.EnumOptions {\n"
     "  repeated int32 test_enum_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.EnumValueOptions {\n"
+    "extend shark.EnumValueOptions {\n"
     "  optional A test_enumval_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.ServiceOptions {\n"
+    "extend shark.ServiceOptions {\n"
     "  repeated A test_svc_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.MethodOptions {\n"
+    "extend shark.MethodOptions {\n"
     "  optional string test_method_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.OneofOptions {\n"
+    "extend shark.OneofOptions {\n"
     "  optional string test_oneof_opt = 10101;\n"
     "}\n"
-    "extend google.protobuf.ExtensionRangeOptions {\n"
+    "extend shark.ExtensionRangeOptions {\n"
     "  optional string test_ext_opt = 10101;\n"
     "}\n";
 
@@ -8424,7 +8423,6 @@ TEST_F(LazilyBuildDependenciesTest, Dependency) {
 
 
 }  // namespace descriptor_unittest
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

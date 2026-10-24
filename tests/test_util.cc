@@ -40,8 +40,6 @@
 
 #include <tests/test_util.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

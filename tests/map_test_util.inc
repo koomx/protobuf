@@ -32,8 +32,7 @@
 #include <tests/map_test_util_impl.h>
 #include <shark/message.h>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class MapTestUtil {
  public:
@@ -267,5 +266,4 @@ inline std::vector<const Message*> MapTestUtil::GetMapEntriesFromRelease(
   return result;
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark

@@ -37,8 +37,7 @@
 // Must include last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 MapReflectionTester::MapReflectionTester(const Descriptor* base_descriptor)
     : base_descriptor_(base_descriptor) {
@@ -1667,7 +1666,6 @@ void MapReflectionTester::ExpectClearViaReflectionIterator(Message* message) {
               reflection->MapEnd(message, F("map_int32_foreign_message")));
 }
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

@@ -39,21 +39,12 @@
 
 #include "shark/compiler/java/field.h"
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 class Context;            // context.h
 class ClassNameResolver;  // name_resolver.h
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 class ImmutableEnumFieldGenerator : public ImmutableFieldGenerator {
  public:
@@ -155,8 +146,5 @@ class RepeatedImmutableEnumFieldGenerator : public ImmutableEnumFieldGenerator {
   std::string GetBoxedType() const override;
 };
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 

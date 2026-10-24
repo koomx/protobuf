@@ -41,9 +41,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 
-namespace google {
-namespace protobuf {
-namespace io {
+namespace shark::io {
 
 static const int kDefaultBufferSize = 65536;
 
@@ -327,8 +325,6 @@ bool GzipOutputStream::Close() {
   return ok;
 }
 
-}  // namespace io
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::io
 
 #endif  // HAVE_ZLIB

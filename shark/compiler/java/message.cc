@@ -60,10 +60,7 @@
 // Must be last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace java {
+namespace shark::compiler::java {
 
 using internal::WireFormat;
 using internal::WireFormatLite;
@@ -1595,9 +1592,6 @@ void ImmutableMessageGenerator::GenerateAnyMethods(io::Printer* printer) {
       "}\n");
 }
 
-}  // namespace java
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::java
 
 #include <shark/port_undef.inc>

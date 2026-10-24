@@ -43,10 +43,7 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/compiler/cpp/names.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace cpp {
+namespace shark::compiler::cpp {
 
 namespace {
 // The GOOGLE_ARRAYSIZE constant is the max enum value plus 1. If the max enum value
@@ -432,7 +429,4 @@ void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
   }
 }
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::cpp

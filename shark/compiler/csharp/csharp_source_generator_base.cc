@@ -41,10 +41,7 @@
 #include <shark/compiler/csharp/csharp_names.h>
 #include <shark/compiler/csharp/csharp_options.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 SourceGeneratorBase::SourceGeneratorBase(
     const Options *options) : options_(options) {
@@ -69,7 +66,4 @@ const Options* SourceGeneratorBase::options() {
   return this->options_;
 }
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp

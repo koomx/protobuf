@@ -66,8 +66,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 class Message;
 
@@ -497,7 +496,7 @@ class RepeatedField final {
   using FastAdder = FastAdderImpl<>;
 
   friend class TestRepeatedFieldHelper;
-  friend class ::google::protobuf::internal::ParseContext;
+  friend class ::shark::internal::ParseContext;
 };
 
 namespace internal {
@@ -1210,8 +1209,7 @@ extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedIterator<float>;
 extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedIterator<double>;
 }  // namespace internal
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 

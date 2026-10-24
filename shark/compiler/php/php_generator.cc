@@ -75,10 +75,7 @@ const int kFieldSetter = 1;
 const int kFieldGetter = 2;
 const int kFieldProperty = 3;
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace php {
+namespace shark::compiler::php {
 
 struct Options {
   bool is_descriptor = false;
@@ -136,7 +133,7 @@ std::string ReservedNamePrefix(const std::string& classname,
   }
 
   if (is_reserved) {
-    if (file->package() == "google.protobuf") {
+    if (file->package() == "shark") {
       return "GPB";
     } else {
       return "PB";
@@ -150,8 +147,8 @@ template <typename DescriptorType>
 std::string DescriptorFullName(const DescriptorType* desc, bool is_internal) {
   if (is_internal) {
     return StringReplace(desc->full_name(),
-                         "google.protobuf",
-                         "google.protobuf.internal", false);
+                         "shark",
+                         "shark.internal", false);
   } else {
     return desc->full_name();
   }
@@ -2420,7 +2417,4 @@ bool Generator::GenerateAll(const std::vector<const FileDescriptor*>& files,
   return true;
 }
 
-}  // namespace php
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::php

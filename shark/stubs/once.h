@@ -35,9 +35,7 @@
 
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
-namespace internal {
+namespace shark::internal {
 
 using once_flag = std::once_flag;
 template <typename... Args>
@@ -45,9 +43,7 @@ void call_once(Args&&... args ) {
   std::call_once(std::forward<Args>(args)...);
 }
 
-}  // namespace internal
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::internal
 
 #include <shark/port_undef.inc>
 

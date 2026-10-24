@@ -77,8 +77,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 namespace {
 const int kPackageLimit = 100;
@@ -874,7 +873,7 @@ const char* FileDescriptor::SyntaxName(FileDescriptor::Syntax syntax) {
   return nullptr;
 }
 
-static const char* const kNonLinkedWeakMessageReplacementName = "google.protobuf.Empty";
+static const char* const kNonLinkedWeakMessageReplacementName = "shark.Empty";
 
 #if !defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912)
 const int FieldDescriptor::kMaxNumber;
@@ -1109,7 +1108,7 @@ std::set<std::string>* NewAllowedProto3Extendee() {
     // descriptor.proto has a different package name in opensource. We allow
     // both so the opensource protocol compiler can also compile internal
     // proto3 files with custom options. See: b/27567912
-    allowed_proto3_extendees->insert(std::string("google.protobuf.") +
+    allowed_proto3_extendees->insert(std::string("shark.") +
                                      option_name);
     // Split the word to trick the opensource processing scripts so they
     // will keep the original package name.
@@ -1423,22 +1422,22 @@ class DescriptorPool::Tables {
 
 DescriptorPool::Tables::Tables() {
   well_known_types_.insert({
-      {"google.protobuf.DoubleValue", Descriptor::WELLKNOWNTYPE_DOUBLEVALUE},
-      {"google.protobuf.FloatValue", Descriptor::WELLKNOWNTYPE_FLOATVALUE},
-      {"google.protobuf.Int64Value", Descriptor::WELLKNOWNTYPE_INT64VALUE},
-      {"google.protobuf.UInt64Value", Descriptor::WELLKNOWNTYPE_UINT64VALUE},
-      {"google.protobuf.Int32Value", Descriptor::WELLKNOWNTYPE_INT32VALUE},
-      {"google.protobuf.UInt32Value", Descriptor::WELLKNOWNTYPE_UINT32VALUE},
-      {"google.protobuf.StringValue", Descriptor::WELLKNOWNTYPE_STRINGVALUE},
-      {"google.protobuf.BytesValue", Descriptor::WELLKNOWNTYPE_BYTESVALUE},
-      {"google.protobuf.BoolValue", Descriptor::WELLKNOWNTYPE_BOOLVALUE},
-      {"google.protobuf.Any", Descriptor::WELLKNOWNTYPE_ANY},
-      {"google.protobuf.FieldMask", Descriptor::WELLKNOWNTYPE_FIELDMASK},
-      {"google.protobuf.Duration", Descriptor::WELLKNOWNTYPE_DURATION},
-      {"google.protobuf.Timestamp", Descriptor::WELLKNOWNTYPE_TIMESTAMP},
-      {"google.protobuf.Value", Descriptor::WELLKNOWNTYPE_VALUE},
-      {"google.protobuf.ListValue", Descriptor::WELLKNOWNTYPE_LISTVALUE},
-      {"google.protobuf.Struct", Descriptor::WELLKNOWNTYPE_STRUCT},
+      {"shark.DoubleValue", Descriptor::WELLKNOWNTYPE_DOUBLEVALUE},
+      {"shark.FloatValue", Descriptor::WELLKNOWNTYPE_FLOATVALUE},
+      {"shark.Int64Value", Descriptor::WELLKNOWNTYPE_INT64VALUE},
+      {"shark.UInt64Value", Descriptor::WELLKNOWNTYPE_UINT64VALUE},
+      {"shark.Int32Value", Descriptor::WELLKNOWNTYPE_INT32VALUE},
+      {"shark.UInt32Value", Descriptor::WELLKNOWNTYPE_UINT32VALUE},
+      {"shark.StringValue", Descriptor::WELLKNOWNTYPE_STRINGVALUE},
+      {"shark.BytesValue", Descriptor::WELLKNOWNTYPE_BYTESVALUE},
+      {"shark.BoolValue", Descriptor::WELLKNOWNTYPE_BOOLVALUE},
+      {"shark.Any", Descriptor::WELLKNOWNTYPE_ANY},
+      {"shark.FieldMask", Descriptor::WELLKNOWNTYPE_FIELDMASK},
+      {"shark.Duration", Descriptor::WELLKNOWNTYPE_DURATION},
+      {"shark.Timestamp", Descriptor::WELLKNOWNTYPE_TIMESTAMP},
+      {"shark.Value", Descriptor::WELLKNOWNTYPE_VALUE},
+      {"shark.ListValue", Descriptor::WELLKNOWNTYPE_LISTVALUE},
+      {"shark.Struct", Descriptor::WELLKNOWNTYPE_STRUCT},
   });
 }
 
@@ -4751,7 +4750,7 @@ void DescriptorBuilder::AllocateOptions(const FileOptions& orig_options,
   // We add the dummy token so that LookupSymbol does the right thing.
   AllocateOptionsImpl(descriptor->package() + ".dummy", descriptor->name(),
                       orig_options, descriptor, options_path,
-                      "google.protobuf.FileOptions", alloc);
+                      "shark.FileOptions", alloc);
 }
 
 template <class DescriptorT>
@@ -5440,7 +5439,7 @@ void DescriptorBuilder::BuildMessage(const DescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     DescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.MessageOptions", alloc);
+                    "shark.MessageOptions", alloc);
   }
 
   AddSymbol(result->full_name(), parent, result->name(), proto, Symbol(result));
@@ -5813,7 +5812,7 @@ void DescriptorBuilder::BuildFieldOrExtension(const FieldDescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     FieldDescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.FieldOptions", alloc);
+                    "shark.FieldOptions", alloc);
   }
 
   AddSymbol(result->full_name(), parent, result->name(), proto, Symbol(result));
@@ -5855,7 +5854,7 @@ void DescriptorBuilder::BuildExtensionRange(
     options_path.push_back(DescriptorProto_ExtensionRange::kOptionsFieldNumber);
     AllocateOptionsImpl(parent->full_name(), parent->full_name(),
                         proto.options(), result, options_path,
-                        "google.protobuf.ExtensionRangeOptions", alloc);
+                        "shark.ExtensionRangeOptions", alloc);
   }
 }
 
@@ -5904,7 +5903,7 @@ void DescriptorBuilder::BuildOneof(const OneofDescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     OneofDescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.OneofOptions", alloc);
+                    "shark.OneofOptions", alloc);
   }
 
   AddSymbol(result->full_name(), parent, result->name(), proto, Symbol(result));
@@ -6032,7 +6031,7 @@ void DescriptorBuilder::BuildEnum(const EnumDescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     EnumDescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.EnumOptions", alloc);
+                    "shark.EnumOptions", alloc);
   }
 
   AddSymbol(result->full_name(), parent, result->name(), proto, Symbol(result));
@@ -6110,7 +6109,7 @@ void DescriptorBuilder::BuildEnumValue(const EnumValueDescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     EnumValueDescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.EnumValueOptions", alloc);
+                    "shark.EnumValueOptions", alloc);
   }
 
   // Again, enum values are weird because we makes them appear as siblings
@@ -6174,7 +6173,7 @@ void DescriptorBuilder::BuildService(const ServiceDescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     ServiceDescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.ServiceOptions", alloc);
+                    "shark.ServiceOptions", alloc);
   }
 
   AddSymbol(result->full_name(), nullptr, result->name(), proto,
@@ -6200,7 +6199,7 @@ void DescriptorBuilder::BuildMethod(const MethodDescriptorProto& proto,
   if (proto.has_options()) {
     AllocateOptions(proto.options(), result,
                     MethodDescriptorProto::kOptionsFieldNumber,
-                    "google.protobuf.MethodOptions", alloc);
+                    "shark.MethodOptions", alloc);
   }
 
   result->client_streaming_ = proto.client_streaming();
@@ -6395,7 +6394,7 @@ void DescriptorBuilder::CrossLinkField(FieldDescriptor* field,
       // from other extendees (< 2^29). If unknown deps are allowed, we may not
       // have that information, and wrongly deem the extension as invalid.
       auto skip_check = get_allow_unknown(pool_) &&
-                        proto.extendee() == "google.protobuf.bridge.MessageSet";
+                        proto.extendee() == "shark.bridge.MessageSet";
       if (!skip_check) {
         AddError(field->full_name(), proto,
                  DescriptorPool::ErrorCollector::NUMBER,
@@ -6468,7 +6467,7 @@ void DescriptorBuilder::CrossLinkField(FieldDescriptor* field,
         }
         return;
       } else {
-        // If the type is a weak type, we change the type to a google.protobuf.Empty
+        // If the type is a weak type, we change the type to a shark.Empty
         // field.
         if (is_weak) {
           type = FindSymbol(kNonLinkedWeakMessageReplacementName);
@@ -8334,7 +8333,6 @@ void LazyDescriptor::Once(const ServiceDescriptor* service) {
 
 }  // namespace internal
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>

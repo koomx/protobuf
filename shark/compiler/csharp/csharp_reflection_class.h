@@ -37,10 +37,7 @@
 #include <shark/descriptor.h>
 #include <shark/io/printer.h>
 
-namespace google {
-namespace protobuf {
-namespace compiler {
-namespace csharp {
+namespace shark::compiler::csharp {
 
 class ReflectionClassGenerator : public SourceGeneratorBase {
  public:
@@ -66,8 +63,5 @@ class ReflectionClassGenerator : public SourceGeneratorBase {
                               bool last);
 };
 
-}  // namespace csharp
-}  // namespace compiler
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark::compiler::csharp
 

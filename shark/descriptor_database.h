@@ -52,8 +52,7 @@
 #error "You cannot SWIG proto headers"
 #endif
 
-namespace google {
-namespace protobuf {
+namespace shark {
 
 // Defined in this file.
 class DescriptorDatabase;
@@ -389,8 +388,7 @@ class SHARK_EXPORT MergedDescriptorDatabase : public DescriptorDatabase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MergedDescriptorDatabase);
 };
 
-}  // namespace protobuf
-}  // namespace google
+}  // namespace shark
 
 #include <shark/port_undef.inc>
 
