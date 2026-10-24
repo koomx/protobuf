@@ -27,8 +27,7 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#ifndef GOOGLE_PROTOBUF_STUBS_INT128_H_
-#define GOOGLE_PROTOBUF_STUBS_INT128_H_
+#pragma once
 
 #include <shark/stubs/common.h>
 
@@ -41,16 +40,16 @@ namespace protobuf {
 
 struct uint128_pod;
 
-// TODO(xiaofeng): Define GOOGLE_PROTOBUF_HAS_CONSTEXPR when constexpr is
+// TODO(xiaofeng): Define SHARK_HAS_CONSTEXPR when constexpr is
 // available.
-#ifdef GOOGLE_PROTOBUF_HAS_CONSTEXPR
+#ifdef SHARK_HAS_CONSTEXPR
 # define UINT128_CONSTEXPR constexpr
 #else
 # define UINT128_CONSTEXPR
 #endif
 
 // An unsigned 128-bit integer type. Thread-compatible.
-class PROTOBUF_EXPORT uint128 {
+class SHARK_EXPORT uint128 {
  public:
   UINT128_CONSTEXPR uint128();  // Sets to 0, but don't trust on this behavior.
   UINT128_CONSTEXPR uint128(uint64_t top, uint64_t bottom);
@@ -86,7 +85,7 @@ class PROTOBUF_EXPORT uint128 {
   friend uint64_t Uint128High64(const uint128& v);
 
   // We add "std::" to avoid including all of port.h.
-  PROTOBUF_EXPORT friend std::ostream& operator<<(std::ostream& o,
+  SHARK_EXPORT friend std::ostream& operator<<(std::ostream& o,
                                                   const uint128& b);
 
  private:
@@ -118,10 +117,10 @@ struct uint128_pod {
   uint64_t lo;
 };
 
-PROTOBUF_EXPORT extern const uint128_pod kuint128max;
+SHARK_EXPORT extern const uint128_pod kuint128max;
 
 // allow uint128 to be logged
-PROTOBUF_EXPORT extern std::ostream& operator<<(std::ostream& o,
+SHARK_EXPORT extern std::ostream& operator<<(std::ostream& o,
                                                 const uint128& b);
 
 // Methods to access low and high pieces of 128-bit value.
@@ -384,4 +383,3 @@ inline uint128& uint128::operator--() {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_INT128_H_

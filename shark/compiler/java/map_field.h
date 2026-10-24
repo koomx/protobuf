@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_MAP_FIELD_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_MAP_FIELD_H__
+#pragma once
 
 #include "shark/compiler/java/field.h"
 
@@ -83,4 +82,3 @@ class ImmutableMapFieldGenerator : public ImmutableFieldGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_MAP_FIELD_H__

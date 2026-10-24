@@ -71,7 +71,7 @@ namespace protobuf {
 
 namespace internal {
 // Controls insertion of DEBUG_STRING_SILENT_MARKER.
-extern PROTOBUF_EXPORT std::atomic<bool> enable_debug_text_format_marker;
+extern SHARK_EXPORT std::atomic<bool> enable_debug_text_format_marker;
 }  // namespace internal
 
 // Can't use an anonymous namespace here due to brokenness of Tru64 compiler.

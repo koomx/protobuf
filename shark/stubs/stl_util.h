@@ -30,8 +30,7 @@
 
 // from google3/util/gtl/stl_util.h
 
-#ifndef GOOGLE_PROTOBUF_STUBS_STL_UTIL_H__
-#define GOOGLE_PROTOBUF_STUBS_STL_UTIL_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 
@@ -87,4 +86,3 @@ inline char* string_as_array(std::string* str) {
 
 #include <shark/port_undef.inc>  // NOLINT
 
-#endif  // GOOGLE_PROTOBUF_STUBS_STL_UTIL_H__

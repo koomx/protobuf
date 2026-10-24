@@ -30,8 +30,7 @@
 
 // Defines classes for field comparison.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_FIELD_COMPARATOR_H__
-#define GOOGLE_PROTOBUF_UTIL_FIELD_COMPARATOR_H__
+#pragma once
 
 
 #include <cstdint>
@@ -60,7 +59,7 @@ class MessageDifferencer;
 // Regular users should consider using or subclassing DefaultFieldComparator
 // rather than this interface.
 // Currently, this does not support comparing unknown fields.
-class PROTOBUF_EXPORT FieldComparator {
+class SHARK_EXPORT FieldComparator {
  public:
   FieldComparator();
   virtual ~FieldComparator();
@@ -100,7 +99,7 @@ class PROTOBUF_EXPORT FieldComparator {
 // Basic implementation of FieldComparator.  Supports three modes of floating
 // point value comparison: exact, approximate using MathUtil::AlmostEqual
 // method, and arbitrarily precise using MathUtil::WithinFractionOrMargin.
-class PROTOBUF_EXPORT SimpleFieldComparator : public FieldComparator {
+class SHARK_EXPORT SimpleFieldComparator : public FieldComparator {
  public:
   enum FloatComparison {
     EXACT,        // Floats and doubles are compared exactly.
@@ -262,12 +261,12 @@ class PROTOBUF_EXPORT SimpleFieldComparator : public FieldComparator {
 };
 
 // Default field comparison: use the basic implementation of FieldComparator.
-#ifdef PROTOBUF_FUTURE_BREAKING_CHANGES
-class PROTOBUF_EXPORT DefaultFieldComparator final
+#ifdef SHARK_FUTURE_BREAKING_CHANGES
+class SHARK_EXPORT DefaultFieldComparator final
     : public SimpleFieldComparator
-#else   // PROTOBUF_FUTURE_BREAKING_CHANGES
-class PROTOBUF_EXPORT DefaultFieldComparator : public SimpleFieldComparator
-#endif  // PROTOBUF_FUTURE_BREAKING_CHANGES
+#else   // SHARK_FUTURE_BREAKING_CHANGES
+class SHARK_EXPORT DefaultFieldComparator : public SimpleFieldComparator
+#endif  // SHARK_FUTURE_BREAKING_CHANGES
 {
  public:
   ComparisonResult Compare(const Message& message_1, const Message& message_2,
@@ -285,4 +284,3 @@ class PROTOBUF_EXPORT DefaultFieldComparator : public SimpleFieldComparator
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_FIELD_COMPARATOR_H__

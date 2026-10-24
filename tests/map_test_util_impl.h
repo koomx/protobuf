@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_TEST_UTIL_IMPL_H__
-#define GOOGLE_PROTOBUF_MAP_TEST_UTIL_IMPL_H__
+#pragma once
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
@@ -473,4 +472,3 @@ void MapTestUtilImpl::ExpectMapFieldsModified(const MapMessage& message) {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_MAP_TEST_UTIL_IMPL_H__

@@ -34,8 +34,7 @@
 //
 // Class for parsing tokenized text from a ZeroCopyInputStream.
 
-#ifndef GOOGLE_PROTOBUF_IO_TOKENIZER_H__
-#define GOOGLE_PROTOBUF_IO_TOKENIZER_H__
+#pragma once
 
 
 #include <string>
@@ -66,7 +65,7 @@ typedef int ColumnNumber;
 // Abstract interface for an object which collects the errors that occur
 // during parsing.  A typical implementation might simply print the errors
 // to stdout.
-class PROTOBUF_EXPORT ErrorCollector {
+class SHARK_EXPORT ErrorCollector {
  public:
   inline ErrorCollector() {}
   virtual ~ErrorCollector();
@@ -93,7 +92,7 @@ class PROTOBUF_EXPORT ErrorCollector {
 // precise descriptions.  Whitespace and comments are skipped.  By default,
 // C- and C++-style comments are recognized, but other styles can be used by
 // calling set_comment_style().
-class PROTOBUF_EXPORT Tokenizer {
+class SHARK_EXPORT Tokenizer {
  public:
   // Construct a Tokenizer that reads and tokenizes text from the given
   // input stream and writes errors to the given error_collector.
@@ -439,4 +438,3 @@ inline void Tokenizer::ParseString(const std::string& text,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_TOKENIZER_H__

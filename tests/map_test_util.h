@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_TEST_UTIL_H__
-#define GOOGLE_PROTOBUF_MAP_TEST_UTIL_H__
+#pragma once
 
 #include <tests/map_unittest.pb.h>
 #include <tests/reflection_tester.h>
@@ -43,4 +42,3 @@
 #undef UNITTEST
 #undef BRIDGE_UNITTEST
 
-#endif  // GOOGLE_PROTOBUF_MAP_TEST_UTIL_H__

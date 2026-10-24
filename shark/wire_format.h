@@ -36,8 +36,7 @@
 // This header is logically internal, but is made public because it is used
 // from protocol-compiler-generated code, which may reside in other components.
 
-#ifndef GOOGLE_PROTOBUF_WIRE_FORMAT_H__
-#define GOOGLE_PROTOBUF_WIRE_FORMAT_H__
+#pragma once
 
 
 #include <shark/stubs/common.h>
@@ -77,7 +76,7 @@ namespace internal {
 // non-reflection based routines.
 //
 // This class is really a namespace that contains only static methods
-class PROTOBUF_EXPORT WireFormat {
+class SHARK_EXPORT WireFormat {
  public:
   // Given a field return its WireType
   static inline WireFormatLite::WireType WireTypeForField(
@@ -306,7 +305,7 @@ class PROTOBUF_EXPORT WireFormat {
 };
 
 // Subclass of FieldSkipper which saves skipped fields to an UnknownFieldSet.
-class PROTOBUF_EXPORT UnknownFieldSetFieldSkipper : public FieldSkipper {
+class SHARK_EXPORT UnknownFieldSetFieldSkipper : public FieldSkipper {
  public:
   UnknownFieldSetFieldSkipper(UnknownFieldSet* unknown_fields)
       : unknown_fields_(unknown_fields) {}
@@ -355,7 +354,7 @@ inline size_t WireFormat::TagSize(int field_number,
 
 inline void WireFormat::VerifyUTF8String(const char* data, int size,
                                          WireFormat::Operation op) {
-#ifdef GOOGLE_PROTOBUF_UTF8_VALIDATION_ENABLED
+#ifdef SHARK_UTF8_VALIDATION_ENABLED
   WireFormatLite::VerifyUtf8String(
       data, size, static_cast<WireFormatLite::Operation>(op), nullptr);
 #else
@@ -369,7 +368,7 @@ inline void WireFormat::VerifyUTF8String(const char* data, int size,
 inline void WireFormat::VerifyUTF8StringNamedField(const char* data, int size,
                                                    WireFormat::Operation op,
                                                    const char* field_name) {
-#ifdef GOOGLE_PROTOBUF_UTF8_VALIDATION_ENABLED
+#ifdef SHARK_UTF8_VALIDATION_ENABLED
   WireFormatLite::VerifyUtf8String(
       data, size, static_cast<WireFormatLite::Operation>(op), field_name);
 #else
@@ -395,7 +394,7 @@ inline size_t ComputeUnknownMessageSetItemsSize(
 }
 
 // Compute the size of the UnknownFieldSet on the wire.
-PROTOBUF_EXPORT
+SHARK_EXPORT
 size_t ComputeUnknownFieldsSize(const InternalMetadata& metadata, size_t size,
                                 CachedSize* cached_size);
 
@@ -411,4 +410,3 @@ uint8_t* SerializeMapKeyWithCachedSizes(const FieldDescriptor* field,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_WIRE_FORMAT_H__

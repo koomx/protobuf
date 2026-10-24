@@ -88,7 +88,7 @@ const char kDebugStringSilentMarker[] = "";
 const char kDebugStringSilentMarkerForDetection[] = "\t ";
 
 // Controls insertion of kDebugStringSilentMarker.
-PROTOBUF_EXPORT std::atomic<bool> enable_debug_text_format_marker;
+SHARK_EXPORT std::atomic<bool> enable_debug_text_format_marker;
 }  // namespace internal
 
 std::string Message::DebugString() const {

@@ -30,8 +30,7 @@
 
 // Generates Ruby code for a given .proto file.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_RUBY_GENERATOR_H__
-#define GOOGLE_PROTOBUF_COMPILER_RUBY_GENERATOR_H__
+#pragma once
 
 #include <string>
 
@@ -64,4 +63,3 @@ class PROTOC_EXPORT Generator : public CodeGenerator {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_RUBY_GENERATOR_H__

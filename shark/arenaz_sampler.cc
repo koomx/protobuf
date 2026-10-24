@@ -51,17 +51,17 @@ void UnsampleSlow(ThreadSafeArenaStats* info) {
   GlobalThreadSafeArenazSampler().Unregister(info);
 }
 
-#if defined(PROTOBUF_ARENAZ_SAMPLE)
+#if defined(SHARK_ARENAZ_SAMPLE)
 namespace {
 
-PROTOBUF_CONSTINIT std::atomic<bool> g_arenaz_enabled{true};
-PROTOBUF_CONSTINIT std::atomic<int32_t> g_arenaz_sample_parameter{1 << 10};
-PROTOBUF_THREAD_LOCAL absl::profiling_internal::ExponentialBiased
+SHARK_CONSTINIT std::atomic<bool> g_arenaz_enabled{true};
+SHARK_CONSTINIT std::atomic<int32_t> g_arenaz_sample_parameter{1 << 10};
+thread_local absl::profiling_internal::ExponentialBiased
     g_exponential_biased_generator;
 
 }  // namespace
 
-PROTOBUF_THREAD_LOCAL int64_t global_next_sample = 1LL << 10;
+thread_local int64_t global_next_sample = 1LL << 10;
 
 ThreadSafeArenaStats::ThreadSafeArenaStats() { PrepareForSampling(); }
 ThreadSafeArenaStats::~ThreadSafeArenaStats() = default;
@@ -122,7 +122,7 @@ ThreadSafeArenaStats* SampleSlow(int64_t* next_sample) {
   // We will only be negative on our first count, so we should just retry in
   // that case.
   if (first) {
-    if (PROTOBUF_PREDICT_TRUE(--*next_sample > 0)) return nullptr;
+    if (SHARK_PREDICT_TRUE(--*next_sample > 0)) return nullptr;
     return SampleSlow(next_sample);
   }
 
@@ -170,7 +170,7 @@ void SetThreadSafeArenazEnabled(bool enabled) {}
 void SetThreadSafeArenazSampleParameter(int32_t rate) {}
 void SetThreadSafeArenazMaxSamples(int32_t max) {}
 void SetThreadSafeArenazGlobalNextSample(int64_t next_sample) {}
-#endif  // defined(PROTOBUF_ARENAZ_SAMPLE)
+#endif  // defined(SHARK_ARENAZ_SAMPLE)
 
 }  // namespace internal
 }  // namespace protobuf

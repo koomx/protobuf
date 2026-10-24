@@ -97,8 +97,7 @@
 // use multiple threads.  RPC implementations should provide multiple
 // choices.
 
-#ifndef GOOGLE_PROTOBUF_SERVICE_H__
-#define GOOGLE_PROTOBUF_SERVICE_H__
+#pragma once
 
 
 #include <string>
@@ -131,7 +130,7 @@ class Message;            // message.h
 // stubs), but they subclass this base interface.  The methods of this
 // interface can be used to call the methods of the Service without knowing
 // its exact type at compile time (analogous to Reflection).
-class PROTOBUF_EXPORT Service {
+class SHARK_EXPORT Service {
  public:
   inline Service() {}
   virtual ~Service();
@@ -203,7 +202,7 @@ class PROTOBUF_EXPORT Service {
 // "least common denominator" set of features which we expect all
 // implementations to support.  Specific implementations may provide more
 // advanced features (e.g. deadline propagation).
-class PROTOBUF_EXPORT RpcController {
+class SHARK_EXPORT RpcController {
  public:
   inline RpcController() {}
   virtual ~RpcController();
@@ -269,7 +268,7 @@ class PROTOBUF_EXPORT RpcController {
 //   RpcChannel* channel = new MyRpcChannel("remotehost.example.com:1234");
 //   MyService* service = new MyService::Stub(channel);
 //   service->MyMethod(request, &response, callback);
-class PROTOBUF_EXPORT RpcChannel {
+class SHARK_EXPORT RpcChannel {
  public:
   inline RpcChannel() {}
   virtual ~RpcChannel();
@@ -292,4 +291,3 @@ class PROTOBUF_EXPORT RpcChannel {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_SERVICE_H__

@@ -454,11 +454,11 @@ void ParseFunctionGenerator::GenerateMethodDecls(io::Printer* printer) {
   if (should_generate_tctable()) {
     format.Outdent();
     if (should_generate_guarded_tctable()) {
-      format("#ifdef PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n");
+      format("#ifdef SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n");
     }
     format(
         " private:\n"
-        "  static const char* Tct_ParseFallback(PROTOBUF_TC_PARAM_DECL);\n"
+        "  static const char* Tct_ParseFallback(SHARK_TC_PARAM_DECL);\n"
         " public:\n");
     if (should_generate_guarded_tctable()) {
       format("#endif\n");
@@ -497,7 +497,7 @@ void ParseFunctionGenerator::GenerateMethodImpls(io::Printer* printer) {
     return;
   }
   if (should_generate_guarded_tctable()) {
-    format("#ifdef PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n\n");
+    format("#ifdef SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n\n");
   }
   if (need_parse_function) {
     GenerateTailcallParseFunction(format);
@@ -507,10 +507,10 @@ void ParseFunctionGenerator::GenerateMethodImpls(io::Printer* printer) {
   }
   if (should_generate_guarded_tctable()) {
     if (need_parse_function) {
-      format("\n#else  // PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n\n");
+      format("\n#else  // SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n\n");
       GenerateLoopingParseFunction(format);
     }
-    format("\n#endif  // PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n");
+    format("\n#endif  // SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n");
   }
 }
 
@@ -540,8 +540,8 @@ void ParseFunctionGenerator::GenerateTailcallFallbackFunction(
     Formatter& format) {
   GOOGLE_CHECK(should_generate_tctable());
   format(
-      "const char* $classname$::Tct_ParseFallback(PROTOBUF_TC_PARAM_DECL) {\n"
-      "#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) return nullptr\n");
+      "const char* $classname$::Tct_ParseFallback(SHARK_TC_PARAM_DECL) {\n"
+      "#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) return nullptr\n");
   format.Indent();
   format("auto* typed_msg = static_cast<$classname$*>(msg);\n");
 
@@ -599,7 +599,7 @@ void ParseFunctionGenerator::GenerateDataDecls(io::Printer* printer) {
   Formatter format(printer, variables_);
   if (should_generate_guarded_tctable()) {
     format.Outdent();
-    format("#ifdef PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n");
+    format("#ifdef SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n");
     format.Indent();
   }
   auto field_num_to_entry_table = MakeNumToEntryTable(ordered_fields_);
@@ -611,7 +611,7 @@ void ParseFunctionGenerator::GenerateDataDecls(io::Printer* printer) {
       field_num_to_entry_table.size16());
   if (should_generate_guarded_tctable()) {
     format.Outdent();
-    format("#endif  // PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n");
+    format("#endif  // SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n");
     format.Indent();
   }
 }
@@ -622,11 +622,11 @@ void ParseFunctionGenerator::GenerateDataDefinitions(io::Printer* printer) {
   }
   Formatter format(printer, variables_);
   if (should_generate_guarded_tctable()) {
-    format("#ifdef PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n");
+    format("#ifdef SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n");
   }
   GenerateTailCallTable(format);
   if (should_generate_guarded_tctable()) {
-    format("#endif  // PROTOBUF_TAIL_CALL_TABLE_PARSER_ENABLED\n");
+    format("#endif  // SHARK_TAIL_CALL_TABLE_PARSER_ENABLED\n");
   }
 }
 
@@ -635,7 +635,7 @@ void ParseFunctionGenerator::GenerateLoopingParseFunction(Formatter& format) {
       "const char* $classname$::_InternalParse(const char* ptr, "
       "::_pbi::ParseContext* ctx) {\n"
       "$annotate_deserialize$"
-      "#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure\n");
+      "#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure\n");
   format.Indent();
   format.Set("msg", "");
   format.Set("this", "this");
@@ -761,7 +761,7 @@ void ParseFunctionGenerator::GenerateTailCallTable(Formatter& format) {
   // unknown fields and potentially an extension range.
   auto field_num_to_entry_table = MakeNumToEntryTable(ordered_fields_);
   format(
-      "PROTOBUF_ATTRIBUTE_INIT_PRIORITY1\n"
+      "SHARK_ATTRIBUTE_INIT_PRIORITY1\n"
       "const ::_pbi::TcParseTable<$1$, $2$, $3$, $4$, $5$> "
       "$classname$::_table_ = "
       "{\n",
@@ -774,13 +774,13 @@ void ParseFunctionGenerator::GenerateTailCallTable(Formatter& format) {
     {
       auto header_scope = format.ScopedIndent();
       if (num_hasbits_ > 0 || IsMapEntryMessage(descriptor_)) {
-        format("PROTOBUF_FIELD_OFFSET($classname$, _impl_._has_bits_),\n");
+        format("SHARK_FIELD_OFFSET($classname$, _impl_._has_bits_),\n");
       } else {
         format("0,  // no _has_bits_\n");
       }
       if (descriptor_->extension_range_count() == 1) {
         format(
-            "PROTOBUF_FIELD_OFFSET($classname$, $extensions$),\n"
+            "SHARK_FIELD_OFFSET($classname$, $extensions$),\n"
             "$1$, $2$,  // extension_range_{low,high}\n",
             descriptor_->extension_range(0)->start,
             descriptor_->extension_range(0)->end);
@@ -902,7 +902,7 @@ void ParseFunctionGenerator::GenerateFastFieldEntries(Formatter& format) {
       bool cold = ShouldSplit(info.field, options_);
       format(
           "{$1$,\n"
-          " {$2$, $3$, $4$, PROTOBUF_FIELD_OFFSET($classname$$5$, $6$)}},\n",
+          " {$2$, $3$, $4$, SHARK_FIELD_OFFSET($classname$$5$, $6$)}},\n",
           info.func_name, info.coded_tag, info.hasbit_idx, info.aux_idx,
           cold ? "::Impl_::Split" : "",
           cold ? FieldName(info.field) + "_"
@@ -1052,7 +1052,7 @@ void ParseFunctionGenerator::GenerateFieldEntries(Formatter& format) {
     } else {
       const OneofDescriptor* oneof = field->real_containing_oneof();
       bool cold = ShouldSplit(field, options_);
-      format("PROTOBUF_FIELD_OFFSET($classname$$1$, $2$), $3$, $4$,\n ",
+      format("SHARK_FIELD_OFFSET($classname$$1$, $2$), $3$, $4$,\n ",
              cold ? "::Impl_::Split" : "",
              cold ? FieldName(field) + "_"
                   : FieldMemberName(field, /*cold=*/false),
@@ -1374,7 +1374,7 @@ void ParseFunctionGenerator::GenerateFieldBody(
             "$uint64$ val = ::$proto_ns$::internal::ReadVarint64(&ptr);\n"
             "CHK_(ptr);\n");
         if (!HasPreservingUnknownEnumSemantics(field)) {
-          format("if (PROTOBUF_PREDICT_TRUE($enum_type$_IsValid(val))) {\n");
+          format("if (SHARK_PREDICT_TRUE($enum_type$_IsValid(val))) {\n");
           format.Indent();
         }
         format("$msg$_internal_$put_field$(static_cast<$enum_type$>(val));\n");
@@ -1563,7 +1563,7 @@ void ParseFunctionGenerator::GenerateFieldSwitch(
     format.Indent();
     uint32_t fallback_tag = 0;
     uint32_t expected_tag = ExpectedTag(field, &fallback_tag);
-    format("if (PROTOBUF_PREDICT_TRUE(static_cast<$uint8$>(tag) == $1$)) {\n",
+    format("if (SHARK_PREDICT_TRUE(static_cast<$uint8$>(tag) == $1$)) {\n",
            expected_tag & 0xFF);
     format.Indent();
     if (cold) {

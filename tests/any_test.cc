@@ -41,7 +41,7 @@ namespace protobuf {
 namespace {
 
 TEST(AnyMetadataTest, ConstInit) {
-  PROTOBUF_CONSTINIT static internal::AnyMetadata metadata(nullptr, nullptr);
+  SHARK_CONSTINIT static internal::AnyMetadata metadata(nullptr, nullptr);
   (void)metadata;
 }
 
@@ -176,7 +176,7 @@ TEST(AnyTest, MoveAssignment) {
   EXPECT_EQ(12345, payload.int32_value());
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 #ifndef NDEBUG
 TEST(AnyTest, PackSelfDeath) {
   google::protobuf::Any any;
@@ -184,7 +184,7 @@ TEST(AnyTest, PackSelfDeath) {
   EXPECT_DEATH(any.PackFrom(any, ""), "&message");
 }
 #endif  // !NDEBUG
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 
 }  // namespace

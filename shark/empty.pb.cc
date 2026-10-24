@@ -15,45 +15,45 @@
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
-PROTOBUF_PRAGMA_INIT_SEG
+SHARK_PRAGMA_INIT_SEG
 
-namespace _pb = ::PROTOBUF_NAMESPACE_ID;
+namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-PROTOBUF_NAMESPACE_OPEN
-PROTOBUF_CONSTEXPR Empty::Empty(
+SHARK_NAMESPACE_OPEN
+constexpr Empty::Empty(
     ::_pbi::ConstantInitialized) {}
 struct EmptyDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR EmptyDefaultTypeInternal()
+  constexpr EmptyDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~EmptyDefaultTypeInternal() {}
   union {
     Empty _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EmptyDefaultTypeInternal _Empty_default_instance_;
-PROTOBUF_NAMESPACE_CLOSE
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 EmptyDefaultTypeInternal _Empty_default_instance_;
+SHARK_NAMESPACE_CLOSE
 static ::_pb::Metadata file_level_metadata_shark_2fempty_2eproto[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2fempty_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fempty_2eproto = nullptr;
 
-const uint32_t TableStruct_shark_2fempty_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+const uint32_t TableStruct_shark_2fempty_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Empty, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Empty, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
 };
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::Empty)},
+static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
+  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Empty)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::PROTOBUF_NAMESPACE_ID::_Empty_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_Empty_default_instance_._instance,
 };
 
-const char descriptor_table_protodef_shark_2fempty_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+const char descriptor_table_protodef_shark_2fempty_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\021shark/empty.proto\022\017google.protobuf\"\007\n\005"
   "EmptyB}\n\023com.google.protobufB\nEmptyProto"
   "P\001Z.google.golang.org/protobuf/types/kno"
@@ -69,13 +69,13 @@ const ::_pbi::DescriptorTable descriptor_table_shark_2fempty_2eproto = {
     file_level_metadata_shark_2fempty_2eproto, file_level_enum_descriptors_shark_2fempty_2eproto,
     file_level_service_descriptors_shark_2fempty_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fempty_2eproto_getter() {
+SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fempty_2eproto_getter() {
   return &descriptor_table_shark_2fempty_2eproto;
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fempty_2eproto(&descriptor_table_shark_2fempty_2eproto);
-PROTOBUF_NAMESPACE_OPEN
+SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fempty_2eproto(&descriptor_table_shark_2fempty_2eproto);
+SHARK_NAMESPACE_OPEN
 
 // ===================================================================
 
@@ -83,15 +83,15 @@ class Empty::_Internal {
  public:
 };
 
-Empty::Empty(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+Empty::Empty(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase(arena, is_message_owned) {
   // @@protoc_insertion_point(arena_constructor:google.protobuf.Empty)
 }
 Empty::Empty(const Empty& from)
-  : ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase() {
+  : ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase() {
   Empty* const _this = this; (void)_this;
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:google.protobuf.Empty)
 }
 
@@ -99,11 +99,11 @@ Empty::Empty(const Empty& from)
 
 
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Empty::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
-    ::PROTOBUF_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
+const ::SHARK_NAMESPACE_ID::Message::ClassData Empty::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase::CopyImpl,
+    ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase::MergeImpl,
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { return &_class_data_; }
 
 
 
@@ -111,20 +111,20 @@ const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { 
 
 
 
-::PROTOBUF_NAMESPACE_ID::Metadata Empty::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata Empty::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2fempty_2eproto_getter, &descriptor_table_shark_2fempty_2eproto_once,
       file_level_metadata_shark_2fempty_2eproto[0]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
-PROTOBUF_NAMESPACE_CLOSE
-PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::Empty*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::Empty >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::Empty >(arena);
+SHARK_NAMESPACE_CLOSE
+SHARK_NAMESPACE_OPEN
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Empty*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Empty >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Empty >(arena);
 }
-PROTOBUF_NAMESPACE_CLOSE
+SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 #include <shark/port_undef.inc>

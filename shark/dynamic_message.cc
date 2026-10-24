@@ -803,7 +803,7 @@ const Message* DynamicMessageFactory::GetPrototypeNoLock(
       type_info->offsets.get(),
       type_info->has_bits_indices.get(),
       type_info->has_bits_offset,
-      PROTOBUF_FIELD_OFFSET(DynamicMessage, _internal_metadata_),
+      SHARK_FIELD_OFFSET(DynamicMessage, _internal_metadata_),
       type_info->extensions_offset,
       type_info->oneof_case_offset,
       type_info->size,

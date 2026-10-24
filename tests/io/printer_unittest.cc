@@ -493,7 +493,7 @@ TEST(Printer, Indenting) {
 }
 
 // Death tests do not work on Windows as of yet.
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 TEST(Printer, Death) {
   char buffer[8192];
 
@@ -550,7 +550,7 @@ TEST(Printer, AnnotateUndefinedDeath) {
                        "Undefined");
   }
 }
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 TEST(Printer, WriteFailurePartial) {
   char buffer[17];
@@ -683,7 +683,7 @@ TEST(Printer, FormatInternal) {
     EXPECT_EQ(4, arg1->begin());
     EXPECT_EQ(8, arg1->end());
   }
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
   // Death tests in case of illegal format strings.
   {
     // Unused arguments
@@ -727,7 +727,7 @@ TEST(Printer, FormatInternal) {
     Printer printer(&output, '$');
     EXPECT_DEATH(printer.FormatInternal({}, vars, "$ $"), "Empty");
   }
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 }
 
 }  // namespace io

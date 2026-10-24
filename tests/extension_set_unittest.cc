@@ -1183,7 +1183,7 @@ TEST(ExtensionSetTest, AbsentExtension) {
                 .bb());
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 
 TEST(ExtensionSetTest, InvalidEnumDeath) {
   unittest::TestAllExtensions message;
@@ -1193,7 +1193,7 @@ TEST(ExtensionSetTest, InvalidEnumDeath) {
       "IsValid");
 }
 
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 TEST(ExtensionSetTest, DynamicExtensions) {
   // Test adding a dynamic extension to a compiled-in message object.
@@ -1331,7 +1331,7 @@ TEST(ExtensionSetTest, DynamicExtensions) {
     const Message& sub_message =
         message.GetReflection()->GetMessage(message, message_extension);
     const unittest::ForeignMessage* typed_sub_message =
-#if PROTOBUF_RTTI
+#if SHARK_RTTI
         dynamic_cast<const unittest::ForeignMessage*>(&sub_message);
 #else
         static_cast<const unittest::ForeignMessage*>(&sub_message);
@@ -1363,7 +1363,7 @@ TEST(ExtensionSetTest, BoolExtension) {
 }
 
 TEST(ExtensionSetTest, ConstInit) {
-  PROTOBUF_CONSTINIT static ExtensionSet set{};
+  SHARK_CONSTINIT static ExtensionSet set{};
   EXPECT_EQ(set.NumExtensions(), 0);
 }
 

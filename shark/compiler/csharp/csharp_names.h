@@ -35,8 +35,7 @@
 // Provides a mechanism for mapping a descriptor to the
 // fully-qualified name of the corresponding C# class.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CSHARP_NAMES_H__
-#define GOOGLE_PROTOBUF_COMPILER_CSHARP_NAMES_H__
+#pragma once
 
 #include <string>
 #include <shark/port.h>
@@ -106,4 +105,3 @@ std::string PROTOC_EXPORT GetOutputFile(const FileDescriptor* descriptor,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CSHARP_NAMES_H__

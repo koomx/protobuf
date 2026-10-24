@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_PADDING_OPTIMIZER_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_PADDING_OPTIMIZER_H__
+#pragma once
 
 #include <shark/compiler/cpp/message_layout_helper.h>
 
@@ -62,4 +61,3 @@ class PaddingOptimizer : public MessageLayoutHelper {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_PADDING_OPTIMIZER_H__

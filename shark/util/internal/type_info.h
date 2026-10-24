@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_TYPE_INFO_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_TYPE_INFO_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 #include <shark/type.pb.h>
@@ -47,7 +46,7 @@ namespace util {
 namespace converter {
 // Internal helper class for type resolving. Note that this class is not
 // thread-safe and should only be accessed in one thread.
-class PROTOBUF_EXPORT TypeInfo {
+class SHARK_EXPORT TypeInfo {
  public:
   TypeInfo() {}
   virtual ~TypeInfo() {}
@@ -94,4 +93,3 @@ class PROTOBUF_EXPORT TypeInfo {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_TYPE_INFO_H__

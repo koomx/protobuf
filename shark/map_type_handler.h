@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_TYPE_HANDLER_H__
-#define GOOGLE_PROTOBUF_MAP_TYPE_HANDLER_H__
+#pragma once
 
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
@@ -237,24 +236,24 @@ inline size_t MapTypeHandler<WireFormatLite::TYPE_MESSAGE, Type>::ByteSize(
   return WireFormatLite::MessageSizeNoVirtual(value);
 }
 
-#define GOOGLE_PROTOBUF_BYTE_SIZE(FieldType, DeclaredType)                     \
+#define SHARK_BYTE_SIZE(FieldType, DeclaredType)                     \
   template <typename Type>                                                     \
   inline int MapTypeHandler<WireFormatLite::TYPE_##FieldType, Type>::ByteSize( \
       const MapEntryAccessorType& value) {                                     \
     return static_cast<int>(WireFormatLite::DeclaredType##Size(value));        \
   }
 
-GOOGLE_PROTOBUF_BYTE_SIZE(STRING, String)
-GOOGLE_PROTOBUF_BYTE_SIZE(BYTES, Bytes)
-GOOGLE_PROTOBUF_BYTE_SIZE(INT64, Int64)
-GOOGLE_PROTOBUF_BYTE_SIZE(UINT64, UInt64)
-GOOGLE_PROTOBUF_BYTE_SIZE(INT32, Int32)
-GOOGLE_PROTOBUF_BYTE_SIZE(UINT32, UInt32)
-GOOGLE_PROTOBUF_BYTE_SIZE(SINT64, SInt64)
-GOOGLE_PROTOBUF_BYTE_SIZE(SINT32, SInt32)
-GOOGLE_PROTOBUF_BYTE_SIZE(ENUM, Enum)
+SHARK_BYTE_SIZE(STRING, String)
+SHARK_BYTE_SIZE(BYTES, Bytes)
+SHARK_BYTE_SIZE(INT64, Int64)
+SHARK_BYTE_SIZE(UINT64, UInt64)
+SHARK_BYTE_SIZE(INT32, Int32)
+SHARK_BYTE_SIZE(UINT32, UInt32)
+SHARK_BYTE_SIZE(SINT64, SInt64)
+SHARK_BYTE_SIZE(SINT32, SInt32)
+SHARK_BYTE_SIZE(ENUM, Enum)
 
-#undef GOOGLE_PROTOBUF_BYTE_SIZE
+#undef SHARK_BYTE_SIZE
 
 #define FIXED_BYTE_SIZE(FieldType, DeclaredType)                               \
   template <typename Type>                                                     \
@@ -396,7 +395,7 @@ template <typename Type>
 const char* MapTypeHandler<WireFormatLite::TYPE_STRING, Type>::Read(
     const char* ptr, ParseContext* ctx, MapEntryAccessorType* value) {
   int size = ReadSize(&ptr);
-  GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+  SHARK_PARSER_ASSERT(ptr);
   return ctx->ReadString(ptr, size, value);
 }
 
@@ -404,7 +403,7 @@ template <typename Type>
 const char* MapTypeHandler<WireFormatLite::TYPE_BYTES, Type>::Read(
     const char* ptr, ParseContext* ctx, MapEntryAccessorType* value) {
   int size = ReadSize(&ptr);
-  GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+  SHARK_PARSER_ASSERT(ptr);
   return ctx->ReadString(ptr, size, value);
 }
 
@@ -733,4 +732,3 @@ struct MapEntryFuncs {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_MAP_TYPE_HANDLER_H__

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_HAS_BITS_H__
-#define GOOGLE_PROTOBUF_HAS_BITS_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 #include <shark/port.h>
@@ -48,17 +47,17 @@ namespace internal {
 template <size_t doublewords>
 class HasBits {
  public:
-  PROTOBUF_NDEBUG_INLINE constexpr HasBits() : has_bits_{} {}
+  SHARK_NDEBUG_INLINE constexpr HasBits() : has_bits_{} {}
 
-  PROTOBUF_NDEBUG_INLINE void Clear() {
+  SHARK_NDEBUG_INLINE void Clear() {
     memset(has_bits_, 0, sizeof(has_bits_));
   }
 
-  PROTOBUF_NDEBUG_INLINE uint32_t& operator[](int index) {
+  SHARK_NDEBUG_INLINE uint32_t& operator[](int index) {
     return has_bits_[index];
   }
 
-  PROTOBUF_NDEBUG_INLINE const uint32_t& operator[](int index) const {
+  SHARK_NDEBUG_INLINE const uint32_t& operator[](int index) const {
     return has_bits_[index];
   }
 
@@ -114,4 +113,3 @@ inline bool HasBits<doublewords>::empty() const {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_HAS_BITS_H__

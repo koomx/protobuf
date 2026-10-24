@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_ENDIAN_H__
-#define GOOGLE_PROTOBUF_ENDIAN_H__
+#pragma once
 
 #if defined(_MSC_VER)
 #include <stdlib.h>
@@ -45,8 +44,8 @@ namespace protobuf {
 namespace internal {
 
 inline uint64_t BSwap64(uint64_t host_int) {
-#if defined(PROTOBUF_BUILTIN_BSWAP64)
-  return PROTOBUF_BUILTIN_BSWAP64(host_int);
+#if defined(SHARK_BUILTIN_BSWAP64)
+  return SHARK_BUILTIN_BSWAP64(host_int);
 #elif defined(_MSC_VER)
   return _byteswap_uint64(host_int);
 #else
@@ -62,8 +61,8 @@ inline uint64_t BSwap64(uint64_t host_int) {
 }
 
 inline uint32_t BSwap32(uint32_t host_int) {
-#if defined(PROTOBUF_BUILTIN_BSWAP32)
-  return PROTOBUF_BUILTIN_BSWAP32(host_int);
+#if defined(SHARK_BUILTIN_BSWAP32)
+  return SHARK_BUILTIN_BSWAP32(host_int);
 #elif defined(_MSC_VER)
   return _byteswap_ulong(host_int);
 #else
@@ -75,8 +74,8 @@ inline uint32_t BSwap32(uint32_t host_int) {
 }
 
 inline uint16_t BSwap16(uint16_t host_int) {
-#if defined(PROTOBUF_BUILTIN_BSWAP16)
-  return PROTOBUF_BUILTIN_BSWAP16(host_int);
+#if defined(SHARK_BUILTIN_BSWAP16)
+  return SHARK_BUILTIN_BSWAP16(host_int);
 #elif defined(_MSC_VER)
   return _byteswap_ushort(host_int);
 #else
@@ -88,7 +87,7 @@ inline uint16_t BSwap16(uint16_t host_int) {
 namespace little_endian {
 
 inline uint16_t FromHost(uint16_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return BSwap16(value);
 #else
   return value;
@@ -96,7 +95,7 @@ inline uint16_t FromHost(uint16_t value) {
 }
 
 inline uint32_t FromHost(uint32_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return BSwap32(value);
 #else
   return value;
@@ -104,7 +103,7 @@ inline uint32_t FromHost(uint32_t value) {
 }
 
 inline uint64_t FromHost(uint64_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return BSwap64(value);
 #else
   return value;
@@ -112,7 +111,7 @@ inline uint64_t FromHost(uint64_t value) {
 }
 
 inline uint16_t ToHost(uint16_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return BSwap16(value);
 #else
   return value;
@@ -120,7 +119,7 @@ inline uint16_t ToHost(uint16_t value) {
 }
 
 inline uint32_t ToHost(uint32_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return BSwap32(value);
 #else
   return value;
@@ -128,7 +127,7 @@ inline uint32_t ToHost(uint32_t value) {
 }
 
 inline uint64_t ToHost(uint64_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return BSwap64(value);
 #else
   return value;
@@ -140,7 +139,7 @@ inline uint64_t ToHost(uint64_t value) {
 namespace big_endian {
 
 inline uint16_t FromHost(uint16_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return value;
 #else
   return BSwap16(value);
@@ -148,7 +147,7 @@ inline uint16_t FromHost(uint16_t value) {
 }
 
 inline uint32_t FromHost(uint32_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return value;
 #else
   return BSwap32(value);
@@ -156,7 +155,7 @@ inline uint32_t FromHost(uint32_t value) {
 }
 
 inline uint64_t FromHost(uint64_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return value;
 #else
   return BSwap64(value);
@@ -164,7 +163,7 @@ inline uint64_t FromHost(uint64_t value) {
 }
 
 inline uint16_t ToHost(uint16_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return value;
 #else
   return BSwap16(value);
@@ -172,7 +171,7 @@ inline uint16_t ToHost(uint16_t value) {
 }
 
 inline uint32_t ToHost(uint32_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return value;
 #else
   return BSwap32(value);
@@ -180,7 +179,7 @@ inline uint32_t ToHost(uint32_t value) {
 }
 
 inline uint64_t ToHost(uint64_t value) {
-#if defined(PROTOBUF_BIG_ENDIAN)
+#if defined(SHARK_BIG_ENDIAN)
   return value;
 #else
   return BSwap64(value);
@@ -195,4 +194,3 @@ inline uint64_t ToHost(uint64_t value) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_ENDIAN_H__

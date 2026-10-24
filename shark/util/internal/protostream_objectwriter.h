@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTOSTREAM_OBJECTWRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTOSTREAM_OBJECTWRITER_H__
+#pragma once
 
 #include <deque>
 #include <string>
@@ -66,7 +65,7 @@ class ObjectLocationTracker;
 // the ProtoWriter class to write raw proto bytes.
 //
 // It also supports streaming.
-class PROTOBUF_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
+class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
  public:
   // Options that control ProtoStreamObjectWriter class's behavior.
   struct Options {
@@ -170,7 +169,7 @@ class PROTOBUF_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
                                        const DataPiece&);
 
   // Handles writing Anys out using nested object writers and the like.
-  class PROTOBUF_EXPORT AnyWriter {
+  class SHARK_EXPORT AnyWriter {
    public:
     explicit AnyWriter(ProtoStreamObjectWriter* parent);
     ~AnyWriter();
@@ -195,7 +194,7 @@ class PROTOBUF_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
    private:
     // Before the "@type" field is encountered, we store all incoming data
     // into this Event struct and replay them after we get the "@type" field.
-    class PROTOBUF_EXPORT Event {
+    class SHARK_EXPORT Event {
      public:
       enum Type {
         START_OBJECT = 0,
@@ -284,7 +283,7 @@ class PROTOBUF_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 
   // Represents an item in a stack of items used to keep state between
   // ObjectWrier events.
-  class PROTOBUF_EXPORT Item : public BaseElement {
+  class SHARK_EXPORT Item : public BaseElement {
    public:
     // Indicates the type of item.
     enum ItemType {
@@ -450,4 +449,3 @@ class PROTOBUF_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTOSTREAM_OBJECTWRITER_H__

@@ -528,7 +528,7 @@ class MyMapField
 TEST(MapFieldTest, ConstInit) {
   // This tests that `MapField` and all its base classes can be constant
   // initialized.
-  PROTOBUF_CONSTINIT static MyMapField field;  // NOLINT
+  SHARK_CONSTINIT static MyMapField field;  // NOLINT
   EXPECT_EQ(field.size(), 0);
 }
 

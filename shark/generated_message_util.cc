@@ -50,7 +50,7 @@
 // Must be included last
 #include <shark/port_def.inc>
 
-PROTOBUF_PRAGMA_INIT_SEG
+SHARK_PRAGMA_INIT_SEG
 
 
 namespace google {
@@ -64,12 +64,12 @@ void DestroyString(const void* s) {
   static_cast<const std::string*>(s)->~basic_string();
 }
 
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT
-    PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 ExplicitlyConstructedArenaString
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT
+    SHARK_ATTRIBUTE_INIT_PRIORITY1 ExplicitlyConstructedArenaString
         fixed_address_empty_string{};  // NOLINT
 
 
-PROTOBUF_CONSTINIT std::atomic<bool> init_protobuf_defaults_state{false};
+SHARK_CONSTINIT std::atomic<bool> init_protobuf_defaults_state{false};
 static bool InitProtobufDefaultsImpl() {
   fixed_address_empty_string.DefaultConstruct();
   OnShutdownDestroyString(fixed_address_empty_string.get_mutable());
@@ -86,7 +86,7 @@ void InitProtobufDefaultsSlow() {
 // Force the initialization of the empty string.
 // Normally, registration would do it, but we don't have any guarantee that
 // there is any object with reflection.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 static std::true_type init_empty_string =
+SHARK_ATTRIBUTE_INIT_PRIORITY1 static std::true_type init_empty_string =
     (InitProtobufDefaultsSlow(), std::true_type{});
 
 size_t StringSpaceUsedExcludingSelfLong(const std::string& str) {

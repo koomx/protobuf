@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_ERROR_LISTENER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_ERROR_LISTENER_H__
+#pragma once
 
 #include <algorithm>
 #include <memory>
@@ -51,7 +50,7 @@ namespace util {
 namespace converter {
 
 // Interface for error listener.
-class PROTOBUF_EXPORT ErrorListener {
+class SHARK_EXPORT ErrorListener {
  public:
   virtual ~ErrorListener() {}
 
@@ -78,7 +77,7 @@ class PROTOBUF_EXPORT ErrorListener {
 };
 
 // An error listener that ignores all errors.
-class PROTOBUF_EXPORT NoopErrorListener : public ErrorListener {
+class SHARK_EXPORT NoopErrorListener : public ErrorListener {
  public:
   NoopErrorListener() {}
   ~NoopErrorListener() override {}
@@ -106,4 +105,3 @@ class PROTOBUF_EXPORT NoopErrorListener : public ErrorListener {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_ERROR_LISTENER_H__

@@ -30,18 +30,17 @@
 
 // Author: kenton@google.com (Kenton Varda)
 
-#ifndef GOOGLE_PROTOBUF_STUBS_HASH_H__
-#define GOOGLE_PROTOBUF_STUBS_HASH_H__
+#pragma once
 
 #include <cstring>
 #include <string>
 #include <unordered_map>
 #include <unordered_set>
 
-# define GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_START \
+# define SHARK_HASH_NAMESPACE_DECLARATION_START \
   namespace google {                                      \
   namespace protobuf {
-# define GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_END }}
+# define SHARK_HASH_NAMESPACE_DECLARATION_END }}
 
 namespace google {
 namespace protobuf {
@@ -111,4 +110,3 @@ struct hash<std::pair<First, Second> > {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_STUBS_HASH_H__

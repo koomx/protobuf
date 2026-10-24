@@ -37,7 +37,7 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-PROTOBUF_PRAGMA_INIT_SEG
+SHARK_PRAGMA_INIT_SEG
 
 namespace google {
 namespace protobuf {
@@ -57,7 +57,7 @@ struct ImplicitWeakMessageDefaultType {
   };
 };
 
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT ImplicitWeakMessageDefaultType
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT ImplicitWeakMessageDefaultType
     implicit_weak_message_default_instance;
 
 const ImplicitWeakMessage* ImplicitWeakMessage::default_instance() {

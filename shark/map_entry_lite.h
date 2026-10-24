@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_ENTRY_LITE_H__
-#define GOOGLE_PROTOBUF_MAP_ENTRY_LITE_H__
+#pragma once
 
 #include <assert.h>
 
@@ -134,8 +133,8 @@ class MapEntryImpl : public Base {
 
   // Constants for field tag.
   static const uint8_t kKeyTag =
-      GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(kKeyFieldNumber, KeyTypeHandler::kWireType);
-  static const uint8_t kValueTag = GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(
+      SHARK_WIRE_FORMAT_MAKE_TAG(kKeyFieldNumber, KeyTypeHandler::kWireType);
+  static const uint8_t kValueTag = SHARK_WIRE_FORMAT_MAKE_TAG(
       kValueFieldNumber, ValueTypeHandler::kWireType);
   static const size_t kTagSize = 1;
 
@@ -197,7 +196,7 @@ class MapEntryImpl : public Base {
     while (!ctx->Done(&ptr)) {
       uint32_t tag;
       ptr = ReadTag(ptr, &tag);
-      GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+      SHARK_PARSER_ASSERT(ptr);
       if (tag == kKeyTag) {
         set_has_key();
         KeyMapEntryAccessorType* key = mutable_key();
@@ -217,7 +216,7 @@ class MapEntryImpl : public Base {
         ptr = UnknownFieldParse(tag, static_cast<std::string*>(nullptr), ptr,
                                 ctx);
       }
-      GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+      SHARK_PARSER_ASSERT(ptr);
     }
     return ptr;
   }
@@ -296,25 +295,25 @@ class MapEntryImpl : public Base {
     }
 
     const char* _InternalParse(const char* ptr, ParseContext* ctx) {
-      if (PROTOBUF_PREDICT_TRUE(!ctx->Done(&ptr) && *ptr == kKeyTag)) {
+      if (SHARK_PREDICT_TRUE(!ctx->Done(&ptr) && *ptr == kKeyTag)) {
         ptr = KeyTypeHandler::Read(ptr + 1, ctx, &key_);
-        if (PROTOBUF_PREDICT_FALSE(!ptr || !Derived::ValidateKey(&key_))) {
+        if (SHARK_PREDICT_FALSE(!ptr || !Derived::ValidateKey(&key_))) {
           return nullptr;
         }
-        if (PROTOBUF_PREDICT_TRUE(!ctx->Done(&ptr) && *ptr == kValueTag)) {
+        if (SHARK_PREDICT_TRUE(!ctx->Done(&ptr) && *ptr == kValueTag)) {
           typename Map::size_type map_size = map_->size();
           value_ptr_ = &(*map_)[key_];
-          if (PROTOBUF_PREDICT_TRUE(map_size != map_->size())) {
+          if (SHARK_PREDICT_TRUE(map_size != map_->size())) {
             using T =
                 typename MapIf<ValueTypeHandler::kIsEnum, int*, Value*>::type;
             ptr = ValueTypeHandler::Read(ptr + 1, ctx,
                                          reinterpret_cast<T>(value_ptr_));
-            if (PROTOBUF_PREDICT_FALSE(!ptr ||
+            if (SHARK_PREDICT_FALSE(!ptr ||
                                        !Derived::ValidateValue(value_ptr_))) {
               map_->erase(key_);  // Failure! Undo insertion.
               return nullptr;
             }
-            if (PROTOBUF_PREDICT_TRUE(ctx->Done(&ptr))) return ptr;
+            if (SHARK_PREDICT_TRUE(ctx->Done(&ptr))) return ptr;
             if (!ptr) return nullptr;
             NewEntry();
             ValueMover::Move(value_ptr_, entry_->mutable_value());
@@ -375,7 +374,7 @@ class MapEntryImpl : public Base {
     // After reading a key and value successfully, and inserting that data
     // into map_, we are not at the end of the input.  This is unusual, but
     // allowed by the spec.
-    bool ReadBeyondKeyValuePair(io::CodedInputStream* input) PROTOBUF_COLD {
+    bool ReadBeyondKeyValuePair(io::CodedInputStream* input) SHARK_COLD {
       NewEntry();
       ValueMover::Move(value_ptr_, entry_->mutable_value());
       map_->erase(key_);
@@ -420,7 +419,7 @@ class MapEntryImpl : public Base {
   uint32_t _has_bits_[1];
 
  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena;
+  friend class ::SHARK_NAMESPACE_ID::Arena;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   template <typename C, typename K, typename V, WireFormatLite::FieldType,
@@ -560,4 +559,3 @@ class MapSorterPtr {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MAP_ENTRY_LITE_H__

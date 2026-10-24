@@ -45,7 +45,7 @@
 namespace google {
 namespace protobuf {
 namespace internal {
-#if defined(PROTOBUF_ARENAZ_SAMPLE)
+#if defined(SHARK_ARENAZ_SAMPLE)
 class ThreadSafeArenaStatsHandlePeer {
  public:
   static bool IsSampled(const ThreadSafeArenaStatsHandle& h) {
@@ -71,11 +71,11 @@ ThreadSafeArenaStats* Register(ThreadSafeArenazSampler* s, size_t size) {
   return info;
 }
 
-#endif  // defined(PROTOBUF_ARENAZ_SAMPLE)
+#endif  // defined(SHARK_ARENAZ_SAMPLE)
 
 namespace {
 
-#if defined(PROTOBUF_ARENAZ_SAMPLE)
+#if defined(SHARK_ARENAZ_SAMPLE)
 
 TEST(ThreadSafeArenaStatsTest, PrepareForSampling) {
   ThreadSafeArenaStats info;
@@ -374,7 +374,7 @@ TEST(ThreadSafeArenazSamplerTest, MultiThread) {
   }
   EXPECT_GT(count, 0);
 }
-#endif  // defined(PROTOBUF_ARENAZ_SAMPLE)
+#endif  // defined(SHARK_ARENAZ_SAMPLE)
 
 }  // namespace
 }  // namespace internal

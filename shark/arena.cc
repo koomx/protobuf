@@ -134,7 +134,7 @@ SerialArena::Memory SerialArena::Free(Deallocator deallocator) {
   return mem;
 }
 
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 std::pair<void*, SerialArena::CleanupNode*>
 SerialArena::AllocateAlignedWithCleanupFallback(
     size_t n, const AllocationPolicy* policy) {
@@ -142,7 +142,7 @@ SerialArena::AllocateAlignedWithCleanupFallback(
   return AllocateFromExistingWithCleanupFallback(n);
 }
 
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 void* SerialArena::AllocateAlignedFallback(size_t n,
                                            const AllocationPolicy* policy) {
   AllocateNewBlock(n, policy);
@@ -208,20 +208,20 @@ void SerialArena::CleanupList() {
 
 ThreadSafeArena::CacheAlignedLifecycleIdGenerator
     ThreadSafeArena::lifecycle_id_generator_;
-#if defined(GOOGLE_PROTOBUF_NO_THREADLOCAL)
+#if defined(SHARK_NO_THREADLOCAL)
 ThreadSafeArena::ThreadCache& ThreadSafeArena::thread_cache() {
   static internal::ThreadLocalStorage<ThreadCache>* thread_cache_ =
       new internal::ThreadLocalStorage<ThreadCache>();
   return *thread_cache_->Get();
 }
-#elif defined(PROTOBUF_USE_DLLS)
+#elif defined(SHARK_USE_DLLS)
 ThreadSafeArena::ThreadCache& ThreadSafeArena::thread_cache() {
-  static PROTOBUF_THREAD_LOCAL ThreadCache thread_cache_ = {
+  static thread_local ThreadCache thread_cache_ = {
       0, static_cast<LifecycleIdAtomic>(-1), nullptr};
   return thread_cache_;
 }
 #else
-PROTOBUF_THREAD_LOCAL ThreadSafeArena::ThreadCache
+thread_local ThreadSafeArena::ThreadCache
     ThreadSafeArena::thread_cache_ = {0, static_cast<LifecycleIdAtomic>(-1),
                                       nullptr};
 #endif
@@ -308,7 +308,7 @@ void ThreadSafeArena::Init() {
   // a tag.
   constexpr uint64_t kDelta = 2;
   constexpr uint64_t kInc = ThreadCache::kPerThreadIds * kDelta;
-  if (PROTOBUF_PREDICT_FALSE((id & (kInc - 1)) == 0)) {
+  if (SHARK_PREDICT_FALSE((id & (kInc - 1)) == 0)) {
     constexpr auto relaxed = std::memory_order_relaxed;
     // On platforms that don't support uint64_t atomics we can certainly not
     // afford to increment by large intervals and expect uniqueness due to
@@ -412,7 +412,7 @@ std::pair<void*, SerialArena::CleanupNode*>
 ThreadSafeArena::AllocateAlignedWithCleanup(size_t n,
                                             const std::type_info* type) {
   SerialArena* arena;
-  if (PROTOBUF_PREDICT_TRUE(!alloc_policy_.should_record_allocs() &&
+  if (SHARK_PREDICT_TRUE(!alloc_policy_.should_record_allocs() &&
                             GetSerialArenaFast(&arena))) {
     return arena->AllocateAlignedWithCleanup(n, alloc_policy_.get());
   } else {
@@ -422,19 +422,19 @@ ThreadSafeArena::AllocateAlignedWithCleanup(size_t n,
 
 void ThreadSafeArena::AddCleanup(void* elem, void (*cleanup)(void*)) {
   SerialArena* arena;
-  if (PROTOBUF_PREDICT_FALSE(!GetSerialArenaFast(&arena))) {
+  if (SHARK_PREDICT_FALSE(!GetSerialArenaFast(&arena))) {
     arena = GetSerialArenaFallback(&thread_cache());
   }
   arena->AddCleanup(elem, cleanup, AllocPolicy());
 }
 
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 void* ThreadSafeArena::AllocateAlignedFallback(size_t n,
                                                const std::type_info* type) {
   if (alloc_policy_.should_record_allocs()) {
     alloc_policy_.RecordAlloc(type, n);
     SerialArena* arena;
-    if (PROTOBUF_PREDICT_TRUE(GetSerialArenaFast(&arena))) {
+    if (SHARK_PREDICT_TRUE(GetSerialArenaFast(&arena))) {
       return arena->AllocateAligned(n, alloc_policy_.get());
     }
   }
@@ -442,7 +442,7 @@ void* ThreadSafeArena::AllocateAlignedFallback(size_t n,
       ->AllocateAligned(n, alloc_policy_.get());
 }
 
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 std::pair<void*, SerialArena::CleanupNode*>
 ThreadSafeArena::AllocateAlignedWithCleanupFallback(
     size_t n, const std::type_info* type) {
@@ -479,7 +479,7 @@ void ThreadSafeArena::CleanupList() {
   PerSerialArena([](SerialArena* a) { a->CleanupList(); });
 }
 
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 SerialArena* ThreadSafeArena::GetSerialArenaFallback(void* me) {
   // Look for this SerialArena in our linked list.
   SerialArena* serial = threads_.load(std::memory_order_acquire);
@@ -509,23 +509,23 @@ SerialArena* ThreadSafeArena::GetSerialArenaFallback(void* me) {
 
 }  // namespace internal
 
-PROTOBUF_FUNC_ALIGN(32)
+SHARK_FUNC_ALIGN(32)
 void* Arena::AllocateAlignedNoHook(size_t n) {
   return impl_.AllocateAligned(n, nullptr);
 }
 
-PROTOBUF_FUNC_ALIGN(32)
+SHARK_FUNC_ALIGN(32)
 void* Arena::AllocateAlignedWithHook(size_t n, const std::type_info* type) {
   return impl_.AllocateAligned(n, type);
 }
 
-PROTOBUF_FUNC_ALIGN(32)
+SHARK_FUNC_ALIGN(32)
 void* Arena::AllocateAlignedWithHookForArray(size_t n,
                                              const std::type_info* type) {
   return impl_.AllocateAligned<internal::AllocationClient::kArray>(n, type);
 }
 
-PROTOBUF_FUNC_ALIGN(32)
+SHARK_FUNC_ALIGN(32)
 std::pair<void*, internal::SerialArena::CleanupNode*>
 Arena::AllocateAlignedWithCleanup(size_t n, const std::type_info* type) {
   return impl_.AllocateAlignedWithCleanup(n, type);

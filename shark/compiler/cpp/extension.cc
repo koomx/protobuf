@@ -180,7 +180,7 @@ void ExtensionGenerator::GenerateDefinition(io::Printer* printer) {
   }
 
   format(
-      "PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 "
+      "SHARK_ATTRIBUTE_INIT_PRIORITY2 "
       "::$proto_ns$::internal::ExtensionIdentifier< $extendee$,\n"
       "    ::$proto_ns$::internal::$type_traits$, $field_type$, $packed$>\n"
       "  $scoped_name$($constant_name$, $1$, $verify_fn$);\n",

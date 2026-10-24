@@ -34,8 +34,7 @@
 // Please avoid using other types defined here, unless they are public
 // types within Map or MapIterator, such as Map::value_type.
 
-#ifndef GOOGLE_PROTOBUF_MAP_H__
-#define GOOGLE_PROTOBUF_MAP_H__
+#pragma once
 
 
 #include <functional>
@@ -51,7 +50,7 @@
 #include <string_view>
 #endif  // defined(__cpp_lib_string_view)
 
-#if !defined(GOOGLE_PROTOBUF_NO_RDTSC) && defined(__APPLE__)
+#if !defined(SHARK_NO_RDTSC) && defined(__APPLE__)
 #include <mach/mach_time.h>
 #endif
 
@@ -140,8 +139,8 @@ class MapAllocator {
     }
   }
 
-#if !defined(GOOGLE_PROTOBUF_OS_APPLE) && !defined(GOOGLE_PROTOBUF_OS_NACL) && \
-    !defined(GOOGLE_PROTOBUF_OS_EMSCRIPTEN)
+#if !defined(SHARK_OS_APPLE) && !defined(SHARK_OS_NACL) && \
+    !defined(SHARK_OS_EMSCRIPTEN)
   template <class NodeType, class... Args>
   void construct(NodeType* p, Args&&... args) {
     // Clang 3.6 doesn't compile static casting to void* directly. (Issue
@@ -288,12 +287,12 @@ size_t MapValueSpaceUsedExcludingSelfLong(const T& message) {
 }
 
 constexpr size_t kGlobalEmptyTableSize = 1;
-PROTOBUF_EXPORT extern void* const kGlobalEmptyTable[kGlobalEmptyTableSize];
+SHARK_EXPORT extern void* const kGlobalEmptyTable[kGlobalEmptyTableSize];
 
 // Space used for the table, trees, and nodes.
 // Does not include the indirect space used. Eg the data of a std::string.
 template <typename Key>
-PROTOBUF_NOINLINE size_t SpaceUsedInTable(void** table, size_t num_buckets,
+SHARK_NOINLINE size_t SpaceUsedInTable(void** table, size_t num_buckets,
                                           size_t num_elements,
                                           size_t sizeof_node) {
   size_t size = 0;
@@ -337,7 +336,7 @@ inline size_t SpaceUsedInValues(const void*) { return 0; }
 // std::pair as value_type, we use this class which provides us more control of
 // its process of construction and destruction.
 template <typename Key, typename T>
-struct PROTOBUF_ATTRIBUTE_STANDALONE_DEBUG MapPair {
+struct SHARK_ATTRIBUTE_STANDALONE_DEBUG MapPair {
   using first_type = const Key;
   using second_type = T;
 
@@ -743,7 +742,7 @@ class Map {
       }
       DestroyNode(item);
       --num_elements_;
-      if (PROTOBUF_PREDICT_FALSE(b == index_of_first_non_null_)) {
+      if (SHARK_PREDICT_FALSE(b == index_of_first_non_null_)) {
         while (index_of_first_non_null_ < num_buckets_ &&
                table_[index_of_first_non_null_] == nullptr) {
           ++index_of_first_non_null_;
@@ -879,7 +878,7 @@ class Map {
       if (TableEntryIsEmpty(b)) {
         result = InsertUniqueInList(b, node);
       } else if (TableEntryIsNonEmptyList(b)) {
-        if (PROTOBUF_PREDICT_FALSE(TableEntryIsTooLong(b))) {
+        if (SHARK_PREDICT_FALSE(TableEntryIsTooLong(b))) {
           TreeConvert(b);
           result = InsertUniqueInTree(b, node);
           GOOGLE_DCHECK_EQ(result.bucket_index_, b & ~static_cast<size_type>(1));
@@ -954,12 +953,12 @@ class Map {
       // We don't care how many elements are in trees.  If a lot are,
       // we may resize even though there are many empty buckets.  In
       // practice, this seems fine.
-      if (PROTOBUF_PREDICT_FALSE(new_size >= hi_cutoff)) {
+      if (SHARK_PREDICT_FALSE(new_size >= hi_cutoff)) {
         if (num_buckets_ <= max_size() / 2) {
           Resize(num_buckets_ * 2);
           return true;
         }
-      } else if (PROTOBUF_PREDICT_FALSE(new_size <= lo_cutoff &&
+      } else if (SHARK_PREDICT_FALSE(new_size <= lo_cutoff &&
                                         num_buckets_ > kMinTableSize)) {
         size_type lg2_of_size_reduction_factor = 1;
         // It's possible we want to shrink a lot here... size() could even be 0.
@@ -1150,7 +1149,7 @@ class Map {
       // lower bits are not very random, due to alignment, so we discard them
       // and shift the higher bits into their place.
       size_type s = reinterpret_cast<uintptr_t>(this) >> 4;
-#if !defined(GOOGLE_PROTOBUF_NO_RDTSC)
+#if !defined(SHARK_NO_RDTSC)
 #if defined(__APPLE__)
       // Use a commpage-based fast time function on Apple environments (MacOS,
       // iOS, tvOS, watchOS, etc).
@@ -1167,7 +1166,7 @@ class Map {
       asm volatile("mrs %0, cntvct_el0" : "=r"(virtual_timer_value));
       s += virtual_timer_value;
 #endif
-#endif  // !defined(GOOGLE_PROTOBUF_NO_RDTSC)
+#endif  // !defined(SHARK_NO_RDTSC)
       return s;
     }
 
@@ -1445,4 +1444,3 @@ class Map {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MAP_H__

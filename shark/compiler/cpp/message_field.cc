@@ -69,7 +69,7 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   (*variables)["type_default_instance"] =
       QualifiedDefaultInstanceName(descriptor->message_type(), options);
   (*variables)["type_default_instance_ptr"] = ReinterpretCast(
-      "const ::PROTOBUF_NAMESPACE_ID::MessageLite*",
+      "const ::SHARK_NAMESPACE_ID::MessageLite*",
       QualifiedDefaultInstancePtr(descriptor->message_type(), options),
       implicit_weak);
   (*variables)["type_reference_function"] =
@@ -118,7 +118,7 @@ void MessageFieldGenerator::GenerateAccessorDeclarations(
     format(
         "$deprecated_attr$const $type$& ${1$$name$$}$() const { "
         "__builtin_trap(); }\n"
-        "PROTOBUF_NODISCARD $deprecated_attr$$type$* "
+        "[[nodiscard]] $deprecated_attr$$type$* "
         "${1$$release_name$$}$() { "
         "__builtin_trap(); }\n"
         "$deprecated_attr$$type$* ${1$mutable_$name$$}$() { "
@@ -135,7 +135,7 @@ void MessageFieldGenerator::GenerateAccessorDeclarations(
   }
   format(
       "$deprecated_attr$const $type$& ${1$$name$$}$() const;\n"
-      "PROTOBUF_NODISCARD $deprecated_attr$$type$* "
+      "[[nodiscard]] $deprecated_attr$$type$* "
       "${1$$release_name$$}$();\n"
       "$deprecated_attr$$type$* ${1$mutable_$name$$}$();\n"
       "$deprecated_attr$void ${1$set_allocated_$name$$}$"
@@ -209,15 +209,15 @@ void MessageFieldGenerator::GenerateInlineAccessorDefinitions(
       "  $clear_hasbit$\n"
       "  $type$* temp = $casted_member$;\n"
       "  $field$ = nullptr;\n"
-      "#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE\n"
+      "#ifdef SHARK_FORCE_COPY_IN_RELEASE\n"
       "  auto* old =  reinterpret_cast<::$proto_ns$::MessageLite*>(temp);\n"
       "  temp = ::$proto_ns$::internal::DuplicateIfNonNull(temp);\n"
       "  if (GetArenaForAllocation() == nullptr) { delete old; }\n"
-      "#else  // PROTOBUF_FORCE_COPY_IN_RELEASE\n"
+      "#else  // SHARK_FORCE_COPY_IN_RELEASE\n"
       "  if (GetArenaForAllocation() != nullptr) {\n"
       "    temp = ::$proto_ns$::internal::DuplicateIfNonNull(temp);\n"
       "  }\n"
-      "#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE\n"
+      "#endif  // !SHARK_FORCE_COPY_IN_RELEASE\n"
       "  return temp;\n"
       "}\n"
       "inline $type$* $classname$::unsafe_arena_release_$name$() {\n"

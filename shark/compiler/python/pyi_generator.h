@@ -32,8 +32,7 @@
 //
 // Generates Python stub (.pyi) for a given .proto file.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_PYTHON_PYI_GENERATOR_H__
-#define GOOGLE_PROTOBUF_COMPILER_PYTHON_PYI_GENERATOR_H__
+#pragma once
 
 #include <map>
 #include <set>
@@ -117,4 +116,3 @@ class PROTOC_EXPORT PyiGenerator : public google::protobuf::compiler::CodeGenera
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_PYTHON_PYI_GENERATOR_H__

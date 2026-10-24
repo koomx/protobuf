@@ -312,7 +312,7 @@ class UnknownFieldParserHelper {
                                    ParseContext* ctx) {
     std::string* s = unknown_->AddLengthDelimited(num);
     int size = ReadSize(&ptr);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    SHARK_PARSER_ASSERT(ptr);
     return ctx->ReadString(ptr, size, s);
   }
   const char* ParseGroup(uint32_t num, const char* ptr, ParseContext* ctx) {

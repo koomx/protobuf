@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_MESSAGE_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_MESSAGE_H__
+#pragma once
 
 #include <cstdint>
 #include <memory>
@@ -229,4 +228,3 @@ class MessageGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_MESSAGE_H__

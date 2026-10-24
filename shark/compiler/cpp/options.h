@@ -30,8 +30,7 @@
 
 // Author: rennie@google.com (Jeffrey Rennie)
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_OPTIONS_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_OPTIONS_H__
+#pragma once
 
 #include <set>
 #include <string>
@@ -84,13 +83,13 @@ struct Options {
   bool profile_driven_inline_string = true;
   bool message_owned_arena_trial = false;
   bool force_split = false;
-#ifdef PROTOBUF_STABLE_EXPERIMENTS
+#ifdef SHARK_STABLE_EXPERIMENTS
   bool force_eagerly_verified_lazy = true;
   bool force_inline_string = true;
-#else   // PROTOBUF_STABLE_EXPERIMENTS
+#else   // SHARK_STABLE_EXPERIMENTS
   bool force_eagerly_verified_lazy = false;
   bool force_inline_string = false;
-#endif  // !PROTOBUF_STABLE_EXPERIMENTS
+#endif  // !SHARK_STABLE_EXPERIMENTS
 };
 
 }  // namespace cpp
@@ -98,4 +97,3 @@ struct Options {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_OPTIONS_H__

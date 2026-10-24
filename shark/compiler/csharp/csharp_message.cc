@@ -130,7 +130,7 @@ void MessageGenerator::Generate(io::Printer* printer) {
   else {
     printer->Print(vars, "pb::IMessage<$class_name$>\n");
   }
-  printer->Print("#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE\n");
+  printer->Print("#if !SHARK_REFSTRUCT_COMPATIBILITY_MODE\n");
   printer->Print("    , pb::IBufferMessage\n");
   printer->Print("#endif\n");
   printer->Print("{\n");
@@ -520,7 +520,7 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
   WriteGeneratedCodeAttributes(printer);
   printer->Print(
       "public void WriteTo(pb::CodedOutputStream output) {\n");
-  printer->Print("#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE\n");
+  printer->Print("#if !SHARK_REFSTRUCT_COMPATIBILITY_MODE\n");
   printer->Indent();
   printer->Print("output.WriteRawMessage(this);\n");
   printer->Outdent();
@@ -531,7 +531,7 @@ void MessageGenerator::GenerateMessageSerializationMethods(io::Printer* printer)
   printer->Print("#endif\n");
   printer->Print("}\n\n");
 
-  printer->Print("#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE\n");
+  printer->Print("#if !SHARK_REFSTRUCT_COMPATIBILITY_MODE\n");
   WriteGeneratedCodeAttributes(printer);
   printer->Print("void pb::IBufferMessage.InternalWriteTo(ref pb::WriteContext output) {\n");
   printer->Indent();
@@ -662,7 +662,7 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
 
   WriteGeneratedCodeAttributes(printer);
   printer->Print("public void MergeFrom(pb::CodedInputStream input) {\n");
-  printer->Print("#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE\n");
+  printer->Print("#if !SHARK_REFSTRUCT_COMPATIBILITY_MODE\n");
   printer->Indent();
   printer->Print("input.ReadRawMessage(this);\n");
   printer->Outdent();
@@ -673,7 +673,7 @@ void MessageGenerator::GenerateMergingMethods(io::Printer* printer) {
   printer->Print("#endif\n");
   printer->Print("}\n\n");
 
-  printer->Print("#if !GOOGLE_PROTOBUF_REFSTRUCT_COMPATIBILITY_MODE\n");
+  printer->Print("#if !SHARK_REFSTRUCT_COMPATIBILITY_MODE\n");
   WriteGeneratedCodeAttributes(printer);
   printer->Print("void pb::IBufferMessage.InternalMergeFrom(ref pb::ParseContext input) {\n");
   printer->Indent();

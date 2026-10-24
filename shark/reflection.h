@@ -30,8 +30,7 @@
 
 // This header defines the RepeatedFieldRef class template used to access
 // repeated fields with protobuf reflection API.
-#ifndef GOOGLE_PROTOBUF_REFLECTION_H__
-#define GOOGLE_PROTOBUF_REFLECTION_H__
+#pragma once
 
 
 #include <memory>
@@ -300,7 +299,7 @@ namespace internal {
 //
 // You can map from T to the actual type using RefTypeTraits:
 //   typedef RefTypeTraits<T>::AccessorValueType ActualType;
-class PROTOBUF_EXPORT RepeatedFieldAccessor {
+class SHARK_EXPORT RepeatedFieldAccessor {
  public:
   // Typedefs for clarity.
   typedef void Field;
@@ -567,4 +566,3 @@ struct RefTypeTraits<
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_REFLECTION_H__

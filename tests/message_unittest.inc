@@ -643,7 +643,7 @@ TEST(MESSAGE_TEST_NAME, DynamicCastToGenerated) {
                          test_all_types_pointer_nullptr));
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST  // death tests do not work on Windows yet.
+#ifdef SHARK_HAS_DEATH_TEST  // death tests do not work on Windows yet.
 
 TEST(MESSAGE_TEST_NAME, SerializeFailsIfNotInitialized) {
   UNITTEST::TestRequired message;
@@ -663,7 +663,7 @@ TEST(MESSAGE_TEST_NAME, CheckInitialized) {
                    "fields: a, b, c");
 }
 
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 namespace {
 // An input stream that repeats a std::string's content for a number of times.

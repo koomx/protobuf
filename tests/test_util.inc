@@ -151,7 +151,7 @@ inline void TestUtil::SetOptionalFields(UNITTEST::TestAllTypes* message) {
 
   // StringPiece and Cord fields are only accessible via reflection in the
   // open source release; see comments in compiler/cpp/string_field.cc.
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   message->GetReflection()->SetString(
       message,
       message->GetDescriptor()->FindFieldByName("optional_string_piece"),
@@ -159,7 +159,7 @@ inline void TestUtil::SetOptionalFields(UNITTEST::TestAllTypes* message) {
   message->GetReflection()->SetString(
       message, message->GetDescriptor()->FindFieldByName("optional_cord"),
       "125");
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 }
 
 // -------------------------------------------------------------------
@@ -191,7 +191,7 @@ inline void TestUtil::AddRepeatedFields1(UNITTEST::TestAllTypes* message) {
   message->add_repeated_foreign_enum(UNITTEST::FOREIGN_BAR);
   message->add_repeated_import_enum(UNITTEST_IMPORT::IMPORT_BAR);
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   message->GetReflection()->AddString(
       message,
       message->GetDescriptor()->FindFieldByName("repeated_string_piece"),
@@ -199,7 +199,7 @@ inline void TestUtil::AddRepeatedFields1(UNITTEST::TestAllTypes* message) {
   message->GetReflection()->AddString(
       message, message->GetDescriptor()->FindFieldByName("repeated_cord"),
       "225");
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 }
 
 inline void TestUtil::AddRepeatedFields2(UNITTEST::TestAllTypes* message) {
@@ -230,7 +230,7 @@ inline void TestUtil::AddRepeatedFields2(UNITTEST::TestAllTypes* message) {
   message->add_repeated_foreign_enum(UNITTEST::FOREIGN_BAZ);
   message->add_repeated_import_enum(UNITTEST_IMPORT::IMPORT_BAZ);
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   message->GetReflection()->AddString(
       message,
       message->GetDescriptor()->FindFieldByName("repeated_string_piece"),
@@ -238,7 +238,7 @@ inline void TestUtil::AddRepeatedFields2(UNITTEST::TestAllTypes* message) {
   message->GetReflection()->AddString(
       message, message->GetDescriptor()->FindFieldByName("repeated_cord"),
       "325");
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 }
 
 // -------------------------------------------------------------------
@@ -264,14 +264,14 @@ inline void TestUtil::SetDefaultFields(UNITTEST::TestAllTypes* message) {
   message->set_default_foreign_enum(UNITTEST::FOREIGN_FOO);
   message->set_default_import_enum(UNITTEST_IMPORT::IMPORT_FOO);
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   message->GetReflection()->SetString(
       message,
       message->GetDescriptor()->FindFieldByName("default_string_piece"), "424");
   message->GetReflection()->SetString(
       message, message->GetDescriptor()->FindFieldByName("default_cord"),
       "425");
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 }
 
 // -------------------------------------------------------------------
@@ -303,7 +303,7 @@ inline void TestUtil::ModifyRepeatedFields(UNITTEST::TestAllTypes* message) {
   message->set_repeated_foreign_enum(1, UNITTEST::FOREIGN_FOO);
   message->set_repeated_import_enum(1, UNITTEST_IMPORT::IMPORT_FOO);
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   message->GetReflection()->SetRepeatedString(
       message,
       message->GetDescriptor()->FindFieldByName("repeated_string_piece"), 1,
@@ -311,7 +311,7 @@ inline void TestUtil::ModifyRepeatedFields(UNITTEST::TestAllTypes* message) {
   message->GetReflection()->SetRepeatedString(
       message, message->GetDescriptor()->FindFieldByName("repeated_cord"), 1,
       "525");
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 }
 
 // ------------------------------------------------------------------
@@ -362,7 +362,7 @@ inline void TestUtil::ExpectAllFieldsSet(
   EXPECT_TRUE(message.has_optional_foreign_enum());
   EXPECT_TRUE(message.has_optional_import_enum());
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   EXPECT_TRUE(message.has_optional_string_piece());
   EXPECT_TRUE(message.has_optional_cord());
 #endif
@@ -423,7 +423,7 @@ inline void TestUtil::ExpectAllFieldsSet(
   ASSERT_EQ(2, message.repeated_foreign_enum_size());
   ASSERT_EQ(2, message.repeated_import_enum_size());
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   ASSERT_EQ(2, message.repeated_string_piece_size());
   ASSERT_EQ(2, message.repeated_cord_size());
 #endif
@@ -720,7 +720,7 @@ inline void TestUtil::ExpectRepeatedFieldsModified(
   ASSERT_EQ(2, message.repeated_foreign_enum_size());
   ASSERT_EQ(2, message.repeated_import_enum_size());
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   ASSERT_EQ(2, message.repeated_string_piece_size());
   ASSERT_EQ(2, message.repeated_cord_size());
 #endif
@@ -1969,7 +1969,7 @@ inline void TestUtil::ExpectLastRepeatedsRemoved(
   ASSERT_EQ(1, message.repeated_foreign_enum_size());
   ASSERT_EQ(1, message.repeated_import_enum_size());
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   ASSERT_EQ(1, message.repeated_string_piece_size());
   ASSERT_EQ(1, message.repeated_cord_size());
 #endif
@@ -2156,7 +2156,7 @@ inline void TestUtil::ExpectRepeatedsSwapped(
   ASSERT_EQ(2, message.repeated_foreign_enum_size());
   ASSERT_EQ(2, message.repeated_import_enum_size());
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
   ASSERT_EQ(2, message.repeated_string_piece_size());
   ASSERT_EQ(2, message.repeated_cord_size());
 #endif

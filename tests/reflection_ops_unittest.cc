@@ -187,7 +187,7 @@ TEST(ReflectionOpsTest, MergeOneof) {
   TestUtil::ExpectOneofSet2(message2);
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 
 TEST(ReflectionOpsTest, MergeFromSelf) {
   // Note:  Copy is implemented in terms of Merge() so technically the Copy
@@ -198,7 +198,7 @@ TEST(ReflectionOpsTest, MergeFromSelf) {
   EXPECT_DEATH(ReflectionOps::Merge(message, &message), "&from");
 }
 
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 TEST(ReflectionOpsTest, Clear) {
   unittest::TestAllTypes message;

@@ -125,7 +125,7 @@ CodedInputStream::Limit CodedInputStream::PushLimit(int byte_limit) {
   // security: byte_limit is possibly evil, so check for negative values
   // and overflow. Also check that the new requested limit is before the
   // previous limit; otherwise we continue to enforce the previous limit.
-  if (PROTOBUF_PREDICT_TRUE(byte_limit >= 0 &&
+  if (SHARK_PREDICT_TRUE(byte_limit >= 0 &&
                             byte_limit <= INT_MAX - current_position &&
                             byte_limit < current_limit_ - current_position)) {
     current_limit_ = current_position + byte_limit;
@@ -363,7 +363,7 @@ const uint8_t* DecodeVarint64KnownSize(const uint8_t* buffer, uint64_t* value) {
 // The first part of the pair is true iff the read was successful.  The second
 // part is buffer + (number of bytes read).  This function is always inlined,
 // so returning a pair is costless.
-PROTOBUF_ALWAYS_INLINE
+SHARK_ALWAYS_INLINE
 ::std::pair<bool, const uint8_t*> ReadVarint32FromArray(uint32_t first_byte,
                                                       const uint8_t* buffer,
                                                       uint32_t* value);
@@ -410,7 +410,7 @@ done:
   return std::make_pair(true, ptr);
 }
 
-PROTOBUF_ALWAYS_INLINE::std::pair<bool, const uint8_t*> ReadVarint64FromArray(
+SHARK_ALWAYS_INLINE::std::pair<bool, const uint8_t*> ReadVarint64FromArray(
     const uint8_t* buffer, uint64_t* value);
 inline ::std::pair<bool, const uint8_t*> ReadVarint64FromArray(
     const uint8_t* buffer, uint64_t* value) {
@@ -787,7 +787,7 @@ uint8_t* EpsCopyOutputStream::GetDirectBufferForNBytesAndAdvance(int size,
 
 uint8_t* EpsCopyOutputStream::Next() {
   GOOGLE_DCHECK(!had_error_);  // NOLINT
-  if (PROTOBUF_PREDICT_FALSE(stream_ == nullptr)) return Error();
+  if (SHARK_PREDICT_FALSE(stream_ == nullptr)) return Error();
   if (buffer_end_) {
     // We're in the patch buffer and need to fill up the previous buffer.
     std::memcpy(buffer_end_, buffer_, end_ - buffer_);
@@ -795,14 +795,14 @@ uint8_t* EpsCopyOutputStream::Next() {
     int size;
     do {
       void* data;
-      if (PROTOBUF_PREDICT_FALSE(!stream_->Next(&data, &size))) {
+      if (SHARK_PREDICT_FALSE(!stream_->Next(&data, &size))) {
         // Stream has an error, we use the patch buffer to continue to be
         // able to write.
         return Error();
       }
       ptr = static_cast<uint8_t*>(data);
     } while (size == 0);
-    if (PROTOBUF_PREDICT_TRUE(size > kSlopBytes)) {
+    if (SHARK_PREDICT_TRUE(size > kSlopBytes)) {
       std::memcpy(ptr, end_, kSlopBytes);
       end_ = ptr + size - kSlopBytes;
       buffer_end_ = nullptr;
@@ -825,7 +825,7 @@ uint8_t* EpsCopyOutputStream::Next() {
 
 uint8_t* EpsCopyOutputStream::EnsureSpaceFallback(uint8_t* ptr) {
   do {
-    if (PROTOBUF_PREDICT_FALSE(had_error_)) return buffer_;
+    if (SHARK_PREDICT_FALSE(had_error_)) return buffer_;
     int overrun = ptr - end_;
     GOOGLE_DCHECK(overrun >= 0);           // NOLINT
     GOOGLE_DCHECK(overrun <= kSlopBytes);  // NOLINT
@@ -861,7 +861,7 @@ uint8_t* EpsCopyOutputStream::WriteAliasedRaw(const void* data, int size,
   }
 }
 
-#ifndef PROTOBUF_LITTLE_ENDIAN
+#ifndef SHARK_LITTLE_ENDIAN
 uint8_t* EpsCopyOutputStream::WriteRawLittleEndian32(const void* data, int size,
                                                    uint8_t* ptr) {
   auto p = static_cast<const uint8_t*>(data);

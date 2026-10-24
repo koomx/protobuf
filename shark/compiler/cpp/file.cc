@@ -198,11 +198,11 @@ void FileGenerator::GenerateHeader(io::Printer* printer) {
   // For Any support with lite protos, we need to friend AnyMetadata, so we
   // forward-declare it here.
   format(
-      "PROTOBUF_NAMESPACE_OPEN\n"
+      "SHARK_NAMESPACE_OPEN\n"
       "namespace internal {\n"
       "class AnyMetadata;\n"
       "}  // namespace internal\n"
-      "PROTOBUF_NAMESPACE_CLOSE\n");
+      "SHARK_NAMESPACE_CLOSE\n");
 
   GenerateGlobalStateFunctionDeclarations(printer);
 
@@ -481,7 +481,7 @@ void FileGenerator::GenerateSourcePrelude(io::Printer* printer) {
   // libraries to happen before the user code.
   // This worksaround the fact that MSVC does not do constant initializers when
   // required by the standard.
-  format("\nPROTOBUF_PRAGMA_INIT_SEG\n");
+  format("\nSHARK_PRAGMA_INIT_SEG\n");
 
   // Generate convenience aliases.
   format(
@@ -508,7 +508,7 @@ void FileGenerator::GenerateSourceDefaultInstance(int idx,
     // destructor that we need to elide.
     format(
         "struct $1$ {\n"
-        "  PROTOBUF_CONSTEXPR $1$()\n"
+        "  constexpr $1$()\n"
         "      : _instance{",
         DefaultInstanceType(generator->descriptor_, options_,
                             /*split=*/true));
@@ -527,8 +527,8 @@ void FileGenerator::GenerateSourceDefaultInstance(int idx,
     // configurations (like non-opt or with certain sanitizers). NO_DESTROY is
     // there just to improve performance and binary size in these builds.
     format(
-        "PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT "
-        "PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 $1$ $2$;\n",
+        "SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT "
+        "SHARK_ATTRIBUTE_INIT_PRIORITY1 $1$ $2$;\n",
         DefaultInstanceType(generator->descriptor_, options_, /*split=*/true),
         DefaultInstanceName(generator->descriptor_, options_, /*split=*/true));
   }
@@ -536,7 +536,7 @@ void FileGenerator::GenerateSourceDefaultInstance(int idx,
   generator->GenerateConstexprConstructor(printer);
   format(
       "struct $1$ {\n"
-      "  PROTOBUF_CONSTEXPR $1$()\n"
+      "  constexpr $1$()\n"
       "      : _instance(::_pbi::ConstantInitialized{}) {}\n"
       "  ~$1$() {}\n"
       "  union {\n"
@@ -546,8 +546,8 @@ void FileGenerator::GenerateSourceDefaultInstance(int idx,
       DefaultInstanceType(generator->descriptor_, options_),
       generator->classname_);
   format(
-      "PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT "
-      "PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 $1$ $2$;\n",
+      "SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT "
+      "SHARK_ATTRIBUTE_INIT_PRIORITY1 $1$ $2$;\n",
       DefaultInstanceType(generator->descriptor_, options_),
       DefaultInstanceName(generator->descriptor_, options_));
 
@@ -556,7 +556,7 @@ void FileGenerator::GenerateSourceDefaultInstance(int idx,
     if (IsStringInlined(field, options_)) {
       // Force the initialization of the inlined string in the default instance.
       format(
-          "PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 std::true_type "
+          "SHARK_ATTRIBUTE_INIT_PRIORITY2 std::true_type "
           "$1$::Impl_::_init_inline_$2$_ = "
           "($3$._instance.$4$.Init(), std::true_type{});\n",
           ClassName(generator->descriptor_), FieldName(field),
@@ -567,7 +567,7 @@ void FileGenerator::GenerateSourceDefaultInstance(int idx,
 
   if (options_.lite_implicit_weak_fields) {
     format(
-        "PROTOBUF_CONSTINIT const void* $1$ =\n"
+        "SHARK_CONSTINIT const void* $1$ =\n"
         "    &$2$;\n",
         DefaultInstancePtr(generator->descriptor_, options_),
         DefaultInstanceName(generator->descriptor_, options_));
@@ -625,7 +625,7 @@ void FileGenerator::GenerateInternalForwardDeclarations(
       ns.ChangeTo(Namespace(instance, options_));
       if (options_.lite_implicit_weak_fields) {
         format(
-            "PROTOBUF_CONSTINIT __attribute__((weak)) const void* $1$ =\n"
+            "SHARK_CONSTINIT __attribute__((weak)) const void* $1$ =\n"
             "    &::_pbi::implicit_weak_message_default_instance;\n",
             DefaultInstancePtr(instance, options_));
       } else {
@@ -829,7 +829,7 @@ void FileGenerator::GenerateReflectionInitializationCode(io::Printer* printer) {
     format(
         "\n"
         "const $uint32$ $tablename$::offsets[] "
-        "PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {\n");
+        "SHARK_SECTION_VARIABLE(protodesc_cold) = {\n");
     format.Indent();
     std::vector<std::pair<size_t, size_t> > pairs;
     pairs.reserve(message_generators_.size());
@@ -840,7 +840,7 @@ void FileGenerator::GenerateReflectionInitializationCode(io::Printer* printer) {
     format(
         "};\n"
         "static const ::_pbi::MigrationSchema schemas[] "
-        "PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {\n");
+        "SHARK_SECTION_VARIABLE(protodesc_cold) = {\n");
     format.Indent();
     {
       int offset = 0;
@@ -883,7 +883,7 @@ void FileGenerator::GenerateReflectionInitializationCode(io::Printer* printer) {
   // built into real descriptors at initialization time.
   const std::string protodef_name =
       UniqueName("descriptor_table_protodef", file_, options_);
-  format("const char $1$[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =\n",
+  format("const char $1$[] SHARK_SECTION_VARIABLE(protodesc_cold) =\n",
          protodef_name);
   format.Indent();
   FileDescriptorProto file_proto;
@@ -966,7 +966,7 @@ void FileGenerator::GenerateReflectionInitializationCode(io::Printer* printer) {
       //   vtables -> GetMetadata
       // By adding a weak function here we break the connection from the
       // individual vtables back into the descriptor table.
-      "PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* "
+      "SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* "
       "$desc_table$_getter() {\n"
       "  return &$desc_table$;\n"
       "}\n"
@@ -984,7 +984,7 @@ void FileGenerator::GenerateReflectionInitializationCode(io::Printer* printer) {
   if (file_->name() != "net/proto2/proto/descriptor.proto") {
     format(
         "// Force running AddDescriptors() at dynamic initialization time.\n"
-        "PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 "
+        "SHARK_ATTRIBUTE_INIT_PRIORITY2 "
         "static ::_pbi::AddDescriptorsRunner $1$(&$desc_table$);\n",
         UniqueName("dynamic_init_dummy", file_, options_));
   }
@@ -1098,26 +1098,24 @@ void FileGenerator::GenerateForwardDeclarations(io::Printer* printer) {
       pair.second.Print(format, options_);
     }
   }
-  format("PROTOBUF_NAMESPACE_OPEN\n");
+  format("SHARK_NAMESPACE_OPEN\n");
   for (const auto& pair : decls) {
     pair.second.PrintTopLevelDecl(format, options_);
   }
-  format("PROTOBUF_NAMESPACE_CLOSE\n");
+  format("SHARK_NAMESPACE_CLOSE\n");
 }
 
-void FileGenerator::GenerateTopHeaderGuard(io::Printer* printer, bool pb_h) {
+void FileGenerator::GenerateTopHeaderGuard(io::Printer* printer, bool /*pb_h*/) {
   Formatter format(printer, variables_);
   // Generate top of header.
   format(
       "// Generated by the protocol buffer compiler.  DO NOT EDIT!\n"
       "// source: $filename$\n"
       "\n"
-      "#ifndef $1$\n"
-      "#define $1$\n"
+      "#pragma once\n"
       "\n"
       "#include <limits>\n"
-      "#include <string>\n",
-      IncludeGuard(file_, pb_h, options_));
+      "#include <string>\n");
   if (!options_.opensource_runtime && !enum_generators_.empty()) {
     // Add header to provide std::is_integral for safe Enum_Name() function.
     format("#include <type_traits>\n");
@@ -1125,10 +1123,8 @@ void FileGenerator::GenerateTopHeaderGuard(io::Printer* printer, bool pb_h) {
   format("\n");
 }
 
-void FileGenerator::GenerateBottomHeaderGuard(io::Printer* printer, bool pb_h) {
-  Formatter format(printer, variables_);
-  format("#endif  // $GOOGLE_PROTOBUF$_INCLUDED_$1$\n",
-         IncludeGuard(file_, pb_h, options_));
+void FileGenerator::GenerateBottomHeaderGuard(io::Printer* printer, bool /*pb_h*/) {
+  (void)printer;
 }
 
 void FileGenerator::GenerateLibraryIncludes(io::Printer* printer) {

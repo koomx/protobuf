@@ -35,8 +35,7 @@
 // Provides a mechanism for mapping a descriptor to the
 // fully-qualified name of the corresponding Java class.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_NAMES_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_NAMES_H__
+#pragma once
 
 #include <string>
 
@@ -97,4 +96,3 @@ std::string CapitalizedFieldName(const FieldDescriptor* descriptor);
 }  // namespace compiler
 }  // namespace protobuf
 }  // namespace google
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_NAMES_H__

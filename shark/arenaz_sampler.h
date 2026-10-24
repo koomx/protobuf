@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_SRC_GOOGLE_PROTOBUF_ARENAZ_SAMPLER_H__
-#define GOOGLE_PROTOBUF_SRC_GOOGLE_PROTOBUF_ARENAZ_SAMPLER_H__
+#pragma once
 
 #include <atomic>
 #include <cstddef>
@@ -43,7 +42,7 @@ namespace google {
 namespace protobuf {
 namespace internal {
 
-#if defined(PROTOBUF_ARENAZ_SAMPLE)
+#if defined(SHARK_ARENAZ_SAMPLE)
 struct ThreadSafeArenaStats;
 void RecordResetSlow(ThreadSafeArenaStats* info);
 void RecordAllocateSlow(ThreadSafeArenaStats* info, size_t requested,
@@ -84,7 +83,7 @@ struct ThreadSafeArenaStats
   void* stack[kMaxStackDepth];
   static void RecordAllocateStats(ThreadSafeArenaStats* info, size_t requested,
                                   size_t allocated, size_t wasted) {
-    if (PROTOBUF_PREDICT_TRUE(info == nullptr)) return;
+    if (SHARK_PREDICT_TRUE(info == nullptr)) return;
     RecordAllocateSlow(info, requested, allocated, wasted);
   }
 };
@@ -99,7 +98,7 @@ class ThreadSafeArenaStatsHandle {
       : info_(info) {}
 
   ~ThreadSafeArenaStatsHandle() {
-    if (PROTOBUF_PREDICT_TRUE(info_ == nullptr)) return;
+    if (SHARK_PREDICT_TRUE(info_ == nullptr)) return;
     UnsampleSlow(info_);
   }
 
@@ -108,7 +107,7 @@ class ThreadSafeArenaStatsHandle {
 
   ThreadSafeArenaStatsHandle& operator=(
       ThreadSafeArenaStatsHandle&& other) noexcept {
-    if (PROTOBUF_PREDICT_FALSE(info_ != nullptr)) {
+    if (SHARK_PREDICT_FALSE(info_ != nullptr)) {
       UnsampleSlow(info_);
     }
     info_ = absl::exchange(other.info_, nullptr);
@@ -116,7 +115,7 @@ class ThreadSafeArenaStatsHandle {
   }
 
   void RecordReset() {
-    if (PROTOBUF_PREDICT_TRUE(info_ == nullptr)) return;
+    if (SHARK_PREDICT_TRUE(info_ == nullptr)) return;
     RecordResetSlow(info_);
   }
 
@@ -136,12 +135,12 @@ class ThreadSafeArenaStatsHandle {
 using ThreadSafeArenazSampler =
     ::absl::profiling_internal::SampleRecorder<ThreadSafeArenaStats>;
 
-extern PROTOBUF_THREAD_LOCAL int64_t global_next_sample;
+extern thread_local int64_t global_next_sample;
 
 // Returns an RAII sampling handle that manages registration and unregistation
 // with the global sampler.
 inline ThreadSafeArenaStatsHandle Sample() {
-  if (PROTOBUF_PREDICT_TRUE(--global_next_sample > 0)) {
+  if (SHARK_PREDICT_TRUE(--global_next_sample > 0)) {
     return ThreadSafeArenaStatsHandle(nullptr);
   }
   return ThreadSafeArenaStatsHandle(SampleSlow(&global_next_sample));
@@ -182,7 +181,7 @@ class ThreadSafeArenazSampler {
 inline ThreadSafeArenaStatsHandle Sample() {
   return ThreadSafeArenaStatsHandle(nullptr);
 }
-#endif  // defined(PROTOBUF_ARENAZ_SAMPLE)
+#endif  // defined(SHARK_ARENAZ_SAMPLE)
 
 // Returns a global Sampler.
 ThreadSafeArenazSampler& GlobalThreadSafeArenazSampler();
@@ -204,4 +203,3 @@ void SetThreadSafeArenazGlobalNextSample(int64_t next_sample);
 }  // namespace google
 
 #include <shark/port_undef.inc>
-#endif  // GOOGLE_PROTOBUF_SRC_PROTOBUF_ARENAZ_SAMPLER_H__

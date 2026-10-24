@@ -123,7 +123,7 @@ class MockGeneratorContext : public GeneratorContext {
   std::map<std::string, std::unique_ptr<std::string>> files_;
 };
 
-const char kDescriptorParameter[] = "dllexport_decl=PROTOBUF_EXPORT";
+const char kDescriptorParameter[] = "dllexport_decl=SHARK_EXPORT";
 const char kPluginParameter[] = "dllexport_decl=PROTOC_EXPORT";
 
 
@@ -158,9 +158,9 @@ TEST(BootstrapTest, GeneratedFilesMatch) {
     EXPECT_EQ("", error_collector.text_);
     CppGenerator generator;
     MockGeneratorContext context;
-#ifdef GOOGLE_PROTOBUF_RUNTIME_INCLUDE_BASE
+#ifdef SHARK_RUNTIME_INCLUDE_BASE
     generator.set_opensource_runtime(true);
-    generator.set_runtime_include_base(GOOGLE_PROTOBUF_RUNTIME_INCLUDE_BASE);
+    generator.set_runtime_include_base(SHARK_RUNTIME_INCLUDE_BASE);
 #endif
     std::string error;
     ASSERT_TRUE(generator.Generate(file, file_parameter[1], &context, &error));

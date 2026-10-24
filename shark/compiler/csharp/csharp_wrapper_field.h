@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CSHARP_WRAPPER_FIELD_H__
-#define GOOGLE_PROTOBUF_COMPILER_CSHARP_WRAPPER_FIELD_H__
+#pragma once
 
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/csharp/csharp_field_base.h>
@@ -94,4 +93,3 @@ class WrapperOneofFieldGenerator : public WrapperFieldGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CSHARP_WRAPPER_FIELD_H__

@@ -27,12 +27,11 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_STUBS_MUTEX_H_
-#define GOOGLE_PROTOBUF_STUBS_MUTEX_H_
+#pragma once
 
 #include <mutex>
 
-#ifdef GOOGLE_PROTOBUF_SUPPORT_WINDOWS_XP
+#ifdef SHARK_SUPPORT_WINDOWS_XP
 
 #include <windows.h>
 
@@ -48,17 +47,17 @@
 // Define thread-safety annotations for use below, if we are building with
 // Clang.
 #if defined(__clang__) && !defined(SWIG)
-#define GOOGLE_PROTOBUF_ACQUIRE(...) \
+#define SHARK_ACQUIRE(...) \
   __attribute__((acquire_capability(__VA_ARGS__)))
-#define GOOGLE_PROTOBUF_RELEASE(...) \
+#define SHARK_RELEASE(...) \
   __attribute__((release_capability(__VA_ARGS__)))
-#define GOOGLE_PROTOBUF_SCOPED_CAPABILITY __attribute__((scoped_lockable))
-#define GOOGLE_PROTOBUF_CAPABILITY(x) __attribute__((capability(x)))
+#define SHARK_SCOPED_CAPABILITY __attribute__((scoped_lockable))
+#define SHARK_CAPABILITY(x) __attribute__((capability(x)))
 #else
-#define GOOGLE_PROTOBUF_ACQUIRE(...)
-#define GOOGLE_PROTOBUF_RELEASE(...)
-#define GOOGLE_PROTOBUF_SCOPED_CAPABILITY
-#define GOOGLE_PROTOBUF_CAPABILITY(x)
+#define SHARK_ACQUIRE(...)
+#define SHARK_RELEASE(...)
+#define SHARK_SCOPED_CAPABILITY
+#define SHARK_CAPABILITY(x)
 #endif
 
 #include <shark/port_def.inc>
@@ -69,15 +68,15 @@ namespace google {
 namespace protobuf {
 namespace internal {
 
-#define GOOGLE_PROTOBUF_LINKER_INITIALIZED
+#define SHARK_LINKER_INITIALIZED
 
-#ifdef GOOGLE_PROTOBUF_SUPPORT_WINDOWS_XP
+#ifdef SHARK_SUPPORT_WINDOWS_XP
 
 // This class is a lightweight replacement for std::mutex on Windows platforms.
 // std::mutex does not work on Windows XP SP2 with the latest VC++ libraries,
 // because it utilizes the Concurrency Runtime that is only supported on Windows
 // XP SP3 and above.
-class PROTOBUF_EXPORT CriticalSectionLock {
+class SHARK_EXPORT CriticalSectionLock {
  public:
   CriticalSectionLock() { InitializeCriticalSection(&critical_section_); }
   ~CriticalSectionLock() { DeleteCriticalSection(&critical_section_); }
@@ -116,21 +115,21 @@ class CallOnceInitializedMutex {
 // Mutex is a natural type to wrap. As both google and other organization have
 // specialized mutexes. gRPC also provides an injection mechanism for custom
 // mutexes.
-class GOOGLE_PROTOBUF_CAPABILITY("mutex") PROTOBUF_EXPORT WrappedMutex {
+class SHARK_CAPABILITY("mutex") SHARK_EXPORT WrappedMutex {
  public:
 #if defined(__QNX__)
   constexpr WrappedMutex() = default;
 #else
   constexpr WrappedMutex() {}
 #endif
-  void Lock() GOOGLE_PROTOBUF_ACQUIRE() { mu_.lock(); }
-  void Unlock() GOOGLE_PROTOBUF_RELEASE() { mu_.unlock(); }
+  void Lock() SHARK_ACQUIRE() { mu_.lock(); }
+  void Unlock() SHARK_RELEASE() { mu_.unlock(); }
   // Crash if this Mutex is not held exclusively by this thread.
   // May fail to crash when it should; will never crash when it should not.
   void AssertHeld() const {}
 
  private:
-#if defined(GOOGLE_PROTOBUF_SUPPORT_WINDOWS_XP)
+#if defined(SHARK_SUPPORT_WINDOWS_XP)
   CallOnceInitializedMutex<CriticalSectionLock> mu_{};
 #elif defined(_WIN32)
   CallOnceInitializedMutex<std::mutex> mu_{};
@@ -142,12 +141,12 @@ class GOOGLE_PROTOBUF_CAPABILITY("mutex") PROTOBUF_EXPORT WrappedMutex {
 using Mutex = WrappedMutex;
 
 // MutexLock(mu) acquires mu when constructed and releases it when destroyed.
-class GOOGLE_PROTOBUF_SCOPED_CAPABILITY PROTOBUF_EXPORT MutexLock {
+class SHARK_SCOPED_CAPABILITY SHARK_EXPORT MutexLock {
  public:
-  explicit MutexLock(Mutex* mu) GOOGLE_PROTOBUF_ACQUIRE(mu) : mu_(mu) {
+  explicit MutexLock(Mutex* mu) SHARK_ACQUIRE(mu) : mu_(mu) {
     this->mu_->Lock();
   }
-  ~MutexLock() GOOGLE_PROTOBUF_RELEASE() { this->mu_->Unlock(); }
+  ~MutexLock() SHARK_RELEASE() { this->mu_->Unlock(); }
 
  private:
   Mutex *const mu_;
@@ -159,7 +158,7 @@ typedef MutexLock ReaderMutexLock;
 typedef MutexLock WriterMutexLock;
 
 // MutexLockMaybe is like MutexLock, but is a no-op when mu is nullptr.
-class PROTOBUF_EXPORT MutexLockMaybe {
+class SHARK_EXPORT MutexLockMaybe {
  public:
   explicit MutexLockMaybe(Mutex *mu) :
     mu_(mu) { if (this->mu_ != nullptr) { this->mu_->Lock(); } }
@@ -169,7 +168,7 @@ class PROTOBUF_EXPORT MutexLockMaybe {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MutexLockMaybe);
 };
 
-#if defined(GOOGLE_PROTOBUF_NO_THREADLOCAL)
+#if defined(SHARK_NO_THREADLOCAL)
 template<typename T>
 class ThreadLocalStorage {
  public:
@@ -210,9 +209,8 @@ using internal::MutexLockMaybe;
 }  // namespace protobuf
 }  // namespace google
 
-#undef GOOGLE_PROTOBUF_ACQUIRE
-#undef GOOGLE_PROTOBUF_RELEASE
+#undef SHARK_ACQUIRE
+#undef SHARK_RELEASE
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_MUTEX_H_

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_CASTS_H__
-#define GOOGLE_PROTOBUF_CASTS_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 
@@ -90,7 +89,7 @@ inline To down_cast(From* f) {                   // so we only accept pointers
     implicit_cast<From*, To>(0);
   }
 
-#if !defined(NDEBUG) && PROTOBUF_RTTI
+#if !defined(NDEBUG) && SHARK_RTTI
   assert(f == nullptr || dynamic_cast<To>(f) != nullptr);  // RTTI: debug mode only!
 #endif
   return static_cast<To>(f);
@@ -107,7 +106,7 @@ inline To down_cast(From& f) {
     implicit_cast<From*, ToAsPointer>(0);
   }
 
-#if !defined(NDEBUG) && PROTOBUF_RTTI
+#if !defined(NDEBUG) && SHARK_RTTI
   // RTTI: debug mode only!
   assert(dynamic_cast<ToAsPointer>(&f) != nullptr);
 #endif
@@ -135,4 +134,3 @@ using internal::bit_cast;
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_CASTS_H__

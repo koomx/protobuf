@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_ARENASTRING_H__
-#define GOOGLE_PROTOBUF_ARENASTRING_H__
+#pragma once
 
 #include <algorithm>
 #include <string>
@@ -58,12 +57,12 @@ class EpsCopyInputStream;
 class SwapFieldHelper;
 
 // Declared in message_lite.h
-PROTOBUF_EXPORT extern ExplicitlyConstructedArenaString
+SHARK_EXPORT extern ExplicitlyConstructedArenaString
     fixed_address_empty_string;
 
 // Lazy string instance to support string fields with non-empty default.
 // These are initialized on the first call to .get().
-class PROTOBUF_EXPORT LazyString {
+class SHARK_EXPORT LazyString {
  public:
   // We explicitly make LazyString an aggregate so that MSVC can do constant
   // initialization on it without marking it `constexpr`.
@@ -84,7 +83,7 @@ class PROTOBUF_EXPORT LazyString {
   const std::string& get() const {
     // This check generates less code than a call-once invocation.
     auto* res = inited_.load(std::memory_order_acquire);
-    if (PROTOBUF_PREDICT_FALSE(res == nullptr)) return Init();
+    if (SHARK_PREDICT_FALSE(res == nullptr)) return Init();
     return *res;
   }
 
@@ -172,7 +171,7 @@ class TaggedStringPtr {
     if (allocated & kMask) return nullptr;
 
     auto ptr = reinterpret_cast<std::string*>(allocated);
-    PROTOBUF_ASSUME(ptr != nullptr);
+    SHARK_ASSUME(ptr != nullptr);
     return ptr;
   }
 
@@ -233,7 +232,7 @@ static_assert(std::is_trivial<TaggedStringPtr>::value,
 //
 // See TaggedStringPtr for more information about the types of string values
 // being held, and the mutable and ownership invariants for each type.
-struct PROTOBUF_EXPORT ArenaStringPtr {
+struct SHARK_EXPORT ArenaStringPtr {
   ArenaStringPtr() = default;
   constexpr ArenaStringPtr(ExplicitlyConstructedArenaString* default_value,
                            ConstantInitialized)
@@ -292,15 +291,15 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   std::string* MutableNoCopy(Arena* arena);
 
   // Basic accessors.
-  PROTOBUF_NDEBUG_INLINE const std::string& Get() const {
+  SHARK_NDEBUG_INLINE const std::string& Get() const {
     // Unconditionally mask away the tag.
     return *tagged_ptr_.Get();
   }
 
   // Returns a pointer to the stored contents for this instance.
   // This method is for internal debugging and tracking purposes only.
-  PROTOBUF_NDEBUG_INLINE const std::string* UnsafeGetPointer() const
-      PROTOBUF_RETURNS_NONNULL {
+  SHARK_NDEBUG_INLINE const std::string* UnsafeGetPointer() const
+      SHARK_RETURNS_NONNULL {
     return tagged_ptr_.Get();
   }
 
@@ -308,7 +307,7 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   // Own()'d by any arena. If the field is not set, this returns nullptr. The
   // caller retains ownership. Clears this field back to the default state.
   // Used to implement release_<field>() methods on generated classes.
-  PROTOBUF_NODISCARD std::string* Release();
+  [[nodiscard]] std::string* Release();
 
   // Takes a std::string that is heap-allocated, and takes ownership. The
   // std::string's destructor is registered with the arena. Used to implement
@@ -336,7 +335,7 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   // Swaps internal pointers. Arena-safety semantics: this is guarded by the
   // logic in Swap()/UnsafeArenaSwap() at the message level, so this method is
   // 'unsafe' if called directly.
-  inline PROTOBUF_NDEBUG_INLINE static void InternalSwap(ArenaStringPtr* rhs,
+  inline SHARK_NDEBUG_INLINE static void InternalSwap(ArenaStringPtr* rhs,
                                                          Arena* rhs_arena,
                                                          ArenaStringPtr* lhs,
                                                          Arena* lhs_arena);
@@ -347,7 +346,7 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
   // Generated code only! An optimization, in certain cases the generated
   // code is certain we can obtain a std::string with no default checks and
   // tag tests.
-  std::string* UnsafeMutablePointer() PROTOBUF_RETURNS_NONNULL;
+  std::string* UnsafeMutablePointer() SHARK_RETURNS_NONNULL;
 
   // Returns true if this instances holds an immutable default value.
   inline bool IsDefault() const { return tagged_ptr_.IsDefault(); }
@@ -370,7 +369,7 @@ struct PROTOBUF_EXPORT ArenaStringPtr {
 
   // Swaps tagged pointer without debug hardening. This is to allow python
   // protobuf to maintain pointer stability even in DEBUG builds.
-  inline PROTOBUF_NDEBUG_INLINE static void UnsafeShallowSwap(
+  inline SHARK_NDEBUG_INLINE static void UnsafeShallowSwap(
       ArenaStringPtr* rhs, ArenaStringPtr* lhs) {
     std::swap(lhs->tagged_ptr_, rhs->tagged_ptr_);
   }
@@ -430,14 +429,14 @@ inline void ArenaStringPtr::SetBytes(const void* p, size_t n, Arena* arena) {
 }
 
 // Make sure rhs_arena allocated rhs, and lhs_arena allocated lhs.
-inline PROTOBUF_NDEBUG_INLINE void ArenaStringPtr::InternalSwap(  //
+inline SHARK_NDEBUG_INLINE void ArenaStringPtr::InternalSwap(  //
     ArenaStringPtr* rhs, Arena* rhs_arena,                        //
     ArenaStringPtr* lhs, Arena* lhs_arena) {
   // Silence unused variable warnings in release buildls.
   (void)rhs_arena;
   (void)lhs_arena;
   std::swap(lhs->tagged_ptr_, rhs->tagged_ptr_);
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   auto force_realloc = [](ArenaStringPtr* p, Arena* arena) {
     if (p->IsDefault()) return;
     std::string* old_value = p->tagged_ptr_.Get();
@@ -456,7 +455,7 @@ inline PROTOBUF_NDEBUG_INLINE void ArenaStringPtr::InternalSwap(  //
   // swapped.
   force_realloc(lhs, rhs_arena);
   force_realloc(rhs, lhs_arena);
-#endif  // PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // SHARK_FORCE_COPY_IN_SWAP
 }
 
 inline void ArenaStringPtr::ClearNonDefaultToEmpty() {
@@ -477,4 +476,3 @@ inline std::string* ArenaStringPtr::UnsafeMutablePointer() {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_ARENASTRING_H__

@@ -41,8 +41,7 @@
 // abstractions they prefer to use, but these should cover the most common
 // cases.
 
-#ifndef GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_IMPL_LITE_H__
-#define GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_IMPL_LITE_H__
+#pragma once
 
 
 #include <iosfwd>
@@ -65,7 +64,7 @@ namespace io {
 // ===================================================================
 
 // A ZeroCopyInputStream backed by an in-memory array of bytes.
-class PROTOBUF_EXPORT ArrayInputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT ArrayInputStream SHARK_FUTURE_FINAL
     : public ZeroCopyInputStream {
  public:
   // Create an InputStream that returns the bytes pointed to by "data".
@@ -100,7 +99,7 @@ class PROTOBUF_EXPORT ArrayInputStream PROTOBUF_FUTURE_FINAL
 // ===================================================================
 
 // A ZeroCopyOutputStream backed by an in-memory array of bytes.
-class PROTOBUF_EXPORT ArrayOutputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT ArrayOutputStream SHARK_FUTURE_FINAL
     : public ZeroCopyOutputStream {
  public:
   // Create an OutputStream that writes to the bytes pointed to by "data".
@@ -133,7 +132,7 @@ class PROTOBUF_EXPORT ArrayOutputStream PROTOBUF_FUTURE_FINAL
 // ===================================================================
 
 // A ZeroCopyOutputStream which appends bytes to a string.
-class PROTOBUF_EXPORT StringOutputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT StringOutputStream SHARK_FUTURE_FINAL
     : public ZeroCopyOutputStream {
  public:
   // Create a StringOutputStream which appends bytes to the given string.
@@ -178,7 +177,7 @@ class PROTOBUF_EXPORT StringOutputStream PROTOBUF_FUTURE_FINAL
 // CopyingInputStream implementations should avoid buffering if possible.
 // CopyingInputStreamAdaptor does its own buffering and will read data
 // in large blocks.
-class PROTOBUF_EXPORT CopyingInputStream {
+class SHARK_EXPORT CopyingInputStream {
  public:
   virtual ~CopyingInputStream() {}
 
@@ -204,7 +203,7 @@ class PROTOBUF_EXPORT CopyingInputStream {
 // If you want to read from file descriptors or C++ istreams, this is
 // already implemented for you:  use FileInputStream or IstreamInputStream
 // respectively.
-class PROTOBUF_EXPORT CopyingInputStreamAdaptor : public ZeroCopyInputStream {
+class SHARK_EXPORT CopyingInputStreamAdaptor : public ZeroCopyInputStream {
  public:
   // Creates a stream that reads from the given CopyingInputStream.
   // If a block_size is given, it specifies the number of bytes that
@@ -272,7 +271,7 @@ class PROTOBUF_EXPORT CopyingInputStreamAdaptor : public ZeroCopyInputStream {
 // CopyingOutputStream implementations should avoid buffering if possible.
 // CopyingOutputStreamAdaptor does its own buffering and will write data
 // in large blocks.
-class PROTOBUF_EXPORT CopyingOutputStream {
+class SHARK_EXPORT CopyingOutputStream {
  public:
   virtual ~CopyingOutputStream() {}
 
@@ -288,7 +287,7 @@ class PROTOBUF_EXPORT CopyingOutputStream {
 // If you want to write to file descriptors or C++ ostreams, this is
 // already implemented for you:  use FileOutputStream or OstreamOutputStream
 // respectively.
-class PROTOBUF_EXPORT CopyingOutputStreamAdaptor : public ZeroCopyOutputStream {
+class SHARK_EXPORT CopyingOutputStreamAdaptor : public ZeroCopyOutputStream {
  public:
   // Creates a stream that writes to the given Unix file descriptor.
   // If a block_size is given, it specifies the size of the buffers
@@ -350,7 +349,7 @@ class PROTOBUF_EXPORT CopyingOutputStreamAdaptor : public ZeroCopyOutputStream {
 
 // A ZeroCopyInputStream which wraps some other stream and limits it to
 // a particular byte count.
-class PROTOBUF_EXPORT LimitingInputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT LimitingInputStream SHARK_FUTURE_FINAL
     : public ZeroCopyInputStream {
  public:
   LimitingInputStream(ZeroCopyInputStream* input, int64_t limit);
@@ -410,4 +409,3 @@ inline std::pair<char*, bool> as_string_data(std::string* s) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_IMPL_LITE_H__

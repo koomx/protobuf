@@ -33,8 +33,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_STRING_FIELD_LITE_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_STRING_FIELD_LITE_H__
+#pragma once
 
 #include <cstdint>
 #include <map>
@@ -136,4 +135,3 @@ class RepeatedImmutableStringFieldLiteGenerator
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_STRING_FIELD_LITE_H__

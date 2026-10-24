@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_GENERATED_ENUM_UTIL_H__
-#define GOOGLE_PROTOBUF_GENERATED_ENUM_UTIL_H__
+#pragma once
 
 
 #include <type_traits>
@@ -63,16 +62,16 @@ struct EnumEntry {
 };
 
 // Looks up a numeric enum value given the string name.
-PROTOBUF_EXPORT bool LookUpEnumValue(const EnumEntry* enums, size_t size,
+SHARK_EXPORT bool LookUpEnumValue(const EnumEntry* enums, size_t size,
                                      StringPiece name, int* value);
 
 // Looks up an enum name given the numeric value.
-PROTOBUF_EXPORT int LookUpEnumName(const EnumEntry* enums,
+SHARK_EXPORT int LookUpEnumName(const EnumEntry* enums,
                                    const int* sorted_indices, size_t size,
                                    int value);
 
 // Initializes the list of enum names in std::string form.
-PROTOBUF_EXPORT bool InitializeEnumStrings(
+SHARK_EXPORT bool InitializeEnumStrings(
     const EnumEntry* enums, const int* sorted_indices, size_t size,
     internal::ExplicitlyConstructed<std::string>* enum_strings);
 
@@ -82,4 +81,3 @@ PROTOBUF_EXPORT bool InitializeEnumStrings(
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_GENERATED_ENUM_UTIL_H__

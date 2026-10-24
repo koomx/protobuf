@@ -40,8 +40,7 @@
 // GzipOutputStream is an ZeroCopyOutputStream that compresses data to
 // an underlying ZeroCopyOutputStream.
 
-#ifndef GOOGLE_PROTOBUF_IO_GZIP_STREAM_H__
-#define GOOGLE_PROTOBUF_IO_GZIP_STREAM_H__
+#pragma once
 
 
 #include <shark/stubs/common.h>
@@ -57,7 +56,7 @@ namespace protobuf {
 namespace io {
 
 // A ZeroCopyInputStream that reads compressed data through zlib
-class PROTOBUF_EXPORT GzipInputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT GzipInputStream SHARK_FUTURE_FINAL
     : public ZeroCopyInputStream {
  public:
   // Format key for constructor
@@ -106,7 +105,7 @@ class PROTOBUF_EXPORT GzipInputStream PROTOBUF_FUTURE_FINAL
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(GzipInputStream);
 };
 
-class PROTOBUF_EXPORT GzipOutputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT GzipOutputStream SHARK_FUTURE_FINAL
     : public ZeroCopyOutputStream {
  public:
   // Format key for constructor
@@ -118,7 +117,7 @@ class PROTOBUF_EXPORT GzipOutputStream PROTOBUF_FUTURE_FINAL
     ZLIB = 2,
   };
 
-  struct PROTOBUF_EXPORT Options {
+  struct SHARK_EXPORT Options {
     // Defaults to GZIP.
     Format format;
 
@@ -202,4 +201,3 @@ class PROTOBUF_EXPORT GzipOutputStream PROTOBUF_FUTURE_FINAL
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_GZIP_STREAM_H__

@@ -40,8 +40,7 @@
 // Apr. 2010: Moved field comparison to FieldComparator
 // Sep. 2020: Added option to output map keys in path
 
-#ifndef GOOGLE_PROTOBUF_UTIL_MESSAGE_DIFFERENCER_H__
-#define GOOGLE_PROTOBUF_UTIL_MESSAGE_DIFFERENCER_H__
+#pragma once
 
 
 #include <functional>
@@ -120,7 +119,7 @@ typedef std::vector<const FieldDescriptor*> FieldDescriptorArray;
 // multiple threads. Note that it's fine to call static comparison methods
 // (like MessageDifferencer::Equals) concurrently, but it's not recommended for
 // performance critical code as it leads to extra allocations.
-class PROTOBUF_EXPORT MessageDifferencer {
+class SHARK_EXPORT MessageDifferencer {
  public:
   // Determines whether the supplied messages are equal. Equality is defined as
   // all fields within the two messages being set to the same value. Primitive
@@ -235,7 +234,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
   // 2. foo.bar.mooo or foo.bar.baz
   // 2. foo.bar
   // 3. foo
-  class PROTOBUF_EXPORT Reporter {
+  class SHARK_EXPORT Reporter {
    public:
     Reporter();
     virtual ~Reporter();
@@ -307,7 +306,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
 
   // MapKeyComparator is used to determine if two elements have the same key
   // when comparing elements of a repeated field as a map.
-  class PROTOBUF_EXPORT MapKeyComparator {
+  class SHARK_EXPORT MapKeyComparator {
    public:
     MapKeyComparator();
     virtual ~MapKeyComparator();
@@ -329,7 +328,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
   // field IsIgnored is called on each added IgnoreCriteria until one returns
   // true or all return false.
   // IsIgnored is called for fields where at least one side has a value.
-  class PROTOBUF_EXPORT IgnoreCriteria {
+  class SHARK_EXPORT IgnoreCriteria {
    public:
     IgnoreCriteria();
     virtual ~IgnoreCriteria();
@@ -524,9 +523,9 @@ class PROTOBUF_EXPORT MessageDifferencer {
   // Note that this method must be called before Compare for the comparator to
   // be used.
   void set_field_comparator(FieldComparator* comparator);
-#ifdef PROTOBUF_FUTURE_BREAKING_CHANGES
+#ifdef SHARK_FUTURE_BREAKING_CHANGES
   void set_field_comparator(DefaultFieldComparator* comparator);
-#endif  // PROTOBUF_FUTURE_BREAKING_CHANGES
+#endif  // SHARK_FUTURE_BREAKING_CHANGES
 
   // DEPRECATED. Pass a DefaultFieldComparator instance instead.
   // Sets the fraction and margin for the float comparison of a given field.
@@ -644,7 +643,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
   // complete until after you destroy the reporter. For example, if you use a
   // StreamReporter to write to a StringOutputStream, the target string may
   // contain uninitialized data until the reporter is destroyed.
-  class PROTOBUF_EXPORT StreamReporter : public Reporter {
+  class SHARK_EXPORT StreamReporter : public Reporter {
    public:
     explicit StreamReporter(io::ZeroCopyOutputStream* output);
     explicit StreamReporter(io::Printer* printer);  // delimiter '$'
@@ -728,7 +727,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
   class MultipleFieldsMapKeyComparator;
 
   // A MapKeyComparator for use with map_entries.
-  class PROTOBUF_EXPORT MapEntryKeyComparator : public MapKeyComparator {
+  class SHARK_EXPORT MapEntryKeyComparator : public MapKeyComparator {
    public:
     explicit MapEntryKeyComparator(MessageDifferencer* message_differencer);
     bool IsMatch(
@@ -957,7 +956,7 @@ class PROTOBUF_EXPORT MessageDifferencer {
 
 // This class provides extra information to the FieldComparator::Compare
 // function.
-class PROTOBUF_EXPORT FieldContext {
+class SHARK_EXPORT FieldContext {
  public:
   explicit FieldContext(
       std::vector<MessageDifferencer::SpecificField>* parent_fields)
@@ -977,4 +976,3 @@ class PROTOBUF_EXPORT FieldContext {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_MESSAGE_DIFFERENCER_H__

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_IMPLICIT_WEAK_MESSAGE_H__
-#define GOOGLE_PROTOBUF_IMPLICIT_WEAK_MESSAGE_H__
+#pragma once
 
 #include <string>
 
@@ -55,7 +54,7 @@ namespace internal {
 // An implementation of MessageLite that treats all data as unknown. This type
 // acts as a placeholder for an implicit weak field in the case where the true
 // message type does not get linked into the binary.
-class PROTOBUF_EXPORT ImplicitWeakMessage : public MessageLite {
+class SHARK_EXPORT ImplicitWeakMessage : public MessageLite {
  public:
   ImplicitWeakMessage() : data_(new std::string) {}
   explicit constexpr ImplicitWeakMessage(ConstantInitialized)
@@ -210,4 +209,3 @@ struct WeakRepeatedPtrField {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IMPLICIT_WEAK_MESSAGE_H__

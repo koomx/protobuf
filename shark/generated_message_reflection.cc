@@ -57,7 +57,7 @@
 #include <shark/port_def.inc>
 // clang-format on
 
-#define GOOGLE_PROTOBUF_HAS_ONEOF
+#define SHARK_HAS_ONEOF
 
 using google::protobuf::internal::ArenaStringPtr;
 using google::protobuf::internal::DescriptorTable;
@@ -81,7 +81,7 @@ namespace protobuf {
 namespace {
 bool IsMapFieldInApi(const FieldDescriptor* field) { return field->is_map(); }
 
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+#ifdef SHARK_FORCE_COPY_IN_RELEASE
 Message* MaybeForceCopy(Arena* arena, Message* msg) {
   if (arena != nullptr || msg == nullptr) return msg;
 
@@ -90,7 +90,7 @@ Message* MaybeForceCopy(Arena* arena, Message* msg) {
   delete msg;
   return copy;
 }
-#endif  // PROTOBUF_FORCE_COPY_IN_RELEASE
+#endif  // SHARK_FORCE_COPY_IN_RELEASE
 }  // anonymous namespace
 
 namespace internal {
@@ -658,11 +658,11 @@ void SwapFieldHelper::SwapMessage(const Reflection* r, Message* lhs,
 
   if (*lhs_sub == *rhs_sub) return;
 
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   if (lhs_arena != nullptr && lhs_arena == rhs_arena) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+#else   // SHARK_FORCE_COPY_IN_SWAP
   if (lhs_arena == rhs_arena) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // !SHARK_FORCE_COPY_IN_SWAP
     std::swap(*lhs_sub, *rhs_sub);
     return;
   }
@@ -957,12 +957,12 @@ void Reflection::Swap(Message* message1, Message* message2) const {
 
   // Check that both messages are in the same arena (or both on the heap). We
   // need to copy all data if not, due to ownership semantics.
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   if (message1->GetOwningArena() == nullptr ||
       message1->GetOwningArena() != message2->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+#else   // SHARK_FORCE_COPY_IN_SWAP
   if (message1->GetOwningArena() != message2->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // !SHARK_FORCE_COPY_IN_SWAP
     // One of the two is guaranteed to have an arena.  Switch things around
     // to guarantee that message1 has an arena.
     Arena* arena = message1->GetOwningArena();
@@ -974,12 +974,12 @@ void Reflection::Swap(Message* message1, Message* message2) const {
     Message* temp = message1->New(arena);
     temp->MergeFrom(*message2);
     message2->CopyFrom(*message1);
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
     message1->CopyFrom(*temp);
     if (arena == nullptr) delete temp;
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+#else   // SHARK_FORCE_COPY_IN_SWAP
     Swap(message1, temp);
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // !SHARK_FORCE_COPY_IN_SWAP
     return;
   }
 
@@ -1398,11 +1398,11 @@ Message* Reflection::ReleaseLast(Message* message,
                      ->ReleaseLast<GenericTypeHandler<Message>>();
     }
   }
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+#ifdef SHARK_FORCE_COPY_IN_RELEASE
   return MaybeForceCopy(message->GetArenaForAllocation(), released);
-#else   // PROTOBUF_FORCE_COPY_IN_RELEASE
+#else   // SHARK_FORCE_COPY_IN_RELEASE
   return released;
-#endif  // !PROTOBUF_FORCE_COPY_IN_RELEASE
+#endif  // !SHARK_FORCE_COPY_IN_RELEASE
 }
 
 Message* Reflection::UnsafeArenaReleaseLast(
@@ -2141,9 +2141,9 @@ Message* Reflection::ReleaseMessage(Message* message,
   CheckInvalidAccess(schema_, field);
 
   Message* released = UnsafeArenaReleaseMessage(message, field, factory);
-#ifdef PROTOBUF_FORCE_COPY_IN_RELEASE
+#ifdef SHARK_FORCE_COPY_IN_RELEASE
   released = MaybeForceCopy(message->GetArenaForAllocation(), released);
-#endif  // PROTOBUF_FORCE_COPY_IN_RELEASE
+#endif  // SHARK_FORCE_COPY_IN_RELEASE
   if (message->GetArenaForAllocation() != nullptr && released != nullptr) {
     Message* copy_from_arena = released->New();
     copy_from_arena->CopyFrom(*released);
@@ -2981,7 +2981,7 @@ void AssignDescriptorsImpl(const DescriptorTable* table, bool eager) {
   {
     // This only happens once per proto file. So a global mutex to serialize
     // calls to AddDescriptors.
-    static WrappedMutex mu{GOOGLE_PROTOBUF_LINKER_INITIALIZED};
+    static WrappedMutex mu{SHARK_LINKER_INITIALIZED};
     mu.Lock();
     AddDescriptors(table);
     mu.Unlock();

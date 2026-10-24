@@ -51,8 +51,7 @@
 // For an example of how you might use descriptors, see the code example
 // at the top of message.h.
 
-#ifndef GOOGLE_PROTOBUF_DESCRIPTOR_H__
-#define GOOGLE_PROTOBUF_DESCRIPTOR_H__
+#pragma once
 
 
 #include <atomic>
@@ -77,7 +76,7 @@
 #endif  // TYPE_BOOL
 
 #ifdef SWIG
-#define PROTOBUF_EXPORT
+#define SHARK_EXPORT
 #endif
 
 
@@ -191,16 +190,16 @@ namespace internal {
 // library. We make sure we are not accidentally making them larger by
 // hardcoding the struct size for a specific platform. Use as:
 //
-//   PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(type, expected_size_in_x84-64);
+//   SHARK_INTERNAL_CHECK_CLASS_SIZE(type, expected_size_in_x84-64);
 //
 
-#if !defined(PROTOBUF_INTERNAL_CHECK_CLASS_SIZE)
-#define PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(t, expected)
+#if !defined(SHARK_INTERNAL_CHECK_CLASS_SIZE)
+#define SHARK_INTERNAL_CHECK_CLASS_SIZE(t, expected)
 #endif
 
 class FlatAllocator;
 
-class PROTOBUF_EXPORT LazyDescriptor {
+class SHARK_EXPORT LazyDescriptor {
  public:
   // Init function to be called at init time of a descriptor containing
   // a LazyDescriptor.
@@ -238,7 +237,7 @@ class PROTOBUF_EXPORT LazyDescriptor {
   internal::once_flag* once_;
 };
 
-class PROTOBUF_EXPORT SymbolBase {
+class SHARK_EXPORT SymbolBase {
  private:
   friend class google::protobuf::Symbol;
   uint8_t symbol_type_;
@@ -249,7 +248,7 @@ class PROTOBUF_EXPORT SymbolBase {
 // intermediate base to do so.
 // See BuildEnumValue for details.
 template <int N>
-class PROTOBUF_EXPORT SymbolBaseN : public SymbolBase {};
+class SHARK_EXPORT SymbolBaseN : public SymbolBase {};
 
 }  // namespace internal
 
@@ -258,7 +257,7 @@ class PROTOBUF_EXPORT SymbolBaseN : public SymbolBase {};
 // Message::GetDescriptor().  Generated message classes also have a
 // static method called descriptor() which returns the type's descriptor.
 // Use DescriptorPool to construct your own descriptors.
-class PROTOBUF_EXPORT Descriptor : private internal::SymbolBase {
+class SHARK_EXPORT Descriptor : private internal::SymbolBase {
  public:
   typedef DescriptorProto Proto;
 
@@ -612,7 +611,7 @@ class PROTOBUF_EXPORT Descriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(Descriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);
 
 // Describes a single field of a message.  To get the descriptor for a given
 // field, first get the Descriptor for the message in which it is defined,
@@ -624,7 +623,7 @@ PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);
 // - Given a DescriptorPool, call DescriptorPool::FindExtensionByNumber() or
 //   DescriptorPool::FindExtensionByPrintableName().
 // Use DescriptorPool to construct your own descriptors.
-class PROTOBUF_EXPORT FieldDescriptor : private internal::SymbolBase {
+class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
  public:
   typedef FieldDescriptorProto Proto;
 
@@ -989,10 +988,10 @@ class PROTOBUF_EXPORT FieldDescriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(FieldDescriptor, 72);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(FieldDescriptor, 72);
 
 // Describes a oneof defined in a message type.
-class PROTOBUF_EXPORT OneofDescriptor : private internal::SymbolBase {
+class SHARK_EXPORT OneofDescriptor : private internal::SymbolBase {
  public:
   typedef OneofDescriptorProto Proto;
 
@@ -1070,12 +1069,12 @@ class PROTOBUF_EXPORT OneofDescriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(OneofDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(OneofDescriptor, 40);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(OneofDescriptor, 40);
 
 // Describes an enum type defined in a .proto file.  To get the EnumDescriptor
 // for a generated enum type, call TypeName_descriptor().  Use DescriptorPool
 // to construct your own descriptors.
-class PROTOBUF_EXPORT EnumDescriptor : private internal::SymbolBase {
+class SHARK_EXPORT EnumDescriptor : private internal::SymbolBase {
  public:
   typedef EnumDescriptorProto Proto;
 
@@ -1241,14 +1240,14 @@ class PROTOBUF_EXPORT EnumDescriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(EnumDescriptor, 72);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(EnumDescriptor, 72);
 
 // Describes an individual enum constant of a particular type.  To get the
 // EnumValueDescriptor for a given enum value, first get the EnumDescriptor
 // for its type, then use EnumDescriptor::FindValueByName() or
 // EnumDescriptor::FindValueByNumber().  Use DescriptorPool to construct
 // your own descriptors.
-class PROTOBUF_EXPORT EnumValueDescriptor : private internal::SymbolBaseN<0>,
+class SHARK_EXPORT EnumValueDescriptor : private internal::SymbolBaseN<0>,
                                             private internal::SymbolBaseN<1> {
  public:
   typedef EnumValueDescriptorProto Proto;
@@ -1326,11 +1325,11 @@ class PROTOBUF_EXPORT EnumValueDescriptor : private internal::SymbolBaseN<0>,
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumValueDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(EnumValueDescriptor, 32);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(EnumValueDescriptor, 32);
 
 // Describes an RPC service. Use DescriptorPool to construct your own
 // descriptors.
-class PROTOBUF_EXPORT ServiceDescriptor : private internal::SymbolBase {
+class SHARK_EXPORT ServiceDescriptor : private internal::SymbolBase {
  public:
   typedef ServiceDescriptorProto Proto;
 
@@ -1409,13 +1408,13 @@ class PROTOBUF_EXPORT ServiceDescriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ServiceDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(ServiceDescriptor, 48);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(ServiceDescriptor, 48);
 
 // Describes an individual service method.  To obtain a MethodDescriptor given
 // a service, first get its ServiceDescriptor, then call
 // ServiceDescriptor::FindMethodByName().  Use DescriptorPool to construct your
 // own descriptors.
-class PROTOBUF_EXPORT MethodDescriptor : private internal::SymbolBase {
+class SHARK_EXPORT MethodDescriptor : private internal::SymbolBase {
  public:
   typedef MethodDescriptorProto Proto;
 
@@ -1498,12 +1497,12 @@ class PROTOBUF_EXPORT MethodDescriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MethodDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(MethodDescriptor, 64);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(MethodDescriptor, 64);
 
 // Describes a whole .proto file.  To get the FileDescriptor for a compiled-in
 // file, get the descriptor for something defined in that file and call
 // descriptor->file().  Use DescriptorPool to construct your own descriptors.
-class PROTOBUF_EXPORT FileDescriptor : private internal::SymbolBase {
+class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
  public:
   typedef FileDescriptorProto Proto;
 
@@ -1702,7 +1701,7 @@ class PROTOBUF_EXPORT FileDescriptor : private internal::SymbolBase {
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FileDescriptor);
 };
 
-PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(FileDescriptor, 144);
+SHARK_INTERNAL_CHECK_CLASS_SIZE(FileDescriptor, 144);
 
 // ===================================================================
 
@@ -1730,7 +1729,7 @@ PROTOBUF_INTERNAL_CHECK_CLASS_SIZE(FileDescriptor, 144);
 //
 // You can also search for descriptors within a DescriptorPool by name, and
 // extensions by number.
-class PROTOBUF_EXPORT DescriptorPool {
+class SHARK_EXPORT DescriptorPool {
  public:
   // Create a normal, empty DescriptorPool.
   DescriptorPool();
@@ -1821,7 +1820,7 @@ class PROTOBUF_EXPORT DescriptorPool {
   // When converting a FileDescriptorProto to a FileDescriptor, various
   // errors might be detected in the input.  The caller may handle these
   // programmatically by implementing an ErrorCollector.
-  class PROTOBUF_EXPORT ErrorCollector {
+  class SHARK_EXPORT ErrorCollector {
    public:
     inline ErrorCollector() {}
     virtual ~ErrorCollector();
@@ -2079,131 +2078,131 @@ class PROTOBUF_EXPORT DescriptorPool {
 // inline methods ====================================================
 
 // These macros makes this repetitive code more readable.
-#define PROTOBUF_DEFINE_ACCESSOR(CLASS, FIELD, TYPE) \
+#define SHARK_DEFINE_ACCESSOR(CLASS, FIELD, TYPE) \
   inline TYPE CLASS::FIELD() const { return FIELD##_; }
 
 // Strings fields are stored as pointers but returned as const references.
-#define PROTOBUF_DEFINE_STRING_ACCESSOR(CLASS, FIELD) \
+#define SHARK_DEFINE_STRING_ACCESSOR(CLASS, FIELD) \
   inline const std::string& CLASS::FIELD() const { return *FIELD##_; }
 
 // Name and full name are stored in a single array to save space.
-#define PROTOBUF_DEFINE_NAME_ACCESSOR(CLASS)                              \
+#define SHARK_DEFINE_NAME_ACCESSOR(CLASS)                              \
   inline const std::string& CLASS::name() const { return all_names_[0]; } \
   inline const std::string& CLASS::full_name() const { return all_names_[1]; }
 
 // Arrays take an index parameter, obviously.
-#define PROTOBUF_DEFINE_ARRAY_ACCESSOR(CLASS, FIELD, TYPE) \
+#define SHARK_DEFINE_ARRAY_ACCESSOR(CLASS, FIELD, TYPE) \
   inline TYPE CLASS::FIELD(int index) const { return FIELD##s_ + index; }
 
-#define PROTOBUF_DEFINE_OPTIONS_ACCESSOR(CLASS, TYPE) \
+#define SHARK_DEFINE_OPTIONS_ACCESSOR(CLASS, TYPE) \
   inline const TYPE& CLASS::options() const { return *options_; }
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(Descriptor)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, file, const FileDescriptor*)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, containing_type, const Descriptor*)
+SHARK_DEFINE_NAME_ACCESSOR(Descriptor)
+SHARK_DEFINE_ACCESSOR(Descriptor, file, const FileDescriptor*)
+SHARK_DEFINE_ACCESSOR(Descriptor, containing_type, const Descriptor*)
 
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, field_count, int)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, oneof_decl_count, int)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, real_oneof_decl_count, int)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, nested_type_count, int)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, enum_type_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, field_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, oneof_decl_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, real_oneof_decl_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, nested_type_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, enum_type_count, int)
 
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, field, const FieldDescriptor*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, oneof_decl, const OneofDescriptor*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, nested_type, const Descriptor*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, enum_type, const EnumDescriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, field, const FieldDescriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, oneof_decl, const OneofDescriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, nested_type, const Descriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, enum_type, const EnumDescriptor*)
 
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, extension_range_count, int)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, extension_count, int)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, extension_range,
+SHARK_DEFINE_ACCESSOR(Descriptor, extension_range_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, extension_count, int)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, extension_range,
                                const Descriptor::ExtensionRange*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, extension, const FieldDescriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, extension, const FieldDescriptor*)
 
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, reserved_range_count, int)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(Descriptor, reserved_range,
+SHARK_DEFINE_ACCESSOR(Descriptor, reserved_range_count, int)
+SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, reserved_range,
                                const Descriptor::ReservedRange*)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, reserved_name_count, int)
+SHARK_DEFINE_ACCESSOR(Descriptor, reserved_name_count, int)
 
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(Descriptor, MessageOptions)
-PROTOBUF_DEFINE_ACCESSOR(Descriptor, is_placeholder, bool)
+SHARK_DEFINE_OPTIONS_ACCESSOR(Descriptor, MessageOptions)
+SHARK_DEFINE_ACCESSOR(Descriptor, is_placeholder, bool)
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(FieldDescriptor)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, file, const FileDescriptor*)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, number, int)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, is_extension, bool)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, containing_type, const Descriptor*)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(FieldDescriptor, FieldOptions)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, has_default_value, bool)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, has_json_name, bool)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_int32_t, int32_t)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_int64_t, int64_t)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_uint32_t, uint32_t)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_uint64_t, uint64_t)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_float, float)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_double, double)
-PROTOBUF_DEFINE_ACCESSOR(FieldDescriptor, default_value_bool, bool)
-PROTOBUF_DEFINE_STRING_ACCESSOR(FieldDescriptor, default_value_string)
+SHARK_DEFINE_NAME_ACCESSOR(FieldDescriptor)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, file, const FileDescriptor*)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, number, int)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, is_extension, bool)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, containing_type, const Descriptor*)
+SHARK_DEFINE_OPTIONS_ACCESSOR(FieldDescriptor, FieldOptions)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, has_default_value, bool)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, has_json_name, bool)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_int32_t, int32_t)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_int64_t, int64_t)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_uint32_t, uint32_t)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_uint64_t, uint64_t)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_float, float)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_double, double)
+SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_bool, bool)
+SHARK_DEFINE_STRING_ACCESSOR(FieldDescriptor, default_value_string)
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(OneofDescriptor)
-PROTOBUF_DEFINE_ACCESSOR(OneofDescriptor, containing_type, const Descriptor*)
-PROTOBUF_DEFINE_ACCESSOR(OneofDescriptor, field_count, int)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(OneofDescriptor, field, const FieldDescriptor*)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(OneofDescriptor, OneofOptions)
+SHARK_DEFINE_NAME_ACCESSOR(OneofDescriptor)
+SHARK_DEFINE_ACCESSOR(OneofDescriptor, containing_type, const Descriptor*)
+SHARK_DEFINE_ACCESSOR(OneofDescriptor, field_count, int)
+SHARK_DEFINE_ARRAY_ACCESSOR(OneofDescriptor, field, const FieldDescriptor*)
+SHARK_DEFINE_OPTIONS_ACCESSOR(OneofDescriptor, OneofOptions)
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(EnumDescriptor)
-PROTOBUF_DEFINE_ACCESSOR(EnumDescriptor, file, const FileDescriptor*)
-PROTOBUF_DEFINE_ACCESSOR(EnumDescriptor, containing_type, const Descriptor*)
-PROTOBUF_DEFINE_ACCESSOR(EnumDescriptor, value_count, int)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(EnumDescriptor, value,
+SHARK_DEFINE_NAME_ACCESSOR(EnumDescriptor)
+SHARK_DEFINE_ACCESSOR(EnumDescriptor, file, const FileDescriptor*)
+SHARK_DEFINE_ACCESSOR(EnumDescriptor, containing_type, const Descriptor*)
+SHARK_DEFINE_ACCESSOR(EnumDescriptor, value_count, int)
+SHARK_DEFINE_ARRAY_ACCESSOR(EnumDescriptor, value,
                                const EnumValueDescriptor*)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(EnumDescriptor, EnumOptions)
-PROTOBUF_DEFINE_ACCESSOR(EnumDescriptor, is_placeholder, bool)
-PROTOBUF_DEFINE_ACCESSOR(EnumDescriptor, reserved_range_count, int)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(EnumDescriptor, reserved_range,
+SHARK_DEFINE_OPTIONS_ACCESSOR(EnumDescriptor, EnumOptions)
+SHARK_DEFINE_ACCESSOR(EnumDescriptor, is_placeholder, bool)
+SHARK_DEFINE_ACCESSOR(EnumDescriptor, reserved_range_count, int)
+SHARK_DEFINE_ARRAY_ACCESSOR(EnumDescriptor, reserved_range,
                                const EnumDescriptor::ReservedRange*)
-PROTOBUF_DEFINE_ACCESSOR(EnumDescriptor, reserved_name_count, int)
+SHARK_DEFINE_ACCESSOR(EnumDescriptor, reserved_name_count, int)
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(EnumValueDescriptor)
-PROTOBUF_DEFINE_ACCESSOR(EnumValueDescriptor, number, int)
-PROTOBUF_DEFINE_ACCESSOR(EnumValueDescriptor, type, const EnumDescriptor*)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(EnumValueDescriptor, EnumValueOptions)
+SHARK_DEFINE_NAME_ACCESSOR(EnumValueDescriptor)
+SHARK_DEFINE_ACCESSOR(EnumValueDescriptor, number, int)
+SHARK_DEFINE_ACCESSOR(EnumValueDescriptor, type, const EnumDescriptor*)
+SHARK_DEFINE_OPTIONS_ACCESSOR(EnumValueDescriptor, EnumValueOptions)
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(ServiceDescriptor)
-PROTOBUF_DEFINE_ACCESSOR(ServiceDescriptor, file, const FileDescriptor*)
-PROTOBUF_DEFINE_ACCESSOR(ServiceDescriptor, method_count, int)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(ServiceDescriptor, method,
+SHARK_DEFINE_NAME_ACCESSOR(ServiceDescriptor)
+SHARK_DEFINE_ACCESSOR(ServiceDescriptor, file, const FileDescriptor*)
+SHARK_DEFINE_ACCESSOR(ServiceDescriptor, method_count, int)
+SHARK_DEFINE_ARRAY_ACCESSOR(ServiceDescriptor, method,
                                const MethodDescriptor*)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(ServiceDescriptor, ServiceOptions)
+SHARK_DEFINE_OPTIONS_ACCESSOR(ServiceDescriptor, ServiceOptions)
 
-PROTOBUF_DEFINE_NAME_ACCESSOR(MethodDescriptor)
-PROTOBUF_DEFINE_ACCESSOR(MethodDescriptor, service, const ServiceDescriptor*)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(MethodDescriptor, MethodOptions)
-PROTOBUF_DEFINE_ACCESSOR(MethodDescriptor, client_streaming, bool)
-PROTOBUF_DEFINE_ACCESSOR(MethodDescriptor, server_streaming, bool)
+SHARK_DEFINE_NAME_ACCESSOR(MethodDescriptor)
+SHARK_DEFINE_ACCESSOR(MethodDescriptor, service, const ServiceDescriptor*)
+SHARK_DEFINE_OPTIONS_ACCESSOR(MethodDescriptor, MethodOptions)
+SHARK_DEFINE_ACCESSOR(MethodDescriptor, client_streaming, bool)
+SHARK_DEFINE_ACCESSOR(MethodDescriptor, server_streaming, bool)
 
-PROTOBUF_DEFINE_STRING_ACCESSOR(FileDescriptor, name)
-PROTOBUF_DEFINE_STRING_ACCESSOR(FileDescriptor, package)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, pool, const DescriptorPool*)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, dependency_count, int)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, public_dependency_count, int)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, weak_dependency_count, int)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, message_type_count, int)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, enum_type_count, int)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, service_count, int)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, extension_count, int)
-PROTOBUF_DEFINE_OPTIONS_ACCESSOR(FileDescriptor, FileOptions)
-PROTOBUF_DEFINE_ACCESSOR(FileDescriptor, is_placeholder, bool)
+SHARK_DEFINE_STRING_ACCESSOR(FileDescriptor, name)
+SHARK_DEFINE_STRING_ACCESSOR(FileDescriptor, package)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, pool, const DescriptorPool*)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, dependency_count, int)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, public_dependency_count, int)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, weak_dependency_count, int)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, message_type_count, int)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, enum_type_count, int)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, service_count, int)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, extension_count, int)
+SHARK_DEFINE_OPTIONS_ACCESSOR(FileDescriptor, FileOptions)
+SHARK_DEFINE_ACCESSOR(FileDescriptor, is_placeholder, bool)
 
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(FileDescriptor, message_type, const Descriptor*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(FileDescriptor, enum_type, const EnumDescriptor*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(FileDescriptor, service,
+SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, message_type, const Descriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, enum_type, const EnumDescriptor*)
+SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, service,
                                const ServiceDescriptor*)
-PROTOBUF_DEFINE_ARRAY_ACCESSOR(FileDescriptor, extension,
+SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, extension,
                                const FieldDescriptor*)
 
-#undef PROTOBUF_DEFINE_ACCESSOR
-#undef PROTOBUF_DEFINE_STRING_ACCESSOR
-#undef PROTOBUF_DEFINE_ARRAY_ACCESSOR
+#undef SHARK_DEFINE_ACCESSOR
+#undef SHARK_DEFINE_STRING_ACCESSOR
+#undef SHARK_DEFINE_ARRAY_ACCESSOR
 
 // A few accessors differ from the macros...
 
@@ -2228,7 +2227,7 @@ inline bool Descriptor::IsReservedName(ConstStringParam name) const {
   return false;
 }
 
-// Can't use PROTOBUF_DEFINE_ARRAY_ACCESSOR because reserved_names_ is actually
+// Can't use SHARK_DEFINE_ARRAY_ACCESSOR because reserved_names_ is actually
 // an array of pointers rather than the usual array of objects.
 inline const std::string& Descriptor::reserved_name(int index) const {
   return *reserved_names_[index];
@@ -2247,7 +2246,7 @@ inline bool EnumDescriptor::IsReservedName(ConstStringParam name) const {
   return false;
 }
 
-// Can't use PROTOBUF_DEFINE_ARRAY_ACCESSOR because reserved_names_ is actually
+// Can't use SHARK_DEFINE_ARRAY_ACCESSOR because reserved_names_ is actually
 // an array of pointers rather than the usual array of objects.
 inline const std::string& EnumDescriptor::reserved_name(int index) const {
   return *reserved_names_[index];
@@ -2434,7 +2433,6 @@ inline FileDescriptor::Syntax FileDescriptor::syntax() const {
 }  // namespace protobuf
 }  // namespace google
 
-#undef PROTOBUF_INTERNAL_CHECK_CLASS_SIZE
+#undef SHARK_INTERNAL_CHECK_CLASS_SIZE
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_DESCRIPTOR_H__

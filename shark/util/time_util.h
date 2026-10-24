@@ -30,8 +30,7 @@
 
 // Defines utilities for the Timestamp and Duration well known types.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_TIME_UTIL_H__
-#define GOOGLE_PROTOBUF_UTIL_TIME_UTIL_H__
+#pragma once
 
 #include <cstdint>
 #include <ctime>
@@ -61,7 +60,7 @@ namespace protobuf {
 namespace util {
 
 // Utility functions for Timestamp and Duration.
-class PROTOBUF_EXPORT TimeUtil {
+class SHARK_EXPORT TimeUtil {
   typedef google::protobuf::Timestamp Timestamp;
   typedef google::protobuf::Duration Duration;
 
@@ -174,14 +173,14 @@ namespace protobuf {
 // Overloaded operators for Duration.
 //
 // Assignment operators.
-PROTOBUF_EXPORT Duration& operator+=(Duration& d1,
+SHARK_EXPORT Duration& operator+=(Duration& d1,
                                      const Duration& d2);  // NOLINT
-PROTOBUF_EXPORT Duration& operator-=(Duration& d1,
+SHARK_EXPORT Duration& operator-=(Duration& d1,
                                      const Duration& d2);     // NOLINT
-PROTOBUF_EXPORT Duration& operator*=(Duration& d, int64_t r);  // NOLINT
-PROTOBUF_EXPORT Duration& operator*=(Duration& d, double r);  // NOLINT
-PROTOBUF_EXPORT Duration& operator/=(Duration& d, int64_t r);  // NOLINT
-PROTOBUF_EXPORT Duration& operator/=(Duration& d, double r);  // NOLINT
+SHARK_EXPORT Duration& operator*=(Duration& d, int64_t r);  // NOLINT
+SHARK_EXPORT Duration& operator*=(Duration& d, double r);  // NOLINT
+SHARK_EXPORT Duration& operator/=(Duration& d, int64_t r);  // NOLINT
+SHARK_EXPORT Duration& operator/=(Duration& d, double r);  // NOLINT
 // Overload for other integer types.
 template <typename T>
 Duration& operator*=(Duration& d, T r) {  // NOLINT
@@ -193,7 +192,7 @@ Duration& operator/=(Duration& d, T r) {  // NOLINT
   int64_t x = r;
   return d /= x;
 }
-PROTOBUF_EXPORT Duration& operator%=(Duration& d1,
+SHARK_EXPORT Duration& operator%=(Duration& d1,
                                      const Duration& d2);  // NOLINT
 // Relational operators.
 inline bool operator<(const Duration& d1, const Duration& d2) {
@@ -245,7 +244,7 @@ template <typename T>
 inline Duration operator/(Duration d, T r) {
   return d /= r;
 }
-PROTOBUF_EXPORT int64_t operator/(const Duration& d1, const Duration& d2);
+SHARK_EXPORT int64_t operator/(const Duration& d1, const Duration& d2);
 
 inline Duration operator%(const Duration& d1, const Duration& d2) {
   Duration result = d1;
@@ -253,16 +252,16 @@ inline Duration operator%(const Duration& d1, const Duration& d2) {
 }
 
 inline std::ostream& operator<<(std::ostream& out, const Duration& d) {
-  out << ::PROTOBUF_NAMESPACE_ID::util::TimeUtil::ToString(d);
+  out << ::SHARK_NAMESPACE_ID::util::TimeUtil::ToString(d);
   return out;
 }
 
 // Overloaded operators for Timestamp
 //
 // Assignment operators.
-PROTOBUF_EXPORT Timestamp& operator+=(Timestamp& t,
+SHARK_EXPORT Timestamp& operator+=(Timestamp& t,
                                       const Duration& d);  // NOLINT
-PROTOBUF_EXPORT Timestamp& operator-=(Timestamp& t,
+SHARK_EXPORT Timestamp& operator-=(Timestamp& t,
                                       const Duration& d);  // NOLINT
 // Relational operators.
 inline bool operator<(const Timestamp& t1, const Timestamp& t2) {
@@ -299,10 +298,10 @@ inline Timestamp operator-(const Timestamp& t, const Duration& d) {
   Timestamp result = t;
   return result -= d;
 }
-PROTOBUF_EXPORT Duration operator-(const Timestamp& t1, const Timestamp& t2);
+SHARK_EXPORT Duration operator-(const Timestamp& t1, const Timestamp& t2);
 
 inline std::ostream& operator<<(std::ostream& out, const Timestamp& t) {
-  out << ::PROTOBUF_NAMESPACE_ID::util::TimeUtil::ToString(t);
+  out << ::SHARK_NAMESPACE_ID::util::TimeUtil::ToString(t);
   return out;
 }
 
@@ -311,4 +310,3 @@ inline std::ostream& operator<<(std::ostream& out, const Timestamp& t) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_TIME_UTIL_H__

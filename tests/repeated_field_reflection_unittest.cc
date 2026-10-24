@@ -137,7 +137,7 @@ TEST(RepeatedFieldReflectionTest, RegularFields) {
     EXPECT_EQ(message.repeated_foreign_message(i).c(), Func(i, 7));
   }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
   // Make sure types are checked correctly at runtime.
   const FieldDescriptor* fd_optional_int32 =
       desc->FindFieldByName("optional_int32");
@@ -148,7 +148,7 @@ TEST(RepeatedFieldReflectionTest, RegularFields) {
   EXPECT_DEATH(refl->GetRepeatedPtrField<TestAllTypes>(
                    message, fd_repeated_foreign_message),
                "wrong submessage type");
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 }
 
 
@@ -420,7 +420,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForRegularFields) {
   EXPECT_TRUE(rf_message.empty());
   EXPECT_TRUE(mrf_message.empty());
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 
   // Make sure types are checked correctly at runtime.
   const FieldDescriptor* fd_optional_int32 =
@@ -433,7 +433,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForRegularFields) {
                    message, fd_repeated_foreign_message),
                "");
 
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 }
 
 TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {

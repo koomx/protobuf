@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTO_WRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTO_WRITER_H__
+#pragma once
 
 #include <cstdint>
 #include <deque>
@@ -69,7 +68,7 @@ class ObjectLocationTracker;
 // special types by inheriting from it or by wrapping it.
 //
 // It also supports streaming.
-class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
+class SHARK_EXPORT ProtoWriter : public StructuredObjectWriter {
  public:
 // Constructor. Does not take ownership of any parameter passed in.
   ProtoWriter(TypeResolver* type_resolver, const google::protobuf::Type& type,
@@ -168,7 +167,7 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
   }
 
  protected:
-  class PROTOBUF_EXPORT ProtoElement : public BaseElement,
+  class SHARK_EXPORT ProtoElement : public BaseElement,
                                        public LocationTrackerInterface {
    public:
     // Constructor for the root element. No parent nor field.
@@ -386,4 +385,3 @@ class PROTOBUF_EXPORT ProtoWriter : public StructuredObjectWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTO_WRITER_H__

@@ -138,8 +138,7 @@
 // (3) A null StringPiece is empty.
 //     An empty StringPiece may or may not be a null StringPiece.
 
-#ifndef GOOGLE_PROTOBUF_STUBS_STRINGPIECE_H_
-#define GOOGLE_PROTOBUF_STUBS_STRINGPIECE_H_
+#pragma once
 
 #include <assert.h>
 #include <stddef.h>
@@ -160,7 +159,7 @@ namespace google {
 namespace protobuf {
 namespace stringpiece_internal {
 
-class PROTOBUF_EXPORT StringPiece {
+class SHARK_EXPORT StringPiece {
  public:
   using traits_type = std::char_traits<char>;
   using value_type = char;
@@ -184,7 +183,7 @@ class PROTOBUF_EXPORT StringPiece {
 
   static size_type CheckSize(size_type size) {
 #if !defined(NDEBUG) || defined(_FORTIFY_SOURCE) && _FORTIFY_SOURCE > 0
-    if (PROTOBUF_PREDICT_FALSE(size > kMaxSize)) {
+    if (SHARK_PREDICT_FALSE(size > kMaxSize)) {
       // Some people grep for this message in logs
       // so take care if you ever change it.
       LogFatalSizeTooBig(size, "string length exceeds max size");
@@ -385,7 +384,7 @@ using ::google::protobuf::stringpiece_internal::StringPiece;
 }  // namespace protobuf
 }  // namespace google
 
-GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_START
+SHARK_HASH_NAMESPACE_DECLARATION_START
 template<> struct hash<StringPiece> {
   size_t operator()(const StringPiece& s) const {
     size_t result = 0;
@@ -395,8 +394,6 @@ template<> struct hash<StringPiece> {
     return result;
   }
 };
-GOOGLE_PROTOBUF_HASH_NAMESPACE_DECLARATION_END
+SHARK_HASH_NAMESPACE_DECLARATION_END
 
 #include <shark/port_undef.inc>
-
-#endif  // STRINGS_STRINGPIECE_H_

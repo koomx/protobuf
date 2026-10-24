@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_LITE_TEST_UTIL_H__
-#define GOOGLE_PROTOBUF_MAP_LITE_TEST_UTIL_H__
+#pragma once
 
 #include <tests/map_lite_unittest.pb.h>
 
@@ -77,4 +76,3 @@ class MapLiteTestUtil {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_MAP_LITE_TEST_UTIL_H__

@@ -56,7 +56,7 @@ namespace util {
 namespace converter {
 
 using io::CodedOutputStream;
-using ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite;
+using ::SHARK_NAMESPACE_ID::internal::WireFormatLite;
 
 ProtoWriter::ProtoWriter(TypeResolver* type_resolver,
                          const google::protobuf::Type& type,

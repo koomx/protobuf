@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_EXPECTING_OBJECTWRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_EXPECTING_OBJECTWRITER_H__
+#pragma once
 
 // An implementation of ObjectWriter that automatically sets the
 // gmock expectations for the response to a method. Every method
@@ -247,4 +246,3 @@ class ExpectingObjectWriter : public ObjectWriter {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_EXPECTING_OBJECTWRITER_H__

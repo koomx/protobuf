@@ -682,13 +682,13 @@ TEST(FindOneCharTest, EdgeCases) {
   EXPECT_EQ(StringPiece::npos, a.rfind('x'));
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 #ifndef NDEBUG
 TEST(NonNegativeLenTest, NonNegativeLen) {
   EXPECT_DEATH(StringPiece("xyz", -1), "string length exceeds max size");
 }
 #endif  // ndef DEBUG
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 }  // namespace
 }  // namespace protobuf

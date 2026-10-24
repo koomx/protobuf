@@ -30,8 +30,7 @@
 
 // Defines utilities for the FieldMask well known type.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_FIELD_MASK_UTIL_H__
-#define GOOGLE_PROTOBUF_UTIL_FIELD_MASK_UTIL_H__
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -47,7 +46,7 @@ namespace google {
 namespace protobuf {
 namespace util {
 
-class PROTOBUF_EXPORT FieldMaskUtil {
+class SHARK_EXPORT FieldMaskUtil {
   typedef google::protobuf::FieldMask FieldMask;
 
  public:
@@ -120,7 +119,7 @@ class PROTOBUF_EXPORT FieldMaskUtil {
     return out;
   }
   template <typename T>
-  PROTOBUF_DEPRECATED_MSG("Use *out = GetFieldMaskForAllFields() instead")
+  [[deprecated("Use *out = GetFieldMaskForAllFields() instead")]]
   static void GetFieldMaskForAllFields(FieldMask* out) {
     GetFieldMaskForAllFields(T::descriptor(), out);
   }
@@ -212,7 +211,7 @@ class PROTOBUF_EXPORT FieldMaskUtil {
                                    std::string* output);
 };
 
-class PROTOBUF_EXPORT FieldMaskUtil::MergeOptions {
+class SHARK_EXPORT FieldMaskUtil::MergeOptions {
  public:
   MergeOptions()
       : replace_message_fields_(false), replace_repeated_fields_(false) {}
@@ -240,7 +239,7 @@ class PROTOBUF_EXPORT FieldMaskUtil::MergeOptions {
   bool replace_repeated_fields_;
 };
 
-class PROTOBUF_EXPORT FieldMaskUtil::TrimOptions {
+class SHARK_EXPORT FieldMaskUtil::TrimOptions {
  public:
   TrimOptions() : keep_required_fields_(false) {}
   // When trimming message fields, the default behavior is to trim required
@@ -260,4 +259,3 @@ class PROTOBUF_EXPORT FieldMaskUtil::TrimOptions {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_FIELD_MASK_UTIL_H__

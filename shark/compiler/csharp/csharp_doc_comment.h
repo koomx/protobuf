@@ -29,8 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CSHARP_DOC_COMMENT_H__
-#define GOOGLE_PROTOBUF_COMPILER_CSHARP_DOC_COMMENT_H__
+#pragma once
 
 #include <shark/io/printer.h>
 #include <shark/descriptor.h>
@@ -48,4 +47,3 @@ namespace csharp {
 }  // namespace compiler
 }  // namespace protobuf
 }  // namespace google
-#endif  // GOOGLE_PROTOBUF_COMPILER_CSHARP_DOC_COMMENT_H__

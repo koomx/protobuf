@@ -106,8 +106,7 @@
 // However, for practicality we set a limit at 64 bits.  The maximum encoded
 // length of a number is thus 10 bytes.
 
-#ifndef GOOGLE_PROTOBUF_IO_CODED_STREAM_H__
-#define GOOGLE_PROTOBUF_IO_CODED_STREAM_H__
+#pragma once
 
 
 #include <assert.h>
@@ -169,7 +168,7 @@ class ZeroCopyOutputStream;  // zero_copy_stream.h
 // failure occurs, the CodedInputStream is broken and is no longer useful.
 // After a failure, callers also should assume writes to "out" args may have
 // occurred, though nothing useful can be determined from those writes.
-class PROTOBUF_EXPORT CodedInputStream {
+class SHARK_EXPORT CodedInputStream {
  public:
   // Create a CodedInputStream that reads from the given ZeroCopyInputStream.
   explicit CodedInputStream(ZeroCopyInputStream* input);
@@ -205,7 +204,7 @@ class PROTOBUF_EXPORT CodedInputStream {
 
   // Like GetDirectBufferPointer, but this method is inlined, and does not
   // attempt to Refresh() if the buffer is currently empty.
-  PROTOBUF_ALWAYS_INLINE
+  SHARK_ALWAYS_INLINE
   void GetDirectBufferPointerInline(const void** data, int* size);
 
   // Read raw bytes, copying them into the given buffer.
@@ -255,11 +254,11 @@ class PROTOBUF_EXPORT CodedInputStream {
   // Always inline because this is only called in one place per parse loop
   // but it is called for every iteration of said loop, so it should be fast.
   // GCC doesn't want to inline this by default.
-  PROTOBUF_ALWAYS_INLINE uint32_t ReadTag() {
+  SHARK_ALWAYS_INLINE uint32_t ReadTag() {
     return last_tag_ = ReadTagNoLastTag();
   }
 
-  PROTOBUF_ALWAYS_INLINE uint32_t ReadTagNoLastTag();
+  SHARK_ALWAYS_INLINE uint32_t ReadTagNoLastTag();
 
   // This usually a faster alternative to ReadTag() when cutoff is a manifest
   // constant.  It does particularly well for cutoff >= 127.  The first part
@@ -269,14 +268,14 @@ class PROTOBUF_EXPORT CodedInputStream {
   // above cutoff or is 0.  (There's intentional wiggle room when tag is 0,
   // because that can arise in several ways, and for best performance we want
   // to avoid an extra "is tag == 0?" check here.)
-  PROTOBUF_ALWAYS_INLINE
+  SHARK_ALWAYS_INLINE
   std::pair<uint32_t, bool> ReadTagWithCutoff(uint32_t cutoff) {
     std::pair<uint32_t, bool> result = ReadTagWithCutoffNoLastTag(cutoff);
     last_tag_ = result.first;
     return result;
   }
 
-  PROTOBUF_ALWAYS_INLINE
+  SHARK_ALWAYS_INLINE
   std::pair<uint32_t, bool> ReadTagWithCutoffNoLastTag(uint32_t cutoff);
 
   // Usually returns true if calling ReadVarint32() now would produce the given
@@ -286,7 +285,7 @@ class PROTOBUF_EXPORT CodedInputStream {
   // parameter.
   // Always inline because this collapses to a small number of instructions
   // when given a constant parameter, but GCC doesn't want to inline by default.
-  PROTOBUF_ALWAYS_INLINE bool ExpectTag(uint32_t expected);
+  SHARK_ALWAYS_INLINE bool ExpectTag(uint32_t expected);
 
   // Like above, except this reads from the specified buffer. The caller is
   // responsible for ensuring that the buffer is large enough to read a varint
@@ -295,7 +294,7 @@ class PROTOBUF_EXPORT CodedInputStream {
   //
   // Returns a pointer beyond the expected tag if it was found, or NULL if it
   // was not.
-  PROTOBUF_ALWAYS_INLINE
+  SHARK_ALWAYS_INLINE
   static const uint8_t* ExpectTagFromArray(const uint8_t* buffer,
                                            uint32_t expected);
 
@@ -634,7 +633,7 @@ class PROTOBUF_EXPORT CodedInputStream {
 // the user of the class and is an explicit parameter in the methods. Careful
 // use of this class, ie. keep ptr a local variable, eliminates the need to
 // for the compiler to sync the ptr value between register and memory.
-class PROTOBUF_EXPORT EpsCopyOutputStream {
+class SHARK_EXPORT EpsCopyOutputStream {
  public:
   enum { kSlopBytes = 16 };
 
@@ -670,15 +669,15 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
   // After this it's guaranteed you can safely write kSlopBytes to ptr. This
   // will never fail! The underlying stream can produce an error. Use HadError
   // to check for errors.
-  PROTOBUF_NODISCARD uint8_t* EnsureSpace(uint8_t* ptr) {
-    if (PROTOBUF_PREDICT_FALSE(ptr >= end_)) {
+  [[nodiscard]] uint8_t* EnsureSpace(uint8_t* ptr) {
+    if (SHARK_PREDICT_FALSE(ptr >= end_)) {
       return EnsureSpaceFallback(ptr);
     }
     return ptr;
   }
 
   uint8_t* WriteRaw(const void* data, int size, uint8_t* ptr) {
-    if (PROTOBUF_PREDICT_FALSE(end_ - ptr < size)) {
+    if (SHARK_PREDICT_FALSE(end_ - ptr < size)) {
       return WriteRawFallback(data, size, ptr);
     }
     std::memcpy(ptr, data, size);
@@ -689,7 +688,7 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
   // to make sure the buffer is alive for the duration of the
   // ZeroCopyOutputStream.
 #ifndef NDEBUG
-  PROTOBUF_NOINLINE
+  SHARK_NOINLINE
 #endif
   uint8_t* WriteRawMaybeAliased(const void* data, int size, uint8_t* ptr) {
     if (aliasing_enabled_) {
@@ -701,12 +700,12 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
 
 
 #ifndef NDEBUG
-  PROTOBUF_NOINLINE
+  SHARK_NOINLINE
 #endif
   uint8_t* WriteStringMaybeAliased(uint32_t num, const std::string& s,
                                    uint8_t* ptr) {
     std::ptrdiff_t size = s.size();
-    if (PROTOBUF_PREDICT_FALSE(
+    if (SHARK_PREDICT_FALSE(
             size >= 128 || end_ - ptr + 16 - TagSize(num << 3) - 1 < size)) {
       return WriteStringMaybeAliasedOutline(num, s, ptr);
     }
@@ -721,10 +720,10 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
   }
 
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteString(uint32_t num, const T& s,
+  SHARK_ALWAYS_INLINE uint8_t* WriteString(uint32_t num, const T& s,
                                               uint8_t* ptr) {
     std::ptrdiff_t size = s.size();
-    if (PROTOBUF_PREDICT_FALSE(
+    if (SHARK_PREDICT_FALSE(
             size >= 128 || end_ - ptr + 16 - TagSize(num << 3) - 1 < size)) {
       return WriteStringOutline(num, s, ptr);
     }
@@ -735,50 +734,50 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
   }
   template <typename T>
 #ifndef NDEBUG
-  PROTOBUF_NOINLINE
+  SHARK_NOINLINE
 #endif
   uint8_t* WriteBytes(uint32_t num, const T& s, uint8_t* ptr) {
     return WriteString(num, s, ptr);
   }
 
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteInt32Packed(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteInt32Packed(int num, const T& r,
                                                    int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, Encode64);
   }
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteUInt32Packed(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteUInt32Packed(int num, const T& r,
                                                     int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, Encode32);
   }
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteSInt32Packed(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteSInt32Packed(int num, const T& r,
                                                     int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, ZigZagEncode32);
   }
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteInt64Packed(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteInt64Packed(int num, const T& r,
                                                    int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, Encode64);
   }
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteUInt64Packed(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteUInt64Packed(int num, const T& r,
                                                     int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, Encode64);
   }
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteSInt64Packed(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteSInt64Packed(int num, const T& r,
                                                     int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, ZigZagEncode64);
   }
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteEnumPacked(int num, const T& r, int size,
+  SHARK_ALWAYS_INLINE uint8_t* WriteEnumPacked(int num, const T& r, int size,
                                                   uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, Encode64);
   }
 
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteFixedPacked(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteFixedPacked(int num, const T& r,
                                                    uint8_t* ptr) {
     ptr = EnsureSpace(ptr);
     constexpr auto element_size = sizeof(typename T::value_type);
@@ -851,13 +850,13 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
                                : 5;
   }
 
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteTag(uint32_t num, uint32_t wt,
+  SHARK_ALWAYS_INLINE uint8_t* WriteTag(uint32_t num, uint32_t wt,
                                            uint8_t* ptr) {
     GOOGLE_DCHECK(ptr < end_);  // NOLINT
     return UnsafeVarint((num << 3) | wt, ptr);
   }
 
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteLengthDelim(int num, uint32_t size,
+  SHARK_ALWAYS_INLINE uint8_t* WriteLengthDelim(int num, uint32_t size,
                                                    uint8_t* ptr) {
     ptr = WriteTag(num, 2, ptr);
     return UnsafeWriteSize(size, ptr);
@@ -872,7 +871,7 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
   uint8_t* WriteStringOutline(uint32_t num, const std::string& s, uint8_t* ptr);
 
   template <typename T, typename E>
-  PROTOBUF_ALWAYS_INLINE uint8_t* WriteVarintPacked(int num, const T& r,
+  SHARK_ALWAYS_INLINE uint8_t* WriteVarintPacked(int num, const T& r,
                                                     int size, uint8_t* ptr,
                                                     const E& encode) {
     ptr = EnsureSpace(ptr);
@@ -896,7 +895,7 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
   }
 
   template <typename T>
-  PROTOBUF_ALWAYS_INLINE static uint8_t* UnsafeVarint(T value, uint8_t* ptr) {
+  SHARK_ALWAYS_INLINE static uint8_t* UnsafeVarint(T value, uint8_t* ptr) {
     static_assert(std::is_unsigned<T>::value,
                   "Varint serialization must be unsigned");
     ptr[0] = static_cast<uint8_t>(value);
@@ -921,9 +920,9 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
     return ptr;
   }
 
-  PROTOBUF_ALWAYS_INLINE static uint8_t* UnsafeWriteSize(uint32_t value,
+  SHARK_ALWAYS_INLINE static uint8_t* UnsafeWriteSize(uint32_t value,
                                                          uint8_t* ptr) {
-    while (PROTOBUF_PREDICT_FALSE(value >= 0x80)) {
+    while (SHARK_PREDICT_FALSE(value >= 0x80)) {
       *ptr = static_cast<uint8_t>(value | 0x80);
       value >>= 7;
       ++ptr;
@@ -934,8 +933,8 @@ class PROTOBUF_EXPORT EpsCopyOutputStream {
 
   template <int S>
   uint8_t* WriteRawLittleEndian(const void* data, int size, uint8_t* ptr);
-#if !defined(PROTOBUF_LITTLE_ENDIAN) || \
-    defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if !defined(SHARK_LITTLE_ENDIAN) || \
+    defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   uint8_t* WriteRawLittleEndian32(const void* data, int size, uint8_t* ptr);
   uint8_t* WriteRawLittleEndian64(const void* data, int size, uint8_t* ptr);
 #endif
@@ -982,8 +981,8 @@ template <>
 inline uint8_t* EpsCopyOutputStream::WriteRawLittleEndian<4>(const void* data,
                                                              int size,
                                                              uint8_t* ptr) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   return WriteRaw(data, size, ptr);
 #else
   return WriteRawLittleEndian32(data, size, ptr);
@@ -993,8 +992,8 @@ template <>
 inline uint8_t* EpsCopyOutputStream::WriteRawLittleEndian<8>(const void* data,
                                                              int size,
                                                              uint8_t* ptr) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   return WriteRaw(data, size, ptr);
 #else
   return WriteRawLittleEndian64(data, size, ptr);
@@ -1047,7 +1046,7 @@ inline uint8_t* EpsCopyOutputStream::WriteRawLittleEndian<8>(const void* data,
 //   }
 //
 //   delete coded_output;
-class PROTOBUF_EXPORT CodedOutputStream {
+class SHARK_EXPORT CodedOutputStream {
  public:
   // Creates a CodedOutputStream that writes to the given `stream`.
   // The provided stream must publicly derive from `ZeroCopyOutputStream`.
@@ -1181,7 +1180,7 @@ class PROTOBUF_EXPORT CodedOutputStream {
   // but GCC by default doesn't want to inline this.
   void WriteTag(uint32_t value);
   // Like WriteTag()  but writing directly to the target array.
-  PROTOBUF_ALWAYS_INLINE
+  SHARK_ALWAYS_INLINE
   static uint8_t* WriteTagToArray(uint32_t value, uint8_t* target);
 
   // Returns the number of bytes needed to encode the given value as a varint.
@@ -1297,7 +1296,7 @@ class PROTOBUF_EXPORT CodedOutputStream {
 
 inline bool CodedInputStream::ReadVarint32(uint32_t* value) {
   uint32_t v = 0;
-  if (PROTOBUF_PREDICT_TRUE(buffer_ < buffer_end_)) {
+  if (SHARK_PREDICT_TRUE(buffer_ < buffer_end_)) {
     v = *buffer_;
     if (v < 0x80) {
       *value = v;
@@ -1311,7 +1310,7 @@ inline bool CodedInputStream::ReadVarint32(uint32_t* value) {
 }
 
 inline bool CodedInputStream::ReadVarint64(uint64_t* value) {
-  if (PROTOBUF_PREDICT_TRUE(buffer_ < buffer_end_) && *buffer_ < 0x80) {
+  if (SHARK_PREDICT_TRUE(buffer_ < buffer_end_) && *buffer_ < 0x80) {
     *value = *buffer_;
     Advance(1);
     return true;
@@ -1322,7 +1321,7 @@ inline bool CodedInputStream::ReadVarint64(uint64_t* value) {
 }
 
 inline bool CodedInputStream::ReadVarintSizeAsInt(int* value) {
-  if (PROTOBUF_PREDICT_TRUE(buffer_ < buffer_end_)) {
+  if (SHARK_PREDICT_TRUE(buffer_ < buffer_end_)) {
     int v = *buffer_;
     if (v < 0x80) {
       *value = v;
@@ -1337,8 +1336,8 @@ inline bool CodedInputStream::ReadVarintSizeAsInt(int* value) {
 // static
 inline const uint8_t* CodedInputStream::ReadLittleEndian32FromArray(
     const uint8_t* buffer, uint32_t* value) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   memcpy(value, buffer, sizeof(*value));
   return buffer + sizeof(*value);
 #else
@@ -1352,8 +1351,8 @@ inline const uint8_t* CodedInputStream::ReadLittleEndian32FromArray(
 // static
 inline const uint8_t* CodedInputStream::ReadLittleEndian64FromArray(
     const uint8_t* buffer, uint64_t* value) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   memcpy(value, buffer, sizeof(*value));
   return buffer + sizeof(*value);
 #else
@@ -1371,9 +1370,9 @@ inline const uint8_t* CodedInputStream::ReadLittleEndian64FromArray(
 }
 
 inline bool CodedInputStream::ReadLittleEndian32(uint32_t* value) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
-  if (PROTOBUF_PREDICT_TRUE(BufferSize() >= static_cast<int>(sizeof(*value)))) {
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+  if (SHARK_PREDICT_TRUE(BufferSize() >= static_cast<int>(sizeof(*value)))) {
     buffer_ = ReadLittleEndian32FromArray(buffer_, value);
     return true;
   } else {
@@ -1385,9 +1384,9 @@ inline bool CodedInputStream::ReadLittleEndian32(uint32_t* value) {
 }
 
 inline bool CodedInputStream::ReadLittleEndian64(uint64_t* value) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
-  if (PROTOBUF_PREDICT_TRUE(BufferSize() >= static_cast<int>(sizeof(*value)))) {
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+  if (SHARK_PREDICT_TRUE(BufferSize() >= static_cast<int>(sizeof(*value)))) {
     buffer_ = ReadLittleEndian64FromArray(buffer_, value);
     return true;
   } else {
@@ -1400,7 +1399,7 @@ inline bool CodedInputStream::ReadLittleEndian64(uint64_t* value) {
 
 inline uint32_t CodedInputStream::ReadTagNoLastTag() {
   uint32_t v = 0;
-  if (PROTOBUF_PREDICT_TRUE(buffer_ < buffer_end_)) {
+  if (SHARK_PREDICT_TRUE(buffer_ < buffer_end_)) {
     v = *buffer_;
     if (v < 0x80) {
       Advance(1);
@@ -1417,7 +1416,7 @@ inline std::pair<uint32_t, bool> CodedInputStream::ReadTagWithCutoffNoLastTag(
   // constant, and things like "cutoff >= kMax1ByteVarint" to be evaluated at
   // compile time.
   uint32_t first_byte_or_zero = 0;
-  if (PROTOBUF_PREDICT_TRUE(buffer_ < buffer_end_)) {
+  if (SHARK_PREDICT_TRUE(buffer_ < buffer_end_)) {
     // Hot case: buffer_ non_empty, buffer_[0] in [1, 128).
     // TODO(gpike): Is it worth rearranging this? E.g., if the number of fields
     // is large enough then is it better to check for the two-byte case first?
@@ -1431,8 +1430,8 @@ inline std::pair<uint32_t, bool> CodedInputStream::ReadTagWithCutoffNoLastTag(
     // Other hot case: cutoff >= 0x80, buffer_ has at least two bytes available,
     // and tag is two bytes.  The latter is tested by bitwise-and-not of the
     // first byte and the second byte.
-    if (cutoff >= 0x80 && PROTOBUF_PREDICT_TRUE(buffer_ + 1 < buffer_end_) &&
-        PROTOBUF_PREDICT_TRUE((buffer_[0] & ~buffer_[1]) >= 0x80)) {
+    if (cutoff >= 0x80 && SHARK_PREDICT_TRUE(buffer_ + 1 < buffer_end_) &&
+        SHARK_PREDICT_TRUE((buffer_[0] & ~buffer_[1]) >= 0x80)) {
       const uint32_t kMax2ByteVarint = (0x7f << 7) + 0x7f;
       uint32_t tag = (1u << 7) * buffer_[1] + (buffer_[0] - 0x80);
       Advance(2);
@@ -1461,7 +1460,7 @@ inline bool CodedInputStream::ConsumedEntireMessage() {
 
 inline bool CodedInputStream::ExpectTag(uint32_t expected) {
   if (expected < (1 << 7)) {
-    if (PROTOBUF_PREDICT_TRUE(buffer_ < buffer_end_) &&
+    if (SHARK_PREDICT_TRUE(buffer_ < buffer_end_) &&
         buffer_[0] == expected) {
       Advance(1);
       return true;
@@ -1469,7 +1468,7 @@ inline bool CodedInputStream::ExpectTag(uint32_t expected) {
       return false;
     }
   } else if (expected < (1 << 14)) {
-    if (PROTOBUF_PREDICT_TRUE(BufferSize() >= 2) &&
+    if (SHARK_PREDICT_TRUE(BufferSize() >= 2) &&
         buffer_[0] == static_cast<uint8_t>(expected | 0x80) &&
         buffer_[1] == static_cast<uint8_t>(expected >> 7)) {
       Advance(2);
@@ -1637,7 +1636,7 @@ template <class Stream>
 inline void CodedOutputStream::InitEagerly(Stream* stream) {
   void* data;
   int size;
-  if (PROTOBUF_PREDICT_TRUE(stream->Next(&data, &size) && size > 0)) {
+  if (SHARK_PREDICT_TRUE(stream->Next(&data, &size) && size > 0)) {
     cur_ = impl_.SetInitialBuffer(data, size);
   }
 }
@@ -1673,8 +1672,8 @@ inline uint8_t* CodedOutputStream::WriteVarint32SignExtendedToArray(
 
 inline uint8_t* CodedOutputStream::WriteLittleEndian32ToArray(uint32_t value,
                                                               uint8_t* target) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   memcpy(target, &value, sizeof(value));
 #else
   target[0] = static_cast<uint8_t>(value);
@@ -1687,8 +1686,8 @@ inline uint8_t* CodedOutputStream::WriteLittleEndian32ToArray(uint32_t value,
 
 inline uint8_t* CodedOutputStream::WriteLittleEndian64ToArray(uint64_t value,
                                                               uint8_t* target) {
-#if defined(PROTOBUF_LITTLE_ENDIAN) && \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#if defined(SHARK_LITTLE_ENDIAN) && \
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
   memcpy(target, &value, sizeof(value));
 #else
   uint32_t part0 = static_cast<uint32_t>(value);
@@ -1796,4 +1795,3 @@ inline uint8_t* CodedOutputStream::WriteStringToArray(const std::string& str,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_CODED_STREAM_H__

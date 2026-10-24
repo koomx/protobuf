@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_OBJECTIVEC_ENUM_FIELD_H__
-#define GOOGLE_PROTOBUF_COMPILER_OBJECTIVEC_ENUM_FIELD_H__
+#pragma once
 
 #include <map>
 #include <string>
@@ -75,4 +74,3 @@ class RepeatedEnumFieldGenerator : public RepeatedFieldGenerator {
 }  // namespace compiler
 }  // namespace protobuf
 }  // namespace google
-#endif  // GOOGLE_PROTOBUF_COMPILER_OBJECTIVEC_ENUM_FIELD_H__

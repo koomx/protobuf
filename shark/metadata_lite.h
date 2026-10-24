@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_METADATA_LITE_H__
-#define GOOGLE_PROTOBUF_METADATA_LITE_H__
+#pragma once
 
 #include <string>
 #include <shark/stubs/common.h>
@@ -60,7 +59,7 @@ namespace internal {
 // It uses bit 0 == 0 to indicate an arena pointer and bit 0 == 1 to indicate a
 // UFS+Arena-container pointer. Besides it uses bit 1 == 0 to indicate arena
 // allocation and bit 1 == 1 to indicate heap allocation.
-class PROTOBUF_EXPORT InternalMetadata {
+class SHARK_EXPORT InternalMetadata {
  public:
   constexpr InternalMetadata() : ptr_(0) {}
   explicit InternalMetadata(Arena* arena, bool is_message_owned = false) {
@@ -112,35 +111,35 @@ class PROTOBUF_EXPORT InternalMetadata {
     }
   }
 
-  PROTOBUF_NDEBUG_INLINE Arena* owning_arena() const {
+  SHARK_NDEBUG_INLINE Arena* owning_arena() const {
     return HasMessageOwnedArenaTag() ? nullptr : arena();
   }
 
-  PROTOBUF_NDEBUG_INLINE Arena* user_arena() const {
+  SHARK_NDEBUG_INLINE Arena* user_arena() const {
     Arena* a = arena();
     return a && !a->IsMessageOwned() ? a : nullptr;
   }
 
-  PROTOBUF_NDEBUG_INLINE Arena* arena() const {
-    if (PROTOBUF_PREDICT_FALSE(have_unknown_fields())) {
+  SHARK_NDEBUG_INLINE Arena* arena() const {
+    if (SHARK_PREDICT_FALSE(have_unknown_fields())) {
       return PtrValue<ContainerBase>()->arena;
     } else {
       return PtrValue<Arena>();
     }
   }
 
-  PROTOBUF_NDEBUG_INLINE bool have_unknown_fields() const {
+  SHARK_NDEBUG_INLINE bool have_unknown_fields() const {
     return HasUnknownFieldsTag();
   }
 
-  PROTOBUF_NDEBUG_INLINE void* raw_arena_ptr() const {
+  SHARK_NDEBUG_INLINE void* raw_arena_ptr() const {
     return reinterpret_cast<void*>(ptr_);
   }
 
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE const T& unknown_fields(
+  SHARK_NDEBUG_INLINE const T& unknown_fields(
       const T& (*default_instance)()) const {
-    if (PROTOBUF_PREDICT_FALSE(have_unknown_fields())) {
+    if (SHARK_PREDICT_FALSE(have_unknown_fields())) {
       return PtrValue<Container<T>>()->unknown_fields;
     } else {
       return default_instance();
@@ -148,8 +147,8 @@ class PROTOBUF_EXPORT InternalMetadata {
   }
 
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE T* mutable_unknown_fields() {
-    if (PROTOBUF_PREDICT_TRUE(have_unknown_fields())) {
+  SHARK_NDEBUG_INLINE T* mutable_unknown_fields() {
+    if (SHARK_PREDICT_TRUE(have_unknown_fields())) {
       return &PtrValue<Container<T>>()->unknown_fields;
     } else {
       return mutable_unknown_fields_slow<T>();
@@ -157,7 +156,7 @@ class PROTOBUF_EXPORT InternalMetadata {
   }
 
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE void Swap(InternalMetadata* other) {
+  SHARK_NDEBUG_INLINE void Swap(InternalMetadata* other) {
     // Semantics here are that we swap only the unknown fields, not the arena
     // pointer. We cannot simply swap ptr_ with other->ptr_ because we need to
     // maintain our own arena ptr. Also, our ptr_ and other's ptr_ may be in
@@ -169,19 +168,19 @@ class PROTOBUF_EXPORT InternalMetadata {
     }
   }
 
-  PROTOBUF_NDEBUG_INLINE void InternalSwap(InternalMetadata* other) {
+  SHARK_NDEBUG_INLINE void InternalSwap(InternalMetadata* other) {
     std::swap(ptr_, other->ptr_);
   }
 
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE void MergeFrom(const InternalMetadata& other) {
+  SHARK_NDEBUG_INLINE void MergeFrom(const InternalMetadata& other) {
     if (other.have_unknown_fields()) {
       DoMergeFrom<T>(other.unknown_fields<T>(nullptr));
     }
   }
 
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE void Clear() {
+  SHARK_NDEBUG_INLINE void Clear() {
     if (have_unknown_fields()) {
       DoClear<T>();
     }
@@ -198,10 +197,10 @@ class PROTOBUF_EXPORT InternalMetadata {
   static constexpr intptr_t kPtrValueMask = ~kPtrTagMask;
 
   // Accessors for pointer tag and pointer value.
-  PROTOBUF_ALWAYS_INLINE bool HasUnknownFieldsTag() const {
+  SHARK_ALWAYS_INLINE bool HasUnknownFieldsTag() const {
     return ptr_ & kUnknownFieldsTagMask;
   }
-  PROTOBUF_ALWAYS_INLINE bool HasMessageOwnedArenaTag() const {
+  SHARK_ALWAYS_INLINE bool HasMessageOwnedArenaTag() const {
     return ptr_ & kMessageOwnedArenaTagMask;
   }
 
@@ -221,7 +220,7 @@ class PROTOBUF_EXPORT InternalMetadata {
   };
 
   template <typename T>
-  PROTOBUF_NOINLINE Arena* DeleteOutOfLineHelper() {
+  SHARK_NOINLINE Arena* DeleteOutOfLineHelper() {
     if (auto* a = arena()) {
       // Subtle: we want to preserve the message-owned arena flag, while at the
       // same time replacing the pointer to Container<T> with a pointer to the
@@ -237,7 +236,7 @@ class PROTOBUF_EXPORT InternalMetadata {
   }
 
   template <typename T>
-  PROTOBUF_NOINLINE T* mutable_unknown_fields_slow() {
+  SHARK_NOINLINE T* mutable_unknown_fields_slow() {
     Arena* my_arena = arena();
     Container<T>* container = Arena::Create<Container<T>>(my_arena);
     intptr_t message_owned_arena_tag = ptr_ & kMessageOwnedArenaTagMask;
@@ -252,17 +251,17 @@ class PROTOBUF_EXPORT InternalMetadata {
   // Templated functions.
 
   template <typename T>
-  PROTOBUF_NOINLINE void DoClear() {
+  SHARK_NOINLINE void DoClear() {
     mutable_unknown_fields<T>()->Clear();
   }
 
   template <typename T>
-  PROTOBUF_NOINLINE void DoMergeFrom(const T& other) {
+  SHARK_NOINLINE void DoMergeFrom(const T& other) {
     mutable_unknown_fields<T>()->MergeFrom(other);
   }
 
   template <typename T>
-  PROTOBUF_NOINLINE void DoSwap(T* other) {
+  SHARK_NOINLINE void DoSwap(T* other) {
     mutable_unknown_fields<T>()->Swap(other);
   }
 
@@ -273,12 +272,12 @@ class PROTOBUF_EXPORT InternalMetadata {
 // String Template specializations.
 
 template <>
-PROTOBUF_EXPORT void InternalMetadata::DoClear<std::string>();
+SHARK_EXPORT void InternalMetadata::DoClear<std::string>();
 template <>
-PROTOBUF_EXPORT void InternalMetadata::DoMergeFrom<std::string>(
+SHARK_EXPORT void InternalMetadata::DoMergeFrom<std::string>(
     const std::string& other);
 template <>
-PROTOBUF_EXPORT void InternalMetadata::DoSwap<std::string>(std::string* other);
+SHARK_EXPORT void InternalMetadata::DoSwap<std::string>(std::string* other);
 
 // This helper RAII class is needed to efficiently parse unknown fields. We
 // should only call mutable_unknown_fields if there are actual unknown fields.
@@ -288,7 +287,7 @@ PROTOBUF_EXPORT void InternalMetadata::DoSwap<std::string>(std::string* other);
 // LiteUnknownFieldSetter setter(&_internal_metadata_);
 // StringOutputStream stream(setter.buffer());
 // guarantees that the string is only swapped after stream is destroyed.
-class PROTOBUF_EXPORT LiteUnknownFieldSetter {
+class SHARK_EXPORT LiteUnknownFieldSetter {
  public:
   explicit LiteUnknownFieldSetter(InternalMetadata* metadata)
       : metadata_(metadata) {
@@ -313,4 +312,3 @@ class PROTOBUF_EXPORT LiteUnknownFieldSetter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_METADATA_LITE_H__

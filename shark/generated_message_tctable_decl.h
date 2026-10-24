@@ -32,8 +32,7 @@
 // that use tail-call table parsing. Everything in this file is for internal
 // use only.
 
-#ifndef GOOGLE_PROTOBUF_GENERATED_MESSAGE_TCTABLE_DECL_H__
-#define GOOGLE_PROTOBUF_GENERATED_MESSAGE_TCTABLE_DECL_H__
+#pragma once
 
 #include <array>
 #include <cstddef>
@@ -106,7 +105,7 @@ struct TcFieldData {
 struct TcParseTableBase;
 
 // TailCallParseFunc is the function pointer type used in the tailcall table.
-typedef const char* (*TailCallParseFunc)(PROTOBUF_TC_PARAM_DECL);
+typedef const char* (*TailCallParseFunc)(SHARK_TC_PARAM_DECL);
 
 namespace field_layout {
 struct Offset {
@@ -309,4 +308,3 @@ static_assert(offsetof(TcParseTable<1>, fast_entries) ==
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_TCTABLE_DECL_H__

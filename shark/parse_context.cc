@@ -172,7 +172,7 @@ const char* EpsCopyInputStream::Next() {
 std::pair<const char*, bool> EpsCopyInputStream::DoneFallback(int overrun,
                                                               int depth) {
   // Did we exceeded the limit (parse error).
-  if (PROTOBUF_PREDICT_FALSE(overrun > limit_)) return {nullptr, true};
+  if (SHARK_PREDICT_FALSE(overrun > limit_)) return {nullptr, true};
   GOOGLE_DCHECK(overrun != limit_);  // Guaranteed by caller.
   GOOGLE_DCHECK(overrun < limit_);   // Follows from above
   // TODO(gerbens) Instead of this dcheck we could just assign, and remove
@@ -190,7 +190,7 @@ std::pair<const char*, bool> EpsCopyInputStream::DoneFallback(int overrun,
     p = NextBuffer(overrun, depth);
     if (p == nullptr) {
       // We are at the end of the stream
-      if (PROTOBUF_PREDICT_FALSE(overrun != 0)) return {nullptr, true};
+      if (SHARK_PREDICT_FALSE(overrun != 0)) return {nullptr, true};
       GOOGLE_DCHECK_GT(limit_, 0);
       limit_end_ = buffer_end_;
       // Distinguish ending on a pushed limit or ending on end-of-stream.
@@ -212,7 +212,7 @@ const char* EpsCopyInputStream::SkipFallback(const char* ptr, int size) {
 const char* EpsCopyInputStream::ReadStringFallback(const char* ptr, int size,
                                                    std::string* str) {
   str->clear();
-  if (PROTOBUF_PREDICT_TRUE(size <= buffer_end_ - ptr + limit_)) {
+  if (SHARK_PREDICT_TRUE(size <= buffer_end_ - ptr + limit_)) {
     // Reserve the string up to a static safe size. If strings are bigger than
     // this we proceed by growing the string as needed. This protects against
     // malicious payloads making protobuf hold on to a lot of memory.
@@ -224,7 +224,7 @@ const char* EpsCopyInputStream::ReadStringFallback(const char* ptr, int size,
 
 const char* EpsCopyInputStream::AppendStringFallback(const char* ptr, int size,
                                                      std::string* str) {
-  if (PROTOBUF_PREDICT_TRUE(size <= buffer_end_ - ptr + limit_)) {
+  if (SHARK_PREDICT_TRUE(size <= buffer_end_ - ptr + limit_)) {
     // Reserve the string up to a static safe size. If strings are bigger than
     // this we proceed by growing the string as needed. This protects against
     // malicious payloads making protobuf hold on to a lot of memory.
@@ -267,7 +267,7 @@ const char* EpsCopyInputStream::InitFrom(io::ZeroCopyInputStream* zcis) {
 const char* ParseContext::ReadSizeAndPushLimitAndDepth(const char* ptr,
                                                        int* old_limit) {
   int size = ReadSize(&ptr);
-  if (PROTOBUF_PREDICT_FALSE(!ptr)) {
+  if (SHARK_PREDICT_FALSE(!ptr)) {
     *old_limit = 0;  // Make sure this isn't uninitialized even on error return
     return nullptr;
   }
@@ -310,14 +310,14 @@ std::pair<const char*, uint32_t> VarintParseSlow32(const char* p,
   for (std::uint32_t i = 2; i < 5; i++) {
     uint32_t byte = static_cast<uint8_t>(p[i]);
     res += (byte - 1) << (7 * i);
-    if (PROTOBUF_PREDICT_TRUE(byte < 128)) {
+    if (SHARK_PREDICT_TRUE(byte < 128)) {
       return {p + i + 1, res};
     }
   }
   // Accept >5 bytes
   for (std::uint32_t i = 5; i < 10; i++) {
     uint32_t byte = static_cast<uint8_t>(p[i]);
-    if (PROTOBUF_PREDICT_TRUE(byte < 128)) {
+    if (SHARK_PREDICT_TRUE(byte < 128)) {
       return {p + i + 1, res};
     }
   }
@@ -330,7 +330,7 @@ std::pair<const char*, uint64_t> VarintParseSlow64(const char* p,
   for (std::uint32_t i = 2; i < 10; i++) {
     uint64_t byte = static_cast<uint8_t>(p[i]);
     res += (byte - 1) << (7 * i);
-    if (PROTOBUF_PREDICT_TRUE(byte < 128)) {
+    if (SHARK_PREDICT_TRUE(byte < 128)) {
       return {p + i + 1, res};
     }
   }
@@ -341,7 +341,7 @@ std::pair<const char*, uint32_t> ReadTagFallback(const char* p, uint32_t res) {
   for (std::uint32_t i = 2; i < 5; i++) {
     uint32_t byte = static_cast<uint8_t>(p[i]);
     res += (byte - 1) << (7 * i);
-    if (PROTOBUF_PREDICT_TRUE(byte < 128)) {
+    if (SHARK_PREDICT_TRUE(byte < 128)) {
       return {p + i + 1, res};
     }
   }
@@ -352,17 +352,17 @@ std::pair<const char*, int32_t> ReadSizeFallback(const char* p, uint32_t res) {
   for (std::uint32_t i = 1; i < 4; i++) {
     uint32_t byte = static_cast<uint8_t>(p[i]);
     res += (byte - 1) << (7 * i);
-    if (PROTOBUF_PREDICT_TRUE(byte < 128)) {
+    if (SHARK_PREDICT_TRUE(byte < 128)) {
       return {p + i + 1, res};
     }
   }
   std::uint32_t byte = static_cast<uint8_t>(p[4]);
-  if (PROTOBUF_PREDICT_FALSE(byte >= 8)) return {nullptr, 0};  // size >= 2gb
+  if (SHARK_PREDICT_FALSE(byte >= 8)) return {nullptr, 0};  // size >= 2gb
   res += (byte - 1) << 28;
   // Protect against sign integer overflow in PushLimit. Limits are relative
   // to buffer ends and ptr could potential be kSlopBytes beyond a buffer end.
   // To protect against overflow we reject limits absurdly close to INT_MAX.
-  if (PROTOBUF_PREDICT_FALSE(res > INT_MAX - ParseContext::kSlopBytes)) {
+  if (SHARK_PREDICT_FALSE(res > INT_MAX - ParseContext::kSlopBytes)) {
     return {nullptr, 0};
   }
   return {p + 5, res};
@@ -499,7 +499,7 @@ class UnknownFieldLiteParserHelper {
   const char* ParseLengthDelimited(uint32_t num, const char* ptr,
                                    ParseContext* ctx) {
     int size = ReadSize(&ptr);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    SHARK_PARSER_ASSERT(ptr);
     if (unknown_ == nullptr) return ctx->Skip(ptr, size);
     WriteVarint(num * 8 + 2, unknown_);
     WriteVarint(size, unknown_);
@@ -508,7 +508,7 @@ class UnknownFieldLiteParserHelper {
   const char* ParseGroup(uint32_t num, const char* ptr, ParseContext* ctx) {
     if (unknown_) WriteVarint(num * 8 + 3, unknown_);
     ptr = ctx->ParseGroup(this, ptr, num * 8 + 3);
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+    SHARK_PARSER_ASSERT(ptr);
     if (unknown_) WriteVarint(num * 8 + 4, unknown_);
     return ptr;
   }

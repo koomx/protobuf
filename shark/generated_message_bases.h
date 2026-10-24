@@ -32,8 +32,7 @@
 //
 //  Nothing in this file should be directly referenced by users of protobufs.
 
-#ifndef GOOGLE_PROTOBUF_GENERATED_MESSAGE_BASES_H__
-#define GOOGLE_PROTOBUF_GENERATED_MESSAGE_BASES_H__
+#pragma once
 
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/arena.h>
@@ -50,9 +49,9 @@ namespace internal {
 
 // To save code size, protos without any fields are derived from ZeroFieldsBase
 // rather than Message.
-class PROTOBUF_EXPORT ZeroFieldsBase : public Message {
+class SHARK_EXPORT ZeroFieldsBase : public Message {
  public:
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;
+  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
   bool IsInitialized() const final { return true; }
   size_t ByteSizeLong() const final;
   int GetCachedSize() const final { return _cached_size_.Get(); }
@@ -84,4 +83,3 @@ class PROTOBUF_EXPORT ZeroFieldsBase : public Message {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_BASES_H__

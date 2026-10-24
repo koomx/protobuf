@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_STRING_FIELD_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_STRING_FIELD_H__
+#pragma once
 
 #include <map>
 #include <string>
@@ -133,4 +132,3 @@ class RepeatedStringFieldGenerator : public FieldGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_STRING_FIELD_H__

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_FIELD_LITE_H__
-#define GOOGLE_PROTOBUF_MAP_FIELD_LITE_H__
+#pragma once
 
 #include <type_traits>
 
@@ -136,7 +135,7 @@ class MapFieldLite {
     Map<Key, T> map_;
   };
 
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena;
+  friend class ::SHARK_NAMESPACE_ID::Arena;
 };
 
 template <typename UnknownType, typename T>
@@ -194,7 +193,7 @@ struct MapEntryToMapField<
 };
 
 #ifndef NDEBUG
-inline PROTOBUF_NOINLINE void MapFieldLiteNotDestructed(void* map_field_lite) {
+inline SHARK_NOINLINE void MapFieldLiteNotDestructed(void* map_field_lite) {
   bool proper_destruct = false;
   GOOGLE_CHECK(proper_destruct) << map_field_lite;
 }
@@ -206,4 +205,3 @@ inline PROTOBUF_NOINLINE void MapFieldLiteNotDestructed(void* map_field_lite) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MAP_FIELD_LITE_H__

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_PHP_GENERATOR_H__
-#define GOOGLE_PROTOBUF_COMPILER_PHP_GENERATOR_H__
+#pragma once
 
 #include <shark/compiler/code_generator.h>
 #include <shark/descriptor.h>
@@ -89,4 +88,3 @@ inline bool IsWrapperType(const FieldDescriptor* descriptor) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_PHP_GENERATOR_H__

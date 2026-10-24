@@ -30,8 +30,7 @@
 
 // Defines a TypeResolver for the Any message.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_H__
-#define GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_H__
+#pragma once
 
 #include <string>
 
@@ -51,7 +50,7 @@ namespace util {
 // Abstract interface for a type resolver.
 //
 // Implementations of this interface must be thread-safe.
-class PROTOBUF_EXPORT TypeResolver {
+class SHARK_EXPORT TypeResolver {
  public:
   TypeResolver() {}
   virtual ~TypeResolver() {}
@@ -74,4 +73,3 @@ class PROTOBUF_EXPORT TypeResolver {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_H__

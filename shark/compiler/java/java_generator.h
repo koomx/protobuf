@@ -1,6 +1,4 @@
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_JAVA_GENERATOR_H_
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_JAVA_GENERATOR_H_
+#pragma once
 
 #include <shark/compiler/java/generator.h>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_JAVA_GENERATOR_H_

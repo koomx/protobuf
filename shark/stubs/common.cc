@@ -115,8 +115,8 @@ std::string VersionString(int version) {
 
 // If the minimum logging level is not set, we default to logging messages for
 // all levels.
-#ifndef GOOGLE_PROTOBUF_MIN_LOG_LEVEL
-#define GOOGLE_PROTOBUF_MIN_LOG_LEVEL LOGLEVEL_INFO
+#ifndef SHARK_MIN_LOG_LEVEL
+#define SHARK_MIN_LOG_LEVEL LOGLEVEL_INFO
 #endif
 
 namespace internal {
@@ -124,7 +124,7 @@ namespace internal {
 #if defined(__ANDROID__)
 inline void DefaultLogHandler(LogLevel level, const char* filename, int line,
                               const std::string& message) {
-  if (level < GOOGLE_PROTOBUF_MIN_LOG_LEVEL) {
+  if (level < SHARK_MIN_LOG_LEVEL) {
     return;
   }
   static const char* level_names[] = {"INFO", "WARNING", "ERROR", "FATAL"};
@@ -159,7 +159,7 @@ inline void DefaultLogHandler(LogLevel level, const char* filename, int line,
 #else
 void DefaultLogHandler(LogLevel level, const char* filename, int line,
                        const std::string& message) {
-  if (level < GOOGLE_PROTOBUF_MIN_LOG_LEVEL) {
+  if (level < SHARK_MIN_LOG_LEVEL) {
     return;
   }
   static const char* level_names[] = { "INFO", "WARNING", "ERROR", "FATAL" };
@@ -248,7 +248,7 @@ void LogMessage::Finish() {
   }
 
   if (level_ == LOGLEVEL_FATAL) {
-#if PROTOBUF_USE_EXCEPTIONS
+#if SHARK_USE_EXCEPTIONS
     throw FatalException(filename_, line_, message_);
 #else
     abort();
@@ -295,7 +295,7 @@ void DoNothing() {}
 // ===================================================================
 // emulates google3/util/endian/endian.h
 //
-// TODO(xiaofeng): PROTOBUF_LITTLE_ENDIAN is unfortunately defined in
+// TODO(xiaofeng): SHARK_LITTLE_ENDIAN is unfortunately defined in
 // google/protobuf/io/coded_stream.h and therefore can not be used here.
 // Maybe move that macro definition here in the future.
 uint32_t ghtonl(uint32_t x) {
@@ -310,7 +310,7 @@ uint32_t ghtonl(uint32_t x) {
   return result;
 }
 
-#if PROTOBUF_USE_EXCEPTIONS
+#if SHARK_USE_EXCEPTIONS
 FatalException::~FatalException() throw() {}
 
 const char* FatalException::what() const throw() {

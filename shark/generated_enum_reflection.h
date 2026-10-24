@@ -36,8 +36,7 @@
 // generated .pb.h files and should have minimal dependencies. The methods are
 // implemented in generated_message_reflection.cc.
 
-#ifndef GOOGLE_PROTOBUF_GENERATED_ENUM_REFLECTION_H__
-#define GOOGLE_PROTOBUF_GENERATED_ENUM_REFLECTION_H__
+#pragma once
 
 
 #include <string>
@@ -73,7 +72,7 @@ namespace internal {
 // Helper for EnumType_Parse functions: try to parse the string 'name' as
 // an enum name of the given type, returning true and filling in value on
 // success, or returning false and leaving value unchanged on failure.
-PROTOBUF_EXPORT bool ParseNamedEnum(const EnumDescriptor* descriptor,
+SHARK_EXPORT bool ParseNamedEnum(const EnumDescriptor* descriptor,
                                     ConstStringParam name, int* value);
 
 template <typename EnumType>
@@ -88,7 +87,7 @@ bool ParseNamedEnum(const EnumDescriptor* descriptor, ConstStringParam name,
 // Just a wrapper around printing the name of a value. The main point of this
 // function is not to be inlined, so that you can do this without including
 // descriptor.h.
-PROTOBUF_EXPORT const std::string& NameOfEnum(const EnumDescriptor* descriptor,
+SHARK_EXPORT const std::string& NameOfEnum(const EnumDescriptor* descriptor,
                                               int value);
 
 }  // namespace internal
@@ -97,4 +96,3 @@ PROTOBUF_EXPORT const std::string& NameOfEnum(const EnumDescriptor* descriptor,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_GENERATED_ENUM_REFLECTION_H__

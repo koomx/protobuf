@@ -44,8 +44,7 @@
 //
 // This file is only used on Windows, it's empty on other platforms.
 
-#ifndef GOOGLE_PROTOBUF_IO_IO_WIN32_H__
-#define GOOGLE_PROTOBUF_IO_IO_WIN32_H__
+#pragma once
 
 #if defined(_WIN32)
 
@@ -64,19 +63,19 @@ namespace protobuf {
 namespace io {
 namespace win32 {
 
-PROTOBUF_EXPORT FILE* fopen(const char* path, const char* mode);
-PROTOBUF_EXPORT int access(const char* path, int mode);
-PROTOBUF_EXPORT int chdir(const char* path);
-PROTOBUF_EXPORT int close(int fd);
-PROTOBUF_EXPORT int dup(int fd);
-PROTOBUF_EXPORT int dup2(int fd1, int fd2);
-PROTOBUF_EXPORT int mkdir(const char* path, int _mode);
-PROTOBUF_EXPORT int open(const char* path, int flags, int mode = 0);
-PROTOBUF_EXPORT int read(int fd, void* buffer, size_t size);
-PROTOBUF_EXPORT int setmode(int fd, int mode);
-PROTOBUF_EXPORT int stat(const char* path, struct _stat* buffer);
-PROTOBUF_EXPORT int write(int fd, const void* buffer, size_t size);
-PROTOBUF_EXPORT std::wstring testonly_utf8_to_winpath(const char* path);
+SHARK_EXPORT FILE* fopen(const char* path, const char* mode);
+SHARK_EXPORT int access(const char* path, int mode);
+SHARK_EXPORT int chdir(const char* path);
+SHARK_EXPORT int close(int fd);
+SHARK_EXPORT int dup(int fd);
+SHARK_EXPORT int dup2(int fd1, int fd2);
+SHARK_EXPORT int mkdir(const char* path, int _mode);
+SHARK_EXPORT int open(const char* path, int flags, int mode = 0);
+SHARK_EXPORT int read(int fd, void* buffer, size_t size);
+SHARK_EXPORT int setmode(int fd, int mode);
+SHARK_EXPORT int stat(const char* path, struct _stat* buffer);
+SHARK_EXPORT int write(int fd, const void* buffer, size_t size);
+SHARK_EXPORT std::wstring testonly_utf8_to_winpath(const char* path);
 
 enum class ExpandWildcardsResult {
   kSuccess = 0,
@@ -93,23 +92,23 @@ enum class ExpandWildcardsResult {
 // `consume`. The resulting paths may not be absolute nor normalized.
 //
 // The function returns a value from `ExpandWildcardsResult`.
-PROTOBUF_EXPORT ExpandWildcardsResult ExpandWildcards(
+SHARK_EXPORT ExpandWildcardsResult ExpandWildcards(
     const std::string& path, std::function<void(const std::string&)> consume);
 
 namespace strings {
 
 // Convert from UTF-16 to Active-Code-Page-encoded or to UTF-8-encoded text.
-PROTOBUF_EXPORT bool wcs_to_mbs(const wchar_t* s, std::string* out,
+SHARK_EXPORT bool wcs_to_mbs(const wchar_t* s, std::string* out,
                                 bool outUtf8);
 
 // Convert from Active-Code-Page-encoded or UTF-8-encoded text to UTF-16.
-PROTOBUF_EXPORT bool mbs_to_wcs(const char* s, std::wstring* out, bool inUtf8);
+SHARK_EXPORT bool mbs_to_wcs(const char* s, std::wstring* out, bool inUtf8);
 
 // Convert from UTF-8-encoded text to UTF-16.
-PROTOBUF_EXPORT bool utf8_to_wcs(const char* input, std::wstring* out);
+SHARK_EXPORT bool utf8_to_wcs(const char* input, std::wstring* out);
 
 // Convert from UTF-16-encoded text to UTF-8.
-PROTOBUF_EXPORT bool wcs_to_utf8(const wchar_t* input, std::string* out);
+SHARK_EXPORT bool wcs_to_utf8(const wchar_t* input, std::string* out);
 
 }  // namespace strings
 
@@ -138,4 +137,3 @@ PROTOBUF_EXPORT bool wcs_to_utf8(const wchar_t* input, std::string* out);
 
 #endif  // defined(_WIN32)
 
-#endif  // GOOGLE_PROTOBUF_IO_IO_WIN32_H__

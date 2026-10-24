@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_OBJECT_SOURCE_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_OBJECT_SOURCE_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/status.h>
@@ -52,7 +51,7 @@ class ObjectWriter;
 // example, a character stream, or protobuf.
 //
 // Derived classes could be thread-unsafe.
-class PROTOBUF_EXPORT ObjectSource {
+class SHARK_EXPORT ObjectSource {
  public:
   virtual ~ObjectSource() {}
 
@@ -82,4 +81,3 @@ class PROTOBUF_EXPORT ObjectSource {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_OBJECT_SOURCE_H__

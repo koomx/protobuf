@@ -104,8 +104,7 @@
 //   close(infd);
 //   close(outfd);
 
-#ifndef GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_H__
-#define GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_H__
+#pragma once
 
 
 #include <shark/stubs/common.h>
@@ -124,7 +123,7 @@ class ZeroCopyOutputStream;
 
 // Abstract interface similar to an input stream but designed to minimize
 // copying.
-class PROTOBUF_EXPORT ZeroCopyInputStream {
+class SHARK_EXPORT ZeroCopyInputStream {
  public:
   ZeroCopyInputStream() {}
   virtual ~ZeroCopyInputStream() {}
@@ -188,7 +187,7 @@ class PROTOBUF_EXPORT ZeroCopyInputStream {
 
 // Abstract interface similar to an output stream but designed to minimize
 // copying.
-class PROTOBUF_EXPORT ZeroCopyOutputStream {
+class SHARK_EXPORT ZeroCopyOutputStream {
  public:
   ZeroCopyOutputStream() {}
   virtual ~ZeroCopyOutputStream() {}
@@ -257,4 +256,3 @@ class PROTOBUF_EXPORT ZeroCopyOutputStream {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_H__

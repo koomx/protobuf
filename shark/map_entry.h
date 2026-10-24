@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_ENTRY_H__
-#define GOOGLE_PROTOBUF_MAP_ENTRY_H__
+#pragma once
 
 #include <shark/port.h>
 #include <shark/generated_message_reflection.h>
@@ -117,7 +116,7 @@ class MapEntry : public MapEntryImpl<Derived, Message, Key, Value,
   }
 
  private:
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena;
+  friend class ::SHARK_NAMESPACE_ID::Arena;
   template <typename C, typename K, typename V,
             WireFormatLite::FieldType k_wire_type, WireFormatLite::FieldType>
   friend class internal::MapField;
@@ -131,4 +130,3 @@ class MapEntry : public MapEntryImpl<Derived, Message, Key, Value,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MAP_ENTRY_H__

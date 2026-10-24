@@ -35,8 +35,7 @@
 // Implements the Protocol Compiler front-end such that it may be reused by
 // custom compilers written to support other languages.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_COMMAND_LINE_INTERFACE_H__
-#define GOOGLE_PROTOBUF_COMPILER_COMMAND_LINE_INTERFACE_H__
+#pragma once
 
 #include <cstdint>
 #include <map>
@@ -461,4 +460,3 @@ class PROTOC_EXPORT CommandLineInterface {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_COMMAND_LINE_INTERFACE_H__

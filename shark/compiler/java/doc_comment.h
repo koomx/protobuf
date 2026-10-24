@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_DOC_COMMENT_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_DOC_COMMENT_H__
+#pragma once
 
 #include <shark/descriptor.h>
 
@@ -99,4 +98,3 @@ PROTOC_EXPORT std::string EscapeJavadoc(const std::string& input);
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_DOC_COMMENT_H__

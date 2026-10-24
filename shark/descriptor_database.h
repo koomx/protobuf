@@ -34,8 +34,7 @@
 //
 // Interface for manipulating databases of descriptors.
 
-#ifndef GOOGLE_PROTOBUF_DESCRIPTOR_DATABASE_H__
-#define GOOGLE_PROTOBUF_DESCRIPTOR_DATABASE_H__
+#pragma once
 
 
 #include <map>
@@ -71,7 +70,7 @@ class MergedDescriptorDatabase;
 // calling DescriptorPool::BuildFile() for each one.  Instead, a DescriptorPool
 // can be created which wraps a DescriptorDatabase and only builds particular
 // descriptors when they are needed.
-class PROTOBUF_EXPORT DescriptorDatabase {
+class SHARK_EXPORT DescriptorDatabase {
  public:
   inline DescriptorDatabase() {}
   virtual ~DescriptorDatabase();
@@ -162,7 +161,7 @@ class PROTOBUF_EXPORT DescriptorDatabase {
 // FileDescriptor::CopyTo()) will always use fully-qualified names for all
 // types.  You only need to worry if you are constructing FileDescriptorProtos
 // yourself, or are calling compiler::Parser directly.
-class PROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
+class SHARK_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
  public:
   SimpleDescriptorDatabase();
   ~SimpleDescriptorDatabase() override;
@@ -283,7 +282,7 @@ class PROTOBUF_EXPORT SimpleDescriptorDatabase : public DescriptorDatabase {
 //
 // The same caveats regarding FindFileContainingExtension() apply as with
 // SimpleDescriptorDatabase.
-class PROTOBUF_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase {
+class SHARK_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase {
  public:
   EncodedDescriptorDatabase();
   ~EncodedDescriptorDatabase() override;
@@ -332,7 +331,7 @@ class PROTOBUF_EXPORT EncodedDescriptorDatabase : public DescriptorDatabase {
 };
 
 // A DescriptorDatabase that fetches files from a given pool.
-class PROTOBUF_EXPORT DescriptorPoolDatabase : public DescriptorDatabase {
+class SHARK_EXPORT DescriptorPoolDatabase : public DescriptorDatabase {
  public:
   explicit DescriptorPoolDatabase(const DescriptorPool& pool);
   ~DescriptorPoolDatabase() override;
@@ -355,7 +354,7 @@ class PROTOBUF_EXPORT DescriptorPoolDatabase : public DescriptorDatabase {
 
 // A DescriptorDatabase that wraps two or more others.  It first searches the
 // first database and, if that fails, tries the second, and so on.
-class PROTOBUF_EXPORT MergedDescriptorDatabase : public DescriptorDatabase {
+class SHARK_EXPORT MergedDescriptorDatabase : public DescriptorDatabase {
  public:
   // Merge just two databases.  The sources remain property of the caller.
   MergedDescriptorDatabase(DescriptorDatabase* source1,
@@ -395,4 +394,3 @@ class PROTOBUF_EXPORT MergedDescriptorDatabase : public DescriptorDatabase {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_DESCRIPTOR_DATABASE_H__

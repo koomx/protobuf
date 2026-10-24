@@ -62,7 +62,7 @@ size_t ZeroFieldsBase::ByteSizeLong() const {
 const char* ZeroFieldsBase::_InternalParse(const char* ptr,
                                            internal::ParseContext* ctx) {
 #define CHK_(x)                       \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) { \
+  if (SHARK_PREDICT_FALSE(!(x))) { \
     goto failure;                     \
   }
 
@@ -89,7 +89,7 @@ failure:
 
 ::uint8_t* ZeroFieldsBase::_InternalSerialize(
     ::uint8_t* target, io::EpsCopyOutputStream* stream) const {
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = internal::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<UnknownFieldSet>(
             UnknownFieldSet::default_instance),

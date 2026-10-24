@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_INLINED_STRING_FIELD_H__
-#define GOOGLE_PROTOBUF_INLINED_STRING_FIELD_H__
+#pragma once
 
 #include <string>
 #include <utility>
@@ -106,7 +105,7 @@ namespace internal {
 // SetAllocated, Rvalue Set, and Swap with a non-donated string.
 //
 // For more details of the donating states transitions, go/pd-inlined-string.
-class PROTOBUF_EXPORT InlinedStringField {
+class SHARK_EXPORT InlinedStringField {
  public:
   InlinedStringField() { Init(); }
   inline void Init() { new (get_mutable()) std::string(); }
@@ -167,12 +166,12 @@ class PROTOBUF_EXPORT InlinedStringField {
                 ::google::protobuf::Arena* arena, bool donated, uint32_t* donating_states,
                 uint32_t mask, MessageLite* msg);
 
-  PROTOBUF_NDEBUG_INLINE void SetNoArena(StringPiece value);
-  PROTOBUF_NDEBUG_INLINE void SetNoArena(std::string&& value);
+  SHARK_NDEBUG_INLINE void SetNoArena(StringPiece value);
+  SHARK_NDEBUG_INLINE void SetNoArena(std::string&& value);
 
   // Basic accessors.
-  PROTOBUF_NDEBUG_INLINE const std::string& Get() const { return GetNoArena(); }
-  PROTOBUF_NDEBUG_INLINE const std::string& GetNoArena() const;
+  SHARK_NDEBUG_INLINE const std::string& Get() const { return GetNoArena(); }
+  SHARK_NDEBUG_INLINE const std::string& GetNoArena() const;
 
   // Mutable returns a std::string* instance that is heap-allocated. If this
   // field is donated, this method undonates this field by mutating the
@@ -207,19 +206,19 @@ class PROTOBUF_EXPORT InlinedStringField {
   // Own()'d by any arena. If the field is not set, this returns nullptr. The
   // caller retains ownership. Clears this field back to nullptr state. Used to
   // implement release_<field>() methods on generated classes.
-  PROTOBUF_NODISCARD std::string* Release(Arena* arena, bool donated);
-  PROTOBUF_NODISCARD std::string* Release();
+  [[nodiscard]] std::string* Release(Arena* arena, bool donated);
+  [[nodiscard]] std::string* Release();
 
   // --------------------------------------------------------
   // Below functions will be removed in subsequent code change
   // --------------------------------------------------------
 #ifdef DEPRECATED_METHODS_TO_BE_DELETED
-  PROTOBUF_NODISCARD std::string* Release(const std::string*, Arena* arena,
+  [[nodiscard]] std::string* Release(const std::string*, Arena* arena,
                                           bool donated) {
     return Release(arena, donated);
   }
 
-  PROTOBUF_NODISCARD std::string* ReleaseNonDefault(const std::string*,
+  [[nodiscard]] std::string* ReleaseNonDefault(const std::string*,
                                                     Arena* arena) {
     return Release();
   }
@@ -310,7 +309,7 @@ class PROTOBUF_EXPORT InlinedStringField {
     return Mutable(arena, donated, donating_states, mask, msg);
   }
 
-  PROTOBUF_NDEBUG_INLINE std::string* MutableNoArenaNoDefault(
+  SHARK_NDEBUG_INLINE std::string* MutableNoArenaNoDefault(
       const std::string* /*default_value*/) {
     return MutableNoCopy(nullptr);
   }
@@ -320,26 +319,26 @@ class PROTOBUF_EXPORT InlinedStringField {
   // Arena-safety semantics: this is guarded by the logic in
   // Swap()/UnsafeArenaSwap() at the message level, so this method is
   // 'unsafe' if called directly.
-  inline PROTOBUF_NDEBUG_INLINE static void InternalSwap(
+  inline SHARK_NDEBUG_INLINE static void InternalSwap(
       InlinedStringField* lhs, Arena* lhs_arena, bool lhs_arena_dtor_registered,
       MessageLite* lhs_msg,  //
       InlinedStringField* rhs, Arena* rhs_arena, bool rhs_arena_dtor_registered,
       MessageLite* rhs_msg);
 
   // Frees storage (if not on an arena).
-  PROTOBUF_NDEBUG_INLINE void Destroy(const std::string* default_value,
+  SHARK_NDEBUG_INLINE void Destroy(const std::string* default_value,
                                       Arena* arena) {
     if (arena == nullptr) {
       DestroyNoArena(default_value);
     }
   }
-  PROTOBUF_NDEBUG_INLINE void DestroyNoArena(const std::string* default_value);
+  SHARK_NDEBUG_INLINE void DestroyNoArena(const std::string* default_value);
 
   // Clears content, but keeps allocated std::string, to avoid the overhead of
   // heap operations. After this returns, the content (as seen by the user) will
   // always be the empty std::string.
-  PROTOBUF_NDEBUG_INLINE void ClearToEmpty() { ClearNonDefaultToEmpty(); }
-  PROTOBUF_NDEBUG_INLINE void ClearNonDefaultToEmpty() {
+  SHARK_NDEBUG_INLINE void ClearToEmpty() { ClearNonDefaultToEmpty(); }
+  SHARK_NDEBUG_INLINE void ClearNonDefaultToEmpty() {
     get_mutable()->clear();
   }
 
@@ -350,7 +349,7 @@ class PROTOBUF_EXPORT InlinedStringField {
                       bool donated);
 
   // Generated code / reflection only! Returns a mutable pointer to the string.
-  PROTOBUF_NDEBUG_INLINE std::string* UnsafeMutablePointer();
+  SHARK_NDEBUG_INLINE std::string* UnsafeMutablePointer();
 
   // InlinedStringField doesn't have things like the `default_value` pointer in
   // ArenaStringPtr.
@@ -360,8 +359,8 @@ class PROTOBUF_EXPORT InlinedStringField {
  private:
   void Destruct() { get_mutable()->~basic_string(); }
 
-  PROTOBUF_NDEBUG_INLINE std::string* get_mutable();
-  PROTOBUF_NDEBUG_INLINE const std::string* get_const() const;
+  SHARK_NDEBUG_INLINE std::string* get_mutable();
+  SHARK_NDEBUG_INLINE const std::string* get_const() const;
 
   alignas(std::string) char value_[sizeof(std::string)];
 
@@ -422,12 +421,12 @@ inline void InlinedStringField::SetNoArena(std::string&& value) {
 }
 
 // Caller should make sure rhs_arena allocated rhs, and lhs_arena allocated lhs.
-inline PROTOBUF_NDEBUG_INLINE void InlinedStringField::InternalSwap(
+inline SHARK_NDEBUG_INLINE void InlinedStringField::InternalSwap(
     InlinedStringField* lhs, Arena* lhs_arena, bool lhs_arena_dtor_registered,
     MessageLite* lhs_msg,  //
     InlinedStringField* rhs, Arena* rhs_arena, bool rhs_arena_dtor_registered,
     MessageLite* rhs_msg) {
-#if GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL_INLINE
+#if SHARK_INTERNAL_DONATE_STEAL_INLINE
   lhs->get_mutable()->swap(*rhs->get_mutable());
   if (!lhs_arena_dtor_registered && rhs_arena_dtor_registered) {
     lhs_msg->OnDemandRegisterArenaDtor(lhs_arena);
@@ -529,4 +528,3 @@ inline std::string* InlinedStringField::MutableNoCopy(std::nullptr_t) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_INLINED_STRING_FIELD_H__

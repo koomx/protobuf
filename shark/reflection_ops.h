@@ -35,8 +35,7 @@
 // This header is logically internal, but is made public because it is used
 // from protocol-compiler-generated code, which may reside in other components.
 
-#ifndef GOOGLE_PROTOBUF_REFLECTION_OPS_H__
-#define GOOGLE_PROTOBUF_REFLECTION_OPS_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 #include <shark/message.h>
@@ -61,7 +60,7 @@ namespace internal {
 // the Message interface.
 //
 // This class is really a namespace that contains only static methods.
-class PROTOBUF_EXPORT ReflectionOps {
+class SHARK_EXPORT ReflectionOps {
  public:
   static void Copy(const Message& from, Message* to);
   static void Merge(const Message& from, Message* to);
@@ -89,4 +88,3 @@ class PROTOBUF_EXPORT ReflectionOps {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_REFLECTION_OPS_H__

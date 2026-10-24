@@ -31,8 +31,7 @@
 // Adapted from the patch of kenton@google.com (Kenton Varda)
 // See https://github.com/protocolbuffers/protobuf/pull/710 for details.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_DELIMITED_MESSAGE_UTIL_H__
-#define GOOGLE_PROTOBUF_UTIL_DELIMITED_MESSAGE_UTIL_H__
+#pragma once
 
 
 #include <ostream>
@@ -64,10 +63,10 @@ namespace util {
 // then parse it. As a result, they may read past the end of the delimited
 // message. There is no way for them to push the extra data back into the
 // underlying source, so instead you must keep using the same stream object.
-bool PROTOBUF_EXPORT SerializeDelimitedToFileDescriptor(
+bool SHARK_EXPORT SerializeDelimitedToFileDescriptor(
     const MessageLite& message, int file_descriptor);
 
-bool PROTOBUF_EXPORT SerializeDelimitedToOstream(const MessageLite& message,
+bool SHARK_EXPORT SerializeDelimitedToOstream(const MessageLite& message,
                                                  std::ostream* output);
 
 // Read a single size-delimited message from the given stream. Delimited
@@ -82,10 +81,10 @@ bool PROTOBUF_EXPORT SerializeDelimitedToOstream(const MessageLite& message,
 // otherwise it will be set false. Note that these methods return false
 // on EOF, but they also return false on other errors, so |clean_eof| is
 // needed to distinguish a clean end from errors.
-bool PROTOBUF_EXPORT ParseDelimitedFromZeroCopyStream(
+bool SHARK_EXPORT ParseDelimitedFromZeroCopyStream(
     MessageLite* message, io::ZeroCopyInputStream* input, bool* clean_eof);
 
-bool PROTOBUF_EXPORT ParseDelimitedFromCodedStream(MessageLite* message,
+bool SHARK_EXPORT ParseDelimitedFromCodedStream(MessageLite* message,
                                                    io::CodedInputStream* input,
                                                    bool* clean_eof);
 
@@ -94,10 +93,10 @@ bool PROTOBUF_EXPORT ParseDelimitedFromCodedStream(MessageLite* message,
 // whereas normally writing multiple non-delimited messages to the same
 // stream would cause them to be merged. A delimited message is a varint
 // encoding the message size followed by a message of exactly that size.
-bool PROTOBUF_EXPORT SerializeDelimitedToZeroCopyStream(
+bool SHARK_EXPORT SerializeDelimitedToZeroCopyStream(
     const MessageLite& message, io::ZeroCopyOutputStream* output);
 
-bool PROTOBUF_EXPORT SerializeDelimitedToCodedStream(
+bool SHARK_EXPORT SerializeDelimitedToCodedStream(
     const MessageLite& message, io::CodedOutputStream* output);
 
 }  // namespace util
@@ -106,4 +105,3 @@ bool PROTOBUF_EXPORT SerializeDelimitedToCodedStream(
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_DELIMITED_MESSAGE_UTIL_H__

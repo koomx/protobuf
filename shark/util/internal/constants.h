@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_CONSTANTS_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_CONSTANTS_H__
+#pragma once
 
 #include <cstdint>
 
@@ -98,4 +97,3 @@ const char kOptionJspbMessageId[] = "jspb.message_id";
 }  // namespace util
 }  // namespace protobuf
 }  // namespace google
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_CONSTANTS_H__

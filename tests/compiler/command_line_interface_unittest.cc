@@ -88,7 +88,7 @@ using google::protobuf::io::win32::write;
 
 // Disable the whole test when we use tcmalloc for "draconian" heap checks, in
 // which case tcmalloc will print warnings that fail the plugin tests.
-#if !GOOGLE_PROTOBUF_HEAP_CHECK_DRACONIAN
+#if !SHARK_HEAP_CHECK_DRACONIAN
 
 
 namespace {
@@ -124,15 +124,15 @@ class CommandLineInterfaceTest : public testing::Test {
   // Create a subdirectory within temp_directory_.
   void CreateTempDir(const std::string& name);
 
-#ifdef PROTOBUF_OPENSOURCE
+#ifdef SHARK_OPENSOURCE
   // Change working directory to temp directory.
   void SwitchToTempDirectory() {
     File::ChangeWorkingDirectory(temp_directory_);
   }
-#else  // !PROTOBUF_OPENSOURCE
+#else  // !SHARK_OPENSOURCE
   // TODO(teboring): Figure out how to change and get working directory in
   // google3.
-#endif  // !PROTOBUF_OPENSOURCE
+#endif  // !SHARK_OPENSOURCE
 
   // -----------------------------------------------------------------
   // Methods to check the test results (called after Run()).
@@ -326,8 +326,8 @@ void CommandLineInterfaceTest::RunWithArgs(std::vector<std::string> args) {
   if (!disallow_plugins_) {
     cli_.AllowPlugins("prefix-");
     std::string plugin_path;
-#ifdef GOOGLE_PROTOBUF_TEST_PLUGIN_PATH
-    plugin_path = GOOGLE_PROTOBUF_TEST_PLUGIN_PATH;
+#ifdef SHARK_TEST_PLUGIN_PATH
+    plugin_path = SHARK_TEST_PLUGIN_PATH;
 #else
     const char* possible_paths[] = {
         // When building with shared libraries, libtool hides the real
@@ -1705,7 +1705,7 @@ TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileGivenTwoInputs) {
       "Can only process one input file when using --dependency_out=FILE.\n");
 }
 
-#ifdef PROTOBUF_OPENSOURCE
+#ifdef SHARK_OPENSOURCE
 TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFile) {
   CreateTempFile("foo.proto",
                  "syntax = \"proto2\";\n"
@@ -1731,10 +1731,10 @@ TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFile) {
 
   File::ChangeWorkingDirectory(current_working_directory);
 }
-#else  // !PROTOBUF_OPENSOURCE
+#else  // !SHARK_OPENSOURCE
 // TODO(teboring): Figure out how to change and get working directory in
 // google3.
-#endif  // !PROTOBUF_OPENSOURCE
+#endif  // !SHARK_OPENSOURCE
 
 TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileForAbsolutePath) {
   CreateTempFile("foo.proto",
@@ -2778,7 +2778,7 @@ INSTANTIATE_TEST_SUITE_P(FileDescriptorSetSource, EncodeDecodeTest,
                          testing::Values(PROTO_PATH, DESCRIPTOR_SET_IN));
 }  // anonymous namespace
 
-#endif  // !GOOGLE_PROTOBUF_HEAP_CHECK_DRACONIAN
+#endif  // !SHARK_HEAP_CHECK_DRACONIAN
 
 #include <shark/port_undef.inc>
 

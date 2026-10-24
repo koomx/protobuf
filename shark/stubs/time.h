@@ -27,8 +27,7 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#ifndef GOOGLE_PROTOBUF_STUBS_TIME_H_
-#define GOOGLE_PROTOBUF_STUBS_TIME_H_
+#pragma once
 
 #include <cstdint>
 
@@ -53,12 +52,12 @@ struct DateTime {
 // negative to represent time before 1970-01-01) to DateTime. Returns false
 // if the timestamp is not in the range between 0001-01-01T00:00:00 and
 // 9999-12-31T23:59:59.
-bool PROTOBUF_EXPORT SecondsToDateTime(int64_t seconds, DateTime* time);
+bool SHARK_EXPORT SecondsToDateTime(int64_t seconds, DateTime* time);
 // Converts DateTime to a timestamp (seconds since 1970-01-01T00:00:00).
 // Returns false if the DateTime is not valid or is not in the valid range.
-bool PROTOBUF_EXPORT DateTimeToSeconds(const DateTime& time, int64_t* seconds);
+bool SHARK_EXPORT DateTimeToSeconds(const DateTime& time, int64_t* seconds);
 
-void PROTOBUF_EXPORT GetCurrentTime(int64_t* seconds, int32_t* nanos);
+void SHARK_EXPORT GetCurrentTime(int64_t* seconds, int32_t* nanos);
 
 // Formats a time string in RFC3339 format.
 //
@@ -67,10 +66,10 @@ void PROTOBUF_EXPORT GetCurrentTime(int64_t* seconds, int32_t* nanos);
 // value.
 //
 // Note that "nanos" must in the range of [0, 999999999].
-std::string PROTOBUF_EXPORT FormatTime(int64_t seconds, int32_t nanos);
+std::string SHARK_EXPORT FormatTime(int64_t seconds, int32_t nanos);
 // Parses a time string. This method accepts RFC3339 date/time string with UTC
 // offset. For example, "2015-05-20T13:29:35.120-08:00".
-bool PROTOBUF_EXPORT ParseTime(const std::string& value, int64_t* seconds,
+bool SHARK_EXPORT ParseTime(const std::string& value, int64_t* seconds,
                                int32_t* nanos);
 
 }  // namespace internal
@@ -79,4 +78,3 @@ bool PROTOBUF_EXPORT ParseTime(const std::string& value, int64_t* seconds,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_TIME_H_

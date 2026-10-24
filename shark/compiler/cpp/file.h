@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_FILE_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_FILE_H__
+#pragma once
 
 #include <algorithm>
 #include <memory>
@@ -206,4 +205,3 @@ class FileGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_FILE_H__

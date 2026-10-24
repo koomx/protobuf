@@ -58,7 +58,7 @@ namespace util {
 namespace converter {
 
 using util::Status;
-using ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite;
+using ::SHARK_NAMESPACE_ID::internal::WireFormatLite;
 using std::placeholders::_1;
 
 
@@ -1260,7 +1260,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::RenderDataPiece(
 // represented by the key.
 std::unordered_map<std::string, ProtoStreamObjectWriter::TypeRenderer>*
     ProtoStreamObjectWriter::renderers_ = nullptr;
-PROTOBUF_NAMESPACE_ID::internal::once_flag writer_renderers_init_;
+SHARK_NAMESPACE_ID::internal::once_flag writer_renderers_init_;
 
 void ProtoStreamObjectWriter::InitRendererMap() {
   renderers_ = new std::unordered_map<std::string,
@@ -1319,7 +1319,7 @@ void ProtoStreamObjectWriter::DeleteRendererMap() {
 
 ProtoStreamObjectWriter::TypeRenderer*
 ProtoStreamObjectWriter::FindTypeRenderer(const std::string& type_url) {
-  PROTOBUF_NAMESPACE_ID::internal::call_once(writer_renderers_init_,
+  SHARK_NAMESPACE_ID::internal::call_once(writer_renderers_init_,
                                              InitRendererMap);
   return FindOrNull(*renderers_, type_url);
 }

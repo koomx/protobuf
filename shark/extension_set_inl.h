@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_EXTENSION_SET_INL_H__
-#define GOOGLE_PROTOBUF_EXTENSION_SET_INL_H__
+#pragma once
 
 #include <shark/extension_set.h>
 #include <shark/metadata_lite.h>
@@ -85,7 +84,7 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
   case WireFormatLite::TYPE_##UPPERCASE: {                                  \
     uint64_t value;                                                         \
     ptr = VarintParse(ptr, &value);                                         \
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);                                    \
+    SHARK_PARSER_ASSERT(ptr);                                    \
     if (extension.is_repeated) {                                            \
       Add##CPP_CAMELCASE(number, WireFormatLite::TYPE_##UPPERCASE,          \
                          extension.is_packed, value, extension.descriptor); \
@@ -105,7 +104,7 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
   case WireFormatLite::TYPE_##UPPERCASE: {                                  \
     uint64_t val;                                                           \
     ptr = VarintParse(ptr, &val);                                           \
-    GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);                                    \
+    SHARK_PARSER_ASSERT(ptr);                                    \
     auto value = WireFormatLite::ZigZagDecode##SIZE(val);                   \
     if (extension.is_repeated) {                                            \
       Add##CPP_CAMELCASE(number, WireFormatLite::TYPE_##UPPERCASE,          \
@@ -143,7 +142,7 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       case WireFormatLite::TYPE_ENUM: {
         uint64_t val;
         ptr = VarintParse(ptr, &val);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
         int value = val;
 
         if (!extension.enum_validity_check.func(
@@ -168,7 +167,7 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
                 : MutableString(number, WireFormatLite::TYPE_STRING,
                                 extension.descriptor);
         int size = ReadSize(&ptr);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
         return ctx->ReadString(ptr, size, value);
       }
 
@@ -215,7 +214,7 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
     if (tag == WireFormatLite::kMessageSetTypeIdTag) {
       uint64_t tmp;
       ptr = ParseBigVarint(ptr, &tmp);
-      GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+      SHARK_PARSER_ASSERT(ptr);
       if (state == State::kNoTag) {
         type_id = tmp;
         state = State::kHasType;
@@ -243,7 +242,7 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
           ParseContext tmp_ctx(ctx->depth(), false, &p, payload);
           tmp_ctx.data().pool = ctx->data().pool;
           tmp_ctx.data().factory = ctx->data().factory;
-          GOOGLE_PROTOBUF_PARSER_ASSERT(value->_InternalParse(p, &tmp_ctx) &&
+          SHARK_PARSER_ASSERT(value->_InternalParse(p, &tmp_ctx) &&
                                          tmp_ctx.EndedAtLimit());
         }
         state = State::kDone;
@@ -252,14 +251,14 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
       if (state == State::kHasType) {
         ptr = ParseFieldMaybeLazily(static_cast<uint64_t>(type_id) * 8 + 2, ptr,
                                     extendee, metadata, ctx);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr != nullptr);
+        SHARK_PARSER_ASSERT(ptr != nullptr);
         state = State::kDone;
       } else {
         std::string tmp;
         int32_t size = ReadSize(&ptr);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
         ptr = ctx->ReadString(ptr, size, &tmp);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
         if (state == State::kNoTag) {
           payload = std::move(tmp);
           state = State::kHasPayload;
@@ -272,7 +271,7 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
         return ptr;
       }
       ptr = ParseField(tag, ptr, extendee, metadata, ctx);
-      GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+      SHARK_PARSER_ASSERT(ptr);
     }
   }
   return ptr;
@@ -282,4 +281,3 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_EXTENSION_SET_INL_H__

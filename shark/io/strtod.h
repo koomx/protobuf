@@ -32,8 +32,7 @@
 // point default values in .proto files, where the decimal separator
 // is always a dot.
 
-#ifndef GOOGLE_PROTOBUF_IO_STRTOD_H__
-#define GOOGLE_PROTOBUF_IO_STRTOD_H__
+#pragma once
 
 namespace google {
 namespace protobuf {
@@ -52,4 +51,3 @@ float SafeDoubleToFloat(double value);
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_IO_STRTOD_H__

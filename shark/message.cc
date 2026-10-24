@@ -198,7 +198,7 @@ size_t Message::ComputeUnknownFieldsSize(
 
 size_t Message::MaybeComputeUnknownFieldsSize(
     size_t total_size, internal::CachedSize* cached_size) const {
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     return ComputeUnknownFieldsSize(total_size, cached_size);
   }
   cached_size->Set(internal::ToCachedSize(total_size));
@@ -379,7 +379,7 @@ template <>
 #if defined(_MSC_VER) && (_MSC_VER >= 1800)
 // Note: force noinline to workaround MSVC compiler bug with /Zc:inline, issue
 // #240
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 #endif
     Message*
     GenericTypeHandler<Message>::NewFromPrototype(const Message* prototype,
@@ -390,7 +390,7 @@ template <>
 #if defined(_MSC_VER) && (_MSC_VER >= 1800)
 // Note: force noinline to workaround MSVC compiler bug with /Zc:inline, issue
 // #240
-PROTOBUF_NOINLINE
+SHARK_NOINLINE
 #endif
     Arena*
     GenericTypeHandler<Message>::GetOwningArena(Message* value) {

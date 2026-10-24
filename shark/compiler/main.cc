@@ -56,9 +56,9 @@ int ProtobufMain(int argc, char* argv[]) {
   cli.RegisterGenerator("--cpp_out", "--cpp_opt", &cpp_generator,
                         "Generate C++ header and source.");
 
-#ifdef GOOGLE_PROTOBUF_RUNTIME_INCLUDE_BASE
+#ifdef SHARK_RUNTIME_INCLUDE_BASE
   cpp_generator.set_opensource_runtime(true);
-  cpp_generator.set_runtime_include_base(GOOGLE_PROTOBUF_RUNTIME_INCLUDE_BASE);
+  cpp_generator.set_runtime_include_base(SHARK_RUNTIME_INCLUDE_BASE);
 #endif
 
   // Proto2 Java
@@ -109,5 +109,5 @@ int ProtobufMain(int argc, char* argv[]) {
 }  // namespace google
 
 int main(int argc, char* argv[]) {
-  return PROTOBUF_NAMESPACE_ID::compiler::ProtobufMain(argc, argv);
+  return SHARK_NAMESPACE_ID::compiler::ProtobufMain(argc, argv);
 }

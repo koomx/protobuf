@@ -37,8 +37,7 @@
 
 #include <string>
 
-#ifndef GOOGLE_PROTOBUF_STUBS_SUBSTITUTE_H_
-#define GOOGLE_PROTOBUF_STUBS_SUBSTITUTE_H_
+#pragma once
 
 #include <shark/port_def.inc>
 
@@ -143,7 +142,7 @@ class SubstituteArg {
 
 }  // namespace internal
 
-PROTOBUF_EXPORT std::string Substitute(
+SHARK_EXPORT std::string Substitute(
     const std::string& format,
     const internal::SubstituteArg& arg0 = internal::SubstituteArg(),
     const internal::SubstituteArg& arg1 = internal::SubstituteArg(),
@@ -156,7 +155,7 @@ PROTOBUF_EXPORT std::string Substitute(
     const internal::SubstituteArg& arg8 = internal::SubstituteArg(),
     const internal::SubstituteArg& arg9 = internal::SubstituteArg());
 
-PROTOBUF_EXPORT void SubstituteAndAppend(
+SHARK_EXPORT void SubstituteAndAppend(
     std::string* output, const char* format,
     const internal::SubstituteArg& arg0 = internal::SubstituteArg(),
     const internal::SubstituteArg& arg1 = internal::SubstituteArg(),
@@ -175,4 +174,3 @@ PROTOBUF_EXPORT void SubstituteAndAppend(
 
 #include <shark/port_undef.inc>
 
-#endif // GOOGLE_PROTOBUF_STUBS_SUBSTITUTE_H_

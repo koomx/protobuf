@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_NAMES_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_NAMES_H__
+#pragma once
 
 #include <string>
 
@@ -94,4 +93,3 @@ PROTOC_EXPORT std::string StripProto(const std::string& filename);
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_NAMES_H__

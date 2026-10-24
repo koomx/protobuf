@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_STUBS_PORT_H_
-#define GOOGLE_PROTOBUF_STUBS_PORT_H_
+#pragma once
 
 #include <assert.h>
 #include <cstdint>
@@ -42,14 +41,14 @@
 
 #include <shark/port_def.inc>
 
-#undef PROTOBUF_LITTLE_ENDIAN
+#undef SHARK_LITTLE_ENDIAN
 #ifdef _WIN32
   // Assuming windows is always little-endian.
-  // TODO(xiaofeng): The PROTOBUF_LITTLE_ENDIAN is not only used for
+  // TODO(xiaofeng): The SHARK_LITTLE_ENDIAN is not only used for
   // optimization but also for correctness. We should define an
   // different macro to test the big-endian code path in coded_stream.
-  #if !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
-    #define PROTOBUF_LITTLE_ENDIAN 1
+  #if !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+    #define SHARK_LITTLE_ENDIAN 1
   #endif
 #if defined(_MSC_VER) && _MSC_VER >= 1300 && !defined(__INTEL_COMPILER)
 // If MSVC has "/RTCc" set, it will complain about truncating casts at
@@ -73,8 +72,8 @@
 #if ((defined(__LITTLE_ENDIAN__) && !defined(__BIG_ENDIAN__)) ||   \
      (defined(__BYTE_ORDER) && __BYTE_ORDER == __LITTLE_ENDIAN) || \
      (defined(BYTE_ORDER) && BYTE_ORDER == LITTLE_ENDIAN)) &&      \
-    !defined(PROTOBUF_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
-#define PROTOBUF_LITTLE_ENDIAN 1
+    !defined(SHARK_DISABLE_LITTLE_ENDIAN_OPT_FOR_TEST)
+#define SHARK_LITTLE_ENDIAN 1
 #endif
 #endif
 
@@ -90,11 +89,11 @@
 
 // Legacy: some users reference these (internal-only) macros even though we
 // don't need them any more.
-#if defined(_MSC_VER) && defined(PROTOBUF_USE_DLLS)
-  #ifdef LIBPROTOBUF_EXPORTS
-    #define LIBPROTOBUF_EXPORT __declspec(dllexport)
+#if defined(_MSC_VER) && defined(SHARK_USE_DLLS)
+  #ifdef LIBSHARK_EXPORTS
+    #define LIBSHARK_EXPORT __declspec(dllexport)
   #else
-    #define LIBPROTOBUF_EXPORT __declspec(dllimport)
+    #define LIBSHARK_EXPORT __declspec(dllimport)
   #endif
   #ifdef LIBPROTOC_EXPORTS
     #define LIBPROTOC_EXPORT   __declspec(dllexport)
@@ -102,13 +101,13 @@
     #define LIBPROTOC_EXPORT   __declspec(dllimport)
   #endif
 #else
-  #define LIBPROTOBUF_EXPORT
+  #define LIBSHARK_EXPORT
   #define LIBPROTOC_EXPORT
 #endif
 
-#define PROTOBUF_RUNTIME_DEPRECATED(message) PROTOBUF_DEPRECATED_MSG(message)
-#define GOOGLE_PROTOBUF_RUNTIME_DEPRECATED(message) \
-  PROTOBUF_DEPRECATED_MSG(message)
+#define SHARK_RUNTIME_DEPRECATED(message) [[deprecated(message)]]
+#define SHARK_RUNTIME_DEPRECATED(message) \
+  [[deprecated(message)]]
 
 // ===================================================================
 // from google3/base/port.h
@@ -187,7 +186,7 @@ inline void GOOGLE_UNALIGNED_STORE64(void *p, uint64_t v) {
   __sanitizer_unaligned_store64(p, v);
 }
 
-#elif defined(GOOGLE_PROTOBUF_USE_UNALIGNED) && GOOGLE_PROTOBUF_USE_UNALIGNED
+#elif defined(SHARK_USE_UNALIGNED) && SHARK_USE_UNALIGNED
 
 #define GOOGLE_UNALIGNED_LOAD16(_p) (*reinterpret_cast<const uint16_t *>(_p))
 #define GOOGLE_UNALIGNED_LOAD32(_p) (*reinterpret_cast<const uint32_t *>(_p))
@@ -229,11 +228,11 @@ inline void GOOGLE_UNALIGNED_STORE64(void *p, uint64_t v) {
 }
 #endif
 
-#if defined(GOOGLE_PROTOBUF_OS_NACL) \
+#if defined(SHARK_OS_NACL) \
     || (defined(__ANDROID__) && defined(__clang__) \
         && (__clang_major__ == 3 && __clang_minor__ == 8) \
         && (__clang_patchlevel__ < 275480))
-# define GOOGLE_PROTOBUF_USE_PORTABLE_LOG2
+# define SHARK_USE_PORTABLE_LOG2
 #endif
 
 // The following guarantees declaration of the byte swap functions.
@@ -306,7 +305,7 @@ class Bits {
     // This includes arm-nacl-clang and clang in older Android NDK versions.
     // To work around this, when we build with those we use the portable
     // implementation instead.
-#if defined(__GNUC__) && !defined(GOOGLE_PROTOBUF_USE_PORTABLE_LOG2)
+#if defined(__GNUC__) && !defined(SHARK_USE_PORTABLE_LOG2)
   return 63 ^ static_cast<uint32_t>(__builtin_clzll(n));
 #elif defined(_MSC_VER) && defined(_M_X64)
   unsigned long where;
@@ -347,11 +346,11 @@ class Bits {
 
 // ===================================================================
 // from google3/util/endian/endian.h
-PROTOBUF_EXPORT uint32_t ghtonl(uint32_t x);
+SHARK_EXPORT uint32_t ghtonl(uint32_t x);
 
 class BigEndian {
  public:
-#ifdef PROTOBUF_LITTLE_ENDIAN
+#ifdef SHARK_LITTLE_ENDIAN
 
   static uint16_t FromHost16(uint16_t x) { return bswap_16(x); }
   static uint16_t ToHost16(uint16_t x) { return bswap_16(x); }
@@ -410,4 +409,3 @@ class BigEndian {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_PORT_H_

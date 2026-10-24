@@ -212,7 +212,7 @@ bool ReflectionOps::IsInitialized(const Message& message, bool check_fields,
       for (const FieldDescriptor* field = begin; field != end; ++field) {
         if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
           const Descriptor* message_type = field->message_type();
-          if (PROTOBUF_PREDICT_FALSE(message_type->options().map_entry())) {
+          if (SHARK_PREDICT_FALSE(message_type->options().map_entry())) {
             if (message_type->field(1)->cpp_type() ==
                 FieldDescriptor::CPPTYPE_MESSAGE) {
               const MapFieldBase* map_field =
@@ -424,12 +424,12 @@ void ReflectionOps::FindInitializationErrors(const Message& message,
 }
 
 void GenericSwap(Message* lhs, Message* rhs) {
-#ifndef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifndef SHARK_FORCE_COPY_IN_SWAP
   GOOGLE_DCHECK(Arena::InternalGetOwningArena(lhs) !=
          Arena::InternalGetOwningArena(rhs));
   GOOGLE_DCHECK(Arena::InternalGetOwningArena(lhs) != nullptr ||
          Arena::InternalGetOwningArena(rhs) != nullptr);
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // !SHARK_FORCE_COPY_IN_SWAP
   // At least one of these must have an arena, so make `rhs` point to it.
   Arena* arena = Arena::InternalGetOwningArena(rhs);
   if (arena == nullptr) {
@@ -443,13 +443,13 @@ void GenericSwap(Message* lhs, Message* rhs) {
   tmp->CheckTypeAndMergeFrom(*lhs);
   lhs->Clear();
   lhs->CheckTypeAndMergeFrom(*rhs);
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   rhs->Clear();
   rhs->CheckTypeAndMergeFrom(*tmp);
   if (arena == nullptr) delete tmp;
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+#else   // SHARK_FORCE_COPY_IN_SWAP
   rhs->GetReflection()->Swap(tmp, rhs);
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // !SHARK_FORCE_COPY_IN_SWAP
 }
 
 }  // namespace internal

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_LOCATION_TRACKER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_LOCATION_TRACKER_H__
+#pragma once
 
 #include <string>
 
@@ -45,7 +44,7 @@ namespace converter {
 
 // LocationTrackerInterface is an interface for classes that track
 // the location information for the purpose of error reporting.
-class PROTOBUF_EXPORT LocationTrackerInterface {
+class SHARK_EXPORT LocationTrackerInterface {
  public:
   virtual ~LocationTrackerInterface() {}
 
@@ -67,4 +66,3 @@ class PROTOBUF_EXPORT LocationTrackerInterface {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_LOCATION_TRACKER_H__

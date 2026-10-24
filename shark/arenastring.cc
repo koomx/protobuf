@@ -71,7 +71,7 @@ static_assert(alignof(ExplicitlyConstructedArenaString) >= 4, "");
 }  // namespace
 
 const std::string& LazyString::Init() const {
-  static WrappedMutex mu{GOOGLE_PROTOBUF_LINKER_INITIALIZED};
+  static WrappedMutex mu{SHARK_LINKER_INITIALIZED};
   mu.Lock();
   const std::string* res = inited_.load(std::memory_order_acquire);
   if (res == nullptr) {
@@ -87,14 +87,14 @@ const std::string& LazyString::Init() const {
 namespace {
 
 
-#if defined(NDEBUG) || !GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL
+#if defined(NDEBUG) || !SHARK_INTERNAL_DONATE_STEAL
 
 class ScopedCheckPtrInvariants {
  public:
   explicit ScopedCheckPtrInvariants(const TaggedStringPtr*) {}
 };
 
-#endif  // NDEBUG || !GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL
+#endif  // NDEBUG || !SHARK_INTERNAL_DONATE_STEAL
 
 // Creates a heap allocated std::string value.
 inline TaggedStringPtr CreateString(ConstStringParam value) {
@@ -103,7 +103,7 @@ inline TaggedStringPtr CreateString(ConstStringParam value) {
   return res;
 }
 
-#if !GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL
+#if !SHARK_INTERNAL_DONATE_STEAL
 
 // Creates an arena allocated std::string value.
 TaggedStringPtr CreateArenaString(Arena& arena, ConstStringParam s) {
@@ -112,7 +112,7 @@ TaggedStringPtr CreateArenaString(Arena& arena, ConstStringParam s) {
   return res;
 }
 
-#endif  // !GOOGLE_PROTOBUF_INTERNAL_DONATE_STEAL
+#endif  // !SHARK_INTERNAL_DONATE_STEAL
 
 }  // namespace
 
@@ -256,7 +256,7 @@ const char* EpsCopyInputStream::ReadArenaString(const char* ptr,
 
   auto* str = s->NewString(arena);
   ptr = ReadString(ptr, size, str);
-  GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+  SHARK_PARSER_ASSERT(ptr);
   return ptr;
 }
 

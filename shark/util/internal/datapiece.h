@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_DATAPIECE_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_DATAPIECE_H__
+#pragma once
 
 #include <cstdint>
 #include <string>
@@ -58,7 +57,7 @@ class ProtoWriter;
 // Just like StringPiece, the DataPiece class does not own the storage for
 // the actual string or Cord, so it is the user's responsibility to guarantee
 // that the underlying storage is still valid when the DataPiece is accessed.
-class PROTOBUF_EXPORT DataPiece {
+class SHARK_EXPORT DataPiece {
  public:
   // Identifies data type of the value.
   // These are the types supported by DataPiece.
@@ -216,4 +215,3 @@ class PROTOBUF_EXPORT DataPiece {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_DATAPIECE_H__

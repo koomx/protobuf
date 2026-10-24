@@ -69,8 +69,7 @@
 //  }
 //
 
-#ifndef GOOGLE_PROTOBUF_STUBS_STATUSOR_H_
-#define GOOGLE_PROTOBUF_STUBS_STATUSOR_H_
+#pragma once
 
 #include <new>
 #include <string>
@@ -153,7 +152,7 @@ class StatusOr {
 ////////////////////////////////////////////////////////////////////////////////
 // Implementation details for StatusOr<T>
 
-class PROTOBUF_EXPORT StatusOrHelper {
+class SHARK_EXPORT StatusOrHelper {
  public:
   // Move type-agnostic error handling to the .cc.
   static void Crash(const util::Status& status);
@@ -250,4 +249,3 @@ using ::google::protobuf::util::statusor_internal::StatusOr;
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_STATUSOR_H_

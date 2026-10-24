@@ -426,7 +426,7 @@ std::string Namespace(const FileDescriptor* d, const Options& options) {
     ret = StringReplace(ret,
                         "::google::"
                         "protobuf",
-                        "::PROTOBUF_NAMESPACE_ID", false);
+                        "::SHARK_NAMESPACE_ID", false);
   }
   return ret;
 }
@@ -478,7 +478,7 @@ std::string DescriptorTableName(const FileDescriptor* file,
 }
 
 std::string FileDllExport(const FileDescriptor* file, const Options& options) {
-  return UniqueName("PROTOBUF_INTERNAL_EXPORT", file, options);
+  return UniqueName("SHARK_INTERNAL_EXPORT", file, options);
 }
 
 std::string SuperClassName(const Descriptor* descriptor,
@@ -1386,10 +1386,10 @@ bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
           generator_context->Open(*basename + ".pb.h"));
       io::Printer printer(output.get(), '$', nullptr);
       printer.Print(
-          "#ifndef PROTOBUF_INCLUDED_$filename_identifier$_FORWARD_PB_H\n"
-          "#define PROTOBUF_INCLUDED_$filename_identifier$_FORWARD_PB_H\n"
+          "#ifndef SHARK_INCLUDED_$filename_identifier$_FORWARD_PB_H\n"
+          "#define SHARK_INCLUDED_$filename_identifier$_FORWARD_PB_H\n"
           "#include \"$forward_to_basename$.pb.h\"  // IWYU pragma: export\n"
-          "#endif  // PROTOBUF_INCLUDED_$filename_identifier$_FORWARD_PB_H\n",
+          "#endif  // SHARK_INCLUDED_$filename_identifier$_FORWARD_PB_H\n",
           "forward_to_basename", forward_to_basename, "filename_identifier",
           FilenameIdentifier(*basename));
 
@@ -1411,12 +1411,12 @@ bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
           generator_context->Open(*basename + ".proto.h"));
       io::Printer printer(output.get(), '$', nullptr);
       printer.Print(
-          "#ifndef PROTOBUF_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n"
-          "#define PROTOBUF_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n"
+          "#ifndef SHARK_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n"
+          "#define SHARK_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n"
           "#include \"$forward_to_basename$.proto.h\"  // IWYU pragma: "
           "export\n"
           "#endif  // "
-          "PROTOBUF_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n",
+          "SHARK_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n",
           "forward_to_basename", forward_to_basename, "filename_identifier",
           FilenameIdentifier(*basename));
     }

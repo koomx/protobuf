@@ -107,8 +107,7 @@
 //     delete foo;
 //   }
 
-#ifndef GOOGLE_PROTOBUF_MESSAGE_H__
-#define GOOGLE_PROTOBUF_MESSAGE_H__
+#pragma once
 
 
 #include <iosfwd>
@@ -221,7 +220,7 @@ const To& GetConstRefAtOffset(const Message& message, uint32_t offset) {
 bool CreateUnknownEnumValues(const FieldDescriptor* field);
 
 // Returns true if "message" is a descendant of "root".
-PROTOBUF_EXPORT bool IsDescendant(Message& root, const Message& message);
+SHARK_EXPORT bool IsDescendant(Message& root, const Message& message);
 }  // namespace internal
 
 // Abstract interface for protocol messages.
@@ -237,7 +236,7 @@ PROTOBUF_EXPORT bool IsDescendant(Message& root, const Message& message);
 //
 // Users must not derive from this class. Only the protocol compiler and
 // the internal library are allowed to create subclasses.
-class PROTOBUF_EXPORT Message : public MessageLite {
+class SHARK_EXPORT Message : public MessageLite {
  public:
   constexpr Message() {}
 
@@ -300,7 +299,7 @@ class PROTOBUF_EXPORT Message : public MessageLite {
   // fields defined for the proto.
   virtual size_t SpaceUsedLong() const;
 
-  PROTOBUF_DEPRECATED_MSG("Please use SpaceUsedLong() instead")
+  [[deprecated("Please use SpaceUsedLong() instead")]]
   int SpaceUsed() const { return internal::ToIntSize(SpaceUsedLong()); }
 
   // Debugging & Testing----------------------------------------------
@@ -457,7 +456,7 @@ class MutableRepeatedFieldRef;
 // double the message's memory footprint, probably worse.  Allocating the
 // objects on-demand, on the other hand, would be expensive and prone to
 // memory leaks.  So, instead we ended up with this flat interface.
-class PROTOBUF_EXPORT Reflection final {
+class SHARK_EXPORT Reflection final {
  public:
   // Get the UnknownFieldSet for the message.  This contains fields which
   // were seen when the Message was parsed but were not recognized according
@@ -471,7 +470,7 @@ class PROTOBUF_EXPORT Reflection final {
   // Estimate the amount of memory used by the message object.
   size_t SpaceUsedLong(const Message& message) const;
 
-  PROTOBUF_DEPRECATED_MSG("Please use SpaceUsedLong() instead")
+  [[deprecated("Please use SpaceUsedLong() instead")]]
   int SpaceUsed(const Message& message) const {
     return internal::ToIntSize(SpaceUsedLong(message));
   }
@@ -508,7 +507,7 @@ class PROTOBUF_EXPORT Reflection final {
   void RemoveLast(Message* message, const FieldDescriptor* field) const;
   // Removes the last element of a repeated message field, and returns the
   // pointer to the caller.  Caller takes ownership of the returned pointer.
-  PROTOBUF_NODISCARD Message* ReleaseLast(Message* message,
+  [[nodiscard]] Message* ReleaseLast(Message* message,
                                           const FieldDescriptor* field) const;
 
   // Similar to ReleaseLast() without internal safety and ownershp checks. This
@@ -663,7 +662,7 @@ class PROTOBUF_EXPORT Reflection final {
   // If the field existed (HasField() is true), then the returned pointer will
   // be the same as the pointer returned by MutableMessage().
   // This function has the same effect as ClearField().
-  PROTOBUF_NODISCARD Message* ReleaseMessage(
+  [[nodiscard]] Message* ReleaseMessage(
       Message* message, const FieldDescriptor* field,
       MessageFactory* factory = nullptr) const;
 
@@ -850,7 +849,7 @@ class PROTOBUF_EXPORT Reflection final {
   //
   // for T = Cord and all protobuf scalar types except enums.
   template <typename T>
-  PROTOBUF_DEPRECATED_MSG("Please use GetRepeatedFieldRef() instead")
+  [[deprecated("Please use GetRepeatedFieldRef() instead")]]
   const RepeatedField<T>& GetRepeatedField(const Message& msg,
                                            const FieldDescriptor* d) const {
     return GetRepeatedFieldInternal<T>(msg, d);
@@ -860,7 +859,7 @@ class PROTOBUF_EXPORT Reflection final {
   //
   // for T = Cord and all protobuf scalar types except enums.
   template <typename T>
-  PROTOBUF_DEPRECATED_MSG("Please use GetMutableRepeatedFieldRef() instead")
+  [[deprecated("Please use GetMutableRepeatedFieldRef() instead")]]
   RepeatedField<T>* MutableRepeatedField(Message* msg,
                                          const FieldDescriptor* d) const {
     return MutableRepeatedFieldInternal<T>(msg, d);
@@ -871,7 +870,7 @@ class PROTOBUF_EXPORT Reflection final {
   // for T = std::string, google::protobuf::internal::StringPieceField
   //         google::protobuf::Message & descendants.
   template <typename T>
-  PROTOBUF_DEPRECATED_MSG("Please use GetRepeatedFieldRef() instead")
+  [[deprecated("Please use GetRepeatedFieldRef() instead")]]
   const RepeatedPtrField<T>& GetRepeatedPtrField(
       const Message& msg, const FieldDescriptor* d) const {
     return GetRepeatedPtrFieldInternal<T>(msg, d);
@@ -882,7 +881,7 @@ class PROTOBUF_EXPORT Reflection final {
   // for T = std::string, google::protobuf::internal::StringPieceField
   //         google::protobuf::Message & descendants.
   template <typename T>
-  PROTOBUF_DEPRECATED_MSG("Please use GetMutableRepeatedFieldRef() instead")
+  [[deprecated("Please use GetMutableRepeatedFieldRef() instead")]]
   RepeatedPtrField<T>* MutableRepeatedPtrField(Message* msg,
                                                const FieldDescriptor* d) const {
     return MutableRepeatedPtrFieldInternal<T>(msg, d);
@@ -1046,14 +1045,14 @@ class PROTOBUF_EXPORT Reflection final {
   friend class RepeatedFieldRef;
   template <typename T, typename Enable>
   friend class MutableRepeatedFieldRef;
-  friend class ::PROTOBUF_NAMESPACE_ID::MessageLayoutInspector;
-  friend class ::PROTOBUF_NAMESPACE_ID::AssignDescriptorsHelper;
+  friend class ::SHARK_NAMESPACE_ID::MessageLayoutInspector;
+  friend class ::SHARK_NAMESPACE_ID::AssignDescriptorsHelper;
   friend class DynamicMessageFactory;
   friend class GeneratedMessageReflectionTestHelper;
   friend class python::MapReflectionFriend;
   friend class python::MessageReflectionFriend;
   friend class util::MessageDifferencer;
-#define GOOGLE_PROTOBUF_HAS_CEL_MAP_REFLECTION_FRIEND
+#define SHARK_HAS_CEL_MAP_REFLECTION_FRIEND
   friend class expr::CelMapReflectionFriend;
   friend class internal::MapFieldReflectionTest;
   friend class internal::MapKeySorter;
@@ -1265,7 +1264,7 @@ class PROTOBUF_EXPORT Reflection final {
 };
 
 // Abstract interface for a factory for message objects.
-class PROTOBUF_EXPORT MessageFactory {
+class SHARK_EXPORT MessageFactory {
  public:
   inline MessageFactory() {}
   virtual ~MessageFactory();
@@ -1330,12 +1329,12 @@ class PROTOBUF_EXPORT MessageFactory {
 
 #define DECLARE_GET_REPEATED_FIELD(TYPE)                           \
   template <>                                                      \
-  PROTOBUF_EXPORT const RepeatedField<TYPE>&                       \
+  SHARK_EXPORT const RepeatedField<TYPE>&                       \
   Reflection::GetRepeatedFieldInternal<TYPE>(                      \
       const Message& message, const FieldDescriptor* field) const; \
                                                                    \
   template <>                                                      \
-  PROTOBUF_EXPORT RepeatedField<TYPE>*                             \
+  SHARK_EXPORT RepeatedField<TYPE>*                             \
   Reflection::MutableRepeatedFieldInternal<TYPE>(                  \
       Message * message, const FieldDescriptor* field) const;
 
@@ -1367,7 +1366,7 @@ const T* DynamicCastToGenerated(const Message* from) {
   const Message* unused = static_cast<T*>(nullptr);
   (void)unused;
 
-#if PROTOBUF_RTTI
+#if SHARK_RTTI
   return dynamic_cast<const T*>(from);
 #else
   bool ok = from != nullptr &&
@@ -1494,4 +1493,3 @@ const Type& Reflection::GetRaw(const Message& message,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MESSAGE_H__

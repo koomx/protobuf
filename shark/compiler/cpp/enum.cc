@@ -184,7 +184,7 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   if (HasDescriptorMethods(descriptor_->file(), options_)) {
     format(
         "inline bool $classname$_Parse(\n"
-        "    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, $classname$* "
+        "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
         "value) "
         "{\n"
         "  return ::$proto_ns$::internal::ParseNamedEnum<$classname$>(\n"
@@ -193,7 +193,7 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   } else {
     format(
         "bool $classname$_Parse(\n"
-        "    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, $classname$* "
+        "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
         "value);\n");
   }
 }
@@ -261,7 +261,7 @@ void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
       "}\n");
   format(
       "static inline bool "
-      "$nested_name$_Parse(::PROTOBUF_NAMESPACE_ID::ConstStringParam name,\n"
+      "$nested_name$_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,\n"
       "    $resolved_name$* value) {\n"
       "  return $classname$_Parse(name, value);\n"
       "}\n");
@@ -391,7 +391,7 @@ void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
         CountUniqueValues(descriptor_));
     format(
         "bool $classname$_Parse(\n"
-        "    ::PROTOBUF_NAMESPACE_ID::ConstStringParam name, $classname$* "
+        "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
         "value) "
         "{\n"
         "  int int_value;\n"

@@ -112,7 +112,7 @@ TEST(ObjCHelper, TextFormatDecodeData_DecodeDataForString_ByteCodes) {
 }
 
 // Death tests do not work on Windows as of yet.
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 TEST(ObjCHelperDeathTest, TextFormatDecodeData_DecodeDataForString_Failures) {
   // Empty inputs.
 
@@ -138,7 +138,7 @@ TEST(ObjCHelperDeathTest, TextFormatDecodeData_DecodeDataForString_Failures) {
       ::testing::KilledBySignal(SIGABRT),
       "error: got a null char in a string for making TextFormat data, input:");
 }
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 TEST(ObjCHelper, TextFormatDecodeData_RawStrings) {
   TextFormatDecodeData decode_data;
@@ -203,7 +203,7 @@ TEST(ObjCHelper, TextFormatDecodeData_ByteCodes) {
 
 
 // Death tests do not work on Windows as of yet.
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 TEST(ObjCHelperDeathTest, TextFormatDecodeData_Failures) {
   TextFormatDecodeData decode_data;
 
@@ -240,7 +240,7 @@ TEST(ObjCHelperDeathTest, TextFormatDecodeData_Failures) {
               ::testing::KilledBySignal(SIGABRT),
               "error: duplicate key \\(2\\) making TextFormat data, input:");
 }
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 class TestLineCollector : public LineConsumer {
  public:

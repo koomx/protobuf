@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_EXPLICITLY_CONSTRUCTED_H__
-#define GOOGLE_PROTOBUF_EXPLICITLY_CONSTRUCTED_H__
+#pragma once
 
 #include <stdint.h>
 
@@ -94,4 +93,3 @@ using ExplicitlyConstructedArenaString = ExplicitlyConstructed<std::string, 8>;
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_EXPLICITLY_CONSTRUCTED_H__

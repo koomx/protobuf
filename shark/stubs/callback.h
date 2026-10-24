@@ -1,5 +1,4 @@
-#ifndef GOOGLE_PROTOBUF_STUBS_CALLBACK_H_
-#define GOOGLE_PROTOBUF_STUBS_CALLBACK_H_
+#pragma once
 
 #include <type_traits>
 
@@ -70,7 +69,7 @@ namespace protobuf {
 //   std::string my_str;
 //   NewCallback(&Foo, my_str);  // WON'T WORK:  Can't use references.
 // However, correctly-typed pointers will work just fine.
-class PROTOBUF_EXPORT Closure {
+class SHARK_EXPORT Closure {
  public:
   Closure() {}
   virtual ~Closure();
@@ -94,7 +93,7 @@ class ResultCallback {
 };
 
 template <typename R, typename A1>
-class PROTOBUF_EXPORT ResultCallback1 {
+class SHARK_EXPORT ResultCallback1 {
  public:
   ResultCallback1() {}
   virtual ~ResultCallback1() {}
@@ -106,7 +105,7 @@ class PROTOBUF_EXPORT ResultCallback1 {
 };
 
 template <typename R, typename A1, typename A2>
-class PROTOBUF_EXPORT ResultCallback2 {
+class SHARK_EXPORT ResultCallback2 {
  public:
   ResultCallback2() {}
   virtual ~ResultCallback2() {}
@@ -119,7 +118,7 @@ class PROTOBUF_EXPORT ResultCallback2 {
 
 namespace internal {
 
-class PROTOBUF_EXPORT FunctionClosure0 : public Closure {
+class SHARK_EXPORT FunctionClosure0 : public Closure {
  public:
   typedef void (*FunctionType)();
 
@@ -573,11 +572,10 @@ inline ResultCallback2<R, A1, A2>* NewPermanentCallback(
 
 // A function which does nothing.  Useful for creating no-op callbacks, e.g.:
 //   Closure* nothing = NewCallback(&DoNothing);
-void PROTOBUF_EXPORT DoNothing();
+void SHARK_EXPORT DoNothing();
 
 }  // namespace protobuf
 }  // namespace google
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_CALLBACK_H_

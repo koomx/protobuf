@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_JSON_OBJECTWRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_JSON_OBJECTWRITER_H__
+#pragma once
 
 #include <cstdint>
 #include <memory>
@@ -88,7 +87,7 @@ namespace converter {
 // uint64 would lose precision if rendered as numbers.
 //
 // JsonObjectWriter is thread-unsafe.
-class PROTOBUF_EXPORT JsonObjectWriter : public StructuredObjectWriter {
+class SHARK_EXPORT JsonObjectWriter : public StructuredObjectWriter {
  public:
   JsonObjectWriter(StringPiece indent_string, io::CodedOutputStream* out)
       : element_(new Element(/*parent=*/nullptr, /*is_json_object=*/false)),
@@ -138,7 +137,7 @@ class PROTOBUF_EXPORT JsonObjectWriter : public StructuredObjectWriter {
   }
 
  protected:
-  class PROTOBUF_EXPORT Element : public BaseElement {
+  class SHARK_EXPORT Element : public BaseElement {
    public:
     Element(Element* parent, bool is_json_object)
         : BaseElement(parent),
@@ -169,7 +168,7 @@ class PROTOBUF_EXPORT JsonObjectWriter : public StructuredObjectWriter {
   Element* element() override { return element_.get(); }
 
  private:
-  class PROTOBUF_EXPORT ByteSinkWrapper : public strings::ByteSink {
+  class SHARK_EXPORT ByteSinkWrapper : public strings::ByteSink {
    public:
     explicit ByteSinkWrapper(io::CodedOutputStream* stream) : stream_(stream) {}
     ~ByteSinkWrapper() override {}
@@ -275,4 +274,3 @@ class PROTOBUF_EXPORT JsonObjectWriter : public StructuredObjectWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_JSON_OBJECTWRITER_H__

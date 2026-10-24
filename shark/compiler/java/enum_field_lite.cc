@@ -58,11 +58,11 @@ namespace java {
 
 namespace {
 bool EnableExperimentalRuntimeForLite() {
-#ifdef PROTOBUF_EXPERIMENT
-  return PROTOBUF_EXPERIMENT;
-#else   // PROTOBUF_EXPERIMENT
+#ifdef SHARK_EXPERIMENT
+  return SHARK_EXPERIMENT;
+#else   // SHARK_EXPERIMENT
   return false;
-#endif  // !PROTOBUF_EXPERIMENT
+#endif  // !SHARK_EXPERIMENT
 }
 
 void SetEnumVariables(const FieldDescriptor* descriptor, int messageBitIndex,

@@ -323,7 +323,7 @@ TEST(Int128, AliasTests) {
   EXPECT_EQ(x4, x3);
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 TEST(Int128, DivideByZeroCheckFails) {
   uint128 a = 0;
   uint128 b = 0;
@@ -339,7 +339,7 @@ TEST(Int128, ModByZeroCheckFails) {
   a = 123;
   EXPECT_DEATH(a % b, "Division or mod by zero:");
 }
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 TEST(Int128, DivideAndMod) {
   // a := q * b + r
@@ -424,7 +424,7 @@ TEST(Int128, DivideAndModRandomInputs) {
   }
 }
 
-#ifdef GOOGLE_PROTOBUF_HAS_CONSTEXPR
+#ifdef SHARK_HAS_CONSTEXPR
 TEST(Int128, ConstexprTest) {
   constexpr uint128 zero;
   constexpr uint128 one = 1;
@@ -441,7 +441,7 @@ TEST(Int128, Traits) {
   EXPECT_TRUE(std::is_trivially_copy_assignable<uint128>::value);
   EXPECT_TRUE(std::is_trivially_destructible<uint128>::value);
 }
-#endif  // GOOGLE_PROTOBUF_HAS_CONSTEXPR
+#endif  // SHARK_HAS_CONSTEXPR
 
 TEST(Int128, OStream) {
   struct {

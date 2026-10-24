@@ -41,8 +41,7 @@
 //
 // This header covers RepeatedField.
 
-#ifndef GOOGLE_PROTOBUF_REPEATED_FIELD_H__
-#define GOOGLE_PROTOBUF_REPEATED_FIELD_H__
+#pragma once
 
 
 #include <algorithm>
@@ -213,13 +212,13 @@ class RepeatedField final {
   // Calling this routine inside a loop can cause quadratic behavior.
   void ExtractSubrange(int start, int num, Element* elements);
 
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear();
+  SHARK_ATTRIBUTE_REINITIALIZES void Clear();
   void MergeFrom(const RepeatedField& other);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void CopyFrom(const RepeatedField& other);
+  SHARK_ATTRIBUTE_REINITIALIZES void CopyFrom(const RepeatedField& other);
 
   // Replaces the contents with RepeatedField(begin, end).
   template <typename Iter>
-  PROTOBUF_ATTRIBUTE_REINITIALIZES void Assign(Iter begin, Iter end);
+  SHARK_ATTRIBUTE_REINITIALIZES void Assign(Iter begin, Iter end);
 
   // Reserves space to expand the field to at least the given size.  If the
   // array is grown, it will always be at least doubled in size.
@@ -346,7 +345,7 @@ class RepeatedField final {
   int total_size_;
   // Pad the Rep after arena allow for power-of-two byte sizes when
   // sizeof(Element) > sizeof(Arena*). eg for 16-byte objects.
-  static PROTOBUF_CONSTEXPR const size_t kRepHeaderSize =
+  static constexpr const size_t kRepHeaderSize =
       sizeof(Arena*) < sizeof(Element) ? sizeof(Element) : sizeof(Arena*);
   struct Rep {
     Arena* arena;
@@ -565,9 +564,9 @@ inline RepeatedField<Element>& RepeatedField<Element>::operator=(
 template <typename Element>
 inline RepeatedField<Element>::RepeatedField(RepeatedField&& other) noexcept
     : RepeatedField() {
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+#ifdef SHARK_FORCE_COPY_IN_MOVE
   CopyFrom(other);
-#else   // PROTOBUF_FORCE_COPY_IN_MOVE
+#else   // SHARK_FORCE_COPY_IN_MOVE
   // We don't just call Swap(&other) here because it would perform 3 copies if
   // other is on an arena. This field can't be on an arena because arena
   // construction always uses the Arena* accepting constructor.
@@ -576,7 +575,7 @@ inline RepeatedField<Element>::RepeatedField(RepeatedField&& other) noexcept
   } else {
     InternalSwap(&other);
   }
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+#endif  // !SHARK_FORCE_COPY_IN_MOVE
 }
 
 template <typename Element>
@@ -586,9 +585,9 @@ inline RepeatedField<Element>& RepeatedField<Element>::operator=(
   // the two fields are on different arenas.
   if (this != &other) {
     if (GetOwningArena() != other.GetOwningArena()
-#ifdef PROTOBUF_FORCE_COPY_IN_MOVE
+#ifdef SHARK_FORCE_COPY_IN_MOVE
         || GetOwningArena() == nullptr
-#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE
+#endif  // !SHARK_FORCE_COPY_IN_MOVE
     ) {
       CopyFrom(other);
     } else {
@@ -830,12 +829,12 @@ inline void RepeatedField<Element>::InternalSwap(RepeatedField* other) {
 template <typename Element>
 void RepeatedField<Element>::Swap(RepeatedField* other) {
   if (this == other) return;
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   if (GetOwningArena() != nullptr &&
       GetOwningArena() == other->GetOwningArena()) {
-#else   // PROTOBUF_FORCE_COPY_IN_SWAP
+#else   // SHARK_FORCE_COPY_IN_SWAP
   if (GetOwningArena() == other->GetOwningArena()) {
-#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP
+#endif  // !SHARK_FORCE_COPY_IN_SWAP
     InternalSwap(other);
   } else {
     RepeatedField<Element> temp(other->GetOwningArena());
@@ -911,7 +910,7 @@ inline int CalculateReserveSize(int total_size, int new_size) {
   }
   constexpr int kMaxSizeBeforeClamp =
       (std::numeric_limits<int>::max() - kRepHeaderSize) / 2;
-  if (PROTOBUF_PREDICT_FALSE(total_size > kMaxSizeBeforeClamp)) {
+  if (SHARK_PREDICT_FALSE(total_size > kMaxSizeBeforeClamp)) {
     return std::numeric_limits<int>::max();
   }
   // We want to double the number of bytes, not the number of elements, to try
@@ -1189,26 +1188,26 @@ internal::RepeatedFieldBackInsertIterator<T> RepeatedFieldBackInserter(
 }
 
 // Extern declarations of common instantiations to reduce library bloat.
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<bool>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<int32_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<uint32_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<int64_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<uint64_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<float>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedField<double>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<bool>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<int32_t>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<uint32_t>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<int64_t>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<uint64_t>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<float>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedField<double>;
 
 namespace internal {
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedIterator<bool>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedIterator<bool>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE
     RepeatedIterator<int32_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE
     RepeatedIterator<uint32_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE
     RepeatedIterator<int64_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE
     RepeatedIterator<uint64_t>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedIterator<float>;
-extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedIterator<double>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedIterator<float>;
+extern template class SHARK_EXPORT_TEMPLATE_DECLARE RepeatedIterator<double>;
 }  // namespace internal
 
 }  // namespace protobuf
@@ -1216,4 +1215,3 @@ extern template class PROTOBUF_EXPORT_TEMPLATE_DECLARE RepeatedIterator<double>;
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_REPEATED_FIELD_H__

@@ -30,8 +30,7 @@
 
 // from google3/strings/strutil.h
 
-#ifndef GOOGLE_PROTOBUF_STUBS_STRUTIL_H__
-#define GOOGLE_PROTOBUF_STUBS_STRUTIL_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/stringpiece.h>
@@ -159,10 +158,10 @@ inline std::string StripSuffixString(const std::string& str,
 // StripWhitespace
 //    Removes whitespaces from both ends of the given string.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT void ReplaceCharacters(std::string* s, const char* remove,
+SHARK_EXPORT void ReplaceCharacters(std::string* s, const char* remove,
                                        char replacewith);
 
-PROTOBUF_EXPORT void StripWhitespace(std::string* s);
+SHARK_EXPORT void StripWhitespace(std::string* s);
 
 // ----------------------------------------------------------------------
 // LowerString()
@@ -206,7 +205,7 @@ inline std::string ToUpper(const std::string& s) {
 //    happened or not.
 // ----------------------------------------------------------------------
 
-PROTOBUF_EXPORT std::string StringReplace(const std::string& s,
+SHARK_EXPORT std::string StringReplace(const std::string& s,
                                           const std::string& oldsub,
                                           const std::string& newsub,
                                           bool replace_all);
@@ -217,7 +216,7 @@ PROTOBUF_EXPORT std::string StringReplace(const std::string& s,
 //    to 'result'.  If there are consecutive delimiters, this function skips
 //    over all of them.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT void SplitStringUsing(StringPiece full, const char* delim,
+SHARK_EXPORT void SplitStringUsing(StringPiece full, const char* delim,
                                       std::vector<std::string>* res);
 
 // Split a string using one or more byte delimiters, presented
@@ -228,7 +227,7 @@ PROTOBUF_EXPORT void SplitStringUsing(StringPiece full, const char* delim,
 //
 // If "full" is the empty string, yields an empty string as the only value.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT void SplitStringAllowEmpty(StringPiece full, const char* delim,
+SHARK_EXPORT void SplitStringAllowEmpty(StringPiece full, const char* delim,
                                            std::vector<std::string>* result);
 
 // ----------------------------------------------------------------------
@@ -254,7 +253,7 @@ inline std::vector<std::string> Split(StringPiece full, const char* delim,
 //    another takes a pointer to the target string. In the latter case the
 //    target string is cleared and overwritten.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT void JoinStrings(const std::vector<std::string>& components,
+SHARK_EXPORT void JoinStrings(const std::vector<std::string>& components,
                                  const char* delim, std::string* result);
 
 inline std::string JoinStrings(const std::vector<std::string>& components,
@@ -295,8 +294,8 @@ inline std::string JoinStrings(const std::vector<std::string>& components,
 //    processed.
 //    ----------------------------------------------------------------------
 
-PROTOBUF_EXPORT int UnescapeCEscapeSequences(const char* source, char* dest);
-PROTOBUF_EXPORT int UnescapeCEscapeSequences(const char* source, char* dest,
+SHARK_EXPORT int UnescapeCEscapeSequences(const char* source, char* dest);
+SHARK_EXPORT int UnescapeCEscapeSequences(const char* source, char* dest,
                                              std::vector<std::string>* errors);
 
 // ----------------------------------------------------------------------
@@ -314,12 +313,12 @@ PROTOBUF_EXPORT int UnescapeCEscapeSequences(const char* source, char* dest,
 //    the third call, the new string is returned.
 // ----------------------------------------------------------------------
 
-PROTOBUF_EXPORT int UnescapeCEscapeString(const std::string& src,
+SHARK_EXPORT int UnescapeCEscapeString(const std::string& src,
                                           std::string* dest);
-PROTOBUF_EXPORT int UnescapeCEscapeString(const std::string& src,
+SHARK_EXPORT int UnescapeCEscapeString(const std::string& src,
                                           std::string* dest,
                                           std::vector<std::string>* errors);
-PROTOBUF_EXPORT std::string UnescapeCEscapeString(const std::string& src);
+SHARK_EXPORT std::string UnescapeCEscapeString(const std::string& src);
 
 // ----------------------------------------------------------------------
 // CEscape()
@@ -328,21 +327,21 @@ PROTOBUF_EXPORT std::string UnescapeCEscapeString(const std::string& src);
 //
 //    Escaped chars: \n, \r, \t, ", ', \, and !isprint().
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT std::string CEscape(const std::string& src);
+SHARK_EXPORT std::string CEscape(const std::string& src);
 
 // ----------------------------------------------------------------------
 // CEscapeAndAppend()
 //    Escapes 'src' using C-style escape sequences, and appends the escaped
 //    string to 'dest'.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT void CEscapeAndAppend(StringPiece src, std::string* dest);
+SHARK_EXPORT void CEscapeAndAppend(StringPiece src, std::string* dest);
 
 namespace strings {
 // Like CEscape() but does not escape bytes with the upper bit set.
-PROTOBUF_EXPORT std::string Utf8SafeCEscape(const std::string& src);
+SHARK_EXPORT std::string Utf8SafeCEscape(const std::string& src);
 
 // Like CEscape() but uses hex (\x) escapes instead of octals.
-PROTOBUF_EXPORT std::string CHexEscape(const std::string& src);
+SHARK_EXPORT std::string CHexEscape(const std::string& src);
 }  // namespace strings
 
 // ----------------------------------------------------------------------
@@ -355,9 +354,9 @@ PROTOBUF_EXPORT std::string CHexEscape(const std::string& src);
 //    platforms, so using these is safer, from the point of view of
 //    overflow behavior, than using the standard libc functions.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT int32_t strto32_adaptor(const char* nptr, char** endptr,
+SHARK_EXPORT int32_t strto32_adaptor(const char* nptr, char** endptr,
                                         int base);
-PROTOBUF_EXPORT uint32_t strtou32_adaptor(const char* nptr, char** endptr,
+SHARK_EXPORT uint32_t strtou32_adaptor(const char* nptr, char** endptr,
                                           int base);
 
 inline int32_t strto32(const char *nptr, char **endptr, int base) {
@@ -397,10 +396,10 @@ inline uint64_t strtou64(const char *nptr, char **endptr, int base) {
 // safe_strtof()
 // safe_strtod()
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT bool safe_strtob(StringPiece str, bool* value);
+SHARK_EXPORT bool safe_strtob(StringPiece str, bool* value);
 
-PROTOBUF_EXPORT bool safe_strto32(const std::string& str, int32_t* value);
-PROTOBUF_EXPORT bool safe_strtou32(const std::string& str, uint32_t* value);
+SHARK_EXPORT bool safe_strto32(const std::string& str, int32_t* value);
+SHARK_EXPORT bool safe_strtou32(const std::string& str, uint32_t* value);
 inline bool safe_strto32(const char* str, int32_t* value) {
   return safe_strto32(std::string(str), value);
 }
@@ -414,8 +413,8 @@ inline bool safe_strtou32(StringPiece str, uint32_t* value) {
   return safe_strtou32(str.ToString(), value);
 }
 
-PROTOBUF_EXPORT bool safe_strto64(const std::string& str, int64_t* value);
-PROTOBUF_EXPORT bool safe_strtou64(const std::string& str, uint64_t* value);
+SHARK_EXPORT bool safe_strto64(const std::string& str, int64_t* value);
+SHARK_EXPORT bool safe_strtou64(const std::string& str, uint64_t* value);
 inline bool safe_strto64(const char* str, int64_t* value) {
   return safe_strto64(std::string(str), value);
 }
@@ -429,8 +428,8 @@ inline bool safe_strtou64(StringPiece str, uint64_t* value) {
   return safe_strtou64(str.ToString(), value);
 }
 
-PROTOBUF_EXPORT bool safe_strtof(const char* str, float* value);
-PROTOBUF_EXPORT bool safe_strtod(const char* str, double* value);
+SHARK_EXPORT bool safe_strtof(const char* str, float* value);
+SHARK_EXPORT bool safe_strtod(const char* str, double* value);
 inline bool safe_strtof(const std::string& str, float* value) {
   return safe_strtof(str.c_str(), value);
 }
@@ -470,13 +469,13 @@ inline bool safe_strtod(StringPiece str, double* value) {
 // DoubleToBuffer() and FloatToBuffer().
 static const int kFastToBufferSize = 32;
 
-PROTOBUF_EXPORT char* FastInt32ToBuffer(int32_t i, char* buffer);
-PROTOBUF_EXPORT char* FastInt64ToBuffer(int64_t i, char* buffer);
+SHARK_EXPORT char* FastInt32ToBuffer(int32_t i, char* buffer);
+SHARK_EXPORT char* FastInt64ToBuffer(int64_t i, char* buffer);
 char* FastUInt32ToBuffer(uint32_t i, char* buffer);  // inline below
 char* FastUInt64ToBuffer(uint64_t i, char* buffer);  // inline below
-PROTOBUF_EXPORT char* FastHexToBuffer(int i, char* buffer);
-PROTOBUF_EXPORT char* FastHex64ToBuffer(uint64_t i, char* buffer);
-PROTOBUF_EXPORT char* FastHex32ToBuffer(uint32_t i, char* buffer);
+SHARK_EXPORT char* FastHexToBuffer(int i, char* buffer);
+SHARK_EXPORT char* FastHex64ToBuffer(uint64_t i, char* buffer);
+SHARK_EXPORT char* FastHex32ToBuffer(uint32_t i, char* buffer);
 
 // at least 22 bytes long
 inline char* FastIntToBuffer(int i, char* buffer) {
@@ -512,10 +511,10 @@ inline char* FastULongToBuffer(unsigned long i, char* buffer) {
 // terminating the string).
 // ----------------------------------------------------------------------
 
-PROTOBUF_EXPORT char* FastInt32ToBufferLeft(int32_t i, char* buffer);
-PROTOBUF_EXPORT char* FastUInt32ToBufferLeft(uint32_t i, char* buffer);
-PROTOBUF_EXPORT char* FastInt64ToBufferLeft(int64_t i, char* buffer);
-PROTOBUF_EXPORT char* FastUInt64ToBufferLeft(uint64_t i, char* buffer);
+SHARK_EXPORT char* FastInt32ToBufferLeft(int32_t i, char* buffer);
+SHARK_EXPORT char* FastUInt32ToBufferLeft(uint32_t i, char* buffer);
+SHARK_EXPORT char* FastInt64ToBufferLeft(int64_t i, char* buffer);
+SHARK_EXPORT char* FastUInt64ToBufferLeft(uint64_t i, char* buffer);
 
 // Just define these in terms of the above.
 inline char* FastUInt32ToBuffer(uint32_t i, char* buffer) {
@@ -535,12 +534,12 @@ inline std::string SimpleBtoa(bool value) { return value ? "true" : "false"; }
 //
 //    Return value: string
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT std::string SimpleItoa(int i);
-PROTOBUF_EXPORT std::string SimpleItoa(unsigned int i);
-PROTOBUF_EXPORT std::string SimpleItoa(long i);
-PROTOBUF_EXPORT std::string SimpleItoa(unsigned long i);
-PROTOBUF_EXPORT std::string SimpleItoa(long long i);
-PROTOBUF_EXPORT std::string SimpleItoa(unsigned long long i);
+SHARK_EXPORT std::string SimpleItoa(int i);
+SHARK_EXPORT std::string SimpleItoa(unsigned int i);
+SHARK_EXPORT std::string SimpleItoa(long i);
+SHARK_EXPORT std::string SimpleItoa(unsigned long i);
+SHARK_EXPORT std::string SimpleItoa(long long i);
+SHARK_EXPORT std::string SimpleItoa(unsigned long long i);
 
 // ----------------------------------------------------------------------
 // SimpleDtoa()
@@ -561,11 +560,11 @@ PROTOBUF_EXPORT std::string SimpleItoa(unsigned long long i);
 //
 //    Return value: string
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT std::string SimpleDtoa(double value);
-PROTOBUF_EXPORT std::string SimpleFtoa(float value);
+SHARK_EXPORT std::string SimpleDtoa(double value);
+SHARK_EXPORT std::string SimpleFtoa(float value);
 
-PROTOBUF_EXPORT char* DoubleToBuffer(double i, char* buffer);
-PROTOBUF_EXPORT char* FloatToBuffer(float i, char* buffer);
+SHARK_EXPORT char* DoubleToBuffer(double i, char* buffer);
+SHARK_EXPORT char* FloatToBuffer(float i, char* buffer);
 
 // In practice, doubles should never need more than 24 bytes and floats
 // should never need more than 14 (including null terminators), but we
@@ -614,7 +613,7 @@ struct Hex {
   }
 };
 
-struct PROTOBUF_EXPORT AlphaNum {
+struct SHARK_EXPORT AlphaNum {
   const char *piece_data_;  // move these to string_ref eventually
   size_t piece_size_;       // move these to string_ref eventually
 
@@ -703,26 +702,26 @@ using strings::AlphaNum;
 //    be a reference into str.
 // ----------------------------------------------------------------------
 
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b);
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c, const AlphaNum& d);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c, const AlphaNum& d,
                                    const AlphaNum& e);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c, const AlphaNum& d,
                                    const AlphaNum& e, const AlphaNum& f);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c, const AlphaNum& d,
                                    const AlphaNum& e, const AlphaNum& f,
                                    const AlphaNum& g);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c, const AlphaNum& d,
                                    const AlphaNum& e, const AlphaNum& f,
                                    const AlphaNum& g, const AlphaNum& h);
-PROTOBUF_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
+SHARK_EXPORT std::string StrCat(const AlphaNum& a, const AlphaNum& b,
                                    const AlphaNum& c, const AlphaNum& d,
                                    const AlphaNum& e, const AlphaNum& f,
                                    const AlphaNum& g, const AlphaNum& h,
@@ -753,12 +752,12 @@ inline std::string StrCat(const AlphaNum& a) {
 //    worked around as consecutive calls to StrAppend are quite efficient.
 // ----------------------------------------------------------------------
 
-PROTOBUF_EXPORT void StrAppend(std::string* dest, const AlphaNum& a);
-PROTOBUF_EXPORT void StrAppend(std::string* dest, const AlphaNum& a,
+SHARK_EXPORT void StrAppend(std::string* dest, const AlphaNum& a);
+SHARK_EXPORT void StrAppend(std::string* dest, const AlphaNum& a,
                                const AlphaNum& b);
-PROTOBUF_EXPORT void StrAppend(std::string* dest, const AlphaNum& a,
+SHARK_EXPORT void StrAppend(std::string* dest, const AlphaNum& a,
                                const AlphaNum& b, const AlphaNum& c);
-PROTOBUF_EXPORT void StrAppend(std::string* dest, const AlphaNum& a,
+SHARK_EXPORT void StrAppend(std::string* dest, const AlphaNum& a,
                                const AlphaNum& b, const AlphaNum& c,
                                const AlphaNum& d);
 
@@ -789,7 +788,7 @@ std::string Join(const Range& components, const char* delim) {
 // ToHex()
 //    Return a lower-case hex string representation of the given integer.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT std::string ToHex(uint64_t num);
+SHARK_EXPORT std::string ToHex(uint64_t num);
 
 // ----------------------------------------------------------------------
 // GlobalReplaceSubstring()
@@ -798,7 +797,7 @@ PROTOBUF_EXPORT std::string ToHex(uint64_t num);
 //
 //    NOTE: The string pieces must not overlap s.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT int GlobalReplaceSubstring(const std::string& substring,
+SHARK_EXPORT int GlobalReplaceSubstring(const std::string& substring,
                                            const std::string& replacement,
                                            std::string* s);
 
@@ -808,7 +807,7 @@ PROTOBUF_EXPORT int GlobalReplaceSubstring(const std::string& substring,
 //    writes it to "dest". If src contains invalid characters, dest is cleared
 //    and the function returns false. Returns true on success.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT bool Base64Unescape(StringPiece src, std::string* dest);
+SHARK_EXPORT bool Base64Unescape(StringPiece src, std::string* dest);
 
 // ----------------------------------------------------------------------
 // WebSafeBase64Unescape()
@@ -821,17 +820,17 @@ PROTOBUF_EXPORT bool Base64Unescape(StringPiece src, std::string* dest);
 //    returns false (with dest empty) if src contains invalid chars; for
 //    this version src and dest must be different strings.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT int WebSafeBase64Unescape(const char* src, int slen, char* dest,
+SHARK_EXPORT int WebSafeBase64Unescape(const char* src, int slen, char* dest,
                                           int szdest);
-PROTOBUF_EXPORT bool WebSafeBase64Unescape(StringPiece src, std::string* dest);
+SHARK_EXPORT bool WebSafeBase64Unescape(StringPiece src, std::string* dest);
 
 // Return the length to use for the output buffer given to the base64 escape
 // routines. Make sure to use the same value for do_padding in both.
 // This function may return incorrect results if given input_len values that
 // are extremely high, which should happen rarely.
-PROTOBUF_EXPORT int CalculateBase64EscapedLen(int input_len, bool do_padding);
+SHARK_EXPORT int CalculateBase64EscapedLen(int input_len, bool do_padding);
 // Use this version when calling Base64Escape without a do_padding arg.
-PROTOBUF_EXPORT int CalculateBase64EscapedLen(int input_len);
+SHARK_EXPORT int CalculateBase64EscapedLen(int input_len);
 
 // ----------------------------------------------------------------------
 // Base64Escape()
@@ -845,22 +844,22 @@ PROTOBUF_EXPORT int CalculateBase64EscapedLen(int input_len);
 //    to escape them.  It also has an extra parameter "do_padding",
 //    which when set to false will prevent padding with "=".
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT int Base64Escape(const unsigned char* src, int slen, char* dest,
+SHARK_EXPORT int Base64Escape(const unsigned char* src, int slen, char* dest,
                                  int szdest);
-PROTOBUF_EXPORT int WebSafeBase64Escape(const unsigned char* src, int slen,
+SHARK_EXPORT int WebSafeBase64Escape(const unsigned char* src, int slen,
                                         char* dest, int szdest,
                                         bool do_padding);
 // Encode src into dest with padding.
-PROTOBUF_EXPORT void Base64Escape(StringPiece src, std::string* dest);
+SHARK_EXPORT void Base64Escape(StringPiece src, std::string* dest);
 // Encode src into dest web-safely without padding.
-PROTOBUF_EXPORT void WebSafeBase64Escape(StringPiece src, std::string* dest);
+SHARK_EXPORT void WebSafeBase64Escape(StringPiece src, std::string* dest);
 // Encode src into dest web-safely with padding.
-PROTOBUF_EXPORT void WebSafeBase64EscapeWithPadding(StringPiece src,
+SHARK_EXPORT void WebSafeBase64EscapeWithPadding(StringPiece src,
                                                     std::string* dest);
 
-PROTOBUF_EXPORT void Base64Escape(const unsigned char* src, int szsrc,
+SHARK_EXPORT void Base64Escape(const unsigned char* src, int szsrc,
                                   std::string* dest, bool do_padding);
-PROTOBUF_EXPORT void WebSafeBase64Escape(const unsigned char* src, int szsrc,
+SHARK_EXPORT void WebSafeBase64Escape(const unsigned char* src, int szsrc,
                                          std::string* dest, bool do_padding);
 
 inline bool IsValidCodePoint(uint32_t code_point) {
@@ -875,13 +874,13 @@ static const int UTFmax = 4;
 //  in any external dependencies. The output buffer must be as least 4 bytes
 //  large.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT int EncodeAsUTF8Char(uint32_t code_point, char* output);
+SHARK_EXPORT int EncodeAsUTF8Char(uint32_t code_point, char* output);
 
 // ----------------------------------------------------------------------
 // UTF8FirstLetterNumBytes()
 //   Length of the first UTF-8 character.
 // ----------------------------------------------------------------------
-PROTOBUF_EXPORT int UTF8FirstLetterNumBytes(const char* src, int len);
+SHARK_EXPORT int UTF8FirstLetterNumBytes(const char* src, int len);
 
 // From google3/third_party/absl/strings/escaping.h
 
@@ -917,12 +916,12 @@ PROTOBUF_EXPORT int UTF8FirstLetterNumBytes(const char* src, int len);
 //
 //       (1) determines the presence of LF (first one is ok)
 //       (2) if yes, removes any CR, else convert every CR to LF
-PROTOBUF_EXPORT void CleanStringLineEndings(const std::string& src,
+SHARK_EXPORT void CleanStringLineEndings(const std::string& src,
                                             std::string* dst,
                                             bool auto_end_last_line);
 
 // Same as above, but transforms the argument in place.
-PROTOBUF_EXPORT void CleanStringLineEndings(std::string* str,
+SHARK_EXPORT void CleanStringLineEndings(std::string* str,
                                             bool auto_end_last_line);
 
 namespace strings {
@@ -947,4 +946,3 @@ double NoLocaleStrtod(const char* str, char** endptr);
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_STRUTIL_H__

@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_HELPERS_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_HELPERS_H__
+#pragma once
 
 #include <algorithm>
 #include <cstdint>
@@ -62,21 +61,17 @@ namespace cpp {
 enum class ArenaDtorNeeds { kNone = 0, kOnDemand = 1, kRequired = 2 };
 
 inline std::string ProtobufNamespace(const Options& /* options */) {
-  return "PROTOBUF_NAMESPACE_ID";
-}
-
-inline std::string MacroPrefix(const Options& /* options */) {
-  return "GOOGLE_PROTOBUF";
+  return "SHARK_NAMESPACE_ID";
 }
 
 inline std::string DeprecatedAttribute(const Options& /* options */,
                                        const FieldDescriptor* d) {
-  return d->options().deprecated() ? "PROTOBUF_DEPRECATED " : "";
+  return d->options().deprecated() ? "[[deprecated]] " : "";
 }
 
 inline std::string DeprecatedAttribute(const Options& /* options */,
                                        const EnumValueDescriptor* d) {
-  return d->options().deprecated() ? "PROTOBUF_DEPRECATED_ENUM " : "";
+  return d->options().deprecated() ? "[[deprecated]] " : "";
 }
 
 // Commonly-used separator comments.  Thick is a line of '=', thin is a line
@@ -531,30 +526,6 @@ bool IsAnyMessage(const Descriptor* descriptor, const Options& options);
 
 bool IsWellKnownMessage(const FileDescriptor* descriptor);
 
-inline std::string IncludeGuard(const FileDescriptor* file, bool pb_h,
-                                const Options& options) {
-  // If we are generating a .pb.h file and the proto_h option is enabled, then
-  // the .pb.h gets an extra suffix.
-  std::string filename_identifier = FilenameIdentifier(
-      file->name() + (pb_h && options.proto_h ? ".pb.h" : ""));
-
-  if (IsWellKnownMessage(file)) {
-    // For well-known messages we need third_party/protobuf and net/proto2 to
-    // have distinct include guards, because some source files include both and
-    // both need to be defined (the third_party copies will be in the
-    // google::protobuf_opensource namespace).
-    return MacroPrefix(options) + "_INCLUDED_" + filename_identifier;
-  } else {
-    // Ideally this case would use distinct include guards for opensource and
-    // google3 protos also.  (The behavior of "first #included wins" is not
-    // ideal).  But unfortunately some legacy code includes both and depends on
-    // the identical include guards to avoid compile errors.
-    //
-    // We should clean this up so that this case can be removed.
-    return "GOOGLE_PROTOBUF_INCLUDED_" + filename_identifier;
-  }
-}
-
 // Returns the OptimizeMode for this file, furthermore it updates a status
 // bool if has_opt_codesize_extension is non-null. If this status bool is true
 // it means this file contains an extension that itself is defined as
@@ -820,11 +791,11 @@ class PROTOC_EXPORT Formatter {
     Formatter* format_;
   };
 
-  PROTOBUF_NODISCARD ScopedIndenter ScopedIndent() {
+  [[nodiscard]] ScopedIndenter ScopedIndent() {
     return ScopedIndenter(this);
   }
   template <typename... Args>
-  PROTOBUF_NODISCARD ScopedIndenter ScopedIndent(const char* format,
+  [[nodiscard]] ScopedIndenter ScopedIndent(const char* format,
                                                  const Args&&... args) {
     (*this)(format, static_cast<Args&&>(args)...);
     return ScopedIndenter(this);
@@ -907,16 +878,16 @@ class PROTOC_EXPORT NamespaceOpener {
     }
     for (auto it = name_stack_.crbegin();
          it != name_stack_.crend() - common_idx; ++it) {
-      if (*it == "PROTOBUF_NAMESPACE_ID") {
-        printer_->Print("PROTOBUF_NAMESPACE_CLOSE\n");
+      if (*it == "SHARK_NAMESPACE_ID") {
+        printer_->Print("SHARK_NAMESPACE_CLOSE\n");
       } else {
         printer_->Print("}  // namespace $ns$\n", "ns", *it);
       }
     }
     name_stack_.swap(new_stack_);
     for (size_t i = common_idx; i < name_stack_.size(); ++i) {
-      if (name_stack_[i] == "PROTOBUF_NAMESPACE_ID") {
-        printer_->Print("PROTOBUF_NAMESPACE_OPEN\n");
+      if (name_stack_[i] == "SHARK_NAMESPACE_ID") {
+        printer_->Print("SHARK_NAMESPACE_OPEN\n");
       } else {
         printer_->Print("namespace $ns$ {\n", "ns", name_stack_[i]);
       }
@@ -1061,4 +1032,3 @@ bool HasMessageFieldOrExtension(const Descriptor* desc);
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_HELPERS_H__

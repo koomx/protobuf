@@ -35,8 +35,7 @@
 // Utilities for printing and parsing protocol messages in a human-readable,
 // text-based format.
 
-#ifndef GOOGLE_PROTOBUF_TEXT_FORMAT_H__
-#define GOOGLE_PROTOBUF_TEXT_FORMAT_H__
+#pragma once
 
 
 #include <map>
@@ -61,8 +60,8 @@ namespace google {
 namespace protobuf {
 
 namespace internal {
-PROTOBUF_EXPORT extern const char kDebugStringSilentMarker[1];
-PROTOBUF_EXPORT extern const char kDebugStringSilentMarkerForDetection[3];
+SHARK_EXPORT extern const char kDebugStringSilentMarker[1];
+SHARK_EXPORT extern const char kDebugStringSilentMarkerForDetection[3];
 }  // namespace internal
 
 namespace io {
@@ -74,7 +73,7 @@ class ErrorCollector;  // tokenizer.h
 // debugging and human editing of messages.
 //
 // This class is really a namespace that contains only static methods.
-class PROTOBUF_EXPORT TextFormat {
+class SHARK_EXPORT TextFormat {
  public:
   // Outputs a textual representation of the given message to the given
   // output stream. Returns false if printing fails.
@@ -104,7 +103,7 @@ class PROTOBUF_EXPORT TextFormat {
                                       const FieldDescriptor* field, int index,
                                       std::string* output);
 
-  class PROTOBUF_EXPORT BaseTextGenerator {
+  class SHARK_EXPORT BaseTextGenerator {
    public:
     virtual ~BaseTextGenerator();
 
@@ -128,7 +127,7 @@ class PROTOBUF_EXPORT TextFormat {
   // string representation.
   // You can derive from this FastFieldValuePrinter if you want to have fields
   // to be printed in a different way and register it at the Printer.
-  class PROTOBUF_EXPORT FastFieldValuePrinter {
+  class SHARK_EXPORT FastFieldValuePrinter {
    public:
     FastFieldValuePrinter();
     virtual ~FastFieldValuePrinter();
@@ -173,7 +172,7 @@ class PROTOBUF_EXPORT TextFormat {
   };
 
   // Deprecated: please use FastFieldValuePrinter instead.
-  class PROTOBUF_EXPORT FieldValuePrinter {
+  class SHARK_EXPORT FieldValuePrinter {
    public:
     FieldValuePrinter();
     virtual ~FieldValuePrinter();
@@ -202,7 +201,7 @@ class PROTOBUF_EXPORT TextFormat {
     GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldValuePrinter);
   };
 
-  class PROTOBUF_EXPORT MessagePrinter {
+  class SHARK_EXPORT MessagePrinter {
    public:
     MessagePrinter() {}
     virtual ~MessagePrinter() {}
@@ -215,7 +214,7 @@ class PROTOBUF_EXPORT TextFormat {
 
   // Interface that Printers or Parsers can use to find extensions, or types
   // referenced in Any messages.
-  class PROTOBUF_EXPORT Finder {
+  class SHARK_EXPORT Finder {
    public:
     virtual ~Finder();
 
@@ -248,7 +247,7 @@ class PROTOBUF_EXPORT TextFormat {
 
   // Class for those users which require more fine-grained control over how
   // a protobuffer message is printed out.
-  class PROTOBUF_EXPORT Printer {
+  class SHARK_EXPORT Printer {
    public:
     Printer();
 
@@ -306,7 +305,7 @@ class PROTOBUF_EXPORT TextFormat {
     // Takes ownership of the printer.
     void SetDefaultFieldValuePrinter(const FastFieldValuePrinter* printer);
 
-    PROTOBUF_DEPRECATED_MSG("Please use FastFieldValuePrinter")
+    [[deprecated("Please use FastFieldValuePrinter")]]
     void SetDefaultFieldValuePrinter(const FieldValuePrinter* printer);
 
     // Sets whether we want to hide unknown fields or not.
@@ -360,7 +359,7 @@ class PROTOBUF_EXPORT TextFormat {
     bool RegisterFieldValuePrinter(const FieldDescriptor* field,
                                    const FastFieldValuePrinter* printer);
 
-    PROTOBUF_DEPRECATED_MSG("Please use FastFieldValuePrinter")
+    [[deprecated("Please use FastFieldValuePrinter")]]
     bool RegisterFieldValuePrinter(const FieldDescriptor* field,
                                    const FieldValuePrinter* printer);
 
@@ -513,7 +512,7 @@ class PROTOBUF_EXPORT TextFormat {
 
   // Data structure which is populated with the locations of each field
   // value parsed from the text.
-  class PROTOBUF_EXPORT ParseInfoTree {
+  class SHARK_EXPORT ParseInfoTree {
    public:
     ParseInfoTree() = default;
     ParseInfoTree(const ParseInfoTree&) = delete;
@@ -563,7 +562,7 @@ class PROTOBUF_EXPORT TextFormat {
   };
 
   // For more control over parsing, use this class.
-  class PROTOBUF_EXPORT Parser {
+  class SHARK_EXPORT Parser {
    public:
     Parser();
     ~Parser();
@@ -690,4 +689,3 @@ inline TextFormat::ParseInfoTree* TextFormat::CreateNested(
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_TEXT_FORMAT_H__

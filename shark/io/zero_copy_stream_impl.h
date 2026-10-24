@@ -37,8 +37,7 @@
 // protobuf library.  These implementations include Unix file descriptors
 // and C++ iostreams.  See also:  zero_copy_stream_impl_lite.h
 
-#ifndef GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_IMPL_H__
-#define GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_IMPL_H__
+#pragma once
 
 
 #include <iosfwd>
@@ -63,7 +62,7 @@ namespace io {
 // The latter will introduce an extra layer of buffering, harming performance.
 // Also, it's conceivable that FileInputStream could someday be enhanced
 // to use zero-copy file descriptors on OSs which support them.
-class PROTOBUF_EXPORT FileInputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT FileInputStream SHARK_FUTURE_FINAL
     : public ZeroCopyInputStream {
  public:
   // Creates a stream that reads from the given Unix file descriptor.
@@ -97,7 +96,7 @@ class PROTOBUF_EXPORT FileInputStream PROTOBUF_FUTURE_FINAL
   int64_t ByteCount() const override;
 
  private:
-  class PROTOBUF_EXPORT CopyingFileInputStream PROTOBUF_FUTURE_FINAL
+  class SHARK_EXPORT CopyingFileInputStream SHARK_FUTURE_FINAL
       : public CopyingInputStream {
    public:
     CopyingFileInputStream(int file_descriptor);
@@ -142,7 +141,7 @@ class PROTOBUF_EXPORT FileInputStream PROTOBUF_FUTURE_FINAL
 // harming performance.  Also, it's conceivable that FileOutputStream could
 // someday be enhanced to use zero-copy file descriptors on OSs which
 // support them.
-class PROTOBUF_EXPORT FileOutputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT FileOutputStream SHARK_FUTURE_FINAL
     : public CopyingOutputStreamAdaptor {
  public:
   // Creates a stream that writes to the given Unix file descriptor.
@@ -172,7 +171,7 @@ class PROTOBUF_EXPORT FileOutputStream PROTOBUF_FUTURE_FINAL
   int GetErrno() const { return copying_output_.GetErrno(); }
 
  private:
-  class PROTOBUF_EXPORT CopyingFileOutputStream PROTOBUF_FUTURE_FINAL
+  class SHARK_EXPORT CopyingFileOutputStream SHARK_FUTURE_FINAL
       : public CopyingOutputStream {
    public:
     CopyingFileOutputStream(int file_descriptor);
@@ -208,7 +207,7 @@ class PROTOBUF_EXPORT FileOutputStream PROTOBUF_FUTURE_FINAL
 //
 // Note that for reading files (or anything represented by a file descriptor),
 // FileInputStream is more efficient.
-class PROTOBUF_EXPORT IstreamInputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT IstreamInputStream SHARK_FUTURE_FINAL
     : public ZeroCopyInputStream {
  public:
   // Creates a stream that reads from the given C++ istream.
@@ -224,7 +223,7 @@ class PROTOBUF_EXPORT IstreamInputStream PROTOBUF_FUTURE_FINAL
   int64_t ByteCount() const override;
 
  private:
-  class PROTOBUF_EXPORT CopyingIstreamInputStream PROTOBUF_FUTURE_FINAL
+  class SHARK_EXPORT CopyingIstreamInputStream SHARK_FUTURE_FINAL
       : public CopyingInputStream {
    public:
     CopyingIstreamInputStream(std::istream* input);
@@ -253,7 +252,7 @@ class PROTOBUF_EXPORT IstreamInputStream PROTOBUF_FUTURE_FINAL
 //
 // Note that for writing files (or anything represented by a file descriptor),
 // FileOutputStream is more efficient.
-class PROTOBUF_EXPORT OstreamOutputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT OstreamOutputStream SHARK_FUTURE_FINAL
     : public ZeroCopyOutputStream {
  public:
   // Creates a stream that writes to the given C++ ostream.
@@ -269,7 +268,7 @@ class PROTOBUF_EXPORT OstreamOutputStream PROTOBUF_FUTURE_FINAL
   int64_t ByteCount() const override;
 
  private:
-  class PROTOBUF_EXPORT CopyingOstreamOutputStream PROTOBUF_FUTURE_FINAL
+  class SHARK_EXPORT CopyingOstreamOutputStream SHARK_FUTURE_FINAL
       : public CopyingOutputStream {
    public:
     CopyingOstreamOutputStream(std::ostream* output);
@@ -300,7 +299,7 @@ class PROTOBUF_EXPORT OstreamOutputStream PROTOBUF_FUTURE_FINAL
 // ConcatenatingInputStream may do odd things.  It is suggested that you do
 // not use ConcatenatingInputStream on streams that might produce read errors
 // other than end-of-stream.
-class PROTOBUF_EXPORT ConcatenatingInputStream PROTOBUF_FUTURE_FINAL
+class SHARK_EXPORT ConcatenatingInputStream SHARK_FUTURE_FINAL
     : public ZeroCopyInputStream {
  public:
   // All streams passed in as well as the array itself must remain valid
@@ -333,4 +332,3 @@ class PROTOBUF_EXPORT ConcatenatingInputStream PROTOBUF_FUTURE_FINAL
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_ZERO_COPY_STREAM_IMPL_H__

@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_EXTENSION_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_EXTENSION_H__
+#pragma once
 
 #include <map>
 #include <string>
@@ -112,4 +111,3 @@ class ImmutableExtensionGenerator : public ExtensionGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_EXTENSION_H__

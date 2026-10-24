@@ -35,8 +35,7 @@
 // This file contains miscellaneous helper code used by generated code --
 // including lite types -- but which should not be used directly by users.
 
-#ifndef GOOGLE_PROTOBUF_GENERATED_MESSAGE_UTIL_H__
-#define GOOGLE_PROTOBUF_GENERATED_MESSAGE_UTIL_H__
+#pragma once
 
 #include <assert.h>
 
@@ -78,28 +77,28 @@ namespace internal {
 
 template <typename To, typename From>
 inline To DownCast(From* f) {
-  return PROTOBUF_NAMESPACE_ID::internal::down_cast<To>(f);
+  return SHARK_NAMESPACE_ID::internal::down_cast<To>(f);
 }
 template <typename To, typename From>
 inline To DownCast(From& f) {
-  return PROTOBUF_NAMESPACE_ID::internal::down_cast<To>(f);
+  return SHARK_NAMESPACE_ID::internal::down_cast<To>(f);
 }
 
 
 // This fastpath inlines a single branch instead of having to make the
 // InitProtobufDefaults function call.
 // It also generates less inlined code than a function-scope static initializer.
-PROTOBUF_EXPORT extern std::atomic<bool> init_protobuf_defaults_state;
-PROTOBUF_EXPORT void InitProtobufDefaultsSlow();
-PROTOBUF_EXPORT inline void InitProtobufDefaults() {
-  if (PROTOBUF_PREDICT_FALSE(
+SHARK_EXPORT extern std::atomic<bool> init_protobuf_defaults_state;
+SHARK_EXPORT void InitProtobufDefaultsSlow();
+SHARK_EXPORT inline void InitProtobufDefaults() {
+  if (SHARK_PREDICT_FALSE(
           !init_protobuf_defaults_state.load(std::memory_order_acquire))) {
     InitProtobufDefaultsSlow();
   }
 }
 
 // This used by proto1
-PROTOBUF_EXPORT inline const std::string& GetEmptyString() {
+SHARK_EXPORT inline const std::string& GetEmptyString() {
   InitProtobufDefaults();
   return GetEmptyStringAlreadyInited();
 }
@@ -148,22 +147,22 @@ typedef void (*SpecialSerializer)(const uint8_t* base, uint32_t offset,
                                   uint32_t tag, uint32_t has_offset,
                                   io::CodedOutputStream* output);
 
-PROTOBUF_EXPORT void ExtensionSerializer(const MessageLite* extendee,
+SHARK_EXPORT void ExtensionSerializer(const MessageLite* extendee,
                                          const uint8_t* ptr, uint32_t offset,
                                          uint32_t tag, uint32_t has_offset,
                                          io::CodedOutputStream* output);
-PROTOBUF_EXPORT void UnknownFieldSerializerLite(const uint8_t* base,
+SHARK_EXPORT void UnknownFieldSerializerLite(const uint8_t* base,
                                                 uint32_t offset, uint32_t tag,
                                                 uint32_t has_offset,
                                                 io::CodedOutputStream* output);
 
-PROTOBUF_EXPORT MessageLite* DuplicateIfNonNullInternal(MessageLite* message);
-PROTOBUF_EXPORT MessageLite* GetOwnedMessageInternal(Arena* message_arena,
+SHARK_EXPORT MessageLite* DuplicateIfNonNullInternal(MessageLite* message);
+SHARK_EXPORT MessageLite* GetOwnedMessageInternal(Arena* message_arena,
                                                      MessageLite* submessage,
                                                      Arena* submessage_arena);
-PROTOBUF_EXPORT void GenericSwap(MessageLite* m1, MessageLite* m2);
+SHARK_EXPORT void GenericSwap(MessageLite* m1, MessageLite* m2);
 // We specialize GenericSwap for non-lite messages to benefit from reflection.
-PROTOBUF_EXPORT void GenericSwap(Message* m1, Message* m2);
+SHARK_EXPORT void GenericSwap(Message* m1, Message* m2);
 
 template <typename T>
 T* DuplicateIfNonNull(T* message) {
@@ -185,7 +184,7 @@ T* GetOwnedMessage(Arena* message_arena, T* submessage,
 
 // Hide atomic from the public header and allow easy change to regular int
 // on platforms where the atomic might have a perf impact.
-class PROTOBUF_EXPORT CachedSize {
+class SHARK_EXPORT CachedSize {
  public:
   int Get() const { return size_.load(std::memory_order_relaxed); }
   void Set(int size) { size_.store(size, std::memory_order_relaxed); }
@@ -194,8 +193,8 @@ class PROTOBUF_EXPORT CachedSize {
   std::atomic<int> size_{0};
 };
 
-PROTOBUF_EXPORT void DestroyMessage(const void* message);
-PROTOBUF_EXPORT void DestroyString(const void* s);
+SHARK_EXPORT void DestroyMessage(const void* message);
+SHARK_EXPORT void DestroyString(const void* s);
 // Destroy (not delete) the message
 inline void OnShutdownDestroyMessage(const void* ptr) {
   OnShutdownRun(DestroyMessage, ptr);
@@ -211,4 +210,3 @@ inline void OnShutdownDestroyString(const std::string* ptr) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_UTIL_H__

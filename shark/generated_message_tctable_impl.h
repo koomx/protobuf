@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_GENERATED_MESSAGE_TCTABLE_IMPL_H__
-#define GOOGLE_PROTOBUF_GENERATED_MESSAGE_TCTABLE_IMPL_H__
+#pragma once
 
 #include <cstdint>
 #include <type_traits>
@@ -236,15 +235,15 @@ enum FieldType : uint16_t {
 // clang-format on
 }  // namespace field_layout
 
-// PROTOBUF_TC_PARAM_DECL are the parameters for tailcall functions, it is
+// SHARK_TC_PARAM_DECL are the parameters for tailcall functions, it is
 // defined in port_def.inc.
 //
 // Note that this is performance sensitive: changing the parameters will change
 // the registers used by the ABI calling convention, which subsequently affects
 // register selection logic inside the function.
 
-// PROTOBUF_TC_PARAM_PASS passes values to match PROTOBUF_TC_PARAM_DECL.
-#define PROTOBUF_TC_PARAM_PASS msg, ptr, ctx, table, hasbits, data
+// SHARK_TC_PARAM_PASS passes values to match SHARK_TC_PARAM_DECL.
+#define SHARK_TC_PARAM_PASS msg, ptr, ctx, table, hasbits, data
 
 #ifndef NDEBUG
 template <size_t align>
@@ -260,10 +259,10 @@ extern template void AlignFail<8>(uintptr_t);
 #endif
 
 // TcParser implements most of the parsing logic for tailcall tables.
-class PROTOBUF_EXPORT TcParser final {
+class SHARK_EXPORT TcParser final {
  public:
-  static const char* GenericFallback(PROTOBUF_TC_PARAM_DECL);
-  static const char* GenericFallbackLite(PROTOBUF_TC_PARAM_DECL);
+  static const char* GenericFallback(SHARK_TC_PARAM_DECL);
+  static const char* GenericFallbackLite(SHARK_TC_PARAM_DECL);
 
   static const char* ParseLoop(MessageLite* msg, const char* ptr,
                                ParseContext* ctx,
@@ -276,110 +275,110 @@ class PROTOBUF_EXPORT TcParser final {
   //   1/2: tag length (bytes)
 
   // Fixed:
-  static const char* FastF32S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF32S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF32R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF32R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF32P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF32P2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF64S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF64S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF64R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF64R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF64P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastF64P2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastF32S1(SHARK_TC_PARAM_DECL);
+  static const char* FastF32S2(SHARK_TC_PARAM_DECL);
+  static const char* FastF32R1(SHARK_TC_PARAM_DECL);
+  static const char* FastF32R2(SHARK_TC_PARAM_DECL);
+  static const char* FastF32P1(SHARK_TC_PARAM_DECL);
+  static const char* FastF32P2(SHARK_TC_PARAM_DECL);
+  static const char* FastF64S1(SHARK_TC_PARAM_DECL);
+  static const char* FastF64S2(SHARK_TC_PARAM_DECL);
+  static const char* FastF64R1(SHARK_TC_PARAM_DECL);
+  static const char* FastF64R2(SHARK_TC_PARAM_DECL);
+  static const char* FastF64P1(SHARK_TC_PARAM_DECL);
+  static const char* FastF64P2(SHARK_TC_PARAM_DECL);
 
   // Varint:
-  static const char* FastV8S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV8S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV8R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV8R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV8P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV8P2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV32S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV32S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV32R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV32R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV32P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV32P2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV64S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV64S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV64R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV64R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV64P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastV64P2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastV8S1(SHARK_TC_PARAM_DECL);
+  static const char* FastV8S2(SHARK_TC_PARAM_DECL);
+  static const char* FastV8R1(SHARK_TC_PARAM_DECL);
+  static const char* FastV8R2(SHARK_TC_PARAM_DECL);
+  static const char* FastV8P1(SHARK_TC_PARAM_DECL);
+  static const char* FastV8P2(SHARK_TC_PARAM_DECL);
+  static const char* FastV32S1(SHARK_TC_PARAM_DECL);
+  static const char* FastV32S2(SHARK_TC_PARAM_DECL);
+  static const char* FastV32R1(SHARK_TC_PARAM_DECL);
+  static const char* FastV32R2(SHARK_TC_PARAM_DECL);
+  static const char* FastV32P1(SHARK_TC_PARAM_DECL);
+  static const char* FastV32P2(SHARK_TC_PARAM_DECL);
+  static const char* FastV64S1(SHARK_TC_PARAM_DECL);
+  static const char* FastV64S2(SHARK_TC_PARAM_DECL);
+  static const char* FastV64R1(SHARK_TC_PARAM_DECL);
+  static const char* FastV64R2(SHARK_TC_PARAM_DECL);
+  static const char* FastV64P1(SHARK_TC_PARAM_DECL);
+  static const char* FastV64P2(SHARK_TC_PARAM_DECL);
 
   // Varint (with zigzag):
-  static const char* FastZ32S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ32S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ32R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ32R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ32P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ32P2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ64S1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ64S2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ64R1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ64R2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ64P1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastZ64P2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastZ32S1(SHARK_TC_PARAM_DECL);
+  static const char* FastZ32S2(SHARK_TC_PARAM_DECL);
+  static const char* FastZ32R1(SHARK_TC_PARAM_DECL);
+  static const char* FastZ32R2(SHARK_TC_PARAM_DECL);
+  static const char* FastZ32P1(SHARK_TC_PARAM_DECL);
+  static const char* FastZ32P2(SHARK_TC_PARAM_DECL);
+  static const char* FastZ64S1(SHARK_TC_PARAM_DECL);
+  static const char* FastZ64S2(SHARK_TC_PARAM_DECL);
+  static const char* FastZ64R1(SHARK_TC_PARAM_DECL);
+  static const char* FastZ64R2(SHARK_TC_PARAM_DECL);
+  static const char* FastZ64P1(SHARK_TC_PARAM_DECL);
+  static const char* FastZ64P2(SHARK_TC_PARAM_DECL);
 
   // Functions referenced by generated fast tables (closed enum):
   //   E: closed enum (N.B.: open enums use V32, above)
   //   r: enum range  v: enum validator (_IsValid function)
   //   S: singular   R: repeated
   //   1/2: tag length (bytes)
-  static const char* FastErS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastErS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastErR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastErR2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastEvS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastEvS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastEvR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastEvR2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastErS1(SHARK_TC_PARAM_DECL);
+  static const char* FastErS2(SHARK_TC_PARAM_DECL);
+  static const char* FastErR1(SHARK_TC_PARAM_DECL);
+  static const char* FastErR2(SHARK_TC_PARAM_DECL);
+  static const char* FastEvS1(SHARK_TC_PARAM_DECL);
+  static const char* FastEvS2(SHARK_TC_PARAM_DECL);
+  static const char* FastEvR1(SHARK_TC_PARAM_DECL);
+  static const char* FastEvR2(SHARK_TC_PARAM_DECL);
 
   // Functions referenced by generated fast tables (string types):
   //   B: bytes      S: string     U: UTF-8 string
   //   (empty): ArenaStringPtr     i: InlinedString
   //   S: singular   R: repeated
   //   1/2: tag length (bytes)
-  static const char* FastBS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastBS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastBR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastBR2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastSS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastSS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastSR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastSR2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastUS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastUS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastUR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastUR2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastBS1(SHARK_TC_PARAM_DECL);
+  static const char* FastBS2(SHARK_TC_PARAM_DECL);
+  static const char* FastBR1(SHARK_TC_PARAM_DECL);
+  static const char* FastBR2(SHARK_TC_PARAM_DECL);
+  static const char* FastSS1(SHARK_TC_PARAM_DECL);
+  static const char* FastSS2(SHARK_TC_PARAM_DECL);
+  static const char* FastSR1(SHARK_TC_PARAM_DECL);
+  static const char* FastSR2(SHARK_TC_PARAM_DECL);
+  static const char* FastUS1(SHARK_TC_PARAM_DECL);
+  static const char* FastUS2(SHARK_TC_PARAM_DECL);
+  static const char* FastUR1(SHARK_TC_PARAM_DECL);
+  static const char* FastUR2(SHARK_TC_PARAM_DECL);
 
-  static const char* FastBiS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastBiS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastSiS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastSiS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastUiS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastUiS2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastBiS1(SHARK_TC_PARAM_DECL);
+  static const char* FastBiS2(SHARK_TC_PARAM_DECL);
+  static const char* FastSiS1(SHARK_TC_PARAM_DECL);
+  static const char* FastSiS2(SHARK_TC_PARAM_DECL);
+  static const char* FastUiS1(SHARK_TC_PARAM_DECL);
+  static const char* FastUiS2(SHARK_TC_PARAM_DECL);
 
   // Functions referenced by generated fast tables (message types):
   //   M: message    G: group
   //   S: singular   R: repeated
   //   1/2: tag length (bytes)
-  static const char* FastMS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastMS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastMR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastMR2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastGS1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastGS2(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastGR1(PROTOBUF_TC_PARAM_DECL);
-  static const char* FastGR2(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastMS1(SHARK_TC_PARAM_DECL);
+  static const char* FastMS2(SHARK_TC_PARAM_DECL);
+  static const char* FastMR1(SHARK_TC_PARAM_DECL);
+  static const char* FastMR2(SHARK_TC_PARAM_DECL);
+  static const char* FastGS1(SHARK_TC_PARAM_DECL);
+  static const char* FastGS2(SHARK_TC_PARAM_DECL);
+  static const char* FastGR1(SHARK_TC_PARAM_DECL);
+  static const char* FastGR2(SHARK_TC_PARAM_DECL);
 
   template <typename T>
   static inline T& RefAt(void* x, size_t offset) {
     T* target = reinterpret_cast<T*>(static_cast<char*>(x) + offset);
 #ifndef NDEBUG
-    if (PROTOBUF_PREDICT_FALSE(
+    if (SHARK_PREDICT_FALSE(
             reinterpret_cast<uintptr_t>(target) % alignof(T) != 0)) {
       AlignFail<alignof(T)>(reinterpret_cast<uintptr_t>(target));
     }
@@ -392,7 +391,7 @@ class PROTOBUF_EXPORT TcParser final {
     const T* target =
         reinterpret_cast<const T*>(static_cast<const char*>(x) + offset);
 #ifndef NDEBUG
-    if (PROTOBUF_PREDICT_FALSE(
+    if (SHARK_PREDICT_FALSE(
             reinterpret_cast<uintptr_t>(target) % alignof(T) != 0)) {
       AlignFail<alignof(T)>(reinterpret_cast<uintptr_t>(target));
     }
@@ -416,17 +415,17 @@ class PROTOBUF_EXPORT TcParser final {
   // NOTE: Currently, this function only calls the table-level fallback
   // function, so it should only be called as the fallback from fast table
   // parsing.
-  static const char* MiniParse(PROTOBUF_TC_PARAM_DECL);
+  static const char* MiniParse(SHARK_TC_PARAM_DECL);
 
  private:
   friend class GeneratedTcTableLiteTest;
 
   template <typename TagType, bool group_coding>
-  static inline const char* SingularParseMessageAuxImpl(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* SingularParseMessageAuxImpl(SHARK_TC_PARAM_DECL);
   template <typename TagType, bool group_coding>
-  static inline const char* RepeatedParseMessageAuxImpl(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* RepeatedParseMessageAuxImpl(SHARK_TC_PARAM_DECL);
 
-  static inline PROTOBUF_ALWAYS_INLINE void SyncHasbits(
+  static inline SHARK_ALWAYS_INLINE void SyncHasbits(
       MessageLite* msg, uint64_t hasbits, const TcParseTableBase* table) {
     const uint32_t has_bits_offset = table->has_bits_offset;
     if (has_bits_offset) {
@@ -436,19 +435,19 @@ class PROTOBUF_EXPORT TcParser final {
     }
   }
 
-  static const char* TagDispatch(PROTOBUF_TC_PARAM_DECL);
-  static const char* ToTagDispatch(PROTOBUF_TC_PARAM_DECL);
-  static const char* ToParseLoop(PROTOBUF_TC_PARAM_DECL);
-  static const char* Error(PROTOBUF_TC_PARAM_DECL);
+  static const char* TagDispatch(SHARK_TC_PARAM_DECL);
+  static const char* ToTagDispatch(SHARK_TC_PARAM_DECL);
+  static const char* ToParseLoop(SHARK_TC_PARAM_DECL);
+  static const char* Error(SHARK_TC_PARAM_DECL);
 
-  static const char* FastUnknownEnumFallback(PROTOBUF_TC_PARAM_DECL);
+  static const char* FastUnknownEnumFallback(SHARK_TC_PARAM_DECL);
 
   class ScopedArenaSwap;
 
   template <class MessageBaseT, class UnknownFieldsT>
-  static const char* GenericFallbackImpl(PROTOBUF_TC_PARAM_DECL) {
+  static const char* GenericFallbackImpl(SHARK_TC_PARAM_DECL) {
 #define CHK_(x) \
-  if (PROTOBUF_PREDICT_FALSE(!(x))) return nullptr /* NOLINT */
+  if (SHARK_PREDICT_FALSE(!(x))) return nullptr /* NOLINT */
 
     SyncHasbits(msg, hasbits, table);
     CHK_(ptr);
@@ -476,36 +475,36 @@ class PROTOBUF_EXPORT TcParser final {
 
   // Implementations for fast fixed field parsing functions:
   template <typename LayoutType, typename TagType>
-  static inline const char* SingularFixed(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* SingularFixed(SHARK_TC_PARAM_DECL);
   template <typename LayoutType, typename TagType>
-  static inline const char* RepeatedFixed(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* RepeatedFixed(SHARK_TC_PARAM_DECL);
   template <typename LayoutType, typename TagType>
-  static inline const char* PackedFixed(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* PackedFixed(SHARK_TC_PARAM_DECL);
 
   // Implementations for fast varint field parsing functions:
   template <typename FieldType, typename TagType, bool zigzag = false>
-  static inline const char* SingularVarint(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* SingularVarint(SHARK_TC_PARAM_DECL);
   template <typename FieldType, typename TagType, bool zigzag = false>
-  static inline const char* RepeatedVarint(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* RepeatedVarint(SHARK_TC_PARAM_DECL);
   template <typename FieldType, typename TagType, bool zigzag = false>
-  static inline const char* PackedVarint(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* PackedVarint(SHARK_TC_PARAM_DECL);
 
   // Helper for ints > 127:
   template <typename FieldType, typename TagType, bool zigzag = false>
-  static const char* SingularVarBigint(PROTOBUF_TC_PARAM_DECL);
+  static const char* SingularVarBigint(SHARK_TC_PARAM_DECL);
 
   // Implementations for fast enum field parsing functions:
   template <typename TagType, uint16_t xform_val>
-  static inline const char* SingularEnum(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* SingularEnum(SHARK_TC_PARAM_DECL);
   template <typename TagType, uint16_t xform_val>
-  static inline const char* RepeatedEnum(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* RepeatedEnum(SHARK_TC_PARAM_DECL);
 
   // Implementations for fast string field parsing functions:
   enum Utf8Type { kNoUtf8 = 0, kUtf8 = 1, kUtf8ValidateOnly = 2 };
   template <typename TagType, Utf8Type utf8>
-  static inline const char* SingularString(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* SingularString(SHARK_TC_PARAM_DECL);
   template <typename TagType, Utf8Type utf8>
-  static inline const char* RepeatedString(PROTOBUF_TC_PARAM_DECL);
+  static inline const char* RepeatedString(SHARK_TC_PARAM_DECL);
 
   // Mini field lookup:
   static const TcParseTableBase::FieldEntry* FindFieldEntry(
@@ -531,17 +530,17 @@ class PROTOBUF_EXPORT TcParser final {
   static constexpr const uint32_t kMtSmallScanSize = 4;
 
   // Mini parsing:
-  static const char* MpVarint(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpRepeatedVarint(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpPackedVarint(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpFixed(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpRepeatedFixed(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpPackedFixed(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpString(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpRepeatedString(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpMessage(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpRepeatedMessage(PROTOBUF_TC_PARAM_DECL);
-  static const char* MpMap(PROTOBUF_TC_PARAM_DECL);
+  static const char* MpVarint(SHARK_TC_PARAM_DECL);
+  static const char* MpRepeatedVarint(SHARK_TC_PARAM_DECL);
+  static const char* MpPackedVarint(SHARK_TC_PARAM_DECL);
+  static const char* MpFixed(SHARK_TC_PARAM_DECL);
+  static const char* MpRepeatedFixed(SHARK_TC_PARAM_DECL);
+  static const char* MpPackedFixed(SHARK_TC_PARAM_DECL);
+  static const char* MpString(SHARK_TC_PARAM_DECL);
+  static const char* MpRepeatedString(SHARK_TC_PARAM_DECL);
+  static const char* MpMessage(SHARK_TC_PARAM_DECL);
+  static const char* MpRepeatedMessage(SHARK_TC_PARAM_DECL);
+  static const char* MpMap(SHARK_TC_PARAM_DECL);
 };
 
 }  // namespace internal
@@ -550,4 +549,3 @@ class PROTOBUF_EXPORT TcParser final {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_GENERATED_MESSAGE_TCTABLE_IMPL_H__

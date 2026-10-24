@@ -1254,7 +1254,7 @@ TEST(GeneratedMessageReflectionTest, ArenaReleaseOneofMessageTest) {
   EXPECT_TRUE(released == nullptr);
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 
 TEST(GeneratedMessageReflectionTest, UsageErrors) {
   unittest::TestAllTypes message;
@@ -1305,7 +1305,7 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
 #undef f
 }
 
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 
 using internal::IsDescendant;

@@ -30,8 +30,7 @@
 
 // Author: liujisi@google.com (Pherl Liu)
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_FACTORY_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_FACTORY_H__
+#pragma once
 
 #include <shark/stubs/common.h>
 
@@ -100,4 +99,3 @@ class ImmutableGeneratorFactory : public GeneratorFactory {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_GENERATOR_FACTORY_H__

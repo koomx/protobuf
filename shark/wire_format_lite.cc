@@ -318,7 +318,7 @@ bool WireFormatLite::ReadPackedEnumPreserveUnknowns(
   return true;
 }
 
-#if !defined(PROTOBUF_LITTLE_ENDIAN)
+#if !defined(SHARK_LITTLE_ENDIAN)
 
 namespace {
 void EncodeFixedSizeValue(float v, uint8_t* dest) {
@@ -350,11 +350,11 @@ void EncodeFixedSizeValue(bool v, uint8_t* dest) {
 }
 }  // anonymous namespace
 
-#endif  // !defined(PROTOBUF_LITTLE_ENDIAN)
+#endif  // !defined(SHARK_LITTLE_ENDIAN)
 
 template <typename CType>
 static void WriteArray(const CType* a, int n, io::CodedOutputStream* output) {
-#if defined(PROTOBUF_LITTLE_ENDIAN)
+#if defined(SHARK_LITTLE_ENDIAN)
   output->WriteRaw(reinterpret_cast<const char*>(a), n * sizeof(a[0]));
 #else
   const int kAtATime = 128;
@@ -573,7 +573,7 @@ void WireFormatLite::WriteMessageMaybeToArray(int field_number,
   WriteSubMessageMaybeToArray(size, value, output);
 }
 
-PROTOBUF_NDEBUG_INLINE static bool ReadBytesToString(
+SHARK_NDEBUG_INLINE static bool ReadBytesToString(
     io::CodedInputStream* input, std::string* value);
 inline static bool ReadBytesToString(io::CodedInputStream* input,
                                      std::string* value) {

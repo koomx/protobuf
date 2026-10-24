@@ -33,8 +33,7 @@
 // port_def.inc and port_undef.inc so they are not visible from outside of
 // protobuf.
 
-#ifndef GOOGLE_PROTOBUF_PORT_H__
-#define GOOGLE_PROTOBUF_PORT_H__
+#pragma once
 
 #include <cstddef>
 #include <new>
@@ -77,4 +76,3 @@ struct ArenaInitialized {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_PORT_H__

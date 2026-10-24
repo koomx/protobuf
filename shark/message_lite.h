@@ -36,8 +36,7 @@
 // Defines MessageLite, the abstract interface implemented by all (lite
 // and non-lite) protocol message objects.
 
-#ifndef GOOGLE_PROTOBUF_MESSAGE_LITE_H__
-#define GOOGLE_PROTOBUF_MESSAGE_LITE_H__
+#pragma once
 
 
 #include <climits>
@@ -127,15 +126,15 @@ inline int ToIntSize(size_t size) {
 // Default empty string object. Don't use this directly. Instead, call
 // GetEmptyString() to get the reference. This empty string is aligned with a
 // minimum alignment of 8 bytes to match the requirement of ArenaStringPtr.
-PROTOBUF_EXPORT extern ExplicitlyConstructedArenaString
+SHARK_EXPORT extern ExplicitlyConstructedArenaString
     fixed_address_empty_string;
 
 
-PROTOBUF_EXPORT constexpr const std::string& GetEmptyStringAlreadyInited() {
+SHARK_EXPORT constexpr const std::string& GetEmptyStringAlreadyInited() {
   return fixed_address_empty_string.get();
 }
 
-PROTOBUF_EXPORT size_t StringSpaceUsedExcludingSelfLong(const std::string& str);
+SHARK_EXPORT size_t StringSpaceUsedExcludingSelfLong(const std::string& str);
 
 }  // namespace internal
 
@@ -165,7 +164,7 @@ PROTOBUF_EXPORT size_t StringSpaceUsedExcludingSelfLong(const std::string& str);
 //
 // Users must not derive from this class. Only the protocol compiler and
 // the internal library are allowed to create subclasses.
-class PROTOBUF_EXPORT MessageLite {
+class SHARK_EXPORT MessageLite {
  public:
   constexpr MessageLite() {}
   virtual ~MessageLite() = default;
@@ -229,34 +228,34 @@ class PROTOBUF_EXPORT MessageLite {
   // format.  A successful return does not indicate the entire input is
   // consumed, ensure you call ConsumedEntireMessage() to check that if
   // applicable.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromCodedStream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromCodedStream(
       io::CodedInputStream* input);
   // Like ParseFromCodedStream(), but accepts messages that are missing
   // required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromCodedStream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromCodedStream(
       io::CodedInputStream* input);
   // Read a protocol buffer from the given zero-copy input stream.  If
   // successful, the entire input will be consumed.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromZeroCopyStream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromZeroCopyStream(
       io::ZeroCopyInputStream* input);
   // Like ParseFromZeroCopyStream(), but accepts messages that are missing
   // required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromZeroCopyStream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromZeroCopyStream(
       io::ZeroCopyInputStream* input);
   // Parse a protocol buffer from a file descriptor.  If successful, the entire
   // input will be consumed.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromFileDescriptor(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromFileDescriptor(
       int file_descriptor);
   // Like ParseFromFileDescriptor(), but accepts messages that are missing
   // required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromFileDescriptor(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromFileDescriptor(
       int file_descriptor);
   // Parse a protocol buffer from a C++ istream.  If successful, the entire
   // input will be consumed.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromIstream(std::istream* input);
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromIstream(std::istream* input);
   // Like ParseFromIstream(), but accepts messages that are missing
   // required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromIstream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromIstream(
       std::istream* input);
   // Read a protocol buffer from the given zero-copy input stream, expecting
   // the message to be exactly "size" bytes long.  If successful, exactly
@@ -266,28 +265,28 @@ class PROTOBUF_EXPORT MessageLite {
   // Like ParseFromBoundedZeroCopyStream(), but accepts messages that are
   // missing required fields.
   bool MergeFromBoundedZeroCopyStream(io::ZeroCopyInputStream* input, int size);
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromBoundedZeroCopyStream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromBoundedZeroCopyStream(
       io::ZeroCopyInputStream* input, int size);
   // Like ParseFromBoundedZeroCopyStream(), but accepts messages that are
   // missing required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromBoundedZeroCopyStream(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromBoundedZeroCopyStream(
       io::ZeroCopyInputStream* input, int size);
   // Parses a protocol buffer contained in a string. Returns true on success.
   // This function takes a string in the (non-human-readable) binary wire
   // format, matching the encoding output by MessageLite::SerializeToString().
   // If you'd like to convert a human-readable string into a protocol buffer
   // object, see google::protobuf::TextFormat::ParseFromString().
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromString(ConstStringParam data);
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromString(ConstStringParam data);
   // Like ParseFromString(), but accepts messages that are missing
   // required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromString(
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromString(
       ConstStringParam data);
   // Parse a protocol buffer contained in an array of bytes.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParseFromArray(const void* data,
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParseFromArray(const void* data,
                                                        int size);
   // Like ParseFromArray(), but accepts messages that are missing
   // required fields.
-  PROTOBUF_ATTRIBUTE_REINITIALIZES bool ParsePartialFromArray(const void* data,
+  SHARK_ATTRIBUTE_REINITIALIZES bool ParsePartialFromArray(const void* data,
                                                               int size);
 
 
@@ -377,7 +376,7 @@ class PROTOBUF_EXPORT MessageLite {
   virtual size_t ByteSizeLong() const = 0;
 
   // Legacy ByteSize() API.
-  PROTOBUF_DEPRECATED_MSG("Please use ByteSizeLong() instead")
+  [[deprecated("Please use ByteSizeLong() instead")]]
   int ByteSize() const { return internal::ToIntSize(ByteSizeLong()); }
 
   // Serializes the message without recomputing the size.  The message must not
@@ -567,14 +566,14 @@ bool MessageLite::ParseFrom(const T& input) {
 // any other part of the protocol buffers library after
 // ShutdownProtobufLibrary() has been called. Furthermore this call is not
 // thread safe, user needs to synchronize multiple calls.
-PROTOBUF_EXPORT void ShutdownProtobufLibrary();
+SHARK_EXPORT void ShutdownProtobufLibrary();
 
 namespace internal {
 
 // Register a function to be called when ShutdownProtocolBuffers() is called.
-PROTOBUF_EXPORT void OnShutdown(void (*func)());
+SHARK_EXPORT void OnShutdown(void (*func)());
 // Run an arbitrary function on an arg
-PROTOBUF_EXPORT void OnShutdownRun(void (*f)(const void*), const void* arg);
+SHARK_EXPORT void OnShutdownRun(void (*f)(const void*), const void* arg);
 
 template <typename T>
 T* OnShutdownDelete(T* p) {
@@ -588,4 +587,3 @@ T* OnShutdownDelete(T* p) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MESSAGE_LITE_H__

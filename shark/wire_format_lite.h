@@ -37,8 +37,7 @@
 // This header is logically internal, but is made public because it is used
 // from protocol-compiler-generated code, which may reside in other components.
 
-#ifndef GOOGLE_PROTOBUF_WIRE_FORMAT_LITE_H__
-#define GOOGLE_PROTOBUF_WIRE_FORMAT_LITE_H__
+#pragma once
 
 
 #include <limits>
@@ -55,7 +54,7 @@
 
 // Do UTF-8 validation on string type in Debug build only
 #ifndef NDEBUG
-#define GOOGLE_PROTOBUF_UTF8_VALIDATION_ENABLED
+#define SHARK_UTF8_VALIDATION_ENABLED
 #endif
 
 // Avoid conflict with iOS where <ConditionalMacros.h> #defines TYPE_BOOL.
@@ -85,7 +84,7 @@ namespace internal {
 // reflection.
 //
 // This class is really a namespace that contains only static methods.
-class PROTOBUF_EXPORT WireFormatLite {
+class SHARK_EXPORT WireFormatLite {
  public:
   // -----------------------------------------------------------------
   // Helper constants and functions related to the format.  These are
@@ -203,7 +202,7 @@ class PROTOBUF_EXPORT WireFormatLite {
   // result is usable as a compile-time constant, which makes it usable
   // as a switch case or a template input.  WireFormatLite::MakeTag() is more
   // type-safe, though, so prefer it if possible.
-#define GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(FIELD_NUMBER, TYPE) \
+#define SHARK_WIRE_FORMAT_MAKE_TAG(FIELD_NUMBER, TYPE) \
   static_cast<uint32_t>((static_cast<uint32_t>(FIELD_NUMBER) << 3) | (TYPE))
 
   // These are the tags for the old MessageSet format, which was defined as:
@@ -216,13 +215,13 @@ class PROTOBUF_EXPORT WireFormatLite {
   static constexpr int kMessageSetItemNumber = 1;
   static constexpr int kMessageSetTypeIdNumber = 2;
   static constexpr int kMessageSetMessageNumber = 3;
-  static const int kMessageSetItemStartTag = GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(
+  static const int kMessageSetItemStartTag = SHARK_WIRE_FORMAT_MAKE_TAG(
       kMessageSetItemNumber, WireFormatLite::WIRETYPE_START_GROUP);
-  static const int kMessageSetItemEndTag = GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(
+  static const int kMessageSetItemEndTag = SHARK_WIRE_FORMAT_MAKE_TAG(
       kMessageSetItemNumber, WireFormatLite::WIRETYPE_END_GROUP);
-  static const int kMessageSetTypeIdTag = GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(
+  static const int kMessageSetTypeIdTag = SHARK_WIRE_FORMAT_MAKE_TAG(
       kMessageSetTypeIdNumber, WireFormatLite::WIRETYPE_VARINT);
-  static const int kMessageSetMessageTag = GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(
+  static const int kMessageSetMessageTag = SHARK_WIRE_FORMAT_MAKE_TAG(
       kMessageSetMessageNumber, WireFormatLite::WIRETYPE_LENGTH_DELIMITED);
 
   // Byte size of all tags of a MessageSet::Item combined.
@@ -257,14 +256,14 @@ class PROTOBUF_EXPORT WireFormatLite {
   // the represented type and the FieldType. These are specialized with the
   // appropriate definition for each declared type.
   template <typename CType, enum FieldType DeclaredType>
-  PROTOBUF_NDEBUG_INLINE static bool ReadPrimitive(io::CodedInputStream* input,
+  SHARK_NDEBUG_INLINE static bool ReadPrimitive(io::CodedInputStream* input,
                                                    CType* value);
 
   // Reads repeated primitive values, with optimizations for repeats.
   // tag_size and tag should both be compile-time constants provided by the
   // protocol compiler.
   template <typename CType, enum FieldType DeclaredType>
-  PROTOBUF_NDEBUG_INLINE static bool ReadRepeatedPrimitive(
+  SHARK_NDEBUG_INLINE static bool ReadRepeatedPrimitive(
       int tag_size, uint32_t tag, io::CodedInputStream* input,
       RepeatedField<CType>* value);
 
@@ -281,14 +280,14 @@ class PROTOBUF_EXPORT WireFormatLite {
   // This is only implemented for the types with fixed wire size, e.g.
   // float, double, and the (s)fixed* types.
   template <typename CType, enum FieldType DeclaredType>
-  PROTOBUF_NDEBUG_INLINE static const uint8_t* ReadPrimitiveFromArray(
+  SHARK_NDEBUG_INLINE static const uint8_t* ReadPrimitiveFromArray(
       const uint8_t* buffer, CType* value);
 
   // Reads a primitive packed field.
   //
   // This is only implemented for packable types.
   template <typename CType, enum FieldType DeclaredType>
-  PROTOBUF_NDEBUG_INLINE static bool ReadPackedPrimitive(
+  SHARK_NDEBUG_INLINE static bool ReadPackedPrimitive(
       io::CodedInputStream* input, RepeatedField<CType>* value);
 
   // Identical to ReadPackedPrimitive, except will not inline the
@@ -350,37 +349,37 @@ class PROTOBUF_EXPORT WireFormatLite {
   // Write a tag.  The Write*() functions typically include the tag, so
   // normally there's no need to call this unless using the Write*NoTag()
   // variants.
-  PROTOBUF_NDEBUG_INLINE static void WriteTag(int field_number, WireType type,
+  SHARK_NDEBUG_INLINE static void WriteTag(int field_number, WireType type,
                                               io::CodedOutputStream* output);
 
   // Write fields, without tags.
-  PROTOBUF_NDEBUG_INLINE static void WriteInt32NoTag(
+  SHARK_NDEBUG_INLINE static void WriteInt32NoTag(
       int32_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteInt64NoTag(
+  SHARK_NDEBUG_INLINE static void WriteInt64NoTag(
       int64_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteUInt32NoTag(
+  SHARK_NDEBUG_INLINE static void WriteUInt32NoTag(
       uint32_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteUInt64NoTag(
+  SHARK_NDEBUG_INLINE static void WriteUInt64NoTag(
       uint64_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteSInt32NoTag(
+  SHARK_NDEBUG_INLINE static void WriteSInt32NoTag(
       int32_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteSInt64NoTag(
+  SHARK_NDEBUG_INLINE static void WriteSInt64NoTag(
       int64_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteFixed32NoTag(
+  SHARK_NDEBUG_INLINE static void WriteFixed32NoTag(
       uint32_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteFixed64NoTag(
+  SHARK_NDEBUG_INLINE static void WriteFixed64NoTag(
       uint64_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteSFixed32NoTag(
+  SHARK_NDEBUG_INLINE static void WriteSFixed32NoTag(
       int32_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteSFixed64NoTag(
+  SHARK_NDEBUG_INLINE static void WriteSFixed64NoTag(
       int64_t value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteFloatNoTag(
+  SHARK_NDEBUG_INLINE static void WriteFloatNoTag(
       float value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteDoubleNoTag(
+  SHARK_NDEBUG_INLINE static void WriteDoubleNoTag(
       double value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteBoolNoTag(
+  SHARK_NDEBUG_INLINE static void WriteBoolNoTag(
       bool value, io::CodedOutputStream* output);
-  PROTOBUF_NDEBUG_INLINE static void WriteEnumNoTag(
+  SHARK_NDEBUG_INLINE static void WriteEnumNoTag(
       int value, io::CodedOutputStream* output);
 
   // Write array of primitive fields, without tags
@@ -464,160 +463,160 @@ class PROTOBUF_EXPORT WireFormatLite {
                                            io::CodedOutputStream* output);
 
   // Like above, but use only *ToArray methods of CodedOutputStream.
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteTagToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteTagToArray(int field_number,
                                                          WireType type,
                                                          uint8_t* target);
 
   // Write fields, without tags.
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt32NoTagToArray(
       int32_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt64NoTagToArray(
       int64_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt32NoTagToArray(
       uint32_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt64NoTagToArray(
       uint64_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt32NoTagToArray(
       int32_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt64NoTagToArray(
       int64_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed32NoTagToArray(
       uint32_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed64NoTagToArray(
       uint64_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed32NoTagToArray(
       int32_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed64NoTagToArray(
       int64_t value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFloatNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFloatNoTagToArray(
       float value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteDoubleNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteDoubleNoTagToArray(
       double value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteBoolNoTagToArray(bool value,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteBoolNoTagToArray(bool value,
                                                                uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteEnumNoTagToArray(int value,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteEnumNoTagToArray(int value,
                                                                uint8_t* target);
 
   // Write fields, without tags.  These require that value.size() > 0.
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WritePrimitiveNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WritePrimitiveNoTagToArray(
       const RepeatedField<T>& value, uint8_t* (*Writer)(T, uint8_t*),
       uint8_t* target);
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixedNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixedNoTagToArray(
       const RepeatedField<T>& value, uint8_t* (*Writer)(T, uint8_t*),
       uint8_t* target);
 
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt32NoTagToArray(
       const RepeatedField<int32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt64NoTagToArray(
       const RepeatedField<int64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt32NoTagToArray(
       const RepeatedField<uint32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt64NoTagToArray(
       const RepeatedField<uint64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt32NoTagToArray(
       const RepeatedField<int32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt64NoTagToArray(
       const RepeatedField<int64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed32NoTagToArray(
       const RepeatedField<uint32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed64NoTagToArray(
       const RepeatedField<uint64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed32NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed32NoTagToArray(
       const RepeatedField<int32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed64NoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed64NoTagToArray(
       const RepeatedField<int64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFloatNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFloatNoTagToArray(
       const RepeatedField<float>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteDoubleNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteDoubleNoTagToArray(
       const RepeatedField<double>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteBoolNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteBoolNoTagToArray(
       const RepeatedField<bool>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteEnumNoTagToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteEnumNoTagToArray(
       const RepeatedField<int>& value, uint8_t* output);
 
   // Write fields, including tags.
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt32ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt32ToArray(int field_number,
                                                            int32_t value,
                                                            uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt64ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt64ToArray(int field_number,
                                                            int64_t value,
                                                            uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt32ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt32ToArray(int field_number,
                                                             uint32_t value,
                                                             uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt64ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt64ToArray(int field_number,
                                                             uint64_t value,
                                                             uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt32ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt32ToArray(int field_number,
                                                             int32_t value,
                                                             uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt64ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt64ToArray(int field_number,
                                                             int64_t value,
                                                             uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed32ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed32ToArray(int field_number,
                                                              uint32_t value,
                                                              uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed64ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed64ToArray(int field_number,
                                                              uint64_t value,
                                                              uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed32ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed32ToArray(int field_number,
                                                               int32_t value,
                                                               uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed64ToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed64ToArray(int field_number,
                                                               int64_t value,
                                                               uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFloatToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFloatToArray(int field_number,
                                                            float value,
                                                            uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteDoubleToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteDoubleToArray(int field_number,
                                                             double value,
                                                             uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteBoolToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteBoolToArray(int field_number,
                                                           bool value,
                                                           uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteEnumToArray(int field_number,
+  SHARK_NDEBUG_INLINE static uint8_t* WriteEnumToArray(int field_number,
                                                           int value,
                                                           uint8_t* target);
 
   template <typename T>
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WritePrimitiveToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WritePrimitiveToArray(
       int field_number, const RepeatedField<T>& value,
       uint8_t* (*Writer)(int, T, uint8_t*), uint8_t* target);
 
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt32ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt32ToArray(
       int field_number, const RepeatedField<int32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteInt64ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt64ToArray(
       int field_number, const RepeatedField<int64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt32ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt32ToArray(
       int field_number, const RepeatedField<uint32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteUInt64ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt64ToArray(
       int field_number, const RepeatedField<uint64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt32ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt32ToArray(
       int field_number, const RepeatedField<int32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSInt64ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSInt64ToArray(
       int field_number, const RepeatedField<int64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed32ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed32ToArray(
       int field_number, const RepeatedField<uint32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFixed64ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFixed64ToArray(
       int field_number, const RepeatedField<uint64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed32ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed32ToArray(
       int field_number, const RepeatedField<int32_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteSFixed64ToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteSFixed64ToArray(
       int field_number, const RepeatedField<int64_t>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteFloatToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteFloatToArray(
       int field_number, const RepeatedField<float>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteDoubleToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteDoubleToArray(
       int field_number, const RepeatedField<double>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteBoolToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteBoolToArray(
       int field_number, const RepeatedField<bool>& value, uint8_t* output);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteEnumToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteEnumToArray(
       int field_number, const RepeatedField<int>& value, uint8_t* output);
 
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteStringToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteStringToArray(
       int field_number, const std::string& value, uint8_t* target);
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteBytesToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteBytesToArray(
       int field_number, const std::string& value, uint8_t* target);
 
   // Whether to serialize deterministically (e.g., map keys are
@@ -637,15 +636,15 @@ class PROTOBUF_EXPORT WireFormatLite {
   // pointer must point at an instance of MessageType, *not* a subclass (or
   // the subclass must not override SerializeWithCachedSizes()).
   template <typename MessageType>
-  PROTOBUF_NDEBUG_INLINE static uint8_t* InternalWriteGroupNoVirtualToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* InternalWriteGroupNoVirtualToArray(
       int field_number, const MessageType& value, uint8_t* target);
   template <typename MessageType>
-  PROTOBUF_NDEBUG_INLINE static uint8_t* InternalWriteMessageNoVirtualToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* InternalWriteMessageNoVirtualToArray(
       int field_number, const MessageType& value, uint8_t* target);
 
   // For backward-compatibility, the last four methods also have versions
   // that are non-deterministic always.
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteGroupToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteGroupToArray(
       int field_number, const MessageLite& value, uint8_t* target) {
     io::EpsCopyOutputStream stream(
         target,
@@ -655,7 +654,7 @@ class PROTOBUF_EXPORT WireFormatLite {
         io::CodedOutputStream::IsDefaultSerializationDeterministic());
     return InternalWriteGroup(field_number, value, target, &stream);
   }
-  PROTOBUF_NDEBUG_INLINE static uint8_t* WriteMessageToArray(
+  SHARK_NDEBUG_INLINE static uint8_t* WriteMessageToArray(
       int field_number, const MessageLite& value, uint8_t* target) {
     int size = value.GetCachedSize();
     io::EpsCopyOutputStream stream(
@@ -729,13 +728,13 @@ class PROTOBUF_EXPORT WireFormatLite {
   // optimizations for primitive types that have fixed size on the wire, and
   // can be read using potentially faster paths.
   template <typename CType, enum FieldType DeclaredType>
-  PROTOBUF_NDEBUG_INLINE static bool ReadRepeatedFixedSizePrimitive(
+  SHARK_NDEBUG_INLINE static bool ReadRepeatedFixedSizePrimitive(
       int tag_size, uint32_t tag, io::CodedInputStream* input,
       RepeatedField<CType>* value);
 
   // Like ReadRepeatedFixedSizePrimitive but for packed primitive fields.
   template <typename CType, enum FieldType DeclaredType>
-  PROTOBUF_NDEBUG_INLINE static bool ReadPackedFixedSizePrimitive(
+  SHARK_NDEBUG_INLINE static bool ReadPackedFixedSizePrimitive(
       io::CodedInputStream* input, RepeatedField<CType>* value);
 
   static const CppType kFieldTypeToCppTypeMap[];
@@ -750,7 +749,7 @@ class PROTOBUF_EXPORT WireFormatLite {
 // discards them.  WireFormat defines a subclass which writes to an
 // UnknownFieldSet.  This class is used by ExtensionSet::ParseField(), since
 // ExtensionSet is part of the lite library but UnknownFieldSet is not.
-class PROTOBUF_EXPORT FieldSkipper {
+class SHARK_EXPORT FieldSkipper {
  public:
   FieldSkipper() {}
   virtual ~FieldSkipper() {}
@@ -770,7 +769,7 @@ class PROTOBUF_EXPORT FieldSkipper {
 
 // Subclass of FieldSkipper which saves skipped fields to a CodedOutputStream.
 
-class PROTOBUF_EXPORT CodedOutputStreamFieldSkipper : public FieldSkipper {
+class SHARK_EXPORT CodedOutputStreamFieldSkipper : public FieldSkipper {
  public:
   explicit CodedOutputStreamFieldSkipper(io::CodedOutputStream* unknown_fields)
       : unknown_fields_(unknown_fields) {}
@@ -794,7 +793,7 @@ inline WireFormatLite::CppType WireFormatLite::FieldTypeToCppType(
 
 constexpr inline uint32_t WireFormatLite::MakeTag(int field_number,
                                                   WireType type) {
-  return GOOGLE_PROTOBUF_WIRE_FORMAT_MAKE_TAG(field_number, type);
+  return SHARK_WIRE_FORMAT_MAKE_TAG(field_number, type);
 }
 
 inline WireFormatLite::WireType WireFormatLite::GetTagWireType(uint32_t tag) {
@@ -1199,7 +1198,7 @@ inline bool WireFormatLite::ReadPackedFixedSizePrimitive(
   }
   if (bytes_limit >= new_bytes) {
     // Fast-path that pre-allocates *values to the final size.
-#if defined(PROTOBUF_LITTLE_ENDIAN)
+#if defined(SHARK_LITTLE_ENDIAN)
     values->Resize(old_entries + new_entries, 0);
     // values->mutable_data() may change after Resize(), so do this after:
     void* dest = reinterpret_cast<void*>(values->mutable_data() + old_entries);
@@ -1458,7 +1457,7 @@ template <typename T>
 inline uint8_t* WireFormatLite::WriteFixedNoTagToArray(
     const RepeatedField<T>& value, uint8_t* (*Writer)(T, uint8_t*),
     uint8_t* target) {
-#if defined(PROTOBUF_LITTLE_ENDIAN)
+#if defined(SHARK_LITTLE_ENDIAN)
   (void)Writer;
 
   const int n = value.size();
@@ -1905,4 +1904,3 @@ bool ParseMessageSetItemImpl(io::CodedInputStream* input, MS ms) {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_WIRE_FORMAT_LITE_H__

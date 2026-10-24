@@ -107,7 +107,7 @@ class MockErrorCollector : public MultiFileErrorCollector {
   }
 };
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
 
 // Test that generated code has proper descriptors:
 // Parse a descriptor directly (using google::protobuf::compiler::Importer) and
@@ -151,7 +151,7 @@ TEST(GENERATED_DESCRIPTOR_TEST_NAME, EnormousDescriptor) {
 }
 #endif
 
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 
 // ===================================================================
 
@@ -393,7 +393,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, StringCharStarLength) {
 }
 
 
-#if !defined(PROTOBUF_TEST_NO_DESCRIPTORS) || defined(NDEBUG)
+#if !defined(SHARK_TEST_NO_DESCRIPTORS) || defined(NDEBUG)
 TEST(GENERATED_MESSAGE_TEST_NAME, CopyFrom) {
   UNITTEST::TestAllTypes message1, message2;
 
@@ -418,7 +418,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, CopyAssignmentOperator) {
   message2.operator=(message2);
   TestUtil::ExpectAllFieldsSet(message2);
 }
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS || NDEBUG
+#endif  // !SHARK_TEST_NO_DESCRIPTORS || NDEBUG
 
 
 TEST(GENERATED_MESSAGE_TEST_NAME, SwapWithEmpty) {
@@ -505,7 +505,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, ADLSwap) {
   // Note the address of one of the repeated fields, to verify it was swapped
   // rather than copied.
   const int32_t* addr = &message1.repeated_int32().Get(0);
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   const int32_t value = *addr;
 #endif
 
@@ -515,7 +515,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, ADLSwap) {
   TestUtil::ExpectAllFieldsSet(message2);
   TestUtil::ExpectClear(message1);
 
-#ifdef PROTOBUF_FORCE_COPY_IN_SWAP
+#ifdef SHARK_FORCE_COPY_IN_SWAP
   EXPECT_NE(addr, &message2.repeated_int32().Get(0));
   EXPECT_EQ(value, message2.repeated_int32().Get(0));
 #else
@@ -594,7 +594,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, CopyConstructorWithArenas) {
   TestUtil::ExpectAllFieldsSet(*message2_heap);
 }
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
 TEST(GENERATED_MESSAGE_TEST_NAME, UpcastCopyFrom) {
   // Test the CopyFrom method that takes in the generic const Message&
   // parameter.
@@ -628,7 +628,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, DynamicMessageCopyFrom) {
   TestUtil::ExpectAllFieldsSet(message2);
 }
 
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 
 TEST(GENERATED_MESSAGE_TEST_NAME, NonEmptyMergeFrom) {
   // Test merging with a non-empty message. Code is a modified form
@@ -838,7 +838,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, CamelCaseFieldNames) {
   EXPECT_EQ(15, message.repeatedmessagefield(0).c());
 }
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
 
 TEST(GENERATED_MESSAGE_TEST_NAME, TestOptimizedForSize) {
   // We rely on the tests in reflection_ops_unittest and wire_format_unittest
@@ -946,7 +946,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, TestOneofSpaceUsed) {
             message1->SpaceUsedLong());
 }
 
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 
 TEST(GENERATED_MESSAGE_TEST_NAME, FieldConstantValues) {
   UNITTEST::TestRequired message;
@@ -1076,7 +1076,7 @@ TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
   }
 }
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
 
 TEST(GENERATED_ENUM_TEST_NAME, Name) {
   // "Names" in the presence of dup values map to the first alias.
@@ -1126,11 +1126,11 @@ TEST(GENERATED_ENUM_TEST_NAME, IsProtoEnumTypeTrait) {
   EXPECT_FALSE(is_proto_enum<NonProtoEnum>::value);
 }
 
-#endif  // PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // SHARK_TEST_NO_DESCRIPTORS
 
 // ===================================================================
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
 
 // Support code for testing services.
 class GENERATED_SERVICE_TEST_NAME : public testing::Test {
@@ -1334,7 +1334,7 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, CallMethod) {
 TEST_F(GENERATED_SERVICE_TEST_NAME, CallMethodTypeFailure) {
   // Verify death if we call Foo() with Bar's message types.
 
-#ifdef PROTOBUF_HAS_DEATH_TEST  // death tests do not work on Windows yet
+#ifdef SHARK_HAS_DEATH_TEST  // death tests do not work on Windows yet
   EXPECT_DEBUG_DEATH(
     mock_service_.CallMethod(foo_, &mock_controller_,
                              &foo_request_, &bar_response_, done_.get()),
@@ -1345,7 +1345,7 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, CallMethodTypeFailure) {
     mock_service_.CallMethod(foo_, &mock_controller_,
                              &bar_request_, &foo_response_, done_.get()),
     "dynamic_cast");
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 }
 
 TEST_F(GENERATED_SERVICE_TEST_NAME, GetPrototypes) {
@@ -2195,17 +2195,17 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, NoGenericServices) {
   EXPECT_EQ("Foo", file->service(0)->method(0)->name());
 }
 
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 
 // ===================================================================
 
 // This test must run last.  It verifies that descriptors were or were not
-// initialized depending on whether PROTOBUF_TEST_NO_DESCRIPTORS was defined.
+// initialized depending on whether SHARK_TEST_NO_DESCRIPTORS was defined.
 // When this is defined, we skip all tests which are expected to trigger
 // descriptor initialization.  This verifies that everything else still works
 // if descriptors are not initialized.
 TEST(DESCRIPTOR_INIT_TEST_NAME, Initialized) {
-#ifdef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifdef SHARK_TEST_NO_DESCRIPTORS
   bool should_have_descriptors = false;
 #else
   bool should_have_descriptors = true;

@@ -59,8 +59,7 @@
 //   On Windows, make sure to include the .exe suffix:
 //     protoc --plugin=protoc-gen-NAME=path/to/mybinary.exe --NAME_out=OUT_DIR
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_PLUGIN_H__
-#define GOOGLE_PROTOBUF_COMPILER_PLUGIN_H__
+#pragma once
 
 #include <string>
 
@@ -93,4 +92,3 @@ bool GenerateCode(const CodeGeneratorRequest& request,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_PLUGIN_H__

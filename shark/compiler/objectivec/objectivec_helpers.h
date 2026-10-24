@@ -30,8 +30,7 @@
 
 // Helper functions for generating ObjectiveC code.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_OBJECTIVEC_HELPERS_H__
-#define GOOGLE_PROTOBUF_COMPILER_OBJECTIVEC_HELPERS_H__
+#pragma once
 
 #include <string>
 #include <vector>
@@ -350,4 +349,3 @@ class PROTOC_EXPORT ImportWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_OBJECTIVEC_HELPERS_H__

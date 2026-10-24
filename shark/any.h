@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_ANY_H__
-#define GOOGLE_PROTOBUF_ANY_H__
+#pragma once
 
 #include <string>
 
@@ -56,7 +55,7 @@ std::string GetTypeUrl(StringPiece message_name,
                        StringPiece type_url_prefix);
 
 // Helper class used to implement google::protobuf::Any.
-class PROTOBUF_EXPORT AnyMetadata {
+class SHARK_EXPORT AnyMetadata {
   typedef ArenaStringPtr UrlType;
   typedef ArenaStringPtr ValueType;
  public:
@@ -154,4 +153,3 @@ bool GetAnyFieldDescriptors(const Message& message,
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_ANY_H__

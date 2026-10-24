@@ -34,8 +34,7 @@
 //
 // Implements parsing of .proto files to FileDescriptorProtos.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_PARSER_H__
-#define GOOGLE_PROTOBUF_COMPILER_PARSER_H__
+#pragma once
 
 #include <cstdint>
 #include <map>
@@ -68,7 +67,7 @@ class SourceLocationTable;
 // to a FileDescriptorProto.  It does not resolve import directives or perform
 // many other kinds of validation needed to construct a complete
 // FileDescriptor.
-class PROTOBUF_EXPORT Parser {
+class SHARK_EXPORT Parser {
  public:
   Parser();
   ~Parser();
@@ -220,7 +219,7 @@ class PROTOBUF_EXPORT Parser {
   // are recorded -- the constructor records the start location and the
   // destructor records the end location.  Since the parser is
   // recursive-descent, this works out beautifully.
-  class PROTOBUF_EXPORT LocationRecorder {
+  class SHARK_EXPORT LocationRecorder {
    public:
     // Construct the file's "root" location.
     LocationRecorder(Parser* parser);
@@ -557,7 +556,7 @@ class PROTOBUF_EXPORT Parser {
 // far more complete information about source locations.  However, as of this
 // writing you still need to use SourceLocationTable when integrating with
 // DescriptorPool.
-class PROTOBUF_EXPORT SourceLocationTable {
+class SHARK_EXPORT SourceLocationTable {
  public:
   SourceLocationTable();
   ~SourceLocationTable();
@@ -599,4 +598,3 @@ class PROTOBUF_EXPORT SourceLocationTable {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_PARSER_H__

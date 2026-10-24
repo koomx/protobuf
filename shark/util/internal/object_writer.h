@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_OBJECT_WRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_OBJECT_WRITER_H__
+#pragma once
 
 #include <cstdint>
 
@@ -61,7 +60,7 @@ class DataPiece;
 //
 // TODO(xinb): seems like a prime candidate to apply the RAII paradigm
 // and get rid the need to call EndXXX().
-class PROTOBUF_EXPORT ObjectWriter {
+class SHARK_EXPORT ObjectWriter {
  public:
   virtual ~ObjectWriter() {}
 
@@ -148,4 +147,3 @@ class PROTOBUF_EXPORT ObjectWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_OBJECT_WRITER_H__

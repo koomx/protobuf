@@ -35,8 +35,7 @@
 // Defines the abstract interface implemented by each of the language-specific
 // code generators.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CODE_GENERATOR_H__
-#define GOOGLE_PROTOBUF_COMPILER_CODE_GENERATOR_H__
+#pragma once
 
 #include <string>
 #include <utility>
@@ -204,4 +203,3 @@ PROTOC_EXPORT std::string StripProto(const std::string& filename);
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CODE_GENERATOR_H__

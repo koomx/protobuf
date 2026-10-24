@@ -70,7 +70,7 @@ using ::testing::Ge;
 using ::testing::Le;
 
 TEST(RepeatedField, ConstInit) {
-  PROTOBUF_CONSTINIT static RepeatedField<int> field{};  // NOLINT
+  SHARK_CONSTINIT static RepeatedField<int> field{};  // NOLINT
   EXPECT_TRUE(field.empty());
 }
 
@@ -433,7 +433,7 @@ TEST(RepeatedField, ReserveHuge) {
                 min_clamping_size, min_clamping_size + 1)),
             std::numeric_limits<int>::max());
 
-#ifdef PROTOBUF_TEST_ALLOW_LARGE_ALLOC
+#ifdef SHARK_TEST_ALLOW_LARGE_ALLOC
   // The rest of this test may allocate several GB of memory, so it is only
   // built if explicitly requested.
   RepeatedField<int> huge_field;
@@ -443,7 +443,7 @@ TEST(RepeatedField, ReserveHuge) {
   EXPECT_GE(huge_field.Capacity(), min_clamping_size);
   ASSERT_LT(huge_field.Capacity(), std::numeric_limits<int>::max() - 1);
 
-#ifndef PROTOBUF_ASAN
+#ifndef SHARK_ASAN
   // The array containing all the fields is, in theory, up to MAXINT-1 in size.
   // However, some compilers can't handle a struct whose size is larger
   // than 2GB, and the protocol buffer format doesn't handle more than 2GB of
@@ -454,8 +454,8 @@ TEST(RepeatedField, ReserveHuge) {
   // size must still be clamped to a valid range.
   huge_field.Reserve(huge_field.Capacity() + 1);
   EXPECT_EQ(huge_field.Capacity(), std::numeric_limits<int>::max());
-#endif  // PROTOBUF_ASAN
-#endif  // PROTOBUF_TEST_ALLOW_LARGE_ALLOC
+#endif  // SHARK_ASAN
+#endif  // SHARK_TEST_ALLOW_LARGE_ALLOC
 }
 
 TEST(RepeatedField, MergeFrom) {
@@ -895,7 +895,7 @@ TEST(RepeatedField, Truncate) {
   // Truncations that don't change the size are allowed, but growing is not
   // allowed.
   field.Truncate(field.size());
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
   EXPECT_DEBUG_DEATH(field.Truncate(field.size() + 1), "new_size");
 #endif
 }
@@ -967,7 +967,7 @@ TEST(RepeatedField, TestSAddFromSelf) {
 // tests above.
 
 TEST(RepeatedPtrField, ConstInit) {
-  PROTOBUF_CONSTINIT static RepeatedPtrField<std::string> field{};  // NOLINT
+  SHARK_CONSTINIT static RepeatedPtrField<std::string> field{};  // NOLINT
   EXPECT_TRUE(field.empty());
 }
 
@@ -1258,7 +1258,7 @@ TEST(RepeatedPtrField, ClearedElements) {
 
   field.Clear();
   EXPECT_EQ(field.ClearedCount(), 2);
-#ifndef PROTOBUF_FUTURE_BREAKING_CHANGES
+#ifndef SHARK_FUTURE_BREAKING_CHANGES
   EXPECT_EQ(field.ReleaseCleared(), original);  // Take ownership again.
   EXPECT_EQ(field.ClearedCount(), 1);
   EXPECT_NE(field.Add(), original);
@@ -1270,7 +1270,7 @@ TEST(RepeatedPtrField, ClearedElements) {
   EXPECT_EQ(field.ClearedCount(), 1);
   EXPECT_EQ(field.Add(), original);
   EXPECT_EQ(field.ClearedCount(), 0);
-#endif  // !PROTOBUF_FUTURE_BREAKING_CHANGES
+#endif  // !SHARK_FUTURE_BREAKING_CHANGES
 }
 
 // Test all code paths in AddAllocated().

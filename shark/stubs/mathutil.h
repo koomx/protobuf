@@ -27,8 +27,7 @@
 // THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
-#ifndef GOOGLE_PROTOBUF_STUBS_MATHUTIL_H_
-#define GOOGLE_PROTOBUF_STUBS_MATHUTIL_H_
+#pragma once
 
 #include <cmath>
 #include <float.h>
@@ -159,4 +158,3 @@ bool MathUtil::WithinFractionOrMargin(const T x, const T y,
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_STUBS_MATHUTIL_H_

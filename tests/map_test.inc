@@ -265,7 +265,7 @@ TEST_F(MapImplTest, MutableAt) {
   ExpectSingleElement(key, value2);
 }
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
 
 TEST_F(MapImplTest, MutableAtNonExistDeathTest) {
   EXPECT_DEATH(map_.at(0), "");
@@ -291,7 +291,7 @@ TEST_F(MapImplTest, UsageErrors) {
       "MapValue[Const]*Ref::type MapValue[Const]*Ref is not initialized.");
 }
 
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
 TEST_F(MapImplTest, MapKeyAssignment) {
   MapKey from, to;
@@ -1333,10 +1333,10 @@ void TestTransparent(const Key& key, const Key& miss_key) {
   EXPECT_EQ(m.at(key), 1);
   EXPECT_EQ(cm.at(key), 1);
 
-#ifdef PROTOBUF_HAS_DEATH_TEST
+#ifdef SHARK_HAS_DEATH_TEST
   EXPECT_DEATH(m.at(miss_key), "");
   EXPECT_DEATH(cm.at(miss_key), "");
-#endif  // PROTOBUF_HAS_DEATH_TEST
+#endif  // SHARK_HAS_DEATH_TEST
 
   EXPECT_EQ(m.count(key), 1);
   EXPECT_EQ(cm.count(key), 1);
@@ -1385,7 +1385,7 @@ TEST_F(MapImplTest, TransparentLookupForString) {
 }
 
 TEST_F(MapImplTest, ConstInit) {
-  PROTOBUF_CONSTINIT static Map<int, int> map;  // NOLINT
+  SHARK_CONSTINIT static Map<int, int> map;  // NOLINT
   EXPECT_TRUE(map.empty());
 }
 
@@ -2296,10 +2296,10 @@ class MyMapEntryLite
 TEST(MapEntryTest, ConstInit) {
   // This verifies that `MapEntry`, `MapEntryLite` and `MapEntryImpl` can be
   // constant initialized.
-  PROTOBUF_CONSTINIT static MyMapEntry entry{};
+  SHARK_CONSTINIT static MyMapEntry entry{};
   EXPECT_NE(entry.SpaceUsed(), 0);
 
-  PROTOBUF_CONSTINIT static MyMapEntryLite entry_lite{};  // NOLINT
+  SHARK_CONSTINIT static MyMapEntryLite entry_lite{};  // NOLINT
   EXPECT_TRUE(entry_lite.IsInitialized());
 }
 
@@ -2423,7 +2423,7 @@ TEST(GeneratedMapFieldTest, CopyAssignmentOperator) {
   MapTestUtil::ExpectMapFieldsSet(message2);
 }
 
-#if !defined(PROTOBUF_TEST_NO_DESCRIPTORS) || PROTOBUF_RTTI
+#if !defined(SHARK_TEST_NO_DESCRIPTORS) || SHARK_RTTI
 TEST(GeneratedMapFieldTest, UpcastCopyFrom) {
   // Test the CopyFrom method that takes in the generic const Message&
   // parameter.
@@ -2438,7 +2438,7 @@ TEST(GeneratedMapFieldTest, UpcastCopyFrom) {
 }
 #endif
 
-#ifndef PROTOBUF_TEST_NO_DESCRIPTORS
+#ifndef SHARK_TEST_NO_DESCRIPTORS
 
 TEST(GeneratedMapFieldTest, CopyFromDynamicMessage) {
   // Test copying from a DynamicMessage, which must fall back to using
@@ -2546,7 +2546,7 @@ TEST(GeneratedMapFieldTest, SyncDynamicMapWithRepeatedField) {
   reflection_tester.ExpectMapFieldsSetViaReflection(*message);
 }
 
-#endif  // !PROTOBUF_TEST_NO_DESCRIPTORS
+#endif  // !SHARK_TEST_NO_DESCRIPTORS
 
 TEST(GeneratedMapFieldTest, NonEmptyMergeFrom) {
   UNITTEST::TestMap message1, message2;

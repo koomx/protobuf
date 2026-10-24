@@ -121,7 +121,7 @@ inline bool CheckFieldPresence(const internal::ParseContext& ctx,
                                const MessageLite& msg,
                                MessageLite::ParseFlags parse_flags) {
   (void)ctx;  // Parameter is used by Google-internal code.
-  if (PROTOBUF_PREDICT_FALSE((parse_flags & MessageLite::kMergePartial) != 0)) {
+  if (SHARK_PREDICT_FALSE((parse_flags & MessageLite::kMergePartial) != 0)) {
     return true;
   }
   return msg.IsInitializedWithErrors();
@@ -143,7 +143,7 @@ bool MergeFromImpl(StringPiece input, MessageLite* msg,
                              aliasing, &ptr, input);
   ptr = msg->_InternalParse(ptr, &ctx);
   // ctx has an explicit limit set (length of string_view).
-  if (PROTOBUF_PREDICT_TRUE(ptr && ctx.EndedAtLimit())) {
+  if (SHARK_PREDICT_TRUE(ptr && ctx.EndedAtLimit())) {
     return CheckFieldPresence(ctx, *msg, parse_flags);
   }
   return false;
@@ -157,7 +157,7 @@ bool MergeFromImpl(io::ZeroCopyInputStream* input, MessageLite* msg,
                              aliasing, &ptr, input);
   ptr = msg->_InternalParse(ptr, &ctx);
   // ctx has no explicit limit (hence we end on end of stream)
-  if (PROTOBUF_PREDICT_TRUE(ptr && ctx.EndedAtEndOfStream())) {
+  if (SHARK_PREDICT_TRUE(ptr && ctx.EndedAtEndOfStream())) {
     return CheckFieldPresence(ctx, *msg, parse_flags);
   }
   return false;
@@ -170,9 +170,9 @@ bool MergeFromImpl(BoundedZCIS input, MessageLite* msg,
   internal::ParseContext ctx(io::CodedInputStream::GetDefaultRecursionLimit(),
                              aliasing, &ptr, input.zcis, input.limit);
   ptr = msg->_InternalParse(ptr, &ctx);
-  if (PROTOBUF_PREDICT_FALSE(!ptr)) return false;
+  if (SHARK_PREDICT_FALSE(!ptr)) return false;
   ctx.BackUp(ptr);
-  if (PROTOBUF_PREDICT_TRUE(ctx.EndedAtLimit())) {
+  if (SHARK_PREDICT_TRUE(ctx.EndedAtLimit())) {
     return CheckFieldPresence(ctx, *msg, parse_flags);
   }
   return false;
@@ -226,7 +226,7 @@ bool MessageLite::MergeFromImpl(io::CodedInputStream* input,
   ctx.data().pool = input->GetExtensionPool();
   ctx.data().factory = input->GetExtensionFactory();
   ptr = _InternalParse(ptr, &ctx);
-  if (PROTOBUF_PREDICT_FALSE(!ptr)) return false;
+  if (SHARK_PREDICT_FALSE(!ptr)) return false;
   ctx.BackUp(ptr);
   if (!ctx.EndedAtEndOfStream()) {
     GOOGLE_DCHECK_NE(ctx.LastTag(), 1);  // We can't end on a pushed limit.

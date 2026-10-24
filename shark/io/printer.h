@@ -34,8 +34,7 @@
 //
 // Utility class for writing text to a ZeroCopyOutputStream.
 
-#ifndef GOOGLE_PROTOBUF_IO_PRINTER_H__
-#define GOOGLE_PROTOBUF_IO_PRINTER_H__
+#pragma once
 
 
 #include <map>
@@ -54,7 +53,7 @@ namespace io {
 class ZeroCopyOutputStream;  // zero_copy_stream.h
 
 // Records annotations about a Printer's output.
-class PROTOBUF_EXPORT AnnotationCollector {
+class SHARK_EXPORT AnnotationCollector {
  public:
   // Annotation is a offset range and a payload pair.
   typedef std::pair<std::pair<size_t, size_t>, std::string> Annotation;
@@ -181,7 +180,7 @@ class AnnotationProtoCollector : public AnnotationCollector {
 // This code associates the span covering "call(bar,bar)" in the output with the
 // call_ descriptor.
 
-class PROTOBUF_EXPORT Printer {
+class SHARK_EXPORT Printer {
  public:
   // Create a printer that writes text to the given output stream.  Use the
   // given character as the delimiter for variables.
@@ -384,4 +383,3 @@ class PROTOBUF_EXPORT Printer {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_IO_PRINTER_H__

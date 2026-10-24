@@ -35,8 +35,7 @@
 // Contains classes used to keep track of unrecognized fields seen while
 // parsing a protocol message.
 
-#ifndef GOOGLE_PROTOBUF_UNKNOWN_FIELD_SET_H__
-#define GOOGLE_PROTOBUF_UNKNOWN_FIELD_SET_H__
+#pragma once
 
 
 #include <assert.h>
@@ -83,7 +82,7 @@ class UnknownField;  // below
 //
 // This class is necessarily tied to the protocol buffer wire format, unlike
 // the Reflection interface which is independent of any serialization scheme.
-class PROTOBUF_EXPORT UnknownFieldSet {
+class SHARK_EXPORT UnknownFieldSet {
  public:
   UnknownFieldSet();
   ~UnknownFieldSet();
@@ -222,17 +221,17 @@ inline void WriteLengthDelimited(uint32_t num, StringPiece val,
   unknown->AddLengthDelimited(num)->assign(val.data(), val.size());
 }
 
-PROTOBUF_EXPORT
+SHARK_EXPORT
 const char* UnknownGroupParse(UnknownFieldSet* unknown, const char* ptr,
                               ParseContext* ctx);
-PROTOBUF_EXPORT
+SHARK_EXPORT
 const char* UnknownFieldParse(uint64_t tag, UnknownFieldSet* unknown,
                               const char* ptr, ParseContext* ctx);
 
 }  // namespace internal
 
 // Represents one field in an UnknownFieldSet.
-class PROTOBUF_EXPORT UnknownField {
+class SHARK_EXPORT UnknownField {
  public:
   enum Type {
     TYPE_VARINT,
@@ -404,4 +403,3 @@ inline void UnknownField::SetType(Type type) {
 }  // namespace google
 
 #include <shark/port_undef.inc>
-#endif  // GOOGLE_PROTOBUF_UNKNOWN_FIELD_SET_H__

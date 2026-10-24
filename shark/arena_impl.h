@@ -30,8 +30,7 @@
 
 // This file defines an Arena allocator for better allocation performance.
 
-#ifndef GOOGLE_PROTOBUF_ARENA_IMPL_H__
-#define GOOGLE_PROTOBUF_ARENA_IMPL_H__
+#pragma once
 
 #include <atomic>
 #include <limits>
@@ -70,7 +69,7 @@ inline constexpr size_t AlignUpTo8(size_t n) {
 using LifecycleIdAtomic = uint64_t;
 
 // MetricsCollector collects stats for a particular arena.
-class PROTOBUF_EXPORT ArenaMetricsCollector {
+class SHARK_EXPORT ArenaMetricsCollector {
  public:
   ArenaMetricsCollector(bool record_allocs) : record_allocs_(record_allocs) {}
 
@@ -201,7 +200,7 @@ enum class AllocationClient { kDefault, kArray };
 // It delagetes the actual memory allocation back to ThreadSafeArena, which
 // contains the information on block growth policy and backing memory allocation
 // used.
-class PROTOBUF_EXPORT SerialArena {
+class SHARK_EXPORT SerialArena {
  public:
   struct Memory {
     void* ptr;
@@ -226,8 +225,8 @@ class PROTOBUF_EXPORT SerialArena {
   }
 
   // See comments on `cached_blocks_` member for details.
-  PROTOBUF_ALWAYS_INLINE void* TryAllocateFromCachedBlock(size_t size) {
-    if (PROTOBUF_PREDICT_FALSE(size < 16)) return nullptr;
+  SHARK_ALWAYS_INLINE void* TryAllocateFromCachedBlock(size_t size) {
+    if (SHARK_PREDICT_FALSE(size < 16)) return nullptr;
     // We round up to the next larger block in case the memory doesn't match
     // the pattern we are looking for.
     const size_t index = Bits::Log2FloorNonZero64(size - 1) - 3;
@@ -262,7 +261,7 @@ class PROTOBUF_EXPORT SerialArena {
       }
     }
 
-    if (PROTOBUF_PREDICT_FALSE(!HasSpace(n))) {
+    if (SHARK_PREDICT_FALSE(!HasSpace(n))) {
       return AllocateAlignedFallback(n, policy);
     }
     return AllocateFromExisting(n);
@@ -284,7 +283,7 @@ class PROTOBUF_EXPORT SerialArena {
     // In 64-bit platforms the minimum allocation size from Repeated*Field will
     // be 16 guaranteed.
     if (sizeof(void*) < 8) {
-      if (PROTOBUF_PREDICT_FALSE(size < 16)) return;
+      if (SHARK_PREDICT_FALSE(size < 16)) return;
     } else {
       GOOGLE_DCHECK(size >= 16);
     }
@@ -294,7 +293,7 @@ class PROTOBUF_EXPORT SerialArena {
     // on the repeated field.
     const size_t index = Bits::Log2FloorNonZero64(size) - 4;
 
-    if (PROTOBUF_PREDICT_FALSE(index >= cached_block_length_)) {
+    if (SHARK_PREDICT_FALSE(index >= cached_block_length_)) {
       // We can't put this object on the freelist so make this object the
       // freelist. It is guaranteed it is larger than the one we have, and
       // large enough to hold another allocation of `size`.
@@ -327,7 +326,7 @@ class PROTOBUF_EXPORT SerialArena {
   bool MaybeAllocateAligned(size_t n, void** out) {
     GOOGLE_DCHECK_EQ(internal::AlignUpTo8(n), n);  // Must be already aligned.
     GOOGLE_DCHECK_GE(limit_, ptr_);
-    if (PROTOBUF_PREDICT_FALSE(!HasSpace(n))) return false;
+    if (SHARK_PREDICT_FALSE(!HasSpace(n))) return false;
     *out = AllocateFromExisting(n);
     return true;
   }
@@ -335,7 +334,7 @@ class PROTOBUF_EXPORT SerialArena {
   std::pair<void*, CleanupNode*> AllocateAlignedWithCleanup(
       size_t n, const AllocationPolicy* policy) {
     GOOGLE_DCHECK_EQ(internal::AlignUpTo8(n), n);  // Must be already aligned.
-    if (PROTOBUF_PREDICT_FALSE(!HasSpace(n + kCleanupSize))) {
+    if (SHARK_PREDICT_FALSE(!HasSpace(n + kCleanupSize))) {
       return AllocateAlignedWithCleanupFallback(n, policy);
     }
     return AllocateFromExistingWithCleanupFallback(n);
@@ -453,7 +452,7 @@ struct MessageOwned {
 // in turn would be templates, which will/cannot happen. However separating
 // the memory allocation part from the cruft of the API users expect we can
 // use #ifdef the select the best implementation based on hardware / OS.
-class PROTOBUF_EXPORT ThreadSafeArena {
+class SHARK_EXPORT ThreadSafeArena {
  public:
   ThreadSafeArena() { Init(); }
 
@@ -483,7 +482,7 @@ class PROTOBUF_EXPORT ThreadSafeArena {
   template <AllocationClient alloc_client = AllocationClient::kDefault>
   void* AllocateAligned(size_t n, const std::type_info* type) {
     SerialArena* arena;
-    if (PROTOBUF_PREDICT_TRUE(!alloc_policy_.should_record_allocs() &&
+    if (SHARK_PREDICT_TRUE(!alloc_policy_.should_record_allocs() &&
                               GetSerialArenaFast(&arena))) {
       return arena->AllocateAligned<alloc_client>(n, AllocPolicy());
     } else {
@@ -493,7 +492,7 @@ class PROTOBUF_EXPORT ThreadSafeArena {
 
   void ReturnArrayMemory(void* p, size_t size) {
     SerialArena* arena;
-    if (PROTOBUF_PREDICT_TRUE(GetSerialArenaFast(&arena))) {
+    if (SHARK_PREDICT_TRUE(GetSerialArenaFast(&arena))) {
       arena->ReturnArrayMemory(p, size);
     }
   }
@@ -503,9 +502,9 @@ class PROTOBUF_EXPORT ThreadSafeArena {
   // semantics is necessary to allow callers to program functions that only
   // have fallback function calls in tail position. This substantially improves
   // code for the happy path.
-  PROTOBUF_NDEBUG_INLINE bool MaybeAllocateAligned(size_t n, void** out) {
+  SHARK_NDEBUG_INLINE bool MaybeAllocateAligned(size_t n, void** out) {
     SerialArena* arena;
-    if (PROTOBUF_PREDICT_TRUE(!alloc_policy_.should_record_allocs() &&
+    if (SHARK_PREDICT_TRUE(!alloc_policy_.should_record_allocs() &&
                               GetSerialArenaFromThreadCache(&arena))) {
       return arena->MaybeAllocateAligned(n, out);
     }
@@ -519,7 +518,7 @@ class PROTOBUF_EXPORT ThreadSafeArena {
   void AddCleanup(void* elem, void (*cleanup)(void*));
 
   // Checks whether this arena is message-owned.
-  PROTOBUF_ALWAYS_INLINE bool IsMessageOwned() const {
+  SHARK_ALWAYS_INLINE bool IsMessageOwned() const {
     return tag_and_id_ & kMessageOwnedArena;
   }
 
@@ -564,27 +563,27 @@ class PROTOBUF_EXPORT ThreadSafeArena {
     hint_.store(serial, std::memory_order_release);
   }
 
-  PROTOBUF_NDEBUG_INLINE bool GetSerialArenaFast(SerialArena** arena) {
+  SHARK_NDEBUG_INLINE bool GetSerialArenaFast(SerialArena** arena) {
     if (GetSerialArenaFromThreadCache(arena)) return true;
 
     // Check whether we own the last accessed SerialArena on this arena.  This
     // fast path optimizes the case where a single thread uses multiple arenas.
     ThreadCache* tc = &thread_cache();
     SerialArena* serial = hint_.load(std::memory_order_acquire);
-    if (PROTOBUF_PREDICT_TRUE(serial != nullptr && serial->owner() == tc)) {
+    if (SHARK_PREDICT_TRUE(serial != nullptr && serial->owner() == tc)) {
       *arena = serial;
       return true;
     }
     return false;
   }
 
-  PROTOBUF_NDEBUG_INLINE bool GetSerialArenaFromThreadCache(
+  SHARK_NDEBUG_INLINE bool GetSerialArenaFromThreadCache(
       SerialArena** arena) {
     // If this thread already owns a block in this arena then try to use that.
     // This fast path optimizes the case where multiple threads allocate from
     // the same arena.
     ThreadCache* tc = &thread_cache();
-    if (PROTOBUF_PREDICT_TRUE(tc->last_lifecycle_id_seen == tag_and_id_)) {
+    if (SHARK_PREDICT_TRUE(tc->last_lifecycle_id_seen == tag_and_id_)) {
       *arena = tc->last_serial_arena;
       return true;
     }
@@ -610,7 +609,7 @@ class PROTOBUF_EXPORT ThreadSafeArena {
 #pragma warning(disable : 4324)
 #endif
   struct alignas(kCacheAlignment) ThreadCache {
-#if defined(GOOGLE_PROTOBUF_NO_THREADLOCAL)
+#if defined(SHARK_NO_THREADLOCAL)
     // If we are using the ThreadLocalStorage class to store the ThreadCache,
     // then the ThreadCache's default constructor has to be responsible for
     // initializing it.
@@ -644,16 +643,16 @@ class PROTOBUF_EXPORT ThreadSafeArena {
     std::atomic<LifecycleIdAtomic> id;
   };
   static CacheAlignedLifecycleIdGenerator lifecycle_id_generator_;
-#if defined(GOOGLE_PROTOBUF_NO_THREADLOCAL)
+#if defined(SHARK_NO_THREADLOCAL)
   // iOS does not support __thread keyword so we use a custom thread local
   // storage class we implemented.
   static ThreadCache& thread_cache();
-#elif defined(PROTOBUF_USE_DLLS)
+#elif defined(SHARK_USE_DLLS)
   // Thread local variables cannot be exposed through DLL interface but we can
   // wrap them in static functions.
   static ThreadCache& thread_cache();
 #else
-  static PROTOBUF_THREAD_LOCAL ThreadCache thread_cache_;
+  static thread_local ThreadCache thread_cache_;
   static ThreadCache& thread_cache() { return thread_cache_; }
 #endif
 
@@ -683,4 +682,3 @@ class PROTOBUF_EXPORT ThreadSafeArena {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_ARENA_IMPL_H__

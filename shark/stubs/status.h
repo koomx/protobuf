@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_STUBS_STATUS_H_
-#define GOOGLE_PROTOBUF_STUBS_STATUS_H_
+#pragma once
 
 #include <string>
 
@@ -63,7 +62,7 @@ enum class StatusCode : int {
   kDataLoss = 15,
 };
 
-class PROTOBUF_EXPORT Status {
+class SHARK_EXPORT Status {
  public:
   // Creates a "successful" status.
   Status();
@@ -99,29 +98,29 @@ class PROTOBUF_EXPORT Status {
 
 // Returns an OK status, equivalent to a default constructed instance. Prefer
 // usage of `OkStatus()` when constructing such an OK status.
-PROTOBUF_EXPORT Status OkStatus();
+SHARK_EXPORT Status OkStatus();
 
 // Prints a human-readable representation of 'x' to 'os'.
-PROTOBUF_EXPORT std::ostream& operator<<(std::ostream& os, const Status& x);
+SHARK_EXPORT std::ostream& operator<<(std::ostream& os, const Status& x);
 
 // These convenience functions return `true` if a given status matches the
 // `StatusCode` error code of its associated function.
-PROTOBUF_EXPORT bool IsAborted(const Status& status);
-PROTOBUF_EXPORT bool IsAlreadyExists(const Status& status);
-PROTOBUF_EXPORT bool IsCancelled(const Status& status);
-PROTOBUF_EXPORT bool IsDataLoss(const Status& status);
-PROTOBUF_EXPORT bool IsDeadlineExceeded(const Status& status);
-PROTOBUF_EXPORT bool IsFailedPrecondition(const Status& status);
-PROTOBUF_EXPORT bool IsInternal(const Status& status);
-PROTOBUF_EXPORT bool IsInvalidArgument(const Status& status);
-PROTOBUF_EXPORT bool IsNotFound(const Status& status);
-PROTOBUF_EXPORT bool IsOutOfRange(const Status& status);
-PROTOBUF_EXPORT bool IsPermissionDenied(const Status& status);
-PROTOBUF_EXPORT bool IsResourceExhausted(const Status& status);
-PROTOBUF_EXPORT bool IsUnauthenticated(const Status& status);
-PROTOBUF_EXPORT bool IsUnavailable(const Status& status);
-PROTOBUF_EXPORT bool IsUnimplemented(const Status& status);
-PROTOBUF_EXPORT bool IsUnknown(const Status& status);
+SHARK_EXPORT bool IsAborted(const Status& status);
+SHARK_EXPORT bool IsAlreadyExists(const Status& status);
+SHARK_EXPORT bool IsCancelled(const Status& status);
+SHARK_EXPORT bool IsDataLoss(const Status& status);
+SHARK_EXPORT bool IsDeadlineExceeded(const Status& status);
+SHARK_EXPORT bool IsFailedPrecondition(const Status& status);
+SHARK_EXPORT bool IsInternal(const Status& status);
+SHARK_EXPORT bool IsInvalidArgument(const Status& status);
+SHARK_EXPORT bool IsNotFound(const Status& status);
+SHARK_EXPORT bool IsOutOfRange(const Status& status);
+SHARK_EXPORT bool IsPermissionDenied(const Status& status);
+SHARK_EXPORT bool IsResourceExhausted(const Status& status);
+SHARK_EXPORT bool IsUnauthenticated(const Status& status);
+SHARK_EXPORT bool IsUnavailable(const Status& status);
+SHARK_EXPORT bool IsUnimplemented(const Status& status);
+SHARK_EXPORT bool IsUnknown(const Status& status);
 
 // These convenience functions create an `Status` object with an error code as
 // indicated by the associated function name, using the error message passed in
@@ -130,22 +129,22 @@ PROTOBUF_EXPORT bool IsUnknown(const Status& status);
 // These functions are intentionally named `*Error` rather than `*Status` to
 // match the names from Abseil:
 // https://github.com/abseil/abseil-cpp/blob/2e9532cc6c701a8323d0cffb468999ab804095ab/absl/status/status.h#L716
-PROTOBUF_EXPORT Status AbortedError(StringPiece message);
-PROTOBUF_EXPORT Status AlreadyExistsError(StringPiece message);
-PROTOBUF_EXPORT Status CancelledError(StringPiece message);
-PROTOBUF_EXPORT Status DataLossError(StringPiece message);
-PROTOBUF_EXPORT Status DeadlineExceededError(StringPiece message);
-PROTOBUF_EXPORT Status FailedPreconditionError(StringPiece message);
-PROTOBUF_EXPORT Status InternalError(StringPiece message);
-PROTOBUF_EXPORT Status InvalidArgumentError(StringPiece message);
-PROTOBUF_EXPORT Status NotFoundError(StringPiece message);
-PROTOBUF_EXPORT Status OutOfRangeError(StringPiece message);
-PROTOBUF_EXPORT Status PermissionDeniedError(StringPiece message);
-PROTOBUF_EXPORT Status ResourceExhaustedError(StringPiece message);
-PROTOBUF_EXPORT Status UnauthenticatedError(StringPiece message);
-PROTOBUF_EXPORT Status UnavailableError(StringPiece message);
-PROTOBUF_EXPORT Status UnimplementedError(StringPiece message);
-PROTOBUF_EXPORT Status UnknownError(StringPiece message);
+SHARK_EXPORT Status AbortedError(StringPiece message);
+SHARK_EXPORT Status AlreadyExistsError(StringPiece message);
+SHARK_EXPORT Status CancelledError(StringPiece message);
+SHARK_EXPORT Status DataLossError(StringPiece message);
+SHARK_EXPORT Status DeadlineExceededError(StringPiece message);
+SHARK_EXPORT Status FailedPreconditionError(StringPiece message);
+SHARK_EXPORT Status InternalError(StringPiece message);
+SHARK_EXPORT Status InvalidArgumentError(StringPiece message);
+SHARK_EXPORT Status NotFoundError(StringPiece message);
+SHARK_EXPORT Status OutOfRangeError(StringPiece message);
+SHARK_EXPORT Status PermissionDeniedError(StringPiece message);
+SHARK_EXPORT Status ResourceExhaustedError(StringPiece message);
+SHARK_EXPORT Status UnauthenticatedError(StringPiece message);
+SHARK_EXPORT Status UnavailableError(StringPiece message);
+SHARK_EXPORT Status UnimplementedError(StringPiece message);
+SHARK_EXPORT Status UnknownError(StringPiece message);
 
 }  // namespace status_internal
 
@@ -193,4 +192,3 @@ using ::google::protobuf::util::status_internal::UnknownError;
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_STATUS_H_

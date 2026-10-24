@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_MAP_FIELD_H__
-#define GOOGLE_PROTOBUF_MAP_FIELD_H__
+#pragma once
 
 #include <atomic>
 #include <functional>
@@ -78,7 +77,7 @@ class MapIterator;
 
 // MapKey is an union type for representing any possible
 // map key.
-class PROTOBUF_EXPORT MapKey {
+class SHARK_EXPORT MapKey {
  public:
   MapKey() : type_() {}
   MapKey(const MapKey& other) : type_() { CopyFrom(other); }
@@ -244,7 +243,7 @@ class PROTOBUF_EXPORT MapKey {
  private:
   template <typename K, typename V>
   friend class internal::TypeDefinedMapFieldBase;
-  friend class ::PROTOBUF_NAMESPACE_ID::MapIterator;
+  friend class ::SHARK_NAMESPACE_ID::MapIterator;
   friend class internal::DynamicMapField;
 
   union KeyValue {
@@ -277,42 +276,42 @@ class PROTOBUF_EXPORT MapKey {
 }  // namespace google
 namespace std {
 template <>
-struct hash<::PROTOBUF_NAMESPACE_ID::MapKey> {
-  size_t operator()(const ::PROTOBUF_NAMESPACE_ID::MapKey& map_key) const {
+struct hash<::SHARK_NAMESPACE_ID::MapKey> {
+  size_t operator()(const ::SHARK_NAMESPACE_ID::MapKey& map_key) const {
     switch (map_key.type()) {
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_DOUBLE:
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_FLOAT:
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_ENUM:
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_MESSAGE:
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_DOUBLE:
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_FLOAT:
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_ENUM:
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_MESSAGE:
         GOOGLE_LOG(FATAL) << "Unsupported";
         break;
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_STRING:
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_STRING:
         return hash<std::string>()(map_key.GetStringValue());
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_INT64: {
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_INT64: {
         auto value = map_key.GetInt64Value();
         return hash<decltype(value)>()(value);
       }
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_INT32: {
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_INT32: {
         auto value = map_key.GetInt32Value();
         return hash<decltype(value)>()(map_key.GetInt32Value());
       }
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_UINT64: {
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_UINT64: {
         auto value = map_key.GetUInt64Value();
         return hash<decltype(value)>()(map_key.GetUInt64Value());
       }
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_UINT32: {
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_UINT32: {
         auto value = map_key.GetUInt32Value();
         return hash<decltype(value)>()(map_key.GetUInt32Value());
       }
-      case ::PROTOBUF_NAMESPACE_ID::FieldDescriptor::CPPTYPE_BOOL: {
+      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_BOOL: {
         return hash<bool>()(map_key.GetBoolValue());
       }
     }
     GOOGLE_LOG(FATAL) << "Can't get here.";
     return 0;
   }
-  bool operator()(const ::PROTOBUF_NAMESPACE_ID::MapKey& map_key1,
-                  const ::PROTOBUF_NAMESPACE_ID::MapKey& map_key2) const {
+  bool operator()(const ::SHARK_NAMESPACE_ID::MapKey& map_key1,
+                  const ::SHARK_NAMESPACE_ID::MapKey& map_key2) const {
     return map_key1 < map_key2;
   }
 };
@@ -329,7 +328,7 @@ class MapFieldAccessor;
 // This class provides access to map field using reflection, which is the same
 // as those provided for RepeatedPtrField<Message>. It is used for internal
 // reflection implementation only. Users should never use this directly.
-class PROTOBUF_EXPORT MapFieldBase {
+class SHARK_EXPORT MapFieldBase {
  public:
   MapFieldBase()
       : arena_(nullptr), repeated_field_(nullptr), state_(STATE_MODIFIED_MAP) {}
@@ -342,7 +341,7 @@ class PROTOBUF_EXPORT MapFieldBase {
   constexpr MapFieldBase(ConstantInitialized)
       : arena_(nullptr),
         repeated_field_(nullptr),
-        mutex_(GOOGLE_PROTOBUF_LINKER_INITIALIZED),
+        mutex_(SHARK_LINKER_INITIALIZED),
         state_(STATE_MODIFIED_MAP) {}
   explicit MapFieldBase(Arena* arena)
       : arena_(arena), repeated_field_(nullptr), state_(STATE_MODIFIED_MAP) {}
@@ -458,14 +457,14 @@ class PROTOBUF_EXPORT MapFieldBase {
   friend class ContendedMapCleanTest;
   friend class GeneratedMessageReflection;
   friend class MapFieldAccessor;
-  friend class ::PROTOBUF_NAMESPACE_ID::Reflection;
-  friend class ::PROTOBUF_NAMESPACE_ID::DynamicMessage;
+  friend class ::SHARK_NAMESPACE_ID::Reflection;
+  friend class ::SHARK_NAMESPACE_ID::DynamicMessage;
 
   // Virtual helper methods for MapIterator. MapIterator doesn't have the
   // type helper for key and value. Call these help methods to deal with
   // different types. Real helper methods are implemented in
   // TypeDefinedMapFieldBase.
-  friend class ::PROTOBUF_NAMESPACE_ID::MapIterator;
+  friend class ::SHARK_NAMESPACE_ID::MapIterator;
   // Allocate map<...>::iterator for MapIterator.
   virtual void InitializeIterator(MapIterator* map_iter) const = 0;
 
@@ -633,7 +632,7 @@ class MapField : public TypeDefinedMapFieldBase<Key, T> {
 
   void SetMapIteratorValue(MapIterator* map_iter) const override;
 
-  friend class ::PROTOBUF_NAMESPACE_ID::Arena;
+  friend class ::SHARK_NAMESPACE_ID::Arena;
   friend class MapFieldStateTest;  // For testing, it needs raw access to impl_
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapField);
 };
@@ -659,7 +658,7 @@ struct MapEntryToMapField<
   typedef MapField<T, Key, Value, kKeyFieldType, kValueFieldType> MapFieldType;
 };
 
-class PROTOBUF_EXPORT DynamicMapField
+class SHARK_EXPORT DynamicMapField
     : public TypeDefinedMapFieldBase<MapKey, MapValueRef> {
  public:
   explicit DynamicMapField(const Message* default_entry);
@@ -701,7 +700,7 @@ class PROTOBUF_EXPORT DynamicMapField
 
 // MapValueConstRef points to a map value. Users can NOT modify
 // the map value.
-class PROTOBUF_EXPORT MapValueConstRef {
+class SHARK_EXPORT MapValueConstRef {
  public:
   MapValueConstRef() : data_(nullptr), type_() {}
 
@@ -779,7 +778,7 @@ class PROTOBUF_EXPORT MapValueConstRef {
   friend class internal::MapField;
   template <typename K, typename V>
   friend class internal::TypeDefinedMapFieldBase;
-  friend class ::PROTOBUF_NAMESPACE_ID::MapIterator;
+  friend class ::SHARK_NAMESPACE_ID::MapIterator;
   friend class Reflection;
   friend class internal::DynamicMapField;
 
@@ -793,7 +792,7 @@ class PROTOBUF_EXPORT MapValueConstRef {
 
 // MapValueRef points to a map value. Users are able to modify
 // the map value.
-class PROTOBUF_EXPORT MapValueRef final : public MapValueConstRef {
+class SHARK_EXPORT MapValueRef final : public MapValueConstRef {
  public:
   MapValueRef() {}
 
@@ -869,7 +868,7 @@ class PROTOBUF_EXPORT MapValueRef final : public MapValueConstRef {
 
 #undef TYPE_CHECK
 
-class PROTOBUF_EXPORT MapIterator {
+class SHARK_EXPORT MapIterator {
  public:
   MapIterator(Message* message, const FieldDescriptor* field) {
     const Reflection* reflection = message->GetReflection();
@@ -943,4 +942,3 @@ class PROTOBUF_EXPORT MapIterator {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_MAP_FIELD_H__

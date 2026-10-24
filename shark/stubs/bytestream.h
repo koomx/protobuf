@@ -47,8 +47,7 @@
 //      ArrayByteSource         Reads from an array or string/StringPiece
 //      LimitedByteSource       Limits the number of bytes read from an
 
-#ifndef GOOGLE_PROTOBUF_STUBS_BYTESTREAM_H_
-#define GOOGLE_PROTOBUF_STUBS_BYTESTREAM_H_
+#pragma once
 
 #include <stddef.h>
 #include <string>
@@ -75,7 +74,7 @@ namespace strings {
 //   sink->Append(my_data.data(), my_data.size());
 //   sink->Flush();
 //
-class PROTOBUF_EXPORT ByteSink {
+class SHARK_EXPORT ByteSink {
  public:
   ByteSink() {}
   virtual ~ByteSink() {}
@@ -104,7 +103,7 @@ class PROTOBUF_EXPORT ByteSink {
 //     source->Skip(data.length());
 //   }
 //
-class PROTOBUF_EXPORT ByteSource {
+class SHARK_EXPORT ByteSource {
  public:
   ByteSource() {}
   virtual ~ByteSource() {}
@@ -160,7 +159,7 @@ class PROTOBUF_EXPORT ByteSource {
 //   sink.Append("hi", 2);    // OK
 //   sink.Append(data, 100);  // WOOPS! Overflows buf[10].
 //
-class PROTOBUF_EXPORT UncheckedArrayByteSink : public ByteSink {
+class SHARK_EXPORT UncheckedArrayByteSink : public ByteSink {
  public:
   explicit UncheckedArrayByteSink(char* dest) : dest_(dest) {}
   virtual void Append(const char* data, size_t n) override;
@@ -188,7 +187,7 @@ class PROTOBUF_EXPORT UncheckedArrayByteSink : public ByteSink {
 //   sink.Append("hi", 2);    // OK
 //   sink.Append(data, 100);  // Will only write 8 more bytes
 //
-class PROTOBUF_EXPORT CheckedArrayByteSink : public ByteSink {
+class SHARK_EXPORT CheckedArrayByteSink : public ByteSink {
  public:
   CheckedArrayByteSink(char* outbuf, size_t capacity);
   virtual void Append(const char* bytes, size_t n) override;
@@ -224,7 +223,7 @@ class PROTOBUF_EXPORT CheckedArrayByteSink : public ByteSink {
 //   const char* buf = sink.GetBuffer();  // Ownership transferred
 //   delete[] buf;
 //
-class PROTOBUF_EXPORT GrowingArrayByteSink : public strings::ByteSink {
+class SHARK_EXPORT GrowingArrayByteSink : public strings::ByteSink {
  public:
   explicit GrowingArrayByteSink(size_t estimated_size);
   virtual ~GrowingArrayByteSink();
@@ -254,7 +253,7 @@ class PROTOBUF_EXPORT GrowingArrayByteSink : public strings::ByteSink {
 //   sink.Append("World", 5);
 //   assert(dest == "Hello World");
 //
-class PROTOBUF_EXPORT StringByteSink : public ByteSink {
+class SHARK_EXPORT StringByteSink : public ByteSink {
  public:
   explicit StringByteSink(std::string* dest) : dest_(dest) {}
   virtual void Append(const char* data, size_t n) override;
@@ -271,7 +270,7 @@ class PROTOBUF_EXPORT StringByteSink : public ByteSink {
 //   NullByteSink sink;
 //   sink.Append(data, data.size());  // All data ignored.
 //
-class PROTOBUF_EXPORT NullByteSink : public ByteSink {
+class SHARK_EXPORT NullByteSink : public ByteSink {
  public:
   NullByteSink() {}
   void Append(const char* /*data*/, size_t /*n*/) override {}
@@ -293,7 +292,7 @@ class PROTOBUF_EXPORT NullByteSink : public ByteSink {
 //   assert(source.Available() == 5);
 //   assert(source.Peek() == "Hello");
 //
-class PROTOBUF_EXPORT ArrayByteSource : public ByteSource {
+class SHARK_EXPORT ArrayByteSource : public ByteSource {
  public:
   explicit ArrayByteSource(StringPiece s) : input_(s) {}
 
@@ -324,7 +323,7 @@ class PROTOBUF_EXPORT ArrayByteSource : public ByteSource {
 //   assert(limit.Available() == 5);
 //   assert(limit.Peek() == "Hello");
 //
-class PROTOBUF_EXPORT LimitByteSource : public ByteSource {
+class SHARK_EXPORT LimitByteSource : public ByteSource {
  public:
   // Returns at most "limit" bytes from "source".
   LimitByteSource(ByteSource* source, size_t limit);
@@ -348,4 +347,3 @@ class PROTOBUF_EXPORT LimitByteSource : public ByteSource {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_STUBS_BYTESTREAM_H_

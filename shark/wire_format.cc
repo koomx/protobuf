@@ -669,7 +669,7 @@ struct WireFormat::MessageSetParser {
       if (tag == WireFormatLite::kMessageSetTypeIdTag) {
         uint64_t tmp;
         ptr = ParseBigVarint(ptr, &tmp);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
         if (state == State::kNoTag) {
           type_id = tmp;
           state = State::kHasType;
@@ -698,7 +698,7 @@ struct WireFormat::MessageSetParser {
             ParseContext tmp_ctx(ctx->depth(), false, &p, payload);
             tmp_ctx.data().pool = ctx->data().pool;
             tmp_ctx.data().factory = ctx->data().factory;
-            GOOGLE_PROTOBUF_PARSER_ASSERT(value->_InternalParse(p, &tmp_ctx) &&
+            SHARK_PARSER_ASSERT(value->_InternalParse(p, &tmp_ctx) &&
                                            tmp_ctx.EndedAtLimit());
           }
           state = State::kDone;
@@ -707,9 +707,9 @@ struct WireFormat::MessageSetParser {
       } else if (tag == WireFormatLite::kMessageSetMessageTag) {
         if (state == State::kNoTag) {
           int32_t size = ReadSize(&ptr);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          SHARK_PARSER_ASSERT(ptr);
           ptr = ctx->ReadString(ptr, size, &payload);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          SHARK_PARSER_ASSERT(ptr);
           state = State::kHasPayload;
         } else if (state == State::kHasType) {
           // We're now parsing the payload
@@ -728,9 +728,9 @@ struct WireFormat::MessageSetParser {
           state = State::kDone;
         } else {
           int32_t size = ReadSize(&ptr);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          SHARK_PARSER_ASSERT(ptr);
           ptr = ctx->Skip(ptr, size);
-          GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+          SHARK_PARSER_ASSERT(ptr);
         }
       } else {
         // An unknown field in MessageSetItem.
@@ -743,7 +743,7 @@ struct WireFormat::MessageSetParser {
         ptr = internal::UnknownFieldParse(
             tag, static_cast<std::string*>(nullptr), ptr, ctx);
       }
-      GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+      SHARK_PARSER_ASSERT(ptr);
     }
     return ptr;
   }
@@ -752,7 +752,7 @@ struct WireFormat::MessageSetParser {
     while (!ctx->Done(&ptr)) {
       uint32_t tag;
       ptr = ReadTag(ptr, &tag);
-      if (PROTOBUF_PREDICT_FALSE(ptr == nullptr)) return nullptr;
+      if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
       if (tag == 0 || (tag & 7) == WireFormatLite::WIRETYPE_END_GROUP) {
         ctx->SetLastTag(tag);
         break;
@@ -775,7 +775,7 @@ struct WireFormat::MessageSetParser {
         ptr = WireFormat::_InternalParseAndMergeField(msg, ptr, ctx, tag,
                                                       reflection, field);
       }
-      if (PROTOBUF_PREDICT_FALSE(ptr == nullptr)) return nullptr;
+      if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
     }
     return ptr;
   }
@@ -798,7 +798,7 @@ const char* WireFormat::_InternalParse(Message* msg, const char* ptr,
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ReadTag(ptr, &tag);
-    if (PROTOBUF_PREDICT_FALSE(ptr == nullptr)) return nullptr;
+    if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
     if (tag == 0 || (tag & 7) == WireFormatLite::WIRETYPE_END_GROUP) {
       ctx->SetLastTag(tag);
       break;
@@ -819,7 +819,7 @@ const char* WireFormat::_InternalParse(Message* msg, const char* ptr,
     }
 
     ptr = _InternalParseAndMergeField(msg, ptr, ctx, tag, reflection, field);
-    if (PROTOBUF_PREDICT_FALSE(ptr == nullptr)) return nullptr;
+    if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
   }
   return ptr;
 }
@@ -982,7 +982,7 @@ const char* WireFormat::_InternalParseAndMergeField(
     case FieldDescriptor::TYPE_STRING:
       utf8_check = true;
       strict_utf8_check = StrictUtf8Check(field);
-      PROTOBUF_FALLTHROUGH_INTENDED;
+      [[fallthrough]];
     case FieldDescriptor::TYPE_BYTES: {
       int size = ReadSize(&ptr);
       if (ptr == nullptr) return nullptr;

@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTOSTREAM_OBJECTSOURCE_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTOSTREAM_OBJECTSOURCE_H__
+#pragma once
 
 #include <cstdint>
 #include <functional>
@@ -73,7 +72,7 @@ class TypeInfo;
 //                              <your message google::protobuf::Type>);
 //
 //   Status status = os.WriteTo(<some ObjectWriter>);
-class PROTOBUF_EXPORT ProtoStreamObjectSource : public ObjectSource {
+class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
  public:
 
   struct RenderOptions {
@@ -326,4 +325,3 @@ class PROTOBUF_EXPORT ProtoStreamObjectSource : public ObjectSource {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_PROTOSTREAM_OBJECTSOURCE_H__

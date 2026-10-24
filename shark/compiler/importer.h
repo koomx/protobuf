@@ -34,8 +34,7 @@
 //
 // This file is the public interface to the .proto file parser.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_IMPORTER_H__
-#define GOOGLE_PROTOBUF_COMPILER_IMPORTER_H__
+#pragma once
 
 #include <set>
 #include <string>
@@ -79,7 +78,7 @@ class DiskSourceTree;
 //
 // Note:  This class does not implement FindFileContainingSymbol() or
 //   FindFileContainingExtension(); these will always return false.
-class PROTOBUF_EXPORT SourceTreeDescriptorDatabase : public DescriptorDatabase {
+class SHARK_EXPORT SourceTreeDescriptorDatabase : public DescriptorDatabase {
  public:
   SourceTreeDescriptorDatabase(SourceTree* source_tree);
 
@@ -122,7 +121,7 @@ class PROTOBUF_EXPORT SourceTreeDescriptorDatabase : public DescriptorDatabase {
   DescriptorDatabase* fallback_database_;
   MultiFileErrorCollector* error_collector_;
 
-  class PROTOBUF_EXPORT ValidationErrorCollector
+  class SHARK_EXPORT ValidationErrorCollector
       : public DescriptorPool::ErrorCollector {
    public:
     ValidationErrorCollector(SourceTreeDescriptorDatabase* owner);
@@ -156,7 +155,7 @@ class PROTOBUF_EXPORT SourceTreeDescriptorDatabase : public DescriptorDatabase {
 // You may find that SourceTreeDescriptorDatabase is more flexible.
 //
 // TODO(kenton):  I feel like this class is not well-named.
-class PROTOBUF_EXPORT Importer {
+class SHARK_EXPORT Importer {
  public:
   Importer(SourceTree* source_tree, MultiFileErrorCollector* error_collector);
   ~Importer();
@@ -194,7 +193,7 @@ class PROTOBUF_EXPORT Importer {
 
 // If the importer encounters problems while trying to import the proto files,
 // it reports them to a MultiFileErrorCollector.
-class PROTOBUF_EXPORT MultiFileErrorCollector {
+class SHARK_EXPORT MultiFileErrorCollector {
  public:
   inline MultiFileErrorCollector() {}
   virtual ~MultiFileErrorCollector();
@@ -215,7 +214,7 @@ class PROTOBUF_EXPORT MultiFileErrorCollector {
 // Used by the default implementation of Importer to resolve import statements
 // Most users will probably want to use the DiskSourceTree implementation,
 // below.
-class PROTOBUF_EXPORT SourceTree {
+class SHARK_EXPORT SourceTree {
  public:
   inline SourceTree() {}
   virtual ~SourceTree();
@@ -240,7 +239,7 @@ class PROTOBUF_EXPORT SourceTree {
 // An implementation of SourceTree which loads files from locations on disk.
 // Multiple mappings can be set up to map locations in the DiskSourceTree to
 // locations in the physical filesystem.
-class PROTOBUF_EXPORT DiskSourceTree : public SourceTree {
+class SHARK_EXPORT DiskSourceTree : public SourceTree {
  public:
   DiskSourceTree();
   ~DiskSourceTree() override;
@@ -335,4 +334,3 @@ class PROTOBUF_EXPORT DiskSourceTree : public SourceTree {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_IMPORTER_H__

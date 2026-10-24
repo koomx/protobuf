@@ -316,7 +316,7 @@ bool ShouldMarkClassAsFinal(const Descriptor* descriptor,
 // factors in the order of precedence.
 // --options().message_set_wire_format() == true
 // --the message is in the allowlist (true)
-// --GOOGLE_PROTOBUF_SHUFFLE_SERIALIZE is defined (false)
+// --SHARK_SHUFFLE_SERIALIZE is defined (false)
 // --a ranage of message names that are allowed to stay in order (true)
 bool ShouldSerializeInOrder(const Descriptor* descriptor,
                             const Options& options) {
@@ -474,7 +474,7 @@ void ColdChunkSkipper::OnStartChunk(int chunk, int cached_has_word_index,
   }
 
   // Emit has_bit check for each has_bit_dword index.
-  format("if (PROTOBUF_PREDICT_FALSE(");
+  format("if (SHARK_PREDICT_FALSE(");
   int first_word = HasbitWord(chunk, 0);
   while (chunk < limit_chunk_) {
     uint32_t mask = 0;
@@ -841,40 +841,40 @@ void MessageGenerator::GenerateFieldAccessorDeclarations(io::Printer* printer) {
     // names.
     format(R"(
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline bool HasExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 $annotate_extension_has$
   return $extensions$.Has(id.number());
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline void ClearExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) {
   $extensions$.ClearExtension(id.number());
 $annotate_extension_clear$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline int ExtensionSize(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 $annotate_extension_repeated_size$
   return $extensions$.ExtensionSize(id.number());
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 $annotate_extension_get$
   return _proto_TypeTraits::Get(id.number(), $extensions$,
@@ -882,10 +882,10 @@ $annotate_extension_get$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) {
 $annotate_extension_mutable$
   return _proto_TypeTraits::Mutable(id.number(), _field_type,
@@ -893,10 +893,10 @@ $annotate_extension_mutable$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline void SetExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     typename _proto_TypeTraits::Singular::ConstType value) {
   _proto_TypeTraits::Set(id.number(), _field_type, value, &$extensions$);
@@ -904,10 +904,10 @@ $annotate_extension_set$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline void SetAllocatedExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     typename _proto_TypeTraits::Singular::MutableType value) {
   _proto_TypeTraits::SetAllocated(id.number(), _field_type, value,
@@ -915,10 +915,10 @@ inline void SetAllocatedExtension(
 $annotate_extension_set$
 }
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline void UnsafeArenaSetAllocatedExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     typename _proto_TypeTraits::Singular::MutableType value) {
   _proto_TypeTraits::UnsafeArenaSetAllocated(id.number(), _field_type,
@@ -926,23 +926,23 @@ inline void UnsafeArenaSetAllocatedExtension(
 $annotate_extension_set$
 }
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
-PROTOBUF_NODISCARD inline
+[[nodiscard]] inline
     typename _proto_TypeTraits::Singular::MutableType
     ReleaseExtension(
-        const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+        const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
             $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) {
 $annotate_extension_release$
   return _proto_TypeTraits::Release(id.number(), _field_type,
                                     &$extensions$);
 }
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Singular::MutableType
 UnsafeArenaReleaseExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) {
 $annotate_extension_release$
   return _proto_TypeTraits::UnsafeArenaRelease(id.number(), _field_type,
@@ -950,10 +950,10 @@ $annotate_extension_release$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     int index) const {
 $annotate_repeated_extension_get$
@@ -961,10 +961,10 @@ $annotate_repeated_extension_get$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     int index) {
 $annotate_repeated_extension_mutable$
@@ -972,10 +972,10 @@ $annotate_repeated_extension_mutable$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline void SetExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     int index, typename _proto_TypeTraits::Repeated::ConstType value) {
   _proto_TypeTraits::Set(id.number(), index, value, &$extensions$);
@@ -983,10 +983,10 @@ $annotate_repeated_extension_set$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) {
   typename _proto_TypeTraits::Repeated::MutableType to_add =
       _proto_TypeTraits::Add(id.number(), _field_type, &$extensions$);
@@ -995,10 +995,10 @@ $annotate_repeated_extension_add_mutable$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline void AddExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id,
     typename _proto_TypeTraits::Repeated::ConstType value) {
   _proto_TypeTraits::Add(id.number(), _field_type, _is_packed, value,
@@ -1007,22 +1007,22 @@ $annotate_repeated_extension_add$
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
 GetRepeatedExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) const {
 $annotate_repeated_extension_list$
   return _proto_TypeTraits::GetRepeated(id.number(), $extensions$);
 }
 
 template <typename _proto_TypeTraits,
-          ::PROTOBUF_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
 MutableRepeatedExtension(
-    const ::PROTOBUF_NAMESPACE_ID::internal::ExtensionIdentifier<
+    const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
         $classname$, _proto_TypeTraits, _field_type, _is_packed>& id) {
 $annotate_repeated_extension_list_mutable$
   return _proto_TypeTraits::MutableRepeated(id.number(), _field_type,
@@ -1036,7 +1036,7 @@ $annotate_repeated_extension_list_mutable$
     if (descriptor_->options().message_set_wire_format() &&
         !options_.opensource_runtime && !options_.lite_implicit_weak_fields) {
       // Special-case MessageSet
-      format("GOOGLE_PROTOBUF_EXTENSION_MESSAGE_SET_ACCESSORS($classname$)\n");
+      format("SHARK_EXTENSION_MESSAGE_SET_ACCESSORS($classname$)\n");
     }
   }
 
@@ -1084,7 +1084,7 @@ void MessageGenerator::GenerateSingularFieldHasBits(
       // We maintain the invariant that for a submessage x, has_x() returning
       // true implies that x_ is not null. By giving this information to the
       // compiler, we allow it to eliminate unnecessary null checks later on.
-      format("  PROTOBUF_ASSUME(!value || $field$ != nullptr);\n");
+      format("  SHARK_ASSUME(!value || $field$ != nullptr);\n");
     }
 
     format(
@@ -1307,7 +1307,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "    ::$proto_ns$::internal::WireFormatLite::$val_wire_type$> "
         "SuperType;\n"
         "  $classname$();\n"
-        "  explicit PROTOBUF_CONSTEXPR $classname$(\n"
+        "  explicit constexpr $classname$(\n"
         "      ::$proto_ns$::internal::ConstantInitialized);\n"
         "  explicit $classname$(::$proto_ns$::Arena* arena);\n"
         "  void MergeFrom(const $classname$& other);\n"
@@ -1409,7 +1409,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
     format("~$classname$() override;\n");
   }
   format(
-      "explicit PROTOBUF_CONSTEXPR "
+      "explicit constexpr "
       "$classname$(::$proto_ns$::internal::ConstantInitialized);\n"
       "\n"
       "$classname$(const $classname$& from);\n"
@@ -1425,9 +1425,9 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
       "inline $classname$& operator=($classname$&& from) noexcept {\n"
       "  if (this == &from) return *this;\n"
       "  if (GetOwningArena() == from.GetOwningArena()\n"
-      "#ifdef PROTOBUF_FORCE_COPY_IN_MOVE\n"
+      "#ifdef SHARK_FORCE_COPY_IN_MOVE\n"
       "      && GetOwningArena() != nullptr\n"
-      "#endif  // !PROTOBUF_FORCE_COPY_IN_MOVE\n"
+      "#endif  // !SHARK_FORCE_COPY_IN_MOVE\n"
       "  ) {\n"
       "    InternalSwap(&from);\n"
       "  } else {\n"
@@ -1518,7 +1518,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
           "  return $any_metadata$.PackFrom(GetArena(), message);\n"
           "}\n"
           "bool PackFrom(const ::$proto_ns$::Message& message,\n"
-          "              ::PROTOBUF_NAMESPACE_ID::ConstStringParam "
+          "              ::SHARK_NAMESPACE_ID::ConstStringParam "
           "type_url_prefix) {\n"
           "  $DCHK$_NE(&message, this);\n"
           "  return $any_metadata$.PackFrom(GetArena(), message, "
@@ -1541,7 +1541,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
           "!std::is_convertible<T, const ::$proto_ns$::Message&>"
           "::value>::type>\n"
           "bool PackFrom(const T& message,\n"
-          "              ::PROTOBUF_NAMESPACE_ID::ConstStringParam "
+          "              ::SHARK_NAMESPACE_ID::ConstStringParam "
           "type_url_prefix) {\n"
           "  return $any_metadata$.PackFrom<T>(GetArena(), message, "
           "type_url_prefix);"
@@ -1560,7 +1560,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
           "}\n"
           "template <typename T>\n"
           "bool PackFrom(const T& message,\n"
-          "              ::PROTOBUF_NAMESPACE_ID::ConstStringParam "
+          "              ::SHARK_NAMESPACE_ID::ConstStringParam "
           "type_url_prefix) {\n"
           "  return $any_metadata$.PackFrom(GetArena(), message, "
           "type_url_prefix);\n"
@@ -1574,7 +1574,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "template<typename T> bool Is() const {\n"
         "  return $any_metadata$.Is<T>();\n"
         "}\n"
-        "static bool ParseAnyTypeUrl(::PROTOBUF_NAMESPACE_ID::ConstStringParam "
+        "static bool ParseAnyTypeUrl(::SHARK_NAMESPACE_ID::ConstStringParam "
         "type_url,\n"
         "                            std::string* full_type_name);\n");
   }
@@ -1585,15 +1585,15 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
       "}\n"
       "inline void Swap($classname$* other) {\n"
       "  if (other == this) return;\n"
-      "#ifdef PROTOBUF_FORCE_COPY_IN_SWAP\n"
+      "#ifdef SHARK_FORCE_COPY_IN_SWAP\n"
       "  if (GetOwningArena() != nullptr &&\n"
       "      GetOwningArena() == other->GetOwningArena()) {\n "
-      "#else  // PROTOBUF_FORCE_COPY_IN_SWAP\n"
+      "#else  // SHARK_FORCE_COPY_IN_SWAP\n"
       "  if (GetOwningArena() == other->GetOwningArena()) {\n"
-      "#endif  // !PROTOBUF_FORCE_COPY_IN_SWAP\n"
+      "#endif  // !SHARK_FORCE_COPY_IN_SWAP\n"
       "    InternalSwap(other);\n"
       "  } else {\n"
-      "    ::PROTOBUF_NAMESPACE_ID::internal::GenericSwap(this, other);\n"
+      "    ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);\n"
       "  }\n"
       "}\n"
       "void UnsafeArenaSwap($classname$* other) {\n"
@@ -1659,7 +1659,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
 
     if (!HasSimpleBaseClass(descriptor_, options_)) {
       format(
-          "PROTOBUF_ATTRIBUTE_REINITIALIZES void Clear() final;\n"
+          "SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;\n"
           "bool IsInitialized() const final;\n"
           "\n"
           "size_t ByteSizeLong() const final;\n");
@@ -1696,7 +1696,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
       "static $1$ FullMessageName() {\n"
       "  return \"$full_name$\";\n"
       "}\n",
-      options_.opensource_runtime ? "::PROTOBUF_NAMESPACE_ID::StringPiece"
+      options_.opensource_runtime ? "::SHARK_NAMESPACE_ID::StringPiece"
                                   : "::StringPiece");
 
   format(
@@ -1760,7 +1760,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "inline bool IsSplitMessageDefault() const {\n"
         "  return $split$ == reinterpret_cast<Impl_::Split*>(&$1$);\n"
         "}\n"
-        "PROTOBUF_NOINLINE void PrepareSplitMessageForWrite();\n"
+        "SHARK_NOINLINE void PrepareSplitMessageForWrite();\n"
         "public:\n",
         DefaultInstanceName(descriptor_, options_, /*split=*/true));
   }
@@ -2087,7 +2087,7 @@ void MessageGenerator::GenerateClassMethods(io::Printer* printer) {
     }
     format(
         "bool $classname$::ParseAnyTypeUrl(\n"
-        "    ::PROTOBUF_NAMESPACE_ID::ConstStringParam type_url,\n"
+        "    ::SHARK_NAMESPACE_ID::ConstStringParam type_url,\n"
         "    std::string* full_type_name) {\n"
         "  return ::_pbi::ParseAnyTypeUrl(type_url, full_type_name);\n"
         "}\n"
@@ -2247,29 +2247,29 @@ std::pair<size_t, size_t> MessageGenerator::GenerateOffsets(
   Formatter format(printer, variables_);
 
   if (!has_bit_indices_.empty() || IsMapEntryMessage(descriptor_)) {
-    format("PROTOBUF_FIELD_OFFSET($classtype$, $has_bits$),\n");
+    format("SHARK_FIELD_OFFSET($classtype$, $has_bits$),\n");
   } else {
     format("~0u,  // no _has_bits_\n");
   }
-  format("PROTOBUF_FIELD_OFFSET($classtype$, _internal_metadata_),\n");
+  format("SHARK_FIELD_OFFSET($classtype$, _internal_metadata_),\n");
   if (descriptor_->extension_range_count() > 0) {
-    format("PROTOBUF_FIELD_OFFSET($classtype$, $extensions$),\n");
+    format("SHARK_FIELD_OFFSET($classtype$, $extensions$),\n");
   } else {
     format("~0u,  // no _extensions_\n");
   }
   if (descriptor_->real_oneof_decl_count() > 0) {
-    format("PROTOBUF_FIELD_OFFSET($classtype$, $oneof_case$[0]),\n");
+    format("SHARK_FIELD_OFFSET($classtype$, $oneof_case$[0]),\n");
   } else {
     format("~0u,  // no _oneof_case_\n");
   }
   if (num_weak_fields_ > 0) {
-    format("PROTOBUF_FIELD_OFFSET($classtype$, $weak_field_map$),\n");
+    format("SHARK_FIELD_OFFSET($classtype$, $weak_field_map$),\n");
   } else {
     format("~0u,  // no _weak_field_map_\n");
   }
   if (!inlined_string_indices_.empty()) {
     format(
-        "PROTOBUF_FIELD_OFFSET($classtype$, "
+        "SHARK_FIELD_OFFSET($classtype$, "
         "$inlined_string_donated_array$),\n");
   } else {
     format("~0u,  // no _inlined_string_donated_\n");
@@ -2290,7 +2290,7 @@ std::pair<size_t, size_t> MessageGenerator::GenerateOffsets(
       // Don't use the top bit because that is for unused fields.
       format("::_pbi::kInvalidFieldOffsetTag");
     } else {
-      format("PROTOBUF_FIELD_OFFSET($classtype$$1$, $2$)",
+      format("SHARK_FIELD_OFFSET($classtype$$1$, $2$)",
              ShouldSplit(field, options_) ? "::Impl_::Split" : "",
              ShouldSplit(field, options_)
                  ? FieldName(field) + "_"
@@ -2314,7 +2314,7 @@ std::pair<size_t, size_t> MessageGenerator::GenerateOffsets(
 
   int count = 0;
   for (auto oneof : OneOfRange(descriptor_)) {
-    format("PROTOBUF_FIELD_OFFSET($classtype$, _impl_.$1$_),\n", oneof->name());
+    format("SHARK_FIELD_OFFSET($classtype$, _impl_.$1$_),\n", oneof->name());
     count++;
   }
   GOOGLE_CHECK_EQ(count, descriptor_->real_oneof_decl_count());
@@ -2646,13 +2646,13 @@ void MessageGenerator::GenerateConstexprConstructor(io::Printer* printer) {
 
   if (IsMapEntryMessage(descriptor_) || !HasImplData(descriptor_, options_)) {
     format(
-        "PROTOBUF_CONSTEXPR $classname$::$classname$(\n"
+        "constexpr $classname$::$classname$(\n"
         "    ::_pbi::ConstantInitialized) {}\n");
     return;
   }
 
   format(
-      "PROTOBUF_CONSTEXPR $classname$::$classname$(\n"
+      "constexpr $classname$::$classname$(\n"
       "    ::_pbi::ConstantInitialized)");
 
   bool need_to_emit_cached_size = !HasSimpleBaseClass(descriptor_, options_);
@@ -2997,7 +2997,7 @@ void MessageGenerator::GenerateSourceInProto2Namespace(io::Printer* printer) {
   Formatter format(printer, variables_);
   format(
       "template<> "
-      "PROTOBUF_NOINLINE $classtype$*\n"
+      "SHARK_NOINLINE $classtype$*\n"
       "Arena::CreateMaybeMessage< $classtype$ >(Arena* arena) {\n"
       "  return Arena::CreateMessageInternal< $classtype$ >(arena);\n"
       "}\n");
@@ -3297,10 +3297,10 @@ void MessageGenerator::GenerateSwap(io::Printer* printer) {
         format.Set("last", last_field_name);
 
         format(
-            "::PROTOBUF_NAMESPACE_ID::internal::memswap<\n"
-            "    PROTOBUF_FIELD_OFFSET($classname$, $last$)\n"
+            "::SHARK_NAMESPACE_ID::internal::memswap<\n"
+            "    SHARK_FIELD_OFFSET($classname$, $last$)\n"
             "    + sizeof($classname$::$last$)\n"
-            "    - PROTOBUF_FIELD_OFFSET($classname$, $first$)>(\n"
+            "    - SHARK_FIELD_OFFSET($classname$, $first$)>(\n"
             "        reinterpret_cast<char*>(&$first$),\n"
             "        reinterpret_cast<char*>(&other->$first$));\n");
 
@@ -3981,7 +3981,7 @@ void MessageGenerator::GenerateSerializeWithCachedSizesBody(
   std::map<std::string, std::string> vars;
   SetUnknownFieldsVariable(descriptor_, options_, &vars);
   format.AddMap(vars);
-  format("if (PROTOBUF_PREDICT_FALSE($have_unknown_fields$)) {\n");
+  format("if (SHARK_PREDICT_FALSE($have_unknown_fields$)) {\n");
   format.Indent();
   if (UseUnknownFieldSet(descriptor_->file(), options_)) {
     format(
@@ -4073,7 +4073,7 @@ void MessageGenerator::GenerateSerializeWithCachedSizesBodyShuffled(
   std::map<std::string, std::string> vars;
   SetUnknownFieldsVariable(descriptor_, options_, &vars);
   format.AddMap(vars);
-  format("if (PROTOBUF_PREDICT_FALSE($have_unknown_fields$)) {\n");
+  format("if (SHARK_PREDICT_FALSE($have_unknown_fields$)) {\n");
   format.Indent();
   if (UseUnknownFieldSet(descriptor_->file(), options_)) {
     format(
@@ -4345,7 +4345,7 @@ void MessageGenerator::GenerateByteSize(io::Printer* printer) {
     format(
         "return MaybeComputeUnknownFieldsSize(total_size, &$cached_size$);\n");
   } else {
-    format("if (PROTOBUF_PREDICT_FALSE($have_unknown_fields$)) {\n");
+    format("if (SHARK_PREDICT_FALSE($have_unknown_fields$)) {\n");
     format("  total_size += $unknown_fields$.size();\n");
     format("}\n");
 

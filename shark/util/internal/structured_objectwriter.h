@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_STRUCTURED_OBJECTWRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_STRUCTURED_OBJECTWRITER_H__
+#pragma once
 
 #include <memory>
 
@@ -56,7 +55,7 @@ namespace converter {
 // StructuredObjectWriter and its use.
 //
 // Derived classes could be thread-unsafe.
-class PROTOBUF_EXPORT StructuredObjectWriter : public ObjectWriter {
+class SHARK_EXPORT StructuredObjectWriter : public ObjectWriter {
  public:
   ~StructuredObjectWriter() override {}
 
@@ -66,7 +65,7 @@ class PROTOBUF_EXPORT StructuredObjectWriter : public ObjectWriter {
   // StructuredObjectWriter behaves as a visitor. BaseElement represents a node
   // in the input tree. Implementation of StructuredObjectWriter should also
   // extend BaseElement to keep track of the location in the input tree.
-  class PROTOBUF_EXPORT BaseElement {
+  class SHARK_EXPORT BaseElement {
    public:
     // Takes ownership of the parent Element.
     explicit BaseElement(BaseElement* parent)
@@ -118,4 +117,3 @@ class PROTOBUF_EXPORT StructuredObjectWriter : public ObjectWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_STRUCTURED_OBJECTWRITER_H__

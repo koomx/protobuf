@@ -64,8 +64,8 @@ namespace protobuf {
 namespace util {
 namespace converter {
 
-using ::PROTOBUF_NAMESPACE_ID::internal::WireFormat;
-using ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite;
+using ::SHARK_NAMESPACE_ID::internal::WireFormat;
+using ::SHARK_NAMESPACE_ID::internal::WireFormatLite;
 
 namespace {
 
@@ -669,7 +669,7 @@ util::Status ProtoStreamObjectSource::RenderFieldMask(
 
 std::unordered_map<std::string, ProtoStreamObjectSource::TypeRenderer>*
     ProtoStreamObjectSource::renderers_ = nullptr;
-PROTOBUF_NAMESPACE_ID::internal::once_flag source_renderers_init_;
+SHARK_NAMESPACE_ID::internal::once_flag source_renderers_init_;
 
 
 void ProtoStreamObjectSource::InitRendererMap() {
@@ -717,7 +717,7 @@ void ProtoStreamObjectSource::DeleteRendererMap() {
 // static
 ProtoStreamObjectSource::TypeRenderer*
 ProtoStreamObjectSource::FindTypeRenderer(const std::string& type_url) {
-  PROTOBUF_NAMESPACE_ID::internal::call_once(source_renderers_init_,
+  SHARK_NAMESPACE_ID::internal::call_once(source_renderers_init_,
                                              InitRendererMap);
   return FindOrNull(*renderers_, type_url);
 }

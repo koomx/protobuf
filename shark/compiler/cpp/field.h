@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CPP_FIELD_H__
-#define GOOGLE_PROTOBUF_COMPILER_CPP_FIELD_H__
+#pragma once
 
 #include <cstdint>
 #include <map>
@@ -267,4 +266,3 @@ class FieldGeneratorMap {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CPP_FIELD_H__

@@ -30,8 +30,7 @@
 
 // Defines utilities for the TypeResolver.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_UTIL_H__
-#define GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_UTIL_H__
+#pragma once
 
 #include <string>
 
@@ -46,7 +45,7 @@ class TypeResolver;
 
 // Creates a TypeResolver that serves type information in the given descriptor
 // pool. Caller takes ownership of the returned TypeResolver.
-PROTOBUF_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(
+SHARK_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(
     const std::string& url_prefix, const DescriptorPool* pool);
 
 }  // namespace util
@@ -55,4 +54,3 @@ PROTOBUF_EXPORT TypeResolver* NewTypeResolverForDescriptorPool(
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_TYPE_RESOLVER_UTIL_H__

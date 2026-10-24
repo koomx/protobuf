@@ -30,8 +30,7 @@
 
 // Author: kenton@google.com (Kenton Varda)
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_SUBPROCESS_H__
-#define GOOGLE_PROTOBUF_COMPILER_SUBPROCESS_H__
+#pragma once
 
 #ifdef _WIN32
 #ifndef WIN32_LEAN_AND_MEAN
@@ -111,4 +110,3 @@ class PROTOC_EXPORT Subprocess {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_SUBPROCESS_H__

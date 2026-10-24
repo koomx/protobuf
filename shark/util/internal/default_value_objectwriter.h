@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_UTIL_INTERNAL_DEFAULT_VALUE_OBJECTWRITER_H__
-#define GOOGLE_PROTOBUF_UTIL_INTERNAL_DEFAULT_VALUE_OBJECTWRITER_H__
+#pragma once
 
 #include <cstdint>
 #include <functional>
@@ -59,7 +58,7 @@ namespace converter {
 // ObjectWriter when EndObject() is called on the root object. It also writes
 // out all non-repeated primitive fields that haven't been explicitly rendered
 // with their default values (0 for numbers, "" for strings, etc).
-class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
+class SHARK_EXPORT DefaultValueObjectWriter : public ObjectWriter {
  public:
   // A Callback function to check whether a field needs to be scrubbed.
   //
@@ -146,7 +145,7 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
   // "Node" represents a node in the tree that holds the input of
   // DefaultValueObjectWriter.
-  class PROTOBUF_EXPORT Node {
+  class SHARK_EXPORT Node {
    public:
     Node(const std::string& name, const google::protobuf::Type* type,
          NodeKind kind, const DataPiece& data, bool is_placeholder,
@@ -329,4 +328,3 @@ class PROTOBUF_EXPORT DefaultValueObjectWriter : public ObjectWriter {
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_UTIL_INTERNAL_DEFAULT_VALUE_OBJECTWRITER_H__

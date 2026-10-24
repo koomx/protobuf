@@ -1213,7 +1213,7 @@ class FileDescriptorTables {
   FieldsByNumberSet fields_by_number_;  // Not including extensions.
   EnumValuesByNumberSet enum_values_by_number_;
   mutable EnumValuesByNumberSet unknown_enum_values_by_number_
-      PROTOBUF_GUARDED_BY(unknown_enum_values_mu_);
+      SHARK_GUARDED_BY(unknown_enum_values_mu_);
 
   // Populated on first request to save space, hence constness games.
   mutable internal::once_flag locations_by_path_once_;
@@ -4025,11 +4025,11 @@ class DescriptorBuilder {
     // A helper function that adds an error at the location of the option name
     // and returns false.
     bool AddNameError(const std::string& msg) {
-#ifdef PROTOBUF_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
+#ifdef SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
       return true;
-#else   // PROTOBUF_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
+#else   // SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
       return AddOptionError(DescriptorPool::ErrorCollector::OPTION_NAME, msg);
-#endif  // PROTOBUF_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
+#endif  // SHARK_INTERNAL_IGNORE_FIELD_NAME_ERRORS_
     }
 
     // A helper function that adds an error at the location of the option name

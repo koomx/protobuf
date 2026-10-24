@@ -170,7 +170,7 @@ void StringFieldGenerator::GenerateAccessorDeclarations(
       descriptor_);
   format(
       "$deprecated_attr$std::string* ${1$mutable_$name$$}$();\n"
-      "PROTOBUF_NODISCARD $deprecated_attr$std::string* "
+      "[[nodiscard]] $deprecated_attr$std::string* "
       "${1$$release_name$$}$();\n"
       "$deprecated_attr$void ${1$set_allocated_$name$$}$(std::string* "
       "$name$);\n",
@@ -178,12 +178,12 @@ void StringFieldGenerator::GenerateAccessorDeclarations(
   format(
       "private:\n"
       "const std::string& _internal_$name$() const;\n"
-      "inline PROTOBUF_ALWAYS_INLINE void "
+      "inline SHARK_ALWAYS_INLINE void "
       "_internal_set_$name$(const std::string& value);\n"
       "std::string* _internal_mutable_$name$();\n");
   if (inlined_) {
     format(
-        "inline PROTOBUF_ALWAYS_INLINE bool _internal_$name$_donated() "
+        "inline SHARK_ALWAYS_INLINE bool _internal_$name$_donated() "
         "const;\n");
   }
   format("public:\n");
@@ -213,7 +213,7 @@ void StringFieldGenerator::GenerateInlineAccessorDefinitions(
   if (!inlined_) {
     format(
         "template <typename ArgT0, typename... ArgT>\n"
-        "inline PROTOBUF_ALWAYS_INLINE\n"
+        "inline SHARK_ALWAYS_INLINE\n"
         "void $classname$::set_$name$(ArgT0&& arg0, ArgT... args) {\n"
         "$maybe_prepare_split_message$"
         " $set_hasbit$\n"
@@ -225,7 +225,7 @@ void StringFieldGenerator::GenerateInlineAccessorDefinitions(
   } else {
     format(
         "template <typename ArgT0, typename... ArgT>\n"
-        "inline PROTOBUF_ALWAYS_INLINE\n"
+        "inline SHARK_ALWAYS_INLINE\n"
         "void $classname$::set_$name$(ArgT0&& arg0, ArgT... args) {\n"
         "$maybe_prepare_split_message$"
         " $set_hasbit$\n"
@@ -296,11 +296,11 @@ void StringFieldGenerator::GenerateInlineAccessorDefinitions(
       format("  auto* p = $field$.Release();\n");
       if (descriptor_->default_value_string().empty()) {
         format(
-            "#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING\n"
+            "#ifdef SHARK_FORCE_COPY_DEFAULT_STRING\n"
             "  if ($field$.IsDefault()) {\n"
             "    $field$.Set(\"\", GetArenaForAllocation());\n"
             "  }\n"
-            "#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING\n");
+            "#endif // SHARK_FORCE_COPY_DEFAULT_STRING\n");
       }
       format("  return p;\n");
     } else {
@@ -325,11 +325,11 @@ void StringFieldGenerator::GenerateInlineAccessorDefinitions(
     format("  $field$.SetAllocated($name$, GetArenaForAllocation());\n");
     if (descriptor_->default_value_string().empty()) {
       format(
-          "#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING\n"
+          "#ifdef SHARK_FORCE_COPY_DEFAULT_STRING\n"
           "  if ($field$.IsDefault()) {\n"
           "    $field$.Set(\"\", GetArenaForAllocation());\n"
           "  }\n"
-          "#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING\n");
+          "#endif // SHARK_FORCE_COPY_DEFAULT_STRING\n");
     }
   } else {
     // Currently, string fields with default value can't be inlined.
@@ -439,9 +439,9 @@ void StringFieldGenerator::GenerateConstructorCode(io::Printer* printer) const {
   if (IsString(descriptor_, options_) &&
       descriptor_->default_value_string().empty()) {
     format(
-        "#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING\n"
+        "#ifdef SHARK_FORCE_COPY_DEFAULT_STRING\n"
         "  $field$.Set(\"\", GetArenaForAllocation());\n"
-        "#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING\n");
+        "#endif // SHARK_FORCE_COPY_DEFAULT_STRING\n");
   }
 }
 
@@ -454,9 +454,9 @@ void StringFieldGenerator::GenerateCreateSplitMessageCode(
   if (IsString(descriptor_, options_) &&
       descriptor_->default_value_string().empty()) {
     format(
-        "#ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING\n"
+        "#ifdef SHARK_FORCE_COPY_DEFAULT_STRING\n"
         "  ptr->$name$_.Set(\"\", GetArenaForAllocation());\n"
-        "#endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING\n");
+        "#endif // SHARK_FORCE_COPY_DEFAULT_STRING\n");
   }
 }
 

@@ -32,8 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_JAVA_MESSAGE_LITE_H__
-#define GOOGLE_PROTOBUF_COMPILER_JAVA_MESSAGE_LITE_H__
+#pragma once
 
 #include <shark/compiler/java/field.h>
 #include <shark/compiler/java/message.h>
@@ -82,4 +81,3 @@ class ImmutableMessageLiteGenerator : public MessageGenerator {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_JAVA_MESSAGE_LITE_H__

@@ -15,48 +15,48 @@
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
-PROTOBUF_PRAGMA_INIT_SEG
+SHARK_PRAGMA_INIT_SEG
 
-namespace _pb = ::PROTOBUF_NAMESPACE_ID;
+namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-PROTOBUF_NAMESPACE_OPEN
-PROTOBUF_CONSTEXPR SourceContext::SourceContext(
+SHARK_NAMESPACE_OPEN
+constexpr SourceContext::SourceContext(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.file_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct SourceContextDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR SourceContextDefaultTypeInternal()
+  constexpr SourceContextDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~SourceContextDefaultTypeInternal() {}
   union {
     SourceContext _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 SourceContextDefaultTypeInternal _SourceContext_default_instance_;
-PROTOBUF_NAMESPACE_CLOSE
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 SourceContextDefaultTypeInternal _SourceContext_default_instance_;
+SHARK_NAMESPACE_CLOSE
 static ::_pb::Metadata file_level_metadata_shark_2fsource_5fcontext_2eproto[1];
 static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2fsource_5fcontext_2eproto = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fsource_5fcontext_2eproto = nullptr;
 
-const uint32_t TableStruct_shark_2fsource_5fcontext_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+const uint32_t TableStruct_shark_2fsource_5fcontext_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::SourceContext, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::SourceContext, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::SourceContext, _impl_.file_name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::SourceContext, _impl_.file_name_),
 };
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::SourceContext)},
+static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
+  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::SourceContext)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::PROTOBUF_NAMESPACE_ID::_SourceContext_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_SourceContext_default_instance_._instance,
 };
 
-const char descriptor_table_protodef_shark_2fsource_5fcontext_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+const char descriptor_table_protodef_shark_2fsource_5fcontext_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\032shark/source_context.proto\022\017google.pro"
   "tobuf\"\"\n\rSourceContext\022\021\n\tfile_name\030\001 \001("
   "\tB\212\001\n\023com.google.protobufB\022SourceContext"
@@ -73,13 +73,13 @@ const ::_pbi::DescriptorTable descriptor_table_shark_2fsource_5fcontext_2eproto 
     file_level_metadata_shark_2fsource_5fcontext_2eproto, file_level_enum_descriptors_shark_2fsource_5fcontext_2eproto,
     file_level_service_descriptors_shark_2fsource_5fcontext_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fsource_5fcontext_2eproto_getter() {
+SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fsource_5fcontext_2eproto_getter() {
   return &descriptor_table_shark_2fsource_5fcontext_2eproto;
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fsource_5fcontext_2eproto(&descriptor_table_shark_2fsource_5fcontext_2eproto);
-PROTOBUF_NAMESPACE_OPEN
+SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fsource_5fcontext_2eproto(&descriptor_table_shark_2fsource_5fcontext_2eproto);
+SHARK_NAMESPACE_OPEN
 
 // ===================================================================
 
@@ -87,24 +87,24 @@ class SourceContext::_Internal {
  public:
 };
 
-SourceContext::SourceContext(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+SourceContext::SourceContext(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:google.protobuf.SourceContext)
 }
 SourceContext::SourceContext(const SourceContext& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::SHARK_NAMESPACE_ID::Message() {
   SourceContext* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.file_name_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.file_name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.file_name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_file_name().empty()) {
     _this->_impl_.file_name_.Set(from._internal_file_name(), 
       _this->GetArenaForAllocation());
@@ -121,14 +121,14 @@ inline void SourceContext::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.file_name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.file_name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
 SourceContext::~SourceContext() {
   // @@protoc_insertion_point(destructor:google.protobuf.SourceContext)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
   }
@@ -151,18 +151,18 @@ void SourceContext::Clear() {
   (void) cached_has_bits;
 
   _impl_.file_name_.ClearToEmpty();
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* SourceContext::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // string file_name = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_file_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -181,7 +181,7 @@ const char* SourceContext::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -194,24 +194,24 @@ failure:
 }
 
 uint8_t* SourceContext::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.SourceContext)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string file_name = 1;
   if (!this->_internal_file_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_file_name().data(), static_cast<int>(this->_internal_file_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.SourceContext.file_name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_file_name(), target);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.SourceContext)
   return target;
@@ -228,21 +228,21 @@ size_t SourceContext::ByteSizeLong() const {
   // string file_name = 1;
   if (!this->_internal_file_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_file_name());
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData SourceContext::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+const ::SHARK_NAMESPACE_ID::Message::ClassData SourceContext::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
     SourceContext::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*SourceContext::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*SourceContext::GetClassData() const { return &_class_data_; }
 
 
-void SourceContext::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+void SourceContext::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<SourceContext*>(&to_msg);
   auto& from = static_cast<const SourceContext&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.SourceContext)
@@ -253,7 +253,7 @@ void SourceContext::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::
   if (!from._internal_file_name().empty()) {
     _this->_internal_set_file_name(from._internal_file_name());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void SourceContext::CopyFrom(const SourceContext& from) {
@@ -272,26 +272,26 @@ void SourceContext::InternalSwap(SourceContext* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.file_name_, lhs_arena,
       &other->_impl_.file_name_, rhs_arena
   );
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata SourceContext::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata SourceContext::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2fsource_5fcontext_2eproto_getter, &descriptor_table_shark_2fsource_5fcontext_2eproto_once,
       file_level_metadata_shark_2fsource_5fcontext_2eproto[0]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
-PROTOBUF_NAMESPACE_CLOSE
-PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::SourceContext*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::SourceContext >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::SourceContext >(arena);
+SHARK_NAMESPACE_CLOSE
+SHARK_NAMESPACE_OPEN
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::SourceContext*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::SourceContext >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::SourceContext >(arena);
 }
-PROTOBUF_NAMESPACE_CLOSE
+SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 #include <shark/port_undef.inc>

@@ -15,13 +15,13 @@
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
-PROTOBUF_PRAGMA_INIT_SEG
+SHARK_PRAGMA_INIT_SEG
 
-namespace _pb = ::PROTOBUF_NAMESPACE_ID;
+namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
-PROTOBUF_NAMESPACE_OPEN
-PROTOBUF_CONSTEXPR Type::Type(
+SHARK_NAMESPACE_OPEN
+constexpr Type::Type(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.fields_)*/{}
   , /*decltype(_impl_.oneofs_)*/{}
@@ -31,15 +31,15 @@ PROTOBUF_CONSTEXPR Type::Type(
   , /*decltype(_impl_.syntax_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct TypeDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR TypeDefaultTypeInternal()
+  constexpr TypeDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~TypeDefaultTypeInternal() {}
   union {
     Type _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 TypeDefaultTypeInternal _Type_default_instance_;
-PROTOBUF_CONSTEXPR Field::Field(
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 TypeDefaultTypeInternal _Type_default_instance_;
+constexpr Field::Field(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.options_)*/{}
   , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
@@ -53,15 +53,15 @@ PROTOBUF_CONSTEXPR Field::Field(
   , /*decltype(_impl_.packed_)*/false
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct FieldDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR FieldDefaultTypeInternal()
+  constexpr FieldDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~FieldDefaultTypeInternal() {}
   union {
     Field _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 FieldDefaultTypeInternal _Field_default_instance_;
-PROTOBUF_CONSTEXPR Enum::Enum(
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 FieldDefaultTypeInternal _Field_default_instance_;
+constexpr Enum::Enum(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.enumvalue_)*/{}
   , /*decltype(_impl_.options_)*/{}
@@ -70,123 +70,123 @@ PROTOBUF_CONSTEXPR Enum::Enum(
   , /*decltype(_impl_.syntax_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct EnumDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR EnumDefaultTypeInternal()
+  constexpr EnumDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~EnumDefaultTypeInternal() {}
   union {
     Enum _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EnumDefaultTypeInternal _Enum_default_instance_;
-PROTOBUF_CONSTEXPR EnumValue::EnumValue(
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 EnumDefaultTypeInternal _Enum_default_instance_;
+constexpr EnumValue::EnumValue(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.options_)*/{}
   , /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.number_)*/0
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct EnumValueDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR EnumValueDefaultTypeInternal()
+  constexpr EnumValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~EnumValueDefaultTypeInternal() {}
   union {
     EnumValue _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 EnumValueDefaultTypeInternal _EnumValue_default_instance_;
-PROTOBUF_CONSTEXPR Option::Option(
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 EnumValueDefaultTypeInternal _EnumValue_default_instance_;
+constexpr Option::Option(
     ::_pbi::ConstantInitialized): _impl_{
     /*decltype(_impl_.name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.value_)*/nullptr
   , /*decltype(_impl_._cached_size_)*/{}} {}
 struct OptionDefaultTypeInternal {
-  PROTOBUF_CONSTEXPR OptionDefaultTypeInternal()
+  constexpr OptionDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
   ~OptionDefaultTypeInternal() {}
   union {
     Option _instance;
   };
 };
-PROTOBUF_ATTRIBUTE_NO_DESTROY PROTOBUF_CONSTINIT PROTOBUF_ATTRIBUTE_INIT_PRIORITY1 OptionDefaultTypeInternal _Option_default_instance_;
-PROTOBUF_NAMESPACE_CLOSE
+SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 OptionDefaultTypeInternal _Option_default_instance_;
+SHARK_NAMESPACE_CLOSE
 static ::_pb::Metadata file_level_metadata_shark_2ftype_2eproto[5];
 static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2ftype_2eproto[3];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftype_2eproto = nullptr;
 
-const uint32_t TableStruct_shark_2ftype_2eproto::offsets[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
+const uint32_t TableStruct_shark_2ftype_2eproto::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _impl_.fields_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _impl_.oneofs_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _impl_.options_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _impl_.source_context_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Type, _impl_.syntax_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _impl_.name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _impl_.fields_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _impl_.oneofs_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _impl_.options_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _impl_.source_context_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Type, _impl_.syntax_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.kind_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.cardinality_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.number_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.type_url_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.oneof_index_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.packed_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.options_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.json_name_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Field, _impl_.default_value_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.kind_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.cardinality_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.number_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.type_url_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.oneof_index_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.packed_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.options_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.json_name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Field, _impl_.default_value_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Enum, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Enum, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Enum, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Enum, _impl_.enumvalue_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Enum, _impl_.options_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Enum, _impl_.source_context_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Enum, _impl_.syntax_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Enum, _impl_.name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Enum, _impl_.enumvalue_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Enum, _impl_.options_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Enum, _impl_.source_context_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Enum, _impl_.syntax_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::EnumValue, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::EnumValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::EnumValue, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::EnumValue, _impl_.number_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::EnumValue, _impl_.options_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::EnumValue, _impl_.name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::EnumValue, _impl_.number_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::EnumValue, _impl_.options_),
   ~0u,  // no _has_bits_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Option, _internal_metadata_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Option, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Option, _impl_.name_),
-  PROTOBUF_FIELD_OFFSET(::PROTOBUF_NAMESPACE_ID::Option, _impl_.value_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Option, _impl_.name_),
+  SHARK_FIELD_OFFSET(::SHARK_NAMESPACE_ID::Option, _impl_.value_),
 };
-static const ::_pbi::MigrationSchema schemas[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::Type)},
-  { 12, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::Field)},
-  { 28, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::Enum)},
-  { 39, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::EnumValue)},
-  { 48, -1, -1, sizeof(::PROTOBUF_NAMESPACE_ID::Option)},
+static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
+  { 0, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Type)},
+  { 12, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Field)},
+  { 28, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Enum)},
+  { 39, -1, -1, sizeof(::SHARK_NAMESPACE_ID::EnumValue)},
+  { 48, -1, -1, sizeof(::SHARK_NAMESPACE_ID::Option)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::PROTOBUF_NAMESPACE_ID::_Type_default_instance_._instance,
-  &::PROTOBUF_NAMESPACE_ID::_Field_default_instance_._instance,
-  &::PROTOBUF_NAMESPACE_ID::_Enum_default_instance_._instance,
-  &::PROTOBUF_NAMESPACE_ID::_EnumValue_default_instance_._instance,
-  &::PROTOBUF_NAMESPACE_ID::_Option_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_Type_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_Field_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_Enum_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_EnumValue_default_instance_._instance,
+  &::SHARK_NAMESPACE_ID::_Option_default_instance_._instance,
 };
 
-const char descriptor_table_protodef_shark_2ftype_2eproto[] PROTOBUF_SECTION_VARIABLE(protodesc_cold) =
+const char descriptor_table_protodef_shark_2ftype_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\020shark/type.proto\022\017google.protobuf\032\017sha"
   "rk/any.proto\032\032shark/source_context.proto"
   "\"\327\001\n\004Type\022\014\n\004name\030\001 \001(\t\022&\n\006fields\030\002 \003(\0132"
@@ -241,15 +241,15 @@ const ::_pbi::DescriptorTable descriptor_table_shark_2ftype_2eproto = {
     file_level_metadata_shark_2ftype_2eproto, file_level_enum_descriptors_shark_2ftype_2eproto,
     file_level_service_descriptors_shark_2ftype_2eproto,
 };
-PROTOBUF_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ftype_2eproto_getter() {
+SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ftype_2eproto_getter() {
   return &descriptor_table_shark_2ftype_2eproto;
 }
 
 // Force running AddDescriptors() at dynamic initialization time.
-PROTOBUF_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2ftype_2eproto(&descriptor_table_shark_2ftype_2eproto);
-PROTOBUF_NAMESPACE_OPEN
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftype_2eproto);
+SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2ftype_2eproto(&descriptor_table_shark_2ftype_2eproto);
+SHARK_NAMESPACE_OPEN
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor() {
+  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftype_2eproto);
   return file_level_enum_descriptors_shark_2ftype_2eproto[0];
 }
 bool Field_Kind_IsValid(int value) {
@@ -303,8 +303,8 @@ constexpr Field_Kind Field::Kind_MIN;
 constexpr Field_Kind Field::Kind_MAX;
 constexpr int Field::Kind_ARRAYSIZE;
 #endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftype_2eproto);
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor() {
+  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftype_2eproto);
   return file_level_enum_descriptors_shark_2ftype_2eproto[1];
 }
 bool Field_Cardinality_IsValid(int value) {
@@ -328,8 +328,8 @@ constexpr Field_Cardinality Field::Cardinality_MIN;
 constexpr Field_Cardinality Field::Cardinality_MAX;
 constexpr int Field::Cardinality_ARRAYSIZE;
 #endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-const ::PROTOBUF_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor() {
-  ::PROTOBUF_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftype_2eproto);
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor() {
+  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftype_2eproto);
   return file_level_enum_descriptors_shark_2ftype_2eproto[2];
 }
 bool Syntax_IsValid(int value) {
@@ -347,10 +347,10 @@ bool Syntax_IsValid(int value) {
 
 class Type::_Internal {
  public:
-  static const ::PROTOBUF_NAMESPACE_ID::SourceContext& source_context(const Type* msg);
+  static const ::SHARK_NAMESPACE_ID::SourceContext& source_context(const Type* msg);
 };
 
-const ::PROTOBUF_NAMESPACE_ID::SourceContext&
+const ::SHARK_NAMESPACE_ID::SourceContext&
 Type::_Internal::source_context(const Type* msg) {
   return *msg->_impl_.source_context_;
 }
@@ -360,14 +360,14 @@ void Type::clear_source_context() {
   }
   _impl_.source_context_ = nullptr;
 }
-Type::Type(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+Type::Type(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:google.protobuf.Type)
 }
 Type::Type(const Type& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::SHARK_NAMESPACE_ID::Message() {
   Type* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.fields_){from._impl_.fields_}
@@ -378,17 +378,17 @@ Type::Type(const Type& from)
     , decltype(_impl_.syntax_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_name().empty()) {
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_source_context()) {
-    _this->_impl_.source_context_ = new ::PROTOBUF_NAMESPACE_ID::SourceContext(*from._impl_.source_context_);
+    _this->_impl_.source_context_ = new ::SHARK_NAMESPACE_ID::SourceContext(*from._impl_.source_context_);
   }
   _this->_impl_.syntax_ = from._impl_.syntax_;
   // @@protoc_insertion_point(copy_constructor:google.protobuf.Type)
@@ -408,14 +408,14 @@ inline void Type::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
 Type::~Type() {
   // @@protoc_insertion_point(destructor:google.protobuf.Type)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
   }
@@ -450,18 +450,18 @@ void Type::Clear() {
   }
   _impl_.source_context_ = nullptr;
   _impl_.syntax_ = 0;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // string name = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -471,20 +471,20 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // repeated .google.protobuf.Field fields = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_fields(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else
           goto handle_unusual;
         continue;
       // repeated string oneofs = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
@@ -493,26 +493,26 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
             CHK_(ptr);
             CHK_(::_pbi::VerifyUTF8(str, "google.protobuf.Type.oneofs"));
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else
           goto handle_unusual;
         continue;
       // repeated .google.protobuf.Option options = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_options(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<34>(ptr));
         } else
           goto handle_unusual;
         continue;
       // .google.protobuf.SourceContext source_context = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr = ctx->ParseMessage(_internal_mutable_source_context(), ptr);
           CHK_(ptr);
         } else
@@ -520,10 +520,10 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // .google.protobuf.Syntax syntax = 6;
       case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::PROTOBUF_NAMESPACE_ID::Syntax>(val));
+          _internal_set_syntax(static_cast<::SHARK_NAMESPACE_ID::Syntax>(val));
         } else
           goto handle_unusual;
         continue;
@@ -538,7 +538,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -551,16 +551,16 @@ failure:
 }
 
 uint8_t* Type::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Type)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Type.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
@@ -570,16 +570,16 @@ uint8_t* Type::_InternalSerialize(
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_fields_size()); i < n; i++) {
     const auto& repfield = this->_internal_fields(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // repeated string oneofs = 3;
   for (int i = 0, n = this->_internal_oneofs_size(); i < n; i++) {
     const auto& s = this->_internal_oneofs(i);
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       s.data(), static_cast<int>(s.length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Type.oneofs");
     target = stream->WriteString(3, s, target);
   }
@@ -588,13 +588,13 @@ uint8_t* Type::_InternalSerialize(
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // .google.protobuf.SourceContext source_context = 5;
   if (this->_internal_has_source_context()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(5, _Internal::source_context(this),
         _Internal::source_context(this).GetCachedSize(), target, stream);
   }
@@ -606,9 +606,9 @@ uint8_t* Type::_InternalSerialize(
       6, this->_internal_syntax(), target);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Type)
   return target;
@@ -626,14 +626,14 @@ size_t Type::ByteSizeLong() const {
   total_size += 1UL * this->_internal_fields_size();
   for (const auto& msg : this->_impl_.fields_) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // repeated string oneofs = 3;
   total_size += 1 *
-      ::PROTOBUF_NAMESPACE_ID::internal::FromIntSize(_impl_.oneofs_.size());
+      ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.oneofs_.size());
   for (int i = 0, n = _impl_.oneofs_.size(); i < n; i++) {
-    total_size += ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+    total_size += ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
       _impl_.oneofs_.Get(i));
   }
 
@@ -641,20 +641,20 @@ size_t Type::ByteSizeLong() const {
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
   // .google.protobuf.SourceContext source_context = 5;
   if (this->_internal_has_source_context()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.source_context_);
   }
 
@@ -667,14 +667,14 @@ size_t Type::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Type::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+const ::SHARK_NAMESPACE_ID::Message::ClassData Type::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
     Type::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Type::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*Type::GetClassData() const { return &_class_data_; }
 
 
-void Type::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+void Type::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Type*>(&to_msg);
   auto& from = static_cast<const Type&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Type)
@@ -689,13 +689,13 @@ void Type::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_
     _this->_internal_set_name(from._internal_name());
   }
   if (from._internal_has_source_context()) {
-    _this->_internal_mutable_source_context()->::PROTOBUF_NAMESPACE_ID::SourceContext::MergeFrom(
+    _this->_internal_mutable_source_context()->::SHARK_NAMESPACE_ID::SourceContext::MergeFrom(
         from._internal_source_context());
   }
   if (from._internal_syntax() != 0) {
     _this->_internal_set_syntax(from._internal_syntax());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Type::CopyFrom(const Type& from) {
@@ -717,19 +717,19 @@ void Type::InternalSwap(Type* other) {
   _impl_.fields_.InternalSwap(&other->_impl_.fields_);
   _impl_.oneofs_.InternalSwap(&other->_impl_.oneofs_);
   _impl_.options_.InternalSwap(&other->_impl_.options_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Type, _impl_.syntax_)
+  ::SHARK_NAMESPACE_ID::internal::memswap<
+      SHARK_FIELD_OFFSET(Type, _impl_.syntax_)
       + sizeof(Type::_impl_.syntax_)
-      - PROTOBUF_FIELD_OFFSET(Type, _impl_.source_context_)>(
+      - SHARK_FIELD_OFFSET(Type, _impl_.source_context_)>(
           reinterpret_cast<char*>(&_impl_.source_context_),
           reinterpret_cast<char*>(&other->_impl_.source_context_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Type::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata Type::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2ftype_2eproto_getter, &descriptor_table_shark_2ftype_2eproto_once,
       file_level_metadata_shark_2ftype_2eproto[0]);
@@ -741,14 +741,14 @@ class Field::_Internal {
  public:
 };
 
-Field::Field(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+Field::Field(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:google.protobuf.Field)
 }
 Field::Field(const Field& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::SHARK_NAMESPACE_ID::Message() {
   Field* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.options_){from._impl_.options_}
@@ -763,35 +763,35 @@ Field::Field(const Field& from)
     , decltype(_impl_.packed_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_name().empty()) {
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
   _impl_.type_url_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.type_url_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_type_url().empty()) {
     _this->_impl_.type_url_.Set(from._internal_type_url(), 
       _this->GetArenaForAllocation());
   }
   _impl_.json_name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.json_name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_json_name().empty()) {
     _this->_impl_.json_name_.Set(from._internal_json_name(), 
       _this->GetArenaForAllocation());
   }
   _impl_.default_value_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.default_value_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_default_value().empty()) {
     _this->_impl_.default_value_.Set(from._internal_default_value(), 
       _this->GetArenaForAllocation());
@@ -820,26 +820,26 @@ inline void Field::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   _impl_.type_url_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.type_url_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   _impl_.json_name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.json_name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   _impl_.default_value_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.default_value_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
 Field::~Field() {
   // @@protoc_insertion_point(destructor:google.protobuf.Field)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
   }
@@ -873,44 +873,44 @@ void Field::Clear() {
   ::memset(&_impl_.kind_, 0, static_cast<size_t>(
       reinterpret_cast<char*>(&_impl_.packed_) -
       reinterpret_cast<char*>(&_impl_.kind_)) + sizeof(_impl_.packed_));
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // .google.protobuf.Field.Kind kind = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_kind(static_cast<::PROTOBUF_NAMESPACE_ID::Field_Kind>(val));
+          _internal_set_kind(static_cast<::SHARK_NAMESPACE_ID::Field_Kind>(val));
         } else
           goto handle_unusual;
         continue;
       // .google.protobuf.Field.Cardinality cardinality = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_cardinality(static_cast<::PROTOBUF_NAMESPACE_ID::Field_Cardinality>(val));
+          _internal_set_cardinality(static_cast<::SHARK_NAMESPACE_ID::Field_Cardinality>(val));
         } else
           goto handle_unusual;
         continue;
       // int32 number = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
-          _impl_.number_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 24)) {
+          _impl_.number_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
       // string name = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -920,7 +920,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // string type_url = 6;
       case 6:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           auto str = _internal_mutable_type_url();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -930,36 +930,36 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // int32 oneof_index = 7;
       case 7:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
-          _impl_.oneof_index_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          _impl_.oneof_index_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
       // bool packed = 8;
       case 8:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
-          _impl_.packed_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 64)) {
+          _impl_.packed_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
       // repeated .google.protobuf.Option options = 9;
       case 9:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_options(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<74>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<74>(ptr));
         } else
           goto handle_unusual;
         continue;
       // string json_name = 10;
       case 10:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
           auto str = _internal_mutable_json_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -969,7 +969,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // string default_value = 11;
       case 11:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 90)) {
           auto str = _internal_mutable_default_value();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -988,7 +988,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -1001,7 +1001,7 @@ failure:
 }
 
 uint8_t* Field::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Field)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
@@ -1028,9 +1028,9 @@ uint8_t* Field::_InternalSerialize(
 
   // string name = 4;
   if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Field.name");
     target = stream->WriteStringMaybeAliased(
         4, this->_internal_name(), target);
@@ -1038,9 +1038,9 @@ uint8_t* Field::_InternalSerialize(
 
   // string type_url = 6;
   if (!this->_internal_type_url().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_type_url().data(), static_cast<int>(this->_internal_type_url().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Field.type_url");
     target = stream->WriteStringMaybeAliased(
         6, this->_internal_type_url(), target);
@@ -1062,15 +1062,15 @@ uint8_t* Field::_InternalSerialize(
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(9, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // string json_name = 10;
   if (!this->_internal_json_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_json_name().data(), static_cast<int>(this->_internal_json_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Field.json_name");
     target = stream->WriteStringMaybeAliased(
         10, this->_internal_json_name(), target);
@@ -1078,17 +1078,17 @@ uint8_t* Field::_InternalSerialize(
 
   // string default_value = 11;
   if (!this->_internal_default_value().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_default_value().data(), static_cast<int>(this->_internal_default_value().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Field.default_value");
     target = stream->WriteStringMaybeAliased(
         11, this->_internal_default_value(), target);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Field)
   return target;
@@ -1106,34 +1106,34 @@ size_t Field::ByteSizeLong() const {
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // string name = 4;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
   // string type_url = 6;
   if (!this->_internal_type_url().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_type_url());
   }
 
   // string json_name = 10;
   if (!this->_internal_json_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_json_name());
   }
 
   // string default_value = 11;
   if (!this->_internal_default_value().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_default_value());
   }
 
@@ -1167,14 +1167,14 @@ size_t Field::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Field::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+const ::SHARK_NAMESPACE_ID::Message::ClassData Field::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
     Field::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Field::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*Field::GetClassData() const { return &_class_data_; }
 
 
-void Field::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+void Field::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Field*>(&to_msg);
   auto& from = static_cast<const Field&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Field)
@@ -1210,7 +1210,7 @@ void Field::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF
   if (from._internal_packed() != 0) {
     _this->_internal_set_packed(from._internal_packed());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Field::CopyFrom(const Field& from) {
@@ -1230,31 +1230,31 @@ void Field::InternalSwap(Field* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.options_.InternalSwap(&other->_impl_.options_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.type_url_, lhs_arena,
       &other->_impl_.type_url_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.json_name_, lhs_arena,
       &other->_impl_.json_name_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.default_value_, lhs_arena,
       &other->_impl_.default_value_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Field, _impl_.packed_)
+  ::SHARK_NAMESPACE_ID::internal::memswap<
+      SHARK_FIELD_OFFSET(Field, _impl_.packed_)
       + sizeof(Field::_impl_.packed_)
-      - PROTOBUF_FIELD_OFFSET(Field, _impl_.kind_)>(
+      - SHARK_FIELD_OFFSET(Field, _impl_.kind_)>(
           reinterpret_cast<char*>(&_impl_.kind_),
           reinterpret_cast<char*>(&other->_impl_.kind_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Field::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata Field::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2ftype_2eproto_getter, &descriptor_table_shark_2ftype_2eproto_once,
       file_level_metadata_shark_2ftype_2eproto[1]);
@@ -1264,10 +1264,10 @@ void Field::InternalSwap(Field* other) {
 
 class Enum::_Internal {
  public:
-  static const ::PROTOBUF_NAMESPACE_ID::SourceContext& source_context(const Enum* msg);
+  static const ::SHARK_NAMESPACE_ID::SourceContext& source_context(const Enum* msg);
 };
 
-const ::PROTOBUF_NAMESPACE_ID::SourceContext&
+const ::SHARK_NAMESPACE_ID::SourceContext&
 Enum::_Internal::source_context(const Enum* msg) {
   return *msg->_impl_.source_context_;
 }
@@ -1277,14 +1277,14 @@ void Enum::clear_source_context() {
   }
   _impl_.source_context_ = nullptr;
 }
-Enum::Enum(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+Enum::Enum(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:google.protobuf.Enum)
 }
 Enum::Enum(const Enum& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::SHARK_NAMESPACE_ID::Message() {
   Enum* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.enumvalue_){from._impl_.enumvalue_}
@@ -1294,17 +1294,17 @@ Enum::Enum(const Enum& from)
     , decltype(_impl_.syntax_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_name().empty()) {
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_source_context()) {
-    _this->_impl_.source_context_ = new ::PROTOBUF_NAMESPACE_ID::SourceContext(*from._impl_.source_context_);
+    _this->_impl_.source_context_ = new ::SHARK_NAMESPACE_ID::SourceContext(*from._impl_.source_context_);
   }
   _this->_impl_.syntax_ = from._impl_.syntax_;
   // @@protoc_insertion_point(copy_constructor:google.protobuf.Enum)
@@ -1323,14 +1323,14 @@ inline void Enum::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
 Enum::~Enum() {
   // @@protoc_insertion_point(destructor:google.protobuf.Enum)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
   }
@@ -1363,18 +1363,18 @@ void Enum::Clear() {
   }
   _impl_.source_context_ = nullptr;
   _impl_.syntax_ = 0;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // string name = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -1384,33 +1384,33 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // repeated .google.protobuf.EnumValue enumvalue = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_enumvalue(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<18>(ptr));
         } else
           goto handle_unusual;
         continue;
       // repeated .google.protobuf.Option options = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_options(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else
           goto handle_unusual;
         continue;
       // .google.protobuf.SourceContext source_context = 4;
       case 4:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr = ctx->ParseMessage(_internal_mutable_source_context(), ptr);
           CHK_(ptr);
         } else
@@ -1418,10 +1418,10 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // .google.protobuf.Syntax syntax = 5;
       case 5:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
-          uint64_t val = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
+          uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::PROTOBUF_NAMESPACE_ID::Syntax>(val));
+          _internal_set_syntax(static_cast<::SHARK_NAMESPACE_ID::Syntax>(val));
         } else
           goto handle_unusual;
         continue;
@@ -1436,7 +1436,7 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -1449,16 +1449,16 @@ failure:
 }
 
 uint8_t* Enum::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Enum)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Enum.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
@@ -1468,7 +1468,7 @@ uint8_t* Enum::_InternalSerialize(
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_enumvalue_size()); i < n; i++) {
     const auto& repfield = this->_internal_enumvalue(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
@@ -1476,13 +1476,13 @@ uint8_t* Enum::_InternalSerialize(
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(3, repfield, repfield.GetCachedSize(), target, stream);
   }
 
   // .google.protobuf.SourceContext source_context = 4;
   if (this->_internal_has_source_context()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(4, _Internal::source_context(this),
         _Internal::source_context(this).GetCachedSize(), target, stream);
   }
@@ -1494,9 +1494,9 @@ uint8_t* Enum::_InternalSerialize(
       5, this->_internal_syntax(), target);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Enum)
   return target;
@@ -1514,27 +1514,27 @@ size_t Enum::ByteSizeLong() const {
   total_size += 1UL * this->_internal_enumvalue_size();
   for (const auto& msg : this->_impl_.enumvalue_) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // repeated .google.protobuf.Option options = 3;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
   // .google.protobuf.SourceContext source_context = 4;
   if (this->_internal_has_source_context()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.source_context_);
   }
 
@@ -1547,14 +1547,14 @@ size_t Enum::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Enum::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+const ::SHARK_NAMESPACE_ID::Message::ClassData Enum::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
     Enum::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Enum::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*Enum::GetClassData() const { return &_class_data_; }
 
 
-void Enum::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+void Enum::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Enum*>(&to_msg);
   auto& from = static_cast<const Enum&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Enum)
@@ -1568,13 +1568,13 @@ void Enum::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_
     _this->_internal_set_name(from._internal_name());
   }
   if (from._internal_has_source_context()) {
-    _this->_internal_mutable_source_context()->::PROTOBUF_NAMESPACE_ID::SourceContext::MergeFrom(
+    _this->_internal_mutable_source_context()->::SHARK_NAMESPACE_ID::SourceContext::MergeFrom(
         from._internal_source_context());
   }
   if (from._internal_syntax() != 0) {
     _this->_internal_set_syntax(from._internal_syntax());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Enum::CopyFrom(const Enum& from) {
@@ -1595,19 +1595,19 @@ void Enum::InternalSwap(Enum* other) {
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.enumvalue_.InternalSwap(&other->_impl_.enumvalue_);
   _impl_.options_.InternalSwap(&other->_impl_.options_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
-  ::PROTOBUF_NAMESPACE_ID::internal::memswap<
-      PROTOBUF_FIELD_OFFSET(Enum, _impl_.syntax_)
+  ::SHARK_NAMESPACE_ID::internal::memswap<
+      SHARK_FIELD_OFFSET(Enum, _impl_.syntax_)
       + sizeof(Enum::_impl_.syntax_)
-      - PROTOBUF_FIELD_OFFSET(Enum, _impl_.source_context_)>(
+      - SHARK_FIELD_OFFSET(Enum, _impl_.source_context_)>(
           reinterpret_cast<char*>(&_impl_.source_context_),
           reinterpret_cast<char*>(&other->_impl_.source_context_));
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Enum::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata Enum::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2ftype_2eproto_getter, &descriptor_table_shark_2ftype_2eproto_once,
       file_level_metadata_shark_2ftype_2eproto[2]);
@@ -1619,14 +1619,14 @@ class EnumValue::_Internal {
  public:
 };
 
-EnumValue::EnumValue(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+EnumValue::EnumValue(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:google.protobuf.EnumValue)
 }
 EnumValue::EnumValue(const EnumValue& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::SHARK_NAMESPACE_ID::Message() {
   EnumValue* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.options_){from._impl_.options_}
@@ -1634,11 +1634,11 @@ EnumValue::EnumValue(const EnumValue& from)
     , decltype(_impl_.number_){}
     , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_name().empty()) {
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
@@ -1658,14 +1658,14 @@ inline void EnumValue::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
 EnumValue::~EnumValue() {
   // @@protoc_insertion_point(destructor:google.protobuf.EnumValue)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
   }
@@ -1691,18 +1691,18 @@ void EnumValue::Clear() {
   _impl_.options_.Clear();
   _impl_.name_.ClearToEmpty();
   _impl_.number_ = 0;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* EnumValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // string name = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -1712,22 +1712,22 @@ const char* EnumValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
         continue;
       // int32 number = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-          _impl_.number_ = ::PROTOBUF_NAMESPACE_ID::internal::ReadVarint32(&ptr);
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _impl_.number_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
       // repeated .google.protobuf.Option options = 3;
       case 3:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
           do {
             ptr += 1;
             ptr = ctx->ParseMessage(_internal_add_options(), ptr);
             CHK_(ptr);
             if (!ctx->DataAvailable(ptr)) break;
-          } while (::PROTOBUF_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
+          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<26>(ptr));
         } else
           goto handle_unusual;
         continue;
@@ -1742,7 +1742,7 @@ const char* EnumValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -1755,16 +1755,16 @@ failure:
 }
 
 uint8_t* EnumValue::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.EnumValue)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.EnumValue.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
@@ -1780,13 +1780,13 @@ uint8_t* EnumValue::_InternalSerialize(
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
         InternalWriteMessage(3, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.EnumValue)
   return target;
@@ -1804,13 +1804,13 @@ size_t EnumValue::ByteSizeLong() const {
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
@@ -1822,14 +1822,14 @@ size_t EnumValue::ByteSizeLong() const {
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData EnumValue::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+const ::SHARK_NAMESPACE_ID::Message::ClassData EnumValue::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
     EnumValue::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*EnumValue::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*EnumValue::GetClassData() const { return &_class_data_; }
 
 
-void EnumValue::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+void EnumValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<EnumValue*>(&to_msg);
   auto& from = static_cast<const EnumValue&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.EnumValue)
@@ -1844,7 +1844,7 @@ void EnumValue::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROT
   if (from._internal_number() != 0) {
     _this->_internal_set_number(from._internal_number());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void EnumValue::CopyFrom(const EnumValue& from) {
@@ -1864,14 +1864,14 @@ void EnumValue::InternalSwap(EnumValue* other) {
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
   _impl_.options_.InternalSwap(&other->_impl_.options_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
   swap(_impl_.number_, other->_impl_.number_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata EnumValue::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata EnumValue::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2ftype_2eproto_getter, &descriptor_table_shark_2ftype_2eproto_once,
       file_level_metadata_shark_2ftype_2eproto[3]);
@@ -1881,10 +1881,10 @@ void EnumValue::InternalSwap(EnumValue* other) {
 
 class Option::_Internal {
  public:
-  static const ::PROTOBUF_NAMESPACE_ID::Any& value(const Option* msg);
+  static const ::SHARK_NAMESPACE_ID::Any& value(const Option* msg);
 };
 
-const ::PROTOBUF_NAMESPACE_ID::Any&
+const ::SHARK_NAMESPACE_ID::Any&
 Option::_Internal::value(const Option* msg) {
   return *msg->_impl_.value_;
 }
@@ -1894,31 +1894,31 @@ void Option::clear_value() {
   }
   _impl_.value_ = nullptr;
 }
-Option::Option(::PROTOBUF_NAMESPACE_ID::Arena* arena,
+Option::Option(::SHARK_NAMESPACE_ID::Arena* arena,
                          bool is_message_owned)
-  : ::PROTOBUF_NAMESPACE_ID::Message(arena, is_message_owned) {
+  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
   SharedCtor(arena, is_message_owned);
   // @@protoc_insertion_point(arena_constructor:google.protobuf.Option)
 }
 Option::Option(const Option& from)
-  : ::PROTOBUF_NAMESPACE_ID::Message() {
+  : ::SHARK_NAMESPACE_ID::Message() {
   Option* const _this = this; (void)_this;
   new (&_impl_) Impl_{
       decltype(_impl_.name_){}
     , decltype(_impl_.value_){nullptr}
     , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   if (!from._internal_name().empty()) {
     _this->_impl_.name_.Set(from._internal_name(), 
       _this->GetArenaForAllocation());
   }
   if (from._internal_has_value()) {
-    _this->_impl_.value_ = new ::PROTOBUF_NAMESPACE_ID::Any(*from._impl_.value_);
+    _this->_impl_.value_ = new ::SHARK_NAMESPACE_ID::Any(*from._impl_.value_);
   }
   // @@protoc_insertion_point(copy_constructor:google.protobuf.Option)
 }
@@ -1933,14 +1933,14 @@ inline void Option::SharedCtor(
     , /*decltype(_impl_._cached_size_)*/{}
   };
   _impl_.name_.InitDefault();
-  #ifdef PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.name_.Set("", GetArenaForAllocation());
-  #endif // PROTOBUF_FORCE_COPY_DEFAULT_STRING
+  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
 Option::~Option() {
   // @@protoc_insertion_point(destructor:google.protobuf.Option)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>()) {
+  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
   (void)arena;
     return;
   }
@@ -1968,18 +1968,18 @@ void Option::Clear() {
     delete _impl_.value_;
   }
   _impl_.value_ = nullptr;
-  _internal_metadata_.Clear<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>();
+  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Option::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (PROTOBUF_PREDICT_FALSE(!(x))) goto failure
+#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
       // string name = 1;
       case 1:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
@@ -1989,7 +1989,7 @@ const char* Option::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         continue;
       // .google.protobuf.Any value = 2;
       case 2:
-        if (PROTOBUF_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ctx->ParseMessage(_internal_mutable_value(), ptr);
           CHK_(ptr);
         } else
@@ -2006,7 +2006,7 @@ const char* Option::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     }
     ptr = UnknownFieldParse(
         tag,
-        _internal_metadata_.mutable_unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(),
+        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
         ptr, ctx);
     CHK_(ptr != nullptr);
   }  // while
@@ -2019,16 +2019,16 @@ failure:
 }
 
 uint8_t* Option::_InternalSerialize(
-    uint8_t* target, ::PROTOBUF_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
+    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
   // @@protoc_insertion_point(serialize_to_array_start:google.protobuf.Option)
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
   // string name = 1;
   if (!this->_internal_name().empty()) {
-    ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
       this->_internal_name().data(), static_cast<int>(this->_internal_name().length()),
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
       "google.protobuf.Option.name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_name(), target);
@@ -2036,14 +2036,14 @@ uint8_t* Option::_InternalSerialize(
 
   // .google.protobuf.Any value = 2;
   if (this->_internal_has_value()) {
-    target = ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::
+    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
       InternalWriteMessage(2, _Internal::value(this),
         _Internal::value(this).GetCachedSize(), target, stream);
   }
 
-  if (PROTOBUF_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(::PROTOBUF_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
   }
   // @@protoc_insertion_point(serialize_to_array_end:google.protobuf.Option)
   return target;
@@ -2060,28 +2060,28 @@ size_t Option::ByteSizeLong() const {
   // string name = 1;
   if (!this->_internal_name().empty()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_name());
   }
 
   // .google.protobuf.Any value = 2;
   if (this->_internal_has_value()) {
     total_size += 1 +
-      ::PROTOBUF_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
+      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(
         *_impl_.value_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData Option::_class_data_ = {
-    ::PROTOBUF_NAMESPACE_ID::Message::CopyWithSourceCheck,
+const ::SHARK_NAMESPACE_ID::Message::ClassData Option::_class_data_ = {
+    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
     Option::MergeImpl
 };
-const ::PROTOBUF_NAMESPACE_ID::Message::ClassData*Option::GetClassData() const { return &_class_data_; }
+const ::SHARK_NAMESPACE_ID::Message::ClassData*Option::GetClassData() const { return &_class_data_; }
 
 
-void Option::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBUF_NAMESPACE_ID::Message& from_msg) {
+void Option::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<Option*>(&to_msg);
   auto& from = static_cast<const Option&>(from_msg);
   // @@protoc_insertion_point(class_specific_merge_from_start:google.protobuf.Option)
@@ -2093,10 +2093,10 @@ void Option::MergeImpl(::PROTOBUF_NAMESPACE_ID::Message& to_msg, const ::PROTOBU
     _this->_internal_set_name(from._internal_name());
   }
   if (from._internal_has_value()) {
-    _this->_internal_mutable_value()->::PROTOBUF_NAMESPACE_ID::Any::MergeFrom(
+    _this->_internal_mutable_value()->::SHARK_NAMESPACE_ID::Any::MergeFrom(
         from._internal_value());
   }
-  _this->_internal_metadata_.MergeFrom<::PROTOBUF_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void Option::CopyFrom(const Option& from) {
@@ -2115,43 +2115,43 @@ void Option::InternalSwap(Option* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  ::PROTOBUF_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
+  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.name_, lhs_arena,
       &other->_impl_.name_, rhs_arena
   );
   swap(_impl_.value_, other->_impl_.value_);
 }
 
-::PROTOBUF_NAMESPACE_ID::Metadata Option::GetMetadata() const {
+::SHARK_NAMESPACE_ID::Metadata Option::GetMetadata() const {
   return ::_pbi::AssignDescriptors(
       &descriptor_table_shark_2ftype_2eproto_getter, &descriptor_table_shark_2ftype_2eproto_once,
       file_level_metadata_shark_2ftype_2eproto[4]);
 }
 
 // @@protoc_insertion_point(namespace_scope)
-PROTOBUF_NAMESPACE_CLOSE
-PROTOBUF_NAMESPACE_OPEN
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::Type*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::Type >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::Type >(arena);
+SHARK_NAMESPACE_CLOSE
+SHARK_NAMESPACE_OPEN
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Type*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Type >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Type >(arena);
 }
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::Field*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::Field >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::Field >(arena);
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Field*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Field >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Field >(arena);
 }
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::Enum*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::Enum >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::Enum >(arena);
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Enum*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Enum >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Enum >(arena);
 }
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::EnumValue*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::EnumValue >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::EnumValue >(arena);
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::EnumValue*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::EnumValue >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::EnumValue >(arena);
 }
-template<> PROTOBUF_NOINLINE ::PROTOBUF_NAMESPACE_ID::Option*
-Arena::CreateMaybeMessage< ::PROTOBUF_NAMESPACE_ID::Option >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::PROTOBUF_NAMESPACE_ID::Option >(arena);
+template<> SHARK_NOINLINE ::SHARK_NAMESPACE_ID::Option*
+Arena::CreateMaybeMessage< ::SHARK_NAMESPACE_ID::Option >(Arena* arena) {
+  return Arena::CreateMessageInternal< ::SHARK_NAMESPACE_ID::Option >(arena);
 }
-PROTOBUF_NAMESPACE_CLOSE
+SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 #include <shark/port_undef.inc>

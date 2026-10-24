@@ -28,8 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#ifndef GOOGLE_PROTOBUF_COMPILER_CSHARP_ENUM_H__
-#define GOOGLE_PROTOBUF_COMPILER_CSHARP_ENUM_H__
+#pragma once
 
 #include <string>
 
@@ -62,5 +61,4 @@ class EnumGenerator : public SourceGeneratorBase {
 }  // namespace protobuf
 }  // namespace google
 
-#endif  // GOOGLE_PROTOBUF_COMPILER_CSHARP_ENUM_H__
 

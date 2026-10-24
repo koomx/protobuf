@@ -35,8 +35,7 @@
 // This header is logically internal, but is made public because it is used
 // from protocol-compiler-generated code, which may reside in other components.
 
-#ifndef GOOGLE_PROTOBUF_EXTENSION_SET_H__
-#define GOOGLE_PROTOBUF_EXTENSION_SET_H__
+#pragma once
 
 
 #include <algorithm>
@@ -154,7 +153,7 @@ struct ExtensionInfo {
 
 // GeneratedExtensionFinder is an ExtensionFinder which finds extensions
 // defined in .proto files which have been compiled into the binary.
-class PROTOBUF_EXPORT GeneratedExtensionFinder {
+class SHARK_EXPORT GeneratedExtensionFinder {
  public:
   explicit GeneratedExtensionFinder(const MessageLite* extendee)
       : extendee_(extendee) {}
@@ -180,7 +179,7 @@ class PROTOBUF_EXPORT GeneratedExtensionFinder {
 // ExtensionSet.  When parsing, if a tag number is encountered which is
 // inside one of the message type's extension ranges, the tag is passed
 // off to the ExtensionSet for parsing.  Etc.
-class PROTOBUF_EXPORT ExtensionSet {
+class SHARK_EXPORT ExtensionSet {
  public:
   constexpr ExtensionSet();
   explicit ExtensionSet(Arena* arena);
@@ -292,12 +291,12 @@ class PROTOBUF_EXPORT ExtensionSet {
   void UnsafeArenaSetAllocatedMessage(int number, FieldType type,
                                       const FieldDescriptor* descriptor,
                                       MessageLite* message);
-  PROTOBUF_NODISCARD MessageLite* ReleaseMessage(int number,
+  [[nodiscard]] MessageLite* ReleaseMessage(int number,
                                                  const MessageLite& prototype);
   MessageLite* UnsafeArenaReleaseMessage(int number,
                                          const MessageLite& prototype);
 
-  PROTOBUF_NODISCARD MessageLite* ReleaseMessage(
+  [[nodiscard]] MessageLite* ReleaseMessage(
       const FieldDescriptor* descriptor, MessageFactory* factory);
   MessageLite* UnsafeArenaReleaseMessage(const FieldDescriptor* descriptor,
                                          MessageFactory* factory);
@@ -367,7 +366,7 @@ class PROTOBUF_EXPORT ExtensionSet {
 #undef desc
 
   void RemoveLast(int number);
-  PROTOBUF_NODISCARD MessageLite* ReleaseLast(int number);
+  [[nodiscard]] MessageLite* ReleaseLast(int number);
   MessageLite* UnsafeArenaReleaseLast(int number);
   void SwapElements(int number, int index1, int index2);
 
@@ -410,17 +409,17 @@ class PROTOBUF_EXPORT ExtensionSet {
     while (!ctx->Done(&ptr)) {
       uint32_t tag;
       ptr = ReadTag(ptr, &tag);
-      GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+      SHARK_PARSER_ASSERT(ptr);
       if (tag == WireFormatLite::kMessageSetItemStartTag) {
         ptr = ctx->ParseGroup(&item, ptr, tag);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
       } else {
         if (tag == 0 || (tag & 7) == 4) {
           ctx->SetLastTag(tag);
           return ptr;
         }
         ptr = ParseField(tag, ptr, extendee, metadata, ctx);
-        GOOGLE_PROTOBUF_PARSER_ASSERT(ptr);
+        SHARK_PARSER_ASSERT(ptr);
       }
     }
     return ptr;
@@ -535,7 +534,7 @@ class PROTOBUF_EXPORT ExtensionSet {
                                   uint8_t* target,
                                   io::EpsCopyOutputStream* stream) const;
   // Interface of a lazily parsed singular message extension.
-  class PROTOBUF_EXPORT LazyMessageExtension {
+  class SHARK_EXPORT LazyMessageExtension {
    public:
     LazyMessageExtension() {}
     virtual ~LazyMessageExtension() {}
@@ -548,14 +547,14 @@ class PROTOBUF_EXPORT ExtensionSet {
     virtual void SetAllocatedMessage(MessageLite* message, Arena* arena) = 0;
     virtual void UnsafeArenaSetAllocatedMessage(MessageLite* message,
                                                 Arena* arena) = 0;
-    PROTOBUF_NODISCARD virtual MessageLite* ReleaseMessage(
+    [[nodiscard]] virtual MessageLite* ReleaseMessage(
         const MessageLite& prototype, Arena* arena) = 0;
     virtual MessageLite* UnsafeArenaReleaseMessage(const MessageLite& prototype,
                                                    Arena* arena) = 0;
 
     virtual bool IsInitialized() const = 0;
 
-    PROTOBUF_DEPRECATED_MSG("Please use ByteSizeLong() instead")
+    [[deprecated("Please use ByteSizeLong() instead")]]
     virtual int ByteSize() const { return internal::ToIntSize(ByteSizeLong()); }
     virtual size_t ByteSizeLong() const = 0;
     virtual size_t SpaceUsedLong() const = 0;
@@ -704,7 +703,7 @@ class PROTOBUF_EXPORT ExtensionSet {
   void Erase(int key);
 
   size_t Size() const {
-    return PROTOBUF_PREDICT_FALSE(is_large()) ? map_.large->size() : flat_size_;
+    return SHARK_PREDICT_FALSE(is_large()) ? map_.large->size() : flat_size_;
   }
 
   // Similar to std::for_each.
@@ -720,7 +719,7 @@ class PROTOBUF_EXPORT ExtensionSet {
   // Applies a functor to the <int, Extension&> pairs in sorted order.
   template <typename KeyValueFunctor>
   KeyValueFunctor ForEach(KeyValueFunctor func) {
-    if (PROTOBUF_PREDICT_FALSE(is_large())) {
+    if (SHARK_PREDICT_FALSE(is_large())) {
       return ForEach(map_.large->begin(), map_.large->end(), std::move(func));
     }
     return ForEach(flat_begin(), flat_end(), std::move(func));
@@ -729,7 +728,7 @@ class PROTOBUF_EXPORT ExtensionSet {
   // Applies a functor to the <int, const Extension&> pairs in sorted order.
   template <typename KeyValueFunctor>
   KeyValueFunctor ForEach(KeyValueFunctor func) const {
-    if (PROTOBUF_PREDICT_FALSE(is_large())) {
+    if (SHARK_PREDICT_FALSE(is_large())) {
       return ForEach(map_.large->begin(), map_.large->end(), std::move(func));
     }
     return ForEach(flat_begin(), flat_end(), std::move(func));
@@ -755,7 +754,7 @@ class PROTOBUF_EXPORT ExtensionSet {
         // someone
         // adds a new wire type.
     }
-    PROTOBUF_ASSUME(false);  // switch handles all possible enum values
+    SHARK_ASSUME(false);  // switch handles all possible enum values
     return false;
   }
 
@@ -1049,7 +1048,7 @@ class RepeatedPrimitiveTypeTraits {
   }
 };
 
-class PROTOBUF_EXPORT RepeatedPrimitiveDefaults {
+class SHARK_EXPORT RepeatedPrimitiveDefaults {
  private:
   template <typename Type>
   friend class RepeatedPrimitiveTypeTraits;
@@ -1063,7 +1062,7 @@ class PROTOBUF_EXPORT RepeatedPrimitiveDefaults {
   RepeatedField<bool> default_repeated_field_bool_;
 };
 
-#define PROTOBUF_DEFINE_PRIMITIVE_TYPE(TYPE, METHOD)                           \
+#define SHARK_DEFINE_PRIMITIVE_TYPE(TYPE, METHOD)                           \
   template <>                                                                  \
   inline TYPE PrimitiveTypeTraits<TYPE>::Get(                                  \
       int number, const ExtensionSet& set, TYPE default_value) {               \
@@ -1128,21 +1127,21 @@ class PROTOBUF_EXPORT RepeatedPrimitiveDefaults {
         set->MutableRawRepeatedField(number, field_type, is_packed, nullptr)); \
   }
 
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(int32_t, Int32)
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(int64_t, Int64)
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(uint32_t, UInt32)
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(uint64_t, UInt64)
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(float, Float)
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(double, Double)
-PROTOBUF_DEFINE_PRIMITIVE_TYPE(bool, Bool)
+SHARK_DEFINE_PRIMITIVE_TYPE(int32_t, Int32)
+SHARK_DEFINE_PRIMITIVE_TYPE(int64_t, Int64)
+SHARK_DEFINE_PRIMITIVE_TYPE(uint32_t, UInt32)
+SHARK_DEFINE_PRIMITIVE_TYPE(uint64_t, UInt64)
+SHARK_DEFINE_PRIMITIVE_TYPE(float, Float)
+SHARK_DEFINE_PRIMITIVE_TYPE(double, Double)
+SHARK_DEFINE_PRIMITIVE_TYPE(bool, Bool)
 
-#undef PROTOBUF_DEFINE_PRIMITIVE_TYPE
+#undef SHARK_DEFINE_PRIMITIVE_TYPE
 
 // -------------------------------------------------------------------
 // StringTypeTraits
 
 // Strings support both Set() and Mutable().
-class PROTOBUF_EXPORT StringTypeTraits {
+class SHARK_EXPORT StringTypeTraits {
  public:
   typedef const std::string& ConstType;
   typedef std::string* MutableType;
@@ -1172,7 +1171,7 @@ class PROTOBUF_EXPORT StringTypeTraits {
   }
 };
 
-class PROTOBUF_EXPORT RepeatedStringTypeTraits {
+class SHARK_EXPORT RepeatedStringTypeTraits {
  public:
   typedef const std::string& ConstType;
   typedef std::string* MutableType;
@@ -1370,7 +1369,7 @@ class MessageTypeTraits {
                                              ExtensionSet* set) {
     set->UnsafeArenaSetAllocatedMessage(number, field_type, nullptr, message);
   }
-  PROTOBUF_NODISCARD static inline MutableType Release(
+  [[nodiscard]] static inline MutableType Release(
       int number, FieldType /* field_type */, ExtensionSet* set) {
     return static_cast<Type*>(
         set->ReleaseMessage(number, Type::default_instance()));
@@ -1518,7 +1517,7 @@ class ExtensionIdentifier {
 
 
 // Used to retrieve a lazy extension, may return nullptr in some environments.
-extern PROTOBUF_ATTRIBUTE_WEAK ExtensionSet::LazyMessageExtension*
+extern SHARK_ATTRIBUTE_WEAK ExtensionSet::LazyMessageExtension*
 MaybeCreateLazyExtension(Arena* arena);
 
 }  // namespace internal
@@ -1558,4 +1557,3 @@ void LinkExtensionReflection(
 
 #include <shark/port_undef.inc>
 
-#endif  // GOOGLE_PROTOBUF_EXTENSION_SET_H__
