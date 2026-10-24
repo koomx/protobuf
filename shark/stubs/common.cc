@@ -138,11 +138,11 @@ inline void DefaultLogHandler(LogLevel level, const char* filename, int line,
   // Bound the logging level.
   const int android_log_level = android_log_levels[level];
   ::std::ostringstream ostr;
-  ostr << "[libprotobuf " << level_names[level] << " " << filename << ":"
+  ostr << "[shark " << level_names[level] << " " << filename << ":"
        << line << "] " << message.c_str();
 
   // Output the log string the Android log at the appropriate level.
-  __android_log_write(android_log_level, "libprotobuf-native",
+  __android_log_write(android_log_level, "shark-native",
                       ostr.str().c_str());
   // Also output to std::cerr.
   fprintf(stderr, "%s", ostr.str().c_str());
@@ -150,7 +150,7 @@ inline void DefaultLogHandler(LogLevel level, const char* filename, int line,
 
   // Indicate termination if needed.
   if (android_log_level == ANDROID_LOG_FATAL) {
-    __android_log_write(ANDROID_LOG_FATAL, "libprotobuf-native",
+    __android_log_write(ANDROID_LOG_FATAL, "shark-native",
                         "terminating.\n");
   }
 }
@@ -165,7 +165,7 @@ void DefaultLogHandler(LogLevel level, const char* filename, int line,
 
   // We use fprintf() instead of cerr because we want this to work at static
   // initialization time.
-  fprintf(stderr, "[libprotobuf %s %s:%d] %s\n",
+  fprintf(stderr, "[shark %s %s:%d] %s\n",
           level_names[level], filename, line, message.c_str());
   fflush(stderr);  // Needed on MSVC.
 }
@@ -295,7 +295,7 @@ void DoNothing() {}
 // emulates google3/util/endian/endian.h
 //
 // TODO(xiaofeng): SHARK_LITTLE_ENDIAN is unfortunately defined in
-// google/protobuf/io/coded_stream.h and therefore can not be used here.
+// shark/io/coded_stream.h and therefore can not be used here.
 // Maybe move that macro definition here in the future.
 uint32_t ghtonl(uint32_t x) {
   union {

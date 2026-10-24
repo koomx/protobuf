@@ -575,7 +575,7 @@ util::Status ProtoStreamObjectSource::RenderAny(
       continue;
     }
     // 'type_url' has field number of 1 and 'value' has field number 2
-    // //google/protobuf/any.proto
+    // shark/any.proto
     if (field->number() == 1) {
       // read type_url
       uint32_t type_url_size;
@@ -1032,7 +1032,7 @@ std::pair<int64_t, int32_t> ProtoStreamObjectSource::ReadSecondsAndNanos(
       continue;
     }
     // 'seconds' has field number of 1 and 'nanos' has field number 2
-    // //google/protobuf/timestamp.proto & duration.proto
+    // shark/timestamp.proto and shark/duration.proto
     if (field->number() == 1) {
       // read seconds
       stream_->ReadVarint64(&seconds);

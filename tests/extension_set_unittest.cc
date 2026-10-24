@@ -62,7 +62,7 @@ namespace {
 
 using TestUtil::EqualsToSerialized;
 
-// This test closely mirrors third_party/protobuf/compiler/cpp/unittest.cc
+// This test closely mirrors tests/compiler/cpp/unittest.cc
 // except that it uses extensions rather than regular fields.
 
 TEST(ExtensionSetTest, Defaults) {

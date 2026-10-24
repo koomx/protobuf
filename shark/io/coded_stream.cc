@@ -195,7 +195,7 @@ void CodedInputStream::PrintTotalBytesLimitError() {
       << total_bytes_limit_
       << " bytes).  To increase the limit (or to disable these "
          "warnings), see CodedInputStream::SetTotalBytesLimit() "
-         "in third_party/protobuf/io/coded_stream.h.";
+         "in shark/io/coded_stream.h.";
 }
 
 bool CodedInputStream::SkipFallback(int count, int original_buffer_size) {

@@ -39,7 +39,7 @@
 // Core components of the Protocol Buffers runtime library.
 //
 // The files in this package represent the core of the Protocol Buffer
-// system.  All of them are part of the libprotobuf library.
+// system.  All of them are part of the shark library.
 //
 // A note on thread-safety:
 //

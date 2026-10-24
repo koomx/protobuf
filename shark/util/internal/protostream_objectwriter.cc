@@ -500,7 +500,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
     // stream, we write those values.
     if (master_type_.name() == kStructType) {
       // Struct has a map<string, Value> field called "fields".
-      // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/struct.proto
+      // shark/struct.proto
       // "fields": [
       Push("fields", Item::MAP, true, true);
       return this;
@@ -511,7 +511,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
       // object within that type is a struct type. So start a struct.
       //
       // The struct field in Value type is named "struct_value"
-      // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/struct.proto
+      // shark/struct.proto
       // Also start the map field "fields" within the struct.
       // "struct_value": {
       //   "fields": [
@@ -700,7 +700,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartList(
       // we have to start the "list_value" within shark.Value.
       //
       // See
-      // https://github.com/protocolbuffers/protobuf/blob/main/src/google/protobuf/struct.proto
+      // shark/struct.proto
       //
       // Render
       // "<name>": {

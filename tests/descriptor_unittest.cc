@@ -3352,7 +3352,7 @@ TEST(CustomOptions, OptionsFromOtherFile) {
       // bug.)
       "  uninterpreted_option { "
       "    name { "
-      "      name_part: \"java_package\" "
+      "      name_part: \"go_package\" "
       "      is_extension: false "
       "    } "
       "    string_value: \"foo\" "
@@ -3372,8 +3372,8 @@ TEST(CustomOptions, OptionsFromOtherFile) {
   const FileDescriptor* file = pool.BuildFile(file_proto);
   ASSERT_TRUE(file != nullptr);
   EXPECT_EQ(1234, file->options().GetExtension(protobuf_unittest::file_opt1));
-  EXPECT_TRUE(file->options().has_java_package());
-  EXPECT_EQ("foo", file->options().java_package());
+  EXPECT_TRUE(file->options().has_go_package());
+  EXPECT_EQ("foo", file->options().go_package());
   EXPECT_TRUE(file->options().has_optimize_for());
   EXPECT_EQ(FileOptions::SPEED, file->options().optimize_for());
 }
@@ -5925,20 +5925,17 @@ TEST_F(ValidationErrorTest, NoLiteServices) {
       "options {"
       "  optimize_for: LITE_RUNTIME"
       "  cc_generic_services: true"
-      "  java_generic_services: true"
       "} "
       "service { name: \"Foo\" }",
 
       "foo.proto: Foo: NAME: Files with optimize_for = LITE_RUNTIME cannot "
-      "define services unless you set both options cc_generic_services and "
-      "java_generic_services to false.\n");
+      "define services unless you set cc_generic_services to false.\n");
 
   BuildFile(
       "name: \"bar.proto\" "
       "options {"
       "  optimize_for: LITE_RUNTIME"
       "  cc_generic_services: false"
-      "  java_generic_services: false"
       "} "
       "service { name: \"Bar\" }");
 }
@@ -7432,7 +7429,7 @@ class SingletonSourceTree : public compiler::SourceTree {
 
 const char* const kSourceLocationTestInput =
     "syntax = \"proto2\";\n"
-    "option java_package = \"com.foo.bar\";\n"
+    "option go_package = \"com.foo.bar\";\n"
     "option (test_file_opt) = \"foobar\";\n"
     "message A {\n"
     "  option (test_msg_opt) = \"foobar\";\n"
@@ -7614,13 +7611,13 @@ TEST_F(SourceLocationTest, InterpretedOptionSourceLocation) {
   // File options
   {
     int path[] = {FileDescriptorProto::kOptionsFieldNumber,
-                  FileOptions::kJavaPackageFieldNumber};
+                  FileOptions::kGoPackageFieldNumber};
     int unint[] = {FileDescriptorProto::kOptionsFieldNumber,
                    FileOptions::kUninterpretedOptionFieldNumber, 0};
 
     std::vector<int> vpath(path, path + 2);
     EXPECT_TRUE(file_desc->GetSourceLocation(vpath, &loc));
-    EXPECT_EQ("2:1-2:37", PrintSourceLocation(loc));
+    EXPECT_EQ("2:1-2:35", PrintSourceLocation(loc));
 
     std::vector<int> vunint(unint, unint + 3);
     EXPECT_FALSE(file_desc->GetSourceLocation(vunint, &loc));

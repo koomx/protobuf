@@ -387,7 +387,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
                                      const DataPiece& data);
 
   // Renders wrapper message types for primitive types in
-  // google/protobuf/wrappers.proto.
+  // shark/wrappers.proto.
   static util::Status RenderWrapperType(ProtoStreamObjectWriter* ow,
                                         const DataPiece& data);
 

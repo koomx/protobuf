@@ -33,7 +33,6 @@
 syntax = "proto3";
 
 package benchmarks.proto3;
-option java_package = "com.google.protobuf.benchmarks";
 
 // This is the default, but we specify it here explicitly.
 option optimize_for = SPEED;

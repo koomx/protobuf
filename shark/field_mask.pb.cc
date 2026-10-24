@@ -58,15 +58,13 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ffield_5fmask_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\026shark/field_mask.proto\022\005shark\"\032\n\tField"
-  "Mask\022\r\n\005paths\030\001 \003(\tB\205\001\n\023com.google.proto"
-  "bufB\016FieldMaskProtoP\001Z2google.golang.org"
-  "/protobuf/types/known/fieldmaskpb\370\001\001\242\002\003G"
-  "PB\252\002\036Google.Protobuf.WellKnownTypesb\006pro"
-  "to3"
+  "Mask\022\r\n\005paths\030\001 \003(\tB7Z2google.golang.org"
+  "/protobuf/types/known/fieldmaskpb\370\001\001b\006pr"
+  "oto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ffield_5fmask_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ffield_5fmask_2eproto = {
-    false, false, 203, descriptor_table_protodef_shark_2ffield_5fmask_2eproto,
+    false, false, 124, descriptor_table_protodef_shark_2ffield_5fmask_2eproto,
     "shark/field_mask.proto",
     &descriptor_table_shark_2ffield_5fmask_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ffield_5fmask_2eproto::offsets,

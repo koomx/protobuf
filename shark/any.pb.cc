@@ -65,14 +65,12 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2fany_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\017shark/any.proto\022\005shark\"&\n\003Any\022\020\n\010type_"
-  "url\030\001 \001(\t\022\r\n\005value\030\002 \001(\014Bv\n\023com.google.p"
-  "rotobufB\010AnyProtoP\001Z,google.golang.org/p"
-  "rotobuf/types/known/anypb\242\002\003GPB\252\002\036Google"
-  ".Protobuf.WellKnownTypesb\006proto3"
+  "url\030\001 \001(\t\022\r\n\005value\030\002 \001(\014B.Z,google.golan"
+  "g.org/protobuf/types/known/anypbb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fany_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fany_2eproto = {
-    false, false, 192, descriptor_table_protodef_shark_2fany_2eproto,
+    false, false, 120, descriptor_table_protodef_shark_2fany_2eproto,
     "shark/any.proto",
     &descriptor_table_shark_2fany_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fany_2eproto::offsets,

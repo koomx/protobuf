@@ -37,7 +37,7 @@
 // just a program that reads a CodeGeneratorRequest from stdin and writes a
 // CodeGeneratorResponse to stdout.
 //
-// Plugins written using C++ can use google/protobuf/compiler/plugin.h instead
+// Plugins written using C++ can use shark/compiler/plugin.h instead
 // of dealing with the raw protocol defined here.
 //
 // A plugin executable needs only to be placed somewhere in the path.  The
@@ -47,8 +47,6 @@
 syntax = "proto2";
 
 package shark.compiler;
-option java_package = "com.google.protobuf.compiler";
-option java_outer_classname = "PluginProtos";
 
 option go_package = "google.golang.org/protobuf/types/pluginpb";
 

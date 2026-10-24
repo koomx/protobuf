@@ -139,11 +139,9 @@ const char descriptor_table_protodef_shark_2fapi_2eproto[] SHARK_SECTION_VARIABL
   "\n\021response_type_url\030\004 \001(\t\022\032\n\022response_st"
   "reaming\030\005 \001(\010\022\036\n\007options\030\006 \003(\0132\r.shark.O"
   "ption\022\035\n\006syntax\030\007 \001(\0162\r.shark.Syntax\"#\n\005"
-  "Mixin\022\014\n\004name\030\001 \001(\t\022\014\n\004root\030\002 \001(\tBv\n\023com"
-  ".google.protobufB\010ApiProtoP\001Z,google.gol"
-  "ang.org/protobuf/types/known/apipb\242\002\003GPB"
-  "\252\002\036Google.Protobuf.WellKnownTypesb\006proto"
-  "3"
+  "Mixin\022\014\n\004name\030\001 \001(\t\022\014\n\004root\030\002 \001(\tB.Z,goo"
+  "gle.golang.org/protobuf/types/known/apip"
+  "bb\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fapi_2eproto_deps[2] = {
   &::descriptor_table_shark_2fsource_5fcontext_2eproto,
@@ -151,7 +149,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fapi_2eproto
 };
 static ::_pbi::once_flag descriptor_table_shark_2fapi_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fapi_2eproto = {
-    false, false, 641, descriptor_table_protodef_shark_2fapi_2eproto,
+    false, false, 569, descriptor_table_protodef_shark_2fapi_2eproto,
     "shark/api.proto",
     &descriptor_table_shark_2fapi_2eproto_once, descriptor_table_shark_2fapi_2eproto_deps, 2, 3,
     schemas, file_default_instances, TableStruct_shark_2fapi_2eproto::offsets,

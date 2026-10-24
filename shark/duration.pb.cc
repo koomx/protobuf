@@ -60,15 +60,13 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2fduration_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\024shark/duration.proto\022\005shark\"*\n\010Duratio"
-  "n\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005B\203\001\n\023co"
-  "m.google.protobufB\rDurationProtoP\001Z1goog"
-  "le.golang.org/protobuf/types/known/durat"
-  "ionpb\370\001\001\242\002\003GPB\252\002\036Google.Protobuf.WellKno"
-  "wnTypesb\006proto3"
+  "n\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005B6Z1goo"
+  "gle.golang.org/protobuf/types/known/dura"
+  "tionpb\370\001\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fduration_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fduration_2eproto = {
-    false, false, 215, descriptor_table_protodef_shark_2fduration_2eproto,
+    false, false, 137, descriptor_table_protodef_shark_2fduration_2eproto,
     "shark/duration.proto",
     &descriptor_table_shark_2fduration_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fduration_2eproto::offsets,

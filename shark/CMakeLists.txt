@@ -146,70 +146,11 @@ kmcmake_cc_library(
         compiler/cpp/primitive_field.cc
         compiler/cpp/service.cc
         compiler/cpp/string_field.cc
-        compiler/csharp/csharp_doc_comment.cc
-        compiler/csharp/csharp_enum.cc
-        compiler/csharp/csharp_enum_field.cc
-        compiler/csharp/csharp_field_base.cc
-        compiler/csharp/csharp_generator.cc
-        compiler/csharp/csharp_helpers.cc
-        compiler/csharp/csharp_map_field.cc
-        compiler/csharp/csharp_message.cc
-        compiler/csharp/csharp_message_field.cc
-        compiler/csharp/csharp_primitive_field.cc
-        compiler/csharp/csharp_reflection_class.cc
-        compiler/csharp/csharp_repeated_enum_field.cc
-        compiler/csharp/csharp_repeated_message_field.cc
-        compiler/csharp/csharp_repeated_primitive_field.cc
-        compiler/csharp/csharp_source_generator_base.cc
-        compiler/csharp/csharp_wrapper_field.cc
-        compiler/java/context.cc
-        compiler/java/doc_comment.cc
-        compiler/java/enum.cc
-        compiler/java/enum_field.cc
-        compiler/java/enum_field_lite.cc
-        compiler/java/enum_lite.cc
-        compiler/java/extension.cc
-        compiler/java/extension_lite.cc
-        compiler/java/field.cc
-        compiler/java/file.cc
-        compiler/java/generator.cc
-        compiler/java/generator_factory.cc
-        compiler/java/helpers.cc
-        compiler/java/kotlin_generator.cc
-        compiler/java/map_field.cc
-        compiler/java/map_field_lite.cc
-        compiler/java/message.cc
-        compiler/java/message_builder.cc
-        compiler/java/message_builder_lite.cc
-        compiler/java/message_field.cc
-        compiler/java/message_field_lite.cc
-        compiler/java/message_lite.cc
-        compiler/java/name_resolver.cc
-        compiler/java/primitive_field.cc
-        compiler/java/primitive_field_lite.cc
-        compiler/java/service.cc
-        compiler/java/shared_code_generator.cc
-        compiler/java/string_field.cc
-        compiler/java/string_field_lite.cc
-        compiler/objectivec/objectivec_enum.cc
-        compiler/objectivec/objectivec_enum_field.cc
-        compiler/objectivec/objectivec_extension.cc
-        compiler/objectivec/objectivec_field.cc
-        compiler/objectivec/objectivec_file.cc
-        compiler/objectivec/objectivec_generator.cc
-        compiler/objectivec/objectivec_helpers.cc
-        compiler/objectivec/objectivec_map_field.cc
-        compiler/objectivec/objectivec_message.cc
-        compiler/objectivec/objectivec_message_field.cc
-        compiler/objectivec/objectivec_oneof.cc
-        compiler/objectivec/objectivec_primitive_field.cc
-        compiler/php/php_generator.cc
         compiler/plugin.cc
         compiler/plugin.pb.cc
         compiler/python/generator.cc
         compiler/python/helpers.cc
         compiler/python/pyi_generator.cc
-        compiler/ruby/ruby_generator.cc
         compiler/subprocess.cc
         compiler/zip_writer.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}

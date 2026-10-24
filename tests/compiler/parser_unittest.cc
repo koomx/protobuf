@@ -1239,11 +1239,11 @@ TEST_F(ParseMiscTest, ParsePackageWithSpaces) {
 
 TEST_F(ParseMiscTest, ParseFileOptions) {
   ExpectParsesTo(
-      "option java_package = \"com.google.foo\";\n"
+      "option go_package = \"com.google.foo\";\n"
       "option optimize_for = CODE_SIZE;",
 
       "options {"
-      "uninterpreted_option { name { name_part: \"java_package\" "
+      "uninterpreted_option { name { name_part: \"go_package\" "
       "                              is_extension: false }"
       "                       string_value: \"com.google.foo\"} "
       "uninterpreted_option { name { name_part: \"optimize_for\" "
@@ -1898,9 +1898,9 @@ TEST_F(ParserValidationErrorTest, FileOptionNameError) {
 
 TEST_F(ParserValidationErrorTest, FileOptionValueError) {
   ExpectHasValidationErrors(
-      "option java_outer_classname = 5;",
-      "0:30: Value must be quoted string for string option "
-      "\"shark.FileOptions.java_outer_classname\".\n");
+      "option go_package = 5;",
+      "0:20: Value must be quoted string for string option "
+      "\"shark.FileOptions.go_package\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, FieldOptionNameError) {

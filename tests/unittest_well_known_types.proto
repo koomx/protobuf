@@ -2,9 +2,6 @@ syntax = "proto3";
 
 package protobuf_unittest;
 
-option csharp_namespace = "Google.Protobuf.TestProtos";
-option java_multiple_files = true;
-option java_package = "com.google.protobuf.test";
 
 import "shark/any.proto";
 import "shark/api.proto";

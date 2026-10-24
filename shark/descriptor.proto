@@ -42,10 +42,6 @@ syntax = "proto2";
 package shark;
 
 option go_package = "google.golang.org/protobuf/types/descriptorpb";
-option java_package = "com.google.protobuf";
-option java_outer_classname = "DescriptorProtos";
-option csharp_namespace = "Google.Protobuf.Reflection";
-option objc_class_prefix = "GPB";
 option cc_enable_arenas = true;
 
 // descriptor.proto must be optimized for speed because reflection-based
@@ -340,40 +336,6 @@ message MethodDescriptorProto {
 
 message FileOptions {
 
-  // Sets the Java package where classes generated from this .proto will be
-  // placed.  By default, the proto package is used, but this is often
-  // inappropriate because proto packages do not normally start with backwards
-  // domain names.
-  optional string java_package = 1;
-
-
-  // Controls the name of the wrapper Java class generated for the .proto file.
-  // That class will always contain the .proto file's getDescriptor() method as
-  // well as any top-level extensions defined in the .proto file.
-  // If java_multiple_files is disabled, then all the other classes from the
-  // .proto file will be nested inside the single wrapper outer class.
-  optional string java_outer_classname = 8;
-
-  // If enabled, then the Java code generator will generate a separate .java
-  // file for each top-level message, enum, and service defined in the .proto
-  // file.  Thus, these types will *not* be nested inside the wrapper class
-  // named by java_outer_classname.  However, the wrapper class will still be
-  // generated to contain the file's getDescriptor() method as well as any
-  // top-level extensions defined in the file.
-  optional bool java_multiple_files = 10 [default = false];
-
-  // This option does nothing.
-  optional bool java_generate_equals_and_hash = 20 [deprecated=true];
-
-  // If set true, then the Java2 code generator will generate code that
-  // throws an exception whenever an attempt is made to assign a non-UTF-8
-  // byte sequence to a string field.
-  // Message reflection will do the same.
-  // However, an extension field still accepts non-UTF-8 byte sequences.
-  // This option has no effect on when used with the lite runtime.
-  optional bool java_string_check_utf8 = 27 [default = false];
-
-
   // Generated classes can be optimized for speed or code size.
   enum OptimizeMode {
     SPEED = 1;         // Generate complete code for parsing, serialization,
@@ -404,9 +366,7 @@ message FileOptions {
   // these default to false.  Old code which depends on generic services should
   // explicitly set them to true.
   optional bool cc_generic_services = 16 [default = false];
-  optional bool java_generic_services = 17 [default = false];
   optional bool py_generic_services = 18 [default = false];
-  optional bool php_generic_services = 42 [default = false];
 
   // Is this file deprecated?
   // Depending on the target platform, this can emit Deprecated annotations
@@ -419,39 +379,6 @@ message FileOptions {
   optional bool cc_enable_arenas = 31 [default = true];
 
 
-  // Sets the objective c class prefix which is prepended to all objective c
-  // generated classes from this .proto. There is no default.
-  optional string objc_class_prefix = 36;
-
-  // Namespace for generated classes; defaults to the package.
-  optional string csharp_namespace = 37;
-
-  // By default Swift generators will take the proto package and CamelCase it
-  // replacing '.' with underscore and use that to prefix the types/symbols
-  // defined. When this options is provided, they will use this value instead
-  // to prefix the types/symbols defined.
-  optional string swift_prefix = 39;
-
-  // Sets the php class prefix which is prepended to all php generated classes
-  // from this .proto. Default is empty.
-  optional string php_class_prefix = 40;
-
-  // Use this option to change the namespace of php generated classes. Default
-  // is empty. When this option is empty, the package name will be used for
-  // determining the namespace.
-  optional string php_namespace = 41;
-
-  // Use this option to change the namespace of php generated metadata classes.
-  // Default is empty. When this option is empty, the proto file name will be
-  // used for determining the namespace.
-  optional string php_metadata_namespace = 44;
-
-  // Use this option to change the package of ruby generated classes. Default
-  // is empty. When this option is not set, the package name will be used for
-  // determining the ruby package.
-  optional string ruby_package = 45;
-
-
   // The parser stores options it doesn't recognize here.
   // See the documentation for the "Options" section above.
   repeated UninterpretedOption uninterpreted_option = 999;
@@ -460,7 +387,7 @@ message FileOptions {
   // See the documentation for the "Options" section above.
   extensions 1000 to max;
 
-  reserved 38;
+  reserved 1, 8, 10, 17, 20, 27, 36, 37, 38, 39, 40, 41, 42, 44, 45;
 }
 
 message MessageOptions {

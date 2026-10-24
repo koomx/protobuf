@@ -224,15 +224,15 @@ bool GetProtocAbsolutePath(std::string* path) {
   }
 }
 
-// Whether a path is where google/protobuf/descriptor.proto and other well-known
+// Whether a path is where shark/descriptor.proto and other well-known
 // type protos are installed.
 bool IsInstalledProtoPath(const std::string& path) {
   // Checking the descriptor.proto file should be good enough.
-  std::string file_path = path + "/google/protobuf/descriptor.proto";
+  std::string file_path = path + "/shark/descriptor.proto";
   return access(file_path.c_str(), F_OK) != -1;
 }
 
-// Add the paths where google/protobuf/descriptor.proto and other well-known
+// Add the paths where shark/descriptor.proto and other well-known
 // type protos are installed.
 void AddDefaultProtoPaths(
     std::vector<std::pair<std::string, std::string>>* paths) {

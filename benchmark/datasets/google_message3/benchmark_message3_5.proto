@@ -39,7 +39,6 @@ import "benchmark/datasets/google_message3/benchmark_message3_7.proto";
 import "benchmark/datasets/google_message3/benchmark_message3_8.proto";
 
 option cc_enable_arenas = true;
-option java_package = "com.google.protobuf.benchmarks";
 
 message Message24377 {}
 

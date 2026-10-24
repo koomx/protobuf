@@ -256,23 +256,9 @@ constexpr FileOptions::FileOptions(
   , /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
   , /*decltype(_impl_.uninterpreted_option_)*/{}
-  , /*decltype(_impl_.java_package_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.java_outer_classname_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_.go_package_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.objc_class_prefix_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.csharp_namespace_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.swift_prefix_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.php_class_prefix_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.php_namespace_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.php_metadata_namespace_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.ruby_package_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.java_multiple_files_)*/false
-  , /*decltype(_impl_.java_generate_equals_and_hash_)*/false
-  , /*decltype(_impl_.java_string_check_utf8_)*/false
   , /*decltype(_impl_.cc_generic_services_)*/false
-  , /*decltype(_impl_.java_generic_services_)*/false
   , /*decltype(_impl_.py_generic_services_)*/false
-  , /*decltype(_impl_.php_generic_services_)*/false
   , /*decltype(_impl_.deprecated_)*/false
   , /*decltype(_impl_.optimize_for_)*/1
   , /*decltype(_impl_.cc_enable_arenas_)*/true} {}
@@ -715,47 +701,19 @@ const uint32_t TableStruct_shark_2fdescriptor_2eproto::offsets[] SHARK_SECTION_V
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.java_package_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.java_outer_classname_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.java_multiple_files_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.java_generate_equals_and_hash_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.java_string_check_utf8_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.optimize_for_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.go_package_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.cc_generic_services_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.java_generic_services_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.py_generic_services_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.php_generic_services_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.deprecated_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.cc_enable_arenas_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.objc_class_prefix_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.csharp_namespace_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.swift_prefix_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.php_class_prefix_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.php_namespace_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.php_metadata_namespace_),
-  SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.ruby_package_),
   SHARK_FIELD_OFFSET(::shark::FileOptions, _impl_.uninterpreted_option_),
+  4,
   0,
   1,
-  10,
-  11,
-  12,
-  18,
   2,
-  13,
-  14,
-  15,
-  16,
-  17,
-  19,
   3,
-  4,
   5,
-  6,
-  7,
-  8,
-  9,
   ~0u,
   SHARK_FIELD_OFFSET(::shark::MessageOptions, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::MessageOptions, _internal_metadata_),
@@ -935,20 +893,20 @@ static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_
   { 156, 165, -1, sizeof(::shark::EnumValueDescriptorProto)},
   { 168, 177, -1, sizeof(::shark::ServiceDescriptorProto)},
   { 180, 192, -1, sizeof(::shark::MethodDescriptorProto)},
-  { 198, 225, -1, sizeof(::shark::FileOptions)},
-  { 246, 257, -1, sizeof(::shark::MessageOptions)},
-  { 262, 276, -1, sizeof(::shark::FieldOptions)},
-  { 284, -1, -1, sizeof(::shark::OneofOptions)},
-  { 291, 300, -1, sizeof(::shark::EnumOptions)},
-  { 303, 311, -1, sizeof(::shark::EnumValueOptions)},
-  { 313, 321, -1, sizeof(::shark::ServiceOptions)},
-  { 323, 332, -1, sizeof(::shark::MethodOptions)},
-  { 335, 343, -1, sizeof(::shark::UninterpretedOption_NamePart)},
-  { 345, 358, -1, sizeof(::shark::UninterpretedOption)},
-  { 365, 376, -1, sizeof(::shark::SourceCodeInfo_Location)},
-  { 381, -1, -1, sizeof(::shark::SourceCodeInfo)},
-  { 388, 398, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
-  { 402, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
+  { 198, 211, -1, sizeof(::shark::FileOptions)},
+  { 218, 229, -1, sizeof(::shark::MessageOptions)},
+  { 234, 248, -1, sizeof(::shark::FieldOptions)},
+  { 256, -1, -1, sizeof(::shark::OneofOptions)},
+  { 263, 272, -1, sizeof(::shark::EnumOptions)},
+  { 275, 283, -1, sizeof(::shark::EnumValueOptions)},
+  { 285, 293, -1, sizeof(::shark::ServiceOptions)},
+  { 295, 304, -1, sizeof(::shark::MethodOptions)},
+  { 307, 315, -1, sizeof(::shark::UninterpretedOption_NamePart)},
+  { 317, 330, -1, sizeof(::shark::UninterpretedOption)},
+  { 337, 348, -1, sizeof(::shark::SourceCodeInfo_Location)},
+  { 353, -1, -1, sizeof(::shark::SourceCodeInfo)},
+  { 360, 370, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
+  { 374, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -1048,85 +1006,75 @@ const char descriptor_table_protodef_shark_2fdescriptor_2eproto[] SHARK_SECTION_
   "\030\002 \001(\t\022\023\n\013output_type\030\003 \001(\t\022%\n\007options\030\004"
   " \001(\0132\024.shark.MethodOptions\022\037\n\020client_str"
   "eaming\030\005 \001(\010:\005false\022\037\n\020server_streaming\030"
-  "\006 \001(\010:\005false\"\221\006\n\013FileOptions\022\024\n\014java_pac"
-  "kage\030\001 \001(\t\022\034\n\024java_outer_classname\030\010 \001(\t"
-  "\022\"\n\023java_multiple_files\030\n \001(\010:\005false\022)\n\035"
-  "java_generate_equals_and_hash\030\024 \001(\010B\002\030\001\022"
-  "%\n\026java_string_check_utf8\030\033 \001(\010:\005false\022<"
-  "\n\014optimize_for\030\t \001(\0162\037.shark.FileOptions"
-  ".OptimizeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\t"
-  "\022\"\n\023cc_generic_services\030\020 \001(\010:\005false\022$\n\025"
-  "java_generic_services\030\021 \001(\010:\005false\022\"\n\023py"
-  "_generic_services\030\022 \001(\010:\005false\022#\n\024php_ge"
-  "neric_services\030* \001(\010:\005false\022\031\n\ndeprecate"
-  "d\030\027 \001(\010:\005false\022\036\n\020cc_enable_arenas\030\037 \001(\010"
-  ":\004true\022\031\n\021objc_class_prefix\030$ \001(\t\022\030\n\020csh"
-  "arp_namespace\030% \001(\t\022\024\n\014swift_prefix\030\' \001("
-  "\t\022\030\n\020php_class_prefix\030( \001(\t\022\025\n\rphp_names"
-  "pace\030) \001(\t\022\036\n\026php_metadata_namespace\030, \001"
-  "(\t\022\024\n\014ruby_package\030- \001(\t\0229\n\024uninterprete"
-  "d_option\030\347\007 \003(\0132\032.shark.UninterpretedOpt"
-  "ion\":\n\014OptimizeMode\022\t\n\005SPEED\020\001\022\r\n\tCODE_S"
-  "IZE\020\002\022\020\n\014LITE_RUNTIME\020\003*\t\010\350\007\020\200\200\200\200\002J\004\010&\020\'"
-  "\"\372\001\n\016MessageOptions\022&\n\027message_set_wire_"
-  "format\030\001 \001(\010:\005false\022.\n\037no_standard_descr"
-  "iptor_accessor\030\002 \001(\010:\005false\022\031\n\ndeprecate"
-  "d\030\003 \001(\010:\005false\022\021\n\tmap_entry\030\007 \001(\010\0229\n\024uni"
+  "\006 \001(\010:\005false\"\276\003\n\013FileOptions\022<\n\014optimize"
+  "_for\030\t \001(\0162\037.shark.FileOptions.OptimizeM"
+  "ode:\005SPEED\022\022\n\ngo_package\030\013 \001(\t\022\"\n\023cc_gen"
+  "eric_services\030\020 \001(\010:\005false\022\"\n\023py_generic"
+  "_services\030\022 \001(\010:\005false\022\031\n\ndeprecated\030\027 \001"
+  "(\010:\005false\022\036\n\020cc_enable_arenas\030\037 \001(\010:\004tru"
+  "e\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.shark"
+  ".UninterpretedOption\":\n\014OptimizeMode\022\t\n\005"
+  "SPEED\020\001\022\r\n\tCODE_SIZE\020\002\022\020\n\014LITE_RUNTIME\020\003"
+  "*\t\010\350\007\020\200\200\200\200\002J\004\010\001\020\002J\004\010\010\020\tJ\004\010\n\020\013J\004\010\021\020\022J\004\010\024\020"
+  "\025J\004\010\033\020\034J\004\010$\020%J\004\010%\020&J\004\010&\020\'J\004\010\'\020(J\004\010(\020)J\004\010"
+  ")\020*J\004\010*\020+J\004\010,\020-J\004\010-\020.\"\372\001\n\016MessageOptions"
+  "\022&\n\027message_set_wire_format\030\001 \001(\010:\005false"
+  "\022.\n\037no_standard_descriptor_accessor\030\002 \001("
+  "\010:\005false\022\031\n\ndeprecated\030\003 \001(\010:\005false\022\021\n\tm"
+  "ap_entry\030\007 \001(\010\0229\n\024uninterpreted_option\030\347"
+  "\007 \003(\0132\032.shark.UninterpretedOption*\t\010\350\007\020\200"
+  "\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\010\020\tJ\004\010\t\020\n\"\240\003\n\014F"
+  "ieldOptions\0220\n\005ctype\030\001 \001(\0162\031.shark.Field"
+  "Options.CType:\006STRING\022\016\n\006packed\030\002 \001(\010\0225\n"
+  "\006jstype\030\006 \001(\0162\032.shark.FieldOptions.JSTyp"
+  "e:\tJS_NORMAL\022\023\n\004lazy\030\005 \001(\010:\005false\022\036\n\017unv"
+  "erified_lazy\030\017 \001(\010:\005false\022\031\n\ndeprecated\030"
+  "\003 \001(\010:\005false\022\023\n\004weak\030\n \001(\010:\005false\0229\n\024uni"
   "nterpreted_option\030\347\007 \003(\0132\032.shark.Uninter"
-  "pretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020"
-  "\007J\004\010\010\020\tJ\004\010\t\020\n\"\240\003\n\014FieldOptions\0220\n\005ctype\030"
-  "\001 \001(\0162\031.shark.FieldOptions.CType:\006STRING"
-  "\022\016\n\006packed\030\002 \001(\010\0225\n\006jstype\030\006 \001(\0162\032.shark"
-  ".FieldOptions.JSType:\tJS_NORMAL\022\023\n\004lazy\030"
-  "\005 \001(\010:\005false\022\036\n\017unverified_lazy\030\017 \001(\010:\005f"
-  "alse\022\031\n\ndeprecated\030\003 \001(\010:\005false\022\023\n\004weak\030"
-  "\n \001(\010:\005false\0229\n\024uninterpreted_option\030\347\007 "
-  "\003(\0132\032.shark.UninterpretedOption\"/\n\005CType"
-  "\022\n\n\006STRING\020\000\022\010\n\004CORD\020\001\022\020\n\014STRING_PIECE\020\002"
-  "\"5\n\006JSType\022\r\n\tJS_NORMAL\020\000\022\r\n\tJS_STRING\020\001"
-  "\022\r\n\tJS_NUMBER\020\002*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"T\n\014Oneo"
-  "fOptions\0229\n\024uninterpreted_option\030\347\007 \003(\0132"
-  "\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\211"
-  "\001\n\013EnumOptions\022\023\n\013allow_alias\030\002 \001(\010\022\031\n\nd"
-  "eprecated\030\003 \001(\010:\005false\0229\n\024uninterpreted_"
-  "option\030\347\007 \003(\0132\032.shark.UninterpretedOptio"
-  "n*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\"s\n\020EnumValueOptions\022\031"
-  "\n\ndeprecated\030\001 \001(\010:\005false\0229\n\024uninterpret"
-  "ed_option\030\347\007 \003(\0132\032.shark.UninterpretedOp"
-  "tion*\t\010\350\007\020\200\200\200\200\002\"q\n\016ServiceOptions\022\031\n\ndep"
-  "recated\030! \001(\010:\005false\0229\n\024uninterpreted_op"
-  "tion\030\347\007 \003(\0132\032.shark.UninterpretedOption*"
-  "\t\010\350\007\020\200\200\200\200\002\"\231\002\n\rMethodOptions\022\031\n\ndeprecat"
-  "ed\030! \001(\010:\005false\022U\n\021idempotency_level\030\" \001"
-  "(\0162%.shark.MethodOptions.IdempotencyLeve"
-  "l:\023IDEMPOTENCY_UNKNOWN\0229\n\024uninterpreted_"
-  "option\030\347\007 \003(\0132\032.shark.UninterpretedOptio"
-  "n\"P\n\020IdempotencyLevel\022\027\n\023IDEMPOTENCY_UNK"
-  "NOWN\020\000\022\023\n\017NO_SIDE_EFFECTS\020\001\022\016\n\nIDEMPOTEN"
-  "T\020\002*\t\010\350\007\020\200\200\200\200\002\"\224\002\n\023UninterpretedOption\0221"
-  "\n\004name\030\002 \003(\0132#.shark.UninterpretedOption"
-  ".NamePart\022\030\n\020identifier_value\030\003 \001(\t\022\032\n\022p"
-  "ositive_int_value\030\004 \001(\004\022\032\n\022negative_int_"
-  "value\030\005 \001(\003\022\024\n\014double_value\030\006 \001(\001\022\024\n\014str"
-  "ing_value\030\007 \001(\014\022\027\n\017aggregate_value\030\010 \001(\t"
-  "\0323\n\010NamePart\022\021\n\tname_part\030\001 \002(\t\022\024\n\014is_ex"
-  "tension\030\002 \002(\010\"\313\001\n\016SourceCodeInfo\0220\n\010loca"
-  "tion\030\001 \003(\0132\036.shark.SourceCodeInfo.Locati"
-  "on\032\206\001\n\010Location\022\020\n\004path\030\001 \003(\005B\002\020\001\022\020\n\004spa"
-  "n\030\002 \003(\005B\002\020\001\022\030\n\020leading_comments\030\003 \001(\t\022\031\n"
-  "\021trailing_comments\030\004 \001(\t\022!\n\031leading_deta"
-  "ched_comments\030\006 \003(\t\"\235\001\n\021GeneratedCodeInf"
-  "o\0227\n\nannotation\030\001 \003(\0132#.shark.GeneratedC"
-  "odeInfo.Annotation\032O\n\nAnnotation\022\020\n\004path"
-  "\030\001 \003(\005B\002\020\001\022\023\n\013source_file\030\002 \001(\t\022\r\n\005begin"
-  "\030\003 \001(\005\022\013\n\003end\030\004 \001(\005B~\n\023com.google.protob"
-  "ufB\020DescriptorProtosH\001Z-google.golang.or"
-  "g/protobuf/types/descriptorpb\370\001\001\242\002\003GPB\252\002"
-  "\032Google.Protobuf.Reflection"
+  "pretedOption\"/\n\005CType\022\n\n\006STRING\020\000\022\010\n\004COR"
+  "D\020\001\022\020\n\014STRING_PIECE\020\002\"5\n\006JSType\022\r\n\tJS_NO"
+  "RMAL\020\000\022\r\n\tJS_STRING\020\001\022\r\n\tJS_NUMBER\020\002*\t\010\350"
+  "\007\020\200\200\200\200\002J\004\010\004\020\005\"T\n\014OneofOptions\0229\n\024uninter"
+  "preted_option\030\347\007 \003(\0132\032.shark.Uninterpret"
+  "edOption*\t\010\350\007\020\200\200\200\200\002\"\211\001\n\013EnumOptions\022\023\n\013a"
+  "llow_alias\030\002 \001(\010\022\031\n\ndeprecated\030\003 \001(\010:\005fa"
+  "lse\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.sha"
+  "rk.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\""
+  "s\n\020EnumValueOptions\022\031\n\ndeprecated\030\001 \001(\010:"
+  "\005false\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032."
+  "shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"q\n\016"
+  "ServiceOptions\022\031\n\ndeprecated\030! \001(\010:\005fals"
+  "e\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.shark"
+  ".UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\231\002\n\rMeth"
+  "odOptions\022\031\n\ndeprecated\030! \001(\010:\005false\022U\n\021"
+  "idempotency_level\030\" \001(\0162%.shark.MethodOp"
+  "tions.IdempotencyLevel:\023IDEMPOTENCY_UNKN"
+  "OWN\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.sha"
+  "rk.UninterpretedOption\"P\n\020IdempotencyLev"
+  "el\022\027\n\023IDEMPOTENCY_UNKNOWN\020\000\022\023\n\017NO_SIDE_E"
+  "FFECTS\020\001\022\016\n\nIDEMPOTENT\020\002*\t\010\350\007\020\200\200\200\200\002\"\224\002\n\023"
+  "UninterpretedOption\0221\n\004name\030\002 \003(\0132#.shar"
+  "k.UninterpretedOption.NamePart\022\030\n\020identi"
+  "fier_value\030\003 \001(\t\022\032\n\022positive_int_value\030\004"
+  " \001(\004\022\032\n\022negative_int_value\030\005 \001(\003\022\024\n\014doub"
+  "le_value\030\006 \001(\001\022\024\n\014string_value\030\007 \001(\014\022\027\n\017"
+  "aggregate_value\030\010 \001(\t\0323\n\010NamePart\022\021\n\tnam"
+  "e_part\030\001 \002(\t\022\024\n\014is_extension\030\002 \002(\010\"\313\001\n\016S"
+  "ourceCodeInfo\0220\n\010location\030\001 \003(\0132\036.shark."
+  "SourceCodeInfo.Location\032\206\001\n\010Location\022\020\n\004"
+  "path\030\001 \003(\005B\002\020\001\022\020\n\004span\030\002 \003(\005B\002\020\001\022\030\n\020lead"
+  "ing_comments\030\003 \001(\t\022\031\n\021trailing_comments\030"
+  "\004 \001(\t\022!\n\031leading_detached_comments\030\006 \003(\t"
+  "\"\235\001\n\021GeneratedCodeInfo\0227\n\nannotation\030\001 \003"
+  "(\0132#.shark.GeneratedCodeInfo.Annotation\032"
+  "O\n\nAnnotation\022\020\n\004path\030\001 \003(\005B\002\020\001\022\023\n\013sourc"
+  "e_file\030\002 \001(\t\022\r\n\005begin\030\003 \001(\005\022\013\n\003end\030\004 \001(\005"
+  "B4H\001Z-google.golang.org/protobuf/types/d"
+  "escriptorpb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fdescriptor_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fdescriptor_2eproto = {
-    false, false, 5627, descriptor_table_protodef_shark_2fdescriptor_2eproto,
+    false, false, 5214, descriptor_table_protodef_shark_2fdescriptor_2eproto,
     "shark/descriptor.proto",
     &descriptor_table_shark_2fdescriptor_2eproto_once, nullptr, 0, 27,
     schemas, file_default_instances, TableStruct_shark_2fdescriptor_2eproto::offsets,
@@ -6152,65 +6100,23 @@ void MethodDescriptorProto::InternalSwap(MethodDescriptorProto* other) {
 class FileOptions::_Internal {
  public:
   using HasBits = decltype(std::declval<FileOptions>()._impl_._has_bits_);
-  static void set_has_java_package(HasBits* has_bits) {
-    (*has_bits)[0] |= 1u;
-  }
-  static void set_has_java_outer_classname(HasBits* has_bits) {
-    (*has_bits)[0] |= 2u;
-  }
-  static void set_has_java_multiple_files(HasBits* has_bits) {
-    (*has_bits)[0] |= 1024u;
-  }
-  static void set_has_java_generate_equals_and_hash(HasBits* has_bits) {
-    (*has_bits)[0] |= 2048u;
-  }
-  static void set_has_java_string_check_utf8(HasBits* has_bits) {
-    (*has_bits)[0] |= 4096u;
-  }
   static void set_has_optimize_for(HasBits* has_bits) {
-    (*has_bits)[0] |= 262144u;
-  }
-  static void set_has_go_package(HasBits* has_bits) {
-    (*has_bits)[0] |= 4u;
-  }
-  static void set_has_cc_generic_services(HasBits* has_bits) {
-    (*has_bits)[0] |= 8192u;
-  }
-  static void set_has_java_generic_services(HasBits* has_bits) {
-    (*has_bits)[0] |= 16384u;
-  }
-  static void set_has_py_generic_services(HasBits* has_bits) {
-    (*has_bits)[0] |= 32768u;
-  }
-  static void set_has_php_generic_services(HasBits* has_bits) {
-    (*has_bits)[0] |= 65536u;
-  }
-  static void set_has_deprecated(HasBits* has_bits) {
-    (*has_bits)[0] |= 131072u;
-  }
-  static void set_has_cc_enable_arenas(HasBits* has_bits) {
-    (*has_bits)[0] |= 524288u;
-  }
-  static void set_has_objc_class_prefix(HasBits* has_bits) {
-    (*has_bits)[0] |= 8u;
-  }
-  static void set_has_csharp_namespace(HasBits* has_bits) {
     (*has_bits)[0] |= 16u;
   }
-  static void set_has_swift_prefix(HasBits* has_bits) {
+  static void set_has_go_package(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static void set_has_cc_generic_services(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
+  static void set_has_py_generic_services(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static void set_has_deprecated(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
+  }
+  static void set_has_cc_enable_arenas(HasBits* has_bits) {
     (*has_bits)[0] |= 32u;
-  }
-  static void set_has_php_class_prefix(HasBits* has_bits) {
-    (*has_bits)[0] |= 64u;
-  }
-  static void set_has_php_namespace(HasBits* has_bits) {
-    (*has_bits)[0] |= 128u;
-  }
-  static void set_has_php_metadata_namespace(HasBits* has_bits) {
-    (*has_bits)[0] |= 256u;
-  }
-  static void set_has_ruby_package(HasBits* has_bits) {
-    (*has_bits)[0] |= 512u;
   }
 };
 
@@ -6228,45 +6134,15 @@ FileOptions::FileOptions(const FileOptions& from)
     , decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
-    , decltype(_impl_.java_package_){}
-    , decltype(_impl_.java_outer_classname_){}
     , decltype(_impl_.go_package_){}
-    , decltype(_impl_.objc_class_prefix_){}
-    , decltype(_impl_.csharp_namespace_){}
-    , decltype(_impl_.swift_prefix_){}
-    , decltype(_impl_.php_class_prefix_){}
-    , decltype(_impl_.php_namespace_){}
-    , decltype(_impl_.php_metadata_namespace_){}
-    , decltype(_impl_.ruby_package_){}
-    , decltype(_impl_.java_multiple_files_){}
-    , decltype(_impl_.java_generate_equals_and_hash_){}
-    , decltype(_impl_.java_string_check_utf8_){}
     , decltype(_impl_.cc_generic_services_){}
-    , decltype(_impl_.java_generic_services_){}
     , decltype(_impl_.py_generic_services_){}
-    , decltype(_impl_.php_generic_services_){}
     , decltype(_impl_.deprecated_){}
     , decltype(_impl_.optimize_for_){}
     , decltype(_impl_.cc_enable_arenas_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_._extensions_.MergeFrom(internal_default_instance(), from._impl_._extensions_);
-  _impl_.java_package_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.java_package_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_java_package()) {
-    _this->_impl_.java_package_.Set(from._internal_java_package(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.java_outer_classname_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.java_outer_classname_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_java_outer_classname()) {
-    _this->_impl_.java_outer_classname_.Set(from._internal_java_outer_classname(), 
-      _this->GetArenaForAllocation());
-  }
   _impl_.go_package_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.go_package_.Set("", GetArenaForAllocation());
@@ -6275,65 +6151,9 @@ FileOptions::FileOptions(const FileOptions& from)
     _this->_impl_.go_package_.Set(from._internal_go_package(), 
       _this->GetArenaForAllocation());
   }
-  _impl_.objc_class_prefix_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.objc_class_prefix_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_objc_class_prefix()) {
-    _this->_impl_.objc_class_prefix_.Set(from._internal_objc_class_prefix(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.csharp_namespace_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.csharp_namespace_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_csharp_namespace()) {
-    _this->_impl_.csharp_namespace_.Set(from._internal_csharp_namespace(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.swift_prefix_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.swift_prefix_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_swift_prefix()) {
-    _this->_impl_.swift_prefix_.Set(from._internal_swift_prefix(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.php_class_prefix_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.php_class_prefix_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_php_class_prefix()) {
-    _this->_impl_.php_class_prefix_.Set(from._internal_php_class_prefix(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.php_namespace_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.php_namespace_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_php_namespace()) {
-    _this->_impl_.php_namespace_.Set(from._internal_php_namespace(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.php_metadata_namespace_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.php_metadata_namespace_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_php_metadata_namespace()) {
-    _this->_impl_.php_metadata_namespace_.Set(from._internal_php_metadata_namespace(), 
-      _this->GetArenaForAllocation());
-  }
-  _impl_.ruby_package_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.ruby_package_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (from._internal_has_ruby_package()) {
-    _this->_impl_.ruby_package_.Set(from._internal_ruby_package(), 
-      _this->GetArenaForAllocation());
-  }
-  ::memcpy(&_impl_.java_multiple_files_, &from._impl_.java_multiple_files_,
+  ::memcpy(&_impl_.cc_generic_services_, &from._impl_.cc_generic_services_,
     static_cast<size_t>(reinterpret_cast<char*>(&_impl_.cc_enable_arenas_) -
-    reinterpret_cast<char*>(&_impl_.java_multiple_files_)) + sizeof(_impl_.cc_enable_arenas_));
+    reinterpret_cast<char*>(&_impl_.cc_generic_services_)) + sizeof(_impl_.cc_enable_arenas_));
   // @@protoc_insertion_point(copy_constructor:shark.FileOptions)
 }
 
@@ -6346,66 +6166,16 @@ inline void FileOptions::SharedCtor(
     , decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.uninterpreted_option_){arena}
-    , decltype(_impl_.java_package_){}
-    , decltype(_impl_.java_outer_classname_){}
     , decltype(_impl_.go_package_){}
-    , decltype(_impl_.objc_class_prefix_){}
-    , decltype(_impl_.csharp_namespace_){}
-    , decltype(_impl_.swift_prefix_){}
-    , decltype(_impl_.php_class_prefix_){}
-    , decltype(_impl_.php_namespace_){}
-    , decltype(_impl_.php_metadata_namespace_){}
-    , decltype(_impl_.ruby_package_){}
-    , decltype(_impl_.java_multiple_files_){false}
-    , decltype(_impl_.java_generate_equals_and_hash_){false}
-    , decltype(_impl_.java_string_check_utf8_){false}
     , decltype(_impl_.cc_generic_services_){false}
-    , decltype(_impl_.java_generic_services_){false}
     , decltype(_impl_.py_generic_services_){false}
-    , decltype(_impl_.php_generic_services_){false}
     , decltype(_impl_.deprecated_){false}
     , decltype(_impl_.optimize_for_){1}
     , decltype(_impl_.cc_enable_arenas_){true}
   };
-  _impl_.java_package_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.java_package_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.java_outer_classname_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.java_outer_classname_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
   _impl_.go_package_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.go_package_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.objc_class_prefix_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.objc_class_prefix_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.csharp_namespace_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.csharp_namespace_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.swift_prefix_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.swift_prefix_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.php_class_prefix_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.php_class_prefix_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.php_namespace_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.php_namespace_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.php_metadata_namespace_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.php_metadata_namespace_.Set("", GetArenaForAllocation());
-  #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  _impl_.ruby_package_.InitDefault();
-  #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-    _impl_.ruby_package_.Set("", GetArenaForAllocation());
   #endif // SHARK_FORCE_COPY_DEFAULT_STRING
 }
 
@@ -6422,16 +6192,7 @@ inline void FileOptions::SharedDtor() {
   GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
   _impl_._extensions_.~ExtensionSet();
   _impl_.uninterpreted_option_.~RepeatedPtrField();
-  _impl_.java_package_.Destroy();
-  _impl_.java_outer_classname_.Destroy();
   _impl_.go_package_.Destroy();
-  _impl_.objc_class_prefix_.Destroy();
-  _impl_.csharp_namespace_.Destroy();
-  _impl_.swift_prefix_.Destroy();
-  _impl_.php_class_prefix_.Destroy();
-  _impl_.php_namespace_.Destroy();
-  _impl_.php_metadata_namespace_.Destroy();
-  _impl_.ruby_package_.Destroy();
 }
 
 void FileOptions::SetCachedSize(int size) const {
@@ -6447,49 +6208,13 @@ void FileOptions::Clear() {
   _impl_._extensions_.Clear();
   _impl_.uninterpreted_option_.Clear();
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    if (cached_has_bits & 0x00000001u) {
-      _impl_.java_package_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _impl_.java_outer_classname_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000004u) {
-      _impl_.go_package_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000008u) {
-      _impl_.objc_class_prefix_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000010u) {
-      _impl_.csharp_namespace_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000020u) {
-      _impl_.swift_prefix_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000040u) {
-      _impl_.php_class_prefix_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000080u) {
-      _impl_.php_namespace_.ClearNonDefaultToEmpty();
-    }
+  if (cached_has_bits & 0x00000001u) {
+    _impl_.go_package_.ClearNonDefaultToEmpty();
   }
-  if (cached_has_bits & 0x00000300u) {
-    if (cached_has_bits & 0x00000100u) {
-      _impl_.php_metadata_namespace_.ClearNonDefaultToEmpty();
-    }
-    if (cached_has_bits & 0x00000200u) {
-      _impl_.ruby_package_.ClearNonDefaultToEmpty();
-    }
-  }
-  if (cached_has_bits & 0x0000fc00u) {
-    ::memset(&_impl_.java_multiple_files_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&_impl_.py_generic_services_) -
-        reinterpret_cast<char*>(&_impl_.java_multiple_files_)) + sizeof(_impl_.py_generic_services_));
-  }
-  if (cached_has_bits & 0x000f0000u) {
-    ::memset(&_impl_.php_generic_services_, 0, static_cast<size_t>(
-        reinterpret_cast<char*>(&_impl_.deprecated_) -
-        reinterpret_cast<char*>(&_impl_.php_generic_services_)) + sizeof(_impl_.deprecated_));
+  ::memset(&_impl_.cc_generic_services_, 0, static_cast<size_t>(
+      reinterpret_cast<char*>(&_impl_.deprecated_) -
+      reinterpret_cast<char*>(&_impl_.cc_generic_services_)) + sizeof(_impl_.deprecated_));
+  if (cached_has_bits & 0x00000030u) {
     _impl_.optimize_for_ = 1;
     _impl_.cc_enable_arenas_ = true;
   }
@@ -6504,30 +6229,6 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // optional string java_package = 1;
-      case 1:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          auto str = _internal_mutable_java_package();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.java_package");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string java_outer_classname = 8;
-      case 8:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
-          auto str = _internal_mutable_java_outer_classname();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.java_outer_classname");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
       // optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
       case 9:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
@@ -6538,15 +6239,6 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
           } else {
             ::SHARK_NAMESPACE_ID::internal::WriteVarint(9, val, mutable_unknown_fields());
           }
-        } else
-          goto handle_unusual;
-        continue;
-      // optional bool java_multiple_files = 10 [default = false];
-      case 10:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
-          _Internal::set_has_java_multiple_files(&has_bits);
-          _impl_.java_multiple_files_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
@@ -6571,29 +6263,11 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         } else
           goto handle_unusual;
         continue;
-      // optional bool java_generic_services = 17 [default = false];
-      case 17:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 136)) {
-          _Internal::set_has_java_generic_services(&has_bits);
-          _impl_.java_generic_services_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
       // optional bool py_generic_services = 18 [default = false];
       case 18:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 144)) {
           _Internal::set_has_py_generic_services(&has_bits);
           _impl_.py_generic_services_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // optional bool java_generate_equals_and_hash = 20 [deprecated = true];
-      case 20:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 160)) {
-          _Internal::set_has_java_generate_equals_and_hash(&has_bits);
-          _impl_.java_generate_equals_and_hash_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
@@ -6607,114 +6281,12 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         } else
           goto handle_unusual;
         continue;
-      // optional bool java_string_check_utf8 = 27 [default = false];
-      case 27:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 216)) {
-          _Internal::set_has_java_string_check_utf8(&has_bits);
-          _impl_.java_string_check_utf8_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
       // optional bool cc_enable_arenas = 31 [default = true];
       case 31:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 248)) {
           _Internal::set_has_cc_enable_arenas(&has_bits);
           _impl_.cc_enable_arenas_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string objc_class_prefix = 36;
-      case 36:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
-          auto str = _internal_mutable_objc_class_prefix();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.objc_class_prefix");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string csharp_namespace = 37;
-      case 37:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
-          auto str = _internal_mutable_csharp_namespace();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.csharp_namespace");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string swift_prefix = 39;
-      case 39:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
-          auto str = _internal_mutable_swift_prefix();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.swift_prefix");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string php_class_prefix = 40;
-      case 40:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
-          auto str = _internal_mutable_php_class_prefix();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.php_class_prefix");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string php_namespace = 41;
-      case 41:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
-          auto str = _internal_mutable_php_namespace();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.php_namespace");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional bool php_generic_services = 42 [default = false];
-      case 42:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
-          _Internal::set_has_php_generic_services(&has_bits);
-          _impl_.php_generic_services_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-          CHK_(ptr);
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string php_metadata_namespace = 44;
-      case 44:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 98)) {
-          auto str = _internal_mutable_php_metadata_namespace();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.php_metadata_namespace");
-          #endif  // !NDEBUG
-        } else
-          goto handle_unusual;
-        continue;
-      // optional string ruby_package = 45;
-      case 45:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 106)) {
-          auto str = _internal_mutable_ruby_package();
-          ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-          CHK_(ptr);
-          #ifndef NDEBUG
-          ::_pbi::VerifyUTF8(str, "shark.FileOptions.ruby_package");
-          #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
@@ -6767,41 +6339,15 @@ uint8_t* FileOptions::_InternalSerialize(
   (void) cached_has_bits;
 
   cached_has_bits = _impl_._has_bits_[0];
-  // optional string java_package = 1;
-  if (cached_has_bits & 0x00000001u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_java_package().data(), static_cast<int>(this->_internal_java_package().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.java_package");
-    target = stream->WriteStringMaybeAliased(
-        1, this->_internal_java_package(), target);
-  }
-
-  // optional string java_outer_classname = 8;
-  if (cached_has_bits & 0x00000002u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_java_outer_classname().data(), static_cast<int>(this->_internal_java_outer_classname().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.java_outer_classname");
-    target = stream->WriteStringMaybeAliased(
-        8, this->_internal_java_outer_classname(), target);
-  }
-
   // optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
-  if (cached_has_bits & 0x00040000u) {
+  if (cached_has_bits & 0x00000010u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
       9, this->_internal_optimize_for(), target);
   }
 
-  // optional bool java_multiple_files = 10 [default = false];
-  if (cached_has_bits & 0x00000400u) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(10, this->_internal_java_multiple_files(), target);
-  }
-
   // optional string go_package = 11;
-  if (cached_has_bits & 0x00000004u) {
+  if (cached_has_bits & 0x00000001u) {
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_go_package().data(), static_cast<int>(this->_internal_go_package().length()),
       ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
@@ -6811,121 +6357,27 @@ uint8_t* FileOptions::_InternalSerialize(
   }
 
   // optional bool cc_generic_services = 16 [default = false];
-  if (cached_has_bits & 0x00002000u) {
+  if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteBoolToArray(16, this->_internal_cc_generic_services(), target);
   }
 
-  // optional bool java_generic_services = 17 [default = false];
-  if (cached_has_bits & 0x00004000u) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(17, this->_internal_java_generic_services(), target);
-  }
-
   // optional bool py_generic_services = 18 [default = false];
-  if (cached_has_bits & 0x00008000u) {
+  if (cached_has_bits & 0x00000004u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteBoolToArray(18, this->_internal_py_generic_services(), target);
   }
 
-  // optional bool java_generate_equals_and_hash = 20 [deprecated = true];
-  if (cached_has_bits & 0x00000800u) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(20, this->_internal_java_generate_equals_and_hash(), target);
-  }
-
   // optional bool deprecated = 23 [default = false];
-  if (cached_has_bits & 0x00020000u) {
+  if (cached_has_bits & 0x00000008u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteBoolToArray(23, this->_internal_deprecated(), target);
   }
 
-  // optional bool java_string_check_utf8 = 27 [default = false];
-  if (cached_has_bits & 0x00001000u) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(27, this->_internal_java_string_check_utf8(), target);
-  }
-
   // optional bool cc_enable_arenas = 31 [default = true];
-  if (cached_has_bits & 0x00080000u) {
+  if (cached_has_bits & 0x00000020u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteBoolToArray(31, this->_internal_cc_enable_arenas(), target);
-  }
-
-  // optional string objc_class_prefix = 36;
-  if (cached_has_bits & 0x00000008u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_objc_class_prefix().data(), static_cast<int>(this->_internal_objc_class_prefix().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.objc_class_prefix");
-    target = stream->WriteStringMaybeAliased(
-        36, this->_internal_objc_class_prefix(), target);
-  }
-
-  // optional string csharp_namespace = 37;
-  if (cached_has_bits & 0x00000010u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_csharp_namespace().data(), static_cast<int>(this->_internal_csharp_namespace().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.csharp_namespace");
-    target = stream->WriteStringMaybeAliased(
-        37, this->_internal_csharp_namespace(), target);
-  }
-
-  // optional string swift_prefix = 39;
-  if (cached_has_bits & 0x00000020u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_swift_prefix().data(), static_cast<int>(this->_internal_swift_prefix().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.swift_prefix");
-    target = stream->WriteStringMaybeAliased(
-        39, this->_internal_swift_prefix(), target);
-  }
-
-  // optional string php_class_prefix = 40;
-  if (cached_has_bits & 0x00000040u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_php_class_prefix().data(), static_cast<int>(this->_internal_php_class_prefix().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.php_class_prefix");
-    target = stream->WriteStringMaybeAliased(
-        40, this->_internal_php_class_prefix(), target);
-  }
-
-  // optional string php_namespace = 41;
-  if (cached_has_bits & 0x00000080u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_php_namespace().data(), static_cast<int>(this->_internal_php_namespace().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.php_namespace");
-    target = stream->WriteStringMaybeAliased(
-        41, this->_internal_php_namespace(), target);
-  }
-
-  // optional bool php_generic_services = 42 [default = false];
-  if (cached_has_bits & 0x00010000u) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(42, this->_internal_php_generic_services(), target);
-  }
-
-  // optional string php_metadata_namespace = 44;
-  if (cached_has_bits & 0x00000100u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_php_metadata_namespace().data(), static_cast<int>(this->_internal_php_metadata_namespace().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.php_metadata_namespace");
-    target = stream->WriteStringMaybeAliased(
-        44, this->_internal_php_metadata_namespace(), target);
-  }
-
-  // optional string ruby_package = 45;
-  if (cached_has_bits & 0x00000200u) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      this->_internal_ruby_package().data(), static_cast<int>(this->_internal_ruby_package().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FileOptions.ruby_package");
-    target = stream->WriteStringMaybeAliased(
-        45, this->_internal_ruby_package(), target);
   }
 
   // repeated .shark.UninterpretedOption uninterpreted_option = 999;
@@ -6966,129 +6418,37 @@ size_t FileOptions::ByteSizeLong() const {
   }
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
-    // optional string java_package = 1;
-    if (cached_has_bits & 0x00000001u) {
-      total_size += 1 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_java_package());
-    }
-
-    // optional string java_outer_classname = 8;
-    if (cached_has_bits & 0x00000002u) {
-      total_size += 1 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_java_outer_classname());
-    }
-
+  if (cached_has_bits & 0x0000003fu) {
     // optional string go_package = 11;
-    if (cached_has_bits & 0x00000004u) {
+    if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
         ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
           this->_internal_go_package());
     }
 
-    // optional string objc_class_prefix = 36;
-    if (cached_has_bits & 0x00000008u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_objc_class_prefix());
-    }
-
-    // optional string csharp_namespace = 37;
-    if (cached_has_bits & 0x00000010u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_csharp_namespace());
-    }
-
-    // optional string swift_prefix = 39;
-    if (cached_has_bits & 0x00000020u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_swift_prefix());
-    }
-
-    // optional string php_class_prefix = 40;
-    if (cached_has_bits & 0x00000040u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_php_class_prefix());
-    }
-
-    // optional string php_namespace = 41;
-    if (cached_has_bits & 0x00000080u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_php_namespace());
-    }
-
-  }
-  if (cached_has_bits & 0x0000ff00u) {
-    // optional string php_metadata_namespace = 44;
-    if (cached_has_bits & 0x00000100u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_php_metadata_namespace());
-    }
-
-    // optional string ruby_package = 45;
-    if (cached_has_bits & 0x00000200u) {
-      total_size += 2 +
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-          this->_internal_ruby_package());
-    }
-
-    // optional bool java_multiple_files = 10 [default = false];
-    if (cached_has_bits & 0x00000400u) {
-      total_size += 1 + 1;
-    }
-
-    // optional bool java_generate_equals_and_hash = 20 [deprecated = true];
-    if (cached_has_bits & 0x00000800u) {
-      total_size += 2 + 1;
-    }
-
-    // optional bool java_string_check_utf8 = 27 [default = false];
-    if (cached_has_bits & 0x00001000u) {
-      total_size += 2 + 1;
-    }
-
     // optional bool cc_generic_services = 16 [default = false];
-    if (cached_has_bits & 0x00002000u) {
-      total_size += 2 + 1;
-    }
-
-    // optional bool java_generic_services = 17 [default = false];
-    if (cached_has_bits & 0x00004000u) {
+    if (cached_has_bits & 0x00000002u) {
       total_size += 2 + 1;
     }
 
     // optional bool py_generic_services = 18 [default = false];
-    if (cached_has_bits & 0x00008000u) {
-      total_size += 2 + 1;
-    }
-
-  }
-  if (cached_has_bits & 0x000f0000u) {
-    // optional bool php_generic_services = 42 [default = false];
-    if (cached_has_bits & 0x00010000u) {
+    if (cached_has_bits & 0x00000004u) {
       total_size += 2 + 1;
     }
 
     // optional bool deprecated = 23 [default = false];
-    if (cached_has_bits & 0x00020000u) {
+    if (cached_has_bits & 0x00000008u) {
       total_size += 2 + 1;
     }
 
     // optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
-    if (cached_has_bits & 0x00040000u) {
+    if (cached_has_bits & 0x00000010u) {
       total_size += 1 +
         ::_pbi::WireFormatLite::EnumSize(this->_internal_optimize_for());
     }
 
     // optional bool cc_enable_arenas = 31 [default = true];
-    if (cached_has_bits & 0x00080000u) {
+    if (cached_has_bits & 0x00000020u) {
       total_size += 2 + 1;
     }
 
@@ -7113,70 +6473,23 @@ void FileOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
 
   _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x000000ffu) {
+  if (cached_has_bits & 0x0000003fu) {
     if (cached_has_bits & 0x00000001u) {
-      _this->_internal_set_java_package(from._internal_java_package());
-    }
-    if (cached_has_bits & 0x00000002u) {
-      _this->_internal_set_java_outer_classname(from._internal_java_outer_classname());
-    }
-    if (cached_has_bits & 0x00000004u) {
       _this->_internal_set_go_package(from._internal_go_package());
     }
-    if (cached_has_bits & 0x00000008u) {
-      _this->_internal_set_objc_class_prefix(from._internal_objc_class_prefix());
-    }
-    if (cached_has_bits & 0x00000010u) {
-      _this->_internal_set_csharp_namespace(from._internal_csharp_namespace());
-    }
-    if (cached_has_bits & 0x00000020u) {
-      _this->_internal_set_swift_prefix(from._internal_swift_prefix());
-    }
-    if (cached_has_bits & 0x00000040u) {
-      _this->_internal_set_php_class_prefix(from._internal_php_class_prefix());
-    }
-    if (cached_has_bits & 0x00000080u) {
-      _this->_internal_set_php_namespace(from._internal_php_namespace());
-    }
-  }
-  if (cached_has_bits & 0x0000ff00u) {
-    if (cached_has_bits & 0x00000100u) {
-      _this->_internal_set_php_metadata_namespace(from._internal_php_metadata_namespace());
-    }
-    if (cached_has_bits & 0x00000200u) {
-      _this->_internal_set_ruby_package(from._internal_ruby_package());
-    }
-    if (cached_has_bits & 0x00000400u) {
-      _this->_impl_.java_multiple_files_ = from._impl_.java_multiple_files_;
-    }
-    if (cached_has_bits & 0x00000800u) {
-      _this->_impl_.java_generate_equals_and_hash_ = from._impl_.java_generate_equals_and_hash_;
-    }
-    if (cached_has_bits & 0x00001000u) {
-      _this->_impl_.java_string_check_utf8_ = from._impl_.java_string_check_utf8_;
-    }
-    if (cached_has_bits & 0x00002000u) {
+    if (cached_has_bits & 0x00000002u) {
       _this->_impl_.cc_generic_services_ = from._impl_.cc_generic_services_;
     }
-    if (cached_has_bits & 0x00004000u) {
-      _this->_impl_.java_generic_services_ = from._impl_.java_generic_services_;
-    }
-    if (cached_has_bits & 0x00008000u) {
+    if (cached_has_bits & 0x00000004u) {
       _this->_impl_.py_generic_services_ = from._impl_.py_generic_services_;
     }
-    _this->_impl_._has_bits_[0] |= cached_has_bits;
-  }
-  if (cached_has_bits & 0x000f0000u) {
-    if (cached_has_bits & 0x00010000u) {
-      _this->_impl_.php_generic_services_ = from._impl_.php_generic_services_;
-    }
-    if (cached_has_bits & 0x00020000u) {
+    if (cached_has_bits & 0x00000008u) {
       _this->_impl_.deprecated_ = from._impl_.deprecated_;
     }
-    if (cached_has_bits & 0x00040000u) {
+    if (cached_has_bits & 0x00000010u) {
       _this->_impl_.optimize_for_ = from._impl_.optimize_for_;
     }
-    if (cached_has_bits & 0x00080000u) {
+    if (cached_has_bits & 0x00000020u) {
       _this->_impl_.cc_enable_arenas_ = from._impl_.cc_enable_arenas_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
@@ -7211,51 +6524,15 @@ void FileOptions::InternalSwap(FileOptions* other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
   ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.java_package_, lhs_arena,
-      &other->_impl_.java_package_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.java_outer_classname_, lhs_arena,
-      &other->_impl_.java_outer_classname_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.go_package_, lhs_arena,
       &other->_impl_.go_package_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.objc_class_prefix_, lhs_arena,
-      &other->_impl_.objc_class_prefix_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.csharp_namespace_, lhs_arena,
-      &other->_impl_.csharp_namespace_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.swift_prefix_, lhs_arena,
-      &other->_impl_.swift_prefix_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.php_class_prefix_, lhs_arena,
-      &other->_impl_.php_class_prefix_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.php_namespace_, lhs_arena,
-      &other->_impl_.php_namespace_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.php_metadata_namespace_, lhs_arena,
-      &other->_impl_.php_metadata_namespace_, rhs_arena
-  );
-  ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
-      &_impl_.ruby_package_, lhs_arena,
-      &other->_impl_.ruby_package_, rhs_arena
   );
   ::SHARK_NAMESPACE_ID::internal::memswap<
       SHARK_FIELD_OFFSET(FileOptions, _impl_.deprecated_)
       + sizeof(FileOptions::_impl_.deprecated_)
-      - SHARK_FIELD_OFFSET(FileOptions, _impl_.java_multiple_files_)>(
-          reinterpret_cast<char*>(&_impl_.java_multiple_files_),
-          reinterpret_cast<char*>(&other->_impl_.java_multiple_files_));
+      - SHARK_FIELD_OFFSET(FileOptions, _impl_.cc_generic_services_)>(
+          reinterpret_cast<char*>(&_impl_.cc_generic_services_),
+          reinterpret_cast<char*>(&other->_impl_.cc_generic_services_));
   swap(_impl_.optimize_for_, other->_impl_.optimize_for_);
   swap(_impl_.cc_enable_arenas_, other->_impl_.cc_enable_arenas_);
 }

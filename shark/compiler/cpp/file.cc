@@ -237,7 +237,7 @@ void FileGenerator::GenerateHeader(io::Printer* printer) {
         "\n");
   }
 
-  // We need to specialize some templates in the ::google::protobuf namespace:
+  // We need to specialize some templates in the shark namespace:
   GenerateProto2NamespaceEnumSpecializations(printer);
 
   format(
@@ -378,20 +378,6 @@ std::string FileGenerator::CreateHeaderInclude(const std::string& basename,
       use_system_include = options_.runtime_include_base.empty();
       if (!options_.runtime_include_base.empty()) {
         name = options_.runtime_include_base + basename;
-        use_system_include = false;
-      }
-    }
-    const std::string kPrefix = "google/protobuf/";
-    if (basename.compare(0, kPrefix.size(), kPrefix) == 0) {
-      const std::string rest = basename.substr(kPrefix.size());
-      if (IsWellKnownMessage(file)) {
-        name = "shark/" + rest;
-      } else {
-        name = "tests/" + rest;
-      }
-      use_system_include = options_.runtime_include_base.empty();
-      if (!options_.runtime_include_base.empty()) {
-        name = options_.runtime_include_base + name;
         use_system_include = false;
       }
     } else if (IsWellKnownMessage(file) && options_.runtime_include_base.empty()) {

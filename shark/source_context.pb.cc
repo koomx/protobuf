@@ -58,15 +58,13 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2fsource_5fcontext_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\032shark/source_context.proto\022\005shark\"\"\n\rS"
-  "ourceContext\022\021\n\tfile_name\030\001 \001(\tB\212\001\n\023com."
-  "google.protobufB\022SourceContextProtoP\001Z6g"
-  "oogle.golang.org/protobuf/types/known/so"
-  "urcecontextpb\242\002\003GPB\252\002\036Google.Protobuf.We"
-  "llKnownTypesb\006proto3"
+  "ourceContext\022\021\n\tfile_name\030\001 \001(\tB8Z6googl"
+  "e.golang.org/protobuf/types/known/source"
+  "contextpbb\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fsource_5fcontext_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fsource_5fcontext_2eproto = {
-    false, false, 220, descriptor_table_protodef_shark_2fsource_5fcontext_2eproto,
+    false, false, 137, descriptor_table_protodef_shark_2fsource_5fcontext_2eproto,
     "shark/source_context.proto",
     &descriptor_table_shark_2fsource_5fcontext_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fsource_5fcontext_2eproto::offsets,

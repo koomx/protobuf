@@ -29,15 +29,9 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/compiler/cpp/generator.h>
-#include <shark/compiler/java/generator.h>
-#include <shark/compiler/java/kotlin_generator.h>
 #include <shark/compiler/command_line_interface.h>
-#include <shark/compiler/csharp/csharp_generator.h>
-#include <shark/compiler/objectivec/objectivec_generator.h>
-#include <shark/compiler/php/php_generator.h>
 #include <shark/compiler/python/generator.h>
 #include <shark/compiler/python/pyi_generator.h>
-#include <shark/compiler/ruby/ruby_generator.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -59,17 +53,6 @@ int ProtobufMain(int argc, char* argv[]) {
   cpp_generator.set_runtime_include_base(SHARK_RUNTIME_INCLUDE_BASE);
 #endif
 
-  // Proto2 Java
-  java::JavaGenerator java_generator;
-  cli.RegisterGenerator("--java_out", "--java_opt", &java_generator,
-                        "Generate Java source file.");
-
-  // Proto2 Kotlin
-  java::KotlinGenerator kt_generator;
-  cli.RegisterGenerator("--kotlin_out", "--kotlin_opt", &kt_generator,
-                        "Generate Kotlin file.");
-
-
   // Proto2 Python
   python::Generator py_generator;
   cli.RegisterGenerator("--python_out", "--python_opt", &py_generator,
@@ -78,26 +61,6 @@ int ProtobufMain(int argc, char* argv[]) {
   python::PyiGenerator pyi_generator;
   cli.RegisterGenerator("--pyi_out", &pyi_generator,
                         "Generate python pyi stub.");
-
-  // PHP
-  php::Generator php_generator;
-  cli.RegisterGenerator("--php_out", "--php_opt", &php_generator,
-                        "Generate PHP source file.");
-
-  // Ruby
-  ruby::Generator rb_generator;
-  cli.RegisterGenerator("--ruby_out", "--ruby_opt", &rb_generator,
-                        "Generate Ruby source file.");
-
-  // CSharp
-  csharp::Generator csharp_generator;
-  cli.RegisterGenerator("--csharp_out", "--csharp_opt", &csharp_generator,
-                        "Generate C# source file.");
-
-  // Objective-C
-  objectivec::ObjectiveCGenerator objc_generator;
-  cli.RegisterGenerator("--objc_out", "--objc_opt", &objc_generator,
-                        "Generate Objective-C header and source.");
 
   return cli.Run(argc, argv);
 }

@@ -181,16 +181,15 @@ const char descriptor_table_protodef_shark_2fcompiler_2fplugin_2eproto[] SHARK_S
   " \001(\t\022\017\n\007content\030\017 \001(\t\0225\n\023generated_code_"
   "info\030\020 \001(\0132\030.shark.GeneratedCodeInfo\"8\n\007"
   "Feature\022\020\n\014FEATURE_NONE\020\000\022\033\n\027FEATURE_PRO"
-  "TO3_OPTIONAL\020\001BW\n\034com.google.protobuf.co"
-  "mpilerB\014PluginProtosZ)google.golang.org/"
-  "protobuf/types/pluginpb"
+  "TO3_OPTIONAL\020\001B+Z)google.golang.org/prot"
+  "obuf/types/pluginpb"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fcompiler_2fplugin_2eproto_deps[1] = {
   &::descriptor_table_shark_2fdescriptor_2eproto,
 };
 static ::_pbi::once_flag descriptor_table_shark_2fcompiler_2fplugin_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fcompiler_2fplugin_2eproto = {
-    false, false, 703, descriptor_table_protodef_shark_2fcompiler_2fplugin_2eproto,
+    false, false, 659, descriptor_table_protodef_shark_2fcompiler_2fplugin_2eproto,
     "shark/compiler/plugin.proto",
     &descriptor_table_shark_2fcompiler_2fplugin_2eproto_once, descriptor_table_shark_2fcompiler_2fplugin_2eproto_deps, 1, 4,
     schemas, file_default_instances, TableStruct_shark_2fcompiler_2fplugin_2eproto::offsets,

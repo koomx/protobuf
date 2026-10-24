@@ -2,7 +2,6 @@ syntax = "proto2";
 
 package benchmarks;
 
-option java_outer_classname = "GoogleSize";
 option optimize_for = CODE_SIZE;
 
 message SizeMessage1 {

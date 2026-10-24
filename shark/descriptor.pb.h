@@ -3830,23 +3830,9 @@ class SHARK_EXPORT FileOptions final :
 
   enum : int {
     kUninterpretedOptionFieldNumber = 999,
-    kJavaPackageFieldNumber = 1,
-    kJavaOuterClassnameFieldNumber = 8,
     kGoPackageFieldNumber = 11,
-    kObjcClassPrefixFieldNumber = 36,
-    kCsharpNamespaceFieldNumber = 37,
-    kSwiftPrefixFieldNumber = 39,
-    kPhpClassPrefixFieldNumber = 40,
-    kPhpNamespaceFieldNumber = 41,
-    kPhpMetadataNamespaceFieldNumber = 44,
-    kRubyPackageFieldNumber = 45,
-    kJavaMultipleFilesFieldNumber = 10,
-    kJavaGenerateEqualsAndHashFieldNumber = 20,
-    kJavaStringCheckUtf8FieldNumber = 27,
     kCcGenericServicesFieldNumber = 16,
-    kJavaGenericServicesFieldNumber = 17,
     kPyGenericServicesFieldNumber = 18,
-    kPhpGenericServicesFieldNumber = 42,
     kDeprecatedFieldNumber = 23,
     kOptimizeForFieldNumber = 9,
     kCcEnableArenasFieldNumber = 31,
@@ -3869,42 +3855,6 @@ class SHARK_EXPORT FileOptions final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption >&
       uninterpreted_option() const;
 
-  // optional string java_package = 1;
-  bool has_java_package() const;
-  private:
-  bool _internal_has_java_package() const;
-  public:
-  void clear_java_package();
-  const std::string& java_package() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_java_package(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_java_package();
-  [[nodiscard]] std::string* release_java_package();
-  void set_allocated_java_package(std::string* java_package);
-  private:
-  const std::string& _internal_java_package() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_java_package(const std::string& value);
-  std::string* _internal_mutable_java_package();
-  public:
-
-  // optional string java_outer_classname = 8;
-  bool has_java_outer_classname() const;
-  private:
-  bool _internal_has_java_outer_classname() const;
-  public:
-  void clear_java_outer_classname();
-  const std::string& java_outer_classname() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_java_outer_classname(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_java_outer_classname();
-  [[nodiscard]] std::string* release_java_outer_classname();
-  void set_allocated_java_outer_classname(std::string* java_outer_classname);
-  private:
-  const std::string& _internal_java_outer_classname() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_java_outer_classname(const std::string& value);
-  std::string* _internal_mutable_java_outer_classname();
-  public:
-
   // optional string go_package = 11;
   bool has_go_package() const;
   private:
@@ -3923,171 +3873,6 @@ class SHARK_EXPORT FileOptions final :
   std::string* _internal_mutable_go_package();
   public:
 
-  // optional string objc_class_prefix = 36;
-  bool has_objc_class_prefix() const;
-  private:
-  bool _internal_has_objc_class_prefix() const;
-  public:
-  void clear_objc_class_prefix();
-  const std::string& objc_class_prefix() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_objc_class_prefix(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_objc_class_prefix();
-  [[nodiscard]] std::string* release_objc_class_prefix();
-  void set_allocated_objc_class_prefix(std::string* objc_class_prefix);
-  private:
-  const std::string& _internal_objc_class_prefix() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_objc_class_prefix(const std::string& value);
-  std::string* _internal_mutable_objc_class_prefix();
-  public:
-
-  // optional string csharp_namespace = 37;
-  bool has_csharp_namespace() const;
-  private:
-  bool _internal_has_csharp_namespace() const;
-  public:
-  void clear_csharp_namespace();
-  const std::string& csharp_namespace() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_csharp_namespace(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_csharp_namespace();
-  [[nodiscard]] std::string* release_csharp_namespace();
-  void set_allocated_csharp_namespace(std::string* csharp_namespace);
-  private:
-  const std::string& _internal_csharp_namespace() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_csharp_namespace(const std::string& value);
-  std::string* _internal_mutable_csharp_namespace();
-  public:
-
-  // optional string swift_prefix = 39;
-  bool has_swift_prefix() const;
-  private:
-  bool _internal_has_swift_prefix() const;
-  public:
-  void clear_swift_prefix();
-  const std::string& swift_prefix() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_swift_prefix(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_swift_prefix();
-  [[nodiscard]] std::string* release_swift_prefix();
-  void set_allocated_swift_prefix(std::string* swift_prefix);
-  private:
-  const std::string& _internal_swift_prefix() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_swift_prefix(const std::string& value);
-  std::string* _internal_mutable_swift_prefix();
-  public:
-
-  // optional string php_class_prefix = 40;
-  bool has_php_class_prefix() const;
-  private:
-  bool _internal_has_php_class_prefix() const;
-  public:
-  void clear_php_class_prefix();
-  const std::string& php_class_prefix() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_php_class_prefix(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_php_class_prefix();
-  [[nodiscard]] std::string* release_php_class_prefix();
-  void set_allocated_php_class_prefix(std::string* php_class_prefix);
-  private:
-  const std::string& _internal_php_class_prefix() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_php_class_prefix(const std::string& value);
-  std::string* _internal_mutable_php_class_prefix();
-  public:
-
-  // optional string php_namespace = 41;
-  bool has_php_namespace() const;
-  private:
-  bool _internal_has_php_namespace() const;
-  public:
-  void clear_php_namespace();
-  const std::string& php_namespace() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_php_namespace(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_php_namespace();
-  [[nodiscard]] std::string* release_php_namespace();
-  void set_allocated_php_namespace(std::string* php_namespace);
-  private:
-  const std::string& _internal_php_namespace() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_php_namespace(const std::string& value);
-  std::string* _internal_mutable_php_namespace();
-  public:
-
-  // optional string php_metadata_namespace = 44;
-  bool has_php_metadata_namespace() const;
-  private:
-  bool _internal_has_php_metadata_namespace() const;
-  public:
-  void clear_php_metadata_namespace();
-  const std::string& php_metadata_namespace() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_php_metadata_namespace(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_php_metadata_namespace();
-  [[nodiscard]] std::string* release_php_metadata_namespace();
-  void set_allocated_php_metadata_namespace(std::string* php_metadata_namespace);
-  private:
-  const std::string& _internal_php_metadata_namespace() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_php_metadata_namespace(const std::string& value);
-  std::string* _internal_mutable_php_metadata_namespace();
-  public:
-
-  // optional string ruby_package = 45;
-  bool has_ruby_package() const;
-  private:
-  bool _internal_has_ruby_package() const;
-  public:
-  void clear_ruby_package();
-  const std::string& ruby_package() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_ruby_package(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_ruby_package();
-  [[nodiscard]] std::string* release_ruby_package();
-  void set_allocated_ruby_package(std::string* ruby_package);
-  private:
-  const std::string& _internal_ruby_package() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_ruby_package(const std::string& value);
-  std::string* _internal_mutable_ruby_package();
-  public:
-
-  // optional bool java_multiple_files = 10 [default = false];
-  bool has_java_multiple_files() const;
-  private:
-  bool _internal_has_java_multiple_files() const;
-  public:
-  void clear_java_multiple_files();
-  bool java_multiple_files() const;
-  void set_java_multiple_files(bool value);
-  private:
-  bool _internal_java_multiple_files() const;
-  void _internal_set_java_multiple_files(bool value);
-  public:
-
-  // optional bool java_generate_equals_and_hash = 20 [deprecated = true];
-  [[deprecated]] bool has_java_generate_equals_and_hash() const;
-  private:
-  bool _internal_has_java_generate_equals_and_hash() const;
-  public:
-  [[deprecated]] void clear_java_generate_equals_and_hash();
-  [[deprecated]] bool java_generate_equals_and_hash() const;
-  [[deprecated]] void set_java_generate_equals_and_hash(bool value);
-  private:
-  bool _internal_java_generate_equals_and_hash() const;
-  void _internal_set_java_generate_equals_and_hash(bool value);
-  public:
-
-  // optional bool java_string_check_utf8 = 27 [default = false];
-  bool has_java_string_check_utf8() const;
-  private:
-  bool _internal_has_java_string_check_utf8() const;
-  public:
-  void clear_java_string_check_utf8();
-  bool java_string_check_utf8() const;
-  void set_java_string_check_utf8(bool value);
-  private:
-  bool _internal_java_string_check_utf8() const;
-  void _internal_set_java_string_check_utf8(bool value);
-  public:
-
   // optional bool cc_generic_services = 16 [default = false];
   bool has_cc_generic_services() const;
   private:
@@ -4101,19 +3886,6 @@ class SHARK_EXPORT FileOptions final :
   void _internal_set_cc_generic_services(bool value);
   public:
 
-  // optional bool java_generic_services = 17 [default = false];
-  bool has_java_generic_services() const;
-  private:
-  bool _internal_has_java_generic_services() const;
-  public:
-  void clear_java_generic_services();
-  bool java_generic_services() const;
-  void set_java_generic_services(bool value);
-  private:
-  bool _internal_java_generic_services() const;
-  void _internal_set_java_generic_services(bool value);
-  public:
-
   // optional bool py_generic_services = 18 [default = false];
   bool has_py_generic_services() const;
   private:
@@ -4125,19 +3897,6 @@ class SHARK_EXPORT FileOptions final :
   private:
   bool _internal_py_generic_services() const;
   void _internal_set_py_generic_services(bool value);
-  public:
-
-  // optional bool php_generic_services = 42 [default = false];
-  bool has_php_generic_services() const;
-  private:
-  bool _internal_has_php_generic_services() const;
-  public:
-  void clear_php_generic_services();
-  bool php_generic_services() const;
-  void set_php_generic_services(bool value);
-  private:
-  bool _internal_php_generic_services() const;
-  void _internal_set_php_generic_services(bool value);
   public:
 
   // optional bool deprecated = 23 [default = false];
@@ -4382,23 +4141,9 @@ class SHARK_EXPORT FileOptions final :
     ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr java_package_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr java_outer_classname_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr go_package_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr objc_class_prefix_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr csharp_namespace_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr swift_prefix_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr php_class_prefix_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr php_namespace_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr php_metadata_namespace_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr ruby_package_;
-    bool java_multiple_files_;
-    bool java_generate_equals_and_hash_;
-    bool java_string_check_utf8_;
     bool cc_generic_services_;
-    bool java_generic_services_;
     bool py_generic_services_;
-    bool php_generic_services_;
     bool deprecated_;
     int optimize_for_;
     bool cc_enable_arenas_;
@@ -11927,229 +11672,9 @@ inline void MethodDescriptorProto::set_server_streaming(bool value) {
 
 // FileOptions
 
-// optional string java_package = 1;
-inline bool FileOptions::_internal_has_java_package() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool FileOptions::has_java_package() const {
-  return _internal_has_java_package();
-}
-inline void FileOptions::clear_java_package() {
-  _impl_.java_package_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline const std::string& FileOptions::java_package() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.java_package)
-  return _internal_java_package();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_java_package(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000001u;
- _impl_.java_package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.java_package)
-}
-inline std::string* FileOptions::mutable_java_package() {
-  std::string* _s = _internal_mutable_java_package();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.java_package)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_java_package() const {
-  return _impl_.java_package_.Get();
-}
-inline void FileOptions::_internal_set_java_package(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.java_package_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_java_package() {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  return _impl_.java_package_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_java_package() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.java_package)
-  if (!_internal_has_java_package()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000001u;
-  auto* p = _impl_.java_package_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.java_package_.IsDefault()) {
-    _impl_.java_package_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_java_package(std::string* java_package) {
-  if (java_package != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000001u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000001u;
-  }
-  _impl_.java_package_.SetAllocated(java_package, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.java_package_.IsDefault()) {
-    _impl_.java_package_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.java_package)
-}
-
-// optional string java_outer_classname = 8;
-inline bool FileOptions::_internal_has_java_outer_classname() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool FileOptions::has_java_outer_classname() const {
-  return _internal_has_java_outer_classname();
-}
-inline void FileOptions::clear_java_outer_classname() {
-  _impl_.java_outer_classname_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline const std::string& FileOptions::java_outer_classname() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.java_outer_classname)
-  return _internal_java_outer_classname();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_java_outer_classname(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000002u;
- _impl_.java_outer_classname_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.java_outer_classname)
-}
-inline std::string* FileOptions::mutable_java_outer_classname() {
-  std::string* _s = _internal_mutable_java_outer_classname();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.java_outer_classname)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_java_outer_classname() const {
-  return _impl_.java_outer_classname_.Get();
-}
-inline void FileOptions::_internal_set_java_outer_classname(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.java_outer_classname_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_java_outer_classname() {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  return _impl_.java_outer_classname_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_java_outer_classname() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.java_outer_classname)
-  if (!_internal_has_java_outer_classname()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000002u;
-  auto* p = _impl_.java_outer_classname_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.java_outer_classname_.IsDefault()) {
-    _impl_.java_outer_classname_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_java_outer_classname(std::string* java_outer_classname) {
-  if (java_outer_classname != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000002u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000002u;
-  }
-  _impl_.java_outer_classname_.SetAllocated(java_outer_classname, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.java_outer_classname_.IsDefault()) {
-    _impl_.java_outer_classname_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.java_outer_classname)
-}
-
-// optional bool java_multiple_files = 10 [default = false];
-inline bool FileOptions::_internal_has_java_multiple_files() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
-  return value;
-}
-inline bool FileOptions::has_java_multiple_files() const {
-  return _internal_has_java_multiple_files();
-}
-inline void FileOptions::clear_java_multiple_files() {
-  _impl_.java_multiple_files_ = false;
-  _impl_._has_bits_[0] &= ~0x00000400u;
-}
-inline bool FileOptions::_internal_java_multiple_files() const {
-  return _impl_.java_multiple_files_;
-}
-inline bool FileOptions::java_multiple_files() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.java_multiple_files)
-  return _internal_java_multiple_files();
-}
-inline void FileOptions::_internal_set_java_multiple_files(bool value) {
-  _impl_._has_bits_[0] |= 0x00000400u;
-  _impl_.java_multiple_files_ = value;
-}
-inline void FileOptions::set_java_multiple_files(bool value) {
-  _internal_set_java_multiple_files(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.java_multiple_files)
-}
-
-// optional bool java_generate_equals_and_hash = 20 [deprecated = true];
-inline bool FileOptions::_internal_has_java_generate_equals_and_hash() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000800u) != 0;
-  return value;
-}
-inline bool FileOptions::has_java_generate_equals_and_hash() const {
-  return _internal_has_java_generate_equals_and_hash();
-}
-inline void FileOptions::clear_java_generate_equals_and_hash() {
-  _impl_.java_generate_equals_and_hash_ = false;
-  _impl_._has_bits_[0] &= ~0x00000800u;
-}
-inline bool FileOptions::_internal_java_generate_equals_and_hash() const {
-  return _impl_.java_generate_equals_and_hash_;
-}
-inline bool FileOptions::java_generate_equals_and_hash() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.java_generate_equals_and_hash)
-  return _internal_java_generate_equals_and_hash();
-}
-inline void FileOptions::_internal_set_java_generate_equals_and_hash(bool value) {
-  _impl_._has_bits_[0] |= 0x00000800u;
-  _impl_.java_generate_equals_and_hash_ = value;
-}
-inline void FileOptions::set_java_generate_equals_and_hash(bool value) {
-  _internal_set_java_generate_equals_and_hash(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.java_generate_equals_and_hash)
-}
-
-// optional bool java_string_check_utf8 = 27 [default = false];
-inline bool FileOptions::_internal_has_java_string_check_utf8() const {
-  bool value = (_impl_._has_bits_[0] & 0x00001000u) != 0;
-  return value;
-}
-inline bool FileOptions::has_java_string_check_utf8() const {
-  return _internal_has_java_string_check_utf8();
-}
-inline void FileOptions::clear_java_string_check_utf8() {
-  _impl_.java_string_check_utf8_ = false;
-  _impl_._has_bits_[0] &= ~0x00001000u;
-}
-inline bool FileOptions::_internal_java_string_check_utf8() const {
-  return _impl_.java_string_check_utf8_;
-}
-inline bool FileOptions::java_string_check_utf8() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.java_string_check_utf8)
-  return _internal_java_string_check_utf8();
-}
-inline void FileOptions::_internal_set_java_string_check_utf8(bool value) {
-  _impl_._has_bits_[0] |= 0x00001000u;
-  _impl_.java_string_check_utf8_ = value;
-}
-inline void FileOptions::set_java_string_check_utf8(bool value) {
-  _internal_set_java_string_check_utf8(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.java_string_check_utf8)
-}
-
 // optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
 inline bool FileOptions::_internal_has_optimize_for() const {
-  bool value = (_impl_._has_bits_[0] & 0x00040000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   return value;
 }
 inline bool FileOptions::has_optimize_for() const {
@@ -12157,7 +11682,7 @@ inline bool FileOptions::has_optimize_for() const {
 }
 inline void FileOptions::clear_optimize_for() {
   _impl_.optimize_for_ = 1;
-  _impl_._has_bits_[0] &= ~0x00040000u;
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline ::shark::FileOptions_OptimizeMode FileOptions::_internal_optimize_for() const {
   return static_cast< ::shark::FileOptions_OptimizeMode >(_impl_.optimize_for_);
@@ -12168,7 +11693,7 @@ inline ::shark::FileOptions_OptimizeMode FileOptions::optimize_for() const {
 }
 inline void FileOptions::_internal_set_optimize_for(::shark::FileOptions_OptimizeMode value) {
   assert(::shark::FileOptions_OptimizeMode_IsValid(value));
-  _impl_._has_bits_[0] |= 0x00040000u;
+  _impl_._has_bits_[0] |= 0x00000010u;
   _impl_.optimize_for_ = value;
 }
 inline void FileOptions::set_optimize_for(::shark::FileOptions_OptimizeMode value) {
@@ -12178,7 +11703,7 @@ inline void FileOptions::set_optimize_for(::shark::FileOptions_OptimizeMode valu
 
 // optional string go_package = 11;
 inline bool FileOptions::_internal_has_go_package() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
   return value;
 }
 inline bool FileOptions::has_go_package() const {
@@ -12186,7 +11711,7 @@ inline bool FileOptions::has_go_package() const {
 }
 inline void FileOptions::clear_go_package() {
   _impl_.go_package_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& FileOptions::go_package() const {
   // @@protoc_insertion_point(field_get:shark.FileOptions.go_package)
@@ -12195,7 +11720,7 @@ inline const std::string& FileOptions::go_package() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void FileOptions::set_go_package(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000004u;
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.go_package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.FileOptions.go_package)
 }
@@ -12208,11 +11733,11 @@ inline const std::string& FileOptions::_internal_go_package() const {
   return _impl_.go_package_.Get();
 }
 inline void FileOptions::_internal_set_go_package(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.go_package_.Set(value, GetArenaForAllocation());
 }
 inline std::string* FileOptions::_internal_mutable_go_package() {
-  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.go_package_.Mutable(GetArenaForAllocation());
 }
 inline std::string* FileOptions::release_go_package() {
@@ -12220,7 +11745,7 @@ inline std::string* FileOptions::release_go_package() {
   if (!_internal_has_go_package()) {
     return nullptr;
   }
-  _impl_._has_bits_[0] &= ~0x00000004u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
   auto* p = _impl_.go_package_.Release();
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
   if (_impl_.go_package_.IsDefault()) {
@@ -12231,9 +11756,9 @@ inline std::string* FileOptions::release_go_package() {
 }
 inline void FileOptions::set_allocated_go_package(std::string* go_package) {
   if (go_package != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000004u;
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.go_package_.SetAllocated(go_package, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -12246,7 +11771,7 @@ inline void FileOptions::set_allocated_go_package(std::string* go_package) {
 
 // optional bool cc_generic_services = 16 [default = false];
 inline bool FileOptions::_internal_has_cc_generic_services() const {
-  bool value = (_impl_._has_bits_[0] & 0x00002000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
   return value;
 }
 inline bool FileOptions::has_cc_generic_services() const {
@@ -12254,7 +11779,7 @@ inline bool FileOptions::has_cc_generic_services() const {
 }
 inline void FileOptions::clear_cc_generic_services() {
   _impl_.cc_generic_services_ = false;
-  _impl_._has_bits_[0] &= ~0x00002000u;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline bool FileOptions::_internal_cc_generic_services() const {
   return _impl_.cc_generic_services_;
@@ -12264,7 +11789,7 @@ inline bool FileOptions::cc_generic_services() const {
   return _internal_cc_generic_services();
 }
 inline void FileOptions::_internal_set_cc_generic_services(bool value) {
-  _impl_._has_bits_[0] |= 0x00002000u;
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.cc_generic_services_ = value;
 }
 inline void FileOptions::set_cc_generic_services(bool value) {
@@ -12272,37 +11797,9 @@ inline void FileOptions::set_cc_generic_services(bool value) {
   // @@protoc_insertion_point(field_set:shark.FileOptions.cc_generic_services)
 }
 
-// optional bool java_generic_services = 17 [default = false];
-inline bool FileOptions::_internal_has_java_generic_services() const {
-  bool value = (_impl_._has_bits_[0] & 0x00004000u) != 0;
-  return value;
-}
-inline bool FileOptions::has_java_generic_services() const {
-  return _internal_has_java_generic_services();
-}
-inline void FileOptions::clear_java_generic_services() {
-  _impl_.java_generic_services_ = false;
-  _impl_._has_bits_[0] &= ~0x00004000u;
-}
-inline bool FileOptions::_internal_java_generic_services() const {
-  return _impl_.java_generic_services_;
-}
-inline bool FileOptions::java_generic_services() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.java_generic_services)
-  return _internal_java_generic_services();
-}
-inline void FileOptions::_internal_set_java_generic_services(bool value) {
-  _impl_._has_bits_[0] |= 0x00004000u;
-  _impl_.java_generic_services_ = value;
-}
-inline void FileOptions::set_java_generic_services(bool value) {
-  _internal_set_java_generic_services(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.java_generic_services)
-}
-
 // optional bool py_generic_services = 18 [default = false];
 inline bool FileOptions::_internal_has_py_generic_services() const {
-  bool value = (_impl_._has_bits_[0] & 0x00008000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
   return value;
 }
 inline bool FileOptions::has_py_generic_services() const {
@@ -12310,7 +11807,7 @@ inline bool FileOptions::has_py_generic_services() const {
 }
 inline void FileOptions::clear_py_generic_services() {
   _impl_.py_generic_services_ = false;
-  _impl_._has_bits_[0] &= ~0x00008000u;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline bool FileOptions::_internal_py_generic_services() const {
   return _impl_.py_generic_services_;
@@ -12320,7 +11817,7 @@ inline bool FileOptions::py_generic_services() const {
   return _internal_py_generic_services();
 }
 inline void FileOptions::_internal_set_py_generic_services(bool value) {
-  _impl_._has_bits_[0] |= 0x00008000u;
+  _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.py_generic_services_ = value;
 }
 inline void FileOptions::set_py_generic_services(bool value) {
@@ -12328,37 +11825,9 @@ inline void FileOptions::set_py_generic_services(bool value) {
   // @@protoc_insertion_point(field_set:shark.FileOptions.py_generic_services)
 }
 
-// optional bool php_generic_services = 42 [default = false];
-inline bool FileOptions::_internal_has_php_generic_services() const {
-  bool value = (_impl_._has_bits_[0] & 0x00010000u) != 0;
-  return value;
-}
-inline bool FileOptions::has_php_generic_services() const {
-  return _internal_has_php_generic_services();
-}
-inline void FileOptions::clear_php_generic_services() {
-  _impl_.php_generic_services_ = false;
-  _impl_._has_bits_[0] &= ~0x00010000u;
-}
-inline bool FileOptions::_internal_php_generic_services() const {
-  return _impl_.php_generic_services_;
-}
-inline bool FileOptions::php_generic_services() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.php_generic_services)
-  return _internal_php_generic_services();
-}
-inline void FileOptions::_internal_set_php_generic_services(bool value) {
-  _impl_._has_bits_[0] |= 0x00010000u;
-  _impl_.php_generic_services_ = value;
-}
-inline void FileOptions::set_php_generic_services(bool value) {
-  _internal_set_php_generic_services(value);
-  // @@protoc_insertion_point(field_set:shark.FileOptions.php_generic_services)
-}
-
 // optional bool deprecated = 23 [default = false];
 inline bool FileOptions::_internal_has_deprecated() const {
-  bool value = (_impl_._has_bits_[0] & 0x00020000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
   return value;
 }
 inline bool FileOptions::has_deprecated() const {
@@ -12366,7 +11835,7 @@ inline bool FileOptions::has_deprecated() const {
 }
 inline void FileOptions::clear_deprecated() {
   _impl_.deprecated_ = false;
-  _impl_._has_bits_[0] &= ~0x00020000u;
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline bool FileOptions::_internal_deprecated() const {
   return _impl_.deprecated_;
@@ -12376,7 +11845,7 @@ inline bool FileOptions::deprecated() const {
   return _internal_deprecated();
 }
 inline void FileOptions::_internal_set_deprecated(bool value) {
-  _impl_._has_bits_[0] |= 0x00020000u;
+  _impl_._has_bits_[0] |= 0x00000008u;
   _impl_.deprecated_ = value;
 }
 inline void FileOptions::set_deprecated(bool value) {
@@ -12386,7 +11855,7 @@ inline void FileOptions::set_deprecated(bool value) {
 
 // optional bool cc_enable_arenas = 31 [default = true];
 inline bool FileOptions::_internal_has_cc_enable_arenas() const {
-  bool value = (_impl_._has_bits_[0] & 0x00080000u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
   return value;
 }
 inline bool FileOptions::has_cc_enable_arenas() const {
@@ -12394,7 +11863,7 @@ inline bool FileOptions::has_cc_enable_arenas() const {
 }
 inline void FileOptions::clear_cc_enable_arenas() {
   _impl_.cc_enable_arenas_ = true;
-  _impl_._has_bits_[0] &= ~0x00080000u;
+  _impl_._has_bits_[0] &= ~0x00000020u;
 }
 inline bool FileOptions::_internal_cc_enable_arenas() const {
   return _impl_.cc_enable_arenas_;
@@ -12404,488 +11873,12 @@ inline bool FileOptions::cc_enable_arenas() const {
   return _internal_cc_enable_arenas();
 }
 inline void FileOptions::_internal_set_cc_enable_arenas(bool value) {
-  _impl_._has_bits_[0] |= 0x00080000u;
+  _impl_._has_bits_[0] |= 0x00000020u;
   _impl_.cc_enable_arenas_ = value;
 }
 inline void FileOptions::set_cc_enable_arenas(bool value) {
   _internal_set_cc_enable_arenas(value);
   // @@protoc_insertion_point(field_set:shark.FileOptions.cc_enable_arenas)
-}
-
-// optional string objc_class_prefix = 36;
-inline bool FileOptions::_internal_has_objc_class_prefix() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
-  return value;
-}
-inline bool FileOptions::has_objc_class_prefix() const {
-  return _internal_has_objc_class_prefix();
-}
-inline void FileOptions::clear_objc_class_prefix() {
-  _impl_.objc_class_prefix_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000008u;
-}
-inline const std::string& FileOptions::objc_class_prefix() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.objc_class_prefix)
-  return _internal_objc_class_prefix();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_objc_class_prefix(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000008u;
- _impl_.objc_class_prefix_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.objc_class_prefix)
-}
-inline std::string* FileOptions::mutable_objc_class_prefix() {
-  std::string* _s = _internal_mutable_objc_class_prefix();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.objc_class_prefix)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_objc_class_prefix() const {
-  return _impl_.objc_class_prefix_.Get();
-}
-inline void FileOptions::_internal_set_objc_class_prefix(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000008u;
-  _impl_.objc_class_prefix_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_objc_class_prefix() {
-  _impl_._has_bits_[0] |= 0x00000008u;
-  return _impl_.objc_class_prefix_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_objc_class_prefix() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.objc_class_prefix)
-  if (!_internal_has_objc_class_prefix()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000008u;
-  auto* p = _impl_.objc_class_prefix_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.objc_class_prefix_.IsDefault()) {
-    _impl_.objc_class_prefix_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_objc_class_prefix(std::string* objc_class_prefix) {
-  if (objc_class_prefix != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000008u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000008u;
-  }
-  _impl_.objc_class_prefix_.SetAllocated(objc_class_prefix, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.objc_class_prefix_.IsDefault()) {
-    _impl_.objc_class_prefix_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.objc_class_prefix)
-}
-
-// optional string csharp_namespace = 37;
-inline bool FileOptions::_internal_has_csharp_namespace() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
-  return value;
-}
-inline bool FileOptions::has_csharp_namespace() const {
-  return _internal_has_csharp_namespace();
-}
-inline void FileOptions::clear_csharp_namespace() {
-  _impl_.csharp_namespace_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000010u;
-}
-inline const std::string& FileOptions::csharp_namespace() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.csharp_namespace)
-  return _internal_csharp_namespace();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_csharp_namespace(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000010u;
- _impl_.csharp_namespace_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.csharp_namespace)
-}
-inline std::string* FileOptions::mutable_csharp_namespace() {
-  std::string* _s = _internal_mutable_csharp_namespace();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.csharp_namespace)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_csharp_namespace() const {
-  return _impl_.csharp_namespace_.Get();
-}
-inline void FileOptions::_internal_set_csharp_namespace(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.csharp_namespace_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_csharp_namespace() {
-  _impl_._has_bits_[0] |= 0x00000010u;
-  return _impl_.csharp_namespace_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_csharp_namespace() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.csharp_namespace)
-  if (!_internal_has_csharp_namespace()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000010u;
-  auto* p = _impl_.csharp_namespace_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.csharp_namespace_.IsDefault()) {
-    _impl_.csharp_namespace_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_csharp_namespace(std::string* csharp_namespace) {
-  if (csharp_namespace != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000010u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000010u;
-  }
-  _impl_.csharp_namespace_.SetAllocated(csharp_namespace, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.csharp_namespace_.IsDefault()) {
-    _impl_.csharp_namespace_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.csharp_namespace)
-}
-
-// optional string swift_prefix = 39;
-inline bool FileOptions::_internal_has_swift_prefix() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
-  return value;
-}
-inline bool FileOptions::has_swift_prefix() const {
-  return _internal_has_swift_prefix();
-}
-inline void FileOptions::clear_swift_prefix() {
-  _impl_.swift_prefix_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000020u;
-}
-inline const std::string& FileOptions::swift_prefix() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.swift_prefix)
-  return _internal_swift_prefix();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_swift_prefix(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000020u;
- _impl_.swift_prefix_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.swift_prefix)
-}
-inline std::string* FileOptions::mutable_swift_prefix() {
-  std::string* _s = _internal_mutable_swift_prefix();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.swift_prefix)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_swift_prefix() const {
-  return _impl_.swift_prefix_.Get();
-}
-inline void FileOptions::_internal_set_swift_prefix(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000020u;
-  _impl_.swift_prefix_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_swift_prefix() {
-  _impl_._has_bits_[0] |= 0x00000020u;
-  return _impl_.swift_prefix_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_swift_prefix() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.swift_prefix)
-  if (!_internal_has_swift_prefix()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000020u;
-  auto* p = _impl_.swift_prefix_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.swift_prefix_.IsDefault()) {
-    _impl_.swift_prefix_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_swift_prefix(std::string* swift_prefix) {
-  if (swift_prefix != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000020u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000020u;
-  }
-  _impl_.swift_prefix_.SetAllocated(swift_prefix, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.swift_prefix_.IsDefault()) {
-    _impl_.swift_prefix_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.swift_prefix)
-}
-
-// optional string php_class_prefix = 40;
-inline bool FileOptions::_internal_has_php_class_prefix() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
-  return value;
-}
-inline bool FileOptions::has_php_class_prefix() const {
-  return _internal_has_php_class_prefix();
-}
-inline void FileOptions::clear_php_class_prefix() {
-  _impl_.php_class_prefix_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000040u;
-}
-inline const std::string& FileOptions::php_class_prefix() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.php_class_prefix)
-  return _internal_php_class_prefix();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_php_class_prefix(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000040u;
- _impl_.php_class_prefix_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.php_class_prefix)
-}
-inline std::string* FileOptions::mutable_php_class_prefix() {
-  std::string* _s = _internal_mutable_php_class_prefix();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.php_class_prefix)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_php_class_prefix() const {
-  return _impl_.php_class_prefix_.Get();
-}
-inline void FileOptions::_internal_set_php_class_prefix(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000040u;
-  _impl_.php_class_prefix_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_php_class_prefix() {
-  _impl_._has_bits_[0] |= 0x00000040u;
-  return _impl_.php_class_prefix_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_php_class_prefix() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.php_class_prefix)
-  if (!_internal_has_php_class_prefix()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000040u;
-  auto* p = _impl_.php_class_prefix_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.php_class_prefix_.IsDefault()) {
-    _impl_.php_class_prefix_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_php_class_prefix(std::string* php_class_prefix) {
-  if (php_class_prefix != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000040u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000040u;
-  }
-  _impl_.php_class_prefix_.SetAllocated(php_class_prefix, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.php_class_prefix_.IsDefault()) {
-    _impl_.php_class_prefix_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.php_class_prefix)
-}
-
-// optional string php_namespace = 41;
-inline bool FileOptions::_internal_has_php_namespace() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
-  return value;
-}
-inline bool FileOptions::has_php_namespace() const {
-  return _internal_has_php_namespace();
-}
-inline void FileOptions::clear_php_namespace() {
-  _impl_.php_namespace_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000080u;
-}
-inline const std::string& FileOptions::php_namespace() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.php_namespace)
-  return _internal_php_namespace();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_php_namespace(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000080u;
- _impl_.php_namespace_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.php_namespace)
-}
-inline std::string* FileOptions::mutable_php_namespace() {
-  std::string* _s = _internal_mutable_php_namespace();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.php_namespace)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_php_namespace() const {
-  return _impl_.php_namespace_.Get();
-}
-inline void FileOptions::_internal_set_php_namespace(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000080u;
-  _impl_.php_namespace_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_php_namespace() {
-  _impl_._has_bits_[0] |= 0x00000080u;
-  return _impl_.php_namespace_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_php_namespace() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.php_namespace)
-  if (!_internal_has_php_namespace()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000080u;
-  auto* p = _impl_.php_namespace_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.php_namespace_.IsDefault()) {
-    _impl_.php_namespace_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_php_namespace(std::string* php_namespace) {
-  if (php_namespace != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000080u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000080u;
-  }
-  _impl_.php_namespace_.SetAllocated(php_namespace, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.php_namespace_.IsDefault()) {
-    _impl_.php_namespace_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.php_namespace)
-}
-
-// optional string php_metadata_namespace = 44;
-inline bool FileOptions::_internal_has_php_metadata_namespace() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
-  return value;
-}
-inline bool FileOptions::has_php_metadata_namespace() const {
-  return _internal_has_php_metadata_namespace();
-}
-inline void FileOptions::clear_php_metadata_namespace() {
-  _impl_.php_metadata_namespace_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000100u;
-}
-inline const std::string& FileOptions::php_metadata_namespace() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.php_metadata_namespace)
-  return _internal_php_metadata_namespace();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_php_metadata_namespace(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000100u;
- _impl_.php_metadata_namespace_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.php_metadata_namespace)
-}
-inline std::string* FileOptions::mutable_php_metadata_namespace() {
-  std::string* _s = _internal_mutable_php_metadata_namespace();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.php_metadata_namespace)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_php_metadata_namespace() const {
-  return _impl_.php_metadata_namespace_.Get();
-}
-inline void FileOptions::_internal_set_php_metadata_namespace(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000100u;
-  _impl_.php_metadata_namespace_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_php_metadata_namespace() {
-  _impl_._has_bits_[0] |= 0x00000100u;
-  return _impl_.php_metadata_namespace_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_php_metadata_namespace() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.php_metadata_namespace)
-  if (!_internal_has_php_metadata_namespace()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000100u;
-  auto* p = _impl_.php_metadata_namespace_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.php_metadata_namespace_.IsDefault()) {
-    _impl_.php_metadata_namespace_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_php_metadata_namespace(std::string* php_metadata_namespace) {
-  if (php_metadata_namespace != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000100u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000100u;
-  }
-  _impl_.php_metadata_namespace_.SetAllocated(php_metadata_namespace, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.php_metadata_namespace_.IsDefault()) {
-    _impl_.php_metadata_namespace_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.php_metadata_namespace)
-}
-
-// optional string ruby_package = 45;
-inline bool FileOptions::_internal_has_ruby_package() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
-  return value;
-}
-inline bool FileOptions::has_ruby_package() const {
-  return _internal_has_ruby_package();
-}
-inline void FileOptions::clear_ruby_package() {
-  _impl_.ruby_package_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000200u;
-}
-inline const std::string& FileOptions::ruby_package() const {
-  // @@protoc_insertion_point(field_get:shark.FileOptions.ruby_package)
-  return _internal_ruby_package();
-}
-template <typename ArgT0, typename... ArgT>
-inline SHARK_ALWAYS_INLINE
-void FileOptions::set_ruby_package(ArgT0&& arg0, ArgT... args) {
- _impl_._has_bits_[0] |= 0x00000200u;
- _impl_.ruby_package_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
-  // @@protoc_insertion_point(field_set:shark.FileOptions.ruby_package)
-}
-inline std::string* FileOptions::mutable_ruby_package() {
-  std::string* _s = _internal_mutable_ruby_package();
-  // @@protoc_insertion_point(field_mutable:shark.FileOptions.ruby_package)
-  return _s;
-}
-inline const std::string& FileOptions::_internal_ruby_package() const {
-  return _impl_.ruby_package_.Get();
-}
-inline void FileOptions::_internal_set_ruby_package(const std::string& value) {
-  _impl_._has_bits_[0] |= 0x00000200u;
-  _impl_.ruby_package_.Set(value, GetArenaForAllocation());
-}
-inline std::string* FileOptions::_internal_mutable_ruby_package() {
-  _impl_._has_bits_[0] |= 0x00000200u;
-  return _impl_.ruby_package_.Mutable(GetArenaForAllocation());
-}
-inline std::string* FileOptions::release_ruby_package() {
-  // @@protoc_insertion_point(field_release:shark.FileOptions.ruby_package)
-  if (!_internal_has_ruby_package()) {
-    return nullptr;
-  }
-  _impl_._has_bits_[0] &= ~0x00000200u;
-  auto* p = _impl_.ruby_package_.Release();
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.ruby_package_.IsDefault()) {
-    _impl_.ruby_package_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  return p;
-}
-inline void FileOptions::set_allocated_ruby_package(std::string* ruby_package) {
-  if (ruby_package != nullptr) {
-    _impl_._has_bits_[0] |= 0x00000200u;
-  } else {
-    _impl_._has_bits_[0] &= ~0x00000200u;
-  }
-  _impl_.ruby_package_.SetAllocated(ruby_package, GetArenaForAllocation());
-#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
-  if (_impl_.ruby_package_.IsDefault()) {
-    _impl_.ruby_package_.Set("", GetArenaForAllocation());
-  }
-#endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  // @@protoc_insertion_point(field_set_allocated:shark.FileOptions.ruby_package)
 }
 
 // repeated .shark.UninterpretedOption uninterpreted_option = 999;

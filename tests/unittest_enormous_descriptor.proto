@@ -39,7 +39,6 @@
 syntax = "proto2";
 
 package protobuf_unittest;
-option java_package = "com.google.protobuf";
 
 // Avoid generating insanely long methods.
 option optimize_for = CODE_SIZE;

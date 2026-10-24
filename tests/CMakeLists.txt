@@ -87,15 +87,9 @@ kmcmake_cc_test(
         compiler/cpp/move_unittest.cc
         compiler/cpp/plugin_unittest.cc
         compiler/cpp/unittest.cc
-        compiler/csharp/csharp_bootstrap_unittest.cc
-        compiler/csharp/csharp_generator_unittest.cc
         compiler/importer_unittest.cc
-        compiler/java/doc_comment_unittest.cc
-        compiler/java/plugin_unittest.cc
-        compiler/objectivec/objectivec_helpers_unittest.cc
         compiler/parser_unittest.cc
         compiler/python/plugin_unittest.cc
-        compiler/ruby/ruby_generator_unittest.cc
         descriptor_database_unittest.cc
         descriptor_unittest.cc
         drop_unknown_fields_test.cc

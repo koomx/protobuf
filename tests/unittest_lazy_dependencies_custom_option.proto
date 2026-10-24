@@ -42,7 +42,6 @@ import "shark/descriptor.proto";
 // Some generic_services option(s) added automatically.
 // See:  http://go/proto2-generic-services-default
 option cc_generic_services = true;   // auto-added
-option java_generic_services = true; // auto-added
 option py_generic_services = true;   // auto-added
 option cc_enable_arenas = true;
 
@@ -56,7 +55,6 @@ package protobuf_unittest.lazy_imports;
 // tests for speed unless explicitly testing code size optimization.
 option optimize_for = SPEED;
 
-option java_outer_classname = "UnittestLazyImportsCustomOptionProto";
 
 message LazyMessage {
   optional int32 a = 1;

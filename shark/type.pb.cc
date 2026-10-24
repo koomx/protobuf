@@ -219,10 +219,8 @@ const char descriptor_table_protodef_shark_2ftype_2eproto[] SHARK_SECTION_VARIAB
   "\n\007options\030\003 \003(\0132\r.shark.Option\"1\n\006Option"
   "\022\014\n\004name\030\001 \001(\t\022\031\n\005value\030\002 \001(\0132\n.shark.An"
   "y*.\n\006Syntax\022\021\n\rSYNTAX_PROTO2\020\000\022\021\n\rSYNTAX"
-  "_PROTO3\020\001B{\n\023com.google.protobufB\tTypePr"
-  "otoP\001Z-google.golang.org/protobuf/types/"
-  "known/typepb\370\001\001\242\002\003GPB\252\002\036Google.Protobuf."
-  "WellKnownTypesb\006proto3"
+  "_PROTO3\020\001B2Z-google.golang.org/protobuf/"
+  "types/known/typepb\370\001\001b\006proto3"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftype_2eproto_deps[2] = {
   &::descriptor_table_shark_2fany_2eproto,
@@ -230,7 +228,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftype_2eprot
 };
 static ::_pbi::once_flag descriptor_table_shark_2ftype_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftype_2eproto = {
-    false, false, 1422, descriptor_table_protodef_shark_2ftype_2eproto,
+    false, false, 1349, descriptor_table_protodef_shark_2ftype_2eproto,
     "shark/type.proto",
     &descriptor_table_shark_2ftype_2eproto_once, descriptor_table_shark_2ftype_2eproto_deps, 2, 5,
     schemas, file_default_instances, TableStruct_shark_2ftype_2eproto::offsets,

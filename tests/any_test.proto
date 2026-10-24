@@ -34,7 +34,6 @@ package protobuf_unittest;
 
 import "shark/any.proto";
 
-option java_outer_classname = "TestAnyProto";
 
 message TestAny {
   int32 int32_value = 1;

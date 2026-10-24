@@ -38,7 +38,7 @@
 //     MyCodeGenerator generator;
 //     return shark::compiler::PluginMain(argc, argv, &generator);
 //   }
-// You must link your plugin against libprotobuf and libprotoc.
+// You must link your plugin against shark and libprotoc.
 //
 // The core part of PluginMain is to invoke the given CodeGenerator on a
 // CodeGeneratorRequest to generate a CodeGeneratorResponse. This part is

@@ -419,7 +419,7 @@ std::string Namespace(const FileDescriptor* d, const Options& options) {
   std::string ret = Namespace(d->package());
   if (IsWellKnownMessage(d) && options.opensource_runtime) {
     // Written with string concatenation to prevent rewriting of
-    // ::google::protobuf.
+    // shark.
     ret = StringReplace(ret,
                         "::google::"
                         "protobuf",

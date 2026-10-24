@@ -207,7 +207,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
                                      StringPiece name, ObjectWriter* ow);
 
   // Following RenderTYPE functions render well known types in
-  // google/protobuf/wrappers.proto corresponding to TYPE.
+  // shark/wrappers.proto corresponding to TYPE.
   static util::Status RenderDouble(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);

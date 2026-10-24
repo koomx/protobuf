@@ -37,7 +37,6 @@ package protobuf_unittest_import;
 
 option optimize_for = LITE_RUNTIME;
 
-option java_package = "com.google.protobuf";
 
 import public "tests/unittest_import_public_lite.proto";
 

@@ -245,7 +245,7 @@ bool Generator::Generate(const FileDescriptor* file,
 
   std::string filename = GetFileName(file, ".py");
   pure_python_workable_ = !cpp_generated_lib_linked;
-  if (HasPrefixString(file->name(), "google/protobuf/")) {
+  if (HasPrefixString(file->name(), "shark/")) {
     pure_python_workable_ = true;
   }
 

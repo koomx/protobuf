@@ -141,14 +141,13 @@ const char descriptor_table_protodef_shark_2fstruct_2eproto[] SHARK_SECTION_VARI
   "\001(\0132\r.shark.StructH\000\022&\n\nlist_value\030\006 \001(\013"
   "2\020.shark.ListValueH\000B\006\n\004kind\")\n\tListValu"
   "e\022\034\n\006values\030\001 \003(\0132\014.shark.Value*\033\n\tNullV"
-  "alue\022\016\n\nNULL_VALUE\020\000B\177\n\023com.google.proto"
-  "bufB\013StructProtoP\001Z/google.golang.org/pr"
-  "otobuf/types/known/structpb\370\001\001\242\002\003GPB\252\002\036G"
-  "oogle.Protobuf.WellKnownTypesb\006proto3"
+  "alue\022\016\n\nNULL_VALUE\020\000B4Z/google.golang.or"
+  "g/protobuf/types/known/structpb\370\001\001b\006prot"
+  "o3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fstruct_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fstruct_2eproto = {
-    false, false, 557, descriptor_table_protodef_shark_2fstruct_2eproto,
+    false, false, 482, descriptor_table_protodef_shark_2fstruct_2eproto,
     "shark/struct.proto",
     &descriptor_table_shark_2fstruct_2eproto_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_shark_2fstruct_2eproto::offsets,

@@ -39,7 +39,7 @@
 
 namespace shark::TestUtil {
 
-// Translate net/proto2/* -> google/protobuf/*
+// Translate net/proto2/* -> tests/*
 inline std::string TranslatePathToOpensource(const std::string& google3_path) {
   const std::string prefix = "net/proto2/";
   GOOGLE_CHECK(google3_path.find(prefix) == 0) << google3_path;

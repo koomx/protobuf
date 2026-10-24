@@ -45,7 +45,7 @@ namespace shark {
 // package:
 // - You want to parse .proto files at runtime.  In this case, you should
 //   look at importer.h.  Since this functionality is widely useful, it is
-//   included in the libprotobuf base library; you do not have to link against
+//   included in the shark base library; you do not have to link against
 //   libprotoc.
 // - You want to write a custom protocol compiler which generates different
 //   kinds of code, e.g. code in a different language which is not supported

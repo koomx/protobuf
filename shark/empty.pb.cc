@@ -54,15 +54,13 @@ static const ::_pb::Message* const file_default_instances[] = {
 };
 
 const char descriptor_table_protodef_shark_2fempty_2eproto[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\021shark/empty.proto\022\005shark\"\007\n\005EmptyB}\n\023c"
-  "om.google.protobufB\nEmptyProtoP\001Z.google"
-  ".golang.org/protobuf/types/known/emptypb"
-  "\370\001\001\242\002\003GPB\252\002\036Google.Protobuf.WellKnownTyp"
-  "esb\006proto3"
+  "\n\021shark/empty.proto\022\005shark\"\007\n\005EmptyB3Z.g"
+  "oogle.golang.org/protobuf/types/known/em"
+  "ptypb\370\001\001b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fempty_2eproto_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fempty_2eproto = {
-    false, false, 170, descriptor_table_protodef_shark_2fempty_2eproto,
+    false, false, 96, descriptor_table_protodef_shark_2fempty_2eproto,
     "shark/empty.proto",
     &descriptor_table_shark_2fempty_2eproto_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2fempty_2eproto::offsets,

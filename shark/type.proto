@@ -35,12 +35,7 @@ package shark;
 import "shark/any.proto";
 import "shark/source_context.proto";
 
-option csharp_namespace = "Google.Protobuf.WellKnownTypes";
 option cc_enable_arenas = true;
-option java_package = "com.google.protobuf";
-option java_outer_classname = "TypeProto";
-option java_multiple_files = true;
-option objc_class_prefix = "GPB";
 option go_package = "google.golang.org/protobuf/types/known/typepb";
 
 // A protocol buffer message type.
@@ -172,9 +167,9 @@ message Option {
   // `"google.api.http"`.
   string name = 1;
   // The option's value packed in an Any message. If the value is a primitive,
-  // the corresponding wrapper type defined in google/protobuf/wrappers.proto
+  // the corresponding wrapper type defined in shark/wrappers.proto
   // should be used. If the value is an enum, it should be stored as an int32
-  // value using the google.protobuf.Int32Value type.
+  // value using the shark.Int32Value type.
   Any value = 2;
 }
 
