@@ -33,7 +33,7 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
 // To test the code generator, we actually use it to generate code for
-// net/proto2/internal/unittest.proto, then test that.  This means that we
+// net/proto2/internal/unittest.shark, then test that.  This means that we
 // are actually testing the parser and other parts of the system at the same
 // time, and that problems in the generator may show up as compile-time errors
 // rather than unittest failures, which may be surprising.  However, testing
@@ -46,9 +46,9 @@
 
 #include <tests/compiler/cpp/unittest.h>
 
-#include <tests/unittest.pb.h>
-#include <tests/unittest_embed_optimize_for.pb.h>
-#include <tests/unittest_optimize_for.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_embed_optimize_for.skp.h>
+#include <tests/unittest_optimize_for.skp.h>
 #include <tests/test_util.h>
 
 #define MESSAGE_TEST_NAME MessageTest
@@ -59,9 +59,9 @@
 #define HELPERS_TEST_NAME HelpersTest
 #define DESCRIPTOR_INIT_TEST_NAME DescriptorInitializationTest
 
-#define UNITTEST_PROTO_PATH "net/proto2/internal/unittest.proto"
-#define UNITTEST ::protobuf_unittest
-#define UNITTEST_IMPORT ::protobuf_unittest_import
+#define UNITTEST_PROTO_PATH "net/proto2/internal/unittest.shark"
+#define UNITTEST ::sharkbuf_unittest
+#define UNITTEST_IMPORT ::sharkbuf_unittest_import
 
 // Must include after the above macros.
 #include <tests/compiler/cpp/unittest.inc>
@@ -71,14 +71,14 @@ namespace shark::compiler::cpp {
 // Can't use an anonymous namespace here due to brokenness of Tru64 compiler.
 namespace cpp_unittest {
 
-namespace protobuf_unittest = ::protobuf_unittest;
+namespace sharkbuf_unittest = ::sharkbuf_unittest;
 
 TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingSymbolNames) {
-  // test_bad_identifiers.proto successfully compiled, then it works.  The
+  // test_bad_identifiers.shark successfully compiled, then it works.  The
   // following is just a token usage to insure that the code is, in fact,
   // being compiled and linked.
 
-  protobuf_unittest::TestConflictingSymbolNames message;
+  sharkbuf_unittest::TestConflictingSymbolNames message;
   message.set_uint32(1);
   EXPECT_EQ(3, message.ByteSizeLong());
 
@@ -90,37 +90,37 @@ TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingSymbolNames) {
 
   // Instantiate extension template functions to test conflicting template
   // parameter names.
-  typedef protobuf_unittest::TestConflictingSymbolNamesExtension ExtensionMessage;
+  typedef sharkbuf_unittest::TestConflictingSymbolNamesExtension ExtensionMessage;
   message.AddExtension(ExtensionMessage::repeated_int32_ext, 123);
   EXPECT_EQ(123, message.GetExtension(ExtensionMessage::repeated_int32_ext, 0));
 }
 
 TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingEnumNames) {
-  protobuf_unittest::TestConflictingEnumNames message;
+  sharkbuf_unittest::TestConflictingEnumNames message;
   message.set_conflicting_enum(
-      protobuf_unittest::TestConflictingEnumNames_while_and_);
+      sharkbuf_unittest::TestConflictingEnumNames_while_and_);
   EXPECT_EQ(1, message.conflicting_enum());
   message.set_conflicting_enum(
-      protobuf_unittest::TestConflictingEnumNames_while_XOR);
+      sharkbuf_unittest::TestConflictingEnumNames_while_XOR);
   EXPECT_EQ(5, message.conflicting_enum());
 
-  protobuf_unittest::bool_ conflicting_enum;
-  conflicting_enum = protobuf_unittest::NOT_EQ;
+  sharkbuf_unittest::bool_ conflicting_enum;
+  conflicting_enum = sharkbuf_unittest::NOT_EQ;
   EXPECT_EQ(1, conflicting_enum);
-  conflicting_enum = protobuf_unittest::return_;
+  conflicting_enum = sharkbuf_unittest::return_;
   EXPECT_EQ(3, conflicting_enum);
 }
 
 TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingMessageNames) {
-  protobuf_unittest::NULL_ message;
+  sharkbuf_unittest::NULL_ message;
   message.set_int_(123);
   EXPECT_EQ(message.int_(), 123);
 }
 
 TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingExtension) {
-  protobuf_unittest::TestConflictingSymbolNames message;
-  message.SetExtension(protobuf_unittest::void_, 123);
-  EXPECT_EQ(123, message.GetExtension(protobuf_unittest::void_));
+  sharkbuf_unittest::TestConflictingSymbolNames message;
+  message.SetExtension(sharkbuf_unittest::void_, 123);
+  EXPECT_EQ(123, message.GetExtension(sharkbuf_unittest::void_));
 }
 
 }  // namespace cpp_unittest

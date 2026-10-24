@@ -8,22 +8,22 @@ set -eu
 root=$(cd "$(dirname "$0")" && pwd)
 cd "$root"
 
-if [[ ! -f shark/descriptor.proto ]]; then
-  echo "Could not find shark/descriptor.proto. Run this script from the repository." >&2
+if [[ ! -f shark/descriptor.shark ]]; then
+  echo "Could not find shark/descriptor.shark. Run this script from the repository." >&2
   exit 1
 fi
 
 runtime_protos=(
-  shark/any.proto
-  shark/api.proto
-  shark/duration.proto
-  shark/empty.proto
-  shark/field_mask.proto
-  shark/source_context.proto
-  shark/struct.proto
-  shark/timestamp.proto
-  shark/type.proto
-  shark/wrappers.proto
+  shark/any.shark
+  shark/api.shark
+  shark/duration.shark
+  shark/empty.shark
+  shark/field_mask.shark
+  shark/source_context.shark
+  shark/struct.shark
+  shark/timestamp.shark
+  shark/type.shark
+  shark/wrappers.shark
 )
 
 build_dir=build
@@ -40,15 +40,15 @@ while true; do
   cmake --build "$build_dir" --target sharkc
 
   "$sharkc" -I . --cpp_out="$tmp" "${runtime_protos[@]}"
-  "$sharkc" -I . --cpp_out="dllexport_decl=SHARK_EXPORT:$tmp" shark/descriptor.proto
-  "$sharkc" -I . --cpp_out="dllexport_decl=PROTOC_EXPORT:$tmp" shark/compiler/plugin.proto
+  "$sharkc" -I . --cpp_out="dllexport_decl=SHARK_EXPORT:$tmp" shark/descriptor.shark
+  "$sharkc" -I . --cpp_out="dllexport_decl=PROTOC_EXPORT:$tmp" shark/compiler/plugin.shark
 
   changed=0
-  for proto in "${runtime_protos[@]}" shark/descriptor.proto shark/compiler/plugin.proto; do
-    base=${proto%.proto}
-    if ! cmp -s "$base.pb.h" "$tmp/$base.pb.h" || ! cmp -s "$base.pb.cc" "$tmp/$base.pb.cc"; then
-      cp "$tmp/$base.pb.h" "$base.pb.h"
-      cp "$tmp/$base.pb.cc" "$base.pb.cc"
+  for proto in "${runtime_protos[@]}" shark/descriptor.shark shark/compiler/plugin.shark; do
+    base=${proto%.shark}
+    if ! cmp -s "$base.skp.h" "$tmp/$base.skp.h" || ! cmp -s "$base.skp.cc" "$tmp/$base.skp.cc"; then
+      cp "$tmp/$base.skp.h" "$base.skp.h"
+      cp "$tmp/$base.skp.cc" "$base.skp.cc"
       changed=1
     fi
   done

@@ -71,7 +71,7 @@
 #include <unordered_map>
 
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/generated_message_reflection.h>
 #include <shark/generated_message_util.h>
 #include <shark/unknown_field_set.h>

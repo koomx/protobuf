@@ -39,7 +39,7 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/cpp/helpers.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 
 namespace shark::compiler::cpp {
 
@@ -138,12 +138,12 @@ void ExtensionGenerator::GenerateDeclaration(io::Printer* printer) const {
 
 void ExtensionGenerator::GenerateDefinition(io::Printer* printer) {
   // If we are building for lite with implicit weak fields, we want to skip over
-  // any custom options (i.e. extensions of messages from descriptor.proto).
+  // any custom options (i.e. extensions of messages from descriptor.shark).
   // This prevents the creation of any unnecessary linker references to the
   // descriptor messages.
   if (options_.lite_implicit_weak_fields &&
       descriptor_->containing_type()->file()->name() ==
-          "net/proto2/proto/descriptor.proto") {
+          "net/proto2/proto/descriptor.shark") {
     return;
   }
 

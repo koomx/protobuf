@@ -59,7 +59,7 @@ class DescriptorDatabase;   // descriptor_database.h
 class DescriptorPool;       // descriptor.h
 class FileDescriptor;       // descriptor.h
 class FileDescriptorSet;    // descriptor.h
-class FileDescriptorProto;  // descriptor.pb.h
+class FileDescriptorProto;  // descriptor.skp.h
 template <typename T>
 class RepeatedPtrField;          // repeated_field.h
 class SimpleDescriptorDatabase;  // descriptor_database.h
@@ -95,14 +95,14 @@ class DiskSourceTree;    // importer.h
 //   }
 //
 // The compiler is invoked with syntax like:
-//   protoc --cpp_out=outdir --foo_out=outdir --proto_path=src src/foo.proto
+//   protoc --cpp_out=outdir --foo_out=outdir --proto_path=src src/foo.shark
 //
-// The .proto file to compile can be specified on the command line using either
+// The .shark file to compile can be specified on the command line using either
 // its physical file path, or a virtual path relative to a directory specified
-// in --proto_path. For example, for src/foo.proto, the following two protoc
+// in --proto_path. For example, for src/foo.shark, the following two protoc
 // invocations work the same way:
-//   1. protoc --proto_path=src src/foo.proto (physical file path)
-//   2. protoc --proto_path=src foo.proto (virtual path relative to src)
+//   1. protoc --proto_path=src src/foo.shark (physical file path)
+//   2. protoc --proto_path=src foo.shark (virtual path relative to src)
 //
 // If a file path can be interpreted both as a physical file path and as a
 // relative virtual path, the physical file path takes precedence.
@@ -162,10 +162,10 @@ class PROTOC_EXPORT CommandLineInterface {
   // --out indicates the output directory (as passed to the --foo_out
   // parameter); if omitted, the current directory should be used.  --parameter
   // gives the generator parameter, if any was provided (see below).  The
-  // PROTO_FILES list the .proto files which were given on the compiler
+  // PROTO_FILES list the .shark files which were given on the compiler
   // command-line; these are the files for which the plugin is expected to
   // generate output code.  Finally, DESCRIPTORS is an encoded FileDescriptorSet
-  // (as defined in descriptor.proto).  This is piped to the plugin's stdin.
+  // (as defined in descriptor.shark).  This is piped to the plugin's stdin.
   // The set will include descriptors for all the files listed in PROTO_FILES as
   // well as all files that they import.  The plugin MUST NOT attempt to read
   // the PROTO_FILES directly -- it must use the FileDescriptorSet.
@@ -193,7 +193,7 @@ class PROTOC_EXPORT CommandLineInterface {
   int Run(int argc, const char* const argv[]);
 
   // DEPRECATED. Calling this method has no effect. Protocol compiler now
-  // always try to find the .proto file relative to the current directory
+  // always try to find the .shark file relative to the current directory
   // first and if the file is not found, it will then treat the input path
   // as a virtual path.
   void SetInputsAreProtoPathRelative(bool /* enable */) {}
@@ -258,8 +258,8 @@ class PROTOC_EXPORT CommandLineInterface {
   //     name = "-I", value = "src/protos"
   //   "--cpp_out=src/foo.pb2.cc" ->
   //     name = "--cpp_out", value = "src/foo.pb2.cc"
-  //   "foo.proto" ->
-  //     name = "", value = "foo.proto"
+  //   "foo.shark" ->
+  //     name = "", value = "foo.shark"
   bool ParseArgument(const char* arg, std::string* name, std::string* value);
 
   // Interprets arguments parsed with ParseArgument.
@@ -371,10 +371,10 @@ class PROTOC_EXPORT CommandLineInterface {
 
   // Stuff parsed from command line.
   enum Mode {
-    MODE_COMPILE,  // Normal mode:  parse .proto files and compile them.
+    MODE_COMPILE,  // Normal mode:  parse .shark files and compile them.
     MODE_ENCODE,   // --encode:  read text from stdin, write binary to stdout.
     MODE_DECODE,   // --decode:  read binary from stdin, write text to stdout.
-    MODE_PRINT,    // Print mode: print info of the given .proto files and exit.
+    MODE_PRINT,    // Print mode: print info of the given .shark files and exit.
   };
 
   Mode mode_ = MODE_COMPILE;
@@ -437,7 +437,7 @@ class PROTOC_EXPORT CommandLineInterface {
 
   // True if --include_imports was given, meaning that we should
   // write all transitive dependencies to the DescriptorSet.  Otherwise, only
-  // the .proto files listed on the command-line are added.
+  // the .shark files listed on the command-line are added.
   bool imports_in_descriptor_set_;
 
   // True if --include_source_info was given, meaning that we should not strip

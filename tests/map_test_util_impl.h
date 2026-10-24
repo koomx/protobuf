@@ -35,11 +35,11 @@
 #include <gtest/gtest.h>
 
 
-namespace protobuf_unittest {}  // namespace protobuf_unittest
+namespace sharkbuf_unittest {}  // namespace sharkbuf_unittest
 
 namespace shark {
 
-namespace unittest = ::protobuf_unittest;
+namespace unittest = ::sharkbuf_unittest;
 
 class MapTestUtilImpl {
  public:

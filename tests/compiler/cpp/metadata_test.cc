@@ -34,7 +34,7 @@
 #include <tests/testing/file.h>
 #include <shark/compiler/cpp/generator.h>
 #include <shark/compiler/command_line_interface.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/compiler/annotation_test_util.h>
@@ -50,7 +50,7 @@ class CppMetadataTest : public ::testing::Test {
  public:
   // Tries to capture a FileDescriptorProto, GeneratedCodeInfo, and output
   // code from the previously added file with name `filename`. Returns true on
-  // success. If pb_h is non-null, expects a .pb.h and a .pb.h.meta (copied to
+  // success. If pb_h is non-null, expects a .skp.h and a .skp.h.meta (copied to
   // pb_h and pb_h_info respecfively); similarly for proto_h and proto_h_info.
   bool CaptureMetadata(const std::string& filename, FileDescriptorProto* file,
                        std::string* pb_h, GeneratedCodeInfo* pb_h_info,
@@ -75,21 +75,21 @@ class CppMetadataTest : public ::testing::Test {
 
     if (pb_cc != nullptr) {
       GOOGLE_CHECK_OK(
-          File::GetContents(output_base + ".pb.cc", pb_cc, true));
+          File::GetContents(output_base + ".skp.cc", pb_cc, true));
     }
 
     if (pb_h != nullptr && pb_h_info != nullptr) {
       GOOGLE_CHECK_OK(
-          File::GetContents(output_base + ".pb.h", pb_h, true));
-      if (!atu::DecodeMetadata(output_base + ".pb.h.meta", pb_h_info)) {
+          File::GetContents(output_base + ".skp.h", pb_h, true));
+      if (!atu::DecodeMetadata(output_base + ".skp.h.meta", pb_h_info)) {
         return false;
       }
     }
 
     if (proto_h != nullptr && proto_h_info != nullptr) {
-      GOOGLE_CHECK_OK(File::GetContents(output_base + ".proto.h", proto_h,
+      GOOGLE_CHECK_OK(File::GetContents(output_base + ".shark.h", proto_h,
                                  true));
-      if (!atu::DecodeMetadata(output_base + ".proto.h.meta", proto_h_info)) {
+      if (!atu::DecodeMetadata(output_base + ".shark.h.meta", proto_h_info)) {
         return false;
       }
     }
@@ -108,15 +108,15 @@ TEST_F(CppMetadataTest, CapturesEnumNames) {
   FileDescriptorProto file;
   GeneratedCodeInfo info;
   std::string pb_h;
-  atu::AddFile("test.proto", kSmallTestFile);
-  EXPECT_TRUE(CaptureMetadata("test.proto", &file, &pb_h, &info, nullptr,
+  atu::AddFile("test.shark", kSmallTestFile);
+  EXPECT_TRUE(CaptureMetadata("test.shark", &file, &pb_h, &info, nullptr,
                               nullptr, nullptr));
   EXPECT_EQ("Enum", file.enum_type(0).name());
   std::vector<int> enum_path;
   enum_path.push_back(FileDescriptorProto::kEnumTypeFieldNumber);
   enum_path.push_back(0);
   const GeneratedCodeInfo::Annotation* enum_annotation =
-      atu::FindAnnotationOnPath(info, "test.proto", enum_path);
+      atu::FindAnnotationOnPath(info, "test.shark", enum_path);
   EXPECT_TRUE(nullptr != enum_annotation);
   EXPECT_TRUE(atu::AnnotationMatchesSubstring(pb_h, enum_annotation, "Enum"));
 }
@@ -125,11 +125,11 @@ TEST_F(CppMetadataTest, AddsPragma) {
   FileDescriptorProto file;
   GeneratedCodeInfo info;
   std::string pb_h;
-  atu::AddFile("test.proto", kSmallTestFile);
-  EXPECT_TRUE(CaptureMetadata("test.proto", &file, &pb_h, &info, nullptr,
+  atu::AddFile("test.shark", kSmallTestFile);
+  EXPECT_TRUE(CaptureMetadata("test.shark", &file, &pb_h, &info, nullptr,
                               nullptr, nullptr));
   EXPECT_TRUE(pb_h.find("#ifdef guard_name") != std::string::npos);
-  EXPECT_TRUE(pb_h.find("#pragma pragma_name \"test.pb.h.meta\"") !=
+  EXPECT_TRUE(pb_h.find("#pragma pragma_name \"test.skp.h.meta\"") !=
               std::string::npos);
 }
 
@@ -137,15 +137,15 @@ TEST_F(CppMetadataTest, CapturesMessageNames) {
   FileDescriptorProto file;
   GeneratedCodeInfo info;
   std::string pb_h;
-  atu::AddFile("test.proto", kSmallTestFile);
-  EXPECT_TRUE(CaptureMetadata("test.proto", &file, &pb_h, &info, nullptr,
+  atu::AddFile("test.shark", kSmallTestFile);
+  EXPECT_TRUE(CaptureMetadata("test.shark", &file, &pb_h, &info, nullptr,
                               nullptr, nullptr));
   EXPECT_EQ("Message", file.message_type(0).name());
   std::vector<int> message_path;
   message_path.push_back(FileDescriptorProto::kMessageTypeFieldNumber);
   message_path.push_back(0);
   const GeneratedCodeInfo::Annotation* message_annotation =
-      atu::FindAnnotationOnPath(info, "test.proto", message_path);
+      atu::FindAnnotationOnPath(info, "test.shark", message_path);
   EXPECT_TRUE(nullptr != message_annotation);
   EXPECT_TRUE(
       atu::AnnotationMatchesSubstring(pb_h, message_annotation, "Message"));

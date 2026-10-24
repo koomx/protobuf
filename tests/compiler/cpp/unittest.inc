@@ -33,7 +33,7 @@
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
 // To test the code generator, we actually use it to generate code for
-// net/proto2/internal/unittest.proto, then test that.  This means that we
+// net/proto2/internal/unittest.shark, then test that.  This means that we
 // are actually testing the parser and other parts of the system at the same
 // time, and that problems in the generator may show up as compile-time errors
 // rather than unittest failures, which may be surprising.  However, testing
@@ -54,12 +54,12 @@
 #ifndef _MSC_VER
 // We exclude this large proto because it's too large for
 // visual studio to compile (report internal errors).
-#include <tests/unittest_enormous_descriptor.pb.h>
+#include <tests/unittest_enormous_descriptor.skp.h>
 #endif
 #include <shark/compiler/cpp/helpers.h>
-#include <tests/compiler/cpp/test_bad_identifiers.pb.h>
-#include <tests/unittest_no_generic_services.pb.h>
-#include <shark/descriptor.pb.h>
+#include <tests/compiler/cpp/test_bad_identifiers.skp.h>
+#include <tests/unittest_no_generic_services.skp.h>
+#include <shark/descriptor.skp.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
@@ -121,7 +121,7 @@ TEST(GENERATED_DESCRIPTOR_TEST_NAME, IdenticalDescriptors) {
   source_tree.MapPath("", TestUtil::TestSourceDir());
   Importer importer(&source_tree, &error_collector);
 
-  // Import (parse) unittest.proto.
+  // Import (parse) unittest.shark.
   const FileDescriptor* parsed_descriptor =
       importer.Import(TestUtil::MaybeTranslatePath(UNITTEST_PROTO_PATH));
   EXPECT_EQ("", error_collector.text_);
@@ -144,7 +144,7 @@ TEST(GENERATED_DESCRIPTOR_TEST_NAME, IdenticalDescriptors) {
 // limit for string literal size
 TEST(GENERATED_DESCRIPTOR_TEST_NAME, EnormousDescriptor) {
   const Descriptor* generated_descriptor =
-    ::protobuf_unittest::TestEnormousDescriptor::descriptor();
+    ::sharkbuf_unittest::TestEnormousDescriptor::descriptor();
 
   EXPECT_TRUE(generated_descriptor != nullptr);
 }
@@ -810,7 +810,7 @@ TEST(GENERATED_MESSAGE_TEST_NAME, CamelCaseFieldNames) {
   // that the field names were coerced to lower-case.
   //
   // Protocol buffers standard style is to use lowercase-with-underscores for
-  // field names.  Some old proto1 .protos unfortunately used camel-case field
+  // field names.  Some old proto1 .sharks unfortunately used camel-case field
   // names.  In proto1, these names were forced to lower-case.  So, we do the
   // same thing in proto2.
 
@@ -2160,7 +2160,7 @@ TEST(HELPERS_TEST_NAME, TestSCCAnalysis) {
 
 namespace no_generic_services_test {
   // Verify that no class called "TestService" was defined in
-  // unittest_no_generic_services.pb.h by defining a different type by the same
+  // unittest_no_generic_services.skp.h by defining a different type by the same
   // name.  If such a service was generated, this will not compile.
   struct TestService {
     int i;
@@ -2172,14 +2172,14 @@ namespace cpp {
 namespace cpp_unittest {
 
 TEST_F(GENERATED_SERVICE_TEST_NAME, NoGenericServices) {
-  // Verify that non-services in unittest_no_generic_services.proto were
+  // Verify that non-services in unittest_no_generic_services.shark were
   // generated.
-  ::protobuf_unittest::no_generic_services_test::TestMessage message;
+  ::sharkbuf_unittest::no_generic_services_test::TestMessage message;
   message.set_a(1);
   message.SetExtension(
-      ::protobuf_unittest::no_generic_services_test::test_extension, 123);
-  ::protobuf_unittest::no_generic_services_test::TestEnum e =
-      ::protobuf_unittest::no_generic_services_test::FOO;
+      ::sharkbuf_unittest::no_generic_services_test::test_extension, 123);
+  ::sharkbuf_unittest::no_generic_services_test::TestEnum e =
+      ::sharkbuf_unittest::no_generic_services_test::FOO;
   EXPECT_EQ(e, 1);
 
   // Verify that a ServiceDescriptor is generated for the service even if the

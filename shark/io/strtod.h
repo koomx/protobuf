@@ -29,7 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 // A locale-independent version of strtod(), used to parse floating
-// point default values in .proto files, where the decimal separator
+// point default values in .shark files, where the decimal separator
 // is always a dot.
 
 #pragma once

@@ -34,16 +34,16 @@
 
 #include <shark/wire_format.h>
 
-#include <tests/unittest.pb.h>
-#include <tests/unittest_mset.pb.h>
-#include <tests/unittest_mset_wire_format.pb.h>
-#include <tests/unittest_proto3_arena.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_mset.skp.h>
+#include <tests/unittest_mset_wire_format.skp.h>
+#include <tests/unittest_proto3_arena.skp.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
-#define UNITTEST ::protobuf_unittest
-#define UNITTEST_IMPORT ::protobuf_unittest_import
-#define UNITTEST_PACKAGE_NAME "protobuf_unittest"
+#define UNITTEST ::sharkbuf_unittest
+#define UNITTEST_IMPORT ::sharkbuf_unittest_import
+#define UNITTEST_PACKAGE_NAME "sharkbuf_unittest"
 #define PROTO2_WIREFORMAT_UNITTEST ::proto2_wireformat_unittest
 #define PROTO3_ARENA_UNITTEST ::proto3_arena_unittest
 

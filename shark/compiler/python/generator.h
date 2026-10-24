@@ -30,7 +30,7 @@
 
 // Author: robinson@google.com (Will Robinson)
 //
-// Generates Python code for a given .proto file.
+// Generates Python code for a given .shark file.
 
 #pragma once
 

@@ -49,7 +49,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <shark/stubs/strutil.h>
 #include <gmock/gmock.h>
 #include <tests/testing/googletest.h>
@@ -62,7 +62,7 @@
 namespace shark {
 namespace {
 
-using ::protobuf_unittest::TestAllTypes;
+using ::sharkbuf_unittest::TestAllTypes;
 using ::testing::AllOf;
 using ::testing::ElementsAre;
 using ::testing::Ge;

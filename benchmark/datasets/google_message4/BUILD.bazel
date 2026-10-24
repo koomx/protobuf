@@ -14,10 +14,10 @@ filegroup(
 proto_library(
     name = "benchmark_message4_proto",
     srcs = [
-        "benchmark_message4.proto",
-        "benchmark_message4_1.proto",
-        "benchmark_message4_2.proto",
-        "benchmark_message4_3.proto",
+        "benchmark_message4.shark",
+        "benchmark_message4_1.shark",
+        "benchmark_message4_2.shark",
+        "benchmark_message4_3.shark",
     ],
     strip_import_prefix = "/benchmarks",
     visibility = [

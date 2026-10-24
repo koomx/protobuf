@@ -70,18 +70,18 @@ kmcmake_cc_library(
         NAMESPACE ${PROJECT_NAME}
         SOURCES
         any.cc
-        any.pb.cc
-        api.pb.cc
+        any.skp.cc
+        api.skp.cc
         compiler/importer.cc
         compiler/parser.cc
         descriptor.cc
-        descriptor.pb.cc
+        descriptor.skp.cc
         descriptor_database.cc
-        duration.pb.cc
+        duration.skp.cc
         dynamic_message.cc
-        empty.pb.cc
+        empty.skp.cc
         extension_set_heavy.cc
-        field_mask.pb.cc
+        field_mask.skp.cc
         generated_message_bases.cc
         generated_message_reflection.cc
         generated_message_tctable_full.cc
@@ -92,12 +92,12 @@ kmcmake_cc_library(
         message.cc
         reflection_ops.cc
         service.cc
-        source_context.pb.cc
-        struct.pb.cc
+        source_context.skp.cc
+        struct.skp.cc
         stubs/substitute.cc
         text_format.cc
-        timestamp.pb.cc
-        type.pb.cc
+        timestamp.skp.cc
+        type.skp.cc
         unknown_field_set.cc
         util/delimited_message_util.cc
         util/field_comparator.cc
@@ -120,7 +120,7 @@ kmcmake_cc_library(
         util/time_util.cc
         util/type_resolver_util.cc
         wire_format.cc
-        wrappers.pb.cc
+        wrappers.skp.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS ${PROJECT_NAME}::shark-lite_static ${KMCMAKE_DEPS_LINK}
 )
@@ -147,7 +147,7 @@ kmcmake_cc_library(
         compiler/cpp/service.cc
         compiler/cpp/string_field.cc
         compiler/plugin.cc
-        compiler/plugin.pb.cc
+        compiler/plugin.skp.cc
         compiler/python/generator.cc
         compiler/python/helpers.cc
         compiler/python/pyi_generator.cc

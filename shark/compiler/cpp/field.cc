@@ -50,7 +50,7 @@
 #include <shark/compiler/cpp/enum_field.h>
 #include <shark/compiler/cpp/map_field.h>
 #include <shark/compiler/cpp/message_field.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 
 namespace shark::compiler::cpp {
 

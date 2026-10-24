@@ -60,14 +60,14 @@
 #include <shark/compiler/python/helpers.h>
 #include <shark/compiler/python/pyi_generator.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 
 namespace shark::compiler::python {
 
 namespace {
-// Returns the alias we assign to the module of the given .proto filename
+// Returns the alias we assign to the module of the given .shark filename
 // when importing. See testPackageInitializationImport in
 // net/proto2/python/internal/reflection_test.py
 // to see why we need the alias.
@@ -376,7 +376,7 @@ void Generator::PrintFileDescriptor() const {
     printer_->Indent();
     // Pure python's AddSerializedFile() depend on the generated
     // descriptor_pb2.py thus we can not use AddSerializedFile() when
-    // generated descriptor.proto for pure python.
+    // generated descriptor.shark for pure python.
     const char file_descriptor_template[] =
         "$descriptor_name$ = _descriptor.FileDescriptor(\n"
         "  name='$name$',\n"
@@ -873,7 +873,7 @@ void Generator::FixForeignFieldsInField(
 }
 
 // Returns the module-level expression for the given FieldDescriptor.
-// Only works for fields in the .proto file this Generator is generating for.
+// Only works for fields in the .shark file this Generator is generating for.
 //
 // containing_type may be NULL, in which case this is a module-level field.
 //
@@ -1080,8 +1080,8 @@ void Generator::PrintExtensionsInDescriptor(
 }
 
 bool Generator::GeneratingDescriptorProto() const {
-  return file_->name() == "net/proto2/proto/descriptor.proto" ||
-         file_->name() == "shark/descriptor.proto";
+  return file_->name() == "net/proto2/proto/descriptor.shark" ||
+         file_->name() == "shark/descriptor.shark";
 }
 
 // Returns the unique Python module-level identifier given to a descriptor.
@@ -1108,7 +1108,7 @@ std::string Generator::ModuleLevelDescriptorName(
   // to make private later.
   name = "_" + name;
   // We now have the name relative to its own module.  Also qualify with
-  // the module name iff this descriptor is from a different .proto file.
+  // the module name iff this descriptor is from a different .shark file.
   if (descriptor.file() != file_) {
     name = ModuleAlias(descriptor.file()->name()) + "." + name;
   }

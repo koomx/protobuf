@@ -34,12 +34,12 @@
 
 #pragma once
 
-#include <tests/unittest_lite.pb.h>
+#include <tests/unittest_lite.skp.h>
 
 namespace shark {
 
-namespace unittest = protobuf_unittest;
-namespace unittest_import = protobuf_unittest_import;
+namespace unittest = sharkbuf_unittest;
+namespace unittest_import = sharkbuf_unittest_import;
 
 class TestUtilLite {
  public:

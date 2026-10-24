@@ -18,11 +18,11 @@ configure_file(${PROJECT_SOURCE_DIR}/benchmark/config.h.in ${PROJECT_SOURCE_DIR}
 
 find_package(benchmark REQUIRED)
 
-file(GLOB_RECURSE BENCH_PROTOS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.proto)
+file(GLOB_RECURSE BENCH_PROTOS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.shark)
 set(bench_proto_files)
 foreach (proto_file ${BENCH_PROTOS})
-    string(REPLACE .proto .pb.cc pb_file ${proto_file})
-    string(REPLACE .proto .pb.h pb_hdr ${proto_file})
+    string(REPLACE .shark .skp.cc pb_file ${proto_file})
+    string(REPLACE .shark .skp.h pb_hdr ${proto_file})
     add_custom_command(
             OUTPUT ${pb_file} ${pb_hdr}
             DEPENDS sharkc ${proto_file}

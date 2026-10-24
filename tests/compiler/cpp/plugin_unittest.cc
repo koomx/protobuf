@@ -55,101 +55,101 @@ class TestGenerator : public CodeGenerator {
 
   bool Generate(const FileDescriptor* file, const std::string& parameter,
                 GeneratorContext* context, std::string* error) const override {
-    TryInsert("test.pb.h", "includes", context);
-    TryInsert("test.pb.h", "namespace_scope", context);
-    TryInsert("test.pb.h", "global_scope", context);
-    TryInsert("test.pb.h", "class_scope:foo.Bar", context);
-    TryInsert("test.pb.h", "class_scope:foo.Bar.Baz", context);
+    TryInsert("test.skp.h", "includes", context);
+    TryInsert("test.skp.h", "namespace_scope", context);
+    TryInsert("test.skp.h", "global_scope", context);
+    TryInsert("test.skp.h", "class_scope:foo.Bar", context);
+    TryInsert("test.skp.h", "class_scope:foo.Bar.Baz", context);
 
-    TryInsert("test.pb.cc", "includes", context);
-    TryInsert("test.pb.cc", "namespace_scope", context);
-    TryInsert("test.pb.cc", "global_scope", context);
+    TryInsert("test.skp.cc", "includes", context);
+    TryInsert("test.skp.cc", "namespace_scope", context);
+    TryInsert("test.skp.cc", "global_scope", context);
 
     // Check field accessors for an optional int32:
-    TryInsert("test.pb.h", "field_get:foo.Bar.optInt", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.optInt", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.optInt", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.optInt", context);
 
     // Check field accessors for a repeated int32:
-    TryInsert("test.pb.h", "field_get:foo.Bar.repeatedInt", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.repeatedInt", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.repeatedInt", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.repeatedInt", context);
 
     // Check field accessors for a required string:
-    TryInsert("test.pb.h", "field_get:foo.Bar.requiredString", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.requiredString", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.requiredString", context);
-    TryInsert("test.pb.h", "field_set_allocated:foo.Bar.requiredString",
+    TryInsert("test.skp.h", "field_get:foo.Bar.requiredString", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.requiredString", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.requiredString", context);
+    TryInsert("test.skp.h", "field_set_allocated:foo.Bar.requiredString",
               context);
 
     // Check field accessors for a repeated string:
-    TryInsert("test.pb.h", "field_get:foo.Bar.repeatedString", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.repeatedString", context);
-    TryInsert("test.pb.h", "field_set_char:foo.Bar.repeatedString", context);
-    TryInsert("test.pb.h", "field_set_pointer:foo.Bar.repeatedString", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.repeatedString", context);
-    TryInsert("test.pb.h", "field_set_char:foo.Bar.repeatedString", context);
-    TryInsert("test.pb.h", "field_set_pointer:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_set_char:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_set_pointer:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_set_char:foo.Bar.repeatedString", context);
+    TryInsert("test.skp.h", "field_set_pointer:foo.Bar.repeatedString", context);
 
     // Check field accessors for an int inside oneof{}:
-    TryInsert("test.pb.h", "field_get:foo.Bar.oneOfInt", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.oneOfInt", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.oneOfInt", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.oneOfInt", context);
 
     // Check field accessors for a string inside oneof{}:
-    TryInsert("test.pb.h", "field_get:foo.Bar.oneOfString", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.oneOfString", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.oneOfString", context);
-    TryInsert("test.pb.h", "field_set_allocated:foo.Bar.oneOfString", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.oneOfString", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.oneOfString", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.oneOfString", context);
+    TryInsert("test.skp.h", "field_set_allocated:foo.Bar.oneOfString", context);
 
     // Check field accessors for an optional message:
-    TryInsert("test.pb.h", "field_get:foo.Bar.optMessage", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.optMessage", context);
-    TryInsert("test.pb.h", "field_set_allocated:foo.Bar.optMessage", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.optMessage", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.optMessage", context);
+    TryInsert("test.skp.h", "field_set_allocated:foo.Bar.optMessage", context);
 
     // Check field accessors for a repeated message:
-    TryInsert("test.pb.h", "field_add:foo.Bar.repeatedMessage", context);
-    TryInsert("test.pb.h", "field_get:foo.Bar.repeatedMessage", context);
-    TryInsert("test.pb.h", "field_list:foo.Bar.repeatedMessage", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.repeatedMessage", context);
-    TryInsert("test.pb.h", "field_mutable_list:foo.Bar.repeatedMessage",
+    TryInsert("test.skp.h", "field_add:foo.Bar.repeatedMessage", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.repeatedMessage", context);
+    TryInsert("test.skp.h", "field_list:foo.Bar.repeatedMessage", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.repeatedMessage", context);
+    TryInsert("test.skp.h", "field_mutable_list:foo.Bar.repeatedMessage",
               context);
 
     // Check field accessors for a message inside oneof{}:
-    TryInsert("test.pb.h", "field_get:foo.Bar.oneOfMessage", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.oneOfMessage", context);
-    TryInsert("test.pb.cc", "field_set_allocated:foo.Bar.oneOfMessage",
+    TryInsert("test.skp.h", "field_get:foo.Bar.oneOfMessage", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.oneOfMessage", context);
+    TryInsert("test.skp.cc", "field_set_allocated:foo.Bar.oneOfMessage",
               context);
 
     // Check field accessors for an optional enum:
-    TryInsert("test.pb.h", "field_get:foo.Bar.optEnum", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.optEnum", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.optEnum", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.optEnum", context);
 
     // Check field accessors for a repeated enum:
-    TryInsert("test.pb.h", "field_get:foo.Bar.repeatedEnum", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.repeatedEnum", context);
-    TryInsert("test.pb.h", "field_add:foo.Bar.repeatedEnum", context);
-    TryInsert("test.pb.h", "field_list:foo.Bar.repeatedEnum", context);
-    TryInsert("test.pb.h", "field_mutable_list:foo.Bar.repeatedEnum", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.repeatedEnum", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.repeatedEnum", context);
+    TryInsert("test.skp.h", "field_add:foo.Bar.repeatedEnum", context);
+    TryInsert("test.skp.h", "field_list:foo.Bar.repeatedEnum", context);
+    TryInsert("test.skp.h", "field_mutable_list:foo.Bar.repeatedEnum", context);
 
     // Check field accessors for an enum inside oneof{}:
-    TryInsert("test.pb.h", "field_get:foo.Bar.oneOfEnum", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.oneOfEnum", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.oneOfEnum", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.oneOfEnum", context);
 
     // Check field accessors for a required cord:
-    TryInsert("test.pb.h", "field_get:foo.Bar.requiredCord", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.requiredCord", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.requiredCord", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.requiredCord", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.requiredCord", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.requiredCord", context);
 
     // Check field accessors for a repeated cord:
-    TryInsert("test.pb.h", "field_get:foo.Bar.repeatedCord", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.repeatedCord", context);
-    TryInsert("test.pb.h", "field_add:foo.Bar.repeatedCord", context);
-    TryInsert("test.pb.h", "field_list:foo.Bar.repeatedCord", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.repeatedCord", context);
-    TryInsert("test.pb.h", "field_mutable_list:foo.Bar.repeatedCord", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.repeatedCord", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.repeatedCord", context);
+    TryInsert("test.skp.h", "field_add:foo.Bar.repeatedCord", context);
+    TryInsert("test.skp.h", "field_list:foo.Bar.repeatedCord", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.repeatedCord", context);
+    TryInsert("test.skp.h", "field_mutable_list:foo.Bar.repeatedCord", context);
 
     // Check field accessors for a cord inside oneof{}:
-    TryInsert("test.pb.h", "field_get:foo.Bar.oneOfCord", context);
-    TryInsert("test.pb.h", "field_set:foo.Bar.oneOfCord", context);
-    TryInsert("test.pb.h", "field_mutable:foo.Bar.oneOfCord", context);
+    TryInsert("test.skp.h", "field_get:foo.Bar.oneOfCord", context);
+    TryInsert("test.skp.h", "field_set:foo.Bar.oneOfCord", context);
+    TryInsert("test.skp.h", "field_mutable:foo.Bar.oneOfCord", context);
 
     return true;
   }
@@ -168,7 +168,7 @@ class TestGenerator : public CodeGenerator {
 // not verify that they are correctly-placed; that would require actually
 // compiling the output which is a bit more than I care to do for this test.
 TEST(CppPluginTest, PluginTest) {
-  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test.proto",
+  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test.shark",
                              "syntax = \"proto2\";\n"
                              "package foo;\n"
                              "\n"
@@ -220,7 +220,7 @@ TEST(CppPluginTest, PluginTest) {
   std::string test_out = "--test_out=" + TestTempDir();
 
   const char* argv[] = {"protoc", proto_path.c_str(), cpp_out.c_str(),
-                        test_out.c_str(), "test.proto"};
+                        test_out.c_str(), "test.shark"};
 
   EXPECT_EQ(0, cli.Run(5, argv));
 }

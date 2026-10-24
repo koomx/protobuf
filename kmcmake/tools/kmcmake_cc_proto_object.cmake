@@ -26,7 +26,7 @@
 #   ARGS:
 #     NAME            Logical object target name. Also used as proto output var prefix.
 #     NAMESPACE       Optional namespace for object alias. Defaults in `kmcmake_cc_object`.
-#     OUTDIR          Required protobuf output directory for generated *.pb.cc/*.pb.h.
+#     OUTDIR          Required protobuf output directory for generated *.skp.cc/*.skp.h.
 #
 #   LIST_ARGS:
 #     PROTOS          Required proto files list.
@@ -44,8 +44,8 @@
 #
 # Example:
 #   set(PROTO_FILES
-#       proto/binlog.proto
-#       proto/common.proto
+#       proto/binlog.shark
+#       proto/common.shark
 #   )
 #
 #   kmcmake_cc_proto_object(
@@ -94,7 +94,7 @@ function(kmcmake_cc_proto_object)
         kmcmake_error("kmcmake_cc_proto_object requires PROTOS")
     endif ()
 
-    # First: generate *.pb.cc/*.pb.h with the existing stable macro.
+    # First: generate *.skp.cc/*.skp.h with the existing stable macro.
     kmcmake_cc_proto(
             NAME ${KMCMAKE_CC_PROTO_OBJECT_NAME}
             OUTDIR ${KMCMAKE_CC_PROTO_OBJECT_OUTDIR}

@@ -33,8 +33,8 @@
 #include <cstdint>
 #include <ctime>
 
-#include <shark/duration.pb.h>
-#include <shark/timestamp.pb.h>
+#include <shark/duration.skp.h>
+#include <shark/timestamp.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 

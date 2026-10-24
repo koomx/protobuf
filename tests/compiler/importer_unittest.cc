@@ -131,11 +131,11 @@ class ImporterTest : public testing::Test {
 
 TEST_F(ImporterTest, Import) {
   // Test normal importing.
-  AddFile("foo.proto",
+  AddFile("foo.shark",
           "syntax = \"proto2\";\n"
           "message Foo {}\n");
 
-  const FileDescriptor* file = importer_.Import("foo.proto");
+  const FileDescriptor* file = importer_.Import("foo.shark");
   EXPECT_EQ("", error_collector_.text_);
   ASSERT_TRUE(file != nullptr);
 
@@ -143,28 +143,28 @@ TEST_F(ImporterTest, Import) {
   EXPECT_EQ("Foo", file->message_type(0)->name());
 
   // Importing again should return same object.
-  EXPECT_EQ(file, importer_.Import("foo.proto"));
+  EXPECT_EQ(file, importer_.Import("foo.shark"));
 }
 
 TEST_F(ImporterTest, ImportNested) {
   // Test that importing a file which imports another file works.
-  AddFile("foo.proto",
+  AddFile("foo.shark",
           "syntax = \"proto2\";\n"
-          "import \"bar.proto\";\n"
+          "import \"bar.shark\";\n"
           "message Foo {\n"
           "  optional Bar bar = 1;\n"
           "}\n");
-  AddFile("bar.proto",
+  AddFile("bar.shark",
           "syntax = \"proto2\";\n"
           "message Bar {}\n");
 
   // Note that both files are actually parsed by the first call to Import()
-  // here, since foo.proto imports bar.proto.  The second call just returns
-  // the same ProtoFile for bar.proto which was constructed while importing
-  // foo.proto.  We test that this is the case below by checking that bar
+  // here, since foo.shark imports bar.shark.  The second call just returns
+  // the same ProtoFile for bar.shark which was constructed while importing
+  // foo.shark.  We test that this is the case below by checking that bar
   // is among foo's dependencies (by pointer).
-  const FileDescriptor* foo = importer_.Import("foo.proto");
-  const FileDescriptor* bar = importer_.Import("bar.proto");
+  const FileDescriptor* foo = importer_.Import("foo.shark");
+  const FileDescriptor* bar = importer_.Import("bar.shark");
   EXPECT_EQ("", error_collector_.text_);
   ASSERT_TRUE(foo != nullptr);
   ASSERT_TRUE(bar != nullptr);
@@ -185,73 +185,73 @@ TEST_F(ImporterTest, ImportNested) {
 
 TEST_F(ImporterTest, FileNotFound) {
   // Error:  Parsing a file that doesn't exist.
-  EXPECT_TRUE(importer_.Import("foo.proto") == nullptr);
-  EXPECT_EQ("foo.proto:-1:0: File not found.\n", error_collector_.text_);
+  EXPECT_TRUE(importer_.Import("foo.shark") == nullptr);
+  EXPECT_EQ("foo.shark:-1:0: File not found.\n", error_collector_.text_);
 }
 
 TEST_F(ImporterTest, ImportNotFound) {
   // Error:  Importing a file that doesn't exist.
-  AddFile("foo.proto",
+  AddFile("foo.shark",
           "syntax = \"proto2\";\n"
-          "import \"bar.proto\";\n");
+          "import \"bar.shark\";\n");
 
-  EXPECT_TRUE(importer_.Import("foo.proto") == nullptr);
+  EXPECT_TRUE(importer_.Import("foo.shark") == nullptr);
   EXPECT_EQ(
-      "bar.proto:-1:0: File not found.\n"
-      "foo.proto:1:0: Import \"bar.proto\" was not found or had errors.\n",
+      "bar.shark:-1:0: File not found.\n"
+      "foo.shark:1:0: Import \"bar.shark\" was not found or had errors.\n",
       error_collector_.text_);
 }
 
 TEST_F(ImporterTest, RecursiveImport) {
   // Error:  Recursive import.
-  AddFile("recursive1.proto",
+  AddFile("recursive1.shark",
           "syntax = \"proto2\";\n"
           "\n"
-          "import \"recursive2.proto\";\n");
-  AddFile("recursive2.proto",
+          "import \"recursive2.shark\";\n");
+  AddFile("recursive2.shark",
           "syntax = \"proto2\";\n"
-          "import \"recursive1.proto\";\n");
+          "import \"recursive1.shark\";\n");
 
-  EXPECT_TRUE(importer_.Import("recursive1.proto") == nullptr);
+  EXPECT_TRUE(importer_.Import("recursive1.shark") == nullptr);
   EXPECT_EQ(
-      "recursive1.proto:2:0: File recursively imports itself: "
-      "recursive1.proto "
-      "-> recursive2.proto -> recursive1.proto\n"
-      "recursive2.proto:1:0: Import \"recursive1.proto\" was not found "
+      "recursive1.shark:2:0: File recursively imports itself: "
+      "recursive1.shark "
+      "-> recursive2.shark -> recursive1.shark\n"
+      "recursive2.shark:1:0: Import \"recursive1.shark\" was not found "
       "or had errors.\n"
-      "recursive1.proto:2:0: Import \"recursive2.proto\" was not found "
+      "recursive1.shark:2:0: Import \"recursive2.shark\" was not found "
       "or had errors.\n",
       error_collector_.text_);
 }
 
 TEST_F(ImporterTest, RecursiveImportSelf) {
   // Error:  Recursive import.
-  AddFile("recursive.proto",
+  AddFile("recursive.shark",
           "syntax = \"proto2\";\n"
           "\n"
-          "import \"recursive.proto\";\n");
+          "import \"recursive.shark\";\n");
 
-  EXPECT_TRUE(importer_.Import("recursive.proto") == nullptr);
+  EXPECT_TRUE(importer_.Import("recursive.shark") == nullptr);
   EXPECT_EQ(
-      "recursive.proto:2:0: File recursively imports itself: "
-      "recursive.proto -> recursive.proto\n",
+      "recursive.shark:2:0: File recursively imports itself: "
+      "recursive.shark -> recursive.shark\n",
       error_collector_.text_);
 }
 
 TEST_F(ImporterTest, LiteRuntimeImport) {
   // Error:  Recursive import.
-  AddFile("bar.proto",
+  AddFile("bar.shark",
           "syntax = \"proto2\";\n"
           "option optimize_for = LITE_RUNTIME;\n");
-  AddFile("foo.proto",
+  AddFile("foo.shark",
           "syntax = \"proto2\";\n"
-          "import \"bar.proto\";\n");
+          "import \"bar.shark\";\n");
 
-  EXPECT_TRUE(importer_.Import("foo.proto") == nullptr);
+  EXPECT_TRUE(importer_.Import("foo.shark") == nullptr);
   EXPECT_EQ(
-      "foo.proto:1:0: Files that do not use optimize_for = LITE_RUNTIME "
+      "foo.shark:1:0: Files that do not use optimize_for = LITE_RUNTIME "
       "cannot import files which do use this option.  This file is not "
-      "lite, but it imports \"bar.proto\" which is.\n",
+      "lite, but it imports \"bar.shark\" which is.\n",
       error_collector_.text_);
 }
 

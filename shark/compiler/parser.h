@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
-// Implements parsing of .proto files to FileDescriptorProtos.
+// Implements parsing of .shark files to FileDescriptorProtos.
 
 #pragma once
 
@@ -42,7 +42,7 @@
 #include <utility>
 
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/repeated_field.h>
 
@@ -59,10 +59,10 @@ namespace compiler {
 class Parser;
 class SourceLocationTable;
 
-// Implements parsing of protocol definitions (such as .proto files).
+// Implements parsing of protocol definitions (such as .shark files).
 //
 // Note that most users will be more interested in the Importer class.
-// Parser is a lower-level class which simply converts a single .proto file
+// Parser is a lower-level class which simply converts a single .shark file
 // to a FileDescriptorProto.  It does not resolve import directives or perform
 // many other kinds of validation needed to construct a complete
 // FileDescriptor.
@@ -214,7 +214,7 @@ class SHARK_EXPORT Parser {
   void AddWarning(const std::string& warning);
 
   // Records a location in the SourceCodeInfo.location table (see
-  // descriptor.proto).  We use RAII to ensure that the start and end locations
+  // descriptor.shark).  We use RAII to ensure that the start and end locations
   // are recorded -- the constructor records the start location and the
   // destructor records the end location.  Since the parser is
   // recursive-descent, this works out beautifully.
@@ -241,7 +241,7 @@ class SHARK_EXPORT Parser {
     ~LocationRecorder();
 
     // Add a path component.  See SourceCodeInfo.Location.path in
-    // descriptor.proto.
+    // descriptor.shark.
     void AddPath(int path_component);
 
     // By default the location is considered to start at the current token at
@@ -540,7 +540,7 @@ class SHARK_EXPORT Parser {
   // Detached comments are not connected to any syntax entities. Elements in
   // this vector are paragraphs of comments separated by empty lines. The
   // detached comments will be put into the leading_detached_comments field for
-  // the next element (See SourceCodeInfo.Location in descriptor.proto), when
+  // the next element (See SourceCodeInfo.Location in descriptor.shark), when
   // ConsumeEndOfDeclaration() is called.
   std::vector<std::string> upcoming_detached_comments_;
 

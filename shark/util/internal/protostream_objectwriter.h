@@ -36,7 +36,7 @@
 #include <unordered_set>
 
 #include <shark/stubs/common.h>
-#include <shark/type.pb.h>
+#include <shark/type.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
@@ -369,7 +369,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
   // Returns true if the field is shark.ListValue.
   inline bool IsStructListValue(const shark::Field& field);
 
-  // Renders shark.Value in struct.proto. It picks the right oneof
+  // Renders shark.Value in struct.shark. It picks the right oneof
   // type based on value's type.
   static util::Status RenderStructValue(ProtoStreamObjectWriter* ow,
                                         const DataPiece& data);
@@ -387,7 +387,7 @@ class SHARK_EXPORT ProtoStreamObjectWriter : public ProtoWriter {
                                      const DataPiece& data);
 
   // Renders wrapper message types for primitive types in
-  // shark/wrappers.proto.
+  // shark/wrappers.shark.
   static util::Status RenderWrapperType(ProtoStreamObjectWriter* ow,
                                         const DataPiece& data);
 

@@ -34,18 +34,18 @@
 #include <memory>
 #include <sstream>
 
-#include <shark/any.pb.h>
+#include <shark/any.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/descriptor.h>
 #include <shark/util/internal/expecting_objectwriter.h>
-#include <tests/util/internal/testdata/anys.pb.h>
-#include <tests/util/internal/testdata/books.pb.h>
-#include <tests/util/internal/testdata/field_mask.pb.h>
-#include <tests/util/internal/testdata/maps.pb.h>
-#include <tests/util/internal/testdata/proto3.pb.h>
-#include <tests/util/internal/testdata/struct.pb.h>
-#include <tests/util/internal/testdata/timestamp_duration.pb.h>
+#include <tests/util/internal/testdata/anys.skp.h>
+#include <tests/util/internal/testdata/books.skp.h>
+#include <tests/util/internal/testdata/field_mask.skp.h>
+#include <tests/util/internal/testdata/maps.skp.h>
+#include <tests/util/internal/testdata/proto3.skp.h>
+#include <tests/util/internal/testdata/struct.skp.h>
+#include <tests/util/internal/testdata/timestamp_duration.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/status.h>

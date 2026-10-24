@@ -32,23 +32,23 @@
 
 #include <stddef.h>  // For size_t
 
-#include <shark/field_mask.pb.h>
-#include <shark/timestamp.pb.h>
-#include <shark/type.pb.h>
-#include <shark/wrappers.pb.h>
+#include <shark/field_mask.skp.h>
+#include <shark/timestamp.skp.h>
+#include <shark/type.skp.h>
+#include <shark/wrappers.skp.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/message.h>
 #include <shark/util/internal/mock_error_listener.h>
-#include <tests/util/internal/testdata/anys.pb.h>
-#include <tests/util/internal/testdata/books.pb.h>
-#include <tests/util/internal/testdata/field_mask.pb.h>
-#include <tests/util/internal/testdata/maps.pb.h>
-#include <tests/util/internal/testdata/oneofs.pb.h>
-#include <tests/util/internal/testdata/proto3.pb.h>
-#include <tests/util/internal/testdata/struct.pb.h>
-#include <tests/util/internal/testdata/timestamp_duration.pb.h>
-#include <tests/util/internal/testdata/wrappers.pb.h>
+#include <tests/util/internal/testdata/anys.skp.h>
+#include <tests/util/internal/testdata/books.skp.h>
+#include <tests/util/internal/testdata/field_mask.skp.h>
+#include <tests/util/internal/testdata/maps.skp.h>
+#include <tests/util/internal/testdata/oneofs.skp.h>
+#include <tests/util/internal/testdata/proto3.skp.h>
+#include <tests/util/internal/testdata/struct.skp.h>
+#include <tests/util/internal/testdata/timestamp_duration.skp.h>
+#include <tests/util/internal/testdata/wrappers.skp.h>
 #include <shark/stubs/bytestream.h>
 #include <shark/stubs/strutil.h>
 #include <gtest/gtest.h>

@@ -38,7 +38,7 @@
 #include <shark/stubs/status.h>
 
 #include <shark/stubs/common.h>
-#include <shark/type.pb.h>
+#include <shark/type.skp.h>
 #include <shark/stubs/statusor.h>
 #include <shark/stubs/strutil.h>
 #include <shark/util/internal/object_source.h>
@@ -207,7 +207,7 @@ class SHARK_EXPORT ProtoStreamObjectSource : public ObjectSource {
                                      StringPiece name, ObjectWriter* ow);
 
   // Following RenderTYPE functions render well known types in
-  // shark/wrappers.proto corresponding to TYPE.
+  // shark/wrappers.shark corresponding to TYPE.
   static util::Status RenderDouble(const ProtoStreamObjectSource* os,
                                    const shark::Type& type,
                                    StringPiece name, ObjectWriter* ow);

@@ -28,9 +28,9 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <tests/unittest.pb.h>
-#include <tests/unittest_preserve_unknown_enum.pb.h>
-#include <tests/unittest_preserve_unknown_enum2.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_preserve_unknown_enum.skp.h>
+#include <tests/unittest_preserve_unknown_enum2.skp.h>
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
 #include <gtest/gtest.h>
@@ -235,7 +235,7 @@ TEST(PreserveUnknownEnumTest, IntegerEnumReflectionAPI) {
 
 // Test that the EnumValue API works properly for proto2 messages as well.
 TEST(PreserveUnknownEnumTest, Proto2CatchesUnknownValues) {
-  protobuf_unittest::TestAllTypes message;  // proto2 message
+  sharkbuf_unittest::TestAllTypes message;  // proto2 message
   const Reflection* r = message.GetReflection();
   const Descriptor* d = message.GetDescriptor();
   const FieldDescriptor* repeated_field =
@@ -253,11 +253,11 @@ TEST(PreserveUnknownEnumTest, Proto2CatchesUnknownValues) {
   // unknown fields.
   r->SetEnumValue(&message, singular_field, 4242);
   EXPECT_EQ(r->GetEnum(message, singular_field)->number(),
-            protobuf_unittest::TestAllTypes::FOO);
+            sharkbuf_unittest::TestAllTypes::FOO);
   r->SetRepeatedEnumValue(&message, repeated_field, 0, 4242);
   // repeated_nested_enum was set to bar above, this should not have changed.
   EXPECT_EQ(r->GetRepeatedEnum(message, repeated_field, 0)->number(),
-            protobuf_unittest::TestAllTypes::BAR);
+            sharkbuf_unittest::TestAllTypes::BAR);
   r->AddEnumValue(&message, repeated_field, 4242);
   // No element should be added
   EXPECT_EQ(message.repeated_nested_enum_size(), 1);
@@ -276,7 +276,7 @@ TEST(PreserveUnknownEnumTest, Proto2CatchesUnknownValues) {
 }
 
 TEST(PreserveUnknownEnumTest, SupportsUnknownEnumValuesAPI) {
-  protobuf_unittest::TestAllTypes proto2_message;
+  sharkbuf_unittest::TestAllTypes proto2_message;
   proto3_preserve_unknown_enum_unittest::MyMessage new_message;
 
   const Reflection* proto2_reflection = proto2_message.GetReflection();

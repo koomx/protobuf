@@ -68,7 +68,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/compiler/subprocess.h>
-#include <shark/compiler/plugin.pb.h>
+#include <shark/compiler/plugin.skp.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/substitute.h>
@@ -224,15 +224,15 @@ bool GetProtocAbsolutePath(std::string* path) {
   }
 }
 
-// Whether a path is where shark/descriptor.proto and other well-known
+// Whether a path is where shark/descriptor.shark and other well-known
 // type protos are installed.
 bool IsInstalledProtoPath(const std::string& path) {
-  // Checking the descriptor.proto file should be good enough.
-  std::string file_path = path + "/shark/descriptor.proto";
+  // Checking the descriptor.shark file should be good enough.
+  std::string file_path = path + "/shark/descriptor.shark";
   return access(file_path.c_str(), F_OK) != -1;
 }
 
-// Add the paths where shark/descriptor.proto and other well-known
+// Add the paths where shark/descriptor.shark and other well-known
 // type protos are installed.
 void AddDefaultProtoPaths(
     std::vector<std::pair<std::string, std::string>>* paths) {
@@ -1113,7 +1113,7 @@ int CommandLineInterface::Run(int argc, const char* const argv[]) {
       // HACK:  Define an EmptyMessage type to use for decoding.
       DescriptorPool pool;
       FileDescriptorProto file;
-      file.set_name("empty_message.proto");
+      file.set_name("empty_message.shark");
       file.add_message_type()->set_name("EmptyMessage");
       GOOGLE_CHECK(pool.BuildFile(file) != nullptr);
       codec_type_ = "EmptyMessage";
@@ -1396,7 +1396,7 @@ bool CommandLineInterface::MakeProtoProtoPathRelative(
             << ": File does not reside within any path "
                "specified using --proto_path (or -I).  You must specify a "
                "--proto_path which encompasses this file.  Note that the "
-               "proto_path must be an exact prefix of the .proto file "
+               "proto_path must be an exact prefix of the .shark file "
                "names -- protoc is too dumb to figure out when two paths "
                "(e.g. absolute and relative) are equivalent (it's harder "
                "than you think)."
@@ -1671,7 +1671,7 @@ CommandLineInterface::InterpretArgument(const std::string& name,
 
 #if defined(_WIN32)
     // On Windows, the shell (typically cmd.exe) does not expand wildcards in
-    // file names (e.g. foo\*.proto), so we do it ourselves.
+    // file names (e.g. foo\*.shark), so we do it ourselves.
     switch (shark::io::win32::ExpandWildcards(
         value, [this](const std::string& path) {
           this->input_files_.push_back(path);
@@ -1971,7 +1971,7 @@ CommandLineInterface::InterpretArgument(const std::string& name,
     } else {
       // It's an output flag.  Add it to the output directives.
       if (mode_ != MODE_COMPILE) {
-        std::cerr << "Cannot use --encode, --decode or print .proto info and "
+        std::cerr << "Cannot use --encode, --decode or print .shark info and "
                      "generate code at the same time."
                   << std::endl;
         return PARSE_ARGUMENT_FAIL;
@@ -2036,14 +2036,14 @@ Parse PROTO_FILES and generate output based on the options given:
                               flag.
   --descriptor_set_in=FILES   Specifies a delimited list of FILES
                               each containing a FileDescriptorSet (a
-                              protocol buffer defined in descriptor.proto).
+                              protocol buffer defined in descriptor.shark).
                               The FileDescriptor for each of the PROTO_FILES
                               provided will be loaded from these
                               FileDescriptorSets. If a FileDescriptor
                               appears multiple times, the first occurrence
                               will be used.
   -oFILE,                     Writes a FileDescriptorSet (a protocol buffer,
-    --descriptor_set_out=FILE defined in descriptor.proto) containing all of
+    --descriptor_set_out=FILE defined in descriptor.shark) containing all of
                               the input files to FILE.
   --include_imports           When using --descriptor_set_out, also include
                               all dependencies of the input files in the

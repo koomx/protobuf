@@ -36,11 +36,11 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/unittest.pb.h>
-#include <tests/unittest_mset.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_mset.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
@@ -692,7 +692,7 @@ TEST(ExtensionSetTest, PackedToUnpackedParsing) {
   // Make sure we can add extensions.
   destination.AddExtension(unittest::unpacked_int32_extension, 1);
   destination.AddExtension(unittest::unpacked_enum_extension,
-                           protobuf_unittest::FOREIGN_BAR);
+                           sharkbuf_unittest::FOREIGN_BAR);
 }
 
 TEST(ExtensionSetTest, UnpackedToPackedParsing) {
@@ -716,7 +716,7 @@ TEST(ExtensionSetTest, UnpackedToPackedParsing) {
   // Make sure we can add extensions.
   destination.AddExtension(unittest::packed_int32_extension, 1);
   destination.AddExtension(unittest::packed_enum_extension,
-                           protobuf_unittest::FOREIGN_BAR);
+                           sharkbuf_unittest::FOREIGN_BAR);
 }
 
 TEST(ExtensionSetTest, IsInitialized) {
@@ -1197,7 +1197,7 @@ TEST(ExtensionSetTest, DynamicExtensions) {
   // Test adding a dynamic extension to a compiled-in message object.
 
   FileDescriptorProto dynamic_proto;
-  dynamic_proto.set_name("dynamic_extensions_test.proto");
+  dynamic_proto.set_name("dynamic_extensions_test.shark");
   dynamic_proto.add_dependency(
       unittest::TestAllExtensions::descriptor()->file()->name());
   dynamic_proto.set_package("dynamic_extensions");
@@ -1357,7 +1357,7 @@ TEST(ExtensionSetTest, BoolExtension) {
   unittest::TestAllExtensions msg;
   uint8_t wire_bytes[2] = {13 * 8, 42 /* out of bounds payload for bool */};
   EXPECT_TRUE(msg.ParseFromArray(wire_bytes, 2));
-  EXPECT_TRUE(msg.GetExtension(protobuf_unittest::optional_bool_extension));
+  EXPECT_TRUE(msg.GetExtension(sharkbuf_unittest::optional_bool_extension));
 }
 
 TEST(ExtensionSetTest, ConstInit) {

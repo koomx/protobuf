@@ -34,10 +34,10 @@
 
 #pragma once
 
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 
-#define UNITTEST ::protobuf_unittest
-#define UNITTEST_IMPORT ::protobuf_unittest_import
+#define UNITTEST ::sharkbuf_unittest
+#define UNITTEST_IMPORT ::sharkbuf_unittest_import
 // Must be included when the preprocessor symbols above are defined.
 #include <tests/test_util.inc>
 #undef UNITTEST
@@ -48,8 +48,8 @@
 
 namespace shark {
 // This file doesn't use these declarations, but some .cc files do.
-namespace unittest = ::protobuf_unittest;
-namespace unittest_import = ::protobuf_unittest_import;
+namespace unittest = ::sharkbuf_unittest;
+namespace unittest_import = ::sharkbuf_unittest_import;
 
 namespace TestUtil {
 

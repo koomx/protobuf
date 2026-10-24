@@ -45,7 +45,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/generated_message_reflection.h>
 #include <shark/generated_message_util.h>
 #include <shark/map_field.h>

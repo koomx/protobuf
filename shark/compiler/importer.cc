@@ -260,7 +260,7 @@ static inline char LastChar(const std::string& str) {
 // Note that the resulting string may be empty.
 //
 // TODO(kenton):  It would be nice to handle "..", e.g. so that we can figure
-//   out that "foo/bar.proto" is inside "baz/../foo".  However, if baz is a
+//   out that "foo/bar.shark" is inside "baz/../foo".  However, if baz is a
 //   symlink or doesn't exist, then things get complicated, and we can't
 //   actually determine this without investigating the filesystem, probably
 //   in non-portable ways.  So, we punt.
@@ -268,10 +268,10 @@ static inline char LastChar(const std::string& str) {
 // TODO(kenton):  It would be nice to use realpath() here except that it
 //   resolves symbolic links.  This could cause problems if people place
 //   symbolic links in their source tree.  For example, if you executed:
-//     protoc --proto_path=foo foo/bar/baz.proto
-//   then if foo/bar is a symbolic link, foo/bar/baz.proto will canonicalize
+//     protoc --proto_path=foo foo/bar/baz.shark
+//   then if foo/bar is a symbolic link, foo/bar/baz.shark will canonicalize
 //   to a path which does not appear to be under foo, and thus the compiler
-//   will complain that baz.proto is not inside the --proto_path.
+//   will complain that baz.shark is not inside the --proto_path.
 static std::string CanonicalizePath(std::string path) {
 #ifdef _WIN32
   // The Win32 API accepts forward slashes as a path delimiter even though

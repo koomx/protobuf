@@ -43,7 +43,7 @@
 #include <shark/stubs/casts.h>
 #include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/extension_set.h>
 #include <shark/generated_message_util.h>
 #include <shark/inlined_string_field.h>

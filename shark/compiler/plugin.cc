@@ -43,10 +43,10 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/compiler/plugin.pb.h>
+#include <shark/compiler/plugin.skp.h>
 #include <shark/compiler/code_generator.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/io_win32.h>
 #include <shark/io/zero_copy_stream_impl.h>
 

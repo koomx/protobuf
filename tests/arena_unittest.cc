@@ -41,8 +41,8 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/unittest.pb.h>
-#include <tests/unittest_arena.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_arena.skp.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/strutil.h>
@@ -63,11 +63,11 @@
 #include <shark/port_def.inc>
 
 using proto2_arena_unittest::ArenaMessage;
-using protobuf_unittest::ForeignMessage;
-using protobuf_unittest::TestAllExtensions;
-using protobuf_unittest::TestAllTypes;
-using protobuf_unittest::TestEmptyMessage;
-using protobuf_unittest::TestOneof2;
+using sharkbuf_unittest::ForeignMessage;
+using sharkbuf_unittest::TestAllExtensions;
+using sharkbuf_unittest::TestAllTypes;
+using sharkbuf_unittest::TestEmptyMessage;
+using sharkbuf_unittest::TestOneof2;
 
 namespace shark {
 
@@ -1146,11 +1146,11 @@ TEST(ArenaTest, ExtensionsOnArena) {
   // Ensure no leaks.
   TestAllExtensions* message_ext =
       Arena::CreateMessage<TestAllExtensions>(&arena);
-  message_ext->SetExtension(protobuf_unittest::optional_int32_extension, 42);
-  message_ext->SetExtension(protobuf_unittest::optional_string_extension,
+  message_ext->SetExtension(sharkbuf_unittest::optional_int32_extension, 42);
+  message_ext->SetExtension(sharkbuf_unittest::optional_string_extension,
                             std::string("test"));
   message_ext
-      ->MutableExtension(protobuf_unittest::optional_nested_message_extension)
+      ->MutableExtension(sharkbuf_unittest::optional_nested_message_extension)
       ->set_bb(42);
 }
 

@@ -16,7 +16,7 @@ filegroup(
 proto_library(
     name = "benchmark_message2_proto",
     srcs = [
-        "benchmark_message2.proto",
+        "benchmark_message2.shark",
     ],
     strip_import_prefix = "/benchmarks",
     visibility = [

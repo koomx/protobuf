@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
-// This file is the public interface to the .proto file parser.
+// This file is the public interface to the .shark file parser.
 
 #pragma once
 
@@ -146,7 +146,7 @@ class SHARK_EXPORT SourceTreeDescriptorDatabase : public DescriptorDatabase {
   ValidationErrorCollector validation_error_collector_;
 };
 
-// Simple interface for parsing .proto files.  This wraps the process
+// Simple interface for parsing .shark files.  This wraps the process
 // of opening the file, parsing it with a Parser, recursively parsing all its
 // imports, and then cross-linking the results to produce a FileDescriptor.
 //

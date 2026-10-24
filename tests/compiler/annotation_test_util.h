@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
@@ -38,9 +38,9 @@
 // See java/internal/annotation_unittest.cc for an example.
 namespace shark::compiler::annotation_test_util {
 
-// Struct that contains the file generated from a .proto file and its
+// Struct that contains the file generated from a .shark file and its
 // GeneratedCodeInfo. For example, the Java generator will fill this struct
-// (for some 'foo.proto') with:
+// (for some 'foo.shark') with:
 //   file_path = "Foo.java"
 //   file_content = content of Foo.java
 //   file_info = parsed content of Foo.java.pb.meta
@@ -60,7 +60,7 @@ void AddFile(const std::string& filename, const std::string& data);
 // Files will be generated in TestTempDir() folder. Callers of this
 // function must read generated files themselves.
 //
-// filename: source .proto file used to generate code.
+// filename: source .shark file used to generate code.
 // plugin_specific_args: command line arguments specific to current generator.
 //     For Java, this value might be "--java_out=annotate_code:test_temp_dir"
 // cli: instance of command line interface to run generator. See Java's
@@ -74,7 +74,7 @@ bool RunProtoCompiler(const std::string& filename,
 bool DecodeMetadata(const std::string& path, GeneratedCodeInfo* info);
 
 // Finds all of the Annotations for a given source file and path.
-// See Location.path in https://github.com/protocolbuffers/protobuf/blob/main/src/shark/descriptor.proto for
+// See Location.path in https://github.com/protocolbuffers/protobuf/blob/main/src/shark/descriptor.shark for
 // explanation of what path vector is.
 void FindAnnotationsOnPath(
     const GeneratedCodeInfo& info, const std::string& source_file,
@@ -84,7 +84,7 @@ void FindAnnotationsOnPath(
 // Finds the Annotation for a given source file and path (or returns null if it
 // couldn't). If there are several annotations for given path, returns the first
 // one. See Location.path in
-// https://github.com/protocolbuffers/protobuf/blob/main/src/shark/descriptor.proto for explanation of what path
+// https://github.com/protocolbuffers/protobuf/blob/main/src/shark/descriptor.shark for explanation of what path
 // vector is.
 const GeneratedCodeInfo::Annotation* FindAnnotationOnPath(
     const GeneratedCodeInfo& info, const std::string& source_file,

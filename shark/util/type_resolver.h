@@ -35,7 +35,7 @@
 #include <string>
 
 #include <shark/stubs/common.h>
-#include <shark/type.pb.h>
+#include <shark/type.skp.h>
 #include <shark/stubs/status.h>
 #include <shark/stubs/status.h>
 

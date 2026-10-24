@@ -48,7 +48,7 @@
 #include <shark/descriptor.h>
 #include <shark/compiler/cpp/names.h>
 #include <shark/compiler/cpp/options.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/compiler/scc.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
@@ -67,7 +67,7 @@ namespace shark::compiler::cpp {
 namespace {
 
 static const char kAnyMessageName[] = "Any";
-static const char kAnyProtoFile[] = "shark/any.proto";
+static const char kAnyProtoFile[] = "shark/any.shark";
 
 std::string DotsToColons(const std::string& name) {
   return StringReplace(name, ".", "::", true);
@@ -1089,18 +1089,18 @@ bool IsAnyMessage(const Descriptor* descriptor, const Options& options) {
 
 bool IsWellKnownMessage(const FileDescriptor* file) {
   static const std::unordered_set<std::string> well_known_files{
-      "shark/any.proto",
-      "shark/api.proto",
-      "shark/compiler/plugin.proto",
-      "shark/descriptor.proto",
-      "shark/duration.proto",
-      "shark/empty.proto",
-      "shark/field_mask.proto",
-      "shark/source_context.proto",
-      "shark/struct.proto",
-      "shark/timestamp.proto",
-      "shark/type.proto",
-      "shark/wrappers.proto",
+      "shark/any.shark",
+      "shark/api.shark",
+      "shark/compiler/plugin.shark",
+      "shark/descriptor.shark",
+      "shark/duration.shark",
+      "shark/empty.shark",
+      "shark/field_mask.shark",
+      "shark/source_context.shark",
+      "shark/struct.shark",
+      "shark/timestamp.shark",
+      "shark/type.shark",
+      "shark/wrappers.shark",
   };
   return well_known_files.find(file->name()) != well_known_files.end();
 }
@@ -1228,7 +1228,7 @@ bool IsImplicitWeakField(const FieldDescriptor* field, const Options& options,
          !field->is_required() && !field->is_map() && !field->is_extension() &&
          !IsWellKnownMessage(field->message_type()->file()) &&
          field->message_type()->file()->name() !=
-             "net/proto2/proto/descriptor.proto" &&
+             "net/proto2/proto/descriptor.shark" &&
          // We do not support implicit weak fields between messages in the same
          // strongly-connected component.
          scc_analyzer->GetSCC(field->containing_type()) !=
@@ -1377,15 +1377,15 @@ bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
   } else {
     const std::string& forward_to_basename = bootstrap_basename;
 
-    // Generate forwarding headers and empty .pb.cc.
+    // Generate forwarding headers and empty .skp.cc.
     {
       std::unique_ptr<io::ZeroCopyOutputStream> output(
-          generator_context->Open(*basename + ".pb.h"));
+          generator_context->Open(*basename + ".skp.h"));
       io::Printer printer(output.get(), '$', nullptr);
       printer.Print(
           "#ifndef SHARK_INCLUDED_$filename_identifier$_FORWARD_PB_H\n"
           "#define SHARK_INCLUDED_$filename_identifier$_FORWARD_PB_H\n"
-          "#include \"$forward_to_basename$.pb.h\"  // IWYU pragma: export\n"
+          "#include \"$forward_to_basename$.skp.h\"  // IWYU pragma: export\n"
           "#endif  // SHARK_INCLUDED_$filename_identifier$_FORWARD_PB_H\n",
           "forward_to_basename", forward_to_basename, "filename_identifier",
           FilenameIdentifier(*basename));
@@ -1396,7 +1396,7 @@ bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
         if (*basename == "net/proto/protocoltype") {
           printer.Print(
               "#ifdef SWIG\n"
-              "%include \"$forward_to_basename$.pb.h\"\n"
+              "%include \"$forward_to_basename$.skp.h\"\n"
               "#endif  // SWIG\n",
               "forward_to_basename", forward_to_basename);
         }
@@ -1405,12 +1405,12 @@ bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
 
     {
       std::unique_ptr<io::ZeroCopyOutputStream> output(
-          generator_context->Open(*basename + ".proto.h"));
+          generator_context->Open(*basename + ".shark.h"));
       io::Printer printer(output.get(), '$', nullptr);
       printer.Print(
           "#ifndef SHARK_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n"
           "#define SHARK_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n"
-          "#include \"$forward_to_basename$.proto.h\"  // IWYU pragma: "
+          "#include \"$forward_to_basename$.shark.h\"  // IWYU pragma: "
           "export\n"
           "#endif  // "
           "SHARK_INCLUDED_$filename_identifier$_FORWARD_PROTO_H\n",
@@ -1420,19 +1420,19 @@ bool MaybeBootstrap(const Options& options, GeneratorContext* generator_context,
 
     {
       std::unique_ptr<io::ZeroCopyOutputStream> output(
-          generator_context->Open(*basename + ".pb.cc"));
+          generator_context->Open(*basename + ".skp.cc"));
       io::Printer printer(output.get(), '$', nullptr);
       printer.Print("\n");
     }
 
     {
       std::unique_ptr<io::ZeroCopyOutputStream> output(
-          generator_context->Open(*basename + ".pb.h.meta"));
+          generator_context->Open(*basename + ".skp.h.meta"));
     }
 
     {
       std::unique_ptr<io::ZeroCopyOutputStream> output(
-          generator_context->Open(*basename + ".proto.h.meta"));
+          generator_context->Open(*basename + ".shark.h.meta"));
     }
 
     // Abort code generation.
@@ -1492,8 +1492,8 @@ static bool HasBootstrapProblem(const FileDescriptor* file,
   // to parse the serialized descriptor describing all the messages defined in
   // this file. Obviously this presents a bootstrap problem for descriptor
   // messages.
-  if (file->name() == "net/proto2/proto/descriptor.proto" ||
-      file->name() == "shark/descriptor.proto") {
+  if (file->name() == "net/proto2/proto/descriptor.shark" ||
+      file->name() == "shark/descriptor.shark") {
     return true;
   }
   // Unfortunately we're not done yet. The descriptor option messages allow
@@ -1504,7 +1504,7 @@ static bool HasBootstrapProblem(const FileDescriptor* file,
   const DescriptorPool* pool = file->pool();
   const Descriptor* fd_proto_descriptor =
       pool->FindMessageTypeByName(linkedin_fd_proto.GetTypeName());
-  // Not all pools have descriptor.proto in them. In these cases there for sure
+  // Not all pools have descriptor.shark in them. In these cases there for sure
   // are no custom options.
   if (fd_proto_descriptor == nullptr) return false;
 

@@ -34,8 +34,8 @@
 #include <cstdint>
 #include <limits>
 
-#include <shark/struct.pb.h>
-#include <shark/type.pb.h>
+#include <shark/struct.skp.h>
+#include <shark/type.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/status.h>
 #include <shark/stubs/strutil.h>

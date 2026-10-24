@@ -34,9 +34,9 @@
 #include <cstdint>
 #include <vector>
 
-#include <shark/field_mask.pb.h>
+#include <shark/field_mask.skp.h>
 #include <tests/test_util.h>
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
@@ -114,10 +114,10 @@ TEST_F(SnakeCaseCamelCaseTest, RoundTripTest) {
 }
 
 using shark::FieldMask;
-using protobuf_unittest::NestedTestAllTypes;
-using protobuf_unittest::TestAllTypes;
-using protobuf_unittest::TestRequired;
-using protobuf_unittest::TestRequiredMessage;
+using sharkbuf_unittest::NestedTestAllTypes;
+using sharkbuf_unittest::TestAllTypes;
+using sharkbuf_unittest::TestRequired;
+using sharkbuf_unittest::TestRequiredMessage;
 
 TEST(FieldMaskUtilTest, StringFormat) {
   FieldMask mask;

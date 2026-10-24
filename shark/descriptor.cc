@@ -53,7 +53,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/once.h>
 #include <shark/any.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
@@ -1105,7 +1105,7 @@ std::set<std::string>* NewAllowedProto3Extendee() {
       "EnumOptions",   "EnumValueOptions", "ServiceOptions",
       "MethodOptions", "OneofOptions",     "ExtensionRangeOptions"};
   for (const char* option_name : kOptionNames) {
-    // descriptor.proto has a different package name in opensource. We allow
+    // descriptor.shark has a different package name in opensource. We allow
     // both so the opensource protocol compiler can also compile internal
     // proto3 files with custom options. See: b/27567912
     allowed_proto3_extendees->insert(std::string("shark.") +
@@ -1952,7 +1952,7 @@ DescriptorPool* DescriptorPool::internal_generated_pool() {
 
 const DescriptorPool* DescriptorPool::generated_pool() {
   const DescriptorPool* pool = internal_generated_pool();
-  // Ensure that descriptor.proto has been registered in the generated pool.
+  // Ensure that descriptor.shark has been registered in the generated pool.
   DescriptorProto::descriptor();
   return pool;
 }
@@ -1961,7 +1961,7 @@ const DescriptorPool* DescriptorPool::generated_pool() {
 void DescriptorPool::InternalAddGeneratedFile(
     const void* encoded_file_descriptor, int size) {
   // So, this function is called in the process of initializing the
-  // descriptors for generated proto classes.  Each generated .pb.cc file
+  // descriptors for generated proto classes.  Each generated .skp.cc file
   // has an internal procedure called AddDescriptors() which is called at
   // process startup, and that function calls this one in order to register
   // the raw bytes of the FileDescriptorProto representing the file.
@@ -2859,7 +2859,7 @@ bool RetrieveOptions(int depth, const Message& options,
     const Descriptor* option_descriptor =
         pool->FindMessageTypeByName(options.GetDescriptor()->full_name());
     if (option_descriptor == nullptr) {
-      // descriptor.proto is not in the pool. This means no custom options are
+      // descriptor.shark is not in the pool. This means no custom options are
       // used so we are safe to proceed with the compiled options message type.
       return RetrieveOptionsAssumingRightPool(depth, options, option_entries);
     }
@@ -3650,7 +3650,7 @@ namespace {
 // name are resolved relative to name_scope. element_name and orig_opt are
 // used only for error reporting (since the parser records locations against
 // pointers in the original options, not the mutable copy). The Message must be
-// one of the Options messages in descriptor.proto.
+// one of the Options messages in descriptor.shark.
 struct OptionsToInterpret {
   OptionsToInterpret(const std::string& ns, const std::string& el,
                      const std::vector<int>& path, const Message* orig_opt,
@@ -3844,7 +3844,7 @@ class DescriptorBuilder {
   // Allocates a copy of orig_options in tables_ and stores it in the
   // descriptor. Remembers its uninterpreted options, to be interpreted
   // later. DescriptorT must be one of the Descriptor messages from
-  // descriptor.proto.
+  // descriptor.shark.
   template <class DescriptorT>
   void AllocateOptions(const typename DescriptorT::OptionsType& orig_options,
                        DescriptorT* descriptor, int options_field_tag,
@@ -4511,7 +4511,7 @@ Symbol DescriptorPool::NewPlaceholderWithMutexHeld(
   }
 
   FileDescriptor* placeholder_file = NewPlaceholderFileWithMutexHeld(
-      StrCat(placeholder_full_name, ".placeholder.proto"), alloc);
+      StrCat(placeholder_full_name, ".placeholder.shark"), alloc);
   placeholder_file->package_ = placeholder_package;
 
   if (placeholder_type == PLACEHOLDER_ENUM) {
@@ -4777,8 +4777,8 @@ void DescriptorBuilder::AllocateOptionsImpl(
 
   // Don't add to options_to_interpret_ unless there were uninterpreted
   // options.  This not only avoids unnecessary work, but prevents a
-  // bootstrapping problem when building descriptors for descriptor.proto.
-  // descriptor.proto does not contain any uninterpreted options, but
+  // bootstrapping problem when building descriptors for descriptor.shark.
+  // descriptor.shark does not contain any uninterpreted options, but
   // attempting to interpret options anyway will cause
   // OptionsType::GetDescriptor() to be called which may then deadlock since
   // we're still trying to build it.
@@ -6408,7 +6408,7 @@ void DescriptorBuilder::CrossLinkField(FieldDescriptor* field,
 
   if (field->containing_oneof() != nullptr) {
     if (field->label() != FieldDescriptor::LABEL_OPTIONAL) {
-      // Note that this error will never happen when parsing .proto files.
+      // Note that this error will never happen when parsing .shark files.
       // It can only happen if you manually construct a FileDescriptorProto
       // that is incorrect.
       AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
@@ -7375,13 +7375,13 @@ bool DescriptorBuilder::OptionInterpreter::InterpretSingleOption(
   // Get the options message's descriptor from the builder's pool, so that we
   // get the version that knows about any extension options declared in the file
   // we're currently building. The descriptor should be there as long as the
-  // file we're building imported descriptor.proto.
+  // file we're building imported descriptor.shark.
 
   // Note that we use DescriptorBuilder::FindSymbolNotEnforcingDeps(), not
   // DescriptorPool::FindMessageTypeByName() because we're already holding the
   // pool's mutex, and the latter method locks it again.  We don't use
   // FindSymbol() because files that use custom options only need to depend on
-  // the file that defines the option, not descriptor.proto itself.
+  // the file that defines the option, not descriptor.shark itself.
   Symbol symbol = builder_->FindSymbolNotEnforcingDeps(
       options->GetDescriptor()->full_name());
   options_descriptor = symbol.descriptor();

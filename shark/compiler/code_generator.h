@@ -89,7 +89,7 @@ class PROTOC_EXPORT CodeGenerator {
   // Generates code for all given proto files.
   //
   // WARNING: The canonical code generator design produces one or two output
-  // files per input .proto file, and we do not wish to encourage alternate
+  // files per input .shark file, and we do not wish to encourage alternate
   // designs.
   //
   // A parameter is given as passed on the command line, as in |Generate()|
@@ -102,7 +102,7 @@ class PROTOC_EXPORT CodeGenerator {
                            GeneratorContext* generator_context,
                            std::string* error) const;
 
-  // This must be kept in sync with plugin.proto. See that file for
+  // This must be kept in sync with plugin.shark. See that file for
   // documentation on each value.
   enum Feature {
     FEATURE_PROTO3_OPTIONAL = 1,
@@ -139,8 +139,8 @@ class PROTOC_EXPORT GeneratorContext {
   // returned instead).
   //
   // The filename given should be relative to the root of the source tree.
-  // E.g. the C++ generator, when generating code for "foo/bar.proto", will
-  // generate the files "foo/bar.pb.h" and "foo/bar.pb.cc"; note that
+  // E.g. the C++ generator, when generating code for "foo/bar.shark", will
+  // generate the files "foo/bar.skp.h" and "foo/bar.skp.cc"; note that
   // "foo/" is included in these filenames.  The filename is not allowed to
   // contain "." or ".." components.
   virtual io::ZeroCopyOutputStream* Open(const std::string& filename) = 0;
@@ -149,7 +149,7 @@ class PROTOC_EXPORT GeneratorContext {
   virtual io::ZeroCopyOutputStream* OpenForAppend(const std::string& filename);
 
   // Creates a ZeroCopyOutputStream which will insert code into the given file
-  // at the given insertion point.  See plugin.proto (plugin.pb.h) for more
+  // at the given insertion point.  See plugin.shark (plugin.skp.h) for more
   // information on insertion points.  The default implementation
   // assert-fails -- it exists only for backwards-compatibility.
   //
@@ -193,7 +193,7 @@ typedef GeneratorContext OutputDirectory;
 PROTOC_EXPORT void ParseGeneratorParameter(
     const std::string&, std::vector<std::pair<std::string, std::string> >*);
 
-// Strips ".proto" or ".protodevel" from the end of a filename.
+// Strips ".shark" or ".protodevel" from the end of a filename.
 PROTOC_EXPORT std::string StripProto(const std::string& filename);
 
 }  // namespace compiler

@@ -59,21 +59,21 @@ TEST_F(LiteArenaTest, MapNoHeapAllocation) {
     // Map.
     // internal::NoHeapChecker no_heap;
 
-    protobuf_unittest::TestArenaMapLite* from =
-        Arena::CreateMessage<protobuf_unittest::TestArenaMapLite>(arena_.get());
+    sharkbuf_unittest::TestArenaMapLite* from =
+        Arena::CreateMessage<sharkbuf_unittest::TestArenaMapLite>(arena_.get());
     MapLiteTestUtil::SetArenaMapFields(from);
     from->SerializeToString(&data);
 
-    protobuf_unittest::TestArenaMapLite* to =
-        Arena::CreateMessage<protobuf_unittest::TestArenaMapLite>(arena_.get());
+    sharkbuf_unittest::TestArenaMapLite* to =
+        Arena::CreateMessage<sharkbuf_unittest::TestArenaMapLite>(arena_.get());
     to->ParseFromString(data);
     MapLiteTestUtil::ExpectArenaMapFieldsSet(*to);
   }
 }
 
 TEST_F(LiteArenaTest, UnknownFieldMemLeak) {
-  protobuf_unittest::ForeignMessageArenaLite* message =
-      Arena::CreateMessage<protobuf_unittest::ForeignMessageArenaLite>(
+  sharkbuf_unittest::ForeignMessageArenaLite* message =
+      Arena::CreateMessage<sharkbuf_unittest::ForeignMessageArenaLite>(
           arena_.get());
   std::string data = "\012\000";
   int original_capacity = data.capacity();

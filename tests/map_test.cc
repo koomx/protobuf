@@ -28,16 +28,16 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <tests/map_proto2_unittest.pb.h>
-#include <tests/map_unittest.pb.h>
+#include <tests/map_proto2_unittest.skp.h>
+#include <tests/map_unittest.skp.h>
 #include <tests/reflection_tester.h>
 #include <tests/test_util2.h>
 
 
 #define BRIDGE_UNITTEST ::shark::bridge_unittest
-#define UNITTEST ::protobuf_unittest
-#define UNITTEST_IMPORT ::protobuf_unittest_import
-#define UNITTEST_PACKAGE_NAME "protobuf_unittest"
+#define UNITTEST ::sharkbuf_unittest
+#define UNITTEST_IMPORT ::sharkbuf_unittest_import
+#define UNITTEST_PACKAGE_NAME "sharkbuf_unittest"
 
 // Must include after defining UNITTEST, etc.
 // clang-format off

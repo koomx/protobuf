@@ -65,7 +65,7 @@ class MergedDescriptorDatabase;
 //
 // This is useful if you want to create a DescriptorPool which loads
 // descriptors on-demand from some sort of large database.  If the database
-// is large, it may be inefficient to enumerate every .proto file inside it
+// is large, it may be inefficient to enumerate every .shark file inside it
 // calling DescriptorPool::BuildFile() for each one.  Instead, a DescriptorPool
 // can be created which wraps a DescriptorDatabase and only builds particular
 // descriptors when they are needed.

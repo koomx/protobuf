@@ -34,7 +34,7 @@
 // This test proto2 methods on a proto2 layout.
 
 #include <shark/stubs/casts.h>
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <shark/dynamic_message.h>
 #include <shark/reflection.h>
 #include <gtest/gtest.h>

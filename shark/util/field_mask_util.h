@@ -35,7 +35,7 @@
 #include <cstdint>
 #include <string>
 
-#include <shark/field_mask.pb.h>
+#include <shark/field_mask.skp.h>
 #include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
 

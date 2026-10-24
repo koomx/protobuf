@@ -49,11 +49,11 @@
 #include <tests/testing/file.h>
 #include <tests/testing/file.h>
 #include <tests/testing/file.h>
-#include <shark/any.pb.h>
+#include <shark/any.skp.h>
 #include <tests/test_util2.h>
-#include <tests/unittest.pb.h>
-#include <tests/unittest_custom_options.pb.h>
-#include <shark/descriptor.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_custom_options.skp.h>
+#include <shark/descriptor.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/strutil.h>
@@ -545,45 +545,45 @@ void CommandLineInterfaceTest::ExpectFileContent(const std::string& filename,
 TEST_F(CommandLineInterfaceTest, BasicOutput) {
   // Test that the common case works.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, BasicOutput_DescriptorSetIn) {
   // Test that the common case works.
   FileDescriptorSet file_descriptor_set;
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   WriteDescriptorSet("foo.bin", &file_descriptor_set);
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, BasicPlugin) {
   // Test that basic plugins work.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --plug_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_plugin", "", "foo.proto", "Foo");
+  ExpectGenerated("test_plugin", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, BasicPlugin_DescriptorSetIn) {
@@ -591,31 +591,31 @@ TEST_F(CommandLineInterfaceTest, BasicPlugin_DescriptorSetIn) {
 
   FileDescriptorSet file_descriptor_set;
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   WriteDescriptorSet("foo.bin", &file_descriptor_set);
 
   Run("protocol_compiler --plug_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_plugin", "", "foo.proto", "Foo");
+  ExpectGenerated("test_plugin", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, GeneratorAndPlugin) {
   // Invoke a generator and a plugin at the same time.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
-  ExpectGenerated("test_plugin", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
+  ExpectGenerated("test_plugin", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, GeneratorAndPlugin_DescriptorSetIn) {
@@ -623,41 +623,41 @@ TEST_F(CommandLineInterfaceTest, GeneratorAndPlugin_DescriptorSetIn) {
 
   FileDescriptorSet file_descriptor_set;
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   WriteDescriptorSet("foo.bin", &file_descriptor_set);
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
-  ExpectGenerated("test_plugin", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
+  ExpectGenerated("test_plugin", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, MultipleInputs) {
   // Test parsing multiple input files.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto bar.proto");
+      "--proto_path=$tmpdir foo.shark bar.shark");
 
   ExpectNoErrors();
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
 }
 
 TEST_F(CommandLineInterfaceTest, MultipleInputs_DescriptorSetIn) {
@@ -665,27 +665,27 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_DescriptorSetIn) {
   FileDescriptorSet file_descriptor_set;
 
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bar.proto");
+  file_descriptor_proto->set_name("bar.shark");
   file_descriptor_proto->add_message_type()->set_name("Bar");
 
   WriteDescriptorSet("foo.bin", &file_descriptor_set);
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto bar.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark bar.shark");
 
   ExpectNoErrors();
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
 }
 
 TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
@@ -701,10 +701,10 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
   shark::Any::descriptor()->file()->CopyTo(&any_proto);
 
   const FileDescriptor* custom_file =
-      protobuf_unittest::AggregateMessage::descriptor()->file();
+      sharkbuf_unittest::AggregateMessage::descriptor()->file();
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
   custom_file->CopyTo(file_descriptor_proto);
-  file_descriptor_proto->set_name("custom_options.proto");
+  file_descriptor_proto->set_name("custom_options.shark");
   // Add a custom message option.
   FieldDescriptorProto* extension_option =
       file_descriptor_proto->add_extension();
@@ -715,8 +715,8 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
   extension_option->set_type(FieldDescriptorProto::TYPE_INT64);
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("import_custom_unknown_options.proto");
-  file_descriptor_proto->add_dependency("custom_options.proto");
+  file_descriptor_proto->set_name("import_custom_unknown_options.shark");
+  file_descriptor_proto->add_dependency("custom_options.shark");
   // Add custom message option to unknown field. This custom option is
   // not known in generated pool, thus option will be in unknown fields.
   file_descriptor_proto->add_message_type()->set_name("Bar");
@@ -729,7 +729,7 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
       "--descriptor_set_in=$tmpdir/foo.bin "
-      "import_custom_unknown_options.proto");
+      "import_custom_unknown_options.shark");
 
   // TODO(jieluo): Fix this test. This test case only happens when
   // CommandLineInterface::Run() is used instead of invoke protoc combined
@@ -738,21 +738,21 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
   // still need to be fixed.
   /*
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("import_custom_extension_options.proto");
-  file_descriptor_proto->add_dependency("custom_options.proto");
+  file_descriptor_proto->set_name("import_custom_extension_options.shark");
+  file_descriptor_proto->add_dependency("custom_options.shark");
   // Add custom message option to unknown field. This custom option is
   // also defined in generated pool, thus option will be in extensions.
   file_descriptor_proto->add_message_type()->set_name("Foo");
   file_descriptor_proto->mutable_message_type(0)
       ->mutable_options()
       ->mutable_unknown_fields()
-      ->AddVarint(protobuf_unittest::message_opt1.number(), 2222);
+      ->AddVarint(sharkbuf_unittest::message_opt1.number(), 2222);
 
   WriteDescriptorSet("foo.bin", &file_descriptor_set);
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin import_custom_unknown_options.proto "
-      "import_custom_extension_options.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin import_custom_unknown_options.shark "
+      "import_custom_extension_options.shark");
   */
 
   ExpectNoErrors();
@@ -761,31 +761,31 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
 TEST_F(CommandLineInterfaceTest, MultipleInputsWithImport) {
   // Test parsing multiple input files with an import of a separate file.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"baz.proto\";\n"
+                 "import \"baz.shark\";\n"
                  "message Bar {\n"
                  "  optional Baz a = 1;\n"
                  "}\n");
-  CreateTempFile("baz.proto",
+  CreateTempFile("baz.shark",
                  "syntax = \"proto2\";\n"
                  "message Baz {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto bar.proto");
+      "--proto_path=$tmpdir foo.shark bar.shark");
 
   ExpectNoErrors();
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
 }
 
 TEST_F(CommandLineInterfaceTest, MultipleInputsWithImport_DescriptorSetIn) {
@@ -793,12 +793,12 @@ TEST_F(CommandLineInterfaceTest, MultipleInputsWithImport_DescriptorSetIn) {
   FileDescriptorSet file_descriptor_set;
 
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bar.proto");
-  file_descriptor_proto->add_dependency("baz.proto");
+  file_descriptor_proto->set_name("bar.shark");
+  file_descriptor_proto->add_dependency("baz.shark");
   DescriptorProto* message = file_descriptor_proto->add_message_type();
   message->set_name("Bar");
   FieldDescriptorProto* field = message->add_field();
@@ -810,12 +810,12 @@ TEST_F(CommandLineInterfaceTest, MultipleInputsWithImport_DescriptorSetIn) {
 
   file_descriptor_set.clear_file();
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("baz.proto");
+  file_descriptor_proto->set_name("baz.shark");
   file_descriptor_proto->add_message_type()->set_name("Baz");
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bat.proto");
-  file_descriptor_proto->add_dependency("baz.proto");
+  file_descriptor_proto->set_name("bat.shark");
+  file_descriptor_proto->add_dependency("baz.shark");
   message = file_descriptor_proto->add_message_type();
   message->set_name("Bat");
   field = message->add_field();
@@ -826,35 +826,35 @@ TEST_F(CommandLineInterfaceTest, MultipleInputsWithImport_DescriptorSetIn) {
   WriteDescriptorSet("baz_and_bat.bin", &file_descriptor_set);
   Run(strings::Substitute(
       "protocol_compiler --test_out=$$tmpdir --plug_out=$$tmpdir "
-      "--descriptor_set_in=$0 foo.proto bar.proto",
+      "--descriptor_set_in=$0 foo.shark bar.shark",
       std::string("$tmpdir/foo_and_bar.bin") +
           CommandLineInterface::kPathSeparator + "$tmpdir/baz_and_bat.bin"));
 
   ExpectNoErrors();
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
 
   Run(strings::Substitute(
       "protocol_compiler --test_out=$$tmpdir --plug_out=$$tmpdir "
-      "--descriptor_set_in=$0 baz.proto bat.proto",
+      "--descriptor_set_in=$0 baz.shark bat.shark",
       std::string("$tmpdir/foo_and_bar.bin") +
           CommandLineInterface::kPathSeparator + "$tmpdir/baz_and_bat.bin"));
 
   ExpectNoErrors();
-  ExpectGeneratedWithMultipleInputs("test_generator", "baz.proto,bat.proto",
-                                    "baz.proto", "Baz");
-  ExpectGeneratedWithMultipleInputs("test_generator", "baz.proto,bat.proto",
-                                    "bat.proto", "Bat");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "baz.proto,bat.proto",
-                                    "baz.proto", "Baz");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "baz.proto,bat.proto",
-                                    "bat.proto", "Bat");
+  ExpectGeneratedWithMultipleInputs("test_generator", "baz.shark,bat.shark",
+                                    "baz.shark", "Baz");
+  ExpectGeneratedWithMultipleInputs("test_generator", "baz.shark,bat.shark",
+                                    "bat.shark", "Bat");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "baz.shark,bat.shark",
+                                    "baz.shark", "Baz");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "baz.shark,bat.shark",
+                                    "bat.shark", "Bat");
 }
 
 TEST_F(CommandLineInterfaceTest,
@@ -863,15 +863,15 @@ TEST_F(CommandLineInterfaceTest,
   FileDescriptorSet file_descriptor_set;
 
   FileDescriptorProto foo_file_descriptor_proto;
-  foo_file_descriptor_proto.set_name("foo.proto");
+  foo_file_descriptor_proto.set_name("foo.shark");
   foo_file_descriptor_proto.add_message_type()->set_name("Foo");
 
   file_descriptor_set.add_file()->CopyFrom(foo_file_descriptor_proto);
 
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bar.proto");
-  file_descriptor_proto->add_dependency("baz.proto");
-  file_descriptor_proto->add_dependency("foo.proto");
+  file_descriptor_proto->set_name("bar.shark");
+  file_descriptor_proto->add_dependency("baz.shark");
+  file_descriptor_proto->add_dependency("foo.shark");
   DescriptorProto* message = file_descriptor_proto->add_message_type();
   message->set_name("Bar");
   FieldDescriptorProto* field = message->add_field();
@@ -888,8 +888,8 @@ TEST_F(CommandLineInterfaceTest,
   file_descriptor_set.add_file()->CopyFrom(foo_file_descriptor_proto);
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("baz.proto");
-  file_descriptor_proto->add_dependency("foo.proto");
+  file_descriptor_proto->set_name("baz.shark");
+  file_descriptor_proto->add_dependency("foo.shark");
   message = file_descriptor_proto->add_message_type();
   message->set_name("Baz");
   field = message->add_field();
@@ -900,13 +900,13 @@ TEST_F(CommandLineInterfaceTest,
 
   Run(strings::Substitute(
       "protocol_compiler --test_out=$$tmpdir --plug_out=$$tmpdir "
-      "--descriptor_set_in=$0 bar.proto",
+      "--descriptor_set_in=$0 bar.shark",
       std::string("$tmpdir/foo_and_bar.bin") +
           CommandLineInterface::kPathSeparator + "$tmpdir/foo_and_baz.bin"));
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "bar.proto", "Bar");
-  ExpectGenerated("test_plugin", "", "bar.proto", "Bar");
+  ExpectGenerated("test_generator", "", "bar.shark", "Bar");
+  ExpectGenerated("test_plugin", "", "bar.shark", "Bar");
 }
 
 TEST_F(CommandLineInterfaceTest,
@@ -915,12 +915,12 @@ TEST_F(CommandLineInterfaceTest,
   FileDescriptorSet file_descriptor_set;
 
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bar.proto");
-  file_descriptor_proto->add_dependency("baz.proto");
+  file_descriptor_proto->set_name("bar.shark");
+  file_descriptor_proto->add_dependency("baz.shark");
   DescriptorProto* message = file_descriptor_proto->add_message_type();
   message->set_name("Bar");
   FieldDescriptorProto* field = message->add_field();
@@ -932,16 +932,16 @@ TEST_F(CommandLineInterfaceTest,
 
   file_descriptor_set.clear_file();
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("baz.proto");
+  file_descriptor_proto->set_name("baz.shark");
   file_descriptor_proto->add_message_type()->set_name("Baz");
 
   WriteDescriptorSet("baz.bin", &file_descriptor_set);
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
       "--descriptor_set_in=$tmpdir/foo_and_bar.bin "
-      "foo.proto bar.proto");
+      "foo.shark bar.shark");
   ExpectErrorSubstring(
-      "bar.proto: Import \"baz.proto\" was not found or had errors.");
-  ExpectErrorSubstring("bar.proto: \"Baz\" is not defined.");
+      "bar.shark: Import \"baz.shark\" was not found or had errors.");
+  ExpectErrorSubstring("bar.shark: \"Baz\" is not defined.");
 }
 
 TEST_F(CommandLineInterfaceTest,
@@ -949,18 +949,18 @@ TEST_F(CommandLineInterfaceTest,
   FileDescriptorSet file_descriptor_set;
 
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("unused.proto");
+  file_descriptor_proto->set_name("unused.shark");
   file_descriptor_proto->add_message_type()->set_name("Unused");
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bar.proto");
-  file_descriptor_proto->add_dependency("unused.proto");
+  file_descriptor_proto->set_name("bar.shark");
+  file_descriptor_proto->add_dependency("unused.shark");
   file_descriptor_proto->add_message_type()->set_name("Bar");
 
   WriteDescriptorSet("unused_and_bar.bin", &file_descriptor_set);
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/unused_and_bar.bin unused.proto bar.proto");
+      "--descriptor_set_in=$tmpdir/unused_and_bar.bin unused.shark bar.shark");
   ExpectNoErrors();
 }
 
@@ -969,133 +969,133 @@ TEST_F(CommandLineInterfaceTest,
   FileDescriptorSet file_descriptor_set;
 
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("unused.proto");
+  file_descriptor_proto->set_name("unused.shark");
   file_descriptor_proto->add_message_type()->set_name("Unused");
 
   file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("bar.proto");
-  file_descriptor_proto->add_dependency("unused.proto");
+  file_descriptor_proto->set_name("bar.shark");
+  file_descriptor_proto->add_dependency("unused.shark");
   file_descriptor_proto->add_message_type()->set_name("Bar");
 
   WriteDescriptorSet("unused_and_bar.bin", &file_descriptor_set);
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo {\n"
                  "  optional Bar bar = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --test_out=$tmpdir --plug_out=$tmpdir "
       "--descriptor_set_in=$tmpdir/unused_and_bar.bin "
-      "--proto_path=$tmpdir unused.proto bar.proto foo.proto");
+      "--proto_path=$tmpdir unused.shark bar.shark foo.shark");
   // Reporting unused imports here is unfair, since it's unactionable. Notice
   // the lack of a line number.
   // TODO(b/144853061): If the file with unused import is from the descriptor
   // set and not from the file system, suppress the warning.
-  ExpectWarningSubstring("bar.proto: warning: Import unused.proto is unused.");
+  ExpectWarningSubstring("bar.shark: warning: Import unused.shark is unused.");
 }
 
 TEST_F(CommandLineInterfaceTest,
        OnlyReportsUnusedImportsForFilesBeingGenerated) {
-  CreateTempFile("unused.proto",
+  CreateTempFile("unused.shark",
                  "syntax = \"proto2\";\n"
                  "message Unused {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"unused.proto\";\n"
+                 "import \"unused.shark\";\n"
                  "message Bar {}\n");
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo {\n"
                  "  optional Bar bar = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
   ExpectNoErrors();
 }
 
 TEST_F(CommandLineInterfaceTest, ReportsTransitiveMisingImports_LeafFirst) {
-  CreateTempFile("unused.proto",
+  CreateTempFile("unused.shark",
                  "syntax = \"proto2\";\n"
                  "message Unused {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"unused.proto\";\n"
+                 "import \"unused.shark\";\n"
                  "message Bar {}\n");
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo {\n"
                  "  optional Bar bar = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir bar.proto foo.proto");
+      "--proto_path=$tmpdir bar.shark foo.shark");
   ExpectWarningSubstring(
-      "bar.proto:2:1: warning: Import unused.proto is unused.");
+      "bar.shark:2:1: warning: Import unused.shark is unused.");
 }
 
 TEST_F(CommandLineInterfaceTest, ReportsTransitiveMisingImports_LeafLast) {
-  CreateTempFile("unused.proto",
+  CreateTempFile("unused.shark",
                  "syntax = \"proto2\";\n"
                  "message Unused {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"unused.proto\";\n"
+                 "import \"unused.shark\";\n"
                  "message Bar {}\n");
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo {\n"
                  "  optional Bar bar = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto bar.proto");
+      "--proto_path=$tmpdir foo.shark bar.shark");
   ExpectWarningSubstring(
-      "bar.proto:2:1: warning: Import unused.proto is unused.");
+      "bar.shark:2:1: warning: Import unused.shark is unused.");
 }
 TEST_F(CommandLineInterfaceTest, CreateDirectory) {
   // Test that when we output to a sub-directory, it is created.
 
-  CreateTempFile("bar/baz/foo.proto",
+  CreateTempFile("bar/baz/foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
   CreateTempDir("out");
   CreateTempDir("plugout");
 
   Run("protocol_compiler --test_out=$tmpdir/out --plug_out=$tmpdir/plugout "
-      "--proto_path=$tmpdir bar/baz/foo.proto");
+      "--proto_path=$tmpdir bar/baz/foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "bar/baz/foo.proto", "Foo", "out");
-  ExpectGenerated("test_plugin", "", "bar/baz/foo.proto", "Foo", "plugout");
+  ExpectGenerated("test_generator", "", "bar/baz/foo.shark", "Foo", "out");
+  ExpectGenerated("test_plugin", "", "bar/baz/foo.shark", "Foo", "plugout");
 }
 
 TEST_F(CommandLineInterfaceTest, GeneratorParameters) {
   // Test that generator parameters are correctly parsed from the command line.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=TestParameter:$tmpdir "
       "--plug_out=TestPluginParameter:$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "TestParameter", "foo.proto", "Foo");
-  ExpectGenerated("test_plugin", "TestPluginParameter", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "TestParameter", "foo.shark", "Foo");
+  ExpectGenerated("test_plugin", "TestPluginParameter", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, ExtraGeneratorParameters) {
   // Test that generator parameters specified with the option flag are
   // correctly passed to the code generator.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
   // Create the "a" and "b" sub-directories.
@@ -1108,12 +1108,12 @@ TEST_F(CommandLineInterfaceTest, ExtraGeneratorParameters) {
       "--test_opt=foo2 "
       "--test_out=baz:$tmpdir/b "
       "--test_opt=foo3 "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "bar,foo1,foo2,foo3", "foo.proto", "Foo",
+  ExpectGenerated("test_generator", "bar,foo1,foo2,foo3", "foo.shark", "Foo",
                   "a");
-  ExpectGenerated("test_generator", "baz,foo1,foo2,foo3", "foo.proto", "Foo",
+  ExpectGenerated("test_generator", "baz,foo1,foo2,foo3", "foo.shark", "Foo",
                   "b");
 }
 
@@ -1121,7 +1121,7 @@ TEST_F(CommandLineInterfaceTest, ExtraPluginParameters) {
   // Test that generator parameters specified with the option flag are
   // correctly passed to the code generator.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
   // Create the "a" and "b" sub-directories.
@@ -1134,22 +1134,22 @@ TEST_F(CommandLineInterfaceTest, ExtraPluginParameters) {
       "--plug_opt=foo2 "
       "--plug_out=baz:$tmpdir/b "
       "--plug_opt=foo3 "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_plugin", "bar,foo1,foo2,foo3", "foo.proto", "Foo", "a");
-  ExpectGenerated("test_plugin", "baz,foo1,foo2,foo3", "foo.proto", "Foo", "b");
+  ExpectGenerated("test_plugin", "bar,foo1,foo2,foo3", "foo.shark", "Foo", "a");
+  ExpectGenerated("test_plugin", "baz,foo1,foo2,foo3", "foo.shark", "Foo", "b");
 }
 
 TEST_F(CommandLineInterfaceTest, UnrecognizedExtraParameters) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
       "--unknown_plug_a_opt=Foo "
       "--unknown_plug_b_opt=Bar "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring("Unknown flag: --unknown_plug_a_opt");
   ExpectErrorSubstring("Unknown flag: --unknown_plug_b_opt");
@@ -1166,7 +1166,7 @@ TEST_F(CommandLineInterfaceTest, ExtraPluginParametersForOutParameters) {
   // NOTE: UnrecognizedExtraParameters confirms that if two unknown _opt
   // directives appear, they both are reported.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
@@ -1174,7 +1174,7 @@ TEST_F(CommandLineInterfaceTest, ExtraPluginParametersForOutParameters) {
       "--xyz_opt=foo=bar --xyz_out=$tmpdir "
       "--abc_out=$tmpdir --abc_opt=foo=bar "
       "--unknown_plug_opt=Foo "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorText("Unknown flag: --unknown_plug_opt\n");
 }
@@ -1182,7 +1182,7 @@ TEST_F(CommandLineInterfaceTest, ExtraPluginParametersForOutParameters) {
 TEST_F(CommandLineInterfaceTest, Insert) {
   // Test running a generator that inserts code into another's output.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
@@ -1191,21 +1191,21 @@ TEST_F(CommandLineInterfaceTest, Insert) {
       "--plug_out=TestPluginParameter:$tmpdir "
       "--test_out=insert=test_generator,test_plugin:$tmpdir "
       "--plug_out=insert=test_generator,test_plugin:$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
   ExpectGeneratedWithInsertions("test_generator", "TestParameter",
-                                "test_generator,test_plugin", "foo.proto",
+                                "test_generator,test_plugin", "foo.shark",
                                 "Foo");
   ExpectGeneratedWithInsertions("test_plugin", "TestPluginParameter",
-                                "test_generator,test_plugin", "foo.proto",
+                                "test_generator,test_plugin", "foo.shark",
                                 "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, InsertWithAnnotationFixup) {
   // Check that annotation spans are updated after insertions.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_Annotate {}\n");
 
@@ -1214,11 +1214,11 @@ TEST_F(CommandLineInterfaceTest, InsertWithAnnotationFixup) {
       "--plug_out=TestPluginParameter:$tmpdir "
       "--test_out=insert_endlines=test_generator,test_plugin:$tmpdir "
       "--plug_out=insert_endlines=test_generator,test_plugin:$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  CheckGeneratedAnnotations("test_generator", "foo.proto");
-  CheckGeneratedAnnotations("test_plugin", "foo.proto");
+  CheckGeneratedAnnotations("test_generator", "foo.shark");
+  CheckGeneratedAnnotations("test_plugin", "foo.shark");
 }
 
 #if defined(_WIN32)
@@ -1226,10 +1226,10 @@ TEST_F(CommandLineInterfaceTest, InsertWithAnnotationFixup) {
 TEST_F(CommandLineInterfaceTest, WindowsOutputPath) {
   // Test that the output path can be a Windows-style path.
 
-  CreateTempFile("foo.proto", "syntax = \"proto2\";\n");
+  CreateTempFile("foo.shark", "syntax = \"proto2\";\n");
 
   Run("protocol_compiler --null_out=C:\\ "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
   ExpectNullCodeGeneratorCalled("");
@@ -1238,10 +1238,10 @@ TEST_F(CommandLineInterfaceTest, WindowsOutputPath) {
 TEST_F(CommandLineInterfaceTest, WindowsOutputPathAndParameter) {
   // Test that we can have a windows-style output path and a parameter.
 
-  CreateTempFile("foo.proto", "syntax = \"proto2\";\n");
+  CreateTempFile("foo.shark", "syntax = \"proto2\";\n");
 
   Run("protocol_compiler --null_out=bar:C:\\ "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
   ExpectNullCodeGeneratorCalled("bar");
@@ -1251,15 +1251,15 @@ TEST_F(CommandLineInterfaceTest, TrailingBackslash) {
   // Test that the directories can end in backslashes.  Some users claim this
   // doesn't work on their system.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir\\ "
-      "--proto_path=$tmpdir\\ foo.proto");
+      "--proto_path=$tmpdir\\ foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, Win32ErrorMessage) {
@@ -1272,81 +1272,81 @@ TEST_F(CommandLineInterfaceTest, Win32ErrorMessage) {
 TEST_F(CommandLineInterfaceTest, PathLookup) {
   // Test that specifying multiple directories in the proto search path works.
 
-  CreateTempFile("b/bar.proto",
+  CreateTempFile("b/bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar {}\n");
-  CreateTempFile("a/foo.proto",
+  CreateTempFile("a/foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo {\n"
                  "  optional Bar a = 1;\n"
                  "}\n");
-  CreateTempFile("b/foo.proto", "this should not be parsed\n");
+  CreateTempFile("b/foo.shark", "this should not be parsed\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir/a --proto_path=$tmpdir/b foo.proto");
+      "--proto_path=$tmpdir/a --proto_path=$tmpdir/b foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, ColonDelimitedPath) {
   // Same as PathLookup, but we provide the proto_path in a single flag.
 
-  CreateTempFile("b/bar.proto",
+  CreateTempFile("b/bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar {}\n");
-  CreateTempFile("a/foo.proto",
+  CreateTempFile("a/foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo {\n"
                  "  optional Bar a = 1;\n"
                  "}\n");
-  CreateTempFile("b/foo.proto", "this should not be parsed\n");
+  CreateTempFile("b/foo.shark", "this should not be parsed\n");
 
   Run(strings::Substitute(
-      "protocol_compiler --test_out=$$tmpdir --proto_path=$0 foo.proto",
+      "protocol_compiler --test_out=$$tmpdir --proto_path=$0 foo.shark",
       std::string("$tmpdir/a") + CommandLineInterface::kPathSeparator +
           "$tmpdir/b"));
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, NonRootMapping) {
   // Test setting up a search path mapping a directory to a non-root location.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=bar=$tmpdir bar/foo.proto");
+      "--proto_path=bar=$tmpdir bar/foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "bar/foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "bar/foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, PathWithEqualsSign) {
   // Test setting up a search path which happens to have '=' in it.
 
   CreateTempDir("with=sign");
-  CreateTempFile("with=sign/foo.proto",
+  CreateTempFile("with=sign/foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir/with=sign foo.proto");
+      "--proto_path=$tmpdir/with=sign foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, MultipleGenerators) {
   // Test that we can have multiple generators and use both in one invocation,
   // each with a different output directory.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
   // Create the "a" and "b" sub-directories.
@@ -1356,136 +1356,136 @@ TEST_F(CommandLineInterfaceTest, MultipleGenerators) {
   Run("protocol_compiler "
       "--test_out=$tmpdir/a "
       "--alt_out=$tmpdir/b "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo", "a");
-  ExpectGenerated("alt_generator", "", "foo.proto", "Foo", "b");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo", "a");
+  ExpectGenerated("alt_generator", "", "foo.shark", "Foo", "b");
 }
 
 TEST_F(CommandLineInterfaceTest, DisallowServicesNoServices) {
   // Test that --disallow_services doesn't cause a problem when there are no
   // services.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --disallow_services --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, DisallowServicesHasService) {
   // Test that --disallow_services produces an error when there are services.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n"
                  "service Bar {}\n");
 
   Run("protocol_compiler --disallow_services --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
-  ExpectErrorSubstring("foo.proto: This file contains services");
+  ExpectErrorSubstring("foo.shark: This file contains services");
 }
 
 TEST_F(CommandLineInterfaceTest, AllowServicesHasService) {
   // Test that services work fine as long as --disallow_services is not used.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n"
                  "service Bar {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 
 TEST_F(CommandLineInterfaceTest, DirectDependencies_Missing_EmptyList) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo { optional Bar bar = 1; }");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar { optional string text = 1; }");
 
   Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
-      "--direct_dependencies= foo.proto");
+      "--direct_dependencies= foo.shark");
 
   ExpectErrorText(
-      "foo.proto: File is imported but not declared in --direct_dependencies: "
-      "bar.proto\n");
+      "foo.shark: File is imported but not declared in --direct_dependencies: "
+      "bar.shark\n");
 }
 
 TEST_F(CommandLineInterfaceTest, DirectDependencies_Missing) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
-                 "import \"bla.proto\";\n"
+                 "import \"bar.shark\";\n"
+                 "import \"bla.shark\";\n"
                  "message Foo { optional Bar bar = 1; optional Bla bla = 2; }");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar { optional string text = 1; }");
-  CreateTempFile("bla.proto",
+  CreateTempFile("bla.shark",
                  "syntax = \"proto2\";\n"
                  "message Bla { optional int64 number = 1; }");
 
   Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
-      "--direct_dependencies=bla.proto foo.proto");
+      "--direct_dependencies=bla.shark foo.shark");
 
   ExpectErrorText(
-      "foo.proto: File is imported but not declared in --direct_dependencies: "
-      "bar.proto\n");
+      "foo.shark: File is imported but not declared in --direct_dependencies: "
+      "bar.shark\n");
 }
 
 TEST_F(CommandLineInterfaceTest, DirectDependencies_NoViolation) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo { optional Bar bar = 1; }");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar { optional string text = 1; }");
 
   Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
-      "--direct_dependencies=bar.proto foo.proto");
+      "--direct_dependencies=bar.shark foo.shark");
 
   ExpectNoErrors();
 }
 
 TEST_F(CommandLineInterfaceTest, DirectDependencies_NoViolation_MultiImports) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
-                 "import \"bla.proto\";\n"
+                 "import \"bar.shark\";\n"
+                 "import \"bla.shark\";\n"
                  "message Foo { optional Bar bar = 1; optional Bla bla = 2; }");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar { optional string text = 1; }");
-  CreateTempFile("bla.proto",
+  CreateTempFile("bla.shark",
                  "syntax = \"proto2\";\n"
                  "message Bla { optional int64 number = 1; }");
 
   Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
-      "--direct_dependencies=bar.proto:bla.proto foo.proto");
+      "--direct_dependencies=bar.shark:bla.shark foo.shark");
 
   ExpectNoErrors();
 }
 
 TEST_F(CommandLineInterfaceTest, DirectDependencies_ProvidedMultipleTimes) {
-  CreateTempFile("foo.proto", "syntax = \"proto2\";\n");
+  CreateTempFile("foo.shark", "syntax = \"proto2\";\n");
 
   Run("protocol_compiler --test_out=$tmpdir --proto_path=$tmpdir "
-      "--direct_dependencies=bar.proto --direct_dependencies=bla.proto "
-      "foo.proto");
+      "--direct_dependencies=bar.shark --direct_dependencies=bla.shark "
+      "foo.shark");
 
   ExpectErrorText(
       "--direct_dependencies may only be passed once. To specify multiple "
@@ -1494,11 +1494,11 @@ TEST_F(CommandLineInterfaceTest, DirectDependencies_ProvidedMultipleTimes) {
 }
 
 TEST_F(CommandLineInterfaceTest, DirectDependencies_CustomErrorMessage) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
+                 "import \"bar.shark\";\n"
                  "message Foo { optional Bar bar = 1; }");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar { optional string text = 1; }");
 
@@ -1508,39 +1508,39 @@ TEST_F(CommandLineInterfaceTest, DirectDependencies_CustomErrorMessage) {
   commands.push_back("--proto_path=$tmpdir");
   commands.push_back("--direct_dependencies=");
   commands.push_back("--direct_dependencies_violation_msg=Bla \"%s\" Bla");
-  commands.push_back("foo.proto");
+  commands.push_back("foo.shark");
   RunWithArgs(commands);
 
-  ExpectErrorText("foo.proto: Bla \"bar.proto\" Bla\n");
+  ExpectErrorText("foo.shark: Bla \"bar.shark\" Bla\n");
 }
 
 TEST_F(CommandLineInterfaceTest, CwdRelativeInputs) {
   // Test that we can accept working-directory-relative input files.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir $tmpdir/foo.proto");
+      "--proto_path=$tmpdir $tmpdir/foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, WriteDescriptorSet) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
-      "--proto_path=$tmpdir bar.proto");
+      "--proto_path=$tmpdir bar.shark");
 
   ExpectNoErrors();
 
@@ -1548,7 +1548,7 @@ TEST_F(CommandLineInterfaceTest, WriteDescriptorSet) {
   ReadDescriptorSet("descriptor_set", &descriptor_set);
   if (HasFatalFailure()) return;
   EXPECT_EQ(1, descriptor_set.file_size());
-  EXPECT_EQ("bar.proto", descriptor_set.file(0).name());
+  EXPECT_EQ("bar.shark", descriptor_set.file(0).name());
   // Descriptor set should not have source code info.
   EXPECT_FALSE(descriptor_set.file(0).has_source_code_info());
   // Descriptor set should have json_name.
@@ -1558,24 +1558,24 @@ TEST_F(CommandLineInterfaceTest, WriteDescriptorSet) {
 }
 
 TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithDuplicates) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
-  CreateTempFile("baz.proto",
+  CreateTempFile("baz.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Baz {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
-      "--proto_path=$tmpdir bar.proto foo.proto bar.proto baz.proto");
+      "--proto_path=$tmpdir bar.shark foo.shark bar.shark baz.shark");
 
   ExpectNoErrors();
 
@@ -1585,9 +1585,9 @@ TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithDuplicates) {
   EXPECT_EQ(3, descriptor_set.file_size());
   // foo should come first since the output is in dependency order.
   // since bar and baz are unordered, they should be in command line order.
-  EXPECT_EQ("foo.proto", descriptor_set.file(0).name());
-  EXPECT_EQ("bar.proto", descriptor_set.file(1).name());
-  EXPECT_EQ("baz.proto", descriptor_set.file(2).name());
+  EXPECT_EQ("foo.shark", descriptor_set.file(0).name());
+  EXPECT_EQ("bar.shark", descriptor_set.file(1).name());
+  EXPECT_EQ("baz.shark", descriptor_set.file(2).name());
   // Descriptor set should not have source code info.
   EXPECT_FALSE(descriptor_set.file(0).has_source_code_info());
   // Descriptor set should have json_name.
@@ -1597,18 +1597,18 @@ TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithDuplicates) {
 }
 
 TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithSourceInfo) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
-      "--include_source_info --proto_path=$tmpdir bar.proto");
+      "--include_source_info --proto_path=$tmpdir bar.shark");
 
   ExpectNoErrors();
 
@@ -1616,24 +1616,24 @@ TEST_F(CommandLineInterfaceTest, WriteDescriptorSetWithSourceInfo) {
   ReadDescriptorSet("descriptor_set", &descriptor_set);
   if (HasFatalFailure()) return;
   EXPECT_EQ(1, descriptor_set.file_size());
-  EXPECT_EQ("bar.proto", descriptor_set.file(0).name());
+  EXPECT_EQ("bar.shark", descriptor_set.file(0).name());
   // Source code info included.
   EXPECT_TRUE(descriptor_set.file(0).has_source_code_info());
 }
 
 TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSet) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
-      "--include_imports --proto_path=$tmpdir bar.proto");
+      "--include_imports --proto_path=$tmpdir bar.shark");
 
   ExpectNoErrors();
 
@@ -1641,30 +1641,30 @@ TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSet) {
   ReadDescriptorSet("descriptor_set", &descriptor_set);
   if (HasFatalFailure()) return;
   EXPECT_EQ(2, descriptor_set.file_size());
-  if (descriptor_set.file(0).name() == "bar.proto") {
+  if (descriptor_set.file(0).name() == "bar.shark") {
     std::swap(descriptor_set.mutable_file()->mutable_data()[0],
               descriptor_set.mutable_file()->mutable_data()[1]);
   }
-  EXPECT_EQ("foo.proto", descriptor_set.file(0).name());
-  EXPECT_EQ("bar.proto", descriptor_set.file(1).name());
+  EXPECT_EQ("foo.shark", descriptor_set.file(0).name());
+  EXPECT_EQ("bar.shark", descriptor_set.file(1).name());
   // Descriptor set should not have source code info.
   EXPECT_FALSE(descriptor_set.file(0).has_source_code_info());
   EXPECT_FALSE(descriptor_set.file(1).has_source_code_info());
 }
 
 TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSetWithSourceInfo) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
-      "--include_imports --include_source_info --proto_path=$tmpdir bar.proto");
+      "--include_imports --include_source_info --proto_path=$tmpdir bar.shark");
 
   ExpectNoErrors();
 
@@ -1672,12 +1672,12 @@ TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSetWithSourceInfo) {
   ReadDescriptorSet("descriptor_set", &descriptor_set);
   if (HasFatalFailure()) return;
   EXPECT_EQ(2, descriptor_set.file_size());
-  if (descriptor_set.file(0).name() == "bar.proto") {
+  if (descriptor_set.file(0).name() == "bar.shark") {
     std::swap(descriptor_set.mutable_file()->mutable_data()[0],
               descriptor_set.mutable_file()->mutable_data()[1]);
   }
-  EXPECT_EQ("foo.proto", descriptor_set.file(0).name());
-  EXPECT_EQ("bar.proto", descriptor_set.file(1).name());
+  EXPECT_EQ("foo.shark", descriptor_set.file(0).name());
+  EXPECT_EQ("bar.shark", descriptor_set.file(1).name());
   // Source code info included.
   EXPECT_TRUE(descriptor_set.file(0).has_source_code_info());
   EXPECT_TRUE(descriptor_set.file(1).has_source_code_info());
@@ -1687,18 +1687,18 @@ TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSetWithSourceInfo) {
 // TODO(teboring): Figure out how to write test on windows.
 #else
 TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileGivenTwoInputs) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --dependency_out=$tmpdir/manifest "
-      "--test_out=$tmpdir --proto_path=$tmpdir bar.proto foo.proto");
+      "--test_out=$tmpdir --proto_path=$tmpdir bar.shark foo.shark");
 
   ExpectErrorText(
       "Can only process one input file when using --dependency_out=FILE.\n");
@@ -1706,12 +1706,12 @@ TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileGivenTwoInputs) {
 
 #ifdef SHARK_OPENSOURCE
 TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFile) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
@@ -1720,13 +1720,13 @@ TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFile) {
   SwitchToTempDirectory();
 
   Run("protocol_compiler --dependency_out=manifest --test_out=. "
-      "bar.proto");
+      "bar.shark");
 
   ExpectNoErrors();
 
   ExpectFileContent("manifest",
-                    "bar.proto.MockCodeGenerator.test_generator: "
-                    "foo.proto\\\n bar.proto");
+                    "bar.shark.MockCodeGenerator.test_generator: "
+                    "foo.shark\\\n bar.shark");
 
   File::ChangeWorkingDirectory(current_working_directory);
 }
@@ -1736,56 +1736,56 @@ TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFile) {
 #endif  // !SHARK_OPENSOURCE
 
 TEST_F(CommandLineInterfaceTest, WriteDependencyManifestFileForAbsolutePath) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --dependency_out=$tmpdir/manifest "
-      "--test_out=$tmpdir --proto_path=$tmpdir bar.proto");
+      "--test_out=$tmpdir --proto_path=$tmpdir bar.shark");
 
   ExpectNoErrors();
 
   ExpectFileContent("manifest",
-                    "$tmpdir/bar.proto.MockCodeGenerator.test_generator: "
-                    "$tmpdir/foo.proto\\\n $tmpdir/bar.proto");
+                    "$tmpdir/bar.shark.MockCodeGenerator.test_generator: "
+                    "$tmpdir/foo.shark\\\n $tmpdir/bar.shark");
 }
 
 TEST_F(CommandLineInterfaceTest,
        WriteDependencyManifestFileWithDescriptorSetOut) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n"
+                 "import \"foo.shark\";\n"
                  "message Bar {\n"
                  "  optional Foo foo = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --dependency_out=$tmpdir/manifest "
-      "--descriptor_set_out=$tmpdir/bar.pb --proto_path=$tmpdir bar.proto");
+      "--descriptor_set_out=$tmpdir/bar.pb --proto_path=$tmpdir bar.shark");
 
   ExpectNoErrors();
 
   ExpectFileContent("manifest",
                     "$tmpdir/bar.pb: "
-                    "$tmpdir/foo.proto\\\n $tmpdir/bar.proto");
+                    "$tmpdir/foo.shark\\\n $tmpdir/bar.shark");
 }
 #endif  // !_WIN32
 
 TEST_F(CommandLineInterfaceTest, TestArgumentFile) {
   // Test parsing multiple input files using an argument file.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar {}\n");
   CreateTempFile("arguments.txt",
@@ -1793,20 +1793,20 @@ TEST_F(CommandLineInterfaceTest, TestArgumentFile) {
                  "--plug_out=$tmpdir\n"
                  "--proto_path=$tmpdir\n"
                  "--direct_dependencies_violation_msg=%s is not imported\n"
-                 "foo.proto\n"
-                 "bar.proto");
+                 "foo.shark\n"
+                 "bar.shark");
 
   Run("protocol_compiler @$tmpdir/arguments.txt");
 
   ExpectNoErrors();
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_generator", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "foo.proto", "Foo");
-  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.proto,bar.proto",
-                                    "bar.proto", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_generator", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "foo.shark", "Foo");
+  ExpectGeneratedWithMultipleInputs("test_plugin", "foo.shark,bar.shark",
+                                    "bar.shark", "Bar");
 }
 
 
@@ -1815,15 +1815,15 @@ TEST_F(CommandLineInterfaceTest, TestArgumentFile) {
 TEST_F(CommandLineInterfaceTest, ParseErrors) {
   // Test that parse errors are reported.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "badsyntax\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorText(
-      "foo.proto:2:1: Expected top-level statement (e.g. \"message\").\n");
+      "foo.shark:2:1: Expected top-level statement (e.g. \"message\").\n");
 }
 
 TEST_F(CommandLineInterfaceTest, ParseErrors_DescriptorSetIn) {
@@ -1831,7 +1831,7 @@ TEST_F(CommandLineInterfaceTest, ParseErrors_DescriptorSetIn) {
   CreateTempFile("foo.bin", "not a FileDescriptorSet");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark");
 
   ExpectErrorText("$tmpdir/foo.bin: Unable to parse.\n");
 }
@@ -1839,52 +1839,52 @@ TEST_F(CommandLineInterfaceTest, ParseErrors_DescriptorSetIn) {
 TEST_F(CommandLineInterfaceTest, ParseErrorsMultipleFiles) {
   // Test that parse errors are reported from multiple files.
 
-  // We set up files such that foo.proto actually depends on bar.proto in
-  // two ways:  Directly and through baz.proto.  bar.proto's errors should
+  // We set up files such that foo.shark actually depends on bar.shark in
+  // two ways:  Directly and through baz.shark.  bar.shark's errors should
   // only be reported once.
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "badsyntax\n");
-  CreateTempFile("baz.proto",
+  CreateTempFile("baz.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n");
-  CreateTempFile("foo.proto",
+                 "import \"bar.shark\";\n");
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n"
-                 "import \"baz.proto\";\n");
+                 "import \"bar.shark\";\n"
+                 "import \"baz.shark\";\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorText(
-      "bar.proto:2:1: Expected top-level statement (e.g. \"message\").\n"
-      "baz.proto:2:1: Import \"bar.proto\" was not found or had errors.\n"
-      "foo.proto:2:1: Import \"bar.proto\" was not found or had errors.\n"
-      "foo.proto:3:1: Import \"baz.proto\" was not found or had errors.\n");
+      "bar.shark:2:1: Expected top-level statement (e.g. \"message\").\n"
+      "baz.shark:2:1: Import \"bar.shark\" was not found or had errors.\n"
+      "foo.shark:2:1: Import \"bar.shark\" was not found or had errors.\n"
+      "foo.shark:3:1: Import \"baz.shark\" was not found or had errors.\n");
 }
 
 TEST_F(CommandLineInterfaceTest, RecursiveImportFails) {
   // Create a proto file that imports itself.
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"foo.proto\";\n");
+                 "import \"foo.shark\";\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring(
-      "foo.proto:2:1: File recursively imports itself: "
-      "foo.proto -> foo.proto\n");
+      "foo.shark:2:1: File recursively imports itself: "
+      "foo.shark -> foo.shark\n");
 }
 
 TEST_F(CommandLineInterfaceTest, InputNotFoundError) {
   // Test what happens if the input file is not found.
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorText(
-      "Could not make proto path relative: foo.proto: No such file or "
+      "Could not make proto path relative: foo.shark: No such file or "
       "directory\n");
 }
 
@@ -1892,7 +1892,7 @@ TEST_F(CommandLineInterfaceTest, InputNotFoundError_DescriptorSetIn) {
   // Test what happens if the input file is not found.
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark");
 
   ExpectErrorText("$tmpdir/foo.bin: No such file or directory\n");
 }
@@ -1902,10 +1902,10 @@ TEST_F(CommandLineInterfaceTest, CwdRelativeInputNotFoundError) {
   // found.
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir $tmpdir/foo.proto");
+      "--proto_path=$tmpdir $tmpdir/foo.shark");
 
   ExpectErrorText(
-      "Could not make proto path relative: $tmpdir/foo.proto: No such file or "
+      "Could not make proto path relative: $tmpdir/foo.shark: No such file or "
       "directory\n");
 }
 
@@ -1913,7 +1913,7 @@ TEST_F(CommandLineInterfaceTest, CwdRelativeInputNotMappedError) {
   // Test what happens when a working-directory-relative input file is not
   // mapped to a virtual path.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
@@ -1921,13 +1921,13 @@ TEST_F(CommandLineInterfaceTest, CwdRelativeInputNotMappedError) {
   CreateTempFile("bar/dummy", "");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir/bar $tmpdir/foo.proto");
+      "--proto_path=$tmpdir/bar $tmpdir/foo.shark");
 
   ExpectErrorText(
-      "$tmpdir/foo.proto: File does not reside within any path "
+      "$tmpdir/foo.shark: File does not reside within any path "
       "specified using --proto_path (or -I).  You must specify a "
       "--proto_path which encompasses this file.  Note that the "
-      "proto_path must be an exact prefix of the .proto file "
+      "proto_path must be an exact prefix of the .shark file "
       "names -- protoc is too dumb to figure out when two paths "
       "(e.g. absolute and relative) are equivalent (it's harder "
       "than you think).\n");
@@ -1941,10 +1941,10 @@ TEST_F(CommandLineInterfaceTest, CwdRelativeInputNotFoundAndNotMappedError) {
   CreateTempFile("bar/dummy", "");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir/bar $tmpdir/foo.proto");
+      "--proto_path=$tmpdir/bar $tmpdir/foo.shark");
 
   ExpectErrorText(
-      "Could not make proto path relative: $tmpdir/foo.proto: No such file or "
+      "Could not make proto path relative: $tmpdir/foo.shark: No such file or "
       "directory\n");
 }
 
@@ -1952,20 +1952,20 @@ TEST_F(CommandLineInterfaceTest, CwdRelativeInputShadowedError) {
   // Test what happens when a working-directory-relative input file is shadowed
   // by another file in the virtual path.
 
-  CreateTempFile("foo/foo.proto",
+  CreateTempFile("foo/foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
-  CreateTempFile("bar/foo.proto",
+  CreateTempFile("bar/foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
       "--proto_path=$tmpdir/foo --proto_path=$tmpdir/bar "
-      "$tmpdir/bar/foo.proto");
+      "$tmpdir/bar/foo.shark");
 
   ExpectErrorText(
-      "$tmpdir/bar/foo.proto: Input is shadowed in the --proto_path "
-      "by \"$tmpdir/foo/foo.proto\".  Either use the latter "
+      "$tmpdir/bar/foo.shark: Input is shadowed in the --proto_path "
+      "by \"$tmpdir/foo/foo.shark\".  Either use the latter "
       "file as your input or reorder the --proto_path so that the "
       "former file's location comes first.\n");
 }
@@ -1974,21 +1974,21 @@ TEST_F(CommandLineInterfaceTest, ProtoPathNotFoundError) {
   // Test what happens if the input file is not found.
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir/foo foo.proto");
+      "--proto_path=$tmpdir/foo foo.shark");
 
   ExpectErrorText(
       "$tmpdir/foo: warning: directory does not exist.\n"
-      "Could not make proto path relative: foo.proto: No such file or "
+      "Could not make proto path relative: foo.shark: No such file or "
       "directory\n");
 }
 
 TEST_F(CommandLineInterfaceTest, ProtoPathAndDescriptorSetIn) {
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir --descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--proto_path=$tmpdir --descriptor_set_in=$tmpdir/foo.bin foo.shark");
   ExpectErrorText("$tmpdir/foo.bin: No such file or directory\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--descriptor_set_in=$tmpdir/foo.bin --proto_path=$tmpdir foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin --proto_path=$tmpdir foo.shark");
   ExpectErrorText("$tmpdir/foo.bin: No such file or directory\n");
 }
 
@@ -2001,19 +2001,19 @@ TEST_F(CommandLineInterfaceTest, ProtoPathAndDescriptorSetIn_CompileFiles) {
   //       to make it easier to test that the file was output instead of the
   //       contents of the --descriptor_set_in file.
   FileDescriptorProto* file_descriptor_proto = file_descriptor_set.add_file();
-  file_descriptor_proto->set_name("foo.proto");
+  file_descriptor_proto->set_name("foo.shark");
   file_descriptor_proto->add_message_type()->set_name("Foo");
 
   WriteDescriptorSet("foo.bin", &file_descriptor_set);
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message FooBar { required string foo_message = 1; }\n");
 
   Run("protocol_compiler --descriptor_set_out=$tmpdir/descriptor_set "
       "--descriptor_set_in=$tmpdir/foo.bin "
       "--include_source_info "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
 
@@ -2021,7 +2021,7 @@ TEST_F(CommandLineInterfaceTest, ProtoPathAndDescriptorSetIn_CompileFiles) {
   ReadDescriptorSet("descriptor_set", &descriptor_set);
 
   EXPECT_EQ(1, descriptor_set.file_size());
-  EXPECT_EQ("foo.proto", descriptor_set.file(0).name());
+  EXPECT_EQ("foo.shark", descriptor_set.file(0).name());
   // Descriptor set SHOULD have source code info.
   EXPECT_TRUE(descriptor_set.file(0).has_source_code_info());
 
@@ -2033,13 +2033,13 @@ TEST_F(CommandLineInterfaceTest, ProtoPathAndDescriptorSetIn_CompileFiles) {
 TEST_F(CommandLineInterfaceTest, ProtoPathAndDependencyOut) {
   Run("protocol_compiler --test_out=$tmpdir "
       "--dependency_out=$tmpdir/manifest "
-      "--descriptor_set_in=$tmpdir/foo.bin foo.proto");
+      "--descriptor_set_in=$tmpdir/foo.bin foo.shark");
   ExpectErrorText(
       "--descriptor_set_in cannot be used with --dependency_out.\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
       "--descriptor_set_in=$tmpdir/foo.bin "
-      "--dependency_out=$tmpdir/manifest foo.proto");
+      "--dependency_out=$tmpdir/manifest foo.shark");
   ExpectErrorText(
       "--dependency_out cannot be used with --descriptor_set_in.\n");
 }
@@ -2054,28 +2054,28 @@ TEST_F(CommandLineInterfaceTest, MissingInputError) {
 }
 
 TEST_F(CommandLineInterfaceTest, MissingOutputError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
-  Run("protocol_compiler --proto_path=$tmpdir foo.proto");
+  Run("protocol_compiler --proto_path=$tmpdir foo.shark");
 
   ExpectErrorText("Missing output directives.\n");
 }
 
 TEST_F(CommandLineInterfaceTest, OutputWriteError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   std::string output_file =
-      MockCodeGenerator::GetOutputFileName("test_generator", "foo.proto");
+      MockCodeGenerator::GetOutputFileName("test_generator", "foo.shark");
 
   // Create a directory blocking our output location.
   CreateTempDir(output_file);
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   // MockCodeGenerator no longer detects an error because we actually write to
   // an in-memory location first, then dump to disk at the end.  This is no
@@ -2093,18 +2093,18 @@ TEST_F(CommandLineInterfaceTest, OutputWriteError) {
 }
 
 TEST_F(CommandLineInterfaceTest, PluginOutputWriteError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   std::string output_file =
-      MockCodeGenerator::GetOutputFileName("test_plugin", "foo.proto");
+      MockCodeGenerator::GetOutputFileName("test_plugin", "foo.shark");
 
   // Create a directory blocking our output location.
   CreateTempDir(output_file);
 
   Run("protocol_compiler --plug_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
   // Windows with MSVCRT.dll produces EPERM instead of EISDIR.
@@ -2117,80 +2117,80 @@ TEST_F(CommandLineInterfaceTest, PluginOutputWriteError) {
 }
 
 TEST_F(CommandLineInterfaceTest, OutputDirectoryNotFoundError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir/nosuchdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring("nosuchdir/: No such file or directory");
 }
 
 TEST_F(CommandLineInterfaceTest, PluginOutputDirectoryNotFoundError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --plug_out=$tmpdir/nosuchdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring("nosuchdir/: No such file or directory");
 }
 
 TEST_F(CommandLineInterfaceTest, OutputDirectoryIsFileError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
-  Run("protocol_compiler --test_out=$tmpdir/foo.proto "
-      "--proto_path=$tmpdir foo.proto");
+  Run("protocol_compiler --test_out=$tmpdir/foo.shark "
+      "--proto_path=$tmpdir foo.shark");
 
 #if defined(_WIN32) && !defined(__CYGWIN__)
   // Windows with MSVCRT.dll produces EINVAL instead of ENOTDIR.
-  if (HasAlternateErrorSubstring("foo.proto/: Invalid argument")) {
+  if (HasAlternateErrorSubstring("foo.shark/: Invalid argument")) {
     return;
   }
 #endif
 
-  ExpectErrorSubstring("foo.proto/: Not a directory");
+  ExpectErrorSubstring("foo.shark/: Not a directory");
 }
 
 TEST_F(CommandLineInterfaceTest, GeneratorError) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_Error {}\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring(
-      "--test_out: foo.proto: Saw message type MockCodeGenerator_Error.");
+      "--test_out: foo.shark: Saw message type MockCodeGenerator_Error.");
 }
 
 TEST_F(CommandLineInterfaceTest, GeneratorPluginError) {
   // Test a generator plugin that returns an error.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_Error {}\n");
 
   Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring(
-      "--plug_out: foo.proto: Saw message type MockCodeGenerator_Error.");
+      "--plug_out: foo.shark: Saw message type MockCodeGenerator_Error.");
 }
 
 TEST_F(CommandLineInterfaceTest, GeneratorPluginFail) {
   // Test a generator plugin that exits with an error code.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_Exit {}\n");
 
   Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring("Saw message type MockCodeGenerator_Exit.");
   ExpectErrorSubstring(
@@ -2200,12 +2200,12 @@ TEST_F(CommandLineInterfaceTest, GeneratorPluginFail) {
 TEST_F(CommandLineInterfaceTest, GeneratorPluginCrash) {
   // Test a generator plugin that crashes.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_Abort {}\n");
 
   Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring("Saw message type MockCodeGenerator_Abort.");
 
@@ -2221,36 +2221,36 @@ TEST_F(CommandLineInterfaceTest, GeneratorPluginCrash) {
 }
 
 TEST_F(CommandLineInterfaceTest, PluginReceivesSourceCodeInfo) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_HasSourceCodeInfo {}\n");
 
-  Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.proto");
+  Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring(
       "Saw message type MockCodeGenerator_HasSourceCodeInfo: 1.");
 }
 
 TEST_F(CommandLineInterfaceTest, PluginReceivesJsonName) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_HasJsonName {\n"
                  "  optional int32 value = 1;\n"
                  "}\n");
 
-  Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.proto");
+  Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring("Saw json_name: 1");
 }
 
 TEST_F(CommandLineInterfaceTest, PluginReceivesCompilerVersion) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message MockCodeGenerator_ShowVersionNumber {\n"
                  "  optional int32 value = 1;\n"
                  "}\n");
 
-  Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.proto");
+  Run("protocol_compiler --plug_out=$tmpdir --proto_path=$tmpdir foo.shark");
 
   ExpectErrorSubstring(StringPrintf("Saw compiler_version: %d %s",
                                     SHARK_VERSION,
@@ -2260,13 +2260,13 @@ TEST_F(CommandLineInterfaceTest, PluginReceivesCompilerVersion) {
 TEST_F(CommandLineInterfaceTest, GeneratorPluginNotFound) {
   // Test what happens if the plugin isn't found.
 
-  CreateTempFile("error.proto",
+  CreateTempFile("error.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --badplug_out=TestParameter:$tmpdir "
       "--plugin=prefix-gen-badplug=no_such_file "
-      "--proto_path=$tmpdir error.proto");
+      "--proto_path=$tmpdir error.shark");
 
 #ifdef _WIN32
   ExpectErrorSubstring("--badplug_out: prefix-gen-badplug: " +
@@ -2288,13 +2288,13 @@ TEST_F(CommandLineInterfaceTest, GeneratorPluginNotFound) {
 TEST_F(CommandLineInterfaceTest, GeneratorPluginNotAllowed) {
   // Test what happens if plugins aren't allowed.
 
-  CreateTempFile("error.proto",
+  CreateTempFile("error.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   DisallowPlugins();
   Run("protocol_compiler --plug_out=TestParameter:$tmpdir "
-      "--proto_path=$tmpdir error.proto");
+      "--proto_path=$tmpdir error.shark");
 
   ExpectErrorSubstring("Unknown flag: --plug_out");
 }
@@ -2313,41 +2313,41 @@ TEST_F(CommandLineInterfaceTest, GccFormatErrors) {
   // Test --error_format=gcc (which is the default, but we want to verify
   // that it can be set explicitly).
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "badsyntax\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir --error_format=gcc foo.proto");
+      "--proto_path=$tmpdir --error_format=gcc foo.shark");
 
   ExpectErrorText(
-      "foo.proto:2:1: Expected top-level statement (e.g. \"message\").\n");
+      "foo.shark:2:1: Expected top-level statement (e.g. \"message\").\n");
 }
 
 TEST_F(CommandLineInterfaceTest, MsvsFormatErrors) {
   // Test --error_format=msvs
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "badsyntax\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir --error_format=msvs foo.proto");
+      "--proto_path=$tmpdir --error_format=msvs foo.shark");
 
   ExpectErrorText(
-      "$tmpdir/foo.proto(2) : error in column=1: Expected top-level statement "
+      "$tmpdir/foo.shark(2) : error in column=1: Expected top-level statement "
       "(e.g. \"message\").\n");
 }
 
 TEST_F(CommandLineInterfaceTest, InvalidErrorFormat) {
   // Test invalid --error_format
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "badsyntax\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir --error_format=invalid foo.proto");
+      "--proto_path=$tmpdir --error_format=invalid foo.shark");
 
   ExpectErrorText("Unknown error format: invalid\n");
 }
@@ -2355,19 +2355,19 @@ TEST_F(CommandLineInterfaceTest, InvalidErrorFormat) {
 TEST_F(CommandLineInterfaceTest, Warnings) {
   // Test --fatal_warnings.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
-                 "import \"bar.proto\";\n");
-  CreateTempFile("bar.proto", "syntax = \"proto2\";\n");
+                 "import \"bar.shark\";\n");
+  CreateTempFile("bar.shark", "syntax = \"proto2\";\n");
 
   Run("protocol_compiler --test_out=$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
   ExpectCapturedStderrSubstringWithZeroReturnCode(
-      "foo.proto:2:1: warning: Import bar.proto is unused.");
+      "foo.shark:2:1: warning: Import bar.shark is unused.");
 
   Run("protocol_compiler --test_out=$tmpdir --fatal_warnings "
-      "--proto_path=$tmpdir foo.proto");
-  ExpectErrorSubstring("foo.proto:2:1: warning: Import bar.proto is unused.");
+      "--proto_path=$tmpdir foo.shark");
+  ExpectErrorSubstring("foo.shark:2:1: warning: Import bar.shark is unused.");
 }
 
 // -------------------------------------------------------------------
@@ -2376,50 +2376,50 @@ TEST_F(CommandLineInterfaceTest, Warnings) {
 TEST_F(CommandLineInterfaceTest, ParseSingleCharacterFlag) {
   // Test that a single-character flag works.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler -t$tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, ParseSpaceDelimitedValue) {
   // Test that separating the flag value with a space works.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler --test_out $tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, ParseSingleCharacterSpaceDelimitedValue) {
   // Test that separating the flag value with a space works for
   // single-character flags.
 
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "message Foo {}\n");
 
   Run("protocol_compiler -t $tmpdir "
-      "--proto_path=$tmpdir foo.proto");
+      "--proto_path=$tmpdir foo.shark");
 
   ExpectNoErrors();
-  ExpectGenerated("test_generator", "", "foo.proto", "Foo");
+  ExpectGenerated("test_generator", "", "foo.shark", "Foo");
 }
 
 TEST_F(CommandLineInterfaceTest, MissingValueError) {
   // Test that we get an error if a flag is missing its value.
 
-  Run("protocol_compiler --test_out --proto_path=$tmpdir foo.proto");
+  Run("protocol_compiler --test_out --proto_path=$tmpdir foo.shark");
 
   ExpectErrorText("Missing value for flag: --test_out\n");
 }
@@ -2434,7 +2434,7 @@ TEST_F(CommandLineInterfaceTest, MissingValueAtEndError) {
 }
 
 TEST_F(CommandLineInterfaceTest, Proto3OptionalDisallowedNoCodegenSupport) {
-  CreateTempFile("google/foo.proto",
+  CreateTempFile("google/foo.shark",
                  "syntax = \"proto3\";\n"
                  "message Foo {\n"
                  "  optional int32 i = 1;\n"
@@ -2445,7 +2445,7 @@ TEST_F(CommandLineInterfaceTest, Proto3OptionalDisallowedNoCodegenSupport) {
                                      CodeGenerator::FEATURE_PROTO3_OPTIONAL);
 
   Run("protocol_compiler --experimental_allow_proto3_optional "
-      "--proto_path=$tmpdir google/foo.proto --no_proto3_optional_out=$tmpdir");
+      "--proto_path=$tmpdir google/foo.shark --no_proto3_optional_out=$tmpdir");
 
   ExpectErrorSubstring(
       "code generator --no_proto3_optional_out hasn't been updated to support "
@@ -2453,19 +2453,19 @@ TEST_F(CommandLineInterfaceTest, Proto3OptionalDisallowedNoCodegenSupport) {
 }
 
 TEST_F(CommandLineInterfaceTest, Proto3OptionalAllowWithFlag) {
-  CreateTempFile("google/foo.proto",
+  CreateTempFile("google/foo.shark",
                  "syntax = \"proto3\";\n"
                  "message Foo {\n"
                  "  optional int32 i = 1;\n"
                  "}\n");
 
   Run("protocol_compiler --experimental_allow_proto3_optional "
-      "--proto_path=$tmpdir google/foo.proto --test_out=$tmpdir");
+      "--proto_path=$tmpdir google/foo.shark --test_out=$tmpdir");
   ExpectNoErrors();
 }
 
 TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
-  CreateTempFile("foo.proto",
+  CreateTempFile("foo.shark",
                  "syntax = \"proto2\";\n"
                  "package foo;\n"
                  "message Foo {\n"
@@ -2475,7 +2475,7 @@ TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
                  "  optional int64 d = 8;\n"
                  "  optional double e = 10;\n"
                  "}\n");
-  CreateTempFile("bar.proto",
+  CreateTempFile("bar.shark",
                  "syntax = \"proto2\";\n"
                  "message Bar {\n"
                  "  optional int32 a = 2;\n"
@@ -2483,7 +2483,7 @@ TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
                  "  optional int64 d = 8;\n"
                  "  extensions 10;\n"
                  "}\n");
-  CreateTempFile("baz.proto",
+  CreateTempFile("baz.shark",
                  "syntax = \"proto2\";\n"
                  "message Baz {\n"
                  "  optional int32 a = 2;\n"
@@ -2495,7 +2495,7 @@ TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
                  "  extensions 4;\n"
                  "}\n");
   CreateTempFile(
-      "quz.proto",
+      "quz.shark",
       "syntax = \"proto2\";\n"
       "message Quz {\n"
       "  message Foo {}\n"  // nested message
@@ -2513,7 +2513,7 @@ TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
       "}\n");
 
   Run("protocol_compiler --print_free_field_numbers --proto_path=$tmpdir "
-      "foo.proto bar.proto baz.proto quz.proto");
+      "foo.shark bar.shark baz.shark quz.shark");
 
   ExpectNoErrors();
 
@@ -2655,13 +2655,13 @@ class EncodeDecodeTest : public testing::TestWithParam<EncodeDecodeTestMode> {
     unittest_proto_descriptor_set_filename_ =
         TestTempDir() + "/unittest_proto_descriptor_set.bin";
     FileDescriptorSet file_descriptor_set;
-    protobuf_unittest::TestAllTypes test_all_types;
+    sharkbuf_unittest::TestAllTypes test_all_types;
     test_all_types.descriptor()->file()->CopyTo(file_descriptor_set.add_file());
 
-    protobuf_unittest_import::ImportMessage import_message;
+    sharkbuf_unittest_import::ImportMessage import_message;
     import_message.descriptor()->file()->CopyTo(file_descriptor_set.add_file());
 
-    protobuf_unittest_import::PublicImportMessage public_import_message;
+    sharkbuf_unittest_import::PublicImportMessage public_import_message;
     public_import_message.descriptor()->file()->CopyTo(
         file_descriptor_set.add_file());
     GOOGLE_DCHECK(file_descriptor_set.IsInitialized());
@@ -2685,9 +2685,9 @@ TEST_P(EncodeDecodeTest, Encode) {
   std::string args;
   if (GetParam() != DESCRIPTOR_SET_IN) {
     args.append(
-        TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto"));
+        TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark"));
   }
-  EXPECT_TRUE(Run(args + " --encode=protobuf_unittest.TestAllTypes"));
+  EXPECT_TRUE(Run(args + " --encode=sharkbuf_unittest.TestAllTypes"));
   ExpectStdoutMatchesBinaryFile(TestUtil::GetTestDataPath(
       "net/proto2/internal/testdata/golden_message_oneof_implemented"));
   ExpectStderrMatchesText("");
@@ -2697,8 +2697,8 @@ TEST_P(EncodeDecodeTest, Decode) {
   RedirectStdinFromFile(TestUtil::GetTestDataPath(
       "net/proto2/internal/testdata/golden_message_oneof_implemented"));
   EXPECT_TRUE(
-      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto") +
-          " --decode=protobuf_unittest.TestAllTypes"));
+      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") +
+          " --decode=sharkbuf_unittest.TestAllTypes"));
   ExpectStdoutMatchesTextFile(TestUtil::GetTestDataPath(
       "net/proto2/internal/"
       "testdata/text_format_unittest_data_oneof_implemented.txt"));
@@ -2708,15 +2708,15 @@ TEST_P(EncodeDecodeTest, Decode) {
 TEST_P(EncodeDecodeTest, Partial) {
   RedirectStdinFromText("");
   EXPECT_TRUE(
-      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto") +
-          " --encode=protobuf_unittest.TestRequired"));
+      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") +
+          " --encode=sharkbuf_unittest.TestRequired"));
   ExpectStdoutMatchesText("");
   ExpectStderrMatchesText(
       "warning:  Input message is missing required fields:  a, b, c\n");
 }
 
 TEST_P(EncodeDecodeTest, DecodeRaw) {
-  protobuf_unittest::TestAllTypes message;
+  sharkbuf_unittest::TestAllTypes message;
   message.set_optional_int32(123);
   message.set_optional_string("foo");
   std::string data;
@@ -2732,7 +2732,7 @@ TEST_P(EncodeDecodeTest, DecodeRaw) {
 
 TEST_P(EncodeDecodeTest, UnknownType) {
   EXPECT_FALSE(
-      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto") +
+      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") +
           " --encode=NoSuchType"));
   ExpectStdoutMatchesText("");
   ExpectStderrMatchesText("Type not defined: NoSuchType\n");
@@ -2740,11 +2740,11 @@ TEST_P(EncodeDecodeTest, UnknownType) {
 
 TEST_P(EncodeDecodeTest, ProtoParseError) {
   EXPECT_FALSE(
-      Run("net/proto2/internal/no_such_file.proto "
+      Run("net/proto2/internal/no_such_file.shark "
           "--encode=NoSuchType"));
   ExpectStdoutMatchesText("");
   ExpectStderrContainsText(
-      "net/proto2/internal/no_such_file.proto: No such file or directory\n");
+      "net/proto2/internal/no_such_file.shark: No such file or directory\n");
 }
 
 TEST_P(EncodeDecodeTest, EncodeDeterministicOutput) {
@@ -2754,10 +2754,10 @@ TEST_P(EncodeDecodeTest, EncodeDeterministicOutput) {
   std::string args;
   if (GetParam() != DESCRIPTOR_SET_IN) {
     args.append(
-        TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto"));
+        TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark"));
   }
   EXPECT_TRUE(Run(
-      args + " --encode=protobuf_unittest.TestAllTypes --deterministic_output"));
+      args + " --encode=sharkbuf_unittest.TestAllTypes --deterministic_output"));
   ExpectStdoutMatchesBinaryFile(TestUtil::GetTestDataPath(
       "net/proto2/internal/testdata/golden_message_oneof_implemented"));
   ExpectStderrMatchesText("");
@@ -2767,8 +2767,8 @@ TEST_P(EncodeDecodeTest, DecodeDeterministicOutput) {
   RedirectStdinFromFile(TestUtil::GetTestDataPath(
       "net/proto2/internal/testdata/golden_message_oneof_implemented"));
   EXPECT_FALSE(
-      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto") +
-          " --decode=protobuf_unittest.TestAllTypes --deterministic_output"));
+      Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") +
+          " --decode=sharkbuf_unittest.TestAllTypes --deterministic_output"));
   ExpectStderrMatchesText(
       "Can only use --deterministic_output with --encode.\n");
 }

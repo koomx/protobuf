@@ -59,7 +59,7 @@
 #include <shark/compiler/cpp/helpers.h>
 #include <shark/compiler/cpp/padding_optimizer.h>
 #include <shark/compiler/cpp/parse_function_generator.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/stubs/hash.h>
 
 

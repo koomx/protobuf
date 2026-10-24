@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <tests/unittest_proto3.pb.h>
+#include <tests/unittest_proto3.skp.h>
 
 #define LITE_TEST_NAME Proto3LiteTest
 #define UNITTEST ::proto3_unittest

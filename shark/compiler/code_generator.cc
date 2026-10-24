@@ -36,7 +36,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/compiler/plugin.pb.h>
+#include <shark/compiler/plugin.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
 
@@ -121,12 +121,12 @@ void ParseGeneratorParameter(
   }
 }
 
-// Strips ".proto" or ".protodevel" from the end of a filename.
+// Strips ".shark" or ".protodevel" from the end of a filename.
 std::string StripProto(const std::string& filename) {
   if (HasSuffixString(filename, ".protodevel")) {
     return StripSuffixString(filename, ".protodevel");
   } else {
-    return StripSuffixString(filename, ".proto");
+    return StripSuffixString(filename, ".shark");
   }
 }
 

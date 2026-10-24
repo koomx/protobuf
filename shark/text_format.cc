@@ -52,7 +52,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/any.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/dynamic_message.h>
 #include <shark/io/strtod.h>
 #include <shark/map_field.h>
@@ -502,7 +502,7 @@ class TextFormat::Parser::ParserImpl {
       } else {
         field = descriptor->FindFieldByName(field_name);
         // Group names are expected to be capitalized as they appear in the
-        // .proto file, which actually matches their type names, not their
+        // .shark file, which actually matches their type names, not their
         // field names.
         if (field == nullptr) {
           std::string lower_field_name = field_name;

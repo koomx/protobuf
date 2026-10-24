@@ -44,7 +44,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/compiler/cpp/file.h>
 #include <shark/compiler/cpp/helpers.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 
 namespace shark::compiler::cpp {
 
@@ -68,10 +68,10 @@ bool CppGenerator::Generate(const FileDescriptor* file,
   // parse generator options
 
   // If the dllexport_decl option is passed to the compiler, we need to write
-  // it in front of every symbol that should be exported if this .proto is
+  // it in front of every symbol that should be exported if this .shark is
   // compiled into a Windows DLL.  E.g., if the user invokes the protocol
   // compiler as:
-  //   protoc --cpp_out=dllexport_decl=FOO_EXPORT:outdir foo.proto
+  //   protoc --cpp_out=dllexport_decl=FOO_EXPORT:outdir foo.shark
   // then we'll define classes like this:
   //   class FOO_EXPORT Foo {
   //     ...
@@ -181,11 +181,11 @@ bool CppGenerator::Generate(const FileDescriptor* file,
   // Generate header(s).
   if (file_options.proto_h) {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        generator_context->Open(basename + ".proto.h"));
+        generator_context->Open(basename + ".shark.h"));
     GeneratedCodeInfo annotations;
     io::AnnotationProtoCollector<GeneratedCodeInfo> annotation_collector(
         &annotations);
-    std::string info_path = basename + ".proto.h.meta";
+    std::string info_path = basename + ".shark.h.meta";
     io::Printer printer(
         output.get(), '$',
         file_options.annotate_headers ? &annotation_collector : nullptr);
@@ -200,11 +200,11 @@ bool CppGenerator::Generate(const FileDescriptor* file,
 
   {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        generator_context->Open(basename + ".pb.h"));
+        generator_context->Open(basename + ".skp.h"));
     GeneratedCodeInfo annotations;
     io::AnnotationProtoCollector<GeneratedCodeInfo> annotation_collector(
         &annotations);
-    std::string info_path = basename + ".pb.h.meta";
+    std::string info_path = basename + ".skp.h.meta";
     io::Printer printer(
         output.get(), '$',
         file_options.annotate_headers ? &annotation_collector : nullptr);
@@ -223,7 +223,7 @@ bool CppGenerator::Generate(const FileDescriptor* file,
       // This is the global .cc file, containing
       // enum/services/tables/reflection
       std::unique_ptr<io::ZeroCopyOutputStream> output(
-          generator_context->Open(basename + ".pb.cc"));
+          generator_context->Open(basename + ".skp.cc"));
       io::Printer printer(output.get(), '$');
       file_generator.GenerateGlobalSource(&printer);
     }
@@ -262,7 +262,7 @@ bool CppGenerator::Generate(const FileDescriptor* file,
     }
   } else {
     std::unique_ptr<io::ZeroCopyOutputStream> output(
-        generator_context->Open(basename + ".pb.cc"));
+        generator_context->Open(basename + ".skp.cc"));
     io::Printer printer(output.get(), '$');
     file_generator.GenerateSource(&printer);
   }

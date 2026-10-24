@@ -35,11 +35,11 @@
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/code_generator.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 
 namespace shark::compiler::python {
 
-// Returns the Python module name expected for a given .proto filename.
+// Returns the Python module name expected for a given .shark filename.
 std::string ModuleName(const std::string& filename) {
   std::string basename = StripProto(filename);
   ReplaceCharacters(&basename, "-", '_');

@@ -30,7 +30,7 @@
 
 #include <tests/map_lite_test_util.h>
 
-#include <tests/map_lite_unittest.pb.h>
+#include <tests/map_lite_unittest.skp.h>
 #include <tests/map_test_util_impl.h>
 
 namespace shark {

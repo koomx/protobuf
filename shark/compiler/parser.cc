@@ -48,7 +48,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/wire_format.h>
 #include <shark/stubs/map_util.h>

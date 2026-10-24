@@ -49,8 +49,8 @@ struct timeval {
 #include <sys/time.h>
 #endif
 
-#include <shark/duration.pb.h>
-#include <shark/timestamp.pb.h>
+#include <shark/duration.skp.h>
+#include <shark/timestamp.skp.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

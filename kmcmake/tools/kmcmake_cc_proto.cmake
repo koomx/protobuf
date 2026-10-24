@@ -13,7 +13,7 @@
 # limitations under the License.
 ###################################################################################################
 # kmcmake_cc_proto_target:
-#   A helper function to generate C++ source and header files from Protocol Buffers (.proto) files.
+#   A helper function to generate C++ source and header files from Protocol Buffers (.shark) files.
 #
 # Parameters:
 #   OPTIONS:
@@ -22,10 +22,10 @@
 #
 #   ARGS:
 #     NAME         - The name of the proto target (required)
-#     OUTDIR       - Output directory for generated .pb.cc and .pb.h files (required)
+#     OUTDIR       - Output directory for generated .skp.cc and .skp.h files (required)
 #
 #   LIST_ARGS:
-#     PROTOS       - List of .proto files to compile (required)
+#     PROTOS       - List of .shark files to compile (required)
 #     DEPS         - Additional dependencies for the generated sources (optional)
 #     INCLUDES     - Extra include directories for protoc (optional)
 # OutputVariable:
@@ -36,11 +36,11 @@
 #   1. Parses the arguments and list arguments.
 #   2. Finds the Protobuf package (must be installed).
 #   3. Prepares protoc include flags from PROJECT_SOURCE_DIR and user-specified INCLUDES.
-#   4. Iterates over each .proto file:
+#   4. Iterates over each .shark file:
 #       - Computes absolute path, directory, and base filename.
-#       - Determines output .pb.cc and .pb.h filenames.
+#       - Determines output .skp.cc and .skp.h filenames.
 #       - Adds a custom command to generate C++ files using protoc.
-#   5. Collects all generated .pb.cc and .pb.h files into HDRS and SRCS lists.
+#   5. Collects all generated .skp.cc and .skp.h files into HDRS and SRCS lists.
 #   6. Sets <NAME>_HDRS and <NAME>_SRCS variables in the parent scope for use by other targets.
 #
 # Example usage:
@@ -94,8 +94,8 @@ function(kmcmake_cc_proto)
         get_filename_component(PROTO_DIR ${PROTO_ABS} DIRECTORY)
         get_filename_component(PROTO_NAME_WE ${P} NAME_WE)
 
-        set(HDR ${PROTO_DIR}/${PROTO_NAME_WE}.pb.h)
-        set(SRC ${PROTO_DIR}/${PROTO_NAME_WE}.pb.cc)
+        set(HDR ${PROTO_DIR}/${PROTO_NAME_WE}.skp.h)
+        set(SRC ${PROTO_DIR}/${PROTO_NAME_WE}.skp.cc)
         list(APPEND HDRS ${HDR})
         list(APPEND SRCS ${SRC})
         message(STATUS "${PROTOBUF_PROTOC_EXECUTABLE} ${PROTOC_FLAGS} ${INCLUDE_FLAGS} --cpp_out=${KMCMAKE_CC_PROTO_OUTDIR} ${PROTO_ABS}")

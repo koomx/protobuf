@@ -30,9 +30,9 @@
 
 #include <string>
 
-#include <tests/unittest.pb.h>
-#include <tests/unittest_no_field_presence.pb.h>
-#include <shark/descriptor.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_no_field_presence.skp.h>
+#include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <gtest/gtest.h>
 

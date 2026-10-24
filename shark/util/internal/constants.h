@@ -69,10 +69,10 @@ const char kStructNullValueTypeUrl[] =
 // Type string for shark.Struct
 const char kStructType[] = "shark.Struct";
 
-// Type string for struct.proto's shark.Value value type.
+// Type string for struct.shark's shark.Value value type.
 const char kStructValueType[] = "shark.Value";
 
-// Type string for struct.proto's shark.ListValue value type.
+// Type string for struct.shark's shark.ListValue value type.
 const char kStructListValueType[] = "shark.ListValue";
 
 // Type string for shark.Timestamp

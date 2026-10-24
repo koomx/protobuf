@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 #include <shark/descriptor.h>
@@ -91,12 +91,12 @@ TEST(GeneratedMessageTest, MockSizes) {
 }
 
 TEST(GeneratedMessageTest, EmptyMessageSize) {
-  EXPECT_EQ(sizeof(protobuf_unittest::TestEmptyMessage),
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestEmptyMessage),
             sizeof(MockZeroFieldsBase));
 }
 
 TEST(GeneratedMessageTest, ReservedSize) {
-  EXPECT_EQ(sizeof(protobuf_unittest::TestReservedFields),
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestReservedFields),
             sizeof(MockZeroFieldsBase));
 }
 
@@ -107,7 +107,7 @@ TEST(GeneratedMessageTest, EmptyMessageWithExtensionsSize) {
     // + 4 bytes of padding
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 48);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestEmptyMessageWithExtensions),
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestEmptyMessageWithExtensions),
             sizeof(MockGenerated));
 }
 
@@ -120,7 +120,7 @@ TEST(GeneratedMessageTest, RecursiveMessageSize) {
     // + 4 bytes padding
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 40);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestRecursiveMessage),
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestRecursiveMessage),
             sizeof(MockGenerated));
 }
 
@@ -131,7 +131,7 @@ TEST(GeneratedMessageTest, OneStringSize) {
     void* data;                                    // 8 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 32);
-  EXPECT_EQ(sizeof(protobuf_unittest::OneString), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::OneString), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, MoreStringSize) {
@@ -141,7 +141,7 @@ TEST(GeneratedMessageTest, MoreStringSize) {
     MockRepeatedPtrField data;                     // 24 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 48);
-  EXPECT_EQ(sizeof(protobuf_unittest::MoreString), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::MoreString), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, Int32MessageSize) {
@@ -152,7 +152,7 @@ TEST(GeneratedMessageTest, Int32MessageSize) {
     // + 4 bytes padding
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 32);
-  EXPECT_EQ(sizeof(protobuf_unittest::Int32Message), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::Int32Message), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, Int64MessageSize) {
@@ -162,7 +162,7 @@ TEST(GeneratedMessageTest, Int64MessageSize) {
     int64_t data;                                  // 8 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 32);
-  EXPECT_EQ(sizeof(protobuf_unittest::Int64Message), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::Int64Message), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, BoolMessageSize) {
@@ -173,7 +173,7 @@ TEST(GeneratedMessageTest, BoolMessageSize) {
     // + 3 bytes padding
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 32);
-  EXPECT_EQ(sizeof(protobuf_unittest::BoolMessage), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::BoolMessage), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, OneofSize) {
@@ -183,7 +183,7 @@ TEST(GeneratedMessageTest, OneofSize) {
     uint32_t oneof_case[1];                        // 4 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 32);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestOneof), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestOneof), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, Oneof2Size) {
@@ -198,7 +198,7 @@ TEST(GeneratedMessageTest, Oneof2Size) {
     uint32_t oneof_case[2];                        // 8 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 64);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestOneof2), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestOneof2), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, FieldOrderingsSize) {
@@ -213,7 +213,7 @@ TEST(GeneratedMessageTest, FieldOrderingsSize) {
     // + 4 bytes of padding
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 80);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestFieldOrderings), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestFieldOrderings), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, TestMessageSize) {
@@ -230,7 +230,7 @@ TEST(GeneratedMessageTest, TestMessageSize) {
     int64_t m6;                                    // 8 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 56);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestMessageSize), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestMessageSize), sizeof(MockGenerated));
 }
 
 TEST(GeneratedMessageTest, PackedTypesSize) {
@@ -259,7 +259,7 @@ TEST(GeneratedMessageTest, PackedTypesSize) {
     int cached_size;                               // 4 bytes
   };
   GOOGLE_CHECK_MESSAGE_SIZE(MockGenerated, 16 * 15 + 8 * 6 + 8);
-  EXPECT_EQ(sizeof(protobuf_unittest::TestPackedTypes), sizeof(MockGenerated));
+  EXPECT_EQ(sizeof(sharkbuf_unittest::TestPackedTypes), sizeof(MockGenerated));
 }
 
 }  // namespace cpp_unittest

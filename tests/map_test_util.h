@@ -30,10 +30,10 @@
 
 #pragma once
 
-#include <tests/map_unittest.pb.h>
+#include <tests/map_unittest.skp.h>
 #include <tests/reflection_tester.h>
 
-#define UNITTEST ::protobuf_unittest
+#define UNITTEST ::sharkbuf_unittest
 #define BRIDGE_UNITTEST ::shark::bridge_unittest
 
 // Must be included after defining UNITTEST, etc.

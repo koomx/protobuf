@@ -34,8 +34,8 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/map_unittest.pb.h>
-#include <tests/unittest.pb.h>
+#include <tests/map_unittest.skp.h>
+#include <tests/unittest.skp.h>
 #include <shark/arena.h>
 #include <shark/map.h>
 #include <shark/map_field_inl.h>

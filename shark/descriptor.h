@@ -94,7 +94,7 @@ class FileDescriptor;
 class DescriptorDatabase;
 class DescriptorPool;
 
-// Defined in descriptor.proto
+// Defined in descriptor.shark
 class DescriptorProto;
 class DescriptorProto_ExtensionRange;
 class FieldDescriptorProto;
@@ -154,7 +154,7 @@ struct SourceLocation {
   int end_column;
 
   // Doc comments found at the source location.
-  // See the comments in SourceCodeInfo.Location (descriptor.proto) for details.
+  // See the comments in SourceCodeInfo.Location (descriptor.shark) for details.
   std::string leading_comments;
   std::string trailing_comments;
   std::vector<std::string> leading_detached_comments;
@@ -274,16 +274,16 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   // type array.
   int index() const;
 
-  // The .proto file in which this message type was defined.  Never nullptr.
+  // The .shark file in which this message type was defined.  Never nullptr.
   const FileDescriptor* file() const;
 
   // If this Descriptor describes a nested type, this returns the type
   // in which it is nested.  Otherwise, returns nullptr.
   const Descriptor* containing_type() const;
 
-  // Get options for this message type.  These are specified in the .proto file
+  // Get options for this message type.  These are specified in the .shark file
   // by placing lines like "option foo = 1234;" in the message definition.
-  // Allowed options are defined by MessageOptions in descriptor.proto, and any
+  // Allowed options are defined by MessageOptions in descriptor.shark, and any
   // available extensions of that message.
   const MessageOptions& options() const;
 
@@ -340,7 +340,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   // The number of fields in this message type.
   int field_count() const;
   // Gets a field by index, where 0 <= index < field_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const FieldDescriptor* field(int index) const;
 
   // Looks up a field by declared tag number.  Returns nullptr if no such field
@@ -369,7 +369,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   // will yield all real oneofs.
   int real_oneof_decl_count() const;
   // Get a oneof by index, where 0 <= index < oneof_decl_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const OneofDescriptor* oneof_decl(int index) const;
 
   // Looks up a oneof by name.  Returns nullptr if no such oneof exists.
@@ -380,7 +380,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   // The number of nested types in this message type.
   int nested_type_count() const;
   // Gets a nested type by index, where 0 <= index < nested_type_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const Descriptor* nested_type(int index) const;
 
   // Looks up a nested type by name.  Returns nullptr if no such nested type
@@ -392,7 +392,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   // The number of enum types in this message type.
   int enum_type_count() const;
   // Gets an enum type by index, where 0 <= index < enum_type_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const EnumDescriptor* enum_type(int index) const;
 
   // Looks up an enum type by name.  Returns nullptr if no such enum type
@@ -425,7 +425,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   int extension_range_count() const;
   // Gets an extension range by index, where 0 <= index <
   // extension_range_count(). These are returned in the order they were defined
-  // in the .proto file.
+  // in the .shark file.
   const ExtensionRange* extension_range(int index) const;
 
   // Returns true if the number is in one of the extension ranges.
@@ -460,7 +460,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   // DescriptorPool::FindAllExtensions.
   int extension_count() const;
   // Get an extension by index, where 0 <= index < extension_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const FieldDescriptor* extension(int index) const;
 
   // Looks up a named extension (which extends some *other* message type)
@@ -489,7 +489,7 @@ class SHARK_EXPORT Descriptor : private internal::SymbolBase {
   int reserved_range_count() const;
   // Gets an reserved range by index, where 0 <= index <
   // reserved_range_count(). These are returned in the order they were defined
-  // in the .proto file.
+  // in the .shark file.
   const ReservedRange* reserved_range(int index) const;
 
   // Returns true if the number is in one of the reserved ranges.
@@ -708,7 +708,7 @@ class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
   // FindFieldByLowercaseName() method) can be useful when parsing formats
   // which prefer to use lowercase naming style.  (Although, technically
   // field names should be lowercased anyway according to the protobuf style
-  // guide, so this only makes a difference when dealing with old .proto files
+  // guide, so this only makes a difference when dealing with old .shark files
   // which do not follow the guide.)
   const std::string& lowercase_name() const;
 
@@ -740,7 +740,7 @@ class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
                              // message_type()->options().map_entry()
 
   // Returns true if this field was syntactically written with "optional" in the
-  // .proto file. Excludes singular proto3 fields that do not have a label.
+  // .shark file. Excludes singular proto3 fields that do not have a label.
   bool has_optional_keyword() const;
 
   // Returns true if this field tracks presence, ie. does the field
@@ -759,7 +759,7 @@ class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
   // Does this field have an explicitly-declared default value?
   bool has_default_value() const;
 
-  // Whether the user has specified the json_name field option in the .proto
+  // Whether the user has specified the json_name field option in the .shark
   // file.
   bool has_json_name() const;
 
@@ -830,7 +830,7 @@ class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
   // square brackets after the field definition.  E.g., the field:
   //   optional string text = 1 [ctype=CORD];
   // has the "ctype" option set.  Allowed options are defined by FieldOptions in
-  // descriptor.proto, and any available extensions of that message.
+  // descriptor.shark, and any available extensions of that message.
   const FieldOptions& options() const;
 
   // See Descriptor::CopyTo().
@@ -909,7 +909,7 @@ class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
 
   bool has_default_value_ : 1;
   bool proto3_optional_ : 1;
-  // Whether the user has specified the json_name field option in the .proto
+  // Whether the user has specified the json_name field option in the .shark
   // file.
   bool has_json_name_ : 1;
   bool is_extension_ : 1;
@@ -1004,7 +1004,7 @@ class SHARK_EXPORT OneofDescriptor : private internal::SymbolBase {
   // optional field. If this returns true, code generators should *not* emit it.
   bool is_synthetic() const;
 
-  // The .proto file in which this oneof was defined.  Never nullptr.
+  // The .shark file in which this oneof was defined.  Never nullptr.
   const FileDescriptor* file() const;
   // The Descriptor for the message containing this oneof.
   const Descriptor* containing_type() const;
@@ -1012,7 +1012,7 @@ class SHARK_EXPORT OneofDescriptor : private internal::SymbolBase {
   // The number of (non-extension) fields which are members of this oneof.
   int field_count() const;
   // Get a member of this oneof, in the order in which they were declared in the
-  // .proto file.  Does not include extensions.
+  // .shark file.  Does not include extensions.
   const FieldDescriptor* field(int index) const;
 
   const OneofOptions& options() const;
@@ -1070,7 +1070,7 @@ class SHARK_EXPORT OneofDescriptor : private internal::SymbolBase {
 
 SHARK_INTERNAL_CHECK_CLASS_SIZE(OneofDescriptor, 40);
 
-// Describes an enum type defined in a .proto file.  To get the EnumDescriptor
+// Describes an enum type defined in a .shark file.  To get the EnumDescriptor
 // for a generated enum type, call TypeName_descriptor().  Use DescriptorPool
 // to construct your own descriptors.
 class SHARK_EXPORT EnumDescriptor : private internal::SymbolBase {
@@ -1086,14 +1086,14 @@ class SHARK_EXPORT EnumDescriptor : private internal::SymbolBase {
   // Index of this enum within the file or containing message's enum array.
   int index() const;
 
-  // The .proto file in which this enum type was defined.  Never nullptr.
+  // The .shark file in which this enum type was defined.  Never nullptr.
   const FileDescriptor* file() const;
 
   // The number of values for this EnumDescriptor.  Guaranteed to be greater
   // than zero.
   int value_count() const;
   // Gets a value by index, where 0 <= index < value_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const EnumValueDescriptor* value(int index) const;
 
   // Looks up a value by name.  Returns nullptr if no such value exists.
@@ -1106,9 +1106,9 @@ class SHARK_EXPORT EnumDescriptor : private internal::SymbolBase {
   // Otherwise, nullptr.
   const Descriptor* containing_type() const;
 
-  // Get options for this enum type.  These are specified in the .proto file by
+  // Get options for this enum type.  These are specified in the .shark file by
   // placing lines like "option foo = 1234;" in the enum definition.  Allowed
-  // options are defined by EnumOptions in descriptor.proto, and any available
+  // options are defined by EnumOptions in descriptor.shark, and any available
   // extensions of that message.
   const EnumOptions& options() const;
 
@@ -1138,7 +1138,7 @@ class SHARK_EXPORT EnumDescriptor : private internal::SymbolBase {
   int reserved_range_count() const;
   // Gets an reserved range by index, where 0 <= index <
   // reserved_range_count(). These are returned in the order they were defined
-  // in the .proto file.
+  // in the .shark file.
   const EnumDescriptor::ReservedRange* reserved_range(int index) const;
 
   // Returns true if the number is in one of the reserved ranges.
@@ -1262,14 +1262,14 @@ class SHARK_EXPORT EnumValueDescriptor : private internal::SymbolBaseN<0>,
   // with C++ scoping rules for enums.
   const std::string& full_name() const;
 
-  // The .proto file in which this value was defined.  Never nullptr.
+  // The .shark file in which this value was defined.  Never nullptr.
   const FileDescriptor* file() const;
   // The type of this value.  Never nullptr.
   const EnumDescriptor* type() const;
 
-  // Get options for this enum value.  These are specified in the .proto file by
+  // Get options for this enum value.  These are specified in the .shark file by
   // adding text like "[foo = 1234]" after an enum value definition.  Allowed
-  // options are defined by EnumValueOptions in descriptor.proto, and any
+  // options are defined by EnumValueOptions in descriptor.shark, and any
   // available extensions of that message.
   const EnumValueOptions& options() const;
 
@@ -1339,19 +1339,19 @@ class SHARK_EXPORT ServiceDescriptor : private internal::SymbolBase {
   // Index of this service within the file's services array.
   int index() const;
 
-  // The .proto file in which this service was defined.  Never nullptr.
+  // The .shark file in which this service was defined.  Never nullptr.
   const FileDescriptor* file() const;
 
-  // Get options for this service type.  These are specified in the .proto file
+  // Get options for this service type.  These are specified in the .shark file
   // by placing lines like "option foo = 1234;" in the service definition.
-  // Allowed options are defined by ServiceOptions in descriptor.proto, and any
+  // Allowed options are defined by ServiceOptions in descriptor.shark, and any
   // available extensions of that message.
   const ServiceOptions& options() const;
 
   // The number of methods this service defines.
   int method_count() const;
   // Gets a MethodDescriptor by index, where 0 <= index < method_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const MethodDescriptor* method(int index) const;
 
   // Look up a MethodDescriptor by name.
@@ -1424,7 +1424,7 @@ class SHARK_EXPORT MethodDescriptor : private internal::SymbolBase {
   // Index within the service's Descriptor.
   int index() const;
 
-  // The .proto file in which this method was defined.  Never nullptr.
+  // The .shark file in which this method was defined.  Never nullptr.
   const FileDescriptor* file() const;
   // Gets the service to which this method belongs.  Never nullptr.
   const ServiceDescriptor* service() const;
@@ -1439,10 +1439,10 @@ class SHARK_EXPORT MethodDescriptor : private internal::SymbolBase {
   // Gets whether the server streams multiple responses.
   bool server_streaming() const;
 
-  // Get options for this method.  These are specified in the .proto file by
+  // Get options for this method.  These are specified in the .shark file by
   // placing lines like "option foo = 1234;" in curly-braces after a method
   // declaration.  Allowed options are defined by MethodOptions in
-  // descriptor.proto, and any available extensions of that message.
+  // descriptor.shark, and any available extensions of that message.
   const MethodOptions& options() const;
 
   // See Descriptor::CopyTo().
@@ -1498,7 +1498,7 @@ class SHARK_EXPORT MethodDescriptor : private internal::SymbolBase {
 
 SHARK_INTERNAL_CHECK_CLASS_SIZE(MethodDescriptor, 64);
 
-// Describes a whole .proto file.  To get the FileDescriptor for a compiled-in
+// Describes a whole .shark file.  To get the FileDescriptor for a compiled-in
 // file, get the descriptor for something defined in that file and call
 // descriptor->file().  Use DescriptorPool to construct your own descriptors.
 class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
@@ -1506,7 +1506,7 @@ class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
   typedef FileDescriptorProto Proto;
 
   // The filename, relative to the source tree.
-  // e.g. "foo/bar/baz.proto"
+  // e.g. "foo/bar/baz.shark"
   const std::string& name() const;
 
   // The package, e.g. "shark.compiler".
@@ -1519,7 +1519,7 @@ class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
   // The number of files imported by this one.
   int dependency_count() const;
   // Gets an imported file by index, where 0 <= index < dependency_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const FileDescriptor* dependency(int index) const;
 
   // The number of files public imported by this one.
@@ -1527,7 +1527,7 @@ class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
   int public_dependency_count() const;
   // Gets a public imported file by index, where 0 <= index <
   // public_dependency_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const FileDescriptor* public_dependency(int index) const;
 
   // The number of files that are imported for weak fields.
@@ -1535,40 +1535,40 @@ class SHARK_EXPORT FileDescriptor : private internal::SymbolBase {
   int weak_dependency_count() const;
   // Gets a weak imported file by index, where 0 <= index <
   // weak_dependency_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const FileDescriptor* weak_dependency(int index) const;
 
   // Number of top-level message types defined in this file.  (This does not
   // include nested types.)
   int message_type_count() const;
   // Gets a top-level message type, where 0 <= index < message_type_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const Descriptor* message_type(int index) const;
 
   // Number of top-level enum types defined in this file.  (This does not
   // include nested types.)
   int enum_type_count() const;
   // Gets a top-level enum type, where 0 <= index < enum_type_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const EnumDescriptor* enum_type(int index) const;
 
   // Number of services defined in this file.
   int service_count() const;
   // Gets a service, where 0 <= index < service_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const ServiceDescriptor* service(int index) const;
 
   // Number of extensions defined at file scope.  (This does not include
   // extensions nested within message types.)
   int extension_count() const;
   // Gets an extension's descriptor, where 0 <= index < extension_count().
-  // These are returned in the order they were defined in the .proto file.
+  // These are returned in the order they were defined in the .shark file.
   const FieldDescriptor* extension(int index) const;
 
-  // Get options for this file.  These are specified in the .proto file by
+  // Get options for this file.  These are specified in the .shark file by
   // placing lines like "option foo = 1234;" at the top level, outside of any
   // other definitions.  Allowed options are defined by FileOptions in
-  // descriptor.proto, and any available extensions of that message.
+  // descriptor.shark, and any available extensions of that message.
   const FileOptions& options() const;
 
   // Syntax of this file.
@@ -1715,7 +1715,7 @@ SHARK_INTERNAL_CHECK_CLASS_SIZE(FileDescriptor, 144);
 // Since Descriptors are composed of a whole lot of cross-linked bits of
 // data that would be a pain to put together manually, the
 // DescriptorPool class is provided to make the process easier.  It can
-// take a FileDescriptorProto (defined in descriptor.proto), validate it,
+// take a FileDescriptorProto (defined in descriptor.shark), validate it,
 // and convert it to a set of nicely cross-linked Descriptors.
 //
 // DescriptorPool also helps with memory management.  Descriptors are
@@ -1826,7 +1826,7 @@ class SHARK_EXPORT DescriptorPool {
 
     // These constants specify what exact part of the construct is broken.
     // This is useful e.g. for mapping the error back to an exact location
-    // in a .proto file.
+    // in a .shark file.
     enum ErrorLocation {
       NAME,           // the symbol name, or the package name for files
       NUMBER,         // field or extension range number
@@ -1884,8 +1884,8 @@ class SHARK_EXPORT DescriptorPool {
   // AllowUnknownDependencies(), however, then unknown types and files
   // will be replaced by placeholder descriptors (which can be identified by
   // the is_placeholder() method).  This can allow you to
-  // perform some useful operations with a .proto file even if you do not
-  // have access to other .proto files on which it depends.  However, some
+  // perform some useful operations with a .shark file even if you do not
+  // have access to other .shark files on which it depends.  However, some
   // heuristics must be used to fill in the gaps in information, and these
   // can lead to descriptors which are inaccurate.  For example, the
   // DescriptorPool may be forced to guess whether an unknown type is a message
@@ -1914,12 +1914,12 @@ class SHARK_EXPORT DescriptorPool {
   // descriptors if necessary.  The underlay remains property of the caller;
   // it must remain valid for the lifetime of the newly-constructed pool.
   //
-  // Example:  Say you want to parse a .proto file at runtime in order to use
-  // its type with a DynamicMessage.  Say this .proto file has dependencies,
+  // Example:  Say you want to parse a .shark file at runtime in order to use
+  // its type with a DynamicMessage.  Say this .shark file has dependencies,
   // but you know that all the dependencies will be things that are already
   // compiled into the binary.  For ease of use, you'd like to load the types
   // right out of generated_pool() rather than have to parse redundant copies
-  // of all these .protos and runtime.  But, you don't want to add the parsed
+  // of all these .sharks and runtime.  But, you don't want to add the parsed
   // types directly into generated_pool(): this is not allowed, and would be
   // bad design anyway.  So, instead, you could use generated_pool() as an
   // underlay for a new DescriptorPool in which you add only the new file.
@@ -1934,7 +1934,7 @@ class SHARK_EXPORT DescriptorPool {
   static void InternalAddGeneratedFile(const void* encoded_file_descriptor,
                                        int size);
 
-  // Disallow [enforce_utf8 = false] in .proto files.
+  // Disallow [enforce_utf8 = false] in .shark files.
   void DisallowEnforceUtf8() { disallow_enforce_utf8_ = true; }
 
 

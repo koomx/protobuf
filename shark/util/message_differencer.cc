@@ -47,7 +47,7 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
 #include <shark/generated_enum_reflection.h>

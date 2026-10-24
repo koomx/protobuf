@@ -70,20 +70,20 @@ class TestGenerator : public CodeGenerator {
   }
 };
 
-// opposed to importlib) in the usual case where the .proto file paths do not
+// opposed to importlib) in the usual case where the .shark file paths do not
 // not contain any Python keywords.
 TEST(PythonPluginTest, ImportTest) {
-  // Create files test1.proto and test2.proto with the former importing the
+  // Create files test1.shark and test2.shark with the former importing the
   // latter.
-  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test1.proto",
+  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test1.shark",
                              "syntax = \"proto3\";\n"
                              "package foo;\n"
-                             "import \"test2.proto\";"
+                             "import \"test2.shark\";"
                              "message Message1 {\n"
                              "  Message2 message_2 = 1;\n"
                              "}\n",
                              true));
-  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test2.proto",
+  GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test2.shark",
                              "syntax = \"proto3\";\n"
                              "package foo;\n"
                              "message Message2 {}\n",
@@ -96,7 +96,7 @@ TEST(PythonPluginTest, ImportTest) {
   std::string proto_path = "-I" + TestTempDir();
   std::string python_out = "--python_out=" + TestTempDir();
   const char* argv[] = {"protoc", proto_path.c_str(), "-I.", python_out.c_str(),
-                        "test1.proto"};
+                        "test1.shark"};
   ASSERT_EQ(0, cli.Run(5, argv));
 
   // Loop over the lines of the generated code and verify that we find an

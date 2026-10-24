@@ -33,7 +33,7 @@
 // This header is logically internal, but is made public because it is used
 // from protocol-compiler-generated code, which may reside in other components.
 // It provides reflection support for generated enums, and is included in
-// generated .pb.h files and should have minimal dependencies. The methods are
+// generated .skp.h files and should have minimal dependencies. The methods are
 // implemented in generated_message_reflection.cc.
 
 #pragma once

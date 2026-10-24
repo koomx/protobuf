@@ -38,7 +38,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/io/zero_copy_stream_impl.h>
@@ -665,7 +665,7 @@ TEST(Printer, FormatInternal) {
       Printer printer(&output, '$', &info_collector);
       printer.Indent();
       GeneratedCodeInfo::Annotation annotation;
-      annotation.set_source_file("file.proto");
+      annotation.set_source_file("file.shark");
       annotation.add_path(33);
       std::vector<std::string> args{annotation.SerializeAsString(), "arg1",
                                     "arg2"};
@@ -677,7 +677,7 @@ TEST(Printer, FormatInternal) {
     const GeneratedCodeInfo::Annotation* arg1 = &info.annotation(0);
     ASSERT_EQ(1, arg1->path_size());
     EXPECT_EQ(33, arg1->path(0));
-    EXPECT_EQ("file.proto", arg1->source_file());
+    EXPECT_EQ("file.shark", arg1->source_file());
     EXPECT_EQ(4, arg1->begin());
     EXPECT_EQ(8, arg1->end());
   }

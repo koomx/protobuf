@@ -40,10 +40,10 @@ namespace shark {
 
 // Implementation of the Protocol Buffer compiler.
 //
-// This package contains code for parsing .proto files and generating code
+// This package contains code for parsing .shark files and generating code
 // based on them.  There are two reasons you might be interested in this
 // package:
-// - You want to parse .proto files at runtime.  In this case, you should
+// - You want to parse .shark files at runtime.  In this case, you should
 //   look at importer.h.  Since this functionality is widely useful, it is
 //   included in the shark base library; you do not have to link against
 //   libprotoc.

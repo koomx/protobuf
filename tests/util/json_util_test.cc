@@ -34,9 +34,9 @@
 #include <list>
 #include <string>
 
-#include <tests/util/internal/testdata/maps.pb.h>
-#include <tests/util/json_format.pb.h>
-#include <tests/util/json_format_proto3.pb.h>
+#include <tests/util/internal/testdata/maps.skp.h>
+#include <tests/util/json_format.skp.h>
+#include <tests/util/json_format_proto3.skp.h>
 #include <gtest/gtest.h>
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
@@ -240,7 +240,7 @@ TEST_F(JsonUtilTest, TestPrintEnumsAsIntsWithDefaultValue) {
 }
 
 TEST_F(JsonUtilTest, TestPrintProto2EnumAsIntWithDefaultValue) {
-  protobuf_unittest::TestDefaultEnumValue orig;
+  sharkbuf_unittest::TestDefaultEnumValue orig;
 
   JsonPrintOptions print_options;
   // use enum as int
@@ -251,11 +251,11 @@ TEST_F(JsonUtilTest, TestPrintProto2EnumAsIntWithDefaultValue) {
   std::string expected_json = "{\"enumValue\":2}";
   EXPECT_EQ(expected_json, ToJson(orig, print_options));
 
-  protobuf_unittest::TestDefaultEnumValue parsed;
+  sharkbuf_unittest::TestDefaultEnumValue parsed;
   JsonParseOptions parse_options;
   ASSERT_TRUE(FromJson(expected_json, &parsed, parse_options));
 
-  EXPECT_EQ(protobuf_unittest::DEFAULT, parsed.enum_value());
+  EXPECT_EQ(sharkbuf_unittest::DEFAULT, parsed.enum_value());
 }
 
 TEST_F(JsonUtilTest, ParseMessage) {
@@ -406,7 +406,7 @@ TEST_F(JsonUtilTest, TestParsingUnknownEnumsProto2) {
       "{\n"
       "  \"a\": \"UNKNOWN_VALUE\"\n"
       "}";
-  protobuf_unittest::TestNumbers m;
+  sharkbuf_unittest::TestNumbers m;
   JsonParseOptions options;
   EXPECT_FALSE(FromJson(input, &m, options));
 

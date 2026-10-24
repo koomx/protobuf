@@ -44,7 +44,7 @@
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/cpp/names.h>
 #include <shark/compiler/cpp/options.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/descriptor.h>
 #include <shark/port.h>
@@ -233,7 +233,7 @@ std::string DefaultValue(const FieldDescriptor* field);
 // Convert a file name into a valid identifier.
 std::string FilenameIdentifier(const std::string& filename);
 
-// For each .proto file generates a unique name. To prevent collisions of
+// For each .shark file generates a unique name. To prevent collisions of
 // symbols in the global namespace
 std::string UniqueName(const std::string& name, const std::string& filename,
                        const Options& options);
@@ -552,7 +552,7 @@ inline bool NeedsEagerDescriptorAssignment(const FileDescriptor* file,
   }
 }
 
-// This orders the messages in a .pb.cc as it's outputted by file.cc
+// This orders the messages in a .skp.cc as it's outputted by file.cc
 void FlattenMessagesInFile(const FileDescriptor* file,
                            std::vector<const Descriptor*>* result);
 inline std::vector<const Descriptor*> FlattenMessagesInFile(

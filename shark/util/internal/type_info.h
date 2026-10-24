@@ -31,7 +31,7 @@
 #pragma once
 
 #include <shark/stubs/common.h>
-#include <shark/type.pb.h>
+#include <shark/type.skp.h>
 #include <shark/stubs/statusor.h>
 #include <shark/stubs/strutil.h>
 #include <shark/util/type_resolver.h>

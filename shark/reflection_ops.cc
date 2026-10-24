@@ -39,7 +39,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/map_field.h>
 #include <shark/map_field_inl.h>
 #include <shark/unknown_field_set.h>

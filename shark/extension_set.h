@@ -124,7 +124,7 @@ struct ExtensionInfo {
   };
 
   struct MessageInfo {
-    const MessageLite* prototype;
+    const MessageLite* sharktype;
   };
 
   union {
@@ -149,7 +149,7 @@ struct ExtensionInfo {
 // bool Find(int number, ExtensionInfo* output);
 
 // GeneratedExtensionFinder is an ExtensionFinder which finds extensions
-// defined in .proto files which have been compiled into the binary.
+// defined in .shark files which have been compiled into the binary.
 class SHARK_EXPORT GeneratedExtensionFinder {
  public:
   explicit GeneratedExtensionFinder(const MessageLite* extendee)
@@ -1531,7 +1531,7 @@ MaybeCreateLazyExtension(Arena* arena);
 // This is often relevant for parsing extensions in text mode.
 //
 // As a side-effect, it will also guarantee that anything else from the same
-// .proto file will also be available for lookup in the generated pool.
+// .shark file will also be available for lookup in the generated pool.
 //
 // This function does not actually register the extension, so it does not need
 // to be called before the lookup.  However it does need to occur in a function

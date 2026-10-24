@@ -145,7 +145,7 @@ SHARK_EXPORT size_t StringSpaceUsedExcludingSelfLong(const std::string& str);
 // the subset of features which it supports -- namely, nothing that uses
 // descriptors or reflection.  You can instruct the protocol compiler
 // to generate classes which implement only MessageLite, not the full
-// Message interface, by adding the following line to the .proto file:
+// Message interface, by adding the following line to the .shark file:
 //
 //   option optimize_for = LITE_RUNTIME;
 //
@@ -552,7 +552,7 @@ bool MessageLite::ParseFrom(const T& input) {
 
 
 // Shut down the entire protocol buffers library, deleting all static-duration
-// objects allocated by the library or by generated .pb.cc files.
+// objects allocated by the library or by generated .skp.cc files.
 //
 // There are two reasons you might want to call this:
 // * You use a draconian definition of "memory leak" in which you expect

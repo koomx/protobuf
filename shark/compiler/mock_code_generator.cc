@@ -46,8 +46,8 @@
 #include <tests/testing/file.h>
 #include <tests/testing/file.h>
 #include <tests/testing/file.h>
-#include <shark/compiler/plugin.pb.h>
-#include <shark/descriptor.pb.h>
+#include <shark/compiler/plugin.skp.h>
+#include <shark/descriptor.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/substitute.h>
 #include <shark/descriptor.h>
@@ -175,24 +175,24 @@ void MockCodeGenerator::CheckGeneratedAnnotations(
   CheckSingleAnnotation("first_annotation", "first", file_content,
                         annotations.annotation(0));
   CheckSingleAnnotation("first_path",
-                        "test_generator: first_insert,\n foo.proto,\n "
-                        "MockCodeGenerator_Annotate,\n foo.proto\n",
+                        "test_generator: first_insert,\n foo.shark,\n "
+                        "MockCodeGenerator_Annotate,\n foo.shark\n",
                         file_content, annotations.annotation(1));
   CheckSingleAnnotation("first_path",
-                        "test_plugin: first_insert,\n foo.proto,\n "
-                        "MockCodeGenerator_Annotate,\n foo.proto\n",
+                        "test_plugin: first_insert,\n foo.shark,\n "
+                        "MockCodeGenerator_Annotate,\n foo.shark\n",
                         file_content, annotations.annotation(2));
   CheckSingleAnnotation("second_annotation", "second", file_content,
                         annotations.annotation(3));
   // This annotated text has changed because it was inserted at an indented
   // insertion point.
   CheckSingleAnnotation("second_path",
-                        "test_generator: second_insert,\n   foo.proto,\n   "
-                        "MockCodeGenerator_Annotate,\n   foo.proto\n",
+                        "test_generator: second_insert,\n   foo.shark,\n   "
+                        "MockCodeGenerator_Annotate,\n   foo.shark\n",
                         file_content, annotations.annotation(4));
   CheckSingleAnnotation("second_path",
-                        "test_plugin: second_insert,\n   foo.proto,\n   "
-                        "MockCodeGenerator_Annotate,\n   foo.proto\n",
+                        "test_plugin: second_insert,\n   foo.shark,\n   "
+                        "MockCodeGenerator_Annotate,\n   foo.shark\n",
                         file_content, annotations.annotation(5));
   CheckSingleAnnotation("third_annotation", "third", file_content,
                         annotations.annotation(6));

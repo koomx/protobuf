@@ -1871,7 +1871,7 @@ const MessageLite* ExtensionSet::GetPrototypeForLazyMessage(
           &extension_info, &was_packed_on_wire)) {
     return nullptr;
   }
-  return extension_info.message_info.prototype;
+  return extension_info.message_info.sharktype;
 }
 
 uint8_t*

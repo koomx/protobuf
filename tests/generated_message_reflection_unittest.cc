@@ -48,10 +48,10 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/map_unittest.pb.h>
-#include <tests/unittest.pb.h>
-#include <tests/unittest_mset.pb.h>
-#include <tests/unittest_mset_wire_format.pb.h>
+#include <tests/map_unittest.skp.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_mset.skp.h>
+#include <tests/unittest_mset_wire_format.skp.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <tests/testing/googletest.h>
@@ -607,7 +607,7 @@ TEST(GeneratedMessageReflectionTest, ReleaseLast) {
   message.Clear();
   TestUtil::SetAllFields(&message);
   ASSERT_EQ(2, message.repeated_foreign_message_size());
-  const protobuf_unittest::ForeignMessage* expected =
+  const sharkbuf_unittest::ForeignMessage* expected =
       message.mutable_repeated_foreign_message(1);
   (void)expected;  // unused in somce configurations
   std::unique_ptr<Message> released(message.GetReflection()->ReleaseLast(
@@ -631,7 +631,7 @@ TEST(GeneratedMessageReflectionTest, ReleaseLastExtensions) {
   TestUtil::SetAllExtensions(&message);
   ASSERT_EQ(
       2, message.ExtensionSize(unittest::repeated_foreign_message_extension));
-  const protobuf_unittest::ForeignMessage* expected =
+  const sharkbuf_unittest::ForeignMessage* expected =
       message.MutableExtension(unittest::repeated_foreign_message_extension, 1);
   std::unique_ptr<Message> released(message.GetReflection()->ReleaseLast(
       &message, descriptor->file()->FindExtensionByName(
@@ -1269,8 +1269,8 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
                            descriptor->FindFieldByName("optional_int64")),
       "Protocol Buffer reflection usage error:\n"
       "  Method      : shark::Reflection::GetInt32\n"
-      "  Message type: protobuf_unittest\\.TestAllTypes\n"
-      "  Field       : protobuf_unittest\\.TestAllTypes\\.optional_int64\n"
+      "  Message type: sharkbuf_unittest\\.TestAllTypes\n"
+      "  Field       : sharkbuf_unittest\\.TestAllTypes\\.optional_int64\n"
       "  Problem     : Field is not the right type for this message:\n"
       "    Expected  : CPPTYPE_INT32\n"
       "    Field type: CPPTYPE_INT64");
@@ -1278,8 +1278,8 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
                    message, descriptor->FindFieldByName("repeated_int32")),
                "Protocol Buffer reflection usage error:\n"
                "  Method      : shark::Reflection::GetInt32\n"
-               "  Message type: protobuf_unittest.TestAllTypes\n"
-               "  Field       : protobuf_unittest.TestAllTypes.repeated_int32\n"
+               "  Message type: sharkbuf_unittest.TestAllTypes\n"
+               "  Field       : sharkbuf_unittest.TestAllTypes.repeated_int32\n"
                "  Problem     : Field is repeated; the method requires a "
                "singular field.");
   EXPECT_DEATH(
@@ -1288,8 +1288,8 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
           unittest::ForeignMessage::descriptor()->FindFieldByName("c")),
       "Protocol Buffer reflection usage error:\n"
       "  Method      : shark::Reflection::GetInt32\n"
-      "  Message type: protobuf_unittest.TestAllTypes\n"
-      "  Field       : protobuf_unittest.ForeignMessage.c\n"
+      "  Message type: sharkbuf_unittest.TestAllTypes\n"
+      "  Field       : sharkbuf_unittest.ForeignMessage.c\n"
       "  Problem     : Field does not match message type.");
   EXPECT_DEATH(
       reflection->HasField(
@@ -1297,8 +1297,8 @@ TEST(GeneratedMessageReflectionTest, UsageErrors) {
           unittest::ForeignMessage::descriptor()->FindFieldByName("c")),
       "Protocol Buffer reflection usage error:\n"
       "  Method      : shark::Reflection::HasField\n"
-      "  Message type: protobuf_unittest.TestAllTypes\n"
-      "  Field       : protobuf_unittest.ForeignMessage.c\n"
+      "  Message type: sharkbuf_unittest.TestAllTypes\n"
+      "  Field       : sharkbuf_unittest.ForeignMessage.c\n"
       "  Problem     : Field does not match message type.");
 
 #undef f

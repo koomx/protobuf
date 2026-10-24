@@ -37,8 +37,8 @@
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/any.pb.h>
-#include <shark/type.pb.h>
+#include <shark/any.skp.h>
+#include <shark/type.skp.h>
 #include <shark/repeated_field.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/statusor.h>

@@ -35,7 +35,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/python/helpers.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 

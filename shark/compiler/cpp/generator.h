@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
-// Generates C++ code for a given .proto file.
+// Generates C++ code for a given .shark file.
 
 #pragma once
 

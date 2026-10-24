@@ -33,8 +33,8 @@
 #include <cstdint>
 
 #include <shark/stubs/strutil.h>
-#include <shark/duration.pb.h>
-#include <shark/timestamp.pb.h>
+#include <shark/duration.skp.h>
+#include <shark/timestamp.skp.h>
 #include <shark/stubs/int128.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/time.h>

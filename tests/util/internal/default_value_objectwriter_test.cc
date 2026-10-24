@@ -31,7 +31,7 @@
 #include <shark/util/internal/default_value_objectwriter.h>
 
 #include <shark/util/internal/expecting_objectwriter.h>
-#include <tests/util/internal/testdata/default_value_test.pb.h>
+#include <tests/util/internal/testdata/default_value_test.skp.h>
 #include <shark/util/internal/constants.h>
 #include <tests/util/internal/type_info_test_helper.h>
 #include <gtest/gtest.h>

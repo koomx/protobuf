@@ -273,7 +273,7 @@ class SHARK_EXPORT alignas(8) Arena final {
 
   // API to create proto2 message objects on the arena. If the arena passed in
   // is NULL, then a heap allocated object is returned. Type T must be a message
-  // defined in a .proto file with cc_enable_arenas set to true, otherwise a
+  // defined in a .shark file with cc_enable_arenas set to true, otherwise a
   // compilation error will occur.
   //
   // RepeatedField and RepeatedPtrField may also be instantiated directly on an

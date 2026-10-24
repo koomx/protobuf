@@ -39,7 +39,7 @@
 namespace shark::util {
 namespace status_internal {
 
-// These values must match error codes defined in google/rpc/code.proto.
+// These values must match error codes defined in google/rpc/code.shark.
 enum class StatusCode : int {
   kOk = 0,
   kCancelled = 1,

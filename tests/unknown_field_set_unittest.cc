@@ -44,8 +44,8 @@
 #include <shark/stubs/callback.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <tests/unittest.pb.h>
-#include <tests/unittest_lite.pb.h>
+#include <tests/unittest.skp.h>
+#include <tests/unittest_lite.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>

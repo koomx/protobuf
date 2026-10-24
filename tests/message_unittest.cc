@@ -32,13 +32,13 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 
 #define MESSAGE_TEST_NAME MessageTest
 #define MESSAGE_FACTORY_TEST_NAME MessageFactoryTest
-#define UNITTEST_PACKAGE_NAME "protobuf_unittest"
-#define UNITTEST ::protobuf_unittest
-#define UNITTEST_IMPORT ::protobuf_unittest_import
+#define UNITTEST_PACKAGE_NAME "sharkbuf_unittest"
+#define UNITTEST ::sharkbuf_unittest
+#define UNITTEST_IMPORT ::sharkbuf_unittest_import
 
 // Must include after the above macros.
 // clang-format off

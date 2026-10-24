@@ -231,7 +231,7 @@ SHARK_EXPORT bool IsDescendant(Message& root, const Message& message);
 // default implementations based on reflection.  Message classes which are
 // optimized for speed will want to override these with faster implementations,
 // but classes optimized for code size may be happy with keeping them.  See
-// the optimize_for option in descriptor.proto.
+// the optimize_for option in descriptor.shark.
 //
 // Users must not derive from this class. Only the protocol compiler and
 // the internal library are allowed to create subclasses.
@@ -1067,7 +1067,7 @@ class SHARK_EXPORT Reflection final {
 
   // Special version for specialized implementations of string.  We can't
   // call MutableRawRepeatedField directly here because we don't have access to
-  // FieldOptions::* which are defined in descriptor.pb.h.  Including that
+  // FieldOptions::* which are defined in descriptor.skp.h.  Including that
   // file here is not possible because it would cause a circular include cycle.
   // We use 1 routine rather than 2 (const vs mutable) because it is private
   // and mutable a repeated string field doesn't change the message.
@@ -1304,7 +1304,7 @@ class SHARK_EXPORT MessageFactory {
   // This factory is a singleton.  The caller must not delete the object.
   static MessageFactory* generated_factory();
 
-  // For internal use only:  Registers a .proto file at static initialization
+  // For internal use only:  Registers a .shark file at static initialization
   // time, to be placed in generated_factory.  The first time GetPrototype()
   // is called with a descriptor from this file, |register_messages| will be
   // called, with the file name as the parameter.  It must call
@@ -1390,7 +1390,7 @@ T* DynamicCastToGenerated(Message* from) {
 //   DescriptorPool::generated_pool()->FindMessageTypeByName("pkg.FooMessage");
 //
 // As a side-effect, it will also guarantee that anything else from the same
-// .proto file will also be available for lookup in the generated pool.
+// .shark file will also be available for lookup in the generated pool.
 //
 // This function does not actually register the message, so it does not need
 // to be called before the lookup.  However it does need to occur in a function

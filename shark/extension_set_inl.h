@@ -173,10 +173,10 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
         MessageLite* value =
             extension.is_repeated
                 ? AddMessage(number, WireFormatLite::TYPE_GROUP,
-                             *extension.message_info.prototype,
+                             *extension.message_info.sharktype,
                              extension.descriptor)
                 : MutableMessage(number, WireFormatLite::TYPE_GROUP,
-                                 *extension.message_info.prototype,
+                                 *extension.message_info.sharktype,
                                  extension.descriptor);
         uint32_t tag = (number << 3) + WireFormatLite::WIRETYPE_START_GROUP;
         return ctx->ParseGroup(value, ptr, tag);
@@ -186,10 +186,10 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
         MessageLite* value =
             extension.is_repeated
                 ? AddMessage(number, WireFormatLite::TYPE_MESSAGE,
-                             *extension.message_info.prototype,
+                             *extension.message_info.sharktype,
                              extension.descriptor)
                 : MutableMessage(number, WireFormatLite::TYPE_MESSAGE,
-                                 *extension.message_info.prototype,
+                                 *extension.message_info.sharktype,
                                  extension.descriptor);
         return ctx->ParseMessage(value, ptr);
       }
@@ -228,10 +228,10 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
           MessageLite* value =
               extension.is_repeated
                   ? AddMessage(type_id, WireFormatLite::TYPE_MESSAGE,
-                               *extension.message_info.prototype,
+                               *extension.message_info.sharktype,
                                extension.descriptor)
                   : MutableMessage(type_id, WireFormatLite::TYPE_MESSAGE,
-                                   *extension.message_info.prototype,
+                                   *extension.message_info.sharktype,
                                    extension.descriptor);
 
           const char* p;

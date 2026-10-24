@@ -30,7 +30,7 @@
 
 #include <memory>
 
-#include <tests/unittest_drop_unknown_fields.pb.h>
+#include <tests/unittest_drop_unknown_fields.skp.h>
 #include <shark/dynamic_message.h>
 #include <shark/message_lite.h>
 #include <gtest/gtest.h>

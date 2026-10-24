@@ -41,7 +41,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/text_format.h>
 #include <gmock/gmock.h>
@@ -176,36 +176,36 @@ class DescriptorDatabaseTest
 
 TEST_P(DescriptorDatabaseTest, FindFileByName) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { name:\"Foo\" }");
   AddToDatabase(
-      "name: \"bar.proto\" "
+      "name: \"bar.shark\" "
       "message_type { name:\"Bar\" }");
 
   {
     FileDescriptorProto file;
-    EXPECT_TRUE(database_->FindFileByName("foo.proto", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_TRUE(database_->FindFileByName("foo.shark", &file));
+    EXPECT_EQ("foo.shark", file.name());
     ExpectContainsType(file, "Foo");
   }
 
   {
     FileDescriptorProto file;
-    EXPECT_TRUE(database_->FindFileByName("bar.proto", &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_TRUE(database_->FindFileByName("bar.shark", &file));
+    EXPECT_EQ("bar.shark", file.name());
     ExpectContainsType(file, "Bar");
   }
 
   {
     // Fails to find undefined files.
     FileDescriptorProto file;
-    EXPECT_FALSE(database_->FindFileByName("baz.proto", &file));
+    EXPECT_FALSE(database_->FindFileByName("baz.shark", &file));
   }
 }
 
 TEST_P(DescriptorDatabaseTest, FindFileContainingSymbol) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { "
       "  name: \"Foo\" "
       "  field { name:\"qux\" }"
@@ -222,21 +222,21 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingSymbol) {
       "  method { name: \"Thud\" } "
       "}");
   AddToDatabase(
-      "name: \"bar.proto\" "
+      "name: \"bar.shark\" "
       "package: \"corge\" "
       "message_type { name: \"Bar\" }");
 
   {
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Foo", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find fields.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Foo.qux", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
     // Non-existent field under a valid top level symbol can also be
     // found.
     EXPECT_TRUE(
@@ -247,56 +247,56 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingSymbol) {
     // Can find nested types.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Foo.Grault", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find nested enums.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Foo.Garply", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find enum types.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Waldo", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find enum values.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Waldo.FRED", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find extensions.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("plugh", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find services.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Xyzzy", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find methods.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("Xyzzy.Thud", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     // Can find things in packages.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingSymbol("corge.Bar", &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_EQ("bar.shark", file.name());
   }
 
   {
@@ -314,7 +314,7 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingSymbol) {
 
 TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { "
       "  name: \"Foo\" "
       "  extension_range { start: 1 end: 1000 } "
@@ -323,9 +323,9 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
       "              extendee: \".Foo\" }"
       "}");
   AddToDatabase(
-      "name: \"bar.proto\" "
+      "name: \"bar.shark\" "
       "package: \"corge\" "
-      "dependency: \"foo.proto\" "
+      "dependency: \"foo.shark\" "
       "message_type { "
       "  name: \"Bar\" "
       "  extension_range { start: 1 end: 1000 } "
@@ -337,20 +337,20 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
   {
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingExtension("Foo", 5, &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
   }
 
   {
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingExtension("Foo", 32, &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_EQ("bar.shark", file.name());
   }
 
   {
     // Can find extensions for qualified type names.
     FileDescriptorProto file;
     EXPECT_TRUE(database_->FindFileContainingExtension("corge.Bar", 70, &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_EQ("bar.shark", file.name());
   }
 
   {
@@ -384,7 +384,7 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
 
 TEST_P(DescriptorDatabaseTest, FindAllExtensionNumbers) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { "
       "  name: \"Foo\" "
       "  extension_range { start: 1 end: 1000 } "
@@ -393,9 +393,9 @@ TEST_P(DescriptorDatabaseTest, FindAllExtensionNumbers) {
       "              extendee: \".Foo\" }"
       "}");
   AddToDatabase(
-      "name: \"bar.proto\" "
+      "name: \"bar.shark\" "
       "package: \"corge\" "
-      "dependency: \"foo.proto\" "
+      "dependency: \"foo.shark\" "
       "message_type { "
       "  name: \"Bar\" "
       "  extension_range { start: 1 end: 1000 } "
@@ -436,12 +436,12 @@ TEST_P(DescriptorDatabaseTest, FindAllExtensionNumbers) {
 
 TEST_P(DescriptorDatabaseTest, ConflictingFileError) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { "
       "  name: \"Foo\" "
       "}");
   AddToDatabaseWithError(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { "
       "  name: \"Bar\" "
       "}");
@@ -449,12 +449,12 @@ TEST_P(DescriptorDatabaseTest, ConflictingFileError) {
 
 TEST_P(DescriptorDatabaseTest, ConflictingTypeError) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "message_type { "
       "  name: \"Foo\" "
       "}");
   AddToDatabaseWithError(
-      "name: \"bar.proto\" "
+      "name: \"bar.shark\" "
       "message_type { "
       "  name: \"Foo\" "
       "}");
@@ -462,11 +462,11 @@ TEST_P(DescriptorDatabaseTest, ConflictingTypeError) {
 
 TEST_P(DescriptorDatabaseTest, ConflictingExtensionError) {
   AddToDatabase(
-      "name: \"foo.proto\" "
+      "name: \"foo.shark\" "
       "extension { name:\"foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:5 "
       "            extendee: \".Foo\" }");
   AddToDatabaseWithError(
-      "name: \"bar.proto\" "
+      "name: \"bar.shark\" "
       "extension { name:\"bar\" label:LABEL_OPTIONAL type:TYPE_INT32 number:5 "
       "            extendee: \".Foo\" }");
 }
@@ -485,10 +485,10 @@ INSTANTIATE_TEST_CASE_P(Pool, DescriptorDatabaseTest,
 TEST(EncodedDescriptorDatabaseExtraTest, FindNameOfFileContainingSymbol) {
   // Create two files, one of which is in two parts.
   FileDescriptorProto file1, file2a, file2b;
-  file1.set_name("foo.proto");
+  file1.set_name("foo.shark");
   file1.set_package("foo");
   file1.add_message_type()->set_name("Foo");
-  file2a.set_name("bar.proto");
+  file2a.set_name("bar.shark");
   file2b.set_package("bar");
   file2b.add_message_type()->set_name("Bar");
 
@@ -506,11 +506,11 @@ TEST(EncodedDescriptorDatabaseExtraTest, FindNameOfFileContainingSymbol) {
   // Test!
   std::string filename;
   EXPECT_TRUE(db.FindNameOfFileContainingSymbol("foo.Foo", &filename));
-  EXPECT_EQ("foo.proto", filename);
+  EXPECT_EQ("foo.shark", filename);
   EXPECT_TRUE(db.FindNameOfFileContainingSymbol("foo.Foo.Blah", &filename));
-  EXPECT_EQ("foo.proto", filename);
+  EXPECT_EQ("foo.shark", filename);
   EXPECT_TRUE(db.FindNameOfFileContainingSymbol("bar.Bar", &filename));
-  EXPECT_EQ("bar.proto", filename);
+  EXPECT_EQ("bar.shark", filename);
   EXPECT_FALSE(db.FindNameOfFileContainingSymbol("foo", &filename));
   EXPECT_FALSE(db.FindNameOfFileContainingSymbol("bar", &filename));
   EXPECT_FALSE(db.FindNameOfFileContainingSymbol("baz.Baz", &filename));
@@ -518,7 +518,7 @@ TEST(EncodedDescriptorDatabaseExtraTest, FindNameOfFileContainingSymbol) {
 
 TEST(SimpleDescriptorDatabaseExtraTest, FindAllFileNames) {
   FileDescriptorProto f;
-  f.set_name("foo.proto");
+  f.set_name("foo.shark");
   f.set_package("foo");
   f.add_message_type()->set_name("Foo");
 
@@ -528,17 +528,17 @@ TEST(SimpleDescriptorDatabaseExtraTest, FindAllFileNames) {
   // Test!
   std::vector<std::string> all_files;
   db.FindAllFileNames(&all_files);
-  EXPECT_THAT(all_files, testing::ElementsAre("foo.proto"));
+  EXPECT_THAT(all_files, testing::ElementsAre("foo.shark"));
 }
 
 TEST(SimpleDescriptorDatabaseExtraTest, FindAllPackageNames) {
   FileDescriptorProto f;
-  f.set_name("foo.proto");
+  f.set_name("foo.shark");
   f.set_package("foo");
   f.add_message_type()->set_name("Foo");
 
   FileDescriptorProto b;
-  b.set_name("bar.proto");
+  b.set_name("bar.shark");
   b.set_package("");
   b.add_message_type()->set_name("Bar");
 
@@ -553,12 +553,12 @@ TEST(SimpleDescriptorDatabaseExtraTest, FindAllPackageNames) {
 
 TEST(SimpleDescriptorDatabaseExtraTest, FindAllMessageNames) {
   FileDescriptorProto f;
-  f.set_name("foo.proto");
+  f.set_name("foo.shark");
   f.set_package("foo");
   f.add_message_type()->set_name("Foo");
 
   FileDescriptorProto b;
-  b.set_name("bar.proto");
+  b.set_name("bar.shark");
   b.set_package("");
   b.add_message_type()->set_name("Bar");
 
@@ -582,21 +582,21 @@ class MergedDescriptorDatabaseTest : public testing::Test {
   void SetUp() override {
     AddToDatabase(
         &database1_,
-        "name: \"foo.proto\" "
+        "name: \"foo.shark\" "
         "message_type { name:\"Foo\" extension_range { start: 1 end: 100 } } "
         "extension { name:\"foo_ext\" extendee: \".Foo\" number:3 "
         "            label:LABEL_OPTIONAL type:TYPE_INT32 } ");
     AddToDatabase(
         &database2_,
-        "name: \"bar.proto\" "
+        "name: \"bar.shark\" "
         "message_type { name:\"Bar\" extension_range { start: 1 end: 100 } } "
         "extension { name:\"bar_ext\" extendee: \".Bar\" number:5 "
         "            label:LABEL_OPTIONAL type:TYPE_INT32 } ");
 
-    // baz.proto exists in both pools, with different definitions.
+    // baz.shark exists in both pools, with different definitions.
     AddToDatabase(
         &database1_,
-        "name: \"baz.proto\" "
+        "name: \"baz.shark\" "
         "message_type { name:\"Baz\" extension_range { start: 1 end: 100 } } "
         "message_type { name:\"FromPool1\" } "
         "extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
@@ -605,7 +605,7 @@ class MergedDescriptorDatabaseTest : public testing::Test {
         "            label:LABEL_OPTIONAL type:TYPE_INT32 } ");
     AddToDatabase(
         &database2_,
-        "name: \"baz.proto\" "
+        "name: \"baz.shark\" "
         "message_type { name:\"Baz\" extension_range { start: 1 end: 100 } } "
         "message_type { name:\"FromPool2\" } "
         "extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
@@ -623,39 +623,39 @@ TEST_F(MergedDescriptorDatabaseTest, FindFileByName) {
   {
     // Can find file that is only in database1_.
     FileDescriptorProto file;
-    EXPECT_TRUE(forward_merged_.FindFileByName("foo.proto", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_TRUE(forward_merged_.FindFileByName("foo.shark", &file));
+    EXPECT_EQ("foo.shark", file.name());
     ExpectContainsType(file, "Foo");
   }
 
   {
     // Can find file that is only in database2_.
     FileDescriptorProto file;
-    EXPECT_TRUE(forward_merged_.FindFileByName("bar.proto", &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_TRUE(forward_merged_.FindFileByName("bar.shark", &file));
+    EXPECT_EQ("bar.shark", file.name());
     ExpectContainsType(file, "Bar");
   }
 
   {
-    // In forward_merged_, database1_'s baz.proto takes precedence.
+    // In forward_merged_, database1_'s baz.shark takes precedence.
     FileDescriptorProto file;
-    EXPECT_TRUE(forward_merged_.FindFileByName("baz.proto", &file));
-    EXPECT_EQ("baz.proto", file.name());
+    EXPECT_TRUE(forward_merged_.FindFileByName("baz.shark", &file));
+    EXPECT_EQ("baz.shark", file.name());
     ExpectContainsType(file, "FromPool1");
   }
 
   {
-    // In reverse_merged_, database2_'s baz.proto takes precedence.
+    // In reverse_merged_, database2_'s baz.shark takes precedence.
     FileDescriptorProto file;
-    EXPECT_TRUE(reverse_merged_.FindFileByName("baz.proto", &file));
-    EXPECT_EQ("baz.proto", file.name());
+    EXPECT_TRUE(reverse_merged_.FindFileByName("baz.shark", &file));
+    EXPECT_EQ("baz.shark", file.name());
     ExpectContainsType(file, "FromPool2");
   }
 
   {
     // Can't find non-existent file.
     FileDescriptorProto file;
-    EXPECT_FALSE(forward_merged_.FindFileByName("no_such.proto", &file));
+    EXPECT_FALSE(forward_merged_.FindFileByName("no_such.shark", &file));
   }
 }
 
@@ -664,7 +664,7 @@ TEST_F(MergedDescriptorDatabaseTest, FindFileContainingSymbol) {
     // Can find file that is only in database1_.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingSymbol("Foo", &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
     ExpectContainsType(file, "Foo");
   }
 
@@ -672,29 +672,29 @@ TEST_F(MergedDescriptorDatabaseTest, FindFileContainingSymbol) {
     // Can find file that is only in database2_.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingSymbol("Bar", &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_EQ("bar.shark", file.name());
     ExpectContainsType(file, "Bar");
   }
 
   {
-    // In forward_merged_, database1_'s baz.proto takes precedence.
+    // In forward_merged_, database1_'s baz.shark takes precedence.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingSymbol("Baz", &file));
-    EXPECT_EQ("baz.proto", file.name());
+    EXPECT_EQ("baz.shark", file.name());
     ExpectContainsType(file, "FromPool1");
   }
 
   {
-    // In reverse_merged_, database2_'s baz.proto takes precedence.
+    // In reverse_merged_, database2_'s baz.shark takes precedence.
     FileDescriptorProto file;
     EXPECT_TRUE(reverse_merged_.FindFileContainingSymbol("Baz", &file));
-    EXPECT_EQ("baz.proto", file.name());
+    EXPECT_EQ("baz.shark", file.name());
     ExpectContainsType(file, "FromPool2");
   }
 
   {
     // FromPool1 only shows up in forward_merged_ because it is masked by
-    // database2_'s baz.proto in reverse_merged_.
+    // database2_'s baz.shark in reverse_merged_.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingSymbol("FromPool1", &file));
     EXPECT_FALSE(reverse_merged_.FindFileContainingSymbol("FromPool1", &file));
@@ -712,7 +712,7 @@ TEST_F(MergedDescriptorDatabaseTest, FindFileContainingExtension) {
     // Can find file that is only in database1_.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingExtension("Foo", 3, &file));
-    EXPECT_EQ("foo.proto", file.name());
+    EXPECT_EQ("foo.shark", file.name());
     ExpectContainsType(file, "Foo");
   }
 
@@ -720,29 +720,29 @@ TEST_F(MergedDescriptorDatabaseTest, FindFileContainingExtension) {
     // Can find file that is only in database2_.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingExtension("Bar", 5, &file));
-    EXPECT_EQ("bar.proto", file.name());
+    EXPECT_EQ("bar.shark", file.name());
     ExpectContainsType(file, "Bar");
   }
 
   {
-    // In forward_merged_, database1_'s baz.proto takes precedence.
+    // In forward_merged_, database1_'s baz.shark takes precedence.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingExtension("Baz", 12, &file));
-    EXPECT_EQ("baz.proto", file.name());
+    EXPECT_EQ("baz.shark", file.name());
     ExpectContainsType(file, "FromPool1");
   }
 
   {
-    // In reverse_merged_, database2_'s baz.proto takes precedence.
+    // In reverse_merged_, database2_'s baz.shark takes precedence.
     FileDescriptorProto file;
     EXPECT_TRUE(reverse_merged_.FindFileContainingExtension("Baz", 12, &file));
-    EXPECT_EQ("baz.proto", file.name());
+    EXPECT_EQ("baz.shark", file.name());
     ExpectContainsType(file, "FromPool2");
   }
 
   {
     // Baz's extension 13 only shows up in forward_merged_ because it is
-    // masked by database2_'s baz.proto in reverse_merged_.
+    // masked by database2_'s baz.shark in reverse_merged_.
     FileDescriptorProto file;
     EXPECT_TRUE(forward_merged_.FindFileContainingExtension("Baz", 13, &file));
     EXPECT_FALSE(reverse_merged_.FindFileContainingExtension("Baz", 13, &file));
@@ -801,8 +801,8 @@ TEST_F(MergedDescriptorDatabaseTest, FindAllExtensionNumbers) {
 TEST_F(MergedDescriptorDatabaseTest, FindAllFileNames) {
   std::vector<std::string> files;
   EXPECT_TRUE(forward_merged_.FindAllFileNames(&files));
-  EXPECT_THAT(files, ::testing::UnorderedElementsAre("foo.proto", "bar.proto",
-                                                     "baz.proto", "baz.proto"));
+  EXPECT_THAT(files, ::testing::UnorderedElementsAre("foo.shark", "bar.shark",
+                                                     "baz.shark", "baz.shark"));
 }
 
 

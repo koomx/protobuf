@@ -40,12 +40,12 @@
 #include <vector>
 
 #include <tests/test_util2.h>
-#include <tests/unittest.pb.h>
-#include <shark/any.pb.h>
-#include <tests/unittest_custom_options.pb.h>
+#include <tests/unittest.skp.h>
+#include <shark/any.skp.h>
+#include <tests/unittest_custom_options.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/text_format.h>
 #include <shark/wire_format.h>
 #include <tests/testing/googletest.h>
@@ -164,7 +164,7 @@ class ParserTest : public testing::Test {
     parser_->RecordSourceLocationsTo(&source_locations);
 
     FileDescriptorProto file;
-    file.set_name("foo.proto");
+    file.set_name("foo.shark");
     parser_->Parse(input_.get(), &file);
     EXPECT_EQ(io::Tokenizer::TYPE_END, input_->current().type);
     ASSERT_EQ("", error_collector_.text_);
@@ -1195,30 +1195,30 @@ TEST_F(ParseServiceTest, MethodsAndStreams) {
 typedef ParserTest ParseMiscTest;
 
 TEST_F(ParseMiscTest, ParseImport) {
-  ExpectParsesTo("import \"foo/bar/baz.proto\";\n",
-                 "dependency: \"foo/bar/baz.proto\"");
+  ExpectParsesTo("import \"foo/bar/baz.shark\";\n",
+                 "dependency: \"foo/bar/baz.shark\"");
 }
 
 TEST_F(ParseMiscTest, ParseMultipleImports) {
   ExpectParsesTo(
-      "import \"foo.proto\";\n"
-      "import \"bar.proto\";\n"
-      "import \"baz.proto\";\n",
-      "dependency: \"foo.proto\""
-      "dependency: \"bar.proto\""
-      "dependency: \"baz.proto\"");
+      "import \"foo.shark\";\n"
+      "import \"bar.shark\";\n"
+      "import \"baz.shark\";\n",
+      "dependency: \"foo.shark\""
+      "dependency: \"bar.shark\""
+      "dependency: \"baz.shark\"");
 }
 
 TEST_F(ParseMiscTest, ParsePublicImports) {
   ExpectParsesTo(
-      "import \"foo.proto\";\n"
-      "import public \"bar.proto\";\n"
-      "import \"baz.proto\";\n"
-      "import public \"qux.proto\";\n",
-      "dependency: \"foo.proto\""
-      "dependency: \"bar.proto\""
-      "dependency: \"baz.proto\""
-      "dependency: \"qux.proto\""
+      "import \"foo.shark\";\n"
+      "import public \"bar.shark\";\n"
+      "import \"baz.shark\";\n"
+      "import public \"qux.shark\";\n",
+      "dependency: \"foo.shark\""
+      "dependency: \"bar.shark\""
+      "dependency: \"baz.shark\""
+      "dependency: \"qux.shark\""
       "public_dependency: 1 "
       "public_dependency: 3 ");
 }
@@ -1789,7 +1789,7 @@ typedef ParserTest ParserValidationErrorTest;
 TEST_F(ParserValidationErrorTest, PackageNameError) {
   // Create another file which defines symbol "foo".
   FileDescriptorProto other_file;
-  other_file.set_name("bar.proto");
+  other_file.set_name("bar.shark");
   other_file.add_message_type()->set_name("foo");
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
 
@@ -1797,34 +1797,34 @@ TEST_F(ParserValidationErrorTest, PackageNameError) {
   ExpectHasValidationErrors(
       "package foo.bar;",
       "0:0: \"foo\" is already defined (as something other than a package) "
-      "in file \"bar.proto\".\n");
+      "in file \"bar.shark\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, ImportUnloadedError) {
   ExpectHasValidationErrors(
       "package test;\n"
       "\n"
-      "import \"unloaded.proto\";",
-      "2:0: Import \"unloaded.proto\" has not been loaded.\n");
+      "import \"unloaded.shark\";",
+      "2:0: Import \"unloaded.shark\" has not been loaded.\n");
 }
 
 TEST_F(ParserValidationErrorTest, ImportTwice) {
   FileDescriptorProto other_file;
-  other_file.set_name("bar.proto");
+  other_file.set_name("bar.shark");
   other_file.add_message_type()->set_name("foo");
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
 
   ExpectHasValidationErrors(
       "package test;\n"
       "\n"
-      "import \"bar.proto\";\n"
-      "  import \"bar.proto\";",
-      "3:2: Import \"bar.proto\" was listed twice.\n");
+      "import \"bar.shark\";\n"
+      "  import \"bar.shark\";",
+      "3:2: Import \"bar.shark\" was listed twice.\n");
 }
 
 TEST_F(ParserValidationErrorTest, DuplicateFileError) {
   FileDescriptorProto other_file;
-  other_file.set_name("foo.proto");
+  other_file.set_name("foo.shark");
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
 
   ExpectHasValidationErrors(
@@ -2069,7 +2069,7 @@ TEST_F(ParserValidationErrorTest, MethodOutputTypeError) {
 TEST_F(ParserValidationErrorTest, ResolvedUndefinedError) {
   // Create another file which defines symbol ".base.bar".
   FileDescriptorProto other_file;
-  other_file.set_name("base.proto");
+  other_file.set_name("base.shark");
   other_file.set_package("base");
   other_file.add_message_type()->set_name("bar");
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
@@ -2078,7 +2078,7 @@ TEST_F(ParserValidationErrorTest, ResolvedUndefinedError) {
   // "base.bar" is resolved to "foo.base.bar" which is not defined.
   ExpectHasValidationErrors(
       "package foo.base;\n"
-      "import \"base.proto\";\n"
+      "import \"base.shark\";\n"
       "message qux {\n"
       "  optional base.bar baz = 1;\n"
       "  optional .base.bar quz = 2;\n"
@@ -2095,13 +2095,13 @@ TEST_F(ParserValidationErrorTest, ResovledUndefinedOptionError) {
   DescriptorProto::descriptor()->file()->CopyTo(&descriptor_proto);
   ASSERT_TRUE(pool_.BuildFile(descriptor_proto) != nullptr);
 
-  // base2.proto:
+  // base2.shark:
   //   package baz
-  //   import net/proto2/proto/descriptor.proto
+  //   import net/proto2/proto/descriptor.shark
   //   message Bar { optional int32 foo = 1; }
   //   extend FileOptions { optional Bar bar = 7672757; }
   FileDescriptorProto other_file;
-  other_file.set_name("base2.proto");
+  other_file.set_name("base2.shark");
   other_file.set_package("baz");
   other_file.add_dependency();
   other_file.set_dependency(0, descriptor_proto.name());
@@ -2124,7 +2124,7 @@ TEST_F(ParserValidationErrorTest, ResovledUndefinedOptionError) {
 
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
 
-  // qux.proto:
+  // qux.shark:
   //   package qux.baz
   //   option (baz.bar).foo = 1;
   //
@@ -2133,7 +2133,7 @@ TEST_F(ParserValidationErrorTest, ResovledUndefinedOptionError) {
   // which will cause a symbol not defined error.
   ExpectHasValidationErrors(
       "package qux.baz;\n"
-      "import \"base2.proto\";\n"
+      "import \"base2.shark\";\n"
       "option (baz.bar).foo = 1;\n",
       "2:7: Option \"(baz.bar)\" is resolved to \"(qux.baz.bar)\","
       " which is not defined. The innermost scope is searched first "
@@ -2204,11 +2204,11 @@ void StripFieldTypeName(FileDescriptorProto* file_proto) {
 
 TEST_F(ParseDescriptorDebugTest, TestAllDescriptorTypes) {
   const FileDescriptor* original_file =
-      protobuf_unittest::TestAllTypes::descriptor()->file();
+      sharkbuf_unittest::TestAllTypes::descriptor()->file();
   FileDescriptorProto expected;
   original_file->CopyTo(&expected);
 
-  // Get the DebugString of the unittest.proto FileDecriptor, which includes
+  // Get the DebugString of the unittest.shark FileDecriptor, which includes
   // all other descriptor types
   std::string debug_string = original_file->DebugString();
 
@@ -2223,15 +2223,15 @@ TEST_F(ParseDescriptorDebugTest, TestAllDescriptorTypes) {
   // need to link to a FileDecriptor, then output back to a proto. We'll
   // also need to give it the same name as the original.
   parsed.set_name(
-      TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.proto"));
+      TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark"));
   // We need the imported dependency before we can build our parsed proto
   const FileDescriptor* public_import =
-      protobuf_unittest_import::PublicImportMessage::descriptor()->file();
+      sharkbuf_unittest_import::PublicImportMessage::descriptor()->file();
   FileDescriptorProto public_import_proto;
   public_import->CopyTo(&public_import_proto);
   ASSERT_TRUE(pool_.BuildFile(public_import_proto) != nullptr);
   const FileDescriptor* import =
-      protobuf_unittest_import::ImportMessage::descriptor()->file();
+      sharkbuf_unittest_import::ImportMessage::descriptor()->file();
   FileDescriptorProto import_proto;
   import->CopyTo(&import_proto);
   ASSERT_TRUE(pool_.BuildFile(import_proto) != nullptr);
@@ -2255,7 +2255,7 @@ TEST_F(ParseDescriptorDebugTest, TestAllDescriptorTypes) {
 
 TEST_F(ParseDescriptorDebugTest, TestCustomOptions) {
   const FileDescriptor* original_file =
-      protobuf_unittest::AggregateMessage::descriptor()->file();
+      sharkbuf_unittest::AggregateMessage::descriptor()->file();
   FileDescriptorProto expected;
   original_file->CopyTo(&expected);
 
@@ -2273,7 +2273,7 @@ TEST_F(ParseDescriptorDebugTest, TestCustomOptions) {
   // also need to give it the same name as the original.
   parsed.set_name(original_file->name());
 
-  // unittest_custom_options.proto depends on descriptor.proto.
+  // unittest_custom_options.shark depends on descriptor.shark.
   const FileDescriptor* import = FileDescriptorProto::descriptor()->file();
   FileDescriptorProto import_proto;
   import->CopyTo(&import_proto);
@@ -2355,7 +2355,7 @@ TEST_F(ParseDescriptorDebugTest, TestCommentsInDebugString) {
       "}\n");
 
   FileDescriptorProto parsed_desc;
-  parsed_desc.set_name("foo.proto");
+  parsed_desc.set_name("foo.shark");
   SourceLocationTable source_locations;
   parser_->RecordSourceLocationsTo(&source_locations);
   parser_->Parse(input_.get(), &parsed_desc);
@@ -2428,7 +2428,7 @@ TEST_F(ParseDescriptorDebugTest, TestMaps) {
       "} ");
   FileDescriptorProto original;
   EXPECT_TRUE(parser_->Parse(input_.get(), &original));
-  original.set_name("foo.proto");
+  original.set_name("foo.shark");
   const FileDescriptor* file = pool_.BuildFile(original);
   ASSERT_TRUE(file != nullptr);
 
@@ -2442,7 +2442,7 @@ TEST_F(ParseDescriptorDebugTest, TestMaps) {
   // Make sure the descriptor debug string is parsable.
   FileDescriptorProto parsed;
   SetupParser(debug_string.c_str());
-  parsed.set_name("foo.proto");
+  parsed.set_name("foo.shark");
   ASSERT_TRUE(parser_->Parse(input_.get(), &parsed));
 
   original.clear_source_code_info();
@@ -2564,7 +2564,7 @@ class SourceInfoTest : public ParserTest {
   // The parsed file (initialized by Parse()).
   FileDescriptorProto file_;
 
-  // Parse the given text as a .proto file and populate the spans_ map with
+  // Parse the given text as a .shark file and populate the spans_ map with
   // all the source location spans in its SourceCodeInfo table.
   bool Parse(const char* text) {
     ExtractMarkers(text);
@@ -2781,10 +2781,10 @@ TEST_F(SourceInfoTest, BasicFileDecls) {
   EXPECT_TRUE(
       Parse("$a$syntax = \"proto2\";$i$\n"
             "$b$package foo.bar;$c$\n"
-            "$d$import \"baz.proto\";$e$\n"
-            "$f$import\"qux.proto\";$h$\n"
-            "$j$import $k$public$l$ \"bar.proto\";$m$\n"
-            "$n$import $o$weak$p$ \"bar.proto\";$q$\n"
+            "$d$import \"baz.shark\";$e$\n"
+            "$f$import\"qux.shark\";$h$\n"
+            "$j$import $k$public$l$ \"bar.shark\";$m$\n"
+            "$n$import $o$weak$p$ \"bar.shark\";$q$\n"
             "\n"
             "// comment ignored\n"));
 

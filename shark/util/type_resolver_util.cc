@@ -30,9 +30,9 @@
 
 #include <shark/util/type_resolver_util.h>
 
-#include <shark/type.pb.h>
-#include <shark/wrappers.pb.h>
-#include <shark/descriptor.pb.h>
+#include <shark/type.skp.h>
+#include <shark/wrappers.skp.h>
+#include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/status.h>

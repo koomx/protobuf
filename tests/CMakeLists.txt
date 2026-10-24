@@ -17,14 +17,14 @@ configure_file(${PROJECT_SOURCE_DIR}/tests/config.h.in ${PROJECT_SOURCE_DIR}/tes
 
 find_package(GTest REQUIRED)
 
-# Test protos are generated at build time by sharkc, next to the .proto.
-# Library .pb.cc files under shark/ stay checked in and are not generated here.
-file(GLOB_RECURSE TEST_PROTOS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.proto)
+# Test protos are generated at build time by sharkc, next to the .shark.
+# Library .skp.cc files under shark/ stay checked in and are not generated here.
+file(GLOB_RECURSE TEST_PROTOS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.shark)
 set(lite_test_proto_files)
 set(tests_proto_files)
 foreach (proto_file ${TEST_PROTOS})
-    string(REPLACE .proto .pb.cc pb_file ${proto_file})
-    string(REPLACE .proto .pb.h pb_hdr ${proto_file})
+    string(REPLACE .shark .skp.cc pb_file ${proto_file})
+    string(REPLACE .shark .skp.h pb_hdr ${proto_file})
     add_custom_command(
             OUTPUT ${pb_file} ${pb_hdr}
             DEPENDS sharkc ${proto_file}
@@ -34,7 +34,7 @@ foreach (proto_file ${TEST_PROTOS})
             --experimental_allow_proto3_optional
     )
     get_filename_component(_pb_name ${pb_file} NAME)
-    if (_pb_name MATCHES "^(map_lite_unittest|unittest_import_lite|unittest_import_public_lite|unittest_lite)\\.pb\\.cc$")
+    if (_pb_name MATCHES "^(map_lite_unittest|unittest_import_lite|unittest_import_public_lite|unittest_lite)\\.skp\\.cc$")
         list(APPEND lite_test_proto_files ${pb_file})
     else ()
         list(APPEND tests_proto_files ${pb_file})

@@ -40,7 +40,7 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 

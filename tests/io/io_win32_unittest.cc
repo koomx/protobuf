@@ -417,9 +417,9 @@ TEST_F(IoWin32Test, ExpandWildcardsInRelativePathTest) {
   wstring wNonAscii(wtest_tmpdir + L"\\" + kUtf16Text);
   EXPECT_TRUE(CreateDirectoryW(wNonAscii.c_str(), nullptr));
   // Create mock files we will test pattern matching on.
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.proto"));
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_b.proto"));
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\bar.proto"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.shark"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_b.shark"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\bar.shark"));
   // `cd` into `wtest_tmpdir`.
   EXPECT_TRUE(SetCurrentDirectoryW(wtest_tmpdir.c_str()));
 
@@ -428,11 +428,11 @@ TEST_F(IoWin32Test, ExpandWildcardsInRelativePathTest) {
   vector<string> found_bad;
   // Assert matching a relative path pattern. Results should also be relative.
   ExpandWildcardsResult result =
-      ExpandWildcards(string(kUtf8Text) + "\\foo*.proto",
+      ExpandWildcards(string(kUtf8Text) + "\\foo*.shark",
                       [&found_a, &found_b, &found_bad](const string& p) {
-                        if (p == string(kUtf8Text) + "\\foo_a.proto") {
+                        if (p == string(kUtf8Text) + "\\foo_a.shark") {
                           found_a++;
-                        } else if (p == string(kUtf8Text) + "\\foo_b.proto") {
+                        } else if (p == string(kUtf8Text) + "\\foo_b.shark") {
                           found_b++;
                         } else {
                           found_bad.push_back(p);
@@ -448,9 +448,9 @@ TEST_F(IoWin32Test, ExpandWildcardsInRelativePathTest) {
   // Assert matching the exact filename.
   found_a = 0;
   found_bad.clear();
-  result = ExpandWildcards(string(kUtf8Text) + "\\foo_a.proto",
+  result = ExpandWildcards(string(kUtf8Text) + "\\foo_a.shark",
                            [&found_a, &found_bad](const string& p) {
-                             if (p == string(kUtf8Text) + "\\foo_a.proto") {
+                             if (p == string(kUtf8Text) + "\\foo_a.shark") {
                                found_a++;
                              } else {
                                found_bad.push_back(p);
@@ -467,9 +467,9 @@ TEST_F(IoWin32Test, ExpandWildcardsInAbsolutePathTest) {
   wstring wNonAscii(wtest_tmpdir + L"\\" + kUtf16Text);
   EXPECT_TRUE(CreateDirectoryW(wNonAscii.c_str(), nullptr));
   // Create mock files we will test pattern matching on.
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.proto"));
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_b.proto"));
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\bar.proto"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.shark"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_b.shark"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\bar.shark"));
 
   int found_a = 0;
   int found_b = 0;
@@ -477,13 +477,13 @@ TEST_F(IoWin32Test, ExpandWildcardsInAbsolutePathTest) {
   // Assert matching an absolute path. The results should also use absolute
   // path.
   ExpandWildcardsResult result =
-      ExpandWildcards(string(test_tmpdir) + "\\" + kUtf8Text + "\\foo*.proto",
+      ExpandWildcards(string(test_tmpdir) + "\\" + kUtf8Text + "\\foo*.shark",
                       [this, &found_a, &found_b, &found_bad](const string& p) {
                         if (p == string(this->test_tmpdir) + "\\" + kUtf8Text +
-                                     "\\foo_a.proto") {
+                                     "\\foo_a.shark") {
                           found_a++;
                         } else if (p == string(this->test_tmpdir) + "\\" +
-                                            kUtf8Text + "\\foo_b.proto") {
+                                            kUtf8Text + "\\foo_b.shark") {
                           found_b++;
                         } else {
                           found_bad.push_back(p);
@@ -500,10 +500,10 @@ TEST_F(IoWin32Test, ExpandWildcardsInAbsolutePathTest) {
   found_a = 0;
   found_bad.clear();
   result =
-      ExpandWildcards(string(test_tmpdir) + "\\" + kUtf8Text + "\\foo_a.proto",
+      ExpandWildcards(string(test_tmpdir) + "\\" + kUtf8Text + "\\foo_a.shark",
                       [this, &found_a, &found_bad](const string& p) {
                         if (p == string(this->test_tmpdir) + "\\" + kUtf8Text +
-                                     "\\foo_a.proto") {
+                                     "\\foo_a.shark") {
                           found_a++;
                         } else {
                           found_bad.push_back(p);
@@ -520,10 +520,10 @@ TEST_F(IoWin32Test, ExpandWildcardsIgnoresDirectoriesTest) {
   wstring wNonAscii(wtest_tmpdir + L"\\" + kUtf16Text);
   EXPECT_TRUE(CreateDirectoryW(wNonAscii.c_str(), nullptr));
   // Create mock files we will test pattern matching on.
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.proto"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.shark"));
   EXPECT_TRUE(
-      CreateDirectoryW((wNonAscii + L"\\foo_b.proto").c_str(), nullptr));
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_c.proto"));
+      CreateDirectoryW((wNonAscii + L"\\foo_b.shark").c_str(), nullptr));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_c.shark"));
   // `cd` into `wtest_tmpdir`.
   EXPECT_TRUE(SetCurrentDirectoryW(wtest_tmpdir.c_str()));
 
@@ -533,11 +533,11 @@ TEST_F(IoWin32Test, ExpandWildcardsIgnoresDirectoriesTest) {
   // Assert that the pattern matches exactly the expected files, and using the
   // absolute path as did the input pattern.
   ExpandWildcardsResult result =
-      ExpandWildcards(string(kUtf8Text) + "\\foo*.proto",
+      ExpandWildcards(string(kUtf8Text) + "\\foo*.shark",
                       [&found_a, &found_c, &found_bad](const string& p) {
-                        if (p == string(kUtf8Text) + "\\foo_a.proto") {
+                        if (p == string(kUtf8Text) + "\\foo_a.shark") {
                           found_a++;
-                        } else if (p == string(kUtf8Text) + "\\foo_c.proto") {
+                        } else if (p == string(kUtf8Text) + "\\foo_c.shark") {
                           found_c++;
                         } else {
                           found_bad.push_back(p);
@@ -555,23 +555,23 @@ TEST_F(IoWin32Test, ExpandWildcardsFailsIfNoFileMatchesTest) {
   wstring wNonAscii(wtest_tmpdir + L"\\" + kUtf16Text);
   EXPECT_TRUE(CreateDirectoryW(wNonAscii.c_str(), nullptr));
   // Create mock files we will test pattern matching on.
-  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.proto"));
+  EXPECT_TRUE(CreateEmptyFile(wNonAscii + L"\\foo_a.shark"));
   // `cd` into `wtest_tmpdir`.
   EXPECT_TRUE(SetCurrentDirectoryW(wtest_tmpdir.c_str()));
 
-  // Control test: should match foo*.proto
+  // Control test: should match foo*.shark
   ExpandWildcardsResult result =
-      ExpandWildcards(string(kUtf8Text) + "\\foo*.proto", [](const string&) {});
+      ExpandWildcards(string(kUtf8Text) + "\\foo*.shark", [](const string&) {});
   EXPECT_EQ(result, ExpandWildcardsResult::kSuccess);
 
-  // Control test: should match foo_a.proto
-  result = ExpandWildcards(string(kUtf8Text) + "\\foo_a.proto",
+  // Control test: should match foo_a.shark
+  result = ExpandWildcards(string(kUtf8Text) + "\\foo_a.shark",
                            [](const string&) {});
   EXPECT_EQ(result, ExpandWildcardsResult::kSuccess);
 
   // Actual test: should not match anything.
   result =
-      ExpandWildcards(string(kUtf8Text) + "\\bar*.proto", [](const string&) {});
+      ExpandWildcards(string(kUtf8Text) + "\\bar*.shark", [](const string&) {});
   ASSERT_EQ(result, ExpandWildcardsResult::kErrorNoMatchingFile);
 }
 

@@ -36,7 +36,7 @@
 #include <sstream>
 
 #include <tests/test_util.h>
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 
@@ -46,11 +46,11 @@ TEST(DelimitedMessageUtilTest, DelimitedMessages) {
   std::stringstream stream;
 
   {
-    protobuf_unittest::TestAllTypes message1;
+    sharkbuf_unittest::TestAllTypes message1;
     TestUtil::SetAllFields(&message1);
     EXPECT_TRUE(SerializeDelimitedToOstream(message1, &stream));
 
-    protobuf_unittest::TestPackedTypes message2;
+    sharkbuf_unittest::TestPackedTypes message2;
     TestUtil::SetPackedFields(&message2);
     EXPECT_TRUE(SerializeDelimitedToOstream(message2, &stream));
   }
@@ -59,14 +59,14 @@ TEST(DelimitedMessageUtilTest, DelimitedMessages) {
     bool clean_eof;
     io::IstreamInputStream zstream(&stream);
 
-    protobuf_unittest::TestAllTypes message1;
+    sharkbuf_unittest::TestAllTypes message1;
     clean_eof = true;
     EXPECT_TRUE(ParseDelimitedFromZeroCopyStream(&message1,
         &zstream, &clean_eof));
     EXPECT_FALSE(clean_eof);
     TestUtil::ExpectAllFieldsSet(message1);
 
-    protobuf_unittest::TestPackedTypes message2;
+    sharkbuf_unittest::TestPackedTypes message2;
     clean_eof = true;
     EXPECT_TRUE(ParseDelimitedFromZeroCopyStream(&message2,
         &zstream, &clean_eof));
@@ -85,7 +85,7 @@ TEST(DelimitedMessageUtilTest, FailsAtEndOfStream) {
   std::stringstream partial_stream;
 
   {
-    protobuf_unittest::ForeignMessage message;
+    sharkbuf_unittest::ForeignMessage message;
     message.set_c(42);
     message.set_d(24);
     EXPECT_TRUE(SerializeDelimitedToOstream(message, &full_stream));
@@ -101,7 +101,7 @@ TEST(DelimitedMessageUtilTest, FailsAtEndOfStream) {
     bool clean_eof;
     io::IstreamInputStream zstream(&partial_stream);
 
-    protobuf_unittest::ForeignMessage message;
+    sharkbuf_unittest::ForeignMessage message;
     clean_eof = true;
     EXPECT_FALSE(ParseDelimitedFromZeroCopyStream(&message,
         &zstream, &clean_eof));

@@ -38,8 +38,8 @@
 #include <shark/stubs/callback.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/wrappers.pb.h>
-#include <shark/descriptor.pb.h>
+#include <shark/wrappers.skp.h>
+#include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
 #include <shark/util/internal/constants.h>

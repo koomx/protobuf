@@ -81,7 +81,7 @@ std::string QualifiedOneofCaseConstantName(const FieldDescriptor* field);
 // code.
 std::string EnumValueName(const EnumValueDescriptor* enum_value);
 
-// Strips ".proto" or ".protodevel" from the end of a filename.
+// Strips ".shark" or ".protodevel" from the end of a filename.
 PROTOC_EXPORT std::string StripProto(const std::string& filename);
 
 }  // namespace compiler::cpp

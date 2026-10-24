@@ -37,7 +37,7 @@
 #include <vector>
 
 #include <shark/stubs/common.h>
-#include <shark/type.pb.h>
+#include <shark/type.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>

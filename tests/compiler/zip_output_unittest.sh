@@ -51,11 +51,11 @@ echo '
   option java_outer_classname = "Outer";
   message Foo {}
   message Bar {}
-' > $TEST_TMPDIR/testzip.proto
+' > $TEST_TMPDIR/testzip.shark
 
 $PROTOC \
     --cpp_out=$TEST_TMPDIR/testzip.zip --python_out=$TEST_TMPDIR/testzip.zip \
-    --java_out=$TEST_TMPDIR/testzip.jar -I$TEST_TMPDIR testzip.proto \
+    --java_out=$TEST_TMPDIR/testzip.jar -I$TEST_TMPDIR testzip.shark \
     || fail 'protoc failed.'
 
 echo "Testing output to zip..."
@@ -64,9 +64,9 @@ if $UNZIP -h > /dev/null; then
     || fail 'unzip failed.'
 
   grep 'testing: testzip\.pb\.cc *OK$' $TEST_TMPDIR/testzip.list > /dev/null \
-    || fail 'testzip.pb.cc not found in output zip.'
+    || fail 'testzip.skp.cc not found in output zip.'
   grep 'testing: testzip\.pb\.h *OK$' $TEST_TMPDIR/testzip.list > /dev/null \
-    || fail 'testzip.pb.h not found in output zip.'
+    || fail 'testzip.skp.h not found in output zip.'
   grep 'testing: testzip_pb2\.py *OK$' $TEST_TMPDIR/testzip.list > /dev/null \
     || fail 'testzip_pb2.py not found in output zip.'
   grep -i 'manifest' $TEST_TMPDIR/testzip.list > /dev/null \
@@ -76,7 +76,7 @@ else
 fi
 
 echo "Testing output to jar..."
-if $JAR c $TEST_TMPDIR/testzip.proto > /dev/null; then
+if $JAR c $TEST_TMPDIR/testzip.shark > /dev/null; then
   $JAR tf $TEST_TMPDIR/testzip.jar > $TEST_TMPDIR/testzip.list \
     || fail 'jar failed.'
 

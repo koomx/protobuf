@@ -34,7 +34,7 @@
 
 #include <limits>
 
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <shark/descriptor.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/mathutil.h>
@@ -42,7 +42,7 @@
 namespace shark::util {
 namespace {
 
-using protobuf_unittest::TestAllTypes;
+using sharkbuf_unittest::TestAllTypes;
 
 class DefaultFieldComparatorTest : public ::testing::Test {
  protected:

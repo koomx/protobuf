@@ -30,7 +30,7 @@
 
 // Author: jieluo@google.com (Jie Luo)
 //
-// Generates Python stub (.pyi) for a given .proto file.
+// Generates Python stub (.pyi) for a given .shark file.
 
 #pragma once
 

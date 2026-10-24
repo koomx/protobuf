@@ -37,7 +37,7 @@
 #include <algorithm>
 #include <set>
 
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 

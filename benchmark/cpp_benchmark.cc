@@ -32,12 +32,12 @@
 #include <iostream>
 #include <memory>
 #include <benchmark/benchmark.h>
-#include <benchmark/benchmarks.pb.h>
-#include <benchmark/datasets/google_message1/proto2/benchmark_message1_proto2.pb.h>
-#include <benchmark/datasets/google_message1/proto3/benchmark_message1_proto3.pb.h>
-#include <benchmark/datasets/google_message2/benchmark_message2.pb.h>
-#include <benchmark/datasets/google_message3/benchmark_message3.pb.h>
-#include <benchmark/datasets/google_message4/benchmark_message4.pb.h>
+#include <benchmark/benchmarks.skp.h>
+#include <benchmark/datasets/google_message1/proto2/benchmark_message1_proto2.skp.h>
+#include <benchmark/datasets/google_message1/proto3/benchmark_message1_proto3.skp.h>
+#include <benchmark/datasets/google_message2/benchmark_message2.skp.h>
+#include <benchmark/datasets/google_message3/benchmark_message3.skp.h>
+#include <benchmark/datasets/google_message4/benchmark_message4.skp.h>
 
 
 #define PREFIX "dataset."
@@ -242,7 +242,7 @@ int main(int argc, char *argv[]) {
   ::benchmark::Initialize(&argc, argv);
   if (argc == 1) {
     std::cerr << "Usage: ./cpp-benchmark <input data>" << std::endl;
-    std::cerr << "input data is in the format of \"benchmarks.proto\""
+    std::cerr << "input data is in the format of \"benchmarks.shark\""
         << std::endl;
     return 1;
   } else {

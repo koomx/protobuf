@@ -36,7 +36,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/unittest.pb.h>
+#include <tests/unittest.skp.h>
 #include <shark/descriptor.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
@@ -490,15 +490,15 @@ TEST(ReflectionOpsTest, FindExtensionInitializationErrors) {
   message.AddExtension(unittest::TestRequired::multi);
   message.AddExtension(unittest::TestRequired::multi);
   EXPECT_EQ(
-      "(protobuf_unittest.TestRequired.single).a,"
-      "(protobuf_unittest.TestRequired.single).b,"
-      "(protobuf_unittest.TestRequired.single).c,"
-      "(protobuf_unittest.TestRequired.multi)[0].a,"
-      "(protobuf_unittest.TestRequired.multi)[0].b,"
-      "(protobuf_unittest.TestRequired.multi)[0].c,"
-      "(protobuf_unittest.TestRequired.multi)[1].a,"
-      "(protobuf_unittest.TestRequired.multi)[1].b,"
-      "(protobuf_unittest.TestRequired.multi)[1].c",
+      "(sharkbuf_unittest.TestRequired.single).a,"
+      "(sharkbuf_unittest.TestRequired.single).b,"
+      "(sharkbuf_unittest.TestRequired.single).c,"
+      "(sharkbuf_unittest.TestRequired.multi)[0].a,"
+      "(sharkbuf_unittest.TestRequired.multi)[0].b,"
+      "(sharkbuf_unittest.TestRequired.multi)[0].c,"
+      "(sharkbuf_unittest.TestRequired.multi)[1].a,"
+      "(sharkbuf_unittest.TestRequired.multi)[1].b,"
+      "(sharkbuf_unittest.TestRequired.multi)[1].c",
       FindInitializationErrors(message));
 }
 

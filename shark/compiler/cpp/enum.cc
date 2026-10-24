@@ -314,7 +314,7 @@ void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
     //
     // Enums with allow_alias = true support multiple entries with the same
     // numerical value. In cases where there are multiple names for the same
-    // number, we treat the first name appearing in the .proto file as the
+    // number, we treat the first name appearing in the .shark file as the
     // canonical one.
     std::map<std::string, int> name_to_number;
     std::map<int, std::string> number_to_canonical_name;
@@ -333,7 +333,7 @@ void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
 
     // We concatenate all the names for a given enum into one big string
     // literal. If instead we store an array of string literals, the linker
-    // seems to put all enum strings for a given .proto file in the same
+    // seems to put all enum strings for a given .shark file in the same
     // section, which hinders its ability to strip out unused strings.
     format("static const char $classname$_names[] =");
     for (const auto& p : name_to_number) {

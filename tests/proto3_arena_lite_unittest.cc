@@ -32,7 +32,7 @@
 #include <string>
 #include <vector>
 
-#include <tests/unittest_proto3_arena.pb.h>
+#include <tests/unittest_proto3_arena.skp.h>
 #include <shark/arena.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>

@@ -35,7 +35,7 @@
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <shark/type.pb.h>
+#include <shark/type.skp.h>
 #include <shark/stubs/statusor.h>
 #include <shark/stubs/strutil.h>
 

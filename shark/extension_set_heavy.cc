@@ -39,7 +39,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <shark/extension_set.h>
 #include <shark/extension_set_inl.h>
 #include <shark/message.h>
@@ -285,9 +285,9 @@ bool DescriptorPoolExtensionFinder::Find(int number, ExtensionInfo* output) {
     output->is_packed = extension->options().packed();
     output->descriptor = extension;
     if (extension->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
-      output->message_info.prototype =
+      output->message_info.sharktype =
           factory_->GetPrototype(extension->message_type());
-      GOOGLE_CHECK(output->message_info.prototype != nullptr)
+      GOOGLE_CHECK(output->message_info.sharktype != nullptr)
           << "Extension factory's GetPrototype() returned nullptr; extension: "
           << extension->full_name();
     } else if (extension->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {

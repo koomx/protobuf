@@ -51,7 +51,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 #include <gmock/gmock.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
@@ -1007,7 +1007,7 @@ TEST(MESSAGE_FACTORY_TEST_NAME, GeneratedFactoryUnknownType) {
   // Construct a new descriptor.
   DescriptorPool pool;
   FileDescriptorProto file;
-  file.set_name("foo.proto");
+  file.set_name("foo.shark");
   file.add_message_type()->set_name("Foo");
   const Descriptor* descriptor = pool.BuildFile(file)->message_type(0);
 

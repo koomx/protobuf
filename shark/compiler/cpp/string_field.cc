@@ -37,7 +37,7 @@
 #include <shark/io/printer.h>
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/cpp/helpers.h>
-#include <shark/descriptor.pb.h>
+#include <shark/descriptor.skp.h>
 
 
 namespace shark::compiler::cpp {
@@ -144,7 +144,7 @@ void StringFieldGenerator::GenerateAccessorDeclarations(
   // In any case, we make all the accessors private while still actually
   // using a string to represent the field internally.  This way, we can
   // guarantee that if we do ever implement the ctype, it won't break any
-  // existing users who might be -- for whatever reason -- already using .proto
+  // existing users who might be -- for whatever reason -- already using .shark
   // files that applied the ctype.  The field can still be accessed via the
   // reflection interface since the reflection interface is independent of
   // the string's underlying representation.
