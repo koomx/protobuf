@@ -1,4 +1,5 @@
-option(protobuf_USE_EXTERNAL_GTEST "Use external Google Test (i.e. not the one in third_party/googletest)" OFF)
+option(protobuf_USE_EXTERNAL_GTEST
+        "Use external Google Test (i.e. not the one in third_party/googletest)" ON)
 
 option(protobuf_TEST_XML_OUTDIR "Output directory for XML logs from tests." "")
 
