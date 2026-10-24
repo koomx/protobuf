@@ -1843,8 +1843,8 @@ CommandLineInterface::InterpretArgument(const std::string& name,
     if (!version_info_.empty()) {
       std::cout << version_info_ << std::endl;
     }
-    std::cout << "libprotoc " << internal::VersionString(PROTOBUF_VERSION)
-              << PROTOBUF_VERSION_SUFFIX << std::endl;
+    std::cout << "libprotoc " << internal::VersionString(SHARK_VERSION)
+              << SHARK_VERSION_SUFFIX << std::endl;
     return PARSE_ARGUMENT_DONE_AND_EXIT;  // Exit without running compiler.
 
   } else if (name == "--disallow_services") {
@@ -2280,10 +2280,10 @@ bool CommandLineInterface::GeneratePluginOutput(
 
   google::protobuf::compiler::Version* version =
       request.mutable_compiler_version();
-  version->set_major(PROTOBUF_VERSION / 1000000);
-  version->set_minor(PROTOBUF_VERSION / 1000 % 1000);
-  version->set_patch(PROTOBUF_VERSION % 1000);
-  version->set_suffix(PROTOBUF_VERSION_SUFFIX);
+  version->set_major(SHARK_VERSION / 1000000);
+  version->set_minor(SHARK_VERSION / 1000 % 1000);
+  version->set_patch(SHARK_VERSION % 1000);
+  version->set_suffix(SHARK_VERSION_SUFFIX);
 
   // Invoke the plugin.
   Subprocess subprocess;
