@@ -104,6 +104,7 @@ kmcmake_cc_test(
         io/tokenizer_unittest.cc
         io/zero_copy_stream_unittest.cc
         map_field_test.cc
+        narrow_int_test.cc
         map_test.cc
         message_unittest.cc
         no_field_presence_test.cc

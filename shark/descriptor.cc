@@ -822,6 +822,10 @@ namespace shark {
             FieldCppType::INT64, // FieldType::SFIXED64
             FieldCppType::INT32, // FieldType::SINT32
             FieldCppType::INT64, // FieldType::SINT64
+            FieldCppType::INT8, // FieldType::INT8
+            FieldCppType::UINT8, // FieldType::UINT8
+            FieldCppType::INT16, // FieldType::INT16
+            FieldCppType::UINT16, // FieldType::UINT16
         };
 
     const char* const FieldDescriptor::kTypeToName[kMaxFieldType + 1] = {
@@ -845,6 +849,10 @@ namespace shark {
         "sfixed64", // FieldType::SFIXED64
         "sint32", // FieldType::SINT32
         "sint64", // FieldType::SINT64
+        "int8", // FieldType::INT8
+        "uint8", // FieldType::UINT8
+        "int16", // FieldType::INT16
+        "uint16", // FieldType::UINT16
     };
 
     const char* const FieldDescriptor::kCppTypeToName[kMaxFieldCppType + 1] = {
@@ -860,6 +868,10 @@ namespace shark {
         "enum", // FieldCppType::ENUM
         "string", // FieldCppType::STRING
         "message", // FieldCppType::MESSAGE
+        "int8", // FieldCppType::INT8
+        "uint8", // FieldCppType::UINT8
+        "int16", // FieldCppType::INT16
+        "uint16", // FieldCppType::UINT16
     };
 
     const char* const FieldDescriptor::kLabelToName[kMaxFieldLabel + 1] = {
@@ -2515,7 +2527,12 @@ namespace shark {
         GOOGLE_CHECK(has_default_value()) << "No default value";
         switch (cpp_type()) {
         case FieldCppType::INT32:
+        case FieldCppType::INT8:
+        case FieldCppType::INT16:
             return StrCat(default_value_int32_t());
+        case FieldCppType::UINT8:
+        case FieldCppType::UINT16:
+            return StrCat(default_value_uint32_t());
         case FieldCppType::INT64:
             return StrCat(default_value_int64_t());
         case FieldCppType::UINT32:
@@ -5561,7 +5578,13 @@ namespace shark {
                 char* end_pos = nullptr;
                 switch (result->cpp_type()) {
                 case FieldCppType::INT32:
+                case FieldCppType::INT8:
+                case FieldCppType::INT16:
                     result->default_value_int32_t_ = strtol(proto.default_value().c_str(), &end_pos, 0);
+                    break;
+                case FieldCppType::UINT8:
+                case FieldCppType::UINT16:
+                    result->default_value_uint32_t_ = strtoul(proto.default_value().c_str(), &end_pos, 0);
                     break;
                 case FieldCppType::INT64:
                     result->default_value_int64_t_ = strto64(proto.default_value().c_str(), &end_pos, 0);
@@ -5641,7 +5664,13 @@ namespace shark {
                 // No explicit default value
                 switch (result->cpp_type()) {
                 case FieldCppType::INT32:
+                case FieldCppType::INT8:
+                case FieldCppType::INT16:
                     result->default_value_int32_t_ = 0;
+                    break;
+                case FieldCppType::UINT8:
+                case FieldCppType::UINT16:
+                    result->default_value_uint32_t_ = 0;
                     break;
                 case FieldCppType::INT64:
                     result->default_value_int64_t_ = 0;

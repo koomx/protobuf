@@ -84,6 +84,10 @@ const TypeNameMap& GetTypeNameTable() {
     result["int64"] = FieldDescriptorProto::TYPE_INT64;
     result["sint32"] = FieldDescriptorProto::TYPE_SINT32;
     result["sint64"] = FieldDescriptorProto::TYPE_SINT64;
+    result["int8"] = FieldDescriptorProto::TYPE_INT8;
+    result["uint8"] = FieldDescriptorProto::TYPE_UINT8;
+    result["int16"] = FieldDescriptorProto::TYPE_INT16;
+    result["uint16"] = FieldDescriptorProto::TYPE_UINT16;
 
     return result;
   }());
@@ -1282,12 +1286,18 @@ bool Parser::ParseDefaultAssignment(
     case FieldDescriptorProto::TYPE_SINT32:
     case FieldDescriptorProto::TYPE_SINT64:
     case FieldDescriptorProto::TYPE_SFIXED32:
-    case FieldDescriptorProto::TYPE_SFIXED64: {
+    case FieldDescriptorProto::TYPE_SFIXED64:
+    case FieldDescriptorProto::TYPE_INT8:
+    case FieldDescriptorProto::TYPE_INT16: {
       uint64_t max_value = std::numeric_limits<int64_t>::max();
       if (field->type() == FieldDescriptorProto::TYPE_INT32 ||
           field->type() == FieldDescriptorProto::TYPE_SINT32 ||
           field->type() == FieldDescriptorProto::TYPE_SFIXED32) {
         max_value = std::numeric_limits<int32_t>::max();
+      } else if (field->type() == FieldDescriptorProto::TYPE_INT8) {
+        max_value = std::numeric_limits<int8_t>::max();
+      } else if (field->type() == FieldDescriptorProto::TYPE_INT16) {
+        max_value = std::numeric_limits<int16_t>::max();
       }
 
       // These types can be negative.
@@ -1308,11 +1318,17 @@ bool Parser::ParseDefaultAssignment(
     case FieldDescriptorProto::TYPE_UINT32:
     case FieldDescriptorProto::TYPE_UINT64:
     case FieldDescriptorProto::TYPE_FIXED32:
-    case FieldDescriptorProto::TYPE_FIXED64: {
+    case FieldDescriptorProto::TYPE_FIXED64:
+    case FieldDescriptorProto::TYPE_UINT8:
+    case FieldDescriptorProto::TYPE_UINT16: {
       uint64_t max_value = std::numeric_limits<uint64_t>::max();
       if (field->type() == FieldDescriptorProto::TYPE_UINT32 ||
           field->type() == FieldDescriptorProto::TYPE_FIXED32) {
         max_value = std::numeric_limits<uint32_t>::max();
+      } else if (field->type() == FieldDescriptorProto::TYPE_UINT8) {
+        max_value = std::numeric_limits<uint8_t>::max();
+      } else if (field->type() == FieldDescriptorProto::TYPE_UINT16) {
+        max_value = std::numeric_limits<uint16_t>::max();
       }
 
       // Numeric, not negative.

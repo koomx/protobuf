@@ -1222,7 +1222,15 @@ void ParseFunctionGenerator::GenerateStrings(Formatter& format,
 void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
                                                  const FieldDescriptor* field) {
   if (field->is_packable()) {
-    if (field->type() == FieldType::ENUM &&
+    if (field->type() == FieldType::INT8 || field->type() == FieldType::UINT8 ||
+        field->type() == FieldType::INT16 ||
+        field->type() == FieldType::UINT16) {
+      format(
+          "ptr = ::$proto_ns$::internal::PackedNarrowVarintParser<"
+          "$unknown_fields_type$, $1$>($msg$_internal_mutable_$name$(), ptr, "
+          "ctx, &$msg$_internal_metadata_, $2$);\n",
+          PrimitiveTypeName(options_, field->cpp_type()), field->number());
+    } else if (field->type() == FieldType::ENUM &&
         (IsEnumClass(field->enum_type()) ||
          !HasPreservingUnknownEnumSemantics(field))) {
       std::string enum_type = QualifiedClassName(field->enum_type(), options_);
@@ -1401,6 +1409,42 @@ void ParseFunctionGenerator::GenerateFieldBody(
               "}\n",
               field->number());
         }
+      } else if (field->type() == FieldType::INT8 ||
+                 field->type() == FieldType::UINT8 ||
+                 field->type() == FieldType::INT16 ||
+                 field->type() == FieldType::UINT16) {
+        const char* fits = "val <= 255";
+        if (field->type() == FieldType::INT8) {
+          fits = "static_cast<int64_t>(val) >= -128 && "
+                 "static_cast<int64_t>(val) <= 127";
+        } else if (field->type() == FieldType::INT16) {
+          fits = "static_cast<int64_t>(val) >= -32768 && "
+                 "static_cast<int64_t>(val) <= 32767";
+        } else if (field->type() == FieldType::UINT16) {
+          fits = "val <= 65535";
+        }
+        format(
+            "$uint64$ val = ::$proto_ns$::internal::ReadVarint64(&ptr);\n"
+            "CHK_(ptr);\n"
+            "if (SHARK_PREDICT_TRUE($1$)) {\n",
+            fits);
+        format.Indent();
+        if (field->is_repeated() || field->real_containing_oneof()) {
+          format("$msg$_internal_$put_field$(static_cast<$primitive_type$>(val));\n");
+        } else {
+          if (HasHasbit(field)) {
+            format("_Internal::set_has_$name$(&$has_bits$);\n");
+          }
+          format("$msg$$field$ = static_cast<$primitive_type$>(val);\n");
+        }
+        format.Outdent();
+        format(
+            "} else {\n"
+            "  ::$proto_ns$::internal::WriteVarint("
+            "$1$, val, $msg$_internal_metadata_.mutable_unknown_fields<"
+            "$unknown_fields_type$>());\n"
+            "}\n",
+            field->number());
       } else {
         std::string size = (field->type() == FieldType::INT32 ||
                             field->type() == FieldType::SINT32 ||

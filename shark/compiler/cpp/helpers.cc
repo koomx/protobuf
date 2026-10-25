@@ -341,7 +341,12 @@ bool CanInitializeByZeroing(const FieldDescriptor* field) {
     case FieldCppType::ENUM:
       return field->default_value_enum()->number() == 0;
     case FieldCppType::INT32:
+    case FieldCppType::INT8:
+    case FieldCppType::INT16:
       return field->default_value_int32() == 0;
+    case FieldCppType::UINT8:
+    case FieldCppType::UINT16:
+      return field->default_value_uint32() == 0;
     case FieldCppType::INT64:
       return field->default_value_int64() == 0;
     case FieldCppType::UINT32:
@@ -563,7 +568,15 @@ int EstimateAlignmentSize(const FieldDescriptor* field) {
   if (field->is_repeated()) return 8;
   switch (field->cpp_type()) {
     case FieldCppType::BOOL:
+    case FieldCppType::INT8:
+    case FieldCppType::UINT8:
       return 1;
+    case FieldCppType::INT16:
+    case FieldCppType::UINT16:
+      // The padding optimizer only groups 1-, 4-, and 8-byte fields. Two-byte
+      // fields are ordered with the 4-byte group; the compiler still aligns
+      // the real int16_t member.
+      return 4;
 
     case FieldCppType::INT32:
     case FieldCppType::UINT32:
@@ -617,6 +630,14 @@ const char* PrimitiveTypeName(FieldCppType type) {
   switch (type) {
     case FieldCppType::INT32:
       return "int32_t";
+    case FieldCppType::INT8:
+      return "int8_t";
+    case FieldCppType::UINT8:
+      return "uint8_t";
+    case FieldCppType::INT16:
+      return "int16_t";
+    case FieldCppType::UINT16:
+      return "uint16_t";
     case FieldCppType::INT64:
       return "int64_t";
     case FieldCppType::UINT32:
@@ -649,6 +670,14 @@ std::string PrimitiveTypeName(const Options& options,
   switch (type) {
     case FieldCppType::INT32:
       return IntTypeName(options, "int32");
+    case FieldCppType::INT8:
+      return "int8_t";
+    case FieldCppType::UINT8:
+      return "uint8_t";
+    case FieldCppType::INT16:
+      return "int16_t";
+    case FieldCppType::UINT16:
+      return "uint16_t";
     case FieldCppType::INT64:
       return IntTypeName(options, "int64");
     case FieldCppType::UINT32:
@@ -690,6 +719,14 @@ const char* DeclaredTypeMethodName(FieldType type) {
       return "SInt32";
     case FieldType::SINT64:
       return "SInt64";
+    case FieldType::INT8:
+      return "Int8";
+    case FieldType::UINT8:
+      return "UInt8";
+    case FieldType::INT16:
+      return "Int16";
+    case FieldType::UINT16:
+      return "UInt16";
     case FieldType::FIXED32:
       return "Fixed32";
     case FieldType::FIXED64:
@@ -755,6 +792,14 @@ std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
   switch (field->cpp_type()) {
     case FieldCppType::INT32:
       return Int32ToString(field->default_value_int32());
+    case FieldCppType::INT8:
+      return StrCat("static_cast<int8_t>(", field->default_value_int32(), ")");
+    case FieldCppType::INT16:
+      return StrCat("static_cast<int16_t>(", field->default_value_int32(), ")");
+    case FieldCppType::UINT8:
+      return StrCat("static_cast<uint8_t>(", field->default_value_uint32(), "u)");
+    case FieldCppType::UINT16:
+      return StrCat("static_cast<uint16_t>(", field->default_value_uint32(), "u)");
     case FieldCppType::UINT32:
       return StrCat(field->default_value_uint32()) + "u";
     case FieldCppType::INT64:
@@ -1074,6 +1119,10 @@ bool IsStringOrMessage(const FieldDescriptor* field) {
     case FieldCppType::FLOAT:
     case FieldCppType::BOOL:
     case FieldCppType::ENUM:
+    case FieldCppType::INT8:
+    case FieldCppType::UINT8:
+    case FieldCppType::INT16:
+    case FieldCppType::UINT16:
       return false;
     case FieldCppType::STRING:
     case FieldCppType::MESSAGE:

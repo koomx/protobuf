@@ -96,6 +96,12 @@ message Field {
     TYPE_SINT32 = 17;
     // Field type sint64.
     TYPE_SINT64 = 18;
+    // Narrow integers. Same numbering as FieldDescriptorProto.Type.
+    // Serialized as a 32-bit varint.
+    TYPE_INT8 = 19;
+    TYPE_UINT8 = 20;
+    TYPE_INT16 = 21;
+    TYPE_UINT16 = 22;
   }
 
   // Whether a field is optional, required, or repeated.

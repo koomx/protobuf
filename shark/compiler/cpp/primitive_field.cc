@@ -50,6 +50,10 @@ namespace {
 int FixedSize(FieldType type) {
   switch (type) {
     case FieldType::INT32:
+    case FieldType::INT8:
+    case FieldType::UINT8:
+    case FieldType::INT16:
+    case FieldType::UINT16:
       return -1;
     case FieldType::INT64:
       return -1;

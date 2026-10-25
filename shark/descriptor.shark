@@ -163,6 +163,14 @@ message FieldDescriptorProto {
     TYPE_SFIXED64 = 16;
     TYPE_SINT32 = 17;  // Uses ZigZag encoding.
     TYPE_SINT64 = 18;  // Uses ZigZag encoding.
+
+    // Narrow integers. Stored at their width. Serialized as a 32-bit varint,
+    // the same encoding as TYPE_INT32 / TYPE_UINT32. Values that do not fit
+    // the width are not stored in the field.
+    TYPE_INT8 = 19;
+    TYPE_UINT8 = 20;
+    TYPE_INT16 = 21;
+    TYPE_UINT16 = 22;
   }
 
   enum Label {

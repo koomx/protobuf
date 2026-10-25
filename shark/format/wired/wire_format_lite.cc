@@ -96,6 +96,10 @@ const WireFormatLite::CppType
         CPPTYPE_INT64,    // TYPE_SFIXED64
         CPPTYPE_INT32,    // TYPE_SINT32
         CPPTYPE_INT64,    // TYPE_SINT64
+        CPPTYPE_INT8,     // TYPE_INT8
+        CPPTYPE_UINT8,    // TYPE_UINT8
+        CPPTYPE_INT16,    // TYPE_INT16
+        CPPTYPE_UINT16,   // TYPE_UINT16
 };
 
 const WireFormatLite::WireType
@@ -119,6 +123,10 @@ const WireFormatLite::WireType
         WireFormatLite::WIRETYPE_FIXED64,           // TYPE_SFIXED64
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_SINT32
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_SINT64
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT8
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT8
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT16
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT16
 };
 
 bool WireFormatLite::SkipField(io::CodedInputStream* input, uint32_t tag) {

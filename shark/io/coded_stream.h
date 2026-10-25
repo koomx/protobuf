@@ -745,6 +745,26 @@ class SHARK_EXPORT EpsCopyOutputStream {
     return WriteVarintPacked(num, r, size, ptr, Encode64);
   }
   template <typename T>
+  SHARK_ALWAYS_INLINE uint8_t* WriteInt8Packed(int num, const T& r, int size,
+                                                  uint8_t* ptr) {
+    return WriteInt32Packed(num, r, size, ptr);
+  }
+  template <typename T>
+  SHARK_ALWAYS_INLINE uint8_t* WriteInt16Packed(int num, const T& r, int size,
+                                                   uint8_t* ptr) {
+    return WriteInt32Packed(num, r, size, ptr);
+  }
+  template <typename T>
+  SHARK_ALWAYS_INLINE uint8_t* WriteUInt8Packed(int num, const T& r, int size,
+                                                   uint8_t* ptr) {
+    return WriteUInt32Packed(num, r, size, ptr);
+  }
+  template <typename T>
+  SHARK_ALWAYS_INLINE uint8_t* WriteUInt16Packed(int num, const T& r, int size,
+                                                    uint8_t* ptr) {
+    return WriteUInt32Packed(num, r, size, ptr);
+  }
+  template <typename T>
   SHARK_ALWAYS_INLINE uint8_t* WriteUInt32Packed(int num, const T& r,
                                                     int size, uint8_t* ptr) {
     return WriteVarintPacked(num, r, size, ptr, Encode32);

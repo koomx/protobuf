@@ -32,6 +32,7 @@
 
 #include <cstdint>
 #include <cstring>
+#include <limits>
 #include <string>
 #include <type_traits>
 
@@ -958,6 +959,32 @@ template <typename T>
     void* object, const char* ptr, ParseContext* ctx);
 [[nodiscard]] SHARK_EXPORT const char* PackedEnumParser(
     void* object, const char* ptr, ParseContext* ctx);
+
+// Packed varints that only stay in the field when they fit in T. Wider values
+// are recorded as unknown fields and are not truncated.
+template <typename UnknownFieldsT, typename T>
+[[nodiscard]] const char* PackedNarrowVarintParser(void* object, const char* ptr,
+                                                   ParseContext* ctx,
+                                                   InternalMetadata* metadata,
+                                                   int field_num) {
+  return ctx->ReadPackedVarint(
+      ptr, [object, metadata, field_num](uint64_t val) {
+        bool fits;
+        if (std::numeric_limits<T>::is_signed) {
+          const int64_t signed_value = static_cast<int64_t>(val);
+          fits = signed_value >= std::numeric_limits<T>::min() &&
+                 signed_value <= std::numeric_limits<T>::max();
+        } else {
+          fits = val <= static_cast<uint64_t>(std::numeric_limits<T>::max());
+        }
+        if (fits) {
+          static_cast<RepeatedField<T>*>(object)->Add(static_cast<T>(val));
+        } else {
+          WriteVarint(field_num, val,
+                      metadata->mutable_unknown_fields<UnknownFieldsT>());
+        }
+      });
+}
 
 template <typename T>
 [[nodiscard]] const char* PackedEnumParser(void* object, const char* ptr,

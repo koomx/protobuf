@@ -157,6 +157,10 @@ bool IsPOD(const FieldDescriptor* field) {
     case FieldCppType::FLOAT:
     case FieldCppType::DOUBLE:
     case FieldCppType::BOOL:
+    case FieldCppType::INT8:
+    case FieldCppType::UINT8:
+    case FieldCppType::INT16:
+    case FieldCppType::UINT16:
       return true;
     case FieldCppType::STRING:
       return false;

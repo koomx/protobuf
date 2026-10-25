@@ -91,7 +91,11 @@ enum class Field_Kind : int32_t {
   TYPE_SFIXED32 = 15,
   TYPE_SFIXED64 = 16,
   TYPE_SINT32 = 17,
-  TYPE_SINT64 = 18
+  TYPE_SINT64 = 18,
+  TYPE_INT8 = 19,
+  TYPE_UINT8 = 20,
+  TYPE_INT16 = 21,
+  TYPE_UINT16 = 22
 };
 constexpr Field_Kind Field_Kind_TYPE_UNKNOWN = Field_Kind::TYPE_UNKNOWN;
 constexpr Field_Kind Field_Kind_TYPE_DOUBLE = Field_Kind::TYPE_DOUBLE;
@@ -112,6 +116,10 @@ constexpr Field_Kind Field_Kind_TYPE_SFIXED32 = Field_Kind::TYPE_SFIXED32;
 constexpr Field_Kind Field_Kind_TYPE_SFIXED64 = Field_Kind::TYPE_SFIXED64;
 constexpr Field_Kind Field_Kind_TYPE_SINT32 = Field_Kind::TYPE_SINT32;
 constexpr Field_Kind Field_Kind_TYPE_SINT64 = Field_Kind::TYPE_SINT64;
+constexpr Field_Kind Field_Kind_TYPE_INT8 = Field_Kind::TYPE_INT8;
+constexpr Field_Kind Field_Kind_TYPE_UINT8 = Field_Kind::TYPE_UINT8;
+constexpr Field_Kind Field_Kind_TYPE_INT16 = Field_Kind::TYPE_INT16;
+constexpr Field_Kind Field_Kind_TYPE_UINT16 = Field_Kind::TYPE_UINT16;
 constexpr int32_t Field_Kind_to_underlying(Field_Kind value) {
   return static_cast<int32_t>(value);
 }
@@ -123,7 +131,7 @@ inline bool Field_Kind_FitsWire(::uint64_t value) {
 }
 bool Field_Kind_IsValid(int value);
 constexpr Field_Kind Field_Kind_Kind_MIN = Field_Kind::TYPE_UNKNOWN;
-constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind::TYPE_SINT64;
+constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind::TYPE_UINT16;
 constexpr int Field_Kind_Kind_ARRAYSIZE = Field_Kind_to_underlying(Field_Kind_Kind_MAX) + 1;
 
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor();
@@ -624,6 +632,14 @@ class Field final :
     Field_Kind::TYPE_SINT32;
   static constexpr Kind TYPE_SINT64 =
     Field_Kind::TYPE_SINT64;
+  static constexpr Kind TYPE_INT8 =
+    Field_Kind::TYPE_INT8;
+  static constexpr Kind TYPE_UINT8 =
+    Field_Kind::TYPE_UINT8;
+  static constexpr Kind TYPE_INT16 =
+    Field_Kind::TYPE_INT16;
+  static constexpr Kind TYPE_UINT16 =
+    Field_Kind::TYPE_UINT16;
   static inline bool Kind_IsValid(int value) {
     return Field_Kind_IsValid(value);
   }

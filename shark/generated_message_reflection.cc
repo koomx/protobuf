@@ -139,7 +139,8 @@ void ReportReflectionUsageError(const Descriptor* descriptor,
 const char* cpptype_names_[kMaxFieldCppType + 1] = {
     "INVALID_CPPTYPE", "CPPTYPE_INT32",  "CPPTYPE_INT64",  "CPPTYPE_UINT32",
     "CPPTYPE_UINT64",  "CPPTYPE_DOUBLE", "CPPTYPE_FLOAT",  "CPPTYPE_BOOL",
-    "CPPTYPE_ENUM",    "CPPTYPE_STRING", "CPPTYPE_MESSAGE"};
+    "CPPTYPE_ENUM",    "CPPTYPE_STRING", "CPPTYPE_MESSAGE",
+    "CPPTYPE_INT8",    "CPPTYPE_UINT8",  "CPPTYPE_INT16",  "CPPTYPE_UINT16"};
 
 static void ReportReflectionUsageTypeError(
     const Descriptor* descriptor, const FieldDescriptor* field,

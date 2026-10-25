@@ -122,6 +122,47 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_BOOL> {
 };
 
 template <>
+struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT8> {
+  typedef int8_t Type;
+  static void Serialize(const void* ptr, io::CodedOutputStream* output) {
+    WireFormatLite::WriteInt32NoTag(Get<Type>(ptr), output);
+  }
+  static uint8_t* SerializeToArray(const void* ptr, uint8_t* buffer) {
+    return WireFormatLite::WriteInt32NoTagToArray(Get<Type>(ptr), buffer);
+  }
+};
+template <>
+struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT8> {
+  typedef uint8_t Type;
+  static void Serialize(const void* ptr, io::CodedOutputStream* output) {
+    WireFormatLite::WriteUInt32NoTag(Get<Type>(ptr), output);
+  }
+  static uint8_t* SerializeToArray(const void* ptr, uint8_t* buffer) {
+    return WireFormatLite::WriteUInt32NoTagToArray(Get<Type>(ptr), buffer);
+  }
+};
+template <>
+struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT16> {
+  typedef int16_t Type;
+  static void Serialize(const void* ptr, io::CodedOutputStream* output) {
+    WireFormatLite::WriteInt32NoTag(Get<Type>(ptr), output);
+  }
+  static uint8_t* SerializeToArray(const void* ptr, uint8_t* buffer) {
+    return WireFormatLite::WriteInt32NoTagToArray(Get<Type>(ptr), buffer);
+  }
+};
+template <>
+struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT16> {
+  typedef uint16_t Type;
+  static void Serialize(const void* ptr, io::CodedOutputStream* output) {
+    WireFormatLite::WriteUInt32NoTag(Get<Type>(ptr), output);
+  }
+  static uint8_t* SerializeToArray(const void* ptr, uint8_t* buffer) {
+    return WireFormatLite::WriteUInt32NoTagToArray(Get<Type>(ptr), buffer);
+  }
+};
+
+template <>
 struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT32> {
   typedef int32_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {

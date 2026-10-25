@@ -1,0 +1,12 @@
+syntax = "proto2";
+
+package shark_unittest;
+
+message NarrowInt {
+  optional int8 i8 = 1;
+  optional uint8 u8 = 2;
+  optional int16 i16 = 3;
+  optional uint16 u16 = 4;
+  repeated int8 ri8 = 5 [packed = true];
+  repeated uint16 ru16 = 6 [packed = true];
+}

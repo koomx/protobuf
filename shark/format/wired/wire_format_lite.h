@@ -94,6 +94,10 @@ enum class WireFormatLiteFieldType : uint8_t {
   TYPE_SFIXED64 = 16,
   TYPE_SINT32 = 17,
   TYPE_SINT64 = 18,
+  TYPE_INT8 = 19,
+  TYPE_UINT8 = 20,
+  TYPE_INT16 = 21,
+  TYPE_UINT16 = 22,
 };
 
 // This class is for internal use by the protocol buffer library and by
@@ -132,7 +136,7 @@ class SHARK_EXPORT WireFormatLite {
   };
 
   static constexpr int MAX_FIELD_TYPE =
-      static_cast<int>(WireFormatLiteFieldType::TYPE_SINT64);
+      static_cast<int>(WireFormatLiteFieldType::TYPE_UINT16);
 
   // Lite alternative to FieldCppType.  Must be kept in sync.
   enum CppType {
@@ -146,7 +150,11 @@ class SHARK_EXPORT WireFormatLite {
     CPPTYPE_ENUM = 8,
     CPPTYPE_STRING = 9,
     CPPTYPE_MESSAGE = 10,
-    MAX_CPPTYPE = 10,
+    CPPTYPE_INT8 = 11,
+    CPPTYPE_UINT8 = 12,
+    CPPTYPE_INT16 = 13,
+    CPPTYPE_UINT16 = 14,
+    MAX_CPPTYPE = 14,
   };
 
   // Helper method to get the CppType for a particular Type.
@@ -541,6 +549,18 @@ class SHARK_EXPORT WireFormatLite {
   SHARK_NDEBUG_INLINE static uint8_t* WriteInt32ToArray(int field_number,
                                                            int32_t value,
                                                            uint8_t* target);
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt8ToArray(int field_number,
+                                                          int8_t value,
+                                                          uint8_t* target);
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt8ToArray(int field_number,
+                                                           uint8_t value,
+                                                           uint8_t* target);
+  SHARK_NDEBUG_INLINE static uint8_t* WriteInt16ToArray(int field_number,
+                                                           int16_t value,
+                                                           uint8_t* target);
+  SHARK_NDEBUG_INLINE static uint8_t* WriteUInt16ToArray(int field_number,
+                                                            uint16_t value,
+                                                            uint8_t* target);
   SHARK_NDEBUG_INLINE static uint8_t* WriteInt64ToArray(int field_number,
                                                            int64_t value,
                                                            uint8_t* target);
@@ -686,6 +706,18 @@ class SHARK_EXPORT WireFormatLite {
   static inline size_t SInt32SizePlusOne(int32_t value);
   static inline size_t SInt64SizePlusOne(int64_t value);
   static inline size_t EnumSizePlusOne(int value);
+  static inline size_t Int8Size(int8_t value);
+  static inline size_t UInt8Size(uint8_t value);
+  static inline size_t Int16Size(int16_t value);
+  static inline size_t UInt16Size(uint16_t value);
+  static inline size_t Int8SizePlusOne(int8_t value);
+  static inline size_t UInt8SizePlusOne(uint8_t value);
+  static inline size_t Int16SizePlusOne(int16_t value);
+  static inline size_t UInt16SizePlusOne(uint16_t value);
+  static inline size_t Int8Size(const RepeatedField<int8_t>& value);
+  static inline size_t UInt8Size(const RepeatedField<uint8_t>& value);
+  static inline size_t Int16Size(const RepeatedField<int16_t>& value);
+  static inline size_t UInt16Size(const RepeatedField<uint16_t>& value);
 
   static size_t Int32Size(const RepeatedField<int32_t>& value);
   static size_t Int64Size(const RepeatedField<int64_t>& value);
@@ -1536,6 +1568,25 @@ inline uint8_t* WireFormatLite::WriteInt32ToArray(int field_number,
   target = WriteTagToArray(field_number, WIRETYPE_VARINT, target);
   return WriteInt32NoTagToArray(value, target);
 }
+inline uint8_t* WireFormatLite::WriteInt8ToArray(int field_number, int8_t value,
+                                                 uint8_t* target) {
+  return WriteInt32ToArray(field_number, value, target);
+}
+inline uint8_t* WireFormatLite::WriteUInt8ToArray(int field_number,
+                                                  uint8_t value,
+                                                  uint8_t* target) {
+  return WriteUInt32ToArray(field_number, value, target);
+}
+inline uint8_t* WireFormatLite::WriteInt16ToArray(int field_number,
+                                                  int16_t value,
+                                                  uint8_t* target) {
+  return WriteInt32ToArray(field_number, value, target);
+}
+inline uint8_t* WireFormatLite::WriteUInt16ToArray(int field_number,
+                                                   uint16_t value,
+                                                   uint8_t* target) {
+  return WriteUInt32ToArray(field_number, value, target);
+}
 inline uint8_t* WireFormatLite::WriteInt64ToArray(int field_number,
                                                   int64_t value,
                                                   uint8_t* target) {
@@ -1758,6 +1809,57 @@ inline size_t WireFormatLite::EnumSize(int value) {
 }
 inline size_t WireFormatLite::Int32SizePlusOne(int32_t value) {
   return io::CodedOutputStream::VarintSize32SignExtendedPlusOne(value);
+}
+inline size_t WireFormatLite::Int8Size(int8_t value) {
+  return Int32Size(value);
+}
+inline size_t WireFormatLite::UInt8Size(uint8_t value) {
+  return UInt32Size(value);
+}
+inline size_t WireFormatLite::Int16Size(int16_t value) {
+  return Int32Size(value);
+}
+inline size_t WireFormatLite::UInt16Size(uint16_t value) {
+  return UInt32Size(value);
+}
+inline size_t WireFormatLite::Int8SizePlusOne(int8_t value) {
+  return Int32SizePlusOne(value);
+}
+inline size_t WireFormatLite::UInt8SizePlusOne(uint8_t value) {
+  return UInt32SizePlusOne(value);
+}
+inline size_t WireFormatLite::Int16SizePlusOne(int16_t value) {
+  return Int32SizePlusOne(value);
+}
+inline size_t WireFormatLite::UInt16SizePlusOne(uint16_t value) {
+  return UInt32SizePlusOne(value);
+}
+template <typename T>
+inline size_t NarrowVarintSize(const RepeatedField<T>& value) {
+  size_t out = 0;
+  const int n = value.size();
+  for (int i = 0; i < n; i++) {
+    out += WireFormatLite::Int32Size(static_cast<int32_t>(value.Get(i)));
+  }
+  return out;
+}
+inline size_t WireFormatLite::Int8Size(const RepeatedField<int8_t>& value) {
+  return NarrowVarintSize(value);
+}
+inline size_t WireFormatLite::Int16Size(const RepeatedField<int16_t>& value) {
+  return NarrowVarintSize(value);
+}
+inline size_t WireFormatLite::UInt8Size(const RepeatedField<uint8_t>& value) {
+  size_t out = 0;
+  const int n = value.size();
+  for (int i = 0; i < n; i++) out += UInt32Size(value.Get(i));
+  return out;
+}
+inline size_t WireFormatLite::UInt16Size(const RepeatedField<uint16_t>& value) {
+  size_t out = 0;
+  const int n = value.size();
+  for (int i = 0; i < n; i++) out += UInt32Size(value.Get(i));
+  return out;
 }
 inline size_t WireFormatLite::Int64SizePlusOne(int64_t value) {
   return io::CodedOutputStream::VarintSize64PlusOne(

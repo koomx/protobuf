@@ -178,6 +178,12 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
                   : "\".decode('utf-8')");
     case FieldCppType::MESSAGE:
       return "None";
+    case FieldCppType::INT8:
+    case FieldCppType::INT16:
+      return StrCat(field.default_value_int32());
+    case FieldCppType::UINT8:
+    case FieldCppType::UINT16:
+      return StrCat(field.default_value_uint32());
   }
   // (We could add a default case above but then we wouldn't get the nice
   // compiler warning when a new type is added.)

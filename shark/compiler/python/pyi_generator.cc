@@ -335,6 +335,10 @@ std::string PyiGenerator::GetFieldType(
     case FieldCppType::UINT32:
     case FieldCppType::INT64:
     case FieldCppType::UINT64:
+    case FieldCppType::INT8:
+    case FieldCppType::UINT8:
+    case FieldCppType::INT16:
+    case FieldCppType::UINT16:
       return "int";
     case FieldCppType::DOUBLE:
     case FieldCppType::FLOAT:

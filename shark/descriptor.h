@@ -641,6 +641,10 @@ namespace shark {
         SFIXED64 = 16, // int64, exactly eight bytes on the wire.
         SINT32 = 17, // int32, ZigZag-encoded varint on the wire.
         SINT64 = 18, // int64, ZigZag-encoded varint on the wire.
+        INT8 = 19, // int8, stored as int8_t, 32-bit varint on the wire.
+        UINT8 = 20, // uint8, stored as uint8_t, 32-bit varint on the wire.
+        INT16 = 21, // int16, stored as int16_t, 32-bit varint on the wire.
+        UINT16 = 22, // uint16, stored as uint16_t, 32-bit varint on the wire.
     };
 
     // C++ type used to represent a field. Each FieldType maps to one FieldCppType.
@@ -656,6 +660,10 @@ namespace shark {
         ENUM = 8, // ENUM
         STRING = 9, // STRING, BYTES
         MESSAGE = 10, // MESSAGE, GROUP
+        INT8 = 11, // INT8
+        UINT8 = 12, // UINT8
+        INT16 = 13, // INT16
+        UINT16 = 14, // UINT16
     };
 
     // Whether a field is optional, required, or repeated. 0 is reserved for errors.
@@ -665,8 +673,8 @@ namespace shark {
         REPEATED = 3,
     };
 
-    constexpr int kMaxFieldType = 18;
-    constexpr int kMaxFieldCppType = 10;
+    constexpr int kMaxFieldType = 22;
+    constexpr int kMaxFieldCppType = 14;
     constexpr int kMaxFieldLabel = 3;
 
     class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
