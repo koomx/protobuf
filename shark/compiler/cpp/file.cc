@@ -342,6 +342,9 @@ void FileGenerator::DoIncludeFile(const std::string& google3_name,
     path = StringReplace(path, "internal/", "", false);
     path = StringReplace(path, "proto/", "", false);
     path = StringReplace(path, "public/", "", false);
+    if (path == "wire_format.h" || path == "wire_format_lite.h") {
+      path = "format/wired/" + path;
+    }
     if (options_.runtime_include_base.empty()) {
       format("#include <shark/$1$>", path);
     } else {

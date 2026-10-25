@@ -37,7 +37,7 @@
 #include <unordered_set>
 
 #include <shark/stubs/once.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/status.h>
 #include <shark/stubs/statusor.h>

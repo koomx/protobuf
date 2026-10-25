@@ -51,7 +51,7 @@
 #include <shark/port.h>
 #include <shark/parse_context.h>
 #include <shark/repeated_field.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 // clang-format off
 #include <shark/port_def.inc>  // Must be last
@@ -1243,7 +1243,8 @@ class EnumTypeTraits {
 
   static inline ConstType Get(int number, const ExtensionSet& set,
                               ConstType default_value) {
-    return static_cast<Type>(set.GetEnum(number, default_value));
+    return static_cast<Type>(
+        set.GetEnum(number, static_cast<int>(default_value)));
   }
   static inline const ConstType* GetPtr(int number, const ExtensionSet& set,
                                         const ConstType& default_value) {
@@ -1252,8 +1253,8 @@ class EnumTypeTraits {
   }
   static inline void Set(int number, FieldType field_type, ConstType value,
                          ExtensionSet* set) {
-    GOOGLE_DCHECK(IsValid(value));
-    set->SetEnum(number, field_type, value, nullptr);
+    GOOGLE_DCHECK(IsValid(static_cast<int>(value)));
+    set->SetEnum(number, field_type, static_cast<int>(value), nullptr);
   }
   template <typename ExtendeeT>
   static void Register(int number, FieldType type, bool is_packed,
@@ -1282,13 +1283,14 @@ class RepeatedEnumTypeTraits {
   }
   static inline void Set(int number, int index, ConstType value,
                          ExtensionSet* set) {
-    GOOGLE_DCHECK(IsValid(value));
-    set->SetRepeatedEnum(number, index, value);
+    GOOGLE_DCHECK(IsValid(static_cast<int>(value)));
+    set->SetRepeatedEnum(number, index, static_cast<int>(value));
   }
   static inline void Add(int number, FieldType field_type, bool is_packed,
                          ConstType value, ExtensionSet* set) {
-    GOOGLE_DCHECK(IsValid(value));
-    set->AddEnum(number, field_type, is_packed, value, nullptr);
+    GOOGLE_DCHECK(IsValid(static_cast<int>(value)));
+    set->AddEnum(number, field_type, is_packed, static_cast<int>(value),
+                 nullptr);
   }
   static inline const RepeatedField<Type>& GetRepeated(
       int number, const ExtensionSet& set) {

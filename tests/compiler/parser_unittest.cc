@@ -47,7 +47,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.skp.h>
 #include <shark/text_format.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/substitute.h>
@@ -108,6 +108,7 @@ class ParserTest : public testing::Test {
 
   // Set up the parser to parse the given text.
   void SetupParser(const char* text) {
+    error_collector_.text_.clear();
     raw_input_.reset(new io::ArrayInputStream(text, strlen(text)));
     input_.reset(new io::Tokenizer(raw_input_.get(), &error_collector_));
     parser_.reset(new Parser());
@@ -1049,6 +1050,73 @@ TEST_F(ParseMessageTest, ExplicitOptionalLabelProto3) {
 
 typedef ParserTest ParseEnumTest;
 
+TEST_F(ParseEnumTest, EnumClassDefaultInt32) {
+  ExpectParsesTo(
+      "enum class TestEnum {\n"
+      "  FOO = 1;\n"
+      "  BAR = -2;\n"
+      "}\n",
+
+      "enum_type {"
+      "  name: \"TestEnum\""
+      "  value { name:\"FOO\" number:1 }"
+      "  value { name:\"BAR\" number:-2 }"
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
+      "}");
+}
+
+TEST_F(ParseEnumTest, EnumClassUint8) {
+  ExpectParsesTo(
+      "enum class Perm : uint8 {\n"
+      "  option enable_operator = true;\n"
+      "  READ = 1;\n"
+      "  WRITE = 2;\n"
+      "}\n",
+
+      "enum_type {"
+      "  name: \"Perm\""
+      "  value { name:\"READ\" number:1 }"
+      "  value { name:\"WRITE\" number:2 }"
+      "  options {"
+      "    underlying_type: ENUM_UNDERLYING_TYPE_UINT8"
+      "    uninterpreted_option {"
+      "      name { name_part: \"enable_operator\" is_extension: false }"
+      "      identifier_value: \"true\""
+      "    }"
+      "  }"
+      "}");
+}
+
+TEST_F(ParseEnumTest, EnumClassUint32HighBit) {
+  ExpectParsesTo(
+      "enum class Mask : uint32 {\n"
+      "  TOP = 4294967295;\n"
+      "}\n",
+
+      "enum_type {"
+      "  name: \"Mask\""
+      "  value { name:\"TOP\" number:-1 }"
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_UINT32 }"
+      "}");
+}
+
+TEST_F(ParseEnumTest, Proto3EnumClass) {
+  ExpectParsesTo(
+      "syntax = \"proto3\";\n"
+      "enum class Color : uint16 {\n"
+      "  COLOR_UNSPECIFIED = 0;\n"
+      "  RED = 1;\n"
+      "}\n",
+
+      "syntax: \"proto3\" "
+      "enum_type {"
+      "  name: \"Color\""
+      "  value { name:\"COLOR_UNSPECIFIED\" number:0 }"
+      "  value { name:\"RED\" number:1 }"
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_UINT16 }"
+      "}");
+}
+
 TEST_F(ParseEnumTest, SimpleEnum) {
   ExpectParsesTo(
       "enum TestEnum {\n"
@@ -1427,6 +1495,35 @@ TEST_F(ParseErrorTest, DuplicateJsonName) {
       "  optional uint32 foo = 1 [json_name=\"a\",json_name=\"b\"];\n"
       "}\n",
       "1:41: Already set option \"json_name\".\n");
+}
+
+TEST_F(ParseErrorTest, EnumClassUnderlyingType) {
+  ExpectHasErrors(
+      "enum Perm : uint8 {\n"
+      "  READ = 1;\n"
+      "}\n",
+      "0:12: An underlying type is only allowed on enum class.\n");
+  ExpectHasErrors(
+      "enum class Perm : string {\n"
+      "  READ = 1;\n"
+      "}\n",
+      "0:25: Unknown enum underlying type \"string\".\n");
+  ExpectHasErrors(
+      "enum class Perm : uint8 {\n"
+      "  READ = 256;\n"
+      "}\n",
+      "1:9: Integer out of range.\n");
+  ExpectHasErrors(
+      "enum class Perm : uint8 {\n"
+      "  READ = -1;\n"
+      "}\n",
+      "1:10: Unsigned enum underlying type cannot be negative.\n");
+  ExpectHasErrors(
+      "enum Foo {\n"
+      "  option enable_operator = true;\n"
+      "  BAR = 1;\n"
+      "}\n",
+      "4:0: 'Foo' sets enable_operator but is not an enum class.\n");
 }
 
 TEST_F(ParseErrorTest, EnumValueOutOfRange) {
@@ -1984,6 +2081,13 @@ TEST_F(ParserValidationErrorTest, EnumNameError) {
       "enum Foo {A = 1;}\n"
       "enum Foo {B = 1;}\n",
       "1:5: \"Foo\" is already defined.\n");
+}
+
+TEST_F(ParserValidationErrorTest, Proto3EnumClassRequiresZero) {
+  ExpectHasValidationErrors(
+      "syntax = 'proto3';\n"
+      "enum class Foo : uint8 { A = 1; }\n",
+      "1:29: The first enum value must be zero in proto3.\n");
 }
 
 TEST_F(ParserValidationErrorTest, Proto3EnumError) {

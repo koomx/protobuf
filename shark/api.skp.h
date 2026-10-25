@@ -1048,7 +1048,7 @@ inline void Api::clear_syntax() {
   _impl_.syntax_ = 0;
 }
 inline ::shark::Syntax Api::_internal_syntax() const {
-  return static_cast< ::shark::Syntax >(_impl_.syntax_);
+  return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
 }
 inline ::shark::Syntax Api::syntax() const {
   // @@protoc_insertion_point(field_get:shark.Api.syntax)
@@ -1056,7 +1056,7 @@ inline ::shark::Syntax Api::syntax() const {
 }
 inline void Api::_internal_set_syntax(::shark::Syntax value) {
   
-  _impl_.syntax_ = value;
+  _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
 }
 inline void Api::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
@@ -1299,7 +1299,7 @@ inline void Method::clear_syntax() {
   _impl_.syntax_ = 0;
 }
 inline ::shark::Syntax Method::_internal_syntax() const {
-  return static_cast< ::shark::Syntax >(_impl_.syntax_);
+  return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
 }
 inline ::shark::Syntax Method::syntax() const {
   // @@protoc_insertion_point(field_get:shark.Method.syntax)
@@ -1307,7 +1307,7 @@ inline ::shark::Syntax Method::syntax() const {
 }
 inline void Method::_internal_set_syntax(::shark::Syntax value) {
   
-  _impl_.syntax_ = value;
+  _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
 }
 inline void Method::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);

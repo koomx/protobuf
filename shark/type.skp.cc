@@ -7,11 +7,11 @@
 
 #include <shark/io/coded_stream.h>
 #include <shark/extension_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/descriptor.h>
 #include <shark/generated_message_reflection.h>
 #include <shark/reflection_ops.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
@@ -517,7 +517,11 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          if (SHARK_PREDICT_TRUE(::shark::Syntax_FitsWire(val))) {
+            _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(6, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -594,10 +598,10 @@ uint8_t* Type::_InternalSerialize(
   }
 
   // .shark.Syntax syntax = 6;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      6, this->_internal_syntax(), target);
+      6, this->_impl_.syntax_, target);
   }
 
   if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -653,9 +657,9 @@ size_t Type::ByteSizeLong() const {
   }
 
   // .shark.Syntax syntax = 6;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_syntax());
+      ::_pbi::WireFormatLite::EnumSize(this->_impl_.syntax_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -686,7 +690,7 @@ void Type::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESP
     _this->_internal_mutable_source_context()->::shark::SourceContext::MergeFrom(
         from._internal_source_context());
   }
-  if (from._internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(from._internal_syntax()) != 0) {
     _this->_internal_set_syntax(from._internal_syntax());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -881,7 +885,11 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_kind(static_cast<::shark::Field_Kind>(val));
+          if (SHARK_PREDICT_TRUE(::shark::Field_Kind_FitsWire(val))) {
+            _internal_set_kind(static_cast<::shark::Field_Kind>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -890,7 +898,11 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_cardinality(static_cast<::shark::Field_Cardinality>(val));
+          if (SHARK_PREDICT_TRUE(::shark::Field_Cardinality_FitsWire(val))) {
+            _internal_set_cardinality(static_cast<::shark::Field_Cardinality>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(2, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -1001,17 +1013,17 @@ uint8_t* Field::_InternalSerialize(
   (void) cached_has_bits;
 
   // .shark.Field.Kind kind = 1;
-  if (this->_internal_kind() != 0) {
+  if (::shark::Field_Kind_to_underlying(this->_internal_kind()) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      1, this->_internal_kind(), target);
+      1, this->_impl_.kind_, target);
   }
 
   // .shark.Field.Cardinality cardinality = 2;
-  if (this->_internal_cardinality() != 0) {
+  if (::shark::Field_Cardinality_to_underlying(this->_internal_cardinality()) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      2, this->_internal_cardinality(), target);
+      2, this->_impl_.cardinality_, target);
   }
 
   // int32 number = 3;
@@ -1132,15 +1144,15 @@ size_t Field::ByteSizeLong() const {
   }
 
   // .shark.Field.Kind kind = 1;
-  if (this->_internal_kind() != 0) {
+  if (::shark::Field_Kind_to_underlying(this->_internal_kind()) != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_kind());
+      ::_pbi::WireFormatLite::EnumSize(this->_impl_.kind_);
   }
 
   // .shark.Field.Cardinality cardinality = 2;
-  if (this->_internal_cardinality() != 0) {
+  if (::shark::Field_Cardinality_to_underlying(this->_internal_cardinality()) != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_cardinality());
+      ::_pbi::WireFormatLite::EnumSize(this->_impl_.cardinality_);
   }
 
   // int32 number = 3;
@@ -1189,10 +1201,10 @@ void Field::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMES
   if (!from._internal_default_value().empty()) {
     _this->_internal_set_default_value(from._internal_default_value());
   }
-  if (from._internal_kind() != 0) {
+  if (::shark::Field_Kind_to_underlying(from._internal_kind()) != 0) {
     _this->_internal_set_kind(from._internal_kind());
   }
-  if (from._internal_cardinality() != 0) {
+  if (::shark::Field_Cardinality_to_underlying(from._internal_cardinality()) != 0) {
     _this->_internal_set_cardinality(from._internal_cardinality());
   }
   if (from._internal_number() != 0) {
@@ -1415,7 +1427,11 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          if (SHARK_PREDICT_TRUE(::shark::Syntax_FitsWire(val))) {
+            _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(5, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -1482,10 +1498,10 @@ uint8_t* Enum::_InternalSerialize(
   }
 
   // .shark.Syntax syntax = 5;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      5, this->_internal_syntax(), target);
+      5, this->_impl_.syntax_, target);
   }
 
   if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -1533,9 +1549,9 @@ size_t Enum::ByteSizeLong() const {
   }
 
   // .shark.Syntax syntax = 5;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_syntax());
+      ::_pbi::WireFormatLite::EnumSize(this->_impl_.syntax_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -1565,7 +1581,7 @@ void Enum::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESP
     _this->_internal_mutable_source_context()->::shark::SourceContext::MergeFrom(
         from._internal_source_context());
   }
-  if (from._internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(from._internal_syntax()) != 0) {
     _this->_internal_set_syntax(from._internal_syntax());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);

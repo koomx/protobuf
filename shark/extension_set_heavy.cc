@@ -47,8 +47,8 @@
 #include <shark/parse_context.h>
 #include <shark/repeated_field.h>
 #include <shark/unknown_field_set.h>
-#include <shark/wire_format.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 
 // Must be included last.

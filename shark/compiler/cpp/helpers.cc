@@ -53,8 +53,8 @@
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/dynamic_message.h>
-#include <shark/wire_format.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
 #include <shark/stubs/hash.h>
@@ -530,6 +530,24 @@ std::string QualifiedOneofCaseConstantName(const FieldDescriptor* field) {
   const std::string qualification =
       QualifiedClassName(field->containing_type());
   return StrCat(qualification, "::", OneofCaseConstantName(field));
+}
+
+const char* EnumUnderlyingCppType(const EnumDescriptor* enum_descriptor) {
+  switch (enum_descriptor->options().underlying_type()) {
+    case ENUM_UNDERLYING_TYPE_INT8:
+      return "int8_t";
+    case ENUM_UNDERLYING_TYPE_UINT8:
+      return "uint8_t";
+    case ENUM_UNDERLYING_TYPE_INT16:
+      return "int16_t";
+    case ENUM_UNDERLYING_TYPE_UINT16:
+      return "uint16_t";
+    case ENUM_UNDERLYING_TYPE_UINT32:
+      return "uint32_t";
+    case ENUM_UNDERLYING_TYPE_INT32:
+    default:
+      return "int32_t";
+  }
 }
 
 std::string EnumValueName(const EnumValueDescriptor* enum_value) {

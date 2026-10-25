@@ -49,7 +49,7 @@
 #include <shark/descriptor.h>
 #include <shark/generated_message_util.h>
 #include <shark/map_entry_lite.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/substitute.h>
@@ -245,6 +245,10 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
           "uint64_t raw_$name$;\n"
           "memcpy(&raw_$name$, &tmp_$name$, sizeof(tmp_$name$));\n"
           "if (raw_$name$ != 0) {\n");
+    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {
+      format(
+          "if ($1$_to_underlying($prefix$_internal_$name$()) != 0) {\n",
+          QualifiedClassName(field->enum_type()));
     } else {
       format("if ($prefix$_internal_$name$() != 0) {\n");
     }

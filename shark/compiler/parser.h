@@ -336,7 +336,8 @@ class SHARK_EXPORT Parser {
                          const FileDescriptorProto* containing_file);
   bool ParseEnumBlock(EnumDescriptorProto* enum_type,
                       const LocationRecorder& enum_location,
-                      const FileDescriptorProto* containing_file);
+                      const FileDescriptorProto* containing_file,
+                      EnumUnderlyingType underlying_type);
   bool ParseServiceBlock(ServiceDescriptorProto* service,
                          const LocationRecorder& service_location,
                          const FileDescriptorProto* containing_file);
@@ -348,7 +349,8 @@ class SHARK_EXPORT Parser {
                              const FileDescriptorProto* containing_file);
   bool ParseEnumStatement(EnumDescriptorProto* message,
                           const LocationRecorder& enum_location,
-                          const FileDescriptorProto* containing_file);
+                          const FileDescriptorProto* containing_file,
+                          EnumUnderlyingType underlying_type);
   bool ParseServiceStatement(ServiceDescriptorProto* message,
                              const LocationRecorder& service_location,
                              const FileDescriptorProto* containing_file);
@@ -420,7 +422,10 @@ class SHARK_EXPORT Parser {
   // Parse a single enum value within an enum block.
   bool ParseEnumConstant(EnumValueDescriptorProto* enum_value,
                          const LocationRecorder& enum_value_location,
-                         const FileDescriptorProto* containing_file);
+                         const FileDescriptorProto* containing_file,
+                         EnumUnderlyingType underlying_type);
+  bool ConsumeEnumNumber(EnumUnderlyingType underlying_type, int32_t* output,
+                         const char* error);
 
   // Parse enum constant options, i.e. the list in square brackets at the end
   // of the enum constant value definition.

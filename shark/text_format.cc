@@ -59,7 +59,7 @@
 #include <shark/message.h>
 #include <shark/repeated_field.h>
 #include <shark/unknown_field_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 

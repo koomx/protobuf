@@ -324,8 +324,12 @@ void MapField<Derived, Key, T, kKeyFieldType,
     EntryType* new_entry =
         down_cast<EntryType*>(default_entry->New(this->MapFieldBase::arena_));
     repeated_field->AddAllocated(new_entry);
-    (*new_entry->mutable_key()) = it->first;
-    (*new_entry->mutable_value()) = it->second;
+    (*new_entry->mutable_key()) = static_cast<
+        typename std::decay<decltype(*new_entry->mutable_key())>::type>(
+        it->first);
+    (*new_entry->mutable_value()) = static_cast<
+        typename std::decay<decltype(*new_entry->mutable_value())>::type>(
+        it->second);
   }
 }
 

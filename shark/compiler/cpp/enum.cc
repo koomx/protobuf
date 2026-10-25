@@ -86,13 +86,62 @@ EnumGenerator::EnumGenerator(const EnumDescriptor* descriptor,
   variables_["resolved_name"] = ResolveKeyword(descriptor_->name());
   variables_["prefix"] =
       (descriptor_->containing_type() == nullptr) ? "" : classname_ + "_";
+  variables_["underlying"] = EnumUnderlyingCppType(descriptor_);
 }
 
 EnumGenerator::~EnumGenerator() {}
 
+namespace {
+
+std::string FitsIntExpression(const EnumDescriptor* descriptor) {
+  switch (descriptor->options().underlying_type()) {
+    case ENUM_UNDERLYING_TYPE_INT8:
+      return "value >= -128 && value <= 127";
+    case ENUM_UNDERLYING_TYPE_UINT8:
+      return "value >= 0 && value <= 255";
+    case ENUM_UNDERLYING_TYPE_INT16:
+      return "value >= -32768 && value <= 32767";
+    case ENUM_UNDERLYING_TYPE_UINT16:
+      return "value >= 0 && value <= 65535";
+    case ENUM_UNDERLYING_TYPE_INT32:
+    case ENUM_UNDERLYING_TYPE_UINT32:
+      return "true";
+    default:
+      return "true";
+  }
+}
+
+std::string FitsWireExpression(const EnumDescriptor* descriptor,
+                                  const std::string& classname) {
+  switch (descriptor->options().underlying_type()) {
+    case ENUM_UNDERLYING_TYPE_INT8:
+    case ENUM_UNDERLYING_TYPE_INT16:
+    case ENUM_UNDERLYING_TYPE_INT32:
+      return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && " +
+             classname + "_FitsUnderlying(static_cast<int>(value))";
+    case ENUM_UNDERLYING_TYPE_UINT8:
+      return "value <= 255u";
+    case ENUM_UNDERLYING_TYPE_UINT16:
+      return "value <= 65535u";
+    case ENUM_UNDERLYING_TYPE_UINT32:
+      return "value <= 0xffffffffu";
+    case ENUM_UNDERLYING_TYPE_UNSPECIFIED:
+    default:
+      return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && " +
+             classname + "_FitsUnderlying(static_cast<int>(value))";
+  }
+}
+
+}  // namespace
+
 void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   Formatter format(printer, variables_);
-  format("enum ${1$$classname$$}$ : int {\n", descriptor_);
+  const bool enum_class = IsEnumClass(descriptor_);
+  if (enum_class) {
+    format("enum class ${1$$classname$$}$ : $underlying$ {\n", descriptor_);
+  } else {
+    format("enum ${1$$classname$$}$ : int {\n", descriptor_);
+  }
   format.Indent();
 
   const EnumValueDescriptor* min_value = descriptor_->value(0);
@@ -109,7 +158,7 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
                      DeprecatedAttribute(options_, descriptor_->value(i)));
 
     if (i > 0) format_value(",\n");
-    format_value("${1$$prefix$$name$$}$ $deprecation$= $number$",
+    format_value("${1$$name$$}$ $deprecation$= $number$",
                  descriptor_->value(i));
 
     if (descriptor_->value(i)->number() < min_value->number()) {
@@ -120,7 +169,8 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
     }
   }
 
-  if (descriptor_->file()->syntax() == FileDescriptor::SYNTAX_PROTO3) {
+  if (!enum_class &&
+      descriptor_->file()->syntax() == FileDescriptor::SYNTAX_PROTO3) {
     // For new enum semantics: generate min and max sentinel values equal to
     // INT32_MIN and INT32_MAX
     if (descriptor_->value_count() > 0) format(",\n");
@@ -134,18 +184,73 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   format.Outdent();
   format("\n};\n");
 
+  if (enum_class) {
+    // Namespace-scope aliases keep existing call sites
+    // (ENUM_UNDERLYING_TYPE_INT32, FileOptions_OptimizeMode_SPEED) compiling
+    // after the enumerators moved inside the enum class.
+    for (int i = 0; i < descriptor_->value_count(); i++) {
+      auto alias = format;
+      alias.Set("name", EnumValueName(descriptor_->value(i)));
+      alias(
+          "constexpr $classname$ $prefix$$name$ = $classname$::$name$;\n");
+    }
+  }
+
+  if (enum_class) {
+    format(
+        "constexpr $underlying$ $classname$_to_underlying($classname$ value) {\n"
+        "  return static_cast<$underlying$>(value);\n"
+        "}\n"
+        "inline bool $classname$_FitsUnderlying(int value) {\n"
+        "  return $1$;\n"
+        "}\n"
+        "inline bool $classname$_FitsWire(::uint64_t value) {\n"
+        "  return $2$;\n"
+        "}\n",
+        FitsIntExpression(descriptor_),
+        FitsWireExpression(descriptor_, classname_));
+    if (descriptor_->options().enable_operator()) {
+      format(
+          "constexpr $classname$ operator|($classname$ lhs, $classname$ rhs) {\n"
+          "  return static_cast<$classname$>(static_cast<$underlying$>("
+          "$classname$_to_underlying(lhs) | $classname$_to_underlying(rhs)));\n"
+          "}\n"
+          "constexpr $classname$ operator&($classname$ lhs, $classname$ rhs) {\n"
+          "  return static_cast<$classname$>(static_cast<$underlying$>("
+          "$classname$_to_underlying(lhs) & $classname$_to_underlying(rhs)));\n"
+          "}\n"
+          "constexpr $classname$ operator^($classname$ lhs, $classname$ rhs) {\n"
+          "  return static_cast<$classname$>(static_cast<$underlying$>("
+          "$classname$_to_underlying(lhs) ^ $classname$_to_underlying(rhs)));\n"
+          "}\n"
+          "constexpr $classname$ operator~($classname$ value) {\n"
+          "  return static_cast<$classname$>(static_cast<$underlying$>("
+          "~$classname$_to_underlying(value)));\n"
+          "}\n"
+          "constexpr $classname$& operator|=($classname$& lhs, $classname$ rhs) {\n"
+          "  return lhs = lhs | rhs;\n"
+          "}\n"
+          "constexpr $classname$& operator&=($classname$& lhs, $classname$ rhs) {\n"
+          "  return lhs = lhs & rhs;\n"
+          "}\n"
+          "constexpr $classname$& operator^=($classname$& lhs, $classname$ rhs) {\n"
+          "  return lhs = lhs ^ rhs;\n"
+          "}\n");
+    }
+  }
+
   format(
       "$dllexport_decl $bool $classname$_IsValid(int value);\n"
       "constexpr $classname$ ${1$$prefix$$short_name$_MIN$}$ = "
-      "$prefix$$2$;\n"
+      "$classname$::$2$;\n"
       "constexpr $classname$ ${1$$prefix$$short_name$_MAX$}$ = "
-      "$prefix$$3$;\n",
+      "$classname$::$3$;\n",
       descriptor_, EnumValueName(min_value), EnumValueName(max_value));
 
   if (generate_array_size_) {
     format(
         "constexpr int ${1$$prefix$$short_name$_ARRAYSIZE$}$ = "
-        "$prefix$$short_name$_MAX + 1;\n\n",
+        "$classname$_to_underlying($prefix$$short_name$_MAX) + 1;\n\n",
         descriptor_);
   }
 
@@ -171,7 +276,8 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   if (HasDescriptorMethods(descriptor_->file(), options_)) {
     format(
         "  return ::$proto_ns$::internal::NameOfEnum(\n"
-        "    $classname$_descriptor(), enum_t_value);\n");
+        "    $classname$_descriptor(),\n"
+        "    $classname$_to_underlying(static_cast<$classname$>(enum_t_value)));\n");
   } else {
     format(
         "  return $classname$_Name(static_cast<$classname$>(enum_t_value));\n");
@@ -217,11 +323,19 @@ void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
   for (int j = 0; j < descriptor_->value_count(); j++) {
     std::string deprecated_attr =
         DeprecatedAttribute(options_, descriptor_->value(j));
-    format(
-        "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
-        "  $classname$_$3$;\n",
-        deprecated_attr, descriptor_->value(j),
-        EnumValueName(descriptor_->value(j)));
+    if (IsEnumClass(descriptor_)) {
+      format(
+          "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
+          "  $classname$::$3$;\n",
+          deprecated_attr, descriptor_->value(j),
+          EnumValueName(descriptor_->value(j)));
+    } else {
+      format(
+          "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
+          "  $classname$_$3$;\n",
+          deprecated_attr, descriptor_->value(j),
+          EnumValueName(descriptor_->value(j)));
+    }
   }
 
   format(
@@ -381,7 +495,7 @@ void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
         "  int idx = ::$proto_ns$::internal::LookUpEnumName(\n"
         "      $classname$_entries,\n"
         "      $classname$_entries_by_number,\n"
-        "      $1$, value);\n"
+        "      $1$, $classname$_to_underlying(value));\n"
         "  return idx == -1 ? ::$proto_ns$::internal::GetEmptyString() :\n"
         "                     $classname$_strings[idx].get();\n"
         "}\n",

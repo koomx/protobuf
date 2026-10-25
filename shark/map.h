@@ -276,6 +276,11 @@ inline bool TableEntryIsList(void* const* table, size_t b) {
 
 // This captures all numeric types.
 inline size_t MapValueSpaceUsedExcludingSelfLong(bool) { return 0; }
+template <typename T,
+          typename std::enable_if<std::is_enum<T>::value, int>::type = 0>
+inline size_t MapValueSpaceUsedExcludingSelfLong(T) {
+  return 0;
+}
 inline size_t MapValueSpaceUsedExcludingSelfLong(const std::string& str) {
   return StringSpaceUsedExcludingSelfLong(str);
 }

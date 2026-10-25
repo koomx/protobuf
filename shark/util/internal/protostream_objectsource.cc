@@ -41,8 +41,8 @@
 #include <shark/descriptor.h>
 #include <shark/stubs/once.h>
 #include <shark/unknown_field_set.h>
-#include <shark/wire_format.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/status.h>

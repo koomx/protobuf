@@ -36,7 +36,7 @@
 #include <shark/map_type_handler.h>
 #include <shark/reflection_ops.h>
 #include <shark/unknown_field_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

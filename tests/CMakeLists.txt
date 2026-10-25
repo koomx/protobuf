@@ -149,6 +149,8 @@ kmcmake_cc_test(
         ${PROJECT_NAME}::shark_static
         GTest::gmock_main
 )
+target_compile_options(shark_suite PRIVATE
+        "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
 
 kmcmake_cc_test(
         NAME lite

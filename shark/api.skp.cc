@@ -7,11 +7,11 @@
 
 #include <shark/io/coded_stream.h>
 #include <shark/extension_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/descriptor.h>
 #include <shark/generated_message_reflection.h>
 #include <shark/reflection_ops.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
@@ -371,7 +371,11 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          if (SHARK_PREDICT_TRUE(::shark::Syntax_FitsWire(val))) {
+            _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(7, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -456,10 +460,10 @@ uint8_t* Api::_InternalSerialize(
   }
 
   // .shark.Syntax syntax = 7;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      7, this->_internal_syntax(), target);
+      7, this->_impl_.syntax_, target);
   }
 
   if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -521,9 +525,9 @@ size_t Api::ByteSizeLong() const {
   }
 
   // .shark.Syntax syntax = 7;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_syntax());
+      ::_pbi::WireFormatLite::EnumSize(this->_impl_.syntax_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -557,7 +561,7 @@ void Api::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPA
     _this->_internal_mutable_source_context()->::shark::SourceContext::MergeFrom(
         from._internal_source_context());
   }
-  if (from._internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(from._internal_syntax()) != 0) {
     _this->_internal_set_syntax(from._internal_syntax());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -798,7 +802,11 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          if (SHARK_PREDICT_TRUE(::shark::Syntax_FitsWire(val))) {
+            _internal_set_syntax(static_cast<::shark::Syntax>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(7, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -882,10 +890,10 @@ uint8_t* Method::_InternalSerialize(
   }
 
   // .shark.Syntax syntax = 7;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      7, this->_internal_syntax(), target);
+      7, this->_impl_.syntax_, target);
   }
 
   if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
@@ -943,9 +951,9 @@ size_t Method::ByteSizeLong() const {
   }
 
   // .shark.Syntax syntax = 7;
-  if (this->_internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(this->_internal_syntax()) != 0) {
     total_size += 1 +
-      ::_pbi::WireFormatLite::EnumSize(this->_internal_syntax());
+      ::_pbi::WireFormatLite::EnumSize(this->_impl_.syntax_);
   }
 
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
@@ -982,7 +990,7 @@ void Method::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAME
   if (from._internal_response_streaming() != 0) {
     _this->_internal_set_response_streaming(from._internal_response_streaming());
   }
-  if (from._internal_syntax() != 0) {
+  if (::shark::Syntax_to_underlying(from._internal_syntax()) != 0) {
     _this->_internal_set_syntax(from._internal_syntax());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);

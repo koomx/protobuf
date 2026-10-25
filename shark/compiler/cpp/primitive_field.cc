@@ -35,7 +35,7 @@
 #include <shark/compiler/cpp/primitive_field.h>
 
 #include <shark/io/printer.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/cpp/helpers.h>
 

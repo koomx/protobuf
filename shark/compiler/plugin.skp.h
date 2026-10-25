@@ -76,14 +76,25 @@ SHARK_NAMESPACE_CLOSE
 namespace shark {
 namespace compiler {
 
-enum CodeGeneratorResponse_Feature : int {
-  CodeGeneratorResponse_Feature_FEATURE_NONE = 0,
-  CodeGeneratorResponse_Feature_FEATURE_PROTO3_OPTIONAL = 1
+enum class CodeGeneratorResponse_Feature : int32_t {
+  FEATURE_NONE = 0,
+  FEATURE_PROTO3_OPTIONAL = 1
 };
+constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_FEATURE_NONE = CodeGeneratorResponse_Feature::FEATURE_NONE;
+constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_FEATURE_PROTO3_OPTIONAL = CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
+constexpr int32_t CodeGeneratorResponse_Feature_to_underlying(CodeGeneratorResponse_Feature value) {
+  return static_cast<int32_t>(value);
+}
+inline bool CodeGeneratorResponse_Feature_FitsUnderlying(int value) {
+  return true;
+}
+inline bool CodeGeneratorResponse_Feature_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && CodeGeneratorResponse_Feature_FitsUnderlying(static_cast<int>(value));
+}
 PROTOC_EXPORT bool CodeGeneratorResponse_Feature_IsValid(int value);
-constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_Feature_MIN = CodeGeneratorResponse_Feature_FEATURE_NONE;
-constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_Feature_MAX = CodeGeneratorResponse_Feature_FEATURE_PROTO3_OPTIONAL;
-constexpr int CodeGeneratorResponse_Feature_Feature_ARRAYSIZE = CodeGeneratorResponse_Feature_Feature_MAX + 1;
+constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_Feature_MIN = CodeGeneratorResponse_Feature::FEATURE_NONE;
+constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_Feature_MAX = CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
+constexpr int CodeGeneratorResponse_Feature_Feature_ARRAYSIZE = CodeGeneratorResponse_Feature_to_underlying(CodeGeneratorResponse_Feature_Feature_MAX) + 1;
 
 PROTOC_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* CodeGeneratorResponse_Feature_descriptor();
 template<typename T>
@@ -92,7 +103,8 @@ inline const std::string& CodeGeneratorResponse_Feature_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function CodeGeneratorResponse_Feature_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    CodeGeneratorResponse_Feature_descriptor(), enum_t_value);
+    CodeGeneratorResponse_Feature_descriptor(),
+    CodeGeneratorResponse_Feature_to_underlying(static_cast<CodeGeneratorResponse_Feature>(enum_t_value)));
 }
 inline bool CodeGeneratorResponse_Feature_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, CodeGeneratorResponse_Feature* value) {
@@ -896,9 +908,9 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
 
   typedef CodeGeneratorResponse_Feature Feature;
   static constexpr Feature FEATURE_NONE =
-    CodeGeneratorResponse_Feature_FEATURE_NONE;
+    CodeGeneratorResponse_Feature::FEATURE_NONE;
   static constexpr Feature FEATURE_PROTO3_OPTIONAL =
-    CodeGeneratorResponse_Feature_FEATURE_PROTO3_OPTIONAL;
+    CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
   static inline bool Feature_IsValid(int value) {
     return CodeGeneratorResponse_Feature_IsValid(value);
   }

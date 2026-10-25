@@ -48,7 +48,7 @@
 #include <tests/map_lite_test_util.h>
 #include <shark/parse_context.h>
 #include <tests/test_util_lite.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 namespace shark {
 
@@ -721,8 +721,10 @@ TEST(Lite, AllLite32) {
 
     sharkbuf_unittest::TestEnumMapLite to;
     EXPECT_TRUE(to.ParseFromString(data));
-    EXPECT_EQ(0, to.unknown_map_field().size());
-    EXPECT_FALSE(to.mutable_unknown_fields()->empty());
+    EXPECT_EQ(1, to.unknown_map_field().size());
+    EXPECT_EQ(static_cast<int>(sharkbuf_unittest::E_PROTO2_MAP_ENUM_EXTRA_LITE),
+              static_cast<int>(to.unknown_map_field().at(0)));
+    EXPECT_TRUE(to.mutable_unknown_fields()->empty());
     ASSERT_EQ(1, to.known_map_field().size());
     EXPECT_EQ(sharkbuf_unittest::PROTO2_MAP_ENUM_FOO_LITE,
               to.known_map_field().at(0));
@@ -905,9 +907,10 @@ TEST(Lite, AllLite42) {
     v1_message.ParseFromString(v2_bytes);
     EXPECT_TRUE(v1_message.IsInitialized());
     EXPECT_EQ(v1_message.int_field(), v2_message.int_field());
-    // V1 client does not understand V2_SECOND value, so it discards it and
-    // uses default value instead.
-    EXPECT_EQ(v1_message.enum_field(), sharkbuf_unittest::V1_FIRST);
+    // V2_SECOND is not a V1 name, but it fits the underlying type, so V1
+    // keeps the value instead of replacing it with the default.
+    EXPECT_EQ(2, static_cast<int>(v1_message.enum_field()));
+
 
     // However, when re-serialized, it should preserve enum value.
     std::string v1_bytes = v1_message.SerializeAsString();

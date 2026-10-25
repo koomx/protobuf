@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 #include <limits>
 #include <stack>

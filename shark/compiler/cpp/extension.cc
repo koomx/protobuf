@@ -58,7 +58,9 @@ ExtensionGenerator::ExtensionGenerator(const FieldDescriptor* descriptor,
       type_traits_.append(ClassName(descriptor_->enum_type(), true));
       type_traits_.append(", ");
       type_traits_.append(ClassName(descriptor_->enum_type(), true));
-      type_traits_.append("_IsValid>");
+      type_traits_.append(IsEnumClass(descriptor_->enum_type())
+                              ? "_FitsUnderlying>"
+                              : "_IsValid>");
       break;
     case FieldDescriptor::CPPTYPE_STRING:
       type_traits_.append("StringTypeTraits");

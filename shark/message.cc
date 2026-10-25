@@ -54,8 +54,8 @@
 #include <shark/reflection_internal.h>
 #include <shark/reflection_ops.h>
 #include <shark/unknown_field_set.h>
-#include <shark/wire_format.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/hash.h>

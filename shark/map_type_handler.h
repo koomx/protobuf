@@ -30,11 +30,13 @@
 
 #pragma once
 
+#include <type_traits>
+
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
 #include <shark/arenastring.h>
 #include <shark/parse_context.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"
@@ -684,6 +686,19 @@ PRIMITIVE_HANDLER_FUNCTIONS(SFIXED32)
 PRIMITIVE_HANDLER_FUNCTIONS(BOOL)
 #undef PRIMITIVE_HANDLER_FUNCTIONS
 
+// Enum class values are stored as int. Other types must be passed by
+// reference: copying a message drops its cached size and writes an empty body.
+template <typename Accessor, typename T>
+typename std::enable_if<std::is_enum<T>::value, Accessor>::type
+MapEntryWireValue(const T& value) {
+  return static_cast<Accessor>(value);
+}
+template <typename Accessor, typename T>
+typename std::enable_if<!std::is_enum<T>::value, const T&>::type
+MapEntryWireValue(const T& value) {
+  return value;
+}
+
 // Functions for operating on a map entry using type handlers.
 //
 // Does not contain any representation (this class is not intended to be
@@ -707,22 +722,40 @@ struct MapEntryFuncs {
     ptr = io::CodedOutputStream::WriteVarint32ToArray(GetCachedSize(key, value),
                                                       ptr);
 
-    ptr = KeyTypeHandler::Write(kKeyFieldNumber, key, ptr, stream);
-    return ValueTypeHandler::Write(kValueFieldNumber, value, ptr, stream);
+    ptr = KeyTypeHandler::Write(
+        kKeyFieldNumber,
+        MapEntryWireValue<typename KeyTypeHandler::MapEntryAccessorType>(key),
+        ptr, stream);
+    return ValueTypeHandler::Write(
+        kValueFieldNumber,
+        MapEntryWireValue<typename ValueTypeHandler::MapEntryAccessorType>(
+            value),
+        ptr, stream);
   }
 
   static size_t ByteSizeLong(const Key& key, const Value& value) {
     // Tags for key and value will both be one byte (field numbers 1 and 2).
     size_t inner_length =
-        2 + KeyTypeHandler::ByteSize(key) + ValueTypeHandler::ByteSize(value);
+        2 +
+        KeyTypeHandler::ByteSize(
+            MapEntryWireValue<typename KeyTypeHandler::MapEntryAccessorType>(
+                key)) +
+        ValueTypeHandler::ByteSize(
+            MapEntryWireValue<typename ValueTypeHandler::MapEntryAccessorType>(
+                value));
     return inner_length + io::CodedOutputStream::VarintSize32(
                               static_cast<uint32_t>(inner_length));
   }
 
   static int GetCachedSize(const Key& key, const Value& value) {
     // Tags for key and value will both be one byte (field numbers 1 and 2).
-    return 2 + KeyTypeHandler::GetCachedSize(key) +
-           ValueTypeHandler::GetCachedSize(value);
+    return 2 +
+           KeyTypeHandler::GetCachedSize(
+               MapEntryWireValue<typename KeyTypeHandler::MapEntryAccessorType>(
+                   key)) +
+           ValueTypeHandler::GetCachedSize(
+               MapEntryWireValue<
+                   typename ValueTypeHandler::MapEntryAccessorType>(value));
   }
 };
 

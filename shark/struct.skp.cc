@@ -7,11 +7,11 @@
 
 #include <shark/io/coded_stream.h>
 #include <shark/extension_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/descriptor.h>
 #include <shark/generated_message_reflection.h>
 #include <shark/reflection_ops.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
@@ -592,7 +592,11 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          _internal_set_null_value(static_cast<::shark::NullValue>(val));
+          if (SHARK_PREDICT_TRUE(::shark::NullValue_FitsWire(val))) {
+            _internal_set_null_value(static_cast<::shark::NullValue>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -671,7 +675,7 @@ uint8_t* Value::_InternalSerialize(
   if (_internal_has_null_value()) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      1, this->_internal_null_value(), target);
+      1, this->_impl_.kind_.null_value_, target);
   }
 
   // double number_value = 2;
@@ -730,7 +734,7 @@ size_t Value::ByteSizeLong() const {
     // .shark.NullValue null_value = 1;
     case kNullValue: {
       total_size += 1 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_null_value());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.kind_.null_value_);
       break;
     }
     // double number_value = 2;

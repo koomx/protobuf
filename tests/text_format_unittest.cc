@@ -816,7 +816,8 @@ TEST_F(TextFormatExtensionsTest, ParseExtensions) {
 TEST_F(TextFormatTest, ParseEnumFieldFromNumber) {
   // Create a parse string with a numerical value for an enum field.
   std::string parse_string =
-      strings::Substitute("optional_nested_enum: $0", unittest::TestAllTypes::BAZ);
+      strings::Substitute("optional_nested_enum: $0",
+                          static_cast<int>(unittest::TestAllTypes::BAZ));
   EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto_));
   EXPECT_TRUE(proto_.has_optional_nested_enum());
   EXPECT_EQ(unittest::TestAllTypes::BAZ, proto_.optional_nested_enum());
@@ -825,7 +826,8 @@ TEST_F(TextFormatTest, ParseEnumFieldFromNumber) {
 TEST_F(TextFormatTest, ParseEnumFieldFromNegativeNumber) {
   ASSERT_LT(unittest::SPARSE_E, 0);
   std::string parse_string =
-      strings::Substitute("sparse_enum: $0", unittest::SPARSE_E);
+      strings::Substitute("sparse_enum: $0",
+                          static_cast<int>(unittest::SPARSE_E));
   unittest::SparseEnumMessage proto;
   EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto));
   EXPECT_TRUE(proto.has_sparse_enum());
@@ -1635,7 +1637,7 @@ TEST_F(TextFormatParserTest, ParseFieldValueFromString) {
   // enum
   EXPECT_FIELD(nested_enum, unittest::TestAllTypes::BAR, "BAR");
   EXPECT_FIELD(nested_enum, unittest::TestAllTypes::BAZ,
-               StrCat(unittest::TestAllTypes::BAZ));
+               StrCat(static_cast<int>(unittest::TestAllTypes::BAZ)));
   EXPECT_INVALID(nested_enum, "FOOBAR");
 
   // message

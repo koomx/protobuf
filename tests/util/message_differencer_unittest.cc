@@ -52,7 +52,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/text_format.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <tests/util/message_differencer_unittest.skp.h>
 #include <shark/util/field_comparator.h>
 #include <shark/util/message_differencer.h>

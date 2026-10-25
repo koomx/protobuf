@@ -35,7 +35,7 @@
 #include <string>
 #include <utility>
 
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <shark/compiler/cpp/helpers.h>
 
 namespace shark::compiler::cpp {
@@ -327,7 +327,8 @@ TailCallTableInfo::TailCallTableInfo(
             "*>(&", QualifiedDefaultInstanceName(field_type, options), ")"));
       }
     } else if (field->type() == FieldDescriptor::TYPE_ENUM &&
-               !HasPreservingUnknownEnumSemantics(field)) {
+               (IsEnumClass(field->enum_type()) ||
+                !HasPreservingUnknownEnumSemantics(field))) {
       // Enum fields which preserve unknown values (proto3 behavior) are
       // effectively int32 fields with respect to parsing -- i.e., the value
       // does not need to be validated at parse time.
@@ -341,6 +342,12 @@ TailCallTableInfo::TailCallTableInfo(
 
       entry.aux_idx = aux_entries.size();
       const EnumDescriptor* enum_type = field->enum_type();
+      if (IsEnumClass(enum_type)) {
+        entry.is_enum_range = false;
+        aux_entries.push_back(
+            StrCat(QualifiedClassName(enum_type, options), "_FitsUnderlying"));
+        continue;
+      }
       GOOGLE_CHECK_GT(enum_type->value_count(), 0) << enum_type->DebugString();
 
       // Check if the enum values are a single, contiguous range.
@@ -1216,14 +1223,17 @@ void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
                                                  const FieldDescriptor* field) {
   if (field->is_packable()) {
     if (field->type() == FieldDescriptor::TYPE_ENUM &&
-        !HasPreservingUnknownEnumSemantics(field)) {
+        (IsEnumClass(field->enum_type()) ||
+         !HasPreservingUnknownEnumSemantics(field))) {
       std::string enum_type = QualifiedClassName(field->enum_type(), options_);
       format(
           "ptr = "
           "::$proto_ns$::internal::Packed$1$Parser<$unknown_fields_type$>("
-          "$msg$_internal_mutable_$name$(), ptr, ctx, $2$_IsValid, "
-          "&$msg$_internal_metadata_, $3$);\n",
-          DeclaredTypeMethodName(field->type()), enum_type, field->number());
+          "$msg$_internal_mutable_$name$(), ptr, ctx, $2$_$3$, "
+          "&$msg$_internal_metadata_, $4$);\n",
+          DeclaredTypeMethodName(field->type()), enum_type,
+          IsEnumClass(field->enum_type()) ? "FitsUnderlying" : "IsValid",
+          field->number());
     } else {
       format(
           "ptr = ::$proto_ns$::internal::Packed$1$Parser("
@@ -1245,14 +1255,16 @@ void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
           const FieldDescriptor* val = field->message_type()->map_value();
           GOOGLE_CHECK(val);
           if (val->type() == FieldDescriptor::TYPE_ENUM &&
-              !HasPreservingUnknownEnumSemantics(field)) {
+              (IsEnumClass(val->enum_type()) ||
+               !HasPreservingUnknownEnumSemantics(field))) {
             format(
                 "auto object = "
                 "::$proto_ns$::internal::InitEnumParseWrapper<"
-                "$unknown_fields_type$>(&$msg$$field$, $1$_IsValid, "
-                "$2$, &$msg$_internal_metadata_);\n"
+                "$unknown_fields_type$>(&$msg$$field$, $1$_$2$, "
+                "$3$, &$msg$_internal_metadata_);\n"
                 "ptr = ctx->ParseMessage(&object, ptr);\n",
                 QualifiedClassName(val->enum_type(), options_),
+                IsEnumClass(val->enum_type()) ? "FitsUnderlying" : "IsValid",
                 field->number());
           } else {
             format("ptr = ctx->ParseMessage(&$msg$$field$, ptr);\n");
@@ -1370,17 +1382,22 @@ void ParseFunctionGenerator::GenerateFieldBody(
         format(
             "$uint64$ val = ::$proto_ns$::internal::ReadVarint64(&ptr);\n"
             "CHK_(ptr);\n");
-        if (!HasPreservingUnknownEnumSemantics(field)) {
+        if (IsEnumClass(field->enum_type())) {
+          format("if (SHARK_PREDICT_TRUE($enum_type$_FitsWire(val))) {\n");
+          format.Indent();
+        } else if (!HasPreservingUnknownEnumSemantics(field)) {
           format("if (SHARK_PREDICT_TRUE($enum_type$_IsValid(val))) {\n");
           format.Indent();
         }
         format("$msg$_internal_$put_field$(static_cast<$enum_type$>(val));\n");
-        if (!HasPreservingUnknownEnumSemantics(field)) {
+        if (IsEnumClass(field->enum_type()) ||
+            !HasPreservingUnknownEnumSemantics(field)) {
           format.Outdent();
           format(
               "} else {\n"
               "  ::$proto_ns$::internal::WriteVarint("
-              "$1$, val, $msg$mutable_unknown_fields());\n"
+              "$1$, val, $msg$_internal_metadata_.mutable_unknown_fields<"
+              "$unknown_fields_type$>());\n"
               "}\n",
               field->number());
         }

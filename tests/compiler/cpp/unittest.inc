@@ -74,6 +74,7 @@
 #include <shark/stubs/logging.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
+#include <tests/gtest_enum.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/substitute.h>
 #include <shark/stubs/stl_util.h>

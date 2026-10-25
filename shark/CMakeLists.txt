@@ -60,7 +60,7 @@ kmcmake_cc_library(
         stubs/structurally_valid.cc
         stubs/strutil.cc
         stubs/time.cc
-        wire_format_lite.cc
+        format/wired/wire_format_lite.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS ${KMCMAKE_DEPS_LINK}
 )
@@ -119,7 +119,7 @@ kmcmake_cc_library(
         util/message_differencer.cc
         util/time_util.cc
         util/type_resolver_util.cc
-        wire_format.cc
+        format/wired/wire_format.cc
         wrappers.skp.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS ${PROJECT_NAME}::shark-lite_static ${KMCMAKE_DEPS_LINK}

@@ -133,14 +133,13 @@ TEST(PreserveUnknownEnumTest, Proto2HidesUnknownValues) {
 
   proto2_preserve_unknown_enum_unittest::MyMessage message;
   EXPECT_EQ(true, message.ParseFromString(serialized));
-  // The intermediate message has everything in its "unknown fields".
+  // Values that fit the underlying type stay in the fields.
   proto2_preserve_unknown_enum_unittest::MyMessage message2 = message;
   message2.DiscardUnknownFields();
-  EXPECT_EQ(0, message2.ByteSizeLong());
+  EXPECT_EQ(message.ByteSizeLong(), message2.ByteSizeLong());
 
-  // But when we pass it to the correct structure, all values are there.
   serialized.clear();
-  message.SerializeToString(&serialized);
+  message2.SerializeToString(&serialized);
   EXPECT_EQ(true, orig_message.ParseFromString(serialized));
   CheckMessage(orig_message);
 }
@@ -160,13 +159,12 @@ TEST(PreserveUnknownEnumTest, DynamicProto2HidesUnknownValues) {
               proto2_preserve_unknown_enum_unittest::MyMessage::descriptor())
           ->New());
   EXPECT_EQ(true, message->ParseFromString(serialized));
-  // The intermediate message has everything in its "unknown fields".
+  // The dynamic message still carries these values as unknown fields.
   proto2_preserve_unknown_enum_unittest::MyMessage message2;
   message2.CopyFrom(*message);
   message2.DiscardUnknownFields();
   EXPECT_EQ(0, message2.ByteSizeLong());
 
-  // But when we pass it to the correct structure, all values are there.
   serialized.clear();
   message->SerializeToString(&serialized);
   EXPECT_EQ(true, orig_message.ParseFromString(serialized));

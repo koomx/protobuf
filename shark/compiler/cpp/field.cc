@@ -46,7 +46,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <shark/io/printer.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <shark/compiler/cpp/enum_field.h>
 #include <shark/compiler/cpp/map_field.h>
 #include <shark/compiler/cpp/message_field.h>

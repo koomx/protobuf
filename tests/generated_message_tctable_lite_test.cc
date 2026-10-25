@@ -31,7 +31,7 @@
 #include <cstddef>
 
 #include <shark/generated_message_tctable_impl.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 

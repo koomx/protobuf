@@ -570,6 +570,17 @@ message OneofOptions {
   extensions 1000 to max;
 }
 
+// Underlying integer type of an enum class. UNSPECIFIED means a legacy enum.
+enum EnumUnderlyingType {
+  ENUM_UNDERLYING_TYPE_UNSPECIFIED = 0;
+  ENUM_UNDERLYING_TYPE_INT8 = 1;
+  ENUM_UNDERLYING_TYPE_UINT8 = 2;
+  ENUM_UNDERLYING_TYPE_INT16 = 3;
+  ENUM_UNDERLYING_TYPE_UINT16 = 4;
+  ENUM_UNDERLYING_TYPE_INT32 = 5;
+  ENUM_UNDERLYING_TYPE_UINT32 = 6;
+}
+
 message EnumOptions {
 
   // Set this option to true to allow mapping different tag names to the same
@@ -583,6 +594,12 @@ message EnumOptions {
   optional bool deprecated = 3 [default = false];
 
   reserved 5;  // javanano_as_lite
+
+  // Generate bitwise operators for this enum class.
+  optional bool enable_operator = 6 [default = false];
+
+  // Set for enum class. Legacy enums leave this unset.
+  optional EnumUnderlyingType underlying_type = 7;
 
   // The parser stores options it doesn't recognize here. See above.
   repeated UninterpretedOption uninterpreted_option = 999;

@@ -2316,7 +2316,9 @@ const void* Reflection::GetRawRepeatedField(const Message& message,
     ReportReflectionUsageTypeError(descriptor_, field, "GetRawRepeatedField",
                                    cpptype);
   if (ctype >= 0)
-    GOOGLE_CHECK_EQ(field->options().ctype(), ctype) << "subtype mismatch";
+    GOOGLE_CHECK_EQ(FieldOptions_CType_to_underlying(field->options().ctype()),
+                    ctype)
+        << "subtype mismatch";
   if (desc != nullptr)
     GOOGLE_CHECK_EQ(field->message_type(), desc) << "wrong submessage type";
   if (field->is_extension()) {
@@ -2748,7 +2750,9 @@ void* Reflection::MutableRawRepeatedString(Message* message,
   (void)is_string;  // Parameter is used by Google-internal code.
   return MutableRawRepeatedField(message, field,
                                  FieldDescriptor::CPPTYPE_STRING,
-                                 FieldOptions::STRING, nullptr);
+                                 FieldOptions_CType_to_underlying(
+                                     FieldOptions::STRING),
+                                 nullptr);
 }
 
 // Template implementations of basic accessors.  Inline because each

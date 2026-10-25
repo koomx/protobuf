@@ -71,7 +71,7 @@
 #include <shark/text_format.h>
 #include <shark/util/message_differencer.h>
 #include <shark/util/time_util.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 
 
 // Must be included last.
@@ -2662,10 +2662,13 @@ TEST(GeneratedMapFieldTest, Proto2UnknownEnum) {
 
   UNITTEST::TestEnumMap to;
   EXPECT_TRUE(to.ParseFromString(data));
-  EXPECT_EQ(0, to.unknown_map_field().size());
+  // The extra enumerator fits the underlying type, so it stays in the map.
+  EXPECT_EQ(1, to.unknown_map_field().size());
+  EXPECT_EQ(static_cast<int>(UNITTEST::E_PROTO2_MAP_ENUM_EXTRA),
+            static_cast<int>(to.unknown_map_field().at(0)));
   const UnknownFieldSet& unknown_field_set =
       to.GetReflection()->GetUnknownFields(to);
-  EXPECT_EQ(1, unknown_field_set.field_count());
+  EXPECT_EQ(0, unknown_field_set.field_count());
   EXPECT_EQ(1, to.known_map_field().size());
   EXPECT_EQ(UNITTEST::PROTO2_MAP_ENUM_FOO, to.known_map_field().at(0));
 

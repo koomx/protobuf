@@ -50,7 +50,7 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/io/tokenizer.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/hash.h>
 
@@ -542,22 +542,24 @@ void Parser::SkipRestOfBlock() {
 
 // ===================================================================
 
+bool EnumValueFits(EnumUnderlyingType type, int32_t number);
+
 bool Parser::ValidateEnum(const EnumDescriptorProto* proto) {
   bool has_allow_alias = false;
   bool allow_alias = false;
+  bool enable_operator = false;
 
   for (int i = 0; i < proto->options().uninterpreted_option_size(); i++) {
     const UninterpretedOption option = proto->options().uninterpreted_option(i);
-    if (option.name_size() > 1) {
+    if (option.name_size() != 1 || option.name(0).is_extension()) {
       continue;
     }
-    if (!option.name(0).is_extension() &&
-        option.name(0).name_part() == "allow_alias") {
+    const std::string& name = option.name(0).name_part();
+    if (name == "allow_alias") {
       has_allow_alias = true;
-      if (option.identifier_value() == "true") {
-        allow_alias = true;
-      }
-      break;
+      allow_alias = option.identifier_value() == "true";
+    } else if (name == "enable_operator") {
+      enable_operator = option.identifier_value() == "true";
     }
   }
 
@@ -603,6 +605,23 @@ bool Parser::ValidateEnum(const EnumDescriptorProto* proto) {
             "Enum constant should be in UPPER_CASE. Found: " +
             enum_value.name() +
             ". See https://developers.google.com/protocol-buffers/docs/style");
+      }
+    }
+  }
+
+  if (enable_operator && !proto->options().has_underlying_type()) {
+    AddError("'" + proto->name() +
+             "' sets enable_operator but is not an enum class.");
+    return false;
+  }
+
+  if (proto->options().has_underlying_type()) {
+    for (int i = 0; i < proto->value_size(); ++i) {
+      if (!EnumValueFits(proto->options().underlying_type(),
+                         proto->value(i).number())) {
+        AddError("Enum value \"" + proto->value(i).name() +
+                 "\" does not fit the underlying type.");
+        return false;
       }
     }
   }
@@ -1979,10 +1998,48 @@ bool Parser::ParseOneof(OneofDescriptorProto* oneof_decl,
 // -------------------------------------------------------------------
 // Enums
 
+bool EnumValueFits(EnumUnderlyingType type, int32_t number) {
+  switch (type) {
+    case ENUM_UNDERLYING_TYPE_INT8:
+      return number >= -128 && number <= 127;
+    case ENUM_UNDERLYING_TYPE_UINT8:
+      return number >= 0 && number <= 255;
+    case ENUM_UNDERLYING_TYPE_INT16:
+      return number >= -32768 && number <= 32767;
+    case ENUM_UNDERLYING_TYPE_UINT16:
+      return number >= 0 && number <= 65535;
+    case ENUM_UNDERLYING_TYPE_INT32:
+    case ENUM_UNDERLYING_TYPE_UINT32:
+      return true;
+    default:
+      return true;
+  }
+}
+
+bool ParseEnumUnderlyingType(const std::string& name, EnumUnderlyingType* type) {
+  if (name == "int8") {
+    *type = ENUM_UNDERLYING_TYPE_INT8;
+  } else if (name == "uint8") {
+    *type = ENUM_UNDERLYING_TYPE_UINT8;
+  } else if (name == "int16") {
+    *type = ENUM_UNDERLYING_TYPE_INT16;
+  } else if (name == "uint16") {
+    *type = ENUM_UNDERLYING_TYPE_UINT16;
+  } else if (name == "int32") {
+    *type = ENUM_UNDERLYING_TYPE_INT32;
+  } else if (name == "uint32") {
+    *type = ENUM_UNDERLYING_TYPE_UINT32;
+  } else {
+    return false;
+  }
+  return true;
+}
+
 bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
                                  const LocationRecorder& enum_location,
                                  const FileDescriptorProto* containing_file) {
   DO(Consume("enum"));
+  const bool is_enum_class = TryConsume("class");
 
   {
     LocationRecorder location(enum_location,
@@ -1992,7 +2049,27 @@ bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
     DO(ConsumeIdentifier(enum_type->mutable_name(), "Expected enum name."));
   }
 
-  DO(ParseEnumBlock(enum_type, enum_location, containing_file));
+  EnumUnderlyingType underlying_type = ENUM_UNDERLYING_TYPE_UNSPECIFIED;
+  if (TryConsume(":")) {
+    if (!is_enum_class) {
+      AddError("An underlying type is only allowed on enum class.");
+      return false;
+    }
+    std::string type_name;
+    DO(ConsumeIdentifier(&type_name, "Expected enum underlying type."));
+    if (!ParseEnumUnderlyingType(type_name, &underlying_type)) {
+      AddError("Unknown enum underlying type \"" + type_name + "\".");
+      return false;
+    }
+  } else if (is_enum_class) {
+    underlying_type = ENUM_UNDERLYING_TYPE_INT32;
+  }
+
+  DO(ParseEnumBlock(enum_type, enum_location, containing_file, underlying_type));
+
+  if (is_enum_class) {
+    enum_type->mutable_options()->set_underlying_type(underlying_type);
+  }
 
   DO(ValidateEnum(enum_type));
 
@@ -2001,7 +2078,8 @@ bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
 
 bool Parser::ParseEnumBlock(EnumDescriptorProto* enum_type,
                             const LocationRecorder& enum_location,
-                            const FileDescriptorProto* containing_file) {
+                            const FileDescriptorProto* containing_file,
+                            EnumUnderlyingType underlying_type) {
   DO(ConsumeEndOfDeclaration("{", &enum_location));
 
   while (!TryConsumeEndOfDeclaration("}", nullptr)) {
@@ -2010,7 +2088,8 @@ bool Parser::ParseEnumBlock(EnumDescriptorProto* enum_type,
       return false;
     }
 
-    if (!ParseEnumStatement(enum_type, enum_location, containing_file)) {
+    if (!ParseEnumStatement(enum_type, enum_location, containing_file,
+                            underlying_type)) {
       // This statement failed to parse.  Skip it, but keep looping to parse
       // other statements.
       SkipStatement();
@@ -2022,7 +2101,8 @@ bool Parser::ParseEnumBlock(EnumDescriptorProto* enum_type,
 
 bool Parser::ParseEnumStatement(EnumDescriptorProto* enum_type,
                                 const LocationRecorder& enum_location,
-                                const FileDescriptorProto* containing_file) {
+                                const FileDescriptorProto* containing_file,
+                                EnumUnderlyingType underlying_type) {
   if (TryConsumeEndOfDeclaration(";", nullptr)) {
     // empty statement; ignore
     return true;
@@ -2037,13 +2117,67 @@ bool Parser::ParseEnumStatement(EnumDescriptorProto* enum_type,
     LocationRecorder location(enum_location,
                               EnumDescriptorProto::kValueFieldNumber,
                               enum_type->value_size());
-    return ParseEnumConstant(enum_type->add_value(), location, containing_file);
+    return ParseEnumConstant(enum_type->add_value(), location, containing_file,
+                             underlying_type);
   }
+}
+
+bool Parser::ConsumeEnumNumber(EnumUnderlyingType underlying_type,
+                               int32_t* output, const char* error) {
+  if (underlying_type == ENUM_UNDERLYING_TYPE_UNSPECIFIED ||
+      underlying_type == ENUM_UNDERLYING_TYPE_INT32) {
+    return ConsumeSignedInteger(output, error);
+  }
+
+  const bool is_unsigned =
+      underlying_type == ENUM_UNDERLYING_TYPE_UINT8 ||
+      underlying_type == ENUM_UNDERLYING_TYPE_UINT16 ||
+      underlying_type == ENUM_UNDERLYING_TYPE_UINT32;
+  const bool is_negative = TryConsume("-");
+  if (is_negative && is_unsigned) {
+    AddError("Unsigned enum underlying type cannot be negative.");
+    return false;
+  }
+
+  uint64_t max_value = 0;
+  switch (underlying_type) {
+    case ENUM_UNDERLYING_TYPE_INT8:
+      max_value = is_negative ? 128 : 127;
+      break;
+    case ENUM_UNDERLYING_TYPE_UINT8:
+      max_value = 255;
+      break;
+    case ENUM_UNDERLYING_TYPE_INT16:
+      max_value = is_negative ? 32768 : 32767;
+      break;
+    case ENUM_UNDERLYING_TYPE_UINT16:
+      max_value = 65535;
+      break;
+    case ENUM_UNDERLYING_TYPE_UINT32:
+      max_value = std::numeric_limits<uint32_t>::max();
+      break;
+    default:
+      max_value = std::numeric_limits<int32_t>::max();
+      break;
+  }
+
+  uint64_t value = 0;
+  DO(ConsumeInteger64(max_value, &value, error));
+  if (is_negative) {
+    *output = -static_cast<int32_t>(value);
+  } else if (value >
+             static_cast<uint64_t>(std::numeric_limits<int32_t>::max())) {
+    *output = static_cast<int32_t>(static_cast<uint32_t>(value));
+  } else {
+    *output = static_cast<int32_t>(value);
+  }
+  return true;
 }
 
 bool Parser::ParseEnumConstant(EnumValueDescriptorProto* enum_value,
                                const LocationRecorder& enum_value_location,
-                               const FileDescriptorProto* containing_file) {
+                               const FileDescriptorProto* containing_file,
+                               EnumUnderlyingType underlying_type) {
   // Parse name.
   {
     LocationRecorder location(enum_value_location,
@@ -2063,8 +2197,8 @@ bool Parser::ParseEnumConstant(EnumValueDescriptorProto* enum_value,
     location.RecordLegacyLocation(enum_value,
                                   DescriptorPool::ErrorCollector::NUMBER);
 
-    int number;
-    DO(ConsumeSignedInteger(&number, "Expected integer."));
+    int32_t number;
+    DO(ConsumeEnumNumber(underlying_type, &number, "Expected integer."));
     enum_value->set_number(number);
   }
 

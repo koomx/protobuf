@@ -772,7 +772,9 @@ class SHARK_EXPORT EpsCopyOutputStream {
   template <typename T>
   SHARK_ALWAYS_INLINE uint8_t* WriteEnumPacked(int num, const T& r, int size,
                                                   uint8_t* ptr) {
-    return WriteVarintPacked(num, r, size, ptr, Encode64);
+    return WriteVarintPacked(num, r, size, ptr, [](auto v) {
+      return static_cast<uint64_t>(v);
+    });
   }
 
   template <typename T>

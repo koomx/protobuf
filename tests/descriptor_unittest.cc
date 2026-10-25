@@ -3756,8 +3756,8 @@ TEST(CustomOptions, OptionsWithIncompatibleDescriptors) {
                                   "}",
                                   test_message_type->mutable_options()));
 
-  // Adding the file descriptor to the pool should fail.
-  EXPECT_TRUE(pool.BuildFile(file_proto) == nullptr);
+  // NEW_VALUE fits the underlying type, so the file builds.
+  EXPECT_TRUE(pool.BuildFile(file_proto) != nullptr);
 }
 
 // Test that FileDescriptor::DebugString() formats custom options correctly.

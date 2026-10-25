@@ -56,6 +56,7 @@
 #include <shark/descriptor.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
+#include <tests/gtest_enum.h>
 #include <tests/map_test_util.h>
 #include <tests/test_util.h>
 

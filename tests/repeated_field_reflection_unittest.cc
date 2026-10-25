@@ -478,7 +478,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {
     message.set_repeated_nested_enum(i, TestAllTypes::BAR);
     EXPECT_EQ(TestAllTypes::BAR, int32_ref.Get(i));
     EXPECT_EQ(TestAllTypes::BAR, mutable_int32_ref.Get(i));
-    mutable_int32_ref.Set(i, TestAllTypes::BAZ);
+    mutable_int32_ref.Set(i, static_cast<int>(TestAllTypes::BAZ));
     EXPECT_EQ(TestAllTypes::BAZ, int32_ref.Get(i));
     EXPECT_EQ(TestAllTypes::BAZ, message.repeated_nested_enum(i));
   }
@@ -491,7 +491,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {
   // Test Add()
   mutable_enum_ref.Add(TestAllTypes::FOO);
   EXPECT_EQ(TestAllTypes::FOO, message.repeated_nested_enum(10));
-  mutable_int32_ref.Add(TestAllTypes::BAR);
+  mutable_int32_ref.Add(static_cast<int>(TestAllTypes::BAR));
   EXPECT_EQ(TestAllTypes::BAR, message.repeated_nested_enum(11));
 
   // Test RemoveLast()

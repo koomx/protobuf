@@ -158,30 +158,57 @@ template<> SHARK_EXPORT ::shark::UninterpretedOption_NamePart* Arena::CreateMayb
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
-enum FieldDescriptorProto_Type : int {
-  FieldDescriptorProto_Type_TYPE_DOUBLE = 1,
-  FieldDescriptorProto_Type_TYPE_FLOAT = 2,
-  FieldDescriptorProto_Type_TYPE_INT64 = 3,
-  FieldDescriptorProto_Type_TYPE_UINT64 = 4,
-  FieldDescriptorProto_Type_TYPE_INT32 = 5,
-  FieldDescriptorProto_Type_TYPE_FIXED64 = 6,
-  FieldDescriptorProto_Type_TYPE_FIXED32 = 7,
-  FieldDescriptorProto_Type_TYPE_BOOL = 8,
-  FieldDescriptorProto_Type_TYPE_STRING = 9,
-  FieldDescriptorProto_Type_TYPE_GROUP = 10,
-  FieldDescriptorProto_Type_TYPE_MESSAGE = 11,
-  FieldDescriptorProto_Type_TYPE_BYTES = 12,
-  FieldDescriptorProto_Type_TYPE_UINT32 = 13,
-  FieldDescriptorProto_Type_TYPE_ENUM = 14,
-  FieldDescriptorProto_Type_TYPE_SFIXED32 = 15,
-  FieldDescriptorProto_Type_TYPE_SFIXED64 = 16,
-  FieldDescriptorProto_Type_TYPE_SINT32 = 17,
-  FieldDescriptorProto_Type_TYPE_SINT64 = 18
+enum class FieldDescriptorProto_Type : int32_t {
+  TYPE_DOUBLE = 1,
+  TYPE_FLOAT = 2,
+  TYPE_INT64 = 3,
+  TYPE_UINT64 = 4,
+  TYPE_INT32 = 5,
+  TYPE_FIXED64 = 6,
+  TYPE_FIXED32 = 7,
+  TYPE_BOOL = 8,
+  TYPE_STRING = 9,
+  TYPE_GROUP = 10,
+  TYPE_MESSAGE = 11,
+  TYPE_BYTES = 12,
+  TYPE_UINT32 = 13,
+  TYPE_ENUM = 14,
+  TYPE_SFIXED32 = 15,
+  TYPE_SFIXED64 = 16,
+  TYPE_SINT32 = 17,
+  TYPE_SINT64 = 18
 };
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_DOUBLE = FieldDescriptorProto_Type::TYPE_DOUBLE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT = FieldDescriptorProto_Type::TYPE_FLOAT;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT64 = FieldDescriptorProto_Type::TYPE_INT64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT64 = FieldDescriptorProto_Type::TYPE_UINT64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT32 = FieldDescriptorProto_Type::TYPE_INT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED64 = FieldDescriptorProto_Type::TYPE_FIXED64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED32 = FieldDescriptorProto_Type::TYPE_FIXED32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BOOL = FieldDescriptorProto_Type::TYPE_BOOL;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_STRING = FieldDescriptorProto_Type::TYPE_STRING;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_GROUP = FieldDescriptorProto_Type::TYPE_GROUP;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_MESSAGE = FieldDescriptorProto_Type::TYPE_MESSAGE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BYTES = FieldDescriptorProto_Type::TYPE_BYTES;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT32 = FieldDescriptorProto_Type::TYPE_UINT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_ENUM = FieldDescriptorProto_Type::TYPE_ENUM;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED32 = FieldDescriptorProto_Type::TYPE_SFIXED32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED64 = FieldDescriptorProto_Type::TYPE_SFIXED64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT32 = FieldDescriptorProto_Type::TYPE_SINT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT64 = FieldDescriptorProto_Type::TYPE_SINT64;
+constexpr int32_t FieldDescriptorProto_Type_to_underlying(FieldDescriptorProto_Type value) {
+  return static_cast<int32_t>(value);
+}
+inline bool FieldDescriptorProto_Type_FitsUnderlying(int value) {
+  return true;
+}
+inline bool FieldDescriptorProto_Type_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Type_FitsUnderlying(static_cast<int>(value));
+}
 SHARK_EXPORT bool FieldDescriptorProto_Type_IsValid(int value);
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MIN = FieldDescriptorProto_Type_TYPE_DOUBLE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MAX = FieldDescriptorProto_Type_TYPE_SINT64;
-constexpr int FieldDescriptorProto_Type_Type_ARRAYSIZE = FieldDescriptorProto_Type_Type_MAX + 1;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MIN = FieldDescriptorProto_Type::TYPE_DOUBLE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MAX = FieldDescriptorProto_Type::TYPE_SINT64;
+constexpr int FieldDescriptorProto_Type_Type_ARRAYSIZE = FieldDescriptorProto_Type_to_underlying(FieldDescriptorProto_Type_Type_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Type_descriptor();
 template<typename T>
@@ -190,22 +217,35 @@ inline const std::string& FieldDescriptorProto_Type_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function FieldDescriptorProto_Type_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldDescriptorProto_Type_descriptor(), enum_t_value);
+    FieldDescriptorProto_Type_descriptor(),
+    FieldDescriptorProto_Type_to_underlying(static_cast<FieldDescriptorProto_Type>(enum_t_value)));
 }
 inline bool FieldDescriptorProto_Type_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Type* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldDescriptorProto_Type>(
     FieldDescriptorProto_Type_descriptor(), name, value);
 }
-enum FieldDescriptorProto_Label : int {
-  FieldDescriptorProto_Label_LABEL_OPTIONAL = 1,
-  FieldDescriptorProto_Label_LABEL_REQUIRED = 2,
-  FieldDescriptorProto_Label_LABEL_REPEATED = 3
+enum class FieldDescriptorProto_Label : int32_t {
+  LABEL_OPTIONAL = 1,
+  LABEL_REQUIRED = 2,
+  LABEL_REPEATED = 3
 };
+constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_LABEL_OPTIONAL = FieldDescriptorProto_Label::LABEL_OPTIONAL;
+constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_LABEL_REQUIRED = FieldDescriptorProto_Label::LABEL_REQUIRED;
+constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_LABEL_REPEATED = FieldDescriptorProto_Label::LABEL_REPEATED;
+constexpr int32_t FieldDescriptorProto_Label_to_underlying(FieldDescriptorProto_Label value) {
+  return static_cast<int32_t>(value);
+}
+inline bool FieldDescriptorProto_Label_FitsUnderlying(int value) {
+  return true;
+}
+inline bool FieldDescriptorProto_Label_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Label_FitsUnderlying(static_cast<int>(value));
+}
 SHARK_EXPORT bool FieldDescriptorProto_Label_IsValid(int value);
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MIN = FieldDescriptorProto_Label_LABEL_OPTIONAL;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MAX = FieldDescriptorProto_Label_LABEL_REPEATED;
-constexpr int FieldDescriptorProto_Label_Label_ARRAYSIZE = FieldDescriptorProto_Label_Label_MAX + 1;
+constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MIN = FieldDescriptorProto_Label::LABEL_OPTIONAL;
+constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MAX = FieldDescriptorProto_Label::LABEL_REPEATED;
+constexpr int FieldDescriptorProto_Label_Label_ARRAYSIZE = FieldDescriptorProto_Label_to_underlying(FieldDescriptorProto_Label_Label_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Label_descriptor();
 template<typename T>
@@ -214,22 +254,35 @@ inline const std::string& FieldDescriptorProto_Label_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function FieldDescriptorProto_Label_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldDescriptorProto_Label_descriptor(), enum_t_value);
+    FieldDescriptorProto_Label_descriptor(),
+    FieldDescriptorProto_Label_to_underlying(static_cast<FieldDescriptorProto_Label>(enum_t_value)));
 }
 inline bool FieldDescriptorProto_Label_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Label* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldDescriptorProto_Label>(
     FieldDescriptorProto_Label_descriptor(), name, value);
 }
-enum FileOptions_OptimizeMode : int {
-  FileOptions_OptimizeMode_SPEED = 1,
-  FileOptions_OptimizeMode_CODE_SIZE = 2,
-  FileOptions_OptimizeMode_LITE_RUNTIME = 3
+enum class FileOptions_OptimizeMode : int32_t {
+  SPEED = 1,
+  CODE_SIZE = 2,
+  LITE_RUNTIME = 3
 };
+constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_SPEED = FileOptions_OptimizeMode::SPEED;
+constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_CODE_SIZE = FileOptions_OptimizeMode::CODE_SIZE;
+constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_LITE_RUNTIME = FileOptions_OptimizeMode::LITE_RUNTIME;
+constexpr int32_t FileOptions_OptimizeMode_to_underlying(FileOptions_OptimizeMode value) {
+  return static_cast<int32_t>(value);
+}
+inline bool FileOptions_OptimizeMode_FitsUnderlying(int value) {
+  return true;
+}
+inline bool FileOptions_OptimizeMode_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FileOptions_OptimizeMode_FitsUnderlying(static_cast<int>(value));
+}
 SHARK_EXPORT bool FileOptions_OptimizeMode_IsValid(int value);
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MIN = FileOptions_OptimizeMode_SPEED;
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MAX = FileOptions_OptimizeMode_LITE_RUNTIME;
-constexpr int FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE = FileOptions_OptimizeMode_OptimizeMode_MAX + 1;
+constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MIN = FileOptions_OptimizeMode::SPEED;
+constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MAX = FileOptions_OptimizeMode::LITE_RUNTIME;
+constexpr int FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE = FileOptions_OptimizeMode_to_underlying(FileOptions_OptimizeMode_OptimizeMode_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FileOptions_OptimizeMode_descriptor();
 template<typename T>
@@ -238,22 +291,35 @@ inline const std::string& FileOptions_OptimizeMode_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function FileOptions_OptimizeMode_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FileOptions_OptimizeMode_descriptor(), enum_t_value);
+    FileOptions_OptimizeMode_descriptor(),
+    FileOptions_OptimizeMode_to_underlying(static_cast<FileOptions_OptimizeMode>(enum_t_value)));
 }
 inline bool FileOptions_OptimizeMode_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, FileOptions_OptimizeMode* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FileOptions_OptimizeMode>(
     FileOptions_OptimizeMode_descriptor(), name, value);
 }
-enum FieldOptions_CType : int {
-  FieldOptions_CType_STRING = 0,
-  FieldOptions_CType_CORD = 1,
-  FieldOptions_CType_STRING_PIECE = 2
+enum class FieldOptions_CType : int32_t {
+  STRING = 0,
+  CORD = 1,
+  STRING_PIECE = 2
 };
+constexpr FieldOptions_CType FieldOptions_CType_STRING = FieldOptions_CType::STRING;
+constexpr FieldOptions_CType FieldOptions_CType_CORD = FieldOptions_CType::CORD;
+constexpr FieldOptions_CType FieldOptions_CType_STRING_PIECE = FieldOptions_CType::STRING_PIECE;
+constexpr int32_t FieldOptions_CType_to_underlying(FieldOptions_CType value) {
+  return static_cast<int32_t>(value);
+}
+inline bool FieldOptions_CType_FitsUnderlying(int value) {
+  return true;
+}
+inline bool FieldOptions_CType_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_CType_FitsUnderlying(static_cast<int>(value));
+}
 SHARK_EXPORT bool FieldOptions_CType_IsValid(int value);
-constexpr FieldOptions_CType FieldOptions_CType_CType_MIN = FieldOptions_CType_STRING;
-constexpr FieldOptions_CType FieldOptions_CType_CType_MAX = FieldOptions_CType_STRING_PIECE;
-constexpr int FieldOptions_CType_CType_ARRAYSIZE = FieldOptions_CType_CType_MAX + 1;
+constexpr FieldOptions_CType FieldOptions_CType_CType_MIN = FieldOptions_CType::STRING;
+constexpr FieldOptions_CType FieldOptions_CType_CType_MAX = FieldOptions_CType::STRING_PIECE;
+constexpr int FieldOptions_CType_CType_ARRAYSIZE = FieldOptions_CType_to_underlying(FieldOptions_CType_CType_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_CType_descriptor();
 template<typename T>
@@ -262,22 +328,35 @@ inline const std::string& FieldOptions_CType_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function FieldOptions_CType_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldOptions_CType_descriptor(), enum_t_value);
+    FieldOptions_CType_descriptor(),
+    FieldOptions_CType_to_underlying(static_cast<FieldOptions_CType>(enum_t_value)));
 }
 inline bool FieldOptions_CType_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldOptions_CType* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldOptions_CType>(
     FieldOptions_CType_descriptor(), name, value);
 }
-enum FieldOptions_JSType : int {
-  FieldOptions_JSType_JS_NORMAL = 0,
-  FieldOptions_JSType_JS_STRING = 1,
-  FieldOptions_JSType_JS_NUMBER = 2
+enum class FieldOptions_JSType : int32_t {
+  JS_NORMAL = 0,
+  JS_STRING = 1,
+  JS_NUMBER = 2
 };
+constexpr FieldOptions_JSType FieldOptions_JSType_JS_NORMAL = FieldOptions_JSType::JS_NORMAL;
+constexpr FieldOptions_JSType FieldOptions_JSType_JS_STRING = FieldOptions_JSType::JS_STRING;
+constexpr FieldOptions_JSType FieldOptions_JSType_JS_NUMBER = FieldOptions_JSType::JS_NUMBER;
+constexpr int32_t FieldOptions_JSType_to_underlying(FieldOptions_JSType value) {
+  return static_cast<int32_t>(value);
+}
+inline bool FieldOptions_JSType_FitsUnderlying(int value) {
+  return true;
+}
+inline bool FieldOptions_JSType_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_JSType_FitsUnderlying(static_cast<int>(value));
+}
 SHARK_EXPORT bool FieldOptions_JSType_IsValid(int value);
-constexpr FieldOptions_JSType FieldOptions_JSType_JSType_MIN = FieldOptions_JSType_JS_NORMAL;
-constexpr FieldOptions_JSType FieldOptions_JSType_JSType_MAX = FieldOptions_JSType_JS_NUMBER;
-constexpr int FieldOptions_JSType_JSType_ARRAYSIZE = FieldOptions_JSType_JSType_MAX + 1;
+constexpr FieldOptions_JSType FieldOptions_JSType_JSType_MIN = FieldOptions_JSType::JS_NORMAL;
+constexpr FieldOptions_JSType FieldOptions_JSType_JSType_MAX = FieldOptions_JSType::JS_NUMBER;
+constexpr int FieldOptions_JSType_JSType_ARRAYSIZE = FieldOptions_JSType_to_underlying(FieldOptions_JSType_JSType_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_JSType_descriptor();
 template<typename T>
@@ -286,22 +365,35 @@ inline const std::string& FieldOptions_JSType_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function FieldOptions_JSType_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldOptions_JSType_descriptor(), enum_t_value);
+    FieldOptions_JSType_descriptor(),
+    FieldOptions_JSType_to_underlying(static_cast<FieldOptions_JSType>(enum_t_value)));
 }
 inline bool FieldOptions_JSType_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldOptions_JSType* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldOptions_JSType>(
     FieldOptions_JSType_descriptor(), name, value);
 }
-enum MethodOptions_IdempotencyLevel : int {
-  MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN = 0,
-  MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS = 1,
-  MethodOptions_IdempotencyLevel_IDEMPOTENT = 2
+enum class MethodOptions_IdempotencyLevel : int32_t {
+  IDEMPOTENCY_UNKNOWN = 0,
+  NO_SIDE_EFFECTS = 1,
+  IDEMPOTENT = 2
 };
+constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN = MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
+constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS = MethodOptions_IdempotencyLevel::NO_SIDE_EFFECTS;
+constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IDEMPOTENT = MethodOptions_IdempotencyLevel::IDEMPOTENT;
+constexpr int32_t MethodOptions_IdempotencyLevel_to_underlying(MethodOptions_IdempotencyLevel value) {
+  return static_cast<int32_t>(value);
+}
+inline bool MethodOptions_IdempotencyLevel_FitsUnderlying(int value) {
+  return true;
+}
+inline bool MethodOptions_IdempotencyLevel_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && MethodOptions_IdempotencyLevel_FitsUnderlying(static_cast<int>(value));
+}
 SHARK_EXPORT bool MethodOptions_IdempotencyLevel_IsValid(int value);
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN = MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN;
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX = MethodOptions_IdempotencyLevel_IDEMPOTENT;
-constexpr int MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE = MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX + 1;
+constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN = MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
+constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX = MethodOptions_IdempotencyLevel::IDEMPOTENT;
+constexpr int MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE = MethodOptions_IdempotencyLevel_to_underlying(MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* MethodOptions_IdempotencyLevel_descriptor();
 template<typename T>
@@ -310,12 +402,58 @@ inline const std::string& MethodOptions_IdempotencyLevel_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function MethodOptions_IdempotencyLevel_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    MethodOptions_IdempotencyLevel_descriptor(), enum_t_value);
+    MethodOptions_IdempotencyLevel_descriptor(),
+    MethodOptions_IdempotencyLevel_to_underlying(static_cast<MethodOptions_IdempotencyLevel>(enum_t_value)));
 }
 inline bool MethodOptions_IdempotencyLevel_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, MethodOptions_IdempotencyLevel* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<MethodOptions_IdempotencyLevel>(
     MethodOptions_IdempotencyLevel_descriptor(), name, value);
+}
+enum class EnumUnderlyingType : int32_t {
+  ENUM_UNDERLYING_TYPE_UNSPECIFIED = 0,
+  ENUM_UNDERLYING_TYPE_INT8 = 1,
+  ENUM_UNDERLYING_TYPE_UINT8 = 2,
+  ENUM_UNDERLYING_TYPE_INT16 = 3,
+  ENUM_UNDERLYING_TYPE_UINT16 = 4,
+  ENUM_UNDERLYING_TYPE_INT32 = 5,
+  ENUM_UNDERLYING_TYPE_UINT32 = 6
+};
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UNSPECIFIED = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED;
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_INT8 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8;
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UINT8 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8;
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_INT16 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16;
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UINT16 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16;
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_INT32 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32;
+constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UINT32 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
+constexpr int32_t EnumUnderlyingType_to_underlying(EnumUnderlyingType value) {
+  return static_cast<int32_t>(value);
+}
+inline bool EnumUnderlyingType_FitsUnderlying(int value) {
+  return true;
+}
+inline bool EnumUnderlyingType_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && EnumUnderlyingType_FitsUnderlying(static_cast<int>(value));
+}
+SHARK_EXPORT bool EnumUnderlyingType_IsValid(int value);
+constexpr EnumUnderlyingType EnumUnderlyingType_MIN = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED;
+constexpr EnumUnderlyingType EnumUnderlyingType_MAX = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
+constexpr int EnumUnderlyingType_ARRAYSIZE = EnumUnderlyingType_to_underlying(EnumUnderlyingType_MAX) + 1;
+
+SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumUnderlyingType_descriptor();
+template<typename T>
+inline const std::string& EnumUnderlyingType_Name(T enum_t_value) {
+  static_assert(::std::is_same<T, EnumUnderlyingType>::value ||
+    ::std::is_integral<T>::value,
+    "Incorrect type passed to function EnumUnderlyingType_Name.");
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    EnumUnderlyingType_descriptor(),
+    EnumUnderlyingType_to_underlying(static_cast<EnumUnderlyingType>(enum_t_value)));
+}
+inline bool EnumUnderlyingType_Parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, EnumUnderlyingType* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<EnumUnderlyingType>(
+    EnumUnderlyingType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -2089,41 +2227,41 @@ class SHARK_EXPORT FieldDescriptorProto final :
 
   typedef FieldDescriptorProto_Type Type;
   static constexpr Type TYPE_DOUBLE =
-    FieldDescriptorProto_Type_TYPE_DOUBLE;
+    FieldDescriptorProto_Type::TYPE_DOUBLE;
   static constexpr Type TYPE_FLOAT =
-    FieldDescriptorProto_Type_TYPE_FLOAT;
+    FieldDescriptorProto_Type::TYPE_FLOAT;
   static constexpr Type TYPE_INT64 =
-    FieldDescriptorProto_Type_TYPE_INT64;
+    FieldDescriptorProto_Type::TYPE_INT64;
   static constexpr Type TYPE_UINT64 =
-    FieldDescriptorProto_Type_TYPE_UINT64;
+    FieldDescriptorProto_Type::TYPE_UINT64;
   static constexpr Type TYPE_INT32 =
-    FieldDescriptorProto_Type_TYPE_INT32;
+    FieldDescriptorProto_Type::TYPE_INT32;
   static constexpr Type TYPE_FIXED64 =
-    FieldDescriptorProto_Type_TYPE_FIXED64;
+    FieldDescriptorProto_Type::TYPE_FIXED64;
   static constexpr Type TYPE_FIXED32 =
-    FieldDescriptorProto_Type_TYPE_FIXED32;
+    FieldDescriptorProto_Type::TYPE_FIXED32;
   static constexpr Type TYPE_BOOL =
-    FieldDescriptorProto_Type_TYPE_BOOL;
+    FieldDescriptorProto_Type::TYPE_BOOL;
   static constexpr Type TYPE_STRING =
-    FieldDescriptorProto_Type_TYPE_STRING;
+    FieldDescriptorProto_Type::TYPE_STRING;
   static constexpr Type TYPE_GROUP =
-    FieldDescriptorProto_Type_TYPE_GROUP;
+    FieldDescriptorProto_Type::TYPE_GROUP;
   static constexpr Type TYPE_MESSAGE =
-    FieldDescriptorProto_Type_TYPE_MESSAGE;
+    FieldDescriptorProto_Type::TYPE_MESSAGE;
   static constexpr Type TYPE_BYTES =
-    FieldDescriptorProto_Type_TYPE_BYTES;
+    FieldDescriptorProto_Type::TYPE_BYTES;
   static constexpr Type TYPE_UINT32 =
-    FieldDescriptorProto_Type_TYPE_UINT32;
+    FieldDescriptorProto_Type::TYPE_UINT32;
   static constexpr Type TYPE_ENUM =
-    FieldDescriptorProto_Type_TYPE_ENUM;
+    FieldDescriptorProto_Type::TYPE_ENUM;
   static constexpr Type TYPE_SFIXED32 =
-    FieldDescriptorProto_Type_TYPE_SFIXED32;
+    FieldDescriptorProto_Type::TYPE_SFIXED32;
   static constexpr Type TYPE_SFIXED64 =
-    FieldDescriptorProto_Type_TYPE_SFIXED64;
+    FieldDescriptorProto_Type::TYPE_SFIXED64;
   static constexpr Type TYPE_SINT32 =
-    FieldDescriptorProto_Type_TYPE_SINT32;
+    FieldDescriptorProto_Type::TYPE_SINT32;
   static constexpr Type TYPE_SINT64 =
-    FieldDescriptorProto_Type_TYPE_SINT64;
+    FieldDescriptorProto_Type::TYPE_SINT64;
   static inline bool Type_IsValid(int value) {
     return FieldDescriptorProto_Type_IsValid(value);
   }
@@ -2151,11 +2289,11 @@ class SHARK_EXPORT FieldDescriptorProto final :
 
   typedef FieldDescriptorProto_Label Label;
   static constexpr Label LABEL_OPTIONAL =
-    FieldDescriptorProto_Label_LABEL_OPTIONAL;
+    FieldDescriptorProto_Label::LABEL_OPTIONAL;
   static constexpr Label LABEL_REQUIRED =
-    FieldDescriptorProto_Label_LABEL_REQUIRED;
+    FieldDescriptorProto_Label::LABEL_REQUIRED;
   static constexpr Label LABEL_REPEATED =
-    FieldDescriptorProto_Label_LABEL_REPEATED;
+    FieldDescriptorProto_Label::LABEL_REPEATED;
   static inline bool Label_IsValid(int value) {
     return FieldDescriptorProto_Label_IsValid(value);
   }
@@ -3796,11 +3934,11 @@ class SHARK_EXPORT FileOptions final :
 
   typedef FileOptions_OptimizeMode OptimizeMode;
   static constexpr OptimizeMode SPEED =
-    FileOptions_OptimizeMode_SPEED;
+    FileOptions_OptimizeMode::SPEED;
   static constexpr OptimizeMode CODE_SIZE =
-    FileOptions_OptimizeMode_CODE_SIZE;
+    FileOptions_OptimizeMode::CODE_SIZE;
   static constexpr OptimizeMode LITE_RUNTIME =
-    FileOptions_OptimizeMode_LITE_RUNTIME;
+    FileOptions_OptimizeMode::LITE_RUNTIME;
   static inline bool OptimizeMode_IsValid(int value) {
     return FileOptions_OptimizeMode_IsValid(value);
   }
@@ -4697,11 +4835,11 @@ class SHARK_EXPORT FieldOptions final :
 
   typedef FieldOptions_CType CType;
   static constexpr CType STRING =
-    FieldOptions_CType_STRING;
+    FieldOptions_CType::STRING;
   static constexpr CType CORD =
-    FieldOptions_CType_CORD;
+    FieldOptions_CType::CORD;
   static constexpr CType STRING_PIECE =
-    FieldOptions_CType_STRING_PIECE;
+    FieldOptions_CType::STRING_PIECE;
   static inline bool CType_IsValid(int value) {
     return FieldOptions_CType_IsValid(value);
   }
@@ -4729,11 +4867,11 @@ class SHARK_EXPORT FieldOptions final :
 
   typedef FieldOptions_JSType JSType;
   static constexpr JSType JS_NORMAL =
-    FieldOptions_JSType_JS_NORMAL;
+    FieldOptions_JSType::JS_NORMAL;
   static constexpr JSType JS_STRING =
-    FieldOptions_JSType_JS_STRING;
+    FieldOptions_JSType::JS_STRING;
   static constexpr JSType JS_NUMBER =
-    FieldOptions_JSType_JS_NUMBER;
+    FieldOptions_JSType::JS_NUMBER;
   static inline bool JSType_IsValid(int value) {
     return FieldOptions_JSType_IsValid(value);
   }
@@ -5583,6 +5721,8 @@ class SHARK_EXPORT EnumOptions final :
     kUninterpretedOptionFieldNumber = 999,
     kAllowAliasFieldNumber = 2,
     kDeprecatedFieldNumber = 3,
+    kEnableOperatorFieldNumber = 6,
+    kUnderlyingTypeFieldNumber = 7,
   };
   // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   int uninterpreted_option_size() const;
@@ -5626,6 +5766,32 @@ class SHARK_EXPORT EnumOptions final :
   private:
   bool _internal_deprecated() const;
   void _internal_set_deprecated(bool value);
+  public:
+
+  // optional bool enable_operator = 6 [default = false];
+  bool has_enable_operator() const;
+  private:
+  bool _internal_has_enable_operator() const;
+  public:
+  void clear_enable_operator();
+  bool enable_operator() const;
+  void set_enable_operator(bool value);
+  private:
+  bool _internal_enable_operator() const;
+  void _internal_set_enable_operator(bool value);
+  public:
+
+  // optional .shark.EnumUnderlyingType underlying_type = 7;
+  bool has_underlying_type() const;
+  private:
+  bool _internal_has_underlying_type() const;
+  public:
+  void clear_underlying_type();
+  ::shark::EnumUnderlyingType underlying_type() const;
+  void set_underlying_type(::shark::EnumUnderlyingType value);
+  private:
+  ::shark::EnumUnderlyingType _internal_underlying_type() const;
+  void _internal_set_underlying_type(::shark::EnumUnderlyingType value);
   public:
 
 
@@ -5833,6 +5999,8 @@ class SHARK_EXPORT EnumOptions final :
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::UninterpretedOption > uninterpreted_option_;
     bool allow_alias_;
     bool deprecated_;
+    bool enable_operator_;
+    int underlying_type_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2fdescriptor_2eshark;
@@ -6710,11 +6878,11 @@ class SHARK_EXPORT MethodOptions final :
 
   typedef MethodOptions_IdempotencyLevel IdempotencyLevel;
   static constexpr IdempotencyLevel IDEMPOTENCY_UNKNOWN =
-    MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN;
+    MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
   static constexpr IdempotencyLevel NO_SIDE_EFFECTS =
-    MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS;
+    MethodOptions_IdempotencyLevel::NO_SIDE_EFFECTS;
   static constexpr IdempotencyLevel IDEMPOTENT =
-    MethodOptions_IdempotencyLevel_IDEMPOTENT;
+    MethodOptions_IdempotencyLevel::IDEMPOTENT;
   static inline bool IdempotencyLevel_IsValid(int value) {
     return MethodOptions_IdempotencyLevel_IsValid(value);
   }
@@ -9920,16 +10088,15 @@ inline void FieldDescriptorProto::clear_label() {
   _impl_._has_bits_[0] &= ~0x00000200u;
 }
 inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::_internal_label() const {
-  return static_cast< ::shark::FieldDescriptorProto_Label >(_impl_.label_);
+  return static_cast<::shark::FieldDescriptorProto_Label>(static_cast<int32_t>(_impl_.label_));
 }
 inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::label() const {
   // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.label)
   return _internal_label();
 }
 inline void FieldDescriptorProto::_internal_set_label(::shark::FieldDescriptorProto_Label value) {
-  assert(::shark::FieldDescriptorProto_Label_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000200u;
-  _impl_.label_ = value;
+  _impl_.label_ = static_cast<int>(::shark::FieldDescriptorProto_Label_to_underlying(value));
 }
 inline void FieldDescriptorProto::set_label(::shark::FieldDescriptorProto_Label value) {
   _internal_set_label(value);
@@ -9949,16 +10116,15 @@ inline void FieldDescriptorProto::clear_type() {
   _impl_._has_bits_[0] &= ~0x00000400u;
 }
 inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::_internal_type() const {
-  return static_cast< ::shark::FieldDescriptorProto_Type >(_impl_.type_);
+  return static_cast<::shark::FieldDescriptorProto_Type>(static_cast<int32_t>(_impl_.type_));
 }
 inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::type() const {
   // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.type)
   return _internal_type();
 }
 inline void FieldDescriptorProto::_internal_set_type(::shark::FieldDescriptorProto_Type value) {
-  assert(::shark::FieldDescriptorProto_Type_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000400u;
-  _impl_.type_ = value;
+  _impl_.type_ = static_cast<int>(::shark::FieldDescriptorProto_Type_to_underlying(value));
 }
 inline void FieldDescriptorProto::set_type(::shark::FieldDescriptorProto_Type value) {
   _internal_set_type(value);
@@ -11685,16 +11851,15 @@ inline void FileOptions::clear_optimize_for() {
   _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline ::shark::FileOptions_OptimizeMode FileOptions::_internal_optimize_for() const {
-  return static_cast< ::shark::FileOptions_OptimizeMode >(_impl_.optimize_for_);
+  return static_cast<::shark::FileOptions_OptimizeMode>(static_cast<int32_t>(_impl_.optimize_for_));
 }
 inline ::shark::FileOptions_OptimizeMode FileOptions::optimize_for() const {
   // @@protoc_insertion_point(field_get:shark.FileOptions.optimize_for)
   return _internal_optimize_for();
 }
 inline void FileOptions::_internal_set_optimize_for(::shark::FileOptions_OptimizeMode value) {
-  assert(::shark::FileOptions_OptimizeMode_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.optimize_for_ = value;
+  _impl_.optimize_for_ = static_cast<int>(::shark::FileOptions_OptimizeMode_to_underlying(value));
 }
 inline void FileOptions::set_optimize_for(::shark::FileOptions_OptimizeMode value) {
   _internal_set_optimize_for(value);
@@ -12094,16 +12259,15 @@ inline void FieldOptions::clear_ctype() {
   _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline ::shark::FieldOptions_CType FieldOptions::_internal_ctype() const {
-  return static_cast< ::shark::FieldOptions_CType >(_impl_.ctype_);
+  return static_cast<::shark::FieldOptions_CType>(static_cast<int32_t>(_impl_.ctype_));
 }
 inline ::shark::FieldOptions_CType FieldOptions::ctype() const {
   // @@protoc_insertion_point(field_get:shark.FieldOptions.ctype)
   return _internal_ctype();
 }
 inline void FieldOptions::_internal_set_ctype(::shark::FieldOptions_CType value) {
-  assert(::shark::FieldOptions_CType_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.ctype_ = value;
+  _impl_.ctype_ = static_cast<int>(::shark::FieldOptions_CType_to_underlying(value));
 }
 inline void FieldOptions::set_ctype(::shark::FieldOptions_CType value) {
   _internal_set_ctype(value);
@@ -12151,16 +12315,15 @@ inline void FieldOptions::clear_jstype() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline ::shark::FieldOptions_JSType FieldOptions::_internal_jstype() const {
-  return static_cast< ::shark::FieldOptions_JSType >(_impl_.jstype_);
+  return static_cast<::shark::FieldOptions_JSType>(static_cast<int32_t>(_impl_.jstype_));
 }
 inline ::shark::FieldOptions_JSType FieldOptions::jstype() const {
   // @@protoc_insertion_point(field_get:shark.FieldOptions.jstype)
   return _internal_jstype();
 }
 inline void FieldOptions::_internal_set_jstype(::shark::FieldOptions_JSType value) {
-  assert(::shark::FieldOptions_JSType_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.jstype_ = value;
+  _impl_.jstype_ = static_cast<int>(::shark::FieldOptions_JSType_to_underlying(value));
 }
 inline void FieldOptions::set_jstype(::shark::FieldOptions_JSType value) {
   _internal_set_jstype(value);
@@ -12423,6 +12586,62 @@ inline void EnumOptions::set_deprecated(bool value) {
   // @@protoc_insertion_point(field_set:shark.EnumOptions.deprecated)
 }
 
+// optional bool enable_operator = 6 [default = false];
+inline bool EnumOptions::_internal_has_enable_operator() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool EnumOptions::has_enable_operator() const {
+  return _internal_has_enable_operator();
+}
+inline void EnumOptions::clear_enable_operator() {
+  _impl_.enable_operator_ = false;
+  _impl_._has_bits_[0] &= ~0x00000004u;
+}
+inline bool EnumOptions::_internal_enable_operator() const {
+  return _impl_.enable_operator_;
+}
+inline bool EnumOptions::enable_operator() const {
+  // @@protoc_insertion_point(field_get:shark.EnumOptions.enable_operator)
+  return _internal_enable_operator();
+}
+inline void EnumOptions::_internal_set_enable_operator(bool value) {
+  _impl_._has_bits_[0] |= 0x00000004u;
+  _impl_.enable_operator_ = value;
+}
+inline void EnumOptions::set_enable_operator(bool value) {
+  _internal_set_enable_operator(value);
+  // @@protoc_insertion_point(field_set:shark.EnumOptions.enable_operator)
+}
+
+// optional .shark.EnumUnderlyingType underlying_type = 7;
+inline bool EnumOptions::_internal_has_underlying_type() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline bool EnumOptions::has_underlying_type() const {
+  return _internal_has_underlying_type();
+}
+inline void EnumOptions::clear_underlying_type() {
+  _impl_.underlying_type_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000008u;
+}
+inline ::shark::EnumUnderlyingType EnumOptions::_internal_underlying_type() const {
+  return static_cast<::shark::EnumUnderlyingType>(static_cast<int32_t>(_impl_.underlying_type_));
+}
+inline ::shark::EnumUnderlyingType EnumOptions::underlying_type() const {
+  // @@protoc_insertion_point(field_get:shark.EnumOptions.underlying_type)
+  return _internal_underlying_type();
+}
+inline void EnumOptions::_internal_set_underlying_type(::shark::EnumUnderlyingType value) {
+  _impl_._has_bits_[0] |= 0x00000008u;
+  _impl_.underlying_type_ = static_cast<int>(::shark::EnumUnderlyingType_to_underlying(value));
+}
+inline void EnumOptions::set_underlying_type(::shark::EnumUnderlyingType value) {
+  _internal_set_underlying_type(value);
+  // @@protoc_insertion_point(field_set:shark.EnumOptions.underlying_type)
+}
+
 // repeated .shark.UninterpretedOption uninterpreted_option = 999;
 inline int EnumOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
@@ -12652,16 +12871,15 @@ inline void MethodOptions::clear_idempotency_level() {
   _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline ::shark::MethodOptions_IdempotencyLevel MethodOptions::_internal_idempotency_level() const {
-  return static_cast< ::shark::MethodOptions_IdempotencyLevel >(_impl_.idempotency_level_);
+  return static_cast<::shark::MethodOptions_IdempotencyLevel>(static_cast<int32_t>(_impl_.idempotency_level_));
 }
 inline ::shark::MethodOptions_IdempotencyLevel MethodOptions::idempotency_level() const {
   // @@protoc_insertion_point(field_get:shark.MethodOptions.idempotency_level)
   return _internal_idempotency_level();
 }
 inline void MethodOptions::_internal_set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value) {
-  assert(::shark::MethodOptions_IdempotencyLevel_IsValid(value));
   _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.idempotency_level_ = value;
+  _impl_.idempotency_level_ = static_cast<int>(::shark::MethodOptions_IdempotencyLevel_to_underlying(value));
 }
 inline void MethodOptions::set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value) {
   _internal_set_idempotency_level(value);
@@ -13803,6 +14021,11 @@ template <> struct is_proto_enum< ::shark::MethodOptions_IdempotencyLevel> : ::s
 template <>
 inline const EnumDescriptor* GetEnumDescriptor< ::shark::MethodOptions_IdempotencyLevel>() {
   return ::shark::MethodOptions_IdempotencyLevel_descriptor();
+}
+template <> struct is_proto_enum< ::shark::EnumUnderlyingType> : ::std::true_type {};
+template <>
+inline const EnumDescriptor* GetEnumDescriptor< ::shark::EnumUnderlyingType>() {
+  return ::shark::EnumUnderlyingType_descriptor();
 }
 
 SHARK_NAMESPACE_CLOSE

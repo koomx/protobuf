@@ -56,7 +56,7 @@
 #include <shark/repeated_field.h>
 #include <tests/test_util.h>
 #include <shark/unknown_field_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 
 // Must be included last

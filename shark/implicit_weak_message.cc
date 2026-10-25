@@ -32,7 +32,7 @@
 
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/parse_context.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

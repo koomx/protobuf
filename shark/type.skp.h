@@ -72,33 +72,59 @@ template<> ::shark::Type* Arena::CreateMaybeMessage<::shark::Type>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
-enum Field_Kind : int {
-  Field_Kind_TYPE_UNKNOWN = 0,
-  Field_Kind_TYPE_DOUBLE = 1,
-  Field_Kind_TYPE_FLOAT = 2,
-  Field_Kind_TYPE_INT64 = 3,
-  Field_Kind_TYPE_UINT64 = 4,
-  Field_Kind_TYPE_INT32 = 5,
-  Field_Kind_TYPE_FIXED64 = 6,
-  Field_Kind_TYPE_FIXED32 = 7,
-  Field_Kind_TYPE_BOOL = 8,
-  Field_Kind_TYPE_STRING = 9,
-  Field_Kind_TYPE_GROUP = 10,
-  Field_Kind_TYPE_MESSAGE = 11,
-  Field_Kind_TYPE_BYTES = 12,
-  Field_Kind_TYPE_UINT32 = 13,
-  Field_Kind_TYPE_ENUM = 14,
-  Field_Kind_TYPE_SFIXED32 = 15,
-  Field_Kind_TYPE_SFIXED64 = 16,
-  Field_Kind_TYPE_SINT32 = 17,
-  Field_Kind_TYPE_SINT64 = 18,
-  Field_Kind_Field_Kind_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  Field_Kind_Field_Kind_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+enum class Field_Kind : int32_t {
+  TYPE_UNKNOWN = 0,
+  TYPE_DOUBLE = 1,
+  TYPE_FLOAT = 2,
+  TYPE_INT64 = 3,
+  TYPE_UINT64 = 4,
+  TYPE_INT32 = 5,
+  TYPE_FIXED64 = 6,
+  TYPE_FIXED32 = 7,
+  TYPE_BOOL = 8,
+  TYPE_STRING = 9,
+  TYPE_GROUP = 10,
+  TYPE_MESSAGE = 11,
+  TYPE_BYTES = 12,
+  TYPE_UINT32 = 13,
+  TYPE_ENUM = 14,
+  TYPE_SFIXED32 = 15,
+  TYPE_SFIXED64 = 16,
+  TYPE_SINT32 = 17,
+  TYPE_SINT64 = 18
 };
+constexpr Field_Kind Field_Kind_TYPE_UNKNOWN = Field_Kind::TYPE_UNKNOWN;
+constexpr Field_Kind Field_Kind_TYPE_DOUBLE = Field_Kind::TYPE_DOUBLE;
+constexpr Field_Kind Field_Kind_TYPE_FLOAT = Field_Kind::TYPE_FLOAT;
+constexpr Field_Kind Field_Kind_TYPE_INT64 = Field_Kind::TYPE_INT64;
+constexpr Field_Kind Field_Kind_TYPE_UINT64 = Field_Kind::TYPE_UINT64;
+constexpr Field_Kind Field_Kind_TYPE_INT32 = Field_Kind::TYPE_INT32;
+constexpr Field_Kind Field_Kind_TYPE_FIXED64 = Field_Kind::TYPE_FIXED64;
+constexpr Field_Kind Field_Kind_TYPE_FIXED32 = Field_Kind::TYPE_FIXED32;
+constexpr Field_Kind Field_Kind_TYPE_BOOL = Field_Kind::TYPE_BOOL;
+constexpr Field_Kind Field_Kind_TYPE_STRING = Field_Kind::TYPE_STRING;
+constexpr Field_Kind Field_Kind_TYPE_GROUP = Field_Kind::TYPE_GROUP;
+constexpr Field_Kind Field_Kind_TYPE_MESSAGE = Field_Kind::TYPE_MESSAGE;
+constexpr Field_Kind Field_Kind_TYPE_BYTES = Field_Kind::TYPE_BYTES;
+constexpr Field_Kind Field_Kind_TYPE_UINT32 = Field_Kind::TYPE_UINT32;
+constexpr Field_Kind Field_Kind_TYPE_ENUM = Field_Kind::TYPE_ENUM;
+constexpr Field_Kind Field_Kind_TYPE_SFIXED32 = Field_Kind::TYPE_SFIXED32;
+constexpr Field_Kind Field_Kind_TYPE_SFIXED64 = Field_Kind::TYPE_SFIXED64;
+constexpr Field_Kind Field_Kind_TYPE_SINT32 = Field_Kind::TYPE_SINT32;
+constexpr Field_Kind Field_Kind_TYPE_SINT64 = Field_Kind::TYPE_SINT64;
+constexpr int32_t Field_Kind_to_underlying(Field_Kind value) {
+  return static_cast<int32_t>(value);
+}
+inline bool Field_Kind_FitsUnderlying(int value) {
+  return true;
+}
+inline bool Field_Kind_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Kind_FitsUnderlying(static_cast<int>(value));
+}
 bool Field_Kind_IsValid(int value);
-constexpr Field_Kind Field_Kind_Kind_MIN = Field_Kind_TYPE_UNKNOWN;
-constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind_TYPE_SINT64;
-constexpr int Field_Kind_Kind_ARRAYSIZE = Field_Kind_Kind_MAX + 1;
+constexpr Field_Kind Field_Kind_Kind_MIN = Field_Kind::TYPE_UNKNOWN;
+constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind::TYPE_SINT64;
+constexpr int Field_Kind_Kind_ARRAYSIZE = Field_Kind_to_underlying(Field_Kind_Kind_MAX) + 1;
 
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor();
 template<typename T>
@@ -107,25 +133,37 @@ inline const std::string& Field_Kind_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function Field_Kind_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    Field_Kind_descriptor(), enum_t_value);
+    Field_Kind_descriptor(),
+    Field_Kind_to_underlying(static_cast<Field_Kind>(enum_t_value)));
 }
 inline bool Field_Kind_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Kind* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<Field_Kind>(
     Field_Kind_descriptor(), name, value);
 }
-enum Field_Cardinality : int {
-  Field_Cardinality_CARDINALITY_UNKNOWN = 0,
-  Field_Cardinality_CARDINALITY_OPTIONAL = 1,
-  Field_Cardinality_CARDINALITY_REQUIRED = 2,
-  Field_Cardinality_CARDINALITY_REPEATED = 3,
-  Field_Cardinality_Field_Cardinality_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  Field_Cardinality_Field_Cardinality_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+enum class Field_Cardinality : int32_t {
+  CARDINALITY_UNKNOWN = 0,
+  CARDINALITY_OPTIONAL = 1,
+  CARDINALITY_REQUIRED = 2,
+  CARDINALITY_REPEATED = 3
 };
+constexpr Field_Cardinality Field_Cardinality_CARDINALITY_UNKNOWN = Field_Cardinality::CARDINALITY_UNKNOWN;
+constexpr Field_Cardinality Field_Cardinality_CARDINALITY_OPTIONAL = Field_Cardinality::CARDINALITY_OPTIONAL;
+constexpr Field_Cardinality Field_Cardinality_CARDINALITY_REQUIRED = Field_Cardinality::CARDINALITY_REQUIRED;
+constexpr Field_Cardinality Field_Cardinality_CARDINALITY_REPEATED = Field_Cardinality::CARDINALITY_REPEATED;
+constexpr int32_t Field_Cardinality_to_underlying(Field_Cardinality value) {
+  return static_cast<int32_t>(value);
+}
+inline bool Field_Cardinality_FitsUnderlying(int value) {
+  return true;
+}
+inline bool Field_Cardinality_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Cardinality_FitsUnderlying(static_cast<int>(value));
+}
 bool Field_Cardinality_IsValid(int value);
-constexpr Field_Cardinality Field_Cardinality_Cardinality_MIN = Field_Cardinality_CARDINALITY_UNKNOWN;
-constexpr Field_Cardinality Field_Cardinality_Cardinality_MAX = Field_Cardinality_CARDINALITY_REPEATED;
-constexpr int Field_Cardinality_Cardinality_ARRAYSIZE = Field_Cardinality_Cardinality_MAX + 1;
+constexpr Field_Cardinality Field_Cardinality_Cardinality_MIN = Field_Cardinality::CARDINALITY_UNKNOWN;
+constexpr Field_Cardinality Field_Cardinality_Cardinality_MAX = Field_Cardinality::CARDINALITY_REPEATED;
+constexpr int Field_Cardinality_Cardinality_ARRAYSIZE = Field_Cardinality_to_underlying(Field_Cardinality_Cardinality_MAX) + 1;
 
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor();
 template<typename T>
@@ -134,23 +172,33 @@ inline const std::string& Field_Cardinality_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function Field_Cardinality_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    Field_Cardinality_descriptor(), enum_t_value);
+    Field_Cardinality_descriptor(),
+    Field_Cardinality_to_underlying(static_cast<Field_Cardinality>(enum_t_value)));
 }
 inline bool Field_Cardinality_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Cardinality* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<Field_Cardinality>(
     Field_Cardinality_descriptor(), name, value);
 }
-enum Syntax : int {
+enum class Syntax : int32_t {
   SYNTAX_PROTO2 = 0,
-  SYNTAX_PROTO3 = 1,
-  Syntax_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  Syntax_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+  SYNTAX_PROTO3 = 1
 };
+constexpr Syntax SYNTAX_PROTO2 = Syntax::SYNTAX_PROTO2;
+constexpr Syntax SYNTAX_PROTO3 = Syntax::SYNTAX_PROTO3;
+constexpr int32_t Syntax_to_underlying(Syntax value) {
+  return static_cast<int32_t>(value);
+}
+inline bool Syntax_FitsUnderlying(int value) {
+  return true;
+}
+inline bool Syntax_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Syntax_FitsUnderlying(static_cast<int>(value));
+}
 bool Syntax_IsValid(int value);
-constexpr Syntax Syntax_MIN = SYNTAX_PROTO2;
-constexpr Syntax Syntax_MAX = SYNTAX_PROTO3;
-constexpr int Syntax_ARRAYSIZE = Syntax_MAX + 1;
+constexpr Syntax Syntax_MIN = Syntax::SYNTAX_PROTO2;
+constexpr Syntax Syntax_MAX = Syntax::SYNTAX_PROTO3;
+constexpr int Syntax_ARRAYSIZE = Syntax_to_underlying(Syntax_MAX) + 1;
 
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor();
 template<typename T>
@@ -159,7 +207,8 @@ inline const std::string& Syntax_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function Syntax_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    Syntax_descriptor(), enum_t_value);
+    Syntax_descriptor(),
+    Syntax_to_underlying(static_cast<Syntax>(enum_t_value)));
 }
 inline bool Syntax_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, Syntax* value) {
@@ -538,43 +587,43 @@ class Field final :
 
   typedef Field_Kind Kind;
   static constexpr Kind TYPE_UNKNOWN =
-    Field_Kind_TYPE_UNKNOWN;
+    Field_Kind::TYPE_UNKNOWN;
   static constexpr Kind TYPE_DOUBLE =
-    Field_Kind_TYPE_DOUBLE;
+    Field_Kind::TYPE_DOUBLE;
   static constexpr Kind TYPE_FLOAT =
-    Field_Kind_TYPE_FLOAT;
+    Field_Kind::TYPE_FLOAT;
   static constexpr Kind TYPE_INT64 =
-    Field_Kind_TYPE_INT64;
+    Field_Kind::TYPE_INT64;
   static constexpr Kind TYPE_UINT64 =
-    Field_Kind_TYPE_UINT64;
+    Field_Kind::TYPE_UINT64;
   static constexpr Kind TYPE_INT32 =
-    Field_Kind_TYPE_INT32;
+    Field_Kind::TYPE_INT32;
   static constexpr Kind TYPE_FIXED64 =
-    Field_Kind_TYPE_FIXED64;
+    Field_Kind::TYPE_FIXED64;
   static constexpr Kind TYPE_FIXED32 =
-    Field_Kind_TYPE_FIXED32;
+    Field_Kind::TYPE_FIXED32;
   static constexpr Kind TYPE_BOOL =
-    Field_Kind_TYPE_BOOL;
+    Field_Kind::TYPE_BOOL;
   static constexpr Kind TYPE_STRING =
-    Field_Kind_TYPE_STRING;
+    Field_Kind::TYPE_STRING;
   static constexpr Kind TYPE_GROUP =
-    Field_Kind_TYPE_GROUP;
+    Field_Kind::TYPE_GROUP;
   static constexpr Kind TYPE_MESSAGE =
-    Field_Kind_TYPE_MESSAGE;
+    Field_Kind::TYPE_MESSAGE;
   static constexpr Kind TYPE_BYTES =
-    Field_Kind_TYPE_BYTES;
+    Field_Kind::TYPE_BYTES;
   static constexpr Kind TYPE_UINT32 =
-    Field_Kind_TYPE_UINT32;
+    Field_Kind::TYPE_UINT32;
   static constexpr Kind TYPE_ENUM =
-    Field_Kind_TYPE_ENUM;
+    Field_Kind::TYPE_ENUM;
   static constexpr Kind TYPE_SFIXED32 =
-    Field_Kind_TYPE_SFIXED32;
+    Field_Kind::TYPE_SFIXED32;
   static constexpr Kind TYPE_SFIXED64 =
-    Field_Kind_TYPE_SFIXED64;
+    Field_Kind::TYPE_SFIXED64;
   static constexpr Kind TYPE_SINT32 =
-    Field_Kind_TYPE_SINT32;
+    Field_Kind::TYPE_SINT32;
   static constexpr Kind TYPE_SINT64 =
-    Field_Kind_TYPE_SINT64;
+    Field_Kind::TYPE_SINT64;
   static inline bool Kind_IsValid(int value) {
     return Field_Kind_IsValid(value);
   }
@@ -602,13 +651,13 @@ class Field final :
 
   typedef Field_Cardinality Cardinality;
   static constexpr Cardinality CARDINALITY_UNKNOWN =
-    Field_Cardinality_CARDINALITY_UNKNOWN;
+    Field_Cardinality::CARDINALITY_UNKNOWN;
   static constexpr Cardinality CARDINALITY_OPTIONAL =
-    Field_Cardinality_CARDINALITY_OPTIONAL;
+    Field_Cardinality::CARDINALITY_OPTIONAL;
   static constexpr Cardinality CARDINALITY_REQUIRED =
-    Field_Cardinality_CARDINALITY_REQUIRED;
+    Field_Cardinality::CARDINALITY_REQUIRED;
   static constexpr Cardinality CARDINALITY_REPEATED =
-    Field_Cardinality_CARDINALITY_REPEATED;
+    Field_Cardinality::CARDINALITY_REPEATED;
   static inline bool Cardinality_IsValid(int value) {
     return Field_Cardinality_IsValid(value);
   }
@@ -1677,7 +1726,7 @@ inline void Type::clear_syntax() {
   _impl_.syntax_ = 0;
 }
 inline ::shark::Syntax Type::_internal_syntax() const {
-  return static_cast< ::shark::Syntax >(_impl_.syntax_);
+  return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
 }
 inline ::shark::Syntax Type::syntax() const {
   // @@protoc_insertion_point(field_get:shark.Type.syntax)
@@ -1685,7 +1734,7 @@ inline ::shark::Syntax Type::syntax() const {
 }
 inline void Type::_internal_set_syntax(::shark::Syntax value) {
   
-  _impl_.syntax_ = value;
+  _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
 }
 inline void Type::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
@@ -1701,7 +1750,7 @@ inline void Field::clear_kind() {
   _impl_.kind_ = 0;
 }
 inline ::shark::Field_Kind Field::_internal_kind() const {
-  return static_cast< ::shark::Field_Kind >(_impl_.kind_);
+  return static_cast<::shark::Field_Kind>(static_cast<int32_t>(_impl_.kind_));
 }
 inline ::shark::Field_Kind Field::kind() const {
   // @@protoc_insertion_point(field_get:shark.Field.kind)
@@ -1709,7 +1758,7 @@ inline ::shark::Field_Kind Field::kind() const {
 }
 inline void Field::_internal_set_kind(::shark::Field_Kind value) {
   
-  _impl_.kind_ = value;
+  _impl_.kind_ = static_cast<int>(::shark::Field_Kind_to_underlying(value));
 }
 inline void Field::set_kind(::shark::Field_Kind value) {
   _internal_set_kind(value);
@@ -1721,7 +1770,7 @@ inline void Field::clear_cardinality() {
   _impl_.cardinality_ = 0;
 }
 inline ::shark::Field_Cardinality Field::_internal_cardinality() const {
-  return static_cast< ::shark::Field_Cardinality >(_impl_.cardinality_);
+  return static_cast<::shark::Field_Cardinality>(static_cast<int32_t>(_impl_.cardinality_));
 }
 inline ::shark::Field_Cardinality Field::cardinality() const {
   // @@protoc_insertion_point(field_get:shark.Field.cardinality)
@@ -1729,7 +1778,7 @@ inline ::shark::Field_Cardinality Field::cardinality() const {
 }
 inline void Field::_internal_set_cardinality(::shark::Field_Cardinality value) {
   
-  _impl_.cardinality_ = value;
+  _impl_.cardinality_ = static_cast<int>(::shark::Field_Cardinality_to_underlying(value));
 }
 inline void Field::set_cardinality(::shark::Field_Cardinality value) {
   _internal_set_cardinality(value);
@@ -2260,7 +2309,7 @@ inline void Enum::clear_syntax() {
   _impl_.syntax_ = 0;
 }
 inline ::shark::Syntax Enum::_internal_syntax() const {
-  return static_cast< ::shark::Syntax >(_impl_.syntax_);
+  return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
 }
 inline ::shark::Syntax Enum::syntax() const {
   // @@protoc_insertion_point(field_get:shark.Enum.syntax)
@@ -2268,7 +2317,7 @@ inline ::shark::Syntax Enum::syntax() const {
 }
 inline void Enum::_internal_set_syntax(::shark::Syntax value) {
   
-  _impl_.syntax_ = value;
+  _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
 }
 inline void Enum::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);

@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 
 #include <tests/unittest.skp.h>
 #include <tests/unittest_mset.skp.h>

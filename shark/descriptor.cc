@@ -5575,9 +5575,9 @@ void DescriptorBuilder::BuildFieldOrExtension(const FieldDescriptorProto& proto,
   // Some compilers do not allow static_cast directly between two enum types,
   // so we must cast to int first.
   result->type_ = static_cast<FieldDescriptor::Type>(
-      implicit_cast<int>(proto.type()));
+      FieldDescriptorProto_Type_to_underlying(proto.type()));
   result->label_ = static_cast<FieldDescriptor::Label>(
-      implicit_cast<int>(proto.label()));
+      FieldDescriptorProto_Label_to_underlying(proto.label()));
 
   if (result->label_ == FieldDescriptor::LABEL_REQUIRED) {
     // An extension cannot have a required field (b/13365836).
@@ -7249,7 +7249,9 @@ void DescriptorBuilder::ValidateJSType(FieldDescriptor* field,
       AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                "Illegal jstype for int64, uint64, sint64, fixed64 "
                "or sfixed64 field: " +
-                   FieldOptions_JSType_descriptor()->value(jstype)->name());
+                   FieldOptions_JSType_descriptor()
+                       ->value(FieldOptions_JSType_to_underlying(jstype))
+                       ->name());
       break;
 
     // No other types permit a jstype option.

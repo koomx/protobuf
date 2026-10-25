@@ -46,7 +46,7 @@
 #include <shark/dynamic_message.h>
 #include <shark/extension_set.h>
 #include <shark/text_format.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/test_util.h>
@@ -1306,9 +1306,11 @@ TEST(ExtensionSetTest, DynamicExtensions) {
       "54321: \"unknown\"\n",
       message_text);
 
-  // Can we serialize it?
-  EXPECT_TRUE(
-      EqualsToSerialized(dynamic_extension, message.SerializeAsString()));
+  // Can we serialize it? Byte-compare: reparsing into TestDynamicExtensions
+  // keeps 12345 in the enum field, so MessageDifferencer no longer matches
+  // the original object that stored it as an unknown varint.
+  EXPECT_EQ(dynamic_extension.SerializeAsString(),
+            message.SerializeAsString());
 
   // What if we parse using the reflection-based parser?
   {

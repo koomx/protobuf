@@ -47,7 +47,7 @@
 #include <shark/message.h>
 #include <shark/metadata_lite.h>
 #include <shark/parse_context.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

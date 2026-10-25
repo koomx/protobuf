@@ -51,7 +51,7 @@
 #include <shark/descriptor.h>
 #include <shark/stubs/mutex.h>
 #include <shark/text_format.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <gmock/gmock.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
@@ -472,11 +472,14 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
   {
     TestEmptyMessage empty_message;
     UnknownFieldSet* unknown_fields = empty_message.mutable_unknown_fields();
-    unknown_fields->AddVarint(singular_field->number(), TestAllTypes::BAR);
+    unknown_fields->AddVarint(singular_field->number(),
+                              static_cast<uint64_t>(TestAllTypes::BAR));
     unknown_fields->AddVarint(singular_field->number(), 5);  // not valid
-    unknown_fields->AddVarint(repeated_field->number(), TestAllTypes::FOO);
+    unknown_fields->AddVarint(repeated_field->number(),
+                              static_cast<uint64_t>(TestAllTypes::FOO));
     unknown_fields->AddVarint(repeated_field->number(), 4);  // not valid
-    unknown_fields->AddVarint(repeated_field->number(), TestAllTypes::BAZ);
+    unknown_fields->AddVarint(repeated_field->number(),
+                              static_cast<uint64_t>(TestAllTypes::BAZ));
     unknown_fields->AddVarint(repeated_field->number(), 6);  // not valid
     empty_message.SerializeToString(&data);
   }
@@ -484,25 +487,15 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
   {
     TestAllTypes message;
     ASSERT_TRUE(message.ParseFromString(data));
-    EXPECT_EQ(TestAllTypes::BAR, message.optional_nested_enum());
-    ASSERT_EQ(2, message.repeated_nested_enum_size());
+    EXPECT_EQ(5, message.optional_nested_enum());
+    ASSERT_EQ(4, message.repeated_nested_enum_size());
     EXPECT_EQ(TestAllTypes::FOO, message.repeated_nested_enum(0));
-    EXPECT_EQ(TestAllTypes::BAZ, message.repeated_nested_enum(1));
+    EXPECT_EQ(4, message.repeated_nested_enum(1));
+    EXPECT_EQ(TestAllTypes::BAZ, message.repeated_nested_enum(2));
+    EXPECT_EQ(6, message.repeated_nested_enum(3));
 
     const UnknownFieldSet& unknown_fields = message.unknown_fields();
-    ASSERT_EQ(3, unknown_fields.field_count());
-
-    EXPECT_EQ(singular_field->number(), unknown_fields.field(0).number());
-    ASSERT_EQ(UnknownField::TYPE_VARINT, unknown_fields.field(0).type());
-    EXPECT_EQ(5, unknown_fields.field(0).varint());
-
-    EXPECT_EQ(repeated_field->number(), unknown_fields.field(1).number());
-    ASSERT_EQ(UnknownField::TYPE_VARINT, unknown_fields.field(1).type());
-    EXPECT_EQ(4, unknown_fields.field(1).varint());
-
-    EXPECT_EQ(repeated_field->number(), unknown_fields.field(2).number());
-    ASSERT_EQ(UnknownField::TYPE_VARINT, unknown_fields.field(2).type());
-    EXPECT_EQ(6, unknown_fields.field(2).varint());
+    ASSERT_EQ(0, unknown_fields.field_count());
   }
 
   {
@@ -511,28 +504,17 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
 
     TestAllExtensions message;
     ASSERT_TRUE(message.ParseFromString(data));
-    EXPECT_EQ(TestAllTypes::BAR,
-              message.GetExtension(optional_nested_enum_extension));
-    ASSERT_EQ(2, message.ExtensionSize(repeated_nested_enum_extension));
+    EXPECT_EQ(5, message.GetExtension(optional_nested_enum_extension));
+    ASSERT_EQ(4, message.ExtensionSize(repeated_nested_enum_extension));
     EXPECT_EQ(TestAllTypes::FOO,
               message.GetExtension(repeated_nested_enum_extension, 0));
+    EXPECT_EQ(4, message.GetExtension(repeated_nested_enum_extension, 1));
     EXPECT_EQ(TestAllTypes::BAZ,
-              message.GetExtension(repeated_nested_enum_extension, 1));
+              message.GetExtension(repeated_nested_enum_extension, 2));
+    EXPECT_EQ(6, message.GetExtension(repeated_nested_enum_extension, 3));
 
     const UnknownFieldSet& unknown_fields = message.unknown_fields();
-    ASSERT_EQ(3, unknown_fields.field_count());
-
-    EXPECT_EQ(singular_field->number(), unknown_fields.field(0).number());
-    ASSERT_EQ(UnknownField::TYPE_VARINT, unknown_fields.field(0).type());
-    EXPECT_EQ(5, unknown_fields.field(0).varint());
-
-    EXPECT_EQ(repeated_field->number(), unknown_fields.field(1).number());
-    ASSERT_EQ(UnknownField::TYPE_VARINT, unknown_fields.field(1).type());
-    EXPECT_EQ(4, unknown_fields.field(1).varint());
-
-    EXPECT_EQ(repeated_field->number(), unknown_fields.field(2).number());
-    ASSERT_EQ(UnknownField::TYPE_VARINT, unknown_fields.field(2).type());
-    EXPECT_EQ(6, unknown_fields.field(2).varint());
+    ASSERT_EQ(0, unknown_fields.field_count());
   }
 }
 

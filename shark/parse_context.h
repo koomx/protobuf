@@ -46,7 +46,7 @@
 #include <shark/inlined_string_field.h>
 #include <shark/metadata_lite.h>
 #include <shark/repeated_field.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

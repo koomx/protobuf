@@ -7,11 +7,11 @@
 
 #include <shark/io/coded_stream.h>
 #include <shark/extension_set.h>
-#include <shark/wire_format_lite.h>
+#include <shark/format/wired/wire_format_lite.h>
 #include <shark/descriptor.h>
 #include <shark/generated_message_reflection.h>
 #include <shark/reflection_ops.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 
@@ -333,7 +333,9 @@ constexpr EnumOptions::EnumOptions(
   , /*decltype(_impl_._cached_size_)*/{}
   , /*decltype(_impl_.uninterpreted_option_)*/{}
   , /*decltype(_impl_.allow_alias_)*/false
-  , /*decltype(_impl_.deprecated_)*/false} {}
+  , /*decltype(_impl_.deprecated_)*/false
+  , /*decltype(_impl_.enable_operator_)*/false
+  , /*decltype(_impl_.underlying_type_)*/0} {}
 struct EnumOptionsDefaultTypeInternal {
   constexpr EnumOptionsDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -493,7 +495,7 @@ struct GeneratedCodeInfoDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 GeneratedCodeInfoDefaultTypeInternal _GeneratedCodeInfo_default_instance_;
 }  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2fdescriptor_2eshark[27];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fdescriptor_2eshark[6];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fdescriptor_2eshark[7];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fdescriptor_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
@@ -768,9 +770,13 @@ const uint32_t TableStruct_shark_2fdescriptor_2eshark::offsets[] SHARK_SECTION_V
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.allow_alias_),
   SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.deprecated_),
+  SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.enable_operator_),
+  SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.underlying_type_),
   SHARK_FIELD_OFFSET(::shark::EnumOptions, _impl_.uninterpreted_option_),
   0,
   1,
+  2,
+  3,
   ~0u,
   SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::EnumValueOptions, _internal_metadata_),
@@ -897,16 +903,16 @@ static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_
   { 218, 229, -1, sizeof(::shark::MessageOptions)},
   { 234, 248, -1, sizeof(::shark::FieldOptions)},
   { 256, -1, -1, sizeof(::shark::OneofOptions)},
-  { 263, 272, -1, sizeof(::shark::EnumOptions)},
-  { 275, 283, -1, sizeof(::shark::EnumValueOptions)},
-  { 285, 293, -1, sizeof(::shark::ServiceOptions)},
-  { 295, 304, -1, sizeof(::shark::MethodOptions)},
-  { 307, 315, -1, sizeof(::shark::UninterpretedOption_NamePart)},
-  { 317, 330, -1, sizeof(::shark::UninterpretedOption)},
-  { 337, 348, -1, sizeof(::shark::SourceCodeInfo_Location)},
-  { 353, -1, -1, sizeof(::shark::SourceCodeInfo)},
-  { 360, 370, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
-  { 374, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
+  { 263, 274, -1, sizeof(::shark::EnumOptions)},
+  { 279, 287, -1, sizeof(::shark::EnumValueOptions)},
+  { 289, 297, -1, sizeof(::shark::ServiceOptions)},
+  { 299, 308, -1, sizeof(::shark::MethodOptions)},
+  { 311, 319, -1, sizeof(::shark::UninterpretedOption_NamePart)},
+  { 321, 334, -1, sizeof(::shark::UninterpretedOption)},
+  { 341, 352, -1, sizeof(::shark::SourceCodeInfo_Location)},
+  { 357, -1, -1, sizeof(::shark::SourceCodeInfo)},
+  { 364, 374, -1, sizeof(::shark::GeneratedCodeInfo_Annotation)},
+  { 378, -1, -1, sizeof(::shark::GeneratedCodeInfo)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -1036,45 +1042,53 @@ const char descriptor_table_protodef_shark_2fdescriptor_2eshark[] SHARK_SECTION_
   "RMAL\020\000\022\r\n\tJS_STRING\020\001\022\r\n\tJS_NUMBER\020\002*\t\010\350"
   "\007\020\200\200\200\200\002J\004\010\004\020\005\"T\n\014OneofOptions\0229\n\024uninter"
   "preted_option\030\347\007 \003(\0132\032.shark.Uninterpret"
-  "edOption*\t\010\350\007\020\200\200\200\200\002\"\211\001\n\013EnumOptions\022\023\n\013a"
+  "edOption*\t\010\350\007\020\200\200\200\200\002\"\335\001\n\013EnumOptions\022\023\n\013a"
   "llow_alias\030\002 \001(\010\022\031\n\ndeprecated\030\003 \001(\010:\005fa"
-  "lse\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.sha"
-  "rk.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010\005\020\006\""
-  "s\n\020EnumValueOptions\022\031\n\ndeprecated\030\001 \001(\010:"
-  "\005false\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032."
-  "shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"q\n\016"
-  "ServiceOptions\022\031\n\ndeprecated\030! \001(\010:\005fals"
-  "e\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.shark"
-  ".UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\231\002\n\rMeth"
-  "odOptions\022\031\n\ndeprecated\030! \001(\010:\005false\022U\n\021"
-  "idempotency_level\030\" \001(\0162%.shark.MethodOp"
-  "tions.IdempotencyLevel:\023IDEMPOTENCY_UNKN"
-  "OWN\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.sha"
-  "rk.UninterpretedOption\"P\n\020IdempotencyLev"
-  "el\022\027\n\023IDEMPOTENCY_UNKNOWN\020\000\022\023\n\017NO_SIDE_E"
-  "FFECTS\020\001\022\016\n\nIDEMPOTENT\020\002*\t\010\350\007\020\200\200\200\200\002\"\224\002\n\023"
-  "UninterpretedOption\0221\n\004name\030\002 \003(\0132#.shar"
-  "k.UninterpretedOption.NamePart\022\030\n\020identi"
-  "fier_value\030\003 \001(\t\022\032\n\022positive_int_value\030\004"
-  " \001(\004\022\032\n\022negative_int_value\030\005 \001(\003\022\024\n\014doub"
-  "le_value\030\006 \001(\001\022\024\n\014string_value\030\007 \001(\014\022\027\n\017"
-  "aggregate_value\030\010 \001(\t\0323\n\010NamePart\022\021\n\tnam"
-  "e_part\030\001 \002(\t\022\024\n\014is_extension\030\002 \002(\010\"\313\001\n\016S"
-  "ourceCodeInfo\0220\n\010location\030\001 \003(\0132\036.shark."
-  "SourceCodeInfo.Location\032\206\001\n\010Location\022\020\n\004"
-  "path\030\001 \003(\005B\002\020\001\022\020\n\004span\030\002 \003(\005B\002\020\001\022\030\n\020lead"
-  "ing_comments\030\003 \001(\t\022\031\n\021trailing_comments\030"
-  "\004 \001(\t\022!\n\031leading_detached_comments\030\006 \003(\t"
-  "\"\235\001\n\021GeneratedCodeInfo\0227\n\nannotation\030\001 \003"
-  "(\0132#.shark.GeneratedCodeInfo.Annotation\032"
-  "O\n\nAnnotation\022\020\n\004path\030\001 \003(\005B\002\020\001\022\023\n\013sourc"
-  "e_file\030\002 \001(\t\022\r\n\005begin\030\003 \001(\005\022\013\n\003end\030\004 \001(\005"
-  "B4H\001Z-google.golang.org/protobuf/types/d"
-  "escriptorpb\370\001\001"
+  "lse\022\036\n\017enable_operator\030\006 \001(\010:\005false\0222\n\017u"
+  "nderlying_type\030\007 \001(\0162\031.shark.EnumUnderly"
+  "ingType\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032"
+  ".shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002J\004\010"
+  "\005\020\006\"s\n\020EnumValueOptions\022\031\n\ndeprecated\030\001 "
+  "\001(\010:\005false\0229\n\024uninterpreted_option\030\347\007 \003("
+  "\0132\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002"
+  "\"q\n\016ServiceOptions\022\031\n\ndeprecated\030! \001(\010:\005"
+  "false\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.s"
+  "hark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\231\002\n\r"
+  "MethodOptions\022\031\n\ndeprecated\030! \001(\010:\005false"
+  "\022U\n\021idempotency_level\030\" \001(\0162%.shark.Meth"
+  "odOptions.IdempotencyLevel:\023IDEMPOTENCY_"
+  "UNKNOWN\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032"
+  ".shark.UninterpretedOption\"P\n\020Idempotenc"
+  "yLevel\022\027\n\023IDEMPOTENCY_UNKNOWN\020\000\022\023\n\017NO_SI"
+  "DE_EFFECTS\020\001\022\016\n\nIDEMPOTENT\020\002*\t\010\350\007\020\200\200\200\200\002\""
+  "\224\002\n\023UninterpretedOption\0221\n\004name\030\002 \003(\0132#."
+  "shark.UninterpretedOption.NamePart\022\030\n\020id"
+  "entifier_value\030\003 \001(\t\022\032\n\022positive_int_val"
+  "ue\030\004 \001(\004\022\032\n\022negative_int_value\030\005 \001(\003\022\024\n\014"
+  "double_value\030\006 \001(\001\022\024\n\014string_value\030\007 \001(\014"
+  "\022\027\n\017aggregate_value\030\010 \001(\t\0323\n\010NamePart\022\021\n"
+  "\tname_part\030\001 \002(\t\022\024\n\014is_extension\030\002 \002(\010\"\313"
+  "\001\n\016SourceCodeInfo\0220\n\010location\030\001 \003(\0132\036.sh"
+  "ark.SourceCodeInfo.Location\032\206\001\n\010Location"
+  "\022\020\n\004path\030\001 \003(\005B\002\020\001\022\020\n\004span\030\002 \003(\005B\002\020\001\022\030\n\020"
+  "leading_comments\030\003 \001(\t\022\031\n\021trailing_comme"
+  "nts\030\004 \001(\t\022!\n\031leading_detached_comments\030\006"
+  " \003(\t\"\235\001\n\021GeneratedCodeInfo\0227\n\nannotation"
+  "\030\001 \003(\0132#.shark.GeneratedCodeInfo.Annotat"
+  "ion\032O\n\nAnnotation\022\020\n\004path\030\001 \003(\005B\002\020\001\022\023\n\013s"
+  "ource_file\030\002 \001(\t\022\r\n\005begin\030\003 \001(\005\022\013\n\003end\030\004"
+  " \001(\005*\373\001\n\022EnumUnderlyingType\022$\n ENUM_UNDE"
+  "RLYING_TYPE_UNSPECIFIED\020\000\022\035\n\031ENUM_UNDERL"
+  "YING_TYPE_INT8\020\001\022\036\n\032ENUM_UNDERLYING_TYPE"
+  "_UINT8\020\002\022\036\n\032ENUM_UNDERLYING_TYPE_INT16\020\003"
+  "\022\037\n\033ENUM_UNDERLYING_TYPE_UINT16\020\004\022\036\n\032ENU"
+  "M_UNDERLYING_TYPE_INT32\020\005\022\037\n\033ENUM_UNDERL"
+  "YING_TYPE_UINT32\020\006B4H\001Z-google.golang.or"
+  "g/protobuf/types/descriptorpb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fdescriptor_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fdescriptor_2eshark = {
-    false, false, 5214, descriptor_table_protodef_shark_2fdescriptor_2eshark,
+    false, false, 5552, descriptor_table_protodef_shark_2fdescriptor_2eshark,
     "shark/descriptor.shark",
     &descriptor_table_shark_2fdescriptor_2eshark_once, nullptr, 0, 27,
     schemas, file_default_instances, TableStruct_shark_2fdescriptor_2eshark::offsets,
@@ -1256,6 +1270,25 @@ constexpr MethodOptions_IdempotencyLevel MethodOptions::IdempotencyLevel_MIN;
 constexpr MethodOptions_IdempotencyLevel MethodOptions::IdempotencyLevel_MAX;
 constexpr int MethodOptions::IdempotencyLevel_ARRAYSIZE;
 #endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumUnderlyingType_descriptor() {
+  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+  return file_level_enum_descriptors_shark_2fdescriptor_2eshark[6];
+}
+bool EnumUnderlyingType_IsValid(int value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
 
 // ===================================================================
 
@@ -3707,10 +3740,10 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_Label_IsValid(val))) {
+          if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_Label_FitsWire(val))) {
             _internal_set_label(static_cast<::shark::FieldDescriptorProto_Label>(val));
           } else {
-            ::SHARK_NAMESPACE_ID::internal::WriteVarint(4, val, mutable_unknown_fields());
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(4, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
           }
         } else
           goto handle_unusual;
@@ -3720,10 +3753,10 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_Type_IsValid(val))) {
+          if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_Type_FitsWire(val))) {
             _internal_set_type(static_cast<::shark::FieldDescriptorProto_Type>(val));
           } else {
-            ::SHARK_NAMESPACE_ID::internal::WriteVarint(5, val, mutable_unknown_fields());
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(5, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
           }
         } else
           goto handle_unusual;
@@ -3851,14 +3884,14 @@ uint8_t* FieldDescriptorProto::_InternalSerialize(
   if (cached_has_bits & 0x00000200u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      4, this->_internal_label(), target);
+      4, this->_impl_.label_, target);
   }
 
   // optional .shark.FieldDescriptorProto.Type type = 5;
   if (cached_has_bits & 0x00000400u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      5, this->_internal_type(), target);
+      5, this->_impl_.type_, target);
   }
 
   // optional string type_name = 6;
@@ -3990,13 +4023,13 @@ size_t FieldDescriptorProto::ByteSizeLong() const {
     // optional .shark.FieldDescriptorProto.Label label = 4;
     if (cached_has_bits & 0x00000200u) {
       total_size += 1 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_label());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.label_);
     }
 
     // optional .shark.FieldDescriptorProto.Type type = 5;
     if (cached_has_bits & 0x00000400u) {
       total_size += 1 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_type());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.type_);
     }
 
   }
@@ -6234,10 +6267,10 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          if (SHARK_PREDICT_TRUE(::shark::FileOptions_OptimizeMode_IsValid(val))) {
+          if (SHARK_PREDICT_TRUE(::shark::FileOptions_OptimizeMode_FitsWire(val))) {
             _internal_set_optimize_for(static_cast<::shark::FileOptions_OptimizeMode>(val));
           } else {
-            ::SHARK_NAMESPACE_ID::internal::WriteVarint(9, val, mutable_unknown_fields());
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(9, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
           }
         } else
           goto handle_unusual;
@@ -6343,7 +6376,7 @@ uint8_t* FileOptions::_InternalSerialize(
   if (cached_has_bits & 0x00000010u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      9, this->_internal_optimize_for(), target);
+      9, this->_impl_.optimize_for_, target);
   }
 
   // optional string go_package = 11;
@@ -6444,7 +6477,7 @@ size_t FileOptions::ByteSizeLong() const {
     // optional .shark.FileOptions.OptimizeMode optimize_for = 9 [default = SPEED];
     if (cached_has_bits & 0x00000010u) {
       total_size += 1 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_optimize_for());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.optimize_for_);
     }
 
     // optional bool cc_enable_arenas = 31 [default = true];
@@ -7017,10 +7050,10 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          if (SHARK_PREDICT_TRUE(::shark::FieldOptions_CType_IsValid(val))) {
+          if (SHARK_PREDICT_TRUE(::shark::FieldOptions_CType_FitsWire(val))) {
             _internal_set_ctype(static_cast<::shark::FieldOptions_CType>(val));
           } else {
-            ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, mutable_unknown_fields());
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
           }
         } else
           goto handle_unusual;
@@ -7057,10 +7090,10 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          if (SHARK_PREDICT_TRUE(::shark::FieldOptions_JSType_IsValid(val))) {
+          if (SHARK_PREDICT_TRUE(::shark::FieldOptions_JSType_FitsWire(val))) {
             _internal_set_jstype(static_cast<::shark::FieldOptions_JSType>(val));
           } else {
-            ::SHARK_NAMESPACE_ID::internal::WriteVarint(6, val, mutable_unknown_fields());
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(6, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
           }
         } else
           goto handle_unusual;
@@ -7136,7 +7169,7 @@ uint8_t* FieldOptions::_InternalSerialize(
   if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      1, this->_internal_ctype(), target);
+      1, this->_impl_.ctype_, target);
   }
 
   // optional bool packed = 2;
@@ -7161,7 +7194,7 @@ uint8_t* FieldOptions::_InternalSerialize(
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      6, this->_internal_jstype(), target);
+      6, this->_impl_.jstype_, target);
   }
 
   // optional bool weak = 10 [default = false];
@@ -7218,13 +7251,13 @@ size_t FieldOptions::ByteSizeLong() const {
     // optional .shark.FieldOptions.CType ctype = 1 [default = STRING];
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_ctype());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.ctype_);
     }
 
     // optional .shark.FieldOptions.JSType jstype = 6 [default = JS_NORMAL];
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_jstype());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.jstype_);
     }
 
     // optional bool packed = 2;
@@ -7558,6 +7591,12 @@ class EnumOptions::_Internal {
   static void set_has_deprecated(HasBits* has_bits) {
     (*has_bits)[0] |= 2u;
   }
+  static void set_has_enable_operator(HasBits* has_bits) {
+    (*has_bits)[0] |= 4u;
+  }
+  static void set_has_underlying_type(HasBits* has_bits) {
+    (*has_bits)[0] |= 8u;
+  }
 };
 
 EnumOptions::EnumOptions(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -7575,13 +7614,15 @@ EnumOptions::EnumOptions(const EnumOptions& from)
     , /*decltype(_impl_._cached_size_)*/{}
     , decltype(_impl_.uninterpreted_option_){from._impl_.uninterpreted_option_}
     , decltype(_impl_.allow_alias_){}
-    , decltype(_impl_.deprecated_){}};
+    , decltype(_impl_.deprecated_){}
+    , decltype(_impl_.enable_operator_){}
+    , decltype(_impl_.underlying_type_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_._extensions_.MergeFrom(internal_default_instance(), from._impl_._extensions_);
   ::memcpy(&_impl_.allow_alias_, &from._impl_.allow_alias_,
-    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.deprecated_) -
-    reinterpret_cast<char*>(&_impl_.allow_alias_)) + sizeof(_impl_.deprecated_));
+    static_cast<size_t>(reinterpret_cast<char*>(&_impl_.underlying_type_) -
+    reinterpret_cast<char*>(&_impl_.allow_alias_)) + sizeof(_impl_.underlying_type_));
   // @@protoc_insertion_point(copy_constructor:shark.EnumOptions)
 }
 
@@ -7596,6 +7637,8 @@ inline void EnumOptions::SharedCtor(
     , decltype(_impl_.uninterpreted_option_){arena}
     , decltype(_impl_.allow_alias_){false}
     , decltype(_impl_.deprecated_){false}
+    , decltype(_impl_.enable_operator_){false}
+    , decltype(_impl_.underlying_type_){0}
   };
 }
 
@@ -7626,9 +7669,12 @@ void EnumOptions::Clear() {
 
   _impl_._extensions_.Clear();
   _impl_.uninterpreted_option_.Clear();
-  ::memset(&_impl_.allow_alias_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.deprecated_) -
-      reinterpret_cast<char*>(&_impl_.allow_alias_)) + sizeof(_impl_.deprecated_));
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x0000000fu) {
+    ::memset(&_impl_.allow_alias_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&_impl_.underlying_type_) -
+        reinterpret_cast<char*>(&_impl_.allow_alias_)) + sizeof(_impl_.underlying_type_));
+  }
   _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
@@ -7655,6 +7701,28 @@ const char* EnumOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
           _Internal::set_has_deprecated(&has_bits);
           _impl_.deprecated_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional bool enable_operator = 6 [default = false];
+      case 6:
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
+          _Internal::set_has_enable_operator(&has_bits);
+          _impl_.enable_operator_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+        } else
+          goto handle_unusual;
+        continue;
+      // optional .shark.EnumUnderlyingType underlying_type = 7;
+      case 7:
+        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
+          uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
+          CHK_(ptr);
+          if (SHARK_PREDICT_TRUE(::shark::EnumUnderlyingType_FitsWire(val))) {
+            _internal_set_underlying_type(static_cast<::shark::EnumUnderlyingType>(val));
+          } else {
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(7, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
+          }
         } else
           goto handle_unusual;
         continue;
@@ -7719,6 +7787,19 @@ uint8_t* EnumOptions::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(3, this->_internal_deprecated(), target);
   }
 
+  // optional bool enable_operator = 6 [default = false];
+  if (cached_has_bits & 0x00000004u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteBoolToArray(6, this->_internal_enable_operator(), target);
+  }
+
+  // optional .shark.EnumUnderlyingType underlying_type = 7;
+  if (cached_has_bits & 0x00000008u) {
+    target = stream->EnsureSpace(target);
+    target = ::_pbi::WireFormatLite::WriteEnumToArray(
+      7, this->_impl_.underlying_type_, target);
+  }
+
   // repeated .shark.UninterpretedOption uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
@@ -7757,7 +7838,7 @@ size_t EnumOptions::ByteSizeLong() const {
   }
 
   cached_has_bits = _impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 0x0000000fu) {
     // optional bool allow_alias = 2;
     if (cached_has_bits & 0x00000001u) {
       total_size += 1 + 1;
@@ -7766,6 +7847,17 @@ size_t EnumOptions::ByteSizeLong() const {
     // optional bool deprecated = 3 [default = false];
     if (cached_has_bits & 0x00000002u) {
       total_size += 1 + 1;
+    }
+
+    // optional bool enable_operator = 6 [default = false];
+    if (cached_has_bits & 0x00000004u) {
+      total_size += 1 + 1;
+    }
+
+    // optional .shark.EnumUnderlyingType underlying_type = 7;
+    if (cached_has_bits & 0x00000008u) {
+      total_size += 1 +
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.underlying_type_);
     }
 
   }
@@ -7789,12 +7881,18 @@ void EnumOptions::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
 
   _this->_impl_.uninterpreted_option_.MergeFrom(from._impl_.uninterpreted_option_);
   cached_has_bits = from._impl_._has_bits_[0];
-  if (cached_has_bits & 0x00000003u) {
+  if (cached_has_bits & 0x0000000fu) {
     if (cached_has_bits & 0x00000001u) {
       _this->_impl_.allow_alias_ = from._impl_.allow_alias_;
     }
     if (cached_has_bits & 0x00000002u) {
       _this->_impl_.deprecated_ = from._impl_.deprecated_;
+    }
+    if (cached_has_bits & 0x00000004u) {
+      _this->_impl_.enable_operator_ = from._impl_.enable_operator_;
+    }
+    if (cached_has_bits & 0x00000008u) {
+      _this->_impl_.underlying_type_ = from._impl_.underlying_type_;
     }
     _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
@@ -7826,8 +7924,8 @@ void EnumOptions::InternalSwap(EnumOptions* other) {
   swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   _impl_.uninterpreted_option_.InternalSwap(&other->_impl_.uninterpreted_option_);
   ::SHARK_NAMESPACE_ID::internal::memswap<
-      SHARK_FIELD_OFFSET(EnumOptions, _impl_.deprecated_)
-      + sizeof(EnumOptions::_impl_.deprecated_)
+      SHARK_FIELD_OFFSET(EnumOptions, _impl_.underlying_type_)
+      + sizeof(EnumOptions::_impl_.underlying_type_)
       - SHARK_FIELD_OFFSET(EnumOptions, _impl_.allow_alias_)>(
           reinterpret_cast<char*>(&_impl_.allow_alias_),
           reinterpret_cast<char*>(&other->_impl_.allow_alias_));
@@ -8447,10 +8545,10 @@ const char* MethodOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
           uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
-          if (SHARK_PREDICT_TRUE(::shark::MethodOptions_IdempotencyLevel_IsValid(val))) {
+          if (SHARK_PREDICT_TRUE(::shark::MethodOptions_IdempotencyLevel_FitsWire(val))) {
             _internal_set_idempotency_level(static_cast<::shark::MethodOptions_IdempotencyLevel>(val));
           } else {
-            ::SHARK_NAMESPACE_ID::internal::WriteVarint(34, val, mutable_unknown_fields());
+            ::SHARK_NAMESPACE_ID::internal::WriteVarint(34, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
           }
         } else
           goto handle_unusual;
@@ -8514,7 +8612,7 @@ uint8_t* MethodOptions::_InternalSerialize(
   if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      34, this->_internal_idempotency_level(), target);
+      34, this->_impl_.idempotency_level_, target);
   }
 
   // repeated .shark.UninterpretedOption uninterpreted_option = 999;
@@ -8564,7 +8662,7 @@ size_t MethodOptions::ByteSizeLong() const {
     // optional .shark.MethodOptions.IdempotencyLevel idempotency_level = 34 [default = IDEMPOTENCY_UNKNOWN];
     if (cached_has_bits & 0x00000002u) {
       total_size += 2 +
-        ::_pbi::WireFormatLite::EnumSize(this->_internal_idempotency_level());
+        ::_pbi::WireFormatLite::EnumSize(this->_impl_.idempotency_level_);
     }
 
   }

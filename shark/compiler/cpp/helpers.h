@@ -469,6 +469,13 @@ inline bool HasPreservingUnknownEnumSemantics(const FieldDescriptor* field) {
   return field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3;
 }
 
+inline bool IsEnumClass(const EnumDescriptor*) {
+  // Every generated enum is an enum class. underlying_type only selects width.
+  return true;
+}
+
+const char* EnumUnderlyingCppType(const EnumDescriptor* enum_descriptor);
+
 inline bool IsCrossFileMessage(const FieldDescriptor* field) {
   return field->type() == FieldDescriptor::TYPE_MESSAGE &&
          field->message_type()->file() != field->file();

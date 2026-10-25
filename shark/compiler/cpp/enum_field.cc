@@ -35,7 +35,7 @@
 #include <shark/compiler/cpp/enum_field.h>
 
 #include <shark/io/printer.h>
-#include <shark/wire_format.h>
+#include <shark/format/wired/wire_format.h>
 #include <shark/stubs/strutil.h>
 #include <shark/compiler/cpp/field.h>
 #include <shark/compiler/cpp/helpers.h>
@@ -56,6 +56,22 @@ void SetEnumVariables(const FieldDescriptor* descriptor,
   bool cold = ShouldSplit(descriptor, options);
   (*variables)["cached_byte_size_field"] =
       MakeVarintCachedSizeFieldName(descriptor, cold);
+  if (IsEnumClass(descriptor->enum_type())) {
+    (*variables)["underlying"] = EnumUnderlyingCppType(descriptor->enum_type());
+    (*variables)["enum_store"] =
+        "static_cast<int>(" + (*variables)["type"] + "_to_underlying(value))";
+    (*variables)["enum_load_field"] =
+        "static_cast<" + (*variables)["type"] + ">(static_cast<" +
+        (*variables)["underlying"] + ">(" + (*variables)["field"] + "))";
+  } else {
+    (*variables)["enum_store"] = "value";
+    (*variables)["enum_load_field"] = "static_cast< $type$ >($field$)";
+  }
+}
+
+bool ValidateEnumValue(const FieldDescriptor* descriptor) {
+  return !HasPreservingUnknownEnumSemantics(descriptor) &&
+         !IsEnumClass(descriptor->enum_type());
 }
 
 }  // namespace
@@ -91,22 +107,30 @@ void EnumFieldGenerator::GenerateAccessorDeclarations(
 void EnumFieldGenerator::GenerateInlineAccessorDefinitions(
     io::Printer* printer) const {
   Formatter format(printer, variables_);
+  if (IsEnumClass(descriptor_->enum_type())) {
+    format(
+        "inline $type$ $classname$::_internal_$name$() const {\n"
+        "  return $enum_load_field$;\n"
+        "}\n");
+  } else {
+    format(
+        "inline $type$ $classname$::_internal_$name$() const {\n"
+        "  return static_cast< $type$ >($field$);\n"
+        "}\n");
+  }
   format(
-      "inline $type$ $classname$::_internal_$name$() const {\n"
-      "  return static_cast< $type$ >($field$);\n"
-      "}\n"
       "inline $type$ $classname$::$name$() const {\n"
       "$annotate_get$"
       "  // @@protoc_insertion_point(field_get:$full_name$)\n"
       "  return _internal_$name$();\n"
       "}\n"
       "inline void $classname$::_internal_set_$name$($type$ value) {\n");
-  if (!HasPreservingUnknownEnumSemantics(descriptor_)) {
+  if (ValidateEnumValue(descriptor_)) {
     format("  assert($type$_IsValid(value));\n");
   }
   format(
       "  $set_hasbit$\n"
-      "  $field$ = value;\n"
+      "  $field$ = $enum_store$;\n"
       "}\n"
       "inline void $classname$::set_$name$($type$ value) {\n"
       "$maybe_prepare_split_message$"
@@ -140,17 +164,30 @@ void EnumFieldGenerator::GenerateCopyConstructorCode(
 void EnumFieldGenerator::GenerateSerializeWithCachedSizesToArray(
     io::Printer* printer) const {
   Formatter format(printer, variables_);
-  format(
-      "target = stream->EnsureSpace(target);\n"
-      "target = ::_pbi::WireFormatLite::WriteEnumToArray(\n"
-      "  $number$, this->_internal_$name$(), target);\n");
+  if (IsEnumClass(descriptor_->enum_type())) {
+    format(
+        "target = stream->EnsureSpace(target);\n"
+        "target = ::_pbi::WireFormatLite::WriteEnumToArray(\n"
+        "  $number$, this->$field$, target);\n");
+  } else {
+    format(
+        "target = stream->EnsureSpace(target);\n"
+        "target = ::_pbi::WireFormatLite::WriteEnumToArray(\n"
+        "  $number$, this->_internal_$name$(), target);\n");
+  }
 }
 
 void EnumFieldGenerator::GenerateByteSize(io::Printer* printer) const {
   Formatter format(printer, variables_);
-  format(
-      "total_size += $tag_size$ +\n"
-      "  ::_pbi::WireFormatLite::EnumSize(this->_internal_$name$());\n");
+  if (IsEnumClass(descriptor_->enum_type())) {
+    format(
+        "total_size += $tag_size$ +\n"
+        "  ::_pbi::WireFormatLite::EnumSize(this->$field$);\n");
+  } else {
+    format(
+        "total_size += $tag_size$ +\n"
+        "  ::_pbi::WireFormatLite::EnumSize(this->_internal_$name$());\n");
+  }
 }
 
 void EnumFieldGenerator::GenerateConstexprAggregateInitializer(
@@ -190,8 +227,13 @@ void EnumOneofFieldGenerator::GenerateInlineAccessorDefinitions(
   Formatter format(printer, variables_);
   format(
       "inline $type$ $classname$::_internal_$name$() const {\n"
-      "  if (_internal_has_$name$()) {\n"
-      "    return static_cast< $type$ >($field$);\n"
+      "  if (_internal_has_$name$()) {\n");
+  if (IsEnumClass(descriptor_->enum_type())) {
+    format("    return $enum_load_field$;\n");
+  } else {
+    format("    return static_cast< $type$ >($field$);\n");
+  }
+  format(
       "  }\n"
       "  return static_cast< $type$ >($default$);\n"
       "}\n"
@@ -201,7 +243,7 @@ void EnumOneofFieldGenerator::GenerateInlineAccessorDefinitions(
       "  return _internal_$name$();\n"
       "}\n"
       "inline void $classname$::_internal_set_$name$($type$ value) {\n");
-  if (!HasPreservingUnknownEnumSemantics(descriptor_)) {
+  if (ValidateEnumValue(descriptor_)) {
     format("  assert($type$_IsValid(value));\n");
   }
   format(
@@ -209,7 +251,7 @@ void EnumOneofFieldGenerator::GenerateInlineAccessorDefinitions(
       "    clear_$oneof_name$();\n"
       "    set_has_$name$();\n"
       "  }\n"
-      "  $field$ = value;\n"
+      "  $field$ = $enum_store$;\n"
       "}\n"
       "inline void $classname$::set_$name$($type$ value) {\n"
       "  _internal_set_$name$(value);\n"
@@ -277,8 +319,14 @@ void RepeatedEnumFieldGenerator::GenerateInlineAccessorDefinitions(
     io::Printer* printer) const {
   Formatter format(printer, variables_);
   format(
-      "inline $type$ $classname$::_internal_$name$(int index) const {\n"
-      "  return static_cast< $type$ >($field$.Get(index));\n"
+      "inline $type$ $classname$::_internal_$name$(int index) const {\n");
+  if (IsEnumClass(descriptor_->enum_type())) {
+    format(
+        "  return static_cast< $type$ >(static_cast<$underlying$>($field$.Get(index)));\n");
+  } else {
+    format("  return static_cast< $type$ >($field$.Get(index));\n");
+  }
+  format(
       "}\n"
       "inline $type$ $classname$::$name$(int index) const {\n"
       "$annotate_get$"
@@ -286,20 +334,20 @@ void RepeatedEnumFieldGenerator::GenerateInlineAccessorDefinitions(
       "  return _internal_$name$(index);\n"
       "}\n"
       "inline void $classname$::set_$name$(int index, $type$ value) {\n");
-  if (!HasPreservingUnknownEnumSemantics(descriptor_)) {
+  if (ValidateEnumValue(descriptor_)) {
     format("  assert($type$_IsValid(value));\n");
   }
   format(
-      "  $field$.Set(index, value);\n"
+      "  $field$.Set(index, $enum_store$);\n"
       "$annotate_set$"
       "  // @@protoc_insertion_point(field_set:$full_name$)\n"
       "}\n"
       "inline void $classname$::_internal_add_$name$($type$ value) {\n");
-  if (!HasPreservingUnknownEnumSemantics(descriptor_)) {
+  if (ValidateEnumValue(descriptor_)) {
     format("  assert($type$_IsValid(value));\n");
   }
   format(
-      "  $field$.Add(value);\n"
+      "  $field$.Add($enum_store$);\n"
       "}\n"
       "inline void $classname$::add_$name$($type$ value) {\n"
       "  _internal_add_$name$(value);\n"
@@ -367,6 +415,14 @@ void RepeatedEnumFieldGenerator::GenerateSerializeWithCachedSizesToArray(
         "        $number$, $field$, byte_size, target);\n"
         "  }\n"
         "}\n");
+  } else if (IsEnumClass(descriptor_->enum_type())) {
+    format(
+        "for (int i = 0, n = this->_internal_$name$_size(); i < n; i++) {\n"
+        "  target = stream->EnsureSpace(target);\n"
+        "  target = ::_pbi::WireFormatLite::WriteEnumToArray(\n"
+        "      $number$, $type$_to_underlying(this->_internal_$name$(i)), "
+        "target);\n"
+        "}\n");
   } else {
     format(
         "for (int i = 0, n = this->_internal_$name$_size(); i < n; i++) {\n"
@@ -388,8 +444,11 @@ void RepeatedEnumFieldGenerator::GenerateByteSize(io::Printer* printer) const {
   format(
       "for (unsigned int i = 0; i < count; i++) {\n"
       "  data_size += ::_pbi::WireFormatLite::EnumSize(\n"
-      "    this->_internal_$name$(static_cast<int>(i)));\n"
-      "}\n");
+      "    $1$(this->_internal_$name$(static_cast<int>(i))));\n"
+      "}\n",
+      IsEnumClass(descriptor_->enum_type())
+          ? variables_.at("type") + "_to_underlying"
+          : "");
 
   if (descriptor_->is_packed()) {
     format(

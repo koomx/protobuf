@@ -69,15 +69,23 @@ template<> ::shark::Value* Arena::CreateMaybeMessage<::shark::Value>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
-enum NullValue : int {
-  NULL_VALUE = 0,
-  NullValue_INT_MIN_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::min(),
-  NullValue_INT_MAX_SENTINEL_DO_NOT_USE_ = std::numeric_limits<int32_t>::max()
+enum class NullValue : int32_t {
+  NULL_VALUE = 0
 };
+constexpr NullValue NULL_VALUE = NullValue::NULL_VALUE;
+constexpr int32_t NullValue_to_underlying(NullValue value) {
+  return static_cast<int32_t>(value);
+}
+inline bool NullValue_FitsUnderlying(int value) {
+  return true;
+}
+inline bool NullValue_FitsWire(::uint64_t value) {
+  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && NullValue_FitsUnderlying(static_cast<int>(value));
+}
 bool NullValue_IsValid(int value);
-constexpr NullValue NullValue_MIN = NULL_VALUE;
-constexpr NullValue NullValue_MAX = NULL_VALUE;
-constexpr int NullValue_ARRAYSIZE = NullValue_MAX + 1;
+constexpr NullValue NullValue_MIN = NullValue::NULL_VALUE;
+constexpr NullValue NullValue_MAX = NullValue::NULL_VALUE;
+constexpr int NullValue_ARRAYSIZE = NullValue_to_underlying(NullValue_MAX) + 1;
 
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* NullValue_descriptor();
 template<typename T>
@@ -86,7 +94,8 @@ inline const std::string& NullValue_Name(T enum_t_value) {
     ::std::is_integral<T>::value,
     "Incorrect type passed to function NullValue_Name.");
   return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    NullValue_descriptor(), enum_t_value);
+    NullValue_descriptor(),
+    NullValue_to_underlying(static_cast<NullValue>(enum_t_value)));
 }
 inline bool NullValue_Parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, NullValue* value) {
@@ -772,7 +781,7 @@ inline void Value::clear_null_value() {
 }
 inline ::shark::NullValue Value::_internal_null_value() const {
   if (_internal_has_null_value()) {
-    return static_cast< ::shark::NullValue >(_impl_.kind_.null_value_);
+    return static_cast<::shark::NullValue>(static_cast<int32_t>(_impl_.kind_.null_value_));
   }
   return static_cast< ::shark::NullValue >(0);
 }
@@ -785,7 +794,7 @@ inline void Value::_internal_set_null_value(::shark::NullValue value) {
     clear_kind();
     set_has_null_value();
   }
-  _impl_.kind_.null_value_ = value;
+  _impl_.kind_.null_value_ = static_cast<int>(::shark::NullValue_to_underlying(value));
 }
 inline void Value::set_null_value(::shark::NullValue value) {
   _internal_set_null_value(value);
