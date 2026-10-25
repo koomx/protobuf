@@ -50,7 +50,7 @@
 #include <shark/port.h>
 #include <shark/stubs/strutil.h>
 #include <shark/explicitly_constructed.h>
-#include <shark/metadata_lite.h>
+#include <shark/generated/metadata_lite.h>
 #include <shark/stubs/hash.h>  // TODO(b/211442718): cleanup
 
 // clang-format off

@@ -47,8 +47,8 @@
 #include <shark/io/coded_stream.h>
 #include <shark/io/printer.h>
 #include <shark/descriptor.h>
-#include <shark/generated_message_util.h>
-#include <shark/map_entry_lite.h>
+#include <shark/generated/generated_message_util.h>
+#include <shark/types/map_entry_lite.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/stringprintf.h>

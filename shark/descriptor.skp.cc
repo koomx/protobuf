@@ -9,7 +9,7 @@
 #include <shark/extension_set.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/descriptor.h>
-#include <shark/generated_message_reflection.h>
+#include <shark/generated/generated_message_reflection.h>
 #include <shark/reflection_ops.h>
 #include <shark/format/wired/wire_format.h>
 // @@protoc_insertion_point(includes)

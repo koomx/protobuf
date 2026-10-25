@@ -21,6 +21,8 @@ find_package(GTest REQUIRED)
 # Library .skp.cc files under shark/ stay checked in and are not generated here.
 file(GLOB_RECURSE TEST_PROTOS CONFIGURE_DEPENDS ${CMAKE_CURRENT_SOURCE_DIR}/*.shark)
 set(lite_test_proto_files)
+set(json_test_proto_files)
+set(types_test_proto_files)
 set(tests_proto_files)
 foreach (proto_file ${TEST_PROTOS})
     string(REPLACE .shark .skp.cc pb_file ${proto_file})
@@ -36,6 +38,10 @@ foreach (proto_file ${TEST_PROTOS})
     get_filename_component(_pb_name ${pb_file} NAME)
     if (_pb_name MATCHES "^(map_lite_unittest|unittest_import_lite|unittest_import_public_lite|unittest_lite)\\.skp\\.cc$")
         list(APPEND lite_test_proto_files ${pb_file})
+    elseif (proto_file MATCHES "/transfer/json/")
+        list(APPEND json_test_proto_files ${pb_file})
+    elseif (proto_file MATCHES "/types/" AND NOT proto_file MATCHES "/(any_test|map_unittest)\\.shark$")
+        list(APPEND types_test_proto_files ${pb_file})
     else ()
         list(APPEND tests_proto_files ${pb_file})
     endif ()
@@ -46,7 +52,7 @@ kmcmake_cc_library(
         NAMESPACE ${PROJECT_NAME}
         SOURCES
         arena_test_util.cc
-        map_lite_test_util.cc
+        types/map_lite_test_util.cc
         test_util_lite.cc
         ${lite_test_proto_files}
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
@@ -58,7 +64,7 @@ kmcmake_cc_library(
         NAMESPACE ${PROJECT_NAME}
         SOURCES
         arena_test_util.cc
-        map_lite_test_util.cc
+        types/map_lite_test_util.cc
         test_util_lite.cc
         test_util.cc
         reflection_tester.cc
@@ -75,7 +81,6 @@ kmcmake_cc_test(
         NAME suite
         MODULE ${PROJECT_NAME}
         SOURCES
-        any_test.cc
         arena_unittest.cc
         arenastring_unittest.cc
         arenaz_sampler_test.cc
@@ -103,9 +108,7 @@ kmcmake_cc_test(
         io/printer_unittest.cc
         io/tokenizer_unittest.cc
         io/zero_copy_stream_unittest.cc
-        map_field_test.cc
         narrow_int_test.cc
-        map_test.cc
         message_unittest.cc
         no_field_presence_test.cc
         preserve_unknown_enum_test.cc
@@ -131,18 +134,8 @@ kmcmake_cc_test(
         util/delimited_message_util_test.cc
         util/field_comparator_test.cc
         util/field_mask_util_test.cc
-        util/internal/default_value_objectwriter_test.cc
-        util/internal/json_objectwriter_test.cc
-        util/internal/json_stream_parser_test.cc
-        util/internal/protostream_objectsource_test.cc
-        util/internal/protostream_objectwriter_test.cc
-        util/internal/type_info_test_helper.cc
-        util/json_util_test.cc
         util/message_differencer_unittest.cc
         util/time_util_test.cc
-        util/type_resolver_util_test.cc
-        well_known_types_unittest.cc
-        wire_format_unittest.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS
         ${PROJECT_NAME}::shark-test-common_static
@@ -151,6 +144,60 @@ kmcmake_cc_test(
         GTest::gmock_main
 )
 target_compile_options(shark_suite PRIVATE
+        "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
+
+kmcmake_cc_test(
+        NAME json
+        MODULE ${PROJECT_NAME}
+        SOURCES
+        transfer/json/default_value_objectwriter_test.cc
+        transfer/json/json_objectwriter_test.cc
+        transfer/json/json_stream_parser_test.cc
+        transfer/json/json_util_test.cc
+        transfer/json/protostream_objectsource_test.cc
+        transfer/json/protostream_objectwriter_test.cc
+        transfer/json/type_info_test_helper.cc
+        transfer/json/type_resolver_util_test.cc
+        ${json_test_proto_files}
+        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${PROJECT_NAME}::shark-test-common_static
+        ${PROJECT_NAME}::shark_static
+        GTest::gmock_main
+)
+target_compile_options(shark_json PRIVATE
+        "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
+
+kmcmake_cc_test(
+        NAME types
+        MODULE ${PROJECT_NAME}
+        SOURCES
+        types/any_test.cc
+        types/map_field_test.cc
+        types/map_test.cc
+        types/well_known_types_unittest.cc
+        ${types_test_proto_files}
+        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${PROJECT_NAME}::shark-test-common_static
+        ${PROJECT_NAME}::shark_static
+        GTest::gmock_main
+)
+target_compile_options(shark_types PRIVATE
+        "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
+
+kmcmake_cc_test(
+        NAME format
+        MODULE ${PROJECT_NAME}
+        SOURCES
+        format/wired/wire_format_unittest.cc
+        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${PROJECT_NAME}::shark-test-common_static
+        ${PROJECT_NAME}::shark_static
+        GTest::gmock_main
+)
+target_compile_options(shark_format PRIVATE
         "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
 
 kmcmake_cc_test(

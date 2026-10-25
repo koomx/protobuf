@@ -50,8 +50,8 @@
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
-#include <shark/generated_enum_reflection.h>
-#include <shark/map_field.h>
+#include <shark/generated/generated_enum_reflection.h>
+#include <shark/types/map_field.h>
 #include <shark/message.h>
 #include <shark/text_format.h>
 #include <shark/stubs/strutil.h>

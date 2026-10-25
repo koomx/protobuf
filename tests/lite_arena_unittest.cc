@@ -29,7 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <tests/arena_test_util.h>
-#include <tests/map_lite_test_util.h>
+#include <tests/types/map_lite_test_util.h>
 #include <gtest/gtest.h>
 
 namespace shark {

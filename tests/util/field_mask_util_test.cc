@@ -34,7 +34,7 @@
 #include <cstdint>
 #include <vector>
 
-#include <shark/field_mask.skp.h>
+#include <shark/types/field_mask.skp.h>
 #include <tests/test_util.h>
 #include <tests/unittest.skp.h>
 #include <gtest/gtest.h>

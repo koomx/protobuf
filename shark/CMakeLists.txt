@@ -29,23 +29,23 @@ kmcmake_cc_library(
         NAME shark-lite
         NAMESPACE ${PROJECT_NAME}
         SOURCES
-        any_lite.cc
+        types/any_lite.cc
         arena.cc
         arenastring.cc
         arenaz_sampler.cc
         extension_set.cc
-        generated_enum_util.cc
-        generated_message_tctable_lite.cc
-        generated_message_util.cc
-        implicit_weak_message.cc
-        inlined_string_field.cc
+        generated/generated_enum_util.cc
+        generated/generated_message_tctable_lite.cc
+        generated/generated_message_util.cc
+        generated/implicit_weak_message.cc
+        generated/inlined_string_field.cc
         io/coded_stream.cc
         io/io_win32.cc
         io/strtod.cc
         io/zero_copy_stream.cc
         io/zero_copy_stream_impl.cc
         io/zero_copy_stream_impl_lite.cc
-        map.cc
+        types/map.cc
         message_lite.cc
         parse_context.cc
         repeated_field.cc
@@ -69,58 +69,58 @@ kmcmake_cc_library(
         NAME shark
         NAMESPACE ${PROJECT_NAME}
         SOURCES
-        any.cc
-        any.skp.cc
-        api.skp.cc
+        types/any.cc
+        types/any.skp.cc
+        types/api.skp.cc
         compiler/importer.cc
         compiler/parser.cc
         descriptor.cc
         descriptor.skp.cc
         descriptor_database.cc
-        duration.skp.cc
+        types/duration.skp.cc
         dynamic_message.cc
-        empty.skp.cc
+        types/empty.skp.cc
         extension_set_heavy.cc
-        field_mask.skp.cc
-        generated_message_bases.cc
-        generated_message_reflection.cc
-        generated_message_tctable_full.cc
+        types/field_mask.skp.cc
+        generated/generated_message_bases.cc
+        generated/generated_message_reflection.cc
+        generated/generated_message_tctable_full.cc
         io/gzip_stream.cc
         io/printer.cc
         io/tokenizer.cc
-        map_field.cc
+        types/map_field.cc
         message.cc
         reflection_ops.cc
         service.cc
-        source_context.skp.cc
-        struct.skp.cc
+        types/source_context.skp.cc
+        types/struct.skp.cc
         stubs/substitute.cc
         text_format.cc
-        timestamp.skp.cc
-        type.skp.cc
+        types/timestamp.skp.cc
+        types/type.skp.cc
         unknown_field_set.cc
         util/delimited_message_util.cc
         util/field_comparator.cc
         util/field_mask_util.cc
-        util/internal/datapiece.cc
-        util/internal/default_value_objectwriter.cc
-        util/internal/error_listener.cc
-        util/internal/field_mask_utility.cc
-        util/internal/json_escaping.cc
-        util/internal/json_objectwriter.cc
-        util/internal/json_stream_parser.cc
-        util/internal/object_writer.cc
-        util/internal/proto_writer.cc
-        util/internal/protostream_objectsource.cc
-        util/internal/protostream_objectwriter.cc
-        util/internal/type_info.cc
-        util/internal/utility.cc
-        util/json_util.cc
+        transfer/json/datapiece.cc
+        transfer/json/default_value_objectwriter.cc
+        transfer/json/error_listener.cc
+        transfer/json/field_mask_utility.cc
+        transfer/json/json_escaping.cc
+        transfer/json/json_objectwriter.cc
+        transfer/json/json_stream_parser.cc
+        transfer/json/object_writer.cc
+        transfer/json/proto_writer.cc
+        transfer/json/protostream_objectsource.cc
+        transfer/json/protostream_objectwriter.cc
+        transfer/json/type_info.cc
+        transfer/json/utility.cc
+        transfer/json/json_util.cc
         util/message_differencer.cc
         util/time_util.cc
-        util/type_resolver_util.cc
+        transfer/json/type_resolver_util.cc
         format/wired/wire_format.cc
-        wrappers.skp.cc
+        types/wrappers.skp.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS ${PROJECT_NAME}::shark-lite_static ${KMCMAKE_DEPS_LINK}
 )

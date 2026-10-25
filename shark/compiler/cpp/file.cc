@@ -345,6 +345,23 @@ void FileGenerator::DoIncludeFile(const std::string& google3_name,
     if (path == "wire_format.h" || path == "wire_format_lite.h") {
       path = "format/wired/" + path;
     }
+    if (path == "any.h" || path == "map.h" || path == "map_entry.h" ||
+        path == "map_entry_lite.h" || path == "map_field.h" ||
+        path == "map_field_inl.h" || path == "map_field_lite.h" ||
+        path == "map_type_handler.h") {
+      path = "types/" + path;
+    }
+    if (path == "generated_enum_reflection.h" ||
+        path == "generated_enum_util.h" ||
+        path == "generated_message_bases.h" ||
+        path == "generated_message_reflection.h" ||
+        path == "generated_message_tctable_decl.h" ||
+        path == "generated_message_tctable_impl.h" ||
+        path == "generated_message_util.h" ||
+        path == "implicit_weak_message.h" ||
+        path == "inlined_string_field.h" || path == "metadata_lite.h") {
+      path = "generated/" + path;
+    }
     if (options_.runtime_include_base.empty()) {
       format("#include <shark/$1$>", path);
     } else {

@@ -37,7 +37,7 @@
 
 syntax = "proto2";
 
-import "tests/unittest_mset_wire_format.shark";
+import "tests/format/wired/unittest_mset_wire_format.shark";
 
 package sharkbuf_unittest;
 

@@ -42,22 +42,22 @@
 // compiler/cpp/unittest, except using the reflection interface
 // rather than generated accessors.
 
-#include <shark/generated_message_reflection.h>
+#include <shark/generated/generated_message_reflection.h>
 
 #include <memory>
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/map_unittest.skp.h>
+#include <tests/types/map_unittest.skp.h>
 #include <tests/unittest.skp.h>
 #include <tests/unittest_mset.skp.h>
-#include <tests/unittest_mset_wire_format.skp.h>
+#include <tests/format/wired/unittest_mset_wire_format.skp.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <tests/testing/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/gtest_enum.h>
-#include <tests/map_test_util.h>
+#include <tests/types/map_test_util.h>
 #include <tests/test_util.h>
 
 // Must be included last.

@@ -36,7 +36,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <shark/implicit_weak_message.h>
+#include <shark/generated/implicit_weak_message.h>
 #include <shark/repeated_field.h>
 #include <shark/port.h>
 

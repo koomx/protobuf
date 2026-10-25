@@ -36,7 +36,7 @@
 #include <memory>
 
 #include <shark/message.h>
-#include <shark/generated_enum_util.h>
+#include <shark/generated/generated_enum_util.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

@@ -120,9 +120,9 @@
 #include <shark/arena.h>
 #include <shark/port.h>
 #include <shark/descriptor.h>
-#include <shark/generated_message_reflection.h>
-#include <shark/generated_message_util.h>
-#include <shark/map.h>  // TODO(b/211442718): cleanup
+#include <shark/generated/generated_message_reflection.h>
+#include <shark/generated/generated_message_util.h>
+#include <shark/types/map.h>  // TODO(b/211442718): cleanup
 #include <shark/message_lite.h>
 
 

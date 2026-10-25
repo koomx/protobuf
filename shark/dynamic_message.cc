@@ -72,15 +72,15 @@
 
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/generated_message_reflection.h>
-#include <shark/generated_message_util.h>
+#include <shark/generated/generated_message_reflection.h>
+#include <shark/generated/generated_message_util.h>
 #include <shark/unknown_field_set.h>
 #include <shark/stubs/hash.h>
 #include <shark/arenastring.h>
 #include <shark/extension_set.h>
-#include <shark/map_field.h>
-#include <shark/map_field_inl.h>
-#include <shark/map_type_handler.h>
+#include <shark/types/map_field.h>
+#include <shark/types/map_field_inl.h>
+#include <shark/types/map_type_handler.h>
 #include <shark/reflection_ops.h>
 #include <shark/repeated_field.h>
 #include <shark/format/wired/wire_format.h>

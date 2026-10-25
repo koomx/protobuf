@@ -36,7 +36,7 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/map_lite_unittest.skp.h>
+#include <tests/types/map_lite_unittest.skp.h>
 #include <tests/unittest_lite.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/strutil.h>
@@ -45,7 +45,7 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <tests/map_lite_test_util.h>
+#include <tests/types/map_lite_test_util.h>
 #include <shark/parse_context.h>
 #include <tests/test_util_lite.h>
 #include <shark/format/wired/wire_format_lite.h>

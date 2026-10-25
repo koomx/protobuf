@@ -43,9 +43,9 @@
 #include <shark/stubs/strutil.h>
 #include <shark/arenastring.h>
 #include <shark/endian.h>
-#include <shark/implicit_weak_message.h>
-#include <shark/inlined_string_field.h>
-#include <shark/metadata_lite.h>
+#include <shark/generated/implicit_weak_message.h>
+#include <shark/generated/inlined_string_field.h>
+#include <shark/generated/metadata_lite.h>
 #include <shark/repeated_field.h>
 #include <shark/format/wired/wire_format_lite.h>
 

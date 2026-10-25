@@ -41,7 +41,7 @@
 #include <shark/stubs/common.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/generated_message_util.h>
+#include <shark/generated/generated_message_util.h>
 #include <shark/message_lite.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/strutil.h>

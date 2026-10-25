@@ -46,8 +46,8 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/dynamic_message.h>
-#include <shark/map_field.h>
-#include <shark/map_field_inl.h>
+#include <shark/types/map_field.h>
+#include <shark/types/map_field_inl.h>
 #include <shark/message.h>
 #include <shark/message_lite.h>
 #include <shark/parse_context.h>

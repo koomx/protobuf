@@ -44,9 +44,9 @@
 #include <shark/stubs/strutil.h>
 
 #include <shark/stubs/logging.h>
-#include <tests/any_test.skp.h>
-#include <tests/map_test_util.h>
-#include <tests/map_unittest.skp.h>
+#include <tests/types/any_test.skp.h>
+#include <tests/types/map_test_util.h>
+#include <tests/types/map_unittest.skp.h>
 #include <tests/test_util.h>
 #include <tests/unittest.skp.h>
 #include <shark/io/coded_stream.h>

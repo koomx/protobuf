@@ -39,7 +39,7 @@ syntax = "proto2";
 
 package sharkbuf_unittest;
 
-import "shark/any.shark";
+import "shark/types/any.shark";
 
 option optimize_for = SPEED;
 

@@ -22,13 +22,13 @@
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
 #include <shark/arenastring.h>
-#include <shark/generated_message_util.h>
-#include <shark/metadata_lite.h>
-#include <shark/generated_message_reflection.h>
+#include <shark/generated/generated_message_util.h>
+#include <shark/generated/metadata_lite.h>
+#include <shark/generated/generated_message_reflection.h>
 #include <shark/message.h>
 #include <shark/repeated_field.h>  // IWYU pragma: export
 #include <shark/extension_set.h>  // IWYU pragma: export
-#include <shark/generated_enum_reflection.h>
+#include <shark/generated/generated_enum_reflection.h>
 #include <shark/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>

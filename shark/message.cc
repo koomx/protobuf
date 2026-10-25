@@ -46,10 +46,10 @@
 #include <shark/stubs/strutil.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/generated_message_reflection.h>
-#include <shark/generated_message_util.h>
-#include <shark/map_field.h>
-#include <shark/map_field_inl.h>
+#include <shark/generated/generated_message_reflection.h>
+#include <shark/generated/generated_message_util.h>
+#include <shark/types/map_field.h>
+#include <shark/types/map_field_inl.h>
 #include <shark/parse_context.h>
 #include <shark/reflection_internal.h>
 #include <shark/reflection_ops.h>

@@ -38,7 +38,7 @@
 #include <memory>
 #include <vector>
 
-#include <shark/any.skp.h>
+#include <shark/types/any.skp.h>
 #include <shark/compiler/importer.h>
 #include <shark/compiler/parser.h>
 #include <tests/unittest.skp.h>

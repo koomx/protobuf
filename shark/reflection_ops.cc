@@ -40,8 +40,8 @@
 #include <shark/stubs/common.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
-#include <shark/map_field.h>
-#include <shark/map_field_inl.h>
+#include <shark/types/map_field.h>
+#include <shark/types/map_field_inl.h>
 #include <shark/unknown_field_set.h>
 
 // Must be included last.

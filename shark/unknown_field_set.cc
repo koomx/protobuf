@@ -41,8 +41,8 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/extension_set.h>
-#include <shark/generated_message_tctable_decl.h>
-#include <shark/generated_message_tctable_impl.h>
+#include <shark/generated/generated_message_tctable_decl.h>
+#include <shark/generated/generated_message_tctable_impl.h>
 #include <shark/parse_context.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>

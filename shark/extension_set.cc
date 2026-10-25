@@ -44,7 +44,7 @@
 #include <shark/arena.h>
 #include <shark/extension_set_inl.h>
 #include <shark/message_lite.h>
-#include <shark/metadata_lite.h>
+#include <shark/generated/metadata_lite.h>
 #include <shark/parse_context.h>
 #include <shark/port.h>
 #include <shark/repeated_field.h>

@@ -43,9 +43,9 @@
 #include <shark/io/coded_stream.h>
 #include <shark/stubs/casts.h>
 #include <shark/descriptor.h>
-#include <shark/generated_message_util.h>
+#include <shark/generated/generated_message_util.h>
 #include <shark/message.h>
-#include <shark/metadata_lite.h>
+#include <shark/generated/metadata_lite.h>
 #include <shark/parse_context.h>
 #include <shark/format/wired/wire_format_lite.h>
 

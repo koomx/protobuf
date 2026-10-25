@@ -43,12 +43,12 @@ package protobuf_test_messages.proto3;
 // This is the default, but we specify it here explicitly.
 option optimize_for = SPEED;
 
-import "shark/any.shark";
-import "shark/duration.shark";
-import "shark/field_mask.shark";
-import "shark/struct.shark";
-import "shark/timestamp.shark";
-import "shark/wrappers.shark";
+import "shark/types/any.shark";
+import "shark/types/duration.shark";
+import "shark/types/field_mask.shark";
+import "shark/types/struct.shark";
+import "shark/types/timestamp.shark";
+import "shark/types/wrappers.shark";
 
 option cc_enable_arenas = true;
 

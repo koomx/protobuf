@@ -44,7 +44,7 @@ option py_generic_services = true;
 // A custom file option (defined below).
 option (file_opt1) = 9876543210;
 
-import "shark/any.shark";
+import "shark/types/any.shark";
 import "shark/descriptor.shark";
 
 // We don't put this in a package within proto2 because we need to make sure

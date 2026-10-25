@@ -48,7 +48,7 @@
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/arena.h>
 #include <shark/stubs/strutil.h>
-#include <shark/generated_message_util.h>
+#include <shark/generated/generated_message_util.h>
 #include <shark/repeated_field.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/mutex.h>

@@ -14,16 +14,16 @@ if [[ ! -f shark/descriptor.shark ]]; then
 fi
 
 runtime_protos=(
-  shark/any.shark
-  shark/api.shark
-  shark/duration.shark
-  shark/empty.shark
-  shark/field_mask.shark
-  shark/source_context.shark
-  shark/struct.shark
-  shark/timestamp.shark
-  shark/type.shark
-  shark/wrappers.shark
+  shark/types/any.shark
+  shark/types/api.shark
+  shark/types/duration.shark
+  shark/types/empty.shark
+  shark/types/field_mask.shark
+  shark/types/source_context.shark
+  shark/types/struct.shark
+  shark/types/timestamp.shark
+  shark/types/type.shark
+  shark/types/wrappers.shark
 )
 
 build_dir=build

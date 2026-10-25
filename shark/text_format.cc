@@ -50,12 +50,12 @@
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/stubs/strutil.h>
-#include <shark/any.h>
+#include <shark/types/any.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/dynamic_message.h>
 #include <shark/io/strtod.h>
-#include <shark/map_field.h>
+#include <shark/types/map_field.h>
 #include <shark/message.h>
 #include <shark/repeated_field.h>
 #include <shark/unknown_field_set.h>

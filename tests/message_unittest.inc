@@ -60,7 +60,7 @@
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <shark/io/io_win32.h>
-#include <shark/generated_message_reflection.h>
+#include <shark/generated/generated_message_reflection.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>

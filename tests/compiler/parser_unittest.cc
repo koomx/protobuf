@@ -41,7 +41,7 @@
 
 #include <tests/test_util2.h>
 #include <tests/unittest.skp.h>
-#include <shark/any.skp.h>
+#include <shark/types/any.skp.h>
 #include <tests/unittest_custom_options.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>

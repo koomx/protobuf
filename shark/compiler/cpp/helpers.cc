@@ -67,7 +67,7 @@ namespace shark::compiler::cpp {
 namespace {
 
 static const char kAnyMessageName[] = "Any";
-static const char kAnyProtoFile[] = "shark/any.shark";
+static const char kAnyProtoFile[] = "shark/types/any.shark";
 
 std::string DotsToColons(const std::string& name) {
   return StringReplace(name, ".", "::", true);
@@ -1156,18 +1156,18 @@ bool IsAnyMessage(const Descriptor* descriptor, const Options& options) {
 
 bool IsWellKnownMessage(const FileDescriptor* file) {
   static const std::unordered_set<std::string> well_known_files{
-      "shark/any.shark",
-      "shark/api.shark",
+      "shark/types/any.shark",
+      "shark/types/api.shark",
       "shark/compiler/plugin.shark",
       "shark/descriptor.shark",
-      "shark/duration.shark",
-      "shark/empty.shark",
-      "shark/field_mask.shark",
-      "shark/source_context.shark",
-      "shark/struct.shark",
-      "shark/timestamp.shark",
-      "shark/type.shark",
-      "shark/wrappers.shark",
+      "shark/types/duration.shark",
+      "shark/types/empty.shark",
+      "shark/types/field_mask.shark",
+      "shark/types/source_context.shark",
+      "shark/types/struct.shark",
+      "shark/types/timestamp.shark",
+      "shark/types/type.shark",
+      "shark/types/wrappers.shark",
   };
   return well_known_files.find(file->name()) != well_known_files.end();
 }

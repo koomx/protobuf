@@ -31,7 +31,7 @@
 #include <tests/reflection_tester.h>
 
 #include <gtest/gtest.h>
-#include <shark/map_field.h>
+#include <shark/types/map_field.h>
 #include <shark/message.h>
 
 // Must include last.

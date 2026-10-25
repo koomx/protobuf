@@ -30,7 +30,7 @@
 
 #pragma once
 
-#include <shark/map_field.h>
+#include <shark/types/map_field.h>
 #include <shark/reflection.h>
 #include <shark/repeated_field.h>
 

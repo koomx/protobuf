@@ -45,11 +45,11 @@
 #include <shark/stubs/common.h>
 #include <tests/testing/file.h>
 #include <tests/testing/file.h>
-#include <shark/any.skp.h>
-#include <tests/map_unittest.skp.h>
+#include <shark/types/any.skp.h>
+#include <tests/types/map_unittest.skp.h>
 #include <tests/unittest.skp.h>
 #include <tests/unittest_mset.skp.h>
-#include <tests/unittest_mset_wire_format.skp.h>
+#include <tests/format/wired/unittest_mset_wire_format.skp.h>
 #include <tests/unittest_proto3.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
