@@ -108,7 +108,6 @@ kmcmake_cc_test(
         io/printer_unittest.cc
         io/tokenizer_unittest.cc
         io/zero_copy_stream_unittest.cc
-        narrow_int_test.cc
         message_unittest.cc
         no_field_presence_test.cc
         preserve_unknown_enum_test.cc
@@ -176,6 +175,8 @@ kmcmake_cc_test(
         types/map_field_test.cc
         types/map_test.cc
         types/well_known_types_unittest.cc
+        types/narrow_int_test.cc
+        types/narrow_int_reflect_test.cc
         ${types_test_proto_files}
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS

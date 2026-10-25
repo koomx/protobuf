@@ -273,8 +273,12 @@ void DynamicMapField::AllocateMapValue(MapValueRef* map_val) {
     break;                                                   \
   }
     HANDLE_TYPE(INT32, int32_t);
+    HANDLE_TYPE(INT8, int8_t);
+    HANDLE_TYPE(INT16, int16_t);
     HANDLE_TYPE(INT64, int64_t);
     HANDLE_TYPE(UINT32, uint32_t);
+    HANDLE_TYPE(UINT8, uint8_t);
+    HANDLE_TYPE(UINT16, uint16_t);
     HANDLE_TYPE(UINT64, uint64_t);
     HANDLE_TYPE(DOUBLE, double);
     HANDLE_TYPE(FLOAT, float);
@@ -379,7 +383,9 @@ void DynamicMapField::MergeFrom(const MapFieldBase& other) {
     const FieldDescriptor* field_descriptor =
         default_entry_->GetDescriptor()->map_value();
     switch (field_descriptor->cpp_type()) {
-      case FieldCppType::INT32: {
+      case FieldCppType::INT32:
+      case FieldCppType::INT8:
+      case FieldCppType::INT16: {
         map_val->SetInt32Value(other_it->second.GetInt32Value());
         break;
       }
@@ -387,7 +393,9 @@ void DynamicMapField::MergeFrom(const MapFieldBase& other) {
         map_val->SetInt64Value(other_it->second.GetInt64Value());
         break;
       }
-      case FieldCppType::UINT32: {
+      case FieldCppType::UINT32:
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16: {
         map_val->SetUInt32Value(other_it->second.GetUInt32Value());
         break;
       }
@@ -459,12 +467,16 @@ void DynamicMapField::SyncRepeatedFieldWithMapNoLock() const {
         reflection->SetInt64(new_entry, key_des, map_key.GetInt64Value());
         break;
       case FieldCppType::INT32:
+      case FieldCppType::INT8:
+      case FieldCppType::INT16:
         reflection->SetInt32(new_entry, key_des, map_key.GetInt32Value());
         break;
       case FieldCppType::UINT64:
         reflection->SetUInt64(new_entry, key_des, map_key.GetUInt64Value());
         break;
       case FieldCppType::UINT32:
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16:
         reflection->SetUInt32(new_entry, key_des, map_key.GetUInt32Value());
         break;
       case FieldCppType::BOOL:
@@ -486,12 +498,16 @@ void DynamicMapField::SyncRepeatedFieldWithMapNoLock() const {
         reflection->SetInt64(new_entry, val_des, map_val.GetInt64Value());
         break;
       case FieldCppType::INT32:
+      case FieldCppType::INT8:
+      case FieldCppType::INT16:
         reflection->SetInt32(new_entry, val_des, map_val.GetInt32Value());
         break;
       case FieldCppType::UINT64:
         reflection->SetUInt64(new_entry, val_des, map_val.GetUInt64Value());
         break;
       case FieldCppType::UINT32:
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16:
         reflection->SetUInt32(new_entry, val_des, map_val.GetUInt32Value());
         break;
       case FieldCppType::BOOL:
@@ -544,11 +560,27 @@ void DynamicMapField::SyncMapWithRepeatedFieldNoLock() const {
       case FieldCppType::INT32:
         map_key.SetInt32Value(reflection->GetInt32(*it, key_des));
         break;
+      case FieldCppType::INT8:
+        map_key.SetInt8Value(
+            static_cast<int8_t>(reflection->GetInt32(*it, key_des)));
+        break;
+      case FieldCppType::INT16:
+        map_key.SetInt16Value(
+            static_cast<int16_t>(reflection->GetInt32(*it, key_des)));
+        break;
       case FieldCppType::UINT64:
         map_key.SetUInt64Value(reflection->GetUInt64(*it, key_des));
         break;
       case FieldCppType::UINT32:
         map_key.SetUInt32Value(reflection->GetUInt32(*it, key_des));
+        break;
+      case FieldCppType::UINT8:
+        map_key.SetUInt8Value(
+            static_cast<uint8_t>(reflection->GetUInt32(*it, key_des)));
+        break;
+      case FieldCppType::UINT16:
+        map_key.SetUInt16Value(
+            static_cast<uint16_t>(reflection->GetUInt32(*it, key_des)));
         break;
       case FieldCppType::BOOL:
         map_key.SetBoolValue(reflection->GetBool(*it, key_des));
@@ -580,8 +612,12 @@ void DynamicMapField::SyncMapWithRepeatedFieldNoLock() const {
     break;                                                   \
   }
       HANDLE_TYPE(INT32, int32_t, Int32);
+      HANDLE_TYPE(INT8, int8_t, Int32);
+      HANDLE_TYPE(INT16, int16_t, Int32);
       HANDLE_TYPE(INT64, int64_t, Int64);
       HANDLE_TYPE(UINT32, uint32_t, UInt32);
+      HANDLE_TYPE(UINT8, uint8_t, UInt32);
+      HANDLE_TYPE(UINT16, uint16_t, UInt32);
       HANDLE_TYPE(UINT64, uint64_t, UInt64);
       HANDLE_TYPE(DOUBLE, double, Double);
       HANDLE_TYPE(FLOAT, float, Float);
@@ -623,8 +659,12 @@ size_t DynamicMapField::SpaceUsedExcludingSelfNoLock() const {
     break;                                   \
   }
       HANDLE_TYPE(INT32, int32_t);
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT64, int64_t);
       HANDLE_TYPE(UINT32, uint32_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(DOUBLE, double);
       HANDLE_TYPE(FLOAT, float);

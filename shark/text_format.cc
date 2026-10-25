@@ -760,10 +760,38 @@ class TextFormat::Parser::ParserImpl {
   }
 
     switch (field->cpp_type()) {
+      case FieldCppType::INT8: {
+        int64_t value;
+        DO(ConsumeSignedInteger(&value, 127));
+        SET_FIELD(Int32, static_cast<int32_t>(value));
+        break;
+      }
+
+      case FieldCppType::INT16: {
+        int64_t value;
+        DO(ConsumeSignedInteger(&value, 32767));
+        SET_FIELD(Int32, static_cast<int32_t>(value));
+        break;
+      }
+
       case FieldCppType::INT32: {
         int64_t value;
         DO(ConsumeSignedInteger(&value, kint32max));
         SET_FIELD(Int32, static_cast<int32_t>(value));
+        break;
+      }
+
+      case FieldCppType::UINT8: {
+        uint64_t value;
+        DO(ConsumeUnsignedInteger(&value, 255));
+        SET_FIELD(UInt32, static_cast<uint32_t>(value));
+        break;
+      }
+
+      case FieldCppType::UINT16: {
+        uint64_t value;
+        DO(ConsumeUnsignedInteger(&value, 65535));
+        SET_FIELD(UInt32, static_cast<uint32_t>(value));
         break;
       }
 
@@ -2251,6 +2279,8 @@ class MapEntryMessageComparator {
         bool second = reflection->GetBool(*b, field_);
         return first < second;
       }
+      case FieldCppType::INT8:
+      case FieldCppType::INT16:
       case FieldCppType::INT32: {
         int32_t first = reflection->GetInt32(*a, field_);
         int32_t second = reflection->GetInt32(*b, field_);
@@ -2261,6 +2291,8 @@ class MapEntryMessageComparator {
         int64_t second = reflection->GetInt64(*b, field_);
         return first < second;
       }
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16:
       case FieldCppType::UINT32: {
         uint32_t first = reflection->GetUInt32(*a, field_);
         uint32_t second = reflection->GetUInt32(*b, field_);
@@ -2356,12 +2388,16 @@ void MapFieldPrinterHelper::CopyKey(const MapKey& key, Message* message,
     case FieldCppType::INT64:
       reflection->SetInt64(message, field_desc, key.GetInt64Value());
       return;
+    case FieldCppType::INT8:
+    case FieldCppType::INT16:
     case FieldCppType::INT32:
       reflection->SetInt32(message, field_desc, key.GetInt32Value());
       return;
     case FieldCppType::UINT64:
       reflection->SetUInt64(message, field_desc, key.GetUInt64Value());
       return;
+    case FieldCppType::UINT8:
+    case FieldCppType::UINT16:
     case FieldCppType::UINT32:
       reflection->SetUInt32(message, field_desc, key.GetUInt32Value());
       return;
@@ -2397,12 +2433,16 @@ void MapFieldPrinterHelper::CopyValue(const MapValueRef& value,
     case FieldCppType::INT64:
       reflection->SetInt64(message, field_desc, value.GetInt64Value());
       return;
+    case FieldCppType::INT8:
+    case FieldCppType::INT16:
     case FieldCppType::INT32:
       reflection->SetInt32(message, field_desc, value.GetInt32Value());
       return;
     case FieldCppType::UINT64:
       reflection->SetUInt64(message, field_desc, value.GetUInt64Value());
       return;
+    case FieldCppType::UINT8:
+    case FieldCppType::UINT16:
     case FieldCppType::UINT32:
       reflection->SetUInt32(message, field_desc, value.GetUInt32Value());
       return;
@@ -2538,8 +2578,12 @@ void TextFormat::Printer::PrintFieldValue(const Message& message,
         generator);                                                  \
     break
 
+    OUTPUT_FIELD(INT8, Int32);
+    OUTPUT_FIELD(INT16, Int32);
     OUTPUT_FIELD(INT32, Int32);
     OUTPUT_FIELD(INT64, Int64);
+    OUTPUT_FIELD(UINT8, UInt32);
+    OUTPUT_FIELD(UINT16, UInt32);
     OUTPUT_FIELD(UINT32, UInt32);
     OUTPUT_FIELD(UINT64, UInt64);
     OUTPUT_FIELD(FLOAT, Float);

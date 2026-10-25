@@ -1,4 +1,4 @@
-#include <tests/narrow_int.skp.h>
+#include <tests/types/narrow_int.skp.h>
 
 #include <string>
 

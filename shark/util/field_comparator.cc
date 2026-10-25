@@ -82,6 +82,8 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
     case FieldCppType::FLOAT:
       COMPARE_FIELD(Float);
     case FieldCppType::INT32:
+    case FieldCppType::INT8:
+    case FieldCppType::INT16:
       COMPARE_FIELD(Int32);
     case FieldCppType::INT64:
       COMPARE_FIELD(Int64);
@@ -109,6 +111,8 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
       }
       break;
     case FieldCppType::UINT32:
+    case FieldCppType::UINT8:
+    case FieldCppType::UINT16:
       COMPARE_FIELD(UInt32);
     case FieldCppType::UINT64:
       COMPARE_FIELD(UInt64);

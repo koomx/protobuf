@@ -88,8 +88,12 @@ util::StatusOr<std::string> MapKeyDefaultValueAsString(
     case shark::Field::TYPE_BOOL:
       return std::string("false");
     case shark::Field::TYPE_INT32:
+    case shark::Field::TYPE_INT8:
+    case shark::Field::TYPE_INT16:
     case shark::Field::TYPE_INT64:
     case shark::Field::TYPE_UINT32:
+    case shark::Field::TYPE_UINT8:
+    case shark::Field::TYPE_UINT16:
     case shark::Field::TYPE_UINT64:
     case shark::Field::TYPE_SINT32:
     case shark::Field::TYPE_SINT64:
@@ -774,7 +778,9 @@ util::Status ProtoStreamObjectSource::RenderNonMessageField(
       ow->RenderBool(field_name, buffer64 != 0);
       break;
     }
-    case shark::Field::TYPE_INT32: {
+    case shark::Field::TYPE_INT32:
+    case shark::Field::TYPE_INT8:
+    case shark::Field::TYPE_INT16: {
       stream_->ReadVarint32(&buffer32);
       ow->RenderInt32(field_name, bit_cast<int32_t>(buffer32));
       break;
@@ -784,7 +790,9 @@ util::Status ProtoStreamObjectSource::RenderNonMessageField(
       ow->RenderInt64(field_name, bit_cast<int64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_UINT32: {
+    case shark::Field::TYPE_UINT32:
+    case shark::Field::TYPE_UINT8:
+    case shark::Field::TYPE_UINT16: {
       stream_->ReadVarint32(&buffer32);
       ow->RenderUint32(field_name, bit_cast<uint32_t>(buffer32));
       break;
@@ -899,7 +907,9 @@ const std::string ProtoStreamObjectSource::ReadFieldValueAsString(
       result = buffer64 != 0 ? "true" : "false";
       break;
     }
-    case shark::Field::TYPE_INT32: {
+    case shark::Field::TYPE_INT32:
+    case shark::Field::TYPE_INT8:
+    case shark::Field::TYPE_INT16: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
       result = StrCat(bit_cast<int32_t>(buffer32));
@@ -911,7 +921,9 @@ const std::string ProtoStreamObjectSource::ReadFieldValueAsString(
       result = StrCat(bit_cast<int64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_UINT32: {
+    case shark::Field::TYPE_UINT32:
+    case shark::Field::TYPE_UINT8:
+    case shark::Field::TYPE_UINT16: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
       result = StrCat(bit_cast<uint32_t>(buffer32));

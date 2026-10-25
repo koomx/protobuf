@@ -1028,8 +1028,12 @@ bool MessageDifferencer::CompareMapFieldByMapReflection(
     break;                                                                    \
   }
     HANDLE_TYPE(INT32, Int32Value, Int32);
+    HANDLE_TYPE(INT8, Int32Value, Int32);
+    HANDLE_TYPE(INT16, Int32Value, Int32);
     HANDLE_TYPE(INT64, Int64Value, Int64);
     HANDLE_TYPE(UINT32, UInt32Value, UInt32);
+    HANDLE_TYPE(UINT8, UInt32Value, UInt32);
+    HANDLE_TYPE(UINT16, UInt32Value, UInt32);
     HANDLE_TYPE(UINT64, UInt64Value, UInt64);
     HANDLE_TYPE(DOUBLE, DoubleValue, Double);
     HANDLE_TYPE(FLOAT, FloatValue, Float);

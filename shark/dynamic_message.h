@@ -181,7 +181,9 @@ class SHARK_EXPORT DynamicMapSorter {
           bool second = reflection->GetBool(*b, field_);
           return first < second;
         }
-        case FieldCppType::INT32: {
+        case FieldCppType::INT32:
+        case FieldCppType::INT8:
+        case FieldCppType::INT16: {
           int32_t first = reflection->GetInt32(*a, field_);
           int32_t second = reflection->GetInt32(*b, field_);
           return first < second;
@@ -191,7 +193,9 @@ class SHARK_EXPORT DynamicMapSorter {
           int64_t second = reflection->GetInt64(*b, field_);
           return first < second;
         }
-        case FieldCppType::UINT32: {
+        case FieldCppType::UINT32:
+        case FieldCppType::UINT8:
+        case FieldCppType::UINT16: {
           uint32_t first = reflection->GetUInt32(*a, field_);
           uint32_t second = reflection->GetUInt32(*b, field_);
           return first < second;

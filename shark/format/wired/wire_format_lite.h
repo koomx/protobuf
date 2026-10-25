@@ -947,6 +947,38 @@ inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLiteFieldType::TYPE
   return true;
 }
 template <>
+inline bool WireFormatLite::ReadPrimitive<int8_t, WireFormatLiteFieldType::TYPE_INT8>(
+    io::CodedInputStream* input, int8_t* value) {
+  uint32_t temp;
+  if (!input->ReadVarint32(&temp)) return false;
+  *value = static_cast<int8_t>(static_cast<int32_t>(temp));
+  return true;
+}
+template <>
+inline bool WireFormatLite::ReadPrimitive<int16_t, WireFormatLiteFieldType::TYPE_INT16>(
+    io::CodedInputStream* input, int16_t* value) {
+  uint32_t temp;
+  if (!input->ReadVarint32(&temp)) return false;
+  *value = static_cast<int16_t>(static_cast<int32_t>(temp));
+  return true;
+}
+template <>
+inline bool WireFormatLite::ReadPrimitive<uint8_t, WireFormatLiteFieldType::TYPE_UINT8>(
+    io::CodedInputStream* input, uint8_t* value) {
+  uint32_t temp;
+  if (!input->ReadVarint32(&temp)) return false;
+  *value = static_cast<uint8_t>(temp);
+  return true;
+}
+template <>
+inline bool WireFormatLite::ReadPrimitive<uint16_t, WireFormatLiteFieldType::TYPE_UINT16>(
+    io::CodedInputStream* input, uint16_t* value) {
+  uint32_t temp;
+  if (!input->ReadVarint32(&temp)) return false;
+  *value = static_cast<uint16_t>(temp);
+  return true;
+}
+template <>
 inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLiteFieldType::TYPE_INT64>(
     io::CodedInputStream* input, int64_t* value) {
   uint64_t temp;

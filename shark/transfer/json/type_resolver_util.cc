@@ -192,12 +192,16 @@ class DescriptorPoolTypeResolver : public TypeResolver {
                 : reflection->GetUInt64(options, field)));
         return;
       case FieldCppType::INT32:
+      case FieldCppType::INT8:
+      case FieldCppType::INT16:
         value->PackFrom(WrapValue<Int32Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedInt32(options, field, index)
                 : reflection->GetInt32(options, field)));
         return;
       case FieldCppType::UINT32:
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16:
         value->PackFrom(WrapValue<UInt32Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedUInt32(options, field, index)
@@ -315,12 +319,16 @@ class DescriptorPoolTypeResolver : public TypeResolver {
   std::string DefaultValueAsString(const FieldDescriptor* descriptor) {
     switch (descriptor->cpp_type()) {
       case FieldCppType::INT32:
+      case FieldCppType::INT8:
+      case FieldCppType::INT16:
         return StrCat(descriptor->default_value_int32());
         break;
       case FieldCppType::INT64:
         return StrCat(descriptor->default_value_int64());
         break;
       case FieldCppType::UINT32:
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16:
         return StrCat(descriptor->default_value_uint32());
         break;
       case FieldCppType::UINT64:

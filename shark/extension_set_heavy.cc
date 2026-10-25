@@ -106,8 +106,7 @@ inline ::shark::FieldType real_type(FieldTypeUint8 type) {
 }
 
 inline ::shark::FieldCppType cpp_type(FieldTypeUint8 type) {
-  return FieldDescriptor::TypeToCppType(
-      static_cast<::shark::FieldType>(type));
+  return FieldDescriptor::TypeToCppType(static_cast<::shark::FieldType>(type));
 }
 
 inline WireFormatLiteFieldType field_type(FieldTypeUint8 type) {
@@ -380,8 +379,12 @@ size_t ExtensionSet::Extension::SpaceUsedExcludingSelfLong() const {
     break
 
       HANDLE_TYPE(INT32, int32_t);
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT64, int64_t);
       HANDLE_TYPE(UINT32, uint32_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(FLOAT, float);
       HANDLE_TYPE(DOUBLE, double);

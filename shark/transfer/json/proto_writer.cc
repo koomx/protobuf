@@ -158,6 +158,30 @@ inline util::Status WriteFixed32(int field_number, const DataPiece& data,
 }
 
 // Writes a UINT32 field, including tag, to the stream.
+inline util::Status WriteRangedInt32(int field_number, const DataPiece& data,
+                                      CodedOutputStream* stream, int32_t min,
+                                      int32_t max) {
+  util::StatusOr<int32_t> i32 = data.ToInt32();
+  if (!i32.ok()) return i32.status();
+  if (i32.value() < min || i32.value() > max) {
+    return util::InvalidArgumentError("Integer out of range.");
+  }
+  WireFormatLite::WriteInt32(field_number, i32.value(), stream);
+  return util::Status();
+}
+
+inline util::Status WriteRangedUInt32(int field_number, const DataPiece& data,
+                                       CodedOutputStream* stream,
+                                       uint32_t max) {
+  util::StatusOr<uint32_t> u32 = data.ToUint32();
+  if (!u32.ok()) return u32.status();
+  if (u32.value() > max) {
+    return util::InvalidArgumentError("Integer out of range.");
+  }
+  WireFormatLite::WriteUInt32(field_number, u32.value(), stream);
+  return util::Status();
+}
+
 inline util::Status WriteUInt32(int field_number, const DataPiece& data,
                                 CodedOutputStream* stream) {
   util::StatusOr<uint32_t> u32 = data.ToUint32();
@@ -628,6 +652,15 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
       status = WriteInt32(field.number(), data, stream_.get());
       break;
     }
+    case shark::Field::TYPE_INT8: {
+      status = WriteRangedInt32(field.number(), data, stream_.get(), -128, 127);
+      break;
+    }
+    case shark::Field::TYPE_INT16: {
+      status = WriteRangedInt32(field.number(), data, stream_.get(), -32768,
+                                32767);
+      break;
+    }
     case shark::Field::TYPE_SFIXED32: {
       status = WriteSFixed32(field.number(), data, stream_.get());
       break;
@@ -642,6 +675,14 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
     }
     case shark::Field::TYPE_UINT32: {
       status = WriteUInt32(field.number(), data, stream_.get());
+      break;
+    }
+    case shark::Field::TYPE_UINT8: {
+      status = WriteRangedUInt32(field.number(), data, stream_.get(), 255);
+      break;
+    }
+    case shark::Field::TYPE_UINT16: {
+      status = WriteRangedUInt32(field.number(), data, stream_.get(), 65535);
       break;
     }
     case shark::Field::TYPE_INT64: {

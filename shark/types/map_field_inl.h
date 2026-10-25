@@ -50,6 +50,22 @@ inline int32_t UnwrapMapKey<int32_t>(const MapKey& map_key) {
   return map_key.GetInt32Value();
 }
 template <>
+inline int8_t UnwrapMapKey<int8_t>(const MapKey& map_key) {
+  return static_cast<int8_t>(map_key.GetInt32Value());
+}
+template <>
+inline int16_t UnwrapMapKey<int16_t>(const MapKey& map_key) {
+  return static_cast<int16_t>(map_key.GetInt32Value());
+}
+template <>
+inline uint8_t UnwrapMapKey<uint8_t>(const MapKey& map_key) {
+  return static_cast<uint8_t>(map_key.GetUInt32Value());
+}
+template <>
+inline uint16_t UnwrapMapKey<uint16_t>(const MapKey& map_key) {
+  return static_cast<uint16_t>(map_key.GetUInt32Value());
+}
+template <>
 inline uint32_t UnwrapMapKey<uint32_t>(const MapKey& map_key) {
   return map_key.GetUInt32Value();
 }
@@ -76,6 +92,22 @@ inline void SetMapKey(MapKey* map_key, const T& value);
 template <>
 inline void SetMapKey<int32_t>(MapKey* map_key, const int32_t& value) {
   map_key->SetInt32Value(value);
+}
+template <>
+inline void SetMapKey<int8_t>(MapKey* map_key, const int8_t& value) {
+  map_key->SetInt8Value(value);
+}
+template <>
+inline void SetMapKey<int16_t>(MapKey* map_key, const int16_t& value) {
+  map_key->SetInt16Value(value);
+}
+template <>
+inline void SetMapKey<uint8_t>(MapKey* map_key, const uint8_t& value) {
+  map_key->SetUInt8Value(value);
+}
+template <>
+inline void SetMapKey<uint16_t>(MapKey* map_key, const uint16_t& value) {
+  map_key->SetUInt16Value(value);
 }
 template <>
 inline void SetMapKey<uint32_t>(MapKey* map_key, const uint32_t& value) {

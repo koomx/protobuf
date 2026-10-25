@@ -133,6 +133,14 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
     switch (field->cpp_type()) {
       case FieldCppType::INT32:
         return sizeof(RepeatedField<int32_t>);
+      case FieldCppType::INT8:
+        return sizeof(RepeatedField<int8_t>);
+      case FieldCppType::INT16:
+        return sizeof(RepeatedField<int16_t>);
+      case FieldCppType::UINT8:
+        return sizeof(RepeatedField<uint8_t>);
+      case FieldCppType::UINT16:
+        return sizeof(RepeatedField<uint16_t>);
       case FieldCppType::INT64:
         return sizeof(RepeatedField<int64_t>);
       case FieldCppType::UINT32:
@@ -166,6 +174,14 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
     switch (field->cpp_type()) {
       case FieldCppType::INT32:
         return sizeof(int32_t);
+      case FieldCppType::INT8:
+        return sizeof(int8_t);
+      case FieldCppType::INT16:
+        return sizeof(int16_t);
+      case FieldCppType::UINT8:
+        return sizeof(uint8_t);
+      case FieldCppType::UINT16:
+        return sizeof(uint16_t);
       case FieldCppType::INT64:
         return sizeof(int64_t);
       case FieldCppType::UINT32:
@@ -394,6 +410,34 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
     break;
 
       HANDLE_TYPE(INT32, int32_t);
+      case FieldCppType::INT8:
+        if (!field->is_repeated()) {
+          new (field_ptr) int8_t(static_cast<int8_t>(field->default_value_int32()));
+        } else {
+          new (field_ptr) RepeatedField<int8_t>(GetArenaForAllocation());
+        }
+        break;
+      case FieldCppType::INT16:
+        if (!field->is_repeated()) {
+          new (field_ptr) int16_t(static_cast<int16_t>(field->default_value_int32()));
+        } else {
+          new (field_ptr) RepeatedField<int16_t>(GetArenaForAllocation());
+        }
+        break;
+      case FieldCppType::UINT8:
+        if (!field->is_repeated()) {
+          new (field_ptr) uint8_t(static_cast<uint8_t>(field->default_value_uint32()));
+        } else {
+          new (field_ptr) RepeatedField<uint8_t>(GetArenaForAllocation());
+        }
+        break;
+      case FieldCppType::UINT16:
+        if (!field->is_repeated()) {
+          new (field_ptr) uint16_t(static_cast<uint16_t>(field->default_value_uint32()));
+        } else {
+          new (field_ptr) RepeatedField<uint16_t>(GetArenaForAllocation());
+        }
+        break;
       HANDLE_TYPE(INT64, int64_t);
       HANDLE_TYPE(UINT32, uint32_t);
       HANDLE_TYPE(UINT64, uint64_t);
@@ -538,6 +582,10 @@ DynamicMessage::~DynamicMessage() {
     break
 
         HANDLE_TYPE(INT32, int32_t);
+        HANDLE_TYPE(INT8, int8_t);
+        HANDLE_TYPE(INT16, int16_t);
+        HANDLE_TYPE(UINT8, uint8_t);
+        HANDLE_TYPE(UINT16, uint16_t);
         HANDLE_TYPE(INT64, int64_t);
         HANDLE_TYPE(UINT32, uint32_t);
         HANDLE_TYPE(UINT64, uint64_t);

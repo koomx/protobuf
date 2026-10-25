@@ -110,6 +110,10 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
     break;
 
           HANDLE_TYPE(INT32, Int32);
+          HANDLE_TYPE(INT8, Int32);
+          HANDLE_TYPE(INT16, Int32);
+          HANDLE_TYPE(UINT8, UInt32);
+          HANDLE_TYPE(UINT16, UInt32);
           HANDLE_TYPE(INT64, Int64);
           HANDLE_TYPE(UINT32, UInt32);
           HANDLE_TYPE(UINT64, UInt64);
@@ -143,8 +147,12 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
     break;
 
         HANDLE_TYPE(INT32, Int32);
+        HANDLE_TYPE(INT8, Int32);
+        HANDLE_TYPE(INT16, Int32);
         HANDLE_TYPE(INT64, Int64);
         HANDLE_TYPE(UINT32, UInt32);
+        HANDLE_TYPE(UINT8, UInt32);
+        HANDLE_TYPE(UINT16, UInt32);
         HANDLE_TYPE(UINT64, UInt64);
         HANDLE_TYPE(FLOAT, Float);
         HANDLE_TYPE(DOUBLE, Double);

@@ -464,6 +464,8 @@ DataPiece DefaultValueObjectWriter::CreateDefaultDataPieceForField(
                                            static_cast<uint64_t>(0)));
     }
     case shark::Field::TYPE_INT32:
+    case shark::Field::TYPE_INT8:
+    case shark::Field::TYPE_INT16:
     case shark::Field::TYPE_SINT32:
     case shark::Field::TYPE_SFIXED32: {
       return DataPiece(ConvertTo<int32_t>(
@@ -480,6 +482,8 @@ DataPiece DefaultValueObjectWriter::CreateDefaultDataPieceForField(
       return DataPiece(field.default_value(), false, true);
     }
     case shark::Field::TYPE_UINT32:
+    case shark::Field::TYPE_UINT8:
+    case shark::Field::TYPE_UINT16:
     case shark::Field::TYPE_FIXED32: {
       return DataPiece(ConvertTo<uint32_t>(field.default_value(),
                                            &DataPiece::ToUint32,

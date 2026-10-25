@@ -793,6 +793,31 @@ const char* TcParser::FastV8S2(SHARK_TC_PARAM_DECL) {
   SHARK_MUSTTAIL return SingularVarint<bool, uint16_t>(
       SHARK_TC_PARAM_PASS);
 }
+// One-byte varints are 0..127, which fit in int8, uint8, int16, and uint16.
+// A longer varint returns to MiniParse before the tag is consumed so the
+// generated fallback can range-check and keep out-of-width values unknown.
+#define SHARK_FAST_NARROW(NAME, FIELD, TAG)                                    \
+  const char* TcParser::NAME(SHARK_TC_PARAM_DECL) {                            \
+    if (SHARK_PREDICT_FALSE(data.coded_tag<TAG>() != 0) ||                     \
+        SHARK_PREDICT_FALSE(static_cast<int8_t>(*ptr) < 0)) {                  \
+      SHARK_MUSTTAIL return MiniParse(SHARK_TC_PARAM_PASS);                    \
+    }                                                                          \
+    ptr += sizeof(TAG);                                                       \
+    hasbits |= (uint64_t{1} << data.hasbit_idx());                             \
+    RefAt<FIELD>(msg, data.offset()) = static_cast<FIELD>(*ptr++);             \
+    SHARK_MUSTTAIL return ToTagDispatch(SHARK_TC_PARAM_PASS);                  \
+  }
+
+SHARK_FAST_NARROW(FastN8S1, int8_t, uint8_t)
+SHARK_FAST_NARROW(FastN8S2, int8_t, uint16_t)
+SHARK_FAST_NARROW(FastU8S1, uint8_t, uint8_t)
+SHARK_FAST_NARROW(FastU8S2, uint8_t, uint16_t)
+SHARK_FAST_NARROW(FastN16S1, int16_t, uint8_t)
+SHARK_FAST_NARROW(FastN16S2, int16_t, uint16_t)
+SHARK_FAST_NARROW(FastU16S1, uint16_t, uint8_t)
+SHARK_FAST_NARROW(FastU16S2, uint16_t, uint16_t)
+#undef SHARK_FAST_NARROW
+
 const char* TcParser::FastV32S1(SHARK_TC_PARAM_DECL) {
   SHARK_MUSTTAIL return SingularVarint<uint32_t, uint8_t>(
       SHARK_TC_PARAM_PASS);

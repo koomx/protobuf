@@ -7042,11 +7042,15 @@ namespace shark {
             break;
         case FieldType::BOOL:
         case FieldType::INT32:
+        case FieldType::INT8:
+        case FieldType::INT16:
         case FieldType::INT64:
         case FieldType::SINT32:
         case FieldType::SINT64:
         case FieldType::STRING:
         case FieldType::UINT32:
+        case FieldType::UINT8:
+        case FieldType::UINT16:
         case FieldType::UINT64:
         case FieldType::FIXED32:
         case FieldType::FIXED64:
@@ -7618,6 +7622,38 @@ namespace shark {
             }
             break;
 
+        case FieldCppType::INT8:
+            if (uninterpreted_option_->has_positive_int_value()) {
+                if (uninterpreted_option_->positive_int_value() > 127) {
+                    return AddValueError("Value out of range for int8 option \"" + option_field->full_name() + "\".");
+                }
+                SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->positive_int_value()), option_field->type(), unknown_fields);
+            } else if (uninterpreted_option_->has_negative_int_value()) {
+                if (uninterpreted_option_->negative_int_value() < -128) {
+                    return AddValueError("Value out of range for int8 option \"" + option_field->full_name() + "\".");
+                }
+                SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->negative_int_value()), option_field->type(), unknown_fields);
+            } else {
+                return AddValueError("Value must be integer for int8 option \"" + option_field->full_name() + "\".");
+            }
+            break;
+
+        case FieldCppType::INT16:
+            if (uninterpreted_option_->has_positive_int_value()) {
+                if (uninterpreted_option_->positive_int_value() > 32767) {
+                    return AddValueError("Value out of range for int16 option \"" + option_field->full_name() + "\".");
+                }
+                SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->positive_int_value()), option_field->type(), unknown_fields);
+            } else if (uninterpreted_option_->has_negative_int_value()) {
+                if (uninterpreted_option_->negative_int_value() < -32768) {
+                    return AddValueError("Value out of range for int16 option \"" + option_field->full_name() + "\".");
+                }
+                SetInt32(option_field->number(), static_cast<int32_t>(uninterpreted_option_->negative_int_value()), option_field->type(), unknown_fields);
+            } else {
+                return AddValueError("Value must be integer for int16 option \"" + option_field->full_name() + "\".");
+            }
+            break;
+
         case FieldCppType::INT64:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > static_cast<uint64_t>(std::numeric_limits<int64_t>::max())) {
@@ -7650,6 +7686,32 @@ namespace shark {
                     "Value must be non-negative integer for uint32 "
                     "option \""
                     + option_field->full_name() + "\".");
+            }
+            break;
+
+        case FieldCppType::UINT8:
+            if (uninterpreted_option_->has_positive_int_value()) {
+                if (uninterpreted_option_->positive_int_value() > 255) {
+                    return AddValueError("Value out of range for uint8 option \"" + option_field->full_name() + "\".");
+                }
+                SetUInt32(option_field->number(),
+                    static_cast<uint32_t>(uninterpreted_option_->positive_int_value()),
+                    option_field->type(), unknown_fields);
+            } else {
+                return AddValueError("Value must be non-negative integer for uint8 option \"" + option_field->full_name() + "\".");
+            }
+            break;
+
+        case FieldCppType::UINT16:
+            if (uninterpreted_option_->has_positive_int_value()) {
+                if (uninterpreted_option_->positive_int_value() > 65535) {
+                    return AddValueError("Value out of range for uint16 option \"" + option_field->full_name() + "\".");
+                }
+                SetUInt32(option_field->number(),
+                    static_cast<uint32_t>(uninterpreted_option_->positive_int_value()),
+                    option_field->type(), unknown_fields);
+            } else {
+                return AddValueError("Value must be non-negative integer for uint16 option \"" + option_field->full_name() + "\".");
             }
             break;
 
@@ -7902,6 +7964,8 @@ namespace shark {
         UnknownFieldSet* unknown_fields) {
         switch (type) {
         case FieldType::INT32:
+        case FieldType::INT8:
+        case FieldType::INT16:
             unknown_fields->AddVarint(
                 number, static_cast<uint64_t>(static_cast<int64_t>(value)));
             break;
@@ -7949,6 +8013,8 @@ namespace shark {
         UnknownFieldSet* unknown_fields) {
         switch (type) {
         case FieldType::UINT32:
+        case FieldType::UINT8:
+        case FieldType::UINT16:
             unknown_fields->AddVarint(number, static_cast<uint64_t>(value));
             break;
 

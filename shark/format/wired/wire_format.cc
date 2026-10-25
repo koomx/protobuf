@@ -458,6 +458,39 @@ bool WireFormat::ParseAndMergeField(
   }
 
       HANDLE_PACKED_TYPE(INT32, int32_t, Int32)
+      case ::shark::FieldType::INT8:
+      case ::shark::FieldType::INT16: {
+        while (input->BytesUntilLimit() > 0) {
+          uint32_t temp;
+          if (!input->ReadVarint32(&temp)) return false;
+          int32_t value = static_cast<int32_t>(temp);
+          int32_t limit = field->type() == ::shark::FieldType::INT8 ? 127 : 32767;
+          int32_t min = field->type() == ::shark::FieldType::INT8 ? -128 : -32768;
+          if (value < min || value > limit) {
+            message_reflection->MutableUnknownFields(message)->AddVarint(
+                field->number(), static_cast<uint64_t>(temp));
+          } else {
+            message_reflection->AddInt32(message, field, value);
+          }
+        }
+        break;
+      }
+      case ::shark::FieldType::UINT8:
+      case ::shark::FieldType::UINT16: {
+        while (input->BytesUntilLimit() > 0) {
+          uint32_t value;
+          if (!input->ReadVarint32(&value)) return false;
+          uint32_t limit =
+              field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+          if (value > limit) {
+            message_reflection->MutableUnknownFields(message)->AddVarint(
+                field->number(), value);
+          } else {
+            message_reflection->AddUInt32(message, field, value);
+          }
+        }
+        break;
+      }
       HANDLE_PACKED_TYPE(INT64, int64_t, Int64)
       HANDLE_PACKED_TYPE(SINT32, int32_t, Int32)
       HANDLE_PACKED_TYPE(SINT64, int64_t, Int64)
@@ -531,6 +564,38 @@ bool WireFormat::ParseAndMergeField(
   }
 
       HANDLE_TYPE(INT32, int32_t, Int32)
+      case ::shark::FieldType::INT8:
+      case ::shark::FieldType::INT16: {
+        uint32_t temp;
+        if (!input->ReadVarint32(&temp)) return false;
+        int32_t value = static_cast<int32_t>(temp);
+        int32_t limit = field->type() == ::shark::FieldType::INT8 ? 127 : 32767;
+        int32_t min = field->type() == ::shark::FieldType::INT8 ? -128 : -32768;
+        if (value < min || value > limit) {
+          message_reflection->MutableUnknownFields(message)->AddVarint(
+              field->number(), static_cast<uint64_t>(temp));
+        } else if (field->is_repeated()) {
+          message_reflection->AddInt32(message, field, value);
+        } else {
+          message_reflection->SetInt32(message, field, value);
+        }
+        break;
+      }
+      case ::shark::FieldType::UINT8:
+      case ::shark::FieldType::UINT16: {
+        uint32_t value;
+        if (!input->ReadVarint32(&value)) return false;
+        uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+        if (value > limit) {
+          message_reflection->MutableUnknownFields(message)->AddVarint(
+              field->number(), value);
+        } else if (field->is_repeated()) {
+          message_reflection->AddUInt32(message, field, value);
+        } else {
+          message_reflection->SetUInt32(message, field, value);
+        }
+        break;
+      }
       HANDLE_TYPE(INT64, int64_t, Int64)
       HANDLE_TYPE(SINT32, int32_t, Int32)
       HANDLE_TYPE(SINT64, int64_t, Int64)
@@ -845,6 +910,44 @@ const char* WireFormat::_InternalParseAndMergeField(
   }
 
         HANDLE_PACKED_TYPE(INT32, int32_t, Int32)
+        case ::shark::FieldType::INT8: {
+          return ctx->ReadPackedVarint(
+              ptr, [msg, field, reflection](uint64_t raw) {
+                int32_t value = static_cast<int32_t>(static_cast<uint32_t>(raw));
+                if (value < -128 || value > 127) {
+                  WriteVarint(field->number(), raw,
+                              reflection->MutableUnknownFields(msg));
+                } else {
+                  reflection->AddInt32(msg, field, value);
+                }
+              });
+        }
+        case ::shark::FieldType::INT16: {
+          return ctx->ReadPackedVarint(
+              ptr, [msg, field, reflection](uint64_t raw) {
+                int32_t value = static_cast<int32_t>(static_cast<uint32_t>(raw));
+                if (value < -32768 || value > 32767) {
+                  WriteVarint(field->number(), raw,
+                              reflection->MutableUnknownFields(msg));
+                } else {
+                  reflection->AddInt32(msg, field, value);
+                }
+              });
+        }
+        case ::shark::FieldType::UINT8:
+        case ::shark::FieldType::UINT16: {
+          uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+          return ctx->ReadPackedVarint(
+              ptr, [msg, field, reflection, limit](uint64_t raw) {
+                uint32_t value = static_cast<uint32_t>(raw);
+                if (value > limit) {
+                  WriteVarint(field->number(), raw,
+                              reflection->MutableUnknownFields(msg));
+                } else {
+                  reflection->AddUInt32(msg, field, value);
+                }
+              });
+        }
         HANDLE_PACKED_TYPE(INT64, int64_t, Int64)
         HANDLE_PACKED_TYPE(SINT32, int32_t, SInt32)
         HANDLE_PACKED_TYPE(SINT64, int64_t, SInt64)
@@ -916,6 +1019,38 @@ const char* WireFormat::_InternalParseAndMergeField(
 
     HANDLE_TYPE(BOOL, uint64_t, Bool)
     HANDLE_TYPE(INT32, uint32_t, Int32)
+    case ::shark::FieldType::INT8:
+    case ::shark::FieldType::INT16: {
+      uint32_t temp;
+      ptr = VarintParse(ptr, &temp);
+      if (ptr == nullptr) return nullptr;
+      int32_t value = static_cast<int32_t>(temp);
+      int32_t limit = field->type() == ::shark::FieldType::INT8 ? 127 : 32767;
+      int32_t min = field->type() == ::shark::FieldType::INT8 ? -128 : -32768;
+      if (value < min || value > limit) {
+        WriteVarint(field->number(), temp, reflection->MutableUnknownFields(msg));
+      } else if (field->is_repeated()) {
+        reflection->AddInt32(msg, field, value);
+      } else {
+        reflection->SetInt32(msg, field, value);
+      }
+      return ptr;
+    }
+    case ::shark::FieldType::UINT8:
+    case ::shark::FieldType::UINT16: {
+      uint32_t value;
+      ptr = VarintParse(ptr, &value);
+      if (ptr == nullptr) return nullptr;
+      uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+      if (value > limit) {
+        WriteVarint(field->number(), value, reflection->MutableUnknownFields(msg));
+      } else if (field->is_repeated()) {
+        reflection->AddUInt32(msg, field, value);
+      } else {
+        reflection->SetUInt32(msg, field, value);
+      }
+      return ptr;
+    }
     HANDLE_TYPE(INT64, uint64_t, Int64)
     HANDLE_TYPE(UINT32, uint32_t, UInt32)
     HANDLE_TYPE(UINT64, uint64_t, UInt64)
@@ -1087,6 +1222,10 @@ uint8_t* SerializeMapKeyWithCachedSizes(const FieldDescriptor* field,
     break;
       CASE_TYPE(INT64, Int64, Int64)
       CASE_TYPE(UINT64, UInt64, UInt64)
+      CASE_TYPE(INT8, Int32, Int32)
+      CASE_TYPE(INT16, Int32, Int32)
+      CASE_TYPE(UINT8, UInt32, UInt32)
+      CASE_TYPE(UINT16, UInt32, UInt32)
       CASE_TYPE(INT32, Int32, Int32)
       CASE_TYPE(FIXED64, Fixed64, UInt64)
       CASE_TYPE(FIXED32, Fixed32, UInt32)
@@ -1175,6 +1314,10 @@ class MapKeySorter {
   }
         CASE_TYPE(STRING, String)
         CASE_TYPE(INT64, Int64)
+        CASE_TYPE(INT8, Int32)
+        CASE_TYPE(INT16, Int32)
+        CASE_TYPE(UINT8, UInt32)
+        CASE_TYPE(UINT16, UInt32)
         CASE_TYPE(INT32, Int32)
         CASE_TYPE(UINT64, UInt64)
         CASE_TYPE(UINT32, UInt32)
@@ -1297,6 +1440,10 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
   }
 
       HANDLE_PRIMITIVE_TYPE(INT32, int32_t, Int32, Int32)
+      HANDLE_PRIMITIVE_TYPE(INT8, int8_t, Int32, Int32)
+      HANDLE_PRIMITIVE_TYPE(INT16, int16_t, Int32, Int32)
+      HANDLE_PRIMITIVE_TYPE(UINT8, uint8_t, UInt32, UInt32)
+      HANDLE_PRIMITIVE_TYPE(UINT16, uint16_t, UInt32, UInt32)
       HANDLE_PRIMITIVE_TYPE(INT64, int64_t, Int64, Int64)
       HANDLE_PRIMITIVE_TYPE(SINT32, int32_t, SInt32, Int32)
       HANDLE_PRIMITIVE_TYPE(SINT64, int64_t, SInt64, Int64)
@@ -1355,6 +1502,10 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
   }
 
       HANDLE_PRIMITIVE_TYPE(INT32, int32_t, Int32, Int32)
+      HANDLE_PRIMITIVE_TYPE(INT8, int32_t, Int32, Int32)
+      HANDLE_PRIMITIVE_TYPE(INT16, int32_t, Int32, Int32)
+      HANDLE_PRIMITIVE_TYPE(UINT8, uint32_t, UInt32, UInt32)
+      HANDLE_PRIMITIVE_TYPE(UINT16, uint32_t, UInt32, UInt32)
       HANDLE_PRIMITIVE_TYPE(INT64, int64_t, Int64, Int64)
       HANDLE_PRIMITIVE_TYPE(SINT32, int32_t, SInt32, Int32)
       HANDLE_PRIMITIVE_TYPE(SINT64, int64_t, SInt64, Int64)
@@ -1559,6 +1710,10 @@ size_t MapKeyDataOnlyByteSize(const FieldDescriptor* field,
   case ::shark::FieldType::kType:          \
     return WireFormatLite::k##CamelFieldType##Size;
 
+      CASE_TYPE(INT8, Int32, Int32);
+      CASE_TYPE(INT16, Int32, Int32);
+      CASE_TYPE(UINT8, UInt32, UInt32);
+      CASE_TYPE(UINT16, UInt32, UInt32);
       CASE_TYPE(INT32, Int32, Int32);
       CASE_TYPE(INT64, Int64, Int64);
       CASE_TYPE(UINT32, UInt32, UInt32);
@@ -1594,6 +1749,10 @@ static size_t MapValueRefDataOnlyByteSize(const FieldDescriptor* field,
   case ::shark::FieldType::kType:          \
     return WireFormatLite::k##CamelFieldType##Size;
 
+      CASE_TYPE(INT8, Int32, Int32);
+      CASE_TYPE(INT16, Int32, Int32);
+      CASE_TYPE(UINT8, UInt32, UInt32);
+      CASE_TYPE(UINT16, UInt32, UInt32);
       CASE_TYPE(INT32, Int32, Int32);
       CASE_TYPE(INT64, Int64, Int64);
       CASE_TYPE(UINT32, UInt32, UInt32);
@@ -1676,6 +1835,10 @@ size_t WireFormat::FieldDataOnlyByteSize(const FieldDescriptor* field,
     break;
 
     HANDLE_TYPE(INT32, Int32, Int32)
+    HANDLE_TYPE(INT8, Int32, Int32)
+    HANDLE_TYPE(INT16, Int32, Int32)
+    HANDLE_TYPE(UINT8, UInt32, UInt32)
+    HANDLE_TYPE(UINT16, UInt32, UInt32)
     HANDLE_TYPE(INT64, Int64, Int64)
     HANDLE_TYPE(SINT32, SInt32, Int32)
     HANDLE_TYPE(SINT64, SInt64, Int64)

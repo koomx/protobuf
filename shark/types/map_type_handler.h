@@ -103,6 +103,10 @@ TYPE_TRAITS(BYTES, ArenaStringPtr, LENGTH_DELIMITED, false, false)
 TYPE_TRAITS(INT64, int64_t, VARINT, false, false)
 TYPE_TRAITS(UINT64, uint64_t, VARINT, false, false)
 TYPE_TRAITS(INT32, int32_t, VARINT, false, false)
+TYPE_TRAITS(INT8, int8_t, VARINT, false, false)
+TYPE_TRAITS(INT16, int16_t, VARINT, false, false)
+TYPE_TRAITS(UINT8, uint8_t, VARINT, false, false)
+TYPE_TRAITS(UINT16, uint16_t, VARINT, false, false)
 TYPE_TRAITS(UINT32, uint32_t, VARINT, false, false)
 TYPE_TRAITS(SINT64, int64_t, VARINT, false, false)
 TYPE_TRAITS(SINT32, int32_t, VARINT, false, false)
@@ -217,6 +221,10 @@ MAP_HANDLER(BYTES)
 MAP_HANDLER(INT64)
 MAP_HANDLER(UINT64)
 MAP_HANDLER(INT32)
+MAP_HANDLER(INT8)
+MAP_HANDLER(INT16)
+MAP_HANDLER(UINT8)
+MAP_HANDLER(UINT16)
 MAP_HANDLER(UINT32)
 MAP_HANDLER(SINT64)
 MAP_HANDLER(SINT32)
@@ -248,6 +256,10 @@ SHARK_BYTE_SIZE(BYTES, Bytes)
 SHARK_BYTE_SIZE(INT64, Int64)
 SHARK_BYTE_SIZE(UINT64, UInt64)
 SHARK_BYTE_SIZE(INT32, Int32)
+SHARK_BYTE_SIZE(INT8, Int32)
+SHARK_BYTE_SIZE(INT16, Int32)
+SHARK_BYTE_SIZE(UINT8, UInt32)
+SHARK_BYTE_SIZE(UINT16, UInt32)
 SHARK_BYTE_SIZE(UINT32, UInt32)
 SHARK_BYTE_SIZE(SINT64, SInt64)
 SHARK_BYTE_SIZE(SINT32, SInt32)
@@ -292,6 +304,10 @@ GET_CACHED_SIZE(BYTES, Bytes)
 GET_CACHED_SIZE(INT64, Int64)
 GET_CACHED_SIZE(UINT64, UInt64)
 GET_CACHED_SIZE(INT32, Int32)
+GET_CACHED_SIZE(INT8, Int32)
+GET_CACHED_SIZE(INT16, Int32)
+GET_CACHED_SIZE(UINT8, UInt32)
+GET_CACHED_SIZE(UINT16, UInt32)
 GET_CACHED_SIZE(UINT32, UInt32)
 GET_CACHED_SIZE(SINT64, SInt64)
 GET_CACHED_SIZE(SINT32, SInt32)
@@ -353,6 +369,10 @@ WRITE_METHOD(BYTES, Bytes)
 WRITE_METHOD(INT64, Int64)
 WRITE_METHOD(UINT64, UInt64)
 WRITE_METHOD(INT32, Int32)
+WRITE_METHOD(INT8, Int32)
+WRITE_METHOD(INT16, Int32)
+WRITE_METHOD(UINT8, UInt32)
+WRITE_METHOD(UINT16, UInt32)
 WRITE_METHOD(UINT32, UInt32)
 WRITE_METHOD(SINT64, SInt64)
 WRITE_METHOD(SINT32, SInt32)
@@ -415,6 +435,30 @@ inline const char* ReadUINT64(const char* ptr, uint64_t* value) {
 }
 inline const char* ReadINT32(const char* ptr, int32_t* value) {
   return VarintParse(ptr, reinterpret_cast<uint32_t*>(value));
+}
+inline const char* ReadINT8(const char* ptr, int8_t* value) {
+  uint32_t temp;
+  ptr = VarintParse(ptr, &temp);
+  if (ptr != nullptr) *value = static_cast<int8_t>(static_cast<int32_t>(temp));
+  return ptr;
+}
+inline const char* ReadINT16(const char* ptr, int16_t* value) {
+  uint32_t temp;
+  ptr = VarintParse(ptr, &temp);
+  if (ptr != nullptr) *value = static_cast<int16_t>(static_cast<int32_t>(temp));
+  return ptr;
+}
+inline const char* ReadUINT8(const char* ptr, uint8_t* value) {
+  uint32_t temp;
+  ptr = VarintParse(ptr, &temp);
+  if (ptr != nullptr) *value = static_cast<uint8_t>(temp);
+  return ptr;
+}
+inline const char* ReadUINT16(const char* ptr, uint16_t* value) {
+  uint32_t temp;
+  ptr = VarintParse(ptr, &temp);
+  if (ptr != nullptr) *value = static_cast<uint16_t>(temp);
+  return ptr;
 }
 inline const char* ReadUINT32(const char* ptr, uint32_t* value) {
   return VarintParse(ptr, value);
@@ -479,6 +523,10 @@ inline const char* ReadSFIXED32(const char* ptr, int32_t* value) {
 READ_METHOD(INT64)
 READ_METHOD(UINT64)
 READ_METHOD(INT32)
+READ_METHOD(INT8)
+READ_METHOD(INT16)
+READ_METHOD(UINT8)
+READ_METHOD(UINT16)
 READ_METHOD(UINT32)
 READ_METHOD(SINT64)
 READ_METHOD(SINT32)
@@ -673,6 +721,10 @@ STRING_OR_BYTES_HANDLER_FUNCTIONS(BYTES)
 PRIMITIVE_HANDLER_FUNCTIONS(INT64)
 PRIMITIVE_HANDLER_FUNCTIONS(UINT64)
 PRIMITIVE_HANDLER_FUNCTIONS(INT32)
+PRIMITIVE_HANDLER_FUNCTIONS(INT8)
+PRIMITIVE_HANDLER_FUNCTIONS(INT16)
+PRIMITIVE_HANDLER_FUNCTIONS(UINT8)
+PRIMITIVE_HANDLER_FUNCTIONS(UINT16)
 PRIMITIVE_HANDLER_FUNCTIONS(UINT32)
 PRIMITIVE_HANDLER_FUNCTIONS(SINT64)
 PRIMITIVE_HANDLER_FUNCTIONS(SINT32)

@@ -49,8 +49,28 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
                                 extension.descriptor),                       \
         ptr, ctx);
       HANDLE_TYPE(INT32, Int32);
+      case WireFormatLiteFieldType::TYPE_INT8:
+        return internal::PackedNarrowVarintParser<T, int8_t>(
+            MutableRawRepeatedField(number, extension.type, extension.is_packed,
+                                    extension.descriptor),
+            ptr, ctx, metadata, number);
+      case WireFormatLiteFieldType::TYPE_INT16:
+        return internal::PackedNarrowVarintParser<T, int16_t>(
+            MutableRawRepeatedField(number, extension.type, extension.is_packed,
+                                    extension.descriptor),
+            ptr, ctx, metadata, number);
       HANDLE_TYPE(INT64, Int64);
       HANDLE_TYPE(UINT32, UInt32);
+      case WireFormatLiteFieldType::TYPE_UINT8:
+        return internal::PackedNarrowVarintParser<T, uint8_t>(
+            MutableRawRepeatedField(number, extension.type, extension.is_packed,
+                                    extension.descriptor),
+            ptr, ctx, metadata, number);
+      case WireFormatLiteFieldType::TYPE_UINT16:
+        return internal::PackedNarrowVarintParser<T, uint16_t>(
+            MutableRawRepeatedField(number, extension.type, extension.is_packed,
+                                    extension.descriptor),
+            ptr, ctx, metadata, number);
       HANDLE_TYPE(UINT64, UInt64);
       HANDLE_TYPE(SINT32, SInt32);
       HANDLE_TYPE(SINT64, SInt64);
@@ -93,8 +113,64 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
   } break
 
       HANDLE_VARINT_TYPE(INT32, Int32);
+      case WireFormatLiteFieldType::TYPE_INT8:
+      case WireFormatLiteFieldType::TYPE_INT16: {
+        uint64_t raw;
+        ptr = VarintParse(ptr, &raw);
+        SHARK_PARSER_ASSERT(ptr);
+        const int64_t signed_value = static_cast<int64_t>(raw);
+        const bool is_int8 =
+            extension.type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_INT8);
+        const bool fits = is_int8 ? signed_value >= -128 && signed_value <= 127
+                                  : signed_value >= -32768 && signed_value <= 32767;
+        if (!fits) {
+          WriteVarint(number, raw, metadata->mutable_unknown_fields<T>());
+        } else if (extension.is_repeated) {
+          if (is_int8) {
+            AddInt8(number, extension.type, extension.is_packed,
+                    static_cast<int8_t>(signed_value), extension.descriptor);
+          } else {
+            AddInt16(number, extension.type, extension.is_packed,
+                     static_cast<int16_t>(signed_value), extension.descriptor);
+          }
+        } else if (is_int8) {
+          SetInt8(number, extension.type, static_cast<int8_t>(signed_value),
+                  extension.descriptor);
+        } else {
+          SetInt16(number, extension.type, static_cast<int16_t>(signed_value),
+                   extension.descriptor);
+        }
+        break;
+      }
       HANDLE_VARINT_TYPE(INT64, Int64);
       HANDLE_VARINT_TYPE(UINT32, UInt32);
+      case WireFormatLiteFieldType::TYPE_UINT8:
+      case WireFormatLiteFieldType::TYPE_UINT16: {
+        uint64_t raw;
+        ptr = VarintParse(ptr, &raw);
+        SHARK_PARSER_ASSERT(ptr);
+        const bool is_uint8 =
+            extension.type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_UINT8);
+        const bool fits = is_uint8 ? raw <= 255 : raw <= 65535;
+        if (!fits) {
+          WriteVarint(number, raw, metadata->mutable_unknown_fields<T>());
+        } else if (extension.is_repeated) {
+          if (is_uint8) {
+            AddUInt8(number, extension.type, extension.is_packed,
+                     static_cast<uint8_t>(raw), extension.descriptor);
+          } else {
+            AddUInt16(number, extension.type, extension.is_packed,
+                      static_cast<uint16_t>(raw), extension.descriptor);
+          }
+        } else if (is_uint8) {
+          SetUInt8(number, extension.type, static_cast<uint8_t>(raw),
+                   extension.descriptor);
+        } else {
+          SetUInt16(number, extension.type, static_cast<uint16_t>(raw),
+                    extension.descriptor);
+        }
+        break;
+      }
       HANDLE_VARINT_TYPE(UINT64, UInt64);
       HANDLE_VARINT_TYPE(BOOL, Bool);
 #undef HANDLE_VARINT_TYPE

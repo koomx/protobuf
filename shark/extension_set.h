@@ -247,6 +247,10 @@ class SHARK_EXPORT ExtensionSet {
   // singular fields -------------------------------------------------
 
   int32_t GetInt32(int number, int32_t default_value) const;
+  int8_t GetInt8(int number, int8_t default_value) const;
+  int16_t GetInt16(int number, int16_t default_value) const;
+  uint8_t GetUInt8(int number, uint8_t default_value) const;
+  uint16_t GetUInt16(int number, uint16_t default_value) const;
   int64_t GetInt64(int number, int64_t default_value) const;
   uint32_t GetUInt32(int number, uint32_t default_value) const;
   uint64_t GetUInt64(int number, uint64_t default_value) const;
@@ -266,6 +270,10 @@ class SHARK_EXPORT ExtensionSet {
   // type.
 #define desc const FieldDescriptor* descriptor  // avoid line wrapping
   void SetInt32(int number, FieldTypeUint8 type, int32_t value, desc);
+  void SetInt8(int number, FieldTypeUint8 type, int8_t value, desc);
+  void SetInt16(int number, FieldTypeUint8 type, int16_t value, desc);
+  void SetUInt8(int number, FieldTypeUint8 type, uint8_t value, desc);
+  void SetUInt16(int number, FieldTypeUint8 type, uint16_t value, desc);
   void SetInt64(int number, FieldTypeUint8 type, int64_t value, desc);
   void SetUInt32(int number, FieldTypeUint8 type, uint32_t value, desc);
   void SetUInt64(int number, FieldTypeUint8 type, uint64_t value, desc);
@@ -319,6 +327,10 @@ class SHARK_EXPORT ExtensionSet {
   void* MutableRawRepeatedField(int number);
 
   int32_t GetRepeatedInt32(int number, int index) const;
+  int8_t GetRepeatedInt8(int number, int index) const;
+  int16_t GetRepeatedInt16(int number, int index) const;
+  uint8_t GetRepeatedUInt8(int number, int index) const;
+  uint16_t GetRepeatedUInt16(int number, int index) const;
   int64_t GetRepeatedInt64(int number, int index) const;
   uint32_t GetRepeatedUInt32(int number, int index) const;
   uint64_t GetRepeatedUInt64(int number, int index) const;
@@ -330,6 +342,10 @@ class SHARK_EXPORT ExtensionSet {
   const MessageLite& GetRepeatedMessage(int number, int index) const;
 
   void SetRepeatedInt32(int number, int index, int32_t value);
+  void SetRepeatedInt8(int number, int index, int8_t value);
+  void SetRepeatedInt16(int number, int index, int16_t value);
+  void SetRepeatedUInt8(int number, int index, uint8_t value);
+  void SetRepeatedUInt16(int number, int index, uint16_t value);
   void SetRepeatedInt64(int number, int index, int64_t value);
   void SetRepeatedUInt32(int number, int index, uint32_t value);
   void SetRepeatedUInt64(int number, int index, uint64_t value);
@@ -343,6 +359,10 @@ class SHARK_EXPORT ExtensionSet {
 
 #define desc const FieldDescriptor* descriptor  // avoid line wrapping
   void AddInt32(int number, FieldTypeUint8 type, bool packed, int32_t value, desc);
+  void AddInt8(int number, FieldTypeUint8 type, bool packed, int8_t value, desc);
+  void AddInt16(int number, FieldTypeUint8 type, bool packed, int16_t value, desc);
+  void AddUInt8(int number, FieldTypeUint8 type, bool packed, uint8_t value, desc);
+  void AddUInt16(int number, FieldTypeUint8 type, bool packed, uint16_t value, desc);
   void AddInt64(int number, FieldTypeUint8 type, bool packed, int64_t value, desc);
   void AddUInt32(int number, FieldTypeUint8 type, bool packed, uint32_t value, desc);
   void AddUInt64(int number, FieldTypeUint8 type, bool packed, uint64_t value, desc);
@@ -509,6 +529,10 @@ class SHARK_EXPORT ExtensionSet {
   friend class shark::Reflection;
 
   const int32_t& GetRefInt32(int number, const int32_t& default_value) const;
+  const int8_t& GetRefInt8(int number, const int8_t& default_value) const;
+  const int16_t& GetRefInt16(int number, const int16_t& default_value) const;
+  const uint8_t& GetRefUInt8(int number, const uint8_t& default_value) const;
+  const uint16_t& GetRefUInt16(int number, const uint16_t& default_value) const;
   const int64_t& GetRefInt64(int number, const int64_t& default_value) const;
   const uint32_t& GetRefUInt32(int number, const uint32_t& default_value) const;
   const uint64_t& GetRefUInt64(int number, const uint64_t& default_value) const;
@@ -517,6 +541,10 @@ class SHARK_EXPORT ExtensionSet {
   const bool& GetRefBool(int number, const bool& default_value) const;
   const int& GetRefEnum(int number, const int& default_value) const;
   const int32_t& GetRefRepeatedInt32(int number, int index) const;
+  const int8_t& GetRefRepeatedInt8(int number, int index) const;
+  const int16_t& GetRefRepeatedInt16(int number, int index) const;
+  const uint8_t& GetRefRepeatedUInt8(int number, int index) const;
+  const uint16_t& GetRefRepeatedUInt16(int number, int index) const;
   const int64_t& GetRefRepeatedInt64(int number, int index) const;
   const uint32_t& GetRefRepeatedUInt32(int number, int index) const;
   const uint64_t& GetRefRepeatedUInt64(int number, int index) const;
@@ -583,6 +611,10 @@ class SHARK_EXPORT ExtensionSet {
       int64_t int64_t_value;
       uint32_t uint32_t_value;
       uint64_t uint64_t_value;
+      int8_t int8_t_value;
+      uint8_t uint8_t_value;
+      int16_t int16_t_value;
+      uint16_t uint16_t_value;
       float float_value;
       double double_value;
       bool bool_value;
@@ -595,6 +627,10 @@ class SHARK_EXPORT ExtensionSet {
       RepeatedField<int64_t>* repeated_int64_t_value;
       RepeatedField<uint32_t>* repeated_uint32_t_value;
       RepeatedField<uint64_t>* repeated_uint64_t_value;
+      RepeatedField<int8_t>* repeated_int8_t_value;
+      RepeatedField<uint8_t>* repeated_uint8_t_value;
+      RepeatedField<int16_t>* repeated_int16_t_value;
+      RepeatedField<uint16_t>* repeated_uint16_t_value;
       RepeatedField<float>* repeated_float_value;
       RepeatedField<double>* repeated_double_value;
       RepeatedField<bool>* repeated_bool_value;

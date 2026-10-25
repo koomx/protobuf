@@ -302,8 +302,12 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
                       .SpaceUsedExcludingSelfLong();                \
     break
 
+        HANDLE_TYPE(INT8, int8_t);
+        HANDLE_TYPE(INT16, int16_t);
         HANDLE_TYPE(INT32, int32_t);
         HANDLE_TYPE(INT64, int64_t);
+        HANDLE_TYPE(UINT8, uint8_t);
+        HANDLE_TYPE(UINT16, uint16_t);
         HANDLE_TYPE(UINT32, uint32_t);
         HANDLE_TYPE(UINT64, uint64_t);
         HANDLE_TYPE(DOUBLE, double);
@@ -342,6 +346,10 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         continue;
       }
       switch (field->cpp_type()) {
+        case FieldCppType::INT8:
+        case FieldCppType::INT16:
+        case FieldCppType::UINT8:
+        case FieldCppType::UINT16:
         case FieldCppType::INT32:
         case FieldCppType::INT64:
         case FieldCppType::UINT32:
@@ -404,12 +412,16 @@ struct OneofFieldMover {
   template <typename FromType, typename ToType>
   void operator()(const FieldDescriptor* field, FromType* from, ToType* to) {
     switch (field->cpp_type()) {
+      case FieldCppType::INT8:
+      case FieldCppType::INT16:
       case FieldCppType::INT32:
         to->SetInt32(from->GetInt32());
         break;
       case FieldCppType::INT64:
         to->SetInt64(from->GetInt64());
         break;
+      case FieldCppType::UINT8:
+      case FieldCppType::UINT16:
       case FieldCppType::UINT32:
         to->SetUint32(from->GetUint32());
         break;
@@ -694,8 +706,12 @@ void SwapFieldHelper::SwapNonMessageNonStringField(
               *r->MutableRaw<TYPE>(rhs, field)); \
     break;
 
+    SWAP_VALUES(INT8, int8_t);
+    SWAP_VALUES(INT16, int16_t);
     SWAP_VALUES(INT32, int32_t);
     SWAP_VALUES(INT64, int64_t);
+    SWAP_VALUES(UINT8, uint8_t);
+    SWAP_VALUES(UINT16, uint16_t);
     SWAP_VALUES(UINT32, uint32_t);
     SWAP_VALUES(UINT64, uint64_t);
     SWAP_VALUES(FLOAT, float);
@@ -720,8 +736,12 @@ void Reflection::SwapField(Message* message1, Message* message2,
         ->Swap(MutableRaw<RepeatedField<TYPE> >(message2, field)); \
     break;
 
+      SWAP_ARRAYS(INT8, int8_t);
+      SWAP_ARRAYS(INT16, int16_t);
       SWAP_ARRAYS(INT32, int32_t);
       SWAP_ARRAYS(INT64, int64_t);
+      SWAP_ARRAYS(UINT8, uint8_t);
+      SWAP_ARRAYS(UINT16, uint16_t);
       SWAP_ARRAYS(UINT32, uint32_t);
       SWAP_ARRAYS(UINT64, uint64_t);
       SWAP_ARRAYS(FLOAT, float);
@@ -783,8 +803,12 @@ void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
         ->InternalSwap(MutableRaw<RepeatedField<TYPE>>(message2, field)); \
     break;
 
+    SHALLOW_SWAP_ARRAYS(INT8, int8_t);
+    SHALLOW_SWAP_ARRAYS(INT16, int16_t);
     SHALLOW_SWAP_ARRAYS(INT32, int32_t);
     SHALLOW_SWAP_ARRAYS(INT64, int64_t);
+    SHALLOW_SWAP_ARRAYS(UINT8, uint8_t);
+    SHALLOW_SWAP_ARRAYS(UINT16, uint16_t);
     SHALLOW_SWAP_ARRAYS(UINT32, uint32_t);
     SHALLOW_SWAP_ARRAYS(UINT64, uint64_t);
     SHALLOW_SWAP_ARRAYS(FLOAT, float);
@@ -1188,8 +1212,12 @@ int Reflection::FieldSize(const Message& message,
   case FieldCppType::UPPERCASE: \
     return GetRaw<RepeatedField<LOWERCASE> >(message, field).size()
 
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT32, int32_t);
       HANDLE_TYPE(INT64, int64_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT32, uint32_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(DOUBLE, double);
@@ -1242,8 +1270,24 @@ void Reflection::ClearField(Message* message,
     *MutableRaw<TYPE>(message, field) = field->default_value_##TYPE(); \
     break;
 
+        case FieldCppType::INT8:
+          *MutableRaw<int8_t>(message, field) =
+              static_cast<int8_t>(field->default_value_int32());
+          break;
+        case FieldCppType::INT16:
+          *MutableRaw<int16_t>(message, field) =
+              static_cast<int16_t>(field->default_value_int32());
+          break;
         CLEAR_TYPE(INT32, int32_t);
         CLEAR_TYPE(INT64, int64_t);
+        case FieldCppType::UINT8:
+          *MutableRaw<uint8_t>(message, field) =
+              static_cast<uint8_t>(field->default_value_uint32());
+          break;
+        case FieldCppType::UINT16:
+          *MutableRaw<uint16_t>(message, field) =
+              static_cast<uint16_t>(field->default_value_uint32());
+          break;
         CLEAR_TYPE(UINT32, uint32_t);
         CLEAR_TYPE(UINT64, uint64_t);
         CLEAR_TYPE(FLOAT, float);
@@ -1295,8 +1339,12 @@ void Reflection::ClearField(Message* message,
     MutableRaw<RepeatedField<LOWERCASE> >(message, field)->Clear(); \
     break
 
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT32, int32_t);
       HANDLE_TYPE(INT64, int64_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT32, uint32_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(DOUBLE, double);
@@ -1345,8 +1393,12 @@ void Reflection::RemoveLast(Message* message,
     MutableRaw<RepeatedField<LOWERCASE> >(message, field)->RemoveLast(); \
     break
 
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT32, int32_t);
       HANDLE_TYPE(INT64, int64_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT32, uint32_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(DOUBLE, double);
@@ -1441,8 +1493,12 @@ void Reflection::SwapElements(Message* message, const FieldDescriptor* field,
         ->SwapElements(index1, index2);                   \
     break
 
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT32, int32_t);
       HANDLE_TYPE(INT64, int64_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT32, uint32_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(DOUBLE, double);
@@ -1625,14 +1681,424 @@ void Reflection::ListFieldsOmitStripped(
     }                                                                          \
   }
 
-DEFINE_PRIMITIVE_ACCESSORS(Int32, int32_t, int32_t, INT32)
 DEFINE_PRIMITIVE_ACCESSORS(Int64, int64_t, int64_t, INT64)
-DEFINE_PRIMITIVE_ACCESSORS(UInt32, uint32_t, uint32_t, UINT32)
 DEFINE_PRIMITIVE_ACCESSORS(UInt64, uint64_t, uint64_t, UINT64)
 DEFINE_PRIMITIVE_ACCESSORS(Float, float, float, FLOAT)
 DEFINE_PRIMITIVE_ACCESSORS(Double, double, double, DOUBLE)
 DEFINE_PRIMITIVE_ACCESSORS(Bool, bool, bool, BOOL)
 #undef DEFINE_PRIMITIVE_ACCESSORS
+
+namespace {
+bool IsInt32Family(FieldCppType type) {
+  return type == FieldCppType::INT32 || type == FieldCppType::INT8 ||
+         type == FieldCppType::INT16;
+}
+bool IsUInt32Family(FieldCppType type) {
+  return type == FieldCppType::UINT32 || type == FieldCppType::UINT8 ||
+         type == FieldCppType::UINT16;
+}
+}  // namespace
+
+int32_t Reflection::GetInt32(const Message& message,
+                             const FieldDescriptor* field) const {
+  USAGE_CHECK_MESSAGE_TYPE(GetInt32);
+  USAGE_CHECK_SINGULAR(GetInt32);
+  if (!IsInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "GetInt32",
+                                   FieldCppType::INT32);
+  }
+  if (field->is_extension()) {
+    switch (field->cpp_type()) {
+      case FieldCppType::INT8:
+        return GetExtensionSet(message).GetInt8(
+            field->number(), static_cast<int8_t>(field->default_value_int32()));
+      case FieldCppType::INT16:
+        return GetExtensionSet(message).GetInt16(
+            field->number(),
+            static_cast<int16_t>(field->default_value_int32()));
+      default:
+        return GetExtensionSet(message).GetInt32(field->number(),
+                                                 field->default_value_int32());
+    }
+  } else if (schema_.InRealOneof(field) && !HasOneofField(message, field)) {
+    return field->default_value_int32();
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::INT8:
+      return GetField<int8_t>(message, field);
+    case FieldCppType::INT16:
+      return GetField<int16_t>(message, field);
+    default:
+      return GetField<int32_t>(message, field);
+  }
+}
+
+void Reflection::SetInt32(Message* message, const FieldDescriptor* field,
+                          int32_t value) const {
+  USAGE_CHECK_MESSAGE_TYPE(SetInt32);
+  USAGE_CHECK_SINGULAR(SetInt32);
+  if (!IsInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "SetInt32",
+                                   FieldCppType::INT32);
+  }
+  if (field->is_extension()) {
+    const int type_number = static_cast<int>(field->type());
+    switch (field->cpp_type()) {
+      case FieldCppType::INT8:
+        if (value >= -128 && value <= 127) {
+          MutableExtensionSet(message)->SetInt8(
+              field->number(), type_number, static_cast<int8_t>(value), field);
+        }
+        return;
+      case FieldCppType::INT16:
+        if (value >= -32768 && value <= 32767) {
+          MutableExtensionSet(message)->SetInt16(
+              field->number(), type_number, static_cast<int16_t>(value), field);
+        }
+        return;
+      default:
+        MutableExtensionSet(message)->SetInt32(field->number(), type_number,
+                                               value, field);
+        return;
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::INT8:
+      if (value < -128 || value > 127) return;
+      SetField<int8_t>(message, field, static_cast<int8_t>(value));
+      break;
+    case FieldCppType::INT16:
+      SetField<int16_t>(message, field, static_cast<int16_t>(value));
+      break;
+    default:
+      SetField<int32_t>(message, field, value);
+      break;
+  }
+}
+
+int32_t Reflection::GetRepeatedInt32(const Message& message,
+                                     const FieldDescriptor* field,
+                                     int index) const {
+  USAGE_CHECK_MESSAGE_TYPE(GetRepeatedInt32);
+  USAGE_CHECK_REPEATED(GetRepeatedInt32);
+  if (!IsInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "GetRepeatedInt32",
+                                   FieldCppType::INT32);
+  }
+  if (field->is_extension()) {
+    switch (field->cpp_type()) {
+      case FieldCppType::INT8:
+        return GetExtensionSet(message).GetRepeatedInt8(field->number(), index);
+      case FieldCppType::INT16:
+        return GetExtensionSet(message).GetRepeatedInt16(field->number(),
+                                                         index);
+      default:
+        return GetExtensionSet(message).GetRepeatedInt32(field->number(),
+                                                         index);
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::INT8:
+      return GetRepeatedField<int8_t>(message, field, index);
+    case FieldCppType::INT16:
+      return GetRepeatedField<int16_t>(message, field, index);
+    default:
+      return GetRepeatedField<int32_t>(message, field, index);
+  }
+}
+
+void Reflection::SetRepeatedInt32(Message* message,
+                                  const FieldDescriptor* field, int index,
+                                  int32_t value) const {
+  USAGE_CHECK_MESSAGE_TYPE(SetRepeatedInt32);
+  USAGE_CHECK_REPEATED(SetRepeatedInt32);
+  if (!IsInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "SetRepeatedInt32",
+                                   FieldCppType::INT32);
+  }
+  if (field->is_extension()) {
+    switch (field->cpp_type()) {
+      case FieldCppType::INT8:
+        if (value >= -128 && value <= 127) {
+          MutableExtensionSet(message)->SetRepeatedInt8(
+              field->number(), index, static_cast<int8_t>(value));
+        }
+        return;
+      case FieldCppType::INT16:
+        if (value >= -32768 && value <= 32767) {
+          MutableExtensionSet(message)->SetRepeatedInt16(
+              field->number(), index, static_cast<int16_t>(value));
+        }
+        return;
+      default:
+        MutableExtensionSet(message)->SetRepeatedInt32(field->number(), index,
+                                                       value);
+        return;
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::INT8:
+      if (value < -128 || value > 127) return;
+      SetRepeatedField<int8_t>(message, field, index,
+                               static_cast<int8_t>(value));
+      break;
+    case FieldCppType::INT16:
+      SetRepeatedField<int16_t>(message, field, index,
+                                static_cast<int16_t>(value));
+      break;
+    default:
+      SetRepeatedField<int32_t>(message, field, index, value);
+      break;
+  }
+}
+
+void Reflection::AddInt32(Message* message, const FieldDescriptor* field,
+                          int32_t value) const {
+  USAGE_CHECK_MESSAGE_TYPE(AddInt32);
+  USAGE_CHECK_REPEATED(AddInt32);
+  if (!IsInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "AddInt32",
+                                   FieldCppType::INT32);
+  }
+  if (field->is_extension()) {
+    const int type_number = static_cast<int>(field->type());
+    switch (field->cpp_type()) {
+      case FieldCppType::INT8:
+        if (value >= -128 && value <= 127) {
+          MutableExtensionSet(message)->AddInt8(
+              field->number(), type_number, field->options().packed(),
+              static_cast<int8_t>(value), field);
+        }
+        return;
+      case FieldCppType::INT16:
+        if (value >= -32768 && value <= 32767) {
+          MutableExtensionSet(message)->AddInt16(
+              field->number(), type_number, field->options().packed(),
+              static_cast<int16_t>(value), field);
+        }
+        return;
+      default:
+        MutableExtensionSet(message)->AddInt32(
+            field->number(), type_number, field->options().packed(), value,
+            field);
+        return;
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::INT8:
+      if (value < -128 || value > 127) return;
+      AddField<int8_t>(message, field, static_cast<int8_t>(value));
+      break;
+    case FieldCppType::INT16:
+      AddField<int16_t>(message, field, static_cast<int16_t>(value));
+      break;
+    default:
+      AddField<int32_t>(message, field, value);
+      break;
+  }
+}
+
+uint32_t Reflection::GetUInt32(const Message& message,
+                               const FieldDescriptor* field) const {
+  USAGE_CHECK_MESSAGE_TYPE(GetUInt32);
+  USAGE_CHECK_SINGULAR(GetUInt32);
+  if (!IsUInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "GetUInt32",
+                                   FieldCppType::UINT32);
+  }
+  if (field->is_extension()) {
+    switch (field->cpp_type()) {
+      case FieldCppType::UINT8:
+        return GetExtensionSet(message).GetUInt8(
+            field->number(),
+            static_cast<uint8_t>(field->default_value_uint32()));
+      case FieldCppType::UINT16:
+        return GetExtensionSet(message).GetUInt16(
+            field->number(),
+            static_cast<uint16_t>(field->default_value_uint32()));
+      default:
+        return GetExtensionSet(message).GetUInt32(
+            field->number(), field->default_value_uint32());
+    }
+  } else if (schema_.InRealOneof(field) && !HasOneofField(message, field)) {
+    return field->default_value_uint32();
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::UINT8:
+      return GetField<uint8_t>(message, field);
+    case FieldCppType::UINT16:
+      return GetField<uint16_t>(message, field);
+    default:
+      return GetField<uint32_t>(message, field);
+  }
+}
+
+void Reflection::SetUInt32(Message* message, const FieldDescriptor* field,
+                           uint32_t value) const {
+  USAGE_CHECK_MESSAGE_TYPE(SetUInt32);
+  USAGE_CHECK_SINGULAR(SetUInt32);
+  if (!IsUInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "SetUInt32",
+                                   FieldCppType::UINT32);
+  }
+  if (field->is_extension()) {
+    const int type_number = static_cast<int>(field->type());
+    switch (field->cpp_type()) {
+      case FieldCppType::UINT8:
+        if (value <= 255) {
+          MutableExtensionSet(message)->SetUInt8(
+              field->number(), type_number, static_cast<uint8_t>(value), field);
+        }
+        return;
+      case FieldCppType::UINT16:
+        if (value <= 65535) {
+          MutableExtensionSet(message)->SetUInt16(
+              field->number(), type_number, static_cast<uint16_t>(value),
+              field);
+        }
+        return;
+      default:
+        MutableExtensionSet(message)->SetUInt32(field->number(), type_number,
+                                                value, field);
+        return;
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::UINT8:
+      if (value > 255) return;
+      SetField<uint8_t>(message, field, static_cast<uint8_t>(value));
+      break;
+    case FieldCppType::UINT16:
+      SetField<uint16_t>(message, field, static_cast<uint16_t>(value));
+      break;
+    default:
+      SetField<uint32_t>(message, field, value);
+      break;
+  }
+}
+
+uint32_t Reflection::GetRepeatedUInt32(const Message& message,
+                                       const FieldDescriptor* field,
+                                       int index) const {
+  USAGE_CHECK_MESSAGE_TYPE(GetRepeatedUInt32);
+  USAGE_CHECK_REPEATED(GetRepeatedUInt32);
+  if (!IsUInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "GetRepeatedUInt32",
+                                   FieldCppType::UINT32);
+  }
+  if (field->is_extension()) {
+    switch (field->cpp_type()) {
+      case FieldCppType::UINT8:
+        return GetExtensionSet(message).GetRepeatedUInt8(field->number(),
+                                                         index);
+      case FieldCppType::UINT16:
+        return GetExtensionSet(message).GetRepeatedUInt16(field->number(),
+                                                          index);
+      default:
+        return GetExtensionSet(message).GetRepeatedUInt32(field->number(),
+                                                          index);
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::UINT8:
+      return GetRepeatedField<uint8_t>(message, field, index);
+    case FieldCppType::UINT16:
+      return GetRepeatedField<uint16_t>(message, field, index);
+    default:
+      return GetRepeatedField<uint32_t>(message, field, index);
+  }
+}
+
+void Reflection::SetRepeatedUInt32(Message* message,
+                                   const FieldDescriptor* field, int index,
+                                   uint32_t value) const {
+  USAGE_CHECK_MESSAGE_TYPE(SetRepeatedUInt32);
+  USAGE_CHECK_REPEATED(SetRepeatedUInt32);
+  if (!IsUInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "SetRepeatedUInt32",
+                                   FieldCppType::UINT32);
+  }
+  if (field->is_extension()) {
+    switch (field->cpp_type()) {
+      case FieldCppType::UINT8:
+        if (value <= 255) {
+          MutableExtensionSet(message)->SetRepeatedUInt8(
+              field->number(), index, static_cast<uint8_t>(value));
+        }
+        return;
+      case FieldCppType::UINT16:
+        if (value <= 65535) {
+          MutableExtensionSet(message)->SetRepeatedUInt16(
+              field->number(), index, static_cast<uint16_t>(value));
+        }
+        return;
+      default:
+        MutableExtensionSet(message)->SetRepeatedUInt32(field->number(), index,
+                                                        value);
+        return;
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::UINT8:
+      if (value > 255) return;
+      SetRepeatedField<uint8_t>(message, field, index,
+                                static_cast<uint8_t>(value));
+      break;
+    case FieldCppType::UINT16:
+      SetRepeatedField<uint16_t>(message, field, index,
+                                 static_cast<uint16_t>(value));
+      break;
+    default:
+      SetRepeatedField<uint32_t>(message, field, index, value);
+      break;
+  }
+}
+
+void Reflection::AddUInt32(Message* message, const FieldDescriptor* field,
+                           uint32_t value) const {
+  USAGE_CHECK_MESSAGE_TYPE(AddUInt32);
+  USAGE_CHECK_REPEATED(AddUInt32);
+  if (!IsUInt32Family(field->cpp_type())) {
+    ReportReflectionUsageTypeError(descriptor_, field, "AddUInt32",
+                                   FieldCppType::UINT32);
+  }
+  if (field->is_extension()) {
+    const int type_number = static_cast<int>(field->type());
+    switch (field->cpp_type()) {
+      case FieldCppType::UINT8:
+        if (value <= 255) {
+          MutableExtensionSet(message)->AddUInt8(
+              field->number(), type_number, field->options().packed(),
+              static_cast<uint8_t>(value), field);
+        }
+        return;
+      case FieldCppType::UINT16:
+        if (value <= 65535) {
+          MutableExtensionSet(message)->AddUInt16(
+              field->number(), type_number, field->options().packed(),
+              static_cast<uint16_t>(value), field);
+        }
+        return;
+      default:
+        MutableExtensionSet(message)->AddUInt32(
+            field->number(), type_number, field->options().packed(), value,
+            field);
+        return;
+    }
+  }
+  switch (field->cpp_type()) {
+    case FieldCppType::UINT8:
+      if (value > 255) return;
+      AddField<uint8_t>(message, field, static_cast<uint8_t>(value));
+      break;
+    case FieldCppType::UINT16:
+      AddField<uint16_t>(message, field, static_cast<uint16_t>(value));
+      break;
+    default:
+      AddField<uint32_t>(message, field, value);
+      break;
+  }
+}
 
 // -------------------------------------------------------------------
 
@@ -2594,6 +3060,14 @@ bool Reflection::HasBit(const Message& message,
         return false;
       case FieldCppType::BOOL:
         return GetRaw<bool>(message, field) != false;
+      case FieldCppType::INT8:
+        return GetRaw<int8_t>(message, field) != 0;
+      case FieldCppType::INT16:
+        return GetRaw<int16_t>(message, field) != 0;
+      case FieldCppType::UINT8:
+        return GetRaw<uint8_t>(message, field) != 0;
+      case FieldCppType::UINT16:
+        return GetRaw<uint16_t>(message, field) != 0;
       case FieldCppType::INT32:
         return GetRaw<int32_t>(message, field) != 0;
       case FieldCppType::INT64:
@@ -2735,6 +3209,10 @@ void Reflection::ClearOneof(Message* message,
   }
 
 HANDLE_TYPE(int32_t, FieldCppType::INT32, -1);
+HANDLE_TYPE(int8_t, FieldCppType::INT8, -1);
+HANDLE_TYPE(int16_t, FieldCppType::INT16, -1);
+HANDLE_TYPE(uint8_t, FieldCppType::UINT8, -1);
+HANDLE_TYPE(uint16_t, FieldCppType::UINT16, -1);
 HANDLE_TYPE(int64_t, FieldCppType::INT64, -1);
 HANDLE_TYPE(uint32_t, FieldCppType::UINT32, -1);
 HANDLE_TYPE(uint64_t, FieldCppType::UINT64, -1);

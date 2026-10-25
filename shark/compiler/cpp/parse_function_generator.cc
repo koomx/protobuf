@@ -116,6 +116,16 @@ bool IsFieldEligibleForFastParsing(
       }
       break;
 
+    case FieldType::INT8:
+    case FieldType::UINT8:
+    case FieldType::INT16:
+    case FieldType::UINT16:
+      // Repeated and packed values can be wider than the type. The generated
+      // fallback records those in the unknown fields. The fast path only
+      // accepts a one-byte varint, which always fits.
+      if (field->is_repeated()) return false;
+      break;
+
     default:
       break;
   }
@@ -979,7 +989,13 @@ static void FormatFieldKind(Formatter& format,
       format("SInt32");
       break;
     case FieldType::INT32:
+    case FieldType::INT8:
+    case FieldType::INT16:
       format("Int32");
+      break;
+    case FieldType::UINT8:
+    case FieldType::UINT16:
+      format("UInt32");
       break;
     case FieldType::UINT64:
       format("UInt64");
@@ -1696,6 +1712,18 @@ std::string FieldParseFunctionName(
     case FieldType::INT32:
     case FieldType::UINT32:
       name.append("V32");
+      break;
+    case FieldType::INT8:
+      name.append("N8");
+      break;
+    case FieldType::UINT8:
+      name.append("U8");
+      break;
+    case FieldType::INT16:
+      name.append("N16");
+      break;
+    case FieldType::UINT16:
+      name.append("U16");
       break;
     case FieldType::INT64:
     case FieldType::UINT64:

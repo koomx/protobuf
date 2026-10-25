@@ -113,6 +113,22 @@ class SHARK_EXPORT MapKey {
     SetType(FieldCppType::INT32);
     val_.int32_value_ = value;
   }
+  void SetInt8Value(int8_t value) {
+    SetType(FieldCppType::INT8);
+    val_.int8_value_ = value;
+  }
+  void SetInt16Value(int16_t value) {
+    SetType(FieldCppType::INT16);
+    val_.int16_value_ = value;
+  }
+  void SetUInt8Value(uint8_t value) {
+    SetType(FieldCppType::UINT8);
+    val_.uint8_value_ = value;
+  }
+  void SetUInt16Value(uint16_t value) {
+    SetType(FieldCppType::UINT16);
+    val_.uint16_value_ = value;
+  }
   void SetUInt32Value(uint32_t value) {
     SetType(FieldCppType::UINT32);
     val_.uint32_value_ = value;
@@ -135,10 +151,14 @@ class SHARK_EXPORT MapKey {
     return val_.uint64_value_;
   }
   int32_t GetInt32Value() const {
+    if (type_ == FieldCppType::INT8) return val_.int8_value_;
+    if (type_ == FieldCppType::INT16) return val_.int16_value_;
     TYPE_CHECK(FieldCppType::INT32, "MapKey::GetInt32Value");
     return val_.int32_value_;
   }
   uint32_t GetUInt32Value() const {
+    if (type_ == FieldCppType::UINT8) return val_.uint8_value_;
+    if (type_ == FieldCppType::UINT16) return val_.uint16_value_;
     TYPE_CHECK(FieldCppType::UINT32, "MapKey::GetUInt32Value");
     return val_.uint32_value_;
   }
@@ -168,10 +188,18 @@ class SHARK_EXPORT MapKey {
         return val_.string_value_.get() < other.val_.string_value_.get();
       case FieldCppType::INT64:
         return val_.int64_value_ < other.val_.int64_value_;
+      case FieldCppType::INT8:
+        return val_.int8_value_ < other.val_.int8_value_;
+      case FieldCppType::INT16:
+        return val_.int16_value_ < other.val_.int16_value_;
       case FieldCppType::INT32:
         return val_.int32_value_ < other.val_.int32_value_;
       case FieldCppType::UINT64:
         return val_.uint64_value_ < other.val_.uint64_value_;
+      case FieldCppType::UINT8:
+        return val_.uint8_value_ < other.val_.uint8_value_;
+      case FieldCppType::UINT16:
+        return val_.uint16_value_ < other.val_.uint16_value_;
       case FieldCppType::UINT32:
         return val_.uint32_value_ < other.val_.uint32_value_;
       case FieldCppType::BOOL:
@@ -196,10 +224,18 @@ class SHARK_EXPORT MapKey {
         return val_.string_value_.get() == other.val_.string_value_.get();
       case FieldCppType::INT64:
         return val_.int64_value_ == other.val_.int64_value_;
+      case FieldCppType::INT8:
+        return val_.int8_value_ == other.val_.int8_value_;
+      case FieldCppType::INT16:
+        return val_.int16_value_ == other.val_.int16_value_;
       case FieldCppType::INT32:
         return val_.int32_value_ == other.val_.int32_value_;
       case FieldCppType::UINT64:
         return val_.uint64_value_ == other.val_.uint64_value_;
+      case FieldCppType::UINT8:
+        return val_.uint8_value_ == other.val_.uint8_value_;
+      case FieldCppType::UINT16:
+        return val_.uint16_value_ == other.val_.uint16_value_;
       case FieldCppType::UINT32:
         return val_.uint32_value_ == other.val_.uint32_value_;
       case FieldCppType::BOOL:
@@ -224,11 +260,23 @@ class SHARK_EXPORT MapKey {
       case FieldCppType::INT64:
         val_.int64_value_ = other.val_.int64_value_;
         break;
+      case FieldCppType::INT8:
+        val_.int8_value_ = other.val_.int8_value_;
+        break;
+      case FieldCppType::INT16:
+        val_.int16_value_ = other.val_.int16_value_;
+        break;
       case FieldCppType::INT32:
         val_.int32_value_ = other.val_.int32_value_;
         break;
       case FieldCppType::UINT64:
         val_.uint64_value_ = other.val_.uint64_value_;
+        break;
+      case FieldCppType::UINT8:
+        val_.uint8_value_ = other.val_.uint8_value_;
+        break;
+      case FieldCppType::UINT16:
+        val_.uint16_value_ = other.val_.uint16_value_;
         break;
       case FieldCppType::UINT32:
         val_.uint32_value_ = other.val_.uint32_value_;
@@ -252,6 +300,10 @@ class SHARK_EXPORT MapKey {
     int32_t int32_value_;
     uint64_t uint64_value_;
     uint32_t uint32_value_;
+    int8_t int8_value_;
+    uint8_t uint8_value_;
+    int16_t int16_value_;
+    uint16_t uint16_value_;
     bool bool_value_;
   } val_;
 
@@ -289,17 +341,21 @@ struct hash<::SHARK_NAMESPACE_ID::MapKey> {
         auto value = map_key.GetInt64Value();
         return hash<decltype(value)>()(value);
       }
+      case ::SHARK_NAMESPACE_ID::FieldCppType::INT8:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::INT16:
       case ::SHARK_NAMESPACE_ID::FieldCppType::INT32: {
         auto value = map_key.GetInt32Value();
-        return hash<decltype(value)>()(map_key.GetInt32Value());
+        return hash<decltype(value)>()(value);
       }
       case ::SHARK_NAMESPACE_ID::FieldCppType::UINT64: {
         auto value = map_key.GetUInt64Value();
         return hash<decltype(value)>()(map_key.GetUInt64Value());
       }
+      case ::SHARK_NAMESPACE_ID::FieldCppType::UINT8:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::UINT16:
       case ::SHARK_NAMESPACE_ID::FieldCppType::UINT32: {
         auto value = map_key.GetUInt32Value();
-        return hash<decltype(value)>()(map_key.GetUInt32Value());
+        return hash<decltype(value)>()(value);
       }
       case ::SHARK_NAMESPACE_ID::FieldCppType::BOOL: {
         return hash<bool>()(map_key.GetBoolValue());
@@ -712,13 +768,23 @@ class SHARK_EXPORT MapValueConstRef {
     return *reinterpret_cast<uint64_t*>(data_);
   }
   int32_t GetInt32Value() const {
-    TYPE_CHECK(FieldCppType::INT32,
-               "MapValueConstRef::GetInt32Value");
+    if (type_ == FieldCppType::INT8) {
+      return *reinterpret_cast<int8_t*>(data_);
+    }
+    if (type_ == FieldCppType::INT16) {
+      return *reinterpret_cast<int16_t*>(data_);
+    }
+    TYPE_CHECK(FieldCppType::INT32, "MapValueConstRef::GetInt32Value");
     return *reinterpret_cast<int32_t*>(data_);
   }
   uint32_t GetUInt32Value() const {
-    TYPE_CHECK(FieldCppType::UINT32,
-               "MapValueConstRef::GetUInt32Value");
+    if (type_ == FieldCppType::UINT8) {
+      return *reinterpret_cast<uint8_t*>(data_);
+    }
+    if (type_ == FieldCppType::UINT16) {
+      return *reinterpret_cast<uint16_t*>(data_);
+    }
+    TYPE_CHECK(FieldCppType::UINT32, "MapValueConstRef::GetUInt32Value");
     return *reinterpret_cast<uint32_t*>(data_);
   }
   bool GetBoolValue() const {
@@ -802,10 +868,26 @@ class SHARK_EXPORT MapValueRef final : public MapValueConstRef {
     *reinterpret_cast<uint64_t*>(data_) = value;
   }
   void SetInt32Value(int32_t value) {
+    if (type_ == FieldCppType::INT8) {
+      *reinterpret_cast<int8_t*>(data_) = static_cast<int8_t>(value);
+      return;
+    }
+    if (type_ == FieldCppType::INT16) {
+      *reinterpret_cast<int16_t*>(data_) = static_cast<int16_t>(value);
+      return;
+    }
     TYPE_CHECK(FieldCppType::INT32, "MapValueRef::SetInt32Value");
     *reinterpret_cast<int32_t*>(data_) = value;
   }
   void SetUInt32Value(uint32_t value) {
+    if (type_ == FieldCppType::UINT8) {
+      *reinterpret_cast<uint8_t*>(data_) = static_cast<uint8_t>(value);
+      return;
+    }
+    if (type_ == FieldCppType::UINT16) {
+      *reinterpret_cast<uint16_t*>(data_) = static_cast<uint16_t>(value);
+      return;
+    }
     TYPE_CHECK(FieldCppType::UINT32, "MapValueRef::SetUInt32Value");
     *reinterpret_cast<uint32_t*>(data_) = value;
   }
@@ -849,8 +931,12 @@ class SHARK_EXPORT MapValueRef final : public MapValueConstRef {
     break;                                   \
   }
       HANDLE_TYPE(INT32, int32_t);
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT64, int64_t);
       HANDLE_TYPE(UINT32, uint32_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(DOUBLE, double);
       HANDLE_TYPE(FLOAT, float);

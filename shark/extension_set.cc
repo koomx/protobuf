@@ -363,6 +363,10 @@ enum { REPEATED_FIELD, OPTIONAL_FIELD };
   }
 
 PRIMITIVE_ACCESSORS(INT32, int32_t, Int32)
+PRIMITIVE_ACCESSORS(INT8, int8_t, Int8)
+PRIMITIVE_ACCESSORS(INT16, int16_t, Int16)
+PRIMITIVE_ACCESSORS(UINT8, uint8_t, UInt8)
+PRIMITIVE_ACCESSORS(UINT16, uint16_t, UInt16)
 PRIMITIVE_ACCESSORS(INT64, int64_t, Int64)
 PRIMITIVE_ACCESSORS(UINT32, uint32_t, UInt32)
 PRIMITIVE_ACCESSORS(UINT64, uint64_t, UInt64)
@@ -400,6 +404,22 @@ void* ExtensionSet::MutableRawRepeatedField(int number, FieldTypeUint8 field_typ
       case WireFormatLite::CPPTYPE_INT32:
         extension->repeated_int32_t_value =
             Arena::CreateMessage<RepeatedField<int32_t>>(arena_);
+        break;
+      case WireFormatLite::CPPTYPE_INT8:
+        extension->repeated_int8_t_value =
+            Arena::CreateMessage<RepeatedField<int8_t>>(arena_);
+        break;
+      case WireFormatLite::CPPTYPE_INT16:
+        extension->repeated_int16_t_value =
+            Arena::CreateMessage<RepeatedField<int16_t>>(arena_);
+        break;
+      case WireFormatLite::CPPTYPE_UINT8:
+        extension->repeated_uint8_t_value =
+            Arena::CreateMessage<RepeatedField<uint8_t>>(arena_);
+        break;
+      case WireFormatLite::CPPTYPE_UINT16:
+        extension->repeated_uint16_t_value =
+            Arena::CreateMessage<RepeatedField<uint16_t>>(arena_);
         break;
       case WireFormatLite::CPPTYPE_INT64:
         extension->repeated_int64_t_value =
@@ -835,6 +855,18 @@ void ExtensionSet::RemoveLast(int number) {
     case WireFormatLite::CPPTYPE_INT32:
       extension->repeated_int32_t_value->RemoveLast();
       break;
+    case WireFormatLite::CPPTYPE_INT8:
+      extension->repeated_int8_t_value->RemoveLast();
+      break;
+    case WireFormatLite::CPPTYPE_INT16:
+      extension->repeated_int16_t_value->RemoveLast();
+      break;
+    case WireFormatLite::CPPTYPE_UINT8:
+      extension->repeated_uint8_t_value->RemoveLast();
+      break;
+    case WireFormatLite::CPPTYPE_UINT16:
+      extension->repeated_uint16_t_value->RemoveLast();
+      break;
     case WireFormatLite::CPPTYPE_INT64:
       extension->repeated_int64_t_value->RemoveLast();
       break;
@@ -889,6 +921,18 @@ void ExtensionSet::SwapElements(int number, int index1, int index2) {
   switch (cpp_type(extension->type)) {
     case WireFormatLite::CPPTYPE_INT32:
       extension->repeated_int32_t_value->SwapElements(index1, index2);
+      break;
+    case WireFormatLite::CPPTYPE_INT8:
+      extension->repeated_int8_t_value->SwapElements(index1, index2);
+      break;
+    case WireFormatLite::CPPTYPE_INT16:
+      extension->repeated_int16_t_value->SwapElements(index1, index2);
+      break;
+    case WireFormatLite::CPPTYPE_UINT8:
+      extension->repeated_uint8_t_value->SwapElements(index1, index2);
+      break;
+    case WireFormatLite::CPPTYPE_UINT16:
+      extension->repeated_uint16_t_value->SwapElements(index1, index2);
       break;
     case WireFormatLite::CPPTYPE_INT64:
       extension->repeated_int64_t_value->SwapElements(index1, index2);
@@ -1008,8 +1052,12 @@ void ExtensionSet::InternalExtensionMergeFrom(const MessageLite* extendee,
     break;
 
       HANDLE_TYPE(INT32, int32_t, RepeatedField<int32_t>);
+        HANDLE_TYPE(INT8, int8_t, RepeatedField<int8_t>);
+        HANDLE_TYPE(INT16, int16_t, RepeatedField<int16_t>);
       HANDLE_TYPE(INT64, int64_t, RepeatedField<int64_t>);
       HANDLE_TYPE(UINT32, uint32_t, RepeatedField<uint32_t>);
+        HANDLE_TYPE(UINT8, uint8_t, RepeatedField<uint8_t>);
+        HANDLE_TYPE(UINT16, uint16_t, RepeatedField<uint16_t>);
       HANDLE_TYPE(UINT64, uint64_t, RepeatedField<uint64_t>);
       HANDLE_TYPE(FLOAT, float, RepeatedField<float>);
       HANDLE_TYPE(DOUBLE, double, RepeatedField<double>);
@@ -1052,8 +1100,12 @@ void ExtensionSet::InternalExtensionMergeFrom(const MessageLite* extendee,
     break;
 
         HANDLE_TYPE(INT32, int32_t, Int32);
+        HANDLE_TYPE(INT8, int8_t, Int32);
+        HANDLE_TYPE(INT16, int16_t, Int32);
         HANDLE_TYPE(INT64, int64_t, Int64);
         HANDLE_TYPE(UINT32, uint32_t, UInt32);
+        HANDLE_TYPE(UINT8, uint8_t, UInt32);
+        HANDLE_TYPE(UINT16, uint16_t, UInt32);
         HANDLE_TYPE(UINT64, uint64_t, UInt64);
         HANDLE_TYPE(FLOAT, float, Float);
         HANDLE_TYPE(DOUBLE, double, Double);
@@ -1315,8 +1367,12 @@ void ExtensionSet::Extension::Clear() {
     break
 
       HANDLE_TYPE(INT32, int32_t);
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT64, int64_t);
       HANDLE_TYPE(UINT32, uint32_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(FLOAT, float);
       HANDLE_TYPE(DOUBLE, double);
@@ -1366,8 +1422,12 @@ size_t ExtensionSet::Extension::ByteSize(int number) const {
     break
 
         HANDLE_TYPE(INT32, Int32, int32_t);
+        HANDLE_TYPE(INT8, Int32, int8_t);
+        HANDLE_TYPE(INT16, Int32, int16_t);
         HANDLE_TYPE(INT64, Int64, int64_t);
         HANDLE_TYPE(UINT32, UInt32, uint32_t);
+        HANDLE_TYPE(UINT8, UInt32, uint8_t);
+        HANDLE_TYPE(UINT16, UInt32, uint16_t);
         HANDLE_TYPE(UINT64, UInt64, uint64_t);
         HANDLE_TYPE(SINT32, SInt32, int32_t);
         HANDLE_TYPE(SINT64, SInt64, int64_t);
@@ -1417,8 +1477,12 @@ size_t ExtensionSet::Extension::ByteSize(int number) const {
     break
 
         HANDLE_TYPE(INT32, Int32, int32_t);
+        HANDLE_TYPE(INT8, Int32, int8_t);
+        HANDLE_TYPE(INT16, Int32, int16_t);
         HANDLE_TYPE(INT64, Int64, int64_t);
         HANDLE_TYPE(UINT32, UInt32, uint32_t);
+        HANDLE_TYPE(UINT8, UInt32, uint8_t);
+        HANDLE_TYPE(UINT16, UInt32, uint16_t);
         HANDLE_TYPE(UINT64, UInt64, uint64_t);
         HANDLE_TYPE(SINT32, SInt32, int32_t);
         HANDLE_TYPE(SINT64, SInt64, int64_t);
@@ -1454,8 +1518,12 @@ size_t ExtensionSet::Extension::ByteSize(int number) const {
     break
 
       HANDLE_TYPE(INT32, Int32, int32_t_value);
+      HANDLE_TYPE(INT8, Int32, int8_t_value);
+      HANDLE_TYPE(INT16, Int32, int16_t_value);
       HANDLE_TYPE(INT64, Int64, int64_t_value);
       HANDLE_TYPE(UINT32, UInt32, uint32_t_value);
+      HANDLE_TYPE(UINT8, UInt32, uint8_t_value);
+      HANDLE_TYPE(UINT16, UInt32, uint16_t_value);
       HANDLE_TYPE(UINT64, UInt64, uint64_t_value);
       HANDLE_TYPE(SINT32, SInt32, int32_t_value);
       HANDLE_TYPE(SINT64, SInt64, int64_t_value);
@@ -1501,8 +1569,12 @@ int ExtensionSet::Extension::GetSize() const {
     return repeated_##LOWERCASE##_value->size()
 
     HANDLE_TYPE(INT32, int32_t);
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
     HANDLE_TYPE(INT64, int64_t);
     HANDLE_TYPE(UINT32, uint32_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
     HANDLE_TYPE(UINT64, uint64_t);
     HANDLE_TYPE(FLOAT, float);
     HANDLE_TYPE(DOUBLE, double);
@@ -1528,8 +1600,12 @@ void ExtensionSet::Extension::Free() {
     break
 
       HANDLE_TYPE(INT32, int32_t);
+      HANDLE_TYPE(INT8, int8_t);
+      HANDLE_TYPE(INT16, int16_t);
       HANDLE_TYPE(INT64, int64_t);
       HANDLE_TYPE(UINT32, uint32_t);
+      HANDLE_TYPE(UINT8, uint8_t);
+      HANDLE_TYPE(UINT16, uint16_t);
       HANDLE_TYPE(UINT64, uint64_t);
       HANDLE_TYPE(FLOAT, float);
       HANDLE_TYPE(DOUBLE, double);
@@ -1733,8 +1809,12 @@ uint8_t* ExtensionSet::Extension::InternalSerializeFieldWithCachedSizesToArray(
     break
 
         HANDLE_TYPE(INT32, Int32, int32_t);
+        HANDLE_TYPE(INT8, Int32, int8_t);
+        HANDLE_TYPE(INT16, Int32, int16_t);
         HANDLE_TYPE(INT64, Int64, int64_t);
         HANDLE_TYPE(UINT32, UInt32, uint32_t);
+        HANDLE_TYPE(UINT8, UInt32, uint8_t);
+        HANDLE_TYPE(UINT16, UInt32, uint16_t);
         HANDLE_TYPE(UINT64, UInt64, uint64_t);
         HANDLE_TYPE(SINT32, SInt32, int32_t);
         HANDLE_TYPE(SINT64, SInt64, int64_t);
@@ -1767,8 +1847,12 @@ uint8_t* ExtensionSet::Extension::InternalSerializeFieldWithCachedSizesToArray(
     break
 
         HANDLE_TYPE(INT32, Int32, int32_t);
+        HANDLE_TYPE(INT8, Int32, int8_t);
+        HANDLE_TYPE(INT16, Int32, int16_t);
         HANDLE_TYPE(INT64, Int64, int64_t);
         HANDLE_TYPE(UINT32, UInt32, uint32_t);
+        HANDLE_TYPE(UINT8, UInt32, uint8_t);
+        HANDLE_TYPE(UINT16, UInt32, uint16_t);
         HANDLE_TYPE(UINT64, UInt64, uint64_t);
         HANDLE_TYPE(SINT32, SInt32, int32_t);
         HANDLE_TYPE(SINT64, SInt64, int64_t);
@@ -1817,8 +1901,12 @@ uint8_t* ExtensionSet::Extension::InternalSerializeFieldWithCachedSizesToArray(
     break
 
       HANDLE_TYPE(INT32, Int32, int32_t_value);
+      HANDLE_TYPE(INT8, Int32, int8_t_value);
+      HANDLE_TYPE(INT16, Int32, int16_t_value);
       HANDLE_TYPE(INT64, Int64, int64_t_value);
       HANDLE_TYPE(UINT32, UInt32, uint32_t_value);
+      HANDLE_TYPE(UINT8, UInt32, uint8_t_value);
+      HANDLE_TYPE(UINT16, UInt32, uint16_t_value);
       HANDLE_TYPE(UINT64, UInt64, uint64_t_value);
       HANDLE_TYPE(SINT32, SInt32, int32_t_value);
       HANDLE_TYPE(SINT64, SInt64, int64_t_value);

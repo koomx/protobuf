@@ -294,6 +294,14 @@ class SHARK_EXPORT TcParser final {
   static const char* FastV8R2(SHARK_TC_PARAM_DECL);
   static const char* FastV8P1(SHARK_TC_PARAM_DECL);
   static const char* FastV8P2(SHARK_TC_PARAM_DECL);
+  static const char* FastN8S1(SHARK_TC_PARAM_DECL);
+  static const char* FastN8S2(SHARK_TC_PARAM_DECL);
+  static const char* FastU8S1(SHARK_TC_PARAM_DECL);
+  static const char* FastU8S2(SHARK_TC_PARAM_DECL);
+  static const char* FastN16S1(SHARK_TC_PARAM_DECL);
+  static const char* FastN16S2(SHARK_TC_PARAM_DECL);
+  static const char* FastU16S1(SHARK_TC_PARAM_DECL);
+  static const char* FastU16S2(SHARK_TC_PARAM_DECL);
   static const char* FastV32S1(SHARK_TC_PARAM_DECL);
   static const char* FastV32S2(SHARK_TC_PARAM_DECL);
   static const char* FastV32R1(SHARK_TC_PARAM_DECL);

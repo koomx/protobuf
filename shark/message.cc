@@ -347,6 +347,10 @@ const internal::RepeatedFieldAccessor* Reflection::RepeatedFieldAccessor(
   case FieldCppType::TYPE:   \
     return GetSingleton<internal::RepeatedFieldPrimitiveAccessor<type> >();
     HANDLE_PRIMITIVE_TYPE(INT32, int32_t)
+    HANDLE_PRIMITIVE_TYPE(INT8, int8_t)
+    HANDLE_PRIMITIVE_TYPE(INT16, int16_t)
+    HANDLE_PRIMITIVE_TYPE(UINT8, uint8_t)
+    HANDLE_PRIMITIVE_TYPE(UINT16, uint16_t)
     HANDLE_PRIMITIVE_TYPE(UINT32, uint32_t)
     HANDLE_PRIMITIVE_TYPE(INT64, int64_t)
     HANDLE_PRIMITIVE_TYPE(UINT64, uint64_t)
