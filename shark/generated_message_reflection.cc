@@ -136,14 +136,14 @@ void ReportReflectionUsageError(const Descriptor* descriptor,
              << description;
 }
 
-const char* cpptype_names_[FieldDescriptor::MAX_CPPTYPE + 1] = {
+const char* cpptype_names_[kMaxFieldCppType + 1] = {
     "INVALID_CPPTYPE", "CPPTYPE_INT32",  "CPPTYPE_INT64",  "CPPTYPE_UINT32",
     "CPPTYPE_UINT64",  "CPPTYPE_DOUBLE", "CPPTYPE_FLOAT",  "CPPTYPE_BOOL",
     "CPPTYPE_ENUM",    "CPPTYPE_STRING", "CPPTYPE_MESSAGE"};
 
 static void ReportReflectionUsageTypeError(
     const Descriptor* descriptor, const FieldDescriptor* field,
-    const char* method, FieldDescriptor::CppType expected_type) {
+    const char* method, FieldCppType expected_type) {
   GOOGLE_LOG(FATAL)
       << "Protocol Buffer reflection usage error:\n"
          "  Method      : shark::Reflection::"
@@ -157,10 +157,10 @@ static void ReportReflectionUsageTypeError(
       << "\n"
          "  Problem     : Field is not the right type for this message:\n"
          "    Expected  : "
-      << cpptype_names_[expected_type]
+      << cpptype_names_[static_cast<int>(expected_type)]
       << "\n"
          "    Field type: "
-      << cpptype_names_[field->cpp_type()];
+      << cpptype_names_[static_cast<int>(field->cpp_type())];
 }
 
 static void ReportReflectionUsageEnumTypeError(
@@ -199,9 +199,9 @@ inline void CheckInvalidAccess(const internal::ReflectionSchema& schema,
   USAGE_CHECK((A) != (B), METHOD, ERROR_DESCRIPTION)
 
 #define USAGE_CHECK_TYPE(METHOD, CPPTYPE)                      \
-  if (field->cpp_type() != FieldDescriptor::CPPTYPE_##CPPTYPE) \
+  if (field->cpp_type() != FieldCppType::CPPTYPE) \
   ReportReflectionUsageTypeError(descriptor_, field, #METHOD,  \
-                                 FieldDescriptor::CPPTYPE_##CPPTYPE)
+                                 FieldCppType::CPPTYPE)
 
 #define USAGE_CHECK_ENUM_VALUE(METHOD)     \
   if (value->type() != field->enum_type()) \
@@ -211,10 +211,10 @@ inline void CheckInvalidAccess(const internal::ReflectionSchema& schema,
   USAGE_CHECK_EQ(field->containing_type(), descriptor_, METHOD, \
                  "Field does not match message type.");
 #define USAGE_CHECK_SINGULAR(METHOD)                                      \
-  USAGE_CHECK_NE(field->label(), FieldDescriptor::LABEL_REPEATED, METHOD, \
+  USAGE_CHECK_NE(field->label(), FieldLabel::REPEATED, METHOD, \
                  "Field is repeated; the method requires a singular field.")
 #define USAGE_CHECK_REPEATED(METHOD)                                      \
-  USAGE_CHECK_EQ(field->label(), FieldDescriptor::LABEL_REPEATED, METHOD, \
+  USAGE_CHECK_EQ(field->label(), FieldLabel::REPEATED, METHOD, \
                  "Field is singular; the method requires a repeated field.")
 
 #define USAGE_CHECK_ALL(METHOD, LABEL, CPPTYPE) \
@@ -265,7 +265,7 @@ bool Reflection::IsLazilyVerifiedLazyField(const FieldDescriptor* field) const {
 
 bool Reflection::IsEagerlyVerifiedLazyField(
     const FieldDescriptor* field) const {
-  return (field->type() == FieldDescriptor::TYPE_MESSAGE &&
+  return (field->type() == FieldType::MESSAGE &&
           schema_.IsEagerlyVerifiedLazyField(field));
 }
 
@@ -296,7 +296,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
     if (field->is_repeated()) {
       switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                           \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE:                        \
+  case FieldCppType::UPPERCASE:                        \
     total_size += GetRaw<RepeatedField<LOWERCASE> >(message, field) \
                       .SpaceUsedExcludingSelfLong();                \
     break
@@ -311,7 +311,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-        case FieldDescriptor::CPPTYPE_STRING:
+        case FieldCppType::STRING:
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::STRING:
@@ -322,7 +322,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
           }
           break;
 
-        case FieldDescriptor::CPPTYPE_MESSAGE:
+        case FieldCppType::MESSAGE:
           if (IsMapFieldInApi(field)) {
             total_size += GetRaw<internal::MapFieldBase>(message, field)
                               .SpaceUsedExcludingSelfLong();
@@ -341,18 +341,18 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         continue;
       }
       switch (field->cpp_type()) {
-        case FieldDescriptor::CPPTYPE_INT32:
-        case FieldDescriptor::CPPTYPE_INT64:
-        case FieldDescriptor::CPPTYPE_UINT32:
-        case FieldDescriptor::CPPTYPE_UINT64:
-        case FieldDescriptor::CPPTYPE_DOUBLE:
-        case FieldDescriptor::CPPTYPE_FLOAT:
-        case FieldDescriptor::CPPTYPE_BOOL:
-        case FieldDescriptor::CPPTYPE_ENUM:
+        case FieldCppType::INT32:
+        case FieldCppType::INT64:
+        case FieldCppType::UINT32:
+        case FieldCppType::UINT64:
+        case FieldCppType::DOUBLE:
+        case FieldCppType::FLOAT:
+        case FieldCppType::BOOL:
+        case FieldCppType::ENUM:
           // Field is inline, so we've already counted it.
           break;
 
-        case FieldDescriptor::CPPTYPE_STRING: {
+        case FieldCppType::STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::STRING:
@@ -379,7 +379,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
           break;
         }
 
-        case FieldDescriptor::CPPTYPE_MESSAGE:
+        case FieldCppType::MESSAGE:
           if (schema_.IsDefaultInstance(message)) {
             // For singular fields, the prototype just stores a pointer to the
             // external type's prototype, so there is no extra memory usage.
@@ -403,38 +403,38 @@ struct OneofFieldMover {
   template <typename FromType, typename ToType>
   void operator()(const FieldDescriptor* field, FromType* from, ToType* to) {
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         to->SetInt32(from->GetInt32());
         break;
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         to->SetInt64(from->GetInt64());
         break;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         to->SetUint32(from->GetUint32());
         break;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         to->SetUint64(from->GetUint64());
         break;
-      case FieldDescriptor::CPPTYPE_FLOAT:
+      case FieldCppType::FLOAT:
         to->SetFloat(from->GetFloat());
         break;
-      case FieldDescriptor::CPPTYPE_DOUBLE:
+      case FieldCppType::DOUBLE:
         to->SetDouble(from->GetDouble());
         break;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         to->SetBool(from->GetBool());
         break;
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         to->SetEnum(from->GetEnum());
         break;
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         if (!unsafe_shallow_swap) {
           to->SetMessage(from->GetMessage());
         } else {
           to->UnsafeSetMessage(from->UnsafeGetMessage());
         }
         break;
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         if (!unsafe_shallow_swap) {
           to->SetString(from->GetString());
           break;
@@ -448,7 +448,7 @@ struct OneofFieldMover {
         }
         break;
       default:
-        GOOGLE_LOG(FATAL) << "unimplemented type: " << field->cpp_type();
+        GOOGLE_LOG(FATAL) << "unimplemented type: " << static_cast<int>(field->cpp_type());
     }
     if (unsafe_shallow_swap) {
       // Not clearing oneof case after move may cause unwanted "ClearOneof"
@@ -688,7 +688,7 @@ void SwapFieldHelper::SwapNonMessageNonStringField(
     const FieldDescriptor* field) {
   switch (field->cpp_type()) {
 #define SWAP_VALUES(CPPTYPE, TYPE)               \
-  case FieldDescriptor::CPPTYPE_##CPPTYPE:       \
+  case FieldCppType::CPPTYPE:       \
     std::swap(*r->MutableRaw<TYPE>(lhs, field),  \
               *r->MutableRaw<TYPE>(rhs, field)); \
     break;
@@ -703,7 +703,7 @@ void SwapFieldHelper::SwapNonMessageNonStringField(
     SWAP_VALUES(ENUM, int);
 #undef SWAP_VALUES
     default:
-      GOOGLE_LOG(FATAL) << "Unimplemented type: " << field->cpp_type();
+      GOOGLE_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
   }
 }
 
@@ -714,7 +714,7 @@ void Reflection::SwapField(Message* message1, Message* message2,
   if (field->is_repeated()) {
     switch (field->cpp_type()) {
 #define SWAP_ARRAYS(CPPTYPE, TYPE)                                 \
-  case FieldDescriptor::CPPTYPE_##CPPTYPE:                         \
+  case FieldCppType::CPPTYPE:                         \
     MutableRaw<RepeatedField<TYPE> >(message1, field)              \
         ->Swap(MutableRaw<RepeatedField<TYPE> >(message2, field)); \
     break;
@@ -729,26 +729,26 @@ void Reflection::SwapField(Message* message1, Message* message2,
       SWAP_ARRAYS(ENUM, int);
 #undef SWAP_ARRAYS
 
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         internal::SwapFieldHelper::SwapRepeatedStringField<false>(
             this, message1, message2, field);
         break;
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         internal::SwapFieldHelper::SwapRepeatedMessageField<false>(
             this, message1, message2, field);
         break;
 
       default:
-        GOOGLE_LOG(FATAL) << "Unimplemented type: " << field->cpp_type();
+        GOOGLE_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
     }
   } else {
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         internal::SwapFieldHelper::SwapMessageField<false>(this, message1,
                                                            message2, field);
         break;
 
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         internal::SwapFieldHelper::SwapStringField<false>(this, message1,
                                                           message2, field);
         break;
@@ -762,10 +762,10 @@ void Reflection::SwapField(Message* message1, Message* message2,
 void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
                                         const FieldDescriptor* field) const {
   if (!field->is_repeated()) {
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    if (field->cpp_type() == FieldCppType::MESSAGE) {
       internal::SwapFieldHelper::SwapMessageField<true>(this, message1,
                                                         message2, field);
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_STRING) {
+    } else if (field->cpp_type() == FieldCppType::STRING) {
       internal::SwapFieldHelper::SwapStringField<true>(this, message1, message2,
                                                        field);
     } else {
@@ -777,7 +777,7 @@ void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
 
   switch (field->cpp_type()) {
 #define SHALLOW_SWAP_ARRAYS(CPPTYPE, TYPE)                                \
-  case FieldDescriptor::CPPTYPE_##CPPTYPE:                                \
+  case FieldCppType::CPPTYPE:                                \
     MutableRaw<RepeatedField<TYPE>>(message1, field)                      \
         ->InternalSwap(MutableRaw<RepeatedField<TYPE>>(message2, field)); \
     break;
@@ -792,17 +792,17 @@ void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
     SHALLOW_SWAP_ARRAYS(ENUM, int);
 #undef SHALLOW_SWAP_ARRAYS
 
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       internal::SwapFieldHelper::SwapRepeatedStringField<true>(this, message1,
                                                                message2, field);
       break;
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       internal::SwapFieldHelper::SwapRepeatedMessageField<true>(
           this, message1, message2, field);
       break;
 
     default:
-      GOOGLE_LOG(FATAL) << "Unimplemented type: " << field->cpp_type();
+      GOOGLE_LOG(FATAL) << "Unimplemented type: " << static_cast<int>(field->cpp_type());
   }
 }
 
@@ -1184,7 +1184,7 @@ int Reflection::FieldSize(const Message& message,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)    \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE: \
+  case FieldCppType::UPPERCASE: \
     return GetRaw<RepeatedField<LOWERCASE> >(message, field).size()
 
       HANDLE_TYPE(INT32, int32_t);
@@ -1197,8 +1197,8 @@ int Reflection::FieldSize(const Message& message,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::CPPTYPE_STRING:
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::STRING:
+      case FieldCppType::MESSAGE:
         if (IsMapFieldInApi(field)) {
           const internal::MapFieldBase& map =
               GetRaw<MapFieldBase>(message, field);
@@ -1237,7 +1237,7 @@ void Reflection::ClearField(Message* message,
       // We need to set the field back to its default value.
       switch (field->cpp_type()) {
 #define CLEAR_TYPE(CPPTYPE, TYPE)                                      \
-  case FieldDescriptor::CPPTYPE_##CPPTYPE:                             \
+  case FieldCppType::CPPTYPE:                             \
     *MutableRaw<TYPE>(message, field) = field->default_value_##TYPE(); \
     break;
 
@@ -1250,12 +1250,12 @@ void Reflection::ClearField(Message* message,
         CLEAR_TYPE(BOOL, bool);
 #undef CLEAR_TYPE
 
-        case FieldDescriptor::CPPTYPE_ENUM:
+        case FieldCppType::ENUM:
           *MutableRaw<int>(message, field) =
               field->default_value_enum()->number();
           break;
 
-        case FieldDescriptor::CPPTYPE_STRING: {
+        case FieldCppType::STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::STRING:
@@ -1273,7 +1273,7 @@ void Reflection::ClearField(Message* message,
           break;
         }
 
-        case FieldDescriptor::CPPTYPE_MESSAGE:
+        case FieldCppType::MESSAGE:
           if (schema_.HasBitIndex(field) == static_cast<uint32_t>(-1)) {
             // Proto3 does not have has-bits and we need to set a message field
             // to nullptr in order to indicate its un-presence.
@@ -1290,7 +1290,7 @@ void Reflection::ClearField(Message* message,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                           \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE:                        \
+  case FieldCppType::UPPERCASE:                        \
     MutableRaw<RepeatedField<LOWERCASE> >(message, field)->Clear(); \
     break
 
@@ -1304,7 +1304,7 @@ void Reflection::ClearField(Message* message,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::CPPTYPE_STRING: {
+      case FieldCppType::STRING: {
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::STRING:
@@ -1314,7 +1314,7 @@ void Reflection::ClearField(Message* message,
         break;
       }
 
-      case FieldDescriptor::CPPTYPE_MESSAGE: {
+      case FieldCppType::MESSAGE: {
         if (IsMapFieldInApi(field)) {
           MutableRaw<MapFieldBase>(message, field)->Clear();
         } else {
@@ -1340,7 +1340,7 @@ void Reflection::RemoveLast(Message* message,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                                \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE:                             \
+  case FieldCppType::UPPERCASE:                             \
     MutableRaw<RepeatedField<LOWERCASE> >(message, field)->RemoveLast(); \
     break
 
@@ -1354,7 +1354,7 @@ void Reflection::RemoveLast(Message* message,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::STRING:
@@ -1364,7 +1364,7 @@ void Reflection::RemoveLast(Message* message,
         }
         break;
 
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         if (IsMapFieldInApi(field)) {
           MutableRaw<MapFieldBase>(message, field)
               ->MutableRepeatedField()
@@ -1435,7 +1435,7 @@ void Reflection::SwapElements(Message* message, const FieldDescriptor* field,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                 \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE:              \
+  case FieldCppType::UPPERCASE:              \
     MutableRaw<RepeatedField<LOWERCASE> >(message, field) \
         ->SwapElements(index1, index2);                   \
     break
@@ -1450,8 +1450,8 @@ void Reflection::SwapElements(Message* message, const FieldDescriptor* field,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::CPPTYPE_STRING:
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::STRING:
+      case FieldCppType::MESSAGE:
         if (IsMapFieldInApi(field)) {
           MutableRaw<MapFieldBase>(message, field)
               ->MutableRepeatedField()
@@ -1583,7 +1583,7 @@ void Reflection::ListFieldsOmitStripped(
     USAGE_CHECK_ALL(Set##TYPENAME, SINGULAR, CPPTYPE);                         \
     if (field->is_extension()) {                                               \
       return MutableExtensionSet(message)->Set##TYPENAME(                      \
-          field->number(), field->type(), value, field);                       \
+          field->number(), static_cast<int>(field->type()), value, field);                       \
     } else {                                                                   \
       SetField<TYPE>(message, field, value);                                   \
     }                                                                          \
@@ -1617,7 +1617,7 @@ void Reflection::ListFieldsOmitStripped(
     USAGE_CHECK_ALL(Add##TYPENAME, REPEATED, CPPTYPE);                         \
     if (field->is_extension()) {                                               \
       MutableExtensionSet(message)->Add##TYPENAME(                             \
-          field->number(), field->type(), field->options().packed(), value,    \
+          field->number(), static_cast<int>(field->type()), field->options().packed(), value,    \
           field);                                                              \
     } else {                                                                   \
       AddField<TYPE>(message, field, value);                                   \
@@ -1689,7 +1689,7 @@ void Reflection::SetString(Message* message, const FieldDescriptor* field,
   USAGE_CHECK_ALL(SetString, SINGULAR, STRING);
   if (field->is_extension()) {
     return MutableExtensionSet(message)->SetString(
-        field->number(), field->type(), std::move(value), field);
+        field->number(), static_cast<int>(field->type()), std::move(value), field);
   } else {
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
@@ -1779,7 +1779,7 @@ void Reflection::AddString(Message* message, const FieldDescriptor* field,
                            std::string value) const {
   USAGE_CHECK_ALL(AddString, REPEATED, STRING);
   if (field->is_extension()) {
-    MutableExtensionSet(message)->AddString(field->number(), field->type(),
+    MutableExtensionSet(message)->AddString(field->number(), static_cast<int>(field->type()),
                                             std::move(value), field);
   } else {
     switch (field->options().ctype()) {
@@ -1844,7 +1844,7 @@ void Reflection::SetEnumValueInternal(Message* message,
                                       const FieldDescriptor* field,
                                       int value) const {
   if (field->is_extension()) {
-    MutableExtensionSet(message)->SetEnum(field->number(), field->type(), value,
+    MutableExtensionSet(message)->SetEnum(field->number(), static_cast<int>(field->type()), value,
                                           field);
   } else {
     SetField<int>(message, field, value);
@@ -1935,7 +1935,7 @@ void Reflection::AddEnumValueInternal(Message* message,
                                       const FieldDescriptor* field,
                                       int value) const {
   if (field->is_extension()) {
-    MutableExtensionSet(message)->AddEnum(field->number(), field->type(),
+    MutableExtensionSet(message)->AddEnum(field->number(), static_cast<int>(field->type()),
                                           field->options().packed(), value,
                                           field);
   } else {
@@ -2047,7 +2047,7 @@ void Reflection::UnsafeArenaSetAllocatedMessage(
 
   if (field->is_extension()) {
     MutableExtensionSet(message)->UnsafeArenaSetAllocatedMessage(
-        field->number(), field->type(), field, sub_message);
+        field->number(), static_cast<int>(field->type()), field, sub_message);
   } else {
     if (schema_.InRealOneof(field)) {
       if (sub_message == nullptr) {
@@ -2279,7 +2279,7 @@ void Reflection::UnsafeArenaAddAllocatedMessage(Message* message,
 
 void* Reflection::MutableRawRepeatedField(Message* message,
                                           const FieldDescriptor* field,
-                                          FieldDescriptor::CppType cpptype,
+                                          FieldCppType cpptype,
                                           int ctype,
                                           const Descriptor* desc) const {
   (void)ctype;  // Parameter is used by Google-internal code.
@@ -2287,15 +2287,15 @@ void* Reflection::MutableRawRepeatedField(Message* message,
   CheckInvalidAccess(schema_, field);
 
   if (field->cpp_type() != cpptype &&
-      (field->cpp_type() != FieldDescriptor::CPPTYPE_ENUM ||
-       cpptype != FieldDescriptor::CPPTYPE_INT32))
+      (field->cpp_type() != FieldCppType::ENUM ||
+       cpptype != FieldCppType::INT32))
     ReportReflectionUsageTypeError(descriptor_, field,
                                    "MutableRawRepeatedField", cpptype);
   if (desc != nullptr)
     GOOGLE_CHECK_EQ(field->message_type(), desc) << "wrong submessage type";
   if (field->is_extension()) {
     return MutableExtensionSet(message)->MutableRawRepeatedField(
-        field->number(), field->type(), field->is_packed(), field);
+        field->number(), static_cast<int>(field->type()), field->is_packed(), field);
   } else {
     // Trigger transform for MapField
     if (IsMapFieldInApi(field)) {
@@ -2308,7 +2308,7 @@ void* Reflection::MutableRawRepeatedField(Message* message,
 
 const void* Reflection::GetRawRepeatedField(const Message& message,
                                             const FieldDescriptor* field,
-                                            FieldDescriptor::CppType cpptype,
+                                            FieldCppType cpptype,
                                             int ctype,
                                             const Descriptor* desc) const {
   USAGE_CHECK_REPEATED("GetRawRepeatedField");
@@ -2327,7 +2327,7 @@ const void* Reflection::GetRawRepeatedField(const Message& message,
     // Map is not supported in extensions, it is acceptable to use
     // extension_set::MutableRawRepeatedField which does not change the message.
     return MutableExtensionSet(const_cast<Message*>(&message))
-        ->MutableRawRepeatedField(field->number(), field->type(),
+        ->MutableRawRepeatedField(field->number(), static_cast<int>(field->type()),
                                   field->is_packed(), field);
   } else {
     // Trigger transform for MapField
@@ -2563,7 +2563,7 @@ bool Reflection::HasBit(const Message& message,
 
   // proto3: no has-bits. All fields present except messages, which are
   // present only if their message-field pointer is non-null.
-  if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+  if (field->cpp_type() == FieldCppType::MESSAGE) {
     return !schema_.IsDefaultInstance(message) &&
            GetRaw<const Message*>(message, field) != nullptr;
   } else {
@@ -2578,7 +2578,7 @@ bool Reflection::HasBit(const Message& message,
     // require presence as "present on wire", and reflection-based merge
     // (which uses HasField()) needs to be consistent with this.
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default: {
             if (IsInlined(field)) {
@@ -2591,27 +2591,27 @@ bool Reflection::HasBit(const Message& message,
           }
         }
         return false;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         return GetRaw<bool>(message, field) != false;
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         return GetRaw<int32_t>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         return GetRaw<int64_t>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         return GetRaw<uint32_t>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         return GetRaw<uint64_t>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_FLOAT:
+      case FieldCppType::FLOAT:
         static_assert(sizeof(uint32_t) == sizeof(float),
                       "Code assumes uint32_t and float are the same size.");
         return GetRaw<uint32_t>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_DOUBLE:
+      case FieldCppType::DOUBLE:
         static_assert(sizeof(uint64_t) == sizeof(double),
                       "Code assumes uint64_t and double are the same size.");
         return GetRaw<uint64_t>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return GetRaw<int>(message, field) != 0;
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         // handled above; avoid warning
         break;
     }
@@ -2690,7 +2690,7 @@ void Reflection::ClearOneof(Message* message,
     const FieldDescriptor* field = descriptor_->FindFieldByNumber(oneof_case);
     if (message->GetArenaForAllocation() == nullptr) {
       switch (field->cpp_type()) {
-        case FieldDescriptor::CPPTYPE_STRING: {
+        case FieldCppType::STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::STRING: {
@@ -2705,7 +2705,7 @@ void Reflection::ClearOneof(Message* message,
           break;
         }
 
-        case FieldDescriptor::CPPTYPE_MESSAGE:
+        case FieldCppType::MESSAGE:
           delete *MutableRaw<Message*>(message, field);
           break;
         default:
@@ -2733,13 +2733,13 @@ void Reflection::ClearOneof(Message* message,
         MutableRawRepeatedField(message, field, CPPTYPE, CTYPE, nullptr)); \
   }
 
-HANDLE_TYPE(int32_t, FieldDescriptor::CPPTYPE_INT32, -1);
-HANDLE_TYPE(int64_t, FieldDescriptor::CPPTYPE_INT64, -1);
-HANDLE_TYPE(uint32_t, FieldDescriptor::CPPTYPE_UINT32, -1);
-HANDLE_TYPE(uint64_t, FieldDescriptor::CPPTYPE_UINT64, -1);
-HANDLE_TYPE(float, FieldDescriptor::CPPTYPE_FLOAT, -1);
-HANDLE_TYPE(double, FieldDescriptor::CPPTYPE_DOUBLE, -1);
-HANDLE_TYPE(bool, FieldDescriptor::CPPTYPE_BOOL, -1);
+HANDLE_TYPE(int32_t, FieldCppType::INT32, -1);
+HANDLE_TYPE(int64_t, FieldCppType::INT64, -1);
+HANDLE_TYPE(uint32_t, FieldCppType::UINT32, -1);
+HANDLE_TYPE(uint64_t, FieldCppType::UINT64, -1);
+HANDLE_TYPE(float, FieldCppType::FLOAT, -1);
+HANDLE_TYPE(double, FieldCppType::DOUBLE, -1);
+HANDLE_TYPE(bool, FieldCppType::BOOL, -1);
 
 
 #undef HANDLE_TYPE
@@ -2749,7 +2749,7 @@ void* Reflection::MutableRawRepeatedString(Message* message,
                                            bool is_string) const {
   (void)is_string;  // Parameter is used by Google-internal code.
   return MutableRawRepeatedField(message, field,
-                                 FieldDescriptor::CPPTYPE_STRING,
+                                 FieldCppType::STRING,
                                  FieldOptions_CType_to_underlying(
                                      FieldOptions::STRING),
                                  nullptr);
@@ -2833,12 +2833,12 @@ MessageFactory* Reflection::GetMessageFactory() const {
 
 void* Reflection::RepeatedFieldData(Message* message,
                                     const FieldDescriptor* field,
-                                    FieldDescriptor::CppType cpp_type,
+                                    FieldCppType cpp_type,
                                     const Descriptor* message_type) const {
   GOOGLE_CHECK(field->is_repeated());
   GOOGLE_CHECK(field->cpp_type() == cpp_type ||
-        (field->cpp_type() == FieldDescriptor::CPPTYPE_ENUM &&
-         cpp_type == FieldDescriptor::CPPTYPE_INT32))
+        (field->cpp_type() == FieldCppType::ENUM &&
+         cpp_type == FieldCppType::INT32))
       << "The type parameter T in RepeatedFieldRef<T> API doesn't match "
       << "the actual field type (for enums T should be the generated enum "
       << "type or int32_t).";
@@ -2847,7 +2847,7 @@ void* Reflection::RepeatedFieldData(Message* message,
   }
   if (field->is_extension()) {
     return MutableExtensionSet(message)->MutableRawRepeatedField(
-        field->number(), field->type(), field->is_packed(), field);
+        field->number(), static_cast<int>(field->type()), field->is_packed(), field);
   } else {
     return MutableRawNonOneof<char>(message, field);
   }
@@ -3121,7 +3121,7 @@ bool IsDescendant(Message& root, const Message& message) {
 
   for (const auto* field : fields) {
     // Skip non-message fields.
-    if (field->cpp_type() != FieldDescriptor::CPPTYPE_MESSAGE) continue;
+    if (field->cpp_type() != FieldCppType::MESSAGE) continue;
 
     // Optional messages.
     if (!field->is_repeated()) {
@@ -3150,7 +3150,7 @@ bool IsDescendant(Message& root, const Message& message) {
     constexpr int kValIdx = 1;
     const FieldDescriptor* val_field = field->message_type()->field(kValIdx);
     // Skip map fields whose value type is not message.
-    if (val_field->cpp_type() != FieldDescriptor::CPPTYPE_MESSAGE) continue;
+    if (val_field->cpp_type() != FieldCppType::MESSAGE) continue;
 
     MapIterator end = reflection->MapEnd(&root, field);
     for (auto iter = reflection->MapBegin(&root, field); iter != end; ++iter) {

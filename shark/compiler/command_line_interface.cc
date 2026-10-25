@@ -2546,7 +2546,7 @@ void GatherOccupiedFieldRanges(
   for (int i = 0; i < descriptor->field_count(); ++i) {
     const FieldDescriptor* fd = descriptor->field(i);
     ranges->insert(FieldRange(fd->number(), fd->number() + 1));
-    if (fd->type() == FieldDescriptor::TYPE_GROUP) {
+    if (fd->type() == FieldType::GROUP) {
       groups.insert(fd->message_type());
     }
   }

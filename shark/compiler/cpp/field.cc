@@ -161,8 +161,8 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
   std::string prepared_add_template;
   // TODO(b/190614678): Support fields with type Message or Map.
   if (descriptor->is_repeated() && !descriptor->is_map()) {
-    if (descriptor->type() != FieldDescriptor::TYPE_MESSAGE &&
-        descriptor->type() != FieldDescriptor::TYPE_GROUP) {
+    if (descriptor->type() != FieldType::MESSAGE &&
+        descriptor->type() != FieldType::GROUP) {
       prepared_template = strings::Substitute("&$0.Get(index)", field_member);
       prepared_add_template =
           strings::Substitute("&$0.Get($0.size() - 1)", field_member);
@@ -172,10 +172,10 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     }
   } else if (descriptor->is_map()) {
     prepared_template = "nullptr";
-  } else if (descriptor->type() == FieldDescriptor::TYPE_MESSAGE &&
+  } else if (descriptor->type() == FieldType::MESSAGE &&
              !IsExplicitLazy(descriptor)) {
     prepared_template = "nullptr";
-  } else if (descriptor->cpp_type() == FieldDescriptor::CPPTYPE_STRING) {
+  } else if (descriptor->cpp_type() == FieldCppType::STRING) {
     if (oneof_member) {
       prepared_template = GenerateTemplateForOneofString(
           descriptor, (*variables)["proto_ns"], field_member);
@@ -187,8 +187,8 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     prepared_template = StrCat("&", field_member);
   }
   if (descriptor->is_repeated() && !descriptor->is_map() &&
-      descriptor->type() != FieldDescriptor::TYPE_MESSAGE &&
-      descriptor->type() != FieldDescriptor::TYPE_GROUP) {
+      descriptor->type() != FieldType::MESSAGE &&
+      descriptor->type() != FieldType::GROUP) {
     prepared_flat_template = StrCat("&", field_member);
   } else {
     prepared_flat_template = prepared_template;
@@ -365,38 +365,38 @@ FieldGenerator* FieldGeneratorMap::MakeGenerator(
 
   if (field->is_repeated()) {
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         if (field->is_map()) {
           return new MapFieldGenerator(field, options, scc_analyzer);
         } else {
           return new RepeatedMessageFieldGenerator(field, options,
                                                    scc_analyzer);
         }
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         return new RepeatedStringFieldGenerator(field, options);
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return new RepeatedEnumFieldGenerator(field, options);
       default:
         return new RepeatedPrimitiveFieldGenerator(field, options);
     }
   } else if (field->real_containing_oneof()) {
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         return new MessageOneofFieldGenerator(field, options, scc_analyzer);
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         return new StringOneofFieldGenerator(field, options);
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return new EnumOneofFieldGenerator(field, options);
       default:
         return new PrimitiveOneofFieldGenerator(field, options);
     }
   } else {
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         return new MessageFieldGenerator(field, options, scc_analyzer);
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         return new StringFieldGenerator(field, options);
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return new EnumFieldGenerator(field, options);
       default:
         return new PrimitiveFieldGenerator(field, options);

@@ -813,7 +813,7 @@ void ProtoWriter::WriteRootMessage() {
 
 void ProtoWriter::WriteTag(const shark::Field& field) {
   WireFormatLite::WireType wire_type = WireFormatLite::WireTypeForFieldType(
-      static_cast<WireFormatLite::FieldType>(field.kind()));
+      static_cast<internal::WireFormatLiteFieldType>(field.kind()));
   stream_->WriteTag(WireFormatLite::MakeTag(field.number(), wire_type));
 }
 

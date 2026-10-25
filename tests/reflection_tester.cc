@@ -780,7 +780,7 @@ void MapReflectionTester::ReleaseLastMapsViaReflection(Message* message) {
   for (int i = 0; i < output.size(); ++i) {
     const FieldDescriptor* field = output[i];
     if (!field->is_repeated()) continue;
-    if (field->cpp_type() != FieldDescriptor::CPPTYPE_MESSAGE) continue;
+    if (field->cpp_type() != FieldCppType::MESSAGE) continue;
 
     Message* released = reflection->ReleaseLast(message, field);
     ASSERT_TRUE(released != nullptr)

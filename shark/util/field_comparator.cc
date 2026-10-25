@@ -73,19 +73,19 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
   }                                                                           \
   break;  // Make sure no fall-through is introduced.
 
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       COMPARE_FIELD(Bool);
-    case FieldDescriptor::CPPTYPE_DOUBLE:
+    case FieldCppType::DOUBLE:
       COMPARE_FIELD(Double);
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       COMPARE_FIELD(Enum);
-    case FieldDescriptor::CPPTYPE_FLOAT:
+    case FieldCppType::FLOAT:
       COMPARE_FIELD(Float);
-    case FieldDescriptor::CPPTYPE_INT32:
+    case FieldCppType::INT32:
       COMPARE_FIELD(Int32);
-    case FieldDescriptor::CPPTYPE_INT64:
+    case FieldCppType::INT64:
       COMPARE_FIELD(Int64);
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       if (field->is_repeated()) {
         // Allocate scratch strings to store the result if a conversion is
         // needed.
@@ -108,19 +108,19 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
             reflection_2->GetStringReference(message_2, field, &scratch2)));
       }
       break;
-    case FieldDescriptor::CPPTYPE_UINT32:
+    case FieldCppType::UINT32:
       COMPARE_FIELD(UInt32);
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::UINT64:
       COMPARE_FIELD(UInt64);
 
 #undef COMPARE_FIELD
 
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       return RECURSE;
 
     default:
       GOOGLE_LOG(FATAL) << "No comparison code for field " << field->full_name()
-                 << " of CppType = " << field->cpp_type();
+                 << " of CppType = " << static_cast<int>(field->cpp_type());
       return DIFFERENT;
   }
 }
@@ -141,8 +141,8 @@ void SimpleFieldComparator::SetDefaultFractionAndMargin(double fraction,
 void SimpleFieldComparator::SetFractionAndMargin(const FieldDescriptor* field,
                                                  double fraction,
                                                  double margin) {
-  GOOGLE_CHECK(FieldDescriptor::CPPTYPE_FLOAT == field->cpp_type() ||
-        FieldDescriptor::CPPTYPE_DOUBLE == field->cpp_type())
+  GOOGLE_CHECK(FieldCppType::FLOAT == field->cpp_type() ||
+        FieldCppType::DOUBLE == field->cpp_type())
       << "Field has to be float or double type. Field name is: "
       << field->full_name();
   map_tolerance_[field] = Tolerance(fraction, margin);

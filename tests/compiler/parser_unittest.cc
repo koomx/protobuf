@@ -2616,7 +2616,7 @@ bool FollowPath(const Message& root,
       return false;
     }
 
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    if (field->cpp_type() == FieldCppType::MESSAGE) {
       // Descend into child message.
       const Message& child = reflection->GetRepeatedMessage(root, field, index);
       return FollowPath(child, path_begin, path_end, output_message,
@@ -2633,7 +2633,7 @@ bool FollowPath(const Message& root,
       return false;
     }
   } else {
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    if (field->cpp_type() == FieldCppType::MESSAGE) {
       const Message& child = reflection->GetMessage(root, field);
       return FollowPath(child, path_begin, path_end, output_message,
                         output_field, output_index);

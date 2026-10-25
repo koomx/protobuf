@@ -1037,17 +1037,17 @@ TEST_F(DescriptorTest, FieldNumber) {
 }
 
 TEST_F(DescriptorTest, FieldType) {
-  EXPECT_EQ(FieldDescriptor::TYPE_STRING, foo_->type());
-  EXPECT_EQ(FieldDescriptor::TYPE_ENUM, bar_->type());
-  EXPECT_EQ(FieldDescriptor::TYPE_MESSAGE, baz_->type());
-  EXPECT_EQ(FieldDescriptor::TYPE_GROUP, moo_->type());
+  EXPECT_EQ(FieldType::STRING, foo_->type());
+  EXPECT_EQ(FieldType::ENUM, bar_->type());
+  EXPECT_EQ(FieldType::MESSAGE, baz_->type());
+  EXPECT_EQ(FieldType::GROUP, moo_->type());
 }
 
 TEST_F(DescriptorTest, FieldLabel) {
-  EXPECT_EQ(FieldDescriptor::LABEL_REQUIRED, foo_->label());
-  EXPECT_EQ(FieldDescriptor::LABEL_OPTIONAL, bar_->label());
-  EXPECT_EQ(FieldDescriptor::LABEL_REPEATED, baz_->label());
-  EXPECT_EQ(FieldDescriptor::LABEL_OPTIONAL, moo_->label());
+  EXPECT_EQ(FieldLabel::REQUIRED, foo_->label());
+  EXPECT_EQ(FieldLabel::OPTIONAL, bar_->label());
+  EXPECT_EQ(FieldLabel::REPEATED, baz_->label());
+  EXPECT_EQ(FieldLabel::OPTIONAL, moo_->label());
 
   EXPECT_TRUE(foo_->is_required());
   EXPECT_FALSE(foo_->is_optional());
@@ -2021,19 +2021,19 @@ TEST_F(ExtensionDescriptorTest, Extensions) {
   EXPECT_EQ(30, bar_->extension(0)->number());
   EXPECT_EQ(39, bar_->extension(1)->number());
 
-  EXPECT_EQ(FieldDescriptor::TYPE_INT32, foo_file_->extension(0)->type());
-  EXPECT_EQ(FieldDescriptor::TYPE_ENUM, foo_file_->extension(1)->type());
-  EXPECT_EQ(FieldDescriptor::TYPE_MESSAGE, bar_->extension(0)->type());
-  EXPECT_EQ(FieldDescriptor::TYPE_GROUP, bar_->extension(1)->type());
+  EXPECT_EQ(FieldType::INT32, foo_file_->extension(0)->type());
+  EXPECT_EQ(FieldType::ENUM, foo_file_->extension(1)->type());
+  EXPECT_EQ(FieldType::MESSAGE, bar_->extension(0)->type());
+  EXPECT_EQ(FieldType::GROUP, bar_->extension(1)->type());
 
   EXPECT_EQ(baz_, foo_file_->extension(1)->enum_type());
   EXPECT_EQ(moo_, bar_->extension(0)->message_type());
   EXPECT_EQ(moo_, bar_->extension(1)->message_type());
 
-  EXPECT_EQ(FieldDescriptor::LABEL_OPTIONAL, foo_file_->extension(0)->label());
-  EXPECT_EQ(FieldDescriptor::LABEL_REPEATED, foo_file_->extension(1)->label());
-  EXPECT_EQ(FieldDescriptor::LABEL_OPTIONAL, bar_->extension(0)->label());
-  EXPECT_EQ(FieldDescriptor::LABEL_REPEATED, bar_->extension(1)->label());
+  EXPECT_EQ(FieldLabel::OPTIONAL, foo_file_->extension(0)->label());
+  EXPECT_EQ(FieldLabel::REPEATED, foo_file_->extension(1)->label());
+  EXPECT_EQ(FieldLabel::OPTIONAL, bar_->extension(0)->label());
+  EXPECT_EQ(FieldLabel::REPEATED, bar_->extension(1)->label());
 
   EXPECT_EQ(foo_, foo_file_->extension(0)->containing_type());
   EXPECT_EQ(foo_, foo_file_->extension(1)->containing_type());
@@ -2445,7 +2445,7 @@ TEST_F(ReservedEnumDescriptorTest, IsReservedName) {
 class MiscTest : public testing::Test {
  protected:
   // Function which makes a field descriptor of the given type.
-  const FieldDescriptor* GetFieldDescriptorOfType(FieldDescriptor::Type type) {
+  const FieldDescriptor* GetFieldDescriptorOfType(FieldType type) {
     FileDescriptorProto file_proto;
     file_proto.set_name("foo.shark");
     AddEmptyEnum(&file_proto, "DummyEnum");
@@ -2455,10 +2455,10 @@ class MiscTest : public testing::Test {
         message, "foo", 1, FieldDescriptorProto::LABEL_OPTIONAL,
         static_cast<FieldDescriptorProto::Type>(static_cast<int>(type)));
 
-    if (type == FieldDescriptor::TYPE_MESSAGE ||
-        type == FieldDescriptor::TYPE_GROUP) {
+    if (type == FieldType::MESSAGE ||
+        type == FieldType::GROUP) {
       field->set_type_name("TestMessage");
-    } else if (type == FieldDescriptor::TYPE_ENUM) {
+    } else if (type == FieldType::ENUM) {
       field->set_type_name("DummyEnum");
     }
 
@@ -2474,30 +2474,30 @@ class MiscTest : public testing::Test {
     }
   }
 
-  const char* GetTypeNameForFieldType(FieldDescriptor::Type type) {
+  const char* GetTypeNameForFieldType(FieldType type) {
     const FieldDescriptor* field = GetFieldDescriptorOfType(type);
     return field != nullptr ? field->type_name() : "";
   }
 
-  FieldDescriptor::CppType GetCppTypeForFieldType(FieldDescriptor::Type type) {
+  FieldCppType GetCppTypeForFieldType(FieldType type) {
     const FieldDescriptor* field = GetFieldDescriptorOfType(type);
     return field != nullptr ? field->cpp_type()
-                            : static_cast<FieldDescriptor::CppType>(0);
+                            : static_cast<FieldCppType>(0);
   }
 
-  const char* GetCppTypeNameForFieldType(FieldDescriptor::Type type) {
+  const char* GetCppTypeNameForFieldType(FieldType type) {
     const FieldDescriptor* field = GetFieldDescriptorOfType(type);
     return field != nullptr ? field->cpp_type_name() : "";
   }
 
   const Descriptor* GetMessageDescriptorForFieldType(
-      FieldDescriptor::Type type) {
+      FieldType type) {
     const FieldDescriptor* field = GetFieldDescriptorOfType(type);
     return field != nullptr ? field->message_type() : nullptr;
   }
 
   const EnumDescriptor* GetEnumDescriptorForFieldType(
-      FieldDescriptor::Type type) {
+      FieldType type) {
     const FieldDescriptor* field = GetFieldDescriptorOfType(type);
     return field != nullptr ? field->enum_type() : nullptr;
   }
@@ -2510,24 +2510,24 @@ TEST_F(MiscTest, TypeNames) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_STREQ("double", GetTypeNameForFieldType(FD::TYPE_DOUBLE));
-  EXPECT_STREQ("float", GetTypeNameForFieldType(FD::TYPE_FLOAT));
-  EXPECT_STREQ("int64", GetTypeNameForFieldType(FD::TYPE_INT64));
-  EXPECT_STREQ("uint64", GetTypeNameForFieldType(FD::TYPE_UINT64));
-  EXPECT_STREQ("int32", GetTypeNameForFieldType(FD::TYPE_INT32));
-  EXPECT_STREQ("fixed64", GetTypeNameForFieldType(FD::TYPE_FIXED64));
-  EXPECT_STREQ("fixed32", GetTypeNameForFieldType(FD::TYPE_FIXED32));
-  EXPECT_STREQ("bool", GetTypeNameForFieldType(FD::TYPE_BOOL));
-  EXPECT_STREQ("string", GetTypeNameForFieldType(FD::TYPE_STRING));
-  EXPECT_STREQ("group", GetTypeNameForFieldType(FD::TYPE_GROUP));
-  EXPECT_STREQ("message", GetTypeNameForFieldType(FD::TYPE_MESSAGE));
-  EXPECT_STREQ("bytes", GetTypeNameForFieldType(FD::TYPE_BYTES));
-  EXPECT_STREQ("uint32", GetTypeNameForFieldType(FD::TYPE_UINT32));
-  EXPECT_STREQ("enum", GetTypeNameForFieldType(FD::TYPE_ENUM));
-  EXPECT_STREQ("sfixed32", GetTypeNameForFieldType(FD::TYPE_SFIXED32));
-  EXPECT_STREQ("sfixed64", GetTypeNameForFieldType(FD::TYPE_SFIXED64));
-  EXPECT_STREQ("sint32", GetTypeNameForFieldType(FD::TYPE_SINT32));
-  EXPECT_STREQ("sint64", GetTypeNameForFieldType(FD::TYPE_SINT64));
+  EXPECT_STREQ("double", GetTypeNameForFieldType(FieldType::DOUBLE));
+  EXPECT_STREQ("float", GetTypeNameForFieldType(FieldType::FLOAT));
+  EXPECT_STREQ("int64", GetTypeNameForFieldType(FieldType::INT64));
+  EXPECT_STREQ("uint64", GetTypeNameForFieldType(FieldType::UINT64));
+  EXPECT_STREQ("int32", GetTypeNameForFieldType(FieldType::INT32));
+  EXPECT_STREQ("fixed64", GetTypeNameForFieldType(FieldType::FIXED64));
+  EXPECT_STREQ("fixed32", GetTypeNameForFieldType(FieldType::FIXED32));
+  EXPECT_STREQ("bool", GetTypeNameForFieldType(FieldType::BOOL));
+  EXPECT_STREQ("string", GetTypeNameForFieldType(FieldType::STRING));
+  EXPECT_STREQ("group", GetTypeNameForFieldType(FieldType::GROUP));
+  EXPECT_STREQ("message", GetTypeNameForFieldType(FieldType::MESSAGE));
+  EXPECT_STREQ("bytes", GetTypeNameForFieldType(FieldType::BYTES));
+  EXPECT_STREQ("uint32", GetTypeNameForFieldType(FieldType::UINT32));
+  EXPECT_STREQ("enum", GetTypeNameForFieldType(FieldType::ENUM));
+  EXPECT_STREQ("sfixed32", GetTypeNameForFieldType(FieldType::SFIXED32));
+  EXPECT_STREQ("sfixed64", GetTypeNameForFieldType(FieldType::SFIXED64));
+  EXPECT_STREQ("sint32", GetTypeNameForFieldType(FieldType::SINT32));
+  EXPECT_STREQ("sint64", GetTypeNameForFieldType(FieldType::SINT64));
 }
 
 TEST_F(MiscTest, StaticTypeNames) {
@@ -2535,24 +2535,24 @@ TEST_F(MiscTest, StaticTypeNames) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_STREQ("double", FD::TypeName(FD::TYPE_DOUBLE));
-  EXPECT_STREQ("float", FD::TypeName(FD::TYPE_FLOAT));
-  EXPECT_STREQ("int64", FD::TypeName(FD::TYPE_INT64));
-  EXPECT_STREQ("uint64", FD::TypeName(FD::TYPE_UINT64));
-  EXPECT_STREQ("int32", FD::TypeName(FD::TYPE_INT32));
-  EXPECT_STREQ("fixed64", FD::TypeName(FD::TYPE_FIXED64));
-  EXPECT_STREQ("fixed32", FD::TypeName(FD::TYPE_FIXED32));
-  EXPECT_STREQ("bool", FD::TypeName(FD::TYPE_BOOL));
-  EXPECT_STREQ("string", FD::TypeName(FD::TYPE_STRING));
-  EXPECT_STREQ("group", FD::TypeName(FD::TYPE_GROUP));
-  EXPECT_STREQ("message", FD::TypeName(FD::TYPE_MESSAGE));
-  EXPECT_STREQ("bytes", FD::TypeName(FD::TYPE_BYTES));
-  EXPECT_STREQ("uint32", FD::TypeName(FD::TYPE_UINT32));
-  EXPECT_STREQ("enum", FD::TypeName(FD::TYPE_ENUM));
-  EXPECT_STREQ("sfixed32", FD::TypeName(FD::TYPE_SFIXED32));
-  EXPECT_STREQ("sfixed64", FD::TypeName(FD::TYPE_SFIXED64));
-  EXPECT_STREQ("sint32", FD::TypeName(FD::TYPE_SINT32));
-  EXPECT_STREQ("sint64", FD::TypeName(FD::TYPE_SINT64));
+  EXPECT_STREQ("double", FD::TypeName(FieldType::DOUBLE));
+  EXPECT_STREQ("float", FD::TypeName(FieldType::FLOAT));
+  EXPECT_STREQ("int64", FD::TypeName(FieldType::INT64));
+  EXPECT_STREQ("uint64", FD::TypeName(FieldType::UINT64));
+  EXPECT_STREQ("int32", FD::TypeName(FieldType::INT32));
+  EXPECT_STREQ("fixed64", FD::TypeName(FieldType::FIXED64));
+  EXPECT_STREQ("fixed32", FD::TypeName(FieldType::FIXED32));
+  EXPECT_STREQ("bool", FD::TypeName(FieldType::BOOL));
+  EXPECT_STREQ("string", FD::TypeName(FieldType::STRING));
+  EXPECT_STREQ("group", FD::TypeName(FieldType::GROUP));
+  EXPECT_STREQ("message", FD::TypeName(FieldType::MESSAGE));
+  EXPECT_STREQ("bytes", FD::TypeName(FieldType::BYTES));
+  EXPECT_STREQ("uint32", FD::TypeName(FieldType::UINT32));
+  EXPECT_STREQ("enum", FD::TypeName(FieldType::ENUM));
+  EXPECT_STREQ("sfixed32", FD::TypeName(FieldType::SFIXED32));
+  EXPECT_STREQ("sfixed64", FD::TypeName(FieldType::SFIXED64));
+  EXPECT_STREQ("sint32", FD::TypeName(FieldType::SINT32));
+  EXPECT_STREQ("sint64", FD::TypeName(FieldType::SINT64));
 }
 
 TEST_F(MiscTest, CppTypes) {
@@ -2560,24 +2560,24 @@ TEST_F(MiscTest, CppTypes) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_EQ(FD::CPPTYPE_DOUBLE, GetCppTypeForFieldType(FD::TYPE_DOUBLE));
-  EXPECT_EQ(FD::CPPTYPE_FLOAT, GetCppTypeForFieldType(FD::TYPE_FLOAT));
-  EXPECT_EQ(FD::CPPTYPE_INT64, GetCppTypeForFieldType(FD::TYPE_INT64));
-  EXPECT_EQ(FD::CPPTYPE_UINT64, GetCppTypeForFieldType(FD::TYPE_UINT64));
-  EXPECT_EQ(FD::CPPTYPE_INT32, GetCppTypeForFieldType(FD::TYPE_INT32));
-  EXPECT_EQ(FD::CPPTYPE_UINT64, GetCppTypeForFieldType(FD::TYPE_FIXED64));
-  EXPECT_EQ(FD::CPPTYPE_UINT32, GetCppTypeForFieldType(FD::TYPE_FIXED32));
-  EXPECT_EQ(FD::CPPTYPE_BOOL, GetCppTypeForFieldType(FD::TYPE_BOOL));
-  EXPECT_EQ(FD::CPPTYPE_STRING, GetCppTypeForFieldType(FD::TYPE_STRING));
-  EXPECT_EQ(FD::CPPTYPE_MESSAGE, GetCppTypeForFieldType(FD::TYPE_GROUP));
-  EXPECT_EQ(FD::CPPTYPE_MESSAGE, GetCppTypeForFieldType(FD::TYPE_MESSAGE));
-  EXPECT_EQ(FD::CPPTYPE_STRING, GetCppTypeForFieldType(FD::TYPE_BYTES));
-  EXPECT_EQ(FD::CPPTYPE_UINT32, GetCppTypeForFieldType(FD::TYPE_UINT32));
-  EXPECT_EQ(FD::CPPTYPE_ENUM, GetCppTypeForFieldType(FD::TYPE_ENUM));
-  EXPECT_EQ(FD::CPPTYPE_INT32, GetCppTypeForFieldType(FD::TYPE_SFIXED32));
-  EXPECT_EQ(FD::CPPTYPE_INT64, GetCppTypeForFieldType(FD::TYPE_SFIXED64));
-  EXPECT_EQ(FD::CPPTYPE_INT32, GetCppTypeForFieldType(FD::TYPE_SINT32));
-  EXPECT_EQ(FD::CPPTYPE_INT64, GetCppTypeForFieldType(FD::TYPE_SINT64));
+  EXPECT_EQ(FieldCppType::DOUBLE, GetCppTypeForFieldType(FieldType::DOUBLE));
+  EXPECT_EQ(FieldCppType::FLOAT, GetCppTypeForFieldType(FieldType::FLOAT));
+  EXPECT_EQ(FieldCppType::INT64, GetCppTypeForFieldType(FieldType::INT64));
+  EXPECT_EQ(FieldCppType::UINT64, GetCppTypeForFieldType(FieldType::UINT64));
+  EXPECT_EQ(FieldCppType::INT32, GetCppTypeForFieldType(FieldType::INT32));
+  EXPECT_EQ(FieldCppType::UINT64, GetCppTypeForFieldType(FieldType::FIXED64));
+  EXPECT_EQ(FieldCppType::UINT32, GetCppTypeForFieldType(FieldType::FIXED32));
+  EXPECT_EQ(FieldCppType::BOOL, GetCppTypeForFieldType(FieldType::BOOL));
+  EXPECT_EQ(FieldCppType::STRING, GetCppTypeForFieldType(FieldType::STRING));
+  EXPECT_EQ(FieldCppType::MESSAGE, GetCppTypeForFieldType(FieldType::GROUP));
+  EXPECT_EQ(FieldCppType::MESSAGE, GetCppTypeForFieldType(FieldType::MESSAGE));
+  EXPECT_EQ(FieldCppType::STRING, GetCppTypeForFieldType(FieldType::BYTES));
+  EXPECT_EQ(FieldCppType::UINT32, GetCppTypeForFieldType(FieldType::UINT32));
+  EXPECT_EQ(FieldCppType::ENUM, GetCppTypeForFieldType(FieldType::ENUM));
+  EXPECT_EQ(FieldCppType::INT32, GetCppTypeForFieldType(FieldType::SFIXED32));
+  EXPECT_EQ(FieldCppType::INT64, GetCppTypeForFieldType(FieldType::SFIXED64));
+  EXPECT_EQ(FieldCppType::INT32, GetCppTypeForFieldType(FieldType::SINT32));
+  EXPECT_EQ(FieldCppType::INT64, GetCppTypeForFieldType(FieldType::SINT64));
 }
 
 TEST_F(MiscTest, CppTypeNames) {
@@ -2585,24 +2585,24 @@ TEST_F(MiscTest, CppTypeNames) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_STREQ("double", GetCppTypeNameForFieldType(FD::TYPE_DOUBLE));
-  EXPECT_STREQ("float", GetCppTypeNameForFieldType(FD::TYPE_FLOAT));
-  EXPECT_STREQ("int64", GetCppTypeNameForFieldType(FD::TYPE_INT64));
-  EXPECT_STREQ("uint64", GetCppTypeNameForFieldType(FD::TYPE_UINT64));
-  EXPECT_STREQ("int32", GetCppTypeNameForFieldType(FD::TYPE_INT32));
-  EXPECT_STREQ("uint64", GetCppTypeNameForFieldType(FD::TYPE_FIXED64));
-  EXPECT_STREQ("uint32", GetCppTypeNameForFieldType(FD::TYPE_FIXED32));
-  EXPECT_STREQ("bool", GetCppTypeNameForFieldType(FD::TYPE_BOOL));
-  EXPECT_STREQ("string", GetCppTypeNameForFieldType(FD::TYPE_STRING));
-  EXPECT_STREQ("message", GetCppTypeNameForFieldType(FD::TYPE_GROUP));
-  EXPECT_STREQ("message", GetCppTypeNameForFieldType(FD::TYPE_MESSAGE));
-  EXPECT_STREQ("string", GetCppTypeNameForFieldType(FD::TYPE_BYTES));
-  EXPECT_STREQ("uint32", GetCppTypeNameForFieldType(FD::TYPE_UINT32));
-  EXPECT_STREQ("enum", GetCppTypeNameForFieldType(FD::TYPE_ENUM));
-  EXPECT_STREQ("int32", GetCppTypeNameForFieldType(FD::TYPE_SFIXED32));
-  EXPECT_STREQ("int64", GetCppTypeNameForFieldType(FD::TYPE_SFIXED64));
-  EXPECT_STREQ("int32", GetCppTypeNameForFieldType(FD::TYPE_SINT32));
-  EXPECT_STREQ("int64", GetCppTypeNameForFieldType(FD::TYPE_SINT64));
+  EXPECT_STREQ("double", GetCppTypeNameForFieldType(FieldType::DOUBLE));
+  EXPECT_STREQ("float", GetCppTypeNameForFieldType(FieldType::FLOAT));
+  EXPECT_STREQ("int64", GetCppTypeNameForFieldType(FieldType::INT64));
+  EXPECT_STREQ("uint64", GetCppTypeNameForFieldType(FieldType::UINT64));
+  EXPECT_STREQ("int32", GetCppTypeNameForFieldType(FieldType::INT32));
+  EXPECT_STREQ("uint64", GetCppTypeNameForFieldType(FieldType::FIXED64));
+  EXPECT_STREQ("uint32", GetCppTypeNameForFieldType(FieldType::FIXED32));
+  EXPECT_STREQ("bool", GetCppTypeNameForFieldType(FieldType::BOOL));
+  EXPECT_STREQ("string", GetCppTypeNameForFieldType(FieldType::STRING));
+  EXPECT_STREQ("message", GetCppTypeNameForFieldType(FieldType::GROUP));
+  EXPECT_STREQ("message", GetCppTypeNameForFieldType(FieldType::MESSAGE));
+  EXPECT_STREQ("string", GetCppTypeNameForFieldType(FieldType::BYTES));
+  EXPECT_STREQ("uint32", GetCppTypeNameForFieldType(FieldType::UINT32));
+  EXPECT_STREQ("enum", GetCppTypeNameForFieldType(FieldType::ENUM));
+  EXPECT_STREQ("int32", GetCppTypeNameForFieldType(FieldType::SFIXED32));
+  EXPECT_STREQ("int64", GetCppTypeNameForFieldType(FieldType::SFIXED64));
+  EXPECT_STREQ("int32", GetCppTypeNameForFieldType(FieldType::SINT32));
+  EXPECT_STREQ("int64", GetCppTypeNameForFieldType(FieldType::SINT64));
 }
 
 TEST_F(MiscTest, StaticCppTypeNames) {
@@ -2610,16 +2610,16 @@ TEST_F(MiscTest, StaticCppTypeNames) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_STREQ("int32", FD::CppTypeName(FD::CPPTYPE_INT32));
-  EXPECT_STREQ("int64", FD::CppTypeName(FD::CPPTYPE_INT64));
-  EXPECT_STREQ("uint32", FD::CppTypeName(FD::CPPTYPE_UINT32));
-  EXPECT_STREQ("uint64", FD::CppTypeName(FD::CPPTYPE_UINT64));
-  EXPECT_STREQ("double", FD::CppTypeName(FD::CPPTYPE_DOUBLE));
-  EXPECT_STREQ("float", FD::CppTypeName(FD::CPPTYPE_FLOAT));
-  EXPECT_STREQ("bool", FD::CppTypeName(FD::CPPTYPE_BOOL));
-  EXPECT_STREQ("enum", FD::CppTypeName(FD::CPPTYPE_ENUM));
-  EXPECT_STREQ("string", FD::CppTypeName(FD::CPPTYPE_STRING));
-  EXPECT_STREQ("message", FD::CppTypeName(FD::CPPTYPE_MESSAGE));
+  EXPECT_STREQ("int32", FD::CppTypeName(FieldCppType::INT32));
+  EXPECT_STREQ("int64", FD::CppTypeName(FieldCppType::INT64));
+  EXPECT_STREQ("uint32", FD::CppTypeName(FieldCppType::UINT32));
+  EXPECT_STREQ("uint64", FD::CppTypeName(FieldCppType::UINT64));
+  EXPECT_STREQ("double", FD::CppTypeName(FieldCppType::DOUBLE));
+  EXPECT_STREQ("float", FD::CppTypeName(FieldCppType::FLOAT));
+  EXPECT_STREQ("bool", FD::CppTypeName(FieldCppType::BOOL));
+  EXPECT_STREQ("enum", FD::CppTypeName(FieldCppType::ENUM));
+  EXPECT_STREQ("string", FD::CppTypeName(FieldCppType::STRING));
+  EXPECT_STREQ("message", FD::CppTypeName(FieldCppType::MESSAGE));
 }
 
 TEST_F(MiscTest, MessageType) {
@@ -2627,24 +2627,24 @@ TEST_F(MiscTest, MessageType) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_DOUBLE));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_FLOAT));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_INT64));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_UINT64));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_INT32));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_FIXED64));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_FIXED32));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_BOOL));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_STRING));
-  EXPECT_TRUE(nullptr != GetMessageDescriptorForFieldType(FD::TYPE_GROUP));
-  EXPECT_TRUE(nullptr != GetMessageDescriptorForFieldType(FD::TYPE_MESSAGE));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_BYTES));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_UINT32));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_ENUM));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_SFIXED32));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_SFIXED64));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_SINT32));
-  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FD::TYPE_SINT64));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::DOUBLE));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::FLOAT));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::INT64));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::UINT64));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::INT32));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::FIXED64));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::FIXED32));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::BOOL));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::STRING));
+  EXPECT_TRUE(nullptr != GetMessageDescriptorForFieldType(FieldType::GROUP));
+  EXPECT_TRUE(nullptr != GetMessageDescriptorForFieldType(FieldType::MESSAGE));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::BYTES));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::UINT32));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::ENUM));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::SFIXED32));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::SFIXED64));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::SINT32));
+  EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::SINT64));
 }
 
 TEST_F(MiscTest, EnumType) {
@@ -2652,24 +2652,24 @@ TEST_F(MiscTest, EnumType) {
 
   typedef FieldDescriptor FD;  // avoid ugly line wrapping
 
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_DOUBLE));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_FLOAT));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_INT64));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_UINT64));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_INT32));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_FIXED64));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_FIXED32));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_BOOL));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_STRING));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_GROUP));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_MESSAGE));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_BYTES));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_UINT32));
-  EXPECT_TRUE(nullptr != GetEnumDescriptorForFieldType(FD::TYPE_ENUM));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_SFIXED32));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_SFIXED64));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_SINT32));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FD::TYPE_SINT64));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::DOUBLE));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::FLOAT));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::INT64));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::UINT64));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::INT32));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::FIXED64));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::FIXED32));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::BOOL));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::STRING));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::GROUP));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::MESSAGE));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::BYTES));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::UINT32));
+  EXPECT_TRUE(nullptr != GetEnumDescriptorForFieldType(FieldType::ENUM));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::SFIXED32));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::SFIXED64));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::SINT32));
+  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::SINT64));
 }
 
 TEST_F(MiscTest, DefaultValues) {
@@ -2952,18 +2952,18 @@ TEST_P(AllowUnknownDependenciesTest, PlaceholderFile) {
 }
 
 TEST_P(AllowUnknownDependenciesTest, PlaceholderTypes) {
-  ASSERT_EQ(FieldDescriptor::TYPE_MESSAGE, bar_field_->type());
+  ASSERT_EQ(FieldType::MESSAGE, bar_field_->type());
   EXPECT_EQ(bar_type_, bar_field_->message_type());
   EXPECT_FALSE(bar_type_->is_placeholder());
 
-  ASSERT_EQ(FieldDescriptor::TYPE_MESSAGE, baz_field_->type());
+  ASSERT_EQ(FieldType::MESSAGE, baz_field_->type());
   const Descriptor* baz_type = baz_field_->message_type();
   EXPECT_EQ("Baz", baz_type->name());
   EXPECT_EQ("Baz", baz_type->full_name());
   EXPECT_EQ(0, baz_type->extension_range_count());
   EXPECT_TRUE(baz_type->is_placeholder());
 
-  ASSERT_EQ(FieldDescriptor::TYPE_ENUM, moo_field_->type());
+  ASSERT_EQ(FieldType::ENUM, moo_field_->type());
   const EnumDescriptor* moo_type = moo_field_->enum_type();
   EXPECT_EQ("Moo", moo_type->name());
   EXPECT_EQ("corge.Moo", moo_type->full_name());
@@ -3149,7 +3149,7 @@ TEST_P(AllowUnknownDependenciesTest,
   EXPECT_FALSE(corge_desc->is_placeholder());
 
   const FieldDescriptor* mooo_field = corge_desc->field(0);
-  ASSERT_EQ(FieldDescriptor::TYPE_MESSAGE, mooo_field->type());
+  ASSERT_EQ(FieldType::MESSAGE, mooo_field->type());
   ASSERT_EQ("Mooo", mooo_field->message_type()->name());
   ASSERT_EQ("undeclared.Mooo", mooo_field->message_type()->full_name());
   EXPECT_TRUE(mooo_field->message_type()->is_placeholder());
@@ -8227,7 +8227,7 @@ TEST_F(LazilyBuildDependenciesTest, Type) {
   EXPECT_TRUE(desc != nullptr);
   const FieldDescriptor* field = desc->FindFieldByName("message1");
   EXPECT_TRUE(field != nullptr);
-  EXPECT_EQ(field->type(), FieldDescriptor::TYPE_MESSAGE);
+  EXPECT_EQ(field->type(), FieldType::MESSAGE);
   EXPECT_TRUE(pool_.InternalIsFileLoaded("message1.shark"));
 
   // Verify calling cpp_type() on a field that is a message type will
@@ -8235,7 +8235,7 @@ TEST_F(LazilyBuildDependenciesTest, Type) {
   EXPECT_FALSE(pool_.InternalIsFileLoaded("message2.shark"));
   field = desc->FindFieldByName("message2");
   EXPECT_TRUE(field != nullptr);
-  EXPECT_EQ(field->cpp_type(), FieldDescriptor::CPPTYPE_MESSAGE);
+  EXPECT_EQ(field->cpp_type(), FieldCppType::MESSAGE);
   EXPECT_TRUE(pool_.InternalIsFileLoaded("message2.shark"));
 
   // Verify calling type() on a field that is an enum type will
@@ -8243,7 +8243,7 @@ TEST_F(LazilyBuildDependenciesTest, Type) {
   EXPECT_FALSE(pool_.InternalIsFileLoaded("enum1.shark"));
   field = desc->FindFieldByName("enum1");
   EXPECT_TRUE(field != nullptr);
-  EXPECT_EQ(field->type(), FieldDescriptor::TYPE_ENUM);
+  EXPECT_EQ(field->type(), FieldType::ENUM);
   EXPECT_TRUE(pool_.InternalIsFileLoaded("enum1.shark"));
 
   // Verify calling cpp_type() on a field that is an enum type will
@@ -8251,7 +8251,7 @@ TEST_F(LazilyBuildDependenciesTest, Type) {
   EXPECT_FALSE(pool_.InternalIsFileLoaded("enum2.shark"));
   field = desc->FindFieldByName("enum2");
   EXPECT_TRUE(field != nullptr);
-  EXPECT_EQ(field->cpp_type(), FieldDescriptor::CPPTYPE_ENUM);
+  EXPECT_EQ(field->cpp_type(), FieldCppType::ENUM);
   EXPECT_TRUE(pool_.InternalIsFileLoaded("enum2.shark"));
 }
 

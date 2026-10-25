@@ -127,15 +127,15 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
   }
 
   switch (field.cpp_type()) {
-    case FieldDescriptor::CPPTYPE_INT32:
+    case FieldCppType::INT32:
       return StrCat(field.default_value_int32());
-    case FieldDescriptor::CPPTYPE_UINT32:
+    case FieldCppType::UINT32:
       return StrCat(field.default_value_uint32());
-    case FieldDescriptor::CPPTYPE_INT64:
+    case FieldCppType::INT64:
       return StrCat(field.default_value_int64());
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::UINT64:
       return StrCat(field.default_value_uint64());
-    case FieldDescriptor::CPPTYPE_DOUBLE: {
+    case FieldCppType::DOUBLE: {
       double value = field.default_value_double();
       if (value == std::numeric_limits<double>::infinity()) {
         // Python pre-2.6 on Windows does not parse "inf" correctly.  However,
@@ -151,7 +151,7 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
         return "float(" + SimpleDtoa(value) + ")";
       }
     }
-    case FieldDescriptor::CPPTYPE_FLOAT: {
+    case FieldCppType::FLOAT: {
       float value = field.default_value_float();
       if (value == std::numeric_limits<float>::infinity()) {
         // Python pre-2.6 on Windows does not parse "inf" correctly.  However,
@@ -167,16 +167,16 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
         return "float(" + SimpleFtoa(value) + ")";
       }
     }
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return field.default_value_bool() ? "True" : "False";
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       return StrCat(field.default_value_enum()->number());
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       return "b\"" + CEscape(field.default_value_string()) +
-             (field.type() != FieldDescriptor::TYPE_STRING
+             (field.type() != FieldType::STRING
                   ? "\""
                   : "\".decode('utf-8')");
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       return "None";
   }
   // (We could add a default case above but then we wouldn't get the nice
@@ -1019,9 +1019,9 @@ void Generator::PrintFieldDescriptor(const FieldDescriptor& field,
   m["full_name"] = field.full_name();
   m["index"] = StrCat(field.index());
   m["number"] = StrCat(field.number());
-  m["type"] = StrCat(field.type());
-  m["cpp_type"] = StrCat(field.cpp_type());
-  m["label"] = StrCat(field.label());
+  m["type"] = StrCat(static_cast<int>(field.type()));
+  m["cpp_type"] = StrCat(static_cast<int>(field.cpp_type()));
+  m["label"] = StrCat(static_cast<int>(field.label()));
   m["has_default_value"] = field.has_default_value() ? "True" : "False";
   m["default_value"] = StringifyDefaultValue(field);
   m["is_extension"] = is_extension ? "True" : "False";

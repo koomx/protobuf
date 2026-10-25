@@ -176,32 +176,32 @@ class SHARK_EXPORT DynamicMapSorter {
     bool operator()(const Message* a, const Message* b) {
       const Reflection* reflection = a->GetReflection();
       switch (field_->cpp_type()) {
-        case FieldDescriptor::CPPTYPE_BOOL: {
+        case FieldCppType::BOOL: {
           bool first = reflection->GetBool(*a, field_);
           bool second = reflection->GetBool(*b, field_);
           return first < second;
         }
-        case FieldDescriptor::CPPTYPE_INT32: {
+        case FieldCppType::INT32: {
           int32_t first = reflection->GetInt32(*a, field_);
           int32_t second = reflection->GetInt32(*b, field_);
           return first < second;
         }
-        case FieldDescriptor::CPPTYPE_INT64: {
+        case FieldCppType::INT64: {
           int64_t first = reflection->GetInt64(*a, field_);
           int64_t second = reflection->GetInt64(*b, field_);
           return first < second;
         }
-        case FieldDescriptor::CPPTYPE_UINT32: {
+        case FieldCppType::UINT32: {
           uint32_t first = reflection->GetUInt32(*a, field_);
           uint32_t second = reflection->GetUInt32(*b, field_);
           return first < second;
         }
-        case FieldDescriptor::CPPTYPE_UINT64: {
+        case FieldCppType::UINT64: {
           uint64_t first = reflection->GetUInt64(*a, field_);
           uint64_t second = reflection->GetUInt64(*b, field_);
           return first < second;
         }
-        case FieldDescriptor::CPPTYPE_STRING: {
+        case FieldCppType::STRING: {
           std::string first = reflection->GetString(*a, field_);
           std::string second = reflection->GetString(*b, field_);
           return first < second;

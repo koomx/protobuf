@@ -301,7 +301,7 @@ bool WireFormatLite::ReadPackedEnumPreserveUnknowns(
   io::CodedInputStream::Limit limit = input->PushLimit(length);
   while (input->BytesUntilLimit() > 0) {
     int value;
-    if (!ReadPrimitive<int, WireFormatLite::TYPE_ENUM>(input, &value)) {
+    if (!ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(input, &value)) {
       return false;
     }
     if (is_valid == nullptr || is_valid(value)) {

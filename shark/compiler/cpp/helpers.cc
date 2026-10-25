@@ -291,7 +291,7 @@ void SetUnknownFieldsVariable(const Descriptor* descriptor,
         unknown_fields_type + "::default_instance)";
   } else {
     unknown_fields_type =
-        PrimitiveTypeName(options, FieldDescriptor::CPPTYPE_STRING);
+        PrimitiveTypeName(options, FieldCppType::STRING);
     (*variables)["unknown_fields"] = "_internal_metadata_.unknown_fields<" +
                                      unknown_fields_type + ">(::" + proto_ns +
                                      "::internal::GetEmptyString)";
@@ -338,21 +338,21 @@ const char kThinSeparator[] =
 bool CanInitializeByZeroing(const FieldDescriptor* field) {
   if (field->is_repeated() || field->is_extension()) return false;
   switch (field->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       return field->default_value_enum()->number() == 0;
-    case FieldDescriptor::CPPTYPE_INT32:
+    case FieldCppType::INT32:
       return field->default_value_int32() == 0;
-    case FieldDescriptor::CPPTYPE_INT64:
+    case FieldCppType::INT64:
       return field->default_value_int64() == 0;
-    case FieldDescriptor::CPPTYPE_UINT32:
+    case FieldCppType::UINT32:
       return field->default_value_uint32() == 0;
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::UINT64:
       return field->default_value_uint64() == 0;
-    case FieldDescriptor::CPPTYPE_FLOAT:
+    case FieldCppType::FLOAT:
       return field->default_value_float() == 0;
-    case FieldDescriptor::CPPTYPE_DOUBLE:
+    case FieldCppType::DOUBLE:
       return field->default_value_double() == 0;
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return field->default_value_bool() == false;
     default:
       return false;
@@ -562,20 +562,20 @@ int EstimateAlignmentSize(const FieldDescriptor* field) {
   if (field == nullptr) return 0;
   if (field->is_repeated()) return 8;
   switch (field->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return 1;
 
-    case FieldDescriptor::CPPTYPE_INT32:
-    case FieldDescriptor::CPPTYPE_UINT32:
-    case FieldDescriptor::CPPTYPE_ENUM:
-    case FieldDescriptor::CPPTYPE_FLOAT:
+    case FieldCppType::INT32:
+    case FieldCppType::UINT32:
+    case FieldCppType::ENUM:
+    case FieldCppType::FLOAT:
       return 4;
 
-    case FieldDescriptor::CPPTYPE_INT64:
-    case FieldDescriptor::CPPTYPE_UINT64:
-    case FieldDescriptor::CPPTYPE_DOUBLE:
-    case FieldDescriptor::CPPTYPE_STRING:
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::INT64:
+    case FieldCppType::UINT64:
+    case FieldCppType::DOUBLE:
+    case FieldCppType::STRING:
+    case FieldCppType::MESSAGE:
       return 8;
   }
   GOOGLE_LOG(FATAL) << "Can't get here.";
@@ -613,27 +613,27 @@ std::string StripProto(const std::string& filename) {
   return compiler::StripProto(filename);
 }
 
-const char* PrimitiveTypeName(FieldDescriptor::CppType type) {
+const char* PrimitiveTypeName(FieldCppType type) {
   switch (type) {
-    case FieldDescriptor::CPPTYPE_INT32:
+    case FieldCppType::INT32:
       return "int32_t";
-    case FieldDescriptor::CPPTYPE_INT64:
+    case FieldCppType::INT64:
       return "int64_t";
-    case FieldDescriptor::CPPTYPE_UINT32:
+    case FieldCppType::UINT32:
       return "uint32_t";
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::UINT64:
       return "uint64_t";
-    case FieldDescriptor::CPPTYPE_DOUBLE:
+    case FieldCppType::DOUBLE:
       return "double";
-    case FieldDescriptor::CPPTYPE_FLOAT:
+    case FieldCppType::FLOAT:
       return "float";
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return "bool";
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       return "int";
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       return "std::string";
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       return nullptr;
 
       // No default because we want the compiler to complain if any new
@@ -645,27 +645,27 @@ const char* PrimitiveTypeName(FieldDescriptor::CppType type) {
 }
 
 std::string PrimitiveTypeName(const Options& options,
-                              FieldDescriptor::CppType type) {
+                              FieldCppType type) {
   switch (type) {
-    case FieldDescriptor::CPPTYPE_INT32:
+    case FieldCppType::INT32:
       return IntTypeName(options, "int32");
-    case FieldDescriptor::CPPTYPE_INT64:
+    case FieldCppType::INT64:
       return IntTypeName(options, "int64");
-    case FieldDescriptor::CPPTYPE_UINT32:
+    case FieldCppType::UINT32:
       return IntTypeName(options, "uint32");
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::UINT64:
       return IntTypeName(options, "uint64");
-    case FieldDescriptor::CPPTYPE_DOUBLE:
+    case FieldCppType::DOUBLE:
       return "double";
-    case FieldDescriptor::CPPTYPE_FLOAT:
+    case FieldCppType::FLOAT:
       return "float";
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return "bool";
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       return "int";
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       return "std::string";
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       return "";
 
       // No default because we want the compiler to complain if any new
@@ -676,45 +676,45 @@ std::string PrimitiveTypeName(const Options& options,
   return "";
 }
 
-const char* DeclaredTypeMethodName(FieldDescriptor::Type type) {
+const char* DeclaredTypeMethodName(FieldType type) {
   switch (type) {
-    case FieldDescriptor::TYPE_INT32:
+    case FieldType::INT32:
       return "Int32";
-    case FieldDescriptor::TYPE_INT64:
+    case FieldType::INT64:
       return "Int64";
-    case FieldDescriptor::TYPE_UINT32:
+    case FieldType::UINT32:
       return "UInt32";
-    case FieldDescriptor::TYPE_UINT64:
+    case FieldType::UINT64:
       return "UInt64";
-    case FieldDescriptor::TYPE_SINT32:
+    case FieldType::SINT32:
       return "SInt32";
-    case FieldDescriptor::TYPE_SINT64:
+    case FieldType::SINT64:
       return "SInt64";
-    case FieldDescriptor::TYPE_FIXED32:
+    case FieldType::FIXED32:
       return "Fixed32";
-    case FieldDescriptor::TYPE_FIXED64:
+    case FieldType::FIXED64:
       return "Fixed64";
-    case FieldDescriptor::TYPE_SFIXED32:
+    case FieldType::SFIXED32:
       return "SFixed32";
-    case FieldDescriptor::TYPE_SFIXED64:
+    case FieldType::SFIXED64:
       return "SFixed64";
-    case FieldDescriptor::TYPE_FLOAT:
+    case FieldType::FLOAT:
       return "Float";
-    case FieldDescriptor::TYPE_DOUBLE:
+    case FieldType::DOUBLE:
       return "Double";
 
-    case FieldDescriptor::TYPE_BOOL:
+    case FieldType::BOOL:
       return "Bool";
-    case FieldDescriptor::TYPE_ENUM:
+    case FieldType::ENUM:
       return "Enum";
 
-    case FieldDescriptor::TYPE_STRING:
+    case FieldType::STRING:
       return "String";
-    case FieldDescriptor::TYPE_BYTES:
+    case FieldType::BYTES:
       return "Bytes";
-    case FieldDescriptor::TYPE_GROUP:
+    case FieldType::GROUP:
       return "Group";
-    case FieldDescriptor::TYPE_MESSAGE:
+    case FieldType::MESSAGE:
       return "Message";
 
       // No default because we want the compiler to complain if any new
@@ -753,15 +753,15 @@ std::string DefaultValue(const FieldDescriptor* field) {
 
 std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
   switch (field->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_INT32:
+    case FieldCppType::INT32:
       return Int32ToString(field->default_value_int32());
-    case FieldDescriptor::CPPTYPE_UINT32:
+    case FieldCppType::UINT32:
       return StrCat(field->default_value_uint32()) + "u";
-    case FieldDescriptor::CPPTYPE_INT64:
+    case FieldCppType::INT64:
       return Int64ToString(field->default_value_int64());
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::UINT64:
       return UInt64ToString(field->default_value_uint64());
-    case FieldDescriptor::CPPTYPE_DOUBLE: {
+    case FieldCppType::DOUBLE: {
       double value = field->default_value_double();
       if (value == std::numeric_limits<double>::infinity()) {
         return "std::numeric_limits<double>::infinity()";
@@ -773,7 +773,7 @@ std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
         return SimpleDtoa(value);
       }
     }
-    case FieldDescriptor::CPPTYPE_FLOAT: {
+    case FieldCppType::FLOAT: {
       float value = field->default_value_float();
       if (value == std::numeric_limits<float>::infinity()) {
         return "std::numeric_limits<float>::infinity()";
@@ -792,19 +792,19 @@ std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
         return float_value;
       }
     }
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return field->default_value_bool() ? "true" : "false";
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       // Lazy:  Generate a static_cast because we don't have a helper function
       //   that constructs the full name of an enum value.
       return strings::Substitute(
           "static_cast< $0 >($1)", ClassName(field->enum_type(), true),
           Int32ToString(field->default_value_enum()->number()));
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       return "\"" +
              EscapeTrigraphs(CEscape(field->default_value_string())) +
              "\"";
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       return "*" + FieldMessageTypeName(field, options) +
              "::internal_default_instance()";
   }
@@ -920,7 +920,7 @@ bool ShouldSplit(const FieldDescriptor*, const Options&) { return false; }
 
 static bool HasRepeatedFields(const Descriptor* descriptor) {
   for (int i = 0; i < descriptor->field_count(); ++i) {
-    if (descriptor->field(i)->label() == FieldDescriptor::LABEL_REPEATED) {
+    if (descriptor->field(i)->label() == FieldLabel::REPEATED) {
       return true;
     }
   }
@@ -939,7 +939,7 @@ bool HasRepeatedFields(const FileDescriptor* file) {
 
 static bool IsStringPieceField(const FieldDescriptor* field,
                                const Options& options) {
-  return field->cpp_type() == FieldDescriptor::CPPTYPE_STRING &&
+  return field->cpp_type() == FieldCppType::STRING &&
          EffectiveStringCType(field, options) == FieldOptions::STRING_PIECE;
 }
 
@@ -962,7 +962,7 @@ bool HasStringPieceFields(const FileDescriptor* file, const Options& options) {
 }
 
 static bool IsCordField(const FieldDescriptor* field, const Options& options) {
-  return field->cpp_type() == FieldDescriptor::CPPTYPE_STRING &&
+  return field->cpp_type() == FieldCppType::STRING &&
          EffectiveStringCType(field, options) == FieldOptions::CORD;
 }
 
@@ -1056,7 +1056,7 @@ bool ShouldVerify(const FileDescriptor* file, const Options& options,
 
 bool IsUtf8String(const FieldDescriptor* field) {
   return IsProto3(field->file()) &&
-      field->type() == FieldDescriptor::TYPE_STRING;
+      field->type() == FieldType::STRING;
 }
 
 VerifySimpleType ShouldVerifySimple(const Descriptor* descriptor) {
@@ -1066,17 +1066,17 @@ VerifySimpleType ShouldVerifySimple(const Descriptor* descriptor) {
 
 bool IsStringOrMessage(const FieldDescriptor* field) {
   switch (field->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_INT32:
-    case FieldDescriptor::CPPTYPE_INT64:
-    case FieldDescriptor::CPPTYPE_UINT32:
-    case FieldDescriptor::CPPTYPE_UINT64:
-    case FieldDescriptor::CPPTYPE_DOUBLE:
-    case FieldDescriptor::CPPTYPE_FLOAT:
-    case FieldDescriptor::CPPTYPE_BOOL:
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::INT32:
+    case FieldCppType::INT64:
+    case FieldCppType::UINT32:
+    case FieldCppType::UINT64:
+    case FieldCppType::DOUBLE:
+    case FieldCppType::FLOAT:
+    case FieldCppType::BOOL:
+    case FieldCppType::ENUM:
       return false;
-    case FieldDescriptor::CPPTYPE_STRING:
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::STRING:
+    case FieldCppType::MESSAGE:
       return true;
   }
 
@@ -1086,7 +1086,7 @@ bool IsStringOrMessage(const FieldDescriptor* field) {
 
 FieldOptions::CType EffectiveStringCType(const FieldDescriptor* field,
                                          const Options& options) {
-  GOOGLE_DCHECK(field->cpp_type() == FieldDescriptor::CPPTYPE_STRING);
+  GOOGLE_DCHECK(field->cpp_type() == FieldCppType::STRING);
   if (options.opensource_runtime) {
     // Open-source protobuf release only supports STRING ctype.
     return FieldOptions::STRING;
@@ -1242,7 +1242,7 @@ bool UsingImplicitWeakFields(const FileDescriptor* file,
 bool IsImplicitWeakField(const FieldDescriptor* field, const Options& options,
                          MessageSCCAnalyzer* scc_analyzer) {
   return UsingImplicitWeakFields(field->file(), options) &&
-         field->type() == FieldDescriptor::TYPE_MESSAGE &&
+         field->type() == FieldType::MESSAGE &&
          !field->is_required() && !field->is_map() && !field->is_extension() &&
          !IsWellKnownMessage(field->message_type()->file()) &&
          field->message_type()->file()->name() !=
@@ -1273,15 +1273,15 @@ MessageAnalysis MessageSCCAnalyzer::GetSCCAnalysis(const SCC* scc) {
         result.contains_weak = true;
       }
       switch (field->type()) {
-        case FieldDescriptor::TYPE_STRING:
-        case FieldDescriptor::TYPE_BYTES: {
+        case FieldType::STRING:
+        case FieldType::BYTES: {
           if (field->options().ctype() == FieldOptions::CORD) {
             result.contains_cord = true;
           }
           break;
         }
-        case FieldDescriptor::TYPE_GROUP:
-        case FieldDescriptor::TYPE_MESSAGE: {
+        case FieldType::GROUP:
+        case FieldType::MESSAGE: {
           const SCC* child = analyzer_.GetSCC(field->message_type());
           if (child != scc) {
             MessageAnalysis analysis = GetSCCAnalysis(child);
@@ -1603,7 +1603,7 @@ bool EnableMessageOwnedArenaTrial(const Descriptor* desc,
 bool HasMessageFieldOrExtension(const Descriptor* desc) {
   if (desc->extension_range_count() > 0) return true;
   for (const auto* f : FieldRange(desc)) {
-    if (f->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) return true;
+    if (f->cpp_type() == FieldCppType::MESSAGE) return true;
   }
   return false;
 }

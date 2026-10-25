@@ -59,19 +59,19 @@ namespace internal {
 namespace {
 
 TEST(WireFormatTest, EnumsInSync) {
-  // Verify that WireFormatLite::FieldType and WireFormatLite::CppType match
-  // FieldDescriptor::Type and FieldDescriptor::CppType.
+  // Verify that WireFormatLiteFieldType and WireFormatLite::CppType match
+  // FieldType and FieldCppType.
 
-  EXPECT_EQ(implicit_cast<int>(FieldDescriptor::MAX_TYPE),
+  EXPECT_EQ(implicit_cast<int>(kMaxFieldType),
             implicit_cast<int>(WireFormatLite::MAX_FIELD_TYPE));
-  EXPECT_EQ(implicit_cast<int>(FieldDescriptor::MAX_CPPTYPE),
+  EXPECT_EQ(implicit_cast<int>(kMaxFieldCppType),
             implicit_cast<int>(WireFormatLite::MAX_CPPTYPE));
 
   for (int i = 1; i <= WireFormatLite::MAX_FIELD_TYPE; i++) {
-    EXPECT_EQ(implicit_cast<int>(FieldDescriptor::TypeToCppType(
-                  static_cast<FieldDescriptor::Type>(i))),
+    EXPECT_EQ(static_cast<int>(FieldDescriptor::TypeToCppType(
+                  static_cast<::shark::FieldType>(i))),
               implicit_cast<int>(WireFormatLite::FieldTypeToCppType(
-                  static_cast<WireFormatLite::FieldType>(i))));
+                  static_cast<WireFormatLiteFieldType>(i))));
   }
 }
 

@@ -49,8 +49,8 @@ namespace shark {
 class Arena;
 namespace internal {
 template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapField;
 }
 }  // namespace shark
@@ -69,7 +69,7 @@ namespace internal {
 // of MapEntry accessors, it's named MapEntry accessor type.
 //
 // cpp type:               the type visible to users in public API.
-// proto type:             WireFormatLite::FieldType of the field.
+// proto type:             WireFormatLiteFieldType of the field.
 // in-memory type:         type of the data member used to stored this field.
 // MapEntry accessor type: type used in MapEntry getters/mutators to access the
 //                         field.
@@ -85,8 +85,8 @@ namespace internal {
 // while we need to explicitly specify the cpp type if proto type is
 // TYPE_MESSAGE to infer the in-memory type.
 template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapEntry : public MapEntryImpl<Derived, Message, Key, Value,
                                      kKeyFieldType, kValueFieldType> {
  public:
@@ -115,7 +115,7 @@ class MapEntry : public MapEntryImpl<Derived, Message, Key, Value,
  private:
   friend class ::SHARK_NAMESPACE_ID::Arena;
   template <typename C, typename K, typename V,
-            WireFormatLite::FieldType k_wire_type, WireFormatLite::FieldType>
+            WireFormatLiteFieldType k_wire_type, WireFormatLiteFieldType>
   friend class internal::MapField;
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapEntry);

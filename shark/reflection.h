@@ -482,8 +482,8 @@ struct PrimitiveTraits {
   template <>                                        \
   struct PrimitiveTraits<type> {                     \
     static const bool is_primitive = true;           \
-    static const FieldDescriptor::CppType cpp_type = \
-        FieldDescriptor::CPPTYPE_##TYPE;             \
+    static const FieldCppType cpp_type = \
+        FieldCppType::TYPE;             \
   };
 DEFINE_PRIMITIVE(INT32, int32_t)
 DEFINE_PRIMITIVE(UINT32, uint32_t)
@@ -502,7 +502,7 @@ struct RefTypeTraits<
   typedef T AccessorValueType;
   typedef T IteratorValueType;
   typedef T* IteratorPointerType;
-  static constexpr FieldDescriptor::CppType cpp_type =
+  static constexpr FieldCppType cpp_type =
       PrimitiveTraits<T>::cpp_type;
   static const Descriptor* GetMessageFieldDescriptor() { return nullptr; }
 };
@@ -516,8 +516,8 @@ struct RefTypeTraits<
   typedef int32_t AccessorValueType;
   typedef T IteratorValueType;
   typedef int32_t* IteratorPointerType;
-  static constexpr FieldDescriptor::CppType cpp_type =
-      FieldDescriptor::CPPTYPE_ENUM;
+  static constexpr FieldCppType cpp_type =
+      FieldCppType::ENUM;
   static const Descriptor* GetMessageFieldDescriptor() { return nullptr; }
 };
 
@@ -529,8 +529,8 @@ struct RefTypeTraits<
   typedef std::string AccessorValueType;
   typedef const std::string IteratorValueType;
   typedef const std::string* IteratorPointerType;
-  static constexpr FieldDescriptor::CppType cpp_type =
-      FieldDescriptor::CPPTYPE_STRING;
+  static constexpr FieldCppType cpp_type =
+      FieldCppType::STRING;
   static const Descriptor* GetMessageFieldDescriptor() { return nullptr; }
 };
 
@@ -553,8 +553,8 @@ struct RefTypeTraits<
   typedef Message AccessorValueType;
   typedef const T& IteratorValueType;
   typedef const T* IteratorPointerType;
-  static constexpr FieldDescriptor::CppType cpp_type =
-      FieldDescriptor::CPPTYPE_MESSAGE;
+  static constexpr FieldCppType cpp_type =
+      FieldCppType::MESSAGE;
   static const Descriptor* GetMessageFieldDescriptor() {
     return MessageDescriptorGetter<T>::get();
   }

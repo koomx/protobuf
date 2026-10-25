@@ -214,7 +214,7 @@ struct ReflectionSchema {
 
   // Returns true if the field is implicitly backed by LazyField.
   bool IsEagerlyVerifiedLazyField(const FieldDescriptor* field) const {
-    GOOGLE_DCHECK_EQ(field->type(), FieldDescriptor::TYPE_MESSAGE);
+    GOOGLE_DCHECK_EQ(field->type(), ::shark::FieldType::MESSAGE);
     (void)field;
     return false;
   }
@@ -252,18 +252,18 @@ struct ReflectionSchema {
 
   // We tag offset values to provide additional data about fields (such as
   // "unused" or "lazy" or "inlined").
-  static uint32_t OffsetValue(uint32_t v, FieldDescriptor::Type type) {
-    if (type == FieldDescriptor::TYPE_MESSAGE ||
-        type == FieldDescriptor::TYPE_STRING ||
-        type == FieldDescriptor::TYPE_BYTES) {
+  static uint32_t OffsetValue(uint32_t v, ::shark::FieldType type) {
+    if (type == ::shark::FieldType::MESSAGE ||
+        type == ::shark::FieldType::STRING ||
+        type == ::shark::FieldType::BYTES) {
       return v & 0xFFFFFFFEu;
     }
     return v;
   }
 
-  static bool Inlined(uint32_t v, FieldDescriptor::Type type) {
-    if (type == FieldDescriptor::TYPE_STRING ||
-        type == FieldDescriptor::TYPE_BYTES) {
+  static bool Inlined(uint32_t v, ::shark::FieldType type) {
+    if (type == ::shark::FieldType::STRING ||
+        type == ::shark::FieldType::BYTES) {
       return (v & 1u) != 0u;
     } else {
       // Non string/byte fields are not inlined.

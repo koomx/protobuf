@@ -100,26 +100,26 @@ void ExtensionSet::AppendToList(
   });
 }
 
-inline FieldDescriptor::Type real_type(FieldType type) {
-  GOOGLE_DCHECK(type > 0 && type <= FieldDescriptor::MAX_TYPE);
-  return static_cast<FieldDescriptor::Type>(type);
+inline ::shark::FieldType real_type(FieldTypeUint8 type) {
+  GOOGLE_DCHECK(type > 0 && type <= kMaxFieldType);
+  return static_cast<::shark::FieldType>(type);
 }
 
-inline FieldDescriptor::CppType cpp_type(FieldType type) {
+inline ::shark::FieldCppType cpp_type(FieldTypeUint8 type) {
   return FieldDescriptor::TypeToCppType(
-      static_cast<FieldDescriptor::Type>(type));
+      static_cast<::shark::FieldType>(type));
 }
 
-inline WireFormatLite::FieldType field_type(FieldType type) {
+inline WireFormatLiteFieldType field_type(FieldTypeUint8 type) {
   GOOGLE_DCHECK(type > 0 && type <= WireFormatLite::MAX_FIELD_TYPE);
-  return static_cast<WireFormatLite::FieldType>(type);
+  return static_cast<WireFormatLiteFieldType>(type);
 }
 
 #define GOOGLE_DCHECK_TYPE(EXTENSION, LABEL, CPPTYPE)                         \
-  GOOGLE_DCHECK_EQ((EXTENSION).is_repeated ? FieldDescriptor::LABEL_REPEATED  \
-                                    : FieldDescriptor::LABEL_OPTIONAL, \
-            FieldDescriptor::LABEL_##LABEL);                           \
-  GOOGLE_DCHECK_EQ(cpp_type((EXTENSION).type), FieldDescriptor::CPPTYPE_##CPPTYPE)
+  GOOGLE_DCHECK_EQ((EXTENSION).is_repeated ? FieldLabel::REPEATED  \
+                                    : FieldLabel::OPTIONAL, \
+            FieldLabel::LABEL);                           \
+  GOOGLE_DCHECK_EQ(cpp_type((EXTENSION).type), FieldCppType::CPPTYPE)
 
 const MessageLite& ExtensionSet::GetMessage(int number,
                                             const Descriptor* message_type,
@@ -143,8 +143,8 @@ MessageLite* ExtensionSet::MutableMessage(const FieldDescriptor* descriptor,
                                           MessageFactory* factory) {
   Extension* extension;
   if (MaybeNewExtension(descriptor->number(), descriptor, &extension)) {
-    extension->type = descriptor->type();
-    GOOGLE_DCHECK_EQ(cpp_type(extension->type), FieldDescriptor::CPPTYPE_MESSAGE);
+    extension->type = static_cast<FieldTypeUint8>(descriptor->type());
+    GOOGLE_DCHECK_EQ(cpp_type(extension->type), FieldCppType::MESSAGE);
     extension->is_repeated = false;
     extension->is_packed = false;
     const MessageLite* prototype =
@@ -220,8 +220,8 @@ ExtensionSet::Extension* ExtensionSet::MaybeNewRepeatedExtension(
     const FieldDescriptor* descriptor) {
   Extension* extension;
   if (MaybeNewExtension(descriptor->number(), descriptor, &extension)) {
-    extension->type = descriptor->type();
-    GOOGLE_DCHECK_EQ(cpp_type(extension->type), FieldDescriptor::CPPTYPE_MESSAGE);
+    extension->type = static_cast<FieldTypeUint8>(descriptor->type());
+    GOOGLE_DCHECK_EQ(cpp_type(extension->type), FieldCppType::MESSAGE);
     extension->is_repeated = true;
     extension->repeated_message_value =
         Arena::CreateMessage<RepeatedPtrField<MessageLite> >(arena_);
@@ -280,17 +280,17 @@ bool DescriptorPoolExtensionFinder::Find(int number, ExtensionInfo* output) {
   if (extension == nullptr) {
     return false;
   } else {
-    output->type = extension->type();
+    output->type = static_cast<FieldTypeUint8>(extension->type());
     output->is_repeated = extension->is_repeated();
     output->is_packed = extension->options().packed();
     output->descriptor = extension;
-    if (extension->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    if (extension->cpp_type() == FieldCppType::MESSAGE) {
       output->message_info.sharktype =
           factory_->GetPrototype(extension->message_type());
       GOOGLE_CHECK(output->message_info.sharktype != nullptr)
           << "Extension factory's GetPrototype() returned nullptr; extension: "
           << extension->full_name();
-    } else if (extension->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {
+    } else if (extension->cpp_type() == FieldCppType::ENUM) {
       output->enum_validity_check.func = ValidateEnumUsingDescriptor;
       output->enum_validity_check.arg = extension->enum_type();
     }
@@ -374,7 +374,7 @@ size_t ExtensionSet::Extension::SpaceUsedExcludingSelfLong() const {
   if (is_repeated) {
     switch (cpp_type(type)) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                                     \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE:                                  \
+  case FieldCppType::UPPERCASE:                                  \
     total_size += sizeof(*repeated_##LOWERCASE##_value) +                     \
                   repeated_##LOWERCASE##_value->SpaceUsedExcludingSelfLong(); \
     break
@@ -390,7 +390,7 @@ size_t ExtensionSet::Extension::SpaceUsedExcludingSelfLong() const {
       HANDLE_TYPE(STRING, string);
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         // repeated_message_value is actually a RepeatedPtrField<MessageLite>,
         // but MessageLite has no SpaceUsedLong(), so we must directly call
         // RepeatedPtrFieldBase::SpaceUsedExcludingSelfLong() with a different
@@ -403,11 +403,11 @@ size_t ExtensionSet::Extension::SpaceUsedExcludingSelfLong() const {
     }
   } else {
     switch (cpp_type(type)) {
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         total_size += sizeof(*string_value) +
                       StringSpaceUsedExcludingSelfLong(*string_value);
         break;
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         if (is_lazy) {
           total_size += lazymessage_value->SpaceUsedLong();
         } else {

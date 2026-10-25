@@ -1894,7 +1894,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1904,7 +1904,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1914,7 +1914,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1924,7 +1924,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1935,7 +1935,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1946,7 +1946,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1957,7 +1957,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1968,7 +1968,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1979,7 +1979,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -1991,7 +1991,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -2003,7 +2003,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -2014,7 +2014,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -2025,7 +2025,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -2036,7 +2036,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -2048,7 +2048,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -2060,7 +2060,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -2071,7 +2071,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -4078,7 +4078,7 @@ class SHARK_EXPORT FileOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4088,7 +4088,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4098,7 +4098,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4108,7 +4108,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4119,7 +4119,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4130,7 +4130,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4141,7 +4141,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4152,7 +4152,7 @@ class SHARK_EXPORT FileOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4163,7 +4163,7 @@ class SHARK_EXPORT FileOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -4175,7 +4175,7 @@ class SHARK_EXPORT FileOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -4187,7 +4187,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4198,7 +4198,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4209,7 +4209,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4220,7 +4220,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4232,7 +4232,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4244,7 +4244,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -4255,7 +4255,7 @@ class SHARK_EXPORT FileOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -4497,7 +4497,7 @@ class SHARK_EXPORT MessageOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4507,7 +4507,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4517,7 +4517,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4527,7 +4527,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4538,7 +4538,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4549,7 +4549,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4560,7 +4560,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4571,7 +4571,7 @@ class SHARK_EXPORT MessageOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4582,7 +4582,7 @@ class SHARK_EXPORT MessageOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -4594,7 +4594,7 @@ class SHARK_EXPORT MessageOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -4606,7 +4606,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4617,7 +4617,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4628,7 +4628,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4639,7 +4639,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4651,7 +4651,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -4663,7 +4663,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -4674,7 +4674,7 @@ class SHARK_EXPORT MessageOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -5020,7 +5020,7 @@ class SHARK_EXPORT FieldOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5030,7 +5030,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5040,7 +5040,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5050,7 +5050,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5061,7 +5061,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5072,7 +5072,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5083,7 +5083,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5094,7 +5094,7 @@ class SHARK_EXPORT FieldOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5105,7 +5105,7 @@ class SHARK_EXPORT FieldOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -5117,7 +5117,7 @@ class SHARK_EXPORT FieldOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -5129,7 +5129,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5140,7 +5140,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5151,7 +5151,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5162,7 +5162,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5174,7 +5174,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5186,7 +5186,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -5197,7 +5197,7 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -5384,7 +5384,7 @@ class SHARK_EXPORT OneofOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5394,7 +5394,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5404,7 +5404,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5414,7 +5414,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5425,7 +5425,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5436,7 +5436,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5447,7 +5447,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5458,7 +5458,7 @@ class SHARK_EXPORT OneofOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5469,7 +5469,7 @@ class SHARK_EXPORT OneofOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -5481,7 +5481,7 @@ class SHARK_EXPORT OneofOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -5493,7 +5493,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5504,7 +5504,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5515,7 +5515,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5526,7 +5526,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5538,7 +5538,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5550,7 +5550,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -5561,7 +5561,7 @@ class SHARK_EXPORT OneofOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -5796,7 +5796,7 @@ class SHARK_EXPORT EnumOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5806,7 +5806,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5816,7 +5816,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5826,7 +5826,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5837,7 +5837,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5848,7 +5848,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5859,7 +5859,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5870,7 +5870,7 @@ class SHARK_EXPORT EnumOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5881,7 +5881,7 @@ class SHARK_EXPORT EnumOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -5893,7 +5893,7 @@ class SHARK_EXPORT EnumOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -5905,7 +5905,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5916,7 +5916,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5927,7 +5927,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5938,7 +5938,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5950,7 +5950,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -5962,7 +5962,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -5973,7 +5973,7 @@ class SHARK_EXPORT EnumOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -6171,7 +6171,7 @@ class SHARK_EXPORT EnumValueOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6181,7 +6181,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6191,7 +6191,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6201,7 +6201,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6212,7 +6212,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6223,7 +6223,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6234,7 +6234,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6245,7 +6245,7 @@ class SHARK_EXPORT EnumValueOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6256,7 +6256,7 @@ class SHARK_EXPORT EnumValueOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -6268,7 +6268,7 @@ class SHARK_EXPORT EnumValueOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -6280,7 +6280,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6291,7 +6291,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6302,7 +6302,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6313,7 +6313,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6325,7 +6325,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6337,7 +6337,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -6348,7 +6348,7 @@ class SHARK_EXPORT EnumValueOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -6543,7 +6543,7 @@ class SHARK_EXPORT ServiceOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6553,7 +6553,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6563,7 +6563,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6573,7 +6573,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6584,7 +6584,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6595,7 +6595,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6606,7 +6606,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6617,7 +6617,7 @@ class SHARK_EXPORT ServiceOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6628,7 +6628,7 @@ class SHARK_EXPORT ServiceOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -6640,7 +6640,7 @@ class SHARK_EXPORT ServiceOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -6652,7 +6652,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6663,7 +6663,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6674,7 +6674,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6685,7 +6685,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6697,7 +6697,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6709,7 +6709,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -6720,7 +6720,7 @@ class SHARK_EXPORT ServiceOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(
@@ -6961,7 +6961,7 @@ class SHARK_EXPORT MethodOptions final :
 
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline bool HasExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6971,7 +6971,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void ClearExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6981,7 +6981,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline int ExtensionSize(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -6991,7 +6991,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7002,7 +7002,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7013,7 +7013,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7024,7 +7024,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7035,7 +7035,7 @@ class SHARK_EXPORT MethodOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void UnsafeArenaSetAllocatedExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7046,7 +7046,7 @@ class SHARK_EXPORT MethodOptions final :
 
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   [[nodiscard]] inline
       typename _proto_TypeTraits::Singular::MutableType
@@ -7058,7 +7058,7 @@ class SHARK_EXPORT MethodOptions final :
                                       &_impl_._extensions_);
   }
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Singular::MutableType
   UnsafeArenaReleaseExtension(
@@ -7070,7 +7070,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7081,7 +7081,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7092,7 +7092,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void SetExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7103,7 +7103,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7115,7 +7115,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline void AddExtension(
       const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -7127,7 +7127,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
   GetRepeatedExtension(
@@ -7138,7 +7138,7 @@ class SHARK_EXPORT MethodOptions final :
   }
 
   template <typename _proto_TypeTraits,
-            ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+            ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
             bool _is_packed>
   inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
   MutableRepeatedExtension(

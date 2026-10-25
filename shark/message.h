@@ -85,13 +85,13 @@
 //     // their types.
 //     const FieldDescriptor* text_field = descriptor->FindFieldByName("text");
 //     assert(text_field != nullptr);
-//     assert(text_field->type() == FieldDescriptor::TYPE_STRING);
-//     assert(text_field->label() == FieldDescriptor::LABEL_OPTIONAL);
+//     assert(text_field->type() == FieldType::STRING);
+//     assert(text_field->label() == FieldLabel::OPTIONAL);
 //     const FieldDescriptor* numbers_field = descriptor->
 //                                            FindFieldByName("numbers");
 //     assert(numbers_field != nullptr);
-//     assert(numbers_field->type() == FieldDescriptor::TYPE_INT32);
-//     assert(numbers_field->label() == FieldDescriptor::LABEL_REPEATED);
+//     assert(numbers_field->type() == FieldType::INT32);
+//     assert(numbers_field->label() == FieldLabel::REPEATED);
 //
 //     // Parse the message.
 //     foo->ParseFromString(data);
@@ -959,12 +959,12 @@ class SHARK_EXPORT Reflection final {
   //   of field->message_type() (if message_type != nullptr).
   // We use 2 routine rather than 4 (const vs mutable) x (scalar vs pointer).
   void* MutableRawRepeatedField(Message* message, const FieldDescriptor* field,
-                                FieldDescriptor::CppType, int ctype,
+                                FieldCppType, int ctype,
                                 const Descriptor* message_type) const;
 
   const void* GetRawRepeatedField(const Message& message,
                                   const FieldDescriptor* field,
-                                  FieldDescriptor::CppType cpptype, int ctype,
+                                  FieldCppType cpptype, int ctype,
                                   const Descriptor* message_type) const;
 
   // The following methods are used to implement (Mutable)RepeatedFieldRef.
@@ -982,7 +982,7 @@ class SHARK_EXPORT Reflection final {
   // field. We use 1 routine rather than 2 (const vs mutable) because it is
   // protected and it doesn't change the message.
   void* RepeatedFieldData(Message* message, const FieldDescriptor* field,
-                          FieldDescriptor::CppType cpp_type,
+                          FieldCppType cpp_type,
                           const Descriptor* message_type) const;
 
   // The returned pointer should point to a singleton instance which implements
@@ -1435,21 +1435,21 @@ template <>
 inline const RepeatedPtrField<Message>& Reflection::GetRepeatedPtrFieldInternal(
     const Message& message, const FieldDescriptor* field) const {
   return *static_cast<const RepeatedPtrField<Message>*>(GetRawRepeatedField(
-      message, field, FieldDescriptor::CPPTYPE_MESSAGE, -1, nullptr));
+      message, field, FieldCppType::MESSAGE, -1, nullptr));
 }
 
 template <>
 inline RepeatedPtrField<Message>* Reflection::MutableRepeatedPtrFieldInternal(
     Message* message, const FieldDescriptor* field) const {
   return static_cast<RepeatedPtrField<Message>*>(MutableRawRepeatedField(
-      message, field, FieldDescriptor::CPPTYPE_MESSAGE, -1, nullptr));
+      message, field, FieldCppType::MESSAGE, -1, nullptr));
 }
 
 template <typename PB>
 inline const RepeatedPtrField<PB>& Reflection::GetRepeatedPtrFieldInternal(
     const Message& message, const FieldDescriptor* field) const {
   return *static_cast<const RepeatedPtrField<PB>*>(
-      GetRawRepeatedField(message, field, FieldDescriptor::CPPTYPE_MESSAGE, -1,
+      GetRawRepeatedField(message, field, FieldCppType::MESSAGE, -1,
                           PB::default_instance().GetDescriptor()));
 }
 
@@ -1457,7 +1457,7 @@ template <typename PB>
 inline RepeatedPtrField<PB>* Reflection::MutableRepeatedPtrFieldInternal(
     Message* message, const FieldDescriptor* field) const {
   return static_cast<RepeatedPtrField<PB>*>(
-      MutableRawRepeatedField(message, field, FieldDescriptor::CPPTYPE_MESSAGE,
+      MutableRawRepeatedField(message, field, FieldCppType::MESSAGE,
                               -1, PB::default_instance().GetDescriptor()));
 }
 

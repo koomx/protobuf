@@ -47,45 +47,45 @@ namespace {
 
 // For encodings with fixed sizes, returns that size in bytes.  Otherwise
 // returns -1.
-int FixedSize(FieldDescriptor::Type type) {
+int FixedSize(FieldType type) {
   switch (type) {
-    case FieldDescriptor::TYPE_INT32:
+    case FieldType::INT32:
       return -1;
-    case FieldDescriptor::TYPE_INT64:
+    case FieldType::INT64:
       return -1;
-    case FieldDescriptor::TYPE_UINT32:
+    case FieldType::UINT32:
       return -1;
-    case FieldDescriptor::TYPE_UINT64:
+    case FieldType::UINT64:
       return -1;
-    case FieldDescriptor::TYPE_SINT32:
+    case FieldType::SINT32:
       return -1;
-    case FieldDescriptor::TYPE_SINT64:
+    case FieldType::SINT64:
       return -1;
-    case FieldDescriptor::TYPE_FIXED32:
+    case FieldType::FIXED32:
       return WireFormatLite::kFixed32Size;
-    case FieldDescriptor::TYPE_FIXED64:
+    case FieldType::FIXED64:
       return WireFormatLite::kFixed64Size;
-    case FieldDescriptor::TYPE_SFIXED32:
+    case FieldType::SFIXED32:
       return WireFormatLite::kSFixed32Size;
-    case FieldDescriptor::TYPE_SFIXED64:
+    case FieldType::SFIXED64:
       return WireFormatLite::kSFixed64Size;
-    case FieldDescriptor::TYPE_FLOAT:
+    case FieldType::FLOAT:
       return WireFormatLite::kFloatSize;
-    case FieldDescriptor::TYPE_DOUBLE:
+    case FieldType::DOUBLE:
       return WireFormatLite::kDoubleSize;
 
-    case FieldDescriptor::TYPE_BOOL:
+    case FieldType::BOOL:
       return WireFormatLite::kBoolSize;
-    case FieldDescriptor::TYPE_ENUM:
+    case FieldType::ENUM:
       return -1;
 
-    case FieldDescriptor::TYPE_STRING:
+    case FieldType::STRING:
       return -1;
-    case FieldDescriptor::TYPE_BYTES:
+    case FieldType::BYTES:
       return -1;
-    case FieldDescriptor::TYPE_GROUP:
+    case FieldType::GROUP:
       return -1;
-    case FieldDescriptor::TYPE_MESSAGE:
+    case FieldType::MESSAGE:
       return -1;
 
       // No default because we want the compiler to complain if any new

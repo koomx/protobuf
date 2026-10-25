@@ -129,32 +129,32 @@ inline bool InRealOneof(const FieldDescriptor* field) {
 // Compute the byte size of the in-memory representation of the field.
 int FieldSpaceUsed(const FieldDescriptor* field) {
   typedef FieldDescriptor FD;  // avoid line wrapping
-  if (field->label() == FD::LABEL_REPEATED) {
+  if (field->label() == FieldLabel::REPEATED) {
     switch (field->cpp_type()) {
-      case FD::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         return sizeof(RepeatedField<int32_t>);
-      case FD::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         return sizeof(RepeatedField<int64_t>);
-      case FD::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         return sizeof(RepeatedField<uint32_t>);
-      case FD::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         return sizeof(RepeatedField<uint64_t>);
-      case FD::CPPTYPE_DOUBLE:
+      case FieldCppType::DOUBLE:
         return sizeof(RepeatedField<double>);
-      case FD::CPPTYPE_FLOAT:
+      case FieldCppType::FLOAT:
         return sizeof(RepeatedField<float>);
-      case FD::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         return sizeof(RepeatedField<bool>);
-      case FD::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return sizeof(RepeatedField<int>);
-      case FD::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         if (IsMapFieldInApi(field)) {
           return sizeof(DynamicMapField);
         } else {
           return sizeof(RepeatedPtrField<Message>);
         }
 
-      case FD::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::STRING:
@@ -164,27 +164,27 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
     }
   } else {
     switch (field->cpp_type()) {
-      case FD::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         return sizeof(int32_t);
-      case FD::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         return sizeof(int64_t);
-      case FD::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         return sizeof(uint32_t);
-      case FD::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         return sizeof(uint64_t);
-      case FD::CPPTYPE_DOUBLE:
+      case FieldCppType::DOUBLE:
         return sizeof(double);
-      case FD::CPPTYPE_FLOAT:
+      case FieldCppType::FLOAT:
         return sizeof(float);
-      case FD::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         return sizeof(bool);
-      case FD::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return sizeof(int);
 
-      case FD::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         return sizeof(Message*);
 
-      case FD::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::STRING:
@@ -385,7 +385,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
     }
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)                                  \
-  case FieldDescriptor::CPPTYPE_##CPPTYPE:                          \
+  case FieldCppType::CPPTYPE:                          \
     if (!field->is_repeated()) {                                    \
       new (field_ptr) TYPE(field->default_value_##TYPE());          \
     } else {                                                        \
@@ -402,7 +402,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
       HANDLE_TYPE(BOOL, bool);
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         if (!field->is_repeated()) {
           new (field_ptr) int{field->default_value_enum()->number()};
         } else {
@@ -410,7 +410,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
         }
         break;
 
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::STRING:
@@ -425,7 +425,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
         }
         break;
 
-      case FieldDescriptor::CPPTYPE_MESSAGE: {
+      case FieldCppType::MESSAGE: {
         if (!field->is_repeated()) {
           new (field_ptr) Message*(nullptr);
         } else {
@@ -513,7 +513,7 @@ DynamicMessage::~DynamicMessage() {
       void* field_ptr = MutableOneofCaseRaw(field->containing_oneof()->index());
       if (*(reinterpret_cast<const int32_t*>(field_ptr)) == field->number()) {
         field_ptr = MutableOneofFieldRaw(field);
-        if (field->cpp_type() == FieldDescriptor::CPPTYPE_STRING) {
+        if (field->cpp_type() == FieldCppType::STRING) {
           switch (field->options().ctype()) {
             default:
             case FieldOptions::STRING: {
@@ -521,7 +521,7 @@ DynamicMessage::~DynamicMessage() {
               break;
             }
           }
-        } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+        } else if (field->cpp_type() == FieldCppType::MESSAGE) {
             delete *reinterpret_cast<Message**>(field_ptr);
         }
       }
@@ -532,7 +532,7 @@ DynamicMessage::~DynamicMessage() {
     if (field->is_repeated()) {
       switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                  \
-  case FieldDescriptor::CPPTYPE_##UPPERCASE:               \
+  case FieldCppType::UPPERCASE:               \
     reinterpret_cast<RepeatedField<LOWERCASE>*>(field_ptr) \
         ->~RepeatedField<LOWERCASE>();                     \
     break
@@ -547,7 +547,7 @@ DynamicMessage::~DynamicMessage() {
         HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-        case FieldDescriptor::CPPTYPE_STRING:
+        case FieldCppType::STRING:
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::STRING:
@@ -557,7 +557,7 @@ DynamicMessage::~DynamicMessage() {
           }
           break;
 
-        case FieldDescriptor::CPPTYPE_MESSAGE:
+        case FieldCppType::MESSAGE:
           if (IsMapFieldInApi(field)) {
             reinterpret_cast<DynamicMapField*>(field_ptr)->~DynamicMapField();
           } else {
@@ -567,7 +567,7 @@ DynamicMessage::~DynamicMessage() {
           break;
       }
 
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_STRING) {
+    } else if (field->cpp_type() == FieldCppType::STRING) {
       switch (field->options().ctype()) {
         default:  // TODO(kenton):  Support other string reps.
         case FieldOptions::STRING: {
@@ -575,7 +575,7 @@ DynamicMessage::~DynamicMessage() {
           break;
         }
       }
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
           if (!is_prototype()) {
         Message* message = *reinterpret_cast<Message**>(field_ptr);
         if (message != nullptr) {
@@ -596,7 +596,7 @@ void DynamicMessage::CrossLinkPrototypes() {
   // Cross-link default messages.
   for (int i = 0; i < descriptor->field_count(); i++) {
     const FieldDescriptor* field = descriptor->field(i);
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE &&
+    if (field->cpp_type() == FieldCppType::MESSAGE &&
         !field->options().weak() && !InRealOneof(field) &&
         !field->is_repeated()) {
       void* field_ptr = MutableRaw(i);

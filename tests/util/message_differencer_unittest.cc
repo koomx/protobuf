@@ -2369,7 +2369,7 @@ class ParentSavingFieldComparator : public util::FieldComparator {
                            int index_2,
                            const util::FieldContext* field_context) override {
     if (field_context) parent_fields_ = *(field_context->parent_fields());
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    if (field->cpp_type() == FieldCppType::MESSAGE) {
       return RECURSE;
     } else {
       return SAME;

@@ -55,12 +55,12 @@
 
 namespace shark::internal {
 template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapEntry;
 template <typename Derived, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapFieldLite;
 }  // namespace shark::internal
 
@@ -98,8 +98,8 @@ struct MoveHelper<false, false, true, T> {  // strings and similar
 // It uses Curious Recursive Template Pattern (CRTP) to provide the type of
 // the eventual code to the template code.
 template <typename Derived, typename Base, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapEntryImpl : public Base {
  public:
   typedef MapEntryFuncs<Key, Value, kKeyFieldType, kValueFieldType> Funcs;
@@ -138,8 +138,8 @@ class MapEntryImpl : public Base {
   typedef Derived EntryType;
   typedef Key EntryKeyType;
   typedef Value EntryValueType;
-  static const WireFormatLite::FieldType kEntryKeyFieldType = kKeyFieldType;
-  static const WireFormatLite::FieldType kEntryValueFieldType = kValueFieldType;
+  static const WireFormatLiteFieldType kEntryKeyFieldType = kKeyFieldType;
+  static const WireFormatLiteFieldType kEntryValueFieldType = kValueFieldType;
 
   constexpr MapEntryImpl()
       : key_(KeyTypeHandler::Constinit()),
@@ -416,19 +416,19 @@ class MapEntryImpl : public Base {
   friend class ::SHARK_NAMESPACE_ID::Arena;
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
-  template <typename C, typename K, typename V, WireFormatLite::FieldType,
-            WireFormatLite::FieldType>
+  template <typename C, typename K, typename V, WireFormatLiteFieldType,
+            WireFormatLiteFieldType>
   friend class internal::MapEntry;
-  template <typename C, typename K, typename V, WireFormatLite::FieldType,
-            WireFormatLite::FieldType>
+  template <typename C, typename K, typename V, WireFormatLiteFieldType,
+            WireFormatLiteFieldType>
   friend class internal::MapFieldLite;
 
   GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(MapEntryImpl);
 };
 
 template <typename T, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapEntryLite : public MapEntryImpl<T, MessageLite, Key, Value,
                                          kKeyFieldType, kValueFieldType> {
  public:

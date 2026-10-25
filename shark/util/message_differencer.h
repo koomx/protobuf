@@ -445,7 +445,7 @@ class SHARK_EXPORT MessageDifferencer {
   // performance.
   //
   // REQUIRES:  field->is_repeated()
-  // REQUIRES:  field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE
+  // REQUIRES:  field->cpp_type() == FieldCppType::MESSAGE
   // REQUIRES:  key->containing_type() == field->message_type()
   void TreatAsMap(const FieldDescriptor* field, const FieldDescriptor* key);
   // Same as TreatAsMap except that this method will use multiple fields as
@@ -478,7 +478,7 @@ class SHARK_EXPORT MessageDifferencer {
   //     for i in [0, key_field_path.size() - 1):
   //       key_field_path[i+1]->containing_type() ==
   //           key_field_path[i]->message_type()
-  //       key_field_path[i]->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE
+  //       key_field_path[i]->cpp_type() == FieldCppType::MESSAGE
   //       !key_field_path[i]->is_repeated()
   void TreatAsMapWithMultipleFieldPathsAsKey(
       const FieldDescriptor* field,
@@ -532,8 +532,8 @@ class SHARK_EXPORT MessageDifferencer {
   // NOTE: this method does nothing if differencer's field comparator has been
   //       set to a custom object.
   //
-  // REQUIRES: field->cpp_type == FieldDescriptor::CPPTYPE_DOUBLE or
-  //           field->cpp_type == FieldDescriptor::CPPTYPE_FLOAT
+  // REQUIRES: field->cpp_type == FieldCppType::DOUBLE or
+  //           field->cpp_type == FieldCppType::FLOAT
   // REQUIRES: float_comparison_ == APPROXIMATE
   void SetFractionAndMargin(const FieldDescriptor* field, double fraction,
                             double margin);

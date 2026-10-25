@@ -153,7 +153,7 @@ const shark::Field* ProtoStreamObjectSource::FindAndVerifyField(
   if (field != nullptr) {
     WireFormatLite::WireType expected_type =
         WireFormatLite::WireTypeForFieldType(
-            static_cast<WireFormatLite::FieldType>(field->kind()));
+            static_cast<internal::WireFormatLiteFieldType>(field->kind()));
     WireFormatLite::WireType actual_type = WireFormatLite::GetTagWireType(tag);
     if (actual_type != expected_type &&
         (!IsPackable(*field) ||
@@ -1073,7 +1073,7 @@ const shark::Field* FindFieldByNumber(
 bool IsPackable(const shark::Field& field) {
   return field.cardinality() == shark::Field::CARDINALITY_REPEATED &&
          FieldDescriptor::IsTypePackable(
-             static_cast<FieldDescriptor::Type>(field.kind()));
+             static_cast<FieldType>(field.kind()));
 }
 
 // TODO(skarvaje): Speed this up by not doing a linear scan.

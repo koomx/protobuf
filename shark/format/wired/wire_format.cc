@@ -173,7 +173,7 @@ bool WireFormat::ReadPackedEnumPreserveUnknowns(io::CodedInputStream* input,
   io::CodedInputStream::Limit limit = input->PushLimit(length);
   while (input->BytesUntilLimit() > 0) {
     int value;
-    if (!WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_ENUM>(
+    if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
             input, &value)) {
       return false;
     }
@@ -396,7 +396,7 @@ bool WireFormat::ParseAndMergeMessageSetField(uint32_t field_number,
     return SkipMessageSetField(
         input, field_number, message_reflection->MutableUnknownFields(message));
   } else if (field->is_repeated() ||
-             field->type() != FieldDescriptor::TYPE_MESSAGE) {
+             field->type() != ::shark::FieldType::MESSAGE) {
     // This shouldn't happen as we only allow optional message extensions to
     // MessageSet.
     GOOGLE_LOG(ERROR) << "Extensions of MessageSets must be optional messages.";
@@ -445,11 +445,11 @@ bool WireFormat::ParseAndMergeField(
 
     switch (field->type()) {
 #define HANDLE_PACKED_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                      \
-  case FieldDescriptor::TYPE_##TYPE: {                                         \
+  case ::shark::FieldType::TYPE: {                                         \
     while (input->BytesUntilLimit() > 0) {                                     \
       CPPTYPE value;                                                           \
       if (!WireFormatLite::ReadPrimitive<CPPTYPE,                              \
-                                         WireFormatLite::TYPE_##TYPE>(input,   \
+                                         WireFormatLiteFieldType::TYPE_##TYPE>(input,   \
                                                                       &value)) \
         return false;                                                          \
       message_reflection->Add##CPPTYPE_METHOD(message, field, value);          \
@@ -475,10 +475,10 @@ bool WireFormat::ParseAndMergeField(
       HANDLE_PACKED_TYPE(BOOL, bool, Bool)
 #undef HANDLE_PACKED_TYPE
 
-      case FieldDescriptor::TYPE_ENUM: {
+      case ::shark::FieldType::ENUM: {
         while (input->BytesUntilLimit() > 0) {
           int value;
-          if (!WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_ENUM>(
+          if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
                   input, &value))
             return false;
           if (message->GetDescriptor()->file()->syntax() ==
@@ -502,10 +502,10 @@ bool WireFormat::ParseAndMergeField(
         break;
       }
 
-      case FieldDescriptor::TYPE_STRING:
-      case FieldDescriptor::TYPE_GROUP:
-      case FieldDescriptor::TYPE_MESSAGE:
-      case FieldDescriptor::TYPE_BYTES:
+      case ::shark::FieldType::STRING:
+      case ::shark::FieldType::GROUP:
+      case ::shark::FieldType::MESSAGE:
+      case ::shark::FieldType::BYTES:
         // Can't have packed fields of these types: these should be caught by
         // the protocol compiler.
         return false;
@@ -517,9 +517,9 @@ bool WireFormat::ParseAndMergeField(
     // Non-packed value (value_format == NORMAL_FORMAT)
     switch (field->type()) {
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                            \
-  case FieldDescriptor::TYPE_##TYPE: {                                        \
+  case ::shark::FieldType::TYPE: {                                        \
     CPPTYPE value;                                                            \
-    if (!WireFormatLite::ReadPrimitive<CPPTYPE, WireFormatLite::TYPE_##TYPE>( \
+    if (!WireFormatLite::ReadPrimitive<CPPTYPE, WireFormatLiteFieldType::TYPE_##TYPE>( \
             input, &value))                                                   \
       return false;                                                           \
     if (field->is_repeated()) {                                               \
@@ -548,9 +548,9 @@ bool WireFormat::ParseAndMergeField(
       HANDLE_TYPE(BOOL, bool, Bool)
 #undef HANDLE_TYPE
 
-      case FieldDescriptor::TYPE_ENUM: {
+      case ::shark::FieldType::ENUM: {
         int value;
-        if (!WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_ENUM>(
+        if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
                 input, &value))
           return false;
         if (field->is_repeated()) {
@@ -562,7 +562,7 @@ bool WireFormat::ParseAndMergeField(
       }
 
       // Handle strings separately so that we can optimize the ctype=CORD case.
-      case FieldDescriptor::TYPE_STRING: {
+      case ::shark::FieldType::STRING: {
         bool strict_utf8_check = StrictUtf8Check(field);
         std::string value;
         if (!WireFormatLite::ReadString(input, &value)) return false;
@@ -584,7 +584,7 @@ bool WireFormat::ParseAndMergeField(
         break;
       }
 
-      case FieldDescriptor::TYPE_BYTES: {
+      case ::shark::FieldType::BYTES: {
         std::string value;
         if (!WireFormatLite::ReadBytes(input, &value)) return false;
         if (field->is_repeated()) {
@@ -595,7 +595,7 @@ bool WireFormat::ParseAndMergeField(
         break;
       }
 
-      case FieldDescriptor::TYPE_GROUP: {
+      case ::shark::FieldType::GROUP: {
         Message* sub_message;
         if (field->is_repeated()) {
           sub_message = message_reflection->AddMessage(
@@ -611,7 +611,7 @@ bool WireFormat::ParseAndMergeField(
         break;
       }
 
-      case FieldDescriptor::TYPE_MESSAGE: {
+      case ::shark::FieldType::MESSAGE: {
         Message* sub_message;
         if (field->is_repeated()) {
           sub_message = message_reflection->AddMessage(
@@ -837,7 +837,7 @@ const char* WireFormat::_InternalParseAndMergeField(
                                     WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
       switch (field->type()) {
 #define HANDLE_PACKED_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                   \
-  case FieldDescriptor::TYPE_##TYPE: {                                      \
+  case ::shark::FieldType::TYPE: {                                      \
     ptr = internal::Packed##CPPTYPE_METHOD##Parser(                         \
         reflection->MutableRepeatedFieldInternal<CPPTYPE>(msg, field), ptr, \
         ctx);                                                               \
@@ -862,7 +862,7 @@ const char* WireFormat::_InternalParseAndMergeField(
         HANDLE_PACKED_TYPE(BOOL, bool, Bool)
 #undef HANDLE_PACKED_TYPE
 
-        case FieldDescriptor::TYPE_ENUM: {
+        case ::shark::FieldType::ENUM: {
           auto rep_enum =
               reflection->MutableRepeatedFieldInternal<int>(msg, field);
           bool open_enum = false;
@@ -883,10 +883,10 @@ const char* WireFormat::_InternalParseAndMergeField(
           return ptr;
         }
 
-        case FieldDescriptor::TYPE_STRING:
-        case FieldDescriptor::TYPE_GROUP:
-        case FieldDescriptor::TYPE_MESSAGE:
-        case FieldDescriptor::TYPE_BYTES:
+        case ::shark::FieldType::STRING:
+        case ::shark::FieldType::GROUP:
+        case ::shark::FieldType::MESSAGE:
+        case ::shark::FieldType::BYTES:
           GOOGLE_LOG(FATAL) << "Can't reach";
           return nullptr;
       }
@@ -902,7 +902,7 @@ const char* WireFormat::_InternalParseAndMergeField(
   bool strict_utf8_check = false;
   switch (field->type()) {
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)        \
-  case FieldDescriptor::TYPE_##TYPE: {                    \
+  case ::shark::FieldType::TYPE: {                    \
     CPPTYPE value;                                        \
     ptr = VarintParse(ptr, &value);                       \
     if (ptr == nullptr) return nullptr;                   \
@@ -920,7 +920,7 @@ const char* WireFormat::_InternalParseAndMergeField(
     HANDLE_TYPE(UINT32, uint32_t, UInt32)
     HANDLE_TYPE(UINT64, uint64_t, UInt64)
 
-    case FieldDescriptor::TYPE_SINT32: {
+    case ::shark::FieldType::SINT32: {
       int32_t value = ReadVarintZigZag32(&ptr);
       if (ptr == nullptr) return nullptr;
       if (field->is_repeated()) {
@@ -930,7 +930,7 @@ const char* WireFormat::_InternalParseAndMergeField(
       }
       return ptr;
     }
-    case FieldDescriptor::TYPE_SINT64: {
+    case ::shark::FieldType::SINT64: {
       int64_t value = ReadVarintZigZag64(&ptr);
       if (ptr == nullptr) return nullptr;
       if (field->is_repeated()) {
@@ -942,7 +942,7 @@ const char* WireFormat::_InternalParseAndMergeField(
     }
 #undef HANDLE_TYPE
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)        \
-  case FieldDescriptor::TYPE_##TYPE: {                    \
+  case ::shark::FieldType::TYPE: {                    \
     CPPTYPE value;                                        \
     value = UnalignedLoad<CPPTYPE>(ptr);                  \
     ptr += sizeof(CPPTYPE);                               \
@@ -964,7 +964,7 @@ const char* WireFormat::_InternalParseAndMergeField(
 
 #undef HANDLE_TYPE
 
-    case FieldDescriptor::TYPE_ENUM: {
+    case ::shark::FieldType::ENUM: {
       uint32_t value;
       ptr = VarintParse(ptr, &value);
       if (ptr == nullptr) return nullptr;
@@ -977,11 +977,11 @@ const char* WireFormat::_InternalParseAndMergeField(
     }
 
     // Handle strings separately so that we can optimize the ctype=CORD case.
-    case FieldDescriptor::TYPE_STRING:
+    case ::shark::FieldType::STRING:
       utf8_check = true;
       strict_utf8_check = StrictUtf8Check(field);
       [[fallthrough]];
-    case FieldDescriptor::TYPE_BYTES: {
+    case ::shark::FieldType::BYTES: {
       int size = ReadSize(&ptr);
       if (ptr == nullptr) return nullptr;
       std::string value;
@@ -1007,7 +1007,7 @@ const char* WireFormat::_InternalParseAndMergeField(
       return ptr;
     }
 
-    case FieldDescriptor::TYPE_GROUP: {
+    case ::shark::FieldType::GROUP: {
       Message* sub_message;
       if (field->is_repeated()) {
         sub_message = reflection->AddMessage(msg, field, ctx->data().factory);
@@ -1019,7 +1019,7 @@ const char* WireFormat::_InternalParseAndMergeField(
       return ctx->ParseGroup(sub_message, ptr, tag);
     }
 
-    case FieldDescriptor::TYPE_MESSAGE: {
+    case ::shark::FieldType::MESSAGE: {
       Message* sub_message;
       if (field->is_repeated()) {
         sub_message = reflection->AddMessage(msg, field, ctx->data().factory);
@@ -1072,16 +1072,16 @@ uint8_t* SerializeMapKeyWithCachedSizes(const FieldDescriptor* field,
                                         io::EpsCopyOutputStream* stream) {
   target = stream->EnsureSpace(target);
   switch (field->type()) {
-    case FieldDescriptor::TYPE_DOUBLE:
-    case FieldDescriptor::TYPE_FLOAT:
-    case FieldDescriptor::TYPE_GROUP:
-    case FieldDescriptor::TYPE_MESSAGE:
-    case FieldDescriptor::TYPE_BYTES:
-    case FieldDescriptor::TYPE_ENUM:
+    case ::shark::FieldType::DOUBLE:
+    case ::shark::FieldType::FLOAT:
+    case ::shark::FieldType::GROUP:
+    case ::shark::FieldType::MESSAGE:
+    case ::shark::FieldType::BYTES:
+    case ::shark::FieldType::ENUM:
       GOOGLE_LOG(FATAL) << "Unsupported";
       break;
-#define CASE_TYPE(FieldType, CamelFieldType, CamelCppType)   \
-  case FieldDescriptor::TYPE_##FieldType:                    \
+#define CASE_TYPE(kType, CamelFieldType, CamelCppType)   \
+  case ::shark::FieldType::kType:                    \
     target = WireFormatLite::Write##CamelFieldType##ToArray( \
         1, value.Get##CamelCppType##Value(), target);        \
     break;
@@ -1097,7 +1097,7 @@ uint8_t* SerializeMapKeyWithCachedSizes(const FieldDescriptor* field,
       CASE_TYPE(SINT32, SInt32, Int32)
       CASE_TYPE(SINT64, SInt64, Int64)
 #undef CASE_TYPE
-    case FieldDescriptor::TYPE_STRING:
+    case ::shark::FieldType::STRING:
       target = stream->WriteString(1, value.GetStringValue(), target);
       break;
   }
@@ -1109,8 +1109,8 @@ static uint8_t* SerializeMapValueRefWithCachedSizes(
     uint8_t* target, io::EpsCopyOutputStream* stream) {
   target = stream->EnsureSpace(target);
   switch (field->type()) {
-#define CASE_TYPE(FieldType, CamelFieldType, CamelCppType)   \
-  case FieldDescriptor::TYPE_##FieldType:                    \
+#define CASE_TYPE(kType, CamelFieldType, CamelCppType)   \
+  case ::shark::FieldType::kType:                    \
     target = WireFormatLite::Write##CamelFieldType##ToArray( \
         2, value.Get##CamelCppType##Value(), target);        \
     break;
@@ -1129,16 +1129,16 @@ static uint8_t* SerializeMapValueRefWithCachedSizes(
     CASE_TYPE(DOUBLE, Double, Double)
     CASE_TYPE(FLOAT, Float, Float)
 #undef CASE_TYPE
-    case FieldDescriptor::TYPE_STRING:
-    case FieldDescriptor::TYPE_BYTES:
+    case ::shark::FieldType::STRING:
+    case ::shark::FieldType::BYTES:
       target = stream->WriteString(2, value.GetStringValue(), target);
       break;
-    case FieldDescriptor::TYPE_MESSAGE: {
+    case ::shark::FieldType::MESSAGE: {
       auto& msg = value.GetMessageValue();
       target = WireFormatLite::InternalWriteMessage(2, msg, msg.GetCachedSize(),
                                                     target, stream);
     } break;
-    case FieldDescriptor::TYPE_GROUP:
+    case ::shark::FieldType::GROUP:
       target = WireFormatLite::InternalWriteGroup(2, value.GetMessageValue(),
                                                   target, stream);
       break;
@@ -1169,8 +1169,8 @@ class MapKeySorter {
     bool operator()(const MapKey& a, const MapKey& b) const {
       GOOGLE_DCHECK(a.type() == b.type());
       switch (a.type()) {
-#define CASE_TYPE(CppType, CamelCppType)                                \
-  case FieldDescriptor::CPPTYPE_##CppType: {                            \
+#define CASE_TYPE(kCpp, CamelCppType)                                \
+  case ::shark::FieldCppType::kCpp: {                            \
     return a.Get##CamelCppType##Value() < b.Get##CamelCppType##Value(); \
   }
         CASE_TYPE(STRING, String)
@@ -1218,7 +1218,7 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
 
   if (field->is_extension() &&
       field->containing_type()->options().message_set_wire_format() &&
-      field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE &&
+      field->cpp_type() == ::shark::FieldCppType::MESSAGE &&
       !field->is_repeated()) {
     return InternalSerializeMessageSetItem(field, message, target, stream);
   }
@@ -1288,7 +1288,7 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
     target = stream->EnsureSpace(target);
     switch (field->type()) {
 #define HANDLE_PRIMITIVE_TYPE(TYPE, CPPTYPE, TYPE_METHOD, CPPTYPE_METHOD)      \
-  case FieldDescriptor::TYPE_##TYPE: {                                         \
+  case ::shark::FieldType::TYPE: {                                         \
     auto r =                                                                   \
         message_reflection->GetRepeatedFieldInternal<CPPTYPE>(message, field); \
     target = stream->Write##TYPE_METHOD##Packed(                               \
@@ -1306,7 +1306,7 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
 
 #undef HANDLE_PRIMITIVE_TYPE
 #define HANDLE_PRIMITIVE_TYPE(TYPE, CPPTYPE, TYPE_METHOD, CPPTYPE_METHOD)      \
-  case FieldDescriptor::TYPE_##TYPE: {                                         \
+  case ::shark::FieldType::TYPE: {                                         \
     auto r =                                                                   \
         message_reflection->GetRepeatedFieldInternal<CPPTYPE>(message, field); \
     target = stream->WriteFixedPacked(field->number(), r, target);             \
@@ -1343,7 +1343,7 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
     target = stream->EnsureSpace(target);
     switch (field->type()) {
 #define HANDLE_PRIMITIVE_TYPE(TYPE, CPPTYPE, TYPE_METHOD, CPPTYPE_METHOD)     \
-  case FieldDescriptor::TYPE_##TYPE: {                                        \
+  case ::shark::FieldType::TYPE: {                                        \
     const CPPTYPE value =                                                     \
         field->is_repeated()                                                  \
             ? message_reflection->GetRepeated##CPPTYPE_METHOD(message, field, \
@@ -1372,19 +1372,19 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
       HANDLE_PRIMITIVE_TYPE(BOOL, bool, Bool, Bool)
 #undef HANDLE_PRIMITIVE_TYPE
 
-      case FieldDescriptor::TYPE_GROUP: {
+      case ::shark::FieldType::GROUP: {
         auto* msg = get_message_from_field(field, j);
         target = WireFormatLite::InternalWriteGroup(field->number(), *msg,
                                                     target, stream);
       } break;
 
-      case FieldDescriptor::TYPE_MESSAGE: {
+      case ::shark::FieldType::MESSAGE: {
         auto* msg = get_message_from_field(field, j);
         target = WireFormatLite::InternalWriteMessage(
             field->number(), *msg, msg->GetCachedSize(), target, stream);
       } break;
 
-      case FieldDescriptor::TYPE_ENUM: {
+      case ::shark::FieldType::ENUM: {
         const EnumValueDescriptor* value =
             field->is_repeated()
                 ? message_reflection->GetRepeatedEnum(message, field, j)
@@ -1396,7 +1396,7 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
 
       // Handle strings separately so that we can get string references
       // instead of copying.
-      case FieldDescriptor::TYPE_STRING: {
+      case ::shark::FieldType::STRING: {
         bool strict_utf8_check = StrictUtf8Check(field);
         std::string scratch;
         const std::string& value =
@@ -1417,7 +1417,7 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
         break;
       }
 
-      case FieldDescriptor::TYPE_BYTES: {
+      case ::shark::FieldType::BYTES: {
         std::string scratch;
         const std::string& value =
             field->is_repeated()
@@ -1497,7 +1497,7 @@ size_t WireFormat::FieldByteSize(const FieldDescriptor* field,
 
   if (field->is_extension() &&
       field->containing_type()->options().message_set_wire_format() &&
-      field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE &&
+      field->cpp_type() == ::shark::FieldCppType::MESSAGE &&
       !field->is_repeated()) {
     return MessageSetItemByteSize(field, message);
   }
@@ -1529,7 +1529,7 @@ size_t WireFormat::FieldByteSize(const FieldDescriptor* field,
       // Packed fields get serialized like a string, not their native type.
       // Technically this doesn't really matter; the size only changes if it's
       // a GROUP
-      our_size += TagSize(field->number(), FieldDescriptor::TYPE_STRING);
+      our_size += TagSize(field->number(), ::shark::FieldType::STRING);
       our_size += io::CodedOutputStream::VarintSize32(data_size);
     }
   } else {
@@ -1542,21 +1542,21 @@ size_t MapKeyDataOnlyByteSize(const FieldDescriptor* field,
                               const MapKey& value) {
   GOOGLE_DCHECK_EQ(FieldDescriptor::TypeToCppType(field->type()), value.type());
   switch (field->type()) {
-    case FieldDescriptor::TYPE_DOUBLE:
-    case FieldDescriptor::TYPE_FLOAT:
-    case FieldDescriptor::TYPE_GROUP:
-    case FieldDescriptor::TYPE_MESSAGE:
-    case FieldDescriptor::TYPE_BYTES:
-    case FieldDescriptor::TYPE_ENUM:
+    case ::shark::FieldType::DOUBLE:
+    case ::shark::FieldType::FLOAT:
+    case ::shark::FieldType::GROUP:
+    case ::shark::FieldType::MESSAGE:
+    case ::shark::FieldType::BYTES:
+    case ::shark::FieldType::ENUM:
       GOOGLE_LOG(FATAL) << "Unsupported";
       return 0;
-#define CASE_TYPE(FieldType, CamelFieldType, CamelCppType) \
-  case FieldDescriptor::TYPE_##FieldType:                  \
+#define CASE_TYPE(kType, CamelFieldType, CamelCppType) \
+  case ::shark::FieldType::kType:                  \
     return WireFormatLite::CamelFieldType##Size(           \
         value.Get##CamelCppType##Value());
 
-#define FIXED_CASE_TYPE(FieldType, CamelFieldType) \
-  case FieldDescriptor::TYPE_##FieldType:          \
+#define FIXED_CASE_TYPE(kType, CamelFieldType) \
+  case ::shark::FieldType::kType:          \
     return WireFormatLite::k##CamelFieldType##Size;
 
       CASE_TYPE(INT32, Int32, Int32);
@@ -1582,16 +1582,16 @@ size_t MapKeyDataOnlyByteSize(const FieldDescriptor* field,
 static size_t MapValueRefDataOnlyByteSize(const FieldDescriptor* field,
                                           const MapValueConstRef& value) {
   switch (field->type()) {
-    case FieldDescriptor::TYPE_GROUP:
+    case ::shark::FieldType::GROUP:
       GOOGLE_LOG(FATAL) << "Unsupported";
       return 0;
-#define CASE_TYPE(FieldType, CamelFieldType, CamelCppType) \
-  case FieldDescriptor::TYPE_##FieldType:                  \
+#define CASE_TYPE(kType, CamelFieldType, CamelCppType) \
+  case ::shark::FieldType::kType:                  \
     return WireFormatLite::CamelFieldType##Size(           \
         value.Get##CamelCppType##Value());
 
-#define FIXED_CASE_TYPE(FieldType, CamelFieldType) \
-  case FieldDescriptor::TYPE_##FieldType:          \
+#define FIXED_CASE_TYPE(kType, CamelFieldType) \
+  case ::shark::FieldType::kType:          \
     return WireFormatLite::k##CamelFieldType##Size;
 
       CASE_TYPE(INT32, Int32, Int32);
@@ -1657,7 +1657,7 @@ size_t WireFormat::FieldDataOnlyByteSize(const FieldDescriptor* field,
 
   switch (field->type()) {
 #define HANDLE_TYPE(TYPE, TYPE_METHOD, CPPTYPE_METHOD)                      \
-  case FieldDescriptor::TYPE_##TYPE:                                        \
+  case ::shark::FieldType::TYPE:                                        \
     if (field->is_repeated()) {                                             \
       for (size_t j = 0; j < count; j++) {                                  \
         data_size += WireFormatLite::TYPE_METHOD##Size(                     \
@@ -1671,7 +1671,7 @@ size_t WireFormat::FieldDataOnlyByteSize(const FieldDescriptor* field,
     break;
 
 #define HANDLE_FIXED_TYPE(TYPE, TYPE_METHOD)                   \
-  case FieldDescriptor::TYPE_##TYPE:                           \
+  case ::shark::FieldType::TYPE:                           \
     data_size += count * WireFormatLite::k##TYPE_METHOD##Size; \
     break;
 
@@ -1697,7 +1697,7 @@ size_t WireFormat::FieldDataOnlyByteSize(const FieldDescriptor* field,
 #undef HANDLE_TYPE
 #undef HANDLE_FIXED_TYPE
 
-    case FieldDescriptor::TYPE_ENUM: {
+    case ::shark::FieldType::ENUM: {
       if (field->is_repeated()) {
         for (size_t j = 0; j < count; j++) {
           data_size += WireFormatLite::EnumSize(
@@ -1712,8 +1712,8 @@ size_t WireFormat::FieldDataOnlyByteSize(const FieldDescriptor* field,
 
     // Handle strings separately so that we can get string references
     // instead of copying.
-    case FieldDescriptor::TYPE_STRING:
-    case FieldDescriptor::TYPE_BYTES: {
+    case ::shark::FieldType::STRING:
+    case ::shark::FieldType::BYTES: {
       for (size_t j = 0; j < count; j++) {
         std::string scratch;
         const std::string& value =

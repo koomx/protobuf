@@ -153,23 +153,23 @@ void TypeDefinedMapFieldBase<Key, T>::CopyIterator(
   // MapValueRef::type() fails when containing data is null. However, if
   // this_iter points to MapEnd, data can be null.
   this_iter->value_.SetType(
-      static_cast<FieldDescriptor::CppType>(that_iter.value_.type_));
+      static_cast<FieldCppType>(that_iter.value_.type_));
   SetMapIteratorValue(this_iter);
 }
 
 // ----------------------------------------------------------------------
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 int MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::size() const {
   MapFieldBase::SyncMapWithRepeatedField();
   return static_cast<int>(impl_.GetMap().size());
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::Clear() {
   if (this->MapFieldBase::repeated_field_ != nullptr) {
     RepeatedPtrField<EntryType>* repeated_field =
@@ -186,8 +186,8 @@ void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::Clear() {
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType,
               kValueFieldType>::SetMapIteratorValue(MapIterator* map_iter)
     const {
@@ -200,8 +200,8 @@ void MapField<Derived, Key, T, kKeyFieldType,
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::ContainsMapKey(
     const MapKey& map_key) const {
   const Map<Key, T>& map = impl_.GetMap();
@@ -211,8 +211,8 @@ bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::ContainsMapKey(
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 bool MapField<Derived, Key, T, kKeyFieldType,
               kValueFieldType>::InsertOrLookupMapValue(const MapKey& map_key,
                                                        MapValueRef* val) {
@@ -232,8 +232,8 @@ bool MapField<Derived, Key, T, kKeyFieldType,
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::LookupMapValue(
     const MapKey& map_key, MapValueConstRef* val) const {
   const Map<Key, T>& map = GetMap();
@@ -249,8 +249,8 @@ bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::LookupMapValue(
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::DeleteMapValue(
     const MapKey& map_key) {
   const Key& key = UnwrapMapKey<Key>(map_key);
@@ -258,8 +258,8 @@ bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::DeleteMapValue(
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::MergeFrom(
     const MapFieldBase& other) {
   MapFieldBase::SyncMapWithRepeatedField();
@@ -270,8 +270,8 @@ void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::MergeFrom(
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::Swap(
     MapFieldBase* other) {
   MapFieldBase::Swap(other);
@@ -280,16 +280,16 @@ void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::Swap(
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType,
               kValueFieldType>::UnsafeShallowSwap(MapFieldBase* other) {
   InternalSwap(down_cast<MapField*>(other));
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::InternalSwap(
     MapField* other) {
   MapFieldBase::InternalSwap(other);
@@ -297,8 +297,8 @@ void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::InternalSwap(
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType,
               kValueFieldType>::SyncRepeatedFieldWithMapNoLock() const {
   if (this->MapFieldBase::repeated_field_ == nullptr) {
@@ -334,8 +334,8 @@ void MapField<Derived, Key, T, kKeyFieldType,
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 void MapField<Derived, Key, T, kKeyFieldType,
               kValueFieldType>::SyncMapWithRepeatedFieldNoLock() const {
   Map<Key, T>* map = const_cast<MapField*>(this)->impl_.MutableMap();
@@ -357,8 +357,8 @@ void MapField<Derived, Key, T, kKeyFieldType,
 }
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 size_t MapField<Derived, Key, T, kKeyFieldType,
                 kValueFieldType>::SpaceUsedExcludingSelfNoLock() const {
   size_t size = 0;

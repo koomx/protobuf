@@ -53,7 +53,7 @@ ExtensionGenerator::ExtensionGenerator(const FieldDescriptor* descriptor,
   }
 
   switch (descriptor_->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       type_traits_.append("EnumTypeTraits< ");
       type_traits_.append(ClassName(descriptor_->enum_type(), true));
       type_traits_.append(", ");
@@ -62,10 +62,10 @@ ExtensionGenerator::ExtensionGenerator(const FieldDescriptor* descriptor,
                               ? "_FitsUnderlying>"
                               : "_IsValid>");
       break;
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       type_traits_.append("StringTypeTraits");
       break;
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       type_traits_.append("MessageTypeTraits< ");
       type_traits_.append(ClassName(descriptor_->message_type(), true));
       type_traits_.append(" >");
@@ -96,7 +96,7 @@ ExtensionGenerator::ExtensionGenerator(const FieldDescriptor* descriptor,
 
   bool add_verify_fn =
       // Only verify msgs.
-      descriptor_->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE &&
+      descriptor_->cpp_type() == FieldCppType::MESSAGE &&
       // Options say to verify.
       ShouldVerify(descriptor_->message_type(), options_, scc_analyzer_) &&
       ShouldVerify(descriptor_->containing_type(), options_, scc_analyzer_);
@@ -152,7 +152,7 @@ void ExtensionGenerator::GenerateDefinition(io::Printer* printer) {
   Formatter format(printer, variables_);
   std::string default_str;
   // If this is a class member, it needs to be declared in its class scope.
-  if (descriptor_->cpp_type() == FieldDescriptor::CPPTYPE_STRING) {
+  if (descriptor_->cpp_type() == FieldCppType::STRING) {
     // We need to declare a global string which will contain the default value.
     // We cannot declare it at class scope because that would require exposing
     // it in the header which would be annoying for other reasons.  So we

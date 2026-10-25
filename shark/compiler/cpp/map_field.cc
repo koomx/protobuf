@@ -54,10 +54,10 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   const FieldDescriptor* val = descriptor->message_type()->map_value();
   (*variables)["key_cpp"] = PrimitiveTypeName(options, key->cpp_type());
   switch (val->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       (*variables)["val_cpp"] = FieldMessageTypeName(val, options);
       break;
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       (*variables)["val_cpp"] = ClassName(val->enum_type(), true);
       break;
     default:
@@ -95,8 +95,8 @@ void MapFieldGenerator::GeneratePrivateMembers(io::Printer* printer) const {
       "::$proto_ns$::internal::MapField$lite$<\n"
       "    $map_classname$,\n"
       "    $key_cpp$, $val_cpp$,\n"
-      "    ::$proto_ns$::internal::WireFormatLite::$key_wire_type$,\n"
-      "    ::$proto_ns$::internal::WireFormatLite::$val_wire_type$> "
+      "    ::$proto_ns$::internal::WireFormatLiteFieldType::$key_wire_type$,\n"
+      "    ::$proto_ns$::internal::WireFormatLiteFieldType::$val_wire_type$> "
       "$name$_;\n");
 }
 
@@ -196,8 +196,8 @@ void MapFieldGenerator::GenerateSerializeWithCachedSizesToArray(
   format.Indent();
   const FieldDescriptor* key_field = descriptor_->message_type()->map_key();
   const FieldDescriptor* value_field = descriptor_->message_type()->map_value();
-  const bool string_key = key_field->type() == FieldDescriptor::TYPE_STRING;
-  const bool string_value = value_field->type() == FieldDescriptor::TYPE_STRING;
+  const bool string_key = key_field->type() == FieldType::STRING;
+  const bool string_value = value_field->type() == FieldType::STRING;
 
   format(
       "using MapType = ::_pb::Map<$key_cpp$, $val_cpp$>;\n"

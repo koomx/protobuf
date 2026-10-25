@@ -82,11 +82,11 @@ namespace internal {
 
 class InternalMetadata;
 
-// Used to store values of type WireFormatLite::FieldType without having to
+// Used to store values of type WireFormatLiteFieldType without having to
 // #include wire_format_lite.h.  Also, ensures that we use only one byte to
 // store these values, which is important to keep the layout of
 // ExtensionSet::Extension small.
-typedef uint8_t FieldType;
+typedef uint8_t FieldTypeUint8;
 
 // A function which, given an integer value, returns true if the number
 // matches one of the defined values for the corresponding enum type.  This
@@ -101,7 +101,7 @@ typedef bool EnumValidityFuncWithArg(const void* arg, int number);
 struct ExtensionInfo {
   constexpr ExtensionInfo() : enum_validity_check() {}
   constexpr ExtensionInfo(const MessageLite* extendee, int param_number,
-                          FieldType type_param, bool isrepeated, bool ispacked,
+                          FieldTypeUint8 type_param, bool isrepeated, bool ispacked,
                           LazyEagerVerifyFnType verify_func)
       : message(extendee),
         number(param_number),
@@ -114,7 +114,7 @@ struct ExtensionInfo {
   const MessageLite* message = nullptr;
   int number = 0;
 
-  FieldType type = 0;
+  FieldTypeUint8 type = 0;
   bool is_repeated = false;
   bool is_packed = false;
 
@@ -189,14 +189,14 @@ class SHARK_EXPORT ExtensionSet {
   // does not use ParseField(); only protocol-compiler-generated parsing
   // methods do.
   static void RegisterExtension(const MessageLite* extendee, int number,
-                                FieldType type, bool is_repeated,
+                                FieldTypeUint8 type, bool is_repeated,
                                 bool is_packed,
                                 LazyEagerVerifyFnType verify_func);
   static void RegisterEnumExtension(const MessageLite* extendee, int number,
-                                    FieldType type, bool is_repeated,
+                                    FieldTypeUint8 type, bool is_repeated,
                                     bool is_packed, EnumValidityFunc* is_valid);
   static void RegisterMessageExtension(const MessageLite* extendee, int number,
-                                       FieldType type, bool is_repeated,
+                                       FieldTypeUint8 type, bool is_repeated,
                                        bool is_packed,
                                        const MessageLite* prototype,
                                        LazyEagerVerifyFnType verify_func);
@@ -241,7 +241,7 @@ class SHARK_EXPORT ExtensionSet {
   bool Has(int number) const;
   int ExtensionSize(int number) const;  // Size of a repeated extension.
   int NumExtensions() const;            // The number of extensions
-  FieldType ExtensionType(int number) const;
+  FieldTypeUint8 ExtensionType(int number) const;
   void ClearExtension(int number);
 
   // singular fields -------------------------------------------------
@@ -265,27 +265,27 @@ class SHARK_EXPORT ExtensionSet {
   // the extension lives in the same pool as the descriptor for the containing
   // type.
 #define desc const FieldDescriptor* descriptor  // avoid line wrapping
-  void SetInt32(int number, FieldType type, int32_t value, desc);
-  void SetInt64(int number, FieldType type, int64_t value, desc);
-  void SetUInt32(int number, FieldType type, uint32_t value, desc);
-  void SetUInt64(int number, FieldType type, uint64_t value, desc);
-  void SetFloat(int number, FieldType type, float value, desc);
-  void SetDouble(int number, FieldType type, double value, desc);
-  void SetBool(int number, FieldType type, bool value, desc);
-  void SetEnum(int number, FieldType type, int value, desc);
-  void SetString(int number, FieldType type, std::string value, desc);
-  std::string* MutableString(int number, FieldType type, desc);
-  MessageLite* MutableMessage(int number, FieldType type,
+  void SetInt32(int number, FieldTypeUint8 type, int32_t value, desc);
+  void SetInt64(int number, FieldTypeUint8 type, int64_t value, desc);
+  void SetUInt32(int number, FieldTypeUint8 type, uint32_t value, desc);
+  void SetUInt64(int number, FieldTypeUint8 type, uint64_t value, desc);
+  void SetFloat(int number, FieldTypeUint8 type, float value, desc);
+  void SetDouble(int number, FieldTypeUint8 type, double value, desc);
+  void SetBool(int number, FieldTypeUint8 type, bool value, desc);
+  void SetEnum(int number, FieldTypeUint8 type, int value, desc);
+  void SetString(int number, FieldTypeUint8 type, std::string value, desc);
+  std::string* MutableString(int number, FieldTypeUint8 type, desc);
+  MessageLite* MutableMessage(int number, FieldTypeUint8 type,
                               const MessageLite& prototype, desc);
   MessageLite* MutableMessage(const FieldDescriptor* descriptor,
                               MessageFactory* factory);
   // Adds the given message to the ExtensionSet, taking ownership of the
   // message object. Existing message with the same number will be deleted.
   // If "message" is nullptr, this is equivalent to "ClearExtension(number)".
-  void SetAllocatedMessage(int number, FieldType type,
+  void SetAllocatedMessage(int number, FieldTypeUint8 type,
                            const FieldDescriptor* descriptor,
                            MessageLite* message);
-  void UnsafeArenaSetAllocatedMessage(int number, FieldType type,
+  void UnsafeArenaSetAllocatedMessage(int number, FieldTypeUint8 type,
                                       const FieldDescriptor* descriptor,
                                       MessageLite* message);
   [[nodiscard]] MessageLite* ReleaseMessage(int number,
@@ -309,7 +309,7 @@ class SHARK_EXPORT ExtensionSet {
   // Fetches a mutable version of a RepeatedField extension by number,
   // instantiating one if none exists. Similar to above, user should not use
   // this directly; it underlies MutableRepeatedExtension().
-  void* MutableRawRepeatedField(int number, FieldType field_type, bool packed,
+  void* MutableRawRepeatedField(int number, FieldTypeUint8 field_type, bool packed,
                                 const FieldDescriptor* desc);
 
   // This is an overload of MutableRawRepeatedField to maintain compatibility
@@ -342,17 +342,17 @@ class SHARK_EXPORT ExtensionSet {
   MessageLite* MutableRepeatedMessage(int number, int index);
 
 #define desc const FieldDescriptor* descriptor  // avoid line wrapping
-  void AddInt32(int number, FieldType type, bool packed, int32_t value, desc);
-  void AddInt64(int number, FieldType type, bool packed, int64_t value, desc);
-  void AddUInt32(int number, FieldType type, bool packed, uint32_t value, desc);
-  void AddUInt64(int number, FieldType type, bool packed, uint64_t value, desc);
-  void AddFloat(int number, FieldType type, bool packed, float value, desc);
-  void AddDouble(int number, FieldType type, bool packed, double value, desc);
-  void AddBool(int number, FieldType type, bool packed, bool value, desc);
-  void AddEnum(int number, FieldType type, bool packed, int value, desc);
-  void AddString(int number, FieldType type, std::string value, desc);
-  std::string* AddString(int number, FieldType type, desc);
-  MessageLite* AddMessage(int number, FieldType type,
+  void AddInt32(int number, FieldTypeUint8 type, bool packed, int32_t value, desc);
+  void AddInt64(int number, FieldTypeUint8 type, bool packed, int64_t value, desc);
+  void AddUInt32(int number, FieldTypeUint8 type, bool packed, uint32_t value, desc);
+  void AddUInt64(int number, FieldTypeUint8 type, bool packed, uint64_t value, desc);
+  void AddFloat(int number, FieldTypeUint8 type, bool packed, float value, desc);
+  void AddDouble(int number, FieldTypeUint8 type, bool packed, double value, desc);
+  void AddBool(int number, FieldTypeUint8 type, bool packed, bool value, desc);
+  void AddEnum(int number, FieldTypeUint8 type, bool packed, int value, desc);
+  void AddString(int number, FieldTypeUint8 type, std::string value, desc);
+  std::string* AddString(int number, FieldTypeUint8 type, desc);
+  MessageLite* AddMessage(int number, FieldTypeUint8 type,
                           const MessageLite& prototype, desc);
   MessageLite* AddMessage(const FieldDescriptor* descriptor,
                           MessageFactory* factory);
@@ -603,7 +603,7 @@ class SHARK_EXPORT ExtensionSet {
       RepeatedPtrField<MessageLite>* repeated_message_value;
     };
 
-    FieldType type;
+    FieldTypeUint8 type;
     bool is_repeated;
 
     // For singular types, indicates if the extension is "cleared".  This
@@ -785,7 +785,7 @@ class SHARK_EXPORT ExtensionSet {
 
     GOOGLE_DCHECK(extension->type > 0 &&
            extension->type <= WireFormatLite::MAX_FIELD_TYPE);
-    auto real_type = static_cast<WireFormatLite::FieldType>(extension->type);
+    auto real_type = static_cast<WireFormatLiteFieldType>(extension->type);
 
     WireFormatLite::WireType expected_wire_type =
         WireFormatLite::WireTypeForFieldType(real_type);
@@ -912,7 +912,7 @@ constexpr ExtensionSet::ExtensionSet()
     : arena_(nullptr), flat_capacity_(0), flat_size_(0), map_{nullptr} {}
 
 // These are just for convenience...
-inline void ExtensionSet::SetString(int number, FieldType type,
+inline void ExtensionSet::SetString(int number, FieldTypeUint8 type,
                                     std::string value,
                                     const FieldDescriptor* descriptor) {
   MutableString(number, type, descriptor)->assign(std::move(value));
@@ -921,7 +921,7 @@ inline void ExtensionSet::SetRepeatedString(int number, int index,
                                             std::string value) {
   MutableRepeatedString(number, index)->assign(std::move(value));
 }
-inline void ExtensionSet::AddString(int number, FieldType type,
+inline void ExtensionSet::AddString(int number, FieldTypeUint8 type,
                                     std::string value,
                                     const FieldDescriptor* descriptor) {
   AddString(number, type, descriptor)->assign(std::move(value));
@@ -968,7 +968,7 @@ inline void ExtensionSet::AddString(int number, FieldType type,
 //     This is used by the ExtensionIdentifier constructor to register
 //     the extension at dynamic initialization.
 //     template <typename ExtendeeT>
-//     static void Register(int number, FieldType type, bool is_packed);
+//     static void Register(int number, FieldTypeUint8 type, bool is_packed);
 //   };
 //
 // Not all of these methods make sense for all field types.  For example, the
@@ -1001,10 +1001,10 @@ class PrimitiveTypeTraits {
 
   static inline const ConstType* GetPtr(int number, const ExtensionSet& set,
                                         const ConstType& default_value);
-  static inline void Set(int number, FieldType field_type, ConstType value,
+  static inline void Set(int number, FieldTypeUint8 field_type, ConstType value,
                          ExtensionSet* set);
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType verify_func) {
     ExtensionSet::RegisterExtension(&ExtendeeT::default_instance(), number,
                                     type, false, is_packed, verify_func);
@@ -1026,19 +1026,19 @@ class RepeatedPrimitiveTypeTraits {
   static inline const RepeatedField<ConstType>* GetRepeatedPtr(
       int number, const ExtensionSet& set);
   static inline void Set(int number, int index, Type value, ExtensionSet* set);
-  static inline void Add(int number, FieldType field_type, bool is_packed,
+  static inline void Add(int number, FieldTypeUint8 field_type, bool is_packed,
                          Type value, ExtensionSet* set);
 
   static inline const RepeatedField<ConstType>& GetRepeated(
       int number, const ExtensionSet& set);
   static inline RepeatedField<Type>* MutableRepeated(int number,
-                                                     FieldType field_type,
+                                                     FieldTypeUint8 field_type,
                                                      bool is_packed,
                                                      ExtensionSet* set);
 
   static const RepeatedFieldType* GetDefaultRepeatedField();
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType verify_func) {
     ExtensionSet::RegisterExtension(&ExtendeeT::default_instance(), number,
                                     type, true, is_packed, verify_func);
@@ -1071,7 +1071,7 @@ class SHARK_EXPORT RepeatedPrimitiveDefaults {
     return &set.GetRef##METHOD(number, default_value);                         \
   }                                                                            \
   template <>                                                                  \
-  inline void PrimitiveTypeTraits<TYPE>::Set(int number, FieldType field_type, \
+  inline void PrimitiveTypeTraits<TYPE>::Set(int number, FieldTypeUint8 field_type, \
                                              TYPE value, ExtensionSet* set) {  \
     set->Set##METHOD(number, field_type, value, nullptr);                      \
   }                                                                            \
@@ -1093,7 +1093,7 @@ class SHARK_EXPORT RepeatedPrimitiveDefaults {
   }                                                                            \
   template <>                                                                  \
   inline void RepeatedPrimitiveTypeTraits<TYPE>::Add(                          \
-      int number, FieldType field_type, bool is_packed, TYPE value,            \
+      int number, FieldTypeUint8 field_type, bool is_packed, TYPE value,            \
       ExtensionSet* set) {                                                     \
     set->Add##METHOD(number, field_type, is_packed, value, nullptr);           \
   }                                                                            \
@@ -1119,7 +1119,7 @@ class SHARK_EXPORT RepeatedPrimitiveDefaults {
   template <>                                                                  \
   inline RepeatedField<TYPE>*                                                  \
   RepeatedPrimitiveTypeTraits<TYPE>::MutableRepeated(                          \
-      int number, FieldType field_type, bool is_packed, ExtensionSet* set) {   \
+      int number, FieldTypeUint8 field_type, bool is_packed, ExtensionSet* set) {   \
     return reinterpret_cast<RepeatedField<TYPE>*>(                             \
         set->MutableRawRepeatedField(number, field_type, is_packed, nullptr)); \
   }
@@ -1152,16 +1152,16 @@ class SHARK_EXPORT StringTypeTraits {
                                           ConstType default_value) {
     return &Get(number, set, default_value);
   }
-  static inline void Set(int number, FieldType field_type,
+  static inline void Set(int number, FieldTypeUint8 field_type,
                          const std::string& value, ExtensionSet* set) {
     set->SetString(number, field_type, value, nullptr);
   }
-  static inline std::string* Mutable(int number, FieldType field_type,
+  static inline std::string* Mutable(int number, FieldTypeUint8 field_type,
                                      ExtensionSet* set) {
     return set->MutableString(number, field_type, nullptr);
   }
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType verify_func) {
     ExtensionSet::RegisterExtension(&ExtendeeT::default_instance(), number,
                                     type, false, is_packed, verify_func);
@@ -1195,11 +1195,11 @@ class SHARK_EXPORT RepeatedStringTypeTraits {
   static inline std::string* Mutable(int number, int index, ExtensionSet* set) {
     return set->MutableRepeatedString(number, index);
   }
-  static inline void Add(int number, FieldType field_type, bool /*is_packed*/,
+  static inline void Add(int number, FieldTypeUint8 field_type, bool /*is_packed*/,
                          const std::string& value, ExtensionSet* set) {
     set->AddString(number, field_type, value, nullptr);
   }
-  static inline std::string* Add(int number, FieldType field_type,
+  static inline std::string* Add(int number, FieldTypeUint8 field_type,
                                  ExtensionSet* set) {
     return set->AddString(number, field_type, nullptr);
   }
@@ -1210,7 +1210,7 @@ class SHARK_EXPORT RepeatedStringTypeTraits {
   }
 
   static inline RepeatedPtrField<std::string>* MutableRepeated(
-      int number, FieldType field_type, bool is_packed, ExtensionSet* set) {
+      int number, FieldTypeUint8 field_type, bool is_packed, ExtensionSet* set) {
     return reinterpret_cast<RepeatedPtrField<std::string>*>(
         set->MutableRawRepeatedField(number, field_type, is_packed, nullptr));
   }
@@ -1218,7 +1218,7 @@ class SHARK_EXPORT RepeatedStringTypeTraits {
   static const RepeatedFieldType* GetDefaultRepeatedField();
 
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType fn) {
     ExtensionSet::RegisterExtension(&ExtendeeT::default_instance(), number,
                                     type, true, is_packed, fn);
@@ -1251,13 +1251,13 @@ class EnumTypeTraits {
     return reinterpret_cast<const Type*>(
         &set.GetRefEnum(number, default_value));
   }
-  static inline void Set(int number, FieldType field_type, ConstType value,
+  static inline void Set(int number, FieldTypeUint8 field_type, ConstType value,
                          ExtensionSet* set) {
     GOOGLE_DCHECK(IsValid(static_cast<int>(value)));
     set->SetEnum(number, field_type, static_cast<int>(value), nullptr);
   }
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType fn) {
     ExtensionSet::RegisterEnumExtension(&ExtendeeT::default_instance(), number,
                                         type, false, is_packed, IsValid);
@@ -1286,7 +1286,7 @@ class RepeatedEnumTypeTraits {
     GOOGLE_DCHECK(IsValid(static_cast<int>(value)));
     set->SetRepeatedEnum(number, index, static_cast<int>(value));
   }
-  static inline void Add(int number, FieldType field_type, bool is_packed,
+  static inline void Add(int number, FieldTypeUint8 field_type, bool is_packed,
                          ConstType value, ExtensionSet* set) {
     GOOGLE_DCHECK(IsValid(static_cast<int>(value)));
     set->AddEnum(number, field_type, is_packed, static_cast<int>(value),
@@ -1306,7 +1306,7 @@ class RepeatedEnumTypeTraits {
     return &GetRepeated(number, set);
   }
   static inline RepeatedField<Type>* MutableRepeated(int number,
-                                                     FieldType field_type,
+                                                     FieldTypeUint8 field_type,
                                                      bool is_packed,
                                                      ExtensionSet* set) {
     return reinterpret_cast<RepeatedField<Type>*>(
@@ -1324,7 +1324,7 @@ class RepeatedEnumTypeTraits {
         RepeatedPrimitiveTypeTraits<int32_t>::GetDefaultRepeatedField());
   }
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType fn) {
     ExtensionSet::RegisterEnumExtension(&ExtendeeT::default_instance(), number,
                                         type, true, is_packed, IsValid);
@@ -1354,33 +1354,33 @@ class MessageTypeTraits {
     // Cannot be implemented because of forward declared messages?
     return nullptr;
   }
-  static inline MutableType Mutable(int number, FieldType field_type,
+  static inline MutableType Mutable(int number, FieldTypeUint8 field_type,
                                     ExtensionSet* set) {
     return static_cast<Type*>(set->MutableMessage(
         number, field_type, Type::default_instance(), nullptr));
   }
-  static inline void SetAllocated(int number, FieldType field_type,
+  static inline void SetAllocated(int number, FieldTypeUint8 field_type,
                                   MutableType message, ExtensionSet* set) {
     set->SetAllocatedMessage(number, field_type, nullptr, message);
   }
-  static inline void UnsafeArenaSetAllocated(int number, FieldType field_type,
+  static inline void UnsafeArenaSetAllocated(int number, FieldTypeUint8 field_type,
                                              MutableType message,
                                              ExtensionSet* set) {
     set->UnsafeArenaSetAllocatedMessage(number, field_type, nullptr, message);
   }
   [[nodiscard]] static inline MutableType Release(
-      int number, FieldType /* field_type */, ExtensionSet* set) {
+      int number, FieldTypeUint8 /* field_type */, ExtensionSet* set) {
     return static_cast<Type*>(
         set->ReleaseMessage(number, Type::default_instance()));
   }
   static inline MutableType UnsafeArenaRelease(int number,
-                                               FieldType /* field_type */,
+                                               FieldTypeUint8 /* field_type */,
                                                ExtensionSet* set) {
     return static_cast<Type*>(
         set->UnsafeArenaReleaseMessage(number, Type::default_instance()));
   }
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType fn) {
     ExtensionSet::RegisterMessageExtension(&ExtendeeT::default_instance(),
                                            number, type, false, is_packed,
@@ -1421,7 +1421,7 @@ class RepeatedMessageTypeTraits {
   static inline MutableType Mutable(int number, int index, ExtensionSet* set) {
     return static_cast<Type*>(set->MutableRepeatedMessage(number, index));
   }
-  static inline MutableType Add(int number, FieldType field_type,
+  static inline MutableType Add(int number, FieldTypeUint8 field_type,
                                 ExtensionSet* set) {
     return static_cast<Type*>(
         set->AddMessage(number, field_type, Type::default_instance(), nullptr));
@@ -1437,7 +1437,7 @@ class RepeatedMessageTypeTraits {
         set.GetRawRepeatedField(number, GetDefaultRepeatedField()));
   }
   static inline RepeatedPtrField<Type>* MutableRepeated(int number,
-                                                        FieldType field_type,
+                                                        FieldTypeUint8 field_type,
                                                         bool is_packed,
                                                         ExtensionSet* set) {
     return reinterpret_cast<RepeatedPtrField<Type>*>(
@@ -1446,7 +1446,7 @@ class RepeatedMessageTypeTraits {
 
   static const RepeatedFieldType* GetDefaultRepeatedField();
   template <typename ExtendeeT>
-  static void Register(int number, FieldType type, bool is_packed,
+  static void Register(int number, FieldTypeUint8 type, bool is_packed,
                        LazyEagerVerifyFnType fn) {
     ExtensionSet::RegisterMessageExtension(&ExtendeeT::default_instance(),
                                            number, type, true, is_packed,
@@ -1480,7 +1480,7 @@ RepeatedMessageTypeTraits<Type>::GetDefaultRepeatedField() {
 // but that would be bad because it would cause this extension to not be
 // registered at static initialization, and therefore using it would crash.
 
-template <typename ExtendeeType, typename TypeTraitsType, FieldType field_type,
+template <typename ExtendeeType, typename TypeTraitsType, FieldTypeUint8 field_type,
           bool is_packed>
 class ExtensionIdentifier {
  public:
@@ -1544,7 +1544,7 @@ MaybeCreateLazyExtension(Arena* arena);
 // should not need to worry about its runtime overhead except in tight loops (on
 // x86-64 it compiles into two "mov" instructions).
 template <typename ExtendeeType, typename TypeTraitsType,
-          internal::FieldType field_type, bool is_packed>
+          internal::FieldTypeUint8 field_type, bool is_packed>
 void LinkExtensionReflection(
     const shark::internal::ExtensionIdentifier<
         ExtendeeType, TypeTraitsType, field_type, is_packed>& extension) {

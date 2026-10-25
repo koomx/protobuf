@@ -132,8 +132,8 @@ class SHARK_EXPORT SimpleFieldComparator : public FieldComparator {
   // Sets the fraction and margin for the float comparison of a given field.
   // Uses MathUtil::WithinFractionOrMargin to compare the values.
   //
-  // REQUIRES: field->cpp_type == FieldDescriptor::CPPTYPE_DOUBLE or
-  //           field->cpp_type == FieldDescriptor::CPPTYPE_FLOAT
+  // REQUIRES: field->cpp_type == FieldCppType::DOUBLE or
+  //           field->cpp_type == FieldCppType::FLOAT
   // REQUIRES: float_comparison_ == APPROXIMATE
   void SetFractionAndMargin(const FieldDescriptor* field, double fraction,
                             double margin);

@@ -149,16 +149,16 @@ struct ExtensionRangeSorter {
 bool IsPOD(const FieldDescriptor* field) {
   if (field->is_repeated() || field->is_extension()) return false;
   switch (field->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_ENUM:
-    case FieldDescriptor::CPPTYPE_INT32:
-    case FieldDescriptor::CPPTYPE_INT64:
-    case FieldDescriptor::CPPTYPE_UINT32:
-    case FieldDescriptor::CPPTYPE_UINT64:
-    case FieldDescriptor::CPPTYPE_FLOAT:
-    case FieldDescriptor::CPPTYPE_DOUBLE:
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::ENUM:
+    case FieldCppType::INT32:
+    case FieldCppType::INT64:
+    case FieldCppType::UINT32:
+    case FieldCppType::UINT64:
+    case FieldCppType::FLOAT:
+    case FieldCppType::DOUBLE:
+    case FieldCppType::BOOL:
       return true;
-    case FieldDescriptor::CPPTYPE_STRING:
+    case FieldCppType::STRING:
       return false;
     default:
       return false;
@@ -178,7 +178,7 @@ bool CanBeManipulatedAsRawBytes(const FieldDescriptor* field,
   // this in Clear, as we need to potentially delete the existing value.
   ret =
       ret || (!field->is_repeated() && !IsLazy(field, options, scc_analyzer) &&
-              field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE);
+              field->cpp_type() == FieldCppType::MESSAGE);
   return ret;
 }
 
@@ -224,12 +224,12 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
   // Merge and serialize semantics: primitive fields are merged/serialized only
   // if non-zero (numeric) or non-empty (string).
   if (!field->is_repeated() && !field->containing_oneof()) {
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_STRING) {
+    if (field->cpp_type() == FieldCppType::STRING) {
       format("if (!$prefix$_internal_$name$().empty()) {\n");
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
       // Message fields still have has_$name$() methods.
       format("if ($prefix$_internal_has_$name$()) {\n");
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_FLOAT) {
+    } else if (field->cpp_type() == FieldCppType::FLOAT) {
       format(
           "static_assert(sizeof(uint32_t) == sizeof(float), \"Code assumes "
           "uint32_t and float are the same size.\");\n"
@@ -237,7 +237,7 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
           "uint32_t raw_$name$;\n"
           "memcpy(&raw_$name$, &tmp_$name$, sizeof(tmp_$name$));\n"
           "if (raw_$name$ != 0) {\n");
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_DOUBLE) {
+    } else if (field->cpp_type() == FieldCppType::DOUBLE) {
       format(
           "static_assert(sizeof(uint64_t) == sizeof(double), \"Code assumes "
           "uint64_t and double are the same size.\");\n"
@@ -245,7 +245,7 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
           "uint64_t raw_$name$;\n"
           "memcpy(&raw_$name$, &tmp_$name$, sizeof(tmp_$name$));\n"
           "if (raw_$name$ != 0) {\n");
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {
+    } else if (field->cpp_type() == FieldCppType::ENUM) {
       format(
           "if ($1$_to_underlying($prefix$_internal_$name$()) != 0) {\n",
           QualifiedClassName(field->enum_type()));
@@ -270,7 +270,7 @@ bool HasHasMethod(const FieldDescriptor* field) {
   }
   // For message types without true field presence, only fields with a message
   // type or inside an one-of have a has_$name$() method.
-  return field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE ||
+  return field->cpp_type() == FieldCppType::MESSAGE ||
          field->has_optional_keyword() || field->real_containing_oneof();
 }
 
@@ -283,10 +283,10 @@ void CollectMapInfo(const Options& options, const Descriptor* descriptor,
   const FieldDescriptor* val = descriptor->map_value();
   vars["key_cpp"] = PrimitiveTypeName(options, key->cpp_type());
   switch (val->cpp_type()) {
-    case FieldDescriptor::CPPTYPE_MESSAGE:
+    case FieldCppType::MESSAGE:
       vars["val_cpp"] = FieldMessageTypeName(val, options);
       break;
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       vars["val_cpp"] = ClassName(val->enum_type(), true);
       break;
     default:
@@ -844,7 +844,7 @@ void MessageGenerator::GenerateFieldAccessorDeclarations(io::Printer* printer) {
     // names.
     format(R"(
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline bool HasExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -854,7 +854,7 @@ $annotate_extension_has$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline void ClearExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -864,7 +864,7 @@ $annotate_extension_clear$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline int ExtensionSize(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -874,7 +874,7 @@ $annotate_extension_repeated_size$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Singular::ConstType GetExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -885,7 +885,7 @@ $annotate_extension_get$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Singular::MutableType MutableExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -896,7 +896,7 @@ $annotate_extension_mutable$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline void SetExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -907,7 +907,7 @@ $annotate_extension_set$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline void SetAllocatedExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -918,7 +918,7 @@ inline void SetAllocatedExtension(
 $annotate_extension_set$
 }
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline void UnsafeArenaSetAllocatedExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -929,7 +929,7 @@ inline void UnsafeArenaSetAllocatedExtension(
 $annotate_extension_set$
 }
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 [[nodiscard]] inline
     typename _proto_TypeTraits::Singular::MutableType
@@ -941,7 +941,7 @@ $annotate_extension_release$
                                     &$extensions$);
 }
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Singular::MutableType
 UnsafeArenaReleaseExtension(
@@ -953,7 +953,7 @@ $annotate_extension_release$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::ConstType GetExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -964,7 +964,7 @@ $annotate_repeated_extension_get$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::MutableType MutableExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -975,7 +975,7 @@ $annotate_repeated_extension_mutable$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline void SetExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -986,7 +986,7 @@ $annotate_repeated_extension_set$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::MutableType AddExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -998,7 +998,7 @@ $annotate_repeated_extension_add_mutable$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline void AddExtension(
     const ::SHARK_NAMESPACE_ID::internal::ExtensionIdentifier<
@@ -1010,7 +1010,7 @@ $annotate_repeated_extension_add$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline const typename _proto_TypeTraits::Repeated::RepeatedFieldType&
 GetRepeatedExtension(
@@ -1021,7 +1021,7 @@ $annotate_repeated_extension_list$
 }
 
 template <typename _proto_TypeTraits,
-          ::SHARK_NAMESPACE_ID::internal::FieldType _field_type,
+          ::SHARK_NAMESPACE_ID::internal::FieldTypeUint8 _field_type,
           bool _is_packed>
 inline typename _proto_TypeTraits::Repeated::RepeatedFieldType*
 MutableRepeatedExtension(
@@ -1082,7 +1082,7 @@ void MessageGenerator::GenerateSingularFieldHasBits(
         "  bool value = "
         "($has_bits$[$has_array_index$] & 0x$has_mask$u) != 0;\n");
 
-    if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE &&
+    if (field->cpp_type() == FieldCppType::MESSAGE &&
         !IsLazy(field, options_, scc_analyzer_)) {
       // We maintain the invariant that for a submessage x, has_x() returning
       // true implies that x_ is not null. By giving this information to the
@@ -1097,7 +1097,7 @@ void MessageGenerator::GenerateSingularFieldHasBits(
         "$annotate_has$"
         "  return _internal_has_$name$();\n"
         "}\n");
-  } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+  } else if (field->cpp_type() == FieldCppType::MESSAGE) {
     // Message fields have a has_$name$() method.
     if (IsLazy(field, options_, scc_analyzer_)) {
       format(
@@ -1301,13 +1301,13 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "class $classname$ : public "
         "::$proto_ns$::internal::MapEntry$lite$<$classname$, \n"
         "    $key_cpp$, $val_cpp$,\n"
-        "    ::$proto_ns$::internal::WireFormatLite::$key_wire_type$,\n"
-        "    ::$proto_ns$::internal::WireFormatLite::$val_wire_type$> {\n"
+        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$key_wire_type$,\n"
+        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$val_wire_type$> {\n"
         "public:\n"
         "  typedef ::$proto_ns$::internal::MapEntry$lite$<$classname$, \n"
         "    $key_cpp$, $val_cpp$,\n"
-        "    ::$proto_ns$::internal::WireFormatLite::$key_wire_type$,\n"
-        "    ::$proto_ns$::internal::WireFormatLite::$val_wire_type$> "
+        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$key_wire_type$,\n"
+        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$val_wire_type$> "
         "SuperType;\n"
         "  $classname$();\n"
         "  explicit constexpr $classname$(\n"
@@ -1318,7 +1318,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "reinterpret_cast<const "
         "$classname$*>(&_$classname$_default_instance_); }\n");
     auto utf8_check = GetUtf8CheckMode(descriptor_->field(0), options_);
-    if (descriptor_->field(0)->type() == FieldDescriptor::TYPE_STRING &&
+    if (descriptor_->field(0)->type() == FieldType::STRING &&
         utf8_check != Utf8CheckMode::kNone) {
       if (utf8_check == Utf8CheckMode::kStrict) {
         format(
@@ -1347,7 +1347,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
     } else {
       format("  static bool ValidateKey(void*) { return true; }\n");
     }
-    if (descriptor_->field(1)->type() == FieldDescriptor::TYPE_STRING &&
+    if (descriptor_->field(1)->type() == FieldType::STRING &&
         utf8_check != Utf8CheckMode::kNone) {
       if (utf8_check == Utf8CheckMode::kStrict) {
         format(
@@ -3139,8 +3139,8 @@ void MessageGenerator::GenerateClear(io::Printer* printer) {
       // TODO(kenton):  Let the CppFieldGenerator decide this somehow.
       bool have_enclosing_if =
           HasBitIndex(field) != kNoHasbit &&
-          (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE ||
-           field->cpp_type() == FieldDescriptor::CPPTYPE_STRING);
+          (field->cpp_type() == FieldCppType::MESSAGE ||
+           field->cpp_type() == FieldCppType::STRING);
 
       if (have_enclosing_if) {
         PrintPresenceCheck(format, field, has_bit_indices_, printer,
@@ -4402,7 +4402,7 @@ void MessageGenerator::GenerateIsInitialized(io::Printer* printer) {
   for (auto oneof : OneOfRange(descriptor_)) {
     bool has_required_fields = false;
     for (auto field : FieldRange(oneof)) {
-      if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE &&
+      if (field->cpp_type() == FieldCppType::MESSAGE &&
           !ShouldIgnoreRequiredFieldCheck(field, options_) &&
           scc_analyzer_->HasRequiredFields(field->message_type())) {
         has_required_fields = true;

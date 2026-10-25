@@ -153,7 +153,7 @@ bool FieldMaskUtil::GetFieldDescriptors(
       field_descriptors->push_back(field);
     }
     if (!field->is_repeated() &&
-        field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+        field->cpp_type() == FieldCppType::MESSAGE) {
       descriptor = field->message_type();
     } else {
       descriptor = nullptr;
@@ -369,7 +369,7 @@ void FieldMaskTree::RemovePath(const std::string& path,
     const FieldDescriptor* field_descriptor =
         current_descriptor->FindFieldByName(parts[i]);
     if (field_descriptor == nullptr ||
-        (field_descriptor->cpp_type() != FieldDescriptor::CPPTYPE_MESSAGE &&
+        (field_descriptor->cpp_type() != FieldCppType::MESSAGE &&
          i != parts.size() - 1)) {
       // Invalid path.
       if (new_branch_node != nullptr) {
@@ -389,7 +389,7 @@ void FieldMaskTree::RemovePath(const std::string& path,
     }
     if (ContainsKey(node->children, parts[i])) {
       node = node->children[parts[i]];
-      if (field_descriptor->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+      if (field_descriptor->cpp_type() == FieldCppType::MESSAGE) {
         current_descriptor = field_descriptor->message_type();
       }
     } else {
@@ -465,7 +465,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
     if (!child->children.empty()) {
       // Sub-paths are only allowed for singular message fields.
       if (field->is_repeated() ||
-          field->cpp_type() != FieldDescriptor::CPPTYPE_MESSAGE) {
+          field->cpp_type() != FieldCppType::MESSAGE) {
         GOOGLE_LOG(ERROR) << "Field \"" << field_name << "\" in message "
                    << descriptor->full_name()
                    << " is not a singular message field and cannot "
@@ -479,7 +479,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
     if (!field->is_repeated()) {
       switch (field->cpp_type()) {
 #define COPY_VALUE(TYPE, Name)                                              \
-  case FieldDescriptor::CPPTYPE_##TYPE: {                                   \
+  case FieldCppType::TYPE: {                                   \
     if (source_reflection->HasField(source, field)) {                       \
       destination_reflection->Set##Name(                                    \
           destination, field, source_reflection->Get##Name(source, field)); \
@@ -498,7 +498,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
         COPY_VALUE(ENUM, Enum)
         COPY_VALUE(STRING, String)
 #undef COPY_VALUE
-        case FieldDescriptor::CPPTYPE_MESSAGE: {
+        case FieldCppType::MESSAGE: {
           if (options.replace_message_fields()) {
             destination_reflection->ClearField(destination, field);
           }
@@ -515,7 +515,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
       }
       switch (field->cpp_type()) {
 #define COPY_REPEATED_VALUE(TYPE, Name)                            \
-  case FieldDescriptor::CPPTYPE_##TYPE: {                          \
+  case FieldCppType::TYPE: {                          \
     int size = source_reflection->FieldSize(source, field);        \
     for (int i = 0; i < size; ++i) {                               \
       destination_reflection->Add##Name(                           \
@@ -534,7 +534,7 @@ void FieldMaskTree::MergeMessage(const Node* node, const Message& source,
         COPY_REPEATED_VALUE(ENUM, Enum)
         COPY_REPEATED_VALUE(STRING, String)
 #undef COPY_REPEATED_VALUE
-        case FieldDescriptor::CPPTYPE_MESSAGE: {
+        case FieldCppType::MESSAGE: {
           int size = source_reflection->FieldSize(source, field);
           for (int i = 0; i < size; ++i) {
             destination_reflection->AddMessage(destination, field)
@@ -565,10 +565,10 @@ void FieldMaskTree::AddRequiredFieldPath(Node* node,
         continue;
       }
       // Add required field in the children to the tree if the field is message.
-      if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+      if (field->cpp_type() == FieldCppType::MESSAGE) {
         AddRequiredFieldPath(child, field->message_type());
       }
-    } else if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
       std::map<std::string, Node*>::const_iterator it =
           node->children.find(field->name());
       if (it != node->children.end()) {
@@ -605,7 +605,7 @@ bool FieldMaskTree::TrimMessage(const Node* node, Message* message) {
       }
       reflection->ClearField(message, field);
     } else {
-      if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+      if (field->cpp_type() == FieldCppType::MESSAGE) {
         Node* child = it->second;
         if (!child->children.empty() && reflection->HasField(*message, field)) {
           bool nestedMessageChanged =

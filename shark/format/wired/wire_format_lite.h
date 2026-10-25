@@ -73,6 +73,29 @@
 
 namespace shark::internal {
 
+// Wire-format field type. Numbers match FieldType. Kept separate so the lite
+// runtime does not depend on the descriptor.
+enum class WireFormatLiteFieldType : uint8_t {
+  TYPE_DOUBLE = 1,
+  TYPE_FLOAT = 2,
+  TYPE_INT64 = 3,
+  TYPE_UINT64 = 4,
+  TYPE_INT32 = 5,
+  TYPE_FIXED64 = 6,
+  TYPE_FIXED32 = 7,
+  TYPE_BOOL = 8,
+  TYPE_STRING = 9,
+  TYPE_GROUP = 10,
+  TYPE_MESSAGE = 11,
+  TYPE_BYTES = 12,
+  TYPE_UINT32 = 13,
+  TYPE_ENUM = 14,
+  TYPE_SFIXED32 = 15,
+  TYPE_SFIXED64 = 16,
+  TYPE_SINT32 = 17,
+  TYPE_SINT64 = 18,
+};
+
 // This class is for internal use by the protocol buffer library and by
 // protocol-compiler-generated message classes.  It must not be called
 // directly by clients.
@@ -93,7 +116,7 @@ class SHARK_EXPORT WireFormatLite {
   // field).  Each tag is encoded as a varint.  The lower bits of the tag
   // identify its wire type, which specifies the format of the data to follow.
   // The rest of the bits contain the field number.  Each type of field (as
-  // declared by FieldDescriptor::Type, in descriptor.h) maps to one of
+  // declared by FieldType, in descriptor.h) maps to one of
   // these wire types.  Immediately following each tag is the field's value,
   // encoded in the format specified by the wire type.  Because the tag
   // identifies the encoding of this data, it is possible to skip
@@ -108,30 +131,10 @@ class SHARK_EXPORT WireFormatLite {
     WIRETYPE_FIXED32 = 5,
   };
 
-  // Lite alternative to FieldDescriptor::Type.  Must be kept in sync.
-  enum FieldType {
-    TYPE_DOUBLE = 1,
-    TYPE_FLOAT = 2,
-    TYPE_INT64 = 3,
-    TYPE_UINT64 = 4,
-    TYPE_INT32 = 5,
-    TYPE_FIXED64 = 6,
-    TYPE_FIXED32 = 7,
-    TYPE_BOOL = 8,
-    TYPE_STRING = 9,
-    TYPE_GROUP = 10,
-    TYPE_MESSAGE = 11,
-    TYPE_BYTES = 12,
-    TYPE_UINT32 = 13,
-    TYPE_ENUM = 14,
-    TYPE_SFIXED32 = 15,
-    TYPE_SFIXED64 = 16,
-    TYPE_SINT32 = 17,
-    TYPE_SINT64 = 18,
-    MAX_FIELD_TYPE = 18,
-  };
+  static constexpr int MAX_FIELD_TYPE =
+      static_cast<int>(WireFormatLiteFieldType::TYPE_SINT64);
 
-  // Lite alternative to FieldDescriptor::CppType.  Must be kept in sync.
+  // Lite alternative to FieldCppType.  Must be kept in sync.
   enum CppType {
     CPPTYPE_INT32 = 1,
     CPPTYPE_INT64 = 2,
@@ -147,12 +150,12 @@ class SHARK_EXPORT WireFormatLite {
   };
 
   // Helper method to get the CppType for a particular Type.
-  static CppType FieldTypeToCppType(FieldType type);
+  static CppType FieldTypeToCppType(WireFormatLiteFieldType type);
 
-  // Given a FieldDescriptor::Type return its WireType
+  // Given a FieldType return its WireType
   static inline WireFormatLite::WireType WireTypeForFieldType(
-      WireFormatLite::FieldType type) {
-    return kWireTypeForFieldType[type];
+      WireFormatLiteFieldType type) {
+    return kWireTypeForFieldType[static_cast<int>(type)];
   }
 
   // Number of bits in a tag which identify the wire type.
@@ -172,7 +175,7 @@ class SHARK_EXPORT WireFormatLite {
   // Compute the byte size of a tag.  For groups, this includes both the start
   // and end tags.
   static inline size_t TagSize(int field_number,
-                               WireFormatLite::FieldType type);
+                               WireFormatLiteFieldType type);
 
   // Skips a field value with the given tag.  The input should start
   // positioned immediately after the tag.  Skipped values are simply
@@ -253,21 +256,21 @@ class SHARK_EXPORT WireFormatLite {
   // For primitive fields, we just use a templatized routine parameterized by
   // the represented type and the FieldType. These are specialized with the
   // appropriate definition for each declared type.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   SHARK_NDEBUG_INLINE static bool ReadPrimitive(io::CodedInputStream* input,
                                                    CType* value);
 
   // Reads repeated primitive values, with optimizations for repeats.
   // tag_size and tag should both be compile-time constants provided by the
   // protocol compiler.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   SHARK_NDEBUG_INLINE static bool ReadRepeatedPrimitive(
       int tag_size, uint32_t tag, io::CodedInputStream* input,
       RepeatedField<CType>* value);
 
   // Identical to ReadRepeatedPrimitive, except will not inline the
   // implementation.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   static bool ReadRepeatedPrimitiveNoInline(int tag_size, uint32_t tag,
                                             io::CodedInputStream* input,
                                             RepeatedField<CType>* value);
@@ -277,20 +280,20 @@ class SHARK_EXPORT WireFormatLite {
   //
   // This is only implemented for the types with fixed wire size, e.g.
   // float, double, and the (s)fixed* types.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   SHARK_NDEBUG_INLINE static const uint8_t* ReadPrimitiveFromArray(
       const uint8_t* buffer, CType* value);
 
   // Reads a primitive packed field.
   //
   // This is only implemented for packable types.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   SHARK_NDEBUG_INLINE static bool ReadPackedPrimitive(
       io::CodedInputStream* input, RepeatedField<CType>* value);
 
   // Identical to ReadPackedPrimitive, except will not inline the
   // implementation.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   static bool ReadPackedPrimitiveNoInline(io::CodedInputStream* input,
                                           RepeatedField<CType>* value);
 
@@ -725,13 +728,13 @@ class SHARK_EXPORT WireFormatLite {
   // A helper method for the repeated primitive reader. This method has
   // optimizations for primitive types that have fixed size on the wire, and
   // can be read using potentially faster paths.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   SHARK_NDEBUG_INLINE static bool ReadRepeatedFixedSizePrimitive(
       int tag_size, uint32_t tag, io::CodedInputStream* input,
       RepeatedField<CType>* value);
 
   // Like ReadRepeatedFixedSizePrimitive but for packed primitive fields.
-  template <typename CType, enum FieldType DeclaredType>
+  template <typename CType, WireFormatLiteFieldType DeclaredType>
   SHARK_NDEBUG_INLINE static bool ReadPackedFixedSizePrimitive(
       io::CodedInputStream* input, RepeatedField<CType>* value);
 
@@ -785,8 +788,8 @@ class SHARK_EXPORT CodedOutputStreamFieldSkipper : public FieldSkipper {
 // inline methods ====================================================
 
 inline WireFormatLite::CppType WireFormatLite::FieldTypeToCppType(
-    FieldType type) {
-  return kFieldTypeToCppTypeMap[type];
+    WireFormatLiteFieldType type) {
+  return kFieldTypeToCppTypeMap[static_cast<int>(type)];
 }
 
 constexpr inline uint32_t WireFormatLite::MakeTag(int field_number,
@@ -803,10 +806,10 @@ inline int WireFormatLite::GetTagFieldNumber(uint32_t tag) {
 }
 
 inline size_t WireFormatLite::TagSize(int field_number,
-                                      WireFormatLite::FieldType type) {
+                                      WireFormatLiteFieldType type) {
   size_t result = io::CodedOutputStream::VarintSize32(
       static_cast<uint32_t>(field_number << kTagTypeBits));
-  if (type == TYPE_GROUP) {
+  if (type == WireFormatLiteFieldType::TYPE_GROUP) {
     // Groups have both a start and an end tag.
     return result * 2;
   } else {
@@ -904,7 +907,7 @@ inline size_t ComputeUnknownMessageSetItemsSize(
 // Implementation details of ReadPrimitive.
 
 template <>
-inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(
+inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLiteFieldType::TYPE_INT32>(
     io::CodedInputStream* input, int32_t* value) {
   uint32_t temp;
   if (!input->ReadVarint32(&temp)) return false;
@@ -912,7 +915,7 @@ inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_INT32>(
   return true;
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_INT64>(
+inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLiteFieldType::TYPE_INT64>(
     io::CodedInputStream* input, int64_t* value) {
   uint64_t temp;
   if (!input->ReadVarint64(&temp)) return false;
@@ -921,18 +924,18 @@ inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_INT64>(
 }
 template <>
 inline bool
-WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_UINT32>(
+WireFormatLite::ReadPrimitive<uint32_t, WireFormatLiteFieldType::TYPE_UINT32>(
     io::CodedInputStream* input, uint32_t* value) {
   return input->ReadVarint32(value);
 }
 template <>
 inline bool
-WireFormatLite::ReadPrimitive<uint64_t, WireFormatLite::TYPE_UINT64>(
+WireFormatLite::ReadPrimitive<uint64_t, WireFormatLiteFieldType::TYPE_UINT64>(
     io::CodedInputStream* input, uint64_t* value) {
   return input->ReadVarint64(value);
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(
+inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLiteFieldType::TYPE_SINT32>(
     io::CodedInputStream* input, int32_t* value) {
   uint32_t temp;
   if (!input->ReadVarint32(&temp)) return false;
@@ -940,7 +943,7 @@ inline bool WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SINT32>(
   return true;
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SINT64>(
+inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLiteFieldType::TYPE_SINT64>(
     io::CodedInputStream* input, int64_t* value) {
   uint64_t temp;
   if (!input->ReadVarint64(&temp)) return false;
@@ -949,19 +952,19 @@ inline bool WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SINT64>(
 }
 template <>
 inline bool
-WireFormatLite::ReadPrimitive<uint32_t, WireFormatLite::TYPE_FIXED32>(
+WireFormatLite::ReadPrimitive<uint32_t, WireFormatLiteFieldType::TYPE_FIXED32>(
     io::CodedInputStream* input, uint32_t* value) {
   return input->ReadLittleEndian32(value);
 }
 template <>
 inline bool
-WireFormatLite::ReadPrimitive<uint64_t, WireFormatLite::TYPE_FIXED64>(
+WireFormatLite::ReadPrimitive<uint64_t, WireFormatLiteFieldType::TYPE_FIXED64>(
     io::CodedInputStream* input, uint64_t* value) {
   return input->ReadLittleEndian64(value);
 }
 template <>
 inline bool
-WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SFIXED32>(
+WireFormatLite::ReadPrimitive<int32_t, WireFormatLiteFieldType::TYPE_SFIXED32>(
     io::CodedInputStream* input, int32_t* value) {
   uint32_t temp;
   if (!input->ReadLittleEndian32(&temp)) return false;
@@ -970,7 +973,7 @@ WireFormatLite::ReadPrimitive<int32_t, WireFormatLite::TYPE_SFIXED32>(
 }
 template <>
 inline bool
-WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SFIXED64>(
+WireFormatLite::ReadPrimitive<int64_t, WireFormatLiteFieldType::TYPE_SFIXED64>(
     io::CodedInputStream* input, int64_t* value) {
   uint64_t temp;
   if (!input->ReadLittleEndian64(&temp)) return false;
@@ -978,7 +981,7 @@ WireFormatLite::ReadPrimitive<int64_t, WireFormatLite::TYPE_SFIXED64>(
   return true;
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<float, WireFormatLite::TYPE_FLOAT>(
+inline bool WireFormatLite::ReadPrimitive<float, WireFormatLiteFieldType::TYPE_FLOAT>(
     io::CodedInputStream* input, float* value) {
   uint32_t temp;
   if (!input->ReadLittleEndian32(&temp)) return false;
@@ -986,7 +989,7 @@ inline bool WireFormatLite::ReadPrimitive<float, WireFormatLite::TYPE_FLOAT>(
   return true;
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<double, WireFormatLite::TYPE_DOUBLE>(
+inline bool WireFormatLite::ReadPrimitive<double, WireFormatLiteFieldType::TYPE_DOUBLE>(
     io::CodedInputStream* input, double* value) {
   uint64_t temp;
   if (!input->ReadLittleEndian64(&temp)) return false;
@@ -994,7 +997,7 @@ inline bool WireFormatLite::ReadPrimitive<double, WireFormatLite::TYPE_DOUBLE>(
   return true;
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<bool, WireFormatLite::TYPE_BOOL>(
+inline bool WireFormatLite::ReadPrimitive<bool, WireFormatLiteFieldType::TYPE_BOOL>(
     io::CodedInputStream* input, bool* value) {
   uint64_t temp;
   if (!input->ReadVarint64(&temp)) return false;
@@ -1002,7 +1005,7 @@ inline bool WireFormatLite::ReadPrimitive<bool, WireFormatLite::TYPE_BOOL>(
   return true;
 }
 template <>
-inline bool WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_ENUM>(
+inline bool WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
     io::CodedInputStream* input, int* value) {
   uint32_t temp;
   if (!input->ReadVarint32(&temp)) return false;
@@ -1012,19 +1015,19 @@ inline bool WireFormatLite::ReadPrimitive<int, WireFormatLite::TYPE_ENUM>(
 
 template <>
 inline const uint8_t*
-WireFormatLite::ReadPrimitiveFromArray<uint32_t, WireFormatLite::TYPE_FIXED32>(
+WireFormatLite::ReadPrimitiveFromArray<uint32_t, WireFormatLiteFieldType::TYPE_FIXED32>(
     const uint8_t* buffer, uint32_t* value) {
   return io::CodedInputStream::ReadLittleEndian32FromArray(buffer, value);
 }
 template <>
 inline const uint8_t*
-WireFormatLite::ReadPrimitiveFromArray<uint64_t, WireFormatLite::TYPE_FIXED64>(
+WireFormatLite::ReadPrimitiveFromArray<uint64_t, WireFormatLiteFieldType::TYPE_FIXED64>(
     const uint8_t* buffer, uint64_t* value) {
   return io::CodedInputStream::ReadLittleEndian64FromArray(buffer, value);
 }
 template <>
 inline const uint8_t*
-WireFormatLite::ReadPrimitiveFromArray<int32_t, WireFormatLite::TYPE_SFIXED32>(
+WireFormatLite::ReadPrimitiveFromArray<int32_t, WireFormatLiteFieldType::TYPE_SFIXED32>(
     const uint8_t* buffer, int32_t* value) {
   uint32_t temp;
   buffer = io::CodedInputStream::ReadLittleEndian32FromArray(buffer, &temp);
@@ -1033,7 +1036,7 @@ WireFormatLite::ReadPrimitiveFromArray<int32_t, WireFormatLite::TYPE_SFIXED32>(
 }
 template <>
 inline const uint8_t*
-WireFormatLite::ReadPrimitiveFromArray<int64_t, WireFormatLite::TYPE_SFIXED64>(
+WireFormatLite::ReadPrimitiveFromArray<int64_t, WireFormatLiteFieldType::TYPE_SFIXED64>(
     const uint8_t* buffer, int64_t* value) {
   uint64_t temp;
   buffer = io::CodedInputStream::ReadLittleEndian64FromArray(buffer, &temp);
@@ -1042,7 +1045,7 @@ WireFormatLite::ReadPrimitiveFromArray<int64_t, WireFormatLite::TYPE_SFIXED64>(
 }
 template <>
 inline const uint8_t*
-WireFormatLite::ReadPrimitiveFromArray<float, WireFormatLite::TYPE_FLOAT>(
+WireFormatLite::ReadPrimitiveFromArray<float, WireFormatLiteFieldType::TYPE_FLOAT>(
     const uint8_t* buffer, float* value) {
   uint32_t temp;
   buffer = io::CodedInputStream::ReadLittleEndian32FromArray(buffer, &temp);
@@ -1051,7 +1054,7 @@ WireFormatLite::ReadPrimitiveFromArray<float, WireFormatLite::TYPE_FLOAT>(
 }
 template <>
 inline const uint8_t*
-WireFormatLite::ReadPrimitiveFromArray<double, WireFormatLite::TYPE_DOUBLE>(
+WireFormatLite::ReadPrimitiveFromArray<double, WireFormatLiteFieldType::TYPE_DOUBLE>(
     const uint8_t* buffer, double* value) {
   uint64_t temp;
   buffer = io::CodedInputStream::ReadLittleEndian64FromArray(buffer, &temp);
@@ -1059,7 +1062,7 @@ WireFormatLite::ReadPrimitiveFromArray<double, WireFormatLite::TYPE_DOUBLE>(
   return buffer;
 }
 
-template <typename CType, enum WireFormatLite::FieldType DeclaredType>
+template <typename CType, WireFormatLiteFieldType DeclaredType>
 inline bool WireFormatLite::ReadRepeatedPrimitive(
     int,  // tag_size, unused.
     uint32_t tag, io::CodedInputStream* input, RepeatedField<CType>* values) {
@@ -1075,7 +1078,7 @@ inline bool WireFormatLite::ReadRepeatedPrimitive(
   return true;
 }
 
-template <typename CType, enum WireFormatLite::FieldType DeclaredType>
+template <typename CType, WireFormatLiteFieldType DeclaredType>
 inline bool WireFormatLite::ReadRepeatedFixedSizePrimitive(
     int tag_size, uint32_t tag, io::CodedInputStream* input,
     RepeatedField<CType>* values) {
@@ -1125,11 +1128,11 @@ inline bool WireFormatLite::ReadRepeatedFixedSizePrimitive(
 #define READ_REPEATED_FIXED_SIZE_PRIMITIVE(CPPTYPE, DECLARED_TYPE)        \
   template <>                                                             \
   inline bool WireFormatLite::ReadRepeatedPrimitive<                      \
-      CPPTYPE, WireFormatLite::DECLARED_TYPE>(                            \
+      CPPTYPE, WireFormatLiteFieldType::DECLARED_TYPE>(                            \
       int tag_size, uint32_t tag, io::CodedInputStream* input,            \
       RepeatedField<CPPTYPE>* values) {                                   \
     return ReadRepeatedFixedSizePrimitive<CPPTYPE,                        \
-                                          WireFormatLite::DECLARED_TYPE>( \
+                                          WireFormatLiteFieldType::DECLARED_TYPE>( \
         tag_size, tag, input, values);                                    \
   }
 
@@ -1142,7 +1145,7 @@ READ_REPEATED_FIXED_SIZE_PRIMITIVE(double, TYPE_DOUBLE)
 
 #undef READ_REPEATED_FIXED_SIZE_PRIMITIVE
 
-template <typename CType, enum WireFormatLite::FieldType DeclaredType>
+template <typename CType, WireFormatLiteFieldType DeclaredType>
 bool WireFormatLite::ReadRepeatedPrimitiveNoInline(
     int tag_size, uint32_t tag, io::CodedInputStream* input,
     RepeatedField<CType>* value) {
@@ -1150,7 +1153,7 @@ bool WireFormatLite::ReadRepeatedPrimitiveNoInline(
                                                     value);
 }
 
-template <typename CType, enum WireFormatLite::FieldType DeclaredType>
+template <typename CType, WireFormatLiteFieldType DeclaredType>
 inline bool WireFormatLite::ReadPackedPrimitive(io::CodedInputStream* input,
                                                 RepeatedField<CType>* values) {
   int length;
@@ -1165,7 +1168,7 @@ inline bool WireFormatLite::ReadPackedPrimitive(io::CodedInputStream* input,
   return true;
 }
 
-template <typename CType, enum WireFormatLite::FieldType DeclaredType>
+template <typename CType, WireFormatLiteFieldType DeclaredType>
 inline bool WireFormatLite::ReadPackedFixedSizePrimitive(
     io::CodedInputStream* input, RepeatedField<CType>* values) {
   int length;
@@ -1230,10 +1233,10 @@ inline bool WireFormatLite::ReadPackedFixedSizePrimitive(
 #define READ_REPEATED_PACKED_FIXED_SIZE_PRIMITIVE(CPPTYPE, DECLARED_TYPE)      \
   template <>                                                                  \
   inline bool                                                                  \
-  WireFormatLite::ReadPackedPrimitive<CPPTYPE, WireFormatLite::DECLARED_TYPE>( \
+  WireFormatLite::ReadPackedPrimitive<CPPTYPE, WireFormatLiteFieldType::DECLARED_TYPE>( \
       io::CodedInputStream * input, RepeatedField<CPPTYPE> * values) {         \
     return ReadPackedFixedSizePrimitive<CPPTYPE,                               \
-                                        WireFormatLite::DECLARED_TYPE>(        \
+                                        WireFormatLiteFieldType::DECLARED_TYPE>(        \
         input, values);                                                        \
   }
 
@@ -1246,7 +1249,7 @@ READ_REPEATED_PACKED_FIXED_SIZE_PRIMITIVE(double, TYPE_DOUBLE)
 
 #undef READ_REPEATED_PACKED_FIXED_SIZE_PRIMITIVE
 
-template <typename CType, enum WireFormatLite::FieldType DeclaredType>
+template <typename CType, WireFormatLiteFieldType DeclaredType>
 bool WireFormatLite::ReadPackedPrimitiveNoInline(io::CodedInputStream* input,
                                                  RepeatedField<CType>* values) {
   return ReadPackedPrimitive<CType, DeclaredType>(input, values);

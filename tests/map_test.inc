@@ -2269,8 +2269,8 @@ TEST_F(MapFieldReflectionTest, UninitializedEntry) {
 
 class MyMapEntry
     : public internal::MapEntry<MyMapEntry, ::int32_t, ::int32_t,
-                                internal::WireFormatLite::TYPE_INT32,
-                                internal::WireFormatLite::TYPE_INT32> {
+                                internal::WireFormatLiteFieldType::TYPE_INT32,
+                                internal::WireFormatLiteFieldType::TYPE_INT32> {
  public:
   constexpr MyMapEntry() {}
   MyMapEntry(Arena*) { std::abort(); }
@@ -2281,8 +2281,8 @@ class MyMapEntry
 
 class MyMapEntryLite
     : public internal::MapEntryLite<MyMapEntryLite, ::int32_t, ::int32_t,
-                                    internal::WireFormatLite::TYPE_INT32,
-                                    internal::WireFormatLite::TYPE_INT32> {
+                                    internal::WireFormatLiteFieldType::TYPE_INT32,
+                                    internal::WireFormatLiteFieldType::TYPE_INT32> {
  public:
   constexpr MyMapEntryLite() {}
   explicit MyMapEntryLite(Arena*) { std::abort(); }

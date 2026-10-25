@@ -374,7 +374,7 @@ TEST_F(TextFormatTest, PrintDeeplyNestedUnknownMessage) {
   for (int i = 0; i < kNestingDepth - 1; ++i) {
     lengths.push_back(
         internal::WireFormatLite::TagSize(
-            kUnknownFieldNumber, internal::WireFormatLite::TYPE_BYTES) +
+            kUnknownFieldNumber, internal::WireFormatLiteFieldType::TYPE_BYTES) +
         internal::WireFormatLite::LengthDelimitedSize(lengths.back()));
   }
   std::string serialized;

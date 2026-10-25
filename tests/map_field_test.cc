@@ -119,8 +119,8 @@ class MapFieldBaseStub : public MapFieldBase {
 class MapFieldBasePrimitiveTest : public testing::TestWithParam<bool> {
  protected:
   typedef unittest::TestMap_MapInt32Int32Entry_DoNotUse EntryType;
-  typedef MapField<EntryType, int32_t, int32_t, WireFormatLite::TYPE_INT32,
-                   WireFormatLite::TYPE_INT32>
+  typedef MapField<EntryType, int32_t, int32_t, WireFormatLiteFieldType::TYPE_INT32,
+                   WireFormatLiteFieldType::TYPE_INT32>
       MapFieldType;
 
   MapFieldBasePrimitiveTest()
@@ -239,8 +239,8 @@ class MapFieldStateTest
     : public testing::TestWithParam<std::tuple<State, bool>> {
  protected:
   typedef unittest::TestMap_MapInt32Int32Entry_DoNotUse EntryType;
-  typedef MapField<EntryType, int32_t, int32_t, WireFormatLite::TYPE_INT32,
-                   WireFormatLite::TYPE_INT32>
+  typedef MapField<EntryType, int32_t, int32_t, WireFormatLiteFieldType::TYPE_INT32,
+                   WireFormatLiteFieldType::TYPE_INT32>
       MapFieldType;
   MapFieldStateTest()
       : arena_(std::get<1>(GetParam()) ? new Arena() : nullptr),
@@ -517,8 +517,8 @@ TEST_P(MapFieldStateTest, MutableMapField) {
 
 class MyMapField
     : public MapField<unittest::TestMap_MapInt32Int32Entry_DoNotUse, int32_t,
-                      int32_t, internal::WireFormatLite::TYPE_INT32,
-                      internal::WireFormatLite::TYPE_INT32> {
+                      int32_t, internal::WireFormatLiteFieldType::TYPE_INT32,
+                      internal::WireFormatLiteFieldType::TYPE_INT32> {
  public:
   constexpr MyMapField()
       : MyMapField::MapField(internal::ConstantInitialized{}) {}

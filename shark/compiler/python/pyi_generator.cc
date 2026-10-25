@@ -129,19 +129,19 @@ void CheckImportModules(const Descriptor* descriptor,
     if (field->is_map()) {
       import_modules->has_mapping = true;
       const FieldDescriptor* value_des = field->message_type()->field(1);
-      if (value_des->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE ||
-          value_des->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {
+      if (value_des->cpp_type() == FieldCppType::MESSAGE ||
+          value_des->cpp_type() == FieldCppType::ENUM) {
         import_modules->has_union = true;
       }
     } else {
       if (field->is_repeated()) {
         import_modules->has_iterable = true;
       }
-      if (field->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+      if (field->cpp_type() == FieldCppType::MESSAGE) {
         import_modules->has_union = true;
         import_modules->has_mapping = true;
       }
-      if (field->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {
+      if (field->cpp_type() == FieldCppType::ENUM) {
         import_modules->has_union = true;
       }
     }
@@ -331,25 +331,25 @@ std::string PyiGenerator::GetFieldType(
     const FieldDescriptor& field_des, const Descriptor& containing_des,
     const std::map<std::string, std::string>& import_map) const {
   switch (field_des.cpp_type()) {
-    case FieldDescriptor::CPPTYPE_INT32:
-    case FieldDescriptor::CPPTYPE_UINT32:
-    case FieldDescriptor::CPPTYPE_INT64:
-    case FieldDescriptor::CPPTYPE_UINT64:
+    case FieldCppType::INT32:
+    case FieldCppType::UINT32:
+    case FieldCppType::INT64:
+    case FieldCppType::UINT64:
       return "int";
-    case FieldDescriptor::CPPTYPE_DOUBLE:
-    case FieldDescriptor::CPPTYPE_FLOAT:
+    case FieldCppType::DOUBLE:
+    case FieldCppType::FLOAT:
       return "float";
-    case FieldDescriptor::CPPTYPE_BOOL:
+    case FieldCppType::BOOL:
       return "bool";
-    case FieldDescriptor::CPPTYPE_ENUM:
+    case FieldCppType::ENUM:
       return ModuleLevelName(*field_des.enum_type(), import_map);
-    case FieldDescriptor::CPPTYPE_STRING:
-      if (field_des.type() == FieldDescriptor::TYPE_STRING) {
+    case FieldCppType::STRING:
+      if (field_des.type() == FieldType::STRING) {
         return "str";
       } else {
         return "bytes";
       }
-    case FieldDescriptor::CPPTYPE_MESSAGE: {
+    case FieldCppType::MESSAGE: {
       // If the field is inside a nested message and the nested message has the
       // same name as a top-level message, then we need to prefix the field type
       // with the module name for disambiguation.
@@ -459,7 +459,7 @@ void PyiGenerator::PrintMessage(
     if (field_des.is_map()) {
       const FieldDescriptor* key_des = field_des.message_type()->field(0);
       const FieldDescriptor* value_des = field_des.message_type()->field(1);
-      field_type = (value_des->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE
+      field_type = (value_des->cpp_type() == FieldCppType::MESSAGE
                         ? "_containers.MessageMap["
                         : "_containers.ScalarMap[");
       field_type += GetFieldType(*key_des, message_descriptor, import_map);
@@ -467,7 +467,7 @@ void PyiGenerator::PrintMessage(
       field_type += GetFieldType(*value_des, message_descriptor, import_map);
     } else {
       if (field_des.is_repeated()) {
-        field_type = (field_des.cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE
+        field_type = (field_des.cpp_type() == FieldCppType::MESSAGE
                           ? "_containers.RepeatedCompositeFieldContainer["
                           : "_containers.RepeatedScalarFieldContainer[");
       }
@@ -503,7 +503,7 @@ void PyiGenerator::PrintMessage(
     is_first = false;
     printer_->Print(", $field_name$: ", "field_name", field_name);
     if (field_des->is_repeated() ||
-        field_des->cpp_type() != FieldDescriptor::CPPTYPE_BOOL) {
+        field_des->cpp_type() != FieldCppType::BOOL) {
       printer_->Print("_Optional[");
     }
     if (field_des->is_map()) {
@@ -517,12 +517,12 @@ void PyiGenerator::PrintMessage(
       if (field_des->is_repeated()) {
         printer_->Print("_Iterable[");
       }
-      if (field_des->cpp_type() == FieldDescriptor::CPPTYPE_MESSAGE) {
+      if (field_des->cpp_type() == FieldCppType::MESSAGE) {
         printer_->Print(
             "_Union[$type_name$, _Mapping]", "type_name",
             GetFieldType(*field_des, message_descriptor, import_map));
       } else {
-        if (field_des->cpp_type() == FieldDescriptor::CPPTYPE_ENUM) {
+        if (field_des->cpp_type() == FieldCppType::ENUM) {
           printer_->Print("_Union[$type_name$, str]", "type_name",
                           ModuleLevelName(*field_des->enum_type(), import_map));
         } else {
@@ -536,7 +536,7 @@ void PyiGenerator::PrintMessage(
       }
     }
     if (field_des->is_repeated() ||
-        field_des->cpp_type() != FieldDescriptor::CPPTYPE_BOOL) {
+        field_des->cpp_type() != FieldCppType::BOOL) {
       printer_->Print("]");
     }
     printer_->Print(" = ...");

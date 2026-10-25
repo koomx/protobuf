@@ -78,13 +78,13 @@ class SHARK_EXPORT WireFormat {
   static inline WireFormatLite::WireType WireTypeForField(
       const FieldDescriptor* field);
 
-  // Given a FieldDescriptor::Type return its WireType
+  // Given a FieldType return its WireType
   static inline WireFormatLite::WireType WireTypeForFieldType(
-      FieldDescriptor::Type type);
+      ::shark::FieldType type);
 
   // Compute the byte size of a tag.  For groups, this includes both the start
   // and end tags.
-  static inline size_t TagSize(int field_number, FieldDescriptor::Type type);
+  static inline size_t TagSize(int field_number, ::shark::FieldType type);
 
   // These procedures can be used to implement the methods of Message which
   // handle parsing and serialization of the protocol buffer wire format
@@ -328,11 +328,9 @@ inline WireFormatLite::WireType WireFormat::WireTypeForField(
 }
 
 inline WireFormatLite::WireType WireFormat::WireTypeForFieldType(
-    FieldDescriptor::Type type) {
-  // Some compilers don't like enum -> enum casts, so we implicit_cast to
-  // int first.
+    ::shark::FieldType type) {
   return WireFormatLite::WireTypeForFieldType(
-      static_cast<WireFormatLite::FieldType>(implicit_cast<int>(type)));
+      static_cast<WireFormatLiteFieldType>(static_cast<int>(type)));
 }
 
 inline uint32_t WireFormat::MakeTag(const FieldDescriptor* field) {
@@ -340,12 +338,10 @@ inline uint32_t WireFormat::MakeTag(const FieldDescriptor* field) {
 }
 
 inline size_t WireFormat::TagSize(int field_number,
-                                  FieldDescriptor::Type type) {
-  // Some compilers don't like enum -> enum casts, so we implicit_cast to
-  // int first.
+                                  ::shark::FieldType type) {
   return WireFormatLite::TagSize(
       field_number,
-      static_cast<WireFormatLite::FieldType>(implicit_cast<int>(type)));
+      static_cast<WireFormatLiteFieldType>(static_cast<int>(type)));
 }
 
 inline void WireFormat::VerifyUTF8String(const char* data, int size,

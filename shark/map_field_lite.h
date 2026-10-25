@@ -56,8 +56,8 @@ void MapFieldLiteNotDestructed(void* map_field_lite);
 // internal generated message implementation only. Users should never use this
 // directly.
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType key_wire_type,
-          WireFormatLite::FieldType value_wire_type>
+          WireFormatLiteFieldType key_wire_type,
+          WireFormatLiteFieldType value_wire_type>
 class MapFieldLite {
   // Define message type for internal repeated field.
   typedef Derived EntryType;
@@ -164,8 +164,8 @@ EnumParseWrapper<UnknownType, T> InitEnumParseWrapper(
 // protobuf compiler from ever having to emit loops in IsInitialized() methods.
 // We want the C++ compiler to inline this or not as it sees fit.
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType key_wire_type,
-          WireFormatLite::FieldType value_wire_type>
+          WireFormatLiteFieldType key_wire_type,
+          WireFormatLiteFieldType value_wire_type>
 bool AllAreInitialized(const MapFieldLite<Derived, Key, T, key_wire_type,
                                           value_wire_type>& field) {
   const auto& t = field.GetMap();
@@ -180,8 +180,8 @@ template <typename MEntry>
 struct MapEntryToMapField : MapEntryToMapField<typename MEntry::SuperType> {};
 
 template <typename T, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 struct MapEntryToMapField<
     MapEntryLite<T, Key, Value, kKeyFieldType, kValueFieldType>> {
   typedef MapFieldLite<

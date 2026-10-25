@@ -80,13 +80,13 @@ struct is_proto_enum;
 
 namespace internal {
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType key_wire_type,
-          WireFormatLite::FieldType value_wire_type>
+          WireFormatLiteFieldType key_wire_type,
+          WireFormatLiteFieldType value_wire_type>
 class MapFieldLite;
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType key_wire_type,
-          WireFormatLite::FieldType value_wire_type>
+          WireFormatLiteFieldType key_wire_type,
+          WireFormatLiteFieldType value_wire_type>
 class MapField;
 
 template <typename Key, typename T>
@@ -1438,8 +1438,8 @@ class Map {
   using InternalArenaConstructable_ = void;
   using DestructorSkippable_ = void;
   template <typename Derived, typename K, typename V,
-            internal::WireFormatLite::FieldType key_wire_type,
-            internal::WireFormatLite::FieldType value_wire_type>
+            internal::WireFormatLiteFieldType key_wire_type,
+            internal::WireFormatLiteFieldType value_wire_type>
   friend class internal::MapFieldLite;
 };
 

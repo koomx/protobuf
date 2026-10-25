@@ -213,13 +213,13 @@ std::string FieldMessageTypeName(const FieldDescriptor* field,
                                  const Options& options);
 
 // Get the C++ type name for a primitive type (e.g. "double", "::shark::int32", etc.).
-const char* PrimitiveTypeName(FieldDescriptor::CppType type);
+const char* PrimitiveTypeName(FieldCppType type);
 std::string PrimitiveTypeName(const Options& options,
-                              FieldDescriptor::CppType type);
+                              FieldCppType type);
 
 // Get the declared type name in CamelCase format, as is used e.g. for the
 // methods of WireFormat.  For example, TYPE_INT32 becomes "Int32".
-const char* DeclaredTypeMethodName(FieldDescriptor::Type type);
+const char* DeclaredTypeMethodName(FieldType type);
 
 // Return the code that evaluates to the number when compiled.
 std::string Int32ToString(int number);
@@ -327,18 +327,18 @@ FieldOptions::CType EffectiveStringCType(const FieldDescriptor* field,
                                          const Options& options);
 
 inline bool IsCord(const FieldDescriptor* field, const Options& options) {
-  return field->cpp_type() == FieldDescriptor::CPPTYPE_STRING &&
+  return field->cpp_type() == FieldCppType::STRING &&
          EffectiveStringCType(field, options) == FieldOptions::CORD;
 }
 
 inline bool IsString(const FieldDescriptor* field, const Options& options) {
-  return field->cpp_type() == FieldDescriptor::CPPTYPE_STRING &&
+  return field->cpp_type() == FieldCppType::STRING &&
          EffectiveStringCType(field, options) == FieldOptions::STRING;
 }
 
 inline bool IsStringPiece(const FieldDescriptor* field,
                           const Options& options) {
-  return field->cpp_type() == FieldDescriptor::CPPTYPE_STRING &&
+  return field->cpp_type() == FieldCppType::STRING &&
          EffectiveStringCType(field, options) == FieldOptions::STRING_PIECE;
 }
 
@@ -477,7 +477,7 @@ inline bool IsEnumClass(const EnumDescriptor*) {
 const char* EnumUnderlyingCppType(const EnumDescriptor* enum_descriptor);
 
 inline bool IsCrossFileMessage(const FieldDescriptor* field) {
-  return field->type() == FieldDescriptor::TYPE_MESSAGE &&
+  return field->type() == FieldType::MESSAGE &&
          field->message_type()->file() != field->file();
 }
 

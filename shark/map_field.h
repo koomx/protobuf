@@ -87,13 +87,13 @@ class SHARK_EXPORT MapKey {
   }
 
   ~MapKey() {
-    if (type_ == FieldDescriptor::CPPTYPE_STRING) {
+    if (type_ == FieldCppType::STRING) {
       val_.string_value_.Destruct();
     }
   }
 
-  FieldDescriptor::CppType type() const {
-    if (type_ == FieldDescriptor::CppType()) {
+  FieldCppType type() const {
+    if (type_ == FieldCppType()) {
       GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"
                  << "MapKey::type MapKey is not initialized. "
                  << "Call set methods to initialize MapKey.";
@@ -102,52 +102,52 @@ class SHARK_EXPORT MapKey {
   }
 
   void SetInt64Value(int64_t value) {
-    SetType(FieldDescriptor::CPPTYPE_INT64);
+    SetType(FieldCppType::INT64);
     val_.int64_value_ = value;
   }
   void SetUInt64Value(uint64_t value) {
-    SetType(FieldDescriptor::CPPTYPE_UINT64);
+    SetType(FieldCppType::UINT64);
     val_.uint64_value_ = value;
   }
   void SetInt32Value(int32_t value) {
-    SetType(FieldDescriptor::CPPTYPE_INT32);
+    SetType(FieldCppType::INT32);
     val_.int32_value_ = value;
   }
   void SetUInt32Value(uint32_t value) {
-    SetType(FieldDescriptor::CPPTYPE_UINT32);
+    SetType(FieldCppType::UINT32);
     val_.uint32_value_ = value;
   }
   void SetBoolValue(bool value) {
-    SetType(FieldDescriptor::CPPTYPE_BOOL);
+    SetType(FieldCppType::BOOL);
     val_.bool_value_ = value;
   }
   void SetStringValue(std::string val) {
-    SetType(FieldDescriptor::CPPTYPE_STRING);
+    SetType(FieldCppType::STRING);
     *val_.string_value_.get_mutable() = std::move(val);
   }
 
   int64_t GetInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64, "MapKey::GetInt64Value");
+    TYPE_CHECK(FieldCppType::INT64, "MapKey::GetInt64Value");
     return val_.int64_value_;
   }
   uint64_t GetUInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64, "MapKey::GetUInt64Value");
+    TYPE_CHECK(FieldCppType::UINT64, "MapKey::GetUInt64Value");
     return val_.uint64_value_;
   }
   int32_t GetInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32, "MapKey::GetInt32Value");
+    TYPE_CHECK(FieldCppType::INT32, "MapKey::GetInt32Value");
     return val_.int32_value_;
   }
   uint32_t GetUInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32, "MapKey::GetUInt32Value");
+    TYPE_CHECK(FieldCppType::UINT32, "MapKey::GetUInt32Value");
     return val_.uint32_value_;
   }
   bool GetBoolValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapKey::GetBoolValue");
+    TYPE_CHECK(FieldCppType::BOOL, "MapKey::GetBoolValue");
     return val_.bool_value_;
   }
   const std::string& GetStringValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapKey::GetStringValue");
+    TYPE_CHECK(FieldCppType::STRING, "MapKey::GetStringValue");
     return val_.string_value_.get();
   }
 
@@ -158,23 +158,23 @@ class SHARK_EXPORT MapKey {
       GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
     }
     switch (type()) {
-      case FieldDescriptor::CPPTYPE_DOUBLE:
-      case FieldDescriptor::CPPTYPE_FLOAT:
-      case FieldDescriptor::CPPTYPE_ENUM:
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::DOUBLE:
+      case FieldCppType::FLOAT:
+      case FieldCppType::ENUM:
+      case FieldCppType::MESSAGE:
         GOOGLE_LOG(FATAL) << "Unsupported";
         return false;
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         return val_.string_value_.get() < other.val_.string_value_.get();
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         return val_.int64_value_ < other.val_.int64_value_;
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         return val_.int32_value_ < other.val_.int32_value_;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         return val_.uint64_value_ < other.val_.uint64_value_;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         return val_.uint32_value_ < other.val_.uint32_value_;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         return val_.bool_value_ < other.val_.bool_value_;
     }
     return false;
@@ -186,23 +186,23 @@ class SHARK_EXPORT MapKey {
       GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
     }
     switch (type()) {
-      case FieldDescriptor::CPPTYPE_DOUBLE:
-      case FieldDescriptor::CPPTYPE_FLOAT:
-      case FieldDescriptor::CPPTYPE_ENUM:
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::DOUBLE:
+      case FieldCppType::FLOAT:
+      case FieldCppType::ENUM:
+      case FieldCppType::MESSAGE:
         GOOGLE_LOG(FATAL) << "Unsupported";
         break;
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         return val_.string_value_.get() == other.val_.string_value_.get();
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         return val_.int64_value_ == other.val_.int64_value_;
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         return val_.int32_value_ == other.val_.int32_value_;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         return val_.uint64_value_ == other.val_.uint64_value_;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         return val_.uint32_value_ == other.val_.uint32_value_;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         return val_.bool_value_ == other.val_.bool_value_;
     }
     GOOGLE_LOG(FATAL) << "Can't get here.";
@@ -212,28 +212,28 @@ class SHARK_EXPORT MapKey {
   void CopyFrom(const MapKey& other) {
     SetType(other.type());
     switch (type_) {
-      case FieldDescriptor::CPPTYPE_DOUBLE:
-      case FieldDescriptor::CPPTYPE_FLOAT:
-      case FieldDescriptor::CPPTYPE_ENUM:
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::DOUBLE:
+      case FieldCppType::FLOAT:
+      case FieldCppType::ENUM:
+      case FieldCppType::MESSAGE:
         GOOGLE_LOG(FATAL) << "Unsupported";
         break;
-      case FieldDescriptor::CPPTYPE_STRING:
+      case FieldCppType::STRING:
         *val_.string_value_.get_mutable() = other.val_.string_value_.get();
         break;
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         val_.int64_value_ = other.val_.int64_value_;
         break;
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         val_.int32_value_ = other.val_.int32_value_;
         break;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         val_.uint64_value_ = other.val_.uint64_value_;
         break;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         val_.uint32_value_ = other.val_.uint32_value_;
         break;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         val_.bool_value_ = other.val_.bool_value_;
         break;
     }
@@ -255,20 +255,20 @@ class SHARK_EXPORT MapKey {
     bool bool_value_;
   } val_;
 
-  void SetType(FieldDescriptor::CppType type) {
+  void SetType(FieldCppType type) {
     if (type_ == type) return;
-    if (type_ == FieldDescriptor::CPPTYPE_STRING) {
+    if (type_ == FieldCppType::STRING) {
       val_.string_value_.Destruct();
     }
     type_ = type;
-    if (type_ == FieldDescriptor::CPPTYPE_STRING) {
+    if (type_ == FieldCppType::STRING) {
       val_.string_value_.DefaultConstruct();
     }
   }
 
-  // type_ is 0 or a valid FieldDescriptor::CppType.
+  // type_ is 0 or a valid FieldCppType.
   // Use "CppType()" to indicate zero.
-  FieldDescriptor::CppType type_;
+  FieldCppType type_;
 };
 
 }  // namespace shark
@@ -277,31 +277,31 @@ template <>
 struct hash<::SHARK_NAMESPACE_ID::MapKey> {
   size_t operator()(const ::SHARK_NAMESPACE_ID::MapKey& map_key) const {
     switch (map_key.type()) {
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_DOUBLE:
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_FLOAT:
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_ENUM:
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_MESSAGE:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::DOUBLE:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::FLOAT:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::ENUM:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::MESSAGE:
         GOOGLE_LOG(FATAL) << "Unsupported";
         break;
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_STRING:
+      case ::SHARK_NAMESPACE_ID::FieldCppType::STRING:
         return hash<std::string>()(map_key.GetStringValue());
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_INT64: {
+      case ::SHARK_NAMESPACE_ID::FieldCppType::INT64: {
         auto value = map_key.GetInt64Value();
         return hash<decltype(value)>()(value);
       }
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_INT32: {
+      case ::SHARK_NAMESPACE_ID::FieldCppType::INT32: {
         auto value = map_key.GetInt32Value();
         return hash<decltype(value)>()(map_key.GetInt32Value());
       }
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_UINT64: {
+      case ::SHARK_NAMESPACE_ID::FieldCppType::UINT64: {
         auto value = map_key.GetUInt64Value();
         return hash<decltype(value)>()(map_key.GetUInt64Value());
       }
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_UINT32: {
+      case ::SHARK_NAMESPACE_ID::FieldCppType::UINT32: {
         auto value = map_key.GetUInt32Value();
         return hash<decltype(value)>()(map_key.GetUInt32Value());
       }
-      case ::SHARK_NAMESPACE_ID::FieldDescriptor::CPPTYPE_BOOL: {
+      case ::SHARK_NAMESPACE_ID::FieldCppType::BOOL: {
         return hash<bool>()(map_key.GetBoolValue());
       }
     }
@@ -532,8 +532,8 @@ class TypeDefinedMapFieldBase : public MapFieldBase {
 // internal generated message implementation only. Users should never use this
 // directly.
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 class MapField : public TypeDefinedMapFieldBase<Key, T> {
   // Provide utilities to parse/serialize key/value.  Provide utilities to
   // manipulate internal stored type.
@@ -635,8 +635,8 @@ class MapField : public TypeDefinedMapFieldBase<Key, T> {
 };
 
 template <typename Derived, typename Key, typename T,
-          WireFormatLite::FieldType key_wire_type,
-          WireFormatLite::FieldType value_wire_type>
+          WireFormatLiteFieldType key_wire_type,
+          WireFormatLiteFieldType value_wire_type>
 bool AllAreInitialized(
     const MapField<Derived, Key, T, key_wire_type, value_wire_type>& field) {
   const auto& t = field.GetMap();
@@ -648,8 +648,8 @@ bool AllAreInitialized(
 }
 
 template <typename T, typename Key, typename Value,
-          WireFormatLite::FieldType kKeyFieldType,
-          WireFormatLite::FieldType kValueFieldType>
+          WireFormatLiteFieldType kKeyFieldType,
+          WireFormatLiteFieldType kValueFieldType>
 struct MapEntryToMapField<
     MapEntry<T, Key, Value, kKeyFieldType, kValueFieldType>> {
   typedef MapField<T, Key, Value, kKeyFieldType, kValueFieldType> MapFieldType;
@@ -702,51 +702,51 @@ class SHARK_EXPORT MapValueConstRef {
   MapValueConstRef() : data_(nullptr), type_() {}
 
   int64_t GetInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64,
+    TYPE_CHECK(FieldCppType::INT64,
                "MapValueConstRef::GetInt64Value");
     return *reinterpret_cast<int64_t*>(data_);
   }
   uint64_t GetUInt64Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64,
+    TYPE_CHECK(FieldCppType::UINT64,
                "MapValueConstRef::GetUInt64Value");
     return *reinterpret_cast<uint64_t*>(data_);
   }
   int32_t GetInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32,
+    TYPE_CHECK(FieldCppType::INT32,
                "MapValueConstRef::GetInt32Value");
     return *reinterpret_cast<int32_t*>(data_);
   }
   uint32_t GetUInt32Value() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32,
+    TYPE_CHECK(FieldCppType::UINT32,
                "MapValueConstRef::GetUInt32Value");
     return *reinterpret_cast<uint32_t*>(data_);
   }
   bool GetBoolValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapValueConstRef::GetBoolValue");
+    TYPE_CHECK(FieldCppType::BOOL, "MapValueConstRef::GetBoolValue");
     return *reinterpret_cast<bool*>(data_);
   }
   int GetEnumValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM, "MapValueConstRef::GetEnumValue");
+    TYPE_CHECK(FieldCppType::ENUM, "MapValueConstRef::GetEnumValue");
     return *reinterpret_cast<int*>(data_);
   }
   const std::string& GetStringValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING,
+    TYPE_CHECK(FieldCppType::STRING,
                "MapValueConstRef::GetStringValue");
     return *reinterpret_cast<std::string*>(data_);
   }
   float GetFloatValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT,
+    TYPE_CHECK(FieldCppType::FLOAT,
                "MapValueConstRef::GetFloatValue");
     return *reinterpret_cast<float*>(data_);
   }
   double GetDoubleValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_DOUBLE,
+    TYPE_CHECK(FieldCppType::DOUBLE,
                "MapValueConstRef::GetDoubleValue");
     return *reinterpret_cast<double*>(data_);
   }
 
   const Message& GetMessageValue() const {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_MESSAGE,
+    TYPE_CHECK(FieldCppType::MESSAGE,
                "MapValueConstRef::GetMessageValue");
     return *reinterpret_cast<Message*>(data_);
   }
@@ -755,12 +755,12 @@ class SHARK_EXPORT MapValueConstRef {
   // data_ point to a map value. MapValueConstRef does not
   // own this value.
   void* data_;
-  // type_ is 0 or a valid FieldDescriptor::CppType.
+  // type_ is 0 or a valid FieldCppType.
   // Use "CppType()" to indicate zero.
-  FieldDescriptor::CppType type_;
+  FieldCppType type_;
 
-  FieldDescriptor::CppType type() const {
-    if (type_ == FieldDescriptor::CppType() || data_ == nullptr) {
+  FieldCppType type() const {
+    if (type_ == FieldCppType() || data_ == nullptr) {
       GOOGLE_LOG(FATAL)
           << "Protocol Buffer map usage error:\n"
           << "MapValueConstRef::type MapValueConstRef is not initialized.";
@@ -770,8 +770,8 @@ class SHARK_EXPORT MapValueConstRef {
 
  private:
   template <typename Derived, typename K, typename V,
-            internal::WireFormatLite::FieldType key_wire_type,
-            internal::WireFormatLite::FieldType value_wire_type>
+            internal::WireFormatLiteFieldType key_wire_type,
+            internal::WireFormatLiteFieldType value_wire_type>
   friend class internal::MapField;
   template <typename K, typename V>
   friend class internal::TypeDefinedMapFieldBase;
@@ -779,7 +779,7 @@ class SHARK_EXPORT MapValueConstRef {
   friend class Reflection;
   friend class internal::DynamicMapField;
 
-  void SetType(FieldDescriptor::CppType type) { type_ = type; }
+  void SetType(FieldCppType type) { type_ = type; }
   void SetValue(const void* val) { data_ = const_cast<void*>(val); }
   void CopyFrom(const MapValueConstRef& other) {
     type_ = other.type_;
@@ -794,45 +794,45 @@ class SHARK_EXPORT MapValueRef final : public MapValueConstRef {
   MapValueRef() {}
 
   void SetInt64Value(int64_t value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT64, "MapValueRef::SetInt64Value");
+    TYPE_CHECK(FieldCppType::INT64, "MapValueRef::SetInt64Value");
     *reinterpret_cast<int64_t*>(data_) = value;
   }
   void SetUInt64Value(uint64_t value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT64, "MapValueRef::SetUInt64Value");
+    TYPE_CHECK(FieldCppType::UINT64, "MapValueRef::SetUInt64Value");
     *reinterpret_cast<uint64_t*>(data_) = value;
   }
   void SetInt32Value(int32_t value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_INT32, "MapValueRef::SetInt32Value");
+    TYPE_CHECK(FieldCppType::INT32, "MapValueRef::SetInt32Value");
     *reinterpret_cast<int32_t*>(data_) = value;
   }
   void SetUInt32Value(uint32_t value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_UINT32, "MapValueRef::SetUInt32Value");
+    TYPE_CHECK(FieldCppType::UINT32, "MapValueRef::SetUInt32Value");
     *reinterpret_cast<uint32_t*>(data_) = value;
   }
   void SetBoolValue(bool value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_BOOL, "MapValueRef::SetBoolValue");
+    TYPE_CHECK(FieldCppType::BOOL, "MapValueRef::SetBoolValue");
     *reinterpret_cast<bool*>(data_) = value;
   }
   // TODO(jieluo) - Checks that enum is member.
   void SetEnumValue(int value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_ENUM, "MapValueRef::SetEnumValue");
+    TYPE_CHECK(FieldCppType::ENUM, "MapValueRef::SetEnumValue");
     *reinterpret_cast<int*>(data_) = value;
   }
   void SetStringValue(const std::string& value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_STRING, "MapValueRef::SetStringValue");
+    TYPE_CHECK(FieldCppType::STRING, "MapValueRef::SetStringValue");
     *reinterpret_cast<std::string*>(data_) = value;
   }
   void SetFloatValue(float value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_FLOAT, "MapValueRef::SetFloatValue");
+    TYPE_CHECK(FieldCppType::FLOAT, "MapValueRef::SetFloatValue");
     *reinterpret_cast<float*>(data_) = value;
   }
   void SetDoubleValue(double value) {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_DOUBLE, "MapValueRef::SetDoubleValue");
+    TYPE_CHECK(FieldCppType::DOUBLE, "MapValueRef::SetDoubleValue");
     *reinterpret_cast<double*>(data_) = value;
   }
 
   Message* MutableMessageValue() {
-    TYPE_CHECK(FieldDescriptor::CPPTYPE_MESSAGE,
+    TYPE_CHECK(FieldCppType::MESSAGE,
                "MapValueRef::MutableMessageValue");
     return reinterpret_cast<Message*>(data_);
   }
@@ -844,7 +844,7 @@ class SHARK_EXPORT MapValueRef final : public MapValueConstRef {
   void DeleteData() {
     switch (type_) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)           \
-  case FieldDescriptor::CPPTYPE_##CPPTYPE: { \
+  case FieldCppType::CPPTYPE: { \
     delete reinterpret_cast<TYPE*>(data_);   \
     break;                                   \
   }
@@ -914,8 +914,8 @@ class SHARK_EXPORT MapIterator {
   friend class internal::TypeDefinedMapFieldBase;
   friend class internal::DynamicMapField;
   template <typename Derived, typename Key, typename T,
-            internal::WireFormatLite::FieldType kKeyFieldType,
-            internal::WireFormatLite::FieldType kValueFieldType>
+            internal::WireFormatLiteFieldType kKeyFieldType,
+            internal::WireFormatLiteFieldType kValueFieldType>
   friend class internal::MapField;
 
   // reinterpret_cast from heap-allocated Map<...>::iterator*. MapIterator owns

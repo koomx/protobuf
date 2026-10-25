@@ -161,67 +161,67 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     out->set_name(field->is_extension() ? field->full_name() : field->name());
     Any* value = out->mutable_value();
     switch (field->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         value->PackFrom(
             field->is_repeated()
                 ? reflection->GetRepeatedMessage(options, field, index)
                 : reflection->GetMessage(options, field));
         return;
-      case FieldDescriptor::CPPTYPE_DOUBLE:
+      case FieldCppType::DOUBLE:
         value->PackFrom(WrapValue<DoubleValue>(
             field->is_repeated()
                 ? reflection->GetRepeatedDouble(options, field, index)
                 : reflection->GetDouble(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_FLOAT:
+      case FieldCppType::FLOAT:
         value->PackFrom(WrapValue<FloatValue>(
             field->is_repeated()
                 ? reflection->GetRepeatedFloat(options, field, index)
                 : reflection->GetFloat(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         value->PackFrom(WrapValue<Int64Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedInt64(options, field, index)
                 : reflection->GetInt64(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         value->PackFrom(WrapValue<UInt64Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedUInt64(options, field, index)
                 : reflection->GetUInt64(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         value->PackFrom(WrapValue<Int32Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedInt32(options, field, index)
                 : reflection->GetInt32(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         value->PackFrom(WrapValue<UInt32Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedUInt32(options, field, index)
                 : reflection->GetUInt32(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         value->PackFrom(WrapValue<BoolValue>(
             field->is_repeated()
                 ? reflection->GetRepeatedBool(options, field, index)
                 : reflection->GetBool(options, field)));
         return;
-      case FieldDescriptor::CPPTYPE_STRING: {
+      case FieldCppType::STRING: {
         const std::string& val =
             field->is_repeated()
                 ? reflection->GetRepeatedString(options, field, index)
                 : reflection->GetString(options, field);
-        if (field->type() == FieldDescriptor::TYPE_STRING) {
+        if (field->type() == FieldType::STRING) {
           value->PackFrom(WrapValue<StringValue>(val));
         } else {
           value->PackFrom(WrapValue<BytesValue>(val));
         }
         return;
       }
-      case FieldDescriptor::CPPTYPE_ENUM: {
+      case FieldCppType::ENUM: {
         const EnumValueDescriptor* val =
             field->is_repeated()
                 ? reflection->GetRepeatedEnum(options, field, index)
@@ -242,13 +242,13 @@ class DescriptorPoolTypeResolver : public TypeResolver {
   void ConvertFieldDescriptor(const FieldDescriptor* descriptor, Field* field) {
     field->set_kind(static_cast<Field::Kind>(descriptor->type()));
     switch (descriptor->label()) {
-      case FieldDescriptor::LABEL_OPTIONAL:
+      case FieldLabel::OPTIONAL:
         field->set_cardinality(Field::CARDINALITY_OPTIONAL);
         break;
-      case FieldDescriptor::LABEL_REPEATED:
+      case FieldLabel::REPEATED:
         field->set_cardinality(Field::CARDINALITY_REPEATED);
         break;
-      case FieldDescriptor::LABEL_REQUIRED:
+      case FieldLabel::REQUIRED:
         field->set_cardinality(Field::CARDINALITY_REQUIRED);
         break;
     }
@@ -258,10 +258,10 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     if (descriptor->has_default_value()) {
       field->set_default_value(DefaultValueAsString(descriptor));
     }
-    if (descriptor->type() == FieldDescriptor::TYPE_MESSAGE ||
-        descriptor->type() == FieldDescriptor::TYPE_GROUP) {
+    if (descriptor->type() == FieldType::MESSAGE ||
+        descriptor->type() == FieldType::GROUP) {
       field->set_type_url(GetTypeUrl(descriptor->message_type()));
-    } else if (descriptor->type() == FieldDescriptor::TYPE_ENUM) {
+    } else if (descriptor->type() == FieldType::ENUM) {
       field->set_type_url(GetTypeUrl(descriptor->enum_type()));
     }
     if (descriptor->containing_oneof() != NULL) {
@@ -314,38 +314,38 @@ class DescriptorPoolTypeResolver : public TypeResolver {
 
   std::string DefaultValueAsString(const FieldDescriptor* descriptor) {
     switch (descriptor->cpp_type()) {
-      case FieldDescriptor::CPPTYPE_INT32:
+      case FieldCppType::INT32:
         return StrCat(descriptor->default_value_int32());
         break;
-      case FieldDescriptor::CPPTYPE_INT64:
+      case FieldCppType::INT64:
         return StrCat(descriptor->default_value_int64());
         break;
-      case FieldDescriptor::CPPTYPE_UINT32:
+      case FieldCppType::UINT32:
         return StrCat(descriptor->default_value_uint32());
         break;
-      case FieldDescriptor::CPPTYPE_UINT64:
+      case FieldCppType::UINT64:
         return StrCat(descriptor->default_value_uint64());
         break;
-      case FieldDescriptor::CPPTYPE_FLOAT:
+      case FieldCppType::FLOAT:
         return SimpleFtoa(descriptor->default_value_float());
         break;
-      case FieldDescriptor::CPPTYPE_DOUBLE:
+      case FieldCppType::DOUBLE:
         return SimpleDtoa(descriptor->default_value_double());
         break;
-      case FieldDescriptor::CPPTYPE_BOOL:
+      case FieldCppType::BOOL:
         return descriptor->default_value_bool() ? "true" : "false";
         break;
-      case FieldDescriptor::CPPTYPE_STRING:
-        if (descriptor->type() == FieldDescriptor::TYPE_BYTES) {
+      case FieldCppType::STRING:
+        if (descriptor->type() == FieldType::BYTES) {
           return CEscape(descriptor->default_value_string());
         } else {
           return descriptor->default_value_string();
         }
         break;
-      case FieldDescriptor::CPPTYPE_ENUM:
+      case FieldCppType::ENUM:
         return descriptor->default_value_enum()->name();
         break;
-      case FieldDescriptor::CPPTYPE_MESSAGE:
+      case FieldCppType::MESSAGE:
         GOOGLE_LOG(DFATAL) << "Messages can't have default values!";
         break;
     }

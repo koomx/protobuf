@@ -106,13 +106,13 @@ inline bool NullValue_Parse(
 
 class Struct_FieldsEntry_DoNotUse : public ::SHARK_NAMESPACE_ID::internal::MapEntry<Struct_FieldsEntry_DoNotUse, 
     std::string, ::shark::Value,
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> {
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_STRING,
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_MESSAGE> {
 public:
   typedef ::SHARK_NAMESPACE_ID::internal::MapEntry<Struct_FieldsEntry_DoNotUse, 
     std::string, ::shark::Value,
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> SuperType;
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_STRING,
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_MESSAGE> SuperType;
   Struct_FieldsEntry_DoNotUse();
   explicit constexpr Struct_FieldsEntry_DoNotUse(
       ::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
@@ -284,8 +284,8 @@ class Struct final :
     ::SHARK_NAMESPACE_ID::internal::MapField<
         Struct_FieldsEntry_DoNotUse,
         std::string, ::shark::Value,
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_STRING,
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::TYPE_MESSAGE> fields_;
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_STRING,
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_MESSAGE> fields_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
