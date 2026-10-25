@@ -47,7 +47,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
 #include <tests/unittest.skp.h>
-#include <tests/unittest_no_field_presence.skp.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
 #include <tests/testing/googletest.h>
@@ -69,8 +68,6 @@ class DynamicMessageTest : public ::testing::TestWithParam<bool> {
   const Message* packed_prototype_;
   const Descriptor* oneof_descriptor_;
   const Message* oneof_prototype_;
-  const Descriptor* proto3_descriptor_;
-  const Message* proto3_prototype_;
 
   DynamicMessageTest() : factory_(&pool_) {}
 
@@ -82,20 +79,15 @@ class DynamicMessageTest : public ::testing::TestWithParam<bool> {
     FileDescriptorProto unittest_file;
     FileDescriptorProto unittest_import_file;
     FileDescriptorProto unittest_import_public_file;
-    FileDescriptorProto unittest_no_field_presence_file;
-
     unittest::TestAllTypes::descriptor()->file()->CopyTo(&unittest_file);
     unittest_import::ImportMessage::descriptor()->file()->CopyTo(
         &unittest_import_file);
     unittest_import::PublicImportMessage::descriptor()->file()->CopyTo(
         &unittest_import_public_file);
-    proto2_nofieldpresence_unittest::TestAllTypes::descriptor()->file()->CopyTo(
-        &unittest_no_field_presence_file);
 
     ASSERT_TRUE(pool_.BuildFile(unittest_import_public_file) != nullptr);
     ASSERT_TRUE(pool_.BuildFile(unittest_import_file) != nullptr);
     ASSERT_TRUE(pool_.BuildFile(unittest_file) != nullptr);
-    ASSERT_TRUE(pool_.BuildFile(unittest_no_field_presence_file) != nullptr);
 
     descriptor_ = pool_.FindMessageTypeByName("sharkbuf_unittest.TestAllTypes");
     ASSERT_TRUE(descriptor_ != nullptr);
@@ -115,11 +107,6 @@ class DynamicMessageTest : public ::testing::TestWithParam<bool> {
         pool_.FindMessageTypeByName("sharkbuf_unittest.TestOneof2");
     ASSERT_TRUE(oneof_descriptor_ != nullptr);
     oneof_prototype_ = factory_.GetPrototype(oneof_descriptor_);
-
-    proto3_descriptor_ = pool_.FindMessageTypeByName(
-        "proto2_nofieldpresence_unittest.TestAllTypes");
-    ASSERT_TRUE(proto3_descriptor_ != nullptr);
-    proto3_prototype_ = factory_.GetPrototype(proto3_descriptor_);
   }
 };
 
@@ -286,40 +273,6 @@ TEST_F(DynamicMessageTest, Arena) {
   // Return without freeing: should not leak.
 }
 
-
-TEST_F(DynamicMessageTest, Proto3) {
-  Message* message = proto3_prototype_->New();
-  const Reflection* refl = message->GetReflection();
-  const Descriptor* desc = message->GetDescriptor();
-
-  // Just test a single primitive and single message field here to make sure we
-  // are getting the no-field-presence semantics elsewhere. DynamicMessage uses
-  // GeneratedMessageReflection under the hood, so the rest should be fine as
-  // long as GMR recognizes that we're using a proto3 message.
-  const FieldDescriptor* optional_int32 =
-      desc->FindFieldByName("optional_int32");
-  const FieldDescriptor* optional_msg =
-      desc->FindFieldByName("optional_nested_message");
-  EXPECT_TRUE(optional_int32 != nullptr);
-  EXPECT_TRUE(optional_msg != nullptr);
-
-  EXPECT_EQ(false, refl->HasField(*message, optional_int32));
-  refl->SetInt32(message, optional_int32, 42);
-  EXPECT_EQ(true, refl->HasField(*message, optional_int32));
-  refl->SetInt32(message, optional_int32, 0);
-  EXPECT_EQ(false, refl->HasField(*message, optional_int32));
-
-  EXPECT_EQ(false, refl->HasField(*message, optional_msg));
-  refl->MutableMessage(message, optional_msg);
-  EXPECT_EQ(true, refl->HasField(*message, optional_msg));
-  delete refl->ReleaseMessage(message, optional_msg);
-  EXPECT_EQ(false, refl->HasField(*message, optional_msg));
-
-  // Also ensure that the default instance handles field presence properly.
-  EXPECT_EQ(false, refl->HasField(*proto3_prototype_, optional_msg));
-
-  delete message;
-}
 
 INSTANTIATE_TEST_SUITE_P(UseArena, DynamicMessageTest, ::testing::Bool());
 

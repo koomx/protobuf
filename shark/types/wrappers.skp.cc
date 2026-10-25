@@ -23,8 +23,9 @@ namespace _pbi = _pb::internal;
 namespace shark {
 constexpr DoubleValue::DoubleValue(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/0} {}
 struct DoubleValueDefaultTypeInternal {
   constexpr DoubleValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -36,8 +37,9 @@ struct DoubleValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 DoubleValueDefaultTypeInternal _DoubleValue_default_instance_;
 constexpr FloatValue::FloatValue(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/0} {}
 struct FloatValueDefaultTypeInternal {
   constexpr FloatValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -49,8 +51,9 @@ struct FloatValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 FloatValueDefaultTypeInternal _FloatValue_default_instance_;
 constexpr Int64Value::Int64Value(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/int64_t{0}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/int64_t{0}} {}
 struct Int64ValueDefaultTypeInternal {
   constexpr Int64ValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -62,8 +65,9 @@ struct Int64ValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 Int64ValueDefaultTypeInternal _Int64Value_default_instance_;
 constexpr UInt64Value::UInt64Value(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/uint64_t{0u}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/uint64_t{0u}} {}
 struct UInt64ValueDefaultTypeInternal {
   constexpr UInt64ValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -75,8 +79,9 @@ struct UInt64ValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 UInt64ValueDefaultTypeInternal _UInt64Value_default_instance_;
 constexpr Int32Value::Int32Value(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/0} {}
 struct Int32ValueDefaultTypeInternal {
   constexpr Int32ValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -88,8 +93,9 @@ struct Int32ValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 Int32ValueDefaultTypeInternal _Int32Value_default_instance_;
 constexpr UInt32Value::UInt32Value(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/0u
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/0u} {}
 struct UInt32ValueDefaultTypeInternal {
   constexpr UInt32ValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -101,8 +107,9 @@ struct UInt32ValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 UInt32ValueDefaultTypeInternal _UInt32Value_default_instance_;
 constexpr BoolValue::BoolValue(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/false
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/false} {}
 struct BoolValueDefaultTypeInternal {
   constexpr BoolValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -114,8 +121,9 @@ struct BoolValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 BoolValueDefaultTypeInternal _BoolValue_default_instance_;
 constexpr StringValue::StringValue(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}} {}
 struct StringValueDefaultTypeInternal {
   constexpr StringValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -127,8 +135,9 @@ struct StringValueDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 StringValueDefaultTypeInternal _StringValue_default_instance_;
 constexpr BytesValue::BytesValue(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.value_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.value_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}} {}
 struct BytesValueDefaultTypeInternal {
   constexpr BytesValueDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -144,80 +153,89 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2fwrappers_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2fwrappers_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
+  SHARK_FIELD_OFFSET(::shark::DoubleValue, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::DoubleValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::DoubleValue, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::FloatValue, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::FloatValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::FloatValue, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::Int64Value, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::Int64Value, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::Int64Value, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::UInt64Value, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::UInt64Value, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::UInt64Value, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::Int32Value, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::Int32Value, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::Int32Value, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::UInt32Value, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::UInt32Value, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::UInt32Value, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::BoolValue, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::BoolValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::BoolValue, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::StringValue, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::StringValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::StringValue, _impl_.value_),
-  ~0u,  // no _has_bits_
+  0,
+  SHARK_FIELD_OFFSET(::shark::BytesValue, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::BytesValue, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::BytesValue, _impl_.value_),
+  0,
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::shark::DoubleValue)},
-  { 7, -1, -1, sizeof(::shark::FloatValue)},
-  { 14, -1, -1, sizeof(::shark::Int64Value)},
-  { 21, -1, -1, sizeof(::shark::UInt64Value)},
-  { 28, -1, -1, sizeof(::shark::Int32Value)},
-  { 35, -1, -1, sizeof(::shark::UInt32Value)},
-  { 42, -1, -1, sizeof(::shark::BoolValue)},
-  { 49, -1, -1, sizeof(::shark::StringValue)},
-  { 56, -1, -1, sizeof(::shark::BytesValue)},
+  { 0, 7, -1, sizeof(::shark::DoubleValue)},
+  { 8, 15, -1, sizeof(::shark::FloatValue)},
+  { 16, 23, -1, sizeof(::shark::Int64Value)},
+  { 24, 31, -1, sizeof(::shark::UInt64Value)},
+  { 32, 39, -1, sizeof(::shark::Int32Value)},
+  { 40, 47, -1, sizeof(::shark::UInt32Value)},
+  { 48, 55, -1, sizeof(::shark::BoolValue)},
+  { 56, 63, -1, sizeof(::shark::StringValue)},
+  { 64, 71, -1, sizeof(::shark::BytesValue)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -241,12 +259,11 @@ const char descriptor_table_protodef_shark_2ftypes_2fwrappers_2eshark[] SHARK_SE
   "\005value\030\001 \001(\r\"\032\n\tBoolValue\022\r\n\005value\030\001 \001(\010"
   "\"\034\n\013StringValue\022\r\n\005value\030\001 \001(\t\"\033\n\nBytesV"
   "alue\022\r\n\005value\030\001 \001(\014B6Z1google.golang.org"
-  "/protobuf/types/known/wrapperspb\370\001\001b\006pro"
-  "to3"
+  "/protobuf/types/known/wrapperspb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fwrappers_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fwrappers_2eshark = {
-    false, false, 363, descriptor_table_protodef_shark_2ftypes_2fwrappers_2eshark,
+    false, false, 355, descriptor_table_protodef_shark_2ftypes_2fwrappers_2eshark,
     "shark/types/wrappers.shark",
     &descriptor_table_shark_2ftypes_2fwrappers_2eshark_once, nullptr, 0, 9,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fwrappers_2eshark::offsets,
@@ -265,6 +282,10 @@ namespace shark {
 
 class DoubleValue::_Internal {
  public:
+  using HasBits = decltype(std::declval<DoubleValue>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 DoubleValue::DoubleValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -277,8 +298,9 @@ DoubleValue::DoubleValue(const DoubleValue& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   DoubleValue* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -290,8 +312,9 @@ inline void DoubleValue::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){0}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){0}
   };
 }
 
@@ -319,18 +342,21 @@ void DoubleValue::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = 0;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* DoubleValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // double value = 1;
+      // optional double value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 9)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::UnalignedLoad<double>(ptr);
           ptr += sizeof(double);
         } else
@@ -352,6 +378,7 @@ const char* DoubleValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -365,12 +392,9 @@ uint8_t* DoubleValue::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // double value = 1;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_value = this->_internal_value();
-  uint64_t raw_value;
-  memcpy(&raw_value, &tmp_value, sizeof(tmp_value));
-  if (raw_value != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional double value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteDoubleToArray(1, this->_internal_value(), target);
   }
@@ -391,12 +415,9 @@ size_t DoubleValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // double value = 1;
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_value = this->_internal_value();
-  uint64_t raw_value;
-  memcpy(&raw_value, &tmp_value, sizeof(tmp_value));
-  if (raw_value != 0) {
+  // optional double value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 + 8;
   }
 
@@ -418,11 +439,7 @@ void DoubleValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  static_assert(sizeof(uint64_t) == sizeof(double), "Code assumes uint64_t and double are the same size.");
-  double tmp_value = from._internal_value();
-  uint64_t raw_value;
-  memcpy(&raw_value, &tmp_value, sizeof(tmp_value));
-  if (raw_value != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -442,6 +459,7 @@ bool DoubleValue::IsInitialized() const {
 void DoubleValue::InternalSwap(DoubleValue* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -455,6 +473,10 @@ void DoubleValue::InternalSwap(DoubleValue* other) {
 
 class FloatValue::_Internal {
  public:
+  using HasBits = decltype(std::declval<FloatValue>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 FloatValue::FloatValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -467,8 +489,9 @@ FloatValue::FloatValue(const FloatValue& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   FloatValue* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -480,8 +503,9 @@ inline void FloatValue::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){0}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){0}
   };
 }
 
@@ -509,18 +533,21 @@ void FloatValue::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = 0;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* FloatValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // float value = 1;
+      // optional float value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 13)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::UnalignedLoad<float>(ptr);
           ptr += sizeof(float);
         } else
@@ -542,6 +569,7 @@ const char* FloatValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -555,12 +583,9 @@ uint8_t* FloatValue::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // float value = 1;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_value = this->_internal_value();
-  uint32_t raw_value;
-  memcpy(&raw_value, &tmp_value, sizeof(tmp_value));
-  if (raw_value != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional float value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteFloatToArray(1, this->_internal_value(), target);
   }
@@ -581,12 +606,9 @@ size_t FloatValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // float value = 1;
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_value = this->_internal_value();
-  uint32_t raw_value;
-  memcpy(&raw_value, &tmp_value, sizeof(tmp_value));
-  if (raw_value != 0) {
+  // optional float value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 + 4;
   }
 
@@ -608,11 +630,7 @@ void FloatValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  static_assert(sizeof(uint32_t) == sizeof(float), "Code assumes uint32_t and float are the same size.");
-  float tmp_value = from._internal_value();
-  uint32_t raw_value;
-  memcpy(&raw_value, &tmp_value, sizeof(tmp_value));
-  if (raw_value != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -632,6 +650,7 @@ bool FloatValue::IsInitialized() const {
 void FloatValue::InternalSwap(FloatValue* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -645,6 +664,10 @@ void FloatValue::InternalSwap(FloatValue* other) {
 
 class Int64Value::_Internal {
  public:
+  using HasBits = decltype(std::declval<Int64Value>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 Int64Value::Int64Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -657,8 +680,9 @@ Int64Value::Int64Value(const Int64Value& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   Int64Value* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -670,8 +694,9 @@ inline void Int64Value::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){int64_t{0}}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){int64_t{0}}
   };
 }
 
@@ -699,18 +724,21 @@ void Int64Value::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = int64_t{0};
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Int64Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int64 value = 1;
+      // optional int64 value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
@@ -732,6 +760,7 @@ const char* Int64Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -745,8 +774,9 @@ uint8_t* Int64Value::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 value = 1;
-  if (this->_internal_value() != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional int64 value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt64ToArray(1, this->_internal_value(), target);
   }
@@ -767,8 +797,9 @@ size_t Int64Value::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int64 value = 1;
-  if (this->_internal_value() != 0) {
+  // optional int64 value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_value());
   }
 
@@ -790,7 +821,7 @@ void Int64Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_value() != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -810,6 +841,7 @@ bool Int64Value::IsInitialized() const {
 void Int64Value::InternalSwap(Int64Value* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -823,6 +855,10 @@ void Int64Value::InternalSwap(Int64Value* other) {
 
 class UInt64Value::_Internal {
  public:
+  using HasBits = decltype(std::declval<UInt64Value>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 UInt64Value::UInt64Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -835,8 +871,9 @@ UInt64Value::UInt64Value(const UInt64Value& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   UInt64Value* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -848,8 +885,9 @@ inline void UInt64Value::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){uint64_t{0u}}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){uint64_t{0u}}
   };
 }
 
@@ -877,18 +915,21 @@ void UInt64Value::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = uint64_t{0u};
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* UInt64Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // uint64 value = 1;
+      // optional uint64 value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
@@ -910,6 +951,7 @@ const char* UInt64Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -923,8 +965,9 @@ uint8_t* UInt64Value::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint64 value = 1;
-  if (this->_internal_value() != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional uint64 value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(1, this->_internal_value(), target);
   }
@@ -945,8 +988,9 @@ size_t UInt64Value::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint64 value = 1;
-  if (this->_internal_value() != 0) {
+  // optional uint64 value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += ::_pbi::WireFormatLite::UInt64SizePlusOne(this->_internal_value());
   }
 
@@ -968,7 +1012,7 @@ void UInt64Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_value() != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -988,6 +1032,7 @@ bool UInt64Value::IsInitialized() const {
 void UInt64Value::InternalSwap(UInt64Value* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -1001,6 +1046,10 @@ void UInt64Value::InternalSwap(UInt64Value* other) {
 
 class Int32Value::_Internal {
  public:
+  using HasBits = decltype(std::declval<Int32Value>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 Int32Value::Int32Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1013,8 +1062,9 @@ Int32Value::Int32Value(const Int32Value& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   Int32Value* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -1026,8 +1076,9 @@ inline void Int32Value::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){0}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){0}
   };
 }
 
@@ -1055,18 +1106,21 @@ void Int32Value::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = 0;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Int32Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int32 value = 1;
+      // optional int32 value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -1088,6 +1142,7 @@ const char* Int32Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1101,8 +1156,9 @@ uint8_t* Int32Value::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int32 value = 1;
-  if (this->_internal_value() != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional int32 value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(1, this->_internal_value(), target);
   }
@@ -1123,8 +1179,9 @@ size_t Int32Value::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int32 value = 1;
-  if (this->_internal_value() != 0) {
+  // optional int32 value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_value());
   }
 
@@ -1146,7 +1203,7 @@ void Int32Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_value() != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1166,6 +1223,7 @@ bool Int32Value::IsInitialized() const {
 void Int32Value::InternalSwap(Int32Value* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -1179,6 +1237,10 @@ void Int32Value::InternalSwap(Int32Value* other) {
 
 class UInt32Value::_Internal {
  public:
+  using HasBits = decltype(std::declval<UInt32Value>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 UInt32Value::UInt32Value(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1191,8 +1253,9 @@ UInt32Value::UInt32Value(const UInt32Value& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   UInt32Value* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -1204,8 +1267,9 @@ inline void UInt32Value::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){0u}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){0u}
   };
 }
 
@@ -1233,18 +1297,21 @@ void UInt32Value::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = 0u;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* UInt32Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // uint32 value = 1;
+      // optional uint32 value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -1266,6 +1333,7 @@ const char* UInt32Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1279,8 +1347,9 @@ uint8_t* UInt32Value::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // uint32 value = 1;
-  if (this->_internal_value() != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional uint32 value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteUInt32ToArray(1, this->_internal_value(), target);
   }
@@ -1301,8 +1370,9 @@ size_t UInt32Value::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // uint32 value = 1;
-  if (this->_internal_value() != 0) {
+  // optional uint32 value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += ::_pbi::WireFormatLite::UInt32SizePlusOne(this->_internal_value());
   }
 
@@ -1324,7 +1394,7 @@ void UInt32Value::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_value() != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1344,6 +1414,7 @@ bool UInt32Value::IsInitialized() const {
 void UInt32Value::InternalSwap(UInt32Value* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -1357,6 +1428,10 @@ void UInt32Value::InternalSwap(UInt32Value* other) {
 
 class BoolValue::_Internal {
  public:
+  using HasBits = decltype(std::declval<BoolValue>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 BoolValue::BoolValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1369,8 +1444,9 @@ BoolValue::BoolValue(const BoolValue& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   BoolValue* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _this->_impl_.value_ = from._impl_.value_;
@@ -1382,8 +1458,9 @@ inline void BoolValue::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){false}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){false}
   };
 }
 
@@ -1411,18 +1488,21 @@ void BoolValue::Clear() {
   (void) cached_has_bits;
 
   _impl_.value_ = false;
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* BoolValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // bool value = 1;
+      // optional bool value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _Internal::set_has_value(&has_bits);
           _impl_.value_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
@@ -1444,6 +1524,7 @@ const char* BoolValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1457,8 +1538,9 @@ uint8_t* BoolValue::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bool value = 1;
-  if (this->_internal_value() != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional bool value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_value(), target);
   }
@@ -1479,8 +1561,9 @@ size_t BoolValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // bool value = 1;
-  if (this->_internal_value() != 0) {
+  // optional bool value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 + 1;
   }
 
@@ -1502,7 +1585,7 @@ void BoolValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_N
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_value() != 0) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1522,6 +1605,7 @@ bool BoolValue::IsInitialized() const {
 void BoolValue::InternalSwap(BoolValue* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   swap(_impl_.value_, other->_impl_.value_);
 }
 
@@ -1535,6 +1619,10 @@ void BoolValue::InternalSwap(BoolValue* other) {
 
 class StringValue::_Internal {
  public:
+  using HasBits = decltype(std::declval<StringValue>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 StringValue::StringValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1547,15 +1635,16 @@ StringValue::StringValue(const StringValue& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   StringValue* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.value_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.value_.Set("", GetArenaForAllocation());
   #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_value().empty()) {
+  if (from._internal_has_value()) {
     _this->_impl_.value_.Set(from._internal_value(), 
       _this->GetArenaForAllocation());
   }
@@ -1567,8 +1656,9 @@ inline void StringValue::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}
   };
   _impl_.value_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -1600,23 +1690,30 @@ void StringValue::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.value_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _impl_.value_.ClearNonDefaultToEmpty();
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* StringValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string value = 1;
+      // optional string value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_value();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "shark.StringValue.value"));
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "shark.StringValue.value");
+          #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
@@ -1636,6 +1733,7 @@ const char* StringValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1649,11 +1747,12 @@ uint8_t* StringValue::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string value = 1;
-  if (!this->_internal_value().empty()) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional string value = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_value().data(), static_cast<int>(this->_internal_value().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "shark.StringValue.value");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_value(), target);
@@ -1675,8 +1774,9 @@ size_t StringValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string value = 1;
-  if (!this->_internal_value().empty()) {
+  // optional string value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_value());
@@ -1700,7 +1800,7 @@ void StringValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_value().empty()) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1722,6 +1822,7 @@ void StringValue::InternalSwap(StringValue* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.value_, lhs_arena,
       &other->_impl_.value_, rhs_arena
@@ -1738,6 +1839,10 @@ void StringValue::InternalSwap(StringValue* other) {
 
 class BytesValue::_Internal {
  public:
+  using HasBits = decltype(std::declval<BytesValue>()._impl_._has_bits_);
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 BytesValue::BytesValue(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -1750,15 +1855,16 @@ BytesValue::BytesValue(const BytesValue& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   BytesValue* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.value_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.value_.Set("", GetArenaForAllocation());
   #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_value().empty()) {
+  if (from._internal_has_value()) {
     _this->_impl_.value_.Set(from._internal_value(), 
       _this->GetArenaForAllocation());
   }
@@ -1770,8 +1876,9 @@ inline void BytesValue::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.value_){}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.value_){}
   };
   _impl_.value_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -1803,17 +1910,22 @@ void BytesValue::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.value_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _impl_.value_.ClearNonDefaultToEmpty();
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* BytesValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // bytes value = 1;
+      // optional bytes value = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_value();
@@ -1838,6 +1950,7 @@ const char* BytesValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ct
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -1851,8 +1964,9 @@ uint8_t* BytesValue::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // bytes value = 1;
-  if (!this->_internal_value().empty()) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional bytes value = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->WriteBytesMaybeAliased(
         1, this->_internal_value(), target);
   }
@@ -1873,8 +1987,9 @@ size_t BytesValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // bytes value = 1;
-  if (!this->_internal_value().empty()) {
+  // optional bytes value = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
         this->_internal_value());
@@ -1898,7 +2013,7 @@ void BytesValue::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_value().empty()) {
+  if (from._internal_has_value()) {
     _this->_internal_set_value(from._internal_value());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -1920,6 +2035,7 @@ void BytesValue::InternalSwap(BytesValue* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.value_, lhs_arena,
       &other->_impl_.value_, rhs_arena

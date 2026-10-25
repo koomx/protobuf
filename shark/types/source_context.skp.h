@@ -86,6 +86,13 @@ class SourceContext final :
     return *this;
   }
 
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }
@@ -178,7 +185,11 @@ class SourceContext final :
   enum : int {
     kFileNameFieldNumber = 1,
   };
-  // string file_name = 1;
+  // optional string file_name = 1;
+  bool has_file_name() const;
+  private:
+  bool _internal_has_file_name() const;
+  public:
   void clear_file_name();
   const std::string& file_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -200,8 +211,9 @@ class SourceContext final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr file_name_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fsource_5fcontext_2eshark;
@@ -217,9 +229,17 @@ class SourceContext final :
 #endif  // __GNUC__
 // SourceContext
 
-// string file_name = 1;
+// optional string file_name = 1;
+inline bool SourceContext::_internal_has_file_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool SourceContext::has_file_name() const {
+  return _internal_has_file_name();
+}
 inline void SourceContext::clear_file_name() {
   _impl_.file_name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& SourceContext::file_name() const {
   // @@protoc_insertion_point(field_get:shark.SourceContext.file_name)
@@ -228,7 +248,7 @@ inline const std::string& SourceContext::file_name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void SourceContext::set_file_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.file_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.SourceContext.file_name)
 }
@@ -241,22 +261,32 @@ inline const std::string& SourceContext::_internal_file_name() const {
   return _impl_.file_name_.Get();
 }
 inline void SourceContext::_internal_set_file_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.file_name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* SourceContext::_internal_mutable_file_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.file_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* SourceContext::release_file_name() {
   // @@protoc_insertion_point(field_release:shark.SourceContext.file_name)
-  return _impl_.file_name_.Release();
+  if (!_internal_has_file_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.file_name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.file_name_.IsDefault()) {
+    _impl_.file_name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void SourceContext::set_allocated_file_name(std::string* file_name) {
   if (file_name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.file_name_.SetAllocated(file_name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING

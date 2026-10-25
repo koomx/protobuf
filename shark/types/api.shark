@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package shark;
 
@@ -49,7 +49,7 @@ option go_package = "google.golang.org/protobuf/types/known/apipb";
 message Api {
   // The fully qualified name of this interface, including package name
   // followed by the interface's simple name.
-  string name = 1;
+  optional string name = 1;
 
   // The methods of this interface, in unspecified order.
   repeated Method methods = 2;
@@ -78,41 +78,41 @@ message Api {
   // experimental, non-GA interfaces.
   //
   //
-  string version = 4;
+  optional string version = 4;
 
   // Source context for the protocol buffer service represented by this
   // message.
-  SourceContext source_context = 5;
+  optional SourceContext source_context = 5;
 
   // Included interfaces. See [Mixin][].
   repeated Mixin mixins = 6;
 
   // The source syntax of the service.
-  Syntax syntax = 7;
+  optional Syntax syntax = 7;
 }
 
 // Method represents a method of an API interface.
 message Method {
   // The simple name of this method.
-  string name = 1;
+  optional string name = 1;
 
   // A URL of the input message type.
-  string request_type_url = 2;
+  optional string request_type_url = 2;
 
   // If true, the request is streamed.
-  bool request_streaming = 3;
+  optional bool request_streaming = 3;
 
   // The URL of the output message type.
-  string response_type_url = 4;
+  optional string response_type_url = 4;
 
   // If true, the response is streamed.
-  bool response_streaming = 5;
+  optional bool response_streaming = 5;
 
   // Any metadata attached to the method.
   repeated Option options = 6;
 
   // The source syntax of this method.
-  Syntax syntax = 7;
+  optional Syntax syntax = 7;
 }
 
 // Declares an API Interface to be included in this interface. The including
@@ -195,9 +195,9 @@ message Method {
 //     }
 message Mixin {
   // The fully qualified name of the interface which is included.
-  string name = 1;
+  optional string name = 1;
 
   // If non-empty specifies a path under which inherited HTTP paths
   // are rooted.
-  string root = 2;
+  optional string root = 2;
 }

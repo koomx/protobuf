@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package sharkbuf_unittest;
 
@@ -36,8 +36,8 @@ import "shark/types/any.shark";
 
 
 message TestAny {
-  int32 int32_value = 1;
-  shark.Any any_value = 2;
+  optional int32 int32_value = 1;
+  optional shark.Any any_value = 2;
   repeated shark.Any repeated_any_value = 3;
-  string text = 4;
+  optional string text = 4;
 }

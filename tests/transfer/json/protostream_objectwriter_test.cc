@@ -45,7 +45,6 @@
 #include <tests/transfer/json/testdata/field_mask.skp.h>
 #include <tests/transfer/json/testdata/maps.skp.h>
 #include <tests/transfer/json/testdata/oneofs.skp.h>
-#include <tests/transfer/json/testdata/proto3.skp.h>
 #include <tests/transfer/json/testdata/struct.skp.h>
 #include <tests/transfer/json/testdata/timestamp_duration.skp.h>
 #include <tests/transfer/json/testdata/wrappers.skp.h>
@@ -71,7 +70,6 @@ using proto_util_converter::testing::FieldMaskTest;
 using proto_util_converter::testing::Int32Wrapper;
 using proto_util_converter::testing::MapIn;
 using proto_util_converter::testing::Primitive;
-using proto_util_converter::testing::Proto3Message;
 using proto_util_converter::testing::Publisher;
 using proto_util_converter::testing::StructType;
 using proto_util_converter::testing::TestJsonName1;
@@ -1042,36 +1040,6 @@ TEST_P(ProtoStreamObjectWriterTest, IgnoreUnknownListAtPublisher) {
       ->EndObject()
       ->RenderString("title", "Brainwashing")
       ->EndObject();
-  CheckOutput(expected);
-}
-
-TEST_P(ProtoStreamObjectWriterTest,
-       IgnoreUnknownFieldsDontIgnoreUnknownEnumValues) {
-  ResetTypeInfo(Proto3Message::descriptor());
-
-  Proto3Message expected;
-  EXPECT_CALL(
-      listener_,
-      InvalidValue(_,
-                   StringPiece(
-                       "type.googleapis.com/"
-                       "proto_util_converter.testing.Proto3Message.NestedEnum"),
-                   StringPiece("\"someunknownvalueyouwillneverknow\"")))
-      .With(Args<0>(HasObjectLocation("enum_value")));
-  ow_->StartObject("")
-      ->RenderString("enumValue", "someunknownvalueyouwillneverknow")
-      ->EndObject();
-  CheckOutput(expected);
-}
-
-TEST_P(ProtoStreamObjectWriterTest, AcceptUnknownEnumValue) {
-  ResetTypeInfo(Proto3Message::descriptor());
-
-  Proto3Message expected;
-  expected.set_enum_value(static_cast<Proto3Message::NestedEnum>(12345));
-
-  EXPECT_CALL(listener_, InvalidValue(_, _, _)).Times(0);
-  ow_->StartObject("")->RenderInt32("enumValue", 12345)->EndObject();
   CheckOutput(expected);
 }
 

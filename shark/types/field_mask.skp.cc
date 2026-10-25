@@ -60,11 +60,11 @@ const char descriptor_table_protodef_shark_2ftypes_2ffield_5fmask_2eshark[] SHAR
   "\n\034shark/types/field_mask.shark\022\005shark\"\032\n"
   "\tFieldMask\022\r\n\005paths\030\001 \003(\tB7Z2google.gola"
   "ng.org/protobuf/types/known/fieldmaskpb\370"
-  "\001\001b\006proto3"
+  "\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark = {
-    false, false, 130, descriptor_table_protodef_shark_2ftypes_2ffield_5fmask_2eshark,
+    false, false, 122, descriptor_table_protodef_shark_2ftypes_2ffield_5fmask_2eshark,
     "shark/types/field_mask.shark",
     &descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2ffield_5fmask_2eshark::offsets,
@@ -155,7 +155,9 @@ const char* FieldMask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
             auto str = _internal_add_paths();
             ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
             CHK_(ptr);
-            CHK_(::_pbi::VerifyUTF8(str, "shark.FieldMask.paths"));
+            #ifndef NDEBUG
+            ::_pbi::VerifyUTF8(str, "shark.FieldMask.paths");
+            #endif  // !NDEBUG
             if (!ctx->DataAvailable(ptr)) break;
           } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
         } else
@@ -193,9 +195,9 @@ uint8_t* FieldMask::_InternalSerialize(
   // repeated string paths = 1;
   for (int i = 0, n = this->_internal_paths_size(); i < n; i++) {
     const auto& s = this->_internal_paths(i);
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       s.data(), static_cast<int>(s.length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "shark.FieldMask.paths");
     target = stream->WriteString(1, s, target);
   }

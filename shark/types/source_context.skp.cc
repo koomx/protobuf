@@ -23,8 +23,9 @@ namespace _pbi = _pb::internal;
 namespace shark {
 constexpr SourceContext::SourceContext(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.file_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.file_name_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}} {}
 struct SourceContextDefaultTypeInternal {
   constexpr SourceContextDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -40,16 +41,17 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2fsource_5fcontext_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2fsource_5fcontext_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
+  SHARK_FIELD_OFFSET(::shark::SourceContext, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::SourceContext, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
   ~0u,  // no _weak_field_map_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::SourceContext, _impl_.file_name_),
+  0,
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::shark::SourceContext)},
+  { 0, 7, -1, sizeof(::shark::SourceContext)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -60,11 +62,11 @@ const char descriptor_table_protodef_shark_2ftypes_2fsource_5fcontext_2eshark[] 
   "\n shark/types/source_context.shark\022\005shar"
   "k\"\"\n\rSourceContext\022\021\n\tfile_name\030\001 \001(\tB8Z"
   "6google.golang.org/protobuf/types/known/"
-  "sourcecontextpbb\006proto3"
+  "sourcecontextpb"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fsource_5fcontext_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fsource_5fcontext_2eshark = {
-    false, false, 143, descriptor_table_protodef_shark_2ftypes_2fsource_5fcontext_2eshark,
+    false, false, 135, descriptor_table_protodef_shark_2ftypes_2fsource_5fcontext_2eshark,
     "shark/types/source_context.shark",
     &descriptor_table_shark_2ftypes_2fsource_5fcontext_2eshark_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fsource_5fcontext_2eshark::offsets,
@@ -83,6 +85,10 @@ namespace shark {
 
 class SourceContext::_Internal {
  public:
+  using HasBits = decltype(std::declval<SourceContext>()._impl_._has_bits_);
+  static void set_has_file_name(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
 };
 
 SourceContext::SourceContext(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -95,15 +101,16 @@ SourceContext::SourceContext(const SourceContext& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   SourceContext* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.file_name_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.file_name_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   _impl_.file_name_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.file_name_.Set("", GetArenaForAllocation());
   #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_file_name().empty()) {
+  if (from._internal_has_file_name()) {
     _this->_impl_.file_name_.Set(from._internal_file_name(), 
       _this->GetArenaForAllocation());
   }
@@ -115,8 +122,9 @@ inline void SourceContext::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.file_name_){}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.file_name_){}
   };
   _impl_.file_name_.InitDefault();
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -148,23 +156,30 @@ void SourceContext::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.file_name_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
+    _impl_.file_name_.ClearNonDefaultToEmpty();
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* SourceContext::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string file_name = 1;
+      // optional string file_name = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_file_name();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "shark.SourceContext.file_name"));
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "shark.SourceContext.file_name");
+          #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
@@ -184,6 +199,7 @@ const char* SourceContext::_InternalParse(const char* ptr, ::_pbi::ParseContext*
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -197,11 +213,12 @@ uint8_t* SourceContext::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string file_name = 1;
-  if (!this->_internal_file_name().empty()) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional string file_name = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_file_name().data(), static_cast<int>(this->_internal_file_name().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "shark.SourceContext.file_name");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_file_name(), target);
@@ -223,8 +240,9 @@ size_t SourceContext::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string file_name = 1;
-  if (!this->_internal_file_name().empty()) {
+  // optional string file_name = 1;
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000001u) {
     total_size += 1 +
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
         this->_internal_file_name());
@@ -248,7 +266,7 @@ void SourceContext::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHA
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_file_name().empty()) {
+  if (from._internal_has_file_name()) {
     _this->_internal_set_file_name(from._internal_file_name());
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -270,6 +288,7 @@ void SourceContext::InternalSwap(SourceContext* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.file_name_, lhs_arena,
       &other->_impl_.file_name_, rhs_arena

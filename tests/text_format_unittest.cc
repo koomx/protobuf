@@ -58,7 +58,6 @@
 #include <tests/types/map_unittest.skp.h>
 #include <tests/unittest.skp.h>
 #include <tests/unittest_mset.skp.h>
-#include <tests/unittest_proto3.skp.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -821,37 +820,6 @@ namespace shark {
             EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto));
             EXPECT_TRUE(proto.has_sparse_enum());
             EXPECT_EQ(unittest::SPARSE_E, proto.sparse_enum());
-        }
-
-        TEST_F(TextFormatTest, PrintUnknownEnumFieldProto3) {
-            proto3_unittest::TestAllTypes proto;
-
-            proto.add_repeated_nested_enum(
-                static_cast<proto3_unittest::TestAllTypes::NestedEnum>(10));
-            proto.add_repeated_nested_enum(
-                static_cast<proto3_unittest::TestAllTypes::NestedEnum>(-10));
-            proto.add_repeated_nested_enum(
-                static_cast<proto3_unittest::TestAllTypes::NestedEnum>(2147483647));
-            proto.add_repeated_nested_enum(
-                static_cast<proto3_unittest::TestAllTypes::NestedEnum>(-2147483648));
-
-            EXPECT_EQ(StrCat("repeated_nested_enum: ", kDebugStringSilentMarker,
-                          "10\n"
-                          "repeated_nested_enum: -10\n"
-                          "repeated_nested_enum: 2147483647\n"
-                          "repeated_nested_enum: -2147483648\n"),
-                proto.DebugString());
-        }
-
-        TEST_F(TextFormatTest, ParseUnknownEnumFieldProto3) {
-            proto3_unittest::TestAllTypes proto;
-            std::string parse_string = "repeated_nested_enum: [10, -10, 2147483647, -2147483648]";
-            EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto));
-            ASSERT_EQ(4, proto.repeated_nested_enum_size());
-            EXPECT_EQ(10, proto.repeated_nested_enum(0));
-            EXPECT_EQ(-10, proto.repeated_nested_enum(1));
-            EXPECT_EQ(2147483647, proto.repeated_nested_enum(2));
-            EXPECT_EQ(-2147483648, proto.repeated_nested_enum(3));
         }
 
         TEST_F(TextFormatTest, ParseStringEscape) {
@@ -2229,13 +2197,13 @@ namespace shark {
         }
 
         TEST(TextFormatFloatingPointTest, PreservesNegative0) {
-            proto3_unittest::TestAllTypes in_message;
+            sharkbuf_unittest::TestAllTypes in_message;
             in_message.set_optional_float(-0.0f);
             in_message.set_optional_double(-0.0);
             TextFormat::Printer printer;
             std::string serialized;
             EXPECT_TRUE(printer.PrintToString(in_message, &serialized));
-            proto3_unittest::TestAllTypes out_message;
+            sharkbuf_unittest::TestAllTypes out_message;
             TextFormat::Parser parser;
             EXPECT_TRUE(parser.ParseFromString(serialized, &out_message));
             EXPECT_EQ(in_message.optional_float(), out_message.optional_float());

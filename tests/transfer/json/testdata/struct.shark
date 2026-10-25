@@ -28,60 +28,60 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package proto_util_converter.testing;
 
 import "shark/types/struct.shark";
 
 message StructTestCases {
-  StructWrapper empty_value = 1;
-  StructWrapper empty_value2 = 2;
-  StructWrapper null_value = 3;
-  StructWrapper simple_struct = 4;
-  StructWrapper longer_struct = 5;
-  StructWrapper struct_with_nested_struct = 6;
-  StructWrapper struct_with_nested_list = 7;
-  StructWrapper struct_with_list_of_nulls = 8;
-  StructWrapper struct_with_list_of_lists = 9;
-  StructWrapper struct_with_list_of_structs = 10;
-  StructWrapper struct_with_empty_list = 11;
-  StructWrapper struct_with_list_with_empty_struct = 12;
-  shark.Struct top_level_struct = 13;
-  shark.Struct top_level_struct_with_empty_list = 14;
-  shark.Struct top_level_struct_with_list_with_empty_struct = 15;
-  ValueWrapper value_wrapper_simple = 16;
-  ValueWrapper value_wrapper_with_struct = 17;
-  ValueWrapper value_wrapper_with_list = 18;
-  ValueWrapper value_wrapper_with_empty_list = 19;
-  ValueWrapper value_wrapper_with_list_with_empty_struct = 20;
-  ListValueWrapper list_value_wrapper = 21;
-  ListValueWrapper list_value_wrapper_with_empty_list = 22;
-  ListValueWrapper list_value_wrapper_with_list_with_empty_struct = 23;
-  shark.Value top_level_value_simple = 24;
-  shark.Value top_level_value_with_struct = 25;
-  shark.Value top_level_value_with_list = 26;
-  shark.Value top_level_value_with_empty_list = 27;
-  shark.Value top_level_value_with_list_with_empty_struct = 28;
-  shark.ListValue top_level_listvalue = 29;
-  shark.ListValue top_level_empty_listvalue = 30;
-  shark.ListValue top_level_listvalue_with_empty_struct = 31;
-  RepeatedValueWrapper repeated_value = 32;
-  RepeatedValueWrapper repeated_value_nested_list = 33;
-  RepeatedValueWrapper repeated_value_nested_list2 = 34;
-  RepeatedValueWrapper repeated_value_nested_list3 = 35;
-  RepeatedListValueWrapper repeated_listvalue = 36;
-  MapOfStruct map_of_struct = 37;
-  MapOfStruct map_of_struct_value = 38;
-  MapOfStruct map_of_listvalue = 39;
+  optional StructWrapper empty_value = 1;
+  optional StructWrapper empty_value2 = 2;
+  optional StructWrapper null_value = 3;
+  optional StructWrapper simple_struct = 4;
+  optional StructWrapper longer_struct = 5;
+  optional StructWrapper struct_with_nested_struct = 6;
+  optional StructWrapper struct_with_nested_list = 7;
+  optional StructWrapper struct_with_list_of_nulls = 8;
+  optional StructWrapper struct_with_list_of_lists = 9;
+  optional StructWrapper struct_with_list_of_structs = 10;
+  optional StructWrapper struct_with_empty_list = 11;
+  optional StructWrapper struct_with_list_with_empty_struct = 12;
+  optional shark.Struct top_level_struct = 13;
+  optional shark.Struct top_level_struct_with_empty_list = 14;
+  optional shark.Struct top_level_struct_with_list_with_empty_struct = 15;
+  optional ValueWrapper value_wrapper_simple = 16;
+  optional ValueWrapper value_wrapper_with_struct = 17;
+  optional ValueWrapper value_wrapper_with_list = 18;
+  optional ValueWrapper value_wrapper_with_empty_list = 19;
+  optional ValueWrapper value_wrapper_with_list_with_empty_struct = 20;
+  optional ListValueWrapper list_value_wrapper = 21;
+  optional ListValueWrapper list_value_wrapper_with_empty_list = 22;
+  optional ListValueWrapper list_value_wrapper_with_list_with_empty_struct = 23;
+  optional shark.Value top_level_value_simple = 24;
+  optional shark.Value top_level_value_with_struct = 25;
+  optional shark.Value top_level_value_with_list = 26;
+  optional shark.Value top_level_value_with_empty_list = 27;
+  optional shark.Value top_level_value_with_list_with_empty_struct = 28;
+  optional shark.ListValue top_level_listvalue = 29;
+  optional shark.ListValue top_level_empty_listvalue = 30;
+  optional shark.ListValue top_level_listvalue_with_empty_struct = 31;
+  optional RepeatedValueWrapper repeated_value = 32;
+  optional RepeatedValueWrapper repeated_value_nested_list = 33;
+  optional RepeatedValueWrapper repeated_value_nested_list2 = 34;
+  optional RepeatedValueWrapper repeated_value_nested_list3 = 35;
+  optional RepeatedListValueWrapper repeated_listvalue = 36;
+  optional MapOfStruct map_of_struct = 37;
+  optional MapOfStruct map_of_struct_value = 38;
+  optional MapOfStruct map_of_listvalue = 39;
 }
 
 message StructWrapper {
-  shark.Struct struct = 1;
+  optional shark.Struct struct = 1;
 }
 
 message ValueWrapper {
-  shark.Value value = 1;
+  optional shark.Value value = 1;
 }
 
 message RepeatedValueWrapper {
@@ -89,7 +89,7 @@ message RepeatedValueWrapper {
 }
 
 message ListValueWrapper {
-  shark.ListValue shopping_list = 1;
+  optional shark.ListValue shopping_list = 1;
 }
 
 message RepeatedListValueWrapper {
@@ -105,7 +105,7 @@ message MapOfStruct {
 // Hack to test return types with Struct as top-level message. Struct typers
 // cannot be directly used in API requests. Hence using Dummy as request type.
 message Dummy {
-  string text = 1;
+  optional string text = 1;
 }
 
 service StructTestService {
@@ -113,5 +113,5 @@ service StructTestService {
 }
 
 message StructType {
-  shark.Struct object = 1;
+  optional shark.Struct object = 1;
 }

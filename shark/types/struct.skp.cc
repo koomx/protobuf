@@ -143,11 +143,10 @@ const char descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark[] SHARK_SECT
   "stValue\022\034\n\006values\030\001 \003(\0132\014.shark.Value*\033\n"
   "\tNullValue\022\016\n\nNULL_VALUE\020\000B4Z/google.gol"
   "ang.org/protobuf/types/known/structpb\370\001\001"
-  "b\006proto3"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fstruct_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fstruct_2eshark = {
-    false, false, 488, descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark,
+    false, false, 480, descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark,
     "shark/types/struct.shark",
     &descriptor_table_shark_2ftypes_2fstruct_2eshark_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fstruct_2eshark::offsets,
@@ -315,9 +314,9 @@ uint8_t* Struct::_InternalSerialize(
     const auto& map_field = this->_internal_fields();
     auto check_utf8 = [](const MapType::value_type& entry) {
       (void)entry;
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+      ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
         entry.first.data(), static_cast<int>(entry.first.length()),
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+        ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
         "shark.Struct.FieldsEntry.key");
     };
 
@@ -614,7 +613,9 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
           auto str = _internal_mutable_string_value();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "shark.Value.string_value"));
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "shark.Value.string_value");
+          #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
@@ -671,49 +672,46 @@ uint8_t* Value::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // .shark.NullValue null_value = 1;
-  if (_internal_has_null_value()) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteEnumToArray(
-      1, this->_impl_.kind_.null_value_, target);
+  switch (kind_case()) {
+    case kNullValue: {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteEnumToArray(
+        1, this->_impl_.kind_.null_value_, target);
+      break;
+    }
+    case kNumberValue: {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteDoubleToArray(2, this->_internal_number_value(), target);
+      break;
+    }
+    case kStringValue: {
+      ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+        this->_internal_string_value().data(), static_cast<int>(this->_internal_string_value().length()),
+        ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+        "shark.Value.string_value");
+      target = stream->WriteStringMaybeAliased(
+          3, this->_internal_string_value(), target);
+      break;
+    }
+    case kBoolValue: {
+      target = stream->EnsureSpace(target);
+      target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_bool_value(), target);
+      break;
+    }
+    case kStructValue: {
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(5, _Internal::struct_value(this),
+          _Internal::struct_value(this).GetCachedSize(), target, stream);
+      break;
+    }
+    case kListValue: {
+      target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
+        InternalWriteMessage(6, _Internal::list_value(this),
+          _Internal::list_value(this).GetCachedSize(), target, stream);
+      break;
+    }
+    default: ;
   }
-
-  // double number_value = 2;
-  if (_internal_has_number_value()) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteDoubleToArray(2, this->_internal_number_value(), target);
-  }
-
-  // string string_value = 3;
-  if (_internal_has_string_value()) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
-      this->_internal_string_value().data(), static_cast<int>(this->_internal_string_value().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
-      "shark.Value.string_value");
-    target = stream->WriteStringMaybeAliased(
-        3, this->_internal_string_value(), target);
-  }
-
-  // bool bool_value = 4;
-  if (_internal_has_bool_value()) {
-    target = stream->EnsureSpace(target);
-    target = ::_pbi::WireFormatLite::WriteBoolToArray(4, this->_internal_bool_value(), target);
-  }
-
-  // .shark.Struct struct_value = 5;
-  if (_internal_has_struct_value()) {
-    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(5, _Internal::struct_value(this),
-        _Internal::struct_value(this).GetCachedSize(), target, stream);
-  }
-
-  // .shark.ListValue list_value = 6;
-  if (_internal_has_list_value()) {
-    target = ::SHARK_NAMESPACE_ID::internal::WireFormatLite::
-      InternalWriteMessage(6, _Internal::list_value(this),
-        _Internal::list_value(this).GetCachedSize(), target, stream);
-  }
-
   if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
     target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
         _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);

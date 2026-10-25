@@ -28,42 +28,42 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package proto_util_converter.testing;
 
 import "shark/types/field_mask.shark";
 
 message NestedFieldMask {
-  string data = 1;
-  shark.FieldMask single_mask = 2;
+  optional string data = 1;
+  optional shark.FieldMask single_mask = 2;
   repeated shark.FieldMask repeated_mask = 3;
 }
 
 message FieldMaskTest {
-  string id = 1;
-  shark.FieldMask single_mask = 2;
+  optional string id = 1;
+  optional shark.FieldMask single_mask = 2;
   repeated shark.FieldMask repeated_mask = 3;
   repeated NestedFieldMask nested_mask = 4;
 }
 
 message FieldMaskTestCases {
-  FieldMaskWrapper single_mask = 1;
-  FieldMaskWrapper multiple_mask = 2;
-  FieldMaskWrapper snake_camel = 3;
-  FieldMaskWrapper empty_field = 4;
-  FieldMaskWrapper apiary_format1 = 5;
-  FieldMaskWrapper apiary_format2 = 6;
-  FieldMaskWrapper apiary_format3 = 7;
-  FieldMaskWrapper map_key1 = 8;
-  FieldMaskWrapper map_key2 = 9;
-  FieldMaskWrapper map_key3 = 10;
-  FieldMaskWrapper map_key4 = 11;
-  FieldMaskWrapper map_key5 = 12;
+  optional FieldMaskWrapper single_mask = 1;
+  optional FieldMaskWrapper multiple_mask = 2;
+  optional FieldMaskWrapper snake_camel = 3;
+  optional FieldMaskWrapper empty_field = 4;
+  optional FieldMaskWrapper apiary_format1 = 5;
+  optional FieldMaskWrapper apiary_format2 = 6;
+  optional FieldMaskWrapper apiary_format3 = 7;
+  optional FieldMaskWrapper map_key1 = 8;
+  optional FieldMaskWrapper map_key2 = 9;
+  optional FieldMaskWrapper map_key3 = 10;
+  optional FieldMaskWrapper map_key4 = 11;
+  optional FieldMaskWrapper map_key5 = 12;
 }
 
 message FieldMaskWrapper {
-  shark.FieldMask mask = 1;
+  optional shark.FieldMask mask = 1;
 }
 
 service FieldMaskTestService {

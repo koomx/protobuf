@@ -47,7 +47,6 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/stringprintf.h>
 #include <tests/unittest_lazy_dependencies.skp.h>
-#include <tests/unittest_proto3_arena.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.skp.h>
@@ -586,9 +585,7 @@ TEST_F(FileDescriptorTest, DebugStringRoundTrip) {
   ExtractDebugString(
       sharkbuf_unittest::TestMessageWithCustomOptions::descriptor()->file(),
       &visited, &debug_strings);
-  ExtractDebugString(proto3_arena_unittest::TestAllTypes::descriptor()->file(),
-                     &visited, &debug_strings);
-  ASSERT_GE(debug_strings.size(), 3);
+  ASSERT_GE(debug_strings.size(), 2);
 
   DescriptorPool pool;
   for (int i = 0; i < debug_strings.size(); ++i) {

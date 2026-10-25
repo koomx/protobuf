@@ -120,7 +120,13 @@ public:
   void MergeFrom(const Struct_FieldsEntry_DoNotUse& other);
   static const Struct_FieldsEntry_DoNotUse* internal_default_instance() { return reinterpret_cast<const Struct_FieldsEntry_DoNotUse*>(&_Struct_FieldsEntry_DoNotUse_default_instance_); }
   static bool ValidateKey(std::string* s) {
-    return ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(s->data(), static_cast<int>(s->size()), ::SHARK_NAMESPACE_ID::internal::WireFormatLite::PARSE, "shark.Struct.FieldsEntry.key");
+#ifndef NDEBUG
+    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+       s->data(), static_cast<int>(s->size()), ::SHARK_NAMESPACE_ID::internal::WireFormatLite::PARSE, "shark.Struct.FieldsEntry.key");
+#else
+    (void) s;
+#endif
+    return true;
  }
   static bool ValidateValue(void*) { return true; }
   using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
@@ -159,6 +165,13 @@ class Struct final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -322,6 +335,13 @@ class Value final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -591,6 +611,13 @@ class ListValue final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {

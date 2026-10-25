@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package shark;
 
@@ -41,7 +41,7 @@ option go_package = "google.golang.org/protobuf/types/known/typepb";
 // A protocol buffer message type.
 message Type {
   // The fully qualified message name.
-  string name = 1;
+  optional string name = 1;
   // The list of fields.
   repeated Field fields = 2;
   // The list of types appearing in `oneof` definitions in this type.
@@ -49,9 +49,9 @@ message Type {
   // The protocol buffer options.
   repeated Option options = 4;
   // The source context.
-  SourceContext source_context = 5;
+  optional SourceContext source_context = 5;
   // The source syntax.
-  Syntax syntax = 6;
+  optional Syntax syntax = 6;
 }
 
 // A single field of a message type.
@@ -117,49 +117,49 @@ message Field {
   }
 
   // The field type.
-  Kind kind = 1;
+  optional Kind kind = 1;
   // The field cardinality.
-  Cardinality cardinality = 2;
+  optional Cardinality cardinality = 2;
   // The field number.
-  int32 number = 3;
+  optional int32 number = 3;
   // The field name.
-  string name = 4;
+  optional string name = 4;
   // The field type URL, without the scheme, for message or enumeration
   // types. Example: `"type.googleapis.com/google.sharkbuf.Timestamp"`.
-  string type_url = 6;
+  optional string type_url = 6;
   // The index of the field type in `Type.oneofs`, for message or enumeration
   // types. The first type has index 1; zero means the type is not in the list.
-  int32 oneof_index = 7;
+  optional int32 oneof_index = 7;
   // Whether to use alternative packed wire representation.
-  bool packed = 8;
+  optional bool packed = 8;
   // The protocol buffer options.
   repeated Option options = 9;
   // The field JSON name.
-  string json_name = 10;
+  optional string json_name = 10;
   // The string value of the default value of this field. Proto2 syntax only.
-  string default_value = 11;
+  optional string default_value = 11;
 }
 
 // Enum type definition.
 message Enum {
   // Enum type name.
-  string name = 1;
+  optional string name = 1;
   // Enum value definitions.
   repeated EnumValue enumvalue = 2;
   // Protocol buffer options.
   repeated Option options = 3;
   // The source context.
-  SourceContext source_context = 4;
+  optional SourceContext source_context = 4;
   // The source syntax.
-  Syntax syntax = 5;
+  optional Syntax syntax = 5;
 }
 
 // Enum value definition.
 message EnumValue {
   // Enum value name.
-  string name = 1;
+  optional string name = 1;
   // Enum value number.
-  int32 number = 2;
+  optional int32 number = 2;
   // Protocol buffer options.
   repeated Option options = 3;
 }
@@ -171,12 +171,12 @@ message Option {
   // descriptor.shark), this is the short name. For example, `"map_entry"`.
   // For custom options, it should be the fully-qualified name. For example,
   // `"google.api.http"`.
-  string name = 1;
+  optional string name = 1;
   // The option's value packed in an Any message. If the value is a primitive,
   // the corresponding wrapper type defined in shark/types/wrappers.shark
   // should be used. If the value is an enum, it should be stored as an int32
   // value using the shark.Int32Value type.
-  Any value = 2;
+  optional Any value = 2;
 }
 
 // The syntax in which a protocol buffer element is defined.

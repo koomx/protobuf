@@ -86,6 +86,13 @@ class Empty final :
     return *this;
   }
 
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }

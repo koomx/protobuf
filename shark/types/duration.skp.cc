@@ -23,9 +23,10 @@ namespace _pbi = _pb::internal;
 namespace shark {
 constexpr Duration::Duration(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.seconds_)*/int64_t{0}
-  , /*decltype(_impl_.nanos_)*/0
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+    /*decltype(_impl_._has_bits_)*/{}
+  , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.seconds_)*/int64_t{0}
+  , /*decltype(_impl_.nanos_)*/0} {}
 struct DurationDefaultTypeInternal {
   constexpr DurationDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -41,7 +42,7 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2fduration_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2fduration_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
+  SHARK_FIELD_OFFSET(::shark::Duration, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::Duration, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -49,9 +50,11 @@ const uint32_t TableStruct_shark_2ftypes_2fduration_2eshark::offsets[] SHARK_SEC
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::Duration, _impl_.seconds_),
   SHARK_FIELD_OFFSET(::shark::Duration, _impl_.nanos_),
+  0,
+  1,
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::shark::Duration)},
+  { 0, 8, -1, sizeof(::shark::Duration)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -62,11 +65,11 @@ const char descriptor_table_protodef_shark_2ftypes_2fduration_2eshark[] SHARK_SE
   "\n\032shark/types/duration.shark\022\005shark\"*\n\010D"
   "uration\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005B"
   "6Z1google.golang.org/protobuf/types/know"
-  "n/durationpb\370\001\001b\006proto3"
+  "n/durationpb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fduration_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fduration_2eshark = {
-    false, false, 143, descriptor_table_protodef_shark_2ftypes_2fduration_2eshark,
+    false, false, 135, descriptor_table_protodef_shark_2ftypes_2fduration_2eshark,
     "shark/types/duration.shark",
     &descriptor_table_shark_2ftypes_2fduration_2eshark_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fduration_2eshark::offsets,
@@ -85,6 +88,13 @@ namespace shark {
 
 class Duration::_Internal {
  public:
+  using HasBits = decltype(std::declval<Duration>()._impl_._has_bits_);
+  static void set_has_seconds(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static void set_has_nanos(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
 };
 
 Duration::Duration(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -97,9 +107,10 @@ Duration::Duration(const Duration& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   Duration* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.seconds_){}
-    , decltype(_impl_.nanos_){}
-    , /*decltype(_impl_._cached_size_)*/{}};
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
+    , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.seconds_){}
+    , decltype(_impl_.nanos_){}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   ::memcpy(&_impl_.seconds_, &from._impl_.seconds_,
@@ -113,9 +124,10 @@ inline void Duration::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.seconds_){int64_t{0}}
-    , decltype(_impl_.nanos_){0}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.seconds_){int64_t{0}}
+    , decltype(_impl_.nanos_){0}
   };
 }
 
@@ -142,29 +154,36 @@ void Duration::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  ::memset(&_impl_.seconds_, 0, static_cast<size_t>(
-      reinterpret_cast<char*>(&_impl_.nanos_) -
-      reinterpret_cast<char*>(&_impl_.seconds_)) + sizeof(_impl_.nanos_));
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    ::memset(&_impl_.seconds_, 0, static_cast<size_t>(
+        reinterpret_cast<char*>(&_impl_.nanos_) -
+        reinterpret_cast<char*>(&_impl_.seconds_)) + sizeof(_impl_.nanos_));
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Duration::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // int64 seconds = 1;
+      // optional int64 seconds = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
+          _Internal::set_has_seconds(&has_bits);
           _impl_.seconds_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
           CHK_(ptr);
         } else
           goto handle_unusual;
         continue;
-      // int32 nanos = 2;
+      // optional int32 nanos = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
+          _Internal::set_has_nanos(&has_bits);
           _impl_.nanos_ = ::SHARK_NAMESPACE_ID::internal::ReadVarint32(&ptr);
           CHK_(ptr);
         } else
@@ -186,6 +205,7 @@ const char* Duration::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx)
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -199,14 +219,15 @@ uint8_t* Duration::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // int64 seconds = 1;
-  if (this->_internal_seconds() != 0) {
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional int64 seconds = 1;
+  if (cached_has_bits & 0x00000001u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt64ToArray(1, this->_internal_seconds(), target);
   }
 
-  // int32 nanos = 2;
-  if (this->_internal_nanos() != 0) {
+  // optional int32 nanos = 2;
+  if (cached_has_bits & 0x00000002u) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_nanos(), target);
   }
@@ -227,16 +248,19 @@ size_t Duration::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // int64 seconds = 1;
-  if (this->_internal_seconds() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_seconds());
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // optional int64 seconds = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += ::_pbi::WireFormatLite::Int64SizePlusOne(this->_internal_seconds());
+    }
 
-  // int32 nanos = 2;
-  if (this->_internal_nanos() != 0) {
-    total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_nanos());
-  }
+    // optional int32 nanos = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += ::_pbi::WireFormatLite::Int32SizePlusOne(this->_internal_nanos());
+    }
 
+  }
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -255,11 +279,15 @@ void Duration::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NA
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (from._internal_seconds() != 0) {
-    _this->_internal_set_seconds(from._internal_seconds());
-  }
-  if (from._internal_nanos() != 0) {
-    _this->_internal_set_nanos(from._internal_nanos());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_impl_.seconds_ = from._impl_.seconds_;
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_impl_.nanos_ = from._impl_.nanos_;
+    }
+    _this->_impl_._has_bits_[0] |= cached_has_bits;
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -278,6 +306,7 @@ bool Duration::IsInitialized() const {
 void Duration::InternalSwap(Duration* other) {
   using std::swap;
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::SHARK_NAMESPACE_ID::internal::memswap<
       SHARK_FIELD_OFFSET(Duration, _impl_.nanos_)
       + sizeof(Duration::_impl_.nanos_)

@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package unittest_drop_unknown_fields;
 
@@ -39,8 +39,8 @@ message Foo {
     BAR = 1;
     BAZ = 2;
   }
-  int32 int32_value = 1;
-  NestedEnum enum_value = 2;
+  optional int32 int32_value = 1;
+  optional NestedEnum enum_value = 2;
 }
 
 message FooWithExtraFields {
@@ -50,7 +50,7 @@ message FooWithExtraFields {
     BAZ = 2;
     MOO = 3;
   }
-  int32 int32_value = 1;
-  NestedEnum enum_value = 2;
-  int32 extra_int32_value = 3;
+  optional int32 int32_value = 1;
+  optional NestedEnum enum_value = 2;
+  optional int32 extra_int32_value = 3;
 }

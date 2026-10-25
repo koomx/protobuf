@@ -118,6 +118,13 @@ class DoubleValue final :
     return *this;
   }
 
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }
@@ -210,7 +217,11 @@ class DoubleValue final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // double value = 1;
+  // optional double value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   double value() const;
   void set_value(double value);
@@ -227,8 +238,9 @@ class DoubleValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    double value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    double value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -264,6 +276,13 @@ class FloatValue final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -358,7 +377,11 @@ class FloatValue final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // float value = 1;
+  // optional float value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   float value() const;
   void set_value(float value);
@@ -375,8 +398,9 @@ class FloatValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    float value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    float value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -412,6 +436,13 @@ class Int64Value final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -506,7 +537,11 @@ class Int64Value final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // int64 value = 1;
+  // optional int64 value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   int64_t value() const;
   void set_value(int64_t value);
@@ -523,8 +558,9 @@ class Int64Value final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    int64_t value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    int64_t value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -560,6 +596,13 @@ class UInt64Value final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -654,7 +697,11 @@ class UInt64Value final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // uint64 value = 1;
+  // optional uint64 value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   uint64_t value() const;
   void set_value(uint64_t value);
@@ -671,8 +718,9 @@ class UInt64Value final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    uint64_t value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    uint64_t value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -708,6 +756,13 @@ class Int32Value final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -802,7 +857,11 @@ class Int32Value final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // int32 value = 1;
+  // optional int32 value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   int32_t value() const;
   void set_value(int32_t value);
@@ -819,8 +878,9 @@ class Int32Value final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    int32_t value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    int32_t value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -856,6 +916,13 @@ class UInt32Value final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -950,7 +1017,11 @@ class UInt32Value final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // uint32 value = 1;
+  // optional uint32 value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   uint32_t value() const;
   void set_value(uint32_t value);
@@ -967,8 +1038,9 @@ class UInt32Value final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    uint32_t value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    uint32_t value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -1004,6 +1076,13 @@ class BoolValue final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -1098,7 +1177,11 @@ class BoolValue final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // bool value = 1;
+  // optional bool value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   bool value() const;
   void set_value(bool value);
@@ -1115,8 +1198,9 @@ class BoolValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    bool value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    bool value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -1152,6 +1236,13 @@ class StringValue final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -1246,7 +1337,11 @@ class StringValue final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // string value = 1;
+  // optional string value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   const std::string& value() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1268,8 +1363,9 @@ class StringValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -1305,6 +1401,13 @@ class BytesValue final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -1399,7 +1502,11 @@ class BytesValue final :
   enum : int {
     kValueFieldNumber = 1,
   };
-  // bytes value = 1;
+  // optional bytes value = 1;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   const std::string& value() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1421,8 +1528,9 @@ class BytesValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr value_;
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
     mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr value_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fwrappers_2eshark;
@@ -1438,9 +1546,17 @@ class BytesValue final :
 #endif  // __GNUC__
 // DoubleValue
 
-// double value = 1;
+// optional double value = 1;
+inline bool DoubleValue::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool DoubleValue::has_value() const {
+  return _internal_has_value();
+}
 inline void DoubleValue::clear_value() {
   _impl_.value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline double DoubleValue::_internal_value() const {
   return _impl_.value_;
@@ -1450,7 +1566,7 @@ inline double DoubleValue::value() const {
   return _internal_value();
 }
 inline void DoubleValue::_internal_set_value(double value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void DoubleValue::set_value(double value) {
@@ -1462,9 +1578,17 @@ inline void DoubleValue::set_value(double value) {
 
 // FloatValue
 
-// float value = 1;
+// optional float value = 1;
+inline bool FloatValue::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool FloatValue::has_value() const {
+  return _internal_has_value();
+}
 inline void FloatValue::clear_value() {
   _impl_.value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline float FloatValue::_internal_value() const {
   return _impl_.value_;
@@ -1474,7 +1598,7 @@ inline float FloatValue::value() const {
   return _internal_value();
 }
 inline void FloatValue::_internal_set_value(float value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void FloatValue::set_value(float value) {
@@ -1486,9 +1610,17 @@ inline void FloatValue::set_value(float value) {
 
 // Int64Value
 
-// int64 value = 1;
+// optional int64 value = 1;
+inline bool Int64Value::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Int64Value::has_value() const {
+  return _internal_has_value();
+}
 inline void Int64Value::clear_value() {
   _impl_.value_ = int64_t{0};
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline int64_t Int64Value::_internal_value() const {
   return _impl_.value_;
@@ -1498,7 +1630,7 @@ inline int64_t Int64Value::value() const {
   return _internal_value();
 }
 inline void Int64Value::_internal_set_value(int64_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void Int64Value::set_value(int64_t value) {
@@ -1510,9 +1642,17 @@ inline void Int64Value::set_value(int64_t value) {
 
 // UInt64Value
 
-// uint64 value = 1;
+// optional uint64 value = 1;
+inline bool UInt64Value::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool UInt64Value::has_value() const {
+  return _internal_has_value();
+}
 inline void UInt64Value::clear_value() {
   _impl_.value_ = uint64_t{0u};
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline uint64_t UInt64Value::_internal_value() const {
   return _impl_.value_;
@@ -1522,7 +1662,7 @@ inline uint64_t UInt64Value::value() const {
   return _internal_value();
 }
 inline void UInt64Value::_internal_set_value(uint64_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void UInt64Value::set_value(uint64_t value) {
@@ -1534,9 +1674,17 @@ inline void UInt64Value::set_value(uint64_t value) {
 
 // Int32Value
 
-// int32 value = 1;
+// optional int32 value = 1;
+inline bool Int32Value::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Int32Value::has_value() const {
+  return _internal_has_value();
+}
 inline void Int32Value::clear_value() {
   _impl_.value_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline int32_t Int32Value::_internal_value() const {
   return _impl_.value_;
@@ -1546,7 +1694,7 @@ inline int32_t Int32Value::value() const {
   return _internal_value();
 }
 inline void Int32Value::_internal_set_value(int32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void Int32Value::set_value(int32_t value) {
@@ -1558,9 +1706,17 @@ inline void Int32Value::set_value(int32_t value) {
 
 // UInt32Value
 
-// uint32 value = 1;
+// optional uint32 value = 1;
+inline bool UInt32Value::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool UInt32Value::has_value() const {
+  return _internal_has_value();
+}
 inline void UInt32Value::clear_value() {
   _impl_.value_ = 0u;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline uint32_t UInt32Value::_internal_value() const {
   return _impl_.value_;
@@ -1570,7 +1726,7 @@ inline uint32_t UInt32Value::value() const {
   return _internal_value();
 }
 inline void UInt32Value::_internal_set_value(uint32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void UInt32Value::set_value(uint32_t value) {
@@ -1582,9 +1738,17 @@ inline void UInt32Value::set_value(uint32_t value) {
 
 // BoolValue
 
-// bool value = 1;
+// optional bool value = 1;
+inline bool BoolValue::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool BoolValue::has_value() const {
+  return _internal_has_value();
+}
 inline void BoolValue::clear_value() {
   _impl_.value_ = false;
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline bool BoolValue::_internal_value() const {
   return _impl_.value_;
@@ -1594,7 +1758,7 @@ inline bool BoolValue::value() const {
   return _internal_value();
 }
 inline void BoolValue::_internal_set_value(bool value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_ = value;
 }
 inline void BoolValue::set_value(bool value) {
@@ -1606,9 +1770,17 @@ inline void BoolValue::set_value(bool value) {
 
 // StringValue
 
-// string value = 1;
+// optional string value = 1;
+inline bool StringValue::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool StringValue::has_value() const {
+  return _internal_has_value();
+}
 inline void StringValue::clear_value() {
   _impl_.value_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& StringValue::value() const {
   // @@protoc_insertion_point(field_get:shark.StringValue.value)
@@ -1617,7 +1789,7 @@ inline const std::string& StringValue::value() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void StringValue::set_value(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.StringValue.value)
 }
@@ -1630,22 +1802,32 @@ inline const std::string& StringValue::_internal_value() const {
   return _impl_.value_.Get();
 }
 inline void StringValue::_internal_set_value(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_.Set(value, GetArenaForAllocation());
 }
 inline std::string* StringValue::_internal_mutable_value() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* StringValue::release_value() {
   // @@protoc_insertion_point(field_release:shark.StringValue.value)
-  return _impl_.value_.Release();
+  if (!_internal_has_value()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.value_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.value_.IsDefault()) {
+    _impl_.value_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void StringValue::set_allocated_value(std::string* value) {
   if (value != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.value_.SetAllocated(value, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -1660,9 +1842,17 @@ inline void StringValue::set_allocated_value(std::string* value) {
 
 // BytesValue
 
-// bytes value = 1;
+// optional bytes value = 1;
+inline bool BytesValue::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool BytesValue::has_value() const {
+  return _internal_has_value();
+}
 inline void BytesValue::clear_value() {
   _impl_.value_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& BytesValue::value() const {
   // @@protoc_insertion_point(field_get:shark.BytesValue.value)
@@ -1671,7 +1861,7 @@ inline const std::string& BytesValue::value() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void BytesValue::set_value(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.value_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.BytesValue.value)
 }
@@ -1684,22 +1874,32 @@ inline const std::string& BytesValue::_internal_value() const {
   return _impl_.value_.Get();
 }
 inline void BytesValue::_internal_set_value(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.value_.Set(value, GetArenaForAllocation());
 }
 inline std::string* BytesValue::_internal_mutable_value() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* BytesValue::release_value() {
   // @@protoc_insertion_point(field_release:shark.BytesValue.value)
-  return _impl_.value_.Release();
+  if (!_internal_has_value()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.value_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.value_.IsDefault()) {
+    _impl_.value_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void BytesValue::set_allocated_value(std::string* value) {
   if (value != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.value_.SetAllocated(value, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING

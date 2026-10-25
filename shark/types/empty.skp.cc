@@ -56,11 +56,11 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_shark_2ftypes_2fempty_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\027shark/types/empty.shark\022\005shark\"\007\n\005Empt"
   "yB3Z.google.golang.org/protobuf/types/kn"
-  "own/emptypb\370\001\001b\006proto3"
+  "own/emptypb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fempty_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fempty_2eshark = {
-    false, false, 102, descriptor_table_protodef_shark_2ftypes_2fempty_2eshark,
+    false, false, 94, descriptor_table_protodef_shark_2ftypes_2fempty_2eshark,
     "shark/types/empty.shark",
     &descriptor_table_shark_2ftypes_2fempty_2eshark_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fempty_2eshark::offsets,

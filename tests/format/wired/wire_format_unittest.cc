@@ -37,7 +37,6 @@
 #include <tests/unittest.skp.h>
 #include <tests/unittest_mset.skp.h>
 #include <tests/format/wired/unittest_mset_wire_format.skp.h>
-#include <tests/unittest_proto3_arena.skp.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
 
@@ -45,7 +44,6 @@
 #define UNITTEST_IMPORT ::sharkbuf_unittest_import
 #define UNITTEST_PACKAGE_NAME "sharkbuf_unittest"
 #define PROTO2_WIREFORMAT_UNITTEST ::proto2_wireformat_unittest
-#define PROTO3_ARENA_UNITTEST ::proto3_arena_unittest
 
 // Must include after defining UNITTEST, etc.
 // clang-format off

@@ -86,6 +86,13 @@ class Duration final :
     return *this;
   }
 
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }
@@ -179,7 +186,11 @@ class Duration final :
     kSecondsFieldNumber = 1,
     kNanosFieldNumber = 2,
   };
-  // int64 seconds = 1;
+  // optional int64 seconds = 1;
+  bool has_seconds() const;
+  private:
+  bool _internal_has_seconds() const;
+  public:
   void clear_seconds();
   int64_t seconds() const;
   void set_seconds(int64_t value);
@@ -188,7 +199,11 @@ class Duration final :
   void _internal_set_seconds(int64_t value);
   public:
 
-  // int32 nanos = 2;
+  // optional int32 nanos = 2;
+  bool has_nanos() const;
+  private:
+  bool _internal_has_nanos() const;
+  public:
   void clear_nanos();
   int32_t nanos() const;
   void set_nanos(int32_t value);
@@ -205,9 +220,10 @@ class Duration final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     int64_t seconds_;
     int32_t nanos_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2fduration_2eshark;
@@ -223,9 +239,17 @@ class Duration final :
 #endif  // __GNUC__
 // Duration
 
-// int64 seconds = 1;
+// optional int64 seconds = 1;
+inline bool Duration::_internal_has_seconds() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Duration::has_seconds() const {
+  return _internal_has_seconds();
+}
 inline void Duration::clear_seconds() {
   _impl_.seconds_ = int64_t{0};
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline int64_t Duration::_internal_seconds() const {
   return _impl_.seconds_;
@@ -235,7 +259,7 @@ inline int64_t Duration::seconds() const {
   return _internal_seconds();
 }
 inline void Duration::_internal_set_seconds(int64_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.seconds_ = value;
 }
 inline void Duration::set_seconds(int64_t value) {
@@ -243,9 +267,17 @@ inline void Duration::set_seconds(int64_t value) {
   // @@protoc_insertion_point(field_set:shark.Duration.seconds)
 }
 
-// int32 nanos = 2;
+// optional int32 nanos = 2;
+inline bool Duration::_internal_has_nanos() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool Duration::has_nanos() const {
+  return _internal_has_nanos();
+}
 inline void Duration::clear_nanos() {
   _impl_.nanos_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t Duration::_internal_nanos() const {
   return _impl_.nanos_;
@@ -255,7 +287,7 @@ inline int32_t Duration::nanos() const {
   return _internal_nanos();
 }
 inline void Duration::_internal_set_nanos(int32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.nanos_ = value;
 }
 inline void Duration::set_nanos(int32_t value) {

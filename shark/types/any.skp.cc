@@ -27,9 +27,10 @@ namespace _pbi = _pb::internal;
 namespace shark {
 constexpr Any::Any(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.type_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
-  , /*decltype(_impl_.value_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+    /*decltype(_impl_._has_bits_)*/{}
   , /*decltype(_impl_._cached_size_)*/{}
+  , /*decltype(_impl_.type_url_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
+  , /*decltype(_impl_.value_)*/{&::_pbi::fixed_address_empty_string, ::_pbi::ConstantInitialized{}}
   , /*decltype(_impl_._any_metadata_)*/{&_impl_.type_url_, &_impl_.value_}} {}
 struct AnyDefaultTypeInternal {
   constexpr AnyDefaultTypeInternal()
@@ -46,7 +47,7 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2fany_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2fany_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
+  SHARK_FIELD_OFFSET(::shark::Any, _impl_._has_bits_),
   SHARK_FIELD_OFFSET(::shark::Any, _internal_metadata_),
   ~0u,  // no _extensions_
   ~0u,  // no _oneof_case_
@@ -54,9 +55,11 @@ const uint32_t TableStruct_shark_2ftypes_2fany_2eshark::offsets[] SHARK_SECTION_
   ~0u,  // no _inlined_string_donated_
   SHARK_FIELD_OFFSET(::shark::Any, _impl_.type_url_),
   SHARK_FIELD_OFFSET(::shark::Any, _impl_.value_),
+  0,
+  1,
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::shark::Any)},
+  { 0, 8, -1, sizeof(::shark::Any)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
@@ -66,12 +69,11 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_shark_2ftypes_2fany_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\025shark/types/any.shark\022\005shark\"&\n\003Any\022\020\n"
   "\010type_url\030\001 \001(\t\022\r\n\005value\030\002 \001(\014B.Z,google"
-  ".golang.org/protobuf/types/known/anypbb\006"
-  "proto3"
+  ".golang.org/protobuf/types/known/anypb"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fany_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fany_2eshark = {
-    false, false, 126, descriptor_table_protodef_shark_2ftypes_2fany_2eshark,
+    false, false, 118, descriptor_table_protodef_shark_2ftypes_2fany_2eshark,
     "shark/types/any.shark",
     &descriptor_table_shark_2ftypes_2fany_2eshark_once, nullptr, 0, 1,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fany_2eshark::offsets,
@@ -103,6 +105,13 @@ bool Any::ParseAnyTypeUrl(
 
 class Any::_Internal {
  public:
+  using HasBits = decltype(std::declval<Any>()._impl_._has_bits_);
+  static void set_has_type_url(HasBits* has_bits) {
+    (*has_bits)[0] |= 1u;
+  }
+  static void set_has_value(HasBits* has_bits) {
+    (*has_bits)[0] |= 2u;
+  }
 };
 
 Any::Any(::SHARK_NAMESPACE_ID::Arena* arena,
@@ -115,9 +124,10 @@ Any::Any(const Any& from)
   : ::SHARK_NAMESPACE_ID::Message() {
   Any* const _this = this; (void)_this;
   new (&_impl_) Impl_{
-      decltype(_impl_.type_url_){}
-    , decltype(_impl_.value_){}
+      decltype(_impl_._has_bits_){from._impl_._has_bits_}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.type_url_){}
+    , decltype(_impl_.value_){}
     , /*decltype(_impl_._any_metadata_)*/{&_impl_.type_url_, &_impl_.value_}};
 
   _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
@@ -125,7 +135,7 @@ Any::Any(const Any& from)
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.type_url_.Set("", GetArenaForAllocation());
   #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_type_url().empty()) {
+  if (from._internal_has_type_url()) {
     _this->_impl_.type_url_.Set(from._internal_type_url(), 
       _this->GetArenaForAllocation());
   }
@@ -133,7 +143,7 @@ Any::Any(const Any& from)
   #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
     _impl_.value_.Set("", GetArenaForAllocation());
   #endif // SHARK_FORCE_COPY_DEFAULT_STRING
-  if (!from._internal_value().empty()) {
+  if (from._internal_has_value()) {
     _this->_impl_.value_.Set(from._internal_value(), 
       _this->GetArenaForAllocation());
   }
@@ -145,9 +155,10 @@ inline void Any::SharedCtor(
   (void)arena;
   (void)is_message_owned;
   new (&_impl_) Impl_{
-      decltype(_impl_.type_url_){}
-    , decltype(_impl_.value_){}
+      decltype(_impl_._has_bits_){}
     , /*decltype(_impl_._cached_size_)*/{}
+    , decltype(_impl_.type_url_){}
+    , decltype(_impl_.value_){}
     , /*decltype(_impl_._any_metadata_)*/{&_impl_.type_url_, &_impl_.value_}
   };
   _impl_.type_url_.InitDefault();
@@ -186,28 +197,39 @@ void Any::Clear() {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  _impl_.type_url_.ClearToEmpty();
-  _impl_.value_.ClearToEmpty();
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _impl_.type_url_.ClearNonDefaultToEmpty();
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _impl_.value_.ClearNonDefaultToEmpty();
+    }
+  }
+  _impl_._has_bits_.Clear();
   _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* Any::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
+  _Internal::HasBits has_bits{};
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // string type_url = 1;
+      // optional string type_url = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           auto str = _internal_mutable_type_url();
           ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
           CHK_(ptr);
-          CHK_(::_pbi::VerifyUTF8(str, "shark.Any.type_url"));
+          #ifndef NDEBUG
+          ::_pbi::VerifyUTF8(str, "shark.Any.type_url");
+          #endif  // !NDEBUG
         } else
           goto handle_unusual;
         continue;
-      // bytes value = 2;
+      // optional bytes value = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           auto str = _internal_mutable_value();
@@ -232,6 +254,7 @@ const char* Any::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     CHK_(ptr != nullptr);
   }  // while
 message_done:
+  _impl_._has_bits_.Or(has_bits);
   return ptr;
 failure:
   ptr = nullptr;
@@ -245,18 +268,19 @@ uint8_t* Any::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // string type_url = 1;
-  if (!this->_internal_type_url().empty()) {
-    ::SHARK_NAMESPACE_ID::internal::WireFormatLite::VerifyUtf8String(
+  cached_has_bits = _impl_._has_bits_[0];
+  // optional string type_url = 1;
+  if (cached_has_bits & 0x00000001u) {
+    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
       this->_internal_type_url().data(), static_cast<int>(this->_internal_type_url().length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::SERIALIZE,
+      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
       "shark.Any.type_url");
     target = stream->WriteStringMaybeAliased(
         1, this->_internal_type_url(), target);
   }
 
-  // bytes value = 2;
-  if (!this->_internal_value().empty()) {
+  // optional bytes value = 2;
+  if (cached_has_bits & 0x00000002u) {
     target = stream->WriteBytesMaybeAliased(
         2, this->_internal_value(), target);
   }
@@ -277,20 +301,23 @@ size_t Any::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // string type_url = 1;
-  if (!this->_internal_type_url().empty()) {
-    total_size += 1 +
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-        this->_internal_type_url());
-  }
+  cached_has_bits = _impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    // optional string type_url = 1;
+    if (cached_has_bits & 0x00000001u) {
+      total_size += 1 +
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+          this->_internal_type_url());
+    }
 
-  // bytes value = 2;
-  if (!this->_internal_value().empty()) {
-    total_size += 1 +
-      ::SHARK_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
-        this->_internal_value());
-  }
+    // optional bytes value = 2;
+    if (cached_has_bits & 0x00000002u) {
+      total_size += 1 +
+        ::SHARK_NAMESPACE_ID::internal::WireFormatLite::BytesSize(
+          this->_internal_value());
+    }
 
+  }
   return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
@@ -309,11 +336,14 @@ void Any::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPA
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  if (!from._internal_type_url().empty()) {
-    _this->_internal_set_type_url(from._internal_type_url());
-  }
-  if (!from._internal_value().empty()) {
-    _this->_internal_set_value(from._internal_value());
+  cached_has_bits = from._impl_._has_bits_[0];
+  if (cached_has_bits & 0x00000003u) {
+    if (cached_has_bits & 0x00000001u) {
+      _this->_internal_set_type_url(from._internal_type_url());
+    }
+    if (cached_has_bits & 0x00000002u) {
+      _this->_internal_set_value(from._internal_value());
+    }
   }
   _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
@@ -334,6 +364,7 @@ void Any::InternalSwap(Any* other) {
   auto* lhs_arena = GetArenaForAllocation();
   auto* rhs_arena = other->GetArenaForAllocation();
   _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+  swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
   ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr::InternalSwap(
       &_impl_.type_url_, lhs_arena,
       &other->_impl_.type_url_, rhs_arena

@@ -309,7 +309,9 @@ TEST_F(JsonUtilTest, ParsePrimitiveMapIn) {
             ToJson(message, print_options));
   MapIn other;
   ASSERT_TRUE(FromJson(ToJson(message, print_options), &other, parse_options));
-  EXPECT_EQ(message.DebugString(), other.DebugString());
+  EXPECT_TRUE(other.has_other());
+  EXPECT_EQ("", other.other());
+  EXPECT_EQ("other: \"\"\n", other.DebugString());
 }
 
 TEST_F(JsonUtilTest, PrintPrimitiveOneof) {

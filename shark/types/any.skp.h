@@ -86,6 +86,13 @@ class Any final :
     return *this;
   }
 
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }
@@ -109,12 +116,18 @@ class Any final :
 
   bool PackFrom(const ::SHARK_NAMESPACE_ID::Message& message) {
     GOOGLE_DCHECK_NE(&message, this);
-    return _impl_._any_metadata_.PackFrom(GetArena(), message);
+    if (!_impl_._any_metadata_.PackFrom(GetArena(), message)) return false;
+    _impl_._has_bits_[0] |= 0x00000003u;
+    return true;
   }
   bool PackFrom(const ::SHARK_NAMESPACE_ID::Message& message,
                 ::SHARK_NAMESPACE_ID::ConstStringParam type_url_prefix) {
     GOOGLE_DCHECK_NE(&message, this);
-    return _impl_._any_metadata_.PackFrom(GetArena(), message, type_url_prefix);
+    if (!_impl_._any_metadata_.PackFrom(GetArena(), message, type_url_prefix)) {
+      return false;
+    }
+    _impl_._has_bits_[0] |= 0x00000003u;
+    return true;
   }
   bool UnpackTo(::SHARK_NAMESPACE_ID::Message* message) const {
     return _impl_._any_metadata_.UnpackTo(message);
@@ -125,12 +138,19 @@ class Any final :
       const ::SHARK_NAMESPACE_ID::FieldDescriptor** value_field);
   template <typename T, class = typename std::enable_if<!std::is_convertible<T, const ::SHARK_NAMESPACE_ID::Message&>::value>::type>
   bool PackFrom(const T& message) {
-    return _impl_._any_metadata_.PackFrom<T>(GetArena(), message);
+    if (!_impl_._any_metadata_.PackFrom<T>(GetArena(), message)) return false;
+    _impl_._has_bits_[0] |= 0x00000003u;
+    return true;
   }
   template <typename T, class = typename std::enable_if<!std::is_convertible<T, const ::SHARK_NAMESPACE_ID::Message&>::value>::type>
   bool PackFrom(const T& message,
                 ::SHARK_NAMESPACE_ID::ConstStringParam type_url_prefix) {
-    return _impl_._any_metadata_.PackFrom<T>(GetArena(), message, type_url_prefix);}
+    if (!_impl_._any_metadata_.PackFrom<T>(GetArena(), message, type_url_prefix)) {
+      return false;
+    }
+    _impl_._has_bits_[0] |= 0x00000003u;
+    return true;
+  }
   template <typename T, class = typename std::enable_if<!std::is_convertible<T, const ::SHARK_NAMESPACE_ID::Message&>::value>::type>
   bool UnpackTo(T* message) const {
     return _impl_._any_metadata_.UnpackTo<T>(message);
@@ -214,7 +234,11 @@ class Any final :
     kTypeUrlFieldNumber = 1,
     kValueFieldNumber = 2,
   };
-  // string type_url = 1;
+  // optional string type_url = 1;
+  bool has_type_url() const;
+  private:
+  bool _internal_has_type_url() const;
+  public:
   void clear_type_url();
   const std::string& type_url() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -228,7 +252,11 @@ class Any final :
   std::string* _internal_mutable_type_url();
   public:
 
-  // bytes value = 2;
+  // optional bytes value = 2;
+  bool has_value() const;
+  private:
+  bool _internal_has_value() const;
+  public:
   void clear_value();
   const std::string& value() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -250,9 +278,10 @@ class Any final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr type_url_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr value_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::internal::AnyMetadata _any_metadata_;
   };
   union { Impl_ _impl_; };
@@ -269,9 +298,17 @@ class Any final :
 #endif  // __GNUC__
 // Any
 
-// string type_url = 1;
+// optional string type_url = 1;
+inline bool Any::_internal_has_type_url() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Any::has_type_url() const {
+  return _internal_has_type_url();
+}
 inline void Any::clear_type_url() {
   _impl_.type_url_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Any::type_url() const {
   // @@protoc_insertion_point(field_get:shark.Any.type_url)
@@ -280,7 +317,7 @@ inline const std::string& Any::type_url() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Any::set_type_url(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.type_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Any.type_url)
 }
@@ -293,22 +330,32 @@ inline const std::string& Any::_internal_type_url() const {
   return _impl_.type_url_.Get();
 }
 inline void Any::_internal_set_type_url(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.type_url_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Any::_internal_mutable_type_url() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.type_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Any::release_type_url() {
   // @@protoc_insertion_point(field_release:shark.Any.type_url)
-  return _impl_.type_url_.Release();
+  if (!_internal_has_type_url()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.type_url_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.type_url_.IsDefault()) {
+    _impl_.type_url_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Any::set_allocated_type_url(std::string* type_url) {
   if (type_url != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.type_url_.SetAllocated(type_url, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -319,9 +366,17 @@ inline void Any::set_allocated_type_url(std::string* type_url) {
   // @@protoc_insertion_point(field_set_allocated:shark.Any.type_url)
 }
 
-// bytes value = 2;
+// optional bytes value = 2;
+inline bool Any::_internal_has_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool Any::has_value() const {
+  return _internal_has_value();
+}
 inline void Any::clear_value() {
   _impl_.value_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& Any::value() const {
   // @@protoc_insertion_point(field_get:shark.Any.value)
@@ -330,7 +385,7 @@ inline const std::string& Any::value() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Any::set_value(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.value_.SetBytes(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Any.value)
 }
@@ -343,22 +398,32 @@ inline const std::string& Any::_internal_value() const {
   return _impl_.value_.Get();
 }
 inline void Any::_internal_set_value(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.value_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Any::_internal_mutable_value() {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   return _impl_.value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Any::release_value() {
   // @@protoc_insertion_point(field_release:shark.Any.value)
-  return _impl_.value_.Release();
+  if (!_internal_has_value()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  auto* p = _impl_.value_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.value_.IsDefault()) {
+    _impl_.value_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Any::set_allocated_value(std::string* value) {
   if (value != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.value_.SetAllocated(value, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING

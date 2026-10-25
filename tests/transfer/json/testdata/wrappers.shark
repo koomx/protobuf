@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-syntax = "proto3";
+syntax = "proto2";
 
 package proto_util_converter.testing;
 
@@ -38,61 +38,61 @@ import "shark/types/wrappers.shark";
 // at the top of the class MarshallingTest for details on how to write
 // test cases.
 message WrappersTestCases {
-  DoubleWrapper double_wrapper = 1;
-  FloatWrapper float_wrapper = 2;
-  Int64Wrapper int64_wrapper = 3;
-  UInt64Wrapper uint64_wrapper = 4;
-  Int32Wrapper int32_wrapper = 5;
-  UInt32Wrapper uint32_wrapper = 6;
-  BoolWrapper bool_wrapper = 7;
-  StringWrapper string_wrapper = 8;
-  BytesWrapper bytes_wrapper = 9;
+  optional DoubleWrapper double_wrapper = 1;
+  optional FloatWrapper float_wrapper = 2;
+  optional Int64Wrapper int64_wrapper = 3;
+  optional UInt64Wrapper uint64_wrapper = 4;
+  optional Int32Wrapper int32_wrapper = 5;
+  optional UInt32Wrapper uint32_wrapper = 6;
+  optional BoolWrapper bool_wrapper = 7;
+  optional StringWrapper string_wrapper = 8;
+  optional BytesWrapper bytes_wrapper = 9;
 
-  DoubleWrapper double_wrapper_default = 10;
-  FloatWrapper float_wrapper_default = 11;
-  Int64Wrapper int64_wrapper_default = 12;
-  UInt64Wrapper uint64_wrapper_default = 13;
-  Int32Wrapper int32_wrapper_default = 14;
-  UInt32Wrapper uint32_wrapper_default = 15;
-  BoolWrapper bool_wrapper_default = 16;
-  StringWrapper string_wrapper_default = 17;
-  BytesWrapper bytes_wrapper_default = 18;
+  optional DoubleWrapper double_wrapper_default = 10;
+  optional FloatWrapper float_wrapper_default = 11;
+  optional Int64Wrapper int64_wrapper_default = 12;
+  optional UInt64Wrapper uint64_wrapper_default = 13;
+  optional Int32Wrapper int32_wrapper_default = 14;
+  optional UInt32Wrapper uint32_wrapper_default = 15;
+  optional BoolWrapper bool_wrapper_default = 16;
+  optional StringWrapper string_wrapper_default = 17;
+  optional BytesWrapper bytes_wrapper_default = 18;
 }
 
 message DoubleWrapper {
-  shark.DoubleValue double = 1;
+  optional shark.DoubleValue double = 1;
 }
 
 message FloatWrapper {
-  shark.FloatValue float = 1;
+  optional shark.FloatValue float = 1;
 }
 
 message Int64Wrapper {
-  shark.Int64Value int64 = 1;
+  optional shark.Int64Value int64 = 1;
 }
 
 message UInt64Wrapper {
-  shark.UInt64Value uint64 = 1;
+  optional shark.UInt64Value uint64 = 1;
 }
 
 message Int32Wrapper {
-  shark.Int32Value int32 = 1;
+  optional shark.Int32Value int32 = 1;
 }
 
 message UInt32Wrapper {
-  shark.UInt32Value uint32 = 1;
+  optional shark.UInt32Value uint32 = 1;
 }
 
 message BoolWrapper {
-  shark.BoolValue bool = 1;
+  optional shark.BoolValue bool = 1;
 }
 
 message StringWrapper {
-  shark.StringValue string = 1;
+  optional shark.StringValue string = 1;
 }
 
 message BytesWrapper {
-  shark.BytesValue bytes = 1;
+  optional shark.BytesValue bytes = 1;
 }
 
 service WrappersTestService {

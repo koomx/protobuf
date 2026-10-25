@@ -1,4 +1,4 @@
-syntax = "proto3";
+syntax = "proto2";
 
 package sharkbuf_unittest;
 
@@ -18,26 +18,26 @@ import "shark/types/wrappers.shark";
 // Each wrapper type is included separately, as languages
 // map handle different wrappers in different ways.
 message TestWellKnownTypes {
-  shark.Any any_field = 1;
-  shark.Api api_field = 2;
-  shark.Duration duration_field = 3;
-  shark.Empty empty_field = 4;
-  shark.FieldMask field_mask_field = 5;
-  shark.SourceContext source_context_field = 6;
-  shark.Struct struct_field = 7;
-  shark.Timestamp timestamp_field = 8;
-  shark.Type type_field = 9;
-  shark.DoubleValue double_field = 10;
-  shark.FloatValue float_field = 11;
-  shark.Int64Value int64_field = 12;
-  shark.UInt64Value uint64_field = 13;
-  shark.Int32Value int32_field = 14;
-  shark.UInt32Value uint32_field = 15;
-  shark.BoolValue bool_field = 16;
-  shark.StringValue string_field = 17;
-  shark.BytesValue bytes_field = 18;
+  optional shark.Any any_field = 1;
+  optional shark.Api api_field = 2;
+  optional shark.Duration duration_field = 3;
+  optional shark.Empty empty_field = 4;
+  optional shark.FieldMask field_mask_field = 5;
+  optional shark.SourceContext source_context_field = 6;
+  optional shark.Struct struct_field = 7;
+  optional shark.Timestamp timestamp_field = 8;
+  optional shark.Type type_field = 9;
+  optional shark.DoubleValue double_field = 10;
+  optional shark.FloatValue float_field = 11;
+  optional shark.Int64Value int64_field = 12;
+  optional shark.UInt64Value uint64_field = 13;
+  optional shark.Int32Value int32_field = 14;
+  optional shark.UInt32Value uint32_field = 15;
+  optional shark.BoolValue bool_field = 16;
+  optional shark.StringValue string_field = 17;
+  optional shark.BytesValue bytes_field = 18;
   // Part of struct, but useful to be able to test separately
-  shark.Value value_field = 19;
+  optional shark.Value value_field = 19;
 }
 
 // A repeated field for each well-known type.

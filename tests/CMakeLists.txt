@@ -109,11 +109,6 @@ kmcmake_cc_test(
         io/tokenizer_unittest.cc
         io/zero_copy_stream_unittest.cc
         message_unittest.cc
-        no_field_presence_test.cc
-        preserve_unknown_enum_test.cc
-        proto3_arena_lite_unittest.cc
-        proto3_arena_unittest.cc
-        proto3_lite_unittest.cc
         reflection_ops_unittest.cc
         repeated_field_reflection_unittest.cc
         repeated_field_unittest.cc

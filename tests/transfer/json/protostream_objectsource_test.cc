@@ -43,7 +43,6 @@
 #include <tests/transfer/json/testdata/books.skp.h>
 #include <tests/transfer/json/testdata/field_mask.skp.h>
 #include <tests/transfer/json/testdata/maps.skp.h>
-#include <tests/transfer/json/testdata/proto3.skp.h>
 #include <tests/transfer/json/testdata/struct.skp.h>
 #include <tests/transfer/json/testdata/timestamp_duration.skp.h>
 #include <gtest/gtest.h>
@@ -73,7 +72,6 @@ using proto_util_converter::testing::NestedBook;
 using proto_util_converter::testing::NestedFieldMask;
 using proto_util_converter::testing::PackedPrimitive;
 using proto_util_converter::testing::Primitive;
-using proto_util_converter::testing::Proto3Message;
 using proto_util_converter::testing::StructType;
 using proto_util_converter::testing::TimestampDuration;
 using ::testing::_;
@@ -97,7 +95,7 @@ class ProtostreamObjectSourceTest
         use_preserve_proto_field_names_(false),
         add_trailing_zeros_(false),
         render_unknown_enum_values_(true) {
-    helper_.ResetTypeInfo(Book::descriptor(), Proto3Message::descriptor());
+    helper_.ResetTypeInfo(Book::descriptor());
   }
 
   ~ProtostreamObjectSourceTest() override {}
@@ -544,30 +542,6 @@ TEST_P(ProtostreamObjectSourceTest, UsePreserveProtoFieldNames) {
 
   ow_.StartObject("")->RenderString("snake_field", "foo")->EndObject();
   DoTest(book, Book::descriptor());
-}
-
-TEST_P(ProtostreamObjectSourceTest,
-       UnknownEnumAreDroppedWhenRenderUnknownEnumValuesIsUnset) {
-  Proto3Message message;
-  message.set_enum_value(static_cast<Proto3Message::NestedEnum>(1234));
-
-  SetRenderUnknownEnumValues(false);
-
-  // Unknown enum values are not output.
-  ow_.StartObject("")->EndObject();
-  DoTest(message, Proto3Message::descriptor());
-}
-
-TEST_P(ProtostreamObjectSourceTest,
-       UnknownEnumAreOutputWhenRenderUnknownEnumValuesIsSet) {
-  Proto3Message message;
-  message.set_enum_value(static_cast<Proto3Message::NestedEnum>(1234));
-
-  SetRenderUnknownEnumValues(true);
-
-  // Unknown enum values are output.
-  ow_.StartObject("")->RenderInt32("enumValue", 1234)->EndObject();
-  DoTest(message, Proto3Message::descriptor());
 }
 
 TEST_P(ProtostreamObjectSourceTest, CyclicMessageDepthTest) {

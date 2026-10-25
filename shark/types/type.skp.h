@@ -256,6 +256,13 @@ class Type final :
     return *this;
   }
 
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+  }
+
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
     return GetDescriptor();
   }
@@ -413,7 +420,11 @@ class Type final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
-  // string name = 1;
+  // optional string name = 1;
+  bool has_name() const;
+  private:
+  bool _internal_has_name() const;
+  public:
   void clear_name();
   const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -427,7 +438,7 @@ class Type final :
   std::string* _internal_mutable_name();
   public:
 
-  // .shark.SourceContext source_context = 5;
+  // optional .shark.SourceContext source_context = 5;
   bool has_source_context() const;
   private:
   bool _internal_has_source_context() const;
@@ -445,7 +456,11 @@ class Type final :
       ::shark::SourceContext* source_context);
   ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // .shark.Syntax syntax = 6;
+  // optional .shark.Syntax syntax = 6;
+  bool has_syntax() const;
+  private:
+  bool _internal_has_syntax() const;
+  public:
   void clear_syntax();
   ::shark::Syntax syntax() const;
   void set_syntax(::shark::Syntax value);
@@ -462,13 +477,14 @@ class Type final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field > fields_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> oneofs_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::shark::SourceContext* source_context_;
     int syntax_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
@@ -504,6 +520,13 @@ class Field final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -731,7 +754,11 @@ class Field final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
-  // string name = 4;
+  // optional string name = 4;
+  bool has_name() const;
+  private:
+  bool _internal_has_name() const;
+  public:
   void clear_name();
   const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -745,7 +772,11 @@ class Field final :
   std::string* _internal_mutable_name();
   public:
 
-  // string type_url = 6;
+  // optional string type_url = 6;
+  bool has_type_url() const;
+  private:
+  bool _internal_has_type_url() const;
+  public:
   void clear_type_url();
   const std::string& type_url() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -759,7 +790,11 @@ class Field final :
   std::string* _internal_mutable_type_url();
   public:
 
-  // string json_name = 10;
+  // optional string json_name = 10;
+  bool has_json_name() const;
+  private:
+  bool _internal_has_json_name() const;
+  public:
   void clear_json_name();
   const std::string& json_name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -773,7 +808,11 @@ class Field final :
   std::string* _internal_mutable_json_name();
   public:
 
-  // string default_value = 11;
+  // optional string default_value = 11;
+  bool has_default_value() const;
+  private:
+  bool _internal_has_default_value() const;
+  public:
   void clear_default_value();
   const std::string& default_value() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -787,7 +826,11 @@ class Field final :
   std::string* _internal_mutable_default_value();
   public:
 
-  // .shark.Field.Kind kind = 1;
+  // optional .shark.Field.Kind kind = 1;
+  bool has_kind() const;
+  private:
+  bool _internal_has_kind() const;
+  public:
   void clear_kind();
   ::shark::Field_Kind kind() const;
   void set_kind(::shark::Field_Kind value);
@@ -796,7 +839,11 @@ class Field final :
   void _internal_set_kind(::shark::Field_Kind value);
   public:
 
-  // .shark.Field.Cardinality cardinality = 2;
+  // optional .shark.Field.Cardinality cardinality = 2;
+  bool has_cardinality() const;
+  private:
+  bool _internal_has_cardinality() const;
+  public:
   void clear_cardinality();
   ::shark::Field_Cardinality cardinality() const;
   void set_cardinality(::shark::Field_Cardinality value);
@@ -805,7 +852,11 @@ class Field final :
   void _internal_set_cardinality(::shark::Field_Cardinality value);
   public:
 
-  // int32 number = 3;
+  // optional int32 number = 3;
+  bool has_number() const;
+  private:
+  bool _internal_has_number() const;
+  public:
   void clear_number();
   int32_t number() const;
   void set_number(int32_t value);
@@ -814,7 +865,11 @@ class Field final :
   void _internal_set_number(int32_t value);
   public:
 
-  // int32 oneof_index = 7;
+  // optional int32 oneof_index = 7;
+  bool has_oneof_index() const;
+  private:
+  bool _internal_has_oneof_index() const;
+  public:
   void clear_oneof_index();
   int32_t oneof_index() const;
   void set_oneof_index(int32_t value);
@@ -823,7 +878,11 @@ class Field final :
   void _internal_set_oneof_index(int32_t value);
   public:
 
-  // bool packed = 8;
+  // optional bool packed = 8;
+  bool has_packed() const;
+  private:
+  bool _internal_has_packed() const;
+  public:
   void clear_packed();
   bool packed() const;
   void set_packed(bool value);
@@ -840,6 +899,8 @@ class Field final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr type_url_;
@@ -850,7 +911,6 @@ class Field final :
     int32_t number_;
     int32_t oneof_index_;
     bool packed_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
@@ -886,6 +946,13 @@ class Enum final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -1020,7 +1087,11 @@ class Enum final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
-  // string name = 1;
+  // optional string name = 1;
+  bool has_name() const;
+  private:
+  bool _internal_has_name() const;
+  public:
   void clear_name();
   const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1034,7 +1105,7 @@ class Enum final :
   std::string* _internal_mutable_name();
   public:
 
-  // .shark.SourceContext source_context = 4;
+  // optional .shark.SourceContext source_context = 4;
   bool has_source_context() const;
   private:
   bool _internal_has_source_context() const;
@@ -1052,7 +1123,11 @@ class Enum final :
       ::shark::SourceContext* source_context);
   ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // .shark.Syntax syntax = 5;
+  // optional .shark.Syntax syntax = 5;
+  bool has_syntax() const;
+  private:
+  bool _internal_has_syntax() const;
+  public:
   void clear_syntax();
   ::shark::Syntax syntax() const;
   void set_syntax(::shark::Syntax value);
@@ -1069,12 +1144,13 @@ class Enum final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue > enumvalue_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::shark::SourceContext* source_context_;
     int syntax_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
@@ -1110,6 +1186,13 @@ class EnumValue final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -1224,7 +1307,11 @@ class EnumValue final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
-  // string name = 1;
+  // optional string name = 1;
+  bool has_name() const;
+  private:
+  bool _internal_has_name() const;
+  public:
   void clear_name();
   const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1238,7 +1325,11 @@ class EnumValue final :
   std::string* _internal_mutable_name();
   public:
 
-  // int32 number = 2;
+  // optional int32 number = 2;
+  bool has_number() const;
+  private:
+  bool _internal_has_number() const;
+  public:
   void clear_number();
   int32_t number() const;
   void set_number(int32_t value);
@@ -1255,10 +1346,11 @@ class EnumValue final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     int32_t number_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
@@ -1294,6 +1386,13 @@ class Option final :
       CopyFrom(from);
     }
     return *this;
+  }
+
+  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+  }
+  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
   }
 
   static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
@@ -1389,7 +1488,11 @@ class Option final :
     kNameFieldNumber = 1,
     kValueFieldNumber = 2,
   };
-  // string name = 1;
+  // optional string name = 1;
+  bool has_name() const;
+  private:
+  bool _internal_has_name() const;
+  public:
   void clear_name();
   const std::string& name() const;
   template <typename ArgT0 = const std::string&, typename... ArgT>
@@ -1403,7 +1506,7 @@ class Option final :
   std::string* _internal_mutable_name();
   public:
 
-  // .shark.Any value = 2;
+  // optional .shark.Any value = 2;
   bool has_value() const;
   private:
   bool _internal_has_value() const;
@@ -1429,9 +1532,10 @@ class Option final :
   typedef void InternalArenaConstructable_;
   typedef void DestructorSkippable_;
   struct Impl_ {
+    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
     ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
     ::shark::Any* value_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
   };
   union { Impl_ _impl_; };
   friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
@@ -1447,9 +1551,17 @@ class Option final :
 #endif  // __GNUC__
 // Type
 
-// string name = 1;
+// optional string name = 1;
+inline bool Type::_internal_has_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Type::has_name() const {
+  return _internal_has_name();
+}
 inline void Type::clear_name() {
   _impl_.name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Type::name() const {
   // @@protoc_insertion_point(field_get:shark.Type.name)
@@ -1458,7 +1570,7 @@ inline const std::string& Type::name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Type::set_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Type.name)
 }
@@ -1471,22 +1583,32 @@ inline const std::string& Type::_internal_name() const {
   return _impl_.name_.Get();
 }
 inline void Type::_internal_set_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Type::_internal_mutable_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Type::release_name() {
   // @@protoc_insertion_point(field_release:shark.Type.name)
-  return _impl_.name_.Release();
+  if (!_internal_has_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Type::set_allocated_name(std::string* name) {
   if (name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -1652,9 +1774,11 @@ Type::options() const {
   return _impl_.options_;
 }
 
-// .shark.SourceContext source_context = 5;
+// optional .shark.SourceContext source_context = 5;
 inline bool Type::_internal_has_source_context() const {
-  return this != internal_default_instance() && _impl_.source_context_ != nullptr;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  SHARK_ASSUME(!value || _impl_.source_context_ != nullptr);
+  return value;
 }
 inline bool Type::has_source_context() const {
   return _internal_has_source_context();
@@ -1675,14 +1799,14 @@ inline void Type::unsafe_arena_set_allocated_source_context(
   }
   _impl_.source_context_ = source_context;
   if (source_context) {
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Type.source_context)
 }
 inline ::shark::SourceContext* Type::release_source_context() {
-  
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
@@ -1698,13 +1822,13 @@ inline ::shark::SourceContext* Type::release_source_context() {
 }
 inline ::shark::SourceContext* Type::unsafe_arena_release_source_context() {
   // @@protoc_insertion_point(field_release:shark.Type.source_context)
-  
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
   return temp;
 }
 inline ::shark::SourceContext* Type::_internal_mutable_source_context() {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.source_context_ == nullptr) {
     auto* p = CreateMaybeMessage<::shark::SourceContext>(GetArenaForAllocation());
     _impl_.source_context_ = p;
@@ -1729,17 +1853,25 @@ inline void Type::set_allocated_source_context(::shark::SourceContext* source_co
       source_context = ::SHARK_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, source_context, submessage_arena);
     }
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.source_context_ = source_context;
   // @@protoc_insertion_point(field_set_allocated:shark.Type.source_context)
 }
 
-// .shark.Syntax syntax = 6;
+// optional .shark.Syntax syntax = 6;
+inline bool Type::_internal_has_syntax() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool Type::has_syntax() const {
+  return _internal_has_syntax();
+}
 inline void Type::clear_syntax() {
   _impl_.syntax_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline ::shark::Syntax Type::_internal_syntax() const {
   return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
@@ -1749,7 +1881,7 @@ inline ::shark::Syntax Type::syntax() const {
   return _internal_syntax();
 }
 inline void Type::_internal_set_syntax(::shark::Syntax value) {
-  
+  _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
 }
 inline void Type::set_syntax(::shark::Syntax value) {
@@ -1761,9 +1893,17 @@ inline void Type::set_syntax(::shark::Syntax value) {
 
 // Field
 
-// .shark.Field.Kind kind = 1;
+// optional .shark.Field.Kind kind = 1;
+inline bool Field::_internal_has_kind() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
+  return value;
+}
+inline bool Field::has_kind() const {
+  return _internal_has_kind();
+}
 inline void Field::clear_kind() {
   _impl_.kind_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline ::shark::Field_Kind Field::_internal_kind() const {
   return static_cast<::shark::Field_Kind>(static_cast<int32_t>(_impl_.kind_));
@@ -1773,7 +1913,7 @@ inline ::shark::Field_Kind Field::kind() const {
   return _internal_kind();
 }
 inline void Field::_internal_set_kind(::shark::Field_Kind value) {
-  
+  _impl_._has_bits_[0] |= 0x00000010u;
   _impl_.kind_ = static_cast<int>(::shark::Field_Kind_to_underlying(value));
 }
 inline void Field::set_kind(::shark::Field_Kind value) {
@@ -1781,9 +1921,17 @@ inline void Field::set_kind(::shark::Field_Kind value) {
   // @@protoc_insertion_point(field_set:shark.Field.kind)
 }
 
-// .shark.Field.Cardinality cardinality = 2;
+// optional .shark.Field.Cardinality cardinality = 2;
+inline bool Field::_internal_has_cardinality() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
+  return value;
+}
+inline bool Field::has_cardinality() const {
+  return _internal_has_cardinality();
+}
 inline void Field::clear_cardinality() {
   _impl_.cardinality_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000020u;
 }
 inline ::shark::Field_Cardinality Field::_internal_cardinality() const {
   return static_cast<::shark::Field_Cardinality>(static_cast<int32_t>(_impl_.cardinality_));
@@ -1793,7 +1941,7 @@ inline ::shark::Field_Cardinality Field::cardinality() const {
   return _internal_cardinality();
 }
 inline void Field::_internal_set_cardinality(::shark::Field_Cardinality value) {
-  
+  _impl_._has_bits_[0] |= 0x00000020u;
   _impl_.cardinality_ = static_cast<int>(::shark::Field_Cardinality_to_underlying(value));
 }
 inline void Field::set_cardinality(::shark::Field_Cardinality value) {
@@ -1801,9 +1949,17 @@ inline void Field::set_cardinality(::shark::Field_Cardinality value) {
   // @@protoc_insertion_point(field_set:shark.Field.cardinality)
 }
 
-// int32 number = 3;
+// optional int32 number = 3;
+inline bool Field::_internal_has_number() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000040u) != 0;
+  return value;
+}
+inline bool Field::has_number() const {
+  return _internal_has_number();
+}
 inline void Field::clear_number() {
   _impl_.number_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000040u;
 }
 inline int32_t Field::_internal_number() const {
   return _impl_.number_;
@@ -1813,7 +1969,7 @@ inline int32_t Field::number() const {
   return _internal_number();
 }
 inline void Field::_internal_set_number(int32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000040u;
   _impl_.number_ = value;
 }
 inline void Field::set_number(int32_t value) {
@@ -1821,9 +1977,17 @@ inline void Field::set_number(int32_t value) {
   // @@protoc_insertion_point(field_set:shark.Field.number)
 }
 
-// string name = 4;
+// optional string name = 4;
+inline bool Field::_internal_has_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Field::has_name() const {
+  return _internal_has_name();
+}
 inline void Field::clear_name() {
   _impl_.name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Field::name() const {
   // @@protoc_insertion_point(field_get:shark.Field.name)
@@ -1832,7 +1996,7 @@ inline const std::string& Field::name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Field::set_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Field.name)
 }
@@ -1845,22 +2009,32 @@ inline const std::string& Field::_internal_name() const {
   return _impl_.name_.Get();
 }
 inline void Field::_internal_set_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Field::_internal_mutable_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_name() {
   // @@protoc_insertion_point(field_release:shark.Field.name)
-  return _impl_.name_.Release();
+  if (!_internal_has_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Field::set_allocated_name(std::string* name) {
   if (name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -1871,9 +2045,17 @@ inline void Field::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.Field.name)
 }
 
-// string type_url = 6;
+// optional string type_url = 6;
+inline bool Field::_internal_has_type_url() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool Field::has_type_url() const {
+  return _internal_has_type_url();
+}
 inline void Field::clear_type_url() {
   _impl_.type_url_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& Field::type_url() const {
   // @@protoc_insertion_point(field_get:shark.Field.type_url)
@@ -1882,7 +2064,7 @@ inline const std::string& Field::type_url() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Field::set_type_url(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000002u;
  _impl_.type_url_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Field.type_url)
 }
@@ -1895,22 +2077,32 @@ inline const std::string& Field::_internal_type_url() const {
   return _impl_.type_url_.Get();
 }
 inline void Field::_internal_set_type_url(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.type_url_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Field::_internal_mutable_type_url() {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   return _impl_.type_url_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_type_url() {
   // @@protoc_insertion_point(field_release:shark.Field.type_url)
-  return _impl_.type_url_.Release();
+  if (!_internal_has_type_url()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000002u;
+  auto* p = _impl_.type_url_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.type_url_.IsDefault()) {
+    _impl_.type_url_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Field::set_allocated_type_url(std::string* type_url) {
   if (type_url != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.type_url_.SetAllocated(type_url, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -1921,9 +2113,17 @@ inline void Field::set_allocated_type_url(std::string* type_url) {
   // @@protoc_insertion_point(field_set_allocated:shark.Field.type_url)
 }
 
-// int32 oneof_index = 7;
+// optional int32 oneof_index = 7;
+inline bool Field::_internal_has_oneof_index() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
+  return value;
+}
+inline bool Field::has_oneof_index() const {
+  return _internal_has_oneof_index();
+}
 inline void Field::clear_oneof_index() {
   _impl_.oneof_index_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000080u;
 }
 inline int32_t Field::_internal_oneof_index() const {
   return _impl_.oneof_index_;
@@ -1933,7 +2133,7 @@ inline int32_t Field::oneof_index() const {
   return _internal_oneof_index();
 }
 inline void Field::_internal_set_oneof_index(int32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000080u;
   _impl_.oneof_index_ = value;
 }
 inline void Field::set_oneof_index(int32_t value) {
@@ -1941,9 +2141,17 @@ inline void Field::set_oneof_index(int32_t value) {
   // @@protoc_insertion_point(field_set:shark.Field.oneof_index)
 }
 
-// bool packed = 8;
+// optional bool packed = 8;
+inline bool Field::_internal_has_packed() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
+  return value;
+}
+inline bool Field::has_packed() const {
+  return _internal_has_packed();
+}
 inline void Field::clear_packed() {
   _impl_.packed_ = false;
+  _impl_._has_bits_[0] &= ~0x00000100u;
 }
 inline bool Field::_internal_packed() const {
   return _impl_.packed_;
@@ -1953,7 +2161,7 @@ inline bool Field::packed() const {
   return _internal_packed();
 }
 inline void Field::_internal_set_packed(bool value) {
-  
+  _impl_._has_bits_[0] |= 0x00000100u;
   _impl_.packed_ = value;
 }
 inline void Field::set_packed(bool value) {
@@ -2001,9 +2209,17 @@ Field::options() const {
   return _impl_.options_;
 }
 
-// string json_name = 10;
+// optional string json_name = 10;
+inline bool Field::_internal_has_json_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool Field::has_json_name() const {
+  return _internal_has_json_name();
+}
 inline void Field::clear_json_name() {
   _impl_.json_name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& Field::json_name() const {
   // @@protoc_insertion_point(field_get:shark.Field.json_name)
@@ -2012,7 +2228,7 @@ inline const std::string& Field::json_name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Field::set_json_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000004u;
  _impl_.json_name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Field.json_name)
 }
@@ -2025,22 +2241,32 @@ inline const std::string& Field::_internal_json_name() const {
   return _impl_.json_name_.Get();
 }
 inline void Field::_internal_set_json_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.json_name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Field::_internal_mutable_json_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000004u;
   return _impl_.json_name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_json_name() {
   // @@protoc_insertion_point(field_release:shark.Field.json_name)
-  return _impl_.json_name_.Release();
+  if (!_internal_has_json_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000004u;
+  auto* p = _impl_.json_name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.json_name_.IsDefault()) {
+    _impl_.json_name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Field::set_allocated_json_name(std::string* json_name) {
   if (json_name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000004u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000004u;
   }
   _impl_.json_name_.SetAllocated(json_name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -2051,9 +2277,17 @@ inline void Field::set_allocated_json_name(std::string* json_name) {
   // @@protoc_insertion_point(field_set_allocated:shark.Field.json_name)
 }
 
-// string default_value = 11;
+// optional string default_value = 11;
+inline bool Field::_internal_has_default_value() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000008u) != 0;
+  return value;
+}
+inline bool Field::has_default_value() const {
+  return _internal_has_default_value();
+}
 inline void Field::clear_default_value() {
   _impl_.default_value_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const std::string& Field::default_value() const {
   // @@protoc_insertion_point(field_get:shark.Field.default_value)
@@ -2062,7 +2296,7 @@ inline const std::string& Field::default_value() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Field::set_default_value(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000008u;
  _impl_.default_value_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Field.default_value)
 }
@@ -2075,22 +2309,32 @@ inline const std::string& Field::_internal_default_value() const {
   return _impl_.default_value_.Get();
 }
 inline void Field::_internal_set_default_value(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000008u;
   _impl_.default_value_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Field::_internal_mutable_default_value() {
-  
+  _impl_._has_bits_[0] |= 0x00000008u;
   return _impl_.default_value_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Field::release_default_value() {
   // @@protoc_insertion_point(field_release:shark.Field.default_value)
-  return _impl_.default_value_.Release();
+  if (!_internal_has_default_value()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000008u;
+  auto* p = _impl_.default_value_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.default_value_.IsDefault()) {
+    _impl_.default_value_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Field::set_allocated_default_value(std::string* default_value) {
   if (default_value != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000008u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000008u;
   }
   _impl_.default_value_.SetAllocated(default_value, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -2105,9 +2349,17 @@ inline void Field::set_allocated_default_value(std::string* default_value) {
 
 // Enum
 
-// string name = 1;
+// optional string name = 1;
+inline bool Enum::_internal_has_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Enum::has_name() const {
+  return _internal_has_name();
+}
 inline void Enum::clear_name() {
   _impl_.name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Enum::name() const {
   // @@protoc_insertion_point(field_get:shark.Enum.name)
@@ -2116,7 +2368,7 @@ inline const std::string& Enum::name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Enum::set_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Enum.name)
 }
@@ -2129,22 +2381,32 @@ inline const std::string& Enum::_internal_name() const {
   return _impl_.name_.Get();
 }
 inline void Enum::_internal_set_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Enum::_internal_mutable_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Enum::release_name() {
   // @@protoc_insertion_point(field_release:shark.Enum.name)
-  return _impl_.name_.Release();
+  if (!_internal_has_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Enum::set_allocated_name(std::string* name) {
   if (name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -2235,9 +2497,11 @@ Enum::options() const {
   return _impl_.options_;
 }
 
-// .shark.SourceContext source_context = 4;
+// optional .shark.SourceContext source_context = 4;
 inline bool Enum::_internal_has_source_context() const {
-  return this != internal_default_instance() && _impl_.source_context_ != nullptr;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  SHARK_ASSUME(!value || _impl_.source_context_ != nullptr);
+  return value;
 }
 inline bool Enum::has_source_context() const {
   return _internal_has_source_context();
@@ -2258,14 +2522,14 @@ inline void Enum::unsafe_arena_set_allocated_source_context(
   }
   _impl_.source_context_ = source_context;
   if (source_context) {
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Enum.source_context)
 }
 inline ::shark::SourceContext* Enum::release_source_context() {
-  
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
@@ -2281,13 +2545,13 @@ inline ::shark::SourceContext* Enum::release_source_context() {
 }
 inline ::shark::SourceContext* Enum::unsafe_arena_release_source_context() {
   // @@protoc_insertion_point(field_release:shark.Enum.source_context)
-  
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::shark::SourceContext* temp = _impl_.source_context_;
   _impl_.source_context_ = nullptr;
   return temp;
 }
 inline ::shark::SourceContext* Enum::_internal_mutable_source_context() {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.source_context_ == nullptr) {
     auto* p = CreateMaybeMessage<::shark::SourceContext>(GetArenaForAllocation());
     _impl_.source_context_ = p;
@@ -2312,17 +2576,25 @@ inline void Enum::set_allocated_source_context(::shark::SourceContext* source_co
       source_context = ::SHARK_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, source_context, submessage_arena);
     }
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.source_context_ = source_context;
   // @@protoc_insertion_point(field_set_allocated:shark.Enum.source_context)
 }
 
-// .shark.Syntax syntax = 5;
+// optional .shark.Syntax syntax = 5;
+inline bool Enum::_internal_has_syntax() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000004u) != 0;
+  return value;
+}
+inline bool Enum::has_syntax() const {
+  return _internal_has_syntax();
+}
 inline void Enum::clear_syntax() {
   _impl_.syntax_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline ::shark::Syntax Enum::_internal_syntax() const {
   return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
@@ -2332,7 +2604,7 @@ inline ::shark::Syntax Enum::syntax() const {
   return _internal_syntax();
 }
 inline void Enum::_internal_set_syntax(::shark::Syntax value) {
-  
+  _impl_._has_bits_[0] |= 0x00000004u;
   _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
 }
 inline void Enum::set_syntax(::shark::Syntax value) {
@@ -2344,9 +2616,17 @@ inline void Enum::set_syntax(::shark::Syntax value) {
 
 // EnumValue
 
-// string name = 1;
+// optional string name = 1;
+inline bool EnumValue::_internal_has_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool EnumValue::has_name() const {
+  return _internal_has_name();
+}
 inline void EnumValue::clear_name() {
   _impl_.name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& EnumValue::name() const {
   // @@protoc_insertion_point(field_get:shark.EnumValue.name)
@@ -2355,7 +2635,7 @@ inline const std::string& EnumValue::name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void EnumValue::set_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.EnumValue.name)
 }
@@ -2368,22 +2648,32 @@ inline const std::string& EnumValue::_internal_name() const {
   return _impl_.name_.Get();
 }
 inline void EnumValue::_internal_set_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* EnumValue::_internal_mutable_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* EnumValue::release_name() {
   // @@protoc_insertion_point(field_release:shark.EnumValue.name)
-  return _impl_.name_.Release();
+  if (!_internal_has_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void EnumValue::set_allocated_name(std::string* name) {
   if (name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -2394,9 +2684,17 @@ inline void EnumValue::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.EnumValue.name)
 }
 
-// int32 number = 2;
+// optional int32 number = 2;
+inline bool EnumValue::_internal_has_number() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  return value;
+}
+inline bool EnumValue::has_number() const {
+  return _internal_has_number();
+}
 inline void EnumValue::clear_number() {
   _impl_.number_ = 0;
+  _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t EnumValue::_internal_number() const {
   return _impl_.number_;
@@ -2406,7 +2704,7 @@ inline int32_t EnumValue::number() const {
   return _internal_number();
 }
 inline void EnumValue::_internal_set_number(int32_t value) {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   _impl_.number_ = value;
 }
 inline void EnumValue::set_number(int32_t value) {
@@ -2458,9 +2756,17 @@ EnumValue::options() const {
 
 // Option
 
-// string name = 1;
+// optional string name = 1;
+inline bool Option::_internal_has_name() const {
+  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
+  return value;
+}
+inline bool Option::has_name() const {
+  return _internal_has_name();
+}
 inline void Option::clear_name() {
   _impl_.name_.ClearToEmpty();
+  _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Option::name() const {
   // @@protoc_insertion_point(field_get:shark.Option.name)
@@ -2469,7 +2775,7 @@ inline const std::string& Option::name() const {
 template <typename ArgT0, typename... ArgT>
 inline SHARK_ALWAYS_INLINE
 void Option::set_name(ArgT0&& arg0, ArgT... args) {
- 
+ _impl_._has_bits_[0] |= 0x00000001u;
  _impl_.name_.Set(static_cast<ArgT0 &&>(arg0), args..., GetArenaForAllocation());
   // @@protoc_insertion_point(field_set:shark.Option.name)
 }
@@ -2482,22 +2788,32 @@ inline const std::string& Option::_internal_name() const {
   return _impl_.name_.Get();
 }
 inline void Option::_internal_set_name(const std::string& value) {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   _impl_.name_.Set(value, GetArenaForAllocation());
 }
 inline std::string* Option::_internal_mutable_name() {
-  
+  _impl_._has_bits_[0] |= 0x00000001u;
   return _impl_.name_.Mutable(GetArenaForAllocation());
 }
 inline std::string* Option::release_name() {
   // @@protoc_insertion_point(field_release:shark.Option.name)
-  return _impl_.name_.Release();
+  if (!_internal_has_name()) {
+    return nullptr;
+  }
+  _impl_._has_bits_[0] &= ~0x00000001u;
+  auto* p = _impl_.name_.Release();
+#ifdef SHARK_FORCE_COPY_DEFAULT_STRING
+  if (_impl_.name_.IsDefault()) {
+    _impl_.name_.Set("", GetArenaForAllocation());
+  }
+#endif // SHARK_FORCE_COPY_DEFAULT_STRING
+  return p;
 }
 inline void Option::set_allocated_name(std::string* name) {
   if (name != nullptr) {
-    
+    _impl_._has_bits_[0] |= 0x00000001u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000001u;
   }
   _impl_.name_.SetAllocated(name, GetArenaForAllocation());
 #ifdef SHARK_FORCE_COPY_DEFAULT_STRING
@@ -2508,9 +2824,11 @@ inline void Option::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.Option.name)
 }
 
-// .shark.Any value = 2;
+// optional .shark.Any value = 2;
 inline bool Option::_internal_has_value() const {
-  return this != internal_default_instance() && _impl_.value_ != nullptr;
+  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
+  SHARK_ASSUME(!value || _impl_.value_ != nullptr);
+  return value;
 }
 inline bool Option::has_value() const {
   return _internal_has_value();
@@ -2531,14 +2849,14 @@ inline void Option::unsafe_arena_set_allocated_value(
   }
   _impl_.value_ = value;
   if (value) {
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   // @@protoc_insertion_point(field_unsafe_arena_set_allocated:shark.Option.value)
 }
 inline ::shark::Any* Option::release_value() {
-  
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::shark::Any* temp = _impl_.value_;
   _impl_.value_ = nullptr;
 #ifdef SHARK_FORCE_COPY_IN_RELEASE
@@ -2554,13 +2872,13 @@ inline ::shark::Any* Option::release_value() {
 }
 inline ::shark::Any* Option::unsafe_arena_release_value() {
   // @@protoc_insertion_point(field_release:shark.Option.value)
-  
+  _impl_._has_bits_[0] &= ~0x00000002u;
   ::shark::Any* temp = _impl_.value_;
   _impl_.value_ = nullptr;
   return temp;
 }
 inline ::shark::Any* Option::_internal_mutable_value() {
-  
+  _impl_._has_bits_[0] |= 0x00000002u;
   if (_impl_.value_ == nullptr) {
     auto* p = CreateMaybeMessage<::shark::Any>(GetArenaForAllocation());
     _impl_.value_ = p;
@@ -2585,9 +2903,9 @@ inline void Option::set_allocated_value(::shark::Any* value) {
       value = ::SHARK_NAMESPACE_ID::internal::GetOwnedMessage(
           message_arena, value, submessage_arena);
     }
-    
+    _impl_._has_bits_[0] |= 0x00000002u;
   } else {
-    
+    _impl_._has_bits_[0] &= ~0x00000002u;
   }
   _impl_.value_ = value;
   // @@protoc_insertion_point(field_set_allocated:shark.Option.value)
