@@ -39,12 +39,6 @@ public class PbParserTest {
     parsingFixture.get().doTest(true);
   }
 
-  /** Test against unittest_proto3.proto from the official protoc release. */
-  @Test
-  public void testUnittestProto3() {
-    parsingFixture.get().doTest(true);
-  }
-
   /** Test against unittest_custom_options.proto from the official protoc release. */
   @Test
   public void testUnittestCustomOptions() {

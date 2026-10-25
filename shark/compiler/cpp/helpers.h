@@ -297,7 +297,8 @@ std::string SafeFunctionName(const Descriptor* descriptor,
 
 // Returns true if generated messages have public unknown fields accessors
 inline bool PublicUnknownFieldsAccessors(const Descriptor* message) {
-  return message->file()->syntax() != FileDescriptor::SYNTAX_PROTO3;
+  (void)message;
+  return true;
 }
 
 // Returns the optimize mode for <file>, respecting <options.enforce_lite>.
@@ -443,30 +444,15 @@ bool IsStringOrMessage(const FieldDescriptor* field);
 std::string UnderscoresToCamelCase(const std::string& input,
                                    bool cap_next_letter);
 
-inline bool IsProto3(const FileDescriptor* file) {
-  return file->syntax() == FileDescriptor::SYNTAX_PROTO3;
-}
-
 inline bool HasHasbit(const FieldDescriptor* field) {
-  // This predicate includes proto3 message fields only if they have "optional".
-  //   Foo submsg1 = 1;           // HasHasbit() == false
-  //   optional Foo submsg2 = 2;  // HasHasbit() == true
-  // This is slightly odd, as adding "optional" to a singular proto3 field does
-  // not change the semantics or API. However whenever any field in a message
-  // has a hasbit, it forces reflection to include hasbit offsets for *all*
-  // fields, even if almost all of them are set to -1 (no hasbit). So to avoid
-  // causing a sudden size regression for ~all proto3 messages, we give proto3
-  // message fields a hasbit only if "optional" is present. If the user is
-  // explicitly writing "optional", it is likely they are writing it on
-  // primitive fields also.
   return (field->has_optional_keyword() || field->is_required()) &&
          !field->options().weak();
 }
 
-// Returns true if 'enum' semantics are such that unknown values are preserved
-// in the enum field itself, rather than going to the UnknownFieldSet.
+// Unknown enum values go to the unknown field set.
 inline bool HasPreservingUnknownEnumSemantics(const FieldDescriptor* field) {
-  return field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3;
+  (void)field;
+  return false;
 }
 
 inline bool IsEnumClass(const EnumDescriptor*) {

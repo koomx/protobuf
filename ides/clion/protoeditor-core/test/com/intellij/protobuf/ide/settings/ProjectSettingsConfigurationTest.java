@@ -27,6 +27,6 @@ public class ProjectSettingsConfigurationTest extends HeavyPlatformTestCase {
   public void testGetDescriptorPathSuggestions() {
     assertContainsElements(
         PbImportPathsConfiguration.getDescriptorPathSuggestions(getProject()),
-        "google/protobuf/descriptor.proto");
+        "shark/descriptor.shark");
   }
 }

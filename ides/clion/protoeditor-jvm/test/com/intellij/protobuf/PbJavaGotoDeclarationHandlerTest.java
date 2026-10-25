@@ -140,20 +140,6 @@ public class PbJavaGotoDeclarationHandlerTest extends LightJavaCodeInsightFixtur
       .isEqualTo(4);
   }
 
-  public void testProtoSyntax3() {
-    myFixture.copyFileToProject(
-      new File(getTestDataPath(), "proto/ProtoSyntax3.proto").getPath(), "protos/ProtoSyntax3.proto");
-    JavaTestData.addGenCodeJar(
-      myFixture.getModule(), getTestJarsDirectoryPath(), "libProtoSyntax3Lib-speed.jar", testDisposable);
-    setupProto2BaseClass();
-    VirtualFile javaFile =
-      JavaTestData.copyJavaProtoUser(myFixture, new File("java", "ProtoSyntax3User.java"));
-
-    assertWithMessage("Number of markers (" + GotoExpectationMarker.EXPECT_MARKER + ")")
-      .that(checkExpectations(javaFile))
-      .isEqualTo(10);
-  }
-
   public void testProto2Lite() {
     myFixture.copyFileToProject(
       new File(getTestDataPath(), "proto/Proto2Lite.proto").getPath(), "protos/Proto2Lite.proto");

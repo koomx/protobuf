@@ -1566,6 +1566,7 @@ namespace shark {
         enum Syntax {
             SYNTAX_UNKNOWN = 0,
             SYNTAX_PROTO2 = 2,
+            // Reserved. Do not reuse 3. Building a file with this syntax fails.
             SYNTAX_PROTO3 = 3,
         };
         Syntax syntax() const;

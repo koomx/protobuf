@@ -65,14 +65,18 @@ class MockErrorCollector : public io::ErrorCollector {
 
   std::string warning_;
   std::string text_;
+  // Subtracted from reported lines when the fixture inserted a syntax line.
+  int line_offset = 0;
 
   // implements ErrorCollector ---------------------------------------
   void AddWarning(int line, int column, const std::string& message) override {
-    strings::SubstituteAndAppend(&warning_, "$0:$1: $2\n", line, column, message);
+    strings::SubstituteAndAppend(&warning_, "$0:$1: $2\n", line - line_offset,
+                                 column, message);
   }
 
   void AddError(int line, int column, const std::string& message) override {
-    strings::SubstituteAndAppend(&text_, "$0:$1: $2\n", line, column, message);
+    strings::SubstituteAndAppend(&text_, "$0:$1: $2\n", line - line_offset,
+                                 column, message);
   }
 };
 
@@ -102,14 +106,61 @@ class MockValidationErrorCollector : public DescriptorPool::ErrorCollector {
   io::ErrorCollector* wrapped_collector_;
 };
 
+bool DeclaresSyntax(const char* text) {
+  const char* p = text;
+  while (*p != '\0') {
+    if (*p == ' ' || *p == '\t' || *p == '\r' || *p == '\n') {
+      ++p;
+      continue;
+    }
+    if (*p == '/' && p[1] == '/') {
+      while (*p != '\0' && *p != '\n') ++p;
+      continue;
+    }
+    if (*p == '/' && p[1] == '*') {
+      p += 2;
+      while (*p != '\0' && !(*p == '*' && p[1] == '/')) ++p;
+      if (*p != '\0') p += 2;
+      continue;
+    }
+    if (static_cast<unsigned char>(*p) == 0xEF) {
+      p += 3;
+      continue;
+    }
+    if (*p == '$') {
+      ++p;
+      if (*p == '$') {
+        ++p;
+        continue;
+      }
+      if (*p != '\0') ++p;
+      if (*p == '$') ++p;
+      continue;
+    }
+    break;
+  }
+  return strncmp(p, "syntax", 6) == 0;
+}
+
 class ParserTest : public testing::Test {
  protected:
-  ParserTest() : require_syntax_identifier_(false) {}
+  ParserTest() : require_syntax_identifier_(false), supply_syntax_(true) {}
 
   // Set up the parser to parse the given text.
   void SetupParser(const char* text) {
     error_collector_.text_.clear();
-    raw_input_.reset(new io::ArrayInputStream(text, strlen(text)));
+    error_collector_.warning_.clear();
+    error_collector_.line_offset = 0;
+    const char* parse_text = text;
+    if (supply_syntax_ && !DeclaresSyntax(text)) {
+      supplied_text_ = std::string("syntax = \"proto2\";\n") + text;
+      parse_text = supplied_text_.c_str();
+      error_collector_.line_offset = 1;
+    } else {
+      supplied_text_.clear();
+    }
+    raw_input_.reset(
+        new io::ArrayInputStream(parse_text, static_cast<int>(strlen(parse_text))));
     input_.reset(new io::Tokenizer(raw_input_.get(), &error_collector_));
     parser_.reset(new Parser());
     parser_->RecordErrorsTo(&error_collector_);
@@ -129,6 +180,9 @@ class ParserTest : public testing::Test {
 
     // We don't cover SourceCodeInfo in these tests.
     actual.clear_source_code_info();
+    if (error_collector_.line_offset != 0) {
+      actual.clear_syntax();
+    }
 
     // Parse the ASCII representation in order to canonicalize it.  We could
     // just compare directly to actual.DebugString(), but that would require
@@ -184,6 +238,8 @@ class ParserTest : public testing::Test {
   std::unique_ptr<io::Tokenizer> input_;
   std::unique_ptr<Parser> parser_;
   bool require_syntax_identifier_;
+  bool supply_syntax_;
+  std::string supplied_text_;
 };
 
 // ===================================================================
@@ -194,18 +250,25 @@ TEST_F(ParserTest, StopAfterSyntaxIdentifier) {
       "syntax = \"foobar\";\n"
       "this line will not be parsed\n");
   parser_->SetStopAfterSyntaxIdentifier(true);
-  EXPECT_TRUE(parser_->Parse(input_.get(), nullptr));
-  EXPECT_EQ("", error_collector_.text_);
+  EXPECT_FALSE(parser_->Parse(input_.get(), nullptr));
+  EXPECT_EQ(
+      "1:9: Unrecognized syntax identifier \"foobar\".  This parser "
+      "only recognizes \"proto2\".\n",
+      error_collector_.text_);
   EXPECT_EQ("foobar", parser_->GetSyntaxIdentifier());
 }
 
 TEST_F(ParserTest, StopAfterOmittedSyntaxIdentifier) {
+  supply_syntax_ = false;
   SetupParser(
       "// blah\n"
       "this line will not be parsed\n");
   parser_->SetStopAfterSyntaxIdentifier(true);
-  EXPECT_TRUE(parser_->Parse(input_.get(), nullptr));
-  EXPECT_EQ("", error_collector_.text_);
+  EXPECT_FALSE(parser_->Parse(input_.get(), nullptr));
+  EXPECT_EQ(
+      "1:0: File must begin with a syntax statement, e.g. 'syntax = "
+      "\"proto2\";'.\n",
+      error_collector_.text_);
   EXPECT_EQ("", parser_->GetSyntaxIdentifier());
 }
 
@@ -218,13 +281,15 @@ TEST_F(ParserTest, StopAfterSyntaxIdentifierWithErrors) {
   EXPECT_EQ("1:9: Expected syntax identifier.\n", error_collector_.text_);
 }
 
-TEST_F(ParserTest, WarnIfSyntaxIdentifierOmmitted) {
+TEST_F(ParserTest, ErrorIfSyntaxIdentifierOmitted) {
+  supply_syntax_ = false;
   SetupParser("message A {}");
   FileDescriptorProto file;
-  CaptureTestStderr();
-  EXPECT_TRUE(parser_->Parse(input_.get(), &file));
-  EXPECT_TRUE(GetCapturedTestStderr().find("No syntax specified") !=
-              std::string::npos);
+  EXPECT_FALSE(parser_->Parse(input_.get(), &file));
+  EXPECT_EQ(
+      "0:0: File must begin with a syntax statement, e.g. 'syntax = "
+      "\"proto2\";'.\n",
+      error_collector_.text_);
 }
 
 TEST_F(ParserTest, WarnIfFieldNameIsNotUpperCamel) {
@@ -270,7 +335,8 @@ typedef ParserTest ParseMessageTest;
 
 TEST_F(ParseMessageTest, IgnoreBOM) {
   char input[] =
-      "   message TestMessage {\n"
+      "   syntax = \"proto2\";\n"
+      "message TestMessage {\n"
       "  required int32 foo = 1;\n"
       "}\n";
   // Set UTF-8 BOM.
@@ -279,6 +345,7 @@ TEST_F(ParseMessageTest, IgnoreBOM) {
   input[2] = (char)0xBF;
   ExpectParsesTo(
       input,
+      "syntax: 'proto2' "
       "message_type {"
       "  name: \"TestMessage\""
       "  field { name:\"foo\" label:LABEL_REQUIRED type:TYPE_INT32 number:1 }"
@@ -287,14 +354,16 @@ TEST_F(ParseMessageTest, IgnoreBOM) {
 
 TEST_F(ParseMessageTest, BOMError) {
   char input[] =
-      "   message TestMessage {\n"
+      "   syntax = \"proto2\";\n"
+      "message TestMessage {\n"
       "  required int32 foo = 1;\n"
       "}\n";
   input[0] = (char)0xEF;
-  ExpectHasErrors(input,
+  ExpectHasEarlyExitErrors(input,
                   "0:1: Proto file starts with 0xEF but not UTF-8 BOM. "
                   "Only UTF-8 is accepted for proto file.\n"
-                  "0:0: Expected top-level statement (e.g. \"message\").\n");
+                  "0:0: File must begin with a syntax statement, e.g. "
+                  "'syntax = \"proto2\";'.\n");
 }
 
 TEST_F(ParseMessageTest, SimpleMessage) {
@@ -310,17 +379,14 @@ TEST_F(ParseMessageTest, SimpleMessage) {
 }
 
 TEST_F(ParseMessageTest, ImplicitSyntaxIdentifier) {
-  require_syntax_identifier_ = false;
-  ExpectParsesTo(
+  supply_syntax_ = false;
+  ExpectHasEarlyExitErrors(
       "message TestMessage {\n"
       "  required int32 foo = 1;\n"
       "}\n",
-
-      "message_type {"
-      "  name: \"TestMessage\""
-      "  field { name:\"foo\" label:LABEL_REQUIRED type:TYPE_INT32 number:1 }"
-      "}");
-  EXPECT_EQ("proto2", parser_->GetSyntaxIdentifier());
+      "0:0: File must begin with a syntax statement, e.g. 'syntax = "
+      "\"proto2\";'.\n");
+  EXPECT_EQ("", parser_->GetSyntaxIdentifier());
 }
 
 TEST_F(ParseMessageTest, ExplicitSyntaxIdentifier) {
@@ -996,54 +1062,23 @@ TEST_F(ParseMessageTest, MultipleExtensionsOneExtendee) {
 }
 
 TEST_F(ParseMessageTest, OptionalLabelProto3) {
-  ExpectParsesTo(
+  ExpectHasEarlyExitErrors(
       "syntax = \"proto3\";\n"
       "message TestMessage {\n"
       "  int32 foo = 1;\n"
       "}\n",
-
-      "syntax: \"proto3\" "
-      "message_type {"
-      "  name: \"TestMessage\""
-      "  field { name:\"foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:1 } "
-      "}");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParseMessageTest, ExplicitOptionalLabelProto3) {
-  ExpectParsesTo(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "message TestMessage {\n"
       "  optional int32 foo = 1;\n"
       "}\n",
-
-      "syntax: \"proto3\" "
-      "message_type {"
-      "  name: \"TestMessage\""
-      "  field { name:\"foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:1 "
-      "          proto3_optional: true oneof_index: 0 } "
-      "  oneof_decl { name:\"_foo\" } "
-      "}");
-
-  // Handle collisions in the synthetic oneof name.
-  ExpectParsesTo(
-      "syntax = 'proto3';\n"
-      "message TestMessage {\n"
-      "  optional int32 foo = 1;\n"
-      "  oneof _foo {\n"
-      "    int32 __foo = 2;\n"
-      "  }\n"
-      "}\n",
-
-      "syntax: \"proto3\" "
-      "message_type {"
-      "  name: \"TestMessage\""
-      "  field { name:\"foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:1 "
-      "          proto3_optional: true oneof_index: 1 } "
-      "  field { name:\"__foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:2 "
-      "          oneof_index: 0 } "
-      "  oneof_decl { name:\"_foo\" } "
-      "  oneof_decl { name:\"X_foo\" } "
-      "}");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 // ===================================================================
@@ -1101,20 +1136,14 @@ TEST_F(ParseEnumTest, EnumClassUint32HighBit) {
 }
 
 TEST_F(ParseEnumTest, Proto3EnumClass) {
-  ExpectParsesTo(
+  ExpectHasEarlyExitErrors(
       "syntax = \"proto3\";\n"
       "enum class Color : uint16 {\n"
       "  COLOR_UNSPECIFIED = 0;\n"
       "  RED = 1;\n"
       "}\n",
-
-      "syntax: \"proto3\" "
-      "enum_type {"
-      "  name: \"Color\""
-      "  value { name:\"COLOR_UNSPECIFIED\" number:0 }"
-      "  value { name:\"RED\" number:1 }"
-      "  options { underlying_type: ENUM_UNDERLYING_TYPE_UINT16 }"
-      "}");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParseEnumTest, SimpleEnum) {
@@ -1333,6 +1362,7 @@ TEST_F(ParseMiscTest, ParseFileOptions) {
 typedef ParserTest ParseErrorTest;
 
 TEST_F(ParseErrorTest, MissingSyntaxIdentifier) {
+  supply_syntax_ = false;
   require_syntax_identifier_ = true;
   ExpectHasEarlyExitErrors("message TestMessage {}",
                            "0:0: File must begin with a syntax statement, e.g. "
@@ -1344,7 +1374,7 @@ TEST_F(ParseErrorTest, UnknownSyntaxIdentifier) {
   ExpectHasEarlyExitErrors(
       "syntax = \"no_such_syntax\";",
       "0:9: Unrecognized syntax identifier \"no_such_syntax\".  This parser "
-      "only recognizes \"proto2\" and \"proto3\".\n");
+      "only recognizes \"proto2\".\n");
   EXPECT_EQ("no_such_syntax", parser_->GetSyntaxIdentifier());
 }
 
@@ -1925,7 +1955,9 @@ TEST_F(ParserValidationErrorTest, DuplicateFileError) {
   EXPECT_TRUE(pool_.BuildFile(other_file) != nullptr);
 
   ExpectHasValidationErrors(
-      "package test;", "0:0: A file with this name is already in the pool.\n");
+      "syntax = \"proto2\";\n"
+      "package test;",
+      "0:0: A file with this name is already in the pool.\n");
 }
 
 TEST_F(ParserValidationErrorTest, MessageNameError) {
@@ -2028,52 +2060,55 @@ TEST_F(ParserValidationErrorTest, ExtensionRangeNumberError) {
 }
 
 TEST_F(ParserValidationErrorTest, Proto3ExtensionError) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "message Foo { \n"
       "  extensions 100 to 199;\n"
       "}\n"
       "extend Foo { string foo = 101; }\n",
-      "4:7: Extensions in proto3 are only allowed for defining options.\n"
-      "2:13: Extension ranges are not allowed in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, Proto3MessageSet) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "message Foo { \n"
       "  option message_set_wire_format = true;\n"
       "}\n",
-      "1:8: MessageSet is not supported in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, Proto3Required) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "message Foo { \n"
       "  required int32 field = 1;"
       "}\n",
-      "2:11: Required fields are not allowed in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, Proto3Default) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "message Foo { \n"
       "  int32 field = 1 [default = 12];"
       "}\n",
-      "2:29: Explicit default values are not allowed in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, Proto3JsonConflictError) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "message TestMessage {\n"
       "  uint32 foo = 1;\n"
       "  uint32 Foo = 2;\n"
       "}\n",
-      "3:9: The JSON camel-case name of field \"Foo\" conflicts with field "
-      "\"foo\". This is not allowed in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, EnumNameError) {
@@ -2084,17 +2119,19 @@ TEST_F(ParserValidationErrorTest, EnumNameError) {
 }
 
 TEST_F(ParserValidationErrorTest, Proto3EnumClassRequiresZero) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "enum class Foo : uint8 { A = 1; }\n",
-      "1:29: The first enum value must be zero in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, Proto3EnumError) {
-  ExpectHasValidationErrors(
+  ExpectHasEarlyExitErrors(
       "syntax = 'proto3';\n"
       "enum Foo {A = 1;}\n",
-      "1:14: The first enum value must be zero in proto3.\n");
+      "0:9: Unrecognized syntax identifier \"proto3\".  This parser "
+      "only recognizes \"proto2\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, EnumValueNameError) {
@@ -2524,7 +2561,7 @@ TEST_F(ParseDescriptorDebugTest, TestCommentsInDebugString) {
 
 TEST_F(ParseDescriptorDebugTest, TestMaps) {
   SetupParser(
-      "syntax = \"proto3\"; "
+      "syntax = \"proto2\"; "
       "message Foo { "
       "  message Bar { } "
       "  map<int32, Bar> enum_message_map = 1; "
@@ -2671,8 +2708,16 @@ class SourceInfoTest : public ParserTest {
   // Parse the given text as a .shark file and populate the spans_ map with
   // all the source location spans in its SourceCodeInfo table.
   bool Parse(const char* text) {
-    ExtractMarkers(text);
+    std::string with_syntax;
+    const char* marked = text;
+    if (!DeclaresSyntax(text)) {
+      with_syntax = std::string("syntax = \"proto2\";\n\n") + text;
+      marked = with_syntax.c_str();
+    }
+    ExtractMarkers(marked);
+    supply_syntax_ = false;
     SetupParser(text_without_markers_.c_str());
+    supply_syntax_ = true;
     if (!parser_->Parse(input_.get(), &file_)) {
       return false;
     }
@@ -2680,6 +2725,10 @@ class SourceInfoTest : public ParserTest {
     const SourceCodeInfo& source_info = file_.source_code_info();
     for (int i = 0; i < source_info.location_size(); i++) {
       const SourceCodeInfo::Location& location = source_info.location(i);
+      if (!with_syntax.empty() && location.path_size() == 1 &&
+          location.path(0) == FileDescriptorProto::kSyntaxFieldNumber) {
+        continue;
+      }
       const Message* descriptor_proto = nullptr;
       const FieldDescriptor* field = nullptr;
       int index = 0;
@@ -2946,32 +2995,12 @@ TEST_F(SourceInfoTest, Fields) {
 }
 
 TEST_F(SourceInfoTest, Proto3Fields) {
-  EXPECT_TRUE(
+  EXPECT_FALSE(
       Parse("syntax = \"proto3\";\n"
             "message Foo {\n"
             "  $a$int32$b$ $c$bar$d$ = $e$1$f$;$g$\n"
             "  $h$repeated$i$ $j$X.Y$k$ $l$baz$m$ = $n$2$o$;$p$\n"
             "}\n"));
-
-  const FieldDescriptorProto& field1 = file_.message_type(0).field(0);
-  const FieldDescriptorProto& field2 = file_.message_type(0).field(1);
-
-  EXPECT_TRUE(HasSpan('a', 'g', field1));
-  EXPECT_TRUE(HasSpan('a', 'b', field1, "type"));
-  EXPECT_TRUE(HasSpan('c', 'd', field1, "name"));
-  EXPECT_TRUE(HasSpan('e', 'f', field1, "number"));
-
-  EXPECT_TRUE(HasSpan('h', 'p', field2));
-  EXPECT_TRUE(HasSpan('h', 'i', field2, "label"));
-  EXPECT_TRUE(HasSpan('j', 'k', field2, "type_name"));
-  EXPECT_TRUE(HasSpan('l', 'm', field2, "name"));
-  EXPECT_TRUE(HasSpan('n', 'o', field2, "number"));
-
-  // Ignore these.
-  EXPECT_TRUE(HasSpan(file_));
-  EXPECT_TRUE(HasSpan(file_, "syntax"));
-  EXPECT_TRUE(HasSpan(file_.message_type(0)));
-  EXPECT_TRUE(HasSpan(file_.message_type(0), "name"));
 }
 
 TEST_F(SourceInfoTest, Extensions) {

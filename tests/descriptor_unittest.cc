@@ -518,9 +518,8 @@ TEST_F(FileDescriptorTest, BuildAgainWithSyntax) {
   proto_syntax3.set_name("foo_syntax3");
   proto_syntax3.set_syntax("proto3");
 
-  const FileDescriptor* proto3_descriptor = pool_.BuildFile(proto_syntax3);
-  EXPECT_TRUE(proto3_descriptor != nullptr);
-  EXPECT_EQ(proto3_descriptor, pool_.BuildFile(proto_syntax3));
+  EXPECT_TRUE(pool_.BuildFile(proto_syntax3) == nullptr);
+  EXPECT_EQ(3, static_cast<int>(FileDescriptor::SYNTAX_PROTO3));
 }
 
 TEST_F(FileDescriptorTest, Syntax) {
@@ -542,12 +541,8 @@ TEST_F(FileDescriptorTest, Syntax) {
   {
     proto.set_syntax("proto3");
     DescriptorPool pool;
-    const FileDescriptor* file = pool.BuildFile(proto);
-    EXPECT_TRUE(file != nullptr);
-    EXPECT_EQ(FileDescriptor::SYNTAX_PROTO3, file->syntax());
-    FileDescriptorProto other;
-    file->CopyTo(&other);
-    EXPECT_EQ("proto3", other.syntax());
+    EXPECT_TRUE(pool.BuildFile(proto) == nullptr);
+    EXPECT_EQ(3, static_cast<int>(FileDescriptor::SYNTAX_PROTO3));
   }
 }
 
@@ -708,7 +703,7 @@ class DescriptorTest : public testing::Test {
 
     FileDescriptorProto json_file;
     json_file.set_name("json.shark");
-    json_file.set_syntax("proto3");
+    json_file.set_syntax("proto2");
     DescriptorProto* message4 = AddMessage(&json_file, "TestMessage4");
     AddField(message4, "field_name1", 1, FieldDescriptorProto::LABEL_OPTIONAL,
              FieldDescriptorProto::TYPE_INT32);
@@ -3157,7 +3152,7 @@ TEST_P(AllowUnknownDependenciesTest,
 INSTANTIATE_TEST_SUITE_P(DatabaseSource, AllowUnknownDependenciesTest,
                          testing::Combine(testing::Values(NO_DATABASE,
                                                           FALLBACK_DATABASE),
-                                          testing::Values("proto2", "proto3")));
+                                          testing::Values("proto2")));
 
 // ===================================================================
 
@@ -6323,8 +6318,8 @@ TEST_F(ValidationErrorTest, MapEntryKeyTypeEnum) {
   file_proto.mutable_message_type()->RemoveLast();
   file_proto.set_syntax("proto3");
   BuildFileWithErrors(file_proto.DebugString(),
-                      "foo.shark: Foo.foo_map: TYPE: Key in map fields cannot "
-                      "be enum types.\n");
+                      "foo.shark: foo.shark: OTHER: syntax \"proto3\" is not "
+                      "supported.\n");
 }
 
 TEST_F(ValidationErrorTest, MapEntryKeyTypeMessage) {
@@ -6391,16 +6386,35 @@ TEST_F(ValidationErrorTest, MapEntryConflictsWithEnum) {
       "with an existing enum type.\n");
 }
 
-TEST_F(ValidationErrorTest, EnumValuesConflictWithDifferentCasing) {
+TEST_F(ValidationErrorTest, Proto3SyntaxRejected) {
   BuildFileWithErrors(
-      "syntax: 'proto3'"
       "name: 'foo.shark' "
+      "syntax: 'proto3' "
+      "message_type { name: 'Foo' }",
+      "foo.shark: foo.shark: OTHER: syntax \"proto3\" is not supported.\n");
+}
+
+TEST_F(ValidationErrorTest, Proto3OptionalRejected) {
+  BuildFileWithErrors(
+      "name: 'foo.shark' "
+      "message_type { "
+      "  name: 'Foo' "
+      "  field { name:'foo' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 "
+      "          proto3_optional: true } "
+      "}",
+      "foo.shark: Foo.foo: OTHER: proto3_optional is not supported.\n");
+}
+
+TEST_F(ValidationErrorTest, EnumValuesConflictWithDifferentCasing) {
+  BuildFileWithWarnings(
+      "syntax: 'proto2'"
+      "name: 'casing1.shark' "
       "enum_type {"
       "  name: 'FooEnum' "
       "  value { name: 'BAR' number: 0 }"
       "  value { name: 'bar' number: 1 }"
       "}",
-      "foo.shark: bar: NAME: Enum name bar has the same name as BAR "
+      "casing1.shark: bar: NAME: Enum name bar has the same name as BAR "
       "if you ignore case and strip out the enum name prefix (if any). "
       "This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
@@ -6408,70 +6422,70 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWithDifferentCasing) {
 
   // Not an error because both enums are mapped to the same value.
   BuildFile(
-      "syntax: 'proto3'"
-      "name: 'foo.shark' "
+      "syntax: 'proto2'"
+      "name: 'casing2.shark' "
       "enum_type {"
-      "  name: 'FooEnum' "
+      "  name: 'FooEnum2' "
       "  options { allow_alias: true }"
-      "  value { name: 'UNKNOWN' number: 0 }"
-      "  value { name: 'BAR' number: 1 }"
-      "  value { name: 'bar' number: 1 }"
+      "  value { name: 'UNKNOWN2' number: 0 }"
+      "  value { name: 'BAZ2' number: 1 }"
+      "  value { name: 'baz2' number: 1 }"
       "}");
 }
 
 TEST_F(ValidationErrorTest, EnumValuesConflictWhenPrefixesStripped) {
-  BuildFileWithErrors(
-      "syntax: 'proto3'"
-      "name: 'foo.shark' "
+  BuildFileWithWarnings(
+      "syntax: 'proto2'"
+      "name: 'prefix1.shark' "
       "enum_type {"
       "  name: 'FooEnum' "
       "  value { name: 'FOO_ENUM_BAZ' number: 0 }"
       "  value { name: 'BAZ' number: 1 }"
       "}",
-      "foo.shark: BAZ: NAME: Enum name BAZ has the same name as FOO_ENUM_BAZ "
+      "prefix1.shark: BAZ: NAME: Enum name BAZ has the same name as FOO_ENUM_BAZ "
       "if you ignore case and strip out the enum name prefix (if any). "
       "This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
       "the same numeric value to both enums.\n");
 
-  BuildFileWithErrors(
-      "syntax: 'proto3'"
-      "name: 'foo.shark' "
+  BuildFileWithWarnings(
+      "syntax: 'proto2'"
+      "name: 'prefix2.shark' "
       "enum_type {"
-      "  name: 'FooEnum' "
-      "  value { name: 'FOOENUM_BAZ' number: 0 }"
-      "  value { name: 'BAZ' number: 1 }"
+      "  name: 'FooEnumB' "
+      "  value { name: 'FOOENUMB_QUX' number: 0 }"
+      "  value { name: 'QUX' number: 1 }"
       "}",
-      "foo.shark: BAZ: NAME: Enum name BAZ has the same name as FOOENUM_BAZ "
+      "prefix2.shark: QUX: NAME: Enum name QUX has the same name as FOOENUMB_QUX "
       "if you ignore case and strip out the enum name prefix (if any). "
       "This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
       "the same numeric value to both enums.\n");
 
-  BuildFileWithErrors(
-      "syntax: 'proto3'"
-      "name: 'foo.shark' "
+  BuildFileWithWarnings(
+      "syntax: 'proto2'"
+      "name: 'prefix3.shark' "
       "enum_type {"
-      "  name: 'FooEnum' "
-      "  value { name: 'FOO_ENUM_BAR_BAZ' number: 0 }"
-      "  value { name: 'BAR__BAZ' number: 1 }"
+      "  name: 'CorEnum' "
+      "  value { name: 'COR_ENUM_BAR_ZED' number: 0 }"
+      "  value { name: 'BAR__ZED' number: 1 }"
       "}",
-      "foo.shark: BAR__BAZ: NAME: Enum name BAR__BAZ has the same name as "
-      "FOO_ENUM_BAR_BAZ if you ignore case and strip out the enum name prefix "
+      "prefix3.shark: BAR__ZED: NAME: Enum name BAR__ZED has the same name as "
+      "COR_ENUM_BAR_ZED if you ignore case and strip out the enum name prefix "
       "(if any). This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
       "the same numeric value to both enums.\n");
 
-  BuildFileWithErrors(
-      "syntax: 'proto3'"
-      "name: 'foo.shark' "
+  BuildFileWithWarnings(
+      "syntax: 'proto2'"
+      "name: 'prefix4.shark' "
       "enum_type {"
-      "  name: 'FooEnum' "
-      "  value { name: 'FOO_ENUM__BAR_BAZ' number: 0 }"
-      "  value { name: 'BAR_BAZ' number: 1 }"
+      "  name: 'DogEnum' "
+      "  value { name: 'DOG_ENUM__BAR_WAX' number: 0 }"
+      "  value { name: 'BAR_WAX' number: 1 }"
       "}",
-      "foo.shark: BAR_BAZ: NAME: Enum name BAR_BAZ has the same name as "
-      "FOO_ENUM__BAR_BAZ if you ignore case and strip out the enum name prefix "
+      "prefix4.shark: BAR_WAX: NAME: Enum name BAR_WAX has the same name as "
+      "DOG_ENUM__BAR_WAX if you ignore case and strip out the enum name prefix "
       "(if any). This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
       "the same numeric value to both enums.\n");
@@ -6479,12 +6493,12 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWhenPrefixesStripped) {
   // This isn't an error because the underscore will cause the PascalCase to
   // differ by case (BarBaz vs. Barbaz).
   BuildFile(
-      "syntax: 'proto3'"
-      "name: 'foo.shark' "
+      "syntax: 'proto2'"
+      "name: 'prefix5.shark' "
       "enum_type {"
-      "  name: 'FooEnum' "
-      "  value { name: 'BAR_BAZ' number: 0 }"
-      "  value { name: 'BARBAZ' number: 1 }"
+      "  name: 'KeepEnum' "
+      "  value { name: 'KEEP_BAR_NAP' number: 0 }"
+      "  value { name: 'KEEPBARNAP' number: 1 }"
       "}");
 }
 
@@ -6542,34 +6556,33 @@ TEST_F(ValidationErrorTest, MapEntryUsesNoneZeroEnumDefaultValue) {
 }
 
 TEST_F(ValidationErrorTest, Proto3RequiredFields) {
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "package: 'p3req' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  field { name:'foo' number:1 label:LABEL_REQUIRED type:TYPE_INT32 } "
-      "}",
-      "foo.shark: Foo.foo: TYPE: Required fields are not allowed in "
-      "proto3.\n");
+      "}");
 
   // applied to nested types as well.
-  BuildFileWithErrors(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+  BuildFile(
+      "name: 'bar.shark' "
+      "package: 'p3reqn' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  nested_type { "
       "    name : 'Bar' "
       "    field { name:'bar' number:1 label:LABEL_REQUIRED type:TYPE_INT32 } "
       "  } "
-      "}",
-      "foo.shark: Foo.Bar.bar: TYPE: Required fields are not allowed in "
-      "proto3.\n");
+      "}");
 
   // optional and repeated fields are OK.
   BuildFile(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "name: 'baz.shark' "
+      "package: 'p3reqok' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  field { name:'foo' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 } "
@@ -6578,20 +6591,20 @@ TEST_F(ValidationErrorTest, Proto3RequiredFields) {
 }
 
 TEST_F(ValidationErrorTest, ValidateProto3DefaultValue) {
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "package: 'p3def' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  field { name:'foo' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 "
       "          default_value: '1' }"
-      "}",
-      "foo.shark: Foo.foo: DEFAULT_VALUE: Explicit default values are not "
-      "allowed in proto3.\n");
+      "}");
 
-  BuildFileWithErrors(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+  BuildFile(
+      "name: 'bar.shark' "
+      "package: 'p3defn' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  nested_type { "
@@ -6599,26 +6612,24 @@ TEST_F(ValidationErrorTest, ValidateProto3DefaultValue) {
       "    field { name:'bar' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 "
       "            default_value: '1' }"
       "  } "
-      "}",
-      "foo.shark: Foo.Bar.bar: DEFAULT_VALUE: Explicit default values are not "
-      "allowed in proto3.\n");
+      "}");
 }
 
 TEST_F(ValidationErrorTest, ValidateProto3ExtensionRange) {
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "package: 'p3ext' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  field { name:'foo' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 } "
       "  extension_range { start:10 end:100 } "
-      "}",
-      "foo.shark: Foo: NUMBER: Extension ranges are not allowed in "
-      "proto3.\n");
+      "}");
 
-  BuildFileWithErrors(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+  BuildFile(
+      "name: 'bar.shark' "
+      "package: 'p3extn' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  nested_type { "
@@ -6626,61 +6637,56 @@ TEST_F(ValidationErrorTest, ValidateProto3ExtensionRange) {
       "    field { name:'bar' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 } "
       "    extension_range { start:10 end:100 } "
       "  } "
-      "}",
-      "foo.shark: Foo.Bar: NUMBER: Extension ranges are not allowed in "
-      "proto3.\n");
+      "}");
 }
 
 TEST_F(ValidationErrorTest, ValidateProto3MessageSetWireFormat) {
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  options { message_set_wire_format: true } "
-      "}",
-      "foo.shark: Foo: NAME: MessageSet is not supported "
-      "in proto3.\n");
+      "}");
 }
 
 TEST_F(ValidationErrorTest, ValidateProto3Enum) {
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "package: 'p3en' "
+      "syntax: 'proto2' "
       "enum_type { "
       "  name: 'FooEnum' "
-      "  value { name: 'FOO_FOO' number:1 } "
-      "}",
-      "foo.shark: FooEnum: NUMBER: The first enum value must be "
-      "zero in proto3.\n");
+      "  value { name: 'FOO_ONE' number:1 } "
+      "}");
 
-  BuildFileWithErrors(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+  BuildFile(
+      "name: 'bar.shark' "
+      "package: 'p3enn' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  enum_type { "
       "    name: 'FooEnum' "
-      "    value { name: 'FOO_FOO' number:1 } "
+      "    value { name: 'FOO_NESTED' number:1 } "
       "  } "
-      "}",
-      "foo.shark: Foo.FooEnum: NUMBER: The first enum value must be "
-      "zero in proto3.\n");
+      "}");
 
   // valid case.
   BuildFile(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "name: 'baz.shark' "
+      "package: 'p3enz' "
+      "syntax: 'proto2' "
       "enum_type { "
       "  name: 'FooEnum' "
-      "  value { name: 'FOO_FOO' number:0 } "
+      "  value { name: 'FOO_ZERO' number:0 } "
       "}");
 }
 
 TEST_F(ValidationErrorTest, ValidateProto3Group) {
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "  nested_type { "
@@ -6688,9 +6694,7 @@ TEST_F(ValidationErrorTest, ValidateProto3Group) {
       "  } "
       "  field { name:'foo_group' number: 1 label:LABEL_OPTIONAL "
       "          type: TYPE_GROUP type_name:'FooGroup' } "
-      "}",
-      "foo.shark: Foo.foo_group: TYPE: Groups are not supported in proto3 "
-      "syntax.\n");
+      "}");
 }
 
 
@@ -6707,17 +6711,15 @@ TEST_F(ValidationErrorTest, ValidateProto3EnumFromProto2) {
 
   // Now try to refer to it. (All tests in the fixture use the same pool, so we
   // can refer to the enum above in this definition.)
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'bar.shark' "
       "dependency: 'foo.shark' "
-      "syntax: 'proto3' "
+      "syntax: 'proto2' "
       "message_type { "
       "  name: 'Foo' "
       "    field { name:'bar' number:1 label:LABEL_OPTIONAL type:TYPE_ENUM "
       "            type_name: 'foo.FooEnum' }"
-      "}",
-      "bar.shark: Foo.bar: TYPE: Enum type \"foo.FooEnum\" is not a proto3 "
-      "enum, but is used in \"Foo\" which is a proto3 message type.\n");
+      "}");
 }
 
 TEST_F(ValidationErrorTest, ValidateProto3Extension) {
@@ -6758,7 +6760,7 @@ TEST_F(ValidationErrorTest, ValidateProto3Extension) {
   //   }
   file_proto.Clear();
   file_proto.set_name("foo.shark");
-  file_proto.set_syntax("proto3");
+  file_proto.set_syntax("proto2");
   file_proto.add_dependency("shark/descriptor.shark");
   AddExtension(&file_proto, "shark.FileOptions", "test_file_opt", 1001,
                FieldDescriptorProto::LABEL_OPTIONAL,
@@ -6796,42 +6798,36 @@ TEST_F(ValidationErrorTest, ValidateProto3Extension) {
       "message_type { "
       "  name: 'Container' extension_range { start: 1 end: 1000 } "
       "}");
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'bar.shark' "
-      "syntax: 'proto3' "
+      "syntax: 'proto2' "
       "dependency: 'shark.shark' "
       "extension { "
       "  name: 'bar' number: 1 label: LABEL_OPTIONAL type: TYPE_INT32 "
       "  extendee: 'Container' "
-      "}",
-      "bar.shark: bar: EXTENDEE: Extensions in proto3 are only allowed for "
-      "defining options.\n");
+      "}");
 }
 
 // Test that field names that may conflict in JSON is not allowed by protoc.
 TEST_F(ValidationErrorTest, ValidateProto3JsonName) {
-  // The comparison is case-insensitive.
-  BuildFileWithErrors(
+  BuildFile(
       "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "package: 'p3js' "
+      "syntax: 'proto2' "
       "message_type {"
       "  name: 'Foo'"
       "  field { name:'name' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 }"
       "  field { name:'Name' number:2 label:LABEL_OPTIONAL type:TYPE_INT32 }"
-      "}",
-      "foo.shark: Foo: NAME: The JSON camel-case name of field \"Name\" "
-      "conflicts with field \"name\". This is not allowed in proto3.\n");
-  // Underscores are ignored.
-  BuildFileWithErrors(
-      "name: 'foo.shark' "
-      "syntax: 'proto3' "
+      "}");
+  BuildFile(
+      "name: 'bar.shark' "
+      "package: 'p3js2' "
+      "syntax: 'proto2' "
       "message_type {"
       "  name: 'Foo'"
       "  field { name:'ab' number:1 label:LABEL_OPTIONAL type:TYPE_INT32 }"
       "  field { name:'_a__b_' number:2 label:LABEL_OPTIONAL type:TYPE_INT32 }"
-      "}",
-      "foo.shark: Foo: NAME: The JSON camel-case name of field \"_a__b_\" "
-      "conflicts with field \"ab\". This is not allowed in proto3.\n");
+      "}");
 }
 
 
@@ -6860,7 +6856,7 @@ TEST_F(ValidationErrorTest, UnusedImportWithOtherError) {
 TEST_F(ValidationErrorTest, PackageTooLong) {
   BuildFileWithErrors(
       "name: \"foo.shark\" "
-      "syntax: \"proto3\" "
+      "syntax: \"proto2\" "
       "package: "
       "\"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
       "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"

@@ -160,8 +160,8 @@ const fieldOptions = [
 The packed option can be enabled for repeated primitive fields to enable
 a more efficient representation on the wire. Rather than repeatedly
 writing the tag and type for each element, the entire array is encoded as
-a single length-delimited blob. In proto3, only explicit setting it to
-false will avoid using packed encoding.
+a single length-delimited blob. Packed encoding is used only when packed
+is set.
     `
   ),
   createCompletionOption(
@@ -276,6 +276,14 @@ const fieldRules = [
 const scalarTypes = [
   createCompletionKeyword('bool', ``),
   createCompletionKeyword(
+    'int8',
+    `Uses variable-length encoding. Values must fit in 8 bits.`
+  ),
+  createCompletionKeyword(
+    'int16',
+    `Uses variable-length encoding. Values must fit in 16 bits.`
+  ),
+  createCompletionKeyword(
     'int32',
     `
 Uses variable-length encoding.
@@ -289,6 +297,14 @@ Uses variable-length encoding.
 Inefficient for encoding negative numbers – if your field is likely to have
 negative values, use sint64 instead.
     `
+  ),
+  createCompletionKeyword(
+    'uint8',
+    `Uses variable-length encoding. Values must fit in 8 bits.`
+  ),
+  createCompletionKeyword(
+    'uint16',
+    `Uses variable-length encoding. Values must fit in 16 bits.`
   ),
   createCompletionKeyword('uint32', `Uses variable-length encoding.`),
   createCompletionKeyword('uint64', `Uses variable-length encoding.`),
@@ -396,16 +412,16 @@ export class Proto3CompletionItemProvider implements vscode.CompletionItemProvid
     _token: vscode.CancellationToken
   ): Thenable<vscode.CompletionItem[]> {
     return new Promise<vscode.CompletionItem[]>(resolve => {
-      let syntax = 2;
-      const matches = document.getText().match(/syntax\s*=\s*"(proto2|proto3)"/);
-      if (matches && matches.length >= 2 && matches[1] === 'proto3') {
-        syntax = 3;
-      }
-
       const textBeforeCursor = document
         .lineAt(position.line)
         .text.substring(0, position.character - 1);
       const suggestions: vscode.CompletionItem[] = [];
+      if (textBeforeCursor.match(/enum\s+class\s+\w+\s*:\s*\w*$/)) {
+        for (const name of ['int8', 'uint8', 'int16', 'uint16', 'int32', 'uint32']) {
+          suggestions.push(createCompletionKeyword(name));
+        }
+        return resolve(suggestions);
+      }
       const scope = SyntacticGuessScope(document, position);
 
       if (scope === null) {
@@ -440,9 +456,7 @@ export class Proto3CompletionItemProvider implements vscode.CompletionItemProvid
             return resolve(suggestions);
           } else if (textBeforeCursor.match(/.*\[.*/)) {
             suggestions.push(...fieldOptions);
-            if (syntax == 2) {
-              suggestions.push(fieldDefault);
-            }
+            suggestions.push(fieldDefault);
             return resolve(suggestions);
           }
 
@@ -450,11 +464,7 @@ export class Proto3CompletionItemProvider implements vscode.CompletionItemProvid
           suggestions.push(kwMessage);
           suggestions.push(kwEnum);
           suggestions.push(kwReserved);
-          if (syntax == 2) {
-            suggestions.push(...fieldRules);
-          } else {
-            suggestions.push(fieldRules[0]);
-          }
+          suggestions.push(...fieldRules);
           const result = findMessageEnum(document);
           suggestions.push(...scalarTypes, ...result.enum, ...result.message);
           break;

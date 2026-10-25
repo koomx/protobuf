@@ -191,6 +191,36 @@ public interface ProtoNumberValue extends ProtoLiteral {
     return getDoubleValue() != null;
   }
 
+  /** Returns <code>true</code> if this value represents a valid int8. */
+  default boolean isValidInt8() {
+    Long value = getLongValue();
+    return value != null && value >= Byte.MIN_VALUE && value <= Byte.MAX_VALUE;
+  }
+
+  /** Returns <code>true</code> if this value represents a valid uint8. */
+  default boolean isValidUint8() {
+    if (isNegative()) {
+      return false;
+    }
+    Long value = getLongValue();
+    return value != null && value >= 0 && value <= 0xFFL;
+  }
+
+  /** Returns <code>true</code> if this value represents a valid int16. */
+  default boolean isValidInt16() {
+    Long value = getLongValue();
+    return value != null && value >= Short.MIN_VALUE && value <= Short.MAX_VALUE;
+  }
+
+  /** Returns <code>true</code> if this value represents a valid uint16. */
+  default boolean isValidUint16() {
+    if (isNegative()) {
+      return false;
+    }
+    Long value = getLongValue();
+    return value != null && value >= 0 && value <= 0xFFFFL;
+  }
+
   /** Returns <code>true</code> if this value represents a valid int32. */
   default boolean isValidInt32() {
     Long value = getLongValue();

@@ -521,9 +521,7 @@ class SHARK_EXPORT Parser {
                         RepeatedPtrField<DescriptorProto>* messages);
 
   // Whether fields without label default to optional fields.
-  bool DefaultToOptionalFields() const {
-    return syntax_identifier_ == "proto3";
-  }
+  bool DefaultToOptionalFields() const { return false; }
 
   bool ValidateEnum(const EnumDescriptorProto* proto);
 

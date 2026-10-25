@@ -2,6 +2,7 @@
 
 import vscode = require('vscode');
 import cp = require('child_process');
+import path = require('path');
 
 import { Proto3Configuration } from './proto3Configuration';
 
@@ -62,6 +63,12 @@ export class Proto3Compiler {
     const protocPath = this._config.getProtocPath(this._isProtocInPath);
     if (protocPath == '?') {
       return; // protoc is not configured
+    }
+
+    const bundledInclude = path.join(__dirname, '..', '..', 'include');
+    const bundledPath = '--proto_path=' + bundledInclude;
+    if (!args.some(arg => arg === bundledPath || arg === '-I' + bundledInclude)) {
+      args = [bundledPath].concat(args);
     }
 
     if (!opts) {

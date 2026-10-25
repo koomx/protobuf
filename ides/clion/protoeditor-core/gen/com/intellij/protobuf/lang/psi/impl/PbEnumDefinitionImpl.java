@@ -37,7 +37,15 @@ public class PbEnumDefinitionImpl extends PbEnumDefinitionMixin implements PbEnu
   @Override
   @Nullable
   public PsiElement getNameIdentifier() {
-    return findChildByType(IDENTIFIER_LITERAL);
+    PsiElement first = findChildByType(IDENTIFIER_LITERAL);
+    if (first != null && "class".equals(first.getText())) {
+      PsiElement next = first.getNextSibling();
+      while (next != null && next.getNode().getElementType() != IDENTIFIER_LITERAL) {
+        next = next.getNextSibling();
+      }
+      return next;
+    }
+    return first;
   }
 
   @Override

@@ -76,15 +76,15 @@ TEST(PythonPluginTest, ImportTest) {
   // Create files test1.shark and test2.shark with the former importing the
   // latter.
   GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test1.shark",
-                             "syntax = \"proto3\";\n"
+                             "syntax = \"proto2\";\n"
                              "package foo;\n"
                              "import \"test2.shark\";"
                              "message Message1 {\n"
-                             "  Message2 message_2 = 1;\n"
+                             "  optional Message2 message_2 = 1;\n"
                              "}\n",
                              true));
   GOOGLE_CHECK_OK(File::SetContents(TestTempDir() + "/test2.shark",
-                             "syntax = \"proto3\";\n"
+                             "syntax = \"proto2\";\n"
                              "package foo;\n"
                              "message Message2 {}\n",
                              true));

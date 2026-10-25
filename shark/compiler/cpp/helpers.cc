@@ -1100,8 +1100,8 @@ bool ShouldVerify(const FileDescriptor* file, const Options& options,
 }
 
 bool IsUtf8String(const FieldDescriptor* field) {
-  return IsProto3(field->file()) &&
-      field->type() == FieldType::STRING;
+  (void)field;
+  return false;
 }
 
 VerifySimpleType ShouldVerifySimple(const Descriptor* descriptor) {
@@ -1172,11 +1172,6 @@ bool IsWellKnownMessage(const FileDescriptor* file) {
   return well_known_files.find(file->name()) != well_known_files.end();
 }
 
-static bool FieldEnforceUtf8(const FieldDescriptor* field,
-                             const Options& options) {
-  return true;
-}
-
 static bool FileUtf8Verification(const FileDescriptor* file,
                                  const Options& options) {
   return true;
@@ -1185,10 +1180,7 @@ static bool FileUtf8Verification(const FileDescriptor* file,
 // Which level of UTF-8 enforcemant is placed on this file.
 Utf8CheckMode GetUtf8CheckMode(const FieldDescriptor* field,
                                const Options& options) {
-  if (field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3 &&
-      FieldEnforceUtf8(field, options)) {
-    return Utf8CheckMode::kStrict;
-  } else if (GetOptimizeFor(field->file(), options) !=
+  if (GetOptimizeFor(field->file(), options) !=
                  FileOptions::LITE_RUNTIME &&
              FileUtf8Verification(field->file(), options)) {
     return Utf8CheckMode::kVerify;

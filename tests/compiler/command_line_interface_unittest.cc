@@ -2447,9 +2447,7 @@ TEST_F(CommandLineInterfaceTest, Proto3OptionalDisallowedNoCodegenSupport) {
   Run("protocol_compiler --experimental_allow_proto3_optional "
       "--proto_path=$tmpdir google/foo.shark --no_proto3_optional_out=$tmpdir");
 
-  ExpectErrorSubstring(
-      "code generator --no_proto3_optional_out hasn't been updated to support "
-      "optional fields in proto3");
+  ExpectErrorSubstring("only recognizes \"proto2\"");
 }
 
 TEST_F(CommandLineInterfaceTest, Proto3OptionalAllowWithFlag) {
@@ -2461,7 +2459,7 @@ TEST_F(CommandLineInterfaceTest, Proto3OptionalAllowWithFlag) {
 
   Run("protocol_compiler --experimental_allow_proto3_optional "
       "--proto_path=$tmpdir google/foo.shark --test_out=$tmpdir");
-  ExpectNoErrors();
+  ExpectErrorSubstring("only recognizes \"proto2\"");
 }
 
 TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {

@@ -44,7 +44,7 @@ Tags are rewritten so fields count up from `1` and enums from `0`.
 | prefix | body |
 | --- | --- |
 | sp2 | `syntax = "proto2";` |
-| sp3 | `syntax = "proto3";` |
+| sp2 | `syntax = "proto2";` |
 | pkg | `package package.name;` |
 | imp | `import "path/to/other/protos.proto";` |
 | ojp | `option java_package = "java.package.name";` |
@@ -98,7 +98,6 @@ Example `.vscode/settings.json` (see `example/.vscode`):
     "path": "/path/to/protoc",
     "compile_on_save": false,
     "options": [
-      "--proto_path=protos/v3",
       "--proto_path=protos/v2",
       "--proto_path=${workspaceRoot}/proto",
       "--proto_path=${env.GOPATH}/src",

@@ -30,6 +30,7 @@ import com.intellij.protobuf.lang.PbLangBundle;
 import com.intellij.protobuf.lang.annotation.OptionOccurrenceTracker.Occurrence;
 import com.intellij.protobuf.lang.intentions.PbAddImportPathIntention;
 import com.intellij.protobuf.lang.psi.PbAggregateValue;
+import com.intellij.protobuf.lang.psi.PbEnumBody;
 import com.intellij.protobuf.lang.psi.PbEnumDefinition;
 import com.intellij.protobuf.lang.psi.PbEnumReservedStatement;
 import com.intellij.protobuf.lang.psi.PbEnumValue;
@@ -339,6 +340,54 @@ public final class PbAnnotator implements Annotator, DumbAware {
     }
   }
 
+  private static void annotateEnumUnderlyingType(
+      PbEnumDefinition enumDefinition, AnnotationHolder holder) {
+    boolean enumClass = false;
+    boolean sawColon = false;
+    PsiElement typeName = null;
+    for (PsiElement child = enumDefinition.getFirstChild();
+        child != null && !(child instanceof PbEnumBody);
+        child = child.getNextSibling()) {
+      if (child.getNode() == null) {
+        continue;
+      }
+      if (ProtoTokenTypes.IDENTIFIER_LITERAL.equals(child.getNode().getElementType())) {
+        if (!enumClass && !sawColon && "class".equals(child.getText())) {
+          enumClass = true;
+        } else if (sawColon && typeName == null) {
+          typeName = child;
+        }
+      } else if (ProtoTokenTypes.COLON.equals(child.getNode().getElementType())) {
+        sawColon = true;
+      }
+    }
+    if (sawColon && !enumClass) {
+      holder
+          .newAnnotation(
+              HighlightSeverity.ERROR, "An underlying type is only allowed on enum class.")
+          .range(enumDefinition)
+          .create();
+      return;
+    }
+    if (typeName != null && !isEnumUnderlyingType(typeName.getText())) {
+      holder
+          .newAnnotation(
+              HighlightSeverity.ERROR,
+              "Unknown enum underlying type \"" + typeName.getText() + "\".")
+          .range(typeName)
+          .create();
+    }
+  }
+
+  private static boolean isEnumUnderlyingType(String name) {
+    return "int8".equals(name)
+        || "uint8".equals(name)
+        || "int16".equals(name)
+        || "uint16".equals(name)
+        || "int32".equals(name)
+        || "uint32".equals(name);
+  }
+
   private static void annotateGroupDefinition(PbGroupDefinition groupDefinition, AnnotationHolder holder) {
     // Groups are a message type plus a field. However, the field is not part of the PSI tree and
     // aren't traversed by the annotator normally. Check the field here.
@@ -354,6 +403,8 @@ public final class PbAnnotator implements Annotator, DumbAware {
     if (name == null) {
       return;
     }
+    annotateEnumUnderlyingType(enumDefinition, holder);
+
     // Enum must contain at least one value.
     if (enumDefinition.getEnumValues().isEmpty()) {
       TextRange range =

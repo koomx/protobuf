@@ -166,51 +166,6 @@ public class PbJavaFindUsagesHandlerFactoryTest extends LightJavaCodeInsightFixt
         "setStringChoiceBytes");
   }
 
-  public void testProtoSyntax3() {
-    JavaTestData.addGenCodeJar(
-        myFixture.getModule(), getTestJarsDirectoryPath(), "libProtoSyntax3Lib-speed.jar", testDisposable);
-    String expectedJavaFile = "ProtoSyntax3User.java";
-    JavaTestData.copyJavaProtoUser(myFixture, new File("java", expectedJavaFile));
-    PsiFile protoFile = myFixture.configureByFile("proto/ProtoSyntax3.proto");
-
-    // Message
-    checkJavaUsages(
-        findJavaUsesForSymbol(protoFile, "M1.NestedM1", 2),
-        expectedJavaFile,
-        2,
-        "NestedM1.Builder setSingle",
-        "NestedM1.Builder caret");
-
-    // Fields
-    checkJavaUsages(
-        findJavaUsesForSymbol(protoFile, "M1.single_primitive", 0),
-        expectedJavaFile,
-        2,
-        "getSinglePrimitive",
-        "setSinglePrimitive");
-
-    // Enums / EnumValues
-    checkJavaUsages(
-        findJavaUsesForSymbol(protoFile, "Shapes", 2), expectedJavaFile, 2, "Shapes;", "Shapes.");
-    checkJavaUsages(findJavaUsesForSymbol(protoFile, "CIRCLE", 0), expectedJavaFile, 1, "CIRCLE);");
-
-    // Oneof
-    checkJavaUsages(
-        findJavaUsesForSymbol(protoFile, "M1.test_oneof", 0),
-        expectedJavaFile,
-        5,
-        "TestOneofCase;",
-        "TestOneofCase oneofEnum",
-        "TestOneofCase.",
-        "TestOneofCase.",
-        "TESTONEOF_NOT_SET");
-    checkJavaUsages(
-        findJavaUsesForSymbol(protoFile, "M1.string_choice", 0),
-        expectedJavaFile,
-        1,
-        "STRING_CHOICE");
-  }
-
   public void testProto2Lite() {
     JavaTestData.addGenCodeJar(
         myFixture.getModule(), getTestJarsDirectoryPath(), "libProto2LiteLib-lite.jar", testDisposable);

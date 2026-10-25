@@ -7,8 +7,12 @@ suite('Proto3Primitive', () => {
       const expectedTypes = [
         'double',
         'float',
+        'int8',
+        'int16',
         'int32',
         'int64',
+        'uint8',
+        'uint16',
         'uint32',
         'uint64',
         'sint32',
@@ -24,8 +28,8 @@ suite('Proto3Primitive', () => {
       assert.deepStrictEqual(Proto3Primitive.primitiveTypes, expectedTypes);
     });
 
-    test('should have 14 primitive types', () => {
-      assert.strictEqual(Proto3Primitive.primitiveTypes.length, 14);
+    test('should have 18 primitive types', () => {
+      assert.strictEqual(Proto3Primitive.primitiveTypes.length, 18);
     });
   });
 
@@ -34,8 +38,12 @@ suite('Proto3Primitive', () => {
       const numericTypes = [
         'double',
         'float',
+        'int8',
+        'int16',
         'int32',
         'int64',
+        'uint8',
+        'uint16',
         'uint32',
         'uint64',
         'sint32',

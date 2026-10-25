@@ -169,18 +169,6 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
     }
   }
 
-  if (!enum_class &&
-      descriptor_->file()->syntax() == FileDescriptor::SYNTAX_PROTO3) {
-    // For new enum semantics: generate min and max sentinel values equal to
-    // INT32_MIN and INT32_MAX
-    if (descriptor_->value_count() > 0) format(",\n");
-    format(
-        "$classname$_$prefix$INT_MIN_SENTINEL_DO_NOT_USE_ = "
-        "std::numeric_limits<$int32$>::min(),\n"
-        "$classname$_$prefix$INT_MAX_SENTINEL_DO_NOT_USE_ = "
-        "std::numeric_limits<$int32$>::max()");
-  }
-
   format.Outdent();
   format("\n};\n");
 

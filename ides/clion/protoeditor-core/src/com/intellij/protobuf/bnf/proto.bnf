@@ -590,6 +590,8 @@ private ReservedNumbers ::= &IntegerValue <<CommaSeparatedList ';' ReservedRange
 
 /*
  * Enum definition.
+ * Parser also accepts: enum class Name [: int8|uint8|int16|uint16|int32|uint32] EnumBody
+ * "class" stays an identifier so field names can still be class.
  */
 EnumDefinition ::= enum Identifier EnumBody
 {

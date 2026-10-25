@@ -10,14 +10,14 @@ import com.intellij.psi.search.GlobalSearchScope
 
 internal class PbIndexBasedFileResolveProvider : FileResolveProvider {
   override fun findFile(path: String, project: Project): VirtualFile? {
-    if (!isEnabled(project) || !path.endsWith(".proto")) return null
+    if (!isEnabled(project) || !path.endsWith(".shark")) return null
     val searchedFileName = path.substringAfterLast('/').let(FileUtilRt::getNameWithoutExtension)
     val searchScope = GlobalSearchScope.projectScope(project)
     return findFileByImportPath(searchedFileName, searchScope, path)
   }
 
   override fun findFile(path: String, module: Module): VirtualFile? {
-    if (!isEnabled(module.project) || !path.endsWith(".proto")) return null
+    if (!isEnabled(module.project) || !path.endsWith(".shark")) return null
     val searchedFileName = path.substringAfterLast('/').let(FileUtilRt::getNameWithoutExtension)
     val searchScope = GlobalSearchScope.moduleWithDependenciesAndLibrariesScope(module).uniteWith(module.getModuleContentWithDependenciesScope())
     return findFileByImportPath(searchedFileName, searchScope, path)

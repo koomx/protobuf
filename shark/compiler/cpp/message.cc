@@ -268,14 +268,8 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
 
 // Does the given field have a has_$name$() method?
 bool HasHasMethod(const FieldDescriptor* field) {
-  if (!IsProto3(field->file())) {
-    // In proto1/proto2, every field has a has_$name$() method.
-    return true;
-  }
-  // For message types without true field presence, only fields with a message
-  // type or inside an one-of have a has_$name$() method.
-  return field->cpp_type() == FieldCppType::MESSAGE ||
-         field->has_optional_keyword() || field->real_containing_oneof();
+  (void)field;
+  return true;
 }
 
 // Collects map entry message type information.
@@ -305,9 +299,8 @@ void CollectMapInfo(const Options& options, const Descriptor* descriptor,
 // Does the given field have a private (internal helper only) has_$name$()
 // method?
 bool HasPrivateHasMethod(const FieldDescriptor* field) {
-  // Only for oneofs in message types with no field presence. has_$name$(),
-  // based on the oneof case, is still useful internally for generated code.
-  return IsProto3(field->file()) && field->real_containing_oneof();
+  (void)field;
+  return false;
 }
 
 // TODO(ckennelly):  Cull these exclusions if/when these protos do not have
@@ -3821,7 +3814,7 @@ void MessageGenerator::GenerateSerializeWithCachedSizesBody(
     LazySerializerEmitter(MessageGenerator* mg, io::Printer* printer)
         : mg_(mg),
           format_(printer),
-          eager_(IsProto3(mg->descriptor_->file())),
+          eager_(false),
           cached_has_bit_index_(kNoHasbit) {}
 
     ~LazySerializerEmitter() { Flush(); }

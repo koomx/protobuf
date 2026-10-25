@@ -409,7 +409,8 @@ bool WireFormat::ParseAndMergeMessageSetField(uint32_t field_number,
 }
 
 static bool StrictUtf8Check(const FieldDescriptor* field) {
-  return field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3;
+  (void)field;
+  return false;
 }
 
 bool WireFormat::ParseAndMergeField(
@@ -514,21 +515,14 @@ bool WireFormat::ParseAndMergeField(
           if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
                   input, &value))
             return false;
-          if (message->GetDescriptor()->file()->syntax() ==
-              FileDescriptor::SYNTAX_PROTO3) {
-            message_reflection->AddEnumValue(message, field, value);
+          const EnumValueDescriptor* enum_value =
+              field->enum_type()->FindValueByNumber(value);
+          if (enum_value != nullptr) {
+            message_reflection->AddEnum(message, field, enum_value);
           } else {
-            const EnumValueDescriptor* enum_value =
-                field->enum_type()->FindValueByNumber(value);
-            if (enum_value != nullptr) {
-              message_reflection->AddEnum(message, field, enum_value);
-            } else {
-              // The enum value is not one of the known values.  Add it to the
-              // UnknownFieldSet.
-              int64_t sign_extended_value = static_cast<int64_t>(value);
-              message_reflection->MutableUnknownFields(message)->AddVarint(
-                  WireFormatLite::GetTagFieldNumber(tag), sign_extended_value);
-            }
+            int64_t sign_extended_value = static_cast<int64_t>(value);
+            message_reflection->MutableUnknownFields(message)->AddVarint(
+                WireFormatLite::GetTagFieldNumber(tag), sign_extended_value);
           }
         }
 
@@ -968,22 +962,15 @@ const char* WireFormat::_InternalParseAndMergeField(
         case ::shark::FieldType::ENUM: {
           auto rep_enum =
               reflection->MutableRepeatedFieldInternal<int>(msg, field);
-          bool open_enum = false;
-          if (field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3 ||
-              open_enum) {
-            ptr = internal::PackedEnumParser(rep_enum, ptr, ctx);
-          } else {
-            return ctx->ReadPackedVarint(
-                ptr, [rep_enum, field, reflection, msg](uint64_t val) {
-                  if (field->enum_type()->FindValueByNumber(val) != nullptr) {
-                    rep_enum->Add(val);
-                  } else {
-                    WriteVarint(field->number(), val,
-                                reflection->MutableUnknownFields(msg));
-                  }
-                });
-          }
-          return ptr;
+          return ctx->ReadPackedVarint(
+              ptr, [rep_enum, field, reflection, msg](uint64_t val) {
+                if (field->enum_type()->FindValueByNumber(val) != nullptr) {
+                  rep_enum->Add(val);
+                } else {
+                  WriteVarint(field->number(), val,
+                              reflection->MutableUnknownFields(msg));
+                }
+              });
         }
 
         case ::shark::FieldType::STRING:

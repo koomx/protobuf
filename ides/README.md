@@ -12,7 +12,7 @@ npm install
 npm run package:vsix
 ```
 
-产物：`ides/vscode/shark-<version>.vsix`（当前 `shark-0.5.8.vsix`）。
+产物：`ides/vscode/shark-<version>.vsix`（当前 `shark-0.5.10.vsix`）。插件自带 `include/shark/descriptor.shark` 和 `include/shark/types/*.shark`，编译时自动加上这份 `--proto_path`。
 
 安装：Extensions 视图 → `…` → **Install from VSIX…**，选该文件。改图标或版本号后需要重新打包并再装一次。
 
@@ -31,6 +31,6 @@ export PATH="$JAVA_HOME/bin:$PATH"
 ./gradlew buildPlugin --no-daemon
 ```
 
-产物：`ides/clion/build/distributions/clion.zip`。
+产物：`ides/clion/build/distributions/clion-0.5.10.zip`。内置描述符是 `shark/descriptor.shark`，well-known 类型在 `shark/types/`。
 
 安装：**Settings → Plugins → 齿轮 → Install Plugin from Disk…**，选该 zip，然后重启。重启后 `.shark` 的文件类型应为 Protocol Buffer。

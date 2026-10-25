@@ -53,8 +53,6 @@ import java.util.stream.Stream;
 
 import static com.intellij.patterns.PlatformPatterns.psiElement;
 import static com.intellij.protobuf.lang.psi.SyntaxLevelKt.isDeprecatedProto2Syntax;
-import static com.intellij.protobuf.lang.psi.SyntaxLevelKt.isDeprecatedProto3Syntax;
-
 /** Provides editor completions for protobuf files. */
 public class PbCompletionContributor extends CompletionContributor {
 
@@ -186,12 +184,6 @@ public class PbCompletionContributor extends CompletionContributor {
         .collect(Collectors.toList());
     }
 
-    private static List<LookupElement> createProto3FieldLabels() {
-      return Stream.of("optional", "repeated")
-        .map(PbCompletionContributor::lookupElementWithSpace)
-        .collect(Collectors.toList());
-    }
-
     private static List<LookupElement> createEditionsFieldLabels() {
       return Stream.of("repeated")
         .map(PbCompletionContributor::lookupElementWithSpace)
@@ -222,9 +214,6 @@ public class PbCompletionContributor extends CompletionContributor {
 
         if (isDeprecatedProto2Syntax(syntaxLevel)) {
           result.addAllElements(createProto2FieldLabels());
-        }
-        else if (isDeprecatedProto3Syntax(syntaxLevel)) {
-          result.addAllElements(createProto3FieldLabels());
         }
         else if (syntaxLevel instanceof SyntaxLevel.Edition) {
           result.addAllElements(createEditionsFieldLabels());

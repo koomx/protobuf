@@ -47,7 +47,7 @@ public final class TestUtils {
   public static String getProtobufCoreTestDataPath() {
     return getTestHomeDirectory() + "/protoeditor-core/testData/";
   }
-  public static final String OPENSOURCE_DESCRIPTOR_PATH = "google/protobuf/descriptor.proto";
+  public static final String OPENSOURCE_DESCRIPTOR_PATH = "shark/descriptor.shark";
 
   private static final Key<FileResolveProvider> TEST_FILE_RESOLVE_PROVIDER =
     Key.create("TEST_FILE_RESOLVE_PROVIDER");
@@ -71,7 +71,7 @@ public final class TestUtils {
   }
 
   public static String getOpensourceDescriptorText() throws IOException {
-    return ResourceUtil.readPathAsString("/include/google/protobuf/descriptor.proto");
+    return ResourceUtil.readPathAsString("/include/shark/descriptor.shark");
   }
 
   @NotNull

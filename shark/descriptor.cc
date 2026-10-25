@@ -3538,11 +3538,7 @@ namespace shark {
     bool FieldDescriptor::is_packed() const {
         if (!is_packable())
             return false;
-        if (file_->syntax() == FileDescriptor::SYNTAX_PROTO2) {
-            return (options_ != nullptr) && options_->packed();
-        } else {
-            return options_ == nullptr || !options_->has_packed() || options_->packed();
-        }
+        return (options_ != nullptr) && options_->packed();
     }
 
     bool Descriptor::GetSourceLocation(SourceLocation* out_location) const {
@@ -5094,7 +5090,9 @@ namespace shark {
         if (proto.syntax().empty() || proto.syntax() == "proto2") {
             file_->syntax_ = FileDescriptor::SYNTAX_PROTO2;
         } else if (proto.syntax() == "proto3") {
-            file_->syntax_ = FileDescriptor::SYNTAX_PROTO3;
+            file_->syntax_ = FileDescriptor::SYNTAX_UNKNOWN;
+            AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
+                "syntax \"proto3\" is not supported.");
         } else {
             file_->syntax_ = FileDescriptor::SYNTAX_UNKNOWN;
             AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
@@ -5529,13 +5527,10 @@ namespace shark {
         result->number_ = proto.number();
         result->is_extension_ = is_extension;
         result->is_oneof_ = false;
-        result->proto3_optional_ = proto.proto3_optional();
-
-        if (proto.proto3_optional() && file_->syntax() != FileDescriptor::SYNTAX_PROTO3) {
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
-                "The [proto3_optional=true] option may only be set on proto3"
-                "fields, not "
-                    + result->full_name());
+        result->proto3_optional_ = false;
+        if (proto.proto3_optional()) {
+            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::OTHER,
+                "proto3_optional is not supported.");
         }
 
         result->has_json_name_ = proto.has_json_name();
@@ -6744,9 +6739,6 @@ namespace shark {
                     break;
                 }
             }
-        }
-        if (file->syntax() == FileDescriptor::SYNTAX_PROTO3) {
-            ValidateProto3(file, proto);
         }
     }
 

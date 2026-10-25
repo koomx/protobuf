@@ -3,7 +3,7 @@
 import vscode = require('vscode');
 
 const MSG_BEGIN = /\s*message\s+(\w*)\s*\{.*/;
-const ENUM_BEGIN = /\s*enum\s+(\w*)\s*\{.*/;
+const ENUM_BEGIN = /\s*enum\s+(?:class\s+)?(\w*)(?:\s*:\s*\w+)?\s*\{.*/;
 const SERVICE_BEGIN = /\s*service\s+(\w*)\s*\{.*/;
 const SCOPE_END = /\s*\}.*/;
 
@@ -63,8 +63,6 @@ class ScopeGuesser {
           this.enterScope(Proto3ScopeKind.Comment, i); // enter block comment
         } else if (lineText.match(/^\s*\/\//)) {
           continue; // skip line comments
-        } else if (lineText.match(/^\s*syntax\s*=\s*"proto3"\s*;/)) {
-          this.syntax = 3;
         } else if (lineText.match(MSG_BEGIN)) {
           this.enterScope(Proto3ScopeKind.Message, i);
         } else if (lineText.match(ENUM_BEGIN)) {

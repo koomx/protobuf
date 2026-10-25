@@ -24,7 +24,7 @@ internal object PbPsiFactory {
     return createFileFromText(
       project,
       """
-        syntax = "proto3";
+        syntax = "proto2";
         import "$importedFqn";
       """.trimMargin()
     ).importStatements.single()

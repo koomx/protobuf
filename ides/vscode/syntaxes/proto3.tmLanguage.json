@@ -202,10 +202,12 @@
       ]
     },
     "enum": {
-      "begin": "(enum)(\\s+)([A-Za-z][A-Za-z0-9_]*)(\\s*)(\\{)?",
+      "begin": "(enum)(\\s+)(?:(class)(\\s+))?([A-Za-z][A-Za-z0-9_]*)(?:(\\s*:\\s*)(int8|uint8|int16|uint16|int32|uint32))?(\\s*)(\\{)?",
       "beginCaptures": {
         "1": { "name": "keyword.other.proto" },
-        "3": { "name": "entity.name.class.proto" }
+        "3": { "name": "keyword.other.proto" },
+        "5": { "name": "entity.name.class.proto" },
+        "7": { "name": "storage.type.proto" }
       },
       "end": "\\}",
       "patterns": [
@@ -270,7 +272,7 @@
       "name": "constant.language.proto"
     },
     "storagetypes": {
-      "match": "\\b(double|float|int32|int64|uint32|uint64|sint32|sint64|fixed32|fixed64|sfixed32|sfixed64|bool|string|bytes)\\b",
+      "match": "\\b(double|float|int8|int16|int32|int64|uint8|uint16|uint32|uint64|sint32|sint64|fixed32|fixed64|sfixed32|sfixed64|bool|string|bytes)\\b",
       "name": "storage.type.proto"
     },
     "string": {

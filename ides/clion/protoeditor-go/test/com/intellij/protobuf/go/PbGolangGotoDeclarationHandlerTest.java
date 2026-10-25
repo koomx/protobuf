@@ -89,24 +89,6 @@ public class PbGolangGotoDeclarationHandlerTest extends GoCodeInsightFixtureTest
             .isEqualTo(62);
   }
 
-  public void testProto3() {
-    copyProtoAndGenCode("proto/proto3.proto", "go/proto3.pb.go", "proto3_go_proto");
-    GoFile userFile = copyProtoUserFile("users/proto3_user.go", "proto3_user.go");
-
-    assertWithMessage("Number of markers (" + GotoExpectationMarker.EXPECT_MARKER + ")")
-        .that(checkExpectations(userFile))
-        .isEqualTo(62);
-  }
-
-  public void testProto3Gogo() {
-    copyProtoAndGenCode("proto/proto3_gogo.proto", "go/proto3_gogo.pb.go", "proto3_gogo_go_proto");
-    GoFile userFile = copyProtoUserFile("users/proto3_gogo_user.go", "proto3_gogo_user.go");
-
-    assertWithMessage("Number of markers (" + GotoExpectationMarker.EXPECT_MARKER + ")")
-            .that(checkExpectations(userFile))
-            .isEqualTo(62);
-  }
-
   private void copyProtoAndGenCode(String protoFile, String generatedGoFile, String goPackageName) {
     // Proto file has to go to the regular place so the proto declaration resolving works.
     myFixture.copyFileToProject(protoFile, new File(protoFile).getPath());

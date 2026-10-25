@@ -350,7 +350,7 @@ public class PbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // enum Identifier EnumBody
+  // enum [class] Identifier [':' Identifier] EnumBody
   public static boolean EnumDefinition(PsiBuilder builder, int level) {
     if (!recursion_guard_(builder, level, "EnumDefinition")) return false;
     if (!nextTokenIs(builder, ENUM)) return false;
@@ -358,7 +358,14 @@ public class PbParser implements PsiParser, LightPsiParser {
     Marker marker = enter_section_(builder, level, _NONE_, ENUM_DEFINITION, null);
     result = consumeToken(builder, ENUM);
     pinned = result; // pin = 1
+    if (nextTokenIs(builder, IDENTIFIER_LITERAL) && "class".equals(builder.getTokenText())) {
+      consumeToken(builder, IDENTIFIER_LITERAL);
+    }
     result = result && report_error_(builder, Identifier(builder, level + 1));
+    if (nextTokenIs(builder, COLON)) {
+      consumeToken(builder, COLON);
+      result = result && report_error_(builder, Identifier(builder, level + 1));
+    }
     result = pinned && EnumBody(builder, level + 1) && result;
     exit_section_(builder, level, marker, result, pinned, null);
     return result || pinned;

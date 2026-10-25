@@ -134,13 +134,6 @@ public class PbAnnotatorErrorTest {
   }
 
   @Test
-  public void testProto3ErrorAnnotations() {
-    myFixture.configureByFile("lang/annotation/import1.proto");
-    myFixture.configureByFile("lang/annotation/proto2enum.proto");
-    doTest("lang/annotation/Proto3Errors.proto.testdata");
-  }
-
-  @Test
   public void testProtoEditionUnsupportedErrorAnnotations() {
     doTest("lang/annotation/EditionUnsupportedErrors.proto.testdata");
   }

@@ -2,7 +2,7 @@
   "name": "shark",
   "displayName": "shark",
   "description": "Shark syntax support for Visual Studio Code",
-  "version": "0.5.8",
+  "version": "0.5.10",
   "publisher": "zxh404",
   "license": "SEE LICENSE IN LICENSE.txt",
   "icon": "images/vscode_extension_icon.png",

@@ -20,6 +20,8 @@ plugins {
   id("org.jetbrains.intellij.platform")
 }
 
+version = "0.5.10"
+
 repositories {
   intellijPlatform {
     defaultRepositories()

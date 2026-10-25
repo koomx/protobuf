@@ -1,10 +1,5 @@
 {
   ".source.go": {
-    "syntax proto3": {
-      "prefix": "sp3",
-      "description": "proto3 syntax",
-      "body": "syntax = \"proto3\";"
-    },
     "syntax proto2": {
       "prefix": "sp2",
       "description": "proto2 syntax",
@@ -85,6 +80,16 @@
       "description": "bool field",
       "body": "bool ${1:field_name} = ${2:tag};"
     },
+    "int8 field": {
+      "prefix": "fi8",
+      "description": "int8 field",
+      "body": "int8 ${1:field_name} = ${2:tag};"
+    },
+    "int16 field": {
+      "prefix": "fi16",
+      "description": "int16 field",
+      "body": "int16 ${1:field_name} = ${2:tag};"
+    },
     "int32 field": {
       "prefix": "fi32",
       "description": "int32 field",
@@ -94,6 +99,16 @@
       "prefix": "fi64",
       "description": "int64 field",
       "body": "int64 ${1:field_name} = ${2:tag};"
+    },
+    "uint8 field": {
+      "prefix": "fu8",
+      "description": "uint8 field",
+      "body": "uint8 ${1:field_name} = ${2:tag};"
+    },
+    "uint16 field": {
+      "prefix": "fu16",
+      "description": "uint16 field",
+      "body": "uint16 ${1:field_name} = ${2:tag};"
     },
     "uint32 field": {
       "prefix": "fu32",
@@ -169,6 +184,11 @@
       "prefix": "en",
       "description": "enum",
       "body": "enum ${3:EnumName} {\n\t$0\n}"
+    },
+    "enum class": {
+      "prefix": "enc",
+      "description": "enum class",
+      "body": "enum class ${1:EnumName} : ${2|int32,int8,uint8,int16,uint16,uint32|} {\n\t$0\n}"
     },
     "service": {
       "prefix": "sv",

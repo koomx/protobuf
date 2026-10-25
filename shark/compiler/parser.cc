@@ -41,8 +41,6 @@
 #include <cstdint>
 #include <limits>
 #include <unordered_map>
-#include <unordered_set>
-
 #include <shark/stubs/casts.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
@@ -656,21 +654,18 @@ bool Parser::Parse(io::Tokenizer* input, FileDescriptorProto* file) {
     root_location.RecordLegacyLocation(file,
                                        DescriptorPool::ErrorCollector::OTHER);
 
-    if (require_syntax_identifier_ || LookingAt("syntax")) {
-      if (!ParseSyntaxIdentifier(root_location)) {
-        // Don't attempt to parse the file if we didn't recognize the syntax
-        // identifier.
-        return false;
-      }
-      // Store the syntax into the file.
-      if (file != nullptr) file->set_syntax(syntax_identifier_);
-    } else if (!stop_after_syntax_identifier_) {
-      GOOGLE_LOG(WARNING) << "No syntax specified for the proto file: " << file->name()
-                   << ". Please use 'syntax = \"proto2\";' "
-                   << "or 'syntax = \"proto3\";' to specify a syntax "
-                   << "version. (Defaulted to proto2 syntax.)";
-      syntax_identifier_ = "proto2";
+    if (!LookingAt("syntax")) {
+      AddError(
+          "File must begin with a syntax statement, e.g. 'syntax = "
+          "\"proto2\";'.");
+      return false;
     }
+    if (!ParseSyntaxIdentifier(root_location)) {
+      // Don't attempt to parse the file if we didn't recognize the syntax
+      // identifier.
+      return false;
+    }
+    if (file != nullptr) file->set_syntax(syntax_identifier_);
 
     if (stop_after_syntax_identifier_) return !had_errors_;
 
@@ -711,12 +706,11 @@ bool Parser::ParseSyntaxIdentifier(const LocationRecorder& parent) {
 
   syntax_identifier_ = syntax;
 
-  if (syntax != "proto2" && syntax != "proto3" &&
-      !stop_after_syntax_identifier_) {
+  if (syntax != "proto2") {
     AddError(syntax_token.line, syntax_token.column,
              "Unrecognized syntax identifier \"" + syntax +
                  "\".  This parser "
-                 "only recognizes \"proto2\" and \"proto3\".");
+                 "only recognizes \"proto2\".");
     return false;
   }
 
@@ -787,43 +781,6 @@ bool Parser::ParseMessageDefinition(
     }
   }
   DO(ParseMessageBlock(message, message_location, containing_file));
-
-  if (syntax_identifier_ == "proto3") {
-    // Add synthetic one-field oneofs for optional fields, except messages which
-    // already have presence in proto3.
-    //
-    // We have to make sure the oneof names don't conflict with any other
-    // field or oneof.
-    std::unordered_set<std::string> names;
-    for (const auto& field : message->field()) {
-      names.insert(field.name());
-    }
-    for (const auto& oneof : message->oneof_decl()) {
-      names.insert(oneof.name());
-    }
-
-    for (auto& field : *message->mutable_field()) {
-      if (field.proto3_optional()) {
-        std::string oneof_name = field.name();
-
-        // Prepend 'XXXXX_' until we are no longer conflicting.
-        // Avoid prepending a double-underscore because such names are
-        // reserved in C++.
-        if (oneof_name.empty() || oneof_name[0] != '_') {
-          oneof_name = '_' + oneof_name;
-        }
-        while (names.count(oneof_name) > 0) {
-          oneof_name = 'X' + oneof_name;
-        }
-
-        names.insert(oneof_name);
-        field.set_oneof_index(message->oneof_decl_size());
-        OneofDescriptorProto* oneof = message->add_oneof_decl();
-        oneof->set_name(oneof_name);
-      }
-    }
-  }
-
   return true;
 }
 
@@ -966,10 +923,6 @@ bool Parser::ParseMessageField(FieldDescriptorProto* field,
     FieldDescriptorProto::Label label;
     if (ParseLabel(&label, field_location)) {
       field->set_label(label);
-      if (label == FieldDescriptorProto::LABEL_OPTIONAL &&
-          syntax_identifier_ == "proto3") {
-        field->set_proto3_optional(true);
-      }
     }
   }
 

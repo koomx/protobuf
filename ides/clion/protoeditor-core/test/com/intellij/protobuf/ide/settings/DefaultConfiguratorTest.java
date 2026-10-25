@@ -85,7 +85,7 @@ public class DefaultConfiguratorTest extends HeavyPlatformTestCase {
       ContainerUtil.getFirstItem(PbImportPathsConfiguration.getDescriptorPathSuggestions(myProject)));
     assertNotNull(settings);
 
-    assertEquals("google/protobuf/descriptor.proto", settings.getDescriptorPath());
+    assertEquals("shark/descriptor.shark", settings.getDescriptorPath());
     assertContainsElements(
       PbImportPathsConfiguration.computeDeterministicImportPathsStream(project, settings).toList(),
       new ImportPathEntry(VfsUtilCore.pathToUrl(module1Root1Src1.getPath()), ""),
@@ -98,7 +98,7 @@ public class DefaultConfiguratorTest extends HeavyPlatformTestCase {
   public void testGetDescriptorPathSuggestions() {
     assertContainsElements(
       PbImportPathsConfiguration.getDescriptorPathSuggestions(myProject),
-      "google/protobuf/descriptor.proto");
+      "shark/descriptor.shark");
   }
 
   public void testBuiltInDescriptor() {
@@ -109,7 +109,7 @@ public class DefaultConfiguratorTest extends HeavyPlatformTestCase {
       VirtualFileManager.getInstance().findFileByUrl(includeEntry.getLocation());
     assertNotNull(descriptorDir);
 
-    String extractedDescriptorPath = includeEntry.getLocation() + "/google/protobuf/descriptor.proto";
+    String extractedDescriptorPath = includeEntry.getLocation() + "/shark/descriptor.shark";
     VirtualFile file = VirtualFileManager.getInstance().findFileByUrl(extractedDescriptorPath);
     assertNotNull(file);
     assertTrue(file.exists());

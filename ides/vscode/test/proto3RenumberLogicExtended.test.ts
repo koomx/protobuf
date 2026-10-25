@@ -15,7 +15,7 @@ suite('Proto3RenumberLogic - Extended Tests', () => {
     });
 
     test('returns undefined when cursor is outside any block', () => {
-      const text = `syntax = "proto3";\n\nmessage Foo {\n  string name = 1;\n}`;
+      const text = `syntax = "proto2";\n\nmessage Foo {\n  string name = 1;\n}`;
       const offset = 0; // at syntax
       const result = findEnclosingBlock(text, offset);
       assert.strictEqual(result, undefined);
@@ -70,7 +70,7 @@ suite('Proto3RenumberLogic - Extended Tests', () => {
     });
 
     test('returns empty array for text without blocks', () => {
-      const result = findAllBlocks('syntax = "proto3";');
+      const result = findAllBlocks('syntax = "proto2";');
       assert.deepStrictEqual(result, []);
     });
 
@@ -274,7 +274,7 @@ suite('Proto3RenumberLogic - Extended Tests', () => {
     });
 
     test('returns empty array for document with only syntax', () => {
-      const result = computeDocumentRenumberEdits('syntax = "proto3";');
+      const result = computeDocumentRenumberEdits('syntax = "proto2";');
       assert.deepStrictEqual(result, []);
     });
 

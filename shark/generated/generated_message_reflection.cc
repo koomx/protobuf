@@ -1538,14 +1538,15 @@ bool IsIndexInHasBitSet(const uint32_t* has_bit_set, uint32_t has_bit_index) {
 }
 
 bool CreateUnknownEnumValues(const FileDescriptor* file) {
-  return file->syntax() == FileDescriptor::SYNTAX_PROTO3;
+  (void)file;
+  return false;
 }
 }  // namespace
 
 namespace internal {
 bool CreateUnknownEnumValues(const FieldDescriptor* field) {
-  bool open_enum = false;
-  return field->file()->syntax() == FileDescriptor::SYNTAX_PROTO3 || open_enum;
+  (void)field;
+  return false;
 }
 }  // namespace internal
 using internal::CreateUnknownEnumValues;
