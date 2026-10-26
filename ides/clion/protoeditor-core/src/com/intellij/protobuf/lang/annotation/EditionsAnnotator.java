@@ -22,7 +22,7 @@ import com.intellij.protobuf.lang.PbLangBundle;
 import com.intellij.protobuf.lang.psi.PbElement;
 import com.intellij.protobuf.lang.psi.PbField;
 import com.intellij.protobuf.lang.psi.PbFieldLabel;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
+import com.intellij.protobuf.lang.psi.PbListField;
 import com.intellij.protobuf.lang.psi.PbMapField;
 import com.intellij.protobuf.lang.psi.PbSyntaxStatement;
 import com.intellij.protobuf.lang.psi.PbVisitor;
@@ -51,11 +51,6 @@ public class EditionsAnnotator implements Annotator {
         public void visitField(@NotNull PbField field) {
           annotateField(field, holder);
         }
-
-        @Override
-        public void visitGroupDefinition(@NotNull PbGroupDefinition group) {
-          annotateGroupDefinition(group, holder);
-        }
       });
   }
 
@@ -78,7 +73,7 @@ public class EditionsAnnotator implements Annotator {
    * In editions, only list<or> null labels are allowed.
    */
   private static void annotateField(PbField field, AnnotationHolder holder) {
-    if (field instanceof PbMapField) {
+    if (field instanceof PbMapField || field instanceof PbListField) {
       return;
     }
     PbFieldLabel label = field.getDeclaredLabel();
@@ -89,14 +84,5 @@ public class EditionsAnnotator implements Annotator {
         .range(label)
         .create();
     }
-  }
-
-  /*
-   * Group syntax is not allowed
-   */
-  private static void annotateGroupDefinition(PbGroupDefinition group, AnnotationHolder holder) {
-    holder.newAnnotation(HighlightSeverity.ERROR, PbLangBundle.message("editions.group.invalid"))
-      .range(group)
-      .create();
   }
 }

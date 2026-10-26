@@ -20,7 +20,7 @@ plugins {
   id("org.jetbrains.intellij.platform")
 }
 
-version = "0.5.10"
+version = "0.5.12"
 
 repositories {
   intellijPlatform {

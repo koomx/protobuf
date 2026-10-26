@@ -15,7 +15,6 @@
  */
 package com.intellij.protobuf.lang.annotation;
 
-import com.google.common.base.Ascii;
 import com.intellij.lang.annotation.AnnotationHolder;
 import com.intellij.lang.annotation.Annotator;
 import com.intellij.lang.annotation.HighlightSeverity;
@@ -23,7 +22,7 @@ import com.intellij.openapi.project.DumbAware;
 import com.intellij.protobuf.lang.PbLangBundle;
 import com.intellij.protobuf.lang.psi.PbElement;
 import com.intellij.protobuf.lang.psi.PbField;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
+import com.intellij.protobuf.lang.psi.PbListField;
 import com.intellij.protobuf.lang.psi.PbMapField;
 import com.intellij.protobuf.lang.psi.PbOneofDefinition;
 import com.intellij.protobuf.lang.psi.PbVisitor;
@@ -48,11 +47,6 @@ public final class Proto2Annotator implements Annotator, DumbAware {
           public void visitField(@NotNull PbField field) {
             annotateField(field, holder);
           }
-
-          @Override
-          public void visitGroupDefinition(@NotNull PbGroupDefinition group) {
-            annotateGroupDefinition(group, holder);
-          }
         });
   }
 
@@ -60,7 +54,7 @@ public final class Proto2Annotator implements Annotator, DumbAware {
    * In proto2, fields must have labels unless they're map fields or are part of oneof definitions.
    */
   private static void annotateField(PbField field, AnnotationHolder holder) {
-    if (field instanceof PbMapField) {
+    if (field instanceof PbMapField || field instanceof PbListField) {
       return;
     }
     if (field.getStatementOwner() instanceof PbOneofDefinition) {
@@ -69,26 +63,6 @@ public final class Proto2Annotator implements Annotator, DumbAware {
     if (field.getDeclaredLabel() == null) {
       holder.newAnnotation(HighlightSeverity.ERROR, PbLangBundle.message("proto2.field.label.required"))
           .range(field)
-          .create();
-    }
-  }
-
-  /*
-   * Group fields must have labels.
-   * Group field names must start with a capital letter.
-   */
-  private static void annotateGroupDefinition(PbGroupDefinition group, AnnotationHolder holder) {
-    PsiElement nameIdentifier = group.getNameIdentifier();
-    String name = group.getName();
-    if (name != null && nameIdentifier != null && !Ascii.isUpperCase(name.charAt(0))) {
-      holder.newAnnotation(HighlightSeverity.ERROR, PbLangBundle.message("proto2.group.name.capital.letter"))
-          .range(nameIdentifier)
-          .create();
-    }
-    if (!(group.getStatementOwner() instanceof PbOneofDefinition)
-        && group.getDeclaredLabel() == null) {
-      holder.newAnnotation(HighlightSeverity.ERROR, PbLangBundle.message("proto2.field.label.required"))
-          .range(group)
           .create();
     }
   }

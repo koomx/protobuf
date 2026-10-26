@@ -20,7 +20,6 @@ import com.intellij.lang.ASTNode;
 import com.intellij.openapi.util.TextRange;
 import com.intellij.protobuf.lang.annotation.OptionOccurrenceTracker;
 import com.intellij.protobuf.lang.psi.PbField;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbMessageType;
 import com.intellij.protobuf.lang.psi.PbSymbol;
 import com.intellij.protobuf.lang.psi.PbTextFieldName;
@@ -84,15 +83,7 @@ public class PbTextFieldNameReference extends PsiReferenceBase<PbTextFieldName> 
 
     Collection<PbSymbol> pbSymbols = type.getSymbolMap().get(name);
     if (pbSymbols == null || pbSymbols.isEmpty()) return null;
-    PbSymbol symbol = ContainerUtil.find(pbSymbols, s -> s instanceof PbField || s instanceof PbGroupDefinition);
-
-    if (symbol instanceof PbGroupDefinition) {
-      PbField generatedField = ((PbGroupDefinition) symbol).getGeneratedField();
-      if (generatedField == null || generatedField.isExtension()) {
-        return null;
-      }
-      return generatedField;
-    }
+    PbSymbol symbol = ContainerUtil.find(pbSymbols, s -> s instanceof PbField);
 
     if (symbol instanceof PbField field) {
       if (field.isExtension()) {
@@ -101,14 +92,6 @@ public class PbTextFieldNameReference extends PsiReferenceBase<PbTextFieldName> 
 
       PbTypeName fieldType = field.getTypeName();
       if (fieldType == null) {
-        return null;
-      }
-
-      // Make sure that group fields use the capitalized type name rather than the lowercase field
-      // name.
-      PbGroupDefinition group =
-          PbPsiUtil.resolveRefToType(fieldType.getEffectiveReference(), PbGroupDefinition.class);
-      if (group != null && !name.equals(group.getName())) {
         return null;
       }
 
@@ -138,13 +121,7 @@ public class PbTextFieldNameReference extends PsiReferenceBase<PbTextFieldName> 
       if (fieldType == null) {
         continue;
       }
-      PbGroupDefinition group =
-          PbPsiUtil.resolveRefToType(fieldType.getEffectiveReference(), PbGroupDefinition.class);
-      if (group != null) {
-        variants.add(PbSymbolLookupElement.forGroupDefinitionAsField(group, occurrence));
-      } else {
-        variants.add(PbSymbolLookupElement.withUnusableFieldHighlight(field, occurrence));
-      }
+      variants.add(PbSymbolLookupElement.withUnusableFieldHighlight(field, occurrence));
     }
     return variants.toArray();
   }

@@ -8,9 +8,6 @@ import com.intellij.psi.PsiElement;
 public interface PbOneofBody extends PbBlockBody, PbOptionStatementOwner {
 
   @NotNull
-  List<PbGroupDefinition> getGroupDefinitionList();
-
-  @NotNull
   List<PbSimpleField> getSimpleFieldList();
 
   @NotNull

@@ -196,23 +196,6 @@ public class PbCompleteOptionsTest extends PbCompletionContributorTestCase {
   }
 
   @Test
-  public void testExtensionOptionUsingGroupUsesLowercaseFieldName() {
-    setInput(
-        "message MyType {",
-        "  group Zz = 1 {",
-        "    int32 yy = 1;",
-        "  }",
-        "}",
-        "extend proto2.FileOptions {",
-        "  MyType tt = 1;",
-        "}",
-        "option (tt)." + CARET_TAG);
-    List<String> completions = getCompletionItemsAsStrings();
-    assertNotNull(completions);
-    assertThat(completions).contains("zz");
-  }
-
-  @Test
   public void testCompleteCustomFieldOption() {
     withPackage("com.foo");
     setInput(

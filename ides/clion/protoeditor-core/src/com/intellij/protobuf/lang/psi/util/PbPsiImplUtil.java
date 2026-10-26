@@ -54,9 +54,7 @@ public final class PbPsiImplUtil {
   }
 
   public static @Nullable PbOptionOwner getOptionOwner(PsiElement element) {
-    // For finding PbOptionOwner parents, we use getContext() instead of getParent(). Group
-    // definitions generate an associated field, and the options specified along with the group are
-    // tied to the generated field. See PbGroupDefinitionMixin.
+    // For finding PbOptionOwner parents, we use getContext() instead of getParent().
     // Also, this method can be called on PbText* elements within an injected PbTextFile to get the
     // outer PbOptionOwner.
     return PsiTreeUtil.getContextOfType(element, PbOptionOwner.class, true);

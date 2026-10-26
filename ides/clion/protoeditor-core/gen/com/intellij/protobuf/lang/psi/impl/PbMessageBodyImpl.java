@@ -46,11 +46,6 @@ public class PbMessageBodyImpl extends PbMessageBodyMixin implements PbMessageBo
     return PsiTreeUtil.getChildrenOfTypeAsList(this, PbExtensionsStatement.class);
   }
 
-  @Override
-  @NotNull
-  public List<PbGroupDefinition> getGroupDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PbGroupDefinition.class);
-  }
 
   @Override
   @NotNull

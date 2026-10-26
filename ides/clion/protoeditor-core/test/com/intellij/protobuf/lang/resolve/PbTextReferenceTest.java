@@ -137,21 +137,6 @@ public class PbTextReferenceTest {
     assertIsField(resolve(), "ext_bug.validation.InRange.min");
   }
 
-  @Test
-  public void testTextGroupDefinitionFieldOption() {
-    assertIsField(resolve(), "foo.bar.OptionType.mygroupoption");
-  }
-
-  @Test
-  public void testTextGroupDefinitionFieldOptionUnresolved() {
-    assertNull(resolve());
-  }
-
-  @Test
-  public void testTextGroupDefinitionMemberOption() {
-    assertIsField(resolve(), "foo.bar.OptionType.MyGroupOption.zz");
-  }
-
   private static void assertIsField(PsiElement target, String name) {
     assertInstanceOf(PbField.class, target);
     QualifiedName qualifiedName = ReadAction.computeBlocking(() -> ((PbField) target).getQualifiedName());

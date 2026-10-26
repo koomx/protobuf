@@ -28,11 +28,6 @@ public class PbExtendBodyImpl extends PbElementBase implements PbExtendBody {
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public List<PbGroupDefinition> getGroupDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PbGroupDefinition.class);
-  }
 
   @Override
   @NotNull

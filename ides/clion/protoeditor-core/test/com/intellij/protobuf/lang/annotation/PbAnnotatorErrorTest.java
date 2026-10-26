@@ -81,11 +81,6 @@ public class PbAnnotatorErrorTest {
   }
 
   @Test
-  public void testGroupOptionReferenceErrorAnnotations() {
-    doTest("lang/annotation/GroupOptionReferenceErrors.proto.testdata");
-  }
-
-  @Test
   public void testStringErrorAnnotations() {
     doTest("lang/annotation/StringErrors.proto.testdata");
   }

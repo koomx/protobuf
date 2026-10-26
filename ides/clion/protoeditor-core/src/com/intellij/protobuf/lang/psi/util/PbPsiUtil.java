@@ -23,7 +23,6 @@ import com.intellij.protobuf.lang.psi.PbEnumDefinition;
 import com.intellij.protobuf.lang.psi.PbExtendDefinition;
 import com.intellij.protobuf.lang.psi.PbField;
 import com.intellij.protobuf.lang.psi.PbFile;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbMessageType;
 import com.intellij.protobuf.lang.psi.PbNamedTypeElement;
 import com.intellij.protobuf.lang.psi.PbOneofDefinition;
@@ -76,11 +75,6 @@ public final class PbPsiUtil {
   /** Returns <code>true</code> if the given element is a message (message or group). */
   public static boolean isMessageElement(PsiElement element) {
     return element instanceof PbMessageType;
-  }
-
-  /** Returns <code>true</code> if the given element is a group type */
-  private static boolean isGroupElement(PsiElement element) {
-    return element instanceof PbGroupDefinition;
   }
 
   /** Returns <code>true</code> if the given element is a package. */
@@ -256,16 +250,6 @@ public final class PbPsiUtil {
     }
     PsiReference ref = fieldType.getEffectiveReference();
     return ref != null && isMessageElement(ref.resolve());
-  }
-
-  /** Returns <code>true</code> if given field is a group type */
-  public static boolean fieldIsGroup(PbField field) {
-    PbTypeName fieldType = field.getTypeName();
-    if (fieldType == null) {
-      return false;
-    }
-    PsiReference ref = fieldType.getEffectiveReference();
-    return ref != null && isGroupElement(ref.resolve());
   }
 
   public static boolean isFirstInside(@NotNull PsiElement element, @NotNull PsiElement ancestor) {

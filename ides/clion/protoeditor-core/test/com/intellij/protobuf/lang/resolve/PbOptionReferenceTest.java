@@ -135,16 +135,6 @@ public class PbOptionReferenceTest {
   }
 
   @Test
-  public void testGroupDefinitionFieldOption() {
-    assertIsField(resolve(), "foo.bar.mygroupoption");
-  }
-
-  @Test
-  public void testGroupDefinitionMemberOption() {
-    assertIsField(resolve(), "foo.bar.MyGroupOption.zz");
-  }
-
-  @Test
   public void testEnumValueReference() {
     assertIsEnumValue(resolve(), "google.protobuf.FieldOptions.STRING_PIECE");
   }

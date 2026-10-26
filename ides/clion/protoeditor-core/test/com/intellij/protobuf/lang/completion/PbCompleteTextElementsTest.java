@@ -67,30 +67,6 @@ public class PbCompleteTextElementsTest extends PbCompletionContributorTestCase 
   }
 
   @Test
-  public void testGroupFieldCompletionSuggestsTypeName() {
-    withPackage("foosbar");
-    withSyntax("proto2");
-    setInput(
-        "import \"lang/completion/mock_descriptor.proto\";",
-        "message MyType {",
-        "  optional int32 foo = 2;",
-        "  optional group MyGroup = 1 {",
-        "    optional int32 xyz = 1;",
-        "  }",
-        "}",
-        "extend proto2.FileOptions {",
-        "  optional MyType opt = 2000;",
-        "}",
-        "option (opt) = {",
-        "  " + CARET_TAG,
-        "};");
-
-    List<LookupElement> completions = getCompletionItems();
-    assertNotNull(completions);
-    assertContainsItems(completions, "foo", "MyGroup");
-  }
-
-  @Test
   public void testFieldCompletionDoesNotSuggestExtensionField() {
     withPackage("foosbar");
     setInput(
@@ -414,29 +390,5 @@ public class PbCompleteTextElementsTest extends PbCompletionContributorTestCase 
     assertNotNull(completions);
     assertContainsHighlightedItems(completions, "ext");
     assertContainsNonhighlightedItems(completions, "ext2");
-  }
-
-  @Test
-  public void testDuplicateGroupFieldsWithDifferentCasingAreHighlighted() {
-    withSyntax("proto2");
-    setInput(
-        "import \"lang/completion/mock_descriptor.proto\";",
-        "message MyType {",
-        "  optional group MyGroup = 1 {",
-        "    optional int32 xyz = 1;",
-        "  }",
-        "  optional int32 foobar = 2;",
-        "}",
-        "extend proto2.MessageOptions {",
-        "  optional MyType opt = 2000;",
-        "}",
-        "option (opt) = {",
-        "  " + CARET_TAG,
-        "};",
-        "option (opt).mygroup.xyz =1;");
-    List<LookupElement> completions = getCompletionItems();
-    assertNotNull(completions);
-    assertContainsHighlightedItems(completions, "MyGroup");
-    assertContainsNonhighlightedItems(completions, "foobar");
   }
 }

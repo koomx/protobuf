@@ -28,11 +28,6 @@ public class PbOneofBodyImpl extends PbOneofBodyMixin implements PbOneofBody {
     else super.accept(visitor);
   }
 
-  @Override
-  @NotNull
-  public List<PbGroupDefinition> getGroupDefinitionList() {
-    return PsiTreeUtil.getChildrenOfTypeAsList(this, PbGroupDefinition.class);
-  }
 
   @Override
   @NotNull

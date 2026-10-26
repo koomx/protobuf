@@ -217,23 +217,6 @@ public class PbCompleteTypesTest extends PbCompletionContributorTestCase {
   }
 
   @Test
-  public void testNonQualifiedTypeDeclaredInNonScopeCreatingParent() {
-    withSyntax("proto2");
-    setInput(
-        "message MyMessage {",
-        "  oneof my_oneof {",
-        "    group MyGroup = 1 {",
-        "      optional int32 my_group_field = 1;",
-        "    }",
-        "  }",
-        "  My" + CARET_TAG,
-        "}");
-    List<String> completions = getCompletionItemsAsStrings();
-    assertNotNull(completions);
-    assertThat(completions).containsExactly("MyMessage", "MyGroup");
-  }
-
-  @Test
   public void testNonQualifiedTypeNestedMessageScope() {
     setInput(
         "message MyMessage {",

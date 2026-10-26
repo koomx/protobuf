@@ -135,11 +135,6 @@ public class PbTypeReferenceTest {
   }
 
   @Test
-  public void testTypeDeclaredInOneof() {
-    assertIsMessageType(resolve(), "foo.bar.Bar.SomeGroup");
-  }
-
-  @Test
   public void testGeneratedMapEntry() {
     assertIsMessageType(resolve(), "foo.bar.Foo.SomeMapEntry");
   }

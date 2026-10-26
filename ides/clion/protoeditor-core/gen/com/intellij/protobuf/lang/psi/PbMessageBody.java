@@ -17,9 +17,6 @@ public interface PbMessageBody extends PbBlockBody, PbOptionStatementOwner {
   List<PbExtensionsStatement> getExtensionsStatementList();
 
   @NotNull
-  List<PbGroupDefinition> getGroupDefinitionList();
-
-  @NotNull
   List<PbMapField> getMapFieldList();
 
   @NotNull

@@ -20,7 +20,6 @@ import com.intellij.protobuf.lang.PbLanguage;
 import com.intellij.protobuf.lang.psi.PbEnumDefinition;
 import com.intellij.protobuf.lang.psi.PbEnumValue;
 import com.intellij.protobuf.lang.psi.PbField;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbMapField;
 import com.intellij.protobuf.lang.psi.PbMessageDefinition;
 import com.intellij.protobuf.lang.psi.PbNamedElement;
@@ -71,9 +70,6 @@ public class PbBreadcrumbsInfoProvider implements BreadcrumbsProvider {
     }
     if (element instanceof PbEnumValue) {
       return "enum value";
-    }
-    if (element instanceof PbGroupDefinition) {
-      return "group";
     }
     if (element instanceof PbMapField) {
       return "map";

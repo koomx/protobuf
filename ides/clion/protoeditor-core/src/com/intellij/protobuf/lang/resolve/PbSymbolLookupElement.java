@@ -21,7 +21,6 @@ import com.intellij.codeInsight.lookup.LookupElement;
 import com.intellij.codeInsight.lookup.LookupElementPresentation;
 import com.intellij.protobuf.lang.annotation.OptionOccurrenceTracker;
 import com.intellij.protobuf.lang.psi.PbField;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbMapField;
 import com.intellij.protobuf.lang.psi.PbPackageName;
 import com.intellij.protobuf.lang.psi.PbSymbol;
@@ -51,18 +50,6 @@ public class PbSymbolLookupElement extends LookupElement {
     this.symbol = symbol;
     this.name = name;
     this.icon = icon;
-  }
-
-  public static PbSymbolLookupElement forGroupDefinitionAsField(
-      PbGroupDefinition group, OptionOccurrenceTracker.Occurrence occurrence) {
-    PbSymbolLookupElement element = new PbSymbolLookupElement(group);
-    PbField generatedField = group.getGeneratedField();
-    if (generatedField != null
-        && occurrence != null
-        && !occurrence.canFieldBeUsed(generatedField)) {
-      element.setRedHighlight();
-    }
-    return element;
   }
 
   public static PbSymbolLookupElement withUnusableFieldHighlight(

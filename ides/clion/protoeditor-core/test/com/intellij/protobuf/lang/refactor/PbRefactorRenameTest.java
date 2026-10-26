@@ -103,42 +103,6 @@ public class PbRefactorRenameTest {
   }
 
   @Test
-  public void testRenameGroup() throws IOException {
-    withSyntax("proto2");
-    PsiFile fileUser =
-        createFile(
-            "user.proto",
-            "import \"definer.proto\";",
-            "message M2 {",
-            "  optional M1.Agroup user = 777;",
-            "}");
-    PsiFile fileDef =
-        createFile(
-            "definer.proto",
-            "message M1 {",
-            "  optional group Agroup" + CARET_TAG + " = 1 {",
-            "    int32 x = 1;",
-            "    int32 y = 2;",
-            "  }",
-            "}");
-    renameElementAtCaret("Ggroup");
-    assertFileContents(
-        fileUser,
-        "import \"definer.proto\";",
-        "message M2 {",
-        "  optional M1.Ggroup user = 777;",
-        "}");
-    assertFileContents(
-        fileDef,
-        "message M1 {",
-        "  optional group Ggroup = 1 {",
-        "    int32 x = 1;",
-        "    int32 y = 2;",
-        "  }",
-        "}");
-  }
-
-  @Test
   public void testRenameFieldOption() throws IOException {
     PsiFile fileUser =
         createFile(

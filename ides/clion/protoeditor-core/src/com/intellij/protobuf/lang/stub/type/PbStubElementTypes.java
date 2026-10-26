@@ -23,8 +23,6 @@ import com.intellij.psi.tree.IElementType;
  */
 public interface PbStubElementTypes {
 
-  PbGroupDefinitionType GROUP_DEFINITION =
-    new PbGroupDefinitionType("GROUP_DEFINITION", PbLanguage.INSTANCE);
   PbEnumDefinitionType ENUM_DEFINITION =
     new PbEnumDefinitionType("ENUM_DEFINITION", PbLanguage.INSTANCE);
   PbExtendDefinitionType EXTEND_DEFINITION =
@@ -41,10 +39,7 @@ public interface PbStubElementTypes {
     new PbServiceMethodDefinitionType("SERVICE_METHOD", PbLanguage.INSTANCE);
 
   static IElementType get(String name) {
-    if ("GROUP_DEFINITION".equals(name)) {
-      return GROUP_DEFINITION;
-    }
-    else if ("ENUM_DEFINITION".equals(name)) {
+    if ("ENUM_DEFINITION".equals(name)) {
       return ENUM_DEFINITION;
     }
     else if ("EXTEND_DEFINITION".equals(name)) {

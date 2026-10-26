@@ -74,7 +74,6 @@ public class PbGotoSymbolContributorTest {
             "}",
             "message AnotherMessage {",
             "  optional map<int32, int32> map_field = 1;",
-            "  optional group SomeGroup = 2 {}",
             "  oneof pick_oneof {",
             "    optional int32 an_int = 3;",
             "    optional float a_float = 4;",
@@ -92,10 +91,6 @@ public class PbGotoSymbolContributorTest {
         ReadAction.computeBlocking(() -> contributor.getItemsByName(
             "com.test.google.AnotherMessage", "Another", myFixture.getProject(), false));
     assertContainsNames(anotherMessageResults, "com.test.google.AnotherMessage");
-    NavigationItem[] groupResults =
-        ReadAction.computeBlocking(() -> contributor.getItemsByName(
-            "com.test.google.AnotherMessage.SomeGroup", "SomeG", myFixture.getProject(), false));
-    assertContainsNames(groupResults, "com.test.google.AnotherMessage.SomeGroup");
     NavigationItem[] oneofResults =
         ReadAction.computeBlocking(() -> contributor.getItemsByName(
             "com.test.google.AnotherMessage.pick_oneof", "pick", myFixture.getProject(), false));

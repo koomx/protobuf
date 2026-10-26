@@ -25,7 +25,6 @@ import com.intellij.protobuf.lang.psi.PbEnumDefinition;
 import com.intellij.protobuf.lang.psi.PbEnumValue;
 import com.intellij.protobuf.lang.psi.PbField;
 import com.intellij.protobuf.lang.psi.PbFile;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbMessageType;
 import com.intellij.protobuf.lang.psi.PbOneofDefinition;
 import com.intellij.protobuf.lang.psi.PbPackageName;
@@ -58,8 +57,6 @@ public class PbFindUsagesProvider implements FindUsagesProvider {
       return PbIdeBundle.message("proto.type.file");
     } else if (element instanceof PbPackageName) {
       return PbIdeBundle.message("proto.type.package");
-    } else if (element instanceof PbGroupDefinition) {
-      return PbIdeBundle.message("proto.type.group");
     } else if (element instanceof PbField) {
       return PbIdeBundle.message("proto.type.field");
     } else if (element instanceof PbMessageType) {

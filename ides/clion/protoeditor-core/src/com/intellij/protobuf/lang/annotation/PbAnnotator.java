@@ -42,7 +42,6 @@ import com.intellij.protobuf.lang.psi.PbField;
 import com.intellij.protobuf.lang.psi.PbField.CanonicalFieldLabel;
 import com.intellij.protobuf.lang.psi.PbFieldLabel;
 import com.intellij.protobuf.lang.psi.PbFile;
-import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbIdentifierValue;
 import com.intellij.protobuf.lang.psi.PbImportName;
 import com.intellij.protobuf.lang.psi.PbImportStatement;
@@ -135,11 +134,6 @@ public final class PbAnnotator implements Annotator, DumbAware {
           public void visitMapField(@NotNull PbMapField mapField) {
             annotateMapField(mapField, holder);
             visitField(mapField);
-          }
-
-          @Override
-          public void visitGroupDefinition(@NotNull PbGroupDefinition group) {
-            annotateGroupDefinition(group, holder);
           }
 
           @Override
@@ -387,16 +381,6 @@ public final class PbAnnotator implements Annotator, DumbAware {
         || "uint16".equals(name)
         || "int32".equals(name)
         || "uint32".equals(name);
-  }
-
-  private static void annotateGroupDefinition(PbGroupDefinition groupDefinition, AnnotationHolder holder) {
-    // Groups are a message type plus a field. However, the field is not part of the PSI tree and
-    // aren't traversed by the annotator normally. Check the field here.
-    for (PbSymbol sibling : groupDefinition.getAdditionalSiblings()) {
-      if (sibling instanceof PbField) {
-        annotateField((PbField) sibling, holder);
-      }
-    }
   }
 
   private static void annotateEnumDefinition(PbEnumDefinition enumDefinition, AnnotationHolder holder) {
