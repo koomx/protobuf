@@ -252,13 +252,13 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2fwrappers_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\032shark/types/wrappers.shark\022\005shark\"\034\n\013D"
-  "oubleValue\022\r\n\005value\030\001 \001(\001\"\033\n\nFloatValue\022"
-  "\r\n\005value\030\001 \001(\002\"\033\n\nInt64Value\022\r\n\005value\030\001 "
-  "\001(\003\"\034\n\013UInt64Value\022\r\n\005value\030\001 \001(\004\"\033\n\nInt"
-  "32Value\022\r\n\005value\030\001 \001(\005\"\034\n\013UInt32Value\022\r\n"
-  "\005value\030\001 \001(\r\"\032\n\tBoolValue\022\r\n\005value\030\001 \001(\010"
-  "\"\034\n\013StringValue\022\r\n\005value\030\001 \001(\t\"\033\n\nBytesV"
-  "alue\022\r\n\005value\030\001 \001(\014B6Z1google.golang.org"
+  "oubleValue\022\r\n\005value\030\001 \001(\r\"\033\n\nFloatValue\022"
+  "\r\n\005value\030\001 \001(\n\"\033\n\nInt64Value\022\r\n\005value\030\001 "
+  "\001(\010\"\034\n\013UInt64Value\022\r\n\005value\030\001 \001(\t\"\033\n\nInt"
+  "32Value\022\r\n\005value\030\001 \001(\006\"\034\n\013UInt32Value\022\r\n"
+  "\005value\030\001 \001(\007\"\032\n\tBoolValue\022\r\n\005value\030\001 \001(\001"
+  "\"\034\n\013StringValue\022\r\n\005value\030\001 \001(\020\"\033\n\nBytesV"
+  "alue\022\r\n\005value\030\001 \001(\021B6Z1google.golang.org"
   "/protobuf/types/known/wrapperspb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fwrappers_2eshark_once;

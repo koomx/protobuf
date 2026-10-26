@@ -159,49 +159,53 @@ SHARK_NAMESPACE_CLOSE
 namespace shark {
 
 enum class FieldDescriptorProto_Type : int32_t {
-  TYPE_DOUBLE = 1,
-  TYPE_FLOAT = 2,
-  TYPE_INT64 = 3,
-  TYPE_UINT64 = 4,
-  TYPE_INT32 = 5,
-  TYPE_FIXED64 = 6,
-  TYPE_FIXED32 = 7,
-  TYPE_BOOL = 8,
-  TYPE_STRING = 9,
-  TYPE_MESSAGE = 11,
-  TYPE_BYTES = 12,
-  TYPE_UINT32 = 13,
+  TYPE_BOOL = 1,
+  TYPE_INT8 = 2,
+  TYPE_UINT8 = 3,
+  TYPE_INT16 = 4,
+  TYPE_UINT16 = 5,
+  TYPE_INT32 = 6,
+  TYPE_UINT32 = 7,
+  TYPE_INT64 = 8,
+  TYPE_UINT64 = 9,
+  TYPE_FLOAT = 10,
+  TYPE_FLOAT16 = 11,
+  TYPE_FLOAT8 = 12,
+  TYPE_DOUBLE = 13,
   TYPE_ENUM = 14,
-  TYPE_SFIXED32 = 15,
-  TYPE_SFIXED64 = 16,
-  TYPE_SINT32 = 17,
-  TYPE_SINT64 = 18,
-  TYPE_INT8 = 19,
-  TYPE_UINT8 = 20,
-  TYPE_INT16 = 21,
-  TYPE_UINT16 = 22
+  TYPE_MESSAGE = 15,
+  TYPE_STRING = 16,
+  TYPE_BYTES = 17,
+  TYPE_FIXED32 = 18,
+  TYPE_FIXED64 = 19,
+  TYPE_SFIXED32 = 20,
+  TYPE_SFIXED64 = 21,
+  TYPE_SINT32 = 22,
+  TYPE_SINT64 = 23
 };
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_DOUBLE = FieldDescriptorProto_Type::TYPE_DOUBLE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT = FieldDescriptorProto_Type::TYPE_FLOAT;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT64 = FieldDescriptorProto_Type::TYPE_INT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT64 = FieldDescriptorProto_Type::TYPE_UINT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT32 = FieldDescriptorProto_Type::TYPE_INT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED64 = FieldDescriptorProto_Type::TYPE_FIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED32 = FieldDescriptorProto_Type::TYPE_FIXED32;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BOOL = FieldDescriptorProto_Type::TYPE_BOOL;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_STRING = FieldDescriptorProto_Type::TYPE_STRING;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_MESSAGE = FieldDescriptorProto_Type::TYPE_MESSAGE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BYTES = FieldDescriptorProto_Type::TYPE_BYTES;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT32 = FieldDescriptorProto_Type::TYPE_UINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_ENUM = FieldDescriptorProto_Type::TYPE_ENUM;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED32 = FieldDescriptorProto_Type::TYPE_SFIXED32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED64 = FieldDescriptorProto_Type::TYPE_SFIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT32 = FieldDescriptorProto_Type::TYPE_SINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT64 = FieldDescriptorProto_Type::TYPE_SINT64;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT8 = FieldDescriptorProto_Type::TYPE_INT8;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT8 = FieldDescriptorProto_Type::TYPE_UINT8;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT16 = FieldDescriptorProto_Type::TYPE_INT16;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT16 = FieldDescriptorProto_Type::TYPE_UINT16;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT32 = FieldDescriptorProto_Type::TYPE_INT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT32 = FieldDescriptorProto_Type::TYPE_UINT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT64 = FieldDescriptorProto_Type::TYPE_INT64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT64 = FieldDescriptorProto_Type::TYPE_UINT64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT = FieldDescriptorProto_Type::TYPE_FLOAT;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT16 = FieldDescriptorProto_Type::TYPE_FLOAT16;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT8 = FieldDescriptorProto_Type::TYPE_FLOAT8;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_DOUBLE = FieldDescriptorProto_Type::TYPE_DOUBLE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_ENUM = FieldDescriptorProto_Type::TYPE_ENUM;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_MESSAGE = FieldDescriptorProto_Type::TYPE_MESSAGE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_STRING = FieldDescriptorProto_Type::TYPE_STRING;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BYTES = FieldDescriptorProto_Type::TYPE_BYTES;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED32 = FieldDescriptorProto_Type::TYPE_FIXED32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED64 = FieldDescriptorProto_Type::TYPE_FIXED64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED32 = FieldDescriptorProto_Type::TYPE_SFIXED32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED64 = FieldDescriptorProto_Type::TYPE_SFIXED64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT32 = FieldDescriptorProto_Type::TYPE_SINT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT64 = FieldDescriptorProto_Type::TYPE_SINT64;
 constexpr int32_t FieldDescriptorProto_Type_to_underlying(FieldDescriptorProto_Type value) {
   return static_cast<int32_t>(value);
 }
@@ -212,8 +216,8 @@ inline bool FieldDescriptorProto_Type_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Type_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool FieldDescriptorProto_Type_IsValid(int value);
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MIN = FieldDescriptorProto_Type::TYPE_DOUBLE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MAX = FieldDescriptorProto_Type::TYPE_UINT16;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MIN = FieldDescriptorProto_Type::TYPE_BOOL;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MAX = FieldDescriptorProto_Type::TYPE_SINT64;
 constexpr int FieldDescriptorProto_Type_Type_ARRAYSIZE = FieldDescriptorProto_Type_to_underlying(FieldDescriptorProto_Type_Type_MAX) + 1;
 
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Type_descriptor();
@@ -2232,40 +2236,8 @@ class SHARK_EXPORT FieldDescriptorProto final :
   // nested types ----------------------------------------------------
 
   typedef FieldDescriptorProto_Type Type;
-  static constexpr Type TYPE_DOUBLE =
-    FieldDescriptorProto_Type::TYPE_DOUBLE;
-  static constexpr Type TYPE_FLOAT =
-    FieldDescriptorProto_Type::TYPE_FLOAT;
-  static constexpr Type TYPE_INT64 =
-    FieldDescriptorProto_Type::TYPE_INT64;
-  static constexpr Type TYPE_UINT64 =
-    FieldDescriptorProto_Type::TYPE_UINT64;
-  static constexpr Type TYPE_INT32 =
-    FieldDescriptorProto_Type::TYPE_INT32;
-  static constexpr Type TYPE_FIXED64 =
-    FieldDescriptorProto_Type::TYPE_FIXED64;
-  static constexpr Type TYPE_FIXED32 =
-    FieldDescriptorProto_Type::TYPE_FIXED32;
   static constexpr Type TYPE_BOOL =
     FieldDescriptorProto_Type::TYPE_BOOL;
-  static constexpr Type TYPE_STRING =
-    FieldDescriptorProto_Type::TYPE_STRING;
-  static constexpr Type TYPE_MESSAGE =
-    FieldDescriptorProto_Type::TYPE_MESSAGE;
-  static constexpr Type TYPE_BYTES =
-    FieldDescriptorProto_Type::TYPE_BYTES;
-  static constexpr Type TYPE_UINT32 =
-    FieldDescriptorProto_Type::TYPE_UINT32;
-  static constexpr Type TYPE_ENUM =
-    FieldDescriptorProto_Type::TYPE_ENUM;
-  static constexpr Type TYPE_SFIXED32 =
-    FieldDescriptorProto_Type::TYPE_SFIXED32;
-  static constexpr Type TYPE_SFIXED64 =
-    FieldDescriptorProto_Type::TYPE_SFIXED64;
-  static constexpr Type TYPE_SINT32 =
-    FieldDescriptorProto_Type::TYPE_SINT32;
-  static constexpr Type TYPE_SINT64 =
-    FieldDescriptorProto_Type::TYPE_SINT64;
   static constexpr Type TYPE_INT8 =
     FieldDescriptorProto_Type::TYPE_INT8;
   static constexpr Type TYPE_UINT8 =
@@ -2274,6 +2246,42 @@ class SHARK_EXPORT FieldDescriptorProto final :
     FieldDescriptorProto_Type::TYPE_INT16;
   static constexpr Type TYPE_UINT16 =
     FieldDescriptorProto_Type::TYPE_UINT16;
+  static constexpr Type TYPE_INT32 =
+    FieldDescriptorProto_Type::TYPE_INT32;
+  static constexpr Type TYPE_UINT32 =
+    FieldDescriptorProto_Type::TYPE_UINT32;
+  static constexpr Type TYPE_INT64 =
+    FieldDescriptorProto_Type::TYPE_INT64;
+  static constexpr Type TYPE_UINT64 =
+    FieldDescriptorProto_Type::TYPE_UINT64;
+  static constexpr Type TYPE_FLOAT =
+    FieldDescriptorProto_Type::TYPE_FLOAT;
+  static constexpr Type TYPE_FLOAT16 =
+    FieldDescriptorProto_Type::TYPE_FLOAT16;
+  static constexpr Type TYPE_FLOAT8 =
+    FieldDescriptorProto_Type::TYPE_FLOAT8;
+  static constexpr Type TYPE_DOUBLE =
+    FieldDescriptorProto_Type::TYPE_DOUBLE;
+  static constexpr Type TYPE_ENUM =
+    FieldDescriptorProto_Type::TYPE_ENUM;
+  static constexpr Type TYPE_MESSAGE =
+    FieldDescriptorProto_Type::TYPE_MESSAGE;
+  static constexpr Type TYPE_STRING =
+    FieldDescriptorProto_Type::TYPE_STRING;
+  static constexpr Type TYPE_BYTES =
+    FieldDescriptorProto_Type::TYPE_BYTES;
+  static constexpr Type TYPE_FIXED32 =
+    FieldDescriptorProto_Type::TYPE_FIXED32;
+  static constexpr Type TYPE_FIXED64 =
+    FieldDescriptorProto_Type::TYPE_FIXED64;
+  static constexpr Type TYPE_SFIXED32 =
+    FieldDescriptorProto_Type::TYPE_SFIXED32;
+  static constexpr Type TYPE_SFIXED64 =
+    FieldDescriptorProto_Type::TYPE_SFIXED64;
+  static constexpr Type TYPE_SINT32 =
+    FieldDescriptorProto_Type::TYPE_SINT32;
+  static constexpr Type TYPE_SINT64 =
+    FieldDescriptorProto_Type::TYPE_SINT64;
   static inline bool Type_IsValid(int value) {
     return FieldDescriptorProto_Type_IsValid(value);
   }

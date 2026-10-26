@@ -132,15 +132,15 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\030shark/types/struct.shark\022\005shark\"p\n\006Str"
-  "uct\022)\n\006fields\030\001 \003(\0132\031.shark.Struct.Field"
-  "sEntry\032;\n\013FieldsEntry\022\013\n\003key\030\001 \001(\t\022\033\n\005va"
-  "lue\030\002 \001(\0132\014.shark.Value:\0028\001\"\314\001\n\005Value\022&\n"
+  "uct\022)\n\006fields\030\001 \003(\0172\031.shark.Struct.Field"
+  "sEntry\032;\n\013FieldsEntry\022\013\n\003key\030\001 \001(\020\022\033\n\005va"
+  "lue\030\002 \001(\0172\014.shark.Value:\0028\001\"\314\001\n\005Value\022&\n"
   "\nnull_value\030\001 \001(\0162\020.shark.NullValueH\000\022\026\n"
-  "\014number_value\030\002 \001(\001H\000\022\026\n\014string_value\030\003 "
-  "\001(\tH\000\022\024\n\nbool_value\030\004 \001(\010H\000\022%\n\014struct_va"
-  "lue\030\005 \001(\0132\r.shark.StructH\000\022&\n\nlist_value"
-  "\030\006 \001(\0132\020.shark.ListValueH\000B\006\n\004kind\")\n\tLi"
-  "stValue\022\034\n\006values\030\001 \003(\0132\014.shark.Value*\033\n"
+  "\014number_value\030\002 \001(\rH\000\022\026\n\014string_value\030\003 "
+  "\001(\020H\000\022\024\n\nbool_value\030\004 \001(\001H\000\022%\n\014struct_va"
+  "lue\030\005 \001(\0172\r.shark.StructH\000\022&\n\nlist_value"
+  "\030\006 \001(\0172\020.shark.ListValueH\000B\006\n\004kind\")\n\tLi"
+  "stValue\022\034\n\006values\030\001 \003(\0172\014.shark.Value*\033\n"
   "\tNullValue\022\016\n\nNULL_VALUE\020\000B4Z/google.gol"
   "ang.org/protobuf/types/known/structpb\370\001\001"
   ;

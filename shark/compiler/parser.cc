@@ -2353,8 +2353,13 @@ bool Parser::ParseLabel(FieldDescriptorProto::Label* label,
 
 bool Parser::ParseType(FieldDescriptorProto::Type* type,
                        std::string* type_name) {
+  const std::string& text = input_->current().text;
+  if (text == "float16" || text == "float8") {
+    AddError("\"" + text + "\" is not supported.");
+    return false;
+  }
   const auto& type_names_table = GetTypeNameTable();
-  auto iter = type_names_table.find(input_->current().text);
+  auto iter = type_names_table.find(text);
   if (iter != type_names_table.end()) {
     *type = iter->second;
     input_->Next();

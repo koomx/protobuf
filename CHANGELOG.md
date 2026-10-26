@@ -2,6 +2,18 @@
 
 新任务加在最上面，一节一件事。步骤做完后，把状态改成完成，并写上实际结果。未做的步骤保持未做。
 
+## 重排 FieldType 和 FieldCppType
+
+日期：2026-10-26
+
+编号从 1 连续排。0 留给错误。`FLOAT16`、`FLOAT8` 写进枚举，解析这两个名字时报不支持。`fixed32`、`fixed64`、`sfixed32`、`sfixed64`、`sint32`、`sint64` 留在末尾，这一节不删。不加 `MAP`，不加 `LIST`。
+
+| 步骤 | 内容 | 状态 | 完成效果 |
+| --- | --- | --- | --- |
+| 1 | `FieldType`：1 BOOL，2 INT8，3 UINT8，4 INT16，5 UINT16，6 INT32，7 UINT32，8 INT64，9 UINT64，10 FLOAT，11 FLOAT16，12 FLOAT8，13 DOUBLE，14 ENUM，15 MESSAGE，16 STRING，17 BYTES，18 FIXED32，19 FIXED64，20 SFIXED32，21 SFIXED64，22 SINT32，23 SINT64。`FieldCppType` 同样排到 STRING = 16，那六个字段类型仍映射到原有的 cpp 类型。`descriptor.shark`、`type.shark` 和 IDE 副本用同一套编号。索引表按新编号重排。解析器拒绝 `float16`、`float8` | 完成 | `kMaxFieldType` 是 23，`kMaxFieldCppType` 是 16。`float` 仍是 4 字节定长，`double` 仍是 8 字节定长 |
+| 2 | 库里的 `.skp` 按新编号重新生成 | 完成 | `sharkc` 已用新编号重新生成 `descriptor.skp`、`plugin.skp`、`shark/types/*.skp` |
+| 3 | 编译测试并跑 `ctest` | 完成 | 测试已通过 |
+
 ## IDE 插件适配 list
 
 日期：2026-10-26

@@ -58,7 +58,7 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2ffield_5fmask_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\034shark/types/field_mask.shark\022\005shark\"\032\n"
-  "\tFieldMask\022\r\n\005paths\030\001 \003(\tB7Z2google.gola"
+  "\tFieldMask\022\r\n\005paths\030\001 \003(\020B7Z2google.gola"
   "ng.org/protobuf/types/known/fieldmaskpb\370"
   "\001\001"
   ;

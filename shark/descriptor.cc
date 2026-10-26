@@ -804,74 +804,78 @@ namespace shark {
         FieldDescriptor::kTypeToCppTypeMap[kMaxFieldType + 1] = {
             static_cast<FieldCppType>(0), // 0 is reserved for errors
 
-            FieldCppType::DOUBLE, // FieldType::DOUBLE
-            FieldCppType::FLOAT, // FieldType::FLOAT
-            FieldCppType::INT64, // FieldType::INT64
-            FieldCppType::UINT64, // FieldType::UINT64
-            FieldCppType::INT32, // FieldType::INT32
-            FieldCppType::UINT64, // FieldType::FIXED64
-            FieldCppType::UINT32, // FieldType::FIXED32
             FieldCppType::BOOL, // FieldType::BOOL
-            FieldCppType::STRING, // FieldType::STRING
-            static_cast<FieldCppType>(0), // 10 is unused
-            FieldCppType::MESSAGE, // FieldType::MESSAGE
-            FieldCppType::STRING, // FieldType::BYTES
-            FieldCppType::UINT32, // FieldType::UINT32
-            FieldCppType::ENUM, // FieldType::ENUM
-            FieldCppType::INT32, // FieldType::SFIXED32
-            FieldCppType::INT64, // FieldType::SFIXED64
-            FieldCppType::INT32, // FieldType::SINT32
-            FieldCppType::INT64, // FieldType::SINT64
             FieldCppType::INT8, // FieldType::INT8
             FieldCppType::UINT8, // FieldType::UINT8
             FieldCppType::INT16, // FieldType::INT16
             FieldCppType::UINT16, // FieldType::UINT16
+            FieldCppType::INT32, // FieldType::INT32
+            FieldCppType::UINT32, // FieldType::UINT32
+            FieldCppType::INT64, // FieldType::INT64
+            FieldCppType::UINT64, // FieldType::UINT64
+            FieldCppType::FLOAT, // FieldType::FLOAT
+            FieldCppType::FLOAT16, // FieldType::FLOAT16
+            FieldCppType::FLOAT8, // FieldType::FLOAT8
+            FieldCppType::DOUBLE, // FieldType::DOUBLE
+            FieldCppType::ENUM, // FieldType::ENUM
+            FieldCppType::MESSAGE, // FieldType::MESSAGE
+            FieldCppType::STRING, // FieldType::STRING
+            FieldCppType::STRING, // FieldType::BYTES
+            FieldCppType::UINT32, // FieldType::FIXED32
+            FieldCppType::UINT64, // FieldType::FIXED64
+            FieldCppType::INT32, // FieldType::SFIXED32
+            FieldCppType::INT64, // FieldType::SFIXED64
+            FieldCppType::INT32, // FieldType::SINT32
+            FieldCppType::INT64, // FieldType::SINT64
         };
 
     const char* const FieldDescriptor::kTypeToName[kMaxFieldType + 1] = {
         "ERROR", // 0 is reserved for errors
 
-        "double", // FieldType::DOUBLE
-        "float", // FieldType::FLOAT
-        "int64", // FieldType::INT64
-        "uint64", // FieldType::UINT64
-        "int32", // FieldType::INT32
-        "fixed64", // FieldType::FIXED64
-        "fixed32", // FieldType::FIXED32
         "bool", // FieldType::BOOL
-        "string", // FieldType::STRING
-        "ERROR", // 10 is unused
-        "message", // FieldType::MESSAGE
-        "bytes", // FieldType::BYTES
-        "uint32", // FieldType::UINT32
-        "enum", // FieldType::ENUM
-        "sfixed32", // FieldType::SFIXED32
-        "sfixed64", // FieldType::SFIXED64
-        "sint32", // FieldType::SINT32
-        "sint64", // FieldType::SINT64
         "int8", // FieldType::INT8
         "uint8", // FieldType::UINT8
         "int16", // FieldType::INT16
         "uint16", // FieldType::UINT16
+        "int32", // FieldType::INT32
+        "uint32", // FieldType::UINT32
+        "int64", // FieldType::INT64
+        "uint64", // FieldType::UINT64
+        "float", // FieldType::FLOAT
+        "float16", // FieldType::FLOAT16
+        "float8", // FieldType::FLOAT8
+        "double", // FieldType::DOUBLE
+        "enum", // FieldType::ENUM
+        "message", // FieldType::MESSAGE
+        "string", // FieldType::STRING
+        "bytes", // FieldType::BYTES
+        "fixed32", // FieldType::FIXED32
+        "fixed64", // FieldType::FIXED64
+        "sfixed32", // FieldType::SFIXED32
+        "sfixed64", // FieldType::SFIXED64
+        "sint32", // FieldType::SINT32
+        "sint64", // FieldType::SINT64
     };
 
     const char* const FieldDescriptor::kCppTypeToName[kMaxFieldCppType + 1] = {
         "ERROR", // 0 is reserved for errors
 
-        "int32", // FieldCppType::INT32
-        "int64", // FieldCppType::INT64
-        "uint32", // FieldCppType::UINT32
-        "uint64", // FieldCppType::UINT64
-        "double", // FieldCppType::DOUBLE
-        "float", // FieldCppType::FLOAT
         "bool", // FieldCppType::BOOL
-        "enum", // FieldCppType::ENUM
-        "string", // FieldCppType::STRING
-        "message", // FieldCppType::MESSAGE
         "int8", // FieldCppType::INT8
         "uint8", // FieldCppType::UINT8
         "int16", // FieldCppType::INT16
         "uint16", // FieldCppType::UINT16
+        "int32", // FieldCppType::INT32
+        "uint32", // FieldCppType::UINT32
+        "int64", // FieldCppType::INT64
+        "uint64", // FieldCppType::UINT64
+        "float", // FieldCppType::FLOAT
+        "float16", // FieldCppType::FLOAT16
+        "float8", // FieldCppType::FLOAT8
+        "double", // FieldCppType::DOUBLE
+        "enum", // FieldCppType::ENUM
+        "message", // FieldCppType::MESSAGE
+        "string", // FieldCppType::STRING
     };
 
     const char* const FieldDescriptor::kLabelToName[kMaxFieldLabel + 1] = {

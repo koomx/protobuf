@@ -76,27 +76,29 @@ namespace shark::internal {
 // Wire-format field type. Numbers match FieldType. Kept separate so the lite
 // runtime does not depend on the descriptor.
 enum class WireFormatLiteFieldType : uint8_t {
-  TYPE_DOUBLE = 1,
-  TYPE_FLOAT = 2,
-  TYPE_INT64 = 3,
-  TYPE_UINT64 = 4,
-  TYPE_INT32 = 5,
-  TYPE_FIXED64 = 6,
-  TYPE_FIXED32 = 7,
-  TYPE_BOOL = 8,
-  TYPE_STRING = 9,
-  TYPE_MESSAGE = 11,
-  TYPE_BYTES = 12,
-  TYPE_UINT32 = 13,
+  TYPE_BOOL = 1,
+  TYPE_INT8 = 2,
+  TYPE_UINT8 = 3,
+  TYPE_INT16 = 4,
+  TYPE_UINT16 = 5,
+  TYPE_INT32 = 6,
+  TYPE_UINT32 = 7,
+  TYPE_INT64 = 8,
+  TYPE_UINT64 = 9,
+  TYPE_FLOAT = 10,
+  TYPE_FLOAT16 = 11,
+  TYPE_FLOAT8 = 12,
+  TYPE_DOUBLE = 13,
   TYPE_ENUM = 14,
-  TYPE_SFIXED32 = 15,
-  TYPE_SFIXED64 = 16,
-  TYPE_SINT32 = 17,
-  TYPE_SINT64 = 18,
-  TYPE_INT8 = 19,
-  TYPE_UINT8 = 20,
-  TYPE_INT16 = 21,
-  TYPE_UINT16 = 22,
+  TYPE_MESSAGE = 15,
+  TYPE_STRING = 16,
+  TYPE_BYTES = 17,
+  TYPE_FIXED32 = 18,
+  TYPE_FIXED64 = 19,
+  TYPE_SFIXED32 = 20,
+  TYPE_SFIXED64 = 21,
+  TYPE_SINT32 = 22,
+  TYPE_SINT64 = 23,
 };
 
 // This class is for internal use by the protocol buffer library and by
@@ -133,25 +135,27 @@ class SHARK_EXPORT WireFormatLite {
   };
 
   static constexpr int MAX_FIELD_TYPE =
-      static_cast<int>(WireFormatLiteFieldType::TYPE_UINT16);
+      static_cast<int>(WireFormatLiteFieldType::TYPE_SINT64);
 
   // Lite alternative to FieldCppType.  Must be kept in sync.
   enum CppType {
-    CPPTYPE_INT32 = 1,
-    CPPTYPE_INT64 = 2,
-    CPPTYPE_UINT32 = 3,
-    CPPTYPE_UINT64 = 4,
-    CPPTYPE_DOUBLE = 5,
-    CPPTYPE_FLOAT = 6,
-    CPPTYPE_BOOL = 7,
-    CPPTYPE_ENUM = 8,
-    CPPTYPE_STRING = 9,
-    CPPTYPE_MESSAGE = 10,
-    CPPTYPE_INT8 = 11,
-    CPPTYPE_UINT8 = 12,
-    CPPTYPE_INT16 = 13,
-    CPPTYPE_UINT16 = 14,
-    MAX_CPPTYPE = 14,
+    CPPTYPE_BOOL = 1,
+    CPPTYPE_INT8 = 2,
+    CPPTYPE_UINT8 = 3,
+    CPPTYPE_INT16 = 4,
+    CPPTYPE_UINT16 = 5,
+    CPPTYPE_INT32 = 6,
+    CPPTYPE_UINT32 = 7,
+    CPPTYPE_INT64 = 8,
+    CPPTYPE_UINT64 = 9,
+    CPPTYPE_FLOAT = 10,
+    CPPTYPE_FLOAT16 = 11,
+    CPPTYPE_FLOAT8 = 12,
+    CPPTYPE_DOUBLE = 13,
+    CPPTYPE_ENUM = 14,
+    CPPTYPE_MESSAGE = 15,
+    CPPTYPE_STRING = 16,
+    MAX_CPPTYPE = 16,
   };
 
   // Helper method to get the CppType for a particular Type.

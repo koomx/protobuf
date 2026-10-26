@@ -74,50 +74,54 @@ namespace shark {
 
 enum class Field_Kind : int32_t {
   TYPE_UNKNOWN = 0,
-  TYPE_DOUBLE = 1,
-  TYPE_FLOAT = 2,
-  TYPE_INT64 = 3,
-  TYPE_UINT64 = 4,
-  TYPE_INT32 = 5,
-  TYPE_FIXED64 = 6,
-  TYPE_FIXED32 = 7,
-  TYPE_BOOL = 8,
-  TYPE_STRING = 9,
-  TYPE_MESSAGE = 11,
-  TYPE_BYTES = 12,
-  TYPE_UINT32 = 13,
+  TYPE_BOOL = 1,
+  TYPE_INT8 = 2,
+  TYPE_UINT8 = 3,
+  TYPE_INT16 = 4,
+  TYPE_UINT16 = 5,
+  TYPE_INT32 = 6,
+  TYPE_UINT32 = 7,
+  TYPE_INT64 = 8,
+  TYPE_UINT64 = 9,
+  TYPE_FLOAT = 10,
+  TYPE_FLOAT16 = 11,
+  TYPE_FLOAT8 = 12,
+  TYPE_DOUBLE = 13,
   TYPE_ENUM = 14,
-  TYPE_SFIXED32 = 15,
-  TYPE_SFIXED64 = 16,
-  TYPE_SINT32 = 17,
-  TYPE_SINT64 = 18,
-  TYPE_INT8 = 19,
-  TYPE_UINT8 = 20,
-  TYPE_INT16 = 21,
-  TYPE_UINT16 = 22
+  TYPE_MESSAGE = 15,
+  TYPE_STRING = 16,
+  TYPE_BYTES = 17,
+  TYPE_FIXED32 = 18,
+  TYPE_FIXED64 = 19,
+  TYPE_SFIXED32 = 20,
+  TYPE_SFIXED64 = 21,
+  TYPE_SINT32 = 22,
+  TYPE_SINT64 = 23
 };
 constexpr Field_Kind Field_Kind_TYPE_UNKNOWN = Field_Kind::TYPE_UNKNOWN;
-constexpr Field_Kind Field_Kind_TYPE_DOUBLE = Field_Kind::TYPE_DOUBLE;
-constexpr Field_Kind Field_Kind_TYPE_FLOAT = Field_Kind::TYPE_FLOAT;
-constexpr Field_Kind Field_Kind_TYPE_INT64 = Field_Kind::TYPE_INT64;
-constexpr Field_Kind Field_Kind_TYPE_UINT64 = Field_Kind::TYPE_UINT64;
-constexpr Field_Kind Field_Kind_TYPE_INT32 = Field_Kind::TYPE_INT32;
-constexpr Field_Kind Field_Kind_TYPE_FIXED64 = Field_Kind::TYPE_FIXED64;
-constexpr Field_Kind Field_Kind_TYPE_FIXED32 = Field_Kind::TYPE_FIXED32;
 constexpr Field_Kind Field_Kind_TYPE_BOOL = Field_Kind::TYPE_BOOL;
-constexpr Field_Kind Field_Kind_TYPE_STRING = Field_Kind::TYPE_STRING;
-constexpr Field_Kind Field_Kind_TYPE_MESSAGE = Field_Kind::TYPE_MESSAGE;
-constexpr Field_Kind Field_Kind_TYPE_BYTES = Field_Kind::TYPE_BYTES;
-constexpr Field_Kind Field_Kind_TYPE_UINT32 = Field_Kind::TYPE_UINT32;
-constexpr Field_Kind Field_Kind_TYPE_ENUM = Field_Kind::TYPE_ENUM;
-constexpr Field_Kind Field_Kind_TYPE_SFIXED32 = Field_Kind::TYPE_SFIXED32;
-constexpr Field_Kind Field_Kind_TYPE_SFIXED64 = Field_Kind::TYPE_SFIXED64;
-constexpr Field_Kind Field_Kind_TYPE_SINT32 = Field_Kind::TYPE_SINT32;
-constexpr Field_Kind Field_Kind_TYPE_SINT64 = Field_Kind::TYPE_SINT64;
 constexpr Field_Kind Field_Kind_TYPE_INT8 = Field_Kind::TYPE_INT8;
 constexpr Field_Kind Field_Kind_TYPE_UINT8 = Field_Kind::TYPE_UINT8;
 constexpr Field_Kind Field_Kind_TYPE_INT16 = Field_Kind::TYPE_INT16;
 constexpr Field_Kind Field_Kind_TYPE_UINT16 = Field_Kind::TYPE_UINT16;
+constexpr Field_Kind Field_Kind_TYPE_INT32 = Field_Kind::TYPE_INT32;
+constexpr Field_Kind Field_Kind_TYPE_UINT32 = Field_Kind::TYPE_UINT32;
+constexpr Field_Kind Field_Kind_TYPE_INT64 = Field_Kind::TYPE_INT64;
+constexpr Field_Kind Field_Kind_TYPE_UINT64 = Field_Kind::TYPE_UINT64;
+constexpr Field_Kind Field_Kind_TYPE_FLOAT = Field_Kind::TYPE_FLOAT;
+constexpr Field_Kind Field_Kind_TYPE_FLOAT16 = Field_Kind::TYPE_FLOAT16;
+constexpr Field_Kind Field_Kind_TYPE_FLOAT8 = Field_Kind::TYPE_FLOAT8;
+constexpr Field_Kind Field_Kind_TYPE_DOUBLE = Field_Kind::TYPE_DOUBLE;
+constexpr Field_Kind Field_Kind_TYPE_ENUM = Field_Kind::TYPE_ENUM;
+constexpr Field_Kind Field_Kind_TYPE_MESSAGE = Field_Kind::TYPE_MESSAGE;
+constexpr Field_Kind Field_Kind_TYPE_STRING = Field_Kind::TYPE_STRING;
+constexpr Field_Kind Field_Kind_TYPE_BYTES = Field_Kind::TYPE_BYTES;
+constexpr Field_Kind Field_Kind_TYPE_FIXED32 = Field_Kind::TYPE_FIXED32;
+constexpr Field_Kind Field_Kind_TYPE_FIXED64 = Field_Kind::TYPE_FIXED64;
+constexpr Field_Kind Field_Kind_TYPE_SFIXED32 = Field_Kind::TYPE_SFIXED32;
+constexpr Field_Kind Field_Kind_TYPE_SFIXED64 = Field_Kind::TYPE_SFIXED64;
+constexpr Field_Kind Field_Kind_TYPE_SINT32 = Field_Kind::TYPE_SINT32;
+constexpr Field_Kind Field_Kind_TYPE_SINT64 = Field_Kind::TYPE_SINT64;
 constexpr int32_t Field_Kind_to_underlying(Field_Kind value) {
   return static_cast<int32_t>(value);
 }
@@ -129,7 +133,7 @@ inline bool Field_Kind_FitsWire(::uint64_t value) {
 }
 bool Field_Kind_IsValid(int value);
 constexpr Field_Kind Field_Kind_Kind_MIN = Field_Kind::TYPE_UNKNOWN;
-constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind::TYPE_UINT16;
+constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind::TYPE_SINT64;
 constexpr int Field_Kind_Kind_ARRAYSIZE = Field_Kind_to_underlying(Field_Kind_Kind_MAX) + 1;
 
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor();
@@ -617,40 +621,8 @@ class Field final :
   typedef Field_Kind Kind;
   static constexpr Kind TYPE_UNKNOWN =
     Field_Kind::TYPE_UNKNOWN;
-  static constexpr Kind TYPE_DOUBLE =
-    Field_Kind::TYPE_DOUBLE;
-  static constexpr Kind TYPE_FLOAT =
-    Field_Kind::TYPE_FLOAT;
-  static constexpr Kind TYPE_INT64 =
-    Field_Kind::TYPE_INT64;
-  static constexpr Kind TYPE_UINT64 =
-    Field_Kind::TYPE_UINT64;
-  static constexpr Kind TYPE_INT32 =
-    Field_Kind::TYPE_INT32;
-  static constexpr Kind TYPE_FIXED64 =
-    Field_Kind::TYPE_FIXED64;
-  static constexpr Kind TYPE_FIXED32 =
-    Field_Kind::TYPE_FIXED32;
   static constexpr Kind TYPE_BOOL =
     Field_Kind::TYPE_BOOL;
-  static constexpr Kind TYPE_STRING =
-    Field_Kind::TYPE_STRING;
-  static constexpr Kind TYPE_MESSAGE =
-    Field_Kind::TYPE_MESSAGE;
-  static constexpr Kind TYPE_BYTES =
-    Field_Kind::TYPE_BYTES;
-  static constexpr Kind TYPE_UINT32 =
-    Field_Kind::TYPE_UINT32;
-  static constexpr Kind TYPE_ENUM =
-    Field_Kind::TYPE_ENUM;
-  static constexpr Kind TYPE_SFIXED32 =
-    Field_Kind::TYPE_SFIXED32;
-  static constexpr Kind TYPE_SFIXED64 =
-    Field_Kind::TYPE_SFIXED64;
-  static constexpr Kind TYPE_SINT32 =
-    Field_Kind::TYPE_SINT32;
-  static constexpr Kind TYPE_SINT64 =
-    Field_Kind::TYPE_SINT64;
   static constexpr Kind TYPE_INT8 =
     Field_Kind::TYPE_INT8;
   static constexpr Kind TYPE_UINT8 =
@@ -659,6 +631,42 @@ class Field final :
     Field_Kind::TYPE_INT16;
   static constexpr Kind TYPE_UINT16 =
     Field_Kind::TYPE_UINT16;
+  static constexpr Kind TYPE_INT32 =
+    Field_Kind::TYPE_INT32;
+  static constexpr Kind TYPE_UINT32 =
+    Field_Kind::TYPE_UINT32;
+  static constexpr Kind TYPE_INT64 =
+    Field_Kind::TYPE_INT64;
+  static constexpr Kind TYPE_UINT64 =
+    Field_Kind::TYPE_UINT64;
+  static constexpr Kind TYPE_FLOAT =
+    Field_Kind::TYPE_FLOAT;
+  static constexpr Kind TYPE_FLOAT16 =
+    Field_Kind::TYPE_FLOAT16;
+  static constexpr Kind TYPE_FLOAT8 =
+    Field_Kind::TYPE_FLOAT8;
+  static constexpr Kind TYPE_DOUBLE =
+    Field_Kind::TYPE_DOUBLE;
+  static constexpr Kind TYPE_ENUM =
+    Field_Kind::TYPE_ENUM;
+  static constexpr Kind TYPE_MESSAGE =
+    Field_Kind::TYPE_MESSAGE;
+  static constexpr Kind TYPE_STRING =
+    Field_Kind::TYPE_STRING;
+  static constexpr Kind TYPE_BYTES =
+    Field_Kind::TYPE_BYTES;
+  static constexpr Kind TYPE_FIXED32 =
+    Field_Kind::TYPE_FIXED32;
+  static constexpr Kind TYPE_FIXED64 =
+    Field_Kind::TYPE_FIXED64;
+  static constexpr Kind TYPE_SFIXED32 =
+    Field_Kind::TYPE_SFIXED32;
+  static constexpr Kind TYPE_SFIXED64 =
+    Field_Kind::TYPE_SFIXED64;
+  static constexpr Kind TYPE_SINT32 =
+    Field_Kind::TYPE_SINT32;
+  static constexpr Kind TYPE_SINT64 =
+    Field_Kind::TYPE_SINT64;
   static inline bool Kind_IsValid(int value) {
     return Field_Kind_IsValid(value);
   }

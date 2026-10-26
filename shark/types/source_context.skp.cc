@@ -60,7 +60,7 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2fsource_5fcontext_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n shark/types/source_context.shark\022\005shar"
-  "k\"\"\n\rSourceContext\022\021\n\tfile_name\030\001 \001(\tB8Z"
+  "k\"\"\n\rSourceContext\022\021\n\tfile_name\030\001 \001(\020B8Z"
   "6google.golang.org/protobuf/types/known/"
   "sourcecontextpb"
   ;

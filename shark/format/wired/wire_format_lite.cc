@@ -72,55 +72,57 @@ const WireFormatLite::CppType
     WireFormatLite::kFieldTypeToCppTypeMap[MAX_FIELD_TYPE + 1] = {
         static_cast<CppType>(0),  // 0 is reserved for errors
 
-        CPPTYPE_DOUBLE,   // TYPE_DOUBLE
-        CPPTYPE_FLOAT,    // TYPE_FLOAT
-        CPPTYPE_INT64,    // TYPE_INT64
-        CPPTYPE_UINT64,   // TYPE_UINT64
-        CPPTYPE_INT32,    // TYPE_INT32
-        CPPTYPE_UINT64,   // TYPE_FIXED64
-        CPPTYPE_UINT32,   // TYPE_FIXED32
         CPPTYPE_BOOL,     // TYPE_BOOL
-        CPPTYPE_STRING,   // TYPE_STRING
-        static_cast<CppType>(0),  // 10 is unused
-        CPPTYPE_MESSAGE,  // TYPE_MESSAGE
-        CPPTYPE_STRING,   // TYPE_BYTES
-        CPPTYPE_UINT32,   // TYPE_UINT32
-        CPPTYPE_ENUM,     // TYPE_ENUM
-        CPPTYPE_INT32,    // TYPE_SFIXED32
-        CPPTYPE_INT64,    // TYPE_SFIXED64
-        CPPTYPE_INT32,    // TYPE_SINT32
-        CPPTYPE_INT64,    // TYPE_SINT64
         CPPTYPE_INT8,     // TYPE_INT8
         CPPTYPE_UINT8,    // TYPE_UINT8
         CPPTYPE_INT16,    // TYPE_INT16
         CPPTYPE_UINT16,   // TYPE_UINT16
+        CPPTYPE_INT32,    // TYPE_INT32
+        CPPTYPE_UINT32,   // TYPE_UINT32
+        CPPTYPE_INT64,    // TYPE_INT64
+        CPPTYPE_UINT64,   // TYPE_UINT64
+        CPPTYPE_FLOAT,    // TYPE_FLOAT
+        CPPTYPE_FLOAT16,  // TYPE_FLOAT16
+        CPPTYPE_FLOAT8,   // TYPE_FLOAT8
+        CPPTYPE_DOUBLE,   // TYPE_DOUBLE
+        CPPTYPE_ENUM,     // TYPE_ENUM
+        CPPTYPE_MESSAGE,  // TYPE_MESSAGE
+        CPPTYPE_STRING,   // TYPE_STRING
+        CPPTYPE_STRING,   // TYPE_BYTES
+        CPPTYPE_UINT32,   // TYPE_FIXED32
+        CPPTYPE_UINT64,   // TYPE_FIXED64
+        CPPTYPE_INT32,    // TYPE_SFIXED32
+        CPPTYPE_INT64,    // TYPE_SFIXED64
+        CPPTYPE_INT32,    // TYPE_SINT32
+        CPPTYPE_INT64,    // TYPE_SINT64
 };
 
 const WireFormatLite::WireType
     WireFormatLite::kWireTypeForFieldType[MAX_FIELD_TYPE + 1] = {
         static_cast<WireFormatLite::WireType>(-1),  // invalid
-        WireFormatLite::WIRETYPE_FIXED64,           // TYPE_DOUBLE
-        WireFormatLite::WIRETYPE_FIXED32,           // TYPE_FLOAT
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT64
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT64
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT32
-        WireFormatLite::WIRETYPE_FIXED64,           // TYPE_FIXED64
-        WireFormatLite::WIRETYPE_FIXED32,           // TYPE_FIXED32
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_BOOL
-        WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_STRING
-        static_cast<WireFormatLite::WireType>(-1),  // 10 is unused
-        WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_MESSAGE
-        WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_BYTES
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT32
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_ENUM
-        WireFormatLite::WIRETYPE_FIXED32,           // TYPE_SFIXED32
-        WireFormatLite::WIRETYPE_FIXED64,           // TYPE_SFIXED64
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_SINT32
-        WireFormatLite::WIRETYPE_VARINT,            // TYPE_SINT64
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT8
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT8
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT16
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT16
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT32
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT32
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_INT64
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT64
+        WireFormatLite::WIRETYPE_FIXED32,           // TYPE_FLOAT
+        static_cast<WireFormatLite::WireType>(-1),  // TYPE_FLOAT16
+        static_cast<WireFormatLite::WireType>(-1),  // TYPE_FLOAT8
+        WireFormatLite::WIRETYPE_FIXED64,           // TYPE_DOUBLE
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_ENUM
+        WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_MESSAGE
+        WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_STRING
+        WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_BYTES
+        WireFormatLite::WIRETYPE_FIXED32,           // TYPE_FIXED32
+        WireFormatLite::WIRETYPE_FIXED64,           // TYPE_FIXED64
+        WireFormatLite::WIRETYPE_FIXED32,           // TYPE_SFIXED32
+        WireFormatLite::WIRETYPE_FIXED64,           // TYPE_SFIXED64
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_SINT32
+        WireFormatLite::WIRETYPE_VARINT,            // TYPE_SINT64
 };
 
 bool WireFormatLite::SkipField(io::CodedInputStream* input, uint32_t tag) {

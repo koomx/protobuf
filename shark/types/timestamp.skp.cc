@@ -63,8 +63,8 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2ftimestamp_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\033shark/types/timestamp.shark\022\005shark\"+\n\t"
-  "Timestamp\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001("
-  "\005B7Z2google.golang.org/protobuf/types/kn"
+  "Timestamp\022\017\n\007seconds\030\001 \001(\010\022\r\n\005nanos\030\002 \001("
+  "\006B7Z2google.golang.org/protobuf/types/kn"
   "own/timestamppb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2ftimestamp_2eshark_once;

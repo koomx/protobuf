@@ -947,149 +947,150 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2fdescriptor_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\026shark/descriptor.shark\022\005shark\"=\n\021FileD"
-  "escriptorSet\022(\n\004file\030\001 \003(\0132\032.shark.FileD"
+  "escriptorSet\022(\n\004file\030\001 \003(\0172\032.shark.FileD"
   "escriptorProto\"\237\003\n\023FileDescriptorProto\022\014"
-  "\n\004name\030\001 \001(\t\022\017\n\007package\030\002 \001(\t\022\022\n\ndepende"
-  "ncy\030\003 \003(\t\022\031\n\021public_dependency\030\n \003(\005\022\027\n\017"
-  "weak_dependency\030\013 \003(\005\022,\n\014message_type\030\004 "
-  "\003(\0132\026.shark.DescriptorProto\022-\n\tenum_type"
-  "\030\005 \003(\0132\032.shark.EnumDescriptorProto\022.\n\007se"
-  "rvice\030\006 \003(\0132\035.shark.ServiceDescriptorPro"
-  "to\022.\n\textension\030\007 \003(\0132\033.shark.FieldDescr"
-  "iptorProto\022#\n\007options\030\010 \001(\0132\022.shark.File"
-  "Options\022/\n\020source_code_info\030\t \001(\0132\025.shar"
-  "k.SourceCodeInfo\022\016\n\006syntax\030\014 \001(\t\"\317\004\n\017Des"
-  "criptorProto\022\014\n\004name\030\001 \001(\t\022*\n\005field\030\002 \003("
-  "\0132\033.shark.FieldDescriptorProto\022.\n\textens"
-  "ion\030\006 \003(\0132\033.shark.FieldDescriptorProto\022+"
-  "\n\013nested_type\030\003 \003(\0132\026.shark.DescriptorPr"
-  "oto\022-\n\tenum_type\030\004 \003(\0132\032.shark.EnumDescr"
-  "iptorProto\022>\n\017extension_range\030\005 \003(\0132%.sh"
+  "\n\004name\030\001 \001(\020\022\017\n\007package\030\002 \001(\020\022\022\n\ndepende"
+  "ncy\030\003 \003(\020\022\031\n\021public_dependency\030\n \003(\006\022\027\n\017"
+  "weak_dependency\030\013 \003(\006\022,\n\014message_type\030\004 "
+  "\003(\0172\026.shark.DescriptorProto\022-\n\tenum_type"
+  "\030\005 \003(\0172\032.shark.EnumDescriptorProto\022.\n\007se"
+  "rvice\030\006 \003(\0172\035.shark.ServiceDescriptorPro"
+  "to\022.\n\textension\030\007 \003(\0172\033.shark.FieldDescr"
+  "iptorProto\022#\n\007options\030\010 \001(\0172\022.shark.File"
+  "Options\022/\n\020source_code_info\030\t \001(\0172\025.shar"
+  "k.SourceCodeInfo\022\016\n\006syntax\030\014 \001(\020\"\317\004\n\017Des"
+  "criptorProto\022\014\n\004name\030\001 \001(\020\022*\n\005field\030\002 \003("
+  "\0172\033.shark.FieldDescriptorProto\022.\n\textens"
+  "ion\030\006 \003(\0172\033.shark.FieldDescriptorProto\022+"
+  "\n\013nested_type\030\003 \003(\0172\026.shark.DescriptorPr"
+  "oto\022-\n\tenum_type\030\004 \003(\0172\032.shark.EnumDescr"
+  "iptorProto\022>\n\017extension_range\030\005 \003(\0172%.sh"
   "ark.DescriptorProto.ExtensionRange\022/\n\non"
-  "eof_decl\030\010 \003(\0132\033.shark.OneofDescriptorPr"
-  "oto\022&\n\007options\030\007 \001(\0132\025.shark.MessageOpti"
-  "ons\022<\n\016reserved_range\030\t \003(\0132$.shark.Desc"
+  "eof_decl\030\010 \003(\0172\033.shark.OneofDescriptorPr"
+  "oto\022&\n\007options\030\007 \001(\0172\025.shark.MessageOpti"
+  "ons\022<\n\016reserved_range\030\t \003(\0172$.shark.Desc"
   "riptorProto.ReservedRange\022\025\n\rreserved_na"
-  "me\030\n \003(\t\032[\n\016ExtensionRange\022\r\n\005start\030\001 \001("
-  "\005\022\013\n\003end\030\002 \001(\005\022-\n\007options\030\003 \001(\0132\034.shark."
+  "me\030\n \003(\020\032[\n\016ExtensionRange\022\r\n\005start\030\001 \001("
+  "\006\022\013\n\003end\030\002 \001(\006\022-\n\007options\030\003 \001(\0172\034.shark."
   "ExtensionRangeOptions\032+\n\rReservedRange\022\r"
-  "\n\005start\030\001 \001(\005\022\013\n\003end\030\002 \001(\005\"]\n\025ExtensionR"
+  "\n\005start\030\001 \001(\006\022\013\n\003end\030\002 \001(\006\"]\n\025ExtensionR"
   "angeOptions\0229\n\024uninterpreted_option\030\347\007 \003"
-  "(\0132\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200"
-  "\002\"\347\005\n\024FieldDescriptorProto\022\014\n\004name\030\001 \001(\t"
-  "\022\016\n\006number\030\003 \001(\005\0220\n\005label\030\004 \001(\0162!.shark."
+  "(\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200"
+  "\002\"\212\006\n\024FieldDescriptorProto\022\014\n\004name\030\001 \001(\020"
+  "\022\016\n\006number\030\003 \001(\006\0220\n\005label\030\004 \001(\0162!.shark."
   "FieldDescriptorProto.Label\022.\n\004type\030\005 \001(\016"
   "2 .shark.FieldDescriptorProto.Type\022\021\n\tty"
-  "pe_name\030\006 \001(\t\022\020\n\010extendee\030\002 \001(\t\022\025\n\rdefau"
-  "lt_value\030\007 \001(\t\022\023\n\013oneof_index\030\t \001(\005\022\021\n\tj"
-  "son_name\030\n \001(\t\022$\n\007options\030\010 \001(\0132\023.shark."
-  "FieldOptions\022\027\n\017proto3_optional\030\021 \001(\010\"\346\002"
-  "\n\004Type\022\017\n\013TYPE_DOUBLE\020\001\022\016\n\nTYPE_FLOAT\020\002\022"
-  "\016\n\nTYPE_INT64\020\003\022\017\n\013TYPE_UINT64\020\004\022\016\n\nTYPE"
-  "_INT32\020\005\022\020\n\014TYPE_FIXED64\020\006\022\020\n\014TYPE_FIXED"
-  "32\020\007\022\r\n\tTYPE_BOOL\020\010\022\017\n\013TYPE_STRING\020\t\022\020\n\014"
-  "TYPE_MESSAGE\020\013\022\016\n\nTYPE_BYTES\020\014\022\017\n\013TYPE_U"
-  "INT32\020\r\022\r\n\tTYPE_ENUM\020\016\022\021\n\rTYPE_SFIXED32\020"
-  "\017\022\021\n\rTYPE_SFIXED64\020\020\022\017\n\013TYPE_SINT32\020\021\022\017\n"
-  "\013TYPE_SINT64\020\022\022\r\n\tTYPE_INT8\020\023\022\016\n\nTYPE_UI"
-  "NT8\020\024\022\016\n\nTYPE_INT16\020\025\022\017\n\013TYPE_UINT16\020\026\"C"
-  "\n\005Label\022\022\n\016LABEL_OPTIONAL\020\001\022\022\n\016LABEL_REQ"
-  "UIRED\020\002\022\022\n\016LABEL_REPEATED\020\003\"J\n\024OneofDesc"
-  "riptorProto\022\014\n\004name\030\001 \001(\t\022$\n\007options\030\002 \001"
-  "(\0132\023.shark.OneofOptions\"\206\002\n\023EnumDescript"
-  "orProto\022\014\n\004name\030\001 \001(\t\022.\n\005value\030\002 \003(\0132\037.s"
-  "hark.EnumValueDescriptorProto\022#\n\007options"
-  "\030\003 \001(\0132\022.shark.EnumOptions\022D\n\016reserved_r"
-  "ange\030\004 \003(\0132,.shark.EnumDescriptorProto.E"
-  "numReservedRange\022\025\n\rreserved_name\030\005 \003(\t\032"
-  "/\n\021EnumReservedRange\022\r\n\005start\030\001 \001(\005\022\013\n\003e"
-  "nd\030\002 \001(\005\"b\n\030EnumValueDescriptorProto\022\014\n\004"
-  "name\030\001 \001(\t\022\016\n\006number\030\002 \001(\005\022(\n\007options\030\003 "
-  "\001(\0132\027.shark.EnumValueOptions\"|\n\026ServiceD"
-  "escriptorProto\022\014\n\004name\030\001 \001(\t\022,\n\006method\030\002"
-  " \003(\0132\034.shark.MethodDescriptorProto\022&\n\007op"
-  "tions\030\003 \001(\0132\025.shark.ServiceOptions\"\267\001\n\025M"
-  "ethodDescriptorProto\022\014\n\004name\030\001 \001(\t\022\022\n\nin"
-  "put_type\030\002 \001(\t\022\023\n\013output_type\030\003 \001(\t\022%\n\007o"
-  "ptions\030\004 \001(\0132\024.shark.MethodOptions\022\037\n\020cl"
-  "ient_streaming\030\005 \001(\010:\005false\022\037\n\020server_st"
-  "reaming\030\006 \001(\010:\005false\"\276\003\n\013FileOptions\022<\n\014"
-  "optimize_for\030\t \001(\0162\037.shark.FileOptions.O"
-  "ptimizeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\t\022\""
-  "\n\023cc_generic_services\030\020 \001(\010:\005false\022\"\n\023py"
-  "_generic_services\030\022 \001(\010:\005false\022\031\n\ndeprec"
-  "ated\030\027 \001(\010:\005false\022\036\n\020cc_enable_arenas\030\037 "
-  "\001(\010:\004true\0229\n\024uninterpreted_option\030\347\007 \003(\013"
-  "2\032.shark.UninterpretedOption\":\n\014Optimize"
-  "Mode\022\t\n\005SPEED\020\001\022\r\n\tCODE_SIZE\020\002\022\020\n\014LITE_R"
-  "UNTIME\020\003*\t\010\350\007\020\200\200\200\200\002J\004\010\001\020\002J\004\010\010\020\tJ\004\010\n\020\013J\004\010"
-  "\021\020\022J\004\010\024\020\025J\004\010\033\020\034J\004\010$\020%J\004\010%\020&J\004\010&\020\'J\004\010\'\020(J"
-  "\004\010(\020)J\004\010)\020*J\004\010*\020+J\004\010,\020-J\004\010-\020.\"\372\001\n\016Messag"
-  "eOptions\022&\n\027message_set_wire_format\030\001 \001("
-  "\010:\005false\022.\n\037no_standard_descriptor_acces"
-  "sor\030\002 \001(\010:\005false\022\031\n\ndeprecated\030\003 \001(\010:\005fa"
-  "lse\022\021\n\tmap_entry\030\007 \001(\010\0229\n\024uninterpreted_"
-  "option\030\347\007 \003(\0132\032.shark.UninterpretedOptio"
-  "n*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\010\020\tJ\004\010\t"
-  "\020\n\"\240\003\n\014FieldOptions\0220\n\005ctype\030\001 \001(\0162\031.sha"
-  "rk.FieldOptions.CType:\006STRING\022\016\n\006packed\030"
-  "\002 \001(\010\0225\n\006jstype\030\006 \001(\0162\032.shark.FieldOptio"
-  "ns.JSType:\tJS_NORMAL\022\023\n\004lazy\030\005 \001(\010:\005fals"
-  "e\022\036\n\017unverified_lazy\030\017 \001(\010:\005false\022\031\n\ndep"
-  "recated\030\003 \001(\010:\005false\022\023\n\004weak\030\n \001(\010:\005fals"
-  "e\0229\n\024uninterpreted_option\030\347\007 \003(\0132\032.shark"
-  ".UninterpretedOption\"/\n\005CType\022\n\n\006STRING\020"
-  "\000\022\010\n\004CORD\020\001\022\020\n\014STRING_PIECE\020\002\"5\n\006JSType\022"
-  "\r\n\tJS_NORMAL\020\000\022\r\n\tJS_STRING\020\001\022\r\n\tJS_NUMB"
-  "ER\020\002*\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"T\n\014OneofOptions\0229\n"
-  "\024uninterpreted_option\030\347\007 \003(\0132\032.shark.Uni"
-  "nterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\335\001\n\013EnumOpti"
-  "ons\022\023\n\013allow_alias\030\002 \001(\010\022\031\n\ndeprecated\030\003"
-  " \001(\010:\005false\022\036\n\017enable_operator\030\006 \001(\010:\005fa"
-  "lse\0222\n\017underlying_type\030\007 \001(\0162\031.shark.Enu"
-  "mUnderlyingType\0229\n\024uninterpreted_option\030"
-  "\347\007 \003(\0132\032.shark.UninterpretedOption*\t\010\350\007\020"
-  "\200\200\200\200\002J\004\010\005\020\006\"s\n\020EnumValueOptions\022\031\n\ndepre"
-  "cated\030\001 \001(\010:\005false\0229\n\024uninterpreted_opti"
-  "on\030\347\007 \003(\0132\032.shark.UninterpretedOption*\t\010"
-  "\350\007\020\200\200\200\200\002\"q\n\016ServiceOptions\022\031\n\ndeprecated"
-  "\030! \001(\010:\005false\0229\n\024uninterpreted_option\030\347\007"
-  " \003(\0132\032.shark.UninterpretedOption*\t\010\350\007\020\200\200"
-  "\200\200\002\"\231\002\n\rMethodOptions\022\031\n\ndeprecated\030! \001("
-  "\010:\005false\022U\n\021idempotency_level\030\" \001(\0162%.sh"
-  "ark.MethodOptions.IdempotencyLevel:\023IDEM"
-  "POTENCY_UNKNOWN\0229\n\024uninterpreted_option\030"
-  "\347\007 \003(\0132\032.shark.UninterpretedOption\"P\n\020Id"
-  "empotencyLevel\022\027\n\023IDEMPOTENCY_UNKNOWN\020\000\022"
-  "\023\n\017NO_SIDE_EFFECTS\020\001\022\016\n\nIDEMPOTENT\020\002*\t\010\350"
-  "\007\020\200\200\200\200\002\"\224\002\n\023UninterpretedOption\0221\n\004name\030"
-  "\002 \003(\0132#.shark.UninterpretedOption.NamePa"
-  "rt\022\030\n\020identifier_value\030\003 \001(\t\022\032\n\022positive"
-  "_int_value\030\004 \001(\004\022\032\n\022negative_int_value\030\005"
-  " \001(\003\022\024\n\014double_value\030\006 \001(\001\022\024\n\014string_val"
-  "ue\030\007 \001(\014\022\027\n\017aggregate_value\030\010 \001(\t\0323\n\010Nam"
-  "ePart\022\021\n\tname_part\030\001 \002(\t\022\024\n\014is_extension"
-  "\030\002 \002(\010\"\313\001\n\016SourceCodeInfo\0220\n\010location\030\001 "
-  "\003(\0132\036.shark.SourceCodeInfo.Location\032\206\001\n\010"
-  "Location\022\020\n\004path\030\001 \003(\005B\002\020\001\022\020\n\004span\030\002 \003(\005"
-  "B\002\020\001\022\030\n\020leading_comments\030\003 \001(\t\022\031\n\021traili"
-  "ng_comments\030\004 \001(\t\022!\n\031leading_detached_co"
-  "mments\030\006 \003(\t\"\235\001\n\021GeneratedCodeInfo\0227\n\nan"
-  "notation\030\001 \003(\0132#.shark.GeneratedCodeInfo"
-  ".Annotation\032O\n\nAnnotation\022\020\n\004path\030\001 \003(\005B"
-  "\002\020\001\022\023\n\013source_file\030\002 \001(\t\022\r\n\005begin\030\003 \001(\005\022"
-  "\013\n\003end\030\004 \001(\005*\373\001\n\022EnumUnderlyingType\022$\n E"
-  "NUM_UNDERLYING_TYPE_UNSPECIFIED\020\000\022\035\n\031ENU"
-  "M_UNDERLYING_TYPE_INT8\020\001\022\036\n\032ENUM_UNDERLY"
-  "ING_TYPE_UINT8\020\002\022\036\n\032ENUM_UNDERLYING_TYPE"
-  "_INT16\020\003\022\037\n\033ENUM_UNDERLYING_TYPE_UINT16\020"
-  "\004\022\036\n\032ENUM_UNDERLYING_TYPE_INT32\020\005\022\037\n\033ENU"
-  "M_UNDERLYING_TYPE_UINT32\020\006B4H\001Z-google.g"
-  "olang.org/protobuf/types/descriptorpb\370\001\001"
+  "pe_name\030\006 \001(\020\022\020\n\010extendee\030\002 \001(\020\022\025\n\rdefau"
+  "lt_value\030\007 \001(\020\022\023\n\013oneof_index\030\t \001(\006\022\021\n\tj"
+  "son_name\030\n \001(\020\022$\n\007options\030\010 \001(\0172\023.shark."
+  "FieldOptions\022\027\n\017proto3_optional\030\021 \001(\001\"\211\003"
+  "\n\004Type\022\r\n\tTYPE_BOOL\020\001\022\r\n\tTYPE_INT8\020\002\022\016\n\n"
+  "TYPE_UINT8\020\003\022\016\n\nTYPE_INT16\020\004\022\017\n\013TYPE_UIN"
+  "T16\020\005\022\016\n\nTYPE_INT32\020\006\022\017\n\013TYPE_UINT32\020\007\022\016"
+  "\n\nTYPE_INT64\020\010\022\017\n\013TYPE_UINT64\020\t\022\016\n\nTYPE_"
+  "FLOAT\020\n\022\020\n\014TYPE_FLOAT16\020\013\022\017\n\013TYPE_FLOAT8"
+  "\020\014\022\017\n\013TYPE_DOUBLE\020\r\022\r\n\tTYPE_ENUM\020\016\022\020\n\014TY"
+  "PE_MESSAGE\020\017\022\017\n\013TYPE_STRING\020\020\022\016\n\nTYPE_BY"
+  "TES\020\021\022\020\n\014TYPE_FIXED32\020\022\022\020\n\014TYPE_FIXED64\020"
+  "\023\022\021\n\rTYPE_SFIXED32\020\024\022\021\n\rTYPE_SFIXED64\020\025\022"
+  "\017\n\013TYPE_SINT32\020\026\022\017\n\013TYPE_SINT64\020\027\"C\n\005Lab"
+  "el\022\022\n\016LABEL_OPTIONAL\020\001\022\022\n\016LABEL_REQUIRED"
+  "\020\002\022\022\n\016LABEL_REPEATED\020\003\"J\n\024OneofDescripto"
+  "rProto\022\014\n\004name\030\001 \001(\020\022$\n\007options\030\002 \001(\0172\023."
+  "shark.OneofOptions\"\206\002\n\023EnumDescriptorPro"
+  "to\022\014\n\004name\030\001 \001(\020\022.\n\005value\030\002 \003(\0172\037.shark."
+  "EnumValueDescriptorProto\022#\n\007options\030\003 \001("
+  "\0172\022.shark.EnumOptions\022D\n\016reserved_range\030"
+  "\004 \003(\0172,.shark.EnumDescriptorProto.EnumRe"
+  "servedRange\022\025\n\rreserved_name\030\005 \003(\020\032/\n\021En"
+  "umReservedRange\022\r\n\005start\030\001 \001(\006\022\013\n\003end\030\002 "
+  "\001(\006\"b\n\030EnumValueDescriptorProto\022\014\n\004name\030"
+  "\001 \001(\020\022\016\n\006number\030\002 \001(\006\022(\n\007options\030\003 \001(\0172\027"
+  ".shark.EnumValueOptions\"|\n\026ServiceDescri"
+  "ptorProto\022\014\n\004name\030\001 \001(\020\022,\n\006method\030\002 \003(\0172"
+  "\034.shark.MethodDescriptorProto\022&\n\007options"
+  "\030\003 \001(\0172\025.shark.ServiceOptions\"\267\001\n\025Method"
+  "DescriptorProto\022\014\n\004name\030\001 \001(\020\022\022\n\ninput_t"
+  "ype\030\002 \001(\020\022\023\n\013output_type\030\003 \001(\020\022%\n\007option"
+  "s\030\004 \001(\0172\024.shark.MethodOptions\022\037\n\020client_"
+  "streaming\030\005 \001(\001:\005false\022\037\n\020server_streami"
+  "ng\030\006 \001(\001:\005false\"\276\003\n\013FileOptions\022<\n\014optim"
+  "ize_for\030\t \001(\0162\037.shark.FileOptions.Optimi"
+  "zeMode:\005SPEED\022\022\n\ngo_package\030\013 \001(\020\022\"\n\023cc_"
+  "generic_services\030\020 \001(\001:\005false\022\"\n\023py_gene"
+  "ric_services\030\022 \001(\001:\005false\022\031\n\ndeprecated\030"
+  "\027 \001(\001:\005false\022\036\n\020cc_enable_arenas\030\037 \001(\001:\004"
+  "true\0229\n\024uninterpreted_option\030\347\007 \003(\0172\032.sh"
+  "ark.UninterpretedOption\":\n\014OptimizeMode\022"
+  "\t\n\005SPEED\020\001\022\r\n\tCODE_SIZE\020\002\022\020\n\014LITE_RUNTIM"
+  "E\020\003*\t\010\350\007\020\200\200\200\200\002J\004\010\001\020\002J\004\010\010\020\tJ\004\010\n\020\013J\004\010\021\020\022J\004"
+  "\010\024\020\025J\004\010\033\020\034J\004\010$\020%J\004\010%\020&J\004\010&\020\'J\004\010\'\020(J\004\010(\020)"
+  "J\004\010)\020*J\004\010*\020+J\004\010,\020-J\004\010-\020.\"\372\001\n\016MessageOpti"
+  "ons\022&\n\027message_set_wire_format\030\001 \001(\001:\005fa"
+  "lse\022.\n\037no_standard_descriptor_accessor\030\002"
+  " \001(\001:\005false\022\031\n\ndeprecated\030\003 \001(\001:\005false\022\021"
+  "\n\tmap_entry\030\007 \001(\001\0229\n\024uninterpreted_optio"
+  "n\030\347\007 \003(\0172\032.shark.UninterpretedOption*\t\010\350"
+  "\007\020\200\200\200\200\002J\004\010\004\020\005J\004\010\005\020\006J\004\010\006\020\007J\004\010\010\020\tJ\004\010\t\020\n\"\240\003"
+  "\n\014FieldOptions\0220\n\005ctype\030\001 \001(\0162\031.shark.Fi"
+  "eldOptions.CType:\006STRING\022\016\n\006packed\030\002 \001(\001"
+  "\0225\n\006jstype\030\006 \001(\0162\032.shark.FieldOptions.JS"
+  "Type:\tJS_NORMAL\022\023\n\004lazy\030\005 \001(\001:\005false\022\036\n\017"
+  "unverified_lazy\030\017 \001(\001:\005false\022\031\n\ndeprecat"
+  "ed\030\003 \001(\001:\005false\022\023\n\004weak\030\n \001(\001:\005false\0229\n\024"
+  "uninterpreted_option\030\347\007 \003(\0172\032.shark.Unin"
+  "terpretedOption\"/\n\005CType\022\n\n\006STRING\020\000\022\010\n\004"
+  "CORD\020\001\022\020\n\014STRING_PIECE\020\002\"5\n\006JSType\022\r\n\tJS"
+  "_NORMAL\020\000\022\r\n\tJS_STRING\020\001\022\r\n\tJS_NUMBER\020\002*"
+  "\t\010\350\007\020\200\200\200\200\002J\004\010\004\020\005\"T\n\014OneofOptions\0229\n\024unin"
+  "terpreted_option\030\347\007 \003(\0172\032.shark.Uninterp"
+  "retedOption*\t\010\350\007\020\200\200\200\200\002\"\335\001\n\013EnumOptions\022\023"
+  "\n\013allow_alias\030\002 \001(\001\022\031\n\ndeprecated\030\003 \001(\001:"
+  "\005false\022\036\n\017enable_operator\030\006 \001(\001:\005false\0222"
+  "\n\017underlying_type\030\007 \001(\0162\031.shark.EnumUnde"
+  "rlyingType\0229\n\024uninterpreted_option\030\347\007 \003("
+  "\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002"
+  "J\004\010\005\020\006\"s\n\020EnumValueOptions\022\031\n\ndeprecated"
+  "\030\001 \001(\001:\005false\0229\n\024uninterpreted_option\030\347\007"
+  " \003(\0172\032.shark.UninterpretedOption*\t\010\350\007\020\200\200"
+  "\200\200\002\"q\n\016ServiceOptions\022\031\n\ndeprecated\030! \001("
+  "\001:\005false\0229\n\024uninterpreted_option\030\347\007 \003(\0172"
+  "\032.shark.UninterpretedOption*\t\010\350\007\020\200\200\200\200\002\"\231"
+  "\002\n\rMethodOptions\022\031\n\ndeprecated\030! \001(\001:\005fa"
+  "lse\022U\n\021idempotency_level\030\" \001(\0162%.shark.M"
+  "ethodOptions.IdempotencyLevel:\023IDEMPOTEN"
+  "CY_UNKNOWN\0229\n\024uninterpreted_option\030\347\007 \003("
+  "\0172\032.shark.UninterpretedOption\"P\n\020Idempot"
+  "encyLevel\022\027\n\023IDEMPOTENCY_UNKNOWN\020\000\022\023\n\017NO"
+  "_SIDE_EFFECTS\020\001\022\016\n\nIDEMPOTENT\020\002*\t\010\350\007\020\200\200\200"
+  "\200\002\"\224\002\n\023UninterpretedOption\0221\n\004name\030\002 \003(\017"
+  "2#.shark.UninterpretedOption.NamePart\022\030\n"
+  "\020identifier_value\030\003 \001(\020\022\032\n\022positive_int_"
+  "value\030\004 \001(\t\022\032\n\022negative_int_value\030\005 \001(\010\022"
+  "\024\n\014double_value\030\006 \001(\r\022\024\n\014string_value\030\007 "
+  "\001(\021\022\027\n\017aggregate_value\030\010 \001(\020\0323\n\010NamePart"
+  "\022\021\n\tname_part\030\001 \002(\020\022\024\n\014is_extension\030\002 \002("
+  "\001\"\313\001\n\016SourceCodeInfo\0220\n\010location\030\001 \003(\0172\036"
+  ".shark.SourceCodeInfo.Location\032\206\001\n\010Locat"
+  "ion\022\020\n\004path\030\001 \003(\006B\002\020\001\022\020\n\004span\030\002 \003(\006B\002\020\001\022"
+  "\030\n\020leading_comments\030\003 \001(\020\022\031\n\021trailing_co"
+  "mments\030\004 \001(\020\022!\n\031leading_detached_comment"
+  "s\030\006 \003(\020\"\235\001\n\021GeneratedCodeInfo\0227\n\nannotat"
+  "ion\030\001 \003(\0172#.shark.GeneratedCodeInfo.Anno"
+  "tation\032O\n\nAnnotation\022\020\n\004path\030\001 \003(\006B\002\020\001\022\023"
+  "\n\013source_file\030\002 \001(\020\022\r\n\005begin\030\003 \001(\006\022\013\n\003en"
+  "d\030\004 \001(\006*\373\001\n\022EnumUnderlyingType\022$\n ENUM_U"
+  "NDERLYING_TYPE_UNSPECIFIED\020\000\022\035\n\031ENUM_UND"
+  "ERLYING_TYPE_INT8\020\001\022\036\n\032ENUM_UNDERLYING_T"
+  "YPE_UINT8\020\002\022\036\n\032ENUM_UNDERLYING_TYPE_INT1"
+  "6\020\003\022\037\n\033ENUM_UNDERLYING_TYPE_UINT16\020\004\022\036\n\032"
+  "ENUM_UNDERLYING_TYPE_INT32\020\005\022\037\n\033ENUM_UND"
+  "ERLYING_TYPE_UINT32\020\006B4H\001Z-google.golang"
+  ".org/protobuf/types/descriptorpb\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2fdescriptor_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fdescriptor_2eshark = {
-    false, false, 5600, descriptor_table_protodef_shark_2fdescriptor_2eshark,
+    false, false, 5635, descriptor_table_protodef_shark_2fdescriptor_2eshark,
     "shark/descriptor.shark",
     &descriptor_table_shark_2fdescriptor_2eshark_once, nullptr, 0, 27,
     schemas, file_default_instances, TableStruct_shark_2fdescriptor_2eshark::offsets,
@@ -1118,6 +1119,7 @@ bool FieldDescriptorProto_Type_IsValid(int value) {
     case 7:
     case 8:
     case 9:
+    case 10:
     case 11:
     case 12:
     case 13:
@@ -1130,6 +1132,7 @@ bool FieldDescriptorProto_Type_IsValid(int value) {
     case 20:
     case 21:
     case 22:
+    case 23:
       return true;
     default:
       return false;
@@ -1137,27 +1140,29 @@ bool FieldDescriptorProto_Type_IsValid(int value) {
 }
 
 #if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_DOUBLE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FIXED32;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_BOOL;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_STRING;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_MESSAGE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_BYTES;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_ENUM;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SFIXED32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SFIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SINT64;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT8;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT8;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT16;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT16;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT16;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT8;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_DOUBLE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_ENUM;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_MESSAGE;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_STRING;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_BYTES;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FIXED32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FIXED64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SFIXED32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SFIXED64;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SINT32;
+constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SINT64;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::Type_MIN;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto::Type_MAX;
 constexpr int FieldDescriptorProto::Type_ARRAYSIZE;

@@ -68,7 +68,7 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2fany_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\025shark/types/any.shark\022\005shark\"&\n\003Any\022\020\n"
-  "\010type_url\030\001 \001(\t\022\r\n\005value\030\002 \001(\014B.Z,google"
+  "\010type_url\030\001 \001(\020\022\r\n\005value\030\002 \001(\021B.Z,google"
   ".golang.org/protobuf/types/known/anypb"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fany_2eshark_once;

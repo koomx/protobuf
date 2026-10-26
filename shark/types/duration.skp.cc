@@ -63,7 +63,7 @@ static const ::_pb::Message* const file_default_instances[] = {
 
 const char descriptor_table_protodef_shark_2ftypes_2fduration_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
   "\n\032shark/types/duration.shark\022\005shark\"*\n\010D"
-  "uration\022\017\n\007seconds\030\001 \001(\003\022\r\n\005nanos\030\002 \001(\005B"
+  "uration\022\017\n\007seconds\030\001 \001(\010\022\r\n\005nanos\030\002 \001(\006B"
   "6Z1google.golang.org/protobuf/types/know"
   "n/durationpb\370\001\001"
   ;

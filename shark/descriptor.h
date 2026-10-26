@@ -620,49 +620,52 @@ namespace shark {
     // - Given a DescriptorPool, call DescriptorPool::FindExtensionByNumber() or
     //   DescriptorPool::FindExtensionByPrintableName().
     // Use DescriptorPool to construct your own descriptors.
-    // Field type. 0 is reserved for errors. Numbers are the descriptor wire
-    // values and stay stable. Order is historical.
+    // Field type. 0 is reserved for errors. Numbers are the descriptor values.
     enum class FieldType : int {
-        DOUBLE = 1, // double, exactly eight bytes on the wire.
-        FLOAT = 2, // float, exactly four bytes on the wire.
-        INT64 = 3, // int64, varint on the wire. Negative numbers take 10 bytes.
-        UINT64 = 4, // uint64, varint on the wire.
-        INT32 = 5, // int32, varint on the wire. Negative numbers take 10 bytes.
-        FIXED64 = 6, // uint64, exactly eight bytes on the wire.
-        FIXED32 = 7, // uint32, exactly four bytes on the wire.
-        BOOL = 8, // bool, varint on the wire.
-        STRING = 9, // UTF-8 text.
-        MESSAGE = 11, // Length-delimited message.
-        BYTES = 12, // Arbitrary byte array.
-        UINT32 = 13, // uint32, varint on the wire.
+        BOOL = 1, // bool, varint on the wire.
+        INT8 = 2, // int8, stored as int8_t, 32-bit varint on the wire.
+        UINT8 = 3, // uint8, stored as uint8_t, 32-bit varint on the wire.
+        INT16 = 4, // int16, stored as int16_t, 32-bit varint on the wire.
+        UINT16 = 5, // uint16, stored as uint16_t, 32-bit varint on the wire.
+        INT32 = 6, // int32, varint on the wire. Negative numbers take 10 bytes.
+        UINT32 = 7, // uint32, varint on the wire.
+        INT64 = 8, // int64, varint on the wire. Negative numbers take 10 bytes.
+        UINT64 = 9, // uint64, varint on the wire.
+        FLOAT = 10, // float, exactly four bytes on the wire.
+        FLOAT16 = 11, // Not supported. The parser rejects this name.
+        FLOAT8 = 12, // Not supported. The parser rejects this name.
+        DOUBLE = 13, // double, exactly eight bytes on the wire.
         ENUM = 14, // Enum, varint on the wire.
-        SFIXED32 = 15, // int32, exactly four bytes on the wire.
-        SFIXED64 = 16, // int64, exactly eight bytes on the wire.
-        SINT32 = 17, // int32, ZigZag-encoded varint on the wire.
-        SINT64 = 18, // int64, ZigZag-encoded varint on the wire.
-        INT8 = 19, // int8, stored as int8_t, 32-bit varint on the wire.
-        UINT8 = 20, // uint8, stored as uint8_t, 32-bit varint on the wire.
-        INT16 = 21, // int16, stored as int16_t, 32-bit varint on the wire.
-        UINT16 = 22, // uint16, stored as uint16_t, 32-bit varint on the wire.
+        MESSAGE = 15, // Length-delimited message.
+        STRING = 16, // UTF-8 text.
+        BYTES = 17, // Arbitrary byte array.
+        FIXED32 = 18, // uint32, exactly four bytes on the wire.
+        FIXED64 = 19, // uint64, exactly eight bytes on the wire.
+        SFIXED32 = 20, // int32, exactly four bytes on the wire.
+        SFIXED64 = 21, // int64, exactly eight bytes on the wire.
+        SINT32 = 22, // int32, ZigZag-encoded varint on the wire.
+        SINT64 = 23, // int64, ZigZag-encoded varint on the wire.
     };
 
     // C++ type used to represent a field. Each FieldType maps to one FieldCppType.
     // 0 is reserved for errors.
     enum class FieldCppType : int {
-        INT32 = 1, // INT32, SINT32, SFIXED32
-        INT64 = 2, // INT64, SINT64, SFIXED64
-        UINT32 = 3, // UINT32, FIXED32
-        UINT64 = 4, // UINT64, FIXED64
-        DOUBLE = 5, // DOUBLE
-        FLOAT = 6, // FLOAT
-        BOOL = 7, // BOOL
-        ENUM = 8, // ENUM
-        STRING = 9, // STRING, BYTES
-        MESSAGE = 10, // MESSAGE, GROUP
-        INT8 = 11, // INT8
-        UINT8 = 12, // UINT8
-        INT16 = 13, // INT16
-        UINT16 = 14, // UINT16
+        BOOL = 1,
+        INT8 = 2,
+        UINT8 = 3,
+        INT16 = 4,
+        UINT16 = 5,
+        INT32 = 6, // INT32, SINT32, SFIXED32
+        UINT32 = 7, // UINT32, FIXED32
+        INT64 = 8, // INT64, SINT64, SFIXED64
+        UINT64 = 9, // UINT64, FIXED64
+        FLOAT = 10,
+        FLOAT16 = 11,
+        FLOAT8 = 12,
+        DOUBLE = 13,
+        ENUM = 14,
+        MESSAGE = 15,
+        STRING = 16, // STRING, BYTES
     };
 
     // Whether a field is optional, required, or repeated. 0 is reserved for errors.
@@ -672,8 +675,8 @@ namespace shark {
         REPEATED = 3,
     };
 
-    constexpr int kMaxFieldType = 22;
-    constexpr int kMaxFieldCppType = 14;
+    constexpr int kMaxFieldType = 23;
+    constexpr int kMaxFieldCppType = 16;
     constexpr int kMaxFieldLabel = 3;
 
     class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
