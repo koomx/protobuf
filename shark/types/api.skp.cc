@@ -352,7 +352,7 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Method methods = 2;
+      // list<.shark.Method> methods = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -365,7 +365,7 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Option options = 3;
+      // list<.shark.Option> options = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -398,7 +398,7 @@ const char* Api::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Mixin mixins = 6;
+      // list<.shark.Mixin> mixins = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -465,7 +465,7 @@ uint8_t* Api::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // repeated .shark.Method methods = 2;
+  // list<.shark.Method> methods = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_methods_size()); i < n; i++) {
     const auto& repfield = this->_internal_methods(i);
@@ -473,7 +473,7 @@ uint8_t* Api::_InternalSerialize(
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -498,7 +498,7 @@ uint8_t* Api::_InternalSerialize(
         _Internal::source_context(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.Mixin mixins = 6;
+  // list<.shark.Mixin> mixins = 6;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_mixins_size()); i < n; i++) {
     const auto& repfield = this->_internal_mixins(i);
@@ -529,21 +529,21 @@ size_t Api::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.Method methods = 2;
+  // list<.shark.Method> methods = 2;
   total_size += 1UL * this->_internal_methods_size();
   for (const auto& msg : this->_impl_.methods_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.Mixin mixins = 6;
+  // list<.shark.Mixin> mixins = 6;
   total_size += 1UL * this->_internal_mixins_size();
   for (const auto& msg : this->_impl_.mixins_) {
     total_size +=
@@ -881,7 +881,7 @@ const char* Method::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Option options = 6;
+      // list<.shark.Option> options = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -980,7 +980,7 @@ uint8_t* Method::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(5, this->_internal_response_streaming(), target);
   }
 
-  // repeated .shark.Option options = 6;
+  // list<.shark.Option> options = 6;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -1011,7 +1011,7 @@ size_t Method::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.Option options = 6;
+  // list<.shark.Option> options = 6;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=

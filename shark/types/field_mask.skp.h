@@ -185,7 +185,7 @@ class FieldMask final :
   enum : int {
     kPathsFieldNumber = 1,
   };
-  // repeated string paths = 1;
+  // list<string> paths = 1;
   int paths_size() const;
   private:
   int _internal_paths_size() const;
@@ -234,7 +234,7 @@ class FieldMask final :
 #endif  // __GNUC__
 // FieldMask
 
-// repeated string paths = 1;
+// list<string> paths = 1;
 inline int FieldMask::_internal_paths_size() const {
   return _impl_.paths_.size();
 }

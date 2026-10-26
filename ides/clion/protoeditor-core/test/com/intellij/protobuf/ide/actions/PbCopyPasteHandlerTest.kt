@@ -15,8 +15,8 @@ class PbCopyPasteHandlerTest : BasePlatformTestCase() {
         optional string title = 1;
         optional string year = 2;
         optional string writtenBy = 3;
-        repeated Actors actors = 4;
-        repeated Hashtags hashtags = 5;
+        list<Actors> actors = 4;
+        list<Hashtags> hashtags = 5;
       }
       message Actors {
         optional string name = 1;
@@ -44,8 +44,8 @@ class PbCopyPasteHandlerTest : BasePlatformTestCase() {
         string title = 1;
         string year = 2;
         string writtenBy = 3;
-        repeated Actors actors = 4;
-        repeated Hashtags hashtags = 5;
+        list<Actors> actors = 4;
+        list<Hashtags> hashtags = 5;
       }
       message Actors {
         string name = 1;
@@ -77,8 +77,8 @@ class PbCopyPasteHandlerTest : BasePlatformTestCase() {
         string title = 1;
         string year = 2;
         string writtenBy = 3;
-        repeated Actors actors = 4;
-        repeated Hashtags hashtags = 5;
+        list<Actors> actors = 4;
+        list<Hashtags> hashtags = 5;
       }
       message Actors {
         string name = 1;

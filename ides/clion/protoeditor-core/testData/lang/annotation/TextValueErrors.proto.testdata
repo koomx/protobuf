@@ -20,23 +20,23 @@ message OptionMessage {
 }
 
 message OptionHolder {
-  repeated string string = 1;
-  repeated bytes bytes = 2;
-  repeated bool bool = 3;
-  repeated double double = 4;
-  repeated float float = 5;
-  repeated uint32 uint32 = 6;
-  repeated uint64 uint64 = 7;
-  repeated fixed32 fixed32 = 8;
-  repeated fixed64 fixed64 = 9;
-  repeated int32 int32 = 10;
-  repeated int64 int64 = 11;
-  repeated sint32 sint32 = 12;
-  repeated sint64 sint64 = 13;
-  repeated sfixed32 sfixed32 = 14;
-  repeated sfixed64 sfixed64 = 15;
-  repeated OptionEnum enum = 16;
-  repeated OptionMessage message = 17;
+  list<string> string = 1;
+  list<bytes> bytes = 2;
+  list<bool> bool = 3;
+  list<double> double = 4;
+  list<float> float = 5;
+  list<uint32> uint32 = 6;
+  list<uint64> uint64 = 7;
+  list<fixed32> fixed32 = 8;
+  list<fixed64> fixed64 = 9;
+  list<int32> int32 = 10;
+  list<int64> int64 = 11;
+  list<sint32> sint32 = 12;
+  list<sint64> sint64 = 13;
+  list<sfixed32> sfixed32 = 14;
+  list<sfixed64> sfixed64 = 15;
+  list<OptionEnum> enum = 16;
+  list<OptionMessage> message = 17;
 }
 
 option (opt) = {
@@ -242,13 +242,13 @@ option (opt) = {
   // Test a value list
   string: ["foo", <error descr="String value expected">{}</error>, <error descr="String value expected">3</error>]
 
-  // Colons are required for non-message repeated fields
+  // Colons are required for non-message list<fields>
   string: ["foo", "bar"]
   string<error descr="Expected ':' after non-message field name"> </error> ["foo", "bar"]
   enum: [FOO, BAR]
   enum<error descr="Expected ':' after non-message field name"> </error> [FOO, BAR]
 
-  // Not required for message repeated fields
+  // Not required for message list<fields>
   message: [{}, {}]
   message [{}, {}]
 };

@@ -371,13 +371,13 @@ private MessageEntry ::=
   | OptionStatement
   | OneofDefinition
   | MapField
-  | GroupDefinition
+  | ListField
   | SimpleField
   | ';' { recoverWhile = MessageRecovery }
 
 private MessageRecovery ::=
   !(export | local | message | enum | extensions | reserved | extend | option | oneof
-  | FieldLabel | group | map | TypeName | '}' | ';')
+  | FieldLabel | map | TypeName | '}' | ';')
 
 /*
  * Option statement and body
@@ -408,15 +408,14 @@ private OptionListEntryRecovery ::= !(OptionName | ',' | ']') MessageRecovery
 /*
  * Field labels. Only Groups and simple fields can be labeled in certain contexts.
  */
-FieldLabel ::= optional | required | repeated
+FieldLabel ::= optional | required
 
 /*
  * Simple fields.
  *
  * Since TypeName ultimately generalizes to Identifier, which can match any
  * {Alpha}{Alphanumeric}* string, SimpleField should come at the end of rule option sequences.
- * E.g., "group abcd = 5 {}" will be matched by `TypeName Identifier '='` unless the
- * GroupDefinition rule is allowed to match it first.
+ * ListField is matched first so that "list" without "<" remains a type name.
  */
 SimpleField ::= FieldLabel? TypeName Identifier '=' IntegerValue OptionList? ';' {
   pin = 2
@@ -452,30 +451,18 @@ MapField ::= FieldLabel? map '<' TypeName ',' TypeName '>' Identifier '=' Intege
 }
 
 /*
- * Group field. Groups act like both fields and message definitions.
+ * list<T> fields. optional and required before list are accepted and ignored.
+ * Oneof bodies do not include this rule.
  */
-GroupDefinition ::= FieldLabel? group Identifier '=' IntegerValue GroupOptionContainer? MessageBody {
-  pin = 2
-  implements = [
-    'com.intellij.protobuf.lang.psi.PbDefinition'
-    'com.intellij.protobuf.lang.psi.PbMessageType'
-    'com.intellij.protobuf.lang.psi.PbSymbolContributor'
-    'com.intellij.protobuf.lang.psi.PbGroupDefinitionBase'
-  ]
-  mixin = 'com.intellij.protobuf.lang.psi.impl.PbGroupDefinitionMixin'
-  stubClass = 'com.intellij.protobuf.lang.stub.PbGroupDefinitionStub'
-  elementTypeFactory = 'com.intellij.protobuf.lang.stub.type.PbStubElementTypes.get'
+ListField ::= FieldLabel? list '<' TypeName '>' Identifier '=' IntegerValue OptionList? ';' {
+  pin = 3
+  implements = 'com.intellij.protobuf.lang.psi.PbField'
+  extends = 'com.intellij.protobuf.lang.psi.impl.PbFieldBase'
   methods = [
     nameIdentifier = 'IDENTIFIER_LITERAL'
-    body = 'MessageBody'
     fieldNumber = 'NumberValue'
     declaredLabel = 'FieldLabel'
-  ]
-}
-GroupOptionContainer ::= OptionList {
-  mixin = 'com.intellij.protobuf.lang.psi.impl.PbGroupOptionContainerMixin'
-  methods = [
-    options = 'OptionList/OptionExpression'
+    typeName = 'TypeName'
   ]
 }
 
@@ -509,8 +496,8 @@ OneofBody ::= <<Block <<BlockBodyOptional OneofEntry>> >> {
     end = 'RBRACE'
   ]
 }
-private OneofEntry ::= (OptionStatement | GroupDefinition | SimpleField) { recoverWhile = OneofRecovery }
-private OneofRecovery ::= !(FieldLabel | option | group | TypeName | ';' | '}')
+private OneofEntry ::= (OptionStatement | SimpleField) { recoverWhile = OneofRecovery }
+private OneofRecovery ::= !(FieldLabel | option | TypeName | ';' | '}')
 
 /*
  * Extend definition.
@@ -534,8 +521,8 @@ ExtendBody ::= <<Block <<BlockBodyOptional ExtendEntry>> >> {
     end = 'RBRACE'
   ]
 }
-private ExtendEntry ::= GroupDefinition | SimpleField { recoverWhile = ExtendRecovery }
-private ExtendRecovery ::= !(FieldLabel | group | TypeName | ';' | '}')
+private ExtendEntry ::= ListField | SimpleField { recoverWhile = ExtendRecovery }
+private ExtendRecovery ::= !(FieldLabel | TypeName | ';' | '}')
 
 /*
  * Extensions statement.

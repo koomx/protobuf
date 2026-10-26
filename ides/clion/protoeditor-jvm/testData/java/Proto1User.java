@@ -199,7 +199,7 @@ public class Proto1User {
     return caretAfterThis.isRepeatedBool(index);
   }
 
-  //---- Map (treated like repeated message)
+  //---- Map (treated like list<message>)
   public static M1_TestMapEntry getTestMap(M1 caretAfterThis, int key) {
     // EXPECT-NEXT: Proto1.proto / M1.test_map
     return caretAfterThis.getTestMap(key);

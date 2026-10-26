@@ -71,11 +71,8 @@ public class PbParser implements PsiParser, LightPsiParser {
     else if (type == FIELD_LABEL) {
       result = FieldLabel(builder, level + 1);
     }
-    else if (type == GROUP_DEFINITION) {
-      result = GroupDefinition(builder, level + 1);
-    }
-    else if (type == GROUP_OPTION_CONTAINER) {
-      result = GroupOptionContainer(builder, level + 1);
+    else if (type == LIST_FIELD) {
+      result = ListField(builder, level + 1);
     }
     else if (type == IDENTIFIER_VALUE) {
       result = IdentifierValue(builder, level + 1);
@@ -610,12 +607,12 @@ public class PbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // GroupDefinition | SimpleField
+  // ListField | SimpleField
   static boolean ExtendEntry(PsiBuilder builder, int level) {
     if (!recursion_guard_(builder, level, "ExtendEntry")) return false;
     boolean result;
     Marker marker = enter_section_(builder, level, _NONE_);
-    result = GroupDefinition(builder, level + 1);
+    result = ListField(builder, level + 1);
     if (!result) result = SimpleField(builder, level + 1);
     exit_section_(builder, level, marker, result, false, PbParser::ExtendRecovery);
     return result;
@@ -632,12 +629,11 @@ public class PbParser implements PsiParser, LightPsiParser {
     return result;
   }
 
-  // FieldLabel | group | TypeName | ';' | '}'
+  // FieldLabel | TypeName | ';' | '}'
   private static boolean ExtendRecovery_0(PsiBuilder builder, int level) {
     if (!recursion_guard_(builder, level, "ExtendRecovery_0")) return false;
     boolean result;
     result = FieldLabel(builder, level + 1);
-    if (!result) result = consumeToken(builder, GROUP);
     if (!result) result = TypeName(builder, level + 1);
     if (!result) result = consumeToken(builder, SEMI);
     if (!result) result = consumeToken(builder, RBRACE);
@@ -762,60 +758,59 @@ public class PbParser implements PsiParser, LightPsiParser {
   }
 
   /* ********************************************************** */
-  // optional | required | repeated
+  // optional | required
   public static boolean FieldLabel(PsiBuilder builder, int level) {
     if (!recursion_guard_(builder, level, "FieldLabel")) return false;
     boolean result;
     Marker marker = enter_section_(builder, level, _NONE_, FIELD_LABEL, "<field label>");
     result = consumeToken(builder, OPTIONAL);
     if (!result) result = consumeToken(builder, REQUIRED);
-    if (!result) result = consumeToken(builder, REPEATED);
     exit_section_(builder, level, marker, result, false, null);
     return result;
   }
 
   /* ********************************************************** */
-  // FieldLabel? group Identifier '=' IntegerValue GroupOptionContainer? MessageBody
-  public static boolean GroupDefinition(PsiBuilder builder, int level) {
-    if (!recursion_guard_(builder, level, "GroupDefinition")) return false;
+  // FieldLabel? list '<' TypeName '>' Identifier '=' IntegerValue OptionList? ';'
+  public static boolean ListField(PsiBuilder builder, int level) {
+    if (!recursion_guard_(builder, level, "ListField")) return false;
     boolean result, pinned;
-    Marker marker = enter_section_(builder, level, _NONE_, GROUP_DEFINITION, "<group definition>");
-    result = GroupDefinition_0(builder, level + 1);
-    result = result && consumeToken(builder, GROUP);
-    pinned = result; // pin = 2
-    result = result && report_error_(builder, Identifier(builder, level + 1));
+    Marker marker = enter_section_(builder, level, _NONE_, LIST_FIELD, "<list field>");
+    result = ListField_0(builder, level + 1);
+    result = result && ListField_1(builder, level + 1);
+    result = result && consumeToken(builder, LT);
+    pinned = result; // pin = 3
+    result = result && report_error_(builder, TypeName(builder, level + 1));
+    result = pinned && report_error_(builder, consumeToken(builder, GT)) && result;
+    result = pinned && report_error_(builder, Identifier(builder, level + 1)) && result;
     result = pinned && report_error_(builder, consumeToken(builder, ASSIGN)) && result;
     result = pinned && report_error_(builder, IntegerValue(builder, level + 1)) && result;
-    result = pinned && report_error_(builder, GroupDefinition_5(builder, level + 1)) && result;
-    result = pinned && MessageBody(builder, level + 1) && result;
+    result = pinned && report_error_(builder, ListField_8(builder, level + 1)) && result;
+    result = pinned && consumeToken(builder, SEMI) && result;
     exit_section_(builder, level, marker, result, pinned, null);
     return result || pinned;
   }
 
   // FieldLabel?
-  private static boolean GroupDefinition_0(PsiBuilder builder, int level) {
-    if (!recursion_guard_(builder, level, "GroupDefinition_0")) return false;
+  private static boolean ListField_0(PsiBuilder builder, int level) {
+    if (!recursion_guard_(builder, level, "ListField_0")) return false;
     FieldLabel(builder, level + 1);
     return true;
   }
 
-  // GroupOptionContainer?
-  private static boolean GroupDefinition_5(PsiBuilder builder, int level) {
-    if (!recursion_guard_(builder, level, "GroupDefinition_5")) return false;
-    GroupOptionContainer(builder, level + 1);
+  // list
+  private static boolean ListField_1(PsiBuilder builder, int level) {
+    if (!recursion_guard_(builder, level, "ListField_1")) return false;
+    if (!nextTokenIs(builder, IDENTIFIER_LITERAL)) return false;
+    if (!"list".equals(builder.getTokenText())) return false;
+    builder.advanceLexer();
     return true;
   }
 
-  /* ********************************************************** */
-  // OptionList
-  public static boolean GroupOptionContainer(PsiBuilder builder, int level) {
-    if (!recursion_guard_(builder, level, "GroupOptionContainer")) return false;
-    if (!nextTokenIs(builder, LBRACK)) return false;
-    boolean result;
-    Marker marker = enter_section_(builder);
-    result = OptionList(builder, level + 1);
-    exit_section_(builder, marker, GROUP_OPTION_CONTAINER, result);
-    return result;
+  // OptionList?
+  private static boolean ListField_8(PsiBuilder builder, int level) {
+    if (!recursion_guard_(builder, level, "ListField_8")) return false;
+    OptionList(builder, level + 1);
+    return true;
   }
 
   /* ********************************************************** */
@@ -991,7 +986,7 @@ public class PbParser implements PsiParser, LightPsiParser {
     if (!result) result = OptionStatement(builder, level + 1);
     if (!result) result = OneofDefinition(builder, level + 1);
     if (!result) result = MapField(builder, level + 1);
-    if (!result) result = GroupDefinition(builder, level + 1);
+    if (!result) result = ListField(builder, level + 1);
     if (!result) result = SimpleField(builder, level + 1);
     if (!result) result = consumeToken(builder, SEMI);
     exit_section_(builder, level, marker, result, false, PbParser::MessageRecovery);
@@ -1052,7 +1047,6 @@ public class PbParser implements PsiParser, LightPsiParser {
     if (!result) result = consumeToken(builder, OPTION);
     if (!result) result = consumeToken(builder, ONEOF);
     if (!result) result = FieldLabel(builder, level + 1);
-    if (!result) result = consumeToken(builder, GROUP);
     if (!result) result = consumeToken(builder, MAP);
     if (!result) result = TypeName(builder, level + 1);
     if (!result) result = consumeToken(builder, RBRACE);
@@ -1180,7 +1174,6 @@ public class PbParser implements PsiParser, LightPsiParser {
     boolean result;
     Marker marker = enter_section_(builder, level, _NONE_);
     result = OptionStatement(builder, level + 1);
-    if (!result) result = GroupDefinition(builder, level + 1);
     if (!result) result = SimpleField(builder, level + 1);
     exit_section_(builder, level, marker, result, false, PbParser::OneofRecovery);
     return result;
@@ -1203,7 +1196,6 @@ public class PbParser implements PsiParser, LightPsiParser {
     boolean result;
     result = FieldLabel(builder, level + 1);
     if (!result) result = consumeToken(builder, OPTION);
-    if (!result) result = consumeToken(builder, GROUP);
     if (!result) result = TypeName(builder, level + 1);
     if (!result) result = consumeToken(builder, SEMI);
     if (!result) result = consumeToken(builder, RBRACE);

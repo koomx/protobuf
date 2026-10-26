@@ -292,7 +292,7 @@ public class PbTextAnnotator implements Annotator {
       PbTextField field, PbTextValueList valueList, AnnotationHolder holder) {
     PbField declaredField = field.getFieldName().getDeclaredField();
     if (declaredField != null && isIncorrectValueListUsage(field, declaredField)) {
-      // Non-repeated fields cannot be initialized with value lists.
+      // Non-list<fields> cannot be initialized with value lists.
       holder.newAnnotation(HighlightSeverity.ERROR, PbLangBundle.message("non.repeated.value.list", declaredField.getName()))
           .range(valueList)
           .create();

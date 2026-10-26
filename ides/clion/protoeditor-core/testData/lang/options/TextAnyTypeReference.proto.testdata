@@ -5,7 +5,7 @@ import "lang/options/any.proto";
 package foo.bar;
 
 message MyType {
-  repeated google.protobuf.Any any = 1;
+  list<google.protobuf.Any> any = 1;
   bool value = 2;
   extensions 100 to 200;
 }

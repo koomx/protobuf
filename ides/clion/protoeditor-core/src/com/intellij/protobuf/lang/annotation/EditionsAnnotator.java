@@ -75,7 +75,7 @@ public class EditionsAnnotator implements Annotator {
   }
 
   /*
-   * In editions, only repeated or null labels are allowed.
+   * In editions, only list<or> null labels are allowed.
    */
   private static void annotateField(PbField field, AnnotationHolder holder) {
     if (field instanceof PbMapField) {

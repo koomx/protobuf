@@ -69,7 +69,7 @@ export function computeMessageEdits(text: string, block: ProtoBlock): NumericEdi
   const body = text.slice(bodyStart, bodyEnd);
   const nested = collectNestedTypeRanges(text, bodyStart, bodyEnd);
   const pattern =
-    /^\s*(?:(?:repeated|optional|required)\s+)?(?:map<[^>]+>|[.A-Za-z_][\w<>.]*)\s+[A-Za-z_][\w]*\s*=\s*(\d+)/gm;
+    /^\s*(?:(?:optional|required)\s+)?(?:map<[^>]+>|list<[^>]+>|[.A-Za-z_][\w.]*)\s+[A-Za-z_][\w]*\s*=\s*(\d+)/gm;
   let nextId = 1;
   let match: RegExpExecArray | null;
 

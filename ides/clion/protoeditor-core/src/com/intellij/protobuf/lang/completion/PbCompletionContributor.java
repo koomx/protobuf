@@ -175,22 +175,14 @@ public class PbCompletionContributor extends CompletionContributor {
     }
     // Probably don't want to follow "map" with a space. We could fill in the "<>" later.
     private static List<LookupElement> createMessageEntryStartNoSpace() {
-      return Stream.of("map").map(LookupElementBuilder::create).collect(Collectors.toList());
+      return Stream.of("map", "list").map(LookupElementBuilder::create).collect(Collectors.toList());
     }
 
     private static List<LookupElement> createProto2FieldLabels() {
-      return Stream.of("optional", "required", "repeated")
+      return Stream.of("optional", "required")
         .map(PbCompletionContributor::lookupElementWithSpace)
         .collect(Collectors.toList());
     }
-
-    private static List<LookupElement> createEditionsFieldLabels() {
-      return Stream.of("repeated")
-        .map(PbCompletionContributor::lookupElementWithSpace)
-        .collect(Collectors.toList());
-    }
-
-    private static LookupElement createGroupKeyWord() { return lookupElementWithSpace("group"); }
 
     @Override
     protected void addCompletions(
@@ -214,20 +206,6 @@ public class PbCompletionContributor extends CompletionContributor {
 
         if (isDeprecatedProto2Syntax(syntaxLevel)) {
           result.addAllElements(createProto2FieldLabels());
-        }
-        else if (syntaxLevel instanceof SyntaxLevel.Edition) {
-          result.addAllElements(createEditionsFieldLabels());
-        }
-      } else {
-        // In proto2, we can have a "group" right after the field label.
-        if (isDeprecatedProto2Syntax( syntaxLevel)) {
-          List<PbElement> fieldElements =
-              PsiTreeUtil.getChildrenOfTypeAsList(simpleField, PbElement.class);
-          if (fieldElements.size() == 2) {
-            if (fieldElements.get(0) instanceof PbFieldLabel) {
-              result.addElement(createGroupKeyWord());
-            }
-          }
         }
       }
     }

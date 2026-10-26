@@ -119,10 +119,10 @@ message SomeMessage {
     NESTED_ENUM_VALUE_1 = 1;
   }
 
-  repeated string repeated_string_field = 8;
-  repeated int32 unpacked_int32_field = 9 [packed = false];
-  repeated SomeEnum repeated_enum_field = 10;
-  repeated google.protobuf.Any repeated_any_field = 11;
+  list<string> repeated_string_field = 8;
+  list<int32> unpacked_int32_field = 9 [packed = false];
+  list<SomeEnum> repeated_enum_field = 10;
+  list<google.protobuf.Any> repeated_any_field = 11;
 
   map<string, int32> string_int32_map = 12;
   map<int32, google.protobuf.Any> int32_any_map = 13;

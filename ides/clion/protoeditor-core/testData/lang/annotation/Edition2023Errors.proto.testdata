@@ -4,7 +4,7 @@ import <error descr="Option imports are not supported before edition 2024">optio
 
 message RegularMessage {
   int32 a = 1;
-  repeated string b = 2;
+  list<string> b = 2;
   int32 required_field = 3 [features.field_presence = LEGACY_REQUIRED];
 
   message SubMessage {

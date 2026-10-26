@@ -1642,8 +1642,7 @@ TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSet) {
   if (HasFatalFailure()) return;
   EXPECT_EQ(2, descriptor_set.file_size());
   if (descriptor_set.file(0).name() == "bar.shark") {
-    std::swap(descriptor_set.mutable_file()->mutable_data()[0],
-              descriptor_set.mutable_file()->mutable_data()[1]);
+    descriptor_set.mutable_file()->SwapElements(0, 1);
   }
   EXPECT_EQ("foo.shark", descriptor_set.file(0).name());
   EXPECT_EQ("bar.shark", descriptor_set.file(1).name());
@@ -1673,8 +1672,7 @@ TEST_F(CommandLineInterfaceTest, WriteTransitiveDescriptorSetWithSourceInfo) {
   if (HasFatalFailure()) return;
   EXPECT_EQ(2, descriptor_set.file_size());
   if (descriptor_set.file(0).name() == "bar.shark") {
-    std::swap(descriptor_set.mutable_file()->mutable_data()[0],
-              descriptor_set.mutable_file()->mutable_data()[1]);
+    descriptor_set.mutable_file()->SwapElements(0, 1);
   }
   EXPECT_EQ("foo.shark", descriptor_set.file(0).name());
   EXPECT_EQ("bar.shark", descriptor_set.file(1).name());

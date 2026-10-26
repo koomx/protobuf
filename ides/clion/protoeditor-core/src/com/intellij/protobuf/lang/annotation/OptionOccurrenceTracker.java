@@ -56,7 +56,7 @@ import java.util.stream.Collectors;
  * A helper class to track option occurrences within some scope and annotate the following problems:
  *
  * <ul>
- *   <li>A non-repeated option specified multiple times
+ *   <li>A non-list<option> specified multiple times
  *   <li>Multiple members of a oneof specified
  *   <li>A missing required field
  * </ul>
@@ -304,7 +304,7 @@ public class OptionOccurrenceTracker {
    * An Occurrence represents an instance of a message in an option setting context. An Occurrence
    * maintains a list of option fields and oneof usage that occur within it.
    *
-   * <p>Scopes are necessary to support repeated and recursive option scenarios. For example:
+   * <p>Scopes are necessary to support list<and> recursive option scenarios. For example:
    *
    * <pre>
    *   option (repeated) = {
@@ -352,10 +352,10 @@ public class OptionOccurrenceTracker {
      * <p>The following cases are annotated:
      *
      * <ul>
-     *   <li>non-repeated fields specified multiple times
+     *   <li>non-list<fields> specified multiple times
      *   <li>multiple members of a oneof specified
      *   <li>missing required fields
-     *   <li>repeated message fields initialized without an aggregate value
+     *   <li>list<message> fields initialized without an aggregate value
      * </ul>
      *
      * @param holder the {@link AnnotationHolder}
@@ -444,7 +444,7 @@ public class OptionOccurrenceTracker {
      * <p>Annotations will be created at this time if:
      *
      * <ul>
-     *   <li>the field is non-repeated and has already been used
+     *   <li>the field is non-list<and> has already been used
      *   <li> the field is part of a oneof definition and another field from the same oneof has
      *       already been used
      * </ul>

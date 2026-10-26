@@ -1459,39 +1459,20 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
   const FieldDescriptor* fd_map_int32_foreign_message_value =
       fd_map_int32_foreign_message->message_type()->map_value();
 
-  // Get RepeatedPtrField objects for all fields of interest.
-  const RepeatedPtrField<Message>& mf_int32_int32 =
-      refl->GetRepeatedPtrField<Message>(message, fd_map_int32_int32);
-  const RepeatedPtrField<Message>& mf_int32_double =
-      refl->GetRepeatedPtrField<Message>(message, fd_map_int32_double);
-  const RepeatedPtrField<Message>& mf_string_string =
-      refl->GetRepeatedPtrField<Message>(message, fd_map_string_string);
-  const RepeatedPtrField<Message>& mf_int32_foreign_message =
-      refl->GetRepeatedPtrField<Message>(message, fd_map_int32_foreign_message);
-
-  // Get mutable RepeatedPtrField objects for all fields of interest.
-  RepeatedPtrField<Message>* mmf_int32_int32 =
-      refl->MutableRepeatedPtrField<Message>(&message, fd_map_int32_int32);
-  RepeatedPtrField<Message>* mmf_int32_double =
-      refl->MutableRepeatedPtrField<Message>(&message, fd_map_int32_double);
-  RepeatedPtrField<Message>* mmf_string_string =
-      refl->MutableRepeatedPtrField<Message>(&message, fd_map_string_string);
-  RepeatedPtrField<Message>* mmf_int32_foreign_message =
-      refl->MutableRepeatedPtrField<Message>(&message,
-                                             fd_map_int32_foreign_message);
-
-  // Make sure we can do gets through the RepeatedPtrField objects.
+  // Make sure we can do gets through reflection.
   for (int i = 0; i < 10; ++i) {
     {
       // Check gets through const objects.
-      const Message& message_int32_int32 = mf_int32_int32.Get(i);
+      const Message& message_int32_int32 =
+          refl->GetRepeatedMessage(message, fd_map_int32_int32, i);
       int32_t key_int32_int32 = message_int32_int32.GetReflection()->GetInt32(
           message_int32_int32, fd_map_int32_in32_key);
       int32_t value_int32_int32 = message_int32_int32.GetReflection()->GetInt32(
           message_int32_int32, fd_map_int32_in32_value);
       EXPECT_EQ(value_int32_int32, Func(key_int32_int32, 1));
 
-      const Message& message_int32_double = mf_int32_double.Get(i);
+      const Message& message_int32_double =
+          refl->GetRepeatedMessage(message, fd_map_int32_double, i);
       int32_t key_int32_double = message_int32_double.GetReflection()->GetInt32(
           message_int32_double, fd_map_int32_double_key);
       double value_int32_double =
@@ -1499,7 +1480,8 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
               message_int32_double, fd_map_int32_double_value);
       EXPECT_EQ(value_int32_double, Func(key_int32_double, 2));
 
-      const Message& message_string_string = mf_string_string.Get(i);
+      const Message& message_string_string =
+          refl->GetRepeatedMessage(message, fd_map_string_string, i);
       std::string key_string_string =
           message_string_string.GetReflection()->GetString(
               message_string_string, fd_map_string_string_key);
@@ -1508,7 +1490,8 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
               message_string_string, fd_map_string_string_value);
       EXPECT_EQ(value_string_string, StrFunc(Int(key_string_string), 5));
 
-      const Message& message_int32_message = mf_int32_foreign_message.Get(i);
+      const Message& message_int32_message = refl->GetRepeatedMessage(
+          message, fd_map_int32_foreign_message, i);
       int32_t key_int32_message =
           message_int32_message.GetReflection()->GetInt32(
               message_int32_message, fd_map_int32_foreign_message_key);
@@ -1521,14 +1504,16 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
 
     {
       // Check gets through mutable objects.
-      const Message& message_int32_int32 = mmf_int32_int32->Get(i);
+      const Message& message_int32_int32 =
+          refl->GetRepeatedMessage(message, fd_map_int32_int32, i);
       int32_t key_int32_int32 = message_int32_int32.GetReflection()->GetInt32(
           message_int32_int32, fd_map_int32_in32_key);
       int32_t value_int32_int32 = message_int32_int32.GetReflection()->GetInt32(
           message_int32_int32, fd_map_int32_in32_value);
       EXPECT_EQ(value_int32_int32, Func(key_int32_int32, 1));
 
-      const Message& message_int32_double = mmf_int32_double->Get(i);
+      const Message& message_int32_double =
+          refl->GetRepeatedMessage(message, fd_map_int32_double, i);
       int32_t key_int32_double = message_int32_double.GetReflection()->GetInt32(
           message_int32_double, fd_map_int32_double_key);
       double value_int32_double =
@@ -1536,7 +1521,8 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
               message_int32_double, fd_map_int32_double_value);
       EXPECT_EQ(value_int32_double, Func(key_int32_double, 2));
 
-      const Message& message_string_string = mmf_string_string->Get(i);
+      const Message& message_string_string =
+          refl->GetRepeatedMessage(message, fd_map_string_string, i);
       std::string key_string_string =
           message_string_string.GetReflection()->GetString(
               message_string_string, fd_map_string_string_key);
@@ -1545,7 +1531,8 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
               message_string_string, fd_map_string_string_value);
       EXPECT_EQ(value_string_string, StrFunc(Int(key_string_string), 5));
 
-      const Message& message_int32_message = mmf_int32_foreign_message->Get(i);
+      const Message& message_int32_message = refl->GetRepeatedMessage(
+          message, fd_map_int32_foreign_message, i);
       int32_t key_int32_message =
           message_int32_message.GetReflection()->GetInt32(
               message_int32_message, fd_map_int32_foreign_message_key);
@@ -1560,14 +1547,16 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
   // Do sets through the RepeatedPtrField objects.
   for (int i = 0; i < 10; i++) {
     {
-      Message* message_int32_int32 = mmf_int32_int32->Mutable(i);
+      Message* message_int32_int32 =
+          refl->MutableRepeatedMessage(&message, fd_map_int32_int32, i);
       int32_t key_int32_int32 = message_int32_int32->GetReflection()->GetInt32(
           *message_int32_int32, fd_map_int32_in32_key);
       message_int32_int32->GetReflection()->SetInt32(message_int32_int32,
                                                      fd_map_int32_in32_value,
                                                      Func(key_int32_int32, -1));
 
-      Message* message_int32_double = mmf_int32_double->Mutable(i);
+      Message* message_int32_double =
+          refl->MutableRepeatedMessage(&message, fd_map_int32_double, i);
       int32_t key_int32_double =
           message_int32_double->GetReflection()->GetInt32(
               *message_int32_double, fd_map_int32_double_key);
@@ -1575,7 +1564,8 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
           message_int32_double, fd_map_int32_double_value,
           Func(key_int32_double, -2));
 
-      Message* message_string_string = mmf_string_string->Mutable(i);
+      Message* message_string_string =
+          refl->MutableRepeatedMessage(&message, fd_map_string_string, i);
       std::string key_string_string =
           message_string_string->GetReflection()->GetString(
               *message_string_string, fd_map_string_string_key);
@@ -1583,7 +1573,8 @@ TEST_F(MapFieldReflectionTest, RegularFields) {
           message_string_string, fd_map_string_string_value,
           StrFunc(Int(key_string_string), -5));
 
-      Message* message_int32_message = mmf_int32_foreign_message->Mutable(i);
+      Message* message_int32_message = refl->MutableRepeatedMessage(
+          &message, fd_map_int32_foreign_message, i);
       int32_t key_int32_message =
           message_int32_message->GetReflection()->GetInt32(
               *message_int32_message, fd_map_int32_foreign_message_key);
@@ -2294,7 +2285,7 @@ TEST(MapEntryTest, ConstInit) {
   // This verifies that `MapEntry`, `MapEntryLite` and `MapEntryImpl` can be
   // constant initialized.
   SHARK_CONSTINIT static MyMapEntry entry{};
-  EXPECT_NE(entry.SpaceUsed(), 0);
+  EXPECT_NE(entry.SpaceUsedLong(), 0);
 
   SHARK_CONSTINIT static MyMapEntryLite entry_lite{};  // NOLINT
   EXPECT_TRUE(entry_lite.IsInitialized());
@@ -2879,8 +2870,8 @@ TEST(GeneratedMapFieldTest, IsInitialized) {
 
 TEST(GeneratedMapFieldTest, SpaceUsed) {
   UNITTEST::TestRequiredMessageMap map_message;
-  const size_t initial = map_message.SpaceUsed();
-  const size_t space_used_message = UNITTEST::TestRequired().SpaceUsed();
+  const size_t initial = map_message.SpaceUsedLong();
+  const size_t space_used_message = UNITTEST::TestRequired().SpaceUsedLong();
 
   auto& m = *map_message.mutable_map_field();
   constexpr int kNumValues = 100;
@@ -2895,7 +2886,7 @@ TEST(GeneratedMapFieldTest, SpaceUsed) {
                               /* Node::next */ sizeof(void*) +
                               /* table entry */ sizeof(void*));
 
-  EXPECT_LE(lower_bound, map_message.SpaceUsed());
+  EXPECT_LE(lower_bound, map_message.SpaceUsedLong());
 }
 
 TEST(GeneratedMapFieldTest, MessagesMustMerge) {
@@ -3881,9 +3872,8 @@ TEST(TextFormatMapTest, NoDisableReflectionIterator) {
   const Reflection* reflection = source.GetReflection();
   const FieldDescriptor* field_desc =
       source.GetDescriptor()->FindFieldByName("map_int32_int32");
-  RepeatedPtrField<Message>* map_field =
-      reflection->MutableRepeatedPtrField<Message>(&source, field_desc);
-  RepeatedPtrField<Message>::iterator iter = map_field->begin();
+  Message* iter =
+      reflection->MutableRepeatedMessage(&source, field_desc, 0);
 
   // Serialize message to text format, which will invalidate the previous
   // iterator previously.

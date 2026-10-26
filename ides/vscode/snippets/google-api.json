@@ -59,7 +59,7 @@
 			"message List${1}sResponse {",
 			"  // The field name should match the noun \"${1/(.*)/${1:/downcase}/}\" in the method name.",
 			"  // There will be a maximum number of items returned based on the page_size field in the request.",
-			"  repeated ${1} ${1/(.*)/${1:/downcase}/}s = 1;",
+			"  list<${1}> ${1/(.*)/${1:/downcase}/}s = 1;",
 			"",
 			"  // Token to retrieve the next page of results, or empty if there are no more results in the list.",
 			"  string next_page_token = 2;",

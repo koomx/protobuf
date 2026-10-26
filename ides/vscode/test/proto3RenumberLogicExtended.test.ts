@@ -146,8 +146,8 @@ suite('Proto3RenumberLogic - Extended Tests', () => {
       );
     });
 
-    test('handles repeated fields', () => {
-      const text = `message Foo {\n  repeated string names = 5;\n}`;
+    test('handles list fields', () => {
+      const text = `message Foo {\n  list<string> names = 5;\n}`;
       const block = findAllBlocks(text)[0];
       const result = computeMessageEdits(text, block);
       assert.strictEqual(result.length, 1);

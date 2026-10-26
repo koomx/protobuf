@@ -116,11 +116,6 @@ class SHARK_EXPORT FieldMaskUtil {
     GetFieldMaskForAllFields(T::descriptor(), &out);
     return out;
   }
-  template <typename T>
-  [[deprecated("Use *out = GetFieldMaskForAllFields() instead")]]
-  static void GetFieldMaskForAllFields(FieldMask* out) {
-    GetFieldMaskForAllFields(T::descriptor(), out);
-  }
   // This flavor takes the protobuf type descriptor as an argument.
   // Useful when the type is not known at compile time.
   static void GetFieldMaskForAllFields(const Descriptor* descriptor,

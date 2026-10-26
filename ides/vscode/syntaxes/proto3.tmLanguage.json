@@ -131,6 +131,7 @@
         { "include": "#comments" },
         { "include": "#oneof" },
         { "include": "#field" },
+        { "include": "#listfield" },
         { "include": "#mapfield" }
       ]
     },
@@ -156,13 +157,31 @@
       ]
     },
     "field": {
-      "begin": "\\s*(optional|repeated|required)?\\s*(\\.?[\\w.]+)\\s+(\\w+)\\s*(=)\\s*(0[xX][0-9a-fA-F]+|[0-9]+)",
+      "begin": "\\s*(optional|required)?\\s*(\\.?[\\w.]+)\\s+(\\w+)\\s*(=)\\s*(0[xX][0-9a-fA-F]+|[0-9]+)",
       "beginCaptures": {
         "1": { "name": "storage.modifier.proto" },
         "2": { "name": "storage.type.proto" },
         "3": { "name": "variable.other.proto" },
         "4": { "name": "keyword.operator.assignment.proto" },
         "5": { "name": "constant.numeric.proto" }
+      },
+      "end": "(;)",
+      "endCaptures": {
+        "1": { "name": "punctuation.terminator.proto" }
+      },
+      "patterns": [{ "include": "#fieldOptions" }]
+    },
+    "listfield": {
+      "begin": "\\s*(optional|required)?\\s*(list)\\s*(<)\\s*(\\.?[\\w.]+)\\s*(>)\\s+(\\w+)\\s*(=)\\s*(0[xX][0-9a-fA-F]+|[0-9]+)",
+      "beginCaptures": {
+        "1": { "name": "storage.modifier.proto" },
+        "2": { "name": "storage.type.proto" },
+        "3": { "name": "punctuation.definition.typeparameters.begin.proto" },
+        "4": { "name": "storage.type.proto" },
+        "5": { "name": "punctuation.definition.typeparameters.end.proto" },
+        "6": { "name": "variable.other.proto" },
+        "7": { "name": "keyword.operator.assignment.proto" },
+        "8": { "name": "constant.numeric.proto" }
       },
       "end": "(;)",
       "endCaptures": {

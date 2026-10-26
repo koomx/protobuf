@@ -77,7 +77,6 @@ public final class ProtoTokenTypes {
   public static final IElementType EXTENSIONS =
       put("extensions", new ProtoKeywordTokenType("extensions"));
   public static final IElementType FALSE = put("false", new ProtoKeywordTokenType("false"));
-  public static final IElementType GROUP = put("group", new ProtoKeywordTokenType("group"));
   public static final IElementType IMPORT = put("import", new ProtoKeywordTokenType("import"));
   public static final IElementType JSON_NAME =
       put("json_name", new ProtoKeywordTokenType("json_name"));
@@ -91,8 +90,6 @@ public final class ProtoTokenTypes {
       put("optional", new ProtoKeywordTokenType("optional"));
   public static final IElementType PACKAGE = put("package", new ProtoKeywordTokenType("package"));
   public static final IElementType PUBLIC = put("public", new ProtoKeywordTokenType("public"));
-  public static final IElementType REPEATED =
-      put("repeated", new ProtoKeywordTokenType("repeated"));
   public static final IElementType REQUIRED =
       put("required", new ProtoKeywordTokenType("required"));
   public static final IElementType RESERVED =

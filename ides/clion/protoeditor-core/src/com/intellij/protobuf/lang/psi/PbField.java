@@ -68,7 +68,7 @@ public interface PbField extends PbNamedElement, PbOptionOwner {
     return CanonicalFieldLabel.REQUIRED.equals(getCanonicalLabel());
   }
 
-  /** Returns <code>true</code> if this is a repeated field. */
+  /** Returns <code>true</code> if this is a list<field.> */
   default boolean isRepeated() {
     return CanonicalFieldLabel.REPEATED.equals(getCanonicalLabel());
   }

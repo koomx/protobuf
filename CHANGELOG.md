@@ -2,6 +2,34 @@
 
 新任务加在最上面，一节一件事。步骤做完后，把状态改成完成，并写上实际结果。未做的步骤保持未做。
 
+## IDE 插件适配 list
+
+日期：2026-10-26
+
+编译器已经只接受 `list<T>`，不再接受 `repeated`，也不再接受 `group`。`optional list<T>`、`required list<T>` 和 `list<T>` 一样，都是 repeated。`oneof` 里不能写 `list<T>`。`map` 写法不变。插件按这个语法改解析、高亮、补全。字段类型仍是元素自己的类型，不引入 `LIST`。
+
+| 步骤 | 内容 | 状态 | 完成效果 |
+| --- | --- | --- | --- |
+| 1 | `ides/clion/protoeditor-core/src/com/intellij/protobuf/bnf/proto.bnf`：`FieldLabel` 只留 `optional` 和 `required`。新增 `ListField`，写法是 `FieldLabel? list '<' TypeName '>' Identifier '=' IntegerValue OptionList? ';'`，实现 `PbField`，`isRepeated()` 为真。`MessageEntry` 和 `ExtendEntry` 接受 `ListField`。`OneofEntry` 不接受 `ListField`。删掉 `GroupDefinition`、`GroupOptionContainer`，以及 `MessageEntry`、`OneofEntry`、`ExtendEntry`、恢复规则里的 `group` | 完成 | `FieldLabel` 只有 `optional`、`required`。`ListField` 在 message 和 extend 里。oneof 里没有。`GroupDefinition` 已从语法删掉 |
+| 2 | 用改过的 `proto.bnf` 重新生成 `ides/clion/protoeditor-core/gen` 里的 parser 和 PSI。删掉只为 group 存在的 mixin、stub、`ProtoTokenTypes` 里的 `GROUP` 和 `repeated` 关键字。`PbFieldBase` 把 `ListField` 当成 repeated。补全去掉 `repeated` 和 `group`，在字段开头补 `list`。`PbParserTest`、`PbAnnotatorErrorTest` 里的 `repeated` 样例改成 `list<T>`，group 样例删掉 | 未做 | parser、`PbListField`、补全和 `repeated` 样例已改。`group` 的 mixin、stub 还在。本机下 Gradle 9.1 失败，CLion 工程没有编过 |
+| 3 | `ides/vscode/syntaxes/proto3.tmLanguage.json` 的字段规则匹配 `list<类型> 名字 = 编号`，也匹配前面的 `optional`、`required`。`proto3Suggest.ts` 的字段关键字去掉 `repeated`，加上 `list`。`proto3Definition.ts`、`proto3SymbolProvider.ts`、`proto3RenumberLogic.ts` 的字段正则同样改。`snippets/google-api.json` 里的 `repeated` 改成 `list<>` | 完成 | 高亮有 `listfield`。补全、跳转、符号、重编号和片段都按 `list<T>` |
+| 4 | VS Code 测试 `proto3SyntaxPatterns.test.ts`、`proto3Definition.test.ts`、`proto3RenumberLogicExtended.test.ts`、`proto3Primitive.test.ts` 的样例改成 `list<T>`。在 `ides/vscode` 跑现有测试 | 完成 | `npm test` 119 项通过 |
+
+## 删掉带替换说明的 deprecated 函数
+
+日期：2026-10-26
+
+schema 文件里标了 `[deprecated = true]` 的字段，生成的访问器继续带 `[[deprecated]]`，例如 `has_deprecated_int32`。`ByteSize()` 这类旧接口不再出现在基类上，生成类型也不再继承到它。生成器本来就只写 `ByteSizeLong`。`ExtensionSet::ByteSize()` 返回 `size_t`，没有标 deprecated，留下。`RepeatedField::mutable_data()` 没有标 deprecated，留下。`Arena::SpaceUsed()` 是另一个函数，留下。
+
+| 步骤 | 内容 | 状态 | 完成效果 |
+| --- | --- | --- | --- |
+| 1 | 删掉 `MessageLite::ByteSize()` 和 `LazyMessageExtension::ByteSize()`。`tests/types/well_known_types_unittest.cc` 里 10 处 `.ByteSize()` 改成 `.ByteSizeLong()` | 完成 | 两个 `int ByteSize()` 已删。10 处调用改为 `ByteSizeLong()`。生成代码只实现 `ByteSizeLong` |
+| 2 | 删掉 `Message::SpaceUsed()` 和 `Reflection::SpaceUsed(const Message&)`。消息上的调用改成 `SpaceUsedLong` | 完成 | 两个 `int SpaceUsed()` 已删。`tests/types/map_test.inc` 里消息的 `SpaceUsed()` 改为 `SpaceUsedLong()`。`arena.SpaceUsed()` 没改 |
+| 3 | 删掉 `Reflection` 的 `GetRepeatedField`、`MutableRepeatedField`、`GetRepeatedPtrField`、`MutableRepeatedPtrField`。标量改用 `GetRepeatedFieldRef`、`GetMutableRepeatedFieldRef`。消息改用 `GetRepeatedMessage`、`MutableRepeatedMessage`。四个 `*Internal` 留下 | 完成 | 四个两参数模板已删。`repeated_field_reflection_unittest.cc` 用 Ref。`map_test.inc` 的 map 条目用 `GetRepeatedMessage` / `MutableRepeatedMessage` |
+| 4 | 删掉 `FieldMaskUtil::GetFieldMaskForAllFields(FieldMask* out)`。留下返回 `FieldMask` 的模板，以及 `GetFieldMaskForAllFields(const Descriptor*, FieldMask*)` | 完成 | 出参重载已删。另外两个留下 |
+| 5 | 删掉 `text_format.h` 的 `FieldValuePrinter`，以及 `SetDefaultFieldValuePrinter(const FieldValuePrinter*)`、`RegisterFieldValuePrinter(..., const FieldValuePrinter*)`。`tests/text_format_unittest.cc` 里用这个类的地方改成 `FastFieldValuePrinter` | 完成 | 类、包装器和两个重载已删。测试里的自定义打印机改成往 `BaseTextGenerator` 写 |
+| 6 | 删掉 `RepeatedPtrField::mutable_data()`。调用改成现有公开接口。`const` 的 `data()` 留下 | 完成 | 声明和定义已删。`parser_unittest.cc` 排序改用 `pointer_begin` / `pointer_end`。`command_line_interface_unittest.cc` 交换改用 `SwapElements`。只为 `mutable_data` 写的 `MutableDataIsMutable` 已删。仓库里没有 `repeated_field_util.h` |
+
 ## repeated 改为 list<T>
 
 日期：2026-10-26

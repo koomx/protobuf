@@ -2256,9 +2256,9 @@ void SortMessages(DescriptorProto* descriptor_proto) {
   for (int i = 0; i < size; ++i) {
     SortMessages(descriptor_proto->mutable_nested_type(i));
   }
-  DescriptorProto** data =
-      descriptor_proto->mutable_nested_type()->mutable_data();
-  std::sort(data, data + size, CompareDescriptorNames());
+  auto* nested = descriptor_proto->mutable_nested_type();
+  std::sort(nested->pointer_begin(), nested->pointer_end(),
+            CompareDescriptorNames());
 }
 
 // Sorts DescriptorProtos belonging to a FileDescriptorProto, by name.
@@ -2268,9 +2268,9 @@ void SortMessages(FileDescriptorProto* file_descriptor_proto) {
   for (int i = 0; i < size; ++i) {
     SortMessages(file_descriptor_proto->mutable_message_type(i));
   }
-  DescriptorProto** data =
-      file_descriptor_proto->mutable_message_type()->mutable_data();
-  std::sort(data, data + size, CompareDescriptorNames());
+  auto* messages = file_descriptor_proto->mutable_message_type();
+  std::sort(messages->pointer_begin(), messages->pointer_end(),
+            CompareDescriptorNames());
 }
 
 // Strips the message and enum field type names for comparison purpose only.

@@ -56,7 +56,7 @@ public class PbCompleteTypesTest extends PbCompletionContributorTestCase {
 
   @Test
   public void testPrimitiveTypeInFieldAfterRepeatedKeyword() {
-    setInput("message Foo {", "  repeated in" + CARET_TAG);
+    setInput("message Foo {", "  list<in>" + CARET_TAG);
     List<String> completions = getCompletionItemsAsStrings();
     assertNotNull(completions);
     assertThat(completions).containsAllOf("int32", "int64", "sint32", "sint64", "uint32", "uint64");
@@ -498,7 +498,7 @@ public class PbCompleteTypesTest extends PbCompletionContributorTestCase {
         "  int32 pennies = 1;",
         "}",
         "message ExpensiveMessage {",
-        "  repeated int32 dollars = 1;",
+        "  list<int32> dollars = 1;",
         "}",
         "message Test {",
         "  Exp" + CARET_TAG,

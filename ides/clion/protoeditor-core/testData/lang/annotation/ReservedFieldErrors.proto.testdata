@@ -6,7 +6,7 @@ import "google/protobuf/descriptor.proto";
 
 message OptionType {
   reserved "nope";
-  repeated string str = 1;
+  list<string> str = 1;
 }
 
 extend google.protobuf.MessageOptions {

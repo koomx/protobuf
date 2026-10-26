@@ -712,7 +712,7 @@ class ListValue final :
   enum : int {
     kValuesFieldNumber = 1,
   };
-  // repeated .shark.Value values = 1;
+  // list<.shark.Value> values = 1;
   int values_size() const;
   private:
   int _internal_values_size() const;
@@ -1142,7 +1142,7 @@ inline Value::KindCase Value::kind_case() const {
 
 // ListValue
 
-// repeated .shark.Value values = 1;
+// list<.shark.Value> values = 1;
 inline int ListValue::_internal_values_size() const {
   return _impl_.values_.size();
 }

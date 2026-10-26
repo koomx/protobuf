@@ -298,9 +298,6 @@ class SHARK_EXPORT Message : public MessageLite {
   // fields defined for the proto.
   virtual size_t SpaceUsedLong() const;
 
-  [[deprecated("Please use SpaceUsedLong() instead")]]
-  int SpaceUsed() const { return internal::ToIntSize(SpaceUsedLong()); }
-
   // Debugging & Testing----------------------------------------------
 
   // Generates a human-readable form of this message for debugging purposes.
@@ -468,11 +465,6 @@ class SHARK_EXPORT Reflection final {
 
   // Estimate the amount of memory used by the message object.
   size_t SpaceUsedLong(const Message& message) const;
-
-  [[deprecated("Please use SpaceUsedLong() instead")]]
-  int SpaceUsed(const Message& message) const {
-    return internal::ToIntSize(SpaceUsedLong(message));
-  }
 
   // Check if the given non-repeated field is set.
   bool HasField(const Message& message, const FieldDescriptor* field) const;
@@ -829,62 +821,6 @@ class SHARK_EXPORT Reflection final {
   template <typename T>
   MutableRepeatedFieldRef<T> GetMutableRepeatedFieldRef(
       Message* message, const FieldDescriptor* field) const;
-
-  // DEPRECATED. Please use Get(Mutable)RepeatedFieldRef() for repeated field
-  // access. The following repeated field accessors will be removed in the
-  // future.
-  //
-  // Repeated field accessors  -------------------------------------------------
-  // The methods above, e.g. GetRepeatedInt32(msg, fd, index), provide singular
-  // access to the data in a RepeatedField.  The methods below provide aggregate
-  // access by exposing the RepeatedField object itself with the Message.
-  // Applying these templates to inappropriate types will lead to an undefined
-  // reference at link time (e.g. GetRepeatedField<***double>), or possibly a
-  // template matching error at compile time (e.g. GetRepeatedPtrField<File>).
-  //
-  // Usage example: my_doubs = refl->GetRepeatedField<double>(msg, fd);
-
-  // DEPRECATED. Please use GetRepeatedFieldRef().
-  //
-  // for T = Cord and all protobuf scalar types except enums.
-  template <typename T>
-  [[deprecated("Please use GetRepeatedFieldRef() instead")]]
-  const RepeatedField<T>& GetRepeatedField(const Message& msg,
-                                           const FieldDescriptor* d) const {
-    return GetRepeatedFieldInternal<T>(msg, d);
-  }
-
-  // DEPRECATED. Please use GetMutableRepeatedFieldRef().
-  //
-  // for T = Cord and all protobuf scalar types except enums.
-  template <typename T>
-  [[deprecated("Please use GetMutableRepeatedFieldRef() instead")]]
-  RepeatedField<T>* MutableRepeatedField(Message* msg,
-                                         const FieldDescriptor* d) const {
-    return MutableRepeatedFieldInternal<T>(msg, d);
-  }
-
-  // DEPRECATED. Please use GetRepeatedFieldRef().
-  //
-  // for T = std::string, shark::internal::StringPieceField
-  //         shark::Message & descendants.
-  template <typename T>
-  [[deprecated("Please use GetRepeatedFieldRef() instead")]]
-  const RepeatedPtrField<T>& GetRepeatedPtrField(
-      const Message& msg, const FieldDescriptor* d) const {
-    return GetRepeatedPtrFieldInternal<T>(msg, d);
-  }
-
-  // DEPRECATED. Please use GetMutableRepeatedFieldRef().
-  //
-  // for T = std::string, shark::internal::StringPieceField
-  //         shark::Message & descendants.
-  template <typename T>
-  [[deprecated("Please use GetMutableRepeatedFieldRef() instead")]]
-  RepeatedPtrField<T>* MutableRepeatedPtrField(Message* msg,
-                                               const FieldDescriptor* d) const {
-    return MutableRepeatedPtrFieldInternal<T>(msg, d);
-  }
 
   // Extensions ----------------------------------------------------------------
 

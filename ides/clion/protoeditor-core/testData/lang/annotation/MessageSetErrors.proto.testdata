@@ -27,9 +27,9 @@ message NotMessageSet {
 }
 
 message OptionType {
-  repeated TestMessageSet set_field = 2;
-  repeated NotMessageSet not_set_field = 3;
-  repeated group GroupMessageSet = 4 {
+  list<TestMessageSet> set_field = 2;
+  list<NotMessageSet> not_set_field = 3;
+  list<group> GroupMessageSet = 4 {
     option message_set_wire_format = true;
     extensions 10 to max;
   }
@@ -167,7 +167,7 @@ message MessageWithOptions {
       [ExtendsTestMessageSet] {
         val: "foo"
       }
-      [<error descr="Non-repeated field 'message_set_extension' is specified multiple times">ExtendsTestMessageSet</error>] {
+      [<error descr="Non-list<field> 'message_set_extension' is specified multiple times">ExtendsTestMessageSet</error>] {
         val: "foo"
       }
     }
@@ -177,7 +177,7 @@ message MessageWithOptions {
       [ExtendsTestMessageSet.message_set_extension] {
         val: "foo"
       }
-      [<error descr="Non-repeated field 'message_set_extension' is specified multiple times">ExtendsTestMessageSet</error>] {
+      [<error descr="Non-list<field> 'message_set_extension' is specified multiple times">ExtendsTestMessageSet</error>] {
         val: "foo"
       }
     }
@@ -185,7 +185,7 @@ message MessageWithOptions {
       [ExtendsTestMessageSet] {
         val: "foo"
       }
-      [ExtendsTestMessageSet.<error descr="Non-repeated field 'message_set_extension' is specified multiple times">message_set_extension</error>] {
+      [ExtendsTestMessageSet.<error descr="Non-list<field> 'message_set_extension' is specified multiple times">message_set_extension</error>] {
         val: "foo"
       }
     }

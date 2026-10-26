@@ -268,7 +268,7 @@ this is a formalization for deprecating services.
 ];
 
 const fieldRules = [
-  createCompletionKeyword('repeated'),
+  createCompletionKeyword('list'),
   createCompletionKeyword('required'),
   createCompletionKeyword('optional'),
 ];
@@ -447,7 +447,7 @@ export class Proto3CompletionItemProvider implements vscode.CompletionItemProvid
           }
           break;
         case 'message':
-          if (textBeforeCursor.match(/(repeated|required|optional)\s*\w*$/)) {
+          if (textBeforeCursor.match(/(list\s*<\s*|required|optional)\s*\w*$/)) {
             const result = findMessageEnum(document);
             suggestions.push(...scalarTypes, ...result.enum, ...result.message);
             return resolve(suggestions);

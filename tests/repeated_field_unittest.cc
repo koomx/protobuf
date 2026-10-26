@@ -1608,17 +1608,6 @@ TEST(RepeatedPtrField, MoveAssign) {
   }
 }
 
-TEST(RepeatedPtrField, MutableDataIsMutable) {
-  RepeatedPtrField<std::string> field;
-  *field.Add() = "1";
-  EXPECT_EQ("1", field.Get(0));
-  // The fact that this line compiles would be enough, but we'll check the
-  // value anyway.
-  std::string** data = field.mutable_data();
-  **data = "2";
-  EXPECT_EQ("2", field.Get(0));
-}
-
 TEST(RepeatedPtrField, SubscriptOperators) {
   RepeatedPtrField<std::string> field;
   *field.Add() = "1";

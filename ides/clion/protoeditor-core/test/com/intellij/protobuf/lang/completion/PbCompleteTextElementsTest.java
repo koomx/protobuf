@@ -351,7 +351,7 @@ public class PbCompleteTextElementsTest extends PbCompletionContributorTestCase 
     setInput(
         "import \"lang/completion/mock_descriptor.proto\";",
         "message MyType {",
-        "  repeated bool field = 1;",
+        "  list<bool> field = 1;",
         "  bool foobar = 2;",
         "}",
         "extend proto2.FileOptions {",

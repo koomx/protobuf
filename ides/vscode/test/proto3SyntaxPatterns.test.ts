@@ -63,7 +63,9 @@ suite('Proto3 Syntax Highlighting Patterns', () => {
   suite('Field pattern (Issue #167 - Fully qualified types)', () => {
     // Pattern from proto3.tmLanguage.json field section - updated to support leading dot
     const fieldPattern =
-      /\s*(optional|repeated|required)?\s*(\.?[\w.]+)\s+(\w+)\s*(=)\s*(0[xX][0-9a-fA-F]+|[0-9]+)/;
+      /\s*(optional|required)?\s*(\.?[\w.]+)\s+(\w+)\s*(=)\s*(0[xX][0-9a-fA-F]+|[0-9]+)/;
+    const listFieldPattern =
+      /\s*(optional|required)?\s*(list)\s*(<)\s*(\.?[\w.]+)\s*(>)\s+(\w+)\s*(=)\s*(0[xX][0-9a-fA-F]+|[0-9]+)/;
 
     test('matches simple field', () => {
       const line = '  string name = 1;';
@@ -95,12 +97,13 @@ suite('Proto3 Syntax Highlighting Patterns', () => {
       assert.strictEqual(match[2], '.my.package.Message');
     });
 
-    test('matches repeated field with leading dot', () => {
-      const line = '  repeated .my.Type items = 2;';
-      const match = fieldPattern.exec(line);
-      assert.ok(match, 'Should match repeated with leading dot');
-      assert.strictEqual(match[1], 'repeated');
-      assert.strictEqual(match[2], '.my.Type');
+    test('matches list field with leading dot', () => {
+      const line = '  list<.my.Type> items = 2;';
+      const match = listFieldPattern.exec(line);
+      assert.ok(match, 'Should match list with leading dot');
+      assert.strictEqual(match[2], 'list');
+      assert.strictEqual(match[4], '.my.Type');
+      assert.strictEqual(match[6], 'items');
     });
 
     test('matches local type with leading dot', () => {

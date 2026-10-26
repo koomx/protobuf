@@ -170,36 +170,6 @@ class SHARK_EXPORT TextFormat {
     GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FastFieldValuePrinter);
   };
 
-  // Deprecated: please use FastFieldValuePrinter instead.
-  class SHARK_EXPORT FieldValuePrinter {
-   public:
-    FieldValuePrinter();
-    virtual ~FieldValuePrinter();
-    virtual std::string PrintBool(bool val) const;
-    virtual std::string PrintInt32(int32_t val) const;
-    virtual std::string PrintUInt32(uint32_t val) const;
-    virtual std::string PrintInt64(int64_t val) const;
-    virtual std::string PrintUInt64(uint64_t val) const;
-    virtual std::string PrintFloat(float val) const;
-    virtual std::string PrintDouble(double val) const;
-    virtual std::string PrintString(const std::string& val) const;
-    virtual std::string PrintBytes(const std::string& val) const;
-    virtual std::string PrintEnum(int32_t val, const std::string& name) const;
-    virtual std::string PrintFieldName(const Message& message,
-                                       const Reflection* reflection,
-                                       const FieldDescriptor* field) const;
-    virtual std::string PrintMessageStart(const Message& message,
-                                          int field_index, int field_count,
-                                          bool single_line_mode) const;
-    virtual std::string PrintMessageEnd(const Message& message, int field_index,
-                                        int field_count,
-                                        bool single_line_mode) const;
-
-   private:
-    FastFieldValuePrinter delegate_;
-    GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(FieldValuePrinter);
-  };
-
   class SHARK_EXPORT MessagePrinter {
    public:
     MessagePrinter() {}
@@ -304,9 +274,6 @@ class SHARK_EXPORT TextFormat {
     // Takes ownership of the printer.
     void SetDefaultFieldValuePrinter(const FastFieldValuePrinter* printer);
 
-    [[deprecated("Please use FastFieldValuePrinter")]]
-    void SetDefaultFieldValuePrinter(const FieldValuePrinter* printer);
-
     // Sets whether we want to hide unknown fields or not.
     // Usually unknown fields are printed in a generic way that includes the
     // tag number of the field instead of field name. However, sometimes it
@@ -357,10 +324,6 @@ class SHARK_EXPORT TextFormat {
     // Takes ownership of the printer on successful registration.
     bool RegisterFieldValuePrinter(const FieldDescriptor* field,
                                    const FastFieldValuePrinter* printer);
-
-    [[deprecated("Please use FastFieldValuePrinter")]]
-    bool RegisterFieldValuePrinter(const FieldDescriptor* field,
-                                   const FieldValuePrinter* printer);
 
     // Register a custom message-specific MessagePrinter for messages with a
     // particular Descriptor.

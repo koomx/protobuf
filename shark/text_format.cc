@@ -1746,76 +1746,6 @@ class StringBaseTextGenerator : public TextFormat::BaseTextGenerator {
 
 }  // namespace
 
-// The default implementation for FieldValuePrinter. We just delegate the
-// implementation to the default FastFieldValuePrinter to avoid duplicating the
-// logic.
-TextFormat::FieldValuePrinter::FieldValuePrinter() {}
-TextFormat::FieldValuePrinter::~FieldValuePrinter() {}
-
-#if 0  // LANG_CXX11
-#define FORWARD_IMPL(fn, ...)            \
-  StringBaseTextGenerator generator;     \
-  delegate_.fn(__VA_ARGS__, &generator); \
-  return std::move(generator).Consume()
-#else  // !LANG_CXX11
-#define FORWARD_IMPL(fn, ...)            \
-  StringBaseTextGenerator generator;     \
-  delegate_.fn(__VA_ARGS__, &generator); \
-  return generator.Get()
-#endif  // LANG_CXX11
-
-std::string TextFormat::FieldValuePrinter::PrintBool(bool val) const {
-  FORWARD_IMPL(PrintBool, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintInt32(int32_t val) const {
-  FORWARD_IMPL(PrintInt32, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintUInt32(uint32_t val) const {
-  FORWARD_IMPL(PrintUInt32, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintInt64(int64_t val) const {
-  FORWARD_IMPL(PrintInt64, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintUInt64(uint64_t val) const {
-  FORWARD_IMPL(PrintUInt64, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintFloat(float val) const {
-  FORWARD_IMPL(PrintFloat, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintDouble(double val) const {
-  FORWARD_IMPL(PrintDouble, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintString(
-    const std::string& val) const {
-  FORWARD_IMPL(PrintString, val);
-}
-std::string TextFormat::FieldValuePrinter::PrintBytes(
-    const std::string& val) const {
-  return PrintString(val);
-}
-std::string TextFormat::FieldValuePrinter::PrintEnum(
-    int32_t val, const std::string& name) const {
-  FORWARD_IMPL(PrintEnum, val, name);
-}
-std::string TextFormat::FieldValuePrinter::PrintFieldName(
-    const Message& message, const Reflection* reflection,
-    const FieldDescriptor* field) const {
-  FORWARD_IMPL(PrintFieldName, message, reflection, field);
-}
-std::string TextFormat::FieldValuePrinter::PrintMessageStart(
-    const Message& message, int field_index, int field_count,
-    bool single_line_mode) const {
-  FORWARD_IMPL(PrintMessageStart, message, field_index, field_count,
-               single_line_mode);
-}
-std::string TextFormat::FieldValuePrinter::PrintMessageEnd(
-    const Message& message, int field_index, int field_count,
-    bool single_line_mode) const {
-  FORWARD_IMPL(PrintMessageEnd, message, field_index, field_count,
-               single_line_mode);
-}
-#undef FORWARD_IMPL
-
 TextFormat::FastFieldValuePrinter::FastFieldValuePrinter() {}
 TextFormat::FastFieldValuePrinter::~FastFieldValuePrinter() {}
 void TextFormat::FastFieldValuePrinter::PrintBool(
@@ -1907,93 +1837,6 @@ void TextFormat::FastFieldValuePrinter::PrintMessageEnd(
   }
 }
 
-namespace {
-
-// A legacy compatibility wrapper. Takes ownership of the delegate.
-class FieldValuePrinterWrapper : public TextFormat::FastFieldValuePrinter {
- public:
-  explicit FieldValuePrinterWrapper(
-      const TextFormat::FieldValuePrinter* delegate)
-      : delegate_(delegate) {}
-
-  void SetDelegate(const TextFormat::FieldValuePrinter* delegate) {
-    delegate_.reset(delegate);
-  }
-
-  void PrintBool(bool val,
-                 TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintBool(val));
-  }
-  void PrintInt32(int32_t val,
-                  TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintInt32(val));
-  }
-  void PrintUInt32(uint32_t val,
-                   TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintUInt32(val));
-  }
-  void PrintInt64(int64_t val,
-                  TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintInt64(val));
-  }
-  void PrintUInt64(uint64_t val,
-                   TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintUInt64(val));
-  }
-  void PrintFloat(float val,
-                  TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintFloat(val));
-  }
-  void PrintDouble(double val,
-                   TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintDouble(val));
-  }
-  void PrintString(const std::string& val,
-                   TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintString(val));
-  }
-  void PrintBytes(const std::string& val,
-                  TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintBytes(val));
-  }
-  void PrintEnum(int32_t val, const std::string& name,
-                 TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintEnum(val, name));
-  }
-  void PrintFieldName(const Message& message, int /*field_index*/,
-                      int /*field_count*/, const Reflection* reflection,
-                      const FieldDescriptor* field,
-                      TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(
-        delegate_->PrintFieldName(message, reflection, field));
-  }
-  void PrintFieldName(const Message& message, const Reflection* reflection,
-                      const FieldDescriptor* field,
-                      TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(
-        delegate_->PrintFieldName(message, reflection, field));
-  }
-  void PrintMessageStart(
-      const Message& message, int field_index, int field_count,
-      bool single_line_mode,
-      TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintMessageStart(
-        message, field_index, field_count, single_line_mode));
-  }
-  void PrintMessageEnd(
-      const Message& message, int field_index, int field_count,
-      bool single_line_mode,
-      TextFormat::BaseTextGenerator* generator) const override {
-    generator->PrintString(delegate_->PrintMessageEnd(
-        message, field_index, field_count, single_line_mode));
-  }
-
- private:
-  std::unique_ptr<const TextFormat::FieldValuePrinter> delegate_;
-};
-
-}  // namespace
-
 const char* const TextFormat::Printer::kDoNotParse =
     "DO NOT PARSE: fields may be stripped and missing.\n";
 
@@ -2017,30 +1860,8 @@ void TextFormat::Printer::SetUseUtf8StringEscaping(bool as_utf8) {
 }
 
 void TextFormat::Printer::SetDefaultFieldValuePrinter(
-    const FieldValuePrinter* printer) {
-  default_field_value_printer_.reset(new FieldValuePrinterWrapper(printer));
-}
-
-void TextFormat::Printer::SetDefaultFieldValuePrinter(
     const FastFieldValuePrinter* printer) {
   default_field_value_printer_.reset(printer);
-}
-
-bool TextFormat::Printer::RegisterFieldValuePrinter(
-    const FieldDescriptor* field, const FieldValuePrinter* printer) {
-  if (field == nullptr || printer == nullptr) {
-    return false;
-  }
-  std::unique_ptr<FieldValuePrinterWrapper> wrapper(
-      new FieldValuePrinterWrapper(nullptr));
-  auto pair = custom_printers_.insert(std::make_pair(field, nullptr));
-  if (pair.second) {
-    wrapper->SetDelegate(printer);
-    pair.first->second = std::move(wrapper);
-    return true;
-  } else {
-    return false;
-  }
 }
 
 bool TextFormat::Printer::RegisterFieldValuePrinter(

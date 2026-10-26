@@ -104,28 +104,6 @@ public class PbCompleteKeywordsTest extends PbCompletionContributorTestCase {
   }
 
   @Test
-  public void testGroupInProto2() {
-    withSyntax("proto2");
-    setInput("message Foo {", "  repeated gro" + CARET_TAG);
-    assertTrue(completeWithUniqueChoice());
-    assertResult("message Foo {", "  repeated group ");
-  }
-
-  @Test
-  public void testNoGroupInProto3() {
-    withSyntax("proto3");
-    setInput("message Foo {", "  repeated gro" + CARET_TAG);
-    assertNoCompletions();
-  }
-
-  @Test
-  public void testNoGroupAsGroupIdentifier() {
-    withSyntax("proto2");
-    setInput("message Foo {", "  repeated group gro" + CARET_TAG);
-    assertNoCompletions();
-  }
-
-  @Test
   public void testNoGroupAsFullyQualifiedType() {
     withSyntax("proto2");
     withPackage("com.bar");
@@ -148,52 +126,6 @@ public class PbCompleteKeywordsTest extends PbCompletionContributorTestCase {
   }
 
   @Test
-  public void testGroupInExtend() {
-    withSyntax("proto2");
-    setInput(
-        "message Foo {",
-        "  optional int32 field123 = 123;",
-        "  extensions 10000 to max;",
-        "}",
-        "extend Foo {",
-        "  optional gro" + CARET_TAG,
-        "}");
-    assertTrue(completeWithUniqueChoice());
-    assertResult(
-        "message Foo {",
-        "  optional int32 field123 = 123;",
-        "  extensions 10000 to max;",
-        "}",
-        "extend Foo {",
-        "  optional group ",
-        "}");
-  }
-
-  @Test
-  public void testMessageWithinExtendInGroup() {
-    withSyntax("proto2");
-    setInput(
-        "message Foo {",
-        "  extensions 10000 to max;",
-        "}",
-        "extend Foo {",
-        "  optional group a_group_field = 1 {",
-        "    mes" + CARET_TAG,
-        "  }",
-        "}");
-    assertTrue(completeWithUniqueChoice());
-    assertResult(
-        "message Foo {",
-        "  extensions 10000 to max;",
-        "}",
-        "extend Foo {",
-        "  optional group a_group_field = 1 {",
-        "    message ",
-        "  }",
-        "}");
-  }
-
-  @Test
   public void testExtendExtensionsInMessage() {
     setInput("message Foo {", "  ext" + CARET_TAG, "}");
     List<String> completions = getCompletionItemsAsStrings();
@@ -209,31 +141,16 @@ public class PbCompleteKeywordsTest extends PbCompletionContributorTestCase {
   }
 
   @Test
-  public void testMessageInGroup() {
-    withSyntax("proto2");
-    setInput(
-        "message Foo {",
-        "  optional int32 field1 = 1;",
-        "  optional string field2 = 2;",
-        "  optional group Bar = 3 {",
-        "    mes" + CARET_TAG,
-        "  }",
-        "}");
+  public void testListInMessageNoAutoInsertSpace() {
+    setInput("message Foo {", "  li" + CARET_TAG, "}");
     assertTrue(completeWithUniqueChoice());
-    assertResult(
-        "message Foo {",
-        "  optional int32 field1 = 1;",
-        "  optional string field2 = 2;",
-        "  optional group Bar = 3 {",
-        "    message ",
-        "  }",
-        "}");
+    assertResult("message Foo {", "  list", "}");
   }
 
   @Test
   public void testOptionOrOptionalForProto2() {
     withSyntax("proto2");
-    setInput("message Foo {", "  repeated int32 field1 = 1;", "  opt" + CARET_TAG, "}");
+    setInput("message Foo {", "  list<int32> field1 = 1;", "  opt" + CARET_TAG, "}");
     Collection<String> completions = getCompletionItemsAsStrings();
     assertNotNull(completions);
     assertThat(completions).containsExactly("option", "optional");
@@ -242,7 +159,7 @@ public class PbCompleteKeywordsTest extends PbCompletionContributorTestCase {
   @Test
   public void testOptionOrOptionalForProto3() {
     withSyntax("proto3");
-    setInput("message Foo {", "  repeated int32 field1 = 1;", "  opt" + CARET_TAG, "}");
+    setInput("message Foo {", "  list<int32> field1 = 1;", "  opt" + CARET_TAG, "}");
     Collection<String> completions = getCompletionItemsAsStrings();
     assertNotNull(completions);
     assertThat(completions).containsExactly("option", "optional");

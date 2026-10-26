@@ -8,12 +8,12 @@ import "lang/options/any.proto";
 message OptionType {
   extensions 200 to max;
   optional int32 optional = 1;
-  repeated int32 repeated = 2;
-  repeated SubType repeated_message = 10;
+  list<int32> repeated = 2;
+  list<SubType> repeated_message = 10;
   optional TypeWithRequiredField with_required = 20;
   optional OptionType recurse = 30;
   optional google.protobuf.Any any = 31;
-  repeated google.protobuf.Any repeated_any = 32;
+  list<google.protobuf.Any> repeated_any = 32;
   oneof OneofTest {
     int32 a = 50;
     int32 b = 51;
@@ -21,7 +21,7 @@ message OptionType {
     SubType sub1 = 53;
     SubType sub2 = 54;
   }
-  repeated RepeatedSubType repeated_msg = 70;
+  list<RepeatedSubType> repeated_msg = 70;
   map<string, float> mapval = 80;
 }
 
@@ -41,8 +41,8 @@ message AnyType {
 
 message RepeatedSubType {
   optional int32 value = 1;
-  repeated RepeatedSubType recurse = 2;
-  repeated TypeWithRequiredField with_required = 3;
+  list<RepeatedSubType> recurse = 2;
+  list<TypeWithRequiredField> with_required = 3;
 }
 
 message TypeWithRequiredField {
@@ -62,23 +62,23 @@ message DuplicateStatementTest {
   option (opt).repeated = 1;
 
   // Optional fields can't be specified twice.
-  option (opt).<error descr="Non-repeated field 'optional' is specified multiple times">optional</error> = 1;
+  option (opt).<error descr="Non-list<field> 'optional' is specified multiple times">optional</error> = 1;
 
   // Repeated fields can.
   option (opt).repeated = 1;
 
   // A third optional field should also generate an error.
-  option (opt).<error descr="Non-repeated field 'optional' is specified multiple times">optional</error> = 1;
+  option (opt).<error descr="Non-list<field> 'optional' is specified multiple times">optional</error> = 1;
 }
 
 message DuplicateInAggregateTest {
   option (opt) = {
     // The second two settings should generate errors
     optional: 1
-    <error descr="Non-repeated field 'optional' is specified multiple times">optional</error>: 1
-    <error descr="Non-repeated field 'optional' is specified multiple times">optional</error>: 1
+    <error descr="Non-list<field> 'optional' is specified multiple times">optional</error>: 1
+    <error descr="Non-list<field> 'optional' is specified multiple times">optional</error>: 1
 
-    // No errors for repeated values
+    // No errors for list<values>
     repeated: 1
     repeated: 1
   };
@@ -87,8 +87,8 @@ message DuplicateInAggregateTest {
 message DuplicateInAggregateShorthandTest {
   option (opt) = {
     repeated: [1, 2]
-    // Lists aren't supported for non-repeated fields.
-    optional: <error descr="Value list specified for non-repeated field 'optional'">[1, 2]</error>
+    // Lists aren't supported for non-list<fields.>
+    optional: <error descr="Value list specified for non-list<field> 'optional'">[1, 2]</error>
   };
 }
 
@@ -103,19 +103,19 @@ message DuplicateWithAggregateTest {
   option (opt).repeated = 1;
 
   // Optional fields can't be specified twice. The first specification was in the aggregate value.
-  option (opt).<error descr="Non-repeated field 'optional' is specified multiple times">optional</error> = 1;
-  option (opt).<error descr="Non-repeated field 'optional' is specified multiple times">optional</error> = 1;
+  option (opt).<error descr="Non-list<field> 'optional' is specified multiple times">optional</error> = 1;
+  option (opt).<error descr="Non-list<field> 'optional' is specified multiple times">optional</error> = 1;
 }
 
 message DuplicateExtensionOptionNameTest {
   option (bool_opt) = true;
-  option (<error descr="Non-repeated field 'bool_opt' is specified multiple times">bool_opt</error>) = true;
+  option (<error descr="Non-list<field> 'bool_opt' is specified multiple times">bool_opt</error>) = true;
 }
 
 message DuplicateExtensionFieldTest {
   option (opt) = {
     [ext]: true
-    [<error descr="Non-repeated field 'ext' is specified multiple times">ext</error>]: true
+    [<error descr="Non-list<field> 'ext' is specified multiple times">ext</error>]: true
   };
 }
 
@@ -123,7 +123,7 @@ message AggregateAfterStatementErrorTest {
   option (opt).repeated = 1;
 
   // This fails because the "opt" field was already implicitly created in the above setting.
-  option (<error descr="Non-repeated field 'opt' is specified multiple times">opt</error>) = {
+  option (<error descr="Non-list<field> 'opt' is specified multiple times">opt</error>) = {
     repeated: 1;
   };
 }
@@ -240,7 +240,7 @@ message MultipleOneofMembersInQualifiers {
   option (opt).<error descr="Field 'sub2' is specified along with field 'sub1', another member of oneof 'OneofTest'">sub2</error>.sub_value = 1;
 }
 
-// Test that multiple levels of repeated message values are valid.
+// Test that multiple levels of list<message> values are valid.
 message RepeatedMessageTest {
   option (opt).repeated_msg = {
     value: 1
@@ -288,7 +288,7 @@ message RepeatedMessageTest {
 message OccurrenceAndReferenceErrorsTest {
   option <error descr="Cannot resolve option 'foobar'">foobar</error> = 1;
   option deprecated = true;
-  option <error descr="Non-repeated field 'deprecated' is specified multiple times">deprecated</error> = true;
+  option <error descr="Non-list<field> 'deprecated' is specified multiple times">deprecated</error> = true;
 }
 
 // Test that multiple message values can be set in a value list.
@@ -298,7 +298,7 @@ message ValueListTest {
       { key: "foo1" value: 3 },
       { key: "foo2" value: 4 },
       { key: "foo3" value: 5 },
-      { key: "foo4" <error descr="Non-repeated field 'key' is specified multiple times">key</error>: "invalid" }
+      { key: "foo4" <error descr="Non-list<field> 'key' is specified multiple times">key</error>: "invalid" }
     ]
   };
 }
@@ -318,12 +318,12 @@ message AnyTest {
     any {
       [type.googleapis.com/foo.bar.AnyType] {
         a: 1
-        <error descr="Non-repeated field 'a' is specified multiple times">a</error>: 1
+        <error descr="Non-list<field> 'a' is specified multiple times">a</error>: 1
         any {
           [type.googleapis.com/foo.bar.AnyType] {
             a: 1
             b: 1
-            <error descr="Non-repeated field 'b' is specified multiple times">b</error>: 1
+            <error descr="Non-list<field> 'b' is specified multiple times">b</error>: 1
           }
         }
       }
@@ -332,20 +332,20 @@ message AnyTest {
     // Any and single field collision
     repeated_any {
       [type.googleapis.com/foo.bar.AnyType] {}
-      <error descr="Non-repeated field 'value' is specified multiple times">value</error>: "bogus"
+      <error descr="Non-list<field> 'value' is specified multiple times">value</error>: "bogus"
     }
 
     // Single field and any collision
     repeated_any {
       value: "bogus"
-      <error descr="Non-repeated field 'value' is specified multiple times">[type.googleapis.com/foo.bar.AnyType]</error> {}
+      <error descr="Non-list<field> 'value' is specified multiple times">[type.googleapis.com/foo.bar.AnyType]</error> {}
     }
 
     // Multiple any collision
     repeated_any {
       [type.googleapis.com/foo.bar.AnyType] {}
-      <error descr="Non-repeated field 'type_url' is specified multiple times"><error descr="Non-repeated field 'value' is specified multiple times">[type.googleapis.com/foo.bar.AnyType]</error></error> {}
+      <error descr="Non-list<field> 'type_url' is specified multiple times"><error descr="Non-list<field> 'value' is specified multiple times">[type.googleapis.com/foo.bar.AnyType]</error></error> {}
     }
   };
-  option (opt).<error descr="Repeated message field 'repeated_any' must be initialized using an aggregate value">repeated_any</error>.<error descr="Non-repeated field 'type_url' is specified multiple times">type_url</error> = "foo";
+  option (opt).<error descr="Repeated message field 'repeated_any' must be initialized using an aggregate value">repeated_any</error>.<error descr="Non-list<field> 'type_url' is specified multiple times">type_url</error> = "foo";
 }

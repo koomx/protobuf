@@ -11,7 +11,7 @@ suite('Proto3Definition', () => {
 
     // Updated pattern that supports 'optional' keyword
     const messageRegExp = new RegExp(
-      `^\\s*(optional|repeated)?\\s*(${messageOrEnumPattern})${messageFieldPattern}$`,
+      `^\\s*(optional|required)?\\s*(?:list\\s*<\\s*)?(${messageOrEnumPattern})>?${messageFieldPattern}$`,
       'i'
     );
 
@@ -20,9 +20,9 @@ suite('Proto3Definition', () => {
       assert.ok(messageRegExp.test(line), 'Should match optional MyMessage field');
     });
 
-    test('matches field with repeated keyword', () => {
-      const line = '  repeated MyMessage field = 1;';
-      assert.ok(messageRegExp.test(line), 'Should match repeated MyMessage field');
+    test('matches list field', () => {
+      const line = '  list<MyMessage> field = 1;';
+      assert.ok(messageRegExp.test(line), 'Should match list<MyMessage> field');
     });
 
     test('matches field without modifier', () => {

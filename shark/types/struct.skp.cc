@@ -913,7 +913,7 @@ const char* ListValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.Value values = 1;
+      // list<.shark.Value> values = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -955,7 +955,7 @@ uint8_t* ListValue::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.Value values = 1;
+  // list<.shark.Value> values = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_values_size()); i < n; i++) {
     const auto& repfield = this->_internal_values(i);
@@ -979,7 +979,7 @@ size_t ListValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.Value values = 1;
+  // list<.shark.Value> values = 1;
   total_size += 1UL * this->_internal_values_size();
   for (const auto& msg : this->_impl_.values_) {
     total_size +=

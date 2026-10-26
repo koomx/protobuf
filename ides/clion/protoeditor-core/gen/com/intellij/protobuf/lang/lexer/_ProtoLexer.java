@@ -928,7 +928,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 96: break;
           case 38:
-            { return keyword(ProtoTokenTypes.GROUP);
+            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 97: break;
@@ -1013,7 +1013,7 @@ public class _ProtoLexer implements FlexLexer {
           // fall through
           case 113: break;
           case 55:
-            { return keyword(ProtoTokenTypes.REPEATED);
+            { return ProtoTokenTypes.IDENTIFIER_LITERAL;
             }
           // fall through
           case 114: break;

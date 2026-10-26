@@ -5,7 +5,7 @@ import "google/protobuf/descriptor.proto";
 package foo.bar;
 
 message OptionType {
-  repeated string str = 1;
+  list<string> str = 1;
 }
 
 extend google.protobuf.FileOptions {

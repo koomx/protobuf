@@ -32,6 +32,6 @@
 
 namespace shark::internal {
 
-void* const kGlobalEmptyTable[kGlobalEmptyTableSize] = {nullptr};
+    void* const kGlobalEmptyTable[kGlobalEmptyTableSize] = { nullptr };
 
-}  // namespace shark::internal
+} // namespace shark::internal

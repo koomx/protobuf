@@ -374,13 +374,9 @@ class SHARK_EXPORT MessageLite {
   // proto.
   virtual size_t ByteSizeLong() const = 0;
 
-  // Legacy ByteSize() API.
-  [[deprecated("Please use ByteSizeLong() instead")]]
-  int ByteSize() const { return internal::ToIntSize(ByteSizeLong()); }
-
   // Serializes the message without recomputing the size.  The message must not
-  // have changed since the last call to ByteSize(), and the value returned by
-  // ByteSize must be non-negative.  Otherwise the results are undefined.
+  // have changed since the last call to ByteSizeLong(), and the value returned
+  // by ByteSizeLong must be non-negative.  Otherwise the results are undefined.
   void SerializeWithCachedSizes(io::CodedOutputStream* output) const {
     output->SetCur(_InternalSerialize(output->Cur(), output->EpsCopy()));
   }

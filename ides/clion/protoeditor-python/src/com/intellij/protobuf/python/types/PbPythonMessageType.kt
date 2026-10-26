@@ -57,7 +57,7 @@ internal class PbPythonMessageType(
       .filterIsInstance<PbField>()
       .filter { it.name == name }
       .any { field ->
-        // Direct assignment is forbidden for repeated containers, map containers, and message-typed fields
+        // Direct assignment is forbidden for list<containers>, map containers, and message-typed fields
         !field.isRepeated &&
         field !is PbMapField &&
         field.typeName?.symbolPath?.reference?.resolve() !is PbMessageType

@@ -201,7 +201,7 @@ class Api final :
     kSourceContextFieldNumber = 5,
     kSyntaxFieldNumber = 7,
   };
-  // repeated .shark.Method methods = 2;
+  // list<.shark.Method> methods = 2;
   int methods_size() const;
   private:
   int _internal_methods_size() const;
@@ -219,7 +219,7 @@ class Api final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >&
       methods() const;
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   int options_size() const;
   private:
   int _internal_options_size() const;
@@ -237,7 +237,7 @@ class Api final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
       options() const;
 
-  // repeated .shark.Mixin mixins = 6;
+  // list<.shark.Mixin> mixins = 6;
   int mixins_size() const;
   private:
   int _internal_mixins_size() const;
@@ -481,7 +481,7 @@ class Method final :
     kResponseStreamingFieldNumber = 5,
     kSyntaxFieldNumber = 7,
   };
-  // repeated .shark.Option options = 6;
+  // list<.shark.Option> options = 6;
   int options_size() const;
   private:
   int _internal_options_size() const;
@@ -877,7 +877,7 @@ inline void Api::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.Api.name)
 }
 
-// repeated .shark.Method methods = 2;
+// list<.shark.Method> methods = 2;
 inline int Api::_internal_methods_size() const {
   return _impl_.methods_.size();
 }
@@ -917,7 +917,7 @@ Api::methods() const {
   return _impl_.methods_;
 }
 
-// repeated .shark.Option options = 3;
+// list<.shark.Option> options = 3;
 inline int Api::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -1109,7 +1109,7 @@ inline void Api::set_allocated_source_context(::shark::SourceContext* source_con
   // @@protoc_insertion_point(field_set_allocated:shark.Api.source_context)
 }
 
-// repeated .shark.Mixin mixins = 6;
+// list<.shark.Mixin> mixins = 6;
 inline int Api::_internal_mixins_size() const {
   return _impl_.mixins_.size();
 }
@@ -1441,7 +1441,7 @@ inline void Method::set_response_streaming(bool value) {
   // @@protoc_insertion_point(field_set:shark.Method.response_streaming)
 }
 
-// repeated .shark.Option options = 6;
+// list<.shark.Option> options = 6;
 inline int Method::_internal_options_size() const {
   return _impl_.options_.size();
 }

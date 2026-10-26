@@ -932,11 +932,6 @@ class RepeatedPtrField final : private internal::RepeatedPtrFieldBase {
 
   // Gets the underlying array.  This pointer is possibly invalidated by
   // any add or remove operation.
-  //
-  // This API is deprecated. Instead of directly working with element array,
-  // use APIs in repeated_field_util.h; e.g. sorting, etc.
-  [[deprecated("Use APIs in repeated_field_util.h")]]
-  Element** mutable_data();
   const Element* const* data() const;
 
   // Swaps entire contents with "other". If they are on separate arenas, then
@@ -1432,11 +1427,6 @@ RepeatedPtrField<Element>::erase(const_iterator first, const_iterator last) {
   size_type last_offset = std::distance(cbegin(), last);
   DeleteSubrange(pos_offset, last_offset - pos_offset);
   return begin() + pos_offset;
-}
-
-template <typename Element>
-inline Element** RepeatedPtrField<Element>::mutable_data() {
-  return RepeatedPtrFieldBase::mutable_data<TypeHandler>();
 }
 
 template <typename Element>

@@ -506,7 +506,7 @@ public class PbCompleteOptionsTest extends PbCompletionContributorTestCase {
     setInput(
         "import \"lang/completion/mock_descriptor.proto\";",
         "message MyType {",
-        "  repeated bool field = 1;",
+        "  list<bool> field = 1;",
         "}",
         "extend proto2.MessageOptions {",
         "  MyType opt = 2000;",

@@ -442,10 +442,12 @@ namespace shark {
         }
 
         // A printer that appends 'u' to all unsigned int32.
-        class CustomUInt32FieldValuePrinter : public TextFormat::FieldValuePrinter {
+        class CustomUInt32FieldValuePrinter : public TextFormat::FastFieldValuePrinter {
         public:
-            std::string PrintUInt32(uint32_t val) const override {
-                return StrCat(FieldValuePrinter::PrintUInt32(val), "u");
+            void PrintUInt32(uint32_t val,
+                             TextFormat::BaseTextGenerator* generator) const override {
+                FastFieldValuePrinter::PrintUInt32(val, generator);
+                generator->PrintLiteral("u");
             }
         };
 
@@ -466,10 +468,13 @@ namespace shark {
             EXPECT_EQ("optional_uint32: 42u\nrepeated_uint32: [1u, 2u, 3u]\n", text);
         }
 
-        class CustomInt32FieldValuePrinter : public TextFormat::FieldValuePrinter {
+        class CustomInt32FieldValuePrinter : public TextFormat::FastFieldValuePrinter {
         public:
-            std::string PrintInt32(int32_t val) const override {
-                return StrCat("value-is(", FieldValuePrinter::PrintInt32(val), ")");
+            void PrintInt32(int32_t val,
+                            TextFormat::BaseTextGenerator* generator) const override {
+                generator->PrintLiteral("value-is(");
+                FastFieldValuePrinter::PrintInt32(val, generator);
+                generator->PrintLiteral(")");
             }
         };
 
@@ -494,7 +499,8 @@ namespace shark {
             const FieldDescriptor* const field = message.GetDescriptor()->FindFieldByName("optional_int32");
             ASSERT_TRUE(printer.RegisterFieldValuePrinter(
                 field, new CustomInt32FieldValuePrinter()));
-            const TextFormat::FieldValuePrinter* const rejected = new CustomInt32FieldValuePrinter();
+            const TextFormat::FastFieldValuePrinter* const rejected =
+                new CustomInt32FieldValuePrinter();
             ASSERT_FALSE(printer.RegisterFieldValuePrinter(field, rejected));
             delete rejected;
         }
@@ -505,31 +511,30 @@ namespace shark {
             // nullptr printer.
             EXPECT_FALSE(printer.RegisterFieldValuePrinter(
                 message.GetDescriptor()->FindFieldByName("optional_int32"),
-                static_cast<const TextFormat::FieldValuePrinter*>(nullptr)));
-            EXPECT_FALSE(printer.RegisterFieldValuePrinter(
-                message.GetDescriptor()->FindFieldByName("optional_int32"),
                 static_cast<const TextFormat::FastFieldValuePrinter*>(nullptr)));
             // Because registration fails, the ownership of this printer is never taken.
-            TextFormat::FieldValuePrinter my_field_printer;
+            TextFormat::FastFieldValuePrinter my_field_printer;
             // nullptr field
             EXPECT_FALSE(printer.RegisterFieldValuePrinter(nullptr, &my_field_printer));
         }
 
-        class CustomMessageFieldValuePrinter : public TextFormat::FieldValuePrinter {
+        class CustomMessageFieldValuePrinter : public TextFormat::FastFieldValuePrinter {
         public:
-            std::string PrintInt32(int32_t v) const override {
-                return StrCat(FieldValuePrinter::PrintInt32(v), "  # x",
-                    strings::Hex(v));
+            void PrintInt32(int32_t v,
+                            TextFormat::BaseTextGenerator* generator) const override {
+                FastFieldValuePrinter::PrintInt32(v, generator);
+                generator->PrintString(StrCat("  # x", strings::Hex(v)));
             }
 
-            std::string PrintMessageStart(const Message& message, int field_index,
-                int field_count,
-                bool single_line_mode) const override {
+            void PrintMessageStart(const Message& message, int field_index,
+                int field_count, bool single_line_mode,
+                TextFormat::BaseTextGenerator* generator) const override {
                 if (single_line_mode) {
-                    return " { ";
+                    generator->PrintLiteral(" { ");
+                    return;
                 }
-                return StrCat(" {  # ", message.GetDescriptor()->name(), ": ",
-                    field_index, "\n");
+                generator->PrintString(StrCat(" {  # ", message.GetDescriptor()->name(),
+                                              ": ", field_index, "\n"));
             }
         };
 
@@ -613,12 +618,12 @@ namespace shark {
                 text);
         }
 
-        class CustomMultilineCommentPrinter : public TextFormat::FieldValuePrinter {
+        class CustomMultilineCommentPrinter : public TextFormat::FastFieldValuePrinter {
         public:
-            std::string PrintMessageStart(const Message& message, int field_index,
-                int field_count,
-                bool single_line_comment) const override {
-                return StrCat(" {  # 1\n", "  # 2\n");
+            void PrintMessageStart(const Message& message, int field_index,
+                int field_count, bool single_line_comment,
+                TextFormat::BaseTextGenerator* generator) const override {
+                generator->PrintString(" {  # 1\n  # 2\n");
             }
         };
 

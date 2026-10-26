@@ -104,10 +104,14 @@ export class Proto3DocumentSymbolProvider implements DocumentSymbolProvider {
             break;
 
           case 'optional':
-          case 'repeated':
           case 'required':
             const fieldWithModifier = this.parseField(doc, tokenizer, tok);
             if (fieldWithModifier) children.push(fieldWithModifier);
+            break;
+
+          case 'list':
+            const listField = this.parseListField(doc, tokenizer);
+            if (listField) children.push(listField);
             break;
 
           case 'map':
@@ -290,9 +294,12 @@ export class Proto3DocumentSymbolProvider implements DocumentSymbolProvider {
     const fieldLine = tokenizer.line - 1;
 
     // Handle modifiers
-    if (firstToken === 'optional' || firstToken === 'repeated' || firstToken === 'required') {
+    if (firstToken === 'optional' || firstToken === 'required') {
       const type = tokenizer.next();
       if (!type) return null;
+      if (type === 'list') {
+        return this.parseListField(doc, tokenizer);
+      }
       typeName = type;
     }
 
@@ -311,6 +318,32 @@ export class Proto3DocumentSymbolProvider implements DocumentSymbolProvider {
     const selectionRange = new Range(fieldLine, 0, fieldLine, fieldName.length);
 
     return new DocumentSymbol(fieldName, typeName, SymbolKind.Field, range, selectionRange);
+  }
+
+  private parseListField(doc: TextDocument, tokenizer: ITokenizerHandle): DocumentSymbol | null {
+    const fieldLine = tokenizer.line - 1;
+    const elementType = tokenizer.next();
+    let tok = tokenizer.next();
+    while (tok !== null && tok !== '>') {
+      tok = tokenizer.next();
+    }
+    if (!tok) return null;
+    const fieldName = tokenizer.next();
+    if (!fieldName || !/^[a-zA-Z_]\w*$/.test(fieldName)) return null;
+    tok = tokenizer.next();
+    while (tok !== null && tok !== ';') {
+      tok = tokenizer.next();
+    }
+    const lineText = doc.lineAt(fieldLine).text;
+    const range = new Range(fieldLine, 0, fieldLine, lineText.length);
+    const selectionRange = new Range(fieldLine, 0, fieldLine, fieldName.length);
+    return new DocumentSymbol(
+      fieldName,
+      elementType ?? 'list',
+      SymbolKind.Field,
+      range,
+      selectionRange
+    );
   }
 
   private parseMapField(doc: TextDocument, tokenizer: ITokenizerHandle): DocumentSymbol | null {

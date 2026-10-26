@@ -4,7 +4,7 @@ import <error descr="Weak imports are not allowed since edition 2024">weak</erro
 
 message RegularMessage {
   int32 a = 1 [<error descr="weak option is not allowed since edition 2024">weak</error> = true];
-  repeated string b = 2 [<error descr="ctype option is not allowed since edition 2024">ctype</error> = CORD];
+  list<string> b = 2 [<error descr="ctype option is not allowed since edition 2024">ctype</error> = CORD];
   int32 required_field = 3 [features.field_presence = LEGACY_REQUIRED];
 
   message SubMessage {

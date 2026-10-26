@@ -24,10 +24,10 @@ message AnyType {
 }
 
 message OptionType {
-  repeated string str = 1;
-  repeated EnumType enumval = 2;
-  repeated SubType subval = 3;
-  repeated google.protobuf.Any any = 4;
+  list<string> str = 1;
+  list<EnumType> enumval = 2;
+  list<SubType> subval = 3;
+  list<google.protobuf.Any> any = 4;
   extensions 100 to 200;
 
   extend OptionType {
@@ -45,11 +45,11 @@ extend google.protobuf.FileOptions {
 }
 
 extend OptionType {
-  repeated int32 ext_opt = 150;
+  list<int32> ext_opt = 150;
 }
 
 extend OtherType {
-  repeated int32 other_ext_opt = 150;
+  list<int32> other_ext_opt = 150;
 }
 
 option (opt) = {

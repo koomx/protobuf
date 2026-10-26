@@ -123,9 +123,7 @@ class Any final :
   bool PackFrom(const ::SHARK_NAMESPACE_ID::Message& message,
                 ::SHARK_NAMESPACE_ID::ConstStringParam type_url_prefix) {
     GOOGLE_DCHECK_NE(&message, this);
-    if (!_impl_._any_metadata_.PackFrom(GetArena(), message, type_url_prefix)) {
-      return false;
-    }
+    if (!_impl_._any_metadata_.PackFrom(GetArena(), message, type_url_prefix)) return false;
     _impl_._has_bits_[0] |= 0x00000003u;
     return true;
   }
@@ -145,9 +143,7 @@ class Any final :
   template <typename T, class = typename std::enable_if<!std::is_convertible<T, const ::SHARK_NAMESPACE_ID::Message&>::value>::type>
   bool PackFrom(const T& message,
                 ::SHARK_NAMESPACE_ID::ConstStringParam type_url_prefix) {
-    if (!_impl_._any_metadata_.PackFrom<T>(GetArena(), message, type_url_prefix)) {
-      return false;
-    }
+    if (!_impl_._any_metadata_.PackFrom<T>(GetArena(), message, type_url_prefix)) return false;
     _impl_._has_bits_[0] |= 0x00000003u;
     return true;
   }

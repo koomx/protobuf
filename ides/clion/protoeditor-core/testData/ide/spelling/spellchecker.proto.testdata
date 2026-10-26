@@ -20,8 +20,8 @@ message Poorly<TYPO descr="Typo: In word 'Spelld'">Spelld</TYPO> {
 }
 
 message ValueType {
-  repeated TestEnum my_enum = 20;
-  repeated string my_string = 30;
+  list<TestEnum> my_enum = 20;
+  list<string> my_string = 30;
 }
 
 extend google.protobuf.FileOptions {

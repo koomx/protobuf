@@ -563,8 +563,6 @@ class SHARK_EXPORT ExtensionSet {
 
     virtual bool IsInitialized() const = 0;
 
-    [[deprecated("Please use ByteSizeLong() instead")]]
-    virtual int ByteSize() const { return internal::ToIntSize(ByteSizeLong()); }
     virtual size_t ByteSizeLong() const = 0;
     virtual size_t SpaceUsedLong() const = 0;
 

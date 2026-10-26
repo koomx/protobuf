@@ -46,6 +46,7 @@ import com.intellij.protobuf.lang.psi.PbGroupDefinition;
 import com.intellij.protobuf.lang.psi.PbIdentifierValue;
 import com.intellij.protobuf.lang.psi.PbImportName;
 import com.intellij.protobuf.lang.psi.PbImportStatement;
+import com.intellij.protobuf.lang.psi.PbListField;
 import com.intellij.protobuf.lang.psi.PbLiteral;
 import com.intellij.protobuf.lang.psi.PbMapField;
 import com.intellij.protobuf.lang.psi.PbMessageType;
@@ -436,7 +437,8 @@ public final class PbAnnotator implements Annotator, DumbAware {
       return;
     }
     // Extend definition must contain at least one field.
-    if (body.getGroupDefinitionList().isEmpty() && body.getSimpleFieldList().isEmpty()) {
+    if (body.getSimpleFieldList().isEmpty()
+        && PsiTreeUtil.getChildrenOfType(body, PbListField.class) == null) {
       TextRange range =
           TextRange.create(
               extendDefinition.getTextRange().getStartOffset(),
@@ -458,7 +460,8 @@ public final class PbAnnotator implements Annotator, DumbAware {
       return;
     }
     // Oneof must contain at least one field.
-    if (body.getGroupDefinitionList().isEmpty() && body.getSimpleFieldList().isEmpty()) {
+    if (body.getSimpleFieldList().isEmpty()
+        && PsiTreeUtil.getChildrenOfType(body, PbListField.class) == null) {
       TextRange range =
           TextRange.create(
               oneofDefinition.getTextRange().getStartOffset(), name.getTextRange().getEndOffset());
@@ -618,9 +621,9 @@ public final class PbAnnotator implements Annotator, DumbAware {
     }
   }
 
-  // Annotate a repeated message field option used as a qualifier name.
+  // Annotate a list<message> field option used as a qualifier name.
   // For example, in "option (myopt).foo.bar = 3;", "foo" would be given an error annotation if
-  // it referred to a repeated message. Repeated messages must be initialized using aggregate
+  // it referred to a list<message.> Repeated messages must be initialized using aggregate
   // values: "option (myopt).foo = { bar: 3 };"
   private static void annotateRepeatedMessageFieldInitialization(PbOptionName name, AnnotationHolder holder) {
     if (DumbService.isDumb(name.getProject())) return;
@@ -637,7 +640,7 @@ public final class PbAnnotator implements Annotator, DumbAware {
 
     PbNamedTypeElement type = resolveType(field);
     if (type instanceof PbMessageType && field.isRepeated()) {
-      // Repeated message fields must be defined using aggregate syntax. So, a repeated message
+      // Repeated message fields must be defined using aggregate syntax. So, a list<message>
       // field cannot be a qualifier.
       holder.newAnnotation(HighlightSeverity.ERROR, PbLangBundle.message("repeated.message.aggregate.value", field.getName()))
           .range(getOptionNameAnnotationElement(name))

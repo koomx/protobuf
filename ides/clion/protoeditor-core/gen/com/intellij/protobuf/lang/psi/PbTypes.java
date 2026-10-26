@@ -22,8 +22,7 @@ public interface PbTypes {
   IElementType EXTENSION_NAME = new PbElementType("EXTENSION_NAME");
   IElementType EXTENSION_RANGE = new PbElementType("EXTENSION_RANGE");
   IElementType FIELD_LABEL = new PbElementType("FIELD_LABEL");
-  IElementType GROUP_DEFINITION = PbStubElementTypes.get("GROUP_DEFINITION");
-  IElementType GROUP_OPTION_CONTAINER = new PbElementType("GROUP_OPTION_CONTAINER");
+  IElementType LIST_FIELD = new PbElementType("LIST_FIELD");
   IElementType IDENTIFIER_VALUE = new PbElementType("IDENTIFIER_VALUE");
   IElementType IMPORT_NAME = new PbElementType("IMPORT_NAME");
   IElementType IMPORT_STATEMENT = new PbElementType("IMPORT_STATEMENT");
@@ -95,11 +94,8 @@ public interface PbTypes {
       else if (type == FIELD_LABEL) {
         return new PbFieldLabelImpl(node);
       }
-      else if (type == GROUP_DEFINITION) {
-        return new PbGroupDefinitionImpl(node);
-      }
-      else if (type == GROUP_OPTION_CONTAINER) {
-        return new PbGroupOptionContainerImpl(node);
+      else if (type == LIST_FIELD) {
+        return new PbListFieldImpl(node);
       }
       else if (type == IDENTIFIER_VALUE) {
         return new PbIdentifierValueImpl(node);

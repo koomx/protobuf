@@ -8,12 +8,12 @@ enum Foo {
 }
 
 message Type {
-  repeated string good_spelling = 1;
-  repeated string bad_spellng = 2;
+  list<string> good_spelling = 1;
+  list<string> bad_spellng = 2;
 }
 
 message PoorlySpelld {
-  repeated Foo foo = 1;
-  repeated string string = 2;
-  repeated Type type = 3;
+  list<Foo> foo = 1;
+  list<string> string = 2;
+  list<Type> type = 3;
 }

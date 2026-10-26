@@ -26,11 +26,10 @@ internal sealed class PbPastedEntity {
     val order: Int
   ) : PbPastedEntity() {
     override fun render(): String {
-      val label = when {
-        isRepeated -> "repeated"
-        isOptional -> "optional"
-        else -> ""
+      if (isRepeated) {
+        return "list<$type> $name = $order;"
       }
+      val label = if (isOptional) "optional" else ""
       return "$label $type $name = $order;"
     }
   }

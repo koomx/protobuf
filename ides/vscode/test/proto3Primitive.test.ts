@@ -107,9 +107,9 @@ suite('Proto3Primitive', () => {
       assert.strictEqual(Proto3Primitive.isTypePrimitive('map'), false);
     });
 
-    test('should return false for repeated modifier', () => {
-      assert.strictEqual(Proto3Primitive.isTypePrimitive('repeated'), false);
-      assert.strictEqual(Proto3Primitive.isTypePrimitive('repeated string'), false);
+    test('should return false for list types', () => {
+      assert.strictEqual(Proto3Primitive.isTypePrimitive('list'), false);
+      assert.strictEqual(Proto3Primitive.isTypePrimitive('list<string>'), false);
     });
   });
 });

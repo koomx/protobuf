@@ -63,15 +63,8 @@ public class PbVisitor extends PsiElementVisitor {
     visitElement(o);
   }
 
-  public void visitGroupDefinition(@NotNull PbGroupDefinition o) {
-    visitDefinition(o);
-    // visitMessageType(o);
-    // visitSymbolContributor(o);
-    // visitGroupDefinitionBase(o);
-  }
-
-  public void visitGroupOptionContainer(@NotNull PbGroupOptionContainer o) {
-    visitElement(o);
+  public void visitListField(@NotNull PbListField o) {
+    visitField(o);
   }
 
   public void visitIdentifierValue(@NotNull PbIdentifierValue o) {

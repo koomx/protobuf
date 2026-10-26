@@ -146,7 +146,7 @@ const char* FieldMask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated string paths = 1;
+      // list<string> paths = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -192,7 +192,7 @@ uint8_t* FieldMask::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string paths = 1;
+  // list<string> paths = 1;
   for (int i = 0, n = this->_internal_paths_size(); i < n; i++) {
     const auto& s = this->_internal_paths(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -218,7 +218,7 @@ size_t FieldMask::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string paths = 1;
+  // list<string> paths = 1;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.paths_.size());
   for (int i = 0, n = _impl_.paths_.size(); i < n; i++) {
