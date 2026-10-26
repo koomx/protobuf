@@ -57,7 +57,7 @@ message Book {
   }
 
   optional Publisher publisher = 9;
-  repeated Label labels = 10;
+  list<Label> labels = 10;
 
   enum Type {
     FICTION = 1;
@@ -75,8 +75,8 @@ message Book {
   // are not added when adding Book to type info.
   optional AnyWrapper type_not_found = 13;
 
-  // Used to test invalid value inside of primitive repeated fields.
-  repeated int32 primitive_repeated = 14;
+  // Used to test invalid value inside of primitive list<fields>.
+  list<int32> primitive_repeated = 14;
 
   extensions 200 to 499;
 }
@@ -90,18 +90,18 @@ message Publisher {
 message Author {
   optional uint64 id = 1 [json_name = "@id"];
   optional string name = 2;
-  repeated string pseudonym = 3;
+  list<string> pseudonym = 3;
   optional bool alive = 4;
-  repeated Author friend = 5;
+  list<Author> friend = 5;
 }
 
 // For testing resiliency of our protostream parser.
 // Field numbers of Author are reused for something else.
 message BadAuthor {
   optional string id = 1;         // non-length-delimited to length-delimited.
-  repeated uint64 name = 2;       // string to repeated (both length-delimited).
+  list<uint64> name = 2;       // string to repeated (both length-delimited).
   optional string pseudonym = 3;  // Repeated to optional.
-  repeated bool alive = 4 [packed = true];  // Optional to repeated.
+  list<bool> alive = 4 [packed = true];  // Optional to repeated.
 }
 
 // All primitive types
@@ -128,53 +128,53 @@ message Primitive {
   optional bool bool = 15;
 
   // repeated 32 bit numbers:
-  repeated fixed32 rep_fix32 = 16;
-  repeated uint32 rep_u32 = 17;
-  repeated int32 rep_i32 = 18;
-  repeated sfixed32 rep_sf32 = 19;
-  repeated sint32 rep_s32 = 20;
+  list<fixed32> rep_fix32 = 16;
+  list<uint32> rep_u32 = 17;
+  list<int32> rep_i32 = 18;
+  list<sfixed32> rep_sf32 = 19;
+  list<sint32> rep_s32 = 20;
 
   // repeated 64 bit numbers:
-  repeated fixed64 rep_fix64 = 21;
-  repeated uint64 rep_u64 = 22;
-  repeated int64 rep_i64 = 23;
-  repeated sfixed64 rep_sf64 = 24;
-  repeated sint64 rep_s64 = 25;
+  list<fixed64> rep_fix64 = 21;
+  list<uint64> rep_u64 = 22;
+  list<int64> rep_i64 = 23;
+  list<sfixed64> rep_sf64 = 24;
+  list<sint64> rep_s64 = 25;
 
-  // repeated other stuff:
-  repeated string rep_str = 26;
-  repeated bytes rep_bytes = 27;
-  repeated float rep_float = 28;
-  repeated double rep_double = 29;
-  repeated bool rep_bool = 30;
+  // list<other> stuff:
+  list<string> rep_str = 26;
+  list<bytes> rep_bytes = 27;
+  list<float> rep_float = 28;
+  list<double> rep_double = 29;
+  list<bool> rep_bool = 30;
 }
 
-// Test packed versions of all repeated primitives.
+// Test packed versions of all list<primitives>.
 // The field numbers should match their non-packed version in Primitive message.
 message PackedPrimitive {
   // repeated 32 bit numbers:
-  repeated fixed32 rep_fix32 = 16 [packed = true];
-  repeated uint32 rep_u32 = 17 [packed = true];
-  repeated int32 rep_i32 = 18 [packed = true];
-  repeated sfixed32 rep_sf32 = 19 [packed = true];
-  repeated sint32 rep_s32 = 20 [packed = true];
+  list<fixed32> rep_fix32 = 16 [packed = true];
+  list<uint32> rep_u32 = 17 [packed = true];
+  list<int32> rep_i32 = 18 [packed = true];
+  list<sfixed32> rep_sf32 = 19 [packed = true];
+  list<sint32> rep_s32 = 20 [packed = true];
 
   // repeated 64 bit numbers:
-  repeated fixed64 rep_fix64 = 21 [packed = true];
-  repeated uint64 rep_u64 = 22 [packed = true];
-  repeated int64 rep_i64 = 23 [packed = true];
-  repeated sfixed64 rep_sf64 = 24 [packed = true];
-  repeated sint64 rep_s64 = 25 [packed = true];
+  list<fixed64> rep_fix64 = 21 [packed = true];
+  list<uint64> rep_u64 = 22 [packed = true];
+  list<int64> rep_i64 = 23 [packed = true];
+  list<sfixed64> rep_sf64 = 24 [packed = true];
+  list<sint64> rep_s64 = 25 [packed = true];
 
-  // repeated other stuff:
-  repeated float rep_float = 28 [packed = true];
-  repeated double rep_double = 29 [packed = true];
-  repeated bool rep_bool = 30 [packed = true];
+  // list<other> stuff:
+  list<float> rep_float = 28 [packed = true];
+  list<double> rep_double = 29 [packed = true];
+  list<bool> rep_bool = 30 [packed = true];
 }
 
 // Test extensions.
 extend Book {
-  repeated Author more_author = 201;
+  list<Author> more_author = 201;
 }
 
 // Test nested extensions.
@@ -189,7 +189,7 @@ message NestedBook {
 // For testing resiliency of our protostream parser.
 // Field number of NestedBook is reused for something else.
 message BadNestedBook {
-  repeated uint32 book = 1 [packed = true];  // Packed to optional message.
+  list<uint32> book = 1 [packed = true];  // Packed to optional message.
 }
 
 // A recursively defined message.
@@ -197,7 +197,7 @@ message Cyclic {
   optional int32 m_int = 1;
   optional string m_str = 2;
   optional Book m_book = 3;
-  repeated Author m_author = 5;
+  list<Author> m_author = 5;
   optional Cyclic m_cyclic = 4;
 }
 
@@ -237,8 +237,8 @@ message TestPrimitiveFieldsWithSameJsonName {
 }
 
 message TestRepeatedFieldsWithSameJsonName {
-  repeated string rep_str1 = 1;
-  repeated string rep_str_1 = 2;
+  list<string> rep_str1 = 1;
+  list<string> rep_str_1 = 2;
 }
 
 message TestMessageFieldsWithSameJsonName {

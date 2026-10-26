@@ -77,7 +77,7 @@ option cc_enable_arenas = true;
 //       }
 //     }
 //
-// A repeated field is not allowed except at the last position of a
+// A list<field> is not allowed except at the last position of a
 // paths string.
 //
 // If a FieldMask object is not present in a get operation, the
@@ -103,9 +103,9 @@ option cc_enable_arenas = true;
 // describe the updated values, the API ignores the values of all
 // fields not covered by the mask.
 //
-// If a repeated field is specified for an update operation, new values will
-// be appended to the existing repeated field in the target resource. Note that
-// a repeated field is only allowed in the last position of a `paths` string.
+// If a list<field> is specified for an update operation, new values will
+// be appended to the existing list<field> in the target resource. Note that
+// a list<field> is only allowed in the last position of a `paths` string.
 //
 // If a sub-message is specified in the last position of the field mask for an
 // update operation, then new value will be merged into the existing sub-message
@@ -145,7 +145,7 @@ option cc_enable_arenas = true;
 //     }
 //
 // An implementation may provide options to override this default behavior for
-// repeated and message fields.
+// list<and> message fields.
 //
 // In order to reset a field's value to the default, the field must
 // be in the mask and set to the default value in the provided resource.
@@ -236,5 +236,5 @@ option cc_enable_arenas = true;
 // `INVALID_ARGUMENT` error if any path is unmappable.
 message FieldMask {
   // The set of field mask paths.
-  repeated string paths = 1;
+  list<string> paths = 1;
 }

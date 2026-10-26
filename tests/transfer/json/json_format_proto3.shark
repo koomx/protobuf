@@ -63,17 +63,17 @@ message TestMessage {
   optional EnumType enum_value = 10;
   optional MessageType message_value = 11;
 
-  repeated bool repeated_bool_value = 21;
-  repeated int32 repeated_int32_value = 22;
-  repeated int64 repeated_int64_value = 23;
-  repeated uint32 repeated_uint32_value = 24;
-  repeated uint64 repeated_uint64_value = 25;
-  repeated float repeated_float_value = 26;
-  repeated double repeated_double_value = 27;
-  repeated string repeated_string_value = 28;
-  repeated bytes repeated_bytes_value = 29;
-  repeated EnumType repeated_enum_value = 30;
-  repeated MessageType repeated_message_value = 31;
+  list<bool> repeated_bool_value = 21;
+  list<int32> repeated_int32_value = 22;
+  list<int64> repeated_int64_value = 23;
+  list<uint32> repeated_uint32_value = 24;
+  list<uint64> repeated_uint64_value = 25;
+  list<float> repeated_float_value = 26;
+  list<double> repeated_double_value = 27;
+  list<string> repeated_string_value = 28;
+  list<bytes> repeated_bytes_value = 29;
+  list<EnumType> repeated_enum_value = 30;
+  list<MessageType> repeated_message_value = 31;
 }
 
 message TestOneof {
@@ -127,25 +127,25 @@ message TestWrapper {
   optional shark.StringValue string_value = 8;
   optional shark.BytesValue bytes_value = 9;
 
-  repeated shark.BoolValue repeated_bool_value = 11;
-  repeated shark.Int32Value repeated_int32_value = 12;
-  repeated shark.Int64Value repeated_int64_value = 13;
-  repeated shark.UInt32Value repeated_uint32_value = 14;
-  repeated shark.UInt64Value repeated_uint64_value = 15;
-  repeated shark.FloatValue repeated_float_value = 16;
-  repeated shark.DoubleValue repeated_double_value = 17;
-  repeated shark.StringValue repeated_string_value = 18;
-  repeated shark.BytesValue repeated_bytes_value = 19;
+  list<shark.BoolValue> repeated_bool_value = 11;
+  list<shark.Int32Value> repeated_int32_value = 12;
+  list<shark.Int64Value> repeated_int64_value = 13;
+  list<shark.UInt32Value> repeated_uint32_value = 14;
+  list<shark.UInt64Value> repeated_uint64_value = 15;
+  list<shark.FloatValue> repeated_float_value = 16;
+  list<shark.DoubleValue> repeated_double_value = 17;
+  list<shark.StringValue> repeated_string_value = 18;
+  list<shark.BytesValue> repeated_bytes_value = 19;
 }
 
 message TestTimestamp {
   optional shark.Timestamp value = 1;
-  repeated shark.Timestamp repeated_value = 2;
+  list<shark.Timestamp> repeated_value = 2;
 }
 
 message TestDuration {
   optional shark.Duration value = 1;
-  repeated shark.Duration repeated_value = 2;
+  list<shark.Duration> repeated_value = 2;
 }
 
 message TestFieldMask {
@@ -154,22 +154,22 @@ message TestFieldMask {
 
 message TestStruct {
   optional shark.Struct value = 1;
-  repeated shark.Struct repeated_value = 2;
+  list<shark.Struct> repeated_value = 2;
 }
 
 message TestAny {
   optional shark.Any value = 1;
-  repeated shark.Any repeated_value = 2;
+  list<shark.Any> repeated_value = 2;
 }
 
 message TestValue {
   optional shark.Value value = 1;
-  repeated shark.Value repeated_value = 2;
+  list<shark.Value> repeated_value = 2;
 }
 
 message TestListValue {
   optional shark.ListValue value = 1;
-  repeated shark.ListValue repeated_value = 2;
+  list<shark.ListValue> repeated_value = 2;
 }
 
 message TestBoolValue {

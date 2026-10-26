@@ -34,7 +34,7 @@ package proto_util_converter.testing;
 
 message DefaultValueTest {
   optional double double_value = 1;
-  repeated double repeated_double = 2;
+  list<double> repeated_double = 2;
   optional float float_value = 3;
   optional int64 int64_value = 5;
   optional uint64 uint64_value = 7;

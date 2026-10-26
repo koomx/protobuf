@@ -425,7 +425,7 @@ TEST_F(ParseMessageTest, SimpleFields) {
       "message TestMessage {\n"
       "  required int32 foo = 15;\n"
       "  optional int32 bar = 34;\n"
-      "  repeated int32 baz = 3;\n"
+      "  list<int32> baz = 3;\n"
       "}\n",
 
       "message_type {"
@@ -1002,7 +1002,7 @@ TEST_F(ParseMessageTest, LargerMaxForMessageSetWireFormatMessages) {
 TEST_F(ParseMessageTest, Extensions) {
   ExpectParsesTo(
       "extend Extendee1 { optional int32 foo = 12; }\n"
-      "extend Extendee2 { repeated TestMessage bar = 22; }\n",
+      "extend Extendee2 { list<TestMessage> bar = 22; }\n",
 
       "extension { name:\"foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:12"
       "            extendee: \"Extendee1\" } "
@@ -1014,7 +1014,7 @@ TEST_F(ParseMessageTest, ExtensionsInMessageScope) {
   ExpectParsesTo(
       "message TestMessage {\n"
       "  extend Extendee1 { optional int32 foo = 12; }\n"
-      "  extend Extendee2 { repeated TestMessage bar = 22; }\n"
+      "  extend Extendee2 { list<TestMessage> bar = 22; }\n"
       "}\n",
 
       "message_type {"
@@ -1031,7 +1031,7 @@ TEST_F(ParseMessageTest, MultipleExtensionsOneExtendee) {
   ExpectParsesTo(
       "extend Extendee1 {\n"
       "  optional int32 foo = 12;\n"
-      "  repeated TestMessage bar = 22;\n"
+      "  list<TestMessage> bar = 22;\n"
       "}\n",
 
       "extension { name:\"foo\" label:LABEL_OPTIONAL type:TYPE_INT32 number:12"
@@ -1421,7 +1421,7 @@ TEST_F(ParseErrorTest, MissingLabel) {
       "message TestMessage {\n"
       "  int32 foo = 1;\n"
       "}\n",
-      "1:2: Expected \"required\", \"optional\", or \"repeated\".\n");
+      "1:2: Expected \"required\" or \"optional\".\n");
 }
 
 TEST_F(ParseErrorTest, ExpectedOptionName) {
@@ -1607,8 +1607,7 @@ TEST_F(ParseErrorTest, LabelInOneof) {
       "    optional int32 bar = 1;\n"
       "  }\n"
       "}\n",
-      "2:4: Fields in oneofs must not have labels (required / optional "
-      "/ repeated).\n");
+      "2:4: Fields in oneofs must not have labels (required / optional).\n");
 }
 
 TEST_F(ParseErrorTest, MapInOneof) {
@@ -1627,14 +1626,11 @@ TEST_F(ParseErrorTest, LabelForMap) {
       "message TestMessage {\n"
       "  optional map<int32, int32> int_map = 1;\n"
       "  required map<int32, int32> int_map2 = 2;\n"
-      "  repeated map<int32, int32> int_map3 = 3;\n"
       "  optional map map_message = 4;\n"  // a normal message field is OK
       "}\n",
-      "1:14: Field labels (required/optional/repeated) are not allowed on map "
+      "1:14: Field labels (required/optional) are not allowed on map "
       "fields.\n"
-      "2:14: Field labels (required/optional/repeated) are not allowed on map "
-      "fields.\n"
-      "3:14: Field labels (required/optional/repeated) are not allowed on map "
+      "2:14: Field labels (required/optional) are not allowed on map "
       "fields.\n");
 }
 
@@ -1651,7 +1647,7 @@ TEST_F(ParseErrorTest, MalformedMaps) {
       "extend SomeMessage {\n"
       "  map<int32, int32> int_map = 1;\n"
       "}",
-      "1:6: Expected \"required\", \"optional\", or \"repeated\".\n"
+      "1:6: Expected \"required\" or \"optional\".\n"
       "2:12: Expected \",\".\n"
       "3:13: Expected type name.\n"
       "4:6: Expected type name.\n"
@@ -1682,7 +1678,7 @@ TEST_F(ParseErrorTest, MultipleParseErrors) {
       "  optional int32 bar = 3 {}\n"
       "}\n",
       "1:20: Missing field number.\n"
-      "2:2: Expected \"required\", \"optional\", or \"repeated\".\n"
+      "2:2: Expected \"required\" or \"optional\".\n"
       "2:2: Expected type name.\n"
       "3:25: Expected \";\".\n");
 }
@@ -2118,9 +2114,9 @@ TEST_F(ParserValidationErrorTest, ExplicitlyMapEntryError) {
       "    optional int32 value = 2;\n"
       "    extensions 99 to 999;\n"
       "  }\n"
-      "  repeated ValueEntry value = 1;\n"
+      "  list<ValueEntry> value = 1;\n"
       "}",
-      "7:11: map_entry should not be set explicitly. Use "
+      "7:2: map_entry should not be set explicitly. Use "
       "map<KeyType, ValueType> instead.\n");
 }
 
@@ -2925,7 +2921,7 @@ TEST_F(SourceInfoTest, Fields) {
   EXPECT_TRUE(
       Parse("message Foo {\n"
             "  $a$optional$b$ $c$int32$d$ $e$bar$f$ = $g$1$h$;$i$\n"
-            "  $j$repeated$k$ $l$X.Y$m$ $n$baz$o$ = $p$2$q$;$r$\n"
+            "  $j$list$k$<$l$X.Y$m$> $n$baz$o$ = $p$2$q$;$r$\n"
             "}\n"));
 
   const FieldDescriptorProto& field1 = file_.message_type(0).field(0);
@@ -2954,7 +2950,7 @@ TEST_F(SourceInfoTest, Proto3Fields) {
       Parse("syntax = \"proto3\";\n"
             "message Foo {\n"
             "  $a$int32$b$ $c$bar$d$ = $e$1$f$;$g$\n"
-            "  $h$repeated$i$ $j$X.Y$k$ $l$baz$m$ = $n$2$o$;$p$\n"
+            "  $h$list$i$<$j$X.Y$k$> $l$baz$m$ = $n$2$o$;$p$\n"
             "}\n"));
 }
 
@@ -2962,7 +2958,7 @@ TEST_F(SourceInfoTest, Extensions) {
   EXPECT_TRUE(
       Parse("$a$extend $b$Foo$c$ {\n"
             "  $d$optional$e$ int32 bar = 1;$f$\n"
-            "  $g$repeated$h$ X.Y baz = 2;$i$\n"
+            "  $g$list$h$<X.Y> baz = 2;$i$\n"
             "}$j$\n"
             "$k$extend $l$Bar$m$ {\n"
             "  $n$optional int32 qux = 1;$o$\n"
@@ -3005,7 +3001,7 @@ TEST_F(SourceInfoTest, NestedExtensions) {
       Parse("message Message {\n"
             "  $a$extend $b$Foo$c$ {\n"
             "    $d$optional$e$ int32 bar = 1;$f$\n"
-            "    $g$repeated$h$ X.Y baz = 2;$i$\n"
+            "    $g$list$h$<X.Y> baz = 2;$i$\n"
             "  }$j$\n"
             "  $k$extend $l$Bar$m$ {\n"
             "    $n$optional int32 qux = 1;$o$\n"

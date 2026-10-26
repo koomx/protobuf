@@ -52,10 +52,10 @@ message Api {
   optional string name = 1;
 
   // The methods of this interface, in unspecified order.
-  repeated Method methods = 2;
+  list<Method> methods = 2;
 
   // Any metadata attached to the interface.
-  repeated Option options = 3;
+  list<Option> options = 3;
 
   // A version string for this interface. If specified, must have the form
   // `major-version.minor-version`, as in `1.10`. If the minor version is
@@ -85,7 +85,7 @@ message Api {
   optional SourceContext source_context = 5;
 
   // Included interfaces. See [Mixin][].
-  repeated Mixin mixins = 6;
+  list<Mixin> mixins = 6;
 
   // The source syntax of the service.
   optional Syntax syntax = 7;
@@ -109,7 +109,7 @@ message Method {
   optional bool response_streaming = 5;
 
   // Any metadata attached to the method.
-  repeated Option options = 6;
+  list<Option> options = 6;
 
   // The source syntax of this method.
   optional Syntax syntax = 7;

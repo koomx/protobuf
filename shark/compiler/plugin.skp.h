@@ -456,7 +456,7 @@ class PROTOC_EXPORT CodeGeneratorRequest final :
     kParameterFieldNumber = 2,
     kCompilerVersionFieldNumber = 3,
   };
-  // repeated string file_to_generate = 1;
+  // list<string> file_to_generate = 1;
   int file_to_generate_size() const;
   private:
   int _internal_file_to_generate_size() const;
@@ -480,7 +480,7 @@ class PROTOC_EXPORT CodeGeneratorRequest final :
   std::string* _internal_add_file_to_generate();
   public:
 
-  // repeated .shark.FileDescriptorProto proto_file = 15;
+  // list<.shark.FileDescriptorProto> proto_file = 15;
   int proto_file_size() const;
   private:
   int _internal_proto_file_size() const;
@@ -943,7 +943,7 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
     kErrorFieldNumber = 1,
     kSupportedFeaturesFieldNumber = 2,
   };
-  // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
+  // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
   int file_size() const;
   private:
   int _internal_file_size() const;
@@ -1176,7 +1176,7 @@ inline void Version::set_allocated_suffix(std::string* suffix) {
 
 // CodeGeneratorRequest
 
-// repeated string file_to_generate = 1;
+// list<string> file_to_generate = 1;
 inline int CodeGeneratorRequest::_internal_file_to_generate_size() const {
   return _impl_.file_to_generate_.size();
 }
@@ -1319,7 +1319,7 @@ inline void CodeGeneratorRequest::set_allocated_parameter(std::string* parameter
   // @@protoc_insertion_point(field_set_allocated:shark.compiler.CodeGeneratorRequest.parameter)
 }
 
-// repeated .shark.FileDescriptorProto proto_file = 15;
+// list<.shark.FileDescriptorProto> proto_file = 15;
 inline int CodeGeneratorRequest::_internal_proto_file_size() const {
   return _impl_.proto_file_.size();
 }
@@ -1841,7 +1841,7 @@ inline void CodeGeneratorResponse::set_supported_features(uint64_t value) {
   // @@protoc_insertion_point(field_set:shark.compiler.CodeGeneratorResponse.supported_features)
 }
 
-// repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
+// list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
 inline int CodeGeneratorResponse::_internal_file_size() const {
   return _impl_.file_.size();
 }

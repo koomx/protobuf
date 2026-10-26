@@ -89,14 +89,14 @@ message Imports {
 message Data {
   optional int32 attr = 1;
   optional string str = 2;
-  repeated string msgs = 3;
+  list<string> msgs = 3;
   optional Data nested_data = 4;
   optional shark.Int32Value int_wrapper = 5;
   optional shark.Timestamp time = 6;
   map<string, string> map_data = 7;
   optional shark.Struct struct_data = 8;
-  repeated Data repeated_data = 9;
-  repeated shark.Any repeated_any = 10;
+  list<Data> repeated_data = 9;
+  list<shark.Any> repeated_any = 10;
 }
 
 service AnyTestService {

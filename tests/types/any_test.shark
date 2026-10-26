@@ -38,6 +38,6 @@ import "shark/types/any.shark";
 message TestAny {
   optional int32 int32_value = 1;
   optional shark.Any any_value = 2;
-  repeated shark.Any repeated_any_value = 3;
+  list<shark.Any> repeated_any_value = 3;
   optional string text = 4;
 }

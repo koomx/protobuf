@@ -16,7 +16,7 @@ message SizeMessage1 {
   optional int32 field6 = 6 [default=0];
   optional int64 field22 = 22;
   optional string field4 = 4;
-  repeated fixed64 field5 = 5;
+  list<fixed64> field5 = 5;
   optional bool field59 = 59 [default=false];
   optional string field7 = 7;
   optional int32 field16 = 16;
@@ -95,11 +95,11 @@ message SizeMessage2 {
   optional float field222 = 222 [default=0.0];
   optional int32 field63 = 63;
 
-  repeated string field128 = 128;
+  list<string> field128 = 128;
   optional int64 field131 = 131;
-  repeated string field127 = 127;
+  list<string> field127 = 127;
   optional int32 field129 = 129;
-  repeated int64 field130 = 130;
+  list<int64> field130 = 130;
   optional bool field205 = 205 [default=false];
   optional bool field206 = 206 [default=false];
 }

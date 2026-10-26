@@ -39,5 +39,5 @@ message NestedMessage {
 }
 
 message ArenaMessage {
-  repeated NestedMessage repeated_nested_message = 1;
+  list<NestedMessage> repeated_nested_message = 1;
 }

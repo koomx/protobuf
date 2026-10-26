@@ -59,17 +59,17 @@ message Message24379 {
   optional .benchmarks.google_message3.UnusedEmptyMessage field24607 = 5;
   optional string field24608 = 6;
   optional .benchmarks.google_message3.Message24381 field24609 = 7;
-  repeated string field24610 = 8;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field24611 = 17;
-  repeated string field24612 = 9;
-  repeated string field24613 = 10;
-  repeated string field24614 = 11;
+  list<string> field24610 = 8;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field24611 = 17;
+  list<string> field24612 = 9;
+  list<string> field24613 = 10;
+  list<string> field24614 = 11;
   optional string field24615 = 14;
   optional string field24616 = 12;
   optional string field24617 = 16;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field24618 = 13;
-  repeated string field24619 = 15;
-  repeated string field24620 = 18;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field24618 = 13;
+  list<string> field24619 = 15;
+  list<string> field24620 = 18;
 }
 
 message Message27358 {
@@ -102,37 +102,37 @@ message Message34619 {
 
 message Message730 {
   optional string field897 = 19;
-  repeated string field898 = 27;
-  repeated string field899 = 28;
-  repeated string field900 = 21;
+  list<string> field898 = 27;
+  list<string> field899 = 28;
+  list<string> field900 = 21;
   optional string field901 = 30;
-  repeated uint32 field902 = 20;
-  repeated uint32 field903 = 32;
-  repeated string field904 = 16;
-  repeated .benchmarks.google_message3.Message697 field905 = 6;
-  repeated .benchmarks.google_message3.Message704 field906 = 7;
-  repeated string field907 = 18;
-  repeated .benchmarks.google_message3.Message703 field908 = 8;
-  repeated string field909 = 9;
+  list<uint32> field902 = 20;
+  list<uint32> field903 = 32;
+  list<string> field904 = 16;
+  list<.benchmarks.google_message3.Message697> field905 = 6;
+  list<.benchmarks.google_message3.Message704> field906 = 7;
+  list<string> field907 = 18;
+  list<.benchmarks.google_message3.Message703> field908 = 8;
+  list<string> field909 = 9;
   optional .benchmarks.google_message3.Message716 field910 = 10;
   optional .benchmarks.google_message3.Message718 field911 = 11;
   optional bool field912 = 14;
-  repeated .benchmarks.google_message3.Message715 field913 = 4;
-  repeated string field914 = 17;
-  repeated string field915 = 23;
-  repeated .benchmarks.google_message3.Message719 field916 = 24;
-  repeated .benchmarks.google_message3.Message728 field917 = 26;
-  repeated .benchmarks.google_message3.Message702 field918 = 35;
+  list<.benchmarks.google_message3.Message715> field913 = 4;
+  list<string> field914 = 17;
+  list<string> field915 = 23;
+  list<.benchmarks.google_message3.Message719> field916 = 24;
+  list<.benchmarks.google_message3.Message728> field917 = 26;
+  list<.benchmarks.google_message3.Message702> field918 = 35;
   optional string field919 = 36;
-  repeated string field920 = 37;
+  list<string> field920 = 37;
   optional int64 field921 = 38;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field922 = 39;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field923 = 1;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field922 = 39;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field923 = 1;
   optional .benchmarks.google_message3.UnusedEmptyMessage field924 = 2;
   optional .benchmarks.google_message3.UnusedEmptyMessage field925 = 3;
   optional .benchmarks.google_message3.UnusedEmptyMessage field926 = 5;
   optional .benchmarks.google_message3.UnusedEmptyMessage field927 = 13;
-  repeated string field928 = 22;
+  list<string> field928 = 22;
   optional bytes field929 = 31;
   extensions 25 to 25;
   extensions 29 to 29;
@@ -151,9 +151,9 @@ message Message33958 {
 
 message Message6637 {
   optional .benchmarks.google_message3.UnusedEmptyMessage field6670 = 2;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field6671 = 1;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field6671 = 1;
   optional int32 field6672 = 3;
-  repeated string field6673 = 4;
+  list<string> field6673 = 4;
   optional .benchmarks.google_message3.UnusedEmptyMessage field6674 = 5;
 }
 
@@ -172,7 +172,7 @@ message Message6643 {
   optional .benchmarks.google_message3.Message6578 field6694 = 15;
   optional .benchmarks.google_message3.UnusedEnum field6695 = 16;
   optional int64 field6696 = 17;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field6697 = 22;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field6697 = 22;
   optional .benchmarks.google_message3.UnusedEmptyMessage field6698 = 19;
   optional .benchmarks.google_message3.UnusedEmptyMessage field6699 = 20;
   optional int32 field6700 = 21;
@@ -180,23 +180,23 @@ message Message6643 {
 
 message Message6126 {
   required string field6152 = 1;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field6153 = 9;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field6153 = 9;
   optional int32 field6154 = 14;
   optional bytes field6155 = 10;
   optional .benchmarks.google_message3.Message6024 field6156 = 12;
   optional int32 field6157 = 4;
   optional string field6158 = 5;
   optional int32 field6159 = 6;
-  repeated int32 field6160 = 2;
-  repeated int32 field6161 = 3;
-  repeated .benchmarks.google_message3.Message6052 field6162 = 7;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field6163 = 11;
+  list<int32> field6160 = 2;
+  list<int32> field6161 = 3;
+  list<.benchmarks.google_message3.Message6052> field6162 = 7;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field6163 = 11;
   optional .benchmarks.google_message3.Enum6065 field6164 = 15;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field6165 = 8;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field6165 = 8;
   optional bool field6166 = 13;
   optional bool field6167 = 16;
   optional bool field6168 = 18;
-  repeated .benchmarks.google_message3.Message6054 field6169 = 17;
+  list<.benchmarks.google_message3.Message6054> field6169 = 17;
   optional int32 field6170 = 19;
 }
 
@@ -247,18 +247,18 @@ message Message35506 {
   optional int32 field35524 = 1;
   optional string field35525 = 2;
   optional .benchmarks.google_message3.Enum35507 field35526 = 3;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field35527 = 4;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field35527 = 4;
 }
 
 message Message13151 {
-  repeated .benchmarks.google_message3.Message13145 field13158 = 1;
+  list<.benchmarks.google_message3.Message13145> field13158 = 1;
 }
 
 message Message18253 {
 }
 
 message Message16685 {
-  repeated .benchmarks.google_message3.Message16686 field16694 = 2;
+  list<.benchmarks.google_message3.Message16686> field16694 = 2;
 }
 
 message Message16816 {
@@ -296,7 +296,7 @@ message Message13167 {
   optional .benchmarks.google_message3.Message12796 field13205 = 11;
   optional fixed64 field13206 = 9;
   optional bool field13207 = 10;
-  repeated int32 field13208 = 4;
+  list<int32> field13208 = 4;
   optional int32 field13209 = 5;
   optional int32 field13210 = 6;
   optional int32 field13211 = 7;
@@ -340,7 +340,7 @@ message Message18856 {
   optional string field18882 = 30;
   optional string field18883 = 15;
   optional string field18884 = 16;
-  repeated string field18885 = 14;
+  list<string> field18885 = 14;
   optional string field18886 = 27;
   optional string field18887 = 28;
 }
@@ -367,7 +367,7 @@ message Message6742 {
 
 message Message6726 {
   optional int64 field6752 = 1;
-  repeated .benchmarks.google_message3.Message6727 field6753 = 2;
+  list<.benchmarks.google_message3.Message6727> field6753 = 2;
 }
 
 message Message6733 {
@@ -378,7 +378,7 @@ message Message6733 {
 
 message Message6723 {
   optional int64 field6748 = 1;
-  repeated .benchmarks.google_message3.Message6724 field6749 = 2;
+  list<.benchmarks.google_message3.Message6724> field6749 = 2;
 }
 
 message Message6725 {
@@ -387,13 +387,13 @@ message Message6725 {
 }
 
 message Message6734 {
-  repeated .benchmarks.google_message3.Message6735 field6757 = 1;
+  list<.benchmarks.google_message3.Message6735> field6757 = 1;
 }
 
 message Message8184 {
   optional .benchmarks.google_message3.Message7966 field8228 = 1;
   optional bool field8229 = 2;
-  repeated .benchmarks.google_message3.Message8183 field8230 = 3;
+  list<.benchmarks.google_message3.Message8183> field8230 = 3;
 }
 
 message Message8477 {
@@ -420,7 +420,7 @@ message Message8476 {
 
 message Message8455 {
   optional .benchmarks.google_message3.Message8449 field8470 = 1;
-  repeated .benchmarks.google_message3.Message8456 field8471 = 2;
+  list<.benchmarks.google_message3.Message8456> field8471 = 2;
   optional .benchmarks.google_message3.Message8457 field8472 = 5;
   optional .benchmarks.google_message3.UnusedEmptyMessage field8473 = 6;
   extend .benchmarks.google_message3.Message8302 {
@@ -456,31 +456,31 @@ message Message16480 {
 message Message24317 {
   optional string field24446 = 1;
   optional .benchmarks.google_message3.Message24312 field24447 = 2;
-  repeated .benchmarks.google_message3.Message24315 field24448 = 3;
-  repeated .benchmarks.google_message3.Message24313 field24449 = 4;
-  repeated .benchmarks.google_message3.Message24316 field24450 = 5;
-  repeated .benchmarks.google_message3.UnusedEmptyMessage field24451 = 6;
+  list<.benchmarks.google_message3.Message24315> field24448 = 3;
+  list<.benchmarks.google_message3.Message24313> field24449 = 4;
+  list<.benchmarks.google_message3.Message24316> field24450 = 5;
+  list<.benchmarks.google_message3.UnusedEmptyMessage> field24451 = 6;
   optional .benchmarks.google_message3.UnusedEmptyMessage field24452 = 7;
-  repeated string field24453 = 8;
-  repeated string field24454 = 9;
-  repeated string field24455 = 10;
-  repeated string field24456 = 28;
+  list<string> field24453 = 8;
+  list<string> field24454 = 9;
+  list<string> field24455 = 10;
+  list<string> field24456 = 28;
   optional string field24457 = 11;
   optional string field24458 = 12;
   optional string field24459 = 13;
   optional string field24460 = 14;
-  repeated string field24461 = 15;
+  list<string> field24461 = 15;
   optional string field24462 = 16;
-  repeated string field24463 = 17;
-  repeated string field24464 = 18;
-  repeated string field24465 = 19;
-  repeated string field24466 = 20;
-  repeated string field24467 = 21;
-  repeated string field24468 = 22;
-  repeated string field24469 = 23;
-  repeated string field24470 = 24;
+  list<string> field24463 = 17;
+  list<string> field24464 = 18;
+  list<string> field24465 = 19;
+  list<string> field24466 = 20;
+  list<string> field24467 = 21;
+  list<string> field24468 = 22;
+  list<string> field24469 = 23;
+  list<string> field24470 = 24;
   optional string field24471 = 25;
   optional string field24472 = 26;
-  repeated string field24473 = 27;
+  list<string> field24473 = 27;
   optional bool field24474 = 40;
 }

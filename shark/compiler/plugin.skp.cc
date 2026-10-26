@@ -671,7 +671,7 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated string file_to_generate = 1;
+      // list<string> file_to_generate = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -708,7 +708,7 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.FileDescriptorProto proto_file = 15;
+      // list<.shark.FileDescriptorProto> proto_file = 15;
       case 15:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr -= 1;
@@ -751,7 +751,7 @@ uint8_t* CodeGeneratorRequest::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated string file_to_generate = 1;
+  // list<string> file_to_generate = 1;
   for (int i = 0, n = this->_internal_file_to_generate_size(); i < n; i++) {
     const auto& s = this->_internal_file_to_generate(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -779,7 +779,7 @@ uint8_t* CodeGeneratorRequest::_InternalSerialize(
         _Internal::compiler_version(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.FileDescriptorProto proto_file = 15;
+  // list<.shark.FileDescriptorProto> proto_file = 15;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_proto_file_size()); i < n; i++) {
     const auto& repfield = this->_internal_proto_file(i);
@@ -803,7 +803,7 @@ size_t CodeGeneratorRequest::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string file_to_generate = 1;
+  // list<string> file_to_generate = 1;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.file_to_generate_.size());
   for (int i = 0, n = _impl_.file_to_generate_.size(); i < n; i++) {
@@ -811,7 +811,7 @@ size_t CodeGeneratorRequest::ByteSizeLong() const {
       _impl_.file_to_generate_.Get(i));
   }
 
-  // repeated .shark.FileDescriptorProto proto_file = 15;
+  // list<.shark.FileDescriptorProto> proto_file = 15;
   total_size += 1UL * this->_internal_proto_file_size();
   for (const auto& msg : this->_impl_.proto_file_) {
     total_size +=
@@ -1414,7 +1414,7 @@ const char* CodeGeneratorResponse::_InternalParse(const char* ptr, ::_pbi::Parse
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
+      // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
       case 15:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 122)) {
           ptr -= 1;
@@ -1474,7 +1474,7 @@ uint8_t* CodeGeneratorResponse::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteUInt64ToArray(2, this->_internal_supported_features(), target);
   }
 
-  // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
+  // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_file_size()); i < n; i++) {
     const auto& repfield = this->_internal_file(i);
@@ -1498,7 +1498,7 @@ size_t CodeGeneratorResponse::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.compiler.CodeGeneratorResponse.File file = 15;
+  // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
   total_size += 1UL * this->_internal_file_size();
   for (const auto& msg : this->_impl_.file_) {
     total_size +=

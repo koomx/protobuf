@@ -56,29 +56,29 @@ message TestConflictingSymbolNames {
   optional int32 input = 1;
   optional int32 output = 2;
   optional string length = 3;
-  repeated int32 i = 4;
-  repeated string new_element = 5 [ctype = STRING_PIECE];
+  list<int32> i = 4;
+  list<string> new_element = 5 [ctype = STRING_PIECE];
   optional int32 total_size = 6;
   optional int32 tag = 7;
 
   enum TestEnum { FOO = 0; }
   message Data1 {
-    repeated int32 data = 1;
+    list<int32> data = 1;
   }
   message Data2 {
-    repeated TestEnum data = 1;
+    list<TestEnum> data = 1;
   }
   message Data3 {
-    repeated string data = 1;
+    list<string> data = 1;
   }
   message Data4 {
-    repeated Data4 data = 1;
+    list<Data4> data = 1;
   }
   message Data5 {
-    repeated string data = 1 [ctype = STRING_PIECE];
+    list<string> data = 1 [ctype = STRING_PIECE];
   }
   message Data6 {
-    repeated string data = 1 [ctype = CORD];
+    list<string> data = 1 [ctype = CORD];
   }
 
   optional int32 source = 8;
@@ -86,7 +86,7 @@ message TestConflictingSymbolNames {
   optional int32 file = 10;
   optional int32 from = 11;
   optional int32 handle_uninterpreted = 12;
-  repeated int32 index = 13;
+  list<int32> index = 13;
   optional int32 controller = 14;
   optional int32 already_here = 15;
 
@@ -141,7 +141,7 @@ message TestConflictingSymbolNames {
 
 message TestConflictingSymbolNamesExtension {                      // NO_PROTO3
   extend TestConflictingSymbolNames {                              // NO_PROTO3
-    repeated int32 repeated_int32_ext = 20423638 [packed = true];  // NO_PROTO3
+    list<int32> repeated_int32_ext = 20423638 [packed = true];  // NO_PROTO3
   }                                                                // NO_PROTO3
 }  // NO_PROTO3
 

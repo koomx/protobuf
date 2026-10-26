@@ -945,9 +945,41 @@ bool Parser::ParseMessageFieldNoLabel(
     FieldDescriptorProto::Type type = FieldDescriptorProto::TYPE_INT32;
     std::string type_name;
 
+    // list<T> is a repeated field of type T. The field type stays T.
+    // optional and required before list<> are accepted and ignored.
+    bool list_field = false;
+    if (TryConsume("list")) {
+      if (LookingAt("<")) {
+        if (field->has_oneof_index()) {
+          AddError("List fields are not allowed in oneofs.");
+          return false;
+        }
+        io::Tokenizer::Token list_token = input_->previous();
+        DO(Consume("<"));
+        io::Tokenizer::Token type_start = input_->current();
+        DO(ParseType(&type, &type_name));
+        io::Tokenizer::Token type_end = input_->previous();
+        DO(Consume(">"));
+        location.StartAt(type_start);
+        location.EndAt(type_end);
+        field->set_label(FieldDescriptorProto::LABEL_REPEATED);
+        {
+          LocationRecorder label_location(
+              field_location, FieldDescriptorProto::kLabelFieldNumber);
+          label_location.StartAt(list_token);
+          label_location.EndAt(list_token);
+        }
+        list_field = true;
+        type_parsed = true;
+      } else {
+        type_parsed = true;
+        type_name = "list";
+      }
+    }
+
     // Special case map field. We only treat the field as a map field if the
     // field type name starts with the word "map" with a following "<".
-    if (TryConsume("map")) {
+    if (!list_field && TryConsume("map")) {
       if (LookingAt("<")) {
         map_field.is_map_field = true;
         DO(ParseMapType(&map_field, field, location));
@@ -959,11 +991,11 @@ bool Parser::ParseMessageFieldNoLabel(
     }
     if (!map_field.is_map_field) {
       // Handle the case where no explicit label is given for a non-map field.
-      if (!field->has_label() && DefaultToOptionalFields()) {
+      if (!list_field && !field->has_label() && DefaultToOptionalFields()) {
         field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
       }
       if (!field->has_label()) {
-        AddError("Expected \"required\", \"optional\", or \"repeated\".");
+        AddError("Expected \"required\" or \"optional\".");
         // We can actually reasonably recover here by just assuming the user
         // forgot the label altogether.
         field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
@@ -1042,7 +1074,7 @@ bool Parser::ParseMapType(MapField* map_field, FieldDescriptorProto* field,
   }
   if (field->has_label()) {
     AddError(
-        "Field labels (required/optional/repeated) are not allowed on "
+        "Field labels (required/optional) are not allowed on "
         "map fields.");
     return false;
   }
@@ -1886,11 +1918,9 @@ bool Parser::ParseOneof(OneofDescriptorProto* oneof_decl,
 
     // Print a nice error if the user accidentally tries to place a label
     // on an individual member of a oneof.
-    if (LookingAt("required") || LookingAt("optional") ||
-        LookingAt("repeated")) {
+    if (LookingAt("required") || LookingAt("optional")) {
       AddError(
-          "Fields in oneofs must not have labels (required / optional "
-          "/ repeated).");
+          "Fields in oneofs must not have labels (required / optional).");
       // We can continue parsing here because we understand what the user
       // meant.  The error report will still make parsing fail overall.
       input_->Next();
@@ -2307,16 +2337,13 @@ bool Parser::ParseMethodOptions(const LocationRecorder& parent_location,
 
 bool Parser::ParseLabel(FieldDescriptorProto::Label* label,
                         const LocationRecorder& field_location) {
-  if (!LookingAt("optional") && !LookingAt("repeated") &&
-      !LookingAt("required")) {
+  if (!LookingAt("optional") && !LookingAt("required")) {
     return false;
   }
   LocationRecorder location(field_location,
                             FieldDescriptorProto::kLabelFieldNumber);
   if (TryConsume("optional")) {
     *label = FieldDescriptorProto::LABEL_OPTIONAL;
-  } else if (TryConsume("repeated")) {
-    *label = FieldDescriptorProto::LABEL_REPEATED;
   } else {
     Consume("required");
     *label = FieldDescriptorProto::LABEL_REQUIRED;

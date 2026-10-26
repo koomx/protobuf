@@ -7435,7 +7435,7 @@ const char* const kSourceLocationTestInput =
     "  extensions 1000 to 2000, 2001 to max [(test_ext_opt) = \"foobar\"];\n"
     "}\n"
     "extend MessageWithExtensions {\n"
-    "  repeated int32 int32_extension = 1001 [packed=true];\n"
+    "  list<int32> int32_extension = 1001 [packed=true];\n"
     "}\n"
     "message C {\n"
     "  extend MessageWithExtensions {\n"
@@ -7453,13 +7453,13 @@ const char* const kSourceLocationTestInput =
     "  optional string test_field_opt = 10101;\n"
     "}\n"
     "extend shark.EnumOptions {\n"
-    "  repeated int32 test_enum_opt = 10101;\n"
+    "  list<int32> test_enum_opt = 10101;\n"
     "}\n"
     "extend shark.EnumValueOptions {\n"
     "  optional A test_enumval_opt = 10101;\n"
     "}\n"
     "extend shark.ServiceOptions {\n"
-    "  repeated A test_svc_opt = 10101;\n"
+    "  list<A> test_svc_opt = 10101;\n"
     "}\n"
     "extend shark.MethodOptions {\n"
     "  optional string test_method_opt = 10101;\n"
@@ -7551,7 +7551,7 @@ TEST_F(SourceLocationTest, ExtensionSourceLocation) {
   const FieldDescriptor* int32_extension_desc =
       file_desc->FindExtensionByName("int32_extension");
   EXPECT_TRUE(int32_extension_desc->GetSourceLocation(&loc));
-  EXPECT_EQ("40:3-40:55", PrintSourceLocation(loc));
+  EXPECT_EQ("40:3-40:52", PrintSourceLocation(loc));
 
   const Descriptor* c_desc = file_desc->FindMessageTypeByName("C");
   EXPECT_TRUE(c_desc->GetSourceLocation(&loc));
@@ -7924,7 +7924,7 @@ TEST_F(SourceLocationTest, InterpretedOptionSourceLocation) {
                    FieldOptions::kUninterpretedOptionFieldNumber, 0};
     std::vector<int> vpath(path, path + 4);
     EXPECT_TRUE(file_desc->GetSourceLocation(vpath, &loc));
-    EXPECT_EQ("40:42-40:53", PrintSourceLocation(loc));
+    EXPECT_EQ("40:39-40:50", PrintSourceLocation(loc));
 
     std::vector<int> vunint(unint, unint + 5);
     EXPECT_FALSE(file_desc->GetSourceLocation(vunint, &loc));

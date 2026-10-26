@@ -358,7 +358,7 @@ class Type final :
     kSourceContextFieldNumber = 5,
     kSyntaxFieldNumber = 6,
   };
-  // repeated .shark.Field fields = 2;
+  // list<.shark.Field> fields = 2;
   int fields_size() const;
   private:
   int _internal_fields_size() const;
@@ -376,7 +376,7 @@ class Type final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >&
       fields() const;
 
-  // repeated string oneofs = 3;
+  // list<string> oneofs = 3;
   int oneofs_size() const;
   private:
   int _internal_oneofs_size() const;
@@ -400,7 +400,7 @@ class Type final :
   std::string* _internal_add_oneofs();
   public:
 
-  // repeated .shark.Option options = 4;
+  // list<.shark.Option> options = 4;
   int options_size() const;
   private:
   int _internal_options_size() const;
@@ -732,7 +732,7 @@ class Field final :
     kOneofIndexFieldNumber = 7,
     kPackedFieldNumber = 8,
   };
-  // repeated .shark.Option options = 9;
+  // list<.shark.Option> options = 9;
   int options_size() const;
   private:
   int _internal_options_size() const;
@@ -1047,7 +1047,7 @@ class Enum final :
     kSourceContextFieldNumber = 4,
     kSyntaxFieldNumber = 5,
   };
-  // repeated .shark.EnumValue enumvalue = 2;
+  // list<.shark.EnumValue> enumvalue = 2;
   int enumvalue_size() const;
   private:
   int _internal_enumvalue_size() const;
@@ -1065,7 +1065,7 @@ class Enum final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >&
       enumvalue() const;
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   int options_size() const;
   private:
   int _internal_options_size() const;
@@ -1285,7 +1285,7 @@ class EnumValue final :
     kNameFieldNumber = 1,
     kNumberFieldNumber = 2,
   };
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   int options_size() const;
   private:
   int _internal_options_size() const;
@@ -1615,7 +1615,7 @@ inline void Type::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.Type.name)
 }
 
-// repeated .shark.Field fields = 2;
+// list<.shark.Field> fields = 2;
 inline int Type::_internal_fields_size() const {
   return _impl_.fields_.size();
 }
@@ -1655,7 +1655,7 @@ Type::fields() const {
   return _impl_.fields_;
 }
 
-// repeated string oneofs = 3;
+// list<string> oneofs = 3;
 inline int Type::_internal_oneofs_size() const {
   return _impl_.oneofs_.size();
 }
@@ -1730,7 +1730,7 @@ Type::mutable_oneofs() {
   return &_impl_.oneofs_;
 }
 
-// repeated .shark.Option options = 4;
+// list<.shark.Option> options = 4;
 inline int Type::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -2165,7 +2165,7 @@ inline void Field::set_packed(bool value) {
   // @@protoc_insertion_point(field_set:shark.Field.packed)
 }
 
-// repeated .shark.Option options = 9;
+// list<.shark.Option> options = 9;
 inline int Field::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -2413,7 +2413,7 @@ inline void Enum::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.Enum.name)
 }
 
-// repeated .shark.EnumValue enumvalue = 2;
+// list<.shark.EnumValue> enumvalue = 2;
 inline int Enum::_internal_enumvalue_size() const {
   return _impl_.enumvalue_.size();
 }
@@ -2453,7 +2453,7 @@ Enum::enumvalue() const {
   return _impl_.enumvalue_;
 }
 
-// repeated .shark.Option options = 3;
+// list<.shark.Option> options = 3;
 inline int Enum::_internal_options_size() const {
   return _impl_.options_.size();
 }
@@ -2708,7 +2708,7 @@ inline void EnumValue::set_number(int32_t value) {
   // @@protoc_insertion_point(field_set:shark.EnumValue.number)
 }
 
-// repeated .shark.Option options = 3;
+// list<.shark.Option> options = 3;
 inline int EnumValue::_internal_options_size() const {
   return _impl_.options_.size();
 }

@@ -76,5 +76,5 @@ service TimestampDurationTestService {
 message TimestampDuration {
   optional shark.Timestamp ts = 1;
   optional shark.Duration dur = 2;
-  repeated shark.Timestamp rep_ts = 3;
+  list<shark.Timestamp> rep_ts = 3;
 }

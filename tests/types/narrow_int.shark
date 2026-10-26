@@ -7,14 +7,14 @@ message NarrowInt {
   optional uint8 u8 = 2;
   optional int16 i16 = 3;
   optional uint16 u16 = 4;
-  repeated int8 ri8 = 5 [packed = true];
-  repeated uint16 ru16 = 6 [packed = true];
+  list<int8> ri8 = 5 [packed = true];
+  list<uint16> ru16 = 6 [packed = true];
   extensions 100 to 199;
 }
 
 extend NarrowInt {
   optional int8 ei8 = 100;
-  repeated int8 eri8 = 101 [packed = true];
+  list<int8> eri8 = 101 [packed = true];
 }
 
 message I8Entry {
@@ -45,8 +45,8 @@ message NarrowMaps {
 }
 
 message NarrowKeyList {
-  repeated I8Entry i8 = 1;
-  repeated U8Entry u8 = 2;
-  repeated I16Entry i16 = 3;
-  repeated U16Entry u16 = 4;
+  list<I8Entry> i8 = 1;
+  list<U8Entry> u8 = 2;
+  list<I16Entry> i16 = 3;
+  list<U16Entry> u16 = 4;
 }

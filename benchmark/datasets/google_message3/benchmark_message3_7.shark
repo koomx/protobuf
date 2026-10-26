@@ -59,11 +59,11 @@ message Message7966 {
 
 message Message708 {
   optional .benchmarks.google_message3.Message741 field823 = 1;
-  repeated string field824 = 6;
+  list<string> field824 = 6;
   optional string field825 = 2;
   optional string field826 = 3;
-  repeated string field827 = 4;
-  repeated string field828 = 5;
+  list<string> field827 = 4;
+  list<string> field828 = 5;
 }
 
 message Message8942 {}
@@ -76,5 +76,5 @@ message Message11011 {
 message UnusedEmptyMessage {}
 
 message Message741 {
-  repeated string field936 = 1;
+  list<string> field936 = 1;
 }

@@ -3212,6 +3212,8 @@ namespace shark {
                 &field_type, "map<$0, $1>",
                 message_type()->field(0)->FieldTypeNameDebugString(),
                 message_type()->field(1)->FieldTypeNameDebugString());
+        } else if (is_repeated()) {
+            field_type = "list<" + FieldTypeNameDebugString() + ">";
         } else {
             field_type = FieldTypeNameDebugString();
         }
@@ -3219,7 +3221,8 @@ namespace shark {
         std::string label = StrCat(kLabelToName[static_cast<int>(this->label())], " ");
 
         // Label is omitted for maps, oneof, and plain proto3 fields.
-        if (is_map() || real_containing_oneof() || (is_optional() && !has_optional_keyword())) {
+        if (is_map() || is_repeated() || real_containing_oneof() ||
+            (is_optional() && !has_optional_keyword())) {
             label.clear();
         }
 

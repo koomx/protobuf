@@ -85,7 +85,7 @@ message ValueWrapper {
 }
 
 message RepeatedValueWrapper {
-  repeated shark.Value values = 1;
+  list<shark.Value> values = 1;
 }
 
 message ListValueWrapper {
@@ -93,7 +93,7 @@ message ListValueWrapper {
 }
 
 message RepeatedListValueWrapper {
-  repeated shark.ListValue dimensions = 1;
+  list<shark.ListValue> dimensions = 1;
 }
 
 message MapOfStruct {

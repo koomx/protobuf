@@ -37,14 +37,14 @@ import "shark/types/field_mask.shark";
 message NestedFieldMask {
   optional string data = 1;
   optional shark.FieldMask single_mask = 2;
-  repeated shark.FieldMask repeated_mask = 3;
+  list<shark.FieldMask> repeated_mask = 3;
 }
 
 message FieldMaskTest {
   optional string id = 1;
   optional shark.FieldMask single_mask = 2;
-  repeated shark.FieldMask repeated_mask = 3;
-  repeated NestedFieldMask nested_mask = 4;
+  list<shark.FieldMask> repeated_mask = 3;
+  list<NestedFieldMask> nested_mask = 4;
 }
 
 message FieldMaskTestCases {

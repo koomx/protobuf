@@ -67,7 +67,7 @@ message CodeGeneratorRequest {
   // The .shark files that were explicitly listed on the command-line.  The
   // code generator should generate code only for these files.  Each file's
   // descriptor will be included in proto_file, below.
-  repeated string file_to_generate = 1;
+  list<string> file_to_generate = 1;
 
   // The generator parameter passed on the command-line.
   optional string parameter = 2;
@@ -86,7 +86,7 @@ message CodeGeneratorRequest {
   //
   // Type names of fields and extensions in the FileDescriptorProto are always
   // fully qualified.
-  repeated FileDescriptorProto proto_file = 15;
+  list<FileDescriptorProto> proto_file = 15;
 
   // The version number of protocol compiler.
   optional Version compiler_version = 3;
@@ -177,5 +177,5 @@ message CodeGeneratorResponse {
     // into the code generation metadata for the generated files.
     optional GeneratedCodeInfo generated_code_info = 16;
   }
-  repeated File file = 15;
+  list<File> file = 15;
 }

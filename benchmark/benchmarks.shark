@@ -58,5 +58,5 @@ message BenchmarkDataset {
   // potentially more realistic results than just parsing the same message
   // over and over.  A single message parsed repeatedly could yield unusually
   // good branch prediction performance.
-  repeated bytes payload = 3;
+  list<bytes> payload = 3;
 }

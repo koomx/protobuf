@@ -47,5 +47,5 @@ message TestEmbedOptimizedForSize {
   // Test that embedding a message which has optimize_for = CODE_SIZE into
   // one optimized for speed works.
   optional TestOptimizedForSize optional_message = 1;
-  repeated TestOptimizedForSize repeated_message = 2;
+  list<TestOptimizedForSize> repeated_message = 2;
 }

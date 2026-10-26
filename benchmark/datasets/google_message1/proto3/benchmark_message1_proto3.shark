@@ -51,7 +51,7 @@ message GoogleMessage1 {
   optional int32 field6 = 6;
   optional int64 field22 = 22;
   optional string field4 = 4;
-  repeated fixed64 field5 = 5;
+  list<fixed64> field5 = 5;
   optional bool field59 = 59;
   optional string field7 = 7;
   optional int32 field16 = 16;

@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 //
-// This file contains messages for testing repeated field comparison
+// This file contains messages for testing list<field> comparison
 // LINT: ALLOW_GROUPS
 
 syntax = "proto2";
@@ -47,7 +47,7 @@ message TestField {
   optional int32 a = 3;
   optional int32 b = 4;
   optional int32 c = 1;
-  repeated int32 rc = 2;
+  list<int32> rc = 2;
   optional TestField m = 5;
 
   extend TestDiffMessage {
@@ -60,10 +60,10 @@ message TestDiffMessage {
   optional int32 v = 13 [deprecated = true];
   optional string w = 14;
   optional TestField m = 15;
-  repeated int32 rv = 11;                          // Test for combinations
-  repeated string rw = 10;                         // Test for combinations
-  repeated TestField rm = 12 [deprecated = true];  // Test for combinations
-  repeated shark.Any rany =
-      16;  // Test for repeated Any type resolution
+  list<int32> rv = 11;                          // Test for combinations
+  list<string> rw = 10;                         // Test for combinations
+  list<TestField> rm = 12 [deprecated = true];  // Test for combinations
+  list<shark.Any> rany =
+      16;  // Test for list<Any> type resolution
   extensions 100 to 199;
 }

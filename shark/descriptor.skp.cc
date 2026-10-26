@@ -1364,7 +1364,7 @@ const char* FileDescriptorSet::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.FileDescriptorProto file = 1;
+      // list<.shark.FileDescriptorProto> file = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -1406,7 +1406,7 @@ uint8_t* FileDescriptorSet::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.FileDescriptorProto file = 1;
+  // list<.shark.FileDescriptorProto> file = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_file_size()); i < n; i++) {
     const auto& repfield = this->_internal_file(i);
@@ -1430,7 +1430,7 @@ size_t FileDescriptorSet::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.FileDescriptorProto file = 1;
+  // list<.shark.FileDescriptorProto> file = 1;
   total_size += 1UL * this->_internal_file_size();
   for (const auto& msg : this->_impl_.file_) {
     total_size +=
@@ -1706,7 +1706,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated string dependency = 3;
+      // list<string> dependency = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -1723,7 +1723,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.DescriptorProto message_type = 4;
+      // list<.shark.DescriptorProto> message_type = 4;
       case 4:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
@@ -1736,7 +1736,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.EnumDescriptorProto enum_type = 5;
+      // list<.shark.EnumDescriptorProto> enum_type = 5;
       case 5:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr -= 1;
@@ -1749,7 +1749,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.ServiceDescriptorProto service = 6;
+      // list<.shark.ServiceDescriptorProto> service = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -1762,7 +1762,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.FieldDescriptorProto extension = 7;
+      // list<.shark.FieldDescriptorProto> extension = 7;
       case 7:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 1;
@@ -1791,7 +1791,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated int32 public_dependency = 10;
+      // list<int32> public_dependency = 10;
       case 10:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 80)) {
           ptr -= 1;
@@ -1807,7 +1807,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated int32 weak_dependency = 11;
+      // list<int32> weak_dependency = 11;
       case 11:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 88)) {
           ptr -= 1;
@@ -1886,7 +1886,7 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
         2, this->_internal_package(), target);
   }
 
-  // repeated string dependency = 3;
+  // list<string> dependency = 3;
   for (int i = 0, n = this->_internal_dependency_size(); i < n; i++) {
     const auto& s = this->_internal_dependency(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -1896,7 +1896,7 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
     target = stream->WriteString(3, s, target);
   }
 
-  // repeated .shark.DescriptorProto message_type = 4;
+  // list<.shark.DescriptorProto> message_type = 4;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_message_type_size()); i < n; i++) {
     const auto& repfield = this->_internal_message_type(i);
@@ -1904,7 +1904,7 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
         InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.EnumDescriptorProto enum_type = 5;
+  // list<.shark.EnumDescriptorProto> enum_type = 5;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_enum_type_size()); i < n; i++) {
     const auto& repfield = this->_internal_enum_type(i);
@@ -1912,7 +1912,7 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
         InternalWriteMessage(5, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.ServiceDescriptorProto service = 6;
+  // list<.shark.ServiceDescriptorProto> service = 6;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_service_size()); i < n; i++) {
     const auto& repfield = this->_internal_service(i);
@@ -1920,7 +1920,7 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
         InternalWriteMessage(6, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.FieldDescriptorProto extension = 7;
+  // list<.shark.FieldDescriptorProto> extension = 7;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_extension_size()); i < n; i++) {
     const auto& repfield = this->_internal_extension(i);
@@ -1942,13 +1942,13 @@ uint8_t* FileDescriptorProto::_InternalSerialize(
         _Internal::source_code_info(this).GetCachedSize(), target, stream);
   }
 
-  // repeated int32 public_dependency = 10;
+  // list<int32> public_dependency = 10;
   for (int i = 0, n = this->_internal_public_dependency_size(); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(10, this->_internal_public_dependency(i), target);
   }
 
-  // repeated int32 weak_dependency = 11;
+  // list<int32> weak_dependency = 11;
   for (int i = 0, n = this->_internal_weak_dependency_size(); i < n; i++) {
     target = stream->EnsureSpace(target);
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(11, this->_internal_weak_dependency(i), target);
@@ -1980,7 +1980,7 @@ size_t FileDescriptorProto::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated string dependency = 3;
+  // list<string> dependency = 3;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.dependency_.size());
   for (int i = 0, n = _impl_.dependency_.size(); i < n; i++) {
@@ -1988,35 +1988,35 @@ size_t FileDescriptorProto::ByteSizeLong() const {
       _impl_.dependency_.Get(i));
   }
 
-  // repeated .shark.DescriptorProto message_type = 4;
+  // list<.shark.DescriptorProto> message_type = 4;
   total_size += 1UL * this->_internal_message_type_size();
   for (const auto& msg : this->_impl_.message_type_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.EnumDescriptorProto enum_type = 5;
+  // list<.shark.EnumDescriptorProto> enum_type = 5;
   total_size += 1UL * this->_internal_enum_type_size();
   for (const auto& msg : this->_impl_.enum_type_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.ServiceDescriptorProto service = 6;
+  // list<.shark.ServiceDescriptorProto> service = 6;
   total_size += 1UL * this->_internal_service_size();
   for (const auto& msg : this->_impl_.service_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.FieldDescriptorProto extension = 7;
+  // list<.shark.FieldDescriptorProto> extension = 7;
   total_size += 1UL * this->_internal_extension_size();
   for (const auto& msg : this->_impl_.extension_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated int32 public_dependency = 10;
+  // list<int32> public_dependency = 10;
   {
     size_t data_size = ::_pbi::WireFormatLite::
       Int32Size(this->_impl_.public_dependency_);
@@ -2025,7 +2025,7 @@ size_t FileDescriptorProto::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated int32 weak_dependency = 11;
+  // list<int32> weak_dependency = 11;
   {
     size_t data_size = ::_pbi::WireFormatLite::
       Int32Size(this->_impl_.weak_dependency_);
@@ -2856,7 +2856,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.FieldDescriptorProto field = 2;
+      // list<.shark.FieldDescriptorProto> field = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -2869,7 +2869,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.DescriptorProto nested_type = 3;
+      // list<.shark.DescriptorProto> nested_type = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -2882,7 +2882,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.EnumDescriptorProto enum_type = 4;
+      // list<.shark.EnumDescriptorProto> enum_type = 4;
       case 4:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
@@ -2895,7 +2895,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
+      // list<.shark.DescriptorProto.ExtensionRange> extension_range = 5;
       case 5:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr -= 1;
@@ -2908,7 +2908,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.FieldDescriptorProto extension = 6;
+      // list<.shark.FieldDescriptorProto> extension = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -2929,7 +2929,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.OneofDescriptorProto oneof_decl = 8;
+      // list<.shark.OneofDescriptorProto> oneof_decl = 8;
       case 8:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 66)) {
           ptr -= 1;
@@ -2942,7 +2942,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
+      // list<.shark.DescriptorProto.ReservedRange> reserved_range = 9;
       case 9:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
           ptr -= 1;
@@ -2955,7 +2955,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
         } else
           goto handle_unusual;
         continue;
-      // repeated string reserved_name = 10;
+      // list<string> reserved_name = 10;
       case 10:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 82)) {
           ptr -= 1;
@@ -3013,7 +3013,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // repeated .shark.FieldDescriptorProto field = 2;
+  // list<.shark.FieldDescriptorProto> field = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_field_size()); i < n; i++) {
     const auto& repfield = this->_internal_field(i);
@@ -3021,7 +3021,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.DescriptorProto nested_type = 3;
+  // list<.shark.DescriptorProto> nested_type = 3;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_nested_type_size()); i < n; i++) {
     const auto& repfield = this->_internal_nested_type(i);
@@ -3029,7 +3029,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         InternalWriteMessage(3, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.EnumDescriptorProto enum_type = 4;
+  // list<.shark.EnumDescriptorProto> enum_type = 4;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_enum_type_size()); i < n; i++) {
     const auto& repfield = this->_internal_enum_type(i);
@@ -3037,7 +3037,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
+  // list<.shark.DescriptorProto.ExtensionRange> extension_range = 5;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_extension_range_size()); i < n; i++) {
     const auto& repfield = this->_internal_extension_range(i);
@@ -3045,7 +3045,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         InternalWriteMessage(5, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.FieldDescriptorProto extension = 6;
+  // list<.shark.FieldDescriptorProto> extension = 6;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_extension_size()); i < n; i++) {
     const auto& repfield = this->_internal_extension(i);
@@ -3060,7 +3060,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         _Internal::options(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.OneofDescriptorProto oneof_decl = 8;
+  // list<.shark.OneofDescriptorProto> oneof_decl = 8;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_oneof_decl_size()); i < n; i++) {
     const auto& repfield = this->_internal_oneof_decl(i);
@@ -3068,7 +3068,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         InternalWriteMessage(8, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
+  // list<.shark.DescriptorProto.ReservedRange> reserved_range = 9;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_reserved_range_size()); i < n; i++) {
     const auto& repfield = this->_internal_reserved_range(i);
@@ -3076,7 +3076,7 @@ uint8_t* DescriptorProto::_InternalSerialize(
         InternalWriteMessage(9, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated string reserved_name = 10;
+  // list<string> reserved_name = 10;
   for (int i = 0, n = this->_internal_reserved_name_size(); i < n; i++) {
     const auto& s = this->_internal_reserved_name(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -3102,56 +3102,56 @@ size_t DescriptorProto::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.FieldDescriptorProto field = 2;
+  // list<.shark.FieldDescriptorProto> field = 2;
   total_size += 1UL * this->_internal_field_size();
   for (const auto& msg : this->_impl_.field_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.DescriptorProto nested_type = 3;
+  // list<.shark.DescriptorProto> nested_type = 3;
   total_size += 1UL * this->_internal_nested_type_size();
   for (const auto& msg : this->_impl_.nested_type_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.EnumDescriptorProto enum_type = 4;
+  // list<.shark.EnumDescriptorProto> enum_type = 4;
   total_size += 1UL * this->_internal_enum_type_size();
   for (const auto& msg : this->_impl_.enum_type_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
+  // list<.shark.DescriptorProto.ExtensionRange> extension_range = 5;
   total_size += 1UL * this->_internal_extension_range_size();
   for (const auto& msg : this->_impl_.extension_range_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.FieldDescriptorProto extension = 6;
+  // list<.shark.FieldDescriptorProto> extension = 6;
   total_size += 1UL * this->_internal_extension_size();
   for (const auto& msg : this->_impl_.extension_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.OneofDescriptorProto oneof_decl = 8;
+  // list<.shark.OneofDescriptorProto> oneof_decl = 8;
   total_size += 1UL * this->_internal_oneof_decl_size();
   for (const auto& msg : this->_impl_.oneof_decl_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
+  // list<.shark.DescriptorProto.ReservedRange> reserved_range = 9;
   total_size += 1UL * this->_internal_reserved_range_size();
   for (const auto& msg : this->_impl_.reserved_range_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated string reserved_name = 10;
+  // list<string> reserved_name = 10;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.reserved_name_.size());
   for (int i = 0, n = _impl_.reserved_name_.size(); i < n; i++) {
@@ -3340,7 +3340,7 @@ const char* ExtensionRangeOptions::_InternalParse(const char* ptr, ::_pbi::Parse
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -3387,7 +3387,7 @@ uint8_t* ExtensionRangeOptions::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -3417,7 +3417,7 @@ size_t ExtensionRangeOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -4804,7 +4804,7 @@ const char* EnumDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.EnumValueDescriptorProto value = 2;
+      // list<.shark.EnumValueDescriptorProto> value = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -4825,7 +4825,7 @@ const char* EnumDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+      // list<.shark.EnumDescriptorProto.EnumReservedRange> reserved_range = 4;
       case 4:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
@@ -4838,7 +4838,7 @@ const char* EnumDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
         } else
           goto handle_unusual;
         continue;
-      // repeated string reserved_name = 5;
+      // list<string> reserved_name = 5;
       case 5:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 42)) {
           ptr -= 1;
@@ -4896,7 +4896,7 @@ uint8_t* EnumDescriptorProto::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // repeated .shark.EnumValueDescriptorProto value = 2;
+  // list<.shark.EnumValueDescriptorProto> value = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_value_size()); i < n; i++) {
     const auto& repfield = this->_internal_value(i);
@@ -4911,7 +4911,7 @@ uint8_t* EnumDescriptorProto::_InternalSerialize(
         _Internal::options(this).GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+  // list<.shark.EnumDescriptorProto.EnumReservedRange> reserved_range = 4;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_reserved_range_size()); i < n; i++) {
     const auto& repfield = this->_internal_reserved_range(i);
@@ -4919,7 +4919,7 @@ uint8_t* EnumDescriptorProto::_InternalSerialize(
         InternalWriteMessage(4, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated string reserved_name = 5;
+  // list<string> reserved_name = 5;
   for (int i = 0, n = this->_internal_reserved_name_size(); i < n; i++) {
     const auto& s = this->_internal_reserved_name(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -4945,21 +4945,21 @@ size_t EnumDescriptorProto::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.EnumValueDescriptorProto value = 2;
+  // list<.shark.EnumValueDescriptorProto> value = 2;
   total_size += 1UL * this->_internal_value_size();
   for (const auto& msg : this->_impl_.value_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+  // list<.shark.EnumDescriptorProto.EnumReservedRange> reserved_range = 4;
   total_size += 1UL * this->_internal_reserved_range_size();
   for (const auto& msg : this->_impl_.reserved_range_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated string reserved_name = 5;
+  // list<string> reserved_name = 5;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.reserved_name_.size());
   for (int i = 0, n = _impl_.reserved_name_.size(); i < n; i++) {
@@ -5493,7 +5493,7 @@ const char* ServiceDescriptorProto::_InternalParse(const char* ptr, ::_pbi::Pars
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.MethodDescriptorProto method = 2;
+      // list<.shark.MethodDescriptorProto> method = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -5555,7 +5555,7 @@ uint8_t* ServiceDescriptorProto::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // repeated .shark.MethodDescriptorProto method = 2;
+  // list<.shark.MethodDescriptorProto> method = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_method_size()); i < n; i++) {
     const auto& repfield = this->_internal_method(i);
@@ -5586,7 +5586,7 @@ size_t ServiceDescriptorProto::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.MethodDescriptorProto method = 2;
+  // list<.shark.MethodDescriptorProto> method = 2;
   total_size += 1UL * this->_internal_method_size();
   for (const auto& msg : this->_impl_.method_) {
     total_size +=
@@ -6330,7 +6330,7 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -6420,7 +6420,7 @@ uint8_t* FileOptions::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(31, this->_internal_cc_enable_arenas(), target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -6450,7 +6450,7 @@ size_t FileOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -6722,7 +6722,7 @@ const char* MessageOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -6795,7 +6795,7 @@ uint8_t* MessageOptions::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(7, this->_internal_map_entry(), target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -6825,7 +6825,7 @@ size_t MessageOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -7123,7 +7123,7 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -7216,7 +7216,7 @@ uint8_t* FieldOptions::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(15, this->_internal_unverified_lazy(), target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -7246,7 +7246,7 @@ size_t FieldOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -7450,7 +7450,7 @@ const char* OneofOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -7497,7 +7497,7 @@ uint8_t* OneofOptions::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -7527,7 +7527,7 @@ size_t OneofOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -7733,7 +7733,7 @@ const char* EnumOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -7807,7 +7807,7 @@ uint8_t* EnumOptions::_InternalSerialize(
       7, this->_impl_.underlying_type_, target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -7837,7 +7837,7 @@ size_t EnumOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -8037,7 +8037,7 @@ const char* EnumValueOptions::_InternalParse(const char* ptr, ::_pbi::ParseConte
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -8092,7 +8092,7 @@ uint8_t* EnumValueOptions::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(1, this->_internal_deprecated(), target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -8122,7 +8122,7 @@ size_t EnumValueOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -8286,7 +8286,7 @@ const char* ServiceOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -8341,7 +8341,7 @@ uint8_t* ServiceOptions::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(33, this->_internal_deprecated(), target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -8371,7 +8371,7 @@ size_t ServiceOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -8560,7 +8560,7 @@ const char* MethodOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext*
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+      // list<.shark.UninterpretedOption> uninterpreted_option = 999;
       case 999:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 58)) {
           ptr -= 2;
@@ -8622,7 +8622,7 @@ uint8_t* MethodOptions::_InternalSerialize(
       34, this->_impl_.idempotency_level_, target);
   }
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_uninterpreted_option_size()); i < n; i++) {
     const auto& repfield = this->_internal_uninterpreted_option(i);
@@ -8652,7 +8652,7 @@ size_t MethodOptions::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   total_size += 2UL * this->_internal_uninterpreted_option_size();
   for (const auto& msg : this->_impl_.uninterpreted_option_) {
     total_size +=
@@ -9180,7 +9180,7 @@ const char* UninterpretedOption::_InternalParse(const char* ptr, ::_pbi::ParseCo
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.UninterpretedOption.NamePart name = 2;
+      // list<.shark.UninterpretedOption.NamePart> name = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -9283,7 +9283,7 @@ uint8_t* UninterpretedOption::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption.NamePart name = 2;
+  // list<.shark.UninterpretedOption.NamePart> name = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_name_size()); i < n; i++) {
     const auto& repfield = this->_internal_name(i);
@@ -9352,7 +9352,7 @@ size_t UninterpretedOption::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.UninterpretedOption.NamePart name = 2;
+  // list<.shark.UninterpretedOption.NamePart> name = 2;
   total_size += 1UL * this->_internal_name_size();
   for (const auto& msg : this->_impl_.name_) {
     total_size +=
@@ -9617,7 +9617,7 @@ const char* SourceCodeInfo_Location::_InternalParse(const char* ptr, ::_pbi::Par
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated int32 path = 1 [packed = true];
+      // list<int32> path = 1 [packed = true];
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ::SHARK_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_path(), ptr, ctx);
@@ -9628,7 +9628,7 @@ const char* SourceCodeInfo_Location::_InternalParse(const char* ptr, ::_pbi::Par
         } else
           goto handle_unusual;
         continue;
-      // repeated int32 span = 2 [packed = true];
+      // list<int32> span = 2 [packed = true];
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr = ::SHARK_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_span(), ptr, ctx);
@@ -9663,7 +9663,7 @@ const char* SourceCodeInfo_Location::_InternalParse(const char* ptr, ::_pbi::Par
         } else
           goto handle_unusual;
         continue;
-      // repeated string leading_detached_comments = 6;
+      // list<string> leading_detached_comments = 6;
       case 6:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 50)) {
           ptr -= 1;
@@ -9710,7 +9710,7 @@ uint8_t* SourceCodeInfo_Location::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated int32 path = 1 [packed = true];
+  // list<int32> path = 1 [packed = true];
   {
     int byte_size = _impl_._path_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
@@ -9719,7 +9719,7 @@ uint8_t* SourceCodeInfo_Location::_InternalSerialize(
     }
   }
 
-  // repeated int32 span = 2 [packed = true];
+  // list<int32> span = 2 [packed = true];
   {
     int byte_size = _impl_._span_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
@@ -9749,7 +9749,7 @@ uint8_t* SourceCodeInfo_Location::_InternalSerialize(
         4, this->_internal_trailing_comments(), target);
   }
 
-  // repeated string leading_detached_comments = 6;
+  // list<string> leading_detached_comments = 6;
   for (int i = 0, n = this->_internal_leading_detached_comments_size(); i < n; i++) {
     const auto& s = this->_internal_leading_detached_comments(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -9775,7 +9775,7 @@ size_t SourceCodeInfo_Location::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated int32 path = 1 [packed = true];
+  // list<int32> path = 1 [packed = true];
   {
     size_t data_size = ::_pbi::WireFormatLite::
       Int32Size(this->_impl_.path_);
@@ -9789,7 +9789,7 @@ size_t SourceCodeInfo_Location::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated int32 span = 2 [packed = true];
+  // list<int32> span = 2 [packed = true];
   {
     size_t data_size = ::_pbi::WireFormatLite::
       Int32Size(this->_impl_.span_);
@@ -9803,7 +9803,7 @@ size_t SourceCodeInfo_Location::ByteSizeLong() const {
     total_size += data_size;
   }
 
-  // repeated string leading_detached_comments = 6;
+  // list<string> leading_detached_comments = 6;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.leading_detached_comments_.size());
   for (int i = 0, n = _impl_.leading_detached_comments_.size(); i < n; i++) {
@@ -9964,7 +9964,7 @@ const char* SourceCodeInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.SourceCodeInfo.Location location = 1;
+      // list<.shark.SourceCodeInfo.Location> location = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -10006,7 +10006,7 @@ uint8_t* SourceCodeInfo::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.SourceCodeInfo.Location location = 1;
+  // list<.shark.SourceCodeInfo.Location> location = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_location_size()); i < n; i++) {
     const auto& repfield = this->_internal_location(i);
@@ -10030,7 +10030,7 @@ size_t SourceCodeInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.SourceCodeInfo.Location location = 1;
+  // list<.shark.SourceCodeInfo.Location> location = 1;
   total_size += 1UL * this->_internal_location_size();
   for (const auto& msg : this->_impl_.location_) {
     total_size +=
@@ -10196,7 +10196,7 @@ const char* GeneratedCodeInfo_Annotation::_InternalParse(const char* ptr, ::_pbi
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated int32 path = 1 [packed = true];
+      // list<int32> path = 1 [packed = true];
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr = ::SHARK_NAMESPACE_ID::internal::PackedInt32Parser(_internal_mutable_path(), ptr, ctx);
@@ -10267,7 +10267,7 @@ uint8_t* GeneratedCodeInfo_Annotation::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated int32 path = 1 [packed = true];
+  // list<int32> path = 1 [packed = true];
   {
     int byte_size = _impl_._path_cached_byte_size_.load(std::memory_order_relaxed);
     if (byte_size > 0) {
@@ -10315,7 +10315,7 @@ size_t GeneratedCodeInfo_Annotation::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated int32 path = 1 [packed = true];
+  // list<int32> path = 1 [packed = true];
   {
     size_t data_size = ::_pbi::WireFormatLite::
       Int32Size(this->_impl_.path_);
@@ -10487,7 +10487,7 @@ const char* GeneratedCodeInfo::_InternalParse(const char* ptr, ::_pbi::ParseCont
     uint32_t tag;
     ptr = ::_pbi::ReadTag(ptr, &tag);
     switch (tag >> 3) {
-      // repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
+      // list<.shark.GeneratedCodeInfo.Annotation> annotation = 1;
       case 1:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
           ptr -= 1;
@@ -10529,7 +10529,7 @@ uint8_t* GeneratedCodeInfo::_InternalSerialize(
   uint32_t cached_has_bits = 0;
   (void) cached_has_bits;
 
-  // repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
+  // list<.shark.GeneratedCodeInfo.Annotation> annotation = 1;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_annotation_size()); i < n; i++) {
     const auto& repfield = this->_internal_annotation(i);
@@ -10553,7 +10553,7 @@ size_t GeneratedCodeInfo::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
+  // list<.shark.GeneratedCodeInfo.Annotation> annotation = 1;
   total_size += 1UL * this->_internal_annotation_size();
   for (const auto& msg : this->_impl_.annotation_) {
     total_size +=

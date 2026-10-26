@@ -521,7 +521,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Field fields = 2;
+      // list<.shark.Field> fields = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -534,7 +534,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated string oneofs = 3;
+      // list<string> oneofs = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -551,7 +551,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Option options = 4;
+      // list<.shark.Option> options = 4;
       case 4:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 34)) {
           ptr -= 1;
@@ -626,7 +626,7 @@ uint8_t* Type::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // repeated .shark.Field fields = 2;
+  // list<.shark.Field> fields = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_fields_size()); i < n; i++) {
     const auto& repfield = this->_internal_fields(i);
@@ -634,7 +634,7 @@ uint8_t* Type::_InternalSerialize(
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated string oneofs = 3;
+  // list<string> oneofs = 3;
   for (int i = 0, n = this->_internal_oneofs_size(); i < n; i++) {
     const auto& s = this->_internal_oneofs(i);
     ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
@@ -644,7 +644,7 @@ uint8_t* Type::_InternalSerialize(
     target = stream->WriteString(3, s, target);
   }
 
-  // repeated .shark.Option options = 4;
+  // list<.shark.Option> options = 4;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -682,14 +682,14 @@ size_t Type::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.Field fields = 2;
+  // list<.shark.Field> fields = 2;
   total_size += 1UL * this->_internal_fields_size();
   for (const auto& msg : this->_impl_.fields_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated string oneofs = 3;
+  // list<string> oneofs = 3;
   total_size += 1 *
       ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.oneofs_.size());
   for (int i = 0, n = _impl_.oneofs_.size(); i < n; i++) {
@@ -697,7 +697,7 @@ size_t Type::ByteSizeLong() const {
       _impl_.oneofs_.Get(i));
   }
 
-  // repeated .shark.Option options = 4;
+  // list<.shark.Option> options = 4;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
@@ -1073,7 +1073,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Option options = 9;
+      // list<.shark.Option> options = 9;
       case 9:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 74)) {
           ptr -= 1;
@@ -1193,7 +1193,7 @@ uint8_t* Field::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteBoolToArray(8, this->_internal_packed(), target);
   }
 
-  // repeated .shark.Option options = 9;
+  // list<.shark.Option> options = 9;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -1237,7 +1237,7 @@ size_t Field::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.Option options = 9;
+  // list<.shark.Option> options = 9;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
@@ -1544,7 +1544,7 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.EnumValue enumvalue = 2;
+      // list<.shark.EnumValue> enumvalue = 2;
       case 2:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 18)) {
           ptr -= 1;
@@ -1557,7 +1557,7 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Option options = 3;
+      // list<.shark.Option> options = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -1632,7 +1632,7 @@ uint8_t* Enum::_InternalSerialize(
         1, this->_internal_name(), target);
   }
 
-  // repeated .shark.EnumValue enumvalue = 2;
+  // list<.shark.EnumValue> enumvalue = 2;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_enumvalue_size()); i < n; i++) {
     const auto& repfield = this->_internal_enumvalue(i);
@@ -1640,7 +1640,7 @@ uint8_t* Enum::_InternalSerialize(
         InternalWriteMessage(2, repfield, repfield.GetCachedSize(), target, stream);
   }
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -1678,14 +1678,14 @@ size_t Enum::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.EnumValue enumvalue = 2;
+  // list<.shark.EnumValue> enumvalue = 2;
   total_size += 1UL * this->_internal_enumvalue_size();
   for (const auto& msg : this->_impl_.enumvalue_) {
     total_size +=
       ::SHARK_NAMESPACE_ID::internal::WireFormatLite::MessageSize(msg);
   }
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=
@@ -1911,7 +1911,7 @@ const char* EnumValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
         } else
           goto handle_unusual;
         continue;
-      // repeated .shark.Option options = 3;
+      // list<.shark.Option> options = 3;
       case 3:
         if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 26)) {
           ptr -= 1;
@@ -1971,7 +1971,7 @@ uint8_t* EnumValue::_InternalSerialize(
     target = ::_pbi::WireFormatLite::WriteInt32ToArray(2, this->_internal_number(), target);
   }
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   for (unsigned i = 0,
       n = static_cast<unsigned>(this->_internal_options_size()); i < n; i++) {
     const auto& repfield = this->_internal_options(i);
@@ -1995,7 +1995,7 @@ size_t EnumValue::ByteSizeLong() const {
   // Prevent compiler warnings about cached_has_bits being unused
   (void) cached_has_bits;
 
-  // repeated .shark.Option options = 3;
+  // list<.shark.Option> options = 3;
   total_size += 1UL * this->_internal_options_size();
   for (const auto& msg : this->_impl_.options_) {
     total_size +=

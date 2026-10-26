@@ -40,27 +40,27 @@ message TestWellKnownTypes {
   optional shark.Value value_field = 19;
 }
 
-// A repeated field for each well-known type.
+// A list<field> for each well-known type.
 message RepeatedWellKnownTypes {
-  repeated shark.Any any_field = 1;
-  repeated shark.Api api_field = 2;
-  repeated shark.Duration duration_field = 3;
-  repeated shark.Empty empty_field = 4;
-  repeated shark.FieldMask field_mask_field = 5;
-  repeated shark.SourceContext source_context_field = 6;
-  repeated shark.Struct struct_field = 7;
-  repeated shark.Timestamp timestamp_field = 8;
-  repeated shark.Type type_field = 9;
+  list<shark.Any> any_field = 1;
+  list<shark.Api> api_field = 2;
+  list<shark.Duration> duration_field = 3;
+  list<shark.Empty> empty_field = 4;
+  list<shark.FieldMask> field_mask_field = 5;
+  list<shark.SourceContext> source_context_field = 6;
+  list<shark.Struct> struct_field = 7;
+  list<shark.Timestamp> timestamp_field = 8;
+  list<shark.Type> type_field = 9;
   // These don't actually make a lot of sense, but they're not prohibited...
-  repeated shark.DoubleValue double_field = 10;
-  repeated shark.FloatValue float_field = 11;
-  repeated shark.Int64Value int64_field = 12;
-  repeated shark.UInt64Value uint64_field = 13;
-  repeated shark.Int32Value int32_field = 14;
-  repeated shark.UInt32Value uint32_field = 15;
-  repeated shark.BoolValue bool_field = 16;
-  repeated shark.StringValue string_field = 17;
-  repeated shark.BytesValue bytes_field = 18;
+  list<shark.DoubleValue> double_field = 10;
+  list<shark.FloatValue> float_field = 11;
+  list<shark.Int64Value> int64_field = 12;
+  list<shark.UInt64Value> uint64_field = 13;
+  list<shark.Int32Value> int32_field = 14;
+  list<shark.UInt32Value> uint32_field = 15;
+  list<shark.BoolValue> bool_field = 16;
+  list<shark.StringValue> string_field = 17;
+  list<shark.BytesValue> bytes_field = 18;
 }
 
 message OneofWellKnownTypes {

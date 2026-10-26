@@ -593,7 +593,7 @@ class SHARK_EXPORT FileDescriptorSet final :
   enum : int {
     kFileFieldNumber = 1,
   };
-  // repeated .shark.FileDescriptorProto file = 1;
+  // list<.shark.FileDescriptorProto> file = 1;
   int file_size() const;
   private:
   int _internal_file_size() const;
@@ -768,7 +768,7 @@ class SHARK_EXPORT FileDescriptorProto final :
     kOptionsFieldNumber = 8,
     kSourceCodeInfoFieldNumber = 9,
   };
-  // repeated string dependency = 3;
+  // list<string> dependency = 3;
   int dependency_size() const;
   private:
   int _internal_dependency_size() const;
@@ -792,7 +792,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   std::string* _internal_add_dependency();
   public:
 
-  // repeated .shark.DescriptorProto message_type = 4;
+  // list<.shark.DescriptorProto> message_type = 4;
   int message_type_size() const;
   private:
   int _internal_message_type_size() const;
@@ -810,7 +810,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
       message_type() const;
 
-  // repeated .shark.EnumDescriptorProto enum_type = 5;
+  // list<.shark.EnumDescriptorProto> enum_type = 5;
   int enum_type_size() const;
   private:
   int _internal_enum_type_size() const;
@@ -828,7 +828,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
       enum_type() const;
 
-  // repeated .shark.ServiceDescriptorProto service = 6;
+  // list<.shark.ServiceDescriptorProto> service = 6;
   int service_size() const;
   private:
   int _internal_service_size() const;
@@ -846,7 +846,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::ServiceDescriptorProto >&
       service() const;
 
-  // repeated .shark.FieldDescriptorProto extension = 7;
+  // list<.shark.FieldDescriptorProto> extension = 7;
   int extension_size() const;
   private:
   int _internal_extension_size() const;
@@ -864,7 +864,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
       extension() const;
 
-  // repeated int32 public_dependency = 10;
+  // list<int32> public_dependency = 10;
   int public_dependency_size() const;
   private:
   int _internal_public_dependency_size() const;
@@ -886,7 +886,7 @@ class SHARK_EXPORT FileDescriptorProto final :
   ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
       mutable_public_dependency();
 
-  // repeated int32 weak_dependency = 11;
+  // list<int32> weak_dependency = 11;
   int weak_dependency_size() const;
   private:
   int _internal_weak_dependency_size() const;
@@ -1538,7 +1538,7 @@ class SHARK_EXPORT DescriptorProto final :
     kNameFieldNumber = 1,
     kOptionsFieldNumber = 7,
   };
-  // repeated .shark.FieldDescriptorProto field = 2;
+  // list<.shark.FieldDescriptorProto> field = 2;
   int field_size() const;
   private:
   int _internal_field_size() const;
@@ -1556,7 +1556,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
       field() const;
 
-  // repeated .shark.DescriptorProto nested_type = 3;
+  // list<.shark.DescriptorProto> nested_type = 3;
   int nested_type_size() const;
   private:
   int _internal_nested_type_size() const;
@@ -1574,7 +1574,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto >&
       nested_type() const;
 
-  // repeated .shark.EnumDescriptorProto enum_type = 4;
+  // list<.shark.EnumDescriptorProto> enum_type = 4;
   int enum_type_size() const;
   private:
   int _internal_enum_type_size() const;
@@ -1592,7 +1592,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto >&
       enum_type() const;
 
-  // repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
+  // list<.shark.DescriptorProto.ExtensionRange> extension_range = 5;
   int extension_range_size() const;
   private:
   int _internal_extension_range_size() const;
@@ -1610,7 +1610,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ExtensionRange >&
       extension_range() const;
 
-  // repeated .shark.FieldDescriptorProto extension = 6;
+  // list<.shark.FieldDescriptorProto> extension = 6;
   int extension_size() const;
   private:
   int _internal_extension_size() const;
@@ -1628,7 +1628,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FieldDescriptorProto >&
       extension() const;
 
-  // repeated .shark.OneofDescriptorProto oneof_decl = 8;
+  // list<.shark.OneofDescriptorProto> oneof_decl = 8;
   int oneof_decl_size() const;
   private:
   int _internal_oneof_decl_size() const;
@@ -1646,7 +1646,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::OneofDescriptorProto >&
       oneof_decl() const;
 
-  // repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
+  // list<.shark.DescriptorProto.ReservedRange> reserved_range = 9;
   int reserved_range_size() const;
   private:
   int _internal_reserved_range_size() const;
@@ -1664,7 +1664,7 @@ class SHARK_EXPORT DescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::DescriptorProto_ReservedRange >&
       reserved_range() const;
 
-  // repeated string reserved_name = 10;
+  // list<string> reserved_name = 10;
   int reserved_name_size() const;
   private:
   int _internal_reserved_name_size() const;
@@ -1880,7 +1880,7 @@ class SHARK_EXPORT ExtensionRangeOptions final :
   enum : int {
     kUninterpretedOptionFieldNumber = 999,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -3042,7 +3042,7 @@ class SHARK_EXPORT EnumDescriptorProto final :
     kNameFieldNumber = 1,
     kOptionsFieldNumber = 3,
   };
-  // repeated .shark.EnumValueDescriptorProto value = 2;
+  // list<.shark.EnumValueDescriptorProto> value = 2;
   int value_size() const;
   private:
   int _internal_value_size() const;
@@ -3060,7 +3060,7 @@ class SHARK_EXPORT EnumDescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValueDescriptorProto >&
       value() const;
 
-  // repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+  // list<.shark.EnumDescriptorProto.EnumReservedRange> reserved_range = 4;
   int reserved_range_size() const;
   private:
   int _internal_reserved_range_size() const;
@@ -3078,7 +3078,7 @@ class SHARK_EXPORT EnumDescriptorProto final :
   const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumDescriptorProto_EnumReservedRange >&
       reserved_range() const;
 
-  // repeated string reserved_name = 5;
+  // list<string> reserved_name = 5;
   int reserved_name_size() const;
   private:
   int _internal_reserved_name_size() const;
@@ -3491,7 +3491,7 @@ class SHARK_EXPORT ServiceDescriptorProto final :
     kNameFieldNumber = 1,
     kOptionsFieldNumber = 3,
   };
-  // repeated .shark.MethodDescriptorProto method = 2;
+  // list<.shark.MethodDescriptorProto> method = 2;
   int method_size() const;
   private:
   int _internal_method_size() const;
@@ -3987,7 +3987,7 @@ class SHARK_EXPORT FileOptions final :
     kOptimizeForFieldNumber = 9,
     kCcEnableArenasFieldNumber = 31,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -4437,7 +4437,7 @@ class SHARK_EXPORT MessageOptions final :
     kDeprecatedFieldNumber = 3,
     kMapEntryFieldNumber = 7,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -4921,7 +4921,7 @@ class SHARK_EXPORT FieldOptions final :
     kDeprecatedFieldNumber = 3,
     kWeakFieldNumber = 10,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -5376,7 +5376,7 @@ class SHARK_EXPORT OneofOptions final :
   enum : int {
     kUninterpretedOptionFieldNumber = 999,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -5736,7 +5736,7 @@ class SHARK_EXPORT EnumOptions final :
     kEnableOperatorFieldNumber = 6,
     kUnderlyingTypeFieldNumber = 7,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -6150,7 +6150,7 @@ class SHARK_EXPORT EnumValueOptions final :
     kUninterpretedOptionFieldNumber = 999,
     kDeprecatedFieldNumber = 1,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -6522,7 +6522,7 @@ class SHARK_EXPORT ServiceOptions final :
     kUninterpretedOptionFieldNumber = 999,
     kDeprecatedFieldNumber = 33,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -6927,7 +6927,7 @@ class SHARK_EXPORT MethodOptions final :
     kDeprecatedFieldNumber = 33,
     kIdempotencyLevelFieldNumber = 34,
   };
-  // repeated .shark.UninterpretedOption uninterpreted_option = 999;
+  // list<.shark.UninterpretedOption> uninterpreted_option = 999;
   int uninterpreted_option_size() const;
   private:
   int _internal_uninterpreted_option_size() const;
@@ -7503,7 +7503,7 @@ class SHARK_EXPORT UninterpretedOption final :
     kNegativeIntValueFieldNumber = 5,
     kDoubleValueFieldNumber = 6,
   };
-  // repeated .shark.UninterpretedOption.NamePart name = 2;
+  // list<.shark.UninterpretedOption.NamePart> name = 2;
   int name_size() const;
   private:
   int _internal_name_size() const;
@@ -7771,7 +7771,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
     kLeadingCommentsFieldNumber = 3,
     kTrailingCommentsFieldNumber = 4,
   };
-  // repeated int32 path = 1 [packed = true];
+  // list<int32> path = 1 [packed = true];
   int path_size() const;
   private:
   int _internal_path_size() const;
@@ -7793,7 +7793,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
   ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
       mutable_path();
 
-  // repeated int32 span = 2 [packed = true];
+  // list<int32> span = 2 [packed = true];
   int span_size() const;
   private:
   int _internal_span_size() const;
@@ -7815,7 +7815,7 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
   ::SHARK_NAMESPACE_ID::RepeatedField< int32_t >*
       mutable_span();
 
-  // repeated string leading_detached_comments = 6;
+  // list<string> leading_detached_comments = 6;
   int leading_detached_comments_size() const;
   private:
   int _internal_leading_detached_comments_size() const;
@@ -8030,7 +8030,7 @@ class SHARK_EXPORT SourceCodeInfo final :
   enum : int {
     kLocationFieldNumber = 1,
   };
-  // repeated .shark.SourceCodeInfo.Location location = 1;
+  // list<.shark.SourceCodeInfo.Location> location = 1;
   int location_size() const;
   private:
   int _internal_location_size() const;
@@ -8197,7 +8197,7 @@ class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
     kBeginFieldNumber = 3,
     kEndFieldNumber = 4,
   };
-  // repeated int32 path = 1 [packed = true];
+  // list<int32> path = 1 [packed = true];
   int path_size() const;
   private:
   int _internal_path_size() const;
@@ -8416,7 +8416,7 @@ class SHARK_EXPORT GeneratedCodeInfo final :
   enum : int {
     kAnnotationFieldNumber = 1,
   };
-  // repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
+  // list<.shark.GeneratedCodeInfo.Annotation> annotation = 1;
   int annotation_size() const;
   private:
   int _internal_annotation_size() const;
@@ -8459,7 +8459,7 @@ class SHARK_EXPORT GeneratedCodeInfo final :
 #endif  // __GNUC__
 // FileDescriptorSet
 
-// repeated .shark.FileDescriptorProto file = 1;
+// list<.shark.FileDescriptorProto> file = 1;
 inline int FileDescriptorSet::_internal_file_size() const {
   return _impl_.file_.size();
 }
@@ -8639,7 +8639,7 @@ inline void FileDescriptorProto::set_allocated_package(std::string* package) {
   // @@protoc_insertion_point(field_set_allocated:shark.FileDescriptorProto.package)
 }
 
-// repeated string dependency = 3;
+// list<string> dependency = 3;
 inline int FileDescriptorProto::_internal_dependency_size() const {
   return _impl_.dependency_.size();
 }
@@ -8714,7 +8714,7 @@ FileDescriptorProto::mutable_dependency() {
   return &_impl_.dependency_;
 }
 
-// repeated int32 public_dependency = 10;
+// list<int32> public_dependency = 10;
 inline int FileDescriptorProto::_internal_public_dependency_size() const {
   return _impl_.public_dependency_.size();
 }
@@ -8761,7 +8761,7 @@ FileDescriptorProto::mutable_public_dependency() {
   return _internal_mutable_public_dependency();
 }
 
-// repeated int32 weak_dependency = 11;
+// list<int32> weak_dependency = 11;
 inline int FileDescriptorProto::_internal_weak_dependency_size() const {
   return _impl_.weak_dependency_.size();
 }
@@ -8808,7 +8808,7 @@ FileDescriptorProto::mutable_weak_dependency() {
   return _internal_mutable_weak_dependency();
 }
 
-// repeated .shark.DescriptorProto message_type = 4;
+// list<.shark.DescriptorProto> message_type = 4;
 inline int FileDescriptorProto::_internal_message_type_size() const {
   return _impl_.message_type_.size();
 }
@@ -8848,7 +8848,7 @@ FileDescriptorProto::message_type() const {
   return _impl_.message_type_;
 }
 
-// repeated .shark.EnumDescriptorProto enum_type = 5;
+// list<.shark.EnumDescriptorProto> enum_type = 5;
 inline int FileDescriptorProto::_internal_enum_type_size() const {
   return _impl_.enum_type_.size();
 }
@@ -8888,7 +8888,7 @@ FileDescriptorProto::enum_type() const {
   return _impl_.enum_type_;
 }
 
-// repeated .shark.ServiceDescriptorProto service = 6;
+// list<.shark.ServiceDescriptorProto> service = 6;
 inline int FileDescriptorProto::_internal_service_size() const {
   return _impl_.service_.size();
 }
@@ -8928,7 +8928,7 @@ FileDescriptorProto::service() const {
   return _impl_.service_;
 }
 
-// repeated .shark.FieldDescriptorProto extension = 7;
+// list<.shark.FieldDescriptorProto> extension = 7;
 inline int FileDescriptorProto::_internal_extension_size() const {
   return _impl_.extension_.size();
 }
@@ -9498,7 +9498,7 @@ inline void DescriptorProto::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.DescriptorProto.name)
 }
 
-// repeated .shark.FieldDescriptorProto field = 2;
+// list<.shark.FieldDescriptorProto> field = 2;
 inline int DescriptorProto::_internal_field_size() const {
   return _impl_.field_.size();
 }
@@ -9538,7 +9538,7 @@ DescriptorProto::field() const {
   return _impl_.field_;
 }
 
-// repeated .shark.FieldDescriptorProto extension = 6;
+// list<.shark.FieldDescriptorProto> extension = 6;
 inline int DescriptorProto::_internal_extension_size() const {
   return _impl_.extension_.size();
 }
@@ -9578,7 +9578,7 @@ DescriptorProto::extension() const {
   return _impl_.extension_;
 }
 
-// repeated .shark.DescriptorProto nested_type = 3;
+// list<.shark.DescriptorProto> nested_type = 3;
 inline int DescriptorProto::_internal_nested_type_size() const {
   return _impl_.nested_type_.size();
 }
@@ -9618,7 +9618,7 @@ DescriptorProto::nested_type() const {
   return _impl_.nested_type_;
 }
 
-// repeated .shark.EnumDescriptorProto enum_type = 4;
+// list<.shark.EnumDescriptorProto> enum_type = 4;
 inline int DescriptorProto::_internal_enum_type_size() const {
   return _impl_.enum_type_.size();
 }
@@ -9658,7 +9658,7 @@ DescriptorProto::enum_type() const {
   return _impl_.enum_type_;
 }
 
-// repeated .shark.DescriptorProto.ExtensionRange extension_range = 5;
+// list<.shark.DescriptorProto.ExtensionRange> extension_range = 5;
 inline int DescriptorProto::_internal_extension_range_size() const {
   return _impl_.extension_range_.size();
 }
@@ -9698,7 +9698,7 @@ DescriptorProto::extension_range() const {
   return _impl_.extension_range_;
 }
 
-// repeated .shark.OneofDescriptorProto oneof_decl = 8;
+// list<.shark.OneofDescriptorProto> oneof_decl = 8;
 inline int DescriptorProto::_internal_oneof_decl_size() const {
   return _impl_.oneof_decl_.size();
 }
@@ -9828,7 +9828,7 @@ inline void DescriptorProto::set_allocated_options(::shark::MessageOptions* opti
   // @@protoc_insertion_point(field_set_allocated:shark.DescriptorProto.options)
 }
 
-// repeated .shark.DescriptorProto.ReservedRange reserved_range = 9;
+// list<.shark.DescriptorProto.ReservedRange> reserved_range = 9;
 inline int DescriptorProto::_internal_reserved_range_size() const {
   return _impl_.reserved_range_.size();
 }
@@ -9868,7 +9868,7 @@ DescriptorProto::reserved_range() const {
   return _impl_.reserved_range_;
 }
 
-// repeated string reserved_name = 10;
+// list<string> reserved_name = 10;
 inline int DescriptorProto::_internal_reserved_name_size() const {
   return _impl_.reserved_name_.size();
 }
@@ -9947,7 +9947,7 @@ DescriptorProto::mutable_reserved_name() {
 
 // ExtensionRangeOptions
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int ExtensionRangeOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -10855,7 +10855,7 @@ inline void EnumDescriptorProto::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.EnumDescriptorProto.name)
 }
 
-// repeated .shark.EnumValueDescriptorProto value = 2;
+// list<.shark.EnumValueDescriptorProto> value = 2;
 inline int EnumDescriptorProto::_internal_value_size() const {
   return _impl_.value_.size();
 }
@@ -10985,7 +10985,7 @@ inline void EnumDescriptorProto::set_allocated_options(::shark::EnumOptions* opt
   // @@protoc_insertion_point(field_set_allocated:shark.EnumDescriptorProto.options)
 }
 
-// repeated .shark.EnumDescriptorProto.EnumReservedRange reserved_range = 4;
+// list<.shark.EnumDescriptorProto.EnumReservedRange> reserved_range = 4;
 inline int EnumDescriptorProto::_internal_reserved_range_size() const {
   return _impl_.reserved_range_.size();
 }
@@ -11025,7 +11025,7 @@ EnumDescriptorProto::reserved_range() const {
   return _impl_.reserved_range_;
 }
 
-// repeated string reserved_name = 5;
+// list<string> reserved_name = 5;
 inline int EnumDescriptorProto::_internal_reserved_name_size() const {
   return _impl_.reserved_name_.size();
 }
@@ -11362,7 +11362,7 @@ inline void ServiceDescriptorProto::set_allocated_name(std::string* name) {
   // @@protoc_insertion_point(field_set_allocated:shark.ServiceDescriptorProto.name)
 }
 
-// repeated .shark.MethodDescriptorProto method = 2;
+// list<.shark.MethodDescriptorProto> method = 2;
 inline int ServiceDescriptorProto::_internal_method_size() const {
   return _impl_.method_.size();
 }
@@ -12058,7 +12058,7 @@ inline void FileOptions::set_cc_enable_arenas(bool value) {
   // @@protoc_insertion_point(field_set:shark.FileOptions.cc_enable_arenas)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int FileOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12214,7 +12214,7 @@ inline void MessageOptions::set_map_entry(bool value) {
   // @@protoc_insertion_point(field_set:shark.MessageOptions.map_entry)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int MessageOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12454,7 +12454,7 @@ inline void FieldOptions::set_weak(bool value) {
   // @@protoc_insertion_point(field_set:shark.FieldOptions.weak)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int FieldOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12498,7 +12498,7 @@ FieldOptions::uninterpreted_option() const {
 
 // OneofOptions
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int OneofOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12654,7 +12654,7 @@ inline void EnumOptions::set_underlying_type(::shark::EnumUnderlyingType value) 
   // @@protoc_insertion_point(field_set:shark.EnumOptions.underlying_type)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int EnumOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12726,7 +12726,7 @@ inline void EnumValueOptions::set_deprecated(bool value) {
   // @@protoc_insertion_point(field_set:shark.EnumValueOptions.deprecated)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int EnumValueOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12798,7 +12798,7 @@ inline void ServiceOptions::set_deprecated(bool value) {
   // @@protoc_insertion_point(field_set:shark.ServiceOptions.deprecated)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int ServiceOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -12898,7 +12898,7 @@ inline void MethodOptions::set_idempotency_level(::shark::MethodOptions_Idempote
   // @@protoc_insertion_point(field_set:shark.MethodOptions.idempotency_level)
 }
 
-// repeated .shark.UninterpretedOption uninterpreted_option = 999;
+// list<.shark.UninterpretedOption> uninterpreted_option = 999;
 inline int MethodOptions::_internal_uninterpreted_option_size() const {
   return _impl_.uninterpreted_option_.size();
 }
@@ -13042,7 +13042,7 @@ inline void UninterpretedOption_NamePart::set_is_extension(bool value) {
 
 // UninterpretedOption
 
-// repeated .shark.UninterpretedOption.NamePart name = 2;
+// list<.shark.UninterpretedOption.NamePart> name = 2;
 inline int UninterpretedOption::_internal_name_size() const {
   return _impl_.name_.size();
 }
@@ -13374,7 +13374,7 @@ inline void UninterpretedOption::set_allocated_aggregate_value(std::string* aggr
 
 // SourceCodeInfo_Location
 
-// repeated int32 path = 1 [packed = true];
+// list<int32> path = 1 [packed = true];
 inline int SourceCodeInfo_Location::_internal_path_size() const {
   return _impl_.path_.size();
 }
@@ -13421,7 +13421,7 @@ SourceCodeInfo_Location::mutable_path() {
   return _internal_mutable_path();
 }
 
-// repeated int32 span = 2 [packed = true];
+// list<int32> span = 2 [packed = true];
 inline int SourceCodeInfo_Location::_internal_span_size() const {
   return _impl_.span_.size();
 }
@@ -13604,7 +13604,7 @@ inline void SourceCodeInfo_Location::set_allocated_trailing_comments(std::string
   // @@protoc_insertion_point(field_set_allocated:shark.SourceCodeInfo.Location.trailing_comments)
 }
 
-// repeated string leading_detached_comments = 6;
+// list<string> leading_detached_comments = 6;
 inline int SourceCodeInfo_Location::_internal_leading_detached_comments_size() const {
   return _impl_.leading_detached_comments_.size();
 }
@@ -13683,7 +13683,7 @@ SourceCodeInfo_Location::mutable_leading_detached_comments() {
 
 // SourceCodeInfo
 
-// repeated .shark.SourceCodeInfo.Location location = 1;
+// list<.shark.SourceCodeInfo.Location> location = 1;
 inline int SourceCodeInfo::_internal_location_size() const {
   return _impl_.location_.size();
 }
@@ -13727,7 +13727,7 @@ SourceCodeInfo::location() const {
 
 // GeneratedCodeInfo_Annotation
 
-// repeated int32 path = 1 [packed = true];
+// list<int32> path = 1 [packed = true];
 inline int GeneratedCodeInfo_Annotation::_internal_path_size() const {
   return _impl_.path_.size();
 }
@@ -13902,7 +13902,7 @@ inline void GeneratedCodeInfo_Annotation::set_end(int32_t value) {
 
 // GeneratedCodeInfo
 
-// repeated .shark.GeneratedCodeInfo.Annotation annotation = 1;
+// list<.shark.GeneratedCodeInfo.Annotation> annotation = 1;
 inline int GeneratedCodeInfo::_internal_annotation_size() const {
   return _impl_.annotation_.size();
 }
