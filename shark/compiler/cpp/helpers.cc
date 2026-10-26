@@ -749,8 +749,6 @@ const char* DeclaredTypeMethodName(FieldType type) {
       return "String";
     case FieldType::BYTES:
       return "Bytes";
-    case FieldType::GROUP:
-      return "Group";
     case FieldType::MESSAGE:
       return "Message";
 
@@ -1321,7 +1319,6 @@ MessageAnalysis MessageSCCAnalyzer::GetSCCAnalysis(const SCC* scc) {
           }
           break;
         }
-        case FieldType::GROUP:
         case FieldType::MESSAGE: {
           const SCC* child = analyzer_.GetSCC(field->message_type());
           if (child != scc) {

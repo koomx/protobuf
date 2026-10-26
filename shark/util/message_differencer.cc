@@ -1559,10 +1559,6 @@ bool MessageDifferencer::CompareUnknownFields(
           match = fields1[index1].second->length_delimited() ==
                   fields2[index2].second->length_delimited();
           break;
-        case UnknownField::TYPE_GROUP:
-          // We must deal with this later, after building the SpecificField.
-          change_type = COMPARE_GROUPS;
-          break;
       }
       if (match && change_type != COMPARE_GROUPS) {
         change_type = NO_CHANGE;
@@ -1647,13 +1643,6 @@ bool MessageDifferencer::CompareUnknownFields(
         ++index2;
         break;
       case COMPARE_GROUPS:
-        if (!CompareUnknownFields(
-                message1, message2, fields1[index1].second->group(),
-                fields2[index2].second->group(), parent_field)) {
-          if (reporter_ == NULL) return false;
-          is_different = true;
-          reporter_->ReportModified(message1, message2, *parent_field);
-        }
         ++index1;
         ++index2;
         break;
@@ -2087,12 +2076,6 @@ void MessageDifferencer::StreamReporter::PrintUnknownFieldValue(
       output = StringPrintf(
           "\"%s\"", CEscape(unknown_field->length_delimited()).c_str());
       break;
-    case UnknownField::TYPE_GROUP:
-      // TODO(kenton):  Print the contents of the group like we do for
-      //   messages.  Requires an equivalent of ShortDebugString() for
-      //   UnknownFieldSet.
-      output = "{ ... }";
-      break;
   }
   printer_->PrintRaw(output);
 }
@@ -2155,10 +2138,6 @@ void MessageDifferencer::StreamReporter::ReportModified(
     const Message& message1, const Message& message2,
     const std::vector<SpecificField>& field_path) {
   if (!report_modified_aggregates_ && field_path.back().field == NULL) {
-    if (field_path.back().unknown_field_type == UnknownField::TYPE_GROUP) {
-      // Any changes to the subfields have already been printed.
-      return;
-    }
   } else if (!report_modified_aggregates_) {
     if (field_path.back().field->cpp_type() ==
         FieldCppType::MESSAGE) {

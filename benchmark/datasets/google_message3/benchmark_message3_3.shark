@@ -46,14 +46,6 @@ message Message35546 {
   optional int32 field35557 = 2;
   optional bool field35558 = 3;
   optional int64 field35559 = 13;
-  optional group Message35547 = 4 {
-    required int32 field35569 = 5;
-    required int32 field35570 = 6;
-  }
-  optional group Message35548 = 10 {
-    required int64 field35571 = 11;
-    required int64 field35572 = 12;
-  }
   optional bool field35562 = 14;
   optional bool field35563 = 15;
   optional int32 field35564 = 16;
@@ -83,32 +75,7 @@ message Message2356 {
   optional int32 field2385 = 119;
   optional int32 field2386 = 105;
   optional bytes field2387 = 5;
-  optional group Message2357 = 6 {
-    optional int64 field2399 = 9;
-    optional int32 field2400 = 10;
-    optional int32 field2401 = 11;
-    optional int32 field2402 = 12;
-    optional int32 field2403 = 13;
-    optional int32 field2404 = 116;
-    optional int32 field2405 = 106;
-    required bytes field2406 = 14;
-    optional int32 field2407 = 45;
-    optional int32 field2408 = 112;
-    optional bool field2409 = 122;
-    optional bytes field2410 = 124;
-  }
   optional string field2389 = 120;
-  optional group Message2358 = 107 {}
-  repeated group Message2359 = 40 {
-    optional string field2413 = 41;
-    optional string field2414 = 42;
-    optional string field2415 = 43;
-    optional string field2416 = 44;
-    optional int32 field2417 = 46;
-    optional string field2418 = 47;
-    optional float field2419 = 110;
-    optional float field2420 = 111;
-  }
   optional int32 field2392 = 50;
   optional .benchmarks.google_message3.UnusedEmptyMessage field2393 = 60;
   optional .benchmarks.google_message3.UnusedEmptyMessage field2394 = 70;
@@ -143,19 +110,6 @@ message Message7029 {
   optional int32 field7204 = 10;
   optional int32 field7205 = 11;
   optional int32 field7206 = 12;
-  repeated group Message7030 = 13 {
-    optional string field7226 = 14;
-    optional string field7227 = 15;
-    optional int64 field7228 = 16;
-  }
-  repeated group Message7031 = 21 {
-    optional string field7229 = 22;
-    optional int32 field7230 = 23;
-    optional int32 field7231 = 24;
-    optional int32 field7232 = 30;
-    optional int32 field7233 = 31;
-    optional int32 field7234 = 35;
-  }
   optional int32 field7209 = 20;
   optional float field7210 = 27;
   optional int32 field7211 = 29;
@@ -186,31 +140,6 @@ message Message18921 {
   optional bool field18950 = 17;
   optional bool field18951 = 23;
   optional .benchmarks.google_message3.UnusedEmptyMessage field18952 = 24;
-  repeated group Message18922 = 5 {
-    optional uint64 field18959 = 6;
-    optional string field18960 = 13;
-    optional bool field18961 = 21;
-    optional bool field18962 = 33;
-    optional int32 field18963 = 7;
-    optional int32 field18964 = 8;
-    optional string field18965 = 9;
-    optional .benchmarks.google_message3.Message18856 field18966 = 10;
-    optional uint64 field18967 = 34;
-    optional .benchmarks.google_message3.UnusedEmptyMessage field18968 = 11;
-    optional uint64 field18969 = 35;
-    optional float field18970 = 12;
-    repeated string field18971 = 14;
-    optional bool field18972 = 15;
-    optional bool field18973 = 16;
-    optional float field18974 = 22;
-    optional int32 field18975 = 18;
-    optional int32 field18976 = 19;
-    optional int32 field18977 = 20;
-    optional .benchmarks.google_message3.UnusedEmptyMessage field18978 = 25;
-    optional .benchmarks.google_message3.UnusedEnum field18979 = 26;
-    repeated string field18980 = 27;
-    optional float field18981 = 28;
-  }
   repeated .benchmarks.google_message3.UnusedEmptyMessage field18954 = 29;
   repeated .benchmarks.google_message3.Message18943 field18955 = 30;
   repeated .benchmarks.google_message3.Message18944 field18956 = 31;
@@ -222,12 +151,6 @@ message Message35540 {
 }
 
 message Message3886 {
-  repeated group Message3887 = 1 {
-    required string field3932 = 2;
-    optional string field3933 = 9;
-    optional .benchmarks.google_message3.Message3850 field3934 = 3;
-    optional bytes field3935 = 8;
-  }
 }
 
 message Message6743 {

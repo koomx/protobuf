@@ -268,7 +268,6 @@ namespace shark {
             unknown_fields->AddFixed32(5, 2);
             unknown_fields->AddFixed64(5, 3);
             unknown_fields->AddLengthDelimited(5, "4");
-            unknown_fields->AddGroup(5)->AddVarint(10, 5);
 
             unknown_fields->AddVarint(8, 1);
             unknown_fields->AddVarint(8, 2);
@@ -279,9 +278,6 @@ namespace shark {
                           "5: 0x00000002\n"
                           "5: 0x0000000000000003\n"
                           "5: \"4\"\n"
-                          "5 {\n"
-                          "  10: 5\n"
-                          "}\n"
                           "8: 1\n"
                           "8: 2\n"
                           "8: 3\n"),
@@ -299,7 +295,6 @@ namespace shark {
             unknown_fields->AddFixed32(5, 2);
             unknown_fields->AddFixed64(5, 3);
             unknown_fields->AddLengthDelimited(5, "4");
-            unknown_fields->AddGroup(5)->AddVarint(10, 5);
 
             unknown_fields->AddVarint(8, 1);
             unknown_fields->AddVarint(8, 2);
@@ -880,9 +875,7 @@ namespace shark {
                 // the parser will accept them.
                 "repeated_string: [ \"foo\", 'bar' ]\n"
                 // Repeated message
-                "repeated_nested_message: [ { bb: 1 }, { bb : 2 }]\n"
-                // Repeated group
-                "RepeatedGroup [{ a: 3 },{ a: 4 }]\n";
+                "repeated_nested_message: [ { bb: 1 }, { bb : 2 }]\n";
 
             ASSERT_TRUE(TextFormat::ParseFromString(parse_string, &proto_));
 
@@ -904,9 +897,6 @@ namespace shark {
             EXPECT_EQ(1, proto_.repeated_nested_message(0).bb());
             EXPECT_EQ(2, proto_.repeated_nested_message(1).bb());
 
-            ASSERT_EQ(2, proto_.repeatedgroup_size());
-            EXPECT_EQ(3, proto_.repeatedgroup(0).a());
-            EXPECT_EQ(4, proto_.repeatedgroup(1).a());
         }
 
         TEST_F(TextFormatTest, ParseShortRepeatedWithTrailingComma) {
@@ -918,15 +908,13 @@ namespace shark {
             ASSERT_FALSE(TextFormat::ParseFromString(parse_string, &proto_));
             parse_string = "repeated_nested_message: [ { bb: 1 }, ]";
             ASSERT_FALSE(TextFormat::ParseFromString(parse_string, &proto_));
-            parse_string = "RepeatedGroup [{ a: 3 },]\n";
         }
 
         TEST_F(TextFormatTest, ParseShortRepeatedEmpty) {
             std::string parse_string = "repeated_int32: []\n"
                                        "repeated_nested_enum: []\n"
                                        "repeated_string: []\n"
-                                       "repeated_nested_message: []\n"
-                                       "RepeatedGroup []\n";
+                                       "repeated_nested_message: []\n";
 
             ASSERT_TRUE(TextFormat::ParseFromString(parse_string, &proto_));
 
@@ -934,7 +922,6 @@ namespace shark {
             EXPECT_EQ(0, proto_.repeated_nested_enum_size());
             EXPECT_EQ(0, proto_.repeated_string_size());
             EXPECT_EQ(0, proto_.repeated_nested_message_size());
-            EXPECT_EQ(0, proto_.repeatedgroup_size());
         }
 
         TEST_F(TextFormatTest, ParseShortRepeatedConcatenatedWithEmpty) {
@@ -944,7 +931,6 @@ namespace shark {
                 "repeated_nested_enum: []\n"
                 "repeated_string: []\n"
                 "repeated_nested_message: []\n"
-                "RepeatedGroup []\n"
                 // Mixed short-form and long-form are simply concatenated.
                 "repeated_int32: 1\n"
                 "repeated_int32: [456, 789]\n"
@@ -955,14 +941,11 @@ namespace shark {
                 "repeated_string: [ \"foo\", 'bar' ]\n"
                 // Repeated message
                 "repeated_nested_message: [ { bb: 1 }, { bb : 2 }]\n"
-                // Repeated group
-                "RepeatedGroup [{ a: 3 },{ a: 4 }]\n"
                 // Adding empty [] should have no impact.
                 "repeated_int32: []\n"
                 "repeated_nested_enum: []\n"
                 "repeated_string: []\n"
-                "repeated_nested_message: []\n"
-                "RepeatedGroup []\n";
+                "repeated_nested_message: []\n";
 
             ASSERT_TRUE(TextFormat::ParseFromString(parse_string, &proto_));
 
@@ -984,9 +967,6 @@ namespace shark {
             EXPECT_EQ(1, proto_.repeated_nested_message(0).bb());
             EXPECT_EQ(2, proto_.repeated_nested_message(1).bb());
 
-            ASSERT_EQ(2, proto_.repeatedgroup_size());
-            EXPECT_EQ(3, proto_.repeatedgroup(0).a());
-            EXPECT_EQ(4, proto_.repeatedgroup(1).a());
         }
 
         TEST_F(TextFormatTest, Comments) {
@@ -1616,12 +1596,6 @@ namespace shark {
         }
 
         TEST_F(TextFormatParserTest, InvalidCapitalization) {
-            // We require that group names be exactly as they appear in the .shark.
-            ExpectFailure(
-                "optionalgroup {\na: 15\n}\n",
-                "Message type \"sharkbuf_unittest.TestAllTypes\" has no field named "
-                "\"optionalgroup\".",
-                1, 15);
             ExpectFailure(
                 "OPTIONALgroup {\na: 15\n}\n",
                 "Message type \"sharkbuf_unittest.TestAllTypes\" has no field named "
@@ -1640,14 +1614,11 @@ namespace shark {
 
             // These fields have a mismatching case.
             EXPECT_FALSE(parser.ParseFromString("Optional_Double: 10.0", &proto));
-            EXPECT_FALSE(parser.ParseFromString("oPtIoNaLgRoUp { a: 15 }", &proto));
 
             // ... but are parsed correctly if we match case insensitive.
             parser.AllowCaseInsensitiveField(true);
             EXPECT_TRUE(parser.ParseFromString("Optional_Double: 10.0", &proto));
             EXPECT_EQ(10.0, proto.optional_double());
-            EXPECT_TRUE(parser.ParseFromString("oPtIoNaLgRoUp { a: 15 }", &proto));
-            EXPECT_EQ(15, proto.optionalgroup().a());
         }
 
         TEST_F(TextFormatParserTest, InvalidFieldValues) {
@@ -1740,13 +1711,10 @@ namespace shark {
         }
 
         TEST_F(TextFormatParserTest, MessageDelimiters) {
-            // Non-matching delimiters.
-            ExpectFailure("OptionalGroup <\n \n}\n", "Expected \">\", found \"}\".", 3,
-                1);
-
-            // Invalid delimiters.
-            ExpectFailure("OptionalGroup [\n \n]\n", "Expected \"{\", found \"[\".", 1,
-                15);
+            ExpectFailure("optional_nested_message <\n \n}\n",
+                          "Expected \">\", found \"}\".", 3, 1);
+            ExpectFailure("optional_nested_message [\n \n]\n",
+                          "Expected \"{\", found \"[\".", 1, 25);
 
             // Unending message.
             ExpectFailure("optional_nested_message {\n \nbb: 118\n",

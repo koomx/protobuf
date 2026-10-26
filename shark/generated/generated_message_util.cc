@@ -380,11 +380,6 @@ bool IsNull<WireFormatLiteFieldType::TYPE_BYTES>(const void* ptr) {
 }
 
 template <>
-bool IsNull<WireFormatLiteFieldType::TYPE_GROUP>(const void* ptr) {
-  return Get<const MessageLite*>(ptr) == nullptr;
-}
-
-template <>
 bool IsNull<WireFormatLiteFieldType::TYPE_MESSAGE>(const void* ptr) {
   return Get<const MessageLite*>(ptr) == nullptr;
 }

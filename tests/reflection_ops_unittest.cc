@@ -209,8 +209,6 @@ TEST(ReflectionOpsTest, Clear) {
 
   // Check that getting embedded messages returns the objects created during
   // SetAllFields() rather than default instances.
-  EXPECT_NE(&unittest::TestAllTypes::OptionalGroup::default_instance(),
-            &message.optionalgroup());
   EXPECT_NE(&unittest::TestAllTypes::NestedMessage::default_instance(),
             &message.optional_nested_message());
   EXPECT_NE(&unittest::ForeignMessage::default_instance(),
@@ -230,8 +228,6 @@ TEST(ReflectionOpsTest, ClearExtensions) {
 
   // Check that getting embedded messages returns the objects created during
   // SetAllExtensions() rather than default instances.
-  EXPECT_NE(&unittest::OptionalGroup_extension::default_instance(),
-            &message.GetExtension(unittest::optionalgroup_extension));
   EXPECT_NE(&unittest::TestAllTypes::NestedMessage::default_instance(),
             &message.GetExtension(unittest::optional_nested_message_extension));
   EXPECT_NE(

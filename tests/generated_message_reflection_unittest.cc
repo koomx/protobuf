@@ -111,8 +111,6 @@ TEST(GeneratedMessageReflectionTest, Defaults) {
   // Messages should return pointers to default instances until first use.
   // (This is not checked by ExpectClear() since it is not actually true after
   // the fields have been set and then cleared.)
-  EXPECT_EQ(&unittest::TestAllTypes::OptionalGroup::default_instance(),
-            &reflection->GetMessage(message, F("optionalgroup")));
   EXPECT_EQ(&unittest::TestAllTypes::NestedMessage::default_instance(),
             &reflection->GetMessage(message, F("optional_nested_message")));
   EXPECT_EQ(&unittest::ForeignMessage::default_instance(),
@@ -963,10 +961,7 @@ TEST(GeneratedMessageReflectionTest, Oneof) {
   EXPECT_EQ(&unittest::TestOneof2::NestedMessage::default_instance(),
             &reflection->GetMessage(
                 message, descriptor->FindFieldByName("foo_message")));
-  EXPECT_EQ(&unittest::TestOneof2::FooGroup::default_instance(),
-            &reflection->GetMessage(message,
-                                    descriptor->FindFieldByName("foogroup")));
-  EXPECT_NE(&unittest::TestOneof2::FooGroup::default_instance(),
+  EXPECT_EQ(&unittest::TestOneof2::NestedMessage::default_instance(),
             &reflection->GetMessage(
                 message, descriptor->FindFieldByName("foo_lazy_message")));
   EXPECT_EQ(

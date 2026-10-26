@@ -459,7 +459,7 @@ class SHARK_EXPORT TcParser final {
     SyncHasbits(msg, hasbits, table);
     CHK_(ptr);
     uint32_t tag = data.tag();
-    if ((tag & 7) == WireFormatLite::WIRETYPE_END_GROUP || tag == 0) {
+    if (tag == 0) {
       ctx->SetLastTag(tag);
       return ptr;
     }

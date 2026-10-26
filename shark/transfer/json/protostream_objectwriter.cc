@@ -641,8 +641,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
     return this;
   }
 
-  if (field->kind() != shark::Field::TYPE_GROUP &&
-      field->kind() != shark::Field::TYPE_MESSAGE) {
+  if (field->kind() != shark::Field::TYPE_MESSAGE) {
     IncrementInvalidDepth();
     if (!options_.suppress_object_to_scalar_error) {
       InvalidValue(field->name(), "Starting an object on a scalar field");

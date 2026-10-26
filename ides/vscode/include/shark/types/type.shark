@@ -78,8 +78,6 @@ message Field {
     TYPE_BOOL = 8;
     // Field type string.
     TYPE_STRING = 9;
-    // Field type group. Proto2 syntax only, and deprecated.
-    TYPE_GROUP = 10;
     // Field type message.
     TYPE_MESSAGE = 11;
     // Field type bytes.

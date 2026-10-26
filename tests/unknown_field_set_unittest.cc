@@ -178,23 +178,6 @@ TEST_F(UnknownFieldSetTest, LengthDelimited) {
   EXPECT_EQ(all_fields_.optional_string(), field->length_delimited());
 }
 
-TEST_F(UnknownFieldSetTest, Group) {
-  const UnknownField* field = GetField("optionalgroup");
-  ASSERT_TRUE(field != nullptr);
-
-  ASSERT_EQ(UnknownField::TYPE_GROUP, field->type());
-  ASSERT_EQ(1, field->group().field_count());
-
-  const UnknownField& nested_field = field->group().field(0);
-  const FieldDescriptor* nested_field_descriptor =
-      unittest::TestAllTypes::OptionalGroup::descriptor()->FindFieldByName("a");
-  ASSERT_TRUE(nested_field_descriptor != nullptr);
-
-  EXPECT_EQ(nested_field_descriptor->number(), nested_field.number());
-  ASSERT_EQ(UnknownField::TYPE_VARINT, nested_field.type());
-  EXPECT_EQ(all_fields_.optionalgroup().a(), nested_field.varint());
-}
-
 TEST_F(UnknownFieldSetTest, SerializeFastAndSlowAreEquivalent) {
   int size =
       WireFormat::ComputeUnknownFieldsSize(empty_message_.unknown_fields());
@@ -527,25 +510,20 @@ TEST_F(UnknownFieldSetTest, SpaceUsedExcludingSelf) {
 TEST_F(UnknownFieldSetTest, SpaceUsed) {
   // Keep shadow vectors to avoid making assumptions about its capacity growth.
   // We imitate the push back calls here to determine the expected capacity.
-  std::vector<UnknownField> shadow_vector, shadow_vector_group;
+  std::vector<UnknownField> shadow_vector;
   unittest::TestEmptyMessage empty_message;
 
   // Make sure an unknown field set has zero space used until a field is
   // actually added.
   const size_t base = empty_message.SpaceUsedLong();
   std::string* str = nullptr;
-  UnknownFieldSet* group = nullptr;
   const auto total = [&] {
     size_t result = base;
     result += shadow_vector.capacity() * sizeof(UnknownField);
-    result += shadow_vector_group.capacity() * sizeof(UnknownField);
     if (str != nullptr) {
       result += sizeof(std::string);
       static const size_t sso_capacity = std::string().capacity();
       if (str->capacity() > sso_capacity) result += str->capacity();
-    }
-    if (group != nullptr) {
-      result += sizeof(UnknownFieldSet);
     }
     return result;
   };
@@ -564,14 +542,6 @@ TEST_F(UnknownFieldSetTest, SpaceUsed) {
 
   str->assign(sizeof(std::string) + 1, 'x');
   EXPECT_EQ(total(), empty_message.SpaceUsedLong()) << "Str2";
-
-  group = unknown_fields->AddGroup(1);
-  shadow_vector.emplace_back();
-  EXPECT_EQ(total(), empty_message.SpaceUsedLong()) << "Group";
-
-  group->AddVarint(1, 0);
-  shadow_vector_group.emplace_back();
-  EXPECT_EQ(total(), empty_message.SpaceUsedLong()) << "Group2";
 
   unknown_fields->AddVarint(1, 0);
   shadow_vector.emplace_back();

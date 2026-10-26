@@ -201,15 +201,7 @@ TEST_P(DynamicMessageTest, Oneof) {
   EXPECT_EQ(nested_prototype,
             &reflection->GetMessage(
                 *message, descriptor->FindFieldByName("foo_message")));
-  const Descriptor* foogroup_descriptor;
-  const Message* foogroup_prototype;
-  foogroup_descriptor =
-      pool_.FindMessageTypeByName("sharkbuf_unittest.TestOneof2.FooGroup");
-  foogroup_prototype = factory_.GetPrototype(foogroup_descriptor);
-  EXPECT_EQ(foogroup_prototype,
-            &reflection->GetMessage(*message,
-                                    descriptor->FindFieldByName("foogroup")));
-  EXPECT_NE(foogroup_prototype,
+  EXPECT_EQ(nested_prototype,
             &reflection->GetMessage(
                 *message, descriptor->FindFieldByName("foo_lazy_message")));
   EXPECT_EQ(5, reflection->GetInt32(*message,

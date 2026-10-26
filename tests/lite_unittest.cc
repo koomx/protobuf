@@ -244,16 +244,6 @@ TEST(Lite, AllLite5) {
     ASSIGN_REPEATED_FIELD(ext2);
 
 #undef ASSIGN_REPEATED_FIELD
-#define ASSIGN_REPEATED_GROUP(FIELD)                \
-  msg1 = generator.add_##FIELD()->mutable_field1(); \
-  msg2 = generator.add_##FIELD()->mutable_field1(); \
-  msg3 = generator.add_##FIELD()->mutable_field1(); \
-  AssignParsingMergeMessages(msg1, msg2, msg3)
-
-    ASSIGN_REPEATED_GROUP(group1);
-    ASSIGN_REPEATED_GROUP(group2);
-
-#undef ASSIGN_REPEATED_GROUP
 
     std::string buffer;
     generator.SerializeToString(&buffer);
@@ -263,14 +253,11 @@ TEST(Lite, AllLite5) {
     // Required and optional fields should be merged.
     ExpectMessageMerged(parsing_merge.required_all_types());
     ExpectMessageMerged(parsing_merge.optional_all_types());
-    ExpectMessageMerged(
-        parsing_merge.optionalgroup().optional_group_all_types());
     ExpectMessageMerged(parsing_merge.GetExtension(
         unittest::TestParsingMergeLite::optional_ext));
 
     // Repeated fields should not be merged.
     EXPECT_EQ(parsing_merge.repeated_all_types_size(), 3);
-    EXPECT_EQ(parsing_merge.repeatedgroup_size(), 3);
     EXPECT_EQ(parsing_merge.ExtensionSize(
                   unittest::TestParsingMergeLite::repeated_ext),
               3);

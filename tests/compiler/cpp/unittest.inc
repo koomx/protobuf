@@ -164,8 +164,6 @@ TEST(GENERATED_MESSAGE_TEST_NAME, Defaults) {
   // Messages should return pointers to default instances until first use.
   // (This is not checked by ExpectClear() since it is not actually true after
   // the fields have been set and then cleared.)
-  EXPECT_EQ(&UNITTEST::TestAllTypes::OptionalGroup::default_instance(),
-            &message.optionalgroup());
   EXPECT_EQ(&UNITTEST::TestAllTypes::NestedMessage::default_instance(),
             &message.optional_nested_message());
   EXPECT_EQ(&UNITTEST::ForeignMessage::default_instance(),
@@ -952,11 +950,9 @@ TEST(GENERATED_MESSAGE_TEST_NAME, FieldConstantValues) {
   UNITTEST::TestRequired message;
   EXPECT_EQ(UNITTEST::TestAllTypes_NestedMessage::kBbFieldNumber, 1);
   EXPECT_EQ(UNITTEST::TestAllTypes::kOptionalInt32FieldNumber, 1);
-  EXPECT_EQ(UNITTEST::TestAllTypes::kOptionalgroupFieldNumber, 16);
   EXPECT_EQ(UNITTEST::TestAllTypes::kOptionalNestedMessageFieldNumber, 18);
   EXPECT_EQ(UNITTEST::TestAllTypes::kOptionalNestedEnumFieldNumber, 21);
   EXPECT_EQ(UNITTEST::TestAllTypes::kRepeatedInt32FieldNumber, 31);
-  EXPECT_EQ(UNITTEST::TestAllTypes::kRepeatedgroupFieldNumber, 46);
   EXPECT_EQ(UNITTEST::TestAllTypes::kRepeatedNestedMessageFieldNumber, 48);
   EXPECT_EQ(UNITTEST::TestAllTypes::kRepeatedNestedEnumFieldNumber, 51);
 }
@@ -965,11 +961,9 @@ TEST(GENERATED_MESSAGE_TEST_NAME, ExtensionConstantValues) {
   EXPECT_EQ(UNITTEST::TestRequired::kSingleFieldNumber, 1000);
   EXPECT_EQ(UNITTEST::TestRequired::kMultiFieldNumber, 1001);
   EXPECT_EQ(UNITTEST::kOptionalInt32ExtensionFieldNumber, 1);
-  EXPECT_EQ(UNITTEST::kOptionalgroupExtensionFieldNumber, 16);
   EXPECT_EQ(UNITTEST::kOptionalNestedMessageExtensionFieldNumber, 18);
   EXPECT_EQ(UNITTEST::kOptionalNestedEnumExtensionFieldNumber, 21);
   EXPECT_EQ(UNITTEST::kRepeatedInt32ExtensionFieldNumber, 31);
-  EXPECT_EQ(UNITTEST::kRepeatedgroupExtensionFieldNumber, 46);
   EXPECT_EQ(UNITTEST::kRepeatedNestedMessageExtensionFieldNumber, 48);
   EXPECT_EQ(UNITTEST::kRepeatedNestedEnumExtensionFieldNumber, 51);
 }
@@ -1448,9 +1442,6 @@ class OneofTest : public testing::Test {
       case UNITTEST::TestOneof2::kFooMessage:
         EXPECT_TRUE(message.has_foo_message());
         break;
-      case UNITTEST::TestOneof2::kFoogroup:
-        EXPECT_TRUE(message.has_foogroup());
-        break;
       case UNITTEST::TestOneof2::kFooLazyMessage:
         EXPECT_TRUE(message.has_foo_lazy_message());
         break;
@@ -1484,8 +1475,6 @@ TEST_F(OneofTest, SettingOneFieldClearsOthers) {
   EXPECT_TRUE(message.has_foo_message());
   TestUtil::ExpectAtMostOneFieldSetInOneof(message);
 
-  message.mutable_foogroup()->set_a(345);
-  EXPECT_TRUE(message.has_foogroup());
   TestUtil::ExpectAtMostOneFieldSetInOneof(message);
 
 
@@ -1509,7 +1498,6 @@ TEST_F(OneofTest, EnumCases) {
   ExpectEnumCasesWork(message);
   message.mutable_foo_message()->set_moo_int(234);
   ExpectEnumCasesWork(message);
-  message.mutable_foogroup()->set_a(345);
   ExpectEnumCasesWork(message);
 }
 
@@ -1723,8 +1711,6 @@ TEST_F(OneofTest, Defaults) {
   EXPECT_FALSE(message.has_foo_message());
   EXPECT_EQ(message.foo_message().moo_int(), 0);
 
-  EXPECT_FALSE(message.has_foogroup());
-  EXPECT_EQ(message.foogroup().a(), 0);
 
 
   EXPECT_FALSE(message.has_bar_int());
@@ -1819,14 +1805,10 @@ TEST_F(OneofTest, UpcastCopyFrom) {
   // Test the CopyFrom method that takes in the generic const Message&
   // parameter.
   UNITTEST::TestOneof2 message1, message2;
-  message1.mutable_foogroup()->set_a(123);
-  EXPECT_TRUE(message1.has_foogroup());
 
   const Message* source = implicit_cast<const Message*>(&message1);
   message2.CopyFrom(*source);
 
-  EXPECT_TRUE(message2.has_foogroup());
-  EXPECT_EQ(message2.foogroup().a(), 123);
 }
 
 // Test the generated SerializeWithCachedSizesToArray(),
@@ -1909,14 +1891,12 @@ EXPECT_EQ(message2.foo_int(), 123);
   {
     UNITTEST::TestOneof2 message1, message2;
     std::string data;
-    message1.mutable_foogroup()->set_a(345);
     int size = message1.ByteSizeLong();
     data.resize(size);
     uint8_t* start = reinterpret_cast<uint8_t*>(::shark::string_as_array(&data));
     uint8_t* end = message1.SerializeWithCachedSizesToArray(start);
     EXPECT_EQ(size, end - start);
     EXPECT_TRUE(message2.ParseFromString(data));
-    EXPECT_EQ(message2.foogroup().a(), 345);
   }
 
 }
@@ -2037,7 +2017,6 @@ data.resize(size);
   {
     UNITTEST::TestOneof2 message1, message2;
     std::string data;
-    message1.mutable_foogroup()->set_a(345);
     int size = message1.ByteSizeLong();
     data.resize(size);
 
@@ -2051,7 +2030,6 @@ data.resize(size);
     }
 
     EXPECT_TRUE(message2.ParseFromString(data));
-    EXPECT_EQ(message2.foogroup().a(), 345);
   }
 
 }
@@ -2090,11 +2068,8 @@ TEST_F(OneofTest, MergeFrom) {
   EXPECT_TRUE(message2.has_foo_message());
   EXPECT_EQ(message2.foo_message().moo_int(), 234);
 
-  message1.mutable_foogroup()->set_a(345);
   message2.MergeFrom(message1);
   TestUtil::ExpectAtMostOneFieldSetInOneof(message2);
-  EXPECT_TRUE(message2.has_foogroup());
-  EXPECT_EQ(message2.foogroup().a(), 345);
 
 }
 
@@ -2108,17 +2083,15 @@ TEST(HELPERS_TEST_NAME, TestSCC) {
     names.push_back(scc->descriptors[i]->full_name());
   }
   std::string package = a.GetDescriptor()->file()->package();
-  ASSERT_EQ(names.size(), 4);
+  ASSERT_EQ(names.size(), 2);
   std::sort(names.begin(), names.end());
   EXPECT_EQ(names[0], package + ".TestMutualRecursionA");
-  EXPECT_EQ(names[1], package + ".TestMutualRecursionA.SubGroup");
-  EXPECT_EQ(names[2], package + ".TestMutualRecursionA.SubMessage");
-  EXPECT_EQ(names[3], package + ".TestMutualRecursionB");
+  EXPECT_EQ(names[1], package + ".TestMutualRecursionB");
 
   MessageAnalysis result = scc_analyzer.GetSCCAnalysis(scc);
   EXPECT_EQ(result.is_recursive, true);
   EXPECT_EQ(result.contains_required, false);
-  EXPECT_EQ(result.contains_cord, true);  // TestAllTypes
+  EXPECT_EQ(result.contains_cord, false);
   EXPECT_EQ(result.contains_extension, false);  // TestAllTypes
 }
 

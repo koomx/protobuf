@@ -801,8 +801,7 @@ const shark::Field* ProtoWriter::Lookup(
 
 const shark::Type* ProtoWriter::LookupType(
     const shark::Field* field) {
-  return ((field->kind() == shark::Field::TYPE_MESSAGE ||
-           field->kind() == shark::Field::TYPE_GROUP)
+  return (field->kind() == shark::Field::TYPE_MESSAGE
               ? typeinfo_->GetTypeByTypeUrl(field->type_url())
               : &element_->type());
 }

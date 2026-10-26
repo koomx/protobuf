@@ -94,8 +94,4 @@ message TestMessageSetExtension3 {
 
 // MessageSet wire format is equivalent to this.
 message RawMessageSet {
-  repeated group Item = 1 {
-    required int32 type_id = 2;
-    required bytes message = 3;
-  }
 }

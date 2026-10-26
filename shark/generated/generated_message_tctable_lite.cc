@@ -1787,17 +1787,11 @@ const char* TcParser::MpMessage(SHARK_TC_PARAM_DECL) {
   const uint32_t decoded_tag = data.tag();
   const uint32_t decoded_wiretype = decoded_tag & 7;
   const uint16_t rep = type_card & field_layout::kRepMask;
-  const bool is_group = rep == field_layout::kRepGroup;
 
   // Validate wiretype:
   switch (rep) {
     case field_layout::kRepMessage:
       if (decoded_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-        goto fallback;
-      }
-      break;
-    case field_layout::kRepGroup:
-      if (decoded_wiretype != WireFormatLite::WIRETYPE_START_GROUP) {
         goto fallback;
       }
       break;
@@ -1823,9 +1817,6 @@ const char* TcParser::MpMessage(SHARK_TC_PARAM_DECL) {
     field = default_instance->New(ctx->data().arena);
   }
   SyncHasbits(msg, hasbits, table);
-  if (is_group) {
-    return ctx->ParseGroup(field, ptr, decoded_tag);
-  }
   return ctx->ParseMessage(field, ptr);
 }
 
@@ -1837,17 +1828,11 @@ const char* TcParser::MpRepeatedMessage(SHARK_TC_PARAM_DECL) {
   const uint32_t decoded_tag = data.tag();
   const uint32_t decoded_wiretype = decoded_tag & 7;
   const uint16_t rep = type_card & field_layout::kRepMask;
-  const bool is_group = rep == field_layout::kRepGroup;
 
   // Validate wiretype:
   switch (rep) {
     case field_layout::kRepMessage:
       if (decoded_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
-        goto fallback;
-      }
-      break;
-    case field_layout::kRepGroup:
-      if (decoded_wiretype != WireFormatLite::WIRETYPE_START_GROUP) {
         goto fallback;
       }
       break;
@@ -1865,9 +1850,6 @@ const char* TcParser::MpRepeatedMessage(SHARK_TC_PARAM_DECL) {
   auto& field = RefAt<RepeatedPtrFieldBase>(msg, entry.offset);
   MessageLite* value =
       field.Add<GenericTypeHandler<MessageLite>>(default_instance);
-  if (is_group) {
-    return ctx->ParseGroup(value, ptr, decoded_tag);
-  }
   return ctx->ParseMessage(value, ptr);
 }
 

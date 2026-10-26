@@ -54,13 +54,6 @@ class DefaultFieldComparatorTest : public ::testing::Test {
   TestAllTypes message_2_;
 };
 
-TEST_F(DefaultFieldComparatorTest, RecursesIntoGroup) {
-  const FieldDescriptor* field = descriptor_->FindFieldByName("optionalgroup");
-  EXPECT_EQ(
-      FieldComparator::RECURSE,
-      comparator_.Compare(message_1_, message_2_, field, -1, -1, nullptr));
-}
-
 TEST_F(DefaultFieldComparatorTest, RecursesIntoNestedMessage) {
   const FieldDescriptor* field =
       descriptor_->FindFieldByName("optional_nested_message");

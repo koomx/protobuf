@@ -74,8 +74,6 @@ TEST(ExtensionSetTest, Defaults) {
   // Messages should return pointers to default instances until first use.
   // (This is not checked by ExpectClear() since it is not actually true after
   // the fields have been set and then cleared.)
-  EXPECT_EQ(&unittest::OptionalGroup_extension::default_instance(),
-            &message.GetExtension(unittest::optionalgroup_extension));
   EXPECT_EQ(&unittest::TestAllTypes::NestedMessage::default_instance(),
             &message.GetExtension(unittest::optional_nested_message_extension));
   EXPECT_EQ(
@@ -618,32 +616,6 @@ TEST(ExtensionSetTest, PackedSerializationToStream) {
   }
   EXPECT_TRUE(destination.ParseFromString(data));
   TestUtil::ExpectPackedFieldsSet(destination);
-}
-
-TEST(ExtensionSetTest, NestedExtensionGroup) {
-  // Serialize as TestGroup and parse as TestGroupExtension.
-  unittest::TestGroup source;
-  unittest::TestGroupExtension destination;
-  std::string data;
-
-  source.mutable_optionalgroup()->set_a(117);
-  source.set_optional_foreign_enum(unittest::FOREIGN_BAZ);
-  source.SerializeToString(&data);
-  EXPECT_TRUE(destination.ParseFromString(data));
-  EXPECT_TRUE(
-      destination
-          .GetExtension(unittest::TestNestedExtension::optionalgroup_extension)
-          .has_a());
-  EXPECT_EQ(117, destination
-                     .GetExtension(
-                         unittest::TestNestedExtension::optionalgroup_extension)
-                     .a());
-  EXPECT_TRUE(destination.HasExtension(
-      unittest::TestNestedExtension::optional_foreign_enum_extension));
-  EXPECT_EQ(
-      unittest::FOREIGN_BAZ,
-      destination.GetExtension(
-          unittest::TestNestedExtension::optional_foreign_enum_extension));
 }
 
 TEST(ExtensionSetTest, Parsing) {

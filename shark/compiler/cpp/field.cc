@@ -161,8 +161,7 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
   std::string prepared_add_template;
   // TODO(b/190614678): Support fields with type Message or Map.
   if (descriptor->is_repeated() && !descriptor->is_map()) {
-    if (descriptor->type() != FieldType::MESSAGE &&
-        descriptor->type() != FieldType::GROUP) {
+    if (descriptor->type() != FieldType::MESSAGE) {
       prepared_template = strings::Substitute("&$0.Get(index)", field_member);
       prepared_add_template =
           strings::Substitute("&$0.Get($0.size() - 1)", field_member);
@@ -187,8 +186,7 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     prepared_template = StrCat("&", field_member);
   }
   if (descriptor->is_repeated() && !descriptor->is_map() &&
-      descriptor->type() != FieldType::MESSAGE &&
-      descriptor->type() != FieldType::GROUP) {
+      descriptor->type() != FieldType::MESSAGE) {
     prepared_flat_template = StrCat("&", field_member);
   } else {
     prepared_flat_template = prepared_template;

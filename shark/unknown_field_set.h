@@ -141,7 +141,6 @@ class SHARK_EXPORT UnknownFieldSet {
   void AddFixed64(int number, uint64_t value);
   void AddLengthDelimited(int number, const std::string& value);
   std::string* AddLengthDelimited(int number);
-  UnknownFieldSet* AddGroup(int number);
 
   // Adds an unknown field from another set.
   void AddField(const UnknownField& field);
@@ -236,8 +235,7 @@ class SHARK_EXPORT UnknownField {
     TYPE_VARINT,
     TYPE_FIXED32,
     TYPE_FIXED64,
-    TYPE_LENGTH_DELIMITED,
-    TYPE_GROUP
+    TYPE_LENGTH_DELIMITED
   };
 
   // The field's field number, as seen on the wire.
@@ -253,14 +251,12 @@ class SHARK_EXPORT UnknownField {
   inline uint32_t fixed32() const;
   inline uint64_t fixed64() const;
   inline const std::string& length_delimited() const;
-  inline const UnknownFieldSet& group() const;
 
   inline void set_varint(uint64_t value);
   inline void set_fixed32(uint32_t value);
   inline void set_fixed64(uint64_t value);
   inline void set_length_delimited(const std::string& value);
   inline std::string* mutable_length_delimited();
-  inline UnknownFieldSet* mutable_group();
 
   inline size_t GetLengthDelimitedSize() const;
   uint8_t* InternalSerializeLengthDelimitedNoTag(
@@ -288,7 +284,6 @@ class SHARK_EXPORT UnknownField {
     uint32_t fixed32_;
     uint64_t fixed64_;
     mutable union LengthDelimited length_delimited_;
-    UnknownFieldSet* group_;
   } data_;
 };
 
@@ -352,10 +347,6 @@ inline const std::string& UnknownField::length_delimited() const {
   assert(type() == TYPE_LENGTH_DELIMITED);
   return *data_.length_delimited_.string_value;
 }
-inline const UnknownFieldSet& UnknownField::group() const {
-  assert(type() == TYPE_GROUP);
-  return *data_.group_;
-}
 
 inline void UnknownField::set_varint(uint64_t value) {
   assert(type() == TYPE_VARINT);
@@ -376,10 +367,6 @@ inline void UnknownField::set_length_delimited(const std::string& value) {
 inline std::string* UnknownField::mutable_length_delimited() {
   assert(type() == TYPE_LENGTH_DELIMITED);
   return data_.length_delimited_.string_value;
-}
-inline UnknownFieldSet* UnknownField::mutable_group() {
-  assert(type() == TYPE_GROUP);
-  return data_.group_;
 }
 template <typename MessageType>
 bool UnknownFieldSet::MergeFromMessage(const MessageType& message) {

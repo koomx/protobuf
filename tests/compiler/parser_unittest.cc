@@ -664,7 +664,6 @@ TEST_F(ParseMessageTest, Oneof) {
       "    int32 a = 1;\n"
       "    string b = 2;\n"
       "    TestMessage c = 3;\n"
-      "    group D = 4 { optional int32 i = 5; }\n"
       "  }\n"
       "}\n",
 
@@ -676,14 +675,8 @@ TEST_F(ParseMessageTest, Oneof) {
       "          oneof_index:0 }"
       "  field { name:\"c\" label:LABEL_OPTIONAL type_name:\"TestMessage\" "
       "          number:3 oneof_index:0 }"
-      "  field { name:\"d\" label:LABEL_OPTIONAL type:TYPE_GROUP "
-      "          type_name:\"D\" number:4 oneof_index:0 }"
       "  oneof_decl {"
       "    name: \"foo\""
-      "  }"
-      "  nested_type {"
-      "    name: \"D\""
-      "    field { name:\"i\" label:LABEL_OPTIONAL type:TYPE_INT32 number:5 }"
       "  }"
       "}");
 }
@@ -765,20 +758,6 @@ TEST_F(ParseMessageTest, Maps) {
       "    type_name: \"CompositeTypeMapEntry\""
       "    number: 2"
       "  }"
-      "}");
-}
-
-TEST_F(ParseMessageTest, Group) {
-  ExpectParsesTo(
-      "message TestMessage {\n"
-      "  optional group TestGroup = 1 {};\n"
-      "}\n",
-
-      "message_type {"
-      "  name: \"TestMessage\""
-      "  nested_type { name: \"TestGroup\" }"
-      "  field { name:\"testgroup\" label:LABEL_OPTIONAL number:1"
-      "          type:TYPE_GROUP type_name: \"TestGroup\" }"
       "}");
 }
 
@@ -1603,14 +1582,6 @@ TEST_F(ParseErrorTest, DefaultValueMissing) {
       "1:35: Expected integer for field default value.\n");
 }
 
-TEST_F(ParseErrorTest, DefaultValueForGroup) {
-  ExpectHasErrors(
-      "message TestMessage {\n"
-      "  optional group Foo = 1 [default=blah] {}\n"
-      "}\n",
-      "1:34: Messages can't have default values.\n");
-}
-
 TEST_F(ParseErrorTest, DuplicateDefaultValue) {
   ExpectHasErrors(
       "message TestMessage {\n"
@@ -1687,22 +1658,6 @@ TEST_F(ParseErrorTest, MalformedMaps) {
       "5:6: Expected type name.\n"
       "6:20: Expected \">\".\n"
       "8:5: Map fields are not allowed to be extensions.\n");
-}
-
-TEST_F(ParseErrorTest, GroupNotCapitalized) {
-  ExpectHasErrors(
-      "message TestMessage {\n"
-      "  optional group foo = 1 {}\n"
-      "}\n",
-      "1:17: Group names must start with a capital letter.\n");
-}
-
-TEST_F(ParseErrorTest, GroupMissingBody) {
-  ExpectHasErrors(
-      "message TestMessage {\n"
-      "  optional group Foo = 1;\n"
-      "}\n",
-      "1:24: Missing group body.\n");
 }
 
 TEST_F(ParseErrorTest, ExtendingPrimitive) {
@@ -3202,40 +3157,6 @@ TEST_F(SourceInfoTest, NestedMessages) {
   EXPECT_TRUE(HasSpan(file_));
   EXPECT_TRUE(HasSpan(file_.message_type(0)));
   EXPECT_TRUE(HasSpan(file_.message_type(0), "name"));
-}
-
-TEST_F(SourceInfoTest, Groups) {
-  EXPECT_TRUE(
-      Parse("message Foo {\n"
-            "  message Bar {}\n"
-            "  $a$optional$b$ $c$group$d$ $e$Baz$f$ = $g$1$h$ {\n"
-            "    $i$message Qux {}$j$\n"
-            "  }$k$\n"
-            "}\n"));
-
-  const DescriptorProto& bar = file_.message_type(0).nested_type(0);
-  const DescriptorProto& baz = file_.message_type(0).nested_type(1);
-  const DescriptorProto& qux = baz.nested_type(0);
-  const FieldDescriptorProto& field = file_.message_type(0).field(0);
-
-  EXPECT_TRUE(HasSpan('a', 'k', field));
-  EXPECT_TRUE(HasSpan('a', 'b', field, "label"));
-  EXPECT_TRUE(HasSpan('c', 'd', field, "type"));
-  EXPECT_TRUE(HasSpan('e', 'f', field, "name"));
-  EXPECT_TRUE(HasSpan('e', 'f', field, "type_name"));
-  EXPECT_TRUE(HasSpan('g', 'h', field, "number"));
-
-  EXPECT_TRUE(HasSpan('a', 'k', baz));
-  EXPECT_TRUE(HasSpan('e', 'f', baz, "name"));
-  EXPECT_TRUE(HasSpan('i', 'j', qux));
-
-  // Ignore these.
-  EXPECT_TRUE(HasSpan(file_));
-  EXPECT_TRUE(HasSpan(file_.message_type(0)));
-  EXPECT_TRUE(HasSpan(file_.message_type(0), "name"));
-  EXPECT_TRUE(HasSpan(bar));
-  EXPECT_TRUE(HasSpan(bar, "name"));
-  EXPECT_TRUE(HasSpan(qux, "name"));
 }
 
 TEST_F(SourceInfoTest, Enums) {

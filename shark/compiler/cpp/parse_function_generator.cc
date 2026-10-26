@@ -261,7 +261,6 @@ std::vector<const FieldDescriptor*> FilterMiniParsedFields(
         break;
 
       case FieldType::MESSAGE:
-      case FieldType::GROUP:
         // TODO(b/210762816): support remaining field types.
         if (field->is_map() || IsWeak(field, options) ||
             IsImplicitWeakField(field, options, scc_analyzer) ||
@@ -317,8 +316,7 @@ TailCallTableInfo::TailCallTableInfo(
         {field, (HasHasbit(field) ? has_bit_indices[field->index()] : -1)});
     auto& entry = field_entries.back();
 
-    if (field->type() == FieldType::MESSAGE ||
-        field->type() == FieldType::GROUP) {
+    if (field->type() == FieldType::MESSAGE) {
       // Message-typed fields have a FieldAux with the default instance pointer.
       if (field->is_map()) {
         // TODO(b/205904770): generate aux entries for maps
@@ -1030,9 +1028,6 @@ static void FormatFieldKind(Formatter& format,
       break;
     }
 
-    case FieldType::GROUP:
-      format("Message | ::_fl::kRepGroup");
-      break;
     case FieldType::MESSAGE:
       if (field->is_map()) {
         format("Map");
@@ -1512,17 +1507,6 @@ void ParseFunctionGenerator::GenerateFieldBody(
       GenerateLengthDelim(format, field);
       break;
     }
-    case WireFormatLite::WIRETYPE_START_GROUP: {
-      format(
-          "ptr = ctx->ParseGroup($msg$_internal_$mutable_field$(), ptr, $1$);\n"
-          "CHK_(ptr);\n",
-          tag);
-      break;
-    }
-    case WireFormatLite::WIRETYPE_END_GROUP: {
-      GOOGLE_LOG(FATAL) << "Can't have end group field\n";
-      break;
-    }
   }  // switch (wire_type)
 }
 
@@ -1778,9 +1762,6 @@ std::string FieldParseFunctionName(
 
     case FieldType::MESSAGE:
       name.append("M");
-      break;
-    case FieldType::GROUP:
-      name.append("G");
       break;
 
     default:

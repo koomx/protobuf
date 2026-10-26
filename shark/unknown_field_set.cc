@@ -119,9 +119,6 @@ size_t UnknownFieldSet::SpaceUsedExcludingSelfLong() const {
                       internal::StringSpaceUsedExcludingSelfLong(
                           *field.data_.length_delimited_.string_value);
         break;
-      case UnknownField::TYPE_GROUP:
-        total_size += field.data_.group_->SpaceUsedLong();
-        break;
       default:
         break;
     }
@@ -166,15 +163,6 @@ std::string* UnknownFieldSet::AddLengthDelimited(int number) {
   return field.data_.length_delimited_.string_value;
 }
 
-
-UnknownFieldSet* UnknownFieldSet::AddGroup(int number) {
-  UnknownField field;
-  field.number_ = number;
-  field.SetType(UnknownField::TYPE_GROUP);
-  field.data_.group_ = new UnknownFieldSet;
-  fields_.push_back(field);
-  return field.data_.group_;
-}
 
 void UnknownFieldSet::AddField(const UnknownField& field) {
   fields_.push_back(field);
@@ -258,9 +246,6 @@ void UnknownField::Delete() {
     case UnknownField::TYPE_LENGTH_DELIMITED:
       delete data_.length_delimited_.string_value;
       break;
-    case UnknownField::TYPE_GROUP:
-      delete data_.group_;
-      break;
     default:
       break;
   }
@@ -273,12 +258,6 @@ void UnknownField::DeepCopy(const UnknownField& other) {
       data_.length_delimited_.string_value =
           new std::string(*data_.length_delimited_.string_value);
       break;
-    case UnknownField::TYPE_GROUP: {
-      UnknownFieldSet* group = new UnknownFieldSet();
-      group->InternalMergeFrom(*data_.group_);
-      data_.group_ = group;
-      break;
-    }
     default:
       break;
   }
@@ -313,10 +292,6 @@ class UnknownFieldParserHelper {
     int size = ReadSize(&ptr);
     SHARK_PARSER_ASSERT(ptr);
     return ctx->ReadString(ptr, size, s);
-  }
-  const char* ParseGroup(uint32_t num, const char* ptr, ParseContext* ctx) {
-    UnknownFieldParserHelper child(unknown_->AddGroup(num));
-    return ctx->ParseGroup(&child, ptr, num * 8 + 3);
   }
   void AddFixed32(uint32_t num, uint32_t value) {
     unknown_->AddFixed32(num, value);

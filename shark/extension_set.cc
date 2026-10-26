@@ -135,7 +135,6 @@ void ExtensionSet::RegisterExtension(const MessageLite* extendee, int number,
                                      LazyEagerVerifyFnType verify_func) {
   GOOGLE_CHECK_NE(type, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_ENUM));
   GOOGLE_CHECK_NE(type, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE));
-  GOOGLE_CHECK_NE(type, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_GROUP));
   ExtensionInfo info(extendee, number, type, is_repeated, is_packed,
                      verify_func);
   Register(info);
@@ -171,8 +170,7 @@ void ExtensionSet::RegisterMessageExtension(const MessageLite* extendee,
                                             bool is_repeated, bool is_packed,
                                             const MessageLite* prototype,
                                             LazyEagerVerifyFnType verify_func) {
-  GOOGLE_CHECK(type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE) ||
-        type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_GROUP));
+  GOOGLE_CHECK(type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE));
   ExtensionInfo info(extendee, number, type, is_repeated, is_packed,
                      verify_func);
   info.message_info = {prototype};
@@ -1451,7 +1449,6 @@ size_t ExtensionSet::Extension::ByteSize(int number) const {
 
         case WireFormatLiteFieldType::TYPE_STRING:
         case WireFormatLiteFieldType::TYPE_BYTES:
-        case WireFormatLiteFieldType::TYPE_GROUP:
         case WireFormatLiteFieldType::TYPE_MESSAGE:
           GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
           break;
@@ -1489,7 +1486,6 @@ size_t ExtensionSet::Extension::ByteSize(int number) const {
         HANDLE_TYPE(STRING, String, string);
         HANDLE_TYPE(BYTES, Bytes, string);
         HANDLE_TYPE(ENUM, Enum, enum);
-        HANDLE_TYPE(GROUP, Group, message);
         HANDLE_TYPE(MESSAGE, Message, message);
 #undef HANDLE_TYPE
 
@@ -1530,7 +1526,6 @@ size_t ExtensionSet::Extension::ByteSize(int number) const {
       HANDLE_TYPE(STRING, String, *string_value);
       HANDLE_TYPE(BYTES, Bytes, *string_value);
       HANDLE_TYPE(ENUM, Enum, enum_value);
-      HANDLE_TYPE(GROUP, Group, *message_value);
 #undef HANDLE_TYPE
       case WireFormatLiteFieldType::TYPE_MESSAGE: {
         if (is_lazy) {
@@ -1830,7 +1825,6 @@ uint8_t* ExtensionSet::Extension::InternalSerializeFieldWithCachedSizesToArray(
 
         case WireFormatLiteFieldType::TYPE_STRING:
         case WireFormatLiteFieldType::TYPE_BYTES:
-        case WireFormatLiteFieldType::TYPE_GROUP:
         case WireFormatLiteFieldType::TYPE_MESSAGE:
           GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
           break;
@@ -1876,13 +1870,6 @@ uint8_t* ExtensionSet::Extension::InternalSerializeFieldWithCachedSizesToArray(
         HANDLE_TYPE(STRING, String, string);
         HANDLE_TYPE(BYTES, Bytes, string);
 #undef HANDLE_TYPE
-        case WireFormatLiteFieldType::TYPE_GROUP:
-          for (int i = 0; i < repeated_message_value->size(); i++) {
-            target = stream->EnsureSpace(target);
-            target = WireFormatLite::InternalWriteGroup(
-                number, repeated_message_value->Get(i), target, stream);
-          }
-          break;
         case WireFormatLiteFieldType::TYPE_MESSAGE:
           for (int i = 0; i < repeated_message_value->size(); i++) {
             auto& msg = repeated_message_value->Get(i);
@@ -1927,11 +1914,6 @@ uint8_t* ExtensionSet::Extension::InternalSerializeFieldWithCachedSizesToArray(
       HANDLE_TYPE(STRING, String, *string_value);
       HANDLE_TYPE(BYTES, Bytes, *string_value);
 #undef HANDLE_TYPE
-      case WireFormatLiteFieldType::TYPE_GROUP:
-        target = stream->EnsureSpace(target);
-        target = WireFormatLite::InternalWriteGroup(number, *message_value,
-                                                    target, stream);
-        break;
       case WireFormatLiteFieldType::TYPE_MESSAGE:
         if (is_lazy) {
           const auto* prototype =
@@ -1976,9 +1958,6 @@ ExtensionSet::Extension::InternalSerializeMessageSetItemWithCachedSizesToArray(
   if (is_cleared) return target;
 
   target = stream->EnsureSpace(target);
-  // Start group.
-  target = io::CodedOutputStream::WriteTagToArray(
-      WireFormatLite::kMessageSetItemStartTag, target);
   // Write type ID.
   target = WireFormatLite::WriteUInt32ToArray(
       WireFormatLite::kMessageSetTypeIdNumber, number, target);
@@ -1993,10 +1972,6 @@ ExtensionSet::Extension::InternalSerializeMessageSetItemWithCachedSizesToArray(
         WireFormatLite::kMessageSetMessageNumber, *message_value,
         message_value->GetCachedSize(), target, stream);
   }
-  // End group.
-  target = stream->EnsureSpace(target);
-  target = io::CodedOutputStream::WriteTagToArray(
-      WireFormatLite::kMessageSetItemEndTag, target);
   return target;
 }
 

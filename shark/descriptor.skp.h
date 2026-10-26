@@ -168,7 +168,6 @@ enum class FieldDescriptorProto_Type : int32_t {
   TYPE_FIXED32 = 7,
   TYPE_BOOL = 8,
   TYPE_STRING = 9,
-  TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
   TYPE_BYTES = 12,
   TYPE_UINT32 = 13,
@@ -191,7 +190,6 @@ constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED64 = Fie
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED32 = FieldDescriptorProto_Type::TYPE_FIXED32;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BOOL = FieldDescriptorProto_Type::TYPE_BOOL;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_STRING = FieldDescriptorProto_Type::TYPE_STRING;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_GROUP = FieldDescriptorProto_Type::TYPE_GROUP;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_MESSAGE = FieldDescriptorProto_Type::TYPE_MESSAGE;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BYTES = FieldDescriptorProto_Type::TYPE_BYTES;
 constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT32 = FieldDescriptorProto_Type::TYPE_UINT32;
@@ -2252,8 +2250,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
     FieldDescriptorProto_Type::TYPE_BOOL;
   static constexpr Type TYPE_STRING =
     FieldDescriptorProto_Type::TYPE_STRING;
-  static constexpr Type TYPE_GROUP =
-    FieldDescriptorProto_Type::TYPE_GROUP;
   static constexpr Type TYPE_MESSAGE =
     FieldDescriptorProto_Type::TYPE_MESSAGE;
   static constexpr Type TYPE_BYTES =

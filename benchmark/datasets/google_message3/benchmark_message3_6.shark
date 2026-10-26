@@ -374,18 +374,9 @@ message Message8939 {
   optional string field9012 = 3;
   repeated string field9013 = 4;
   optional string field9014 = 5;
-  repeated group Message8940 = 11 {}
   optional int64 field9016 = 21;
   optional int64 field9017 = 22;
   optional int64 field9018 = 23;
-  optional group Message8941 = 31 {
-    optional string field9033 = 32;
-    optional string field9034 = 33;
-    optional string field9035 = 34;
-    optional string field9036 = 35;
-    optional string field9037 = 36;
-    optional string field9038 = 37;
-  }
   optional .benchmarks.google_message3.Message8942 field9020 = 38;
   repeated .benchmarks.google_message3.UnusedEmptyMessage field9021 = 39;
   repeated string field9022 = 41;
@@ -397,14 +388,6 @@ message Message8939 {
   optional string field9028 = 47;
   optional .benchmarks.google_message3.UnusedEnum field9029 = 48;
   optional .benchmarks.google_message3.UnusedEnum field9030 = 49;
-  optional group Message8943 = 51 {
-    optional string field9039 = 1;
-    optional string field9040 = 2;
-    optional string field9041 = 3;
-    optional string field9042 = 4;
-    optional string field9043 = 5;
-    optional string field9044 = 6;
-  }
 }
 
 message Message9181 {

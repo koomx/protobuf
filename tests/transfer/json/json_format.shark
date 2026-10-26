@@ -40,9 +40,6 @@ package sharkbuf_unittest;
 
 message TestFlagsAndStrings {
   required int32 A = 1;
-  repeated group RepeatedGroup = 2 {
-    required string f = 3;
-  }
 }
 
 message TestBase64ByteArrays {

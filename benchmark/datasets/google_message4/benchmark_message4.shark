@@ -178,7 +178,6 @@ message Message176 {
   optional .benchmarks.google_message4.UnusedEnum field455 = 37;
   optional .benchmarks.google_message4.UnusedEnum field456 = 34;
   optional int32 field457 = 35;
-  repeated group Message178 = 101 {}
   optional bool field459 = 52;
   optional uint64 field460 = 58;
   optional uint64 field461 = 59;
@@ -309,10 +308,6 @@ message Message7320 {
 message Message3069 {
   optional .benchmarks.google_message4.Message3061 field3374 = 1;
   optional bytes field3375 = 2;
-  repeated group Message3070 = 3 {
-    required .benchmarks.google_message4.Enum3071 field3378 = 4;
-    required bytes field3379 = 5;
-  }
   extensions 10000 to 536870911;
 }
 
@@ -444,23 +439,7 @@ message Message2356 {
   optional int32 field2385 = 119;
   optional int32 field2386 = 105;
   optional bytes field2387 = 5;
-  optional group Message2357 = 6 {
-    optional int64 field2399 = 9;
-    optional int32 field2400 = 10;
-    optional int32 field2401 = 11;
-    optional int32 field2402 = 12;
-    optional int32 field2403 = 13;
-    optional int32 field2404 = 116;
-    optional int32 field2405 = 106;
-    required bytes field2406 = 14;
-    optional int32 field2407 = 45;
-    optional int32 field2408 = 112;
-    optional bool field2409 = 122;
-    optional bytes field2410 = 124;
-  }
   optional string field2389 = 120;
-  optional group Message2358 = 107 {}
-  repeated group Message2359 = 40 {}
   optional int32 field2392 = 50;
   optional .benchmarks.google_message4.UnusedEmptyMessage field2393 = 60;
   optional .benchmarks.google_message4.UnusedEmptyMessage field2394 = 70;

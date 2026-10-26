@@ -56,8 +56,6 @@ namespace internal {
 #if !defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912)
 // Old version of MSVC doesn't like definitions of inline constants, GCC
 // requires them.
-const int WireFormatLite::kMessageSetItemStartTag;
-const int WireFormatLite::kMessageSetItemEndTag;
 const int WireFormatLite::kMessageSetTypeIdTag;
 const int WireFormatLite::kMessageSetMessageTag;
 
@@ -65,10 +63,6 @@ const int WireFormatLite::kMessageSetMessageTag;
 
 // IBM xlC requires prefixing constants with WireFormatLite::
 const size_t WireFormatLite::kMessageSetItemTagsSize =
-    io::CodedOutputStream::StaticVarintSize32<
-        WireFormatLite::kMessageSetItemStartTag>::value +
-    io::CodedOutputStream::StaticVarintSize32<
-        WireFormatLite::kMessageSetItemEndTag>::value +
     io::CodedOutputStream::StaticVarintSize32<
         WireFormatLite::kMessageSetTypeIdTag>::value +
     io::CodedOutputStream::StaticVarintSize32<
@@ -87,7 +81,7 @@ const WireFormatLite::CppType
         CPPTYPE_UINT32,   // TYPE_FIXED32
         CPPTYPE_BOOL,     // TYPE_BOOL
         CPPTYPE_STRING,   // TYPE_STRING
-        CPPTYPE_MESSAGE,  // TYPE_GROUP
+        static_cast<CppType>(0),  // 10 is unused
         CPPTYPE_MESSAGE,  // TYPE_MESSAGE
         CPPTYPE_STRING,   // TYPE_BYTES
         CPPTYPE_UINT32,   // TYPE_UINT32
@@ -114,7 +108,7 @@ const WireFormatLite::WireType
         WireFormatLite::WIRETYPE_FIXED32,           // TYPE_FIXED32
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_BOOL
         WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_STRING
-        WireFormatLite::WIRETYPE_START_GROUP,       // TYPE_GROUP
+        static_cast<WireFormatLite::WireType>(-1),  // 10 is unused
         WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_MESSAGE
         WireFormatLite::WIRETYPE_LENGTH_DELIMITED,  // TYPE_BYTES
         WireFormatLite::WIRETYPE_VARINT,            // TYPE_UINT32
@@ -148,21 +142,6 @@ bool WireFormatLite::SkipField(io::CodedInputStream* input, uint32_t tag) {
       if (!input->ReadVarint32(&length)) return false;
       if (!input->Skip(length)) return false;
       return true;
-    }
-    case WireFormatLite::WIRETYPE_START_GROUP: {
-      if (!input->IncrementRecursionDepth()) return false;
-      if (!SkipMessage(input)) return false;
-      input->DecrementRecursionDepth();
-      // Check that the ending tag matched the starting tag.
-      if (!input->LastTagWas(
-              WireFormatLite::MakeTag(WireFormatLite::GetTagFieldNumber(tag),
-                                      WireFormatLite::WIRETYPE_END_GROUP))) {
-        return false;
-      }
-      return true;
-    }
-    case WireFormatLite::WIRETYPE_END_GROUP: {
-      return false;
     }
     case WireFormatLite::WIRETYPE_FIXED32: {
       uint32_t value;
@@ -205,22 +184,6 @@ bool WireFormatLite::SkipField(io::CodedInputStream* input, uint32_t tag,
       output->WriteString(temp);
       return true;
     }
-    case WireFormatLite::WIRETYPE_START_GROUP: {
-      output->WriteVarint32(tag);
-      if (!input->IncrementRecursionDepth()) return false;
-      if (!SkipMessage(input, output)) return false;
-      input->DecrementRecursionDepth();
-      // Check that the ending tag matched the starting tag.
-      if (!input->LastTagWas(
-              WireFormatLite::MakeTag(WireFormatLite::GetTagFieldNumber(tag),
-                                      WireFormatLite::WIRETYPE_END_GROUP))) {
-        return false;
-      }
-      return true;
-    }
-    case WireFormatLite::WIRETYPE_END_GROUP: {
-      return false;
-    }
     case WireFormatLite::WIRETYPE_FIXED32: {
       uint32_t value;
       if (!input->ReadLittleEndian32(&value)) return false;
@@ -242,13 +205,6 @@ bool WireFormatLite::SkipMessage(io::CodedInputStream* input) {
       return true;
     }
 
-    WireFormatLite::WireType wire_type = WireFormatLite::GetTagWireType(tag);
-
-    if (wire_type == WireFormatLite::WIRETYPE_END_GROUP) {
-      // Must be the end of the message.
-      return true;
-    }
-
     if (!SkipField(input, tag)) return false;
   }
 }
@@ -259,14 +215,6 @@ bool WireFormatLite::SkipMessage(io::CodedInputStream* input,
     uint32_t tag = input->ReadTag();
     if (tag == 0) {
       // End of input.  This is a valid place to end, so return true.
-      return true;
-    }
-
-    WireFormatLite::WireType wire_type = WireFormatLite::GetTagWireType(tag);
-
-    if (wire_type == WireFormatLite::WIRETYPE_END_GROUP) {
-      output->WriteVarint32(tag);
-      // Must be the end of the message.
       return true;
     }
 
@@ -520,30 +468,12 @@ void WireFormatLite::WriteBytesMaybeAliased(int field_number,
 }
 
 
-void WireFormatLite::WriteGroup(int field_number, const MessageLite& value,
-                                io::CodedOutputStream* output) {
-  WriteTag(field_number, WIRETYPE_START_GROUP, output);
-  value.SerializeWithCachedSizes(output);
-  WriteTag(field_number, WIRETYPE_END_GROUP, output);
-}
-
 void WireFormatLite::WriteMessage(int field_number, const MessageLite& value,
                                   io::CodedOutputStream* output) {
   WriteTag(field_number, WIRETYPE_LENGTH_DELIMITED, output);
   const int size = value.GetCachedSize();
   output->WriteVarint32(size);
   value.SerializeWithCachedSizes(output);
-}
-
-uint8_t* WireFormatLite::InternalWriteGroup(int field_number,
-                                            const MessageLite& value,
-                                            uint8_t* target,
-                                            io::EpsCopyOutputStream* stream) {
-  target = stream->EnsureSpace(target);
-  target = WriteTagToArray(field_number, WIRETYPE_START_GROUP, target);
-  target = value._InternalSerialize(target, stream);
-  target = stream->EnsureSpace(target);
-  return WriteTagToArray(field_number, WIRETYPE_END_GROUP, target);
 }
 
 uint8_t* WireFormatLite::InternalWriteMessage(int field_number,
@@ -560,15 +490,6 @@ uint8_t* WireFormatLite::InternalWriteMessage(int field_number,
 void WireFormatLite::WriteSubMessageMaybeToArray(
     int /*size*/, const MessageLite& value, io::CodedOutputStream* output) {
   output->SetCur(value._InternalSerialize(output->Cur(), output->EpsCopy()));
-}
-
-void WireFormatLite::WriteGroupMaybeToArray(int field_number,
-                                            const MessageLite& value,
-                                            io::CodedOutputStream* output) {
-  WriteTag(field_number, WIRETYPE_START_GROUP, output);
-  const int size = value.GetCachedSize();
-  WriteSubMessageMaybeToArray(size, value, output);
-  WriteTag(field_number, WIRETYPE_END_GROUP, output);
 }
 
 void WireFormatLite::WriteMessageMaybeToArray(int field_number,

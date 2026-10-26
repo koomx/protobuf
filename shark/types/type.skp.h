@@ -83,7 +83,6 @@ enum class Field_Kind : int32_t {
   TYPE_FIXED32 = 7,
   TYPE_BOOL = 8,
   TYPE_STRING = 9,
-  TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
   TYPE_BYTES = 12,
   TYPE_UINT32 = 13,
@@ -107,7 +106,6 @@ constexpr Field_Kind Field_Kind_TYPE_FIXED64 = Field_Kind::TYPE_FIXED64;
 constexpr Field_Kind Field_Kind_TYPE_FIXED32 = Field_Kind::TYPE_FIXED32;
 constexpr Field_Kind Field_Kind_TYPE_BOOL = Field_Kind::TYPE_BOOL;
 constexpr Field_Kind Field_Kind_TYPE_STRING = Field_Kind::TYPE_STRING;
-constexpr Field_Kind Field_Kind_TYPE_GROUP = Field_Kind::TYPE_GROUP;
 constexpr Field_Kind Field_Kind_TYPE_MESSAGE = Field_Kind::TYPE_MESSAGE;
 constexpr Field_Kind Field_Kind_TYPE_BYTES = Field_Kind::TYPE_BYTES;
 constexpr Field_Kind Field_Kind_TYPE_UINT32 = Field_Kind::TYPE_UINT32;
@@ -637,8 +635,6 @@ class Field final :
     Field_Kind::TYPE_BOOL;
   static constexpr Kind TYPE_STRING =
     Field_Kind::TYPE_STRING;
-  static constexpr Kind TYPE_GROUP =
-    Field_Kind::TYPE_GROUP;
   static constexpr Kind TYPE_MESSAGE =
     Field_Kind::TYPE_MESSAGE;
   static constexpr Kind TYPE_BYTES =

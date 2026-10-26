@@ -13,9 +13,6 @@ optional_double: 112
 optional_bool: true
 optional_string: "115"
 optional_bytes: "116"
-OptionalGroup {
-  a: 117
-}
 optional_nested_message {
   bb: 118
 }
@@ -66,12 +63,6 @@ repeated_string: "215"
 repeated_string: "315"
 repeated_bytes: "216"
 repeated_bytes: "316"
-RepeatedGroup {
-  a: 217
-}
-RepeatedGroup {
-  a: 317
-}
 repeated_nested_message {
   bb: 218
 }

@@ -91,7 +91,6 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
             extension.enum_validity_check.arg, metadata, number);
       case WireFormatLiteFieldType::TYPE_STRING:
       case WireFormatLiteFieldType::TYPE_BYTES:
-      case WireFormatLiteFieldType::TYPE_GROUP:
       case WireFormatLiteFieldType::TYPE_MESSAGE:
         GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
         break;
@@ -245,19 +244,6 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
         return ctx->ReadString(ptr, size, value);
       }
 
-      case WireFormatLiteFieldType::TYPE_GROUP: {
-        MessageLite* value =
-            extension.is_repeated
-                ? AddMessage(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_GROUP),
-                             *extension.message_info.sharktype,
-                             extension.descriptor)
-                : MutableMessage(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_GROUP),
-                                 *extension.message_info.sharktype,
-                                 extension.descriptor);
-        uint32_t tag = (number << 3) + WireFormatLite::WIRETYPE_START_GROUP;
-        return ctx->ParseGroup(value, ptr, tag);
-      }
-
       case WireFormatLiteFieldType::TYPE_MESSAGE: {
         MessageLite* value =
             extension.is_repeated
@@ -289,6 +275,10 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
       uint64_t tmp;
       ptr = ParseBigVarint(ptr, &tmp);
       SHARK_PARSER_ASSERT(ptr);
+      if (state == State::kDone) {
+        state = State::kNoTag;
+        payload.clear();
+      }
       if (state == State::kNoTag) {
         type_id = tmp;
         state = State::kHasType;
@@ -322,6 +312,10 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
         state = State::kDone;
       }
     } else if (tag == WireFormatLite::kMessageSetMessageTag) {
+      if (state == State::kDone) {
+        state = State::kNoTag;
+        payload.clear();
+      }
       if (state == State::kHasType) {
         ptr = ParseFieldMaybeLazily(static_cast<uint64_t>(type_id) * 8 + 2, ptr,
                                     extendee, metadata, ctx);

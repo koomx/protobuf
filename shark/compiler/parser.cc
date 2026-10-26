@@ -72,8 +72,6 @@ const TypeNameMap& GetTypeNameTable() {
     result["fixed32"] = FieldDescriptorProto::TYPE_FIXED32;
     result["bool"] = FieldDescriptorProto::TYPE_BOOL;
     result["string"] = FieldDescriptorProto::TYPE_STRING;
-    result["group"] = FieldDescriptorProto::TYPE_GROUP;
-
     result["bytes"] = FieldDescriptorProto::TYPE_BYTES;
     result["uint32"] = FieldDescriptorProto::TYPE_UINT32;
     result["sfixed32"] = FieldDescriptorProto::TYPE_SFIXED32;
@@ -1022,55 +1020,11 @@ bool Parser::ParseMessageFieldNoLabel(
   // Parse options.
   DO(ParseFieldOptions(field, field_location, containing_file));
 
-  // Deal with groups.
-  if (field->has_type() && field->type() == FieldDescriptorProto::TYPE_GROUP) {
-    // Awkward:  Since a group declares both a message type and a field, we
-    //   have to create overlapping locations.
-    LocationRecorder group_location(parent_location);
-    group_location.StartAt(field_location);
-    group_location.AddPath(location_field_number_for_nested_type);
-    group_location.AddPath(messages->size());
-
-    DescriptorProto* group = messages->Add();
-    group->set_name(field->name());
-
-    // Record name location to match the field name's location.
-    {
-      LocationRecorder location(group_location,
-                                DescriptorProto::kNameFieldNumber);
-      location.StartAt(name_token);
-      location.EndAt(name_token);
-      location.RecordLegacyLocation(group,
-                                    DescriptorPool::ErrorCollector::NAME);
-    }
-
-    // The field's type_name also comes from the name.  Confusing!
-    {
-      LocationRecorder location(field_location,
-                                FieldDescriptorProto::kTypeNameFieldNumber);
-      location.StartAt(name_token);
-      location.EndAt(name_token);
-    }
-
-    // As a hack for backwards-compatibility, we force the group name to start
-    // with a capital letter and lower-case the field name.  New code should
-    // not use groups; it should use nested messages.
-    if (group->name()[0] < 'A' || 'Z' < group->name()[0]) {
-      AddError(name_token.line, name_token.column,
-               "Group names must start with a capital letter.");
-    }
-    LowerString(field->mutable_name());
-
-    field->set_type_name(group->name());
-    if (LookingAt("{")) {
-      DO(ParseMessageBlock(group, group_location, containing_file));
-    } else {
-      AddError("Missing group body.");
-      return false;
-    }
-  } else {
-    DO(ConsumeEndOfDeclaration(";", &field_location));
-  }
+  (void)name_token;
+  (void)messages;
+  (void)parent_location;
+  (void)location_field_number_for_nested_type;
+  DO(ConsumeEndOfDeclaration(";", &field_location));
 
   // Create a map entry type if this is a map field.
   if (map_field.is_map_field) {
@@ -1343,7 +1297,6 @@ bool Parser::ParseDefaultAssignment(
       break;
 
     case FieldDescriptorProto::TYPE_MESSAGE:
-    case FieldDescriptorProto::TYPE_GROUP:
       AddError("Messages can't have default values.");
       return false;
   }

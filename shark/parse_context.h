@@ -902,15 +902,6 @@ template <typename T>
       SHARK_PARSER_ASSERT(ptr);
       break;
     }
-    case WireType::WIRETYPE_START_GROUP: {
-      ptr = field_parser.ParseGroup(number, ptr, ctx);
-      SHARK_PARSER_ASSERT(ptr);
-      break;
-    }
-    case WireType::WIRETYPE_END_GROUP: {
-      GOOGLE_LOG(FATAL) << "Can't happen";
-      break;
-    }
     case WireType::WIRETYPE_FIXED32: {
       uint32_t value = UnalignedLoad<uint32_t>(ptr);
       ptr += 4;

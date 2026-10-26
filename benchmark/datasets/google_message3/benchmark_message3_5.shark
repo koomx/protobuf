@@ -183,12 +183,6 @@ message Message10155 {
   optional int32 field10198 = 18;
   optional int32 field10199 = 19;
   optional int32 field10200 = 21;
-  repeated group Message10156 = 50 {
-    optional .benchmarks.google_message3.Enum8862 field10266 = 51;
-    optional int32 field10267 = 52;
-    optional int32 field10268 = 53;
-    optional int32 field10269 = 54;
-  }
   optional int32 field10202 = 3;
   optional int32 field10203 = 4;
   optional int32 field10204 = 5;

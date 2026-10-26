@@ -246,9 +246,6 @@ message ComplexOptionType2 {
 message ComplexOptionType3 {
   optional int32 moo = 1;
 
-  optional group ComplexOptionType5 = 2 {
-    optional int32 plugh = 3;
-  }
 }
 
 extend ComplexOptionType1 {
@@ -265,9 +262,6 @@ extend shark.MessageOptions {
   optional sharkbuf_unittest.ComplexOptionType1 complex_opt1 = 7646756;
   optional ComplexOptionType2 complex_opt2 = 7636949;
   optional ComplexOptionType3 complex_opt3 = 7636463;
-  optional group ComplexOpt6 = 7595468 {
-    optional int32 xyzzy = 7593951;
-  }
 }
 
 // Note that we try various different ways of naming the same extension.
@@ -294,8 +288,6 @@ message VariousComplexOptions {
     waldo: 212
   };
   option (sharkbuf_unittest.complex_opt3).moo = 9;
-  option (complex_opt3).complexoptiontype5.plugh = 22;
-  option (complexopt6).xyzzy = 24;
 }
 
 // ------------------------------------------------------

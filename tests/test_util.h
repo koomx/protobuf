@@ -96,8 +96,6 @@ class ReflectionTester {
 
   const Descriptor* base_descriptor_;
 
-  const FieldDescriptor* group_a_;
-  const FieldDescriptor* repeated_group_a_;
   const FieldDescriptor* nested_b_;
   const FieldDescriptor* foreign_c_;
   const FieldDescriptor* import_d_;
@@ -146,18 +144,6 @@ inline TestUtil::ReflectionTester::ReflectionTester(
   import_bar_ = pool->FindEnumValueByName(import_package + ".IMPORT_BAR");
   import_baz_ = pool->FindEnumValueByName(import_package + ".IMPORT_BAZ");
 
-  if (base_descriptor_->name() == "TestAllExtensions") {
-    group_a_ = pool->FindFieldByName(package + ".OptionalGroup_extension.a");
-    repeated_group_a_ =
-        pool->FindFieldByName(package + ".RepeatedGroup_extension.a");
-  } else {
-    group_a_ = pool->FindFieldByName(package + ".TestAllTypes.OptionalGroup.a");
-    repeated_group_a_ =
-        pool->FindFieldByName(package + ".TestAllTypes.RepeatedGroup.a");
-  }
-
-  EXPECT_TRUE(group_a_ != nullptr);
-  EXPECT_TRUE(repeated_group_a_ != nullptr);
   EXPECT_TRUE(nested_b_ != nullptr);
   EXPECT_TRUE(foreign_c_ != nullptr);
   EXPECT_TRUE(import_d_ != nullptr);
@@ -210,8 +196,6 @@ inline void TestUtil::ReflectionTester::SetAllFieldsViaReflection(
   reflection->SetString(message, F("optional_string"), "115");
   reflection->SetString(message, F("optional_bytes"), "116");
 
-  sub_message = reflection->MutableMessage(message, F("optionalgroup"));
-  sub_message->GetReflection()->SetInt32(sub_message, group_a_, 117);
   sub_message =
       reflection->MutableMessage(message, F("optional_nested_message"));
   sub_message->GetReflection()->SetInt32(sub_message, nested_b_, 118);
@@ -258,8 +242,6 @@ inline void TestUtil::ReflectionTester::SetAllFieldsViaReflection(
   reflection->AddString(message, F("repeated_string"), "215");
   reflection->AddString(message, F("repeated_bytes"), "216");
 
-  sub_message = reflection->AddMessage(message, F("repeatedgroup"));
-  sub_message->GetReflection()->SetInt32(sub_message, repeated_group_a_, 217);
   sub_message = reflection->AddMessage(message, F("repeated_nested_message"));
   sub_message->GetReflection()->SetInt32(sub_message, nested_b_, 218);
   sub_message = reflection->AddMessage(message, F("repeated_foreign_message"));
@@ -293,8 +275,6 @@ inline void TestUtil::ReflectionTester::SetAllFieldsViaReflection(
   reflection->AddString(message, F("repeated_string"), "315");
   reflection->AddString(message, F("repeated_bytes"), "316");
 
-  sub_message = reflection->AddMessage(message, F("repeatedgroup"));
-  sub_message->GetReflection()->SetInt32(sub_message, repeated_group_a_, 317);
   sub_message = reflection->AddMessage(message, F("repeated_nested_message"));
   sub_message->GetReflection()->SetInt32(sub_message, nested_b_, 318);
   sub_message = reflection->AddMessage(message, F("repeated_foreign_message"));
@@ -463,7 +443,6 @@ inline void TestUtil::ReflectionTester::ExpectAllFieldsSetViaReflection1(
   EXPECT_TRUE(reflection->HasField(message, F("optional_string")));
   EXPECT_TRUE(reflection->HasField(message, F("optional_bytes")));
 
-  EXPECT_TRUE(reflection->HasField(message, F("optionalgroup")));
   EXPECT_TRUE(reflection->HasField(message, F("optional_nested_message")));
   EXPECT_TRUE(reflection->HasField(message, F("optional_foreign_message")));
   EXPECT_TRUE(reflection->HasField(message, F("optional_import_message")));
@@ -473,8 +452,6 @@ inline void TestUtil::ReflectionTester::ExpectAllFieldsSetViaReflection1(
   EXPECT_TRUE(
       reflection->HasField(message, F("optional_unverified_lazy_message")));
 
-  sub_message = &reflection->GetMessage(message, F("optionalgroup"));
-  EXPECT_TRUE(sub_message->GetReflection()->HasField(*sub_message, group_a_));
   sub_message = &reflection->GetMessage(message, F("optional_nested_message"));
   EXPECT_TRUE(sub_message->GetReflection()->HasField(*sub_message, nested_b_));
   sub_message = &reflection->GetMessage(message, F("optional_foreign_message"));
@@ -518,9 +495,6 @@ inline void TestUtil::ReflectionTester::ExpectAllFieldsSetViaReflection1(
   EXPECT_EQ("116", reflection->GetStringReference(message, F("optional_bytes"),
                                                   &scratch));
 
-  sub_message = &reflection->GetMessage(message, F("optionalgroup"));
-  EXPECT_EQ(117,
-            sub_message->GetReflection()->GetInt32(*sub_message, group_a_));
   sub_message = &reflection->GetMessage(message, F("optional_nested_message"));
   EXPECT_EQ(118,
             sub_message->GetReflection()->GetInt32(*sub_message, nested_b_));
@@ -598,7 +572,6 @@ inline void TestUtil::ReflectionTester::ExpectAllFieldsSetViaReflection2(
   ASSERT_EQ(2, reflection->FieldSize(message, F("repeated_string")));
   ASSERT_EQ(2, reflection->FieldSize(message, F("repeated_bytes")));
 
-  ASSERT_EQ(2, reflection->FieldSize(message, F("repeatedgroup")));
   ASSERT_EQ(2, reflection->FieldSize(message, F("repeated_nested_message")));
   ASSERT_EQ(2, reflection->FieldSize(message, F("repeated_foreign_message")));
   ASSERT_EQ(2, reflection->FieldSize(message, F("repeated_import_message")));
@@ -642,9 +615,6 @@ inline void TestUtil::ReflectionTester::ExpectAllFieldsSetViaReflection2(
   EXPECT_EQ("216", reflection->GetRepeatedStringReference(
                        message, F("repeated_bytes"), 0, &scratch));
 
-  sub_message = &reflection->GetRepeatedMessage(message, F("repeatedgroup"), 0);
-  EXPECT_EQ(217, sub_message->GetReflection()->GetInt32(*sub_message,
-                                                        repeated_group_a_));
   sub_message =
       &reflection->GetRepeatedMessage(message, F("repeated_nested_message"), 0);
   EXPECT_EQ(218,
@@ -711,9 +681,6 @@ inline void TestUtil::ReflectionTester::ExpectAllFieldsSetViaReflection2(
   EXPECT_EQ("316", reflection->GetRepeatedStringReference(
                        message, F("repeated_bytes"), 1, &scratch));
 
-  sub_message = &reflection->GetRepeatedMessage(message, F("repeatedgroup"), 1);
-  EXPECT_EQ(317, sub_message->GetReflection()->GetInt32(*sub_message,
-                                                        repeated_group_a_));
   sub_message =
       &reflection->GetRepeatedMessage(message, F("repeated_nested_message"), 1);
   EXPECT_EQ(318,
@@ -901,7 +868,6 @@ inline void TestUtil::ReflectionTester::ExpectClearViaReflection(
   EXPECT_FALSE(reflection->HasField(message, F("optional_string")));
   EXPECT_FALSE(reflection->HasField(message, F("optional_bytes")));
 
-  EXPECT_FALSE(reflection->HasField(message, F("optionalgroup")));
   EXPECT_FALSE(reflection->HasField(message, F("optional_nested_message")));
   EXPECT_FALSE(reflection->HasField(message, F("optional_foreign_message")));
   EXPECT_FALSE(reflection->HasField(message, F("optional_import_message")));
@@ -941,9 +907,6 @@ inline void TestUtil::ReflectionTester::ExpectClearViaReflection(
                                                &scratch));
 
   // Embedded messages should also be clear.
-  sub_message = &reflection->GetMessage(message, F("optionalgroup"));
-  EXPECT_FALSE(sub_message->GetReflection()->HasField(*sub_message, group_a_));
-  EXPECT_EQ(0, sub_message->GetReflection()->GetInt32(*sub_message, group_a_));
   sub_message = &reflection->GetMessage(message, F("optional_nested_message"));
   EXPECT_FALSE(sub_message->GetReflection()->HasField(*sub_message, nested_b_));
   EXPECT_EQ(0, sub_message->GetReflection()->GetInt32(*sub_message, nested_b_));
@@ -1000,7 +963,6 @@ inline void TestUtil::ReflectionTester::ExpectClearViaReflection(
   EXPECT_EQ(0, reflection->FieldSize(message, F("repeated_string")));
   EXPECT_EQ(0, reflection->FieldSize(message, F("repeated_bytes")));
 
-  EXPECT_EQ(0, reflection->FieldSize(message, F("repeatedgroup")));
   EXPECT_EQ(0, reflection->FieldSize(message, F("repeated_nested_message")));
   EXPECT_EQ(0, reflection->FieldSize(message, F("repeated_foreign_message")));
   EXPECT_EQ(0, reflection->FieldSize(message, F("repeated_import_message")));
@@ -1098,8 +1060,6 @@ inline void TestUtil::ReflectionTester::ModifyRepeatedFieldsViaReflection(
   reflection->SetRepeatedString(message, F("repeated_bytes"), 1, "516");
 
   sub_message =
-      reflection->MutableRepeatedMessage(message, F("repeatedgroup"), 1);
-  sub_message->GetReflection()->SetInt32(sub_message, repeated_group_a_, 517);
   sub_message = reflection->MutableRepeatedMessage(
       message, F("repeated_nested_message"), 1);
   sub_message->GetReflection()->SetInt32(sub_message, nested_b_, 518);
@@ -1216,7 +1176,6 @@ inline void TestUtil::ReflectionTester::ExpectMessagesReleasedViaReflection(
   const Reflection* reflection = message->GetReflection();
 
   static const char* fields[] = {
-      "optionalgroup",
       "optional_nested_message",
       "optional_foreign_message",
       "optional_import_message",

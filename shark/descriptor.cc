@@ -813,7 +813,7 @@ namespace shark {
             FieldCppType::UINT32, // FieldType::FIXED32
             FieldCppType::BOOL, // FieldType::BOOL
             FieldCppType::STRING, // FieldType::STRING
-            FieldCppType::MESSAGE, // FieldType::GROUP
+            static_cast<FieldCppType>(0), // 10 is unused
             FieldCppType::MESSAGE, // FieldType::MESSAGE
             FieldCppType::STRING, // FieldType::BYTES
             FieldCppType::UINT32, // FieldType::UINT32
@@ -840,7 +840,7 @@ namespace shark {
         "fixed32", // FieldType::FIXED32
         "bool", // FieldType::BOOL
         "string", // FieldType::STRING
-        "group", // FieldType::GROUP
+        "ERROR", // 10 is unused
         "message", // FieldType::MESSAGE
         "bytes", // FieldType::BYTES
         "uint32", // FieldType::UINT32
@@ -3037,21 +3037,10 @@ namespace shark {
             contents.append("\n");
         }
 
-        // Find all the 'group' type extensions; we will not output their nested
-        // definitions (those will be done with their group field descriptor).
-        std::set<const Descriptor*> groups;
-        for (int i = 0; i < extension_count(); i++) {
-            if (extension(i)->type() == FieldType::GROUP) {
-                groups.insert(extension(i)->message_type());
-            }
-        }
-
         for (int i = 0; i < message_type_count(); i++) {
-            if (groups.count(message_type(i)) == 0) {
-                message_type(i)->DebugString(0, &contents, debug_string_options,
-                    /* include_opening_clause */ true);
-                contents.append("\n");
-            }
+            message_type(i)->DebugString(0, &contents, debug_string_options,
+                /* include_opening_clause */ true);
+            contents.append("\n");
         }
 
         for (int i = 0; i < service_count(); i++) {
@@ -3111,26 +3100,9 @@ namespace shark {
 
         FormatLineOptions(depth, options(), file()->pool(), contents);
 
-        // Find all the 'group' types for fields and extensions; we will not output
-        // their nested definitions (those will be done with their group field
-        // descriptor).
-        std::set<const Descriptor*> groups;
-        for (int i = 0; i < field_count(); i++) {
-            if (field(i)->type() == FieldType::GROUP) {
-                groups.insert(field(i)->message_type());
-            }
-        }
-        for (int i = 0; i < extension_count(); i++) {
-            if (extension(i)->type() == FieldType::GROUP) {
-                groups.insert(extension(i)->message_type());
-            }
-        }
-
         for (int i = 0; i < nested_type_count(); i++) {
-            if (groups.count(nested_type(i)) == 0) {
-                nested_type(i)->DebugString(depth, contents, debug_string_options,
-                    /* include_opening_clause */ true);
-            }
+            nested_type(i)->DebugString(depth, contents, debug_string_options,
+                /* include_opening_clause */ true);
         }
         for (int i = 0; i < enum_type_count(); i++) {
             enum_type(i)->DebugString(depth, contents, debug_string_options);
@@ -3256,8 +3228,8 @@ namespace shark {
         comment_printer.AddPreComment(contents);
 
         strings::SubstituteAndAppend(
-            contents, "$0$1$2 $3 = $4", prefix, label, field_type,
-            type() == FieldType::GROUP ? message_type()->name() : name(), number());
+            contents, "$0$1$2 $3 = $4", prefix, label, field_type, name(),
+            number());
 
         bool bracketed = false;
         if (has_default_value()) {
@@ -3289,16 +3261,7 @@ namespace shark {
             contents->append("]");
         }
 
-        if (type() == FieldType::GROUP) {
-            if (debug_string_options.elide_group_body) {
-                contents->append(" { ... };\n");
-            } else {
-                message_type()->DebugString(depth, contents, debug_string_options,
-                    /* include_opening_clause */ false);
-            }
-        } else {
-            contents->append(";\n");
-        }
+        contents->append(";\n");
 
         comment_printer.AddPostComment(contents);
     }
@@ -6832,10 +6795,6 @@ namespace shark {
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Enum type \"" + field->enum_type()->full_name() + "\" is not a proto3 enum, but is used in \"" + field->containing_type()->full_name() + "\" which is a proto3 message type.");
         }
-        if (field->type() == FieldType::GROUP) {
-            AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
-                "Groups are not supported in proto3 syntax.");
-        }
     }
 
     void DescriptorBuilder::ValidateProto3Enum(EnumDescriptor* enm,
@@ -7026,7 +6985,6 @@ namespace shark {
         case FieldType::FLOAT:
         case FieldType::DOUBLE:
         case FieldType::MESSAGE:
-        case FieldType::GROUP:
         case FieldType::BYTES:
             AddError(
                 field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
@@ -7399,12 +7357,6 @@ namespace shark {
                 break;
             }
 
-            case FieldType::GROUP: {
-                parent_unknown_fields->AddGroup((*iter)->number())
-                    ->MergeFrom(*unknown_fields);
-                break;
-            }
-
             default:
                 GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::MESSAGE: "
                                   << static_cast<int>((*iter)->type());
@@ -7564,16 +7516,6 @@ namespace shark {
                                 intermediate_fields_end, innermost_field,
                                 debug_msg_name,
                                 intermediate_unknown_fields)) {
-                            return false; // Error already added.
-                        }
-                    }
-                    break;
-
-                case FieldType::GROUP:
-                    if (unknown_field->type() == UnknownField::TYPE_GROUP) {
-                        if (!ExamineIfOptionIsSet(intermediate_fields_iter + 1,
-                                intermediate_fields_end, innermost_field,
-                                debug_msg_name, unknown_field->group())) {
                             return false; // Error already added.
                         }
                     }
@@ -7940,13 +7882,7 @@ namespace shark {
         } else {
             std::string serial;
             dynamic->SerializeToString(&serial); // Never fails
-            if (option_field->type() == FieldType::MESSAGE) {
-                unknown_fields->AddLengthDelimited(option_field->number(), serial);
-            } else {
-                GOOGLE_CHECK_EQ(option_field->type(), FieldType::GROUP);
-                UnknownFieldSet* group = unknown_fields->AddGroup(option_field->number());
-                group->ParseFromString(serial);
-            }
+            unknown_fields->AddLengthDelimited(option_field->number(), serial);
             return true;
         }
     }
@@ -8126,8 +8062,7 @@ namespace shark {
         if (type_once_) {
             internal::call_once(*type_once_, FieldDescriptor::TypeOnceInit, this);
         }
-        return static_cast<FieldType>(type_) == FieldType::MESSAGE ||
-               static_cast<FieldType>(type_) == FieldType::GROUP
+        return static_cast<FieldType>(type_) == FieldType::MESSAGE
             ? type_descriptor_.message_type
             : nullptr;
     }

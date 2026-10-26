@@ -208,12 +208,6 @@ TEST_F(DescriptorPoolTypeResolverTest, TestAllTypes) {
   EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_BYTES,
                        "optional_bytes", 15));
 
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_GROUP,
-                       "optionalgroup", 16));
-
-  EXPECT_TRUE(CheckFieldTypeUrl(
-      type, "optionalgroup",
-      GetTypeUrl<sharkbuf_unittest::TestAllTypes::OptionalGroup>()));
 
   EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_MESSAGE,
                        "optional_nested_message", 18));
@@ -269,12 +263,6 @@ TEST_F(DescriptorPoolTypeResolverTest, TestAllTypes) {
   EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_BYTES,
                        "repeated_bytes", 45));
 
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_GROUP,
-                       "repeatedgroup", 46));
-
-  EXPECT_TRUE(CheckFieldTypeUrl(
-      type, "repeatedgroup",
-      GetTypeUrl<sharkbuf_unittest::TestAllTypes::RepeatedGroup>()));
 
   EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_MESSAGE,
                        "repeated_nested_message", 48));

@@ -38,6 +38,10 @@ message NarrowMaps {
   map<uint8, int32> u8 = 2;
   map<int16, int32> i16 = 3;
   map<uint16, int32> u16 = 4;
+  map<int32, int8> vi8 = 5;
+  map<int32, uint8> vu8 = 6;
+  map<int32, int16> vi16 = 7;
+  map<int32, uint16> vu16 = 8;
 }
 
 message NarrowKeyList {

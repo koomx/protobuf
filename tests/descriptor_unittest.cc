@@ -670,7 +670,7 @@ class DescriptorTest : public testing::Test {
              FieldDescriptorProto::TYPE_MESSAGE)
         ->set_type_name("TestForeign");
     AddField(message, "moo", 15, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_GROUP)
+             FieldDescriptorProto::TYPE_MESSAGE)
         ->set_type_name("TestForeign");
 
     FileDescriptorProto bar_file;
@@ -1032,7 +1032,7 @@ TEST_F(DescriptorTest, FieldType) {
   EXPECT_EQ(FieldType::STRING, foo_->type());
   EXPECT_EQ(FieldType::ENUM, bar_->type());
   EXPECT_EQ(FieldType::MESSAGE, baz_->type());
-  EXPECT_EQ(FieldType::GROUP, moo_->type());
+  EXPECT_EQ(FieldType::MESSAGE, moo_->type());
 }
 
 TEST_F(DescriptorTest, FieldLabel) {
@@ -1925,7 +1925,7 @@ class ExtensionDescriptorTest : public testing::Test {
     //     optional int32 non_ext_int32 = 1;
     //     extend Foo {
     //       optional Moo foo_message = 30;
-    //       repeated Moo foo_group = 39;  // (but internally set to TYPE_GROUP)
+    //       repeated Moo foo_group = 39;
     //     }
     //   }
 
@@ -1956,7 +1956,7 @@ class ExtensionDescriptorTest : public testing::Test {
         ->set_type_name("Moo");
     AddNestedExtension(bar, "Foo", "foo_group", 39,
                        FieldDescriptorProto::LABEL_REPEATED,
-                       FieldDescriptorProto::TYPE_GROUP)
+                       FieldDescriptorProto::TYPE_MESSAGE)
         ->set_type_name("Moo");
 
     // Build the descriptors and get the pointers.
@@ -2016,7 +2016,7 @@ TEST_F(ExtensionDescriptorTest, Extensions) {
   EXPECT_EQ(FieldType::INT32, foo_file_->extension(0)->type());
   EXPECT_EQ(FieldType::ENUM, foo_file_->extension(1)->type());
   EXPECT_EQ(FieldType::MESSAGE, bar_->extension(0)->type());
-  EXPECT_EQ(FieldType::GROUP, bar_->extension(1)->type());
+  EXPECT_EQ(FieldType::MESSAGE, bar_->extension(1)->type());
 
   EXPECT_EQ(baz_, foo_file_->extension(1)->enum_type());
   EXPECT_EQ(moo_, bar_->extension(0)->message_type());
@@ -2447,8 +2447,7 @@ class MiscTest : public testing::Test {
         message, "foo", 1, FieldDescriptorProto::LABEL_OPTIONAL,
         static_cast<FieldDescriptorProto::Type>(static_cast<int>(type)));
 
-    if (type == FieldType::MESSAGE ||
-        type == FieldType::GROUP) {
+    if (type == FieldType::MESSAGE) {
       field->set_type_name("TestMessage");
     } else if (type == FieldType::ENUM) {
       field->set_type_name("DummyEnum");
@@ -2511,7 +2510,6 @@ TEST_F(MiscTest, TypeNames) {
   EXPECT_STREQ("fixed32", GetTypeNameForFieldType(FieldType::FIXED32));
   EXPECT_STREQ("bool", GetTypeNameForFieldType(FieldType::BOOL));
   EXPECT_STREQ("string", GetTypeNameForFieldType(FieldType::STRING));
-  EXPECT_STREQ("group", GetTypeNameForFieldType(FieldType::GROUP));
   EXPECT_STREQ("message", GetTypeNameForFieldType(FieldType::MESSAGE));
   EXPECT_STREQ("bytes", GetTypeNameForFieldType(FieldType::BYTES));
   EXPECT_STREQ("uint32", GetTypeNameForFieldType(FieldType::UINT32));
@@ -2536,7 +2534,6 @@ TEST_F(MiscTest, StaticTypeNames) {
   EXPECT_STREQ("fixed32", FD::TypeName(FieldType::FIXED32));
   EXPECT_STREQ("bool", FD::TypeName(FieldType::BOOL));
   EXPECT_STREQ("string", FD::TypeName(FieldType::STRING));
-  EXPECT_STREQ("group", FD::TypeName(FieldType::GROUP));
   EXPECT_STREQ("message", FD::TypeName(FieldType::MESSAGE));
   EXPECT_STREQ("bytes", FD::TypeName(FieldType::BYTES));
   EXPECT_STREQ("uint32", FD::TypeName(FieldType::UINT32));
@@ -2561,7 +2558,6 @@ TEST_F(MiscTest, CppTypes) {
   EXPECT_EQ(FieldCppType::UINT32, GetCppTypeForFieldType(FieldType::FIXED32));
   EXPECT_EQ(FieldCppType::BOOL, GetCppTypeForFieldType(FieldType::BOOL));
   EXPECT_EQ(FieldCppType::STRING, GetCppTypeForFieldType(FieldType::STRING));
-  EXPECT_EQ(FieldCppType::MESSAGE, GetCppTypeForFieldType(FieldType::GROUP));
   EXPECT_EQ(FieldCppType::MESSAGE, GetCppTypeForFieldType(FieldType::MESSAGE));
   EXPECT_EQ(FieldCppType::STRING, GetCppTypeForFieldType(FieldType::BYTES));
   EXPECT_EQ(FieldCppType::UINT32, GetCppTypeForFieldType(FieldType::UINT32));
@@ -2586,7 +2582,6 @@ TEST_F(MiscTest, CppTypeNames) {
   EXPECT_STREQ("uint32", GetCppTypeNameForFieldType(FieldType::FIXED32));
   EXPECT_STREQ("bool", GetCppTypeNameForFieldType(FieldType::BOOL));
   EXPECT_STREQ("string", GetCppTypeNameForFieldType(FieldType::STRING));
-  EXPECT_STREQ("message", GetCppTypeNameForFieldType(FieldType::GROUP));
   EXPECT_STREQ("message", GetCppTypeNameForFieldType(FieldType::MESSAGE));
   EXPECT_STREQ("string", GetCppTypeNameForFieldType(FieldType::BYTES));
   EXPECT_STREQ("uint32", GetCppTypeNameForFieldType(FieldType::UINT32));
@@ -2628,7 +2623,6 @@ TEST_F(MiscTest, MessageType) {
   EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::FIXED32));
   EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::BOOL));
   EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::STRING));
-  EXPECT_TRUE(nullptr != GetMessageDescriptorForFieldType(FieldType::GROUP));
   EXPECT_TRUE(nullptr != GetMessageDescriptorForFieldType(FieldType::MESSAGE));
   EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::BYTES));
   EXPECT_TRUE(nullptr == GetMessageDescriptorForFieldType(FieldType::UINT32));
@@ -2653,7 +2647,6 @@ TEST_F(MiscTest, EnumType) {
   EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::FIXED32));
   EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::BOOL));
   EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::STRING));
-  EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::GROUP));
   EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::MESSAGE));
   EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::BYTES));
   EXPECT_TRUE(nullptr == GetEnumDescriptorForFieldType(FieldType::UINT32));
@@ -3304,10 +3297,6 @@ TEST(CustomOptions, ComplexExtensionOptions) {
   EXPECT_EQ(options->GetExtension(sharkbuf_unittest::complex_opt2).fred().waldo(),
             321);
   EXPECT_EQ(9, options->GetExtension(sharkbuf_unittest::complex_opt3).moo());
-  EXPECT_EQ(22, options->GetExtension(sharkbuf_unittest::complex_opt3)
-                    .complexoptiontype5()
-                    .plugh());
-  EXPECT_EQ(24, options->GetExtension(sharkbuf_unittest::complexopt6).xyzzy());
 }
 
 TEST(CustomOptions, OptionsFromOtherFile) {
@@ -6682,21 +6671,6 @@ TEST_F(ValidationErrorTest, ValidateProto3Enum) {
       "  value { name: 'FOO_ZERO' number:0 } "
       "}");
 }
-
-TEST_F(ValidationErrorTest, ValidateProto3Group) {
-  BuildFile(
-      "name: 'foo.shark' "
-      "syntax: 'proto2' "
-      "message_type { "
-      "  name: 'Foo' "
-      "  nested_type { "
-      "    name: 'FooGroup' "
-      "  } "
-      "  field { name:'foo_group' number: 1 label:LABEL_OPTIONAL "
-      "          type: TYPE_GROUP type_name:'FooGroup' } "
-      "}");
-}
-
 
 TEST_F(ValidationErrorTest, ValidateProto3EnumFromProto2) {
   // Define an enum in a proto2 file.

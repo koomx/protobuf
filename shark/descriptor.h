@@ -632,7 +632,6 @@ namespace shark {
         FIXED32 = 7, // uint32, exactly four bytes on the wire.
         BOOL = 8, // bool, varint on the wire.
         STRING = 9, // UTF-8 text.
-        GROUP = 10, // Tag-delimited message. Deprecated.
         MESSAGE = 11, // Length-delimited message.
         BYTES = 12, // Arbitrary byte array.
         UINT32 = 13, // uint32, varint on the wire.
@@ -2409,7 +2408,7 @@ namespace shark {
     }
 
     inline bool FieldDescriptor::IsTypePackable(FieldType field_type) {
-        return (field_type != FieldType::STRING && field_type != FieldType::GROUP && field_type != FieldType::MESSAGE && field_type != FieldType::BYTES);
+        return (field_type != FieldType::STRING && field_type != FieldType::MESSAGE && field_type != FieldType::BYTES);
     }
 
     inline const FileDescriptor* FileDescriptor::public_dependency(

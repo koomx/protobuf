@@ -188,10 +188,6 @@ message TestAllTypesProto2 {
   extensions 120 to 200;
 
   // groups
-  optional group Data = 201 {
-    optional int32 group_int32 = 202;
-    optional uint32 group_uint32 = 203;
-  }
 
   // default values
   optional int32 default_int32 = 241 [ default = -123456789];
@@ -274,9 +270,6 @@ message UnknownToTestAllTypes {
   optional int32 optional_int32 = 1001;
   optional string optional_string = 1002;
   optional ForeignMessageProto2 nested_message = 1003;
-  optional group OptionalGroup = 1004 {
-    optional int32 a = 1;
-  }
   optional bool optional_bool = 1006;
   repeated int32 repeated_int32 = 1011;
 }

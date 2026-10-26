@@ -58,7 +58,6 @@ void TestUtilLite::SetAllFields(unittest::TestAllTypesLite* message) {
   message->set_optional_string("115");
   message->set_optional_bytes("116");
 
-  message->mutable_optionalgroup()->set_a(117);
   message->mutable_optional_nested_message()->set_bb(118);
   message->mutable_optional_foreign_message()->set_c(119);
   message->mutable_optional_import_message()->set_d(120);
@@ -89,7 +88,6 @@ void TestUtilLite::SetAllFields(unittest::TestAllTypesLite* message) {
   message->add_repeated_string("215");
   message->add_repeated_bytes("216");
 
-  message->add_repeatedgroup()->set_a(217);
   message->add_repeated_nested_message()->set_bb(218);
   message->add_repeated_foreign_message()->set_c(219);
   message->add_repeated_import_message()->set_d(220);
@@ -117,7 +115,6 @@ void TestUtilLite::SetAllFields(unittest::TestAllTypesLite* message) {
   message->add_repeated_string("315");
   message->add_repeated_bytes("316");
 
-  message->add_repeatedgroup()->set_a(317);
   message->add_repeated_nested_message()->set_bb(318);
   message->add_repeated_foreign_message()->set_c(319);
   message->add_repeated_import_message()->set_d(320);
@@ -176,7 +173,6 @@ void TestUtilLite::ModifyRepeatedFields(unittest::TestAllTypesLite* message) {
   message->set_repeated_string(1, "515");
   message->set_repeated_bytes(1, "516");
 
-  message->mutable_repeatedgroup(1)->set_a(517);
   message->mutable_repeated_nested_message(1)->set_bb(518);
   message->mutable_repeated_foreign_message(1)->set_c(519);
   message->mutable_repeated_import_message(1)->set_d(520);
@@ -208,7 +204,6 @@ void TestUtilLite::ExpectAllFieldsSet(
   EXPECT_TRUE(message.has_optional_string());
   EXPECT_TRUE(message.has_optional_bytes());
 
-  EXPECT_TRUE(message.has_optionalgroup());
   EXPECT_TRUE(message.has_optional_nested_message());
   EXPECT_TRUE(message.has_optional_foreign_message());
   EXPECT_TRUE(message.has_optional_import_message());
@@ -216,7 +211,6 @@ void TestUtilLite::ExpectAllFieldsSet(
   EXPECT_TRUE(message.has_optional_lazy_message());
   EXPECT_TRUE(message.has_optional_unverified_lazy_message());
 
-  EXPECT_TRUE(message.optionalgroup().has_a());
   EXPECT_TRUE(message.optional_nested_message().has_bb());
   EXPECT_TRUE(message.optional_foreign_message().has_c());
   EXPECT_TRUE(message.optional_import_message().has_d());
@@ -245,7 +239,6 @@ void TestUtilLite::ExpectAllFieldsSet(
   EXPECT_EQ("115", message.optional_string());
   EXPECT_EQ("116", message.optional_bytes());
 
-  EXPECT_EQ(117, message.optionalgroup().a());
   EXPECT_EQ(118, message.optional_nested_message().bb());
   EXPECT_EQ(119, message.optional_foreign_message().c());
   EXPECT_EQ(120, message.optional_import_message().d());
@@ -276,7 +269,6 @@ void TestUtilLite::ExpectAllFieldsSet(
   ASSERT_EQ(2, message.repeated_string_size());
   ASSERT_EQ(2, message.repeated_bytes_size());
 
-  ASSERT_EQ(2, message.repeatedgroup_size());
   ASSERT_EQ(2, message.repeated_nested_message_size());
   ASSERT_EQ(2, message.repeated_foreign_message_size());
   ASSERT_EQ(2, message.repeated_import_message_size());
@@ -302,7 +294,6 @@ void TestUtilLite::ExpectAllFieldsSet(
   EXPECT_EQ("215", message.repeated_string(0));
   EXPECT_EQ("216", message.repeated_bytes(0));
 
-  EXPECT_EQ(217, message.repeatedgroup(0).a());
   EXPECT_EQ(218, message.repeated_nested_message(0).bb());
   EXPECT_EQ(219, message.repeated_foreign_message(0).c());
   EXPECT_EQ(220, message.repeated_import_message(0).d());
@@ -329,7 +320,6 @@ void TestUtilLite::ExpectAllFieldsSet(
   EXPECT_EQ("315", message.repeated_string(1));
   EXPECT_EQ("316", message.repeated_bytes(1));
 
-  EXPECT_EQ(317, message.repeatedgroup(1).a());
   EXPECT_EQ(318, message.repeated_nested_message(1).bb());
   EXPECT_EQ(319, message.repeated_foreign_message(1).c());
   EXPECT_EQ(320, message.repeated_import_message(1).d());
@@ -412,7 +402,6 @@ void TestUtilLite::ExpectClear(const unittest::TestAllTypesLite& message) {
   EXPECT_FALSE(message.has_optional_string());
   EXPECT_FALSE(message.has_optional_bytes());
 
-  EXPECT_FALSE(message.has_optionalgroup());
   EXPECT_FALSE(message.has_optional_nested_message());
   EXPECT_FALSE(message.has_optional_foreign_message());
   EXPECT_FALSE(message.has_optional_import_message());
@@ -443,7 +432,6 @@ void TestUtilLite::ExpectClear(const unittest::TestAllTypesLite& message) {
   EXPECT_EQ("", message.optional_bytes());
 
   // Embedded messages should also be clear.
-  EXPECT_FALSE(message.optionalgroup().has_a());
   EXPECT_FALSE(message.optional_nested_message().has_bb());
   EXPECT_FALSE(message.optional_foreign_message().has_c());
   EXPECT_FALSE(message.optional_import_message().has_d());
@@ -451,7 +439,6 @@ void TestUtilLite::ExpectClear(const unittest::TestAllTypesLite& message) {
   EXPECT_FALSE(message.optional_lazy_message().has_bb());
   EXPECT_FALSE(message.optional_unverified_lazy_message().has_bb());
 
-  EXPECT_EQ(0, message.optionalgroup().a());
   EXPECT_EQ(0, message.optional_nested_message().bb());
   EXPECT_EQ(0, message.optional_foreign_message().c());
   EXPECT_EQ(0, message.optional_import_message().d());
@@ -479,7 +466,6 @@ void TestUtilLite::ExpectClear(const unittest::TestAllTypesLite& message) {
   EXPECT_EQ(0, message.repeated_string_size());
   EXPECT_EQ(0, message.repeated_bytes_size());
 
-  EXPECT_EQ(0, message.repeatedgroup_size());
   EXPECT_EQ(0, message.repeated_nested_message_size());
   EXPECT_EQ(0, message.repeated_foreign_message_size());
   EXPECT_EQ(0, message.repeated_import_message_size());
@@ -562,7 +548,6 @@ void TestUtilLite::ExpectRepeatedFieldsModified(
   ASSERT_EQ(2, message.repeated_string_size());
   ASSERT_EQ(2, message.repeated_bytes_size());
 
-  ASSERT_EQ(2, message.repeatedgroup_size());
   ASSERT_EQ(2, message.repeated_nested_message_size());
   ASSERT_EQ(2, message.repeated_foreign_message_size());
   ASSERT_EQ(2, message.repeated_import_message_size());
@@ -588,7 +573,6 @@ void TestUtilLite::ExpectRepeatedFieldsModified(
   EXPECT_EQ("215", message.repeated_string(0));
   EXPECT_EQ("216", message.repeated_bytes(0));
 
-  EXPECT_EQ(217, message.repeatedgroup(0).a());
   EXPECT_EQ(218, message.repeated_nested_message(0).bb());
   EXPECT_EQ(219, message.repeated_foreign_message(0).c());
   EXPECT_EQ(220, message.repeated_import_message(0).d());
@@ -616,7 +600,6 @@ void TestUtilLite::ExpectRepeatedFieldsModified(
   EXPECT_EQ("515", message.repeated_string(1));
   EXPECT_EQ("516", message.repeated_bytes(1));
 
-  EXPECT_EQ(517, message.repeatedgroup(1).a());
   EXPECT_EQ(518, message.repeated_nested_message(1).bb());
   EXPECT_EQ(519, message.repeated_foreign_message(1).c());
   EXPECT_EQ(520, message.repeated_import_message(1).d());
@@ -828,7 +811,6 @@ void TestUtilLite::SetAllExtensions(unittest::TestAllExtensionsLite* message) {
   message->SetExtension(unittest::optional_string_extension_lite, "115");
   message->SetExtension(unittest::optional_bytes_extension_lite, "116");
 
-  message->MutableExtension(unittest::optionalgroup_extension_lite)->set_a(117);
   message->MutableExtension(unittest::optional_nested_message_extension_lite)
       ->set_bb(118);
   message->MutableExtension(unittest::optional_foreign_message_extension_lite)
@@ -872,7 +854,6 @@ void TestUtilLite::SetAllExtensions(unittest::TestAllExtensionsLite* message) {
   message->AddExtension(unittest::repeated_string_extension_lite, "215");
   message->AddExtension(unittest::repeated_bytes_extension_lite, "216");
 
-  message->AddExtension(unittest::repeatedgroup_extension_lite)->set_a(217);
   message->AddExtension(unittest::repeated_nested_message_extension_lite)
       ->set_bb(218);
   message->AddExtension(unittest::repeated_foreign_message_extension_lite)
@@ -907,7 +888,6 @@ void TestUtilLite::SetAllExtensions(unittest::TestAllExtensionsLite* message) {
   message->AddExtension(unittest::repeated_string_extension_lite, "315");
   message->AddExtension(unittest::repeated_bytes_extension_lite, "316");
 
-  message->AddExtension(unittest::repeatedgroup_extension_lite)->set_a(317);
   message->AddExtension(unittest::repeated_nested_message_extension_lite)
       ->set_bb(318);
   message->AddExtension(unittest::repeated_foreign_message_extension_lite)
@@ -979,8 +959,6 @@ void TestUtilLite::ModifyRepeatedExtensions(
   message->SetExtension(unittest::repeated_string_extension_lite, 1, "515");
   message->SetExtension(unittest::repeated_bytes_extension_lite, 1, "516");
 
-  message->MutableExtension(unittest::repeatedgroup_extension_lite, 1)
-      ->set_a(517);
   message->MutableExtension(unittest::repeated_nested_message_extension_lite, 1)
       ->set_bb(518);
   message
@@ -1020,7 +998,6 @@ void TestUtilLite::ExpectAllExtensionsSet(
   EXPECT_TRUE(message.HasExtension(unittest::optional_string_extension_lite));
   EXPECT_TRUE(message.HasExtension(unittest::optional_bytes_extension_lite));
 
-  EXPECT_TRUE(message.HasExtension(unittest::optionalgroup_extension_lite));
   EXPECT_TRUE(
       message.HasExtension(unittest::optional_nested_message_extension_lite));
   EXPECT_TRUE(
@@ -1034,8 +1011,6 @@ void TestUtilLite::ExpectAllExtensionsSet(
   EXPECT_TRUE(message.HasExtension(
       unittest::optional_unverified_lazy_message_extension_lite));
 
-  EXPECT_TRUE(
-      message.GetExtension(unittest::optionalgroup_extension_lite).has_a());
   EXPECT_TRUE(
       message.GetExtension(unittest::optional_nested_message_extension_lite)
           .has_bb());
@@ -1092,8 +1067,6 @@ void TestUtilLite::ExpectAllExtensionsSet(
   EXPECT_EQ("116",
             message.GetExtension(unittest::optional_bytes_extension_lite));
 
-  EXPECT_EQ(117,
-            message.GetExtension(unittest::optionalgroup_extension_lite).a());
   EXPECT_EQ(
       118,
       message.GetExtension(unittest::optional_nested_message_extension_lite)
@@ -1153,7 +1126,6 @@ void TestUtilLite::ExpectAllExtensionsSet(
   ASSERT_EQ(2, message.ExtensionSize(unittest::repeated_string_extension_lite));
   ASSERT_EQ(2, message.ExtensionSize(unittest::repeated_bytes_extension_lite));
 
-  ASSERT_EQ(2, message.ExtensionSize(unittest::repeatedgroup_extension_lite));
   ASSERT_EQ(2, message.ExtensionSize(
                    unittest::repeated_nested_message_extension_lite));
   ASSERT_EQ(2, message.ExtensionSize(
@@ -1201,8 +1173,6 @@ void TestUtilLite::ExpectAllExtensionsSet(
   EXPECT_EQ("216",
             message.GetExtension(unittest::repeated_bytes_extension_lite, 0));
 
-  EXPECT_EQ(
-      217, message.GetExtension(unittest::repeatedgroup_extension_lite, 0).a());
   EXPECT_EQ(
       218,
       message.GetExtension(unittest::repeated_nested_message_extension_lite, 0)
@@ -1262,8 +1232,6 @@ void TestUtilLite::ExpectAllExtensionsSet(
   EXPECT_EQ("316",
             message.GetExtension(unittest::repeated_bytes_extension_lite, 1));
 
-  EXPECT_EQ(
-      317, message.GetExtension(unittest::repeatedgroup_extension_lite, 1).a());
   EXPECT_EQ(
       318,
       message.GetExtension(unittest::repeated_nested_message_extension_lite, 1)
@@ -1392,7 +1360,6 @@ void TestUtilLite::ExpectExtensionsClear(
   EXPECT_FALSE(message.HasExtension(unittest::optional_string_extension_lite));
   EXPECT_FALSE(message.HasExtension(unittest::optional_bytes_extension_lite));
 
-  EXPECT_FALSE(message.HasExtension(unittest::optionalgroup_extension_lite));
   EXPECT_FALSE(
       message.HasExtension(unittest::optional_nested_message_extension_lite));
   EXPECT_FALSE(
@@ -1434,8 +1401,6 @@ void TestUtilLite::ExpectExtensionsClear(
 
   // Embedded messages should also be clear.
   EXPECT_FALSE(
-      message.GetExtension(unittest::optionalgroup_extension_lite).has_a());
-  EXPECT_FALSE(
       message.GetExtension(unittest::optional_nested_message_extension_lite)
           .has_bb());
   EXPECT_FALSE(
@@ -1452,8 +1417,6 @@ void TestUtilLite::ExpectExtensionsClear(
       message.GetExtension(unittest::optional_lazy_message_extension_lite)
           .has_bb());
 
-  EXPECT_EQ(0,
-            message.GetExtension(unittest::optionalgroup_extension_lite).a());
   EXPECT_EQ(
       0, message.GetExtension(unittest::optional_nested_message_extension_lite)
              .bb());
@@ -1504,7 +1467,6 @@ void TestUtilLite::ExpectExtensionsClear(
   EXPECT_EQ(0, message.ExtensionSize(unittest::repeated_string_extension_lite));
   EXPECT_EQ(0, message.ExtensionSize(unittest::repeated_bytes_extension_lite));
 
-  EXPECT_EQ(0, message.ExtensionSize(unittest::repeatedgroup_extension_lite));
   EXPECT_EQ(0, message.ExtensionSize(
                    unittest::repeated_nested_message_extension_lite));
   EXPECT_EQ(0, message.ExtensionSize(
@@ -1612,7 +1574,6 @@ void TestUtilLite::ExpectRepeatedExtensionsModified(
   ASSERT_EQ(2, message.ExtensionSize(unittest::repeated_string_extension_lite));
   ASSERT_EQ(2, message.ExtensionSize(unittest::repeated_bytes_extension_lite));
 
-  ASSERT_EQ(2, message.ExtensionSize(unittest::repeatedgroup_extension_lite));
   ASSERT_EQ(2, message.ExtensionSize(
                    unittest::repeated_nested_message_extension_lite));
   ASSERT_EQ(2, message.ExtensionSize(
@@ -1660,8 +1621,6 @@ void TestUtilLite::ExpectRepeatedExtensionsModified(
   EXPECT_EQ("216",
             message.GetExtension(unittest::repeated_bytes_extension_lite, 0));
 
-  EXPECT_EQ(
-      217, message.GetExtension(unittest::repeatedgroup_extension_lite, 0).a());
   EXPECT_EQ(
       218,
       message.GetExtension(unittest::repeated_nested_message_extension_lite, 0)
@@ -1722,8 +1681,6 @@ void TestUtilLite::ExpectRepeatedExtensionsModified(
   EXPECT_EQ("516",
             message.GetExtension(unittest::repeated_bytes_extension_lite, 1));
 
-  EXPECT_EQ(
-      517, message.GetExtension(unittest::repeatedgroup_extension_lite, 1).a());
   EXPECT_EQ(
       518,
       message.GetExtension(unittest::repeated_nested_message_extension_lite, 1)

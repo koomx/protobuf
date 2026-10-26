@@ -87,8 +87,6 @@ int FixedSize(FieldType type) {
       return -1;
     case FieldType::BYTES:
       return -1;
-    case FieldType::GROUP:
-      return -1;
     case FieldType::MESSAGE:
       return -1;
 

@@ -423,23 +423,7 @@ class SHARK_EXPORT ExtensionSet {
       const Msg* extendee;
       InternalMetadata* metadata;
     } item{this, extendee, metadata};
-    while (!ctx->Done(&ptr)) {
-      uint32_t tag;
-      ptr = ReadTag(ptr, &tag);
-      SHARK_PARSER_ASSERT(ptr);
-      if (tag == WireFormatLite::kMessageSetItemStartTag) {
-        ptr = ctx->ParseGroup(&item, ptr, tag);
-        SHARK_PARSER_ASSERT(ptr);
-      } else {
-        if (tag == 0 || (tag & 7) == 4) {
-          ctx->SetLastTag(tag);
-          return ptr;
-        }
-        ptr = ParseField(tag, ptr, extendee, metadata, ctx);
-        SHARK_PARSER_ASSERT(ptr);
-      }
-    }
-    return ptr;
+    return item._InternalParse(ptr, ctx);
   }
 
   // Write all extension fields with field numbers in the range
@@ -779,8 +763,6 @@ class SHARK_EXPORT ExtensionSet {
       case WireFormatLite::WIRETYPE_FIXED32:
         return true;
       case WireFormatLite::WIRETYPE_LENGTH_DELIMITED:
-      case WireFormatLite::WIRETYPE_START_GROUP:
-      case WireFormatLite::WIRETYPE_END_GROUP:
         return false;
 
         // Do not add a default statement. Let the compiler complain when

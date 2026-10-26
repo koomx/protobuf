@@ -13,9 +13,6 @@
 [sharkbuf_unittest.optional_bool_extension]: true
 [sharkbuf_unittest.optional_string_extension]: "115"
 [sharkbuf_unittest.optional_bytes_extension]: "116"
-[sharkbuf_unittest.optionalgroup_extension] <
-  a: 117
->
 [sharkbuf_unittest.optional_nested_message_extension] <
   bb: 118
 >
@@ -69,12 +66,6 @@
 [sharkbuf_unittest.repeated_string_extension]: "315"
 [sharkbuf_unittest.repeated_bytes_extension]: "216"
 [sharkbuf_unittest.repeated_bytes_extension]: "316"
-[sharkbuf_unittest.repeatedgroup_extension] <
-  a: 217
->
-[sharkbuf_unittest.repeatedgroup_extension] <
-  a: 317
->
 [sharkbuf_unittest.repeated_nested_message_extension] <
   bb: 218
 >

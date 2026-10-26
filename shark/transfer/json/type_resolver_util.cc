@@ -262,8 +262,7 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     if (descriptor->has_default_value()) {
       field->set_default_value(DefaultValueAsString(descriptor));
     }
-    if (descriptor->type() == FieldType::MESSAGE ||
-        descriptor->type() == FieldType::GROUP) {
+    if (descriptor->type() == FieldType::MESSAGE) {
       field->set_type_url(GetTypeUrl(descriptor->message_type()));
     } else if (descriptor->type() == FieldType::ENUM) {
       field->set_type_url(GetTypeUrl(descriptor->enum_type()));

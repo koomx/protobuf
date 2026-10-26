@@ -2542,13 +2542,9 @@ typedef std::pair<int, int> FieldRange;
 void GatherOccupiedFieldRanges(
     const Descriptor* descriptor, std::set<FieldRange>* ranges,
     std::vector<const Descriptor*>* nested_messages) {
-  std::set<const Descriptor*> groups;
   for (int i = 0; i < descriptor->field_count(); ++i) {
     const FieldDescriptor* fd = descriptor->field(i);
     ranges->insert(FieldRange(fd->number(), fd->number() + 1));
-    if (fd->type() == FieldType::GROUP) {
-      groups.insert(fd->message_type());
-    }
   }
   for (int i = 0; i < descriptor->extension_range_count(); ++i) {
     ranges->insert(FieldRange(descriptor->extension_range(i)->start,
@@ -2561,12 +2557,7 @@ void GatherOccupiedFieldRanges(
   // Handle the nested messages/groups in declaration order to make it
   // post-order strict.
   for (int i = 0; i < descriptor->nested_type_count(); ++i) {
-    const Descriptor* nested_desc = descriptor->nested_type(i);
-    if (groups.find(nested_desc) != groups.end()) {
-      GatherOccupiedFieldRanges(nested_desc, ranges, nested_messages);
-    } else {
-      nested_messages->push_back(nested_desc);
-    }
+    nested_messages->push_back(descriptor->nested_type(i));
   }
 }
 

@@ -193,7 +193,6 @@ message Message36869 {
 }
 
 message Message33968 {
-  repeated group Message33969 = 1 {}
   repeated .benchmarks.google_message3.Message33958 field33989 = 3;
   optional .benchmarks.google_message3.UnusedEmptyMessage field33990 = 106;
   optional bool field33991 = 108;
@@ -220,21 +219,6 @@ message Message6644 {
 }
 
 message Message18831 {
-  repeated group Message18832 = 1 {
-    optional int32 field18836 = 2;
-    optional string field18837 = 5;
-    optional float field18838 = 3;
-    optional float field18839 = 9;
-    optional int32 field18840 = 11;
-    repeated uint64 field18841 = 4;
-    repeated group Message18833 = 6 {
-      required uint64 field18843 = 7;
-      optional string field18844 = 8;
-      optional float field18845 = 10;
-      optional int32 field18846 = 12;
-      optional bool field18847 = 13;
-    }
-  }
 }
 
 message Message13090 {
@@ -253,14 +237,6 @@ message Message11874 {
 }
 
 message Message4144 {
-  repeated group Message4145 = 1 {
-    required .benchmarks.google_message3.Enum4146 field4165 = 2;
-    required int32 field4166 = 3;
-    optional .benchmarks.google_message3.Enum4160 field4167 = 9;
-    optional bytes field4168 = 4;
-    optional .benchmarks.google_message3.Enum4152 field4169 = 5;
-    optional string field4170 = 6;
-  }
 }
 
 message Message35573 {
@@ -268,78 +244,11 @@ message Message35573 {
   optional string field35696 = 1000;
   optional string field35697 = 1004;
   optional int32 field35698 = 1003;
-  repeated group Message35574 = 1012 {}
   optional int64 field35700 = 1011;
   optional int64 field35701 = 1005;
   optional int64 field35702 = 1006;
   optional int64 field35703 = 1007;
   optional int64 field35704 = 1008;
-  repeated group Message35575 = 1 {
-    optional int64 field35709 = 2;
-    optional string field35710 = 3;
-    optional string field35711 = 19;
-    optional int32 field35712 = 20;
-    optional int32 field35713 = 21;
-    optional int32 field35714 = 22;
-    optional bool field35715 = 23;
-    optional int32 field35716 = 47;
-    optional int32 field35717 = 48;
-    optional bool field35718 = 24;
-    optional fixed64 field35719 = 25;
-    optional bytes field35720 = 52;
-    optional int32 field35721 = 18;
-    optional fixed32 field35722 = 43;
-    optional bool field35723 = 26;
-    optional int32 field35724 = 27;
-    optional int32 field35725 = 17;
-    optional bool field35726 = 45;
-    repeated int32 field35727 = 33;
-    repeated int32 field35728 = 58;
-    optional float field35729 = 34;
-    optional float field35730 = 1009;
-    optional int32 field35731 = 28;
-    repeated fixed64 field35732 = 1001;
-    repeated fixed64 field35733 = 1002;
-    optional int32 field35734 = 44;
-    optional int32 field35735 = 50;
-    optional int32 field35736 = 36;
-    optional int32 field35737 = 40;
-    optional bool field35738 = 1016;
-    optional bool field35739 = 1010;
-    optional int32 field35740 = 37;
-    optional int32 field35741 = 38;
-    optional string field35742 = 46;
-    optional uint32 field35743 = 60;
-    repeated bytes field35744 = 56;
-    optional .benchmarks.google_message3.Message0 field35745 = 57;
-    required group Message35576 = 4 {
-      optional fixed64 field35747 = 5;
-      optional int32 field35748 = 6;
-      optional int32 field35749 = 49;
-      optional int32 field35750 = 7;
-      optional uint32 field35751 = 59;
-      optional int32 field35752 = 14;
-      optional int32 field35753 = 15;
-      optional int32 field35754 = 35;
-      optional bytes field35755 = 53;
-      optional int32 field35756 = 8;
-      optional string field35757 = 9;
-      optional fixed64 field35758 = 10;
-      optional int32 field35759 = 11;
-      optional int32 field35760 = 12;
-      optional int32 field35761 = 41;
-      optional int32 field35762 = 30;
-      optional int32 field35763 = 31;
-      optional int32 field35764 = 13;
-      optional bytes field35765 = 39;
-      optional string field35766 = 29;
-      optional int32 field35767 = 42;
-      repeated int32 field35768 = 32;
-      repeated int32 field35769 = 51;
-      optional int64 field35770 = 54;
-      optional .benchmarks.google_message3.Message0 field35771 = 55;
-    }
-  }
 }
 
 message Message36858 {
@@ -354,10 +263,6 @@ message Message36858 {
   optional bool field36964 = 13;
   optional int64 field36965 = 6;
   optional .benchmarks.google_message3.Message35506 field36966 = 7;
-  repeated group Message36859 = 8 {
-    required .benchmarks.google_message3.Enum36860 field36968 = 9;
-    optional float field36969 = 10;
-  }
 }
 
 message Message13174 {

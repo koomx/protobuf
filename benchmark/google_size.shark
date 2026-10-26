@@ -95,24 +95,6 @@ message SizeMessage2 {
   optional float field222 = 222 [default=0.0];
   optional int32 field63 = 63;
 
-  repeated group Group1 = 10 {
-    required float field11 = 11;
-    optional float field26 = 26;
-    optional string field12 = 12;
-    optional string field13 = 13;
-    repeated string field14 = 14;
-    required uint64 field15 = 15;
-    optional int32 field5 = 5;
-    optional string field27 = 27;
-    optional int32 field28 = 28;
-    optional string field29 = 29;
-    optional string field16 = 16;
-    repeated string field22 = 22;
-    repeated int32 field73 = 73;
-    optional int32 field20 = 20 [default=0];
-    optional string field24 = 24;
-    optional SizeMessage2GroupedMessage field31 = 31;
-  }
   repeated string field128 = 128;
   optional int64 field131 = 131;
   repeated string field127 = 127;

@@ -202,8 +202,7 @@ class MapEntryImpl : public Base {
         ptr = ValueTypeHandler::Read(ptr, ctx, value);
         if (!Derived::ValidateValue(value)) return nullptr;
       } else {
-        if (tag == 0 || WireFormatLite::GetTagWireType(tag) ==
-                            WireFormatLite::WIRETYPE_END_GROUP) {
+        if (tag == 0) {
           ctx->SetLastTag(tag);
           return ptr;
         }

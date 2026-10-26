@@ -7,6 +7,8 @@
 #include <gtest/gtest.h>
 #include <shark/dynamic_message.h>
 #include <shark/format/wired/wire_format.h>
+#include <shark/io/coded_stream.h>
+#include <shark/io/zero_copy_stream_impl.h>
 #include <shark/text_format.h>
 #include <shark/types/map_field.h>
 #include <shark/util/message_differencer.h>
@@ -140,6 +142,35 @@ TEST(NarrowIntReflectTest, DynamicRoundTripAndByteSize) {
   std::string again;
   ASSERT_TRUE(dynamic->SerializeToString(&again));
   EXPECT_EQ(bytes, again);
+}
+
+TEST(NarrowIntReflectTest, MapValueSerializeMatchesGenerated) {
+  shark_unittest::NarrowMaps generated;
+  (*generated.mutable_vi8())[1] = -128;
+  (*generated.mutable_vu8())[1] = 255;
+  (*generated.mutable_vi16())[1] = -32768;
+  (*generated.mutable_vu16())[1] = 65535;
+
+  std::string generated_bytes;
+  ASSERT_TRUE(generated.SerializeToString(&generated_bytes));
+
+  std::string reflected_bytes;
+  {
+    io::StringOutputStream raw_output(&reflected_bytes);
+    io::CodedOutputStream output(&raw_output);
+    size_t size = internal::WireFormat::ByteSize(generated);
+    internal::WireFormat::SerializeWithCachedSizes(generated, size, &output);
+    ASSERT_FALSE(output.HadError());
+  }
+  EXPECT_EQ(generated_bytes, reflected_bytes);
+
+  DynamicMessageFactory factory;
+  std::unique_ptr<Message> dynamic(
+      factory.GetPrototype(shark_unittest::NarrowMaps::descriptor())->New());
+  ASSERT_TRUE(dynamic->ParseFromString(generated_bytes));
+  std::string dynamic_bytes;
+  ASSERT_TRUE(dynamic->SerializeToString(&dynamic_bytes));
+  EXPECT_EQ(generated_bytes, dynamic_bytes);
 }
 
 TEST(NarrowIntReflectTest, ReflectionPackedMatchesGenerated) {

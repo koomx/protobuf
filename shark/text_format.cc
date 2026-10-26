@@ -501,24 +501,6 @@ class TextFormat::Parser::ParserImpl {
         }
       } else {
         field = descriptor->FindFieldByName(field_name);
-        // Group names are expected to be capitalized as they appear in the
-        // .shark file, which actually matches their type names, not their
-        // field names.
-        if (field == nullptr) {
-          std::string lower_field_name = field_name;
-          LowerString(&lower_field_name);
-          field = descriptor->FindFieldByName(lower_field_name);
-          // If the case-insensitive match worked but the field is NOT a group,
-          if (field != nullptr &&
-              field->type() != FieldType::GROUP) {
-            field = nullptr;
-          }
-        }
-        // Again, special-case group names as described above.
-        if (field != nullptr && field->type() == FieldType::GROUP &&
-            field->message_type()->name() != field_name) {
-          field = nullptr;
-        }
 
         if (field == nullptr && allow_case_insensitive_field_) {
           std::string lower_field_name = field_name;
@@ -1897,9 +1879,6 @@ void TextFormat::FastFieldValuePrinter::PrintFieldName(
     generator->PrintLiteral("[");
     generator->PrintString(field->PrintableNameForExtension());
     generator->PrintLiteral("]");
-  } else if (field->type() == FieldType::GROUP) {
-    // Groups must be serialized with their original capitalization.
-    generator->PrintString(field->message_type()->name());
   } else {
     generator->PrintString(field->name());
   }
@@ -2760,25 +2739,6 @@ void TextFormat::Printer::PrintUnknownFields(
         }
         break;
       }
-      case UnknownField::TYPE_GROUP:
-        generator->PrintString(field_number);
-        if (single_line_mode_) {
-          generator->PrintMaybeWithMarker(" ", "{ ");
-        } else {
-          generator->PrintMaybeWithMarker(" ", "{\n");
-          generator->Indent();
-        }
-        // For groups, we recurse without checking the budget. This is OK,
-        // because if the groups were too deeply nested then we would have
-        // already rejected the message when we originally parsed it.
-        PrintUnknownFields(field.group(), generator, recursion_budget - 1);
-        if (single_line_mode_) {
-          generator->PrintLiteral("} ");
-        } else {
-          generator->Outdent();
-          generator->PrintLiteral("}\n");
-        }
-        break;
     }
   }
 }

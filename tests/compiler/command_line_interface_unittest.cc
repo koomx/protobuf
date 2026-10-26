@@ -2498,16 +2498,19 @@ TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
       "message Quz {\n"
       "  message Foo {}\n"  // nested message
       "  optional int32 a = 2;\n"
-      "  optional group C = 4 {\n"
+      "  message C {\n"
       "    optional int32 d = 5;\n"
       "  }\n"
+      "  optional C c = 4;\n"
       "  extensions 8 to 10;\n"
-      "  optional group E = 11 {\n"
-      "    optional int32 f = 9;\n"    // explicitly reuse extension range 8-10
-      "    optional group G = 15 {\n"  // nested group
-      "      message Foo {}\n"         // nested message inside nested group
+      "  message E {\n"
+      "    optional int32 f = 9;\n"  // explicitly reuse extension range 8-10
+      "    message G {\n"
+      "      message Foo {}\n"
       "    }\n"
+      "    optional G g = 15;\n"
       "  }\n"
+      "  optional E e = 11;\n"
       "}\n");
 
   Run("protocol_compiler --print_free_field_numbers --proto_path=$tmpdir "
@@ -2524,8 +2527,11 @@ TEST_F(CommandLineInterfaceTest, PrintFreeFieldNumbers) {
       "Bar                                 free: 1 3 6-7 9 11-INF\n"
       "Baz                                 free: 1 3 6-7 9 14\n"
       "Quz.Foo                             free: 1-INF\n"
+      "Quz.C                               free: 1-4 6-INF\n"
       "Quz.E.G.Foo                         free: 1-INF\n"
-      "Quz                                 free: 1 3 6-7 12-14 16-INF\n");
+      "Quz.E.G                             free: 1-INF\n"
+      "Quz.E                               free: 1-8 10-14 16-INF\n"
+      "Quz                                 free: 1 3 5-7 12-INF\n");
 #endif
 }
 

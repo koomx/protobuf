@@ -224,36 +224,36 @@ const char descriptor_table_protodef_shark_2ftypes_2ftype_2eshark[] SHARK_SECTIO
   "s\030\002 \003(\0132\014.shark.Field\022\016\n\006oneofs\030\003 \003(\t\022\036\n"
   "\007options\030\004 \003(\0132\r.shark.Option\022,\n\016source_"
   "context\030\005 \001(\0132\024.shark.SourceContext\022\035\n\006s"
-  "yntax\030\006 \001(\0162\r.shark.Syntax\"\367\005\n\005Field\022\037\n\004"
+  "yntax\030\006 \001(\0162\r.shark.Syntax\"\347\005\n\005Field\022\037\n\004"
   "kind\030\001 \001(\0162\021.shark.Field.Kind\022-\n\013cardina"
   "lity\030\002 \001(\0162\030.shark.Field.Cardinality\022\016\n\006"
   "number\030\003 \001(\005\022\014\n\004name\030\004 \001(\t\022\020\n\010type_url\030\006"
   " \001(\t\022\023\n\013oneof_index\030\007 \001(\005\022\016\n\006packed\030\010 \001("
   "\010\022\036\n\007options\030\t \003(\0132\r.shark.Option\022\021\n\tjso"
-  "n_name\030\n \001(\t\022\025\n\rdefault_value\030\013 \001(\t\"\210\003\n\004"
+  "n_name\030\n \001(\t\022\025\n\rdefault_value\030\013 \001(\t\"\370\002\n\004"
   "Kind\022\020\n\014TYPE_UNKNOWN\020\000\022\017\n\013TYPE_DOUBLE\020\001\022"
   "\016\n\nTYPE_FLOAT\020\002\022\016\n\nTYPE_INT64\020\003\022\017\n\013TYPE_"
   "UINT64\020\004\022\016\n\nTYPE_INT32\020\005\022\020\n\014TYPE_FIXED64"
   "\020\006\022\020\n\014TYPE_FIXED32\020\007\022\r\n\tTYPE_BOOL\020\010\022\017\n\013T"
-  "YPE_STRING\020\t\022\016\n\nTYPE_GROUP\020\n\022\020\n\014TYPE_MES"
-  "SAGE\020\013\022\016\n\nTYPE_BYTES\020\014\022\017\n\013TYPE_UINT32\020\r\022"
-  "\r\n\tTYPE_ENUM\020\016\022\021\n\rTYPE_SFIXED32\020\017\022\021\n\rTYP"
-  "E_SFIXED64\020\020\022\017\n\013TYPE_SINT32\020\021\022\017\n\013TYPE_SI"
-  "NT64\020\022\022\r\n\tTYPE_INT8\020\023\022\016\n\nTYPE_UINT8\020\024\022\016\n"
-  "\nTYPE_INT16\020\025\022\017\n\013TYPE_UINT16\020\026\"t\n\013Cardin"
-  "ality\022\027\n\023CARDINALITY_UNKNOWN\020\000\022\030\n\024CARDIN"
-  "ALITY_OPTIONAL\020\001\022\030\n\024CARDINALITY_REQUIRED"
-  "\020\002\022\030\n\024CARDINALITY_REPEATED\020\003\"\246\001\n\004Enum\022\014\n"
-  "\004name\030\001 \001(\t\022#\n\tenumvalue\030\002 \003(\0132\020.shark.E"
-  "numValue\022\036\n\007options\030\003 \003(\0132\r.shark.Option"
-  "\022,\n\016source_context\030\004 \001(\0132\024.shark.SourceC"
-  "ontext\022\035\n\006syntax\030\005 \001(\0162\r.shark.Syntax\"I\n"
-  "\tEnumValue\022\014\n\004name\030\001 \001(\t\022\016\n\006number\030\002 \001(\005"
-  "\022\036\n\007options\030\003 \003(\0132\r.shark.Option\"1\n\006Opti"
-  "on\022\014\n\004name\030\001 \001(\t\022\031\n\005value\030\002 \001(\0132\n.shark."
-  "Any*.\n\006Syntax\022\021\n\rSYNTAX_PROTO2\020\000\022\021\n\rSYNT"
-  "AX_PROTO3\020\001B2Z-google.golang.org/protobu"
-  "f/types/known/typepb\370\001\001"
+  "YPE_STRING\020\t\022\020\n\014TYPE_MESSAGE\020\013\022\016\n\nTYPE_B"
+  "YTES\020\014\022\017\n\013TYPE_UINT32\020\r\022\r\n\tTYPE_ENUM\020\016\022\021"
+  "\n\rTYPE_SFIXED32\020\017\022\021\n\rTYPE_SFIXED64\020\020\022\017\n\013"
+  "TYPE_SINT32\020\021\022\017\n\013TYPE_SINT64\020\022\022\r\n\tTYPE_I"
+  "NT8\020\023\022\016\n\nTYPE_UINT8\020\024\022\016\n\nTYPE_INT16\020\025\022\017\n"
+  "\013TYPE_UINT16\020\026\"t\n\013Cardinality\022\027\n\023CARDINA"
+  "LITY_UNKNOWN\020\000\022\030\n\024CARDINALITY_OPTIONAL\020\001"
+  "\022\030\n\024CARDINALITY_REQUIRED\020\002\022\030\n\024CARDINALIT"
+  "Y_REPEATED\020\003\"\246\001\n\004Enum\022\014\n\004name\030\001 \001(\t\022#\n\te"
+  "numvalue\030\002 \003(\0132\020.shark.EnumValue\022\036\n\007opti"
+  "ons\030\003 \003(\0132\r.shark.Option\022,\n\016source_conte"
+  "xt\030\004 \001(\0132\024.shark.SourceContext\022\035\n\006syntax"
+  "\030\005 \001(\0162\r.shark.Syntax\"I\n\tEnumValue\022\014\n\004na"
+  "me\030\001 \001(\t\022\016\n\006number\030\002 \001(\005\022\036\n\007options\030\003 \003("
+  "\0132\r.shark.Option\"1\n\006Option\022\014\n\004name\030\001 \001(\t"
+  "\022\031\n\005value\030\002 \001(\0132\n.shark.Any*.\n\006Syntax\022\021\n"
+  "\rSYNTAX_PROTO2\020\000\022\021\n\rSYNTAX_PROTO3\020\001B2Z-g"
+  "oogle.golang.org/protobuf/types/known/ty"
+  "pepb\370\001\001"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2ftype_2eshark_deps[2] = {
   &::descriptor_table_shark_2ftypes_2fany_2eshark,
@@ -261,7 +261,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2ftyp
 };
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2ftype_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ftype_2eshark = {
-    false, false, 1423, descriptor_table_protodef_shark_2ftypes_2ftype_2eshark,
+    false, false, 1407, descriptor_table_protodef_shark_2ftypes_2ftype_2eshark,
     "shark/types/type.shark",
     &descriptor_table_shark_2ftypes_2ftype_2eshark_once, descriptor_table_shark_2ftypes_2ftype_2eshark_deps, 2, 5,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2ftype_2eshark::offsets,
@@ -291,7 +291,6 @@ bool Field_Kind_IsValid(int value) {
     case 7:
     case 8:
     case 9:
-    case 10:
     case 11:
     case 12:
     case 13:
@@ -321,7 +320,6 @@ constexpr Field_Kind Field::TYPE_FIXED64;
 constexpr Field_Kind Field::TYPE_FIXED32;
 constexpr Field_Kind Field::TYPE_BOOL;
 constexpr Field_Kind Field::TYPE_STRING;
-constexpr Field_Kind Field::TYPE_GROUP;
 constexpr Field_Kind Field::TYPE_MESSAGE;
 constexpr Field_Kind Field::TYPE_BYTES;
 constexpr Field_Kind Field::TYPE_UINT32;

@@ -143,14 +143,6 @@ message Message730 {
 message Message33958 {
   optional string field33977 = 1;
   optional string field33978 = 9;
-  repeated group Message33959 = 2 {
-    required string field33982 = 3;
-    optional string field33983 = 4;
-    optional string field33984 = 5;
-    optional fixed64 field33985 = 8;
-    optional bool field33986 = 10;
-    optional .benchmarks.google_message3.Message0 field33987 = 6;
-  }
   optional .benchmarks.google_message3.Enum33960 field33980 = 7;
   extend .benchmarks.google_message3.Message0 {
     optional .benchmarks.google_message3.Message33958 field33981 = 10747482;
@@ -210,27 +202,14 @@ message Message6126 {
 
 message Message13083 {
   optional float field13096 = 1;
-  repeated group Message13084 = 2 {
-    required float field13107 = 3;
-    required int32 field13108 = 4;
-    optional float field13109 = 5;
-    repeated .benchmarks.google_message3.Enum13092 field13110 = 6;
-  }
   optional float field13098 = 44;
   optional float field13099 = 45;
   optional uint64 field13100 = 46;
   optional float field13101 = 47;
-  optional group Message13085 = 16 {}
-  repeated group Message13086 = 23 {}
-  repeated group Message13087 = 29 {}
   optional .benchmarks.google_message3.UnusedEmptyMessage field13105 = 43;
 }
 
 message Message13088 {
-  repeated group Message13089 = 1 {
-    required string field13139 = 2;
-    optional float field13140 = 3;
-  }
   optional int64 field13136 = 4;
   optional bool field13137 = 5;
 }
@@ -276,10 +255,6 @@ message Message13151 {
 }
 
 message Message18253 {
-  repeated group Message18254 = 1 {
-    required fixed64 field18362 = 2;
-    required double field18363 = 3;
-  }
 }
 
 message Message16685 {
@@ -290,10 +265,8 @@ message Message16816 {
   optional float field16826 = 1;
   optional .benchmarks.google_message3.Enum16819 field16827 = 2;
   optional float field16828 = 3;
-  repeated group Message16817 = 4 {}
   optional bool field16830 = 7;
   optional bool field16831 = 8;
-  repeated group Message16818 = 12 {}
   optional string field16833 = 10;
   optional bool field16834 = 13;
   optional bool field16835 = 14;

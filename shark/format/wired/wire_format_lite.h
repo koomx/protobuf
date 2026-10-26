@@ -85,7 +85,6 @@ enum class WireFormatLiteFieldType : uint8_t {
   TYPE_FIXED32 = 7,
   TYPE_BOOL = 8,
   TYPE_STRING = 9,
-  TYPE_GROUP = 10,
   TYPE_MESSAGE = 11,
   TYPE_BYTES = 12,
   TYPE_UINT32 = 13,
@@ -130,8 +129,6 @@ class SHARK_EXPORT WireFormatLite {
     WIRETYPE_VARINT = 0,
     WIRETYPE_FIXED64 = 1,
     WIRETYPE_LENGTH_DELIMITED = 2,
-    WIRETYPE_START_GROUP = 3,
-    WIRETYPE_END_GROUP = 4,
     WIRETYPE_FIXED32 = 5,
   };
 
@@ -224,10 +221,6 @@ class SHARK_EXPORT WireFormatLite {
   static constexpr int kMessageSetItemNumber = 1;
   static constexpr int kMessageSetTypeIdNumber = 2;
   static constexpr int kMessageSetMessageNumber = 3;
-  static const int kMessageSetItemStartTag = SHARK_WIRE_FORMAT_MAKE_TAG(
-      kMessageSetItemNumber, WireFormatLite::WIRETYPE_START_GROUP);
-  static const int kMessageSetItemEndTag = SHARK_WIRE_FORMAT_MAKE_TAG(
-      kMessageSetItemNumber, WireFormatLite::WIRETYPE_END_GROUP);
   static const int kMessageSetTypeIdTag = SHARK_WIRE_FORMAT_MAKE_TAG(
       kMessageSetTypeIdNumber, WireFormatLite::WIRETYPE_VARINT);
   static const int kMessageSetMessageTag = SHARK_WIRE_FORMAT_MAKE_TAG(
@@ -839,14 +832,8 @@ inline int WireFormatLite::GetTagFieldNumber(uint32_t tag) {
 
 inline size_t WireFormatLite::TagSize(int field_number,
                                       WireFormatLiteFieldType type) {
-  size_t result = io::CodedOutputStream::VarintSize32(
+  return io::CodedOutputStream::VarintSize32(
       static_cast<uint32_t>(field_number << kTagTypeBits));
-  if (type == WireFormatLiteFieldType::TYPE_GROUP) {
-    // Groups have both a start and an end tag.
-    return result * 2;
-  } else {
-    return result;
-  }
 }
 
 inline uint32_t WireFormatLite::EncodeFloat(float value) {
@@ -1321,19 +1308,6 @@ bool WireFormatLite::ReadPackedPrimitiveNoInline(io::CodedInputStream* input,
 
 
 template <typename MessageType>
-inline bool WireFormatLite::ReadGroup(int field_number,
-                                      io::CodedInputStream* input,
-                                      MessageType* value) {
-  if (!input->IncrementRecursionDepth()) return false;
-  if (!value->MergePartialFromCodedStream(input)) return false;
-  input->UnsafeDecrementRecursionDepth();
-  // Make sure the last thing read was an end tag for this group.
-  if (!input->LastTagWas(MakeTag(field_number, WIRETYPE_END_GROUP))) {
-    return false;
-  }
-  return true;
-}
-template <typename MessageType>
 inline bool WireFormatLite::ReadMessage(io::CodedInputStream* input,
                                         MessageType* value) {
   int length;
@@ -1410,16 +1384,6 @@ inline void WireFormatLite::WriteEnumNoTag(int value,
   output->WriteVarint32SignExtended(value);
 }
 
-// See comment on ReadGroupNoVirtual to understand the need for this template
-// parameter name.
-template <typename MessageType_WorkAroundCppLookupDefect>
-inline void WireFormatLite::WriteGroupNoVirtual(
-    int field_number, const MessageType_WorkAroundCppLookupDefect& value,
-    io::CodedOutputStream* output) {
-  WriteTag(field_number, WIRETYPE_START_GROUP, output);
-  value.MessageType_WorkAroundCppLookupDefect::SerializeWithCachedSizes(output);
-  WriteTag(field_number, WIRETYPE_END_GROUP, output);
-}
 template <typename MessageType_WorkAroundCppLookupDefect>
 inline void WireFormatLite::WriteMessageNoVirtual(
     int field_number, const MessageType_WorkAroundCppLookupDefect& value,
@@ -1791,17 +1755,6 @@ inline uint8_t* WireFormatLite::WriteBytesToArray(int field_number,
 }
 
 
-// See comment on ReadGroupNoVirtual to understand the need for this template
-// parameter name.
-template <typename MessageType_WorkAroundCppLookupDefect>
-inline uint8_t* WireFormatLite::InternalWriteGroupNoVirtualToArray(
-    int field_number, const MessageType_WorkAroundCppLookupDefect& value,
-    uint8_t* target) {
-  target = WriteTagToArray(field_number, WIRETYPE_START_GROUP, target);
-  target = value.MessageType_WorkAroundCppLookupDefect::
-               SerializeWithCachedSizesToArray(target);
-  return WriteTagToArray(field_number, WIRETYPE_END_GROUP, target);
-}
 template <typename MessageType_WorkAroundCppLookupDefect>
 inline uint8_t* WireFormatLite::InternalWriteMessageNoVirtualToArray(
     int field_number, const MessageType_WorkAroundCppLookupDefect& value,
@@ -1970,12 +1923,15 @@ bool ParseMessageSetItemImpl(io::CodedInputStream* input, MS ms) {
 
   while (true) {
     const uint32_t tag = input->ReadTagNoLastTag();
-    if (tag == 0) return false;
+    if (tag == 0) {
+      return true;
+    }
 
     switch (tag) {
       case WireFormatLite::kMessageSetTypeIdTag: {
         uint32_t type_id;
         if (!input->ReadVarint32(&type_id)) return false;
+        if (state == State::kDone) state = State::kNoTag;
         if (state == State::kNoTag) {
           last_type_id = type_id;
           state = State::kHasType;
@@ -1997,6 +1953,7 @@ bool ParseMessageSetItemImpl(io::CodedInputStream* input, MS ms) {
       }
 
       case WireFormatLite::kMessageSetMessageTag: {
+        if (state == State::kDone) state = State::kNoTag;
         if (state == State::kHasType) {
           // Already saw type_id, so we can parse this directly.
           if (!ms.ParseField(last_type_id, input)) {
@@ -2020,10 +1977,6 @@ bool ParseMessageSetItemImpl(io::CodedInputStream* input, MS ms) {
         }
 
         break;
-      }
-
-      case WireFormatLite::kMessageSetItemEndTag: {
-        return true;
       }
 
       default: {

@@ -872,16 +872,6 @@ TEST(MESSAGE_TEST_NAME, ParsingMerge) {
   ASSIGN_REPEATED_FIELD(ext2);
 
 #undef ASSIGN_REPEATED_FIELD
-#define ASSIGN_REPEATED_GROUP(FIELD)                \
-  msg1 = generator.add_##FIELD()->mutable_field1(); \
-  msg2 = generator.add_##FIELD()->mutable_field1(); \
-  msg3 = generator.add_##FIELD()->mutable_field1(); \
-  AssignParsingMergeMessages(msg1, msg2, msg3)
-
-  ASSIGN_REPEATED_GROUP(group1);
-  ASSIGN_REPEATED_GROUP(group2);
-
-#undef ASSIGN_REPEATED_GROUP
 
   std::string buffer;
   generator.SerializeToString(&buffer);
@@ -891,13 +881,11 @@ TEST(MESSAGE_TEST_NAME, ParsingMerge) {
   // Required and optional fields should be merged.
   ExpectMessageMerged(parsing_merge.required_all_types());
   ExpectMessageMerged(parsing_merge.optional_all_types());
-  ExpectMessageMerged(parsing_merge.optionalgroup().optional_group_all_types());
   ExpectMessageMerged(
       parsing_merge.GetExtension(UNITTEST::TestParsingMerge::optional_ext));
 
   // Repeated fields should not be merged.
   EXPECT_EQ(3, parsing_merge.repeated_all_types_size());
-  EXPECT_EQ(3, parsing_merge.repeatedgroup_size());
   EXPECT_EQ(
       3, parsing_merge.ExtensionSize(UNITTEST::TestParsingMerge::repeated_ext));
 }
@@ -961,11 +949,6 @@ TEST(MESSAGE_TEST_NAME, IsInitialized) {
   EXPECT_TRUE(msg.IsInitialized());
   UNITTEST::TestIsInitialized::SubMessage* sub_message =
       msg.mutable_sub_message();
-  EXPECT_TRUE(msg.IsInitialized());
-  UNITTEST::TestIsInitialized::SubMessage::SubGroup* sub_group =
-      sub_message->mutable_subgroup();
-  EXPECT_FALSE(msg.IsInitialized());
-  sub_group->set_i(1);
   EXPECT_TRUE(msg.IsInitialized());
 }
 
@@ -1032,36 +1015,6 @@ TEST(MESSAGE_TEST_NAME, MOMIParserEdgeCases) {
     io::CodedInputStream cis(&zcis);
     EXPECT_TRUE(msg.MergePartialFromCodedStream(&cis));
     EXPECT_EQ(cis.CurrentPosition(), 3 * 4 + 1);
-  }
-  {
-    // Parser ends in last 16 bytes of buffer due to a end-group.
-    // Must use a message that is a group. Otherwise ending on a group end is
-    // a failure.
-    UNITTEST::TestAllTypes::OptionalGroup msg;
-    std::string data;
-    for (int i = 0; i < 3; i++) data += "\370\1\1";
-    data += '\14';  // Octal end-group tag 12 (1 * 8 + 4(
-    data += std::string(30, ' ');
-    io::ArrayInputStream zcis(data.data(), data.size(), 17);
-    io::CodedInputStream cis(&zcis);
-    EXPECT_TRUE(msg.MergePartialFromCodedStream(&cis));
-    EXPECT_EQ(cis.CurrentPosition(), 3 * 3 + 1);
-    EXPECT_TRUE(cis.LastTagWas(12));
-  }
-  {
-    // Parser ends in last 16 bytes of buffer due to a end-group. But is inside
-    // a length delimited field.
-    // a failure.
-    UNITTEST::TestAllTypes::OptionalGroup msg;
-    std::string data;
-    data += "\22\3foo";
-    data += '\14';  // Octal end-group tag 12 (1 * 8 + 4(
-    data += std::string(30, ' ');
-    io::ArrayInputStream zcis(data.data(), data.size(), 17);
-    io::CodedInputStream cis(&zcis);
-    EXPECT_TRUE(msg.MergePartialFromCodedStream(&cis));
-    EXPECT_EQ(cis.CurrentPosition(), 6);
-    EXPECT_TRUE(cis.LastTagWas(12));
   }
   {
     // Parser fails when ending on 0 if from ZeroCopyInputStream

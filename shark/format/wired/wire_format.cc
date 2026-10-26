@@ -112,25 +112,6 @@ bool WireFormat::SkipField(io::CodedInputStream* input, uint32_t tag,
       }
       return true;
     }
-    case WireFormatLite::WIRETYPE_START_GROUP: {
-      if (!input->IncrementRecursionDepth()) return false;
-      if (!SkipMessage(input, (unknown_fields == nullptr)
-                                  ? nullptr
-                                  : unknown_fields->AddGroup(number))) {
-        return false;
-      }
-      input->DecrementRecursionDepth();
-      // Check that the ending tag matched the starting tag.
-      if (!input->LastTagWas(
-              WireFormatLite::MakeTag(WireFormatLite::GetTagFieldNumber(tag),
-                                      WireFormatLite::WIRETYPE_END_GROUP))) {
-        return false;
-      }
-      return true;
-    }
-    case WireFormatLite::WIRETYPE_END_GROUP: {
-      return false;
-    }
     case WireFormatLite::WIRETYPE_FIXED32: {
       uint32_t value;
       if (!input->ReadLittleEndian32(&value)) return false;
@@ -149,13 +130,6 @@ bool WireFormat::SkipMessage(io::CodedInputStream* input,
     uint32_t tag = input->ReadTag();
     if (tag == 0) {
       // End of input.  This is a valid place to end, so return true.
-      return true;
-    }
-
-    WireFormatLite::WireType wire_type = WireFormatLite::GetTagWireType(tag);
-
-    if (wire_type == WireFormatLite::WIRETYPE_END_GROUP) {
-      // Must be the end of the message.
       return true;
     }
 
@@ -211,15 +185,6 @@ uint8_t* WireFormat::InternalSerializeUnknownFieldsToArray(
         target = stream->WriteString(field.number(), field.length_delimited(),
                                      target);
         break;
-      case UnknownField::TYPE_GROUP:
-        target = WireFormatLite::WriteTagToArray(
-            field.number(), WireFormatLite::WIRETYPE_START_GROUP, target);
-        target = InternalSerializeUnknownFieldsToArray(field.group(), target,
-                                                       stream);
-        target = stream->EnsureSpace(target);
-        target = WireFormatLite::WriteTagToArray(
-            field.number(), WireFormatLite::WIRETYPE_END_GROUP, target);
-        break;
     }
   }
   return target;
@@ -235,10 +200,6 @@ uint8_t* WireFormat::InternalSerializeUnknownMessageSetItemsToArray(
     // messages, which are length-delimited.
     if (field.type() == UnknownField::TYPE_LENGTH_DELIMITED) {
       target = stream->EnsureSpace(target);
-      // Start group.
-      target = io::CodedOutputStream::WriteTagToArray(
-          WireFormatLite::kMessageSetItemStartTag, target);
-
       // Write type ID.
       target = io::CodedOutputStream::WriteTagToArray(
           WireFormatLite::kMessageSetTypeIdTag, target);
@@ -250,11 +211,6 @@ uint8_t* WireFormat::InternalSerializeUnknownMessageSetItemsToArray(
           WireFormatLite::kMessageSetMessageTag, target);
 
       target = field.InternalSerializeLengthDelimitedNoTag(target, stream);
-
-      target = stream->EnsureSpace(target);
-      // End group.
-      target = io::CodedOutputStream::WriteTagToArray(
-          WireFormatLite::kMessageSetItemEndTag, target);
     }
   }
 
@@ -290,13 +246,6 @@ size_t WireFormat::ComputeUnknownFieldsSize(
             field.length_delimited().size());
         size += field.length_delimited().size();
         break;
-      case UnknownField::TYPE_GROUP:
-        size += io::CodedOutputStream::VarintSize32(WireFormatLite::MakeTag(
-            field.number(), WireFormatLite::WIRETYPE_START_GROUP));
-        size += ComputeUnknownFieldsSize(field.group());
-        size += io::CodedOutputStream::VarintSize32(WireFormatLite::MakeTag(
-            field.number(), WireFormatLite::WIRETYPE_END_GROUP));
-        break;
     }
   }
 
@@ -331,16 +280,14 @@ bool WireFormat::ParseAndMergePartial(io::CodedInputStream* input,
   const Descriptor* descriptor = message->GetDescriptor();
   const Reflection* message_reflection = message->GetReflection();
 
+  if (descriptor->options().message_set_wire_format()) {
+    return ParseAndMergeMessageSetItem(input, message);
+  }
+
   while (true) {
     uint32_t tag = input->ReadTag();
     if (tag == 0) {
       // End of input.  This is a valid place to end, so return true.
-      return true;
-    }
-
-    if (WireFormatLite::GetTagWireType(tag) ==
-        WireFormatLite::WIRETYPE_END_GROUP) {
-      // Must be the end of the message.
       return true;
     }
 
@@ -360,15 +307,6 @@ bool WireFormat::ParseAndMergePartial(io::CodedInputStream* input,
         }
       }
 
-      // If that failed, but we're a MessageSet, and this is the tag for a
-      // MessageSet item, then parse that.
-      if (field == nullptr && descriptor->options().message_set_wire_format() &&
-          tag == WireFormatLite::kMessageSetItemStartTag) {
-        if (!ParseAndMergeMessageSetItem(input, message)) {
-          return false;
-        }
-        continue;  // Skip ParseAndMergeField(); already taken care of.
-      }
     }
 
     if (!ParseAndMergeField(tag, field, message, input)) {
@@ -530,7 +468,6 @@ bool WireFormat::ParseAndMergeField(
       }
 
       case ::shark::FieldType::STRING:
-      case ::shark::FieldType::GROUP:
       case ::shark::FieldType::MESSAGE:
       case ::shark::FieldType::BYTES:
         // Can't have packed fields of these types: these should be caught by
@@ -654,22 +591,6 @@ bool WireFormat::ParseAndMergeField(
         break;
       }
 
-      case ::shark::FieldType::GROUP: {
-        Message* sub_message;
-        if (field->is_repeated()) {
-          sub_message = message_reflection->AddMessage(
-              message, field, input->GetExtensionFactory());
-        } else {
-          sub_message = message_reflection->MutableMessage(
-              message, field, input->GetExtensionFactory());
-        }
-
-        if (!WireFormatLite::ReadGroup(WireFormatLite::GetTagFieldNumber(tag),
-                                       input, sub_message))
-          return false;
-        break;
-      }
-
       case ::shark::FieldType::MESSAGE: {
         Message* sub_message;
         if (field->is_repeated()) {
@@ -727,6 +648,10 @@ struct WireFormat::MessageSetParser {
         uint64_t tmp;
         ptr = ParseBigVarint(ptr, &tmp);
         SHARK_PARSER_ASSERT(ptr);
+        if (state == State::kDone) {
+          state = State::kNoTag;
+          payload.clear();
+        }
         if (state == State::kNoTag) {
           type_id = tmp;
           state = State::kHasType;
@@ -762,6 +687,10 @@ struct WireFormat::MessageSetParser {
         }
         continue;
       } else if (tag == WireFormatLite::kMessageSetMessageTag) {
+        if (state == State::kDone) {
+          state = State::kNoTag;
+          payload.clear();
+        }
         if (state == State::kNoTag) {
           int32_t size = ReadSize(&ptr);
           SHARK_PARSER_ASSERT(ptr);
@@ -792,7 +721,7 @@ struct WireFormat::MessageSetParser {
       } else {
         // An unknown field in MessageSetItem.
         ptr = ReadTag(ptr - 1, &tag);
-        if (tag == 0 || (tag & 7) == WireFormatLite::WIRETYPE_END_GROUP) {
+        if (tag == 0) {
           ctx->SetLastTag(tag);
           return ptr;
         }
@@ -806,35 +735,7 @@ struct WireFormat::MessageSetParser {
   }
 
   const char* ParseMessageSet(const char* ptr, internal::ParseContext* ctx) {
-    while (!ctx->Done(&ptr)) {
-      uint32_t tag;
-      ptr = ReadTag(ptr, &tag);
-      if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
-      if (tag == 0 || (tag & 7) == WireFormatLite::WIRETYPE_END_GROUP) {
-        ctx->SetLastTag(tag);
-        break;
-      }
-      if (tag == WireFormatLite::kMessageSetItemStartTag) {
-        // A message set item starts
-        ptr = ctx->ParseGroup(this, ptr, tag);
-      } else {
-        // Parse other fields as normal extensions.
-        int field_number = WireFormatLite::GetTagFieldNumber(tag);
-        const FieldDescriptor* field = nullptr;
-        if (descriptor->IsExtensionNumber(field_number)) {
-          if (ctx->data().pool == nullptr) {
-            field = reflection->FindKnownExtensionByNumber(field_number);
-          } else {
-            field = ctx->data().pool->FindExtensionByNumber(descriptor,
-                                                            field_number);
-          }
-        }
-        ptr = WireFormat::_InternalParseAndMergeField(msg, ptr, ctx, tag,
-                                                      reflection, field);
-      }
-      if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
-    }
-    return ptr;
+    return _InternalParse(ptr, ctx);
   }
 
   Message* msg;
@@ -856,7 +757,7 @@ const char* WireFormat::_InternalParse(Message* msg, const char* ptr,
     uint32_t tag;
     ptr = ReadTag(ptr, &tag);
     if (SHARK_PREDICT_FALSE(ptr == nullptr)) return nullptr;
-    if (tag == 0 || (tag & 7) == WireFormatLite::WIRETYPE_END_GROUP) {
+    if (tag == 0) {
       ctx->SetLastTag(tag);
       break;
     }
@@ -974,7 +875,6 @@ const char* WireFormat::_InternalParseAndMergeField(
         }
 
         case ::shark::FieldType::STRING:
-        case ::shark::FieldType::GROUP:
         case ::shark::FieldType::MESSAGE:
         case ::shark::FieldType::BYTES:
           GOOGLE_LOG(FATAL) << "Can't reach";
@@ -1129,18 +1029,6 @@ const char* WireFormat::_InternalParseAndMergeField(
       return ptr;
     }
 
-    case ::shark::FieldType::GROUP: {
-      Message* sub_message;
-      if (field->is_repeated()) {
-        sub_message = reflection->AddMessage(msg, field, ctx->data().factory);
-      } else {
-        sub_message =
-            reflection->MutableMessage(msg, field, ctx->data().factory);
-      }
-
-      return ctx->ParseGroup(sub_message, ptr, tag);
-    }
-
     case ::shark::FieldType::MESSAGE: {
       Message* sub_message;
       if (field->is_repeated()) {
@@ -1196,7 +1084,6 @@ uint8_t* SerializeMapKeyWithCachedSizes(const FieldDescriptor* field,
   switch (field->type()) {
     case ::shark::FieldType::DOUBLE:
     case ::shark::FieldType::FLOAT:
-    case ::shark::FieldType::GROUP:
     case ::shark::FieldType::MESSAGE:
     case ::shark::FieldType::BYTES:
     case ::shark::FieldType::ENUM:
@@ -1242,6 +1129,10 @@ static uint8_t* SerializeMapValueRefWithCachedSizes(
     break;
     CASE_TYPE(INT64, Int64, Int64)
     CASE_TYPE(UINT64, UInt64, UInt64)
+    CASE_TYPE(INT8, Int32, Int32)
+    CASE_TYPE(INT16, Int32, Int32)
+    CASE_TYPE(UINT8, UInt32, UInt32)
+    CASE_TYPE(UINT16, UInt32, UInt32)
     CASE_TYPE(INT32, Int32, Int32)
     CASE_TYPE(FIXED64, Fixed64, UInt64)
     CASE_TYPE(FIXED32, Fixed32, UInt32)
@@ -1264,10 +1155,6 @@ static uint8_t* SerializeMapValueRefWithCachedSizes(
       target = WireFormatLite::InternalWriteMessage(2, msg, msg.GetCachedSize(),
                                                     target, stream);
     } break;
-    case ::shark::FieldType::GROUP:
-      target = WireFormatLite::InternalWriteGroup(2, value.GetMessageValue(),
-                                                  target, stream);
-      break;
   }
   return target;
 }
@@ -1510,12 +1397,6 @@ uint8_t* WireFormat::InternalSerializeField(const FieldDescriptor* field,
       HANDLE_PRIMITIVE_TYPE(BOOL, bool, Bool, Bool)
 #undef HANDLE_PRIMITIVE_TYPE
 
-      case ::shark::FieldType::GROUP: {
-        auto* msg = get_message_from_field(field, j);
-        target = WireFormatLite::InternalWriteGroup(field->number(), *msg,
-                                                    target, stream);
-      } break;
-
       case ::shark::FieldType::MESSAGE: {
         auto* msg = get_message_from_field(field, j);
         target = WireFormatLite::InternalWriteMessage(
@@ -1577,9 +1458,6 @@ uint8_t* WireFormat::InternalSerializeMessageSetItem(
   const Reflection* message_reflection = message.GetReflection();
 
   target = stream->EnsureSpace(target);
-  // Start group.
-  target = io::CodedOutputStream::WriteTagToArray(
-      WireFormatLite::kMessageSetItemStartTag, target);
   // Write type ID.
   target = WireFormatLite::WriteUInt32ToArray(
       WireFormatLite::kMessageSetTypeIdNumber, field->number(), target);
@@ -1588,10 +1466,6 @@ uint8_t* WireFormat::InternalSerializeMessageSetItem(
   target = WireFormatLite::InternalWriteMessage(
       WireFormatLite::kMessageSetMessageNumber, msg, msg.GetCachedSize(),
       target, stream);
-  // End group.
-  target = stream->EnsureSpace(target);
-  target = io::CodedOutputStream::WriteTagToArray(
-      WireFormatLite::kMessageSetItemEndTag, target);
   return target;
 }
 
@@ -1682,7 +1556,6 @@ size_t MapKeyDataOnlyByteSize(const FieldDescriptor* field,
   switch (field->type()) {
     case ::shark::FieldType::DOUBLE:
     case ::shark::FieldType::FLOAT:
-    case ::shark::FieldType::GROUP:
     case ::shark::FieldType::MESSAGE:
     case ::shark::FieldType::BYTES:
     case ::shark::FieldType::ENUM:
@@ -1724,9 +1597,6 @@ size_t MapKeyDataOnlyByteSize(const FieldDescriptor* field,
 static size_t MapValueRefDataOnlyByteSize(const FieldDescriptor* field,
                                           const MapValueConstRef& value) {
   switch (field->type()) {
-    case ::shark::FieldType::GROUP:
-      GOOGLE_LOG(FATAL) << "Unsupported";
-      return 0;
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType) \
   case ::shark::FieldType::kType:                  \
     return WireFormatLite::CamelFieldType##Size(           \
@@ -1842,7 +1712,6 @@ size_t WireFormat::FieldDataOnlyByteSize(const FieldDescriptor* field,
 
     HANDLE_FIXED_TYPE(BOOL, Bool)
 
-    HANDLE_TYPE(GROUP, Group, Message)
     HANDLE_TYPE(MESSAGE, Message, Message)
 #undef HANDLE_TYPE
 #undef HANDLE_FIXED_TYPE

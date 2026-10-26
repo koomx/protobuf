@@ -50,10 +50,6 @@ message Book {
   optional int64 published = 4;
   optional bytes content = 5;
 
-  optional group Data = 6 {
-    optional uint32 year = 7;
-    optional string copyright = 8;
-  }
 
   message Label {
     optional string key = 1;
