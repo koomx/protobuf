@@ -813,13 +813,13 @@ namespace shark {
         }
 
         TEST_F(TextFormatTest, ParseEnumFieldFromNegativeNumber) {
-            ASSERT_LT(unittest::SPARSE_E, 0);
+            ASSERT_LT(unittest::TestSparseEnum::SPARSE_E, 0);
             std::string parse_string = strings::Substitute("sparse_enum: $0",
-                static_cast<int>(unittest::SPARSE_E));
+                static_cast<int>(unittest::TestSparseEnum::SPARSE_E));
             unittest::SparseEnumMessage proto;
             EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto));
             EXPECT_TRUE(proto.has_sparse_enum());
-            EXPECT_EQ(unittest::SPARSE_E, proto.sparse_enum());
+            EXPECT_EQ(unittest::TestSparseEnum::SPARSE_E, proto.sparse_enum());
         }
 
         TEST_F(TextFormatTest, ParseStringEscape) {

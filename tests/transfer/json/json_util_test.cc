@@ -48,8 +48,8 @@
 namespace shark::util {
 namespace {
 
-using proto3::BAR;
-using proto3::FOO;
+using proto3::EnumType::BAR;
+using proto3::EnumType::FOO;
 using proto3::TestAny;
 using proto3::TestEnumValue;
 using proto3::TestMap;
@@ -196,9 +196,9 @@ TEST_F(JsonUtilTest, TestPreserveProtoFieldNames) {
 
 TEST_F(JsonUtilTest, TestAlwaysPrintEnumsAsInts) {
   TestMessage orig;
-  orig.set_enum_value(proto3::BAR);
-  orig.add_repeated_enum_value(proto3::FOO);
-  orig.add_repeated_enum_value(proto3::BAR);
+  orig.set_enum_value(proto3::EnumType::BAR);
+  orig.add_repeated_enum_value(proto3::EnumType::FOO);
+  orig.add_repeated_enum_value(proto3::EnumType::BAR);
 
   JsonPrintOptions print_options;
   print_options.always_print_enums_as_ints = true;
@@ -210,17 +210,17 @@ TEST_F(JsonUtilTest, TestAlwaysPrintEnumsAsInts) {
   JsonParseOptions parse_options;
   ASSERT_TRUE(FromJson(expected_json, &parsed, parse_options));
 
-  EXPECT_EQ(proto3::BAR, parsed.enum_value());
+  EXPECT_EQ(proto3::EnumType::BAR, parsed.enum_value());
   EXPECT_EQ(2, parsed.repeated_enum_value_size());
-  EXPECT_EQ(proto3::FOO, parsed.repeated_enum_value(0));
-  EXPECT_EQ(proto3::BAR, parsed.repeated_enum_value(1));
+  EXPECT_EQ(proto3::EnumType::FOO, parsed.repeated_enum_value(0));
+  EXPECT_EQ(proto3::EnumType::BAR, parsed.repeated_enum_value(1));
 }
 
 TEST_F(JsonUtilTest, TestPrintEnumsAsIntsWithDefaultValue) {
   TestEnumValue orig;
   // orig.set_enum_value1(proto3::FOO)
-  orig.set_enum_value2(proto3::FOO);
-  orig.set_enum_value3(proto3::BAR);
+  orig.set_enum_value2(proto3::EnumType::FOO);
+  orig.set_enum_value3(proto3::EnumType::BAR);
 
   JsonPrintOptions print_options;
   print_options.always_print_enums_as_ints = true;
@@ -234,9 +234,9 @@ TEST_F(JsonUtilTest, TestPrintEnumsAsIntsWithDefaultValue) {
   JsonParseOptions parse_options;
   ASSERT_TRUE(FromJson(expected_json, &parsed, parse_options));
 
-  EXPECT_EQ(proto3::FOO, parsed.enum_value1());
-  EXPECT_EQ(proto3::FOO, parsed.enum_value2());
-  EXPECT_EQ(proto3::BAR, parsed.enum_value3());
+  EXPECT_EQ(proto3::EnumType::FOO, parsed.enum_value1());
+  EXPECT_EQ(proto3::EnumType::FOO, parsed.enum_value2());
+  EXPECT_EQ(proto3::EnumType::BAR, parsed.enum_value3());
 }
 
 TEST_F(JsonUtilTest, TestPrintProto2EnumAsIntWithDefaultValue) {
@@ -255,7 +255,7 @@ TEST_F(JsonUtilTest, TestPrintProto2EnumAsIntWithDefaultValue) {
   JsonParseOptions parse_options;
   ASSERT_TRUE(FromJson(expected_json, &parsed, parse_options));
 
-  EXPECT_EQ(sharkbuf_unittest::DEFAULT, parsed.enum_value());
+  EXPECT_EQ(sharkbuf_unittest::EnumValue::DEFAULT, parsed.enum_value());
 }
 
 TEST_F(JsonUtilTest, ParseMessage) {
@@ -426,9 +426,9 @@ TEST_F(JsonUtilTest, TestParsingUnknownEnumsProto3) {
         "{\n"
         "  \"enum_value\":\"UNKNOWN_VALUE\"\n"
         "}";
-    m.set_enum_value(proto3::BAR);
+    m.set_enum_value(proto3::EnumType::BAR);
     EXPECT_FALSE(FromJson(input, &m, options));
-    ASSERT_EQ(proto3::BAR, m.enum_value());  // Keep previous value
+    ASSERT_EQ(proto3::EnumType::BAR, m.enum_value());  // Keep previous value
 
     options.ignore_unknown_fields = true;
     EXPECT_TRUE(FromJson(input, &m, options));
@@ -441,7 +441,7 @@ TEST_F(JsonUtilTest, TestParsingUnknownEnumsProto3) {
         "{\n"
         "  \"enum_value\":12345\n"
         "}";
-    m.set_enum_value(proto3::BAR);
+    m.set_enum_value(proto3::EnumType::BAR);
     EXPECT_TRUE(FromJson(input, &m, options));
     ASSERT_EQ(12345, m.enum_value());
 
@@ -485,10 +485,10 @@ TEST_F(JsonUtilTest, TestParsingEnumIgnoreCase) {
         "{\n"
         "  \"enum_value\":\"bar\"\n"
         "}";
-    m.set_enum_value(proto3::FOO);
+    m.set_enum_value(proto3::EnumType::FOO);
     EXPECT_FALSE(FromJson(input, &m, options));
     // Default behavior is case-sensitive, so keep previous value.
-    ASSERT_EQ(proto3::FOO, m.enum_value());
+    ASSERT_EQ(proto3::EnumType::FOO, m.enum_value());
   }
   {
     JsonParseOptions options;
@@ -497,9 +497,9 @@ TEST_F(JsonUtilTest, TestParsingEnumIgnoreCase) {
         "{\n"
         "  \"enum_value\":\"bar\"\n"
         "}";
-    m.set_enum_value(proto3::FOO);
+    m.set_enum_value(proto3::EnumType::FOO);
     EXPECT_FALSE(FromJson(input, &m, options));
-    ASSERT_EQ(proto3::FOO, m.enum_value());  // Keep previous value
+    ASSERT_EQ(proto3::EnumType::FOO, m.enum_value());  // Keep previous value
   }
   {
     JsonParseOptions options;
@@ -508,9 +508,9 @@ TEST_F(JsonUtilTest, TestParsingEnumIgnoreCase) {
         "{\n"
         "  \"enum_value\":\"bar\"\n"
         "}";
-    m.set_enum_value(proto3::FOO);
+    m.set_enum_value(proto3::EnumType::FOO);
     EXPECT_TRUE(FromJson(input, &m, options));
-    ASSERT_EQ(proto3::BAR, m.enum_value());
+    ASSERT_EQ(proto3::EnumType::BAR, m.enum_value());
   }
 }
 

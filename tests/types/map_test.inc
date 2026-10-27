@@ -2312,7 +2312,7 @@ TEST(GeneratedMapFieldTest, SetMapFieldsInitialized) {
 
 TEST(GeneratedMapFieldTest, Proto2SetMapFieldsInitialized) {
   UNITTEST::TestEnumMap message;
-  EXPECT_EQ(UNITTEST::PROTO2_MAP_ENUM_FOO,
+  EXPECT_EQ(UNITTEST::Proto2MapEnum::PROTO2_MAP_ENUM_FOO,
             (*message.mutable_known_map_field())[0]);
 }
 
@@ -2646,8 +2646,8 @@ TEST(GeneratedMapFieldTest, SameTypeMaps) {
 
 TEST(GeneratedMapFieldTest, Proto2UnknownEnum) {
   UNITTEST::TestEnumMapPlusExtra from;
-  (*from.mutable_known_map_field())[0] = UNITTEST::E_PROTO2_MAP_ENUM_FOO;
-  (*from.mutable_unknown_map_field())[0] = UNITTEST::E_PROTO2_MAP_ENUM_EXTRA;
+  (*from.mutable_known_map_field())[0] = UNITTEST::Proto2MapEnumPlusExtra::E_PROTO2_MAP_ENUM_FOO;
+  (*from.mutable_unknown_map_field())[0] = UNITTEST::Proto2MapEnumPlusExtra::E_PROTO2_MAP_ENUM_EXTRA;
   std::string data;
   from.SerializeToString(&data);
 
@@ -2655,13 +2655,13 @@ TEST(GeneratedMapFieldTest, Proto2UnknownEnum) {
   EXPECT_TRUE(to.ParseFromString(data));
   // The extra enumerator fits the underlying type, so it stays in the map.
   EXPECT_EQ(1, to.unknown_map_field().size());
-  EXPECT_EQ(static_cast<int>(UNITTEST::E_PROTO2_MAP_ENUM_EXTRA),
+  EXPECT_EQ(static_cast<int>(UNITTEST::Proto2MapEnumPlusExtra::E_PROTO2_MAP_ENUM_EXTRA),
             static_cast<int>(to.unknown_map_field().at(0)));
   const UnknownFieldSet& unknown_field_set =
       to.GetReflection()->GetUnknownFields(to);
   EXPECT_EQ(0, unknown_field_set.field_count());
   EXPECT_EQ(1, to.known_map_field().size());
-  EXPECT_EQ(UNITTEST::PROTO2_MAP_ENUM_FOO, to.known_map_field().at(0));
+  EXPECT_EQ(UNITTEST::Proto2MapEnum::PROTO2_MAP_ENUM_FOO, to.known_map_field().at(0));
 
   data.clear();
   from.Clear();
@@ -2669,9 +2669,9 @@ TEST(GeneratedMapFieldTest, Proto2UnknownEnum) {
   EXPECT_TRUE(from.ParseFromString(data));
   EXPECT_EQ(0, from.GetReflection()->GetUnknownFields(from).field_count());
   EXPECT_EQ(1, from.known_map_field().size());
-  EXPECT_EQ(UNITTEST::E_PROTO2_MAP_ENUM_FOO, from.known_map_field().at(0));
+  EXPECT_EQ(UNITTEST::Proto2MapEnumPlusExtra::E_PROTO2_MAP_ENUM_FOO, from.known_map_field().at(0));
   EXPECT_EQ(1, from.unknown_map_field().size());
-  EXPECT_EQ(UNITTEST::E_PROTO2_MAP_ENUM_EXTRA, from.unknown_map_field().at(0));
+  EXPECT_EQ(UNITTEST::Proto2MapEnumPlusExtra::E_PROTO2_MAP_ENUM_EXTRA, from.unknown_map_field().at(0));
 }
 
 TEST(GeneratedMapFieldTest, StandardWireFormat) {

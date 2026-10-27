@@ -183,29 +183,6 @@ enum class FieldDescriptorProto_Type : int32_t {
   TYPE_SINT32 = 22,
   TYPE_SINT64 = 23
 };
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BOOL = FieldDescriptorProto_Type::TYPE_BOOL;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT8 = FieldDescriptorProto_Type::TYPE_INT8;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT8 = FieldDescriptorProto_Type::TYPE_UINT8;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT16 = FieldDescriptorProto_Type::TYPE_INT16;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT16 = FieldDescriptorProto_Type::TYPE_UINT16;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT32 = FieldDescriptorProto_Type::TYPE_INT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT32 = FieldDescriptorProto_Type::TYPE_UINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_INT64 = FieldDescriptorProto_Type::TYPE_INT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_UINT64 = FieldDescriptorProto_Type::TYPE_UINT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT = FieldDescriptorProto_Type::TYPE_FLOAT;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT16 = FieldDescriptorProto_Type::TYPE_FLOAT16;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FLOAT8 = FieldDescriptorProto_Type::TYPE_FLOAT8;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_DOUBLE = FieldDescriptorProto_Type::TYPE_DOUBLE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_ENUM = FieldDescriptorProto_Type::TYPE_ENUM;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_MESSAGE = FieldDescriptorProto_Type::TYPE_MESSAGE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_STRING = FieldDescriptorProto_Type::TYPE_STRING;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_BYTES = FieldDescriptorProto_Type::TYPE_BYTES;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED32 = FieldDescriptorProto_Type::TYPE_FIXED32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_FIXED64 = FieldDescriptorProto_Type::TYPE_FIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED32 = FieldDescriptorProto_Type::TYPE_SFIXED32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SFIXED64 = FieldDescriptorProto_Type::TYPE_SFIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT32 = FieldDescriptorProto_Type::TYPE_SINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_TYPE_SINT64 = FieldDescriptorProto_Type::TYPE_SINT64;
 constexpr int32_t FieldDescriptorProto_Type_to_underlying(FieldDescriptorProto_Type value) {
   return static_cast<int32_t>(value);
 }
@@ -240,9 +217,6 @@ enum class FieldDescriptorProto_Label : int32_t {
   LABEL_REQUIRED = 2,
   LABEL_REPEATED = 3
 };
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_LABEL_OPTIONAL = FieldDescriptorProto_Label::LABEL_OPTIONAL;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_LABEL_REQUIRED = FieldDescriptorProto_Label::LABEL_REQUIRED;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_LABEL_REPEATED = FieldDescriptorProto_Label::LABEL_REPEATED;
 constexpr int32_t FieldDescriptorProto_Label_to_underlying(FieldDescriptorProto_Label value) {
   return static_cast<int32_t>(value);
 }
@@ -277,9 +251,6 @@ enum class FileOptions_OptimizeMode : int32_t {
   CODE_SIZE = 2,
   LITE_RUNTIME = 3
 };
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_SPEED = FileOptions_OptimizeMode::SPEED;
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_CODE_SIZE = FileOptions_OptimizeMode::CODE_SIZE;
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_LITE_RUNTIME = FileOptions_OptimizeMode::LITE_RUNTIME;
 constexpr int32_t FileOptions_OptimizeMode_to_underlying(FileOptions_OptimizeMode value) {
   return static_cast<int32_t>(value);
 }
@@ -314,9 +285,6 @@ enum class FieldOptions_CType : int32_t {
   CORD = 1,
   STRING_PIECE = 2
 };
-constexpr FieldOptions_CType FieldOptions_CType_STRING = FieldOptions_CType::STRING;
-constexpr FieldOptions_CType FieldOptions_CType_CORD = FieldOptions_CType::CORD;
-constexpr FieldOptions_CType FieldOptions_CType_STRING_PIECE = FieldOptions_CType::STRING_PIECE;
 constexpr int32_t FieldOptions_CType_to_underlying(FieldOptions_CType value) {
   return static_cast<int32_t>(value);
 }
@@ -351,9 +319,6 @@ enum class FieldOptions_JSType : int32_t {
   JS_STRING = 1,
   JS_NUMBER = 2
 };
-constexpr FieldOptions_JSType FieldOptions_JSType_JS_NORMAL = FieldOptions_JSType::JS_NORMAL;
-constexpr FieldOptions_JSType FieldOptions_JSType_JS_STRING = FieldOptions_JSType::JS_STRING;
-constexpr FieldOptions_JSType FieldOptions_JSType_JS_NUMBER = FieldOptions_JSType::JS_NUMBER;
 constexpr int32_t FieldOptions_JSType_to_underlying(FieldOptions_JSType value) {
   return static_cast<int32_t>(value);
 }
@@ -388,9 +353,6 @@ enum class MethodOptions_IdempotencyLevel : int32_t {
   NO_SIDE_EFFECTS = 1,
   IDEMPOTENT = 2
 };
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IDEMPOTENCY_UNKNOWN = MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_NO_SIDE_EFFECTS = MethodOptions_IdempotencyLevel::NO_SIDE_EFFECTS;
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IDEMPOTENT = MethodOptions_IdempotencyLevel::IDEMPOTENT;
 constexpr int32_t MethodOptions_IdempotencyLevel_to_underlying(MethodOptions_IdempotencyLevel value) {
   return static_cast<int32_t>(value);
 }
@@ -429,13 +391,6 @@ enum class EnumUnderlyingType : int32_t {
   ENUM_UNDERLYING_TYPE_INT32 = 5,
   ENUM_UNDERLYING_TYPE_UINT32 = 6
 };
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UNSPECIFIED = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED;
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_INT8 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8;
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UINT8 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8;
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_INT16 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16;
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UINT16 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16;
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_INT32 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32;
-constexpr EnumUnderlyingType ENUM_UNDERLYING_TYPE_UINT32 = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
 constexpr int32_t EnumUnderlyingType_to_underlying(EnumUnderlyingType value) {
   return static_cast<int32_t>(value);
 }

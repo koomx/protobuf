@@ -1943,16 +1943,16 @@ bool Parser::ParseOneof(OneofDescriptorProto* oneof_decl,
 
 bool EnumValueFits(EnumUnderlyingType type, int32_t number) {
   switch (type) {
-    case ENUM_UNDERLYING_TYPE_INT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8:
       return number >= -128 && number <= 127;
-    case ENUM_UNDERLYING_TYPE_UINT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8:
       return number >= 0 && number <= 255;
-    case ENUM_UNDERLYING_TYPE_INT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16:
       return number >= -32768 && number <= 32767;
-    case ENUM_UNDERLYING_TYPE_UINT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16:
       return number >= 0 && number <= 65535;
-    case ENUM_UNDERLYING_TYPE_INT32:
-    case ENUM_UNDERLYING_TYPE_UINT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32:
       return true;
     default:
       return true;
@@ -1961,17 +1961,17 @@ bool EnumValueFits(EnumUnderlyingType type, int32_t number) {
 
 bool ParseEnumUnderlyingType(const std::string& name, EnumUnderlyingType* type) {
   if (name == "int8") {
-    *type = ENUM_UNDERLYING_TYPE_INT8;
+    *type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8;
   } else if (name == "uint8") {
-    *type = ENUM_UNDERLYING_TYPE_UINT8;
+    *type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8;
   } else if (name == "int16") {
-    *type = ENUM_UNDERLYING_TYPE_INT16;
+    *type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16;
   } else if (name == "uint16") {
-    *type = ENUM_UNDERLYING_TYPE_UINT16;
+    *type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16;
   } else if (name == "int32") {
-    *type = ENUM_UNDERLYING_TYPE_INT32;
+    *type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32;
   } else if (name == "uint32") {
-    *type = ENUM_UNDERLYING_TYPE_UINT32;
+    *type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
   } else {
     return false;
   }
@@ -1997,7 +1997,7 @@ bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
   // "enum" and "enum class" are equivalent and always record an
   // underlying_type (defaulting to int32) so both spellings produce
   // byte-identical descriptors.
-  EnumUnderlyingType underlying_type = ENUM_UNDERLYING_TYPE_INT32;
+  EnumUnderlyingType underlying_type = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32;
   if (TryConsume(":")) {
     std::string type_name;
     DO(ConsumeIdentifier(&type_name, "Expected enum underlying type."));
@@ -2064,15 +2064,15 @@ bool Parser::ParseEnumStatement(EnumDescriptorProto* enum_type,
 
 bool Parser::ConsumeEnumNumber(EnumUnderlyingType underlying_type,
                                int32_t* output, const char* error) {
-  if (underlying_type == ENUM_UNDERLYING_TYPE_UNSPECIFIED ||
-      underlying_type == ENUM_UNDERLYING_TYPE_INT32) {
+  if (underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED ||
+      underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32) {
     return ConsumeSignedInteger(output, error);
   }
 
   const bool is_unsigned =
-      underlying_type == ENUM_UNDERLYING_TYPE_UINT8 ||
-      underlying_type == ENUM_UNDERLYING_TYPE_UINT16 ||
-      underlying_type == ENUM_UNDERLYING_TYPE_UINT32;
+      underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8 ||
+      underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16 ||
+      underlying_type == EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
   const bool is_negative = TryConsume("-");
   if (is_negative && is_unsigned) {
     AddError("Unsigned enum underlying type cannot be negative.");
@@ -2081,19 +2081,19 @@ bool Parser::ConsumeEnumNumber(EnumUnderlyingType underlying_type,
 
   uint64_t max_value = 0;
   switch (underlying_type) {
-    case ENUM_UNDERLYING_TYPE_INT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8:
       max_value = is_negative ? 128 : 127;
       break;
-    case ENUM_UNDERLYING_TYPE_UINT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8:
       max_value = 255;
       break;
-    case ENUM_UNDERLYING_TYPE_INT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16:
       max_value = is_negative ? 32768 : 32767;
       break;
-    case ENUM_UNDERLYING_TYPE_UINT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16:
       max_value = 65535;
       break;
-    case ENUM_UNDERLYING_TYPE_UINT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32:
       max_value = std::numeric_limits<uint32_t>::max();
       break;
     default:

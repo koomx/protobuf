@@ -3178,7 +3178,7 @@ TEST(CustomOptions, OptionLocations) {
                      sharkbuf_unittest::enum_value_opt1));
   EXPECT_EQ(int64_t{-9876543210},
             service->options().GetExtension(sharkbuf_unittest::service_opt1));
-  EXPECT_EQ(sharkbuf_unittest::METHODOPT1_VAL2,
+  EXPECT_EQ(sharkbuf_unittest::MethodOpt1::METHODOPT1_VAL2,
             method->options().GetExtension(sharkbuf_unittest::method_opt1));
 
   // See that the regular options went through unscathed.
@@ -8332,7 +8332,7 @@ TEST_F(LazilyBuildDependenciesTest, GeneratedFile) {
       "tests/unittest_lazy_dependencies_custom_option.shark"));
   EXPECT_FALSE(DescriptorPool::generated_pool()->InternalIsFileLoaded(
       "tests/unittest_lazy_dependencies_enum.shark"));
-  EXPECT_EQ(custom_option_value, sharkbuf_unittest::lazy_imports::LAZY_ENUM_1);
+  EXPECT_EQ(custom_option_value, sharkbuf_unittest::lazy_imports::LazyEnum::LAZY_ENUM_1);
 
   const MessageOptions& options2 =
       sharkbuf_unittest::lazy_imports::MessageCustomOption2::descriptor()
@@ -8344,7 +8344,7 @@ TEST_F(LazilyBuildDependenciesTest, GeneratedFile) {
       "tests/unittest_lazy_dependencies_custom_option.shark"));
   EXPECT_FALSE(DescriptorPool::generated_pool()->InternalIsFileLoaded(
       "tests/unittest_lazy_dependencies_enum.shark"));
-  EXPECT_EQ(custom_option_value, sharkbuf_unittest::lazy_imports::LAZY_ENUM_0);
+  EXPECT_EQ(custom_option_value, sharkbuf_unittest::lazy_imports::LazyEnum::LAZY_ENUM_0);
 }
 
 TEST_F(LazilyBuildDependenciesTest, Dependency) {

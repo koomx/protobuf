@@ -72,7 +72,6 @@ namespace shark {
 enum class NullValue : int32_t {
   NULL_VALUE = 0
 };
-constexpr NullValue NULL_VALUE = NullValue::NULL_VALUE;
 constexpr int32_t NullValue_to_underlying(NullValue value) {
   return static_cast<int32_t>(value);
 }

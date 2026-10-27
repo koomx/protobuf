@@ -98,16 +98,16 @@ TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingSymbolNames) {
 TEST(GENERATED_MESSAGE_TEST_NAME, TestConflictingEnumNames) {
   sharkbuf_unittest::TestConflictingEnumNames message;
   message.set_conflicting_enum(
-      sharkbuf_unittest::TestConflictingEnumNames_while_and_);
+      sharkbuf_unittest::TestConflictingEnumNames_while::and_);
   EXPECT_EQ(1, message.conflicting_enum());
   message.set_conflicting_enum(
-      sharkbuf_unittest::TestConflictingEnumNames_while_XOR);
+      sharkbuf_unittest::TestConflictingEnumNames_while::XOR);
   EXPECT_EQ(5, message.conflicting_enum());
 
   sharkbuf_unittest::bool_ conflicting_enum;
-  conflicting_enum = sharkbuf_unittest::NOT_EQ;
+  conflicting_enum = sharkbuf_unittest::bool_::NOT_EQ;
   EXPECT_EQ(1, conflicting_enum);
-  conflicting_enum = sharkbuf_unittest::return_;
+  conflicting_enum = sharkbuf_unittest::bool_::return_;
   EXPECT_EQ(3, conflicting_enum);
 }
 

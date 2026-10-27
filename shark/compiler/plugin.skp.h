@@ -80,8 +80,6 @@ enum class CodeGeneratorResponse_Feature : int32_t {
   FEATURE_NONE = 0,
   FEATURE_PROTO3_OPTIONAL = 1
 };
-constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_FEATURE_NONE = CodeGeneratorResponse_Feature::FEATURE_NONE;
-constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_FEATURE_PROTO3_OPTIONAL = CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
 constexpr int32_t CodeGeneratorResponse_Feature_to_underlying(CodeGeneratorResponse_Feature value) {
   return static_cast<int32_t>(value);
 }

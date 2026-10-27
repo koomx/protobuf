@@ -817,22 +817,22 @@ TEST(GENERATED_MESSAGE_TEST_NAME, CamelCaseFieldNames) {
 
   message.set_primitivefield(2);
   message.set_stringfield("foo");
-  message.set_enumfield(UNITTEST::FOREIGN_FOO);
+  message.set_enumfield(UNITTEST::ForeignEnum::FOREIGN_FOO);
   message.mutable_messagefield()->set_c(6);
 
   message.add_repeatedprimitivefield(8);
   message.add_repeatedstringfield("moo");
-  message.add_repeatedenumfield(UNITTEST::FOREIGN_BAR);
+  message.add_repeatedenumfield(UNITTEST::ForeignEnum::FOREIGN_BAR);
   message.add_repeatedmessagefield()->set_c(15);
 
   EXPECT_EQ(2, message.primitivefield());
   EXPECT_EQ("foo", message.stringfield());
-  EXPECT_EQ(UNITTEST::FOREIGN_FOO, message.enumfield());
+  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, message.enumfield());
   EXPECT_EQ(6, message.messagefield().c());
 
   EXPECT_EQ(8, message.repeatedprimitivefield(0));
   EXPECT_EQ("moo", message.repeatedstringfield(0));
-  EXPECT_EQ(UNITTEST::FOREIGN_BAR, message.repeatedenumfield(0));
+  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR, message.repeatedenumfield(0));
   EXPECT_EQ(15, message.repeatedmessagefield(0).c());
 }
 
@@ -1039,16 +1039,16 @@ TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
             UNITTEST::TestAllTypes::NestedEnum_MAX);
   EXPECT_EQ(4, UNITTEST::TestAllTypes::NestedEnum_ARRAYSIZE);
 
-  EXPECT_EQ(UNITTEST::FOREIGN_FOO, UNITTEST::ForeignEnum_MIN);
-  EXPECT_EQ(UNITTEST::FOREIGN_BAZ, UNITTEST::ForeignEnum_MAX);
+  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, UNITTEST::ForeignEnum_MIN);
+  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ, UNITTEST::ForeignEnum_MAX);
   EXPECT_EQ(7, UNITTEST::ForeignEnum_ARRAYSIZE);
 
   EXPECT_EQ(1, UNITTEST::TestEnumWithDupValue_MIN);
   EXPECT_EQ(3, UNITTEST::TestEnumWithDupValue_MAX);
   EXPECT_EQ(4, UNITTEST::TestEnumWithDupValue_ARRAYSIZE);
 
-  EXPECT_EQ(UNITTEST::SPARSE_E, UNITTEST::TestSparseEnum_MIN);
-  EXPECT_EQ(UNITTEST::SPARSE_C, UNITTEST::TestSparseEnum_MAX);
+  EXPECT_EQ(UNITTEST::TestSparseEnum::SPARSE_E, UNITTEST::TestSparseEnum_MIN);
+  EXPECT_EQ(UNITTEST::TestSparseEnum::SPARSE_C, UNITTEST::TestSparseEnum_MAX);
   EXPECT_EQ(12589235, UNITTEST::TestSparseEnum_ARRAYSIZE);
 
   // Make sure we can take the address of _MIN, _MAX and _ARRAYSIZE.
@@ -1061,7 +1061,7 @@ TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
   EXPECT_NE(nullptr, &UNITTEST::ForeignEnum_ARRAYSIZE);
 
   // Make sure we can use _MIN and _MAX as switch cases.
-  switch (UNITTEST::SPARSE_A) {
+  switch (UNITTEST::TestSparseEnum::SPARSE_A) {
     case UNITTEST::TestSparseEnum_MIN:
     case UNITTEST::TestSparseEnum_MAX:
       break;
@@ -1074,24 +1074,24 @@ TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
 
 TEST(GENERATED_ENUM_TEST_NAME, Name) {
   // "Names" in the presence of dup values map to the first alias.
-  EXPECT_EQ("FOO1", UNITTEST::TestEnumWithDupValue_Name(UNITTEST::FOO1));
-  EXPECT_EQ("FOO1", UNITTEST::TestEnumWithDupValue_Name(UNITTEST::FOO2));
+  EXPECT_EQ("FOO1", UNITTEST::TestEnumWithDupValue_Name(UNITTEST::TestEnumWithDupValue::FOO1));
+  EXPECT_EQ("FOO1", UNITTEST::TestEnumWithDupValue_Name(UNITTEST::TestEnumWithDupValue::FOO2));
 
-  EXPECT_EQ("SPARSE_A", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_A));
-  EXPECT_EQ("SPARSE_B", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_B));
-  EXPECT_EQ("SPARSE_C", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_C));
-  EXPECT_EQ("SPARSE_D", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_D));
-  EXPECT_EQ("SPARSE_E", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_E));
-  EXPECT_EQ("SPARSE_F", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_F));
-  EXPECT_EQ("SPARSE_G", UNITTEST::TestSparseEnum_Name(UNITTEST::SPARSE_G));
+  EXPECT_EQ("SPARSE_A", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_A));
+  EXPECT_EQ("SPARSE_B", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_B));
+  EXPECT_EQ("SPARSE_C", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_C));
+  EXPECT_EQ("SPARSE_D", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_D));
+  EXPECT_EQ("SPARSE_E", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_E));
+  EXPECT_EQ("SPARSE_F", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_F));
+  EXPECT_EQ("SPARSE_G", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_G));
 }
 
 TEST(GENERATED_ENUM_TEST_NAME, Parse) {
-  UNITTEST::TestEnumWithDupValue dup_value = UNITTEST::FOO1;
+  UNITTEST::TestEnumWithDupValue dup_value = UNITTEST::TestEnumWithDupValue::FOO1;
   EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_Parse("FOO1", &dup_value));
-  EXPECT_EQ(UNITTEST::FOO1, dup_value);
+  EXPECT_EQ(UNITTEST::TestEnumWithDupValue::FOO1, dup_value);
   EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_Parse("FOO2", &dup_value));
-  EXPECT_EQ(UNITTEST::FOO2, dup_value);
+  EXPECT_EQ(UNITTEST::TestEnumWithDupValue::FOO2, dup_value);
   EXPECT_FALSE(UNITTEST::TestEnumWithDupValue_Parse("FOO", &dup_value));
 }
 
@@ -2153,7 +2153,7 @@ TEST_F(GENERATED_SERVICE_TEST_NAME, NoGenericServices) {
   message.SetExtension(
       ::sharkbuf_unittest::no_generic_services_test::test_extension, 123);
   ::sharkbuf_unittest::no_generic_services_test::TestEnum e =
-      ::sharkbuf_unittest::no_generic_services_test::FOO;
+      ::sharkbuf_unittest::no_generic_services_test::TestEnum::FOO;
   EXPECT_EQ(e, 1);
 
   // Verify that a ServiceDescriptor is generated for the service even if the

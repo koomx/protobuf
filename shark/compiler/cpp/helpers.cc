@@ -539,17 +539,17 @@ std::string QualifiedOneofCaseConstantName(const FieldDescriptor* field) {
 
 const char* EnumUnderlyingCppType(const EnumDescriptor* enum_descriptor) {
   switch (enum_descriptor->options().underlying_type()) {
-    case ENUM_UNDERLYING_TYPE_INT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8:
       return "int8_t";
-    case ENUM_UNDERLYING_TYPE_UINT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8:
       return "uint8_t";
-    case ENUM_UNDERLYING_TYPE_INT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16:
       return "int16_t";
-    case ENUM_UNDERLYING_TYPE_UINT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16:
       return "uint16_t";
-    case ENUM_UNDERLYING_TYPE_UINT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32:
       return "uint32_t";
-    case ENUM_UNDERLYING_TYPE_INT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32:
     default:
       return "int32_t";
   }

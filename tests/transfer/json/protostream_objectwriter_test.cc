@@ -1662,7 +1662,7 @@ TEST_P(ProtoStreamObjectWriterStructTest, StructAcceptsNull) {
 TEST_P(ProtoStreamObjectWriterStructTest, StructValuePreservesNull) {
   StructType struct_type;
   (*struct_type.mutable_object()->mutable_fields())["key"].set_null_value(
-      shark::NULL_VALUE);
+      shark::NullValue::NULL_VALUE);
   EXPECT_CALL(listener_, InvalidValue(_, _, _)).Times(0);
 
   ow_->StartObject("")
@@ -1781,7 +1781,7 @@ TEST_P(ProtoStreamObjectWriterStructTest,
 
 TEST_P(ProtoStreamObjectWriterStructTest, ValuePreservesNull) {
   ValueWrapper value;
-  value.mutable_value()->set_null_value(shark::NULL_VALUE);
+  value.mutable_value()->set_null_value(shark::NullValue::NULL_VALUE);
 
   EXPECT_CALL(listener_, InvalidValue(_, _, _)).Times(0);
   ow_->StartObject("")->RenderNull("value")->EndObject();

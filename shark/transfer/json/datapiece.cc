@@ -289,7 +289,7 @@ util::StatusOr<int> DataPiece::ToEnum(const shark::Enum* enum_type,
                                       bool case_insensitive_enum_parsing,
                                       bool ignore_unknown_enum_values,
                                       bool* is_unknown_enum_value) const {
-  if (type_ == TYPE_NULL) return NullValue_to_underlying(shark::NULL_VALUE);
+  if (type_ == TYPE_NULL) return NullValue_to_underlying(shark::NullValue::NULL_VALUE);
 
   if (type_ == TYPE_STRING) {
     // First try the given value as a name.

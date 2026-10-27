@@ -98,30 +98,6 @@ enum class Field_Kind : int32_t {
   TYPE_SINT32 = 22,
   TYPE_SINT64 = 23
 };
-constexpr Field_Kind Field_Kind_TYPE_UNKNOWN = Field_Kind::TYPE_UNKNOWN;
-constexpr Field_Kind Field_Kind_TYPE_BOOL = Field_Kind::TYPE_BOOL;
-constexpr Field_Kind Field_Kind_TYPE_INT8 = Field_Kind::TYPE_INT8;
-constexpr Field_Kind Field_Kind_TYPE_UINT8 = Field_Kind::TYPE_UINT8;
-constexpr Field_Kind Field_Kind_TYPE_INT16 = Field_Kind::TYPE_INT16;
-constexpr Field_Kind Field_Kind_TYPE_UINT16 = Field_Kind::TYPE_UINT16;
-constexpr Field_Kind Field_Kind_TYPE_INT32 = Field_Kind::TYPE_INT32;
-constexpr Field_Kind Field_Kind_TYPE_UINT32 = Field_Kind::TYPE_UINT32;
-constexpr Field_Kind Field_Kind_TYPE_INT64 = Field_Kind::TYPE_INT64;
-constexpr Field_Kind Field_Kind_TYPE_UINT64 = Field_Kind::TYPE_UINT64;
-constexpr Field_Kind Field_Kind_TYPE_FLOAT = Field_Kind::TYPE_FLOAT;
-constexpr Field_Kind Field_Kind_TYPE_FLOAT16 = Field_Kind::TYPE_FLOAT16;
-constexpr Field_Kind Field_Kind_TYPE_FLOAT8 = Field_Kind::TYPE_FLOAT8;
-constexpr Field_Kind Field_Kind_TYPE_DOUBLE = Field_Kind::TYPE_DOUBLE;
-constexpr Field_Kind Field_Kind_TYPE_ENUM = Field_Kind::TYPE_ENUM;
-constexpr Field_Kind Field_Kind_TYPE_MESSAGE = Field_Kind::TYPE_MESSAGE;
-constexpr Field_Kind Field_Kind_TYPE_STRING = Field_Kind::TYPE_STRING;
-constexpr Field_Kind Field_Kind_TYPE_BYTES = Field_Kind::TYPE_BYTES;
-constexpr Field_Kind Field_Kind_TYPE_FIXED32 = Field_Kind::TYPE_FIXED32;
-constexpr Field_Kind Field_Kind_TYPE_FIXED64 = Field_Kind::TYPE_FIXED64;
-constexpr Field_Kind Field_Kind_TYPE_SFIXED32 = Field_Kind::TYPE_SFIXED32;
-constexpr Field_Kind Field_Kind_TYPE_SFIXED64 = Field_Kind::TYPE_SFIXED64;
-constexpr Field_Kind Field_Kind_TYPE_SINT32 = Field_Kind::TYPE_SINT32;
-constexpr Field_Kind Field_Kind_TYPE_SINT64 = Field_Kind::TYPE_SINT64;
 constexpr int32_t Field_Kind_to_underlying(Field_Kind value) {
   return static_cast<int32_t>(value);
 }
@@ -157,10 +133,6 @@ enum class Field_Cardinality : int32_t {
   CARDINALITY_REQUIRED = 2,
   CARDINALITY_REPEATED = 3
 };
-constexpr Field_Cardinality Field_Cardinality_CARDINALITY_UNKNOWN = Field_Cardinality::CARDINALITY_UNKNOWN;
-constexpr Field_Cardinality Field_Cardinality_CARDINALITY_OPTIONAL = Field_Cardinality::CARDINALITY_OPTIONAL;
-constexpr Field_Cardinality Field_Cardinality_CARDINALITY_REQUIRED = Field_Cardinality::CARDINALITY_REQUIRED;
-constexpr Field_Cardinality Field_Cardinality_CARDINALITY_REPEATED = Field_Cardinality::CARDINALITY_REPEATED;
 constexpr int32_t Field_Cardinality_to_underlying(Field_Cardinality value) {
   return static_cast<int32_t>(value);
 }
@@ -194,8 +166,6 @@ enum class Syntax : int32_t {
   SYNTAX_PROTO2 = 0,
   SYNTAX_PROTO3 = 1
 };
-constexpr Syntax SYNTAX_PROTO2 = Syntax::SYNTAX_PROTO2;
-constexpr Syntax SYNTAX_PROTO3 = Syntax::SYNTAX_PROTO3;
 constexpr int32_t Syntax_to_underlying(Syntax value) {
   return static_cast<int32_t>(value);
 }

@@ -81,13 +81,13 @@ class MapTestUtil {
 };
 
 inline void MapTestUtil::SetMapFields(UNITTEST::TestMap* message) {
-  MapTestUtilImpl::SetMapFields<UNITTEST::MapEnum, UNITTEST::MAP_ENUM_BAR,
-                                UNITTEST::MAP_ENUM_BAZ>(message);
+  MapTestUtilImpl::SetMapFields<UNITTEST::MapEnum, UNITTEST::MapEnum::MAP_ENUM_BAR,
+                                UNITTEST::MapEnum::MAP_ENUM_BAZ>(message);
 }
 
 inline void MapTestUtil::SetArenaMapFields(UNITTEST::TestArenaMap* message) {
-  MapTestUtilImpl::SetArenaMapFields<UNITTEST::MapEnum, UNITTEST::MAP_ENUM_BAR,
-                                     UNITTEST::MAP_ENUM_BAZ>(message);
+  MapTestUtilImpl::SetArenaMapFields<UNITTEST::MapEnum, UNITTEST::MapEnum::MAP_ENUM_BAR,
+                                     UNITTEST::MapEnum::MAP_ENUM_BAZ>(message);
 }
 
 inline void MapTestUtil::SetMapFieldsInitialized(UNITTEST::TestMap* message) {
@@ -95,7 +95,7 @@ inline void MapTestUtil::SetMapFieldsInitialized(UNITTEST::TestMap* message) {
 }
 
 inline void MapTestUtil::ModifyMapFields(UNITTEST::TestMap* message) {
-  MapTestUtilImpl::ModifyMapFields<UNITTEST::MapEnum, UNITTEST::MAP_ENUM_FOO>(
+  MapTestUtilImpl::ModifyMapFields<UNITTEST::MapEnum, UNITTEST::MapEnum::MAP_ENUM_FOO>(
       message);
 }
 
@@ -104,28 +104,28 @@ inline void MapTestUtil::ExpectClear(const UNITTEST::TestMap& message) {
 }
 
 inline void MapTestUtil::ExpectMapFieldsSet(const UNITTEST::TestMap& message) {
-  MapTestUtilImpl::ExpectMapFieldsSet<UNITTEST::MapEnum, UNITTEST::MAP_ENUM_BAR,
-                                      UNITTEST::MAP_ENUM_BAZ>(message);
+  MapTestUtilImpl::ExpectMapFieldsSet<UNITTEST::MapEnum, UNITTEST::MapEnum::MAP_ENUM_BAR,
+                                      UNITTEST::MapEnum::MAP_ENUM_BAZ>(message);
 }
 
 inline void MapTestUtil::ExpectArenaMapFieldsSet(
     const UNITTEST::TestArenaMap& message) {
   MapTestUtilImpl::ExpectArenaMapFieldsSet<
-      UNITTEST::MapEnum, UNITTEST::MAP_ENUM_BAR, UNITTEST::MAP_ENUM_BAZ>(
+      UNITTEST::MapEnum, UNITTEST::MapEnum::MAP_ENUM_BAR, UNITTEST::MapEnum::MAP_ENUM_BAZ>(
       message);
 }
 
 inline void MapTestUtil::ExpectMapFieldsSetInitialized(
     const UNITTEST::TestMap& message) {
   MapTestUtilImpl::ExpectMapFieldsSetInitialized<UNITTEST::MapEnum,
-                                                 UNITTEST::MAP_ENUM_FOO>(
+                                                 UNITTEST::MapEnum::MAP_ENUM_FOO>(
       message);
 }
 
 inline void MapTestUtil::ExpectMapFieldsModified(
     const UNITTEST::TestMap& message) {
   MapTestUtilImpl::ExpectMapFieldsModified<
-      UNITTEST::MapEnum, UNITTEST::MAP_ENUM_BAR, UNITTEST::MAP_ENUM_FOO>(
+      UNITTEST::MapEnum, UNITTEST::MapEnum::MAP_ENUM_BAR, UNITTEST::MapEnum::MAP_ENUM_FOO>(
       message);
 }
 

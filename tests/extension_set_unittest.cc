@@ -664,7 +664,7 @@ TEST(ExtensionSetTest, PackedToUnpackedParsing) {
   // Make sure we can add extensions.
   destination.AddExtension(unittest::unpacked_int32_extension, 1);
   destination.AddExtension(unittest::unpacked_enum_extension,
-                           sharkbuf_unittest::FOREIGN_BAR);
+                           sharkbuf_unittest::ForeignEnum::FOREIGN_BAR);
 }
 
 TEST(ExtensionSetTest, UnpackedToPackedParsing) {
@@ -688,7 +688,7 @@ TEST(ExtensionSetTest, UnpackedToPackedParsing) {
   // Make sure we can add extensions.
   destination.AddExtension(unittest::packed_int32_extension, 1);
   destination.AddExtension(unittest::packed_enum_extension,
-                           sharkbuf_unittest::FOREIGN_BAR);
+                           sharkbuf_unittest::ForeignEnum::FOREIGN_BAR);
 }
 
 TEST(ExtensionSetTest, IsInitialized) {
@@ -1220,7 +1220,7 @@ TEST(ExtensionSetTest, DynamicExtensions) {
   {
     unittest::TestDynamicExtensions message;
     message.set_scalar_extension(123);
-    message.set_enum_extension(unittest::FOREIGN_BAR);
+    message.set_enum_extension(unittest::ForeignEnum::FOREIGN_BAR);
     message.set_dynamic_enum_extension(
         unittest::TestDynamicExtensions::DYNAMIC_BAZ);
     message.mutable_message_extension()->set_c(456);

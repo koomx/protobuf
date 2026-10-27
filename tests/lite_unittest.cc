@@ -386,7 +386,7 @@ TEST(Lite, AllLite12) {
     message.set_optional_nested_enum(unittest::TestAllTypesLite::BAZ);
     message2.set_optional_int64(102);
     message2.add_repeated_int64(202);
-    message2.set_optional_foreign_enum(unittest::FOREIGN_LITE_BAZ);
+    message2.set_optional_foreign_enum(unittest::ForeignEnumLite::FOREIGN_LITE_BAZ);
 
     data = message.SerializeAsString();
     empty_message.ParseFromString(data);
@@ -700,20 +700,20 @@ TEST(Lite, AllLite32) {
     // Proto2UnknownEnum
     sharkbuf_unittest::TestEnumMapPlusExtraLite from;
     (*from.mutable_known_map_field())[0] =
-        sharkbuf_unittest::E_PROTO2_MAP_ENUM_FOO_LITE;
+        sharkbuf_unittest::Proto2MapEnumPlusExtraLite::E_PROTO2_MAP_ENUM_FOO_LITE;
     (*from.mutable_unknown_map_field())[0] =
-        sharkbuf_unittest::E_PROTO2_MAP_ENUM_EXTRA_LITE;
+        sharkbuf_unittest::Proto2MapEnumPlusExtraLite::E_PROTO2_MAP_ENUM_EXTRA_LITE;
     std::string data;
     from.SerializeToString(&data);
 
     sharkbuf_unittest::TestEnumMapLite to;
     EXPECT_TRUE(to.ParseFromString(data));
     EXPECT_EQ(1, to.unknown_map_field().size());
-    EXPECT_EQ(static_cast<int>(sharkbuf_unittest::E_PROTO2_MAP_ENUM_EXTRA_LITE),
+    EXPECT_EQ(static_cast<int>(sharkbuf_unittest::Proto2MapEnumPlusExtraLite::E_PROTO2_MAP_ENUM_EXTRA_LITE),
               static_cast<int>(to.unknown_map_field().at(0)));
     EXPECT_TRUE(to.mutable_unknown_fields()->empty());
     ASSERT_EQ(1, to.known_map_field().size());
-    EXPECT_EQ(sharkbuf_unittest::PROTO2_MAP_ENUM_FOO_LITE,
+    EXPECT_EQ(sharkbuf_unittest::Proto2MapEnumLite::PROTO2_MAP_ENUM_FOO_LITE,
               to.known_map_field().at(0));
 
     data.clear();
@@ -721,10 +721,10 @@ TEST(Lite, AllLite32) {
     to.SerializeToString(&data);
     EXPECT_TRUE(from.ParseFromString(data));
     ASSERT_EQ(1, from.known_map_field().size());
-    EXPECT_EQ(sharkbuf_unittest::E_PROTO2_MAP_ENUM_FOO_LITE,
+    EXPECT_EQ(sharkbuf_unittest::Proto2MapEnumPlusExtraLite::E_PROTO2_MAP_ENUM_FOO_LITE,
               from.known_map_field().at(0));
     ASSERT_EQ(1, from.unknown_map_field().size());
-    EXPECT_EQ(sharkbuf_unittest::E_PROTO2_MAP_ENUM_EXTRA_LITE,
+    EXPECT_EQ(sharkbuf_unittest::Proto2MapEnumPlusExtraLite::E_PROTO2_MAP_ENUM_EXTRA_LITE,
               from.unknown_map_field().at(0));
   }
 }
@@ -887,7 +887,7 @@ TEST(Lite, AllLite42) {
     sharkbuf_unittest::V2MessageLite v2_message;
     v2_message.set_int_field(800);
     // Set enum field to the value not understood by the old client.
-    v2_message.set_enum_field(sharkbuf_unittest::V2_SECOND);
+    v2_message.set_enum_field(sharkbuf_unittest::V2EnumLite::V2_SECOND);
     std::string v2_bytes = v2_message.SerializeAsString();
 
     sharkbuf_unittest::V1MessageLite v1_message;
@@ -1024,7 +1024,7 @@ TEST(Lite, AllLite44) {
   // Enum
   {
     sharkbuf_unittest::TestOneofParsingLite original;
-    original.set_oneof_enum(sharkbuf_unittest::V2_SECOND);
+    original.set_oneof_enum(sharkbuf_unittest::V2EnumLite::V2_SECOND);
     std::string serialized;
     EXPECT_TRUE(original.SerializeToString(&serialized));
     sharkbuf_unittest::TestOneofParsingLite parsed;
@@ -1033,7 +1033,7 @@ TEST(Lite, AllLite44) {
           reinterpret_cast<const ::uint8_t*>(serialized.data()),
           serialized.size());
       EXPECT_TRUE(parsed.MergeFromCodedStream(&input_stream));
-      EXPECT_EQ(sharkbuf_unittest::V2_SECOND, parsed.oneof_enum());
+      EXPECT_EQ(sharkbuf_unittest::V2EnumLite::V2_SECOND, parsed.oneof_enum());
     }
   }
 
@@ -1147,11 +1147,11 @@ TEST(Lite, DebugString) {
 
 TEST(Lite, EnumValueToName) {
   EXPECT_EQ("FOREIGN_LITE_FOO", sharkbuf_unittest::ForeignEnumLite_Name(
-                                    sharkbuf_unittest::FOREIGN_LITE_FOO));
+                                    sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_FOO));
   EXPECT_EQ("FOREIGN_LITE_BAR", sharkbuf_unittest::ForeignEnumLite_Name(
-                                    sharkbuf_unittest::FOREIGN_LITE_BAR));
+                                    sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAR));
   EXPECT_EQ("FOREIGN_LITE_BAZ", sharkbuf_unittest::ForeignEnumLite_Name(
-                                    sharkbuf_unittest::FOREIGN_LITE_BAZ));
+                                    sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAZ));
   EXPECT_EQ("", sharkbuf_unittest::ForeignEnumLite_Name(0));
   EXPECT_EQ("", sharkbuf_unittest::ForeignEnumLite_Name(999));
 }
@@ -1172,15 +1172,15 @@ TEST(Lite, EnumNameToValue) {
 
   ASSERT_TRUE(
       sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_FOO", &value));
-  EXPECT_EQ(sharkbuf_unittest::FOREIGN_LITE_FOO, value);
+  EXPECT_EQ(sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_FOO, value);
 
   ASSERT_TRUE(
       sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_BAR", &value));
-  EXPECT_EQ(sharkbuf_unittest::FOREIGN_LITE_BAR, value);
+  EXPECT_EQ(sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAR, value);
 
   ASSERT_TRUE(
       sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_BAZ", &value));
-  EXPECT_EQ(sharkbuf_unittest::FOREIGN_LITE_BAZ, value);
+  EXPECT_EQ(sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAZ, value);
 
   // Non-existent values
   EXPECT_FALSE(sharkbuf_unittest::ForeignEnumLite_Parse("E", &value));

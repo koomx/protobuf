@@ -95,16 +95,16 @@ namespace {
 
 std::string FitsIntExpression(const EnumDescriptor* descriptor) {
   switch (descriptor->options().underlying_type()) {
-    case ENUM_UNDERLYING_TYPE_INT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8:
       return "value >= -128 && value <= 127";
-    case ENUM_UNDERLYING_TYPE_UINT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8:
       return "value >= 0 && value <= 255";
-    case ENUM_UNDERLYING_TYPE_INT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16:
       return "value >= -32768 && value <= 32767";
-    case ENUM_UNDERLYING_TYPE_UINT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16:
       return "value >= 0 && value <= 65535";
-    case ENUM_UNDERLYING_TYPE_INT32:
-    case ENUM_UNDERLYING_TYPE_UINT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32:
       return "true";
     default:
       return "true";
@@ -114,18 +114,18 @@ std::string FitsIntExpression(const EnumDescriptor* descriptor) {
 std::string FitsWireExpression(const EnumDescriptor* descriptor,
                                   const std::string& classname) {
   switch (descriptor->options().underlying_type()) {
-    case ENUM_UNDERLYING_TYPE_INT8:
-    case ENUM_UNDERLYING_TYPE_INT16:
-    case ENUM_UNDERLYING_TYPE_INT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32:
       return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && " +
              classname + "_FitsUnderlying(static_cast<int>(value))";
-    case ENUM_UNDERLYING_TYPE_UINT8:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8:
       return "value <= 255u";
-    case ENUM_UNDERLYING_TYPE_UINT16:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16:
       return "value <= 65535u";
-    case ENUM_UNDERLYING_TYPE_UINT32:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32:
       return "value <= 0xffffffffu";
-    case ENUM_UNDERLYING_TYPE_UNSPECIFIED:
+    case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED:
     default:
       return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && " +
              classname + "_FitsUnderlying(static_cast<int>(value))";
@@ -168,16 +168,6 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
 
   format.Outdent();
   format("\n};\n");
-
-  // Namespace-scope aliases keep existing call sites
-  // (ENUM_UNDERLYING_TYPE_INT32, FileOptions_OptimizeMode_SPEED) compiling
-  // after the enumerators moved inside the enum class.
-  for (int i = 0; i < descriptor_->value_count(); i++) {
-    auto alias = format;
-    alias.Set("name", EnumValueName(descriptor_->value(i)));
-    alias(
-        "constexpr $classname$ $prefix$$name$ = $classname$::$name$;\n");
-  }
 
   {
     format(
