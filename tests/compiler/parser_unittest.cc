@@ -785,7 +785,10 @@ TEST_F(ParseMessageTest, NestedEnum) {
 
       "message_type {"
       "  name: \"TestMessage\""
-      "  enum_type { name: \"NestedEnum\" }"
+      "  enum_type {"
+      "    name: \"NestedEnum\""
+      "    options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
+      "  }"
       "  field { name:\"test_enum\" label:LABEL_OPTIONAL number:1"
       "          type_name: \"NestedEnum\" }"
       "}");
@@ -1125,6 +1128,76 @@ TEST_F(ParseEnumTest, Proto3EnumClass) {
       "only recognizes \"proto2\".\n");
 }
 
+TEST_F(ParseEnumTest, EnumWithUnderlyingType) {
+  // Plain enums accept an underlying type, same as enum class.
+  ExpectParsesTo(
+      "enum Perm : uint8 {\n"
+      "  option enable_operator = true;\n"
+      "  READ = 1;\n"
+      "  WRITE = 2;\n"
+      "}\n",
+
+      "enum_type {"
+      "  name: \"Perm\""
+      "  value { name:\"READ\" number:1 }"
+      "  value { name:\"WRITE\" number:2 }"
+      "  options {"
+      "    underlying_type: ENUM_UNDERLYING_TYPE_UINT8"
+      "    uninterpreted_option {"
+      "      name { name_part: \"enable_operator\" is_extension: false }"
+      "      identifier_value: \"true\""
+      "    }"
+      "  }"
+      "}");
+}
+
+TEST_F(ParseEnumTest, EnumEnableOperator) {
+  // enable_operator is no longer restricted to enum class.
+  ExpectParsesTo(
+      "enum Foo {\n"
+      "  option enable_operator = true;\n"
+      "  BAR = 1;\n"
+      "}\n",
+
+      "enum_type {"
+      "  name: \"Foo\""
+      "  value { name:\"BAR\" number:1 }"
+      "  options {"
+      "    underlying_type: ENUM_UNDERLYING_TYPE_INT32"
+      "    uninterpreted_option {"
+      "      name { name_part: \"enable_operator\" is_extension: false }"
+      "      identifier_value: \"true\""
+      "    }"
+      "  }"
+      "}");
+}
+
+TEST_F(ParseEnumTest, EnumAndEnumClassEquivalent) {
+  // "enum X" and "enum class X" produce byte-identical descriptors.
+  FileDescriptorProto plain, enum_class;
+  {
+    SetupParser(
+        "enum Perm {\n"
+        "  READ = 1;\n"
+        "  WRITE = 2;\n"
+        "}\n");
+    parser_->Parse(input_.get(), &plain);
+    ASSERT_EQ("", error_collector_.text_);
+  }
+  {
+    SetupParser(
+        "enum class Perm {\n"
+        "  READ = 1;\n"
+        "  WRITE = 2;\n"
+        "}\n");
+    parser_->Parse(input_.get(), &enum_class);
+    ASSERT_EQ("", error_collector_.text_);
+  }
+  plain.clear_source_code_info();
+  enum_class.clear_source_code_info();
+  EXPECT_EQ(plain.DebugString(), enum_class.DebugString());
+}
+
 TEST_F(ParseEnumTest, SimpleEnum) {
   ExpectParsesTo(
       "enum TestEnum {\n"
@@ -1134,6 +1207,7 @@ TEST_F(ParseEnumTest, SimpleEnum) {
       "enum_type {"
       "  name: \"TestEnum\""
       "  value { name:\"FOO\" number:0 }"
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
       "}");
 }
 
@@ -1158,6 +1232,7 @@ TEST_F(ParseEnumTest, Values) {
       "  value { name:\"HEX_MIN\" number:-2147483648 }"
       "  value { name:\"INT_MAX\" number:2147483647 }"
       "  value { name:\"INT_MIN\" number:-2147483648 }"
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
       "}");
 }
 
@@ -1192,6 +1267,7 @@ TEST_F(ParseEnumTest, ValueOptions) {
       "      } "
       "    } "
       "  } "
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
       "}");
 }
 
@@ -1214,6 +1290,7 @@ TEST_F(ParseEnumTest, ReservedRange) {
       "  reserved_range { start:9            end:11          }"
       "  reserved_range { start:3            end:3           }"
       "  reserved_range { start:20           end:2147483647  }"
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
       "}");
 }
 
@@ -1229,6 +1306,7 @@ TEST_F(ParseEnumTest, ReservedNames) {
       "  value { name:\"FOO\" number:0 }"
       "  reserved_name: \"foo\""
       "  reserved_name: \"bar\""
+      "  options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
       "}");
 }
 
@@ -1508,11 +1586,6 @@ TEST_F(ParseErrorTest, DuplicateJsonName) {
 
 TEST_F(ParseErrorTest, EnumClassUnderlyingType) {
   ExpectHasErrors(
-      "enum Perm : uint8 {\n"
-      "  READ = 1;\n"
-      "}\n",
-      "0:12: An underlying type is only allowed on enum class.\n");
-  ExpectHasErrors(
       "enum class Perm : string {\n"
       "  READ = 1;\n"
       "}\n",
@@ -1527,12 +1600,6 @@ TEST_F(ParseErrorTest, EnumClassUnderlyingType) {
       "  READ = -1;\n"
       "}\n",
       "1:10: Unsigned enum underlying type cannot be negative.\n");
-  ExpectHasErrors(
-      "enum Foo {\n"
-      "  option enable_operator = true;\n"
-      "  BAR = 1;\n"
-      "}\n",
-      "4:0: 'Foo' sets enable_operator but is not an enum class.\n");
 }
 
 TEST_F(ParseErrorTest, EnumValueOutOfRange) {

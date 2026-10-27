@@ -456,7 +456,8 @@ inline bool HasPreservingUnknownEnumSemantics(const FieldDescriptor* field) {
 }
 
 inline bool IsEnumClass(const EnumDescriptor*) {
-  // Every generated enum is an enum class. underlying_type only selects width.
+  // "enum" and "enum class" are equivalent in the .shark language: both
+  // always generate a C++ enum class. underlying_type only selects width.
   return true;
 }
 

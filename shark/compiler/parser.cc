@@ -547,7 +547,6 @@ bool EnumValueFits(EnumUnderlyingType type, int32_t number);
 bool Parser::ValidateEnum(const EnumDescriptorProto* proto) {
   bool has_allow_alias = false;
   bool allow_alias = false;
-  bool enable_operator = false;
 
   for (int i = 0; i < proto->options().uninterpreted_option_size(); i++) {
     const UninterpretedOption option = proto->options().uninterpreted_option(i);
@@ -558,8 +557,6 @@ bool Parser::ValidateEnum(const EnumDescriptorProto* proto) {
     if (name == "allow_alias") {
       has_allow_alias = true;
       allow_alias = option.identifier_value() == "true";
-    } else if (name == "enable_operator") {
-      enable_operator = option.identifier_value() == "true";
     }
   }
 
@@ -607,12 +604,6 @@ bool Parser::ValidateEnum(const EnumDescriptorProto* proto) {
             ". See https://developers.google.com/protocol-buffers/docs/style");
       }
     }
-  }
-
-  if (enable_operator && !proto->options().has_underlying_type()) {
-    AddError("'" + proto->name() +
-             "' sets enable_operator but is not an enum class.");
-    return false;
   }
 
   if (proto->options().has_underlying_type()) {
@@ -1991,7 +1982,9 @@ bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
                                  const LocationRecorder& enum_location,
                                  const FileDescriptorProto* containing_file) {
   DO(Consume("enum"));
-  const bool is_enum_class = TryConsume("class");
+  // "enum class" is sugar: plain enum and enum class are equivalent and
+  // always generate a C++ enum class.
+  TryConsume("class");
 
   {
     LocationRecorder location(enum_location,
@@ -2001,27 +1994,22 @@ bool Parser::ParseEnumDefinition(EnumDescriptorProto* enum_type,
     DO(ConsumeIdentifier(enum_type->mutable_name(), "Expected enum name."));
   }
 
-  EnumUnderlyingType underlying_type = ENUM_UNDERLYING_TYPE_UNSPECIFIED;
+  // "enum" and "enum class" are equivalent and always record an
+  // underlying_type (defaulting to int32) so both spellings produce
+  // byte-identical descriptors.
+  EnumUnderlyingType underlying_type = ENUM_UNDERLYING_TYPE_INT32;
   if (TryConsume(":")) {
-    if (!is_enum_class) {
-      AddError("An underlying type is only allowed on enum class.");
-      return false;
-    }
     std::string type_name;
     DO(ConsumeIdentifier(&type_name, "Expected enum underlying type."));
     if (!ParseEnumUnderlyingType(type_name, &underlying_type)) {
       AddError("Unknown enum underlying type \"" + type_name + "\".");
       return false;
     }
-  } else if (is_enum_class) {
-    underlying_type = ENUM_UNDERLYING_TYPE_INT32;
   }
 
   DO(ParseEnumBlock(enum_type, enum_location, containing_file, underlying_type));
 
-  if (is_enum_class) {
-    enum_type->mutable_options()->set_underlying_type(underlying_type);
-  }
+  enum_type->mutable_options()->set_underlying_type(underlying_type);
 
   DO(ValidateEnum(enum_type));
 

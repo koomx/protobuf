@@ -224,13 +224,13 @@ const char descriptor_table_protodef_shark_2ftypes_2ftype_2eshark[] SHARK_SECTIO
   "s\030\002 \003(\0172\014.shark.Field\022\016\n\006oneofs\030\003 \003(\020\022\036\n"
   "\007options\030\004 \003(\0172\r.shark.Option\022,\n\016source_"
   "context\030\005 \001(\0172\024.shark.SourceContext\022\035\n\006s"
-  "yntax\030\006 \001(\0162\r.shark.Syntax\"\212\006\n\005Field\022\037\n\004"
+  "yntax\030\006 \001(\0162\r.shark.Syntax\"\222\006\n\005Field\022\037\n\004"
   "kind\030\001 \001(\0162\021.shark.Field.Kind\022-\n\013cardina"
   "lity\030\002 \001(\0162\030.shark.Field.Cardinality\022\016\n\006"
   "number\030\003 \001(\006\022\014\n\004name\030\004 \001(\020\022\020\n\010type_url\030\006"
   " \001(\020\022\023\n\013oneof_index\030\007 \001(\006\022\016\n\006packed\030\010 \001("
   "\001\022\036\n\007options\030\t \003(\0172\r.shark.Option\022\021\n\tjso"
-  "n_name\030\n \001(\020\022\025\n\rdefault_value\030\013 \001(\020\"\233\003\n\004"
+  "n_name\030\n \001(\020\022\025\n\rdefault_value\030\013 \001(\020\"\237\003\n\004"
   "Kind\022\020\n\014TYPE_UNKNOWN\020\000\022\r\n\tTYPE_BOOL\020\001\022\r\n"
   "\tTYPE_INT8\020\002\022\016\n\nTYPE_UINT8\020\003\022\016\n\nTYPE_INT"
   "16\020\004\022\017\n\013TYPE_UINT16\020\005\022\016\n\nTYPE_INT32\020\006\022\017\n"
@@ -241,20 +241,20 @@ const char descriptor_table_protodef_shark_2ftypes_2ftype_2eshark[] SHARK_SECTIO
   "ING\020\020\022\016\n\nTYPE_BYTES\020\021\022\020\n\014TYPE_FIXED32\020\022\022"
   "\020\n\014TYPE_FIXED64\020\023\022\021\n\rTYPE_SFIXED32\020\024\022\021\n\r"
   "TYPE_SFIXED64\020\025\022\017\n\013TYPE_SINT32\020\026\022\017\n\013TYPE"
-  "_SINT64\020\027\"t\n\013Cardinality\022\027\n\023CARDINALITY_"
-  "UNKNOWN\020\000\022\030\n\024CARDINALITY_OPTIONAL\020\001\022\030\n\024C"
-  "ARDINALITY_REQUIRED\020\002\022\030\n\024CARDINALITY_REP"
-  "EATED\020\003\"\246\001\n\004Enum\022\014\n\004name\030\001 \001(\020\022#\n\tenumva"
-  "lue\030\002 \003(\0172\020.shark.EnumValue\022\036\n\007options\030\003"
-  " \003(\0172\r.shark.Option\022,\n\016source_context\030\004 "
-  "\001(\0172\024.shark.SourceContext\022\035\n\006syntax\030\005 \001("
-  "\0162\r.shark.Syntax\"I\n\tEnumValue\022\014\n\004name\030\001 "
-  "\001(\020\022\016\n\006number\030\002 \001(\006\022\036\n\007options\030\003 \003(\0172\r.s"
-  "hark.Option\"1\n\006Option\022\014\n\004name\030\001 \001(\020\022\031\n\005v"
-  "alue\030\002 \001(\0172\n.shark.Any*.\n\006Syntax\022\021\n\rSYNT"
-  "AX_PROTO2\020\000\022\021\n\rSYNTAX_PROTO3\020\001B2Z-google"
-  ".golang.org/protobuf/types/known/typepb\370"
-  "\001\001"
+  "_SINT64\020\027\032\0028\005\"x\n\013Cardinality\022\027\n\023CARDINAL"
+  "ITY_UNKNOWN\020\000\022\030\n\024CARDINALITY_OPTIONAL\020\001\022"
+  "\030\n\024CARDINALITY_REQUIRED\020\002\022\030\n\024CARDINALITY"
+  "_REPEATED\020\003\032\0028\005\"\246\001\n\004Enum\022\014\n\004name\030\001 \001(\020\022#"
+  "\n\tenumvalue\030\002 \003(\0172\020.shark.EnumValue\022\036\n\007o"
+  "ptions\030\003 \003(\0172\r.shark.Option\022,\n\016source_co"
+  "ntext\030\004 \001(\0172\024.shark.SourceContext\022\035\n\006syn"
+  "tax\030\005 \001(\0162\r.shark.Syntax\"I\n\tEnumValue\022\014\n"
+  "\004name\030\001 \001(\020\022\016\n\006number\030\002 \001(\006\022\036\n\007options\030\003"
+  " \003(\0172\r.shark.Option\"1\n\006Option\022\014\n\004name\030\001 "
+  "\001(\020\022\031\n\005value\030\002 \001(\0172\n.shark.Any*2\n\006Syntax"
+  "\022\021\n\rSYNTAX_PROTO2\020\000\022\021\n\rSYNTAX_PROTO3\020\001\032\002"
+  "8\005B2Z-google.golang.org/protobuf/types/k"
+  "nown/typepb\370\001\001"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2ftype_2eshark_deps[2] = {
   &::descriptor_table_shark_2ftypes_2fany_2eshark,
@@ -262,7 +262,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2ftyp
 };
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2ftype_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ftype_2eshark = {
-    false, false, 1442, descriptor_table_protodef_shark_2ftypes_2ftype_2eshark,
+    false, false, 1454, descriptor_table_protodef_shark_2ftypes_2ftype_2eshark,
     "shark/types/type.shark",
     &descriptor_table_shark_2ftypes_2ftype_2eshark_once, descriptor_table_shark_2ftypes_2ftype_2eshark_deps, 2, 5,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2ftype_2eshark::offsets,

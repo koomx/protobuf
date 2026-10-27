@@ -173,23 +173,23 @@ const char descriptor_table_protodef_shark_2fcompiler_2fplugin_2eshark[] SHARK_S
   "equest\022\030\n\020file_to_generate\030\001 \003(\020\022\021\n\tpara"
   "meter\030\002 \001(\020\022.\n\nproto_file\030\017 \003(\0172\032.shark."
   "FileDescriptorProto\0221\n\020compiler_version\030"
-  "\003 \001(\0172\027.shark.compiler.Version\"\255\002\n\025CodeG"
+  "\003 \001(\0172\027.shark.compiler.Version\"\261\002\n\025CodeG"
   "eneratorResponse\022\r\n\005error\030\001 \001(\020\022\032\n\022suppo"
   "rted_features\030\002 \001(\t\0228\n\004file\030\017 \003(\0172*.shar"
   "k.compiler.CodeGeneratorResponse.File\032u\n"
   "\004File\022\014\n\004name\030\001 \001(\020\022\027\n\017insertion_point\030\002"
   " \001(\020\022\017\n\007content\030\017 \001(\020\0225\n\023generated_code_"
-  "info\030\020 \001(\0172\030.shark.GeneratedCodeInfo\"8\n\007"
+  "info\030\020 \001(\0172\030.shark.GeneratedCodeInfo\"<\n\007"
   "Feature\022\020\n\014FEATURE_NONE\020\000\022\033\n\027FEATURE_PRO"
-  "TO3_OPTIONAL\020\001B+Z)google.golang.org/prot"
-  "obuf/types/pluginpb"
+  "TO3_OPTIONAL\020\001\032\0028\005B+Z)google.golang.org/"
+  "protobuf/types/pluginpb"
   ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2fcompiler_2fplugin_2eshark_deps[1] = {
   &::descriptor_table_shark_2fdescriptor_2eshark,
 };
 static ::_pbi::once_flag descriptor_table_shark_2fcompiler_2fplugin_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fcompiler_2fplugin_2eshark = {
-    false, false, 659, descriptor_table_protodef_shark_2fcompiler_2fplugin_2eshark,
+    false, false, 663, descriptor_table_protodef_shark_2fcompiler_2fplugin_2eshark,
     "shark/compiler/plugin.shark",
     &descriptor_table_shark_2fcompiler_2fplugin_2eshark_once, descriptor_table_shark_2fcompiler_2fplugin_2eshark_deps, 1, 4,
     schemas, file_default_instances, TableStruct_shark_2fcompiler_2fplugin_2eshark::offsets,

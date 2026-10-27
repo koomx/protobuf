@@ -140,13 +140,14 @@ const char descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark[] SHARK_SECT
   "\001(\020H\000\022\024\n\nbool_value\030\004 \001(\001H\000\022%\n\014struct_va"
   "lue\030\005 \001(\0172\r.shark.StructH\000\022&\n\nlist_value"
   "\030\006 \001(\0172\020.shark.ListValueH\000B\006\n\004kind\")\n\tLi"
-  "stValue\022\034\n\006values\030\001 \003(\0172\014.shark.Value*\033\n"
-  "\tNullValue\022\016\n\nNULL_VALUE\020\000B4Z/google.gol"
-  "ang.org/protobuf/types/known/structpb\370\001\001"
+  "stValue\022\034\n\006values\030\001 \003(\0172\014.shark.Value*\037\n"
+  "\tNullValue\022\016\n\nNULL_VALUE\020\000\032\0028\005B4Z/google"
+  ".golang.org/protobuf/types/known/structp"
+  "b\370\001\001"
   ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fstruct_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fstruct_2eshark = {
-    false, false, 480, descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark,
+    false, false, 484, descriptor_table_protodef_shark_2ftypes_2fstruct_2eshark,
     "shark/types/struct.shark",
     &descriptor_table_shark_2ftypes_2fstruct_2eshark_once, nullptr, 0, 4,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fstruct_2eshark::offsets,

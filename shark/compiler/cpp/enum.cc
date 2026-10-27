@@ -136,12 +136,9 @@ std::string FitsWireExpression(const EnumDescriptor* descriptor,
 
 void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   Formatter format(printer, variables_);
-  const bool enum_class = IsEnumClass(descriptor_);
-  if (enum_class) {
-    format("enum class ${1$$classname$$}$ : $underlying$ {\n", descriptor_);
-  } else {
-    format("enum ${1$$classname$$}$ : int {\n", descriptor_);
-  }
+  // "enum" and "enum class" are equivalent: always generate a C++ enum
+  // class with the selected underlying type.
+  format("enum class ${1$$classname$$}$ : $underlying$ {\n", descriptor_);
   format.Indent();
 
   const EnumValueDescriptor* min_value = descriptor_->value(0);
@@ -172,19 +169,17 @@ void EnumGenerator::GenerateDefinition(io::Printer* printer) {
   format.Outdent();
   format("\n};\n");
 
-  if (enum_class) {
-    // Namespace-scope aliases keep existing call sites
-    // (ENUM_UNDERLYING_TYPE_INT32, FileOptions_OptimizeMode_SPEED) compiling
-    // after the enumerators moved inside the enum class.
-    for (int i = 0; i < descriptor_->value_count(); i++) {
-      auto alias = format;
-      alias.Set("name", EnumValueName(descriptor_->value(i)));
-      alias(
-          "constexpr $classname$ $prefix$$name$ = $classname$::$name$;\n");
-    }
+  // Namespace-scope aliases keep existing call sites
+  // (ENUM_UNDERLYING_TYPE_INT32, FileOptions_OptimizeMode_SPEED) compiling
+  // after the enumerators moved inside the enum class.
+  for (int i = 0; i < descriptor_->value_count(); i++) {
+    auto alias = format;
+    alias.Set("name", EnumValueName(descriptor_->value(i)));
+    alias(
+        "constexpr $classname$ $prefix$$name$ = $classname$::$name$;\n");
   }
 
-  if (enum_class) {
+  {
     format(
         "constexpr $underlying$ $classname$_to_underlying($classname$ value) {\n"
         "  return static_cast<$underlying$>(value);\n"
@@ -311,19 +306,11 @@ void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
   for (int j = 0; j < descriptor_->value_count(); j++) {
     std::string deprecated_attr =
         DeprecatedAttribute(options_, descriptor_->value(j));
-    if (IsEnumClass(descriptor_)) {
-      format(
-          "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
-          "  $classname$::$3$;\n",
-          deprecated_attr, descriptor_->value(j),
-          EnumValueName(descriptor_->value(j)));
-    } else {
-      format(
-          "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
-          "  $classname$_$3$;\n",
-          deprecated_attr, descriptor_->value(j),
-          EnumValueName(descriptor_->value(j)));
-    }
+    format(
+        "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
+        "  $classname$::$3$;\n",
+        deprecated_attr, descriptor_->value(j),
+        EnumValueName(descriptor_->value(j)));
   }
 
   format(
