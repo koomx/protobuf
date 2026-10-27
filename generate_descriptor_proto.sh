@@ -26,10 +26,10 @@ runtime_protos=(
   shark/types/wrappers.shark
 )
 
-build_dir=build
+build_dir=build-upgrade
 sharkc="$build_dir/shark/sharkc"
 
-cmake --preset=vcpkg
+cmake --preset=vcpkg-upgrade
 
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
