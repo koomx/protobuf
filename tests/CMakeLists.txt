@@ -141,6 +141,20 @@ target_compile_options(shark_suite PRIVATE
         "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
 
 kmcmake_cc_test(
+        NAME parser-enum
+        MODULE ${PROJECT_NAME}
+        SOURCES compiler/parser_enum_test.cc
+        CXXOPTS ${KMCMAKE_CXX_OPTIONS}
+        LINKS
+        ${PROJECT_NAME}::shark-test-common_static
+        ${PROJECT_NAME}::sharkc-lib_static
+        ${PROJECT_NAME}::shark_static
+        GTest::gmock_main
+)
+target_compile_options(shark_parser-enum PRIVATE
+        "SHELL:-include ${CMAKE_CURRENT_SOURCE_DIR}/gtest_enum.h")
+
+kmcmake_cc_test(
         NAME json
         MODULE ${PROJECT_NAME}
         SOURCES
