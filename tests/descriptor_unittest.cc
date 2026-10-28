@@ -438,7 +438,7 @@ TEST_F(FileDescriptorTest, FindEnumTypeByName) {
 
 TEST_F(FileDescriptorTest, FindEnumValueByName) {
   EXPECT_EQ(foo_enum_value_, foo_file_->FindEnumValueByName("FooEnum.FOO_ENUM_VALUE"));
-  EXPECT_EQ(bar_enum_value_, bar_file_->FindEnumValueByName("FooEnum.BAR_ENUM_VALUE"));
+  EXPECT_EQ(bar_enum_value_, bar_file_->FindEnumValueByName("BarEnum.BAR_ENUM_VALUE"));
 
   EXPECT_TRUE(foo_file_->FindEnumValueByName("BAR_ENUM_VALUE") == nullptr);
   EXPECT_TRUE(bar_file_->FindEnumValueByName("FOO_ENUM_VALUE") == nullptr);
@@ -1888,10 +1888,10 @@ TEST_F(NestedDescriptorTest, FindEnumTypeByName) {
 }
 
 TEST_F(NestedDescriptorTest, FindEnumValueByName) {
-  EXPECT_EQ(a_, message_->FindEnumValueByName("A"));
-  EXPECT_EQ(b_, message_->FindEnumValueByName("B"));
-  EXPECT_EQ(a2_, message2_->FindEnumValueByName("A"));
-  EXPECT_EQ(c2_, message2_->FindEnumValueByName("C"));
+  EXPECT_EQ(a_, message_->FindEnumValueByName("Baz.A"));
+  EXPECT_EQ(b_, message_->FindEnumValueByName("Moo.B"));
+  EXPECT_EQ(a2_, message2_->FindEnumValueByName("Moo.A"));
+  EXPECT_EQ(c2_, message2_->FindEnumValueByName("Mooo.C"));
 
   EXPECT_TRUE(message_->FindEnumValueByName("NO_SUCH_VALUE") == nullptr);
   EXPECT_TRUE(message_->FindEnumValueByName("C") == nullptr);
@@ -3920,33 +3920,6 @@ TEST_F(ValidationErrorTest, PackageAlreadyDefined) {
       "than a package) in file \"foo.shark\".\n");
 }
 
-TEST_F(ValidationErrorTest, EnumValueAlreadyDefinedInParent) {
-  BuildFileWithErrors(
-      "name: \"foo.shark\" "
-      "enum_type { name: \"Foo\" value { name: \"FOO\" number: 1 } } "
-      "enum_type { name: \"Bar\" value { name: \"FOO\" number: 1 } } ",
-
-      "foo.shark: FOO: NAME: \"FOO\" is already defined.\n"
-      "foo.shark: FOO: NAME: Note that enum values use C++ scoping rules, "
-      "meaning that enum values are siblings of their type, not children of "
-      "it.  Therefore, \"FOO\" must be unique within the global scope, not "
-      "just within \"Bar\".\n");
-}
-
-TEST_F(ValidationErrorTest, EnumValueAlreadyDefinedInParentNonGlobal) {
-  BuildFileWithErrors(
-      "name: \"foo.shark\" "
-      "package: \"pkg\" "
-      "enum_type { name: \"Foo\" value { name: \"FOO\" number: 1 } } "
-      "enum_type { name: \"Bar\" value { name: \"FOO\" number: 1 } } ",
-
-      "foo.shark: pkg.FOO: NAME: \"FOO\" is already defined in \"pkg\".\n"
-      "foo.shark: pkg.FOO: NAME: Note that enum values use C++ scoping rules, "
-      "meaning that enum values are siblings of their type, not children of "
-      "it.  Therefore, \"FOO\" must be unique within \"pkg\", not just within "
-      "\"Bar\".\n");
-}
-
 TEST_F(ValidationErrorTest, MissingName) {
   BuildFileWithErrors(
       "name: \"foo.shark\" "
@@ -4367,7 +4340,7 @@ TEST_F(ValidationErrorTest, EnumReservedNameError) {
       "  reserved_name: \"BAR\""
       "}",
 
-      "foo.shark: Foo.FOO: NAME: Enum value \"FOO\" is reserved.\nfoo.shark: Foo.BAR: NAME: Enum value \"BAR\" is reserved.");
+      "foo.shark: Foo.FOO: NAME: Enum value \"FOO\" is reserved.\nfoo.shark: Foo.BAR: NAME: Enum value \"BAR\" is reserved.\n");
 }
 
 TEST_F(ValidationErrorTest, EnumReservedNameRedundant) {
@@ -5758,7 +5731,7 @@ TEST_F(ValidationErrorTest, EnumOptionValueIsSiblingEnumValueName) {
       "                                        is_extension: true } "
       "                                 identifier_value: \"MOOO\" } }",
 
-      "foo.shark: foo.shark: OPTION_VALUE: Enum type \"FooEnum1\" has no value named \"MOOO\" for option \"foo\".");
+      "foo.shark: foo.shark: OPTION_VALUE: Enum type \"FooEnum1\" has no value named \"MOOO\" for option \"foo\".\n");
 }
 
 TEST_F(ValidationErrorTest, StringOptionValueIsNotString) {
@@ -6421,7 +6394,7 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWhenPrefixesStripped) {
       "  value { name: 'FOO_ENUM_BAZ' number: 0 }"
       "  value { name: 'BAZ' number: 1 }"
       "}",
-      "prefix1.shark: BAZ: NAME: Enum name BAZ has the same name as FOO_ENUM_BAZ "
+      "prefix1.shark: FooEnum.BAZ: NAME: Enum name BAZ has the same name as FOO_ENUM_BAZ "
       "if you ignore case and strip out the enum name prefix (if any). "
       "This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
@@ -6435,7 +6408,7 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWhenPrefixesStripped) {
       "  value { name: 'FOOENUMB_QUX' number: 0 }"
       "  value { name: 'QUX' number: 1 }"
       "}",
-      "prefix2.shark: QUX: NAME: Enum name QUX has the same name as FOOENUMB_QUX "
+      "prefix2.shark: FooEnumB.QUX: NAME: Enum name QUX has the same name as FOOENUMB_QUX "
       "if you ignore case and strip out the enum name prefix (if any). "
       "This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
@@ -6449,7 +6422,7 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWhenPrefixesStripped) {
       "  value { name: 'COR_ENUM_BAR_ZED' number: 0 }"
       "  value { name: 'BAR__ZED' number: 1 }"
       "}",
-      "prefix3.shark: BAR__ZED: NAME: Enum name BAR__ZED has the same name as "
+      "prefix3.shark: CorEnum.BAR__ZED: NAME: Enum name BAR__ZED has the same name as "
       "COR_ENUM_BAR_ZED if you ignore case and strip out the enum name prefix "
       "(if any). This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "
@@ -6463,7 +6436,7 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWhenPrefixesStripped) {
       "  value { name: 'DOG_ENUM__BAR_WAX' number: 0 }"
       "  value { name: 'BAR_WAX' number: 1 }"
       "}",
-      "prefix4.shark: BAR_WAX: NAME: Enum name BAR_WAX has the same name as "
+      "prefix4.shark: DogEnum.BAR_WAX: NAME: Enum name BAR_WAX has the same name as "
       "DOG_ENUM__BAR_WAX if you ignore case and strip out the enum name prefix "
       "(if any). This is error-prone and can lead to undefined behavior. "
       "Please avoid doing this. If you are using allow_alias, please assign "

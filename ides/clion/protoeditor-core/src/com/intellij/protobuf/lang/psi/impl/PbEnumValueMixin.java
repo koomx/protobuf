@@ -19,9 +19,12 @@ import com.intellij.lang.ASTNode;
 import com.intellij.protobuf.ide.util.PbIcons;
 import com.intellij.protobuf.lang.descriptor.Descriptor;
 import com.intellij.protobuf.lang.descriptor.DescriptorOptionType;
+import com.intellij.protobuf.lang.psi.PbEnumDefinition;
 import com.intellij.protobuf.lang.psi.PbEnumValue;
 import com.intellij.protobuf.lang.psi.PbOptionExpression;
 import com.intellij.protobuf.lang.psi.PbOptionList;
+import com.intellij.protobuf.lang.psi.util.PbPsiUtil;
+import com.intellij.psi.util.PsiTreeUtil;
 import com.intellij.psi.util.QualifiedName;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -58,6 +61,19 @@ abstract class PbEnumValueMixin extends PbNamedElementBase implements PbEnumValu
   @Override
   public @Nullable QualifiedName getExtensionOptionScope() {
     QualifiedName name = getQualifiedName();
-    return name != null ? name.removeLastComponent() : null;
+    if (name == null) {
+      return null;
+    }
+    // For an `enum class`, the value's qualified name is `pkg.EnumName.ValueName` (the enum
+    // introduces a child scope). The enum-value extension option scope is the enum's own
+    // package scope (`pkg`), matching PbEnumBodyMixin.getExtensionOptionScope, so we strip both
+    // the value name and the enum name. For a plain `enum`, the value's qualified name is
+    // `pkg.ValueName` and stripping the value name yields the package scope directly.
+    PbEnumDefinition enumDefinition = PsiTreeUtil.getParentOfType(this, PbEnumDefinition.class);
+    if (enumDefinition != null && PbPsiUtil.isEnumClass(enumDefinition)) {
+      QualifiedName withoutEnum = name.removeLastComponent();
+      return withoutEnum != null ? withoutEnum.removeLastComponent() : null;
+    }
+    return name.removeLastComponent();
   }
 }

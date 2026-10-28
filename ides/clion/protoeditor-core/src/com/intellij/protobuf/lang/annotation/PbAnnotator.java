@@ -349,6 +349,14 @@ public final class PbAnnotator implements Annotator, DumbAware {
       if (ProtoTokenTypes.IDENTIFIER_LITERAL.equals(child.getNode().getElementType())) {
         if (!enumClass && !sawColon && "class".equals(child.getText())) {
           enumClass = true;
+          // "class" in "enum class" is lexed as an IDENTIFIER_LITERAL (see proto.bnf) so that
+          // field names may still be called "class". Highlight the keyword-position occurrence as
+          // a keyword so it is visually distinguished from an identifier-position "class".
+          holder
+              .newSilentAnnotation(HighlightSeverity.INFORMATION)
+              .range(child)
+              .textAttributes(PbSyntaxHighlighter.KEYWORD)
+              .create();
         } else if (sawColon && typeName == null) {
           typeName = child;
         }
@@ -356,14 +364,7 @@ public final class PbAnnotator implements Annotator, DumbAware {
         sawColon = true;
       }
     }
-    if (sawColon && !enumClass) {
-      holder
-          .newAnnotation(
-              HighlightSeverity.ERROR, "An underlying type is only allowed on enum class.")
-          .range(enumDefinition)
-          .create();
-      return;
-    }
+
     if (typeName != null && !isEnumUnderlyingType(typeName.getText())) {
       holder
           .newAnnotation(

@@ -571,6 +571,7 @@ namespace shark {
             ONEOF,
             ENUM,
             ENUM_VALUE,
+            ENUM_VALUE_OTHER_PARENT,
             SERVICE,
             METHOD,
             FULL_PACKAGE,
@@ -615,11 +616,16 @@ namespace shark {
         };
         DEFINE_MEMBERS(Subpackage, SUB_PACKAGE, sub_package_file_descriptor)
 
-        static Symbol EnumValue(EnumValueDescriptor* value) {
+        static Symbol EnumValue(EnumValueDescriptor* value, int n) {
             Symbol s;
             internal::SymbolBase* ptr;
-            ptr = static_cast<internal::SymbolBaseN<0>*>(value);
-            ptr->symbol_type_ = ENUM_VALUE;
+            if (n == 0) {
+                ptr = static_cast<internal::SymbolBaseN<0>*>(value);
+                ptr->symbol_type_ = ENUM_VALUE;
+            } else {
+                ptr = static_cast<internal::SymbolBaseN<1>*>(value);
+                ptr->symbol_type_ = ENUM_VALUE_OTHER_PARENT;
+            }
             s.ptr_ = ptr;
             return s;
         }
@@ -628,6 +634,9 @@ namespace shark {
             return type() == ENUM_VALUE
                 ? static_cast<const EnumValueDescriptor*>(
                       static_cast<const internal::SymbolBaseN<0>*>(ptr_))
+                : type() == ENUM_VALUE_OTHER_PARENT
+                ? static_cast<const EnumValueDescriptor*>(
+                      static_cast<const internal::SymbolBaseN<1>*>(ptr_))
                 : nullptr;
         }
 
@@ -690,6 +699,7 @@ namespace shark {
             case ENUM:
                 return enum_descriptor()->file();
             case ENUM_VALUE:
+            case ENUM_VALUE_OTHER_PARENT:
                 return enum_value_descriptor()->type()->file();
             case SERVICE:
                 return service_descriptor()->file();
@@ -715,6 +725,7 @@ namespace shark {
             case ENUM:
                 return enum_descriptor()->full_name();
             case ENUM_VALUE:
+            case ENUM_VALUE_OTHER_PARENT:
                 return enum_value_descriptor()->full_name();
             case SERVICE:
                 return service_descriptor()->full_name();
@@ -753,6 +764,20 @@ namespace shark {
             case ENUM_VALUE:
                 return { enum_value_descriptor()->type(),
                     enum_value_descriptor()->name() };
+            case ENUM_VALUE_OTHER_PARENT: {
+                // The outer-scope alias key is "EnumName.ValueName" — i.e. the
+                // value's full_name with the package (and any containing-message)
+                // prefix stripped. Both full_name and the enum/value names are
+                // already persistent, so the StringPiece is valid for the table's
+                // hash/compare lifetime.
+                const EnumValueDescriptor* v = enum_value_descriptor();
+                const EnumDescriptor* e = v->type();
+                const std::string& full = v->full_name();
+                int len = static_cast<int>(e->name().size() + 1 + v->name().size());
+                int offset = static_cast<int>(full.size()) - len;
+                return { or_file(e->containing_type()),
+                    StringPiece(full.data() + offset, static_cast<size_t>(len)) };
+            }
             case SERVICE:
                 return { GetFile(), service_descriptor()->name() };
             case METHOD:
@@ -1715,7 +1740,7 @@ namespace shark {
             result->number_ = number;
             result->type_ = parent;
             result->options_ = &EnumValueOptions::default_instance();
-            unknown_enum_values_by_number_.insert(Symbol::EnumValue(result));
+            unknown_enum_values_by_number_.insert(Symbol::EnumValue(result, 0));
             return result;
         }
     }
@@ -1786,7 +1811,7 @@ namespace shark {
         const int base = value->type()->value(0)->number();
         if (base <= value->number() && value->number() <= static_cast<int64_t>(base) + value->type()->sequential_value_limit_)
             return true;
-        return enum_values_by_number_.insert(Symbol::EnumValue(value)).second;
+        return enum_values_by_number_.insert(Symbol::EnumValue(value, 0)).second;
     }
 
     bool DescriptorPool::Tables::AddExtension(const FieldDescriptor* field) {
@@ -6015,7 +6040,26 @@ namespace shark {
         // Enum values are scoped to their enum type (C++ enum class rules):
         // the symbol lives in the enum's own namespace, keyed by the enum's
         // full name plus the value name.
-        AddSymbol(result->full_name(), parent, result->name(),proto, Symbol::EnumValue(result));
+        AddSymbol(result->full_name(), parent, result->name(),proto, Symbol::EnumValue(result, 0));
+
+        // Also register an alias under the enum's containing scope (file or
+        // message) keyed by "EnumName.ValueName", so that
+        // FileDescriptor::FindEnumValueByName("FooEnum.FOO_ENUM_VALUE") and
+        // Descriptor::FindEnumValueByName("Baz.A") resolve without falling back
+        // to the DescriptorPool (which would otherwise trigger fallback-database
+        // lookups on misses). parent->containing_type() is nullptr for
+        // top-level enums (AddAliasUnderParent treats nullptr as file_) and the
+        // containing message for nested enums. The alias key is derived from
+        // full_name by stripping the package/containing-message prefix; see
+        // Symbol::parent_name_key() for ENUM_VALUE_OTHER_PARENT.
+        const void* outer_parent = parent->containing_type();
+        // outer_key matches what ENUM_VALUE_OTHER_PARENT's parent_name_key()
+        // returns, so AddAliasUnderParent's DCHECK holds.
+        std::string outer_key = parent->name();
+        outer_key.push_back('.');
+        outer_key.append(result->name());
+        file_tables_->AddAliasUnderParent(outer_parent, outer_key,
+            Symbol::EnumValue(result, 1));
 
         // An enum is allowed to define two numbers that refer to the same value.
         // FindValueByNumber() should return the first such value, so we simply
@@ -7992,14 +8036,13 @@ namespace shark {
             if (lazy_default_value_enum_name[0] != '\0') {
                 // Have to build the full name now instead of at CrossLink time,
                 // because enum_type may not be known at the time.
+                // Enum values are scoped to their enum type (enum class rules):
+                // the value's full name is the enum's full name plus the value
+                // name, matching BuildEnumValue and the non-lazy default-value
+                // lookup path in CrossLinkField.
                 std::string name = enum_type->full_name();
-                // Enum values reside in the same scope as the enum type.
-                std::string::size_type last_dot = name.find_last_of('.');
-                if (last_dot != std::string::npos) {
-                    name = name.substr(0, last_dot) + "." + lazy_default_value_enum_name;
-                } else {
-                    name = lazy_default_value_enum_name;
-                }
+                name += ".";
+                name += lazy_default_value_enum_name;
                 Symbol result = file()->pool()->CrossLinkOnDemandHelper(name, true);
                 default_value_enum_ = result.enum_value_descriptor();
             } else {

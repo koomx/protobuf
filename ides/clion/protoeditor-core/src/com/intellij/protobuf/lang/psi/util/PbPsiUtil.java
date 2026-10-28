@@ -97,6 +97,35 @@ public final class PbPsiUtil {
     return element instanceof PbOneofDefinition;
   }
 
+  /**
+   * Returns <code>true</code> if the given enum definition is declared as <code>enum class</code>.
+   *
+   * <p>An <code>enum class</code> introduces a new symbol scope for its values: enum value
+   * qualified names are <code>pkg.EnumName.ValueName</code> instead of <code>pkg.ValueName</code>,
+   * so values with the same name in different <code>enum class</code> definitions do not conflict.
+   *
+   * @param enumDefinition the enum definition to check
+   * @return <code>true</code> if the enum is declared with the <code>class</code> keyword
+   */
+  public static boolean isEnumClass(@NotNull PbEnumDefinition enumDefinition) {
+    // The "class" keyword in "enum class" is parsed as an IDENTIFIER_LITERAL (see proto.bnf),
+    // so we detect it by scanning the enum definition's header children between "enum" and the
+    // enum body. This mirrors the scanning logic used by annotateEnumUnderlyingType in PbAnnotator.
+    PsiElement body = enumDefinition.getBody();
+    for (PsiElement child = enumDefinition.getFirstChild();
+        child != null && child != body;
+        child = child.getNextSibling()) {
+      if (child.getNode() == null) {
+        continue;
+      }
+      if (ProtoTokenTypes.IDENTIFIER_LITERAL.equals(child.getNode().getElementType())
+          && "class".equals(child.getText())) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   /** Returns the descriptor option with the given name if it exists, or else <code>null</code>. */
   public static @Nullable PbOptionExpression getDescriptorOption(PbOptionOwner owner, String name) {
     Descriptor descriptor = Descriptor.locate(owner.getPbFile());
