@@ -74,6 +74,7 @@ kmcmake_cc_library(
         types/api.skp.cc
         compiler/importer.cc
         compiler/parser.cc
+        meta.skp.cc
         descriptor.cc
         descriptor.skp.cc
         descriptor_database.cc

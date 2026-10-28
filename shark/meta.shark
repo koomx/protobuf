@@ -1,0 +1,65 @@
+// Copyright (C) 2026 Kumo inc. and its affiliates. All Rights Reserved.
+//
+// Licensed under the Apache License, Version 2.0 (the "License");
+// you may not use this file except in compliance with the License.
+// You may obtain a copy of the License at
+//
+//     http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing, software
+// distributed under the License is distributed on an "AS IS" BASIS,
+// WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+// See the License for the specific language governing permissions and
+// limitations under the License.
+//
+
+syntax = "proto2";
+
+package shark;
+
+enum class SharkType : uint8 {
+  UNKNOWN = 0;
+  BOOL = 1;
+  INT8 = 2;
+  UINT8 = 3;
+  INT16 = 4;
+  UINT16 = 5;
+  INT32 = 6;
+  UINT32 = 7;
+  INT64 = 8;
+  UINT64 = 9;
+  FLOAT = 10;
+  FLOAT16 = 11;
+  FLOAT8 = 12;
+  DOUBLE = 13;
+  ENUM = 14;
+  MESSAGE = 15;
+  STRING = 16;
+  BYTES = 17;
+
+  FIXED32 = 60;
+  FIXED64 = 61;
+  SFIXED32 = 62;
+  SFIXED64 = 63;
+  SINT32 = 64;
+  SINT64 = 65;
+}
+
+enum class SharkCppType : uint8 {
+  BOOL = 1;
+  INT8 = 2;
+  UINT8 = 3;
+  INT16 = 4;
+  UINT16 = 5;
+  INT32 = 6; // INT32, SINT32, SFIXED32
+  UINT32 = 7; // UINT32, FIXED32
+  INT64 = 8; // INT64, SINT64, SFIXED64
+  UINT64 = 9; // UINT64, FIXED64
+  FLOAT = 10;
+  FLOAT16 = 11;
+  FLOAT8 = 12;
+  DOUBLE = 13;
+  ENUM = 14;
+  MESSAGE = 15;
+  STRING = 16; // STRING, BYTES
+};

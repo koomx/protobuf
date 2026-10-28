@@ -40,11 +40,12 @@ while true; do
   cmake --build "$build_dir" --target sharkc
 
   "$sharkc" -I . --cpp_out="$tmp" "${runtime_protos[@]}"
+  "$sharkc" -I . --cpp_out="dllexport_decl=SHARK_EXPORT:$tmp" shark/meta.shark
   "$sharkc" -I . --cpp_out="dllexport_decl=SHARK_EXPORT:$tmp" shark/descriptor.shark
   "$sharkc" -I . --cpp_out="dllexport_decl=PROTOC_EXPORT:$tmp" shark/compiler/plugin.shark
 
   changed=0
-  for proto in "${runtime_protos[@]}" shark/descriptor.shark shark/compiler/plugin.shark; do
+  for proto in "${runtime_protos[@]}" shark/meta.shark shark/descriptor.shark shark/compiler/plugin.shark; do
     base=${proto%.shark}
     if ! cmp -s "$base.skp.h" "$tmp/$base.skp.h" || ! cmp -s "$base.skp.cc" "$tmp/$base.skp.cc"; then
       cp "$tmp/$base.skp.h" "$base.skp.h"
