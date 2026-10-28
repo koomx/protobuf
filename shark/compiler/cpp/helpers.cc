@@ -983,7 +983,7 @@ bool HasRepeatedFields(const FileDescriptor* file) {
 static bool IsStringPieceField(const FieldDescriptor* field,
                                const Options& options) {
   return field->cpp_type() == FieldCppType::STRING &&
-         EffectiveStringCType(field, options) == FieldOptions::STRING_PIECE;
+         EffectiveStringCType(field, options) == FieldOptions_CType::STRING_PIECE;
 }
 
 static bool HasStringPieceFields(const Descriptor* descriptor,
@@ -1006,7 +1006,7 @@ bool HasStringPieceFields(const FileDescriptor* file, const Options& options) {
 
 static bool IsCordField(const FieldDescriptor* field, const Options& options) {
   return field->cpp_type() == FieldCppType::STRING &&
-         EffectiveStringCType(field, options) == FieldOptions::CORD;
+         EffectiveStringCType(field, options) == FieldOptions_CType::CORD;
 }
 
 static bool HasCordFields(const Descriptor* descriptor,
@@ -1136,7 +1136,7 @@ FieldOptions::CType EffectiveStringCType(const FieldDescriptor* field,
   GOOGLE_DCHECK(field->cpp_type() == FieldCppType::STRING);
   if (options.opensource_runtime) {
     // Open-source protobuf release only supports STRING ctype.
-    return FieldOptions::STRING;
+    return FieldOptions_CType::STRING;
   } else {
     // Google-internal supports all ctypes.
     return field->options().ctype();
@@ -1179,7 +1179,7 @@ static bool FileUtf8Verification(const FileDescriptor* file,
 Utf8CheckMode GetUtf8CheckMode(const FieldDescriptor* field,
                                const Options& options) {
   if (GetOptimizeFor(field->file(), options) !=
-                 FileOptions::LITE_RUNTIME &&
+                 FileOptions_OptimizeMode::LITE_RUNTIME &&
              FileUtf8Verification(field->file(), options)) {
     return Utf8CheckMode::kVerify;
   } else {
@@ -1275,7 +1275,7 @@ bool HasWeakFields(const FileDescriptor* file, const Options& options) {
 bool UsingImplicitWeakFields(const FileDescriptor* file,
                              const Options& options) {
   return options.lite_implicit_weak_fields &&
-         GetOptimizeFor(file, options) == FileOptions::LITE_RUNTIME;
+         GetOptimizeFor(file, options) == FileOptions_OptimizeMode::LITE_RUNTIME;
 }
 
 bool IsImplicitWeakField(const FieldDescriptor* field, const Options& options,
@@ -1314,7 +1314,7 @@ MessageAnalysis MessageSCCAnalyzer::GetSCCAnalysis(const SCC* scc) {
       switch (field->type()) {
         case FieldType::STRING:
         case FieldType::BYTES: {
-          if (field->options().ctype() == FieldOptions::CORD) {
+          if (field->options().ctype() == FieldOptions_CType::CORD) {
             result.contains_cord = true;
           }
           break;
@@ -1516,7 +1516,7 @@ static bool HasExtensionFromFile(const Message& msg, const FileDescriptor* file,
       if (msg_extension_file == file) return true;
       if (has_opt_codesize_extension &&
           GetOptimizeFor(msg_extension_file, options) ==
-              FileOptions::CODE_SIZE) {
+              FileOptions_OptimizeMode::CODE_SIZE) {
         *has_opt_codesize_extension = true;
       }
     }
@@ -1592,24 +1592,24 @@ FileOptions_OptimizeMode GetOptimizeFor(const FileDescriptor* file,
   if (has_opt_codesize_extension) *has_opt_codesize_extension = false;
   switch (options.enforce_mode) {
     case EnforceOptimizeMode::kSpeed:
-      return FileOptions::SPEED;
+      return FileOptions_OptimizeMode::SPEED;
     case EnforceOptimizeMode::kLiteRuntime:
-      return FileOptions::LITE_RUNTIME;
+      return FileOptions_OptimizeMode::LITE_RUNTIME;
     case EnforceOptimizeMode::kCodeSize:
-      if (file->options().optimize_for() == FileOptions::LITE_RUNTIME) {
-        return FileOptions::LITE_RUNTIME;
+      if (file->options().optimize_for() == FileOptions_OptimizeMode::LITE_RUNTIME) {
+        return FileOptions_OptimizeMode::LITE_RUNTIME;
       }
       if (HasBootstrapProblem(file, options, has_opt_codesize_extension)) {
-        return FileOptions::SPEED;
+        return FileOptions_OptimizeMode::SPEED;
       }
-      return FileOptions::CODE_SIZE;
+      return FileOptions_OptimizeMode::CODE_SIZE;
     case EnforceOptimizeMode::kNoEnforcement:
-      if (file->options().optimize_for() == FileOptions::CODE_SIZE) {
+      if (file->options().optimize_for() == FileOptions_OptimizeMode::CODE_SIZE) {
         if (HasBootstrapProblem(file, options, has_opt_codesize_extension)) {
           GOOGLE_LOG(WARNING) << "Proto states optimize_for = CODE_SIZE, but we "
                           "cannot honor that because it contains custom option "
                           "extensions defined in the same proto.";
-          return FileOptions::SPEED;
+          return FileOptions_OptimizeMode::SPEED;
         }
       }
       return file->options().optimize_for();
@@ -1617,12 +1617,12 @@ FileOptions_OptimizeMode GetOptimizeFor(const FileDescriptor* file,
 
   GOOGLE_LOG(FATAL) << "Unknown optimization enforcement requested.";
   // The phony return below serves to silence a warning from GCC 8.
-  return FileOptions::SPEED;
+  return FileOptions_OptimizeMode::SPEED;
 }
 
 inline bool IsMessageOwnedArenaEligible(const Descriptor* desc,
                                         const Options& options) {
-  return GetOptimizeFor(desc->file(), options) != FileOptions::LITE_RUNTIME &&
+  return GetOptimizeFor(desc->file(), options) != FileOptions_OptimizeMode::LITE_RUNTIME &&
          !options.bootstrap && !options.opensource_runtime &&
          AllocExpected(desc);
 }

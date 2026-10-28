@@ -571,7 +571,6 @@ namespace shark {
             ONEOF,
             ENUM,
             ENUM_VALUE,
-            ENUM_VALUE_OTHER_PARENT,
             SERVICE,
             METHOD,
             FULL_PACKAGE,
@@ -616,19 +615,11 @@ namespace shark {
         };
         DEFINE_MEMBERS(Subpackage, SUB_PACKAGE, sub_package_file_descriptor)
 
-        // Enum values have two different parents.
-        // We use two different identitied for the same object to determine the two
-        // different insertions in the map.
-        static Symbol EnumValue(EnumValueDescriptor* value, int n) {
+        static Symbol EnumValue(EnumValueDescriptor* value) {
             Symbol s;
             internal::SymbolBase* ptr;
-            if (n == 0) {
-                ptr = static_cast<internal::SymbolBaseN<0>*>(value);
-                ptr->symbol_type_ = ENUM_VALUE;
-            } else {
-                ptr = static_cast<internal::SymbolBaseN<1>*>(value);
-                ptr->symbol_type_ = ENUM_VALUE_OTHER_PARENT;
-            }
+            ptr = static_cast<internal::SymbolBaseN<0>*>(value);
+            ptr->symbol_type_ = ENUM_VALUE;
             s.ptr_ = ptr;
             return s;
         }
@@ -637,9 +628,6 @@ namespace shark {
             return type() == ENUM_VALUE
                 ? static_cast<const EnumValueDescriptor*>(
                       static_cast<const internal::SymbolBaseN<0>*>(ptr_))
-                : type() == ENUM_VALUE_OTHER_PARENT
-                ? static_cast<const EnumValueDescriptor*>(
-                      static_cast<const internal::SymbolBaseN<1>*>(ptr_))
                 : nullptr;
         }
 
@@ -763,9 +751,6 @@ namespace shark {
                 return { or_file(enum_descriptor()->containing_type()),
                     enum_descriptor()->name() };
             case ENUM_VALUE:
-                return { or_file(enum_value_descriptor()->type()->containing_type()),
-                    enum_value_descriptor()->name() };
-            case ENUM_VALUE_OTHER_PARENT:
                 return { enum_value_descriptor()->type(),
                     enum_value_descriptor()->name() };
             case SERVICE:
@@ -1730,7 +1715,7 @@ namespace shark {
             result->number_ = number;
             result->type_ = parent;
             result->options_ = &EnumValueOptions::default_instance();
-            unknown_enum_values_by_number_.insert(Symbol::EnumValue(result, 0));
+            unknown_enum_values_by_number_.insert(Symbol::EnumValue(result));
             return result;
         }
     }
@@ -1801,7 +1786,7 @@ namespace shark {
         const int base = value->type()->value(0)->number();
         if (base <= value->number() && value->number() <= static_cast<int64_t>(base) + value->type()->sequential_value_limit_)
             return true;
-        return enum_values_by_number_.insert(Symbol::EnumValue(value, 0)).second;
+        return enum_values_by_number_.insert(Symbol::EnumValue(value)).second;
     }
 
     bool DescriptorPool::Tables::AddExtension(const FieldDescriptor* field) {
@@ -4871,7 +4856,7 @@ namespace shark {
                 alloc.PlanArray<FieldOptions>(1);
             alloc.PlanFieldNames(field.name(),
                 field.has_json_name() ? &field.json_name() : nullptr);
-            if (field.has_default_value() && field.has_type() && (field.type() == FieldDescriptorProto::TYPE_STRING || field.type() == FieldDescriptorProto::TYPE_BYTES)) {
+            if (field.has_default_value() && field.has_type() && (field.type() == FieldDescriptorProto::Type::TYPE_STRING || field.type() == FieldDescriptorProto::Type::TYPE_BYTES)) {
                 // For the default string value.
                 alloc.PlanArray<std::string>(1);
             }
@@ -6006,12 +5991,11 @@ namespace shark {
         const EnumDescriptor* parent,
         EnumValueDescriptor* result,
         internal::FlatAllocator& alloc) {
-        // Note:  full_name for enum values is a sibling to the parent's name, not a
-        //   child of it.
+        // Note:  full_name for enum values is a child of the enum's name.
         std::string full_name;
-        size_t scope_len = parent->full_name().size() - parent->name().size();
-        full_name.reserve(scope_len + proto.name().size());
-        full_name.append(parent->full_name().data(), scope_len);
+        full_name.reserve(parent->full_name().size() + 1 + proto.name().size());
+        full_name.append(parent->full_name());
+        full_name.push_back('.');
         full_name.append(proto.name());
 
         result->all_names_ = alloc.AllocateStrings(proto.name(), std::move(full_name));
@@ -6028,42 +6012,10 @@ namespace shark {
                 "shark.EnumValueOptions", alloc);
         }
 
-        // Again, enum values are weird because we makes them appear as siblings
-        // of the enum type instead of children of it.  So, we use
-        // parent->containing_type() as the value's parent.
-        bool added_to_outer_scope = AddSymbol(result->full_name(), parent->containing_type(), result->name(),
-            proto, Symbol::EnumValue(result, 0));
-
-        // However, we also want to be able to search for values within a single
-        // enum type, so we add it as a child of the enum type itself, too.
-        // Note:  This could fail, but if it does, the error has already been
-        //   reported by the above AddSymbol() call, so we ignore the return code.
-        bool added_to_inner_scope = file_tables_->AddAliasUnderParent(
-            parent, result->name(), Symbol::EnumValue(result, 1));
-
-        if (added_to_inner_scope && !added_to_outer_scope) {
-            // This value did not conflict with any values defined in the same enum,
-            // but it did conflict with some other symbol defined in the enum type's
-            // scope.  Let's print an additional error to explain this.
-            std::string outer_scope;
-            if (parent->containing_type() == nullptr) {
-                outer_scope = file_->package();
-            } else {
-                outer_scope = parent->containing_type()->full_name();
-            }
-
-            if (outer_scope.empty()) {
-                outer_scope = "the global scope";
-            } else {
-                outer_scope = "\"" + outer_scope + "\"";
-            }
-
-            AddError(result->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
-                "Note that enum values use C++ scoping rules, meaning that "
-                "enum values are siblings of their type, not children of it.  "
-                "Therefore, \""
-                    + result->name() + "\" must be unique within " + outer_scope + ", not just within \"" + parent->name() + "\".");
-        }
+        // Enum values are scoped to their enum type (C++ enum class rules):
+        // the symbol lives in the enum's own namespace, keyed by the enum's
+        // full name plus the value name.
+        AddSymbol(result->full_name(), parent, result->name(),proto, Symbol::EnumValue(result));
 
         // An enum is allowed to define two numbers that refer to the same value.
         // FindValueByNumber() should return the first such value, so we simply
@@ -6327,7 +6279,7 @@ namespace shark {
             // Assume we are expecting a message type unless the proto contains some
             // evidence that it expects an enum type.  This only makes a difference if
             // we end up creating a placeholder.
-            bool expecting_enum = (proto.type() == FieldDescriptorProto::TYPE_ENUM) || proto.has_default_value();
+            bool expecting_enum = (proto.type() == FieldDescriptorProto::Type::TYPE_ENUM) || proto.has_default_value();
 
             // In case of weak fields we force building the dependency. We need to know
             // if the type exist or not. If it doesn't exist we substitute Empty which
@@ -6442,8 +6394,12 @@ namespace shark {
                         // We can't just use field->enum_type()->FindValueByName() here
                         // because that locks the pool's mutex, which we have already locked
                         // at this point.
-                        const EnumValueDescriptor* default_value = LookupSymbolNoPlaceholder(proto.default_value(),
-                            field->enum_type()->full_name())
+                        // Enum values are scoped to their enum type, so the fully
+                        // qualified name is the enum's full name plus the value name.
+                        std::string fully_qualified_name = field->enum_type()->full_name();
+                        fully_qualified_name += ".";
+                        fully_qualified_name += proto.default_value();
+                        const EnumValueDescriptor* default_value = LookupSymbolNoPlaceholder(fully_qualified_name, "")
                                                                        .enum_value_descriptor();
 
                         if (default_value != nullptr && default_value->type() == field->enum_type()) {
@@ -6685,7 +6641,7 @@ namespace shark {
     static bool IsLite(const FileDescriptor* file) {
         // TODO(kenton):  I don't even remember how many of these conditions are
         //   actually possible.  I'm just being super-safe.
-        return file != nullptr && &file->options() != &FileOptions::default_instance() && file->options().optimize_for() == FileOptions::LITE_RUNTIME;
+        return file != nullptr && &file->options() != &FileOptions::default_instance() && file->options().optimize_for() == FileOptions_OptimizeMode::LITE_RUNTIME;
     }
 
     void DescriptorBuilder::ValidateFileOptions(FileDescriptor* file,
@@ -7082,7 +7038,7 @@ namespace shark {
         const FieldDescriptorProto& proto) {
         FieldOptions::JSType jstype = field->options().jstype();
         // The default is always acceptable.
-        if (jstype == FieldOptions::JS_NORMAL) {
+        if (jstype == FieldOptions::JSType::JS_NORMAL) {
             return;
         }
 
@@ -7094,7 +7050,7 @@ namespace shark {
         case FieldType::SINT64:
         case FieldType::FIXED64:
         case FieldType::SFIXED64:
-            if (jstype == FieldOptions::JS_STRING || jstype == FieldOptions::JS_NUMBER) {
+            if (jstype == FieldOptions::JSType::JS_STRING || jstype == FieldOptions::JSType::JS_NUMBER) {
                 return;
             }
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
@@ -7734,10 +7690,10 @@ namespace shark {
             const EnumValueDescriptor* enum_value = nullptr;
 
             if (enum_type->file()->pool() != DescriptorPool::generated_pool()) {
-                // Note that the enum value's fully-qualified name is a sibling of the
-                // enum's name, not a child of it.
+                // The enum value's fully-qualified name is a child of the enum's
+                // name.
                 std::string fully_qualified_name = enum_type->full_name();
-                fully_qualified_name.resize(fully_qualified_name.size() - enum_type->name().size());
+                fully_qualified_name += ".";
                 fully_qualified_name += value_name;
 
                 // Search for the enum value's descriptor in the builder's pool. Note

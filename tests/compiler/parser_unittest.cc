@@ -1668,14 +1668,14 @@ TEST_F(ParserValidationErrorTest, ResovledUndefinedOptionError) {
   FieldDescriptorProto* field(message->add_field());
   field->set_name("foo");
   field->set_number(1);
-  field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
-  field->set_type(FieldDescriptorProto::TYPE_INT32);
+  field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+  field->set_type(FieldDescriptorProto_Type::TYPE_INT32);
 
   FieldDescriptorProto* extension(other_file.add_extension());
   extension->set_name("bar");
   extension->set_number(7672757);
-  extension->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
-  extension->set_type(FieldDescriptorProto::TYPE_MESSAGE);
+  extension->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+  extension->set_type(FieldDescriptorProto_Type::TYPE_MESSAGE);
   extension->set_type_name("Bar");
   extension->set_extendee("shark.FileOptions");
 

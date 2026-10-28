@@ -143,7 +143,7 @@ inline void TestUtil::SetOptionalFields(UNITTEST::TestAllTypes* message) {
   message->mutable_optional_lazy_message()->set_bb(127);
   message->mutable_optional_unverified_lazy_message()->set_bb(128);
 
-  message->set_optional_nested_enum(UNITTEST::TestAllTypes::BAZ);
+  message->set_optional_nested_enum(UNITTEST::TestAllTypes_NestedEnum::BAZ);
   message->set_optional_foreign_enum(UNITTEST::ForeignEnum::FOREIGN_BAZ);
   message->set_optional_import_enum(UNITTEST_IMPORT::ImportEnum::IMPORT_BAZ);
 
@@ -184,7 +184,7 @@ inline void TestUtil::AddRepeatedFields1(UNITTEST::TestAllTypes* message) {
   message->add_repeated_import_message()->set_d(220);
   message->add_repeated_lazy_message()->set_bb(227);
 
-  message->add_repeated_nested_enum(UNITTEST::TestAllTypes::BAR);
+  message->add_repeated_nested_enum(UNITTEST::TestAllTypes_NestedEnum::BAR);
   message->add_repeated_foreign_enum(UNITTEST::ForeignEnum::FOREIGN_BAR);
   message->add_repeated_import_enum(UNITTEST_IMPORT::ImportEnum::IMPORT_BAR);
 
@@ -222,7 +222,7 @@ inline void TestUtil::AddRepeatedFields2(UNITTEST::TestAllTypes* message) {
   message->add_repeated_import_message()->set_d(320);
   message->add_repeated_lazy_message()->set_bb(327);
 
-  message->add_repeated_nested_enum(UNITTEST::TestAllTypes::BAZ);
+  message->add_repeated_nested_enum(UNITTEST::TestAllTypes_NestedEnum::BAZ);
   message->add_repeated_foreign_enum(UNITTEST::ForeignEnum::FOREIGN_BAZ);
   message->add_repeated_import_enum(UNITTEST_IMPORT::ImportEnum::IMPORT_BAZ);
 
@@ -256,7 +256,7 @@ inline void TestUtil::SetDefaultFields(UNITTEST::TestAllTypes* message) {
   message->set_default_string("415");
   message->set_default_bytes("416");
 
-  message->set_default_nested_enum(UNITTEST::TestAllTypes::FOO);
+  message->set_default_nested_enum(UNITTEST::TestAllTypes_NestedEnum::FOO);
   message->set_default_foreign_enum(UNITTEST::ForeignEnum::FOREIGN_FOO);
   message->set_default_import_enum(UNITTEST_IMPORT::ImportEnum::IMPORT_FOO);
 
@@ -294,7 +294,7 @@ inline void TestUtil::ModifyRepeatedFields(UNITTEST::TestAllTypes* message) {
   message->mutable_repeated_import_message(1)->set_d(520);
   message->mutable_repeated_lazy_message(1)->set_bb(527);
 
-  message->set_repeated_nested_enum(1, UNITTEST::TestAllTypes::FOO);
+  message->set_repeated_nested_enum(1, UNITTEST::TestAllTypes_NestedEnum::FOO);
   message->set_repeated_foreign_enum(1, UNITTEST::ForeignEnum::FOREIGN_FOO);
   message->set_repeated_import_enum(1, UNITTEST_IMPORT::ImportEnum::IMPORT_FOO);
 
@@ -383,7 +383,7 @@ inline void TestUtil::ExpectAllFieldsSet(
   EXPECT_EQ(127, message.optional_lazy_message().bb());
   EXPECT_EQ(128, message.optional_unverified_lazy_message().bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ, message.optional_nested_enum());
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ, message.optional_nested_enum());
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ, message.optional_foreign_enum());
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAZ, message.optional_import_enum());
 
@@ -441,7 +441,7 @@ inline void TestUtil::ExpectAllFieldsSet(
   EXPECT_EQ(227, message.repeated_lazy_message(0).bb());
 
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message.repeated_nested_enum(0));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message.repeated_nested_enum(0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR, message.repeated_foreign_enum(0));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAR, message.repeated_import_enum(0));
 
@@ -466,7 +466,7 @@ inline void TestUtil::ExpectAllFieldsSet(
   EXPECT_EQ(320, message.repeated_import_message(1).d());
   EXPECT_EQ(327, message.repeated_lazy_message(1).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ, message.repeated_nested_enum(1));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ, message.repeated_nested_enum(1));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ, message.repeated_foreign_enum(1));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAZ, message.repeated_import_enum(1));
 
@@ -510,7 +510,7 @@ inline void TestUtil::ExpectAllFieldsSet(
   EXPECT_EQ("415", message.default_string());
   EXPECT_EQ("416", message.default_bytes());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO, message.default_nested_enum());
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO, message.default_nested_enum());
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, message.default_foreign_enum());
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_FOO, message.default_import_enum());
 
@@ -590,7 +590,7 @@ inline void TestUtil::ExpectClear(const UNITTEST::TestAllTypes& message) {
   EXPECT_EQ(0, message.optional_unverified_lazy_message().bb());
 
   // Enums without defaults are set to the first value in the enum.
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO, message.optional_nested_enum());
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO, message.optional_nested_enum());
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, message.optional_foreign_enum());
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_FOO, message.optional_import_enum());
 
@@ -662,7 +662,7 @@ inline void TestUtil::ExpectClear(const UNITTEST::TestAllTypes& message) {
   EXPECT_EQ("hello", message.default_string());
   EXPECT_EQ("world", message.default_bytes());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message.default_nested_enum());
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message.default_nested_enum());
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR, message.default_foreign_enum());
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAR, message.default_import_enum());
 
@@ -730,7 +730,7 @@ inline void TestUtil::ExpectRepeatedFieldsModified(
   EXPECT_EQ(220, message.repeated_import_message(0).d());
   EXPECT_EQ(227, message.repeated_lazy_message(0).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message.repeated_nested_enum(0));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message.repeated_nested_enum(0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR, message.repeated_foreign_enum(0));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAR, message.repeated_import_enum(0));
 
@@ -757,7 +757,7 @@ inline void TestUtil::ExpectRepeatedFieldsModified(
   EXPECT_EQ(520, message.repeated_import_message(1).d());
   EXPECT_EQ(527, message.repeated_lazy_message(1).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO, message.repeated_nested_enum(1));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO, message.repeated_nested_enum(1));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, message.repeated_foreign_enum(1));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_FOO, message.repeated_import_enum(1));
 
@@ -962,7 +962,7 @@ inline void TestUtil::SetAllExtensions(UNITTEST::TestAllExtensions* message) {
       ->set_d(120);
 
   message->SetExtension(UNITTEST::optional_nested_enum_extension,
-                        UNITTEST::TestAllTypes::BAZ);
+                        UNITTEST::TestAllTypes_NestedEnum::BAZ);
   message->SetExtension(UNITTEST::optional_foreign_enum_extension,
                         UNITTEST::ForeignEnum::FOREIGN_BAZ);
   message->SetExtension(UNITTEST::optional_import_enum_extension,
@@ -1006,7 +1006,7 @@ inline void TestUtil::SetAllExtensions(UNITTEST::TestAllExtensions* message) {
   message->AddExtension(UNITTEST::repeated_lazy_message_extension)->set_bb(227);
 
   message->AddExtension(UNITTEST::repeated_nested_enum_extension,
-                        UNITTEST::TestAllTypes::BAR);
+                        UNITTEST::TestAllTypes_NestedEnum::BAR);
   message->AddExtension(UNITTEST::repeated_foreign_enum_extension,
                         UNITTEST::ForeignEnum::FOREIGN_BAR);
   message->AddExtension(UNITTEST::repeated_import_enum_extension,
@@ -1041,7 +1041,7 @@ inline void TestUtil::SetAllExtensions(UNITTEST::TestAllExtensions* message) {
   message->AddExtension(UNITTEST::repeated_lazy_message_extension)->set_bb(327);
 
   message->AddExtension(UNITTEST::repeated_nested_enum_extension,
-                        UNITTEST::TestAllTypes::BAZ);
+                        UNITTEST::TestAllTypes_NestedEnum::BAZ);
   message->AddExtension(UNITTEST::repeated_foreign_enum_extension,
                         UNITTEST::ForeignEnum::FOREIGN_BAZ);
   message->AddExtension(UNITTEST::repeated_import_enum_extension,
@@ -1069,7 +1069,7 @@ inline void TestUtil::SetAllExtensions(UNITTEST::TestAllExtensions* message) {
   message->SetExtension(UNITTEST::default_bytes_extension, "416");
 
   message->SetExtension(UNITTEST::default_nested_enum_extension,
-                        UNITTEST::TestAllTypes::FOO);
+                        UNITTEST::TestAllTypes_NestedEnum::FOO);
   message->SetExtension(UNITTEST::default_foreign_enum_extension,
                         UNITTEST::ForeignEnum::FOREIGN_FOO);
   message->SetExtension(UNITTEST::default_import_enum_extension,
@@ -1131,7 +1131,7 @@ inline void TestUtil::ModifyRepeatedExtensions(
       ->set_bb(527);
 
   message->SetExtension(UNITTEST::repeated_nested_enum_extension, 1,
-                        UNITTEST::TestAllTypes::FOO);
+                        UNITTEST::TestAllTypes_NestedEnum::FOO);
   message->SetExtension(UNITTEST::repeated_foreign_enum_extension, 1,
                         UNITTEST::ForeignEnum::FOREIGN_FOO);
   message->SetExtension(UNITTEST::repeated_import_enum_extension, 1,
@@ -1221,7 +1221,7 @@ inline void TestUtil::ExpectAllExtensionsSet(
       120,
       message.GetExtension(UNITTEST::optional_import_message_extension).d());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ,
             message.GetExtension(UNITTEST::optional_nested_enum_extension));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ,
             message.GetExtension(UNITTEST::optional_foreign_enum_extension));
@@ -1310,7 +1310,7 @@ inline void TestUtil::ExpectAllExtensionsSet(
       227,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 0).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 0));
@@ -1353,7 +1353,7 @@ inline void TestUtil::ExpectAllExtensionsSet(
       327,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 1).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 1));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 1));
@@ -1405,7 +1405,7 @@ inline void TestUtil::ExpectAllExtensionsSet(
   EXPECT_EQ("415", message.GetExtension(UNITTEST::default_string_extension));
   EXPECT_EQ("416", message.GetExtension(UNITTEST::default_bytes_extension));
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO,
             message.GetExtension(UNITTEST::default_nested_enum_extension));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO,
             message.GetExtension(UNITTEST::default_foreign_enum_extension));
@@ -1528,7 +1528,7 @@ inline void TestUtil::ExpectExtensionsClear(
           .bb());
 
   // Enums without defaults are set to the first value in the enum.
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO,
             message.GetExtension(UNITTEST::optional_nested_enum_extension));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO,
             message.GetExtension(UNITTEST::optional_foreign_enum_extension));
@@ -1614,7 +1614,7 @@ inline void TestUtil::ExpectExtensionsClear(
   EXPECT_EQ("hello", message.GetExtension(UNITTEST::default_string_extension));
   EXPECT_EQ("world", message.GetExtension(UNITTEST::default_bytes_extension));
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR,
             message.GetExtension(UNITTEST::default_nested_enum_extension));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR,
             message.GetExtension(UNITTEST::default_foreign_enum_extension));
@@ -1704,7 +1704,7 @@ inline void TestUtil::ExpectRepeatedExtensionsModified(
       227,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 0).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 0));
@@ -1748,7 +1748,7 @@ inline void TestUtil::ExpectRepeatedExtensionsModified(
       527,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 1).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 1));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 1));
@@ -1956,7 +1956,7 @@ inline void TestUtil::ExpectLastRepeatedsRemoved(
   EXPECT_EQ(220, message.repeated_import_message(0).d());
   EXPECT_EQ(220, message.repeated_import_message(0).d());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message.repeated_nested_enum(0));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message.repeated_nested_enum(0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR, message.repeated_foreign_enum(0));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAR, message.repeated_import_enum(0));
 }
@@ -2030,7 +2030,7 @@ inline void TestUtil::ExpectLastRepeatedExtensionsRemoved(
       227,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 0).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 0));
@@ -2133,7 +2133,7 @@ inline void TestUtil::ExpectRepeatedsSwapped(
   EXPECT_EQ(220, message.repeated_import_message(1).d());
   EXPECT_EQ(220, message.repeated_import_message(1).d());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message.repeated_nested_enum(1));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message.repeated_nested_enum(1));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR, message.repeated_foreign_enum(1));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAR, message.repeated_import_enum(1));
 
@@ -2158,7 +2158,7 @@ inline void TestUtil::ExpectRepeatedsSwapped(
   EXPECT_EQ(320, message.repeated_import_message(0).d());
   EXPECT_EQ(320, message.repeated_import_message(0).d());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ, message.repeated_nested_enum(0));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ, message.repeated_nested_enum(0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ, message.repeated_foreign_enum(0));
   EXPECT_EQ(UNITTEST_IMPORT::ImportEnum::IMPORT_BAZ, message.repeated_import_enum(0));
 }
@@ -2230,7 +2230,7 @@ inline void TestUtil::ExpectRepeatedExtensionsSwapped(
       227,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 1).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 1));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAR,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 1));
@@ -2273,7 +2273,7 @@ inline void TestUtil::ExpectRepeatedExtensionsSwapped(
       327,
       message.GetExtension(UNITTEST::repeated_lazy_message_extension, 0).bb());
 
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ,
             message.GetExtension(UNITTEST::repeated_nested_enum_extension, 0));
   EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ,
             message.GetExtension(UNITTEST::repeated_foreign_enum_extension, 0));
@@ -2294,7 +2294,7 @@ inline void TestUtil::SetOneof1(UNITTEST::TestOneof2* message) {
 
 inline void TestUtil::SetOneof2(UNITTEST::TestOneof2* message) {
   message->set_foo_int(200);
-  message->set_bar_enum(UNITTEST::TestOneof2::BAZ);
+  message->set_bar_enum(UNITTEST::TestOneof2_NestedEnum::BAZ);
   message->set_baz_int(202);
   message->set_baz_string("203");
 }
@@ -2326,7 +2326,7 @@ inline void TestUtil::ExpectOneofSet2(const UNITTEST::TestOneof2& message) {
   EXPECT_TRUE(message.has_baz_string());
 
   EXPECT_EQ(200, message.foo_int());
-  EXPECT_EQ(UNITTEST::TestOneof2::BAZ, message.bar_enum());
+  EXPECT_EQ(UNITTEST::TestOneof2_NestedEnum::BAZ, message.bar_enum());
   EXPECT_EQ(202, message.baz_int());
   EXPECT_EQ("203", message.baz_string());
 }

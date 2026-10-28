@@ -589,54 +589,6 @@ class Field final :
   // nested types ----------------------------------------------------
 
   typedef Field_Kind Kind;
-  static constexpr Kind TYPE_UNKNOWN =
-    Field_Kind::TYPE_UNKNOWN;
-  static constexpr Kind TYPE_BOOL =
-    Field_Kind::TYPE_BOOL;
-  static constexpr Kind TYPE_INT8 =
-    Field_Kind::TYPE_INT8;
-  static constexpr Kind TYPE_UINT8 =
-    Field_Kind::TYPE_UINT8;
-  static constexpr Kind TYPE_INT16 =
-    Field_Kind::TYPE_INT16;
-  static constexpr Kind TYPE_UINT16 =
-    Field_Kind::TYPE_UINT16;
-  static constexpr Kind TYPE_INT32 =
-    Field_Kind::TYPE_INT32;
-  static constexpr Kind TYPE_UINT32 =
-    Field_Kind::TYPE_UINT32;
-  static constexpr Kind TYPE_INT64 =
-    Field_Kind::TYPE_INT64;
-  static constexpr Kind TYPE_UINT64 =
-    Field_Kind::TYPE_UINT64;
-  static constexpr Kind TYPE_FLOAT =
-    Field_Kind::TYPE_FLOAT;
-  static constexpr Kind TYPE_FLOAT16 =
-    Field_Kind::TYPE_FLOAT16;
-  static constexpr Kind TYPE_FLOAT8 =
-    Field_Kind::TYPE_FLOAT8;
-  static constexpr Kind TYPE_DOUBLE =
-    Field_Kind::TYPE_DOUBLE;
-  static constexpr Kind TYPE_ENUM =
-    Field_Kind::TYPE_ENUM;
-  static constexpr Kind TYPE_MESSAGE =
-    Field_Kind::TYPE_MESSAGE;
-  static constexpr Kind TYPE_STRING =
-    Field_Kind::TYPE_STRING;
-  static constexpr Kind TYPE_BYTES =
-    Field_Kind::TYPE_BYTES;
-  static constexpr Kind TYPE_FIXED32 =
-    Field_Kind::TYPE_FIXED32;
-  static constexpr Kind TYPE_FIXED64 =
-    Field_Kind::TYPE_FIXED64;
-  static constexpr Kind TYPE_SFIXED32 =
-    Field_Kind::TYPE_SFIXED32;
-  static constexpr Kind TYPE_SFIXED64 =
-    Field_Kind::TYPE_SFIXED64;
-  static constexpr Kind TYPE_SINT32 =
-    Field_Kind::TYPE_SINT32;
-  static constexpr Kind TYPE_SINT64 =
-    Field_Kind::TYPE_SINT64;
   static inline bool Kind_IsValid(int value) {
     return Field_Kind_IsValid(value);
   }
@@ -663,14 +615,6 @@ class Field final :
   }
 
   typedef Field_Cardinality Cardinality;
-  static constexpr Cardinality CARDINALITY_UNKNOWN =
-    Field_Cardinality::CARDINALITY_UNKNOWN;
-  static constexpr Cardinality CARDINALITY_OPTIONAL =
-    Field_Cardinality::CARDINALITY_OPTIONAL;
-  static constexpr Cardinality CARDINALITY_REQUIRED =
-    Field_Cardinality::CARDINALITY_REQUIRED;
-  static constexpr Cardinality CARDINALITY_REPEATED =
-    Field_Cardinality::CARDINALITY_REPEATED;
   static inline bool Cardinality_IsValid(int value) {
     return Field_Cardinality_IsValid(value);
   }

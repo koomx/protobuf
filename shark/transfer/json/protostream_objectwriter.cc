@@ -641,7 +641,7 @@ ProtoStreamObjectWriter* ProtoStreamObjectWriter::StartObject(
     return this;
   }
 
-  if (field->kind() != shark::Field::TYPE_MESSAGE) {
+  if (field->kind() != shark::Field_Kind::TYPE_MESSAGE) {
     IncrementInvalidDepth();
     if (!options_.suppress_object_to_scalar_error) {
       InvalidValue(field->name(), "Starting an object on a scalar field");
@@ -1363,8 +1363,8 @@ void ProtoStreamObjectWriter::PopOneElement() {
 
 bool ProtoStreamObjectWriter::IsMap(const shark::Field& field) {
   if (field.type_url().empty() ||
-      field.kind() != shark::Field::TYPE_MESSAGE ||
-      field.cardinality() != shark::Field::CARDINALITY_REPEATED) {
+      field.kind() != shark::Field_Kind::TYPE_MESSAGE ||
+      field.cardinality() != shark::Field_Cardinality::CARDINALITY_REPEATED) {
     return false;
   }
   const shark::Type* field_type =

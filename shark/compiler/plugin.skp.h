@@ -905,10 +905,6 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
   typedef CodeGeneratorResponse_File File;
 
   typedef CodeGeneratorResponse_Feature Feature;
-  static constexpr Feature FEATURE_NONE =
-    CodeGeneratorResponse_Feature::FEATURE_NONE;
-  static constexpr Feature FEATURE_PROTO3_OPTIONAL =
-    CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
   static inline bool Feature_IsValid(int value) {
     return CodeGeneratorResponse_Feature_IsValid(value);
   }

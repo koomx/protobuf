@@ -444,31 +444,31 @@ TEST(GENERATED_MESSAGE_TEST_NAME, SwapWithOther) {
   message1.set_optional_int32(123);
   message1.set_optional_string("abc");
   message1.mutable_optional_nested_message()->set_bb(1);
-  message1.set_optional_nested_enum(UNITTEST::TestAllTypes::FOO);
+  message1.set_optional_nested_enum(UNITTEST::TestAllTypes_NestedEnum::FOO);
   message1.add_repeated_int32(1);
   message1.add_repeated_int32(2);
   message1.add_repeated_string("a");
   message1.add_repeated_string("b");
   message1.add_repeated_nested_message()->set_bb(7);
   message1.add_repeated_nested_message()->set_bb(8);
-  message1.add_repeated_nested_enum(UNITTEST::TestAllTypes::FOO);
-  message1.add_repeated_nested_enum(UNITTEST::TestAllTypes::BAR);
+  message1.add_repeated_nested_enum(UNITTEST::TestAllTypes_NestedEnum::FOO);
+  message1.add_repeated_nested_enum(UNITTEST::TestAllTypes_NestedEnum::BAR);
 
   message2.set_optional_int32(456);
   message2.set_optional_string("def");
   message2.mutable_optional_nested_message()->set_bb(2);
-  message2.set_optional_nested_enum(UNITTEST::TestAllTypes::BAR);
+  message2.set_optional_nested_enum(UNITTEST::TestAllTypes_NestedEnum::BAR);
   message2.add_repeated_int32(3);
   message2.add_repeated_string("c");
   message2.add_repeated_nested_message()->set_bb(9);
-  message2.add_repeated_nested_enum(UNITTEST::TestAllTypes::BAZ);
+  message2.add_repeated_nested_enum(UNITTEST::TestAllTypes_NestedEnum::BAZ);
 
   message1.Swap(&message2);
 
   EXPECT_EQ(456, message1.optional_int32());
   EXPECT_EQ("def", message1.optional_string());
   EXPECT_EQ(2, message1.optional_nested_message().bb());
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message1.optional_nested_enum());
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message1.optional_nested_enum());
   ASSERT_EQ(1, message1.repeated_int32_size());
   EXPECT_EQ(3, message1.repeated_int32(0));
   ASSERT_EQ(1, message1.repeated_string_size());
@@ -476,12 +476,12 @@ TEST(GENERATED_MESSAGE_TEST_NAME, SwapWithOther) {
   ASSERT_EQ(1, message1.repeated_nested_message_size());
   EXPECT_EQ(9, message1.repeated_nested_message(0).bb());
   ASSERT_EQ(1, message1.repeated_nested_enum_size());
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ, message1.repeated_nested_enum(0));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ, message1.repeated_nested_enum(0));
 
   EXPECT_EQ(123, message2.optional_int32());
   EXPECT_EQ("abc", message2.optional_string());
   EXPECT_EQ(1, message2.optional_nested_message().bb());
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO, message2.optional_nested_enum());
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO, message2.optional_nested_enum());
   ASSERT_EQ(2, message2.repeated_int32_size());
   EXPECT_EQ(1, message2.repeated_int32(0));
   EXPECT_EQ(2, message2.repeated_int32(1));
@@ -492,8 +492,8 @@ TEST(GENERATED_MESSAGE_TEST_NAME, SwapWithOther) {
   EXPECT_EQ(7, message2.repeated_nested_message(0).bb());
   EXPECT_EQ(8, message2.repeated_nested_message(1).bb());
   ASSERT_EQ(2, message2.repeated_nested_enum_size());
-  EXPECT_EQ(UNITTEST::TestAllTypes::FOO, message2.repeated_nested_enum(0));
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAR, message2.repeated_nested_enum(1));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::FOO, message2.repeated_nested_enum(0));
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAR, message2.repeated_nested_enum(1));
 }
 
 TEST(GENERATED_MESSAGE_TEST_NAME, ADLSwap) {
@@ -991,18 +991,18 @@ TEST(GENERATED_ENUM_TEST_NAME, EnumValuesAsSwitchCases) {
   // doesn't actually do anything, the proof that it works is that it
   // compiles.
   int i =0;
-  UNITTEST::TestAllTypes::NestedEnum a = UNITTEST::TestAllTypes::BAR;
+  UNITTEST::TestAllTypes::NestedEnum a = UNITTEST::TestAllTypes_NestedEnum::BAR;
   switch (a) {
-    case UNITTEST::TestAllTypes::FOO:
+    case UNITTEST::TestAllTypes_NestedEnum::FOO:
       i = 1;
       break;
-    case UNITTEST::TestAllTypes::BAR:
+    case UNITTEST::TestAllTypes_NestedEnum::BAR:
       i = 2;
       break;
-    case UNITTEST::TestAllTypes::BAZ:
+    case UNITTEST::TestAllTypes_NestedEnum::BAZ:
       i = 3;
       break;
-    case UNITTEST::TestAllTypes::NEG:
+    case UNITTEST::TestAllTypes_NestedEnum::NEG:
       i = -1;
       break;
     // no default case:  We want to make sure the compiler recognizes that
@@ -1033,9 +1033,9 @@ TEST(GENERATED_ENUM_TEST_NAME, IsValidValue) {
 }
 
 TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
-  EXPECT_EQ(UNITTEST::TestAllTypes::NEG,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::NEG,
             UNITTEST::TestAllTypes::NestedEnum_MIN);
-  EXPECT_EQ(UNITTEST::TestAllTypes::BAZ,
+  EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ,
             UNITTEST::TestAllTypes::NestedEnum_MAX);
   EXPECT_EQ(4, UNITTEST::TestAllTypes::NestedEnum_ARRAYSIZE);
 
@@ -1467,7 +1467,7 @@ TEST_F(OneofTest, SettingOneFieldClearsOthers) {
   EXPECT_TRUE(message.has_foo_bytes());
   TestUtil::ExpectAtMostOneFieldSetInOneof(message);
 
-  message.set_foo_enum(UNITTEST::TestOneof2::FOO);
+  message.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::FOO);
   EXPECT_TRUE(message.has_foo_enum());
   TestUtil::ExpectAtMostOneFieldSetInOneof(message);
 
@@ -1494,7 +1494,7 @@ TEST_F(OneofTest, EnumCases) {
   ExpectEnumCasesWork(message);
   message.set_foo_bytes("moo");
   ExpectEnumCasesWork(message);
-  message.set_foo_enum(UNITTEST::TestOneof2::FOO);
+  message.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::FOO);
   ExpectEnumCasesWork(message);
   message.mutable_foo_message()->set_moo_int(234);
   ExpectEnumCasesWork(message);
@@ -1518,9 +1518,9 @@ TEST_F(OneofTest, EnumType) {
   // Unset field returns default value
   EXPECT_EQ(message.foo_enum(), 1);
 
-  message.set_foo_enum(UNITTEST::TestOneof2::FOO);
+  message.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::FOO);
   EXPECT_TRUE(message.has_foo_enum());
-  EXPECT_EQ(message.foo_enum(), UNITTEST::TestOneof2::FOO);
+  EXPECT_EQ(message.foo_enum(), UNITTEST::TestOneof2_NestedEnum::FOO);
   message.clear_foo_enum();
   EXPECT_FALSE(message.has_foo_enum());
 }
@@ -1774,17 +1774,17 @@ TEST_F(OneofTest, CopyConstructor) {
 
 TEST_F(OneofTest, CopyFrom) {
   UNITTEST::TestOneof2 message1, message2;
-  message1.set_foo_enum(UNITTEST::TestOneof2::BAR);
+  message1.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::BAR);
   EXPECT_TRUE(message1.has_foo_enum());
 
   message2.CopyFrom(message1);
   EXPECT_TRUE(message2.has_foo_enum());
-  EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2::BAR);
+  EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2_NestedEnum::BAR);
 
   // Copying from self should be a no-op.
   message2.CopyFrom(message2);
   EXPECT_TRUE(message2.has_foo_enum());
-  EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2::BAR);
+  EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2_NestedEnum::BAR);
 }
 
 TEST_F(OneofTest, CopyAssignmentOperator) {
@@ -1863,14 +1863,14 @@ EXPECT_EQ(message2.foo_int(), 123);
   {
     UNITTEST::TestOneof2 message1, message2;
     std::string data;
-    message1.set_foo_enum(UNITTEST::TestOneof2::FOO);
+    message1.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::FOO);
     int size = message1.ByteSizeLong();
     data.resize(size);
     uint8_t* start = reinterpret_cast<uint8_t*>(::shark::string_as_array(&data));
     uint8_t* end = message1.SerializeWithCachedSizesToArray(start);
     EXPECT_EQ(size, end - start);
     EXPECT_TRUE(message2.ParseFromString(data));
-    EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2::FOO);
+    EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2_NestedEnum::FOO);
   }
 
   // Message
@@ -1975,7 +1975,7 @@ data.resize(size);
   {
     UNITTEST::TestOneof2 message1, message2;
     std::string data;
-    message1.set_foo_enum(UNITTEST::TestOneof2::FOO);
+    message1.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::FOO);
     int size = message1.ByteSizeLong();
     data.resize(size);
 
@@ -1989,7 +1989,7 @@ data.resize(size);
     }
 
     EXPECT_TRUE(message2.ParseFromString(data));
-    EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2::FOO);
+    EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2_NestedEnum::FOO);
   }
 
   // Message
@@ -2056,11 +2056,11 @@ TEST_F(OneofTest, MergeFrom) {
   EXPECT_TRUE(message2.has_foo_bytes());
   EXPECT_EQ(message2.foo_bytes(), "moo");
 
-  message1.set_foo_enum(UNITTEST::TestOneof2::FOO);
+  message1.set_foo_enum(UNITTEST::TestOneof2_NestedEnum::FOO);
   message2.MergeFrom(message1);
   TestUtil::ExpectAtMostOneFieldSetInOneof(message2);
   EXPECT_TRUE(message2.has_foo_enum());
-  EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2::FOO);
+  EXPECT_EQ(message2.foo_enum(), UNITTEST::TestOneof2_NestedEnum::FOO);
 
   message1.mutable_foo_message()->set_moo_int(234);
   message2.MergeFrom(message1);

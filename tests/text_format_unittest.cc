@@ -165,8 +165,8 @@ namespace shark {
             proto_.add_repeated_string("bar");
             proto_.add_repeated_nested_message()->set_bb(2);
             proto_.add_repeated_nested_message()->set_bb(3);
-            proto_.add_repeated_nested_enum(unittest::TestAllTypes::FOO);
-            proto_.add_repeated_nested_enum(unittest::TestAllTypes::BAR);
+            proto_.add_repeated_nested_enum(unittest::TestAllTypes_NestedEnum::FOO);
+            proto_.add_repeated_nested_enum(unittest::TestAllTypes_NestedEnum::BAR);
 
             TextFormat::Printer printer;
             printer.SetUseShortRepeatedPrimitives(true);
@@ -806,10 +806,10 @@ namespace shark {
         TEST_F(TextFormatTest, ParseEnumFieldFromNumber) {
             // Create a parse string with a numerical value for an enum field.
             std::string parse_string = strings::Substitute("optional_nested_enum: $0",
-                static_cast<int>(unittest::TestAllTypes::BAZ));
+                static_cast<int>(unittest::TestAllTypes_NestedEnum::BAZ));
             EXPECT_TRUE(TextFormat::ParseFromString(parse_string, &proto_));
             EXPECT_TRUE(proto_.has_optional_nested_enum());
-            EXPECT_EQ(unittest::TestAllTypes::BAZ, proto_.optional_nested_enum());
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::BAZ, proto_.optional_nested_enum());
         }
 
         TEST_F(TextFormatTest, ParseEnumFieldFromNegativeNumber) {
@@ -890,9 +890,9 @@ namespace shark {
             EXPECT_EQ(789, proto_.repeated_int32(2));
 
             ASSERT_EQ(3, proto_.repeated_nested_enum_size());
-            EXPECT_EQ(unittest::TestAllTypes::FOO, proto_.repeated_nested_enum(0));
-            EXPECT_EQ(unittest::TestAllTypes::BAR, proto_.repeated_nested_enum(1));
-            EXPECT_EQ(unittest::TestAllTypes::BAZ, proto_.repeated_nested_enum(2));
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::FOO, proto_.repeated_nested_enum(0));
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::BAR, proto_.repeated_nested_enum(1));
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::BAZ, proto_.repeated_nested_enum(2));
 
             ASSERT_EQ(2, proto_.repeated_string_size());
             EXPECT_EQ("foo", proto_.repeated_string(0));
@@ -960,9 +960,9 @@ namespace shark {
             EXPECT_EQ(789, proto_.repeated_int32(2));
 
             ASSERT_EQ(3, proto_.repeated_nested_enum_size());
-            EXPECT_EQ(unittest::TestAllTypes::FOO, proto_.repeated_nested_enum(0));
-            EXPECT_EQ(unittest::TestAllTypes::BAR, proto_.repeated_nested_enum(1));
-            EXPECT_EQ(unittest::TestAllTypes::BAZ, proto_.repeated_nested_enum(2));
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::FOO, proto_.repeated_nested_enum(0));
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::BAR, proto_.repeated_nested_enum(1));
+            EXPECT_EQ(unittest::TestAllTypes_NestedEnum::BAZ, proto_.repeated_nested_enum(2));
 
             ASSERT_EQ(2, proto_.repeated_string_size());
             EXPECT_EQ("foo", proto_.repeated_string(0));
@@ -1564,9 +1564,9 @@ namespace shark {
             EXPECT_INVALID(string, "hello"); // without quote for value
 
             // enum
-            EXPECT_FIELD(nested_enum, unittest::TestAllTypes::BAR, "BAR");
-            EXPECT_FIELD(nested_enum, unittest::TestAllTypes::BAZ,
-                StrCat(static_cast<int>(unittest::TestAllTypes::BAZ)));
+            EXPECT_FIELD(nested_enum, unittest::TestAllTypes_NestedEnum::BAR, "BAR");
+            EXPECT_FIELD(nested_enum, unittest::TestAllTypes_NestedEnum::BAZ,
+                StrCat(static_cast<int>(unittest::TestAllTypes_NestedEnum::BAZ)));
             EXPECT_INVALID(nested_enum, "FOOBAR");
 
             // message

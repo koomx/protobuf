@@ -444,7 +444,7 @@ TEST_F(ParserValidationErrorTest, EnumValueNameError) {
       "  BAR = 1;\n"
       "  BAR = 1;\n"
       "}\n",
-      "2:2: \"BAR\" is already defined.\n");
+      "2:2: \"BAR\" is already defined in \"Foo\".\n");
 }
 
 TEST_F(ParserValidationErrorTest, EnumValueAliasError) {
@@ -453,7 +453,7 @@ TEST_F(ParserValidationErrorTest, EnumValueAliasError) {
       "  BAR = 1;\n"
       "  BAZ = 1;\n"
       "}\n",
-      "2:8: \"BAZ\" uses the same enum value as \"BAR\". If this is "
+      "2:8: \"Foo.BAZ\" uses the same enum value as \"Foo.BAR\". If this is "
       "intended, set 'option allow_alias = true;' to the enum "
       "definition.\n");
 }

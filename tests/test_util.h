@@ -134,15 +134,15 @@ inline TestUtil::ReflectionTester::ReflectionTester(
   foreign_c_ = pool->FindFieldByName(package + ".ForeignMessage.c");
   import_d_ = pool->FindFieldByName(import_package + ".ImportMessage.d");
   import_e_ = pool->FindFieldByName(import_package + ".PublicImportMessage.e");
-  nested_foo_ = pool->FindEnumValueByName(package + ".TestAllTypes.FOO");
-  nested_bar_ = pool->FindEnumValueByName(package + ".TestAllTypes.BAR");
-  nested_baz_ = pool->FindEnumValueByName(package + ".TestAllTypes.BAZ");
-  foreign_foo_ = pool->FindEnumValueByName(package + ".FOREIGN_FOO");
-  foreign_bar_ = pool->FindEnumValueByName(package + ".FOREIGN_BAR");
-  foreign_baz_ = pool->FindEnumValueByName(package + ".FOREIGN_BAZ");
-  import_foo_ = pool->FindEnumValueByName(import_package + ".IMPORT_FOO");
-  import_bar_ = pool->FindEnumValueByName(import_package + ".IMPORT_BAR");
-  import_baz_ = pool->FindEnumValueByName(import_package + ".IMPORT_BAZ");
+  nested_foo_ = pool->FindEnumValueByName(package + ".TestAllTypes.NestedEnum.FOO");
+  nested_bar_ = pool->FindEnumValueByName(package + ".TestAllTypes.NestedEnum.BAR");
+  nested_baz_ = pool->FindEnumValueByName(package + ".TestAllTypes.NestedEnum.BAZ");
+  foreign_foo_ = pool->FindEnumValueByName(package + ".ForeignEnum.FOREIGN_FOO");
+  foreign_bar_ = pool->FindEnumValueByName(package + ".ForeignEnum.FOREIGN_BAR");
+  foreign_baz_ = pool->FindEnumValueByName(package + ".ForeignEnum.FOREIGN_BAZ");
+  import_foo_ = pool->FindEnumValueByName(import_package + ".ImportEnum.IMPORT_FOO");
+  import_bar_ = pool->FindEnumValueByName(import_package + ".ImportEnum.IMPORT_BAR");
+  import_baz_ = pool->FindEnumValueByName(import_package + ".ImportEnum.IMPORT_BAZ");
 
   EXPECT_TRUE(nested_b_ != nullptr);
   EXPECT_TRUE(foreign_c_ != nullptr);

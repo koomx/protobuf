@@ -456,13 +456,13 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
     TestEmptyMessage empty_message;
     UnknownFieldSet* unknown_fields = empty_message.mutable_unknown_fields();
     unknown_fields->AddVarint(singular_field->number(),
-                              static_cast<uint64_t>(TestAllTypes::BAR));
+                              static_cast<uint64_t>(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR));
     unknown_fields->AddVarint(singular_field->number(), 5);  // not valid
     unknown_fields->AddVarint(repeated_field->number(),
-                              static_cast<uint64_t>(TestAllTypes::FOO));
+                              static_cast<uint64_t>(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO));
     unknown_fields->AddVarint(repeated_field->number(), 4);  // not valid
     unknown_fields->AddVarint(repeated_field->number(),
-                              static_cast<uint64_t>(TestAllTypes::BAZ));
+                              static_cast<uint64_t>(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ));
     unknown_fields->AddVarint(repeated_field->number(), 6);  // not valid
     empty_message.SerializeToString(&data);
   }
@@ -472,9 +472,9 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
     ASSERT_TRUE(message.ParseFromString(data));
     EXPECT_EQ(5, message.optional_nested_enum());
     ASSERT_EQ(4, message.repeated_nested_enum_size());
-    EXPECT_EQ(TestAllTypes::FOO, message.repeated_nested_enum(0));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO, message.repeated_nested_enum(0));
     EXPECT_EQ(4, message.repeated_nested_enum(1));
-    EXPECT_EQ(TestAllTypes::BAZ, message.repeated_nested_enum(2));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, message.repeated_nested_enum(2));
     EXPECT_EQ(6, message.repeated_nested_enum(3));
 
     const UnknownFieldSet& unknown_fields = message.unknown_fields();
@@ -489,10 +489,10 @@ TEST_F(UnknownFieldSetTest, UnknownEnumValue) {
     ASSERT_TRUE(message.ParseFromString(data));
     EXPECT_EQ(5, message.GetExtension(optional_nested_enum_extension));
     ASSERT_EQ(4, message.ExtensionSize(repeated_nested_enum_extension));
-    EXPECT_EQ(TestAllTypes::FOO,
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO,
               message.GetExtension(repeated_nested_enum_extension, 0));
     EXPECT_EQ(4, message.GetExtension(repeated_nested_enum_extension, 1));
-    EXPECT_EQ(TestAllTypes::BAZ,
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ,
               message.GetExtension(repeated_nested_enum_extension, 2));
     EXPECT_EQ(6, message.GetExtension(repeated_nested_enum_extension, 3));
 

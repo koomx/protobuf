@@ -293,16 +293,6 @@ void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
   Formatter format(printer, variables_);
   format("typedef $classname$ $resolved_name$;\n");
 
-  for (int j = 0; j < descriptor_->value_count(); j++) {
-    std::string deprecated_attr =
-        DeprecatedAttribute(options_, descriptor_->value(j));
-    format(
-        "$1$static constexpr $resolved_name$ ${2$$3$$}$ =\n"
-        "  $classname$::$3$;\n",
-        deprecated_attr, descriptor_->value(j),
-        EnumValueName(descriptor_->value(j)));
-  }
-
   format(
       "static inline bool $nested_name$_IsValid(int value) {\n"
       "  return $classname$_IsValid(value);\n"
@@ -479,32 +469,6 @@ void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
         "  return success;\n"
         "}\n",
         descriptor_->value_count());
-  }
-
-  if (descriptor_->containing_type() != nullptr) {
-    std::string parent = ClassName(descriptor_->containing_type(), false);
-    // Before C++17, we must define the static constants which were
-    // declared in the header, to give the linker a place to put them.
-    // But MSVC++ pre-2015 and post-2017 (version 15.5+) insists that we not.
-    format(
-        "#if (__cplusplus < 201703) && "
-        "(!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))\n");
-
-    for (int i = 0; i < descriptor_->value_count(); i++) {
-      format("constexpr $classname$ $1$::$2$;\n", parent,
-             EnumValueName(descriptor_->value(i)));
-    }
-    format(
-        "constexpr $classname$ $1$::$nested_name$_MIN;\n"
-        "constexpr $classname$ $1$::$nested_name$_MAX;\n",
-        parent);
-    if (generate_array_size_) {
-      format("constexpr int $1$::$nested_name$_ARRAYSIZE;\n", parent);
-    }
-
-    format(
-        "#endif  // (__cplusplus < 201703) && "
-        "(!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))\n");
   }
 }
 

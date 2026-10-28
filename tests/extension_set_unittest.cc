@@ -765,7 +765,7 @@ TEST(ExtensionSetTest, SpaceUsedExcludingSelf) {
     unittest::TestAllExtensions message;
     const int base_size = message.SpaceUsedLong();
     message.SetExtension(unittest::optional_nested_enum_extension,
-                         unittest::TestAllTypes::FOO);
+                         unittest::TestAllTypes_NestedEnum::FOO);
     int min_expected_size =
         base_size +
         sizeof(message.GetExtension(unittest::optional_nested_enum_extension));
@@ -851,7 +851,7 @@ TEST(ExtensionSetTest, SpaceUsedExcludingSelf) {
   TEST_REPEATED_EXTENSIONS_SPACE_USED(double, double, 112);
   TEST_REPEATED_EXTENSIONS_SPACE_USED(bool, bool, true);
   TEST_REPEATED_EXTENSIONS_SPACE_USED(nested_enum, int,
-                                      unittest::TestAllTypes::FOO);
+                                      unittest::TestAllTypes_NestedEnum::FOO);
 #undef TEST_REPEATED_EXTENSIONS_SPACE_USED
   // Repeated strings
   {
@@ -1222,7 +1222,7 @@ TEST(ExtensionSetTest, DynamicExtensions) {
     message.set_scalar_extension(123);
     message.set_enum_extension(unittest::ForeignEnum::FOREIGN_BAR);
     message.set_dynamic_enum_extension(
-        unittest::TestDynamicExtensions::DYNAMIC_BAZ);
+        unittest::TestDynamicExtensions_DynamicEnumType::DYNAMIC_BAZ);
     message.mutable_message_extension()->set_c(456);
     message.mutable_dynamic_message_extension()->set_dynamic_field(789);
     message.add_repeated_extension("foo");

@@ -487,7 +487,7 @@ TEST_P(ProtostreamObjectSourceTest,
 
 TEST_P(ProtostreamObjectSourceTest, LowerCamelEnumOutputMacroCase) {
   Book book;
-  book.set_type(Book::ACTION_AND_ADVENTURE);
+  book.set_type(proto_util_converter::testing::Book_Type::ACTION_AND_ADVENTURE);
 
   UseLowerCamelForEnums();
 
@@ -497,7 +497,7 @@ TEST_P(ProtostreamObjectSourceTest, LowerCamelEnumOutputMacroCase) {
 
 TEST_P(ProtostreamObjectSourceTest, LowerCamelEnumOutputSnakeCase) {
   Book book;
-  book.set_type(Book::arts_and_photography);
+  book.set_type(proto_util_converter::testing::Book_Type::arts_and_photography);
 
   UseLowerCamelForEnums();
 
@@ -507,7 +507,7 @@ TEST_P(ProtostreamObjectSourceTest, LowerCamelEnumOutputSnakeCase) {
 
 TEST_P(ProtostreamObjectSourceTest, LowerCamelEnumOutputWithNumber) {
   Book book;
-  book.set_type(Book::I18N_Tech);
+  book.set_type(proto_util_converter::testing::Book_Type::I18N_Tech);
 
   UseLowerCamelForEnums();
 
@@ -517,7 +517,7 @@ TEST_P(ProtostreamObjectSourceTest, LowerCamelEnumOutputWithNumber) {
 
 TEST_P(ProtostreamObjectSourceTest, EnumCaseIsUnchangedByDefault) {
   Book book;
-  book.set_type(Book::ACTION_AND_ADVENTURE);
+  book.set_type(proto_util_converter::testing::Book_Type::ACTION_AND_ADVENTURE);
   ow_.StartObject("")
       ->RenderString("type", "ACTION_AND_ADVENTURE")
       ->EndObject();
@@ -526,7 +526,7 @@ TEST_P(ProtostreamObjectSourceTest, EnumCaseIsUnchangedByDefault) {
 
 TEST_P(ProtostreamObjectSourceTest, UseIntsForEnumsTest) {
   Book book;
-  book.set_type(Book::ACTION_AND_ADVENTURE);
+  book.set_type(proto_util_converter::testing::Book_Type::ACTION_AND_ADVENTURE);
 
   UseIntsForEnums();
 
@@ -758,7 +758,7 @@ TEST_P(ProtostreamObjectSourceAnysTest, LowerCamelEnumOutputSnakeCase) {
   ::shark::Any* any = out.mutable_any();
 
   Book book;
-  book.set_type(Book::arts_and_photography);
+  book.set_type(proto_util_converter::testing::Book_Type::arts_and_photography);
   any->PackFrom(book);
 
   UseLowerCamelForEnums();
@@ -779,7 +779,7 @@ TEST_P(ProtostreamObjectSourceAnysTest, UseIntsForEnumsTest) {
   ::shark::Any* any = out.mutable_any();
 
   Book book;
-  book.set_type(Book::ACTION_AND_ADVENTURE);
+  book.set_type(proto_util_converter::testing::Book_Type::ACTION_AND_ADVENTURE);
   any->PackFrom(book);
 
   UseIntsForEnums();

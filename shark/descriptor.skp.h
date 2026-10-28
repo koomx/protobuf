@@ -2191,52 +2191,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
   // nested types ----------------------------------------------------
 
   typedef FieldDescriptorProto_Type Type;
-  static constexpr Type TYPE_BOOL =
-    FieldDescriptorProto_Type::TYPE_BOOL;
-  static constexpr Type TYPE_INT8 =
-    FieldDescriptorProto_Type::TYPE_INT8;
-  static constexpr Type TYPE_UINT8 =
-    FieldDescriptorProto_Type::TYPE_UINT8;
-  static constexpr Type TYPE_INT16 =
-    FieldDescriptorProto_Type::TYPE_INT16;
-  static constexpr Type TYPE_UINT16 =
-    FieldDescriptorProto_Type::TYPE_UINT16;
-  static constexpr Type TYPE_INT32 =
-    FieldDescriptorProto_Type::TYPE_INT32;
-  static constexpr Type TYPE_UINT32 =
-    FieldDescriptorProto_Type::TYPE_UINT32;
-  static constexpr Type TYPE_INT64 =
-    FieldDescriptorProto_Type::TYPE_INT64;
-  static constexpr Type TYPE_UINT64 =
-    FieldDescriptorProto_Type::TYPE_UINT64;
-  static constexpr Type TYPE_FLOAT =
-    FieldDescriptorProto_Type::TYPE_FLOAT;
-  static constexpr Type TYPE_FLOAT16 =
-    FieldDescriptorProto_Type::TYPE_FLOAT16;
-  static constexpr Type TYPE_FLOAT8 =
-    FieldDescriptorProto_Type::TYPE_FLOAT8;
-  static constexpr Type TYPE_DOUBLE =
-    FieldDescriptorProto_Type::TYPE_DOUBLE;
-  static constexpr Type TYPE_ENUM =
-    FieldDescriptorProto_Type::TYPE_ENUM;
-  static constexpr Type TYPE_MESSAGE =
-    FieldDescriptorProto_Type::TYPE_MESSAGE;
-  static constexpr Type TYPE_STRING =
-    FieldDescriptorProto_Type::TYPE_STRING;
-  static constexpr Type TYPE_BYTES =
-    FieldDescriptorProto_Type::TYPE_BYTES;
-  static constexpr Type TYPE_FIXED32 =
-    FieldDescriptorProto_Type::TYPE_FIXED32;
-  static constexpr Type TYPE_FIXED64 =
-    FieldDescriptorProto_Type::TYPE_FIXED64;
-  static constexpr Type TYPE_SFIXED32 =
-    FieldDescriptorProto_Type::TYPE_SFIXED32;
-  static constexpr Type TYPE_SFIXED64 =
-    FieldDescriptorProto_Type::TYPE_SFIXED64;
-  static constexpr Type TYPE_SINT32 =
-    FieldDescriptorProto_Type::TYPE_SINT32;
-  static constexpr Type TYPE_SINT64 =
-    FieldDescriptorProto_Type::TYPE_SINT64;
   static inline bool Type_IsValid(int value) {
     return FieldDescriptorProto_Type_IsValid(value);
   }
@@ -2263,12 +2217,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
   }
 
   typedef FieldDescriptorProto_Label Label;
-  static constexpr Label LABEL_OPTIONAL =
-    FieldDescriptorProto_Label::LABEL_OPTIONAL;
-  static constexpr Label LABEL_REQUIRED =
-    FieldDescriptorProto_Label::LABEL_REQUIRED;
-  static constexpr Label LABEL_REPEATED =
-    FieldDescriptorProto_Label::LABEL_REPEATED;
   static inline bool Label_IsValid(int value) {
     return FieldDescriptorProto_Label_IsValid(value);
   }
@@ -3908,12 +3856,6 @@ class SHARK_EXPORT FileOptions final :
   // nested types ----------------------------------------------------
 
   typedef FileOptions_OptimizeMode OptimizeMode;
-  static constexpr OptimizeMode SPEED =
-    FileOptions_OptimizeMode::SPEED;
-  static constexpr OptimizeMode CODE_SIZE =
-    FileOptions_OptimizeMode::CODE_SIZE;
-  static constexpr OptimizeMode LITE_RUNTIME =
-    FileOptions_OptimizeMode::LITE_RUNTIME;
   static inline bool OptimizeMode_IsValid(int value) {
     return FileOptions_OptimizeMode_IsValid(value);
   }
@@ -4809,12 +4751,6 @@ class SHARK_EXPORT FieldOptions final :
   // nested types ----------------------------------------------------
 
   typedef FieldOptions_CType CType;
-  static constexpr CType STRING =
-    FieldOptions_CType::STRING;
-  static constexpr CType CORD =
-    FieldOptions_CType::CORD;
-  static constexpr CType STRING_PIECE =
-    FieldOptions_CType::STRING_PIECE;
   static inline bool CType_IsValid(int value) {
     return FieldOptions_CType_IsValid(value);
   }
@@ -4841,12 +4777,6 @@ class SHARK_EXPORT FieldOptions final :
   }
 
   typedef FieldOptions_JSType JSType;
-  static constexpr JSType JS_NORMAL =
-    FieldOptions_JSType::JS_NORMAL;
-  static constexpr JSType JS_STRING =
-    FieldOptions_JSType::JS_STRING;
-  static constexpr JSType JS_NUMBER =
-    FieldOptions_JSType::JS_NUMBER;
   static inline bool JSType_IsValid(int value) {
     return FieldOptions_JSType_IsValid(value);
   }
@@ -6852,12 +6782,6 @@ class SHARK_EXPORT MethodOptions final :
   // nested types ----------------------------------------------------
 
   typedef MethodOptions_IdempotencyLevel IdempotencyLevel;
-  static constexpr IdempotencyLevel IDEMPOTENCY_UNKNOWN =
-    MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
-  static constexpr IdempotencyLevel NO_SIDE_EFFECTS =
-    MethodOptions_IdempotencyLevel::NO_SIDE_EFFECTS;
-  static constexpr IdempotencyLevel IDEMPOTENT =
-    MethodOptions_IdempotencyLevel::IDEMPOTENT;
   static inline bool IdempotencyLevel_IsValid(int value) {
     return MethodOptions_IdempotencyLevel_IsValid(value);
   }

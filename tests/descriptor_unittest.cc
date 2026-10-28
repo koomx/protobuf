@@ -326,8 +326,8 @@ class FileDescriptorTest : public testing::Test {
     AddEnumValue(AddEnum(&foo_file, "FooEnum"), "FOO_ENUM_VALUE", 1);
     AddService(&foo_file, "FooService");
     AddExtension(&foo_file, "FooMessage", "foo_extension", 1,
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
 
     FileDescriptorProto bar_file;
     bar_file.set_name("bar.shark");
@@ -337,8 +337,8 @@ class FileDescriptorTest : public testing::Test {
     AddEnumValue(AddEnum(&bar_file, "BarEnum"), "BAR_ENUM_VALUE", 1);
     AddService(&bar_file, "BarService");
     AddExtension(&bar_file, "bar_package.BarMessage", "bar_extension", 1,
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
 
     FileDescriptorProto baz_file;
     baz_file.set_name("baz.shark");
@@ -437,8 +437,8 @@ TEST_F(FileDescriptorTest, FindEnumTypeByName) {
 }
 
 TEST_F(FileDescriptorTest, FindEnumValueByName) {
-  EXPECT_EQ(foo_enum_value_, foo_file_->FindEnumValueByName("FOO_ENUM_VALUE"));
-  EXPECT_EQ(bar_enum_value_, bar_file_->FindEnumValueByName("BAR_ENUM_VALUE"));
+  EXPECT_EQ(foo_enum_value_, foo_file_->FindEnumValueByName("FooEnum.FOO_ENUM_VALUE"));
+  EXPECT_EQ(bar_enum_value_, bar_file_->FindEnumValueByName("FooEnum.BAR_ENUM_VALUE"));
 
   EXPECT_TRUE(foo_file_->FindEnumValueByName("BAR_ENUM_VALUE") == nullptr);
   EXPECT_TRUE(bar_file_->FindEnumValueByName("FOO_ENUM_VALUE") == nullptr);
@@ -661,16 +661,16 @@ class DescriptorTest : public testing::Test {
     AddEmptyEnum(&foo_file, "TestEnum");
 
     DescriptorProto* message = AddMessage(&foo_file, "TestMessage");
-    AddField(message, "foo", 1, FieldDescriptorProto::LABEL_REQUIRED,
-             FieldDescriptorProto::TYPE_STRING);
-    AddField(message, "bar", 6, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_ENUM)
+    AddField(message, "foo", 1, FieldDescriptorProto_Label::LABEL_REQUIRED,
+             FieldDescriptorProto_Type::TYPE_STRING);
+    AddField(message, "bar", 6, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_ENUM)
         ->set_type_name("TestEnum");
-    AddField(message, "baz", 500000000, FieldDescriptorProto::LABEL_REPEATED,
-             FieldDescriptorProto::TYPE_MESSAGE)
+    AddField(message, "baz", 500000000, FieldDescriptorProto_Label::LABEL_REPEATED,
+             FieldDescriptorProto_Type::TYPE_MESSAGE)
         ->set_type_name("TestForeign");
-    AddField(message, "moo", 15, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_MESSAGE)
+    AddField(message, "moo", 15, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_MESSAGE)
         ->set_type_name("TestForeign");
 
     FileDescriptorProto bar_file;
@@ -678,48 +678,48 @@ class DescriptorTest : public testing::Test {
     bar_file.set_package("corge.grault");
 
     DescriptorProto* message2 = AddMessage(&bar_file, "TestMessage2");
-    AddField(message2, "foo", 1, FieldDescriptorProto::LABEL_REQUIRED,
-             FieldDescriptorProto::TYPE_STRING);
-    AddField(message2, "bar", 2, FieldDescriptorProto::LABEL_REQUIRED,
-             FieldDescriptorProto::TYPE_STRING);
-    AddField(message2, "mooo", 6, FieldDescriptorProto::LABEL_REQUIRED,
-             FieldDescriptorProto::TYPE_STRING);
+    AddField(message2, "foo", 1, FieldDescriptorProto_Label::LABEL_REQUIRED,
+             FieldDescriptorProto_Type::TYPE_STRING);
+    AddField(message2, "bar", 2, FieldDescriptorProto_Label::LABEL_REQUIRED,
+             FieldDescriptorProto_Type::TYPE_STRING);
+    AddField(message2, "mooo", 6, FieldDescriptorProto_Label::LABEL_REQUIRED,
+             FieldDescriptorProto_Type::TYPE_STRING);
 
     FileDescriptorProto map_file;
     map_file.set_name("map.shark");
     DescriptorProto* message3 = AddMessage(&map_file, "TestMessage3");
 
     DescriptorProto* entry = AddNestedMessage(message3, "MapInt32Int32Entry");
-    AddField(entry, "key", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(entry, "value", 2, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
+    AddField(entry, "key", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(entry, "value", 2, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
     entry->mutable_options()->set_map_entry(true);
 
     AddField(message3, "map_int32_int32", 1,
-             FieldDescriptorProto::LABEL_REPEATED,
-             FieldDescriptorProto::TYPE_MESSAGE)
+             FieldDescriptorProto_Label::LABEL_REPEATED,
+             FieldDescriptorProto_Type::TYPE_MESSAGE)
         ->set_type_name("MapInt32Int32Entry");
 
     FileDescriptorProto json_file;
     json_file.set_name("json.shark");
     json_file.set_syntax("proto2");
     DescriptorProto* message4 = AddMessage(&json_file, "TestMessage4");
-    AddField(message4, "field_name1", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message4, "fieldName2", 2, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message4, "FieldName3", 3, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message4, "_field_name4", 4, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message4, "FIELD_NAME5", 5, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message4, "field_name6", 6, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32)
+    AddField(message4, "field_name1", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message4, "fieldName2", 2, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message4, "FieldName3", 3, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message4, "_field_name4", 4, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message4, "FIELD_NAME5", 5, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message4, "field_name6", 6, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32)
         ->set_json_name("@type");
-    AddField(message4, "fieldname7", 7, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
+    AddField(message4, "fieldname7", 7, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
 
     // Build the descriptors and get the pointers.
     foo_file_ = pool_.BuildFile(foo_file);
@@ -862,8 +862,8 @@ TEST_F(DescriptorTest, FieldNameDedupJsonEqFull) {
   proto.set_name("file");
   auto* message = AddMessage(&proto, "Name1");
   auto* field =
-      AddField(message, "Name2", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_INT32);
+      AddField(message, "Name2", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_INT32);
   field->set_json_name("Name1.Name2");
   auto* file = pool_.BuildFile(proto);
   EXPECT_EQ(file->message_type(0)->name(), "Name1");
@@ -1139,18 +1139,18 @@ class OneofDescriptorTest : public testing::Test {
     oneof_message->add_oneof_decl()->set_name("foo");
     oneof_message->add_oneof_decl()->set_name("bar");
 
-    AddField(oneof_message, "a", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(oneof_message, "b", 2, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_STRING);
+    AddField(oneof_message, "a", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(oneof_message, "b", 2, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_STRING);
     oneof_message->mutable_field(1)->set_oneof_index(0);
-    AddField(oneof_message, "c", 3, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_MESSAGE);
+    AddField(oneof_message, "c", 3, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_MESSAGE);
     oneof_message->mutable_field(2)->set_oneof_index(0);
     oneof_message->mutable_field(2)->set_type_name("TestOneof");
 
-    AddField(oneof_message, "d", 4, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_FLOAT);
+    AddField(oneof_message, "d", 4, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_FLOAT);
     oneof_message->mutable_field(3)->set_oneof_index(1);
 
     // Build the descriptors and get the pointers.
@@ -1214,50 +1214,50 @@ class StylizedFieldNamesTest : public testing::Test {
     AddExtensionRange(AddMessage(&file, "ExtendableMessage"), 1, 1000);
 
     DescriptorProto* message = AddMessage(&file, "TestMessage");
-    AddField(message, "foo_foo", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message, "FooBar", 2, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
-    AddField(message, "fooBaz", 3, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
+    AddField(message, "foo_foo", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message, "FooBar", 2, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
+    AddField(message, "fooBaz", 3, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
     AddField(message, "fooFoo", 4,  // Camel-case conflict with foo_foo.
-             FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
+             FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
     AddField(message, "foobar", 5,  // Lower-case conflict with FooBar.
-             FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
+             FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
 
     AddNestedExtension(message, "ExtendableMessage", "bar_foo", 1,
-                       FieldDescriptorProto::LABEL_OPTIONAL,
-                       FieldDescriptorProto::TYPE_INT32);
+                       FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                       FieldDescriptorProto_Type::TYPE_INT32);
     AddNestedExtension(message, "ExtendableMessage", "BarBar", 2,
-                       FieldDescriptorProto::LABEL_OPTIONAL,
-                       FieldDescriptorProto::TYPE_INT32);
+                       FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                       FieldDescriptorProto_Type::TYPE_INT32);
     AddNestedExtension(message, "ExtendableMessage", "BarBaz", 3,
-                       FieldDescriptorProto::LABEL_OPTIONAL,
-                       FieldDescriptorProto::TYPE_INT32);
+                       FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                       FieldDescriptorProto_Type::TYPE_INT32);
     AddNestedExtension(message, "ExtendableMessage", "barFoo", 4,  // Conflict
-                       FieldDescriptorProto::LABEL_OPTIONAL,
-                       FieldDescriptorProto::TYPE_INT32);
+                       FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                       FieldDescriptorProto_Type::TYPE_INT32);
     AddNestedExtension(message, "ExtendableMessage", "barbar", 5,  // Conflict
-                       FieldDescriptorProto::LABEL_OPTIONAL,
-                       FieldDescriptorProto::TYPE_INT32);
+                       FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                       FieldDescriptorProto_Type::TYPE_INT32);
 
     AddExtension(&file, "ExtendableMessage", "baz_foo", 11,
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
     AddExtension(&file, "ExtendableMessage", "BazBar", 12,
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
     AddExtension(&file, "ExtendableMessage", "BazBaz", 13,
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
     AddExtension(&file, "ExtendableMessage", "bazFoo", 14,  // Conflict
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
     AddExtension(&file, "ExtendableMessage", "bazbar", 15,  // Conflict
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
 
     file_ = pool_.BuildFile(file);
     ASSERT_TRUE(file_ != nullptr);
@@ -1503,10 +1503,10 @@ TEST_F(EnumDescriptorTest, ValueName) {
 }
 
 TEST_F(EnumDescriptorTest, ValueFullName) {
-  EXPECT_EQ("FOO", foo_->full_name());
-  EXPECT_EQ("BAR", bar_->full_name());
-  EXPECT_EQ("corge.grault.FOO", foo2_->full_name());
-  EXPECT_EQ("corge.grault.BAZ", baz2_->full_name());
+  EXPECT_EQ("TestEnum.FOO", foo_->full_name());
+  EXPECT_EQ("TestEnum.BAR", bar_->full_name());
+  EXPECT_EQ("corge.grault.TestEnum2.FOO", foo2_->full_name());
+  EXPECT_EQ("corge.grault.TestEnum2.BAZ", baz2_->full_name());
 }
 
 TEST_F(EnumDescriptorTest, ValueIndex) {
@@ -1940,23 +1940,23 @@ class ExtensionDescriptorTest : public testing::Test {
     AddExtensionRange(foo, 30, 40);
 
     AddExtension(&foo_file, "Foo", "foo_int32", 10,
-                 FieldDescriptorProto::LABEL_OPTIONAL,
-                 FieldDescriptorProto::TYPE_INT32);
+                 FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                 FieldDescriptorProto_Type::TYPE_INT32);
     AddExtension(&foo_file, "Foo", "foo_enum", 19,
-                 FieldDescriptorProto::LABEL_REPEATED,
-                 FieldDescriptorProto::TYPE_ENUM)
+                 FieldDescriptorProto_Label::LABEL_REPEATED,
+                 FieldDescriptorProto_Type::TYPE_ENUM)
         ->set_type_name("Baz");
 
     DescriptorProto* bar = AddMessage(&foo_file, "Bar");
-    AddField(bar, "non_ext_int32", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-             FieldDescriptorProto::TYPE_INT32);
+    AddField(bar, "non_ext_int32", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+             FieldDescriptorProto_Type::TYPE_INT32);
     AddNestedExtension(bar, "Foo", "foo_message", 30,
-                       FieldDescriptorProto::LABEL_OPTIONAL,
-                       FieldDescriptorProto::TYPE_MESSAGE)
+                       FieldDescriptorProto_Label::LABEL_OPTIONAL,
+                       FieldDescriptorProto_Type::TYPE_MESSAGE)
         ->set_type_name("Moo");
     AddNestedExtension(bar, "Foo", "foo_group", 39,
-                       FieldDescriptorProto::LABEL_REPEATED,
-                       FieldDescriptorProto::TYPE_MESSAGE)
+                       FieldDescriptorProto_Label::LABEL_REPEATED,
+                       FieldDescriptorProto_Type::TYPE_MESSAGE)
         ->set_type_name("Moo");
 
     // Build the descriptors and get the pointers.
@@ -2126,8 +2126,8 @@ TEST_F(ExtensionDescriptorTest, DuplicateFieldNumber) {
   file_proto.set_name("foo.shark");
   file_proto.add_dependency("shark/descriptor.shark");
   AddExtension(&file_proto, "shark.FieldOptions", "option1", 1000,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_INT32);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_INT32);
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
   // Add "bar.shark":
   //   import "shark/descriptor.shark";
@@ -2138,8 +2138,8 @@ TEST_F(ExtensionDescriptorTest, DuplicateFieldNumber) {
   file_proto.set_name("bar.shark");
   file_proto.add_dependency("shark/descriptor.shark");
   AddExtension(&file_proto, "shark.FieldOptions", "option2", 1000,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_INT32);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_INT32);
   // Currently we only generate a warning for conflicting extension numbers.
   // TODO(xiaofeng): Change it to an error.
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
@@ -2444,7 +2444,7 @@ class MiscTest : public testing::Test {
 
     DescriptorProto* message = AddMessage(&file_proto, "TestMessage");
     FieldDescriptorProto* field = AddField(
-        message, "foo", 1, FieldDescriptorProto::LABEL_OPTIONAL,
+        message, "foo", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
         static_cast<FieldDescriptorProto::Type>(static_cast<int>(type)));
 
     if (type == FieldType::MESSAGE) {
@@ -2669,49 +2669,49 @@ TEST_F(MiscTest, DefaultValues) {
   DescriptorProto* message_proto = AddMessage(&file_proto, "TestMessage");
 
   typedef FieldDescriptorProto FD;  // avoid ugly line wrapping
-  const FD::Label label = FD::LABEL_OPTIONAL;
+  const FD::Label label = FieldDescriptorProto_Label::LABEL_OPTIONAL;
 
   // Create fields of every CPP type with default values.
-  AddField(message_proto, "int32", 1, label, FD::TYPE_INT32)
+  AddField(message_proto, "int32", 1, label, FieldDescriptorProto_Type::TYPE_INT32)
       ->set_default_value("-1");
-  AddField(message_proto, "int64", 2, label, FD::TYPE_INT64)
+  AddField(message_proto, "int64", 2, label, FieldDescriptorProto_Type::TYPE_INT64)
       ->set_default_value("-1000000000000");
-  AddField(message_proto, "uint32", 3, label, FD::TYPE_UINT32)
+  AddField(message_proto, "uint32", 3, label, FieldDescriptorProto_Type::TYPE_UINT32)
       ->set_default_value("42");
-  AddField(message_proto, "uint64", 4, label, FD::TYPE_UINT64)
+  AddField(message_proto, "uint64", 4, label, FieldDescriptorProto_Type::TYPE_UINT64)
       ->set_default_value("2000000000000");
-  AddField(message_proto, "float", 5, label, FD::TYPE_FLOAT)
+  AddField(message_proto, "float", 5, label, FieldDescriptorProto_Type::TYPE_FLOAT)
       ->set_default_value("4.5");
-  AddField(message_proto, "double", 6, label, FD::TYPE_DOUBLE)
+  AddField(message_proto, "double", 6, label, FieldDescriptorProto_Type::TYPE_DOUBLE)
       ->set_default_value("10e100");
-  AddField(message_proto, "bool", 7, label, FD::TYPE_BOOL)
+  AddField(message_proto, "bool", 7, label, FieldDescriptorProto_Type::TYPE_BOOL)
       ->set_default_value("true");
-  AddField(message_proto, "string", 8, label, FD::TYPE_STRING)
+  AddField(message_proto, "string", 8, label, FieldDescriptorProto_Type::TYPE_STRING)
       ->set_default_value("hello");
-  AddField(message_proto, "data", 9, label, FD::TYPE_BYTES)
+  AddField(message_proto, "data", 9, label, FieldDescriptorProto_Type::TYPE_BYTES)
       ->set_default_value("\\001\\002\\003");
 
   FieldDescriptorProto* enum_field =
-      AddField(message_proto, "enum", 10, label, FD::TYPE_ENUM);
+      AddField(message_proto, "enum", 10, label, FieldDescriptorProto_Type::TYPE_ENUM);
   enum_field->set_type_name("DummyEnum");
   enum_field->set_default_value("B");
 
   // Strings are allowed to have empty defaults.  (At one point, due to
   // a bug, empty defaults for strings were rejected.  Oops.)
-  AddField(message_proto, "empty_string", 11, label, FD::TYPE_STRING)
+  AddField(message_proto, "empty_string", 11, label, FieldDescriptorProto_Type::TYPE_STRING)
       ->set_default_value("");
 
   // Add a second set of fields with implicit default values.
-  AddField(message_proto, "implicit_int32", 21, label, FD::TYPE_INT32);
-  AddField(message_proto, "implicit_int64", 22, label, FD::TYPE_INT64);
-  AddField(message_proto, "implicit_uint32", 23, label, FD::TYPE_UINT32);
-  AddField(message_proto, "implicit_uint64", 24, label, FD::TYPE_UINT64);
-  AddField(message_proto, "implicit_float", 25, label, FD::TYPE_FLOAT);
-  AddField(message_proto, "implicit_double", 26, label, FD::TYPE_DOUBLE);
-  AddField(message_proto, "implicit_bool", 27, label, FD::TYPE_BOOL);
-  AddField(message_proto, "implicit_string", 28, label, FD::TYPE_STRING);
-  AddField(message_proto, "implicit_data", 29, label, FD::TYPE_BYTES);
-  AddField(message_proto, "implicit_enum", 30, label, FD::TYPE_ENUM)
+  AddField(message_proto, "implicit_int32", 21, label, FieldDescriptorProto_Type::TYPE_INT32);
+  AddField(message_proto, "implicit_int64", 22, label, FieldDescriptorProto_Type::TYPE_INT64);
+  AddField(message_proto, "implicit_uint32", 23, label, FieldDescriptorProto_Type::TYPE_UINT32);
+  AddField(message_proto, "implicit_uint64", 24, label, FieldDescriptorProto_Type::TYPE_UINT64);
+  AddField(message_proto, "implicit_float", 25, label, FieldDescriptorProto_Type::TYPE_FLOAT);
+  AddField(message_proto, "implicit_double", 26, label, FieldDescriptorProto_Type::TYPE_DOUBLE);
+  AddField(message_proto, "implicit_bool", 27, label, FieldDescriptorProto_Type::TYPE_BOOL);
+  AddField(message_proto, "implicit_string", 28, label, FieldDescriptorProto_Type::TYPE_STRING);
+  AddField(message_proto, "implicit_data", 29, label, FieldDescriptorProto_Type::TYPE_BYTES);
+  AddField(message_proto, "implicit_enum", 30, label, FieldDescriptorProto_Type::TYPE_ENUM)
       ->set_type_name("DummyEnum");
 
   // Build it.
@@ -2785,14 +2785,14 @@ TEST_F(MiscTest, FieldOptions) {
   file_proto.set_name("foo.shark");
 
   DescriptorProto* message_proto = AddMessage(&file_proto, "TestMessage");
-  AddField(message_proto, "foo", 1, FieldDescriptorProto::LABEL_OPTIONAL,
-           FieldDescriptorProto::TYPE_INT32);
+  AddField(message_proto, "foo", 1, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+           FieldDescriptorProto_Type::TYPE_INT32);
   FieldDescriptorProto* bar_proto =
-      AddField(message_proto, "bar", 2, FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_INT32);
+      AddField(message_proto, "bar", 2, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_INT32);
 
   FieldOptions* options = bar_proto->mutable_options();
-  options->set_ctype(FieldOptions::CORD);
+  options->set_ctype(FieldOptions_CType::CORD);
 
   // Build the descriptors and get the pointers.
   DescriptorPool pool;
@@ -2812,7 +2812,7 @@ TEST_F(MiscTest, FieldOptions) {
   // "bar" had options set.
   EXPECT_NE(&FieldOptions::default_instance(), options);
   EXPECT_TRUE(bar->options().has_ctype());
-  EXPECT_EQ(FieldOptions::CORD, bar->options().ctype());
+  EXPECT_EQ(FieldOptions_CType::CORD, bar->options().ctype());
 }
 
 // ===================================================================
@@ -2970,7 +2970,7 @@ TEST_P(AllowUnknownDependenciesTest, CopyTo) {
   // Bar is not a placeholder, so it is fully-qualified.
   bar_field_->CopyTo(&proto);
   EXPECT_EQ(".Bar", proto.type_name());
-  EXPECT_EQ(FieldDescriptorProto::TYPE_MESSAGE, proto.type());
+  EXPECT_EQ(FieldDescriptorProto_Type::TYPE_MESSAGE, proto.type());
 
   // Baz is an unqualified placeholder.
   proto.Clear();
@@ -2982,7 +2982,7 @@ TEST_P(AllowUnknownDependenciesTest, CopyTo) {
   proto.Clear();
   moo_field_->CopyTo(&proto);
   EXPECT_EQ(".corge.Moo", proto.type_name());
-  EXPECT_EQ(FieldDescriptorProto::TYPE_ENUM, proto.type());
+  EXPECT_EQ(FieldDescriptorProto_Type::TYPE_ENUM, proto.type());
 }
 
 TEST_P(AllowUnknownDependenciesTest, CustomOptions) {
@@ -3183,7 +3183,7 @@ TEST(CustomOptions, OptionLocations) {
 
   // See that the regular options went through unscathed.
   EXPECT_TRUE(message->options().has_message_set_wire_format());
-  EXPECT_EQ(FieldOptions::CORD, field->options().ctype());
+  EXPECT_EQ(FieldOptions_CType::CORD, field->options().ctype());
 }
 
 TEST(CustomOptions, OptionTypes) {
@@ -3236,7 +3236,7 @@ TEST(CustomOptions, OptionTypes) {
   EXPECT_EQ(std::string("Hello\0World", 11),
             options->GetExtension(sharkbuf_unittest::bytes_opt));
 
-  EXPECT_EQ(sharkbuf_unittest::DummyMessageContainingEnum::TEST_OPTION_ENUM_TYPE2,
+  EXPECT_EQ(sharkbuf_unittest::DummyMessageContainingEnum_TestEnumType::TEST_OPTION_ENUM_TYPE2,
             options->GetExtension(sharkbuf_unittest::enum_opt));
 
   options =
@@ -3356,7 +3356,7 @@ TEST(CustomOptions, OptionsFromOtherFile) {
   EXPECT_TRUE(file->options().has_go_package());
   EXPECT_EQ("foo", file->options().go_package());
   EXPECT_TRUE(file->options().has_optimize_for());
-  EXPECT_EQ(FileOptions::SPEED, file->options().optimize_for());
+  EXPECT_EQ(FileOptions_OptimizeMode::SPEED, file->options().optimize_for());
 }
 
 TEST(CustomOptions, MessageOptionThreeFieldsSet) {
@@ -4258,7 +4258,7 @@ TEST_F(ValidationErrorTest, EnumReservedFieldError) {
       "  reserved_range { start: 10 end: 20 }"
       "}",
 
-      "foo.shark: BAR: NUMBER: Enum value \"BAR\" uses reserved number 15.\n");
+      "foo.shark: Foo.BAR: NUMBER: Enum value \"BAR\" uses reserved number 15.\n");
 }
 
 TEST_F(ValidationErrorTest, EnumNegativeReservedFieldError) {
@@ -4270,7 +4270,7 @@ TEST_F(ValidationErrorTest, EnumNegativeReservedFieldError) {
       "  reserved_range { start: -20 end: -10 }"
       "}",
 
-      "foo.shark: BAR: NUMBER: Enum value \"BAR\" uses reserved number -15.\n");
+      "foo.shark: Foo.BAR: NUMBER: Enum value \"BAR\" uses reserved number -15.\n");
 }
 
 TEST_F(ValidationErrorTest, EnumReservedRangeOverlap) {
@@ -4367,8 +4367,7 @@ TEST_F(ValidationErrorTest, EnumReservedNameError) {
       "  reserved_name: \"BAR\""
       "}",
 
-      "foo.shark: FOO: NAME: Enum value \"FOO\" is reserved.\n"
-      "foo.shark: BAR: NAME: Enum value \"BAR\" is reserved.\n");
+      "foo.shark: Foo.FOO: NAME: Enum value \"FOO\" is reserved.\nfoo.shark: Foo.BAR: NAME: Enum value \"BAR\" is reserved.");
 }
 
 TEST_F(ValidationErrorTest, EnumReservedNameRedundant) {
@@ -5759,9 +5758,7 @@ TEST_F(ValidationErrorTest, EnumOptionValueIsSiblingEnumValueName) {
       "                                        is_extension: true } "
       "                                 identifier_value: \"MOOO\" } }",
 
-      "foo.shark: foo.shark: OPTION_VALUE: Enum type \"FooEnum1\" has no value "
-      "named \"MOOO\" for option \"foo\". This appears to be a value from a "
-      "sibling type.\n");
+      "foo.shark: foo.shark: OPTION_VALUE: Enum type \"FooEnum1\" has no value named \"MOOO\" for option \"foo\".");
 }
 
 TEST_F(ValidationErrorTest, StringOptionValueIsNotString) {
@@ -6003,10 +6000,7 @@ TEST_F(ValidationErrorTest, DisallowEnumAlias) {
       "  value { name:\"ENUM_A\" number:0 }"
       "  value { name:\"ENUM_B\" number:0 }"
       "}",
-      "foo.shark: Bar: NUMBER: "
-      "\"ENUM_B\" uses the same enum value as \"ENUM_A\". "
-      "If this is intended, set 'option allow_alias = true;' to the enum "
-      "definition.\n");
+      "foo.shark: Bar: NUMBER: \"Bar.ENUM_B\" uses the same enum value as \"Bar.ENUM_A\". If this is intended, set 'option allow_alias = true;' to the enum definition.\n");
 }
 
 TEST_F(ValidationErrorTest, AllowEnumAlias) {
@@ -6182,7 +6176,7 @@ TEST_F(ValidationErrorTest, MapEntryNoneRepeatedMapEntry) {
   FileDescriptorProto file_proto;
   FillValidMapEntry(&file_proto);
   file_proto.mutable_message_type(0)->mutable_field(0)->set_label(
-      FieldDescriptorProto::LABEL_OPTIONAL);
+      FieldDescriptorProto_Label::LABEL_OPTIONAL);
   BuildFileWithErrors(file_proto.DebugString(), kMapEntryErrorMessage);
 }
 
@@ -6212,7 +6206,7 @@ TEST_F(ValidationErrorTest, MapEntryKeyLabel) {
   FieldDescriptorProto* key =
       file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
           0);
-  key->set_label(FieldDescriptorProto::LABEL_REQUIRED);
+  key->set_label(FieldDescriptorProto_Label::LABEL_REQUIRED);
   BuildFileWithErrors(file_proto.DebugString(), kMapEntryErrorMessage);
 }
 
@@ -6242,7 +6236,7 @@ TEST_F(ValidationErrorTest, MapEntryValueLabel) {
   FieldDescriptorProto* value =
       file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
           1);
-  value->set_label(FieldDescriptorProto::LABEL_REQUIRED);
+  value->set_label(FieldDescriptorProto_Label::LABEL_REQUIRED);
   BuildFileWithErrors(file_proto.DebugString(), kMapEntryErrorMessage);
 }
 
@@ -6262,7 +6256,7 @@ TEST_F(ValidationErrorTest, MapEntryKeyTypeFloat) {
   FieldDescriptorProto* key =
       file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
           0);
-  key->set_type(FieldDescriptorProto::TYPE_FLOAT);
+  key->set_type(FieldDescriptorProto_Type::TYPE_FLOAT);
   BuildFileWithErrors(file_proto.DebugString(), kMapEntryKeyTypeErrorMessage);
 }
 
@@ -6272,7 +6266,7 @@ TEST_F(ValidationErrorTest, MapEntryKeyTypeDouble) {
   FieldDescriptorProto* key =
       file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
           0);
-  key->set_type(FieldDescriptorProto::TYPE_DOUBLE);
+  key->set_type(FieldDescriptorProto_Type::TYPE_DOUBLE);
   BuildFileWithErrors(file_proto.DebugString(), kMapEntryKeyTypeErrorMessage);
 }
 
@@ -6282,7 +6276,7 @@ TEST_F(ValidationErrorTest, MapEntryKeyTypeBytes) {
   FieldDescriptorProto* key =
       file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
           0);
-  key->set_type(FieldDescriptorProto::TYPE_BYTES);
+  key->set_type(FieldDescriptorProto_Type::TYPE_BYTES);
   BuildFileWithErrors(file_proto.DebugString(), kMapEntryKeyTypeErrorMessage);
 }
 
@@ -6403,11 +6397,7 @@ TEST_F(ValidationErrorTest, EnumValuesConflictWithDifferentCasing) {
       "  value { name: 'BAR' number: 0 }"
       "  value { name: 'bar' number: 1 }"
       "}",
-      "casing1.shark: bar: NAME: Enum name bar has the same name as BAR "
-      "if you ignore case and strip out the enum name prefix (if any). "
-      "This is error-prone and can lead to undefined behavior. "
-      "Please avoid doing this. If you are using allow_alias, please assign "
-      "the same numeric value to both enums.\n");
+      "casing1.shark: FooEnum.bar: NAME: Enum name bar has the same name as BAR if you ignore case and strip out the enum name prefix (if any). This is error-prone and can lead to undefined behavior. Please avoid doing this. If you are using allow_alias, please assign the same numeric value to both enums.\n");
 
   // Not an error because both enums are mapped to the same value.
   BuildFile(
@@ -6737,32 +6727,32 @@ TEST_F(ValidationErrorTest, ValidateProto3Extension) {
   file_proto.set_syntax("proto2");
   file_proto.add_dependency("shark/descriptor.shark");
   AddExtension(&file_proto, "shark.FileOptions", "test_file_opt", 1001,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_STRING);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_STRING);
   AddExtension(&file_proto, "shark.MessageOptions", "test_msg_opt", 1001,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_STRING);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_STRING);
   AddExtension(&file_proto, "shark.FieldOptions", "test_field_opt", 1003,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_STRING);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_STRING);
   AddExtension(&file_proto, "shark.EnumOptions", "test_enum_opt", 1004,
-               FieldDescriptorProto::LABEL_REPEATED,
-               FieldDescriptorProto::TYPE_INT32);
+               FieldDescriptorProto_Label::LABEL_REPEATED,
+               FieldDescriptorProto_Type::TYPE_INT32);
   AddExtension(&file_proto, "shark.EnumValueOptions", "test_enumval_opt", 1005,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_INT32);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_INT32);
   AddExtension(&file_proto, "shark.ServiceOptions", "test_svc_opt", 1006,
-               FieldDescriptorProto::LABEL_REPEATED,
-               FieldDescriptorProto::TYPE_INT32);
+               FieldDescriptorProto_Label::LABEL_REPEATED,
+               FieldDescriptorProto_Type::TYPE_INT32);
   AddExtension(&file_proto, "shark.MethodOptions", "test_method_opt", 1007,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_STRING);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_STRING);
   AddExtension(&file_proto, "shark.OneofOptions", "test_oneof_opt", 1008,
-               FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_STRING);
+               FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_STRING);
   AddExtension(&file_proto, "shark.ExtensionRangeOptions", "test_ext_opt",
-               1009, FieldDescriptorProto::LABEL_OPTIONAL,
-               FieldDescriptorProto::TYPE_STRING);
+               1009, FieldDescriptorProto_Label::LABEL_OPTIONAL,
+               FieldDescriptorProto_Type::TYPE_STRING);
   ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
   // Copy and change the package of the descriptor.shark
@@ -7311,8 +7301,8 @@ class ExponentialErrorDatabase : public DescriptorDatabase {
         FieldDescriptorProto* field = message->add_field();
         field->set_name(strings::Substitute("field$0", i));
         field->set_number(i);
-        field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
-        field->set_type(FieldDescriptorProto::TYPE_MESSAGE);
+        field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+        field->set_type(FieldDescriptorProto_Type::TYPE_MESSAGE);
         field->set_type_name(strings::Substitute("Message$0", i));
       }
     }

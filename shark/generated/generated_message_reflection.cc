@@ -320,7 +320,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         case FieldCppType::STRING:
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
-            case FieldOptions::STRING:
+            case FieldOptions::CType::STRING:
               total_size +=
                   GetRaw<RepeatedPtrField<std::string> >(message, field)
                       .SpaceUsedExcludingSelfLong();
@@ -365,7 +365,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         case FieldCppType::STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
-            case FieldOptions::STRING:
+            case FieldOptions::CType::STRING:
               if (IsInlined(field)) {
                 const std::string* ptr =
                     &GetField<InlinedStringField>(message, field).GetNoArena();
@@ -455,7 +455,7 @@ struct OneofFieldMover {
         }
         switch (field->options().ctype()) {
           default:
-          case FieldOptions::STRING: {
+          case FieldOptions::CType::STRING: {
             to->SetArenaStringPtr(from->GetArenaStringPtr());
             break;
           }
@@ -523,7 +523,7 @@ void SwapFieldHelper::SwapRepeatedStringField(const Reflection* r, Message* lhs,
                                               const FieldDescriptor* field) {
   switch (field->options().ctype()) {
     default:
-    case FieldOptions::STRING: {
+    case FieldOptions::CType::STRING: {
       auto* lhs_string = r->MutableRaw<RepeatedPtrFieldBase>(lhs, field);
       auto* rhs_string = r->MutableRaw<RepeatedPtrFieldBase>(rhs, field);
       if (unsafe_shallow_swap) {
@@ -589,7 +589,7 @@ void SwapFieldHelper::SwapStringField(const Reflection* r, Message* lhs,
                                       const FieldDescriptor* field) {
   switch (field->options().ctype()) {
     default:
-    case FieldOptions::STRING: {
+    case FieldOptions::CType::STRING: {
       if (r->IsInlined(field)) {
         SwapFieldHelper::SwapInlinedStrings<unsafe_shallow_swap>(r, lhs, rhs,
                                                                  field);
@@ -1076,7 +1076,7 @@ void Reflection::SwapFieldsImpl(
         // may depend on the information in has bits.
         if (!field->is_repeated()) {
           SwapBit(message1, message2, field);
-          if (field->options().ctype() == FieldOptions::STRING &&
+          if (field->options().ctype() == FieldOptions::CType::STRING &&
               IsInlined(field)) {
             GOOGLE_DCHECK(!unsafe_shallow_swap ||
                    message1->GetArenaForAllocation() ==
@@ -1176,7 +1176,7 @@ void Reflection::UnsafeArenaSwap(Message* lhs, Message* rhs) const {
       const FieldDescriptor* field = descriptor_->field(i);
       if (field->is_extension() || field->is_repeated() ||
           schema_.InRealOneof(field) ||
-          field->options().ctype() != FieldOptions::STRING ||
+          field->options().ctype() != FieldOptions::CType::STRING ||
           !IsInlined(field)) {
         continue;
       }
@@ -1304,7 +1304,7 @@ void Reflection::ClearField(Message* message,
         case FieldCppType::STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
-            case FieldOptions::STRING:
+            case FieldOptions::CType::STRING:
               if (IsInlined(field)) {
                 // Currently, string with default value can't be inlined. So we
                 // don't have to handle default value here.
@@ -1357,7 +1357,7 @@ void Reflection::ClearField(Message* message,
       case FieldCppType::STRING: {
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
-          case FieldOptions::STRING:
+          case FieldOptions::CType::STRING:
             MutableRaw<RepeatedPtrField<std::string> >(message, field)->Clear();
             break;
         }
@@ -1411,7 +1411,7 @@ void Reflection::RemoveLast(Message* message,
       case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
-          case FieldOptions::STRING:
+          case FieldOptions::CType::STRING:
             MutableRaw<RepeatedPtrField<std::string> >(message, field)
                 ->RemoveLast();
             break;
@@ -2116,7 +2116,7 @@ std::string Reflection::GetString(const Message& message,
     }
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING:
+      case FieldOptions::CType::STRING:
         if (IsInlined(field)) {
           return GetField<InlinedStringField>(message, field).GetNoArena();
         } else {
@@ -2141,7 +2141,7 @@ const std::string& Reflection::GetStringReference(const Message& message,
     }
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING:
+      case FieldOptions::CType::STRING:
         if (IsInlined(field)) {
           return GetField<InlinedStringField>(message, field).GetNoArena();
         } else {
@@ -2162,7 +2162,7 @@ void Reflection::SetString(Message* message, const FieldDescriptor* field,
   } else {
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING: {
+      case FieldOptions::CType::STRING: {
         if (IsInlined(field)) {
           const uint32_t index = schema_.InlinedStringIndex(field);
           GOOGLE_DCHECK_GT(index, 0);
@@ -2202,7 +2202,7 @@ std::string Reflection::GetRepeatedString(const Message& message,
   } else {
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING:
+      case FieldOptions::CType::STRING:
         return GetRepeatedPtrField<std::string>(message, field, index);
     }
   }
@@ -2218,7 +2218,7 @@ const std::string& Reflection::GetRepeatedStringReference(
   } else {
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING:
+      case FieldOptions::CType::STRING:
         return GetRepeatedPtrField<std::string>(message, field, index);
     }
   }
@@ -2235,7 +2235,7 @@ void Reflection::SetRepeatedString(Message* message,
   } else {
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING:
+      case FieldOptions::CType::STRING:
         MutableRepeatedField<std::string>(message, field, index)
             ->assign(std::move(value));
         break;
@@ -2253,7 +2253,7 @@ void Reflection::AddString(Message* message, const FieldDescriptor* field,
   } else {
     switch (field->options().ctype()) {
       default:  // TODO(kenton):  Support other string reps.
-      case FieldOptions::STRING:
+      case FieldOptions::CType::STRING:
         AddField<std::string>(message, field)->assign(std::move(value));
         break;
     }
@@ -3170,7 +3170,7 @@ void Reflection::ClearOneof(Message* message,
         case FieldCppType::STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
-            case FieldOptions::STRING: {
+            case FieldOptions::CType::STRING: {
               // Oneof string fields are never set as a default instance.
               // We just need to pass some arbitrary default string to make it
               // work. This allows us to not have the real default accessible
@@ -3232,7 +3232,7 @@ void* Reflection::MutableRawRepeatedString(Message* message,
   return MutableRawRepeatedField(message, field,
                                  FieldCppType::STRING,
                                  FieldOptions_CType_to_underlying(
-                                     FieldOptions::STRING),
+                                     FieldOptions::CType::STRING),
                                  nullptr);
 }
 

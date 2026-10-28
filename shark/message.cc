@@ -362,7 +362,7 @@ const internal::RepeatedFieldAccessor* Reflection::RepeatedFieldAccessor(
     case FieldCppType::STRING:
       switch (field->options().ctype()) {
         default:
-        case FieldOptions::STRING:
+        case FieldOptions_CType::STRING:
           return GetSingleton<internal::RepeatedPtrFieldStringAccessor>();
       }
       break;

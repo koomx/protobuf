@@ -312,35 +312,6 @@ bool Field_Kind_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr Field_Kind Field::TYPE_UNKNOWN;
-constexpr Field_Kind Field::TYPE_BOOL;
-constexpr Field_Kind Field::TYPE_INT8;
-constexpr Field_Kind Field::TYPE_UINT8;
-constexpr Field_Kind Field::TYPE_INT16;
-constexpr Field_Kind Field::TYPE_UINT16;
-constexpr Field_Kind Field::TYPE_INT32;
-constexpr Field_Kind Field::TYPE_UINT32;
-constexpr Field_Kind Field::TYPE_INT64;
-constexpr Field_Kind Field::TYPE_UINT64;
-constexpr Field_Kind Field::TYPE_FLOAT;
-constexpr Field_Kind Field::TYPE_FLOAT16;
-constexpr Field_Kind Field::TYPE_FLOAT8;
-constexpr Field_Kind Field::TYPE_DOUBLE;
-constexpr Field_Kind Field::TYPE_ENUM;
-constexpr Field_Kind Field::TYPE_MESSAGE;
-constexpr Field_Kind Field::TYPE_STRING;
-constexpr Field_Kind Field::TYPE_BYTES;
-constexpr Field_Kind Field::TYPE_FIXED32;
-constexpr Field_Kind Field::TYPE_FIXED64;
-constexpr Field_Kind Field::TYPE_SFIXED32;
-constexpr Field_Kind Field::TYPE_SFIXED64;
-constexpr Field_Kind Field::TYPE_SINT32;
-constexpr Field_Kind Field::TYPE_SINT64;
-constexpr Field_Kind Field::Kind_MIN;
-constexpr Field_Kind Field::Kind_MAX;
-constexpr int Field::Kind_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2ftype_2eshark);
   return file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark[1];
@@ -357,15 +328,6 @@ bool Field_Cardinality_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr Field_Cardinality Field::CARDINALITY_UNKNOWN;
-constexpr Field_Cardinality Field::CARDINALITY_OPTIONAL;
-constexpr Field_Cardinality Field::CARDINALITY_REQUIRED;
-constexpr Field_Cardinality Field::CARDINALITY_REPEATED;
-constexpr Field_Cardinality Field::Cardinality_MIN;
-constexpr Field_Cardinality Field::Cardinality_MAX;
-constexpr int Field::Cardinality_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2ftype_2eshark);
   return file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark[2];

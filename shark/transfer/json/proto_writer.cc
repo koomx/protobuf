@@ -297,7 +297,7 @@ std::unordered_set<const shark::Field*> GetRequiredFields(
   std::unordered_set<const shark::Field*> required;
   for (int i = 0; i < type.fields_size(); i++) {
     const shark::Field& field = type.fields(i);
-    if (field.cardinality() == shark::Field::CARDINALITY_REQUIRED) {
+    if (field.cardinality() == shark::Field_Cardinality::CARDINALITY_REQUIRED) {
       required.insert(&field);
     }
   }
@@ -335,7 +335,7 @@ ProtoWriter::ProtoElement::ProtoElement(ProtoWriter::ProtoElement* parent,
       proto3_(type.syntax() == shark::Syntax::SYNTAX_PROTO3),
       type_(type),
       size_index_(!is_list &&
-                          field->kind() == shark::Field::TYPE_MESSAGE
+                          field->kind() == shark::Field_Kind::TYPE_MESSAGE
                       ? ow_->size_insert_.size()
                       : -1),
       array_index_(is_list ? 0 : -1),
@@ -350,7 +350,7 @@ ProtoWriter::ProtoElement::ProtoElement(ProtoWriter::ProtoElement* parent,
       this->parent()->RegisterField(field);
     }
 
-    if (field->kind() == shark::Field::TYPE_MESSAGE) {
+    if (field->kind() == shark::Field_Kind::TYPE_MESSAGE) {
       if (!proto3_) {
         required_fields_ = GetRequiredFields(type_);
       }
@@ -404,7 +404,7 @@ ProtoWriter::ProtoElement* ProtoWriter::ProtoElement::pop() {
 void ProtoWriter::ProtoElement::RegisterField(
     const shark::Field* field) {
   if (!required_fields_.empty() &&
-      field->cardinality() == shark::Field::CARDINALITY_REQUIRED) {
+      field->cardinality() == shark::Field_Cardinality::CARDINALITY_REQUIRED) {
     required_fields_.erase(field);
   }
 }
@@ -601,7 +601,7 @@ bool ProtoWriter::ValidOneof(const shark::Field& field,
 }
 
 bool ProtoWriter::IsRepeated(const shark::Field& field) {
-  return field.cardinality() == shark::Field::CARDINALITY_REPEATED;
+  return field.cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED;
 }
 
 ProtoWriter* ProtoWriter::StartObjectField(const shark::Field& field,
@@ -648,84 +648,84 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
   }
 
   switch (field.kind()) {
-    case shark::Field::TYPE_INT32: {
+    case shark::Field_Kind::TYPE_INT32: {
       status = WriteInt32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_INT8: {
+    case shark::Field_Kind::TYPE_INT8: {
       status = WriteRangedInt32(field.number(), data, stream_.get(), -128, 127);
       break;
     }
-    case shark::Field::TYPE_INT16: {
+    case shark::Field_Kind::TYPE_INT16: {
       status = WriteRangedInt32(field.number(), data, stream_.get(), -32768,
                                 32767);
       break;
     }
-    case shark::Field::TYPE_SFIXED32: {
+    case shark::Field_Kind::TYPE_SFIXED32: {
       status = WriteSFixed32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_SINT32: {
+    case shark::Field_Kind::TYPE_SINT32: {
       status = WriteSInt32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_FIXED32: {
+    case shark::Field_Kind::TYPE_FIXED32: {
       status = WriteFixed32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_UINT32: {
+    case shark::Field_Kind::TYPE_UINT32: {
       status = WriteUInt32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_UINT8: {
+    case shark::Field_Kind::TYPE_UINT8: {
       status = WriteRangedUInt32(field.number(), data, stream_.get(), 255);
       break;
     }
-    case shark::Field::TYPE_UINT16: {
+    case shark::Field_Kind::TYPE_UINT16: {
       status = WriteRangedUInt32(field.number(), data, stream_.get(), 65535);
       break;
     }
-    case shark::Field::TYPE_INT64: {
+    case shark::Field_Kind::TYPE_INT64: {
       status = WriteInt64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_SFIXED64: {
+    case shark::Field_Kind::TYPE_SFIXED64: {
       status = WriteSFixed64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_SINT64: {
+    case shark::Field_Kind::TYPE_SINT64: {
       status = WriteSInt64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_FIXED64: {
+    case shark::Field_Kind::TYPE_FIXED64: {
       status = WriteFixed64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_UINT64: {
+    case shark::Field_Kind::TYPE_UINT64: {
       status = WriteUInt64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_DOUBLE: {
+    case shark::Field_Kind::TYPE_DOUBLE: {
       status = WriteDouble(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_FLOAT: {
+    case shark::Field_Kind::TYPE_FLOAT: {
       status = WriteFloat(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_BOOL: {
+    case shark::Field_Kind::TYPE_BOOL: {
       status = WriteBool(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_BYTES: {
+    case shark::Field_Kind::TYPE_BYTES: {
       status = WriteBytes(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_STRING: {
+    case shark::Field_Kind::TYPE_STRING: {
       status = WriteString(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field::TYPE_ENUM: {
+    case shark::Field_Kind::TYPE_ENUM: {
       status = WriteEnum(
           field.number(), data, typeinfo_->GetEnumByTypeUrl(field.type_url()),
           stream_.get(), use_lower_camel_for_enums_,
@@ -801,7 +801,7 @@ const shark::Field* ProtoWriter::Lookup(
 
 const shark::Type* ProtoWriter::LookupType(
     const shark::Field* field) {
-  return (field->kind() == shark::Field::TYPE_MESSAGE
+  return (field->kind() == shark::Field_Kind::TYPE_MESSAGE
               ? typeinfo_->GetTypeByTypeUrl(field->type_url())
               : &element_->type());
 }

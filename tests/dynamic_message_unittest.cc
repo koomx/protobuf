@@ -190,7 +190,7 @@ TEST_P(DynamicMessageTest, Oneof) {
   EXPECT_EQ("", reflection->GetString(
                     *message, descriptor->FindFieldByName("foo_bytes")));
   EXPECT_EQ(
-      unittest::TestOneof2::FOO,
+      unittest::TestOneof2_NestedEnum::FOO,
       reflection->GetEnum(*message, descriptor->FindFieldByName("foo_enum"))
           ->number());
   const Descriptor* nested_descriptor;
@@ -216,7 +216,7 @@ TEST_P(DynamicMessageTest, Oneof) {
   EXPECT_EQ("BYTES", reflection->GetString(
                          *message, descriptor->FindFieldByName("bar_bytes")));
   EXPECT_EQ(
-      unittest::TestOneof2::BAR,
+      unittest::TestOneof2_NestedEnum::BAR,
       reflection->GetEnum(*message, descriptor->FindFieldByName("bar_enum"))
           ->number());
 

@@ -177,41 +177,41 @@ TEST_F(DescriptorPoolTypeResolverTest, TestAllTypes) {
                       GetTypeUrl<sharkbuf_unittest::TestAllTypes>(), &type)
                   .ok());
   // Check all optional fields.
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_INT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_INT32,
                        "optional_int32", 1));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_INT64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_INT64,
                        "optional_int64", 2));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_UINT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_UINT32,
                        "optional_uint32", 3));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_UINT64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_UINT64,
                        "optional_uint64", 4));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_SINT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_SINT32,
                        "optional_sint32", 5));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_SINT64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_SINT64,
                        "optional_sint64", 6));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_FIXED32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_FIXED32,
                        "optional_fixed32", 7));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_FIXED64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_FIXED64,
                        "optional_fixed64", 8));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_SFIXED32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_SFIXED32,
                        "optional_sfixed32", 9));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_SFIXED64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_SFIXED64,
                        "optional_sfixed64", 10));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_FLOAT,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_FLOAT,
                        "optional_float", 11));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_DOUBLE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_DOUBLE,
                        "optional_double", 12));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_BOOL,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_BOOL,
                        "optional_bool", 13));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_STRING,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_STRING,
                        "optional_string", 14));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_BYTES,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_BYTES,
                        "optional_bytes", 15));
 
 
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_MESSAGE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_MESSAGE,
                        "optional_nested_message", 18));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_MESSAGE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_MESSAGE,
                        "optional_foreign_message", 19));
 
   EXPECT_TRUE(CheckFieldTypeUrl(
@@ -220,9 +220,9 @@ TEST_F(DescriptorPoolTypeResolverTest, TestAllTypes) {
   EXPECT_TRUE(CheckFieldTypeUrl(type, "optional_foreign_message",
                                 GetTypeUrl<sharkbuf_unittest::ForeignMessage>()));
 
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_ENUM,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_ENUM,
                        "optional_nested_enum", 21));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_ENUM,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_ENUM,
                        "optional_foreign_enum", 22));
 
   EXPECT_TRUE(
@@ -232,41 +232,41 @@ TEST_F(DescriptorPoolTypeResolverTest, TestAllTypes) {
                                 GetTypeUrl("sharkbuf_unittest.ForeignEnum")));
 
   // Check all repeated fields.
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_INT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_INT32,
                        "repeated_int32", 31));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_INT64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_INT64,
                        "repeated_int64", 32));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_UINT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_UINT32,
                        "repeated_uint32", 33));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_UINT64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_UINT64,
                        "repeated_uint64", 34));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_SINT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_SINT32,
                        "repeated_sint32", 35));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_SINT64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_SINT64,
                        "repeated_sint64", 36));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_FIXED32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_FIXED32,
                        "repeated_fixed32", 37));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_FIXED64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_FIXED64,
                        "repeated_fixed64", 38));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_SFIXED32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_SFIXED32,
                        "repeated_sfixed32", 39));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_SFIXED64,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_SFIXED64,
                        "repeated_sfixed64", 40));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_FLOAT,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_FLOAT,
                        "repeated_float", 41));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_DOUBLE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_DOUBLE,
                        "repeated_double", 42));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_BOOL,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_BOOL,
                        "repeated_bool", 43));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_STRING,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_STRING,
                        "repeated_string", 44));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_BYTES,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_BYTES,
                        "repeated_bytes", 45));
 
 
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_MESSAGE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_MESSAGE,
                        "repeated_nested_message", 48));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_MESSAGE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_MESSAGE,
                        "repeated_foreign_message", 49));
 
   EXPECT_TRUE(CheckFieldTypeUrl(
@@ -275,9 +275,9 @@ TEST_F(DescriptorPoolTypeResolverTest, TestAllTypes) {
   EXPECT_TRUE(CheckFieldTypeUrl(type, "repeated_foreign_message",
                                 GetTypeUrl<sharkbuf_unittest::ForeignMessage>()));
 
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_ENUM,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_ENUM,
                        "repeated_nested_enum", 51));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_ENUM,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_ENUM,
                        "repeated_foreign_enum", 52));
 
   EXPECT_TRUE(
@@ -293,7 +293,7 @@ TEST_F(DescriptorPoolTypeResolverTest, TestPackedField) {
                   ->ResolveMessageType(
                       GetTypeUrl<sharkbuf_unittest::TestPackedTypes>(), &type)
                   .ok());
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_INT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_INT32,
                        "packed_int32", 90));
   EXPECT_TRUE(IsPacked(type, "packed_int32"));
 }
@@ -304,13 +304,13 @@ TEST_F(DescriptorPoolTypeResolverTest, TestOneof) {
                   ->ResolveMessageType(
                       GetTypeUrl<sharkbuf_unittest::TestAllTypes>(), &type)
                   .ok());
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_UINT32,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_UINT32,
                        "oneof_uint32", 111));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_MESSAGE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_MESSAGE,
                        "oneof_nested_message", 112));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_STRING,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_STRING,
                        "oneof_string", 113));
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_OPTIONAL, Field::TYPE_BYTES,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_OPTIONAL, Field_Kind::TYPE_BYTES,
                        "oneof_bytes", 114));
   EXPECT_TRUE(FieldInOneof(type, "oneof_uint32", "oneof_field"));
   EXPECT_TRUE(FieldInOneof(type, "oneof_nested_message", "oneof_field"));
@@ -324,7 +324,7 @@ TEST_F(DescriptorPoolTypeResolverTest, TestMap) {
       resolver_
           ->ResolveMessageType(GetTypeUrl<sharkbuf_unittest::TestMap>(), &type)
           .ok());
-  EXPECT_TRUE(HasField(type, Field::CARDINALITY_REPEATED, Field::TYPE_MESSAGE,
+  EXPECT_TRUE(HasField(type, Field_Cardinality::CARDINALITY_REPEATED, Field_Kind::TYPE_MESSAGE,
                        "map_int32_int32", 1));
   EXPECT_TRUE(CheckFieldTypeUrl(
       type, "map_int32_int32",

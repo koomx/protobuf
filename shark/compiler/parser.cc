@@ -65,25 +65,25 @@ const TypeNameMap& GetTypeNameTable() {
   static auto* table = new auto([]() {
     TypeNameMap result;
 
-    result["double"] = FieldDescriptorProto::TYPE_DOUBLE;
-    result["float"] = FieldDescriptorProto::TYPE_FLOAT;
-    result["uint64"] = FieldDescriptorProto::TYPE_UINT64;
-    result["fixed64"] = FieldDescriptorProto::TYPE_FIXED64;
-    result["fixed32"] = FieldDescriptorProto::TYPE_FIXED32;
-    result["bool"] = FieldDescriptorProto::TYPE_BOOL;
-    result["string"] = FieldDescriptorProto::TYPE_STRING;
-    result["bytes"] = FieldDescriptorProto::TYPE_BYTES;
-    result["uint32"] = FieldDescriptorProto::TYPE_UINT32;
-    result["sfixed32"] = FieldDescriptorProto::TYPE_SFIXED32;
-    result["sfixed64"] = FieldDescriptorProto::TYPE_SFIXED64;
-    result["int32"] = FieldDescriptorProto::TYPE_INT32;
-    result["int64"] = FieldDescriptorProto::TYPE_INT64;
-    result["sint32"] = FieldDescriptorProto::TYPE_SINT32;
-    result["sint64"] = FieldDescriptorProto::TYPE_SINT64;
-    result["int8"] = FieldDescriptorProto::TYPE_INT8;
-    result["uint8"] = FieldDescriptorProto::TYPE_UINT8;
-    result["int16"] = FieldDescriptorProto::TYPE_INT16;
-    result["uint16"] = FieldDescriptorProto::TYPE_UINT16;
+    result["double"] = FieldDescriptorProto_Type::TYPE_DOUBLE;
+    result["float"] = FieldDescriptorProto_Type::TYPE_FLOAT;
+    result["uint64"] = FieldDescriptorProto_Type::TYPE_UINT64;
+    result["fixed64"] = FieldDescriptorProto_Type::TYPE_FIXED64;
+    result["fixed32"] = FieldDescriptorProto_Type::TYPE_FIXED32;
+    result["bool"] = FieldDescriptorProto_Type::TYPE_BOOL;
+    result["string"] = FieldDescriptorProto_Type::TYPE_STRING;
+    result["bytes"] = FieldDescriptorProto_Type::TYPE_BYTES;
+    result["uint32"] = FieldDescriptorProto_Type::TYPE_UINT32;
+    result["sfixed32"] = FieldDescriptorProto_Type::TYPE_SFIXED32;
+    result["sfixed64"] = FieldDescriptorProto_Type::TYPE_SFIXED64;
+    result["int32"] = FieldDescriptorProto_Type::TYPE_INT32;
+    result["int64"] = FieldDescriptorProto_Type::TYPE_INT64;
+    result["sint32"] = FieldDescriptorProto_Type::TYPE_SINT32;
+    result["sint64"] = FieldDescriptorProto_Type::TYPE_SINT64;
+    result["int8"] = FieldDescriptorProto_Type::TYPE_INT8;
+    result["uint8"] = FieldDescriptorProto_Type::TYPE_UINT8;
+    result["int16"] = FieldDescriptorProto_Type::TYPE_INT16;
+    result["uint16"] = FieldDescriptorProto_Type::TYPE_UINT16;
 
     return result;
   }());
@@ -933,7 +933,7 @@ bool Parser::ParseMessageFieldNoLabel(
     location.RecordLegacyLocation(field, DescriptorPool::ErrorCollector::TYPE);
 
     bool type_parsed = false;
-    FieldDescriptorProto::Type type = FieldDescriptorProto::TYPE_INT32;
+    FieldDescriptorProto::Type type = FieldDescriptorProto_Type::TYPE_INT32;
     std::string type_name;
 
     // list<T> is a repeated field of type T. The field type stays T.
@@ -953,7 +953,7 @@ bool Parser::ParseMessageFieldNoLabel(
         DO(Consume(">"));
         location.StartAt(type_start);
         location.EndAt(type_end);
-        field->set_label(FieldDescriptorProto::LABEL_REPEATED);
+        field->set_label(FieldDescriptorProto_Label::LABEL_REPEATED);
         {
           LocationRecorder label_location(
               field_location, FieldDescriptorProto::kLabelFieldNumber);
@@ -983,13 +983,13 @@ bool Parser::ParseMessageFieldNoLabel(
     if (!map_field.is_map_field) {
       // Handle the case where no explicit label is given for a non-map field.
       if (!list_field && !field->has_label() && DefaultToOptionalFields()) {
-        field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
+        field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
       }
       if (!field->has_label()) {
         AddError("Expected \"required\" or \"optional\".");
         // We can actually reasonably recover here by just assuming the user
         // forgot the label altogether.
-        field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
+        field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
       }
 
       // Handle the case where the actual type is a message or enum named
@@ -1073,7 +1073,7 @@ bool Parser::ParseMapType(MapField* map_field, FieldDescriptorProto* field,
     AddError("Map fields are not allowed to be extensions.");
     return false;
   }
-  field->set_label(FieldDescriptorProto::LABEL_REPEATED);
+  field->set_label(FieldDescriptorProto_Label::LABEL_REPEATED);
   DO(Consume("<"));
   DO(ParseType(&map_field->key_type, &map_field->key_type_name));
   DO(Consume(","));
@@ -1095,7 +1095,7 @@ void Parser::GenerateMapEntry(const MapField& map_field,
   entry->mutable_options()->set_map_entry(true);
   FieldDescriptorProto* key_field = entry->add_field();
   key_field->set_name("key");
-  key_field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
+  key_field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
   key_field->set_number(1);
   if (map_field.key_type_name.empty()) {
     key_field->set_type(map_field.key_type);
@@ -1104,7 +1104,7 @@ void Parser::GenerateMapEntry(const MapField& map_field,
   }
   FieldDescriptorProto* value_field = entry->add_field();
   value_field->set_name("value");
-  value_field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
+  value_field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
   value_field->set_number(2);
   if (map_field.value_type_name.empty()) {
     value_field->set_type(map_field.value_type);
@@ -1137,11 +1137,11 @@ void Parser::GenerateMapEntry(const MapField& map_field,
     if (option.name_size() == 1 &&
         option.name(0).name_part() == "enforce_utf8" &&
         !option.name(0).is_extension()) {
-      if (key_field->type() == FieldDescriptorProto::TYPE_STRING) {
+      if (key_field->type() == FieldDescriptorProto_Type::TYPE_STRING) {
         key_field->mutable_options()->add_uninterpreted_option()->CopyFrom(
             option);
       }
-      if (value_field->type() == FieldDescriptorProto::TYPE_STRING) {
+      if (value_field->type() == FieldDescriptorProto_Type::TYPE_STRING) {
         value_field->mutable_options()->add_uninterpreted_option()->CopyFrom(
             option);
       }
@@ -1211,22 +1211,22 @@ bool Parser::ParseDefaultAssignment(
   }
 
   switch (field->type()) {
-    case FieldDescriptorProto::TYPE_INT32:
-    case FieldDescriptorProto::TYPE_INT64:
-    case FieldDescriptorProto::TYPE_SINT32:
-    case FieldDescriptorProto::TYPE_SINT64:
-    case FieldDescriptorProto::TYPE_SFIXED32:
-    case FieldDescriptorProto::TYPE_SFIXED64:
-    case FieldDescriptorProto::TYPE_INT8:
-    case FieldDescriptorProto::TYPE_INT16: {
+    case FieldDescriptorProto_Type::TYPE_INT32:
+    case FieldDescriptorProto_Type::TYPE_INT64:
+    case FieldDescriptorProto_Type::TYPE_SINT32:
+    case FieldDescriptorProto_Type::TYPE_SINT64:
+    case FieldDescriptorProto_Type::TYPE_SFIXED32:
+    case FieldDescriptorProto_Type::TYPE_SFIXED64:
+    case FieldDescriptorProto_Type::TYPE_INT8:
+    case FieldDescriptorProto_Type::TYPE_INT16: {
       uint64_t max_value = std::numeric_limits<int64_t>::max();
-      if (field->type() == FieldDescriptorProto::TYPE_INT32 ||
-          field->type() == FieldDescriptorProto::TYPE_SINT32 ||
-          field->type() == FieldDescriptorProto::TYPE_SFIXED32) {
+      if (field->type() == FieldDescriptorProto_Type::TYPE_INT32 ||
+          field->type() == FieldDescriptorProto_Type::TYPE_SINT32 ||
+          field->type() == FieldDescriptorProto_Type::TYPE_SFIXED32) {
         max_value = std::numeric_limits<int32_t>::max();
-      } else if (field->type() == FieldDescriptorProto::TYPE_INT8) {
+      } else if (field->type() == FieldDescriptorProto_Type::TYPE_INT8) {
         max_value = std::numeric_limits<int8_t>::max();
-      } else if (field->type() == FieldDescriptorProto::TYPE_INT16) {
+      } else if (field->type() == FieldDescriptorProto_Type::TYPE_INT16) {
         max_value = std::numeric_limits<int16_t>::max();
       }
 
@@ -1245,19 +1245,19 @@ bool Parser::ParseDefaultAssignment(
       break;
     }
 
-    case FieldDescriptorProto::TYPE_UINT32:
-    case FieldDescriptorProto::TYPE_UINT64:
-    case FieldDescriptorProto::TYPE_FIXED32:
-    case FieldDescriptorProto::TYPE_FIXED64:
-    case FieldDescriptorProto::TYPE_UINT8:
-    case FieldDescriptorProto::TYPE_UINT16: {
+    case FieldDescriptorProto_Type::TYPE_UINT32:
+    case FieldDescriptorProto_Type::TYPE_UINT64:
+    case FieldDescriptorProto_Type::TYPE_FIXED32:
+    case FieldDescriptorProto_Type::TYPE_FIXED64:
+    case FieldDescriptorProto_Type::TYPE_UINT8:
+    case FieldDescriptorProto_Type::TYPE_UINT16: {
       uint64_t max_value = std::numeric_limits<uint64_t>::max();
-      if (field->type() == FieldDescriptorProto::TYPE_UINT32 ||
-          field->type() == FieldDescriptorProto::TYPE_FIXED32) {
+      if (field->type() == FieldDescriptorProto_Type::TYPE_UINT32 ||
+          field->type() == FieldDescriptorProto_Type::TYPE_FIXED32) {
         max_value = std::numeric_limits<uint32_t>::max();
-      } else if (field->type() == FieldDescriptorProto::TYPE_UINT8) {
+      } else if (field->type() == FieldDescriptorProto_Type::TYPE_UINT8) {
         max_value = std::numeric_limits<uint8_t>::max();
-      } else if (field->type() == FieldDescriptorProto::TYPE_UINT16) {
+      } else if (field->type() == FieldDescriptorProto_Type::TYPE_UINT16) {
         max_value = std::numeric_limits<uint16_t>::max();
       }
 
@@ -1274,8 +1274,8 @@ bool Parser::ParseDefaultAssignment(
       break;
     }
 
-    case FieldDescriptorProto::TYPE_FLOAT:
-    case FieldDescriptorProto::TYPE_DOUBLE:
+    case FieldDescriptorProto_Type::TYPE_FLOAT:
+    case FieldDescriptorProto_Type::TYPE_DOUBLE:
       // These types can be negative.
       if (TryConsume("-")) {
         default_value->append("-");
@@ -1288,7 +1288,7 @@ bool Parser::ParseDefaultAssignment(
       default_value->append(SimpleDtoa(value));
       break;
 
-    case FieldDescriptorProto::TYPE_BOOL:
+    case FieldDescriptorProto_Type::TYPE_BOOL:
       if (TryConsume("true")) {
         default_value->assign("true");
       } else if (TryConsume("false")) {
@@ -1299,7 +1299,7 @@ bool Parser::ParseDefaultAssignment(
       }
       break;
 
-    case FieldDescriptorProto::TYPE_STRING:
+    case FieldDescriptorProto_Type::TYPE_STRING:
       // Note: When file option java_string_check_utf8 is true, if a
       // non-string representation (eg byte[]) is later supported, it must
       // be checked for UTF-8-ness.
@@ -1308,18 +1308,18 @@ bool Parser::ParseDefaultAssignment(
                        "value."));
       break;
 
-    case FieldDescriptorProto::TYPE_BYTES:
+    case FieldDescriptorProto_Type::TYPE_BYTES:
       DO(ConsumeString(default_value, "Expected string."));
       *default_value = CEscape(*default_value);
       break;
 
-    case FieldDescriptorProto::TYPE_ENUM:
+    case FieldDescriptorProto_Type::TYPE_ENUM:
       DO(ConsumeIdentifier(default_value,
                            "Expected enum identifier for field "
                            "default value."));
       break;
 
-    case FieldDescriptorProto::TYPE_MESSAGE:
+    case FieldDescriptorProto_Type::TYPE_MESSAGE:
       AddError("Messages can't have default values.");
       return false;
   }
@@ -1922,7 +1922,7 @@ bool Parser::ParseOneof(OneofDescriptorProto* oneof_decl,
                                     containing_type->field_size());
 
     FieldDescriptorProto* field = containing_type->add_field();
-    field->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
+    field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
     field->set_oneof_index(oneof_index);
 
     if (!ParseMessageFieldNoLabel(field, containing_type->mutable_nested_type(),
@@ -2331,10 +2331,10 @@ bool Parser::ParseLabel(FieldDescriptorProto::Label* label,
   LocationRecorder location(field_location,
                             FieldDescriptorProto::kLabelFieldNumber);
   if (TryConsume("optional")) {
-    *label = FieldDescriptorProto::LABEL_OPTIONAL;
+    *label = FieldDescriptorProto_Label::LABEL_OPTIONAL;
   } else {
     Consume("required");
-    *label = FieldDescriptorProto::LABEL_REQUIRED;
+    *label = FieldDescriptorProto_Label::LABEL_REQUIRED;
   }
   return true;
 }

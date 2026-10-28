@@ -448,7 +448,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {
   const Descriptor* desc = message.GetDescriptor();
 
   for (int i = 0; i < 10; ++i) {
-    message.add_repeated_nested_enum(TestAllTypes::BAR);
+    message.add_repeated_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR);
   }
 
   const FieldDescriptor* fd_repeated_nested_enum =
@@ -476,18 +476,18 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {
   EXPECT_FALSE(mutable_int32_ref.empty());
 
   for (int i = 0; i < 10; ++i) {
-    EXPECT_EQ(TestAllTypes::BAR, enum_ref.Get(i));
-    EXPECT_EQ(TestAllTypes::BAR, mutable_enum_ref.Get(i));
-    mutable_enum_ref.Set(i, TestAllTypes::BAZ);
-    EXPECT_EQ(TestAllTypes::BAZ, enum_ref.Get(i));
-    EXPECT_EQ(TestAllTypes::BAZ, message.repeated_nested_enum(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, enum_ref.Get(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, mutable_enum_ref.Get(i));
+    mutable_enum_ref.Set(i, sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ);
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, enum_ref.Get(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, message.repeated_nested_enum(i));
 
-    message.set_repeated_nested_enum(i, TestAllTypes::BAR);
-    EXPECT_EQ(TestAllTypes::BAR, int32_ref.Get(i));
-    EXPECT_EQ(TestAllTypes::BAR, mutable_int32_ref.Get(i));
-    mutable_int32_ref.Set(i, static_cast<int>(TestAllTypes::BAZ));
-    EXPECT_EQ(TestAllTypes::BAZ, int32_ref.Get(i));
-    EXPECT_EQ(TestAllTypes::BAZ, message.repeated_nested_enum(i));
+    message.set_repeated_nested_enum(i, sharkbuf_unittest::TestAllTypes_NestedEnum::BAR);
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, int32_ref.Get(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, mutable_int32_ref.Get(i));
+    mutable_int32_ref.Set(i, static_cast<int>(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, int32_ref.Get(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, message.repeated_nested_enum(i));
   }
 
   TestRepeatedFieldRefIteratorForPrimitive(enum_ref, message,
@@ -496,10 +496,10 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {
                                            &TestAllTypes::repeated_nested_enum);
 
   // Test Add()
-  mutable_enum_ref.Add(TestAllTypes::FOO);
-  EXPECT_EQ(TestAllTypes::FOO, message.repeated_nested_enum(10));
-  mutable_int32_ref.Add(static_cast<int>(TestAllTypes::BAR));
-  EXPECT_EQ(TestAllTypes::BAR, message.repeated_nested_enum(11));
+  mutable_enum_ref.Add(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO);
+  EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO, message.repeated_nested_enum(10));
+  mutable_int32_ref.Add(static_cast<int>(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR));
+  EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, message.repeated_nested_enum(11));
 
   // Test RemoveLast()
   mutable_enum_ref.RemoveLast();
@@ -508,19 +508,19 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefForEnums) {
   EXPECT_EQ(10, message.repeated_nested_enum_size());
 
   // Test SwapElements()
-  mutable_enum_ref.Set(0, TestAllTypes::BAR);
-  mutable_enum_ref.Set(9, TestAllTypes::BAZ);
+  mutable_enum_ref.Set(0, sharkbuf_unittest::TestAllTypes_NestedEnum::BAR);
+  mutable_enum_ref.Set(9, sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ);
   mutable_enum_ref.SwapElements(0, 9);
-  EXPECT_EQ(TestAllTypes::BAZ, enum_ref.Get(0));
-  EXPECT_EQ(TestAllTypes::BAR, enum_ref.Get(9));
+  EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, enum_ref.Get(0));
+  EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, enum_ref.Get(9));
   mutable_int32_ref.SwapElements(0, 9);
-  EXPECT_EQ(TestAllTypes::BAR, enum_ref.Get(0));
-  EXPECT_EQ(TestAllTypes::BAZ, enum_ref.Get(9));
+  EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, enum_ref.Get(0));
+  EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, enum_ref.Get(9));
 
   // Test Clear()
   mutable_enum_ref.Clear();
   EXPECT_EQ(0, message.repeated_nested_enum_size());
-  mutable_enum_ref.Add(TestAllTypes::FOO);
+  mutable_enum_ref.Add(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO);
   EXPECT_EQ(1, message.repeated_nested_enum_size());
   mutable_int32_ref.Clear();
   EXPECT_EQ(0, message.repeated_nested_enum_size());
@@ -571,17 +571,17 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefMergeFromAndSwap) {
     m0.add_repeated_double(Func(i, 2));
     m0.add_repeated_string(StrFunc(i, 5));
     m0.add_repeated_foreign_message()->set_c(Func(i, 6));
-    m0.add_repeated_nested_enum(TestAllTypes::FOO);
+    m0.add_repeated_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::FOO);
     m1.add_repeated_int32(Func(i, 11));
     m1.add_repeated_double(Func(i, 12));
     m1.add_repeated_string(StrFunc(i, 15));
     m1.add_repeated_foreign_message()->set_c(Func(i, 16));
-    m1.add_repeated_nested_enum(TestAllTypes::BAR);
+    m1.add_repeated_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR);
     m2.add_repeated_int32(Func(i, 21));
     m2.add_repeated_double(Func(i, 22));
     m2.add_repeated_string(StrFunc(i, 25));
     m2.add_repeated_foreign_message()->set_c(Func(i, 26));
-    m2.add_repeated_nested_enum(TestAllTypes::BAZ);
+    m2.add_repeated_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ);
   }
 
   const Reflection* refl = m0.GetReflection();
@@ -628,7 +628,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefMergeFromAndSwap) {
     EXPECT_EQ(Func(i, 12), m0.repeated_double(i));
     EXPECT_EQ(StrFunc(i, 15), m0.repeated_string(i));
     EXPECT_EQ(Func(i, 16), m0.repeated_foreign_message(i).c());
-    EXPECT_EQ(TestAllTypes::BAR, m0.repeated_nested_enum(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, m0.repeated_nested_enum(i));
   }
 
   // Test MutableRepeatedRef::MergeFrom
@@ -647,7 +647,7 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefMergeFromAndSwap) {
     EXPECT_EQ(Func(i, 22), m0.repeated_double(i + 10));
     EXPECT_EQ(StrFunc(i, 25), m0.repeated_string(i + 10));
     EXPECT_EQ(Func(i, 26), m0.repeated_foreign_message(i + 10).c());
-    EXPECT_EQ(TestAllTypes::BAZ, m0.repeated_nested_enum(i + 10));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, m0.repeated_nested_enum(i + 10));
   }
 
   // Test MutableRepeatedRef::Swap
@@ -669,19 +669,19 @@ TEST(RepeatedFieldReflectionTest, RepeatedFieldRefMergeFromAndSwap) {
     EXPECT_EQ(Func(i, 22), m0.repeated_double(i));
     EXPECT_EQ(StrFunc(i, 25), m0.repeated_string(i));
     EXPECT_EQ(Func(i, 26), m0.repeated_foreign_message(i).c());
-    EXPECT_EQ(TestAllTypes::BAZ, m0.repeated_nested_enum(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, m0.repeated_nested_enum(i));
 
     // Check the content of m2.
     EXPECT_EQ(Func(i, 11), m2.repeated_int32(i));
     EXPECT_EQ(Func(i, 12), m2.repeated_double(i));
     EXPECT_EQ(StrFunc(i, 15), m2.repeated_string(i));
     EXPECT_EQ(Func(i, 16), m2.repeated_foreign_message(i).c());
-    EXPECT_EQ(TestAllTypes::BAR, m2.repeated_nested_enum(i));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR, m2.repeated_nested_enum(i));
     EXPECT_EQ(Func(i, 21), m2.repeated_int32(i + 10));
     EXPECT_EQ(Func(i, 22), m2.repeated_double(i + 10));
     EXPECT_EQ(StrFunc(i, 25), m2.repeated_string(i + 10));
     EXPECT_EQ(Func(i, 26), m2.repeated_foreign_message(i + 10).c());
-    EXPECT_EQ(TestAllTypes::BAZ, m2.repeated_nested_enum(i + 10));
+    EXPECT_EQ(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ, m2.repeated_nested_enum(i + 10));
   }
 }
 

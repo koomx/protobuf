@@ -1140,34 +1140,6 @@ bool FieldDescriptorProto_Type_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_BOOL;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT8;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT8;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT16;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT16;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_INT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_UINT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT16;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FLOAT8;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_DOUBLE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_ENUM;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_MESSAGE;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_STRING;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_BYTES;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FIXED32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_FIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SFIXED32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SFIXED64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SINT32;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::TYPE_SINT64;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::Type_MIN;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto::Type_MAX;
-constexpr int FieldDescriptorProto::Type_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Label_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
   return file_level_enum_descriptors_shark_2fdescriptor_2eshark[1];
@@ -1183,14 +1155,6 @@ bool FieldDescriptorProto_Label_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr FieldDescriptorProto_Label FieldDescriptorProto::LABEL_OPTIONAL;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto::LABEL_REQUIRED;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto::LABEL_REPEATED;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto::Label_MIN;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto::Label_MAX;
-constexpr int FieldDescriptorProto::Label_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* FileOptions_OptimizeMode_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
   return file_level_enum_descriptors_shark_2fdescriptor_2eshark[2];
@@ -1206,14 +1170,6 @@ bool FileOptions_OptimizeMode_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr FileOptions_OptimizeMode FileOptions::SPEED;
-constexpr FileOptions_OptimizeMode FileOptions::CODE_SIZE;
-constexpr FileOptions_OptimizeMode FileOptions::LITE_RUNTIME;
-constexpr FileOptions_OptimizeMode FileOptions::OptimizeMode_MIN;
-constexpr FileOptions_OptimizeMode FileOptions::OptimizeMode_MAX;
-constexpr int FileOptions::OptimizeMode_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_CType_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
   return file_level_enum_descriptors_shark_2fdescriptor_2eshark[3];
@@ -1229,14 +1185,6 @@ bool FieldOptions_CType_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr FieldOptions_CType FieldOptions::STRING;
-constexpr FieldOptions_CType FieldOptions::CORD;
-constexpr FieldOptions_CType FieldOptions::STRING_PIECE;
-constexpr FieldOptions_CType FieldOptions::CType_MIN;
-constexpr FieldOptions_CType FieldOptions::CType_MAX;
-constexpr int FieldOptions::CType_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_JSType_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
   return file_level_enum_descriptors_shark_2fdescriptor_2eshark[4];
@@ -1252,14 +1200,6 @@ bool FieldOptions_JSType_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr FieldOptions_JSType FieldOptions::JS_NORMAL;
-constexpr FieldOptions_JSType FieldOptions::JS_STRING;
-constexpr FieldOptions_JSType FieldOptions::JS_NUMBER;
-constexpr FieldOptions_JSType FieldOptions::JSType_MIN;
-constexpr FieldOptions_JSType FieldOptions::JSType_MAX;
-constexpr int FieldOptions::JSType_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* MethodOptions_IdempotencyLevel_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
   return file_level_enum_descriptors_shark_2fdescriptor_2eshark[5];
@@ -1275,14 +1215,6 @@ bool MethodOptions_IdempotencyLevel_IsValid(int value) {
   }
 }
 
-#if (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
-constexpr MethodOptions_IdempotencyLevel MethodOptions::IDEMPOTENCY_UNKNOWN;
-constexpr MethodOptions_IdempotencyLevel MethodOptions::NO_SIDE_EFFECTS;
-constexpr MethodOptions_IdempotencyLevel MethodOptions::IDEMPOTENT;
-constexpr MethodOptions_IdempotencyLevel MethodOptions::IdempotencyLevel_MIN;
-constexpr MethodOptions_IdempotencyLevel MethodOptions::IdempotencyLevel_MAX;
-constexpr int MethodOptions::IdempotencyLevel_ARRAYSIZE;
-#endif  // (__cplusplus < 201703) && (!defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912))
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumUnderlyingType_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
   return file_level_enum_descriptors_shark_2fdescriptor_2eshark[6];

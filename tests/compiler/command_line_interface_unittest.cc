@@ -711,8 +711,8 @@ TEST_F(CommandLineInterfaceTest, MultipleInputs_UnusedImport_DescriptorSetIn) {
   extension_option->set_name("unknown_option");
   extension_option->set_extendee(".shark.MessageOptions");
   extension_option->set_number(1111);
-  extension_option->set_label(FieldDescriptorProto::LABEL_OPTIONAL);
-  extension_option->set_type(FieldDescriptorProto::TYPE_INT64);
+  extension_option->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+  extension_option->set_type(FieldDescriptorProto_Type::TYPE_INT64);
 
   file_descriptor_proto = file_descriptor_set.add_file();
   file_descriptor_proto->set_name("import_custom_unknown_options.shark");

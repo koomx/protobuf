@@ -165,7 +165,7 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
       case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
-          case FieldOptions::STRING:
+          case FieldOptions_CType::STRING:
             return sizeof(RepeatedPtrField<std::string>);
         }
         break;
@@ -203,7 +203,7 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
       case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
-          case FieldOptions::STRING:
+          case FieldOptions_CType::STRING:
             return sizeof(ArenaStringPtr);
         }
         break;
@@ -457,7 +457,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
       case FieldCppType::STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
-          case FieldOptions::STRING:
+          case FieldOptions_CType::STRING:
             if (!field->is_repeated()) {
               ArenaStringPtr* asp = new (field_ptr) ArenaStringPtr();
               asp->InitDefault();
@@ -560,7 +560,7 @@ DynamicMessage::~DynamicMessage() {
         if (field->cpp_type() == FieldCppType::STRING) {
           switch (field->options().ctype()) {
             default:
-            case FieldOptions::STRING: {
+            case FieldOptions_CType::STRING: {
               reinterpret_cast<ArenaStringPtr*>(field_ptr)->Destroy();
               break;
             }
@@ -598,7 +598,7 @@ DynamicMessage::~DynamicMessage() {
         case FieldCppType::STRING:
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
-            case FieldOptions::STRING:
+            case FieldOptions_CType::STRING:
               reinterpret_cast<RepeatedPtrField<std::string>*>(field_ptr)
                   ->~RepeatedPtrField<std::string>();
               break;
@@ -618,7 +618,7 @@ DynamicMessage::~DynamicMessage() {
     } else if (field->cpp_type() == FieldCppType::STRING) {
       switch (field->options().ctype()) {
         default:  // TODO(kenton):  Support other string reps.
-        case FieldOptions::STRING: {
+        case FieldOptions_CType::STRING: {
           reinterpret_cast<ArenaStringPtr*>(field_ptr)->Destroy();
           break;
         }

@@ -309,7 +309,7 @@ FileOptions_OptimizeMode GetOptimizeFor(const FileDescriptor* file,
 // a string.
 inline bool UseUnknownFieldSet(const FileDescriptor* file,
                                const Options& options) {
-  return GetOptimizeFor(file, options) != FileOptions::LITE_RUNTIME;
+  return GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME;
 }
 
 inline bool IsWeak(const FieldDescriptor* field, const Options& options) {
@@ -329,18 +329,18 @@ FieldOptions::CType EffectiveStringCType(const FieldDescriptor* field,
 
 inline bool IsCord(const FieldDescriptor* field, const Options& options) {
   return field->cpp_type() == FieldCppType::STRING &&
-         EffectiveStringCType(field, options) == FieldOptions::CORD;
+         EffectiveStringCType(field, options) == FieldOptions_CType::CORD;
 }
 
 inline bool IsString(const FieldDescriptor* field, const Options& options) {
   return field->cpp_type() == FieldCppType::STRING &&
-         EffectiveStringCType(field, options) == FieldOptions::STRING;
+         EffectiveStringCType(field, options) == FieldOptions_CType::STRING;
 }
 
 inline bool IsStringPiece(const FieldDescriptor* field,
                           const Options& options) {
   return field->cpp_type() == FieldCppType::STRING &&
-         EffectiveStringCType(field, options) == FieldOptions::STRING_PIECE;
+         EffectiveStringCType(field, options) == FieldOptions_CType::STRING_PIECE;
 }
 
 class MessageSCCAnalyzer;
@@ -408,20 +408,20 @@ bool HasEnumDefinitions(const FileDescriptor* file);
 // standard methods for which reflection-based fallback implementations exist?
 inline bool HasGeneratedMethods(const FileDescriptor* file,
                                 const Options& options) {
-  return GetOptimizeFor(file, options) != FileOptions::CODE_SIZE;
+  return GetOptimizeFor(file, options) != FileOptions_OptimizeMode::CODE_SIZE;
 }
 
 // Do message classes in this file have descriptor and reflection methods?
 inline bool HasDescriptorMethods(const FileDescriptor* file,
                                  const Options& options) {
-  return GetOptimizeFor(file, options) != FileOptions::LITE_RUNTIME;
+  return GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME;
 }
 
 // Should we generate generic services for this file?
 inline bool HasGenericServices(const FileDescriptor* file,
                                const Options& options) {
   return file->service_count() > 0 &&
-         GetOptimizeFor(file, options) != FileOptions::LITE_RUNTIME &&
+         GetOptimizeFor(file, options) != FileOptions_OptimizeMode::LITE_RUNTIME &&
          file->options().cc_generic_services();
 }
 
@@ -532,7 +532,7 @@ inline bool NeedsEagerDescriptorAssignment(const FileDescriptor* file,
                                            const Options& options) {
   bool has_opt_codesize_extension;
   if (GetOptimizeFor(file, options, &has_opt_codesize_extension) ==
-          FileOptions::CODE_SIZE &&
+          FileOptions_OptimizeMode::CODE_SIZE &&
       has_opt_codesize_extension) {
     // If this filedescriptor contains an extension from another file which
     // is optimized_for = CODE_SIZE. We need to be careful in the ordering so
@@ -700,7 +700,7 @@ inline std::string SimpleBaseClass(const Descriptor* desc,
 inline bool HasTracker(const Descriptor* desc, const Options& options) {
   return options.field_listener_options.inject_field_listener_events &&
          desc->file()->options().optimize_for() !=
-             shark::FileOptions::LITE_RUNTIME;
+             shark::FileOptions_OptimizeMode::LITE_RUNTIME;
 }
 
 // Returns true if this message needs an Impl_ struct for it's data.

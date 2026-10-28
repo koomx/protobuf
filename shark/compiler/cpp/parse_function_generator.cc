@@ -60,7 +60,7 @@ std::vector<const FieldDescriptor*> GetOrderedFields(
 }
 
 bool HasInternalAccessors(const FieldOptions::CType ctype) {
-  return ctype == FieldOptions::STRING || ctype == FieldOptions::CORD;
+  return ctype == FieldOptions_CType::STRING || ctype == FieldOptions_CType::CORD;
 }
 
 int TagSize(uint32_t field_number) {
@@ -104,7 +104,7 @@ bool IsFieldEligibleForFastParsing(
       // Some bytes fields can be handled on fast path.
     case FieldType::STRING:
     case FieldType::BYTES:
-      if (field->options().ctype() != FieldOptions::STRING) {
+      if (field->options().ctype() != FieldOptions_CType::STRING) {
         return false;
       }
       if (IsStringInlined(field, options)) {
@@ -759,7 +759,7 @@ void ParseFunctionGenerator::GenerateTailCallTable(Formatter& format) {
   } else {
     fallback = "::_pbi::TcParser::GenericFallback";
     if (GetOptimizeFor(descriptor_->file(), options_) ==
-        FileOptions::LITE_RUNTIME) {
+        FileOptions_OptimizeMode::LITE_RUNTIME) {
       fallback += "Lite";
     }
   }
@@ -1164,27 +1164,27 @@ void ParseFunctionGenerator::GenerateArenaString(Formatter& format,
 void ParseFunctionGenerator::GenerateStrings(Formatter& format,
                                              const FieldDescriptor* field,
                                              bool check_utf8) {
-  FieldOptions::CType ctype = FieldOptions::STRING;
+  FieldOptions::CType ctype = FieldOptions_CType::STRING;
   if (!options_.opensource_runtime) {
     // Open source doesn't support other ctypes;
     ctype = field->options().ctype();
   }
   if (!field->is_repeated() && !options_.opensource_runtime &&
-      GetOptimizeFor(field->file(), options_) != FileOptions::LITE_RUNTIME &&
+      GetOptimizeFor(field->file(), options_) != FileOptions_OptimizeMode::LITE_RUNTIME &&
       // For now only use arena string for strings with empty defaults.
       field->default_value_string().empty() &&
-      !field->real_containing_oneof() && ctype == FieldOptions::STRING) {
+      !field->real_containing_oneof() && ctype == FieldOptions_CType::STRING) {
     GenerateArenaString(format, field);
   } else {
     std::string parser_name;
     switch (ctype) {
-      case FieldOptions::STRING:
+      case FieldOptions_CType::STRING:
         parser_name = "GreedyStringParser";
         break;
-      case FieldOptions::CORD:
+      case FieldOptions_CType::CORD:
         parser_name = "CordParser";
         break;
-      case FieldOptions::STRING_PIECE:
+      case FieldOptions_CType::STRING_PIECE:
         parser_name = "StringPieceParser";
         break;
     }

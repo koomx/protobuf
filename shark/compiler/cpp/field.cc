@@ -77,7 +77,7 @@ std::string GenerateTemplateForOneofString(const FieldDescriptor* descriptor,
                                            StringPiece field_member) {
   std::string field_name = shark::compiler::cpp::FieldName(descriptor);
   std::string field_pointer =
-      descriptor->options().ctype() == shark::FieldOptions::STRING
+      descriptor->options().ctype() == shark::FieldOptions_CType::STRING
           ? "$0.UnsafeGetPointer()"
           : "$0";
 
@@ -87,14 +87,14 @@ std::string GenerateTemplateForOneofString(const FieldDescriptor* descriptor,
                             field_member);
   }
 
-  if (descriptor->options().ctype() == shark::FieldOptions::STRING_PIECE) {
+  if (descriptor->options().ctype() == shark::FieldOptions_CType::STRING_PIECE) {
     return strings::Substitute(StrCat("_internal_has_", field_name, "() ? ",
                                          field_pointer, ": nullptr"),
                             field_member);
   }
 
   std::string default_value_pointer =
-      descriptor->options().ctype() == shark::FieldOptions::STRING
+      descriptor->options().ctype() == shark::FieldOptions_CType::STRING
           ? "&$1.get()"
           : "&$1";
   return strings::Substitute(
@@ -109,7 +109,7 @@ std::string GenerateTemplateForSingleString(const FieldDescriptor* descriptor,
     return StrCat("&", field_member);
   }
 
-  if (descriptor->options().ctype() == shark::FieldOptions::STRING) {
+  if (descriptor->options().ctype() == shark::FieldOptions_CType::STRING) {
     return strings::Substitute(
         "$0.IsDefault() ? &$1.get() : $0.UnsafeGetPointer()", field_member,
         MakeDefaultFieldName(descriptor));
@@ -144,7 +144,7 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     return;
   }
   if (descriptor->file()->options().optimize_for() ==
-      shark::FileOptions::LITE_RUNTIME) {
+      shark::FileOptions_OptimizeMode::LITE_RUNTIME) {
     return;
   }
   std::string field_member = (*variables)["field"];

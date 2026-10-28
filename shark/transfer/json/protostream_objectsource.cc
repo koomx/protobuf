@@ -85,24 +85,24 @@ const std::string FormatNanos(uint32_t nanos, bool with_trailing_zeros);
 util::StatusOr<std::string> MapKeyDefaultValueAsString(
     const shark::Field& field) {
   switch (field.kind()) {
-    case shark::Field::TYPE_BOOL:
+    case shark::Field_Kind::TYPE_BOOL:
       return std::string("false");
-    case shark::Field::TYPE_INT32:
-    case shark::Field::TYPE_INT8:
-    case shark::Field::TYPE_INT16:
-    case shark::Field::TYPE_INT64:
-    case shark::Field::TYPE_UINT32:
-    case shark::Field::TYPE_UINT8:
-    case shark::Field::TYPE_UINT16:
-    case shark::Field::TYPE_UINT64:
-    case shark::Field::TYPE_SINT32:
-    case shark::Field::TYPE_SINT64:
-    case shark::Field::TYPE_SFIXED32:
-    case shark::Field::TYPE_SFIXED64:
-    case shark::Field::TYPE_FIXED32:
-    case shark::Field::TYPE_FIXED64:
+    case shark::Field_Kind::TYPE_INT32:
+    case shark::Field_Kind::TYPE_INT8:
+    case shark::Field_Kind::TYPE_INT16:
+    case shark::Field_Kind::TYPE_INT64:
+    case shark::Field_Kind::TYPE_UINT32:
+    case shark::Field_Kind::TYPE_UINT8:
+    case shark::Field_Kind::TYPE_UINT16:
+    case shark::Field_Kind::TYPE_UINT64:
+    case shark::Field_Kind::TYPE_SINT32:
+    case shark::Field_Kind::TYPE_SINT64:
+    case shark::Field_Kind::TYPE_SFIXED32:
+    case shark::Field_Kind::TYPE_SFIXED64:
+    case shark::Field_Kind::TYPE_FIXED32:
+    case shark::Field_Kind::TYPE_FIXED64:
       return std::string("0");
-    case shark::Field::TYPE_STRING:
+    case shark::Field_Kind::TYPE_STRING:
       return std::string();
     default:
       return util::InternalError("Invalid map key type.");
@@ -210,7 +210,7 @@ util::Status ProtoStreamObjectSource::WriteMessage(
       continue;
     }
 
-    if (field->cardinality() == shark::Field::CARDINALITY_REPEATED) {
+    if (field->cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED) {
       if (IsMap(*field)) {
         ow->StartObject(field_name);
         ASSIGN_OR_RETURN(tag, RenderMap(field, field_name, tag, ow));
@@ -729,7 +729,7 @@ util::Status ProtoStreamObjectSource::RenderField(
   // Short-circuit message types as it tends to call WriteMessage recursively
   // and ends up using a lot of stack space. Keep the stack usage of this
   // message small in order to preserve stack space and not crash.
-  if (field->kind() == shark::Field::TYPE_MESSAGE) {
+  if (field->kind() == shark::Field_Kind::TYPE_MESSAGE) {
     uint32_t buffer32;
     stream_->ReadVarint32(&buffer32);  // message length
     int old_limit = stream_->PushLimit(buffer32);
@@ -773,76 +773,76 @@ util::Status ProtoStreamObjectSource::RenderNonMessageField(
   uint64_t buffer64 = 0;
   std::string strbuffer;
   switch (field->kind()) {
-    case shark::Field::TYPE_BOOL: {
+    case shark::Field_Kind::TYPE_BOOL: {
       stream_->ReadVarint64(&buffer64);
       ow->RenderBool(field_name, buffer64 != 0);
       break;
     }
-    case shark::Field::TYPE_INT32:
-    case shark::Field::TYPE_INT8:
-    case shark::Field::TYPE_INT16: {
+    case shark::Field_Kind::TYPE_INT32:
+    case shark::Field_Kind::TYPE_INT8:
+    case shark::Field_Kind::TYPE_INT16: {
       stream_->ReadVarint32(&buffer32);
       ow->RenderInt32(field_name, bit_cast<int32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_INT64: {
+    case shark::Field_Kind::TYPE_INT64: {
       stream_->ReadVarint64(&buffer64);
       ow->RenderInt64(field_name, bit_cast<int64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_UINT32:
-    case shark::Field::TYPE_UINT8:
-    case shark::Field::TYPE_UINT16: {
+    case shark::Field_Kind::TYPE_UINT32:
+    case shark::Field_Kind::TYPE_UINT8:
+    case shark::Field_Kind::TYPE_UINT16: {
       stream_->ReadVarint32(&buffer32);
       ow->RenderUint32(field_name, bit_cast<uint32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_UINT64: {
+    case shark::Field_Kind::TYPE_UINT64: {
       stream_->ReadVarint64(&buffer64);
       ow->RenderUint64(field_name, bit_cast<uint64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_SINT32: {
+    case shark::Field_Kind::TYPE_SINT32: {
       stream_->ReadVarint32(&buffer32);
       ow->RenderInt32(field_name, WireFormatLite::ZigZagDecode32(buffer32));
       break;
     }
-    case shark::Field::TYPE_SINT64: {
+    case shark::Field_Kind::TYPE_SINT64: {
       stream_->ReadVarint64(&buffer64);
       ow->RenderInt64(field_name, WireFormatLite::ZigZagDecode64(buffer64));
       break;
     }
-    case shark::Field::TYPE_SFIXED32: {
+    case shark::Field_Kind::TYPE_SFIXED32: {
       stream_->ReadLittleEndian32(&buffer32);
       ow->RenderInt32(field_name, bit_cast<int32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_SFIXED64: {
+    case shark::Field_Kind::TYPE_SFIXED64: {
       stream_->ReadLittleEndian64(&buffer64);
       ow->RenderInt64(field_name, bit_cast<int64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_FIXED32: {
+    case shark::Field_Kind::TYPE_FIXED32: {
       stream_->ReadLittleEndian32(&buffer32);
       ow->RenderUint32(field_name, bit_cast<uint32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_FIXED64: {
+    case shark::Field_Kind::TYPE_FIXED64: {
       stream_->ReadLittleEndian64(&buffer64);
       ow->RenderUint64(field_name, bit_cast<uint64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_FLOAT: {
+    case shark::Field_Kind::TYPE_FLOAT: {
       stream_->ReadLittleEndian32(&buffer32);
       ow->RenderFloat(field_name, bit_cast<float>(buffer32));
       break;
     }
-    case shark::Field::TYPE_DOUBLE: {
+    case shark::Field_Kind::TYPE_DOUBLE: {
       stream_->ReadLittleEndian64(&buffer64);
       ow->RenderDouble(field_name, bit_cast<double>(buffer64));
       break;
     }
-    case shark::Field::TYPE_ENUM: {
+    case shark::Field_Kind::TYPE_ENUM: {
       stream_->ReadVarint32(&buffer32);
 
       // If the field represents an explicit NULL value, render null.
@@ -878,13 +878,13 @@ util::Status ProtoStreamObjectSource::RenderNonMessageField(
       }
       break;
     }
-    case shark::Field::TYPE_STRING: {
+    case shark::Field_Kind::TYPE_STRING: {
       stream_->ReadVarint32(&buffer32);  // string size.
       stream_->ReadString(&strbuffer, buffer32);
       ow->RenderString(field_name, strbuffer);
       break;
     }
-    case shark::Field::TYPE_BYTES: {
+    case shark::Field_Kind::TYPE_BYTES: {
       stream_->ReadVarint32(&buffer32);  // bytes size.
       stream_->ReadString(&strbuffer, buffer32);
       ow->RenderBytes(field_name, strbuffer);
@@ -901,89 +901,89 @@ const std::string ProtoStreamObjectSource::ReadFieldValueAsString(
     const shark::Field& field) const {
   std::string result;
   switch (field.kind()) {
-    case shark::Field::TYPE_BOOL: {
+    case shark::Field_Kind::TYPE_BOOL: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
       result = buffer64 != 0 ? "true" : "false";
       break;
     }
-    case shark::Field::TYPE_INT32:
-    case shark::Field::TYPE_INT8:
-    case shark::Field::TYPE_INT16: {
+    case shark::Field_Kind::TYPE_INT32:
+    case shark::Field_Kind::TYPE_INT8:
+    case shark::Field_Kind::TYPE_INT16: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
       result = StrCat(bit_cast<int32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_INT64: {
+    case shark::Field_Kind::TYPE_INT64: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
       result = StrCat(bit_cast<int64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_UINT32:
-    case shark::Field::TYPE_UINT8:
-    case shark::Field::TYPE_UINT16: {
+    case shark::Field_Kind::TYPE_UINT32:
+    case shark::Field_Kind::TYPE_UINT8:
+    case shark::Field_Kind::TYPE_UINT16: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
       result = StrCat(bit_cast<uint32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_UINT64: {
+    case shark::Field_Kind::TYPE_UINT64: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
       result = StrCat(bit_cast<uint64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_SINT32: {
+    case shark::Field_Kind::TYPE_SINT32: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
       result = StrCat(WireFormatLite::ZigZagDecode32(buffer32));
       break;
     }
-    case shark::Field::TYPE_SINT64: {
+    case shark::Field_Kind::TYPE_SINT64: {
       uint64_t buffer64;
       stream_->ReadVarint64(&buffer64);
       result = StrCat(WireFormatLite::ZigZagDecode64(buffer64));
       break;
     }
-    case shark::Field::TYPE_SFIXED32: {
+    case shark::Field_Kind::TYPE_SFIXED32: {
       uint32_t buffer32;
       stream_->ReadLittleEndian32(&buffer32);
       result = StrCat(bit_cast<int32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_SFIXED64: {
+    case shark::Field_Kind::TYPE_SFIXED64: {
       uint64_t buffer64;
       stream_->ReadLittleEndian64(&buffer64);
       result = StrCat(bit_cast<int64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_FIXED32: {
+    case shark::Field_Kind::TYPE_FIXED32: {
       uint32_t buffer32;
       stream_->ReadLittleEndian32(&buffer32);
       result = StrCat(bit_cast<uint32_t>(buffer32));
       break;
     }
-    case shark::Field::TYPE_FIXED64: {
+    case shark::Field_Kind::TYPE_FIXED64: {
       uint64_t buffer64;
       stream_->ReadLittleEndian64(&buffer64);
       result = StrCat(bit_cast<uint64_t>(buffer64));
       break;
     }
-    case shark::Field::TYPE_FLOAT: {
+    case shark::Field_Kind::TYPE_FLOAT: {
       uint32_t buffer32;
       stream_->ReadLittleEndian32(&buffer32);
       result = SimpleFtoa(bit_cast<float>(buffer32));
       break;
     }
-    case shark::Field::TYPE_DOUBLE: {
+    case shark::Field_Kind::TYPE_DOUBLE: {
       uint64_t buffer64;
       stream_->ReadLittleEndian64(&buffer64);
       result = SimpleDtoa(bit_cast<double>(buffer64));
       break;
     }
-    case shark::Field::TYPE_ENUM: {
+    case shark::Field_Kind::TYPE_ENUM: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);
       // Get the nested enum type for this field.
@@ -1001,13 +1001,13 @@ const std::string ProtoStreamObjectSource::ReadFieldValueAsString(
       }
       break;
     }
-    case shark::Field::TYPE_STRING: {
+    case shark::Field_Kind::TYPE_STRING: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);  // string size.
       stream_->ReadString(&result, buffer32);
       break;
     }
-    case shark::Field::TYPE_BYTES: {
+    case shark::Field_Kind::TYPE_BYTES: {
       uint32_t buffer32;
       stream_->ReadVarint32(&buffer32);  // bytes size.
       stream_->ReadString(&result, buffer32);
@@ -1025,7 +1025,7 @@ bool ProtoStreamObjectSource::IsMap(
     const shark::Field& field) const {
   const shark::Type* field_type =
       typeinfo_->GetTypeByTypeUrl(field.type_url());
-  return field.kind() == shark::Field::TYPE_MESSAGE &&
+  return field.kind() == shark::Field_Kind::TYPE_MESSAGE &&
          util::converter::IsMap(field, *field_type);
 }
 
@@ -1083,7 +1083,7 @@ const shark::Field* FindFieldByNumber(
 // TODO(skarvaje): Replace FieldDescriptor by implementing IsTypePackable()
 // using tech Field.
 bool IsPackable(const shark::Field& field) {
-  return field.cardinality() == shark::Field::CARDINALITY_REPEATED &&
+  return field.cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED &&
          FieldDescriptor::IsTypePackable(
              static_cast<FieldType>(field.kind()));
 }

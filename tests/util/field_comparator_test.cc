@@ -145,13 +145,13 @@ TEST_F(DefaultFieldComparatorTest, BooleanComparison) {
 TEST_F(DefaultFieldComparatorTest, EnumComparison) {
   const FieldDescriptor* field =
       descriptor_->FindFieldByName("optional_nested_enum");
-  message_1_.set_optional_nested_enum(TestAllTypes::BAR);
-  message_2_.set_optional_nested_enum(TestAllTypes::BAR);
+  message_1_.set_optional_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR);
+  message_2_.set_optional_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::BAR);
 
   EXPECT_EQ(FieldComparator::SAME, comparator_.Compare(message_1_, message_2_,
                                                        field, -1, -1, nullptr));
 
-  message_2_.set_optional_nested_enum(TestAllTypes::BAZ);
+  message_2_.set_optional_nested_enum(sharkbuf_unittest::TestAllTypes_NestedEnum::BAZ);
   EXPECT_EQ(
       FieldComparator::DIFFERENT,
       comparator_.Compare(message_1_, message_2_, field, -1, -1, nullptr));

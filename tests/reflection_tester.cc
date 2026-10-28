@@ -44,9 +44,9 @@ MapReflectionTester::MapReflectionTester(const Descriptor* base_descriptor)
   const DescriptorPool* pool = base_descriptor->file()->pool();
   std::string package = base_descriptor->file()->package();
 
-  map_enum_foo_ = pool->FindEnumValueByName(package + ".MAP_ENUM_FOO");
-  map_enum_bar_ = pool->FindEnumValueByName(package + ".MAP_ENUM_BAR");
-  map_enum_baz_ = pool->FindEnumValueByName(package + ".MAP_ENUM_BAZ");
+  map_enum_foo_ = pool->FindEnumValueByName(package + ".MapEnum.MAP_ENUM_FOO");
+  map_enum_bar_ = pool->FindEnumValueByName(package + ".MapEnum.MAP_ENUM_BAR");
+  map_enum_baz_ = pool->FindEnumValueByName(package + ".MapEnum.MAP_ENUM_BAZ");
 
   foreign_c_ = pool->FindFieldByName(package + ".ForeignMessage.c");
   map_int32_int32_key_ =
