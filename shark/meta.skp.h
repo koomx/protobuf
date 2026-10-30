@@ -70,13 +70,14 @@ struct TempTest_InnerETrait {
     static constexpr TempTest_InnerE enum_max = TempTest_InnerE::B;
     static constexpr uint32_t value_count = 3;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(TempTest_InnerE value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(TempTest_InnerE e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, TempTest_InnerE *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -84,8 +85,6 @@ struct TempTest_InnerETrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // global enum SharkType
 // enum class SharkType : uint8_t {
 enum class SharkType : uint8_t {
@@ -122,13 +121,14 @@ struct SharkTypeTrait {
     static constexpr SharkType enum_max = SharkType::SINT64;
     static constexpr uint32_t value_count = 24;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static uint8_t to_underlying(SharkType value) { return static_cast<uint8_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(SharkType e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, SharkType *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return value >= 0 && value <= 255;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -136,8 +136,6 @@ struct SharkTypeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // global enum SharkCppType
 // enum class SharkCppType : uint8_t {
 enum class SharkCppType : uint8_t {
@@ -166,13 +164,14 @@ struct SharkCppTypeTrait {
     static constexpr SharkCppType enum_max = SharkCppType::STRING;
     static constexpr uint32_t value_count = 16;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static uint8_t to_underlying(SharkCppType value) { return static_cast<uint8_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(SharkCppType e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, SharkCppType *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return value >= 0 && value <= 255;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -180,78 +179,28 @@ struct SharkCppTypeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
 
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::TempTest_InnerE
     template <>
-    struct EnumTraitImpl<::shark::TempTest_InnerE> {
-        using underlying = int32_t;
-        static constexpr ::shark::TempTest_InnerE enum_min = ::shark::TempTest_InnerE::A;
-        static constexpr ::shark::TempTest_InnerE enum_max = ::shark::TempTest_InnerE::B;
-        static constexpr uint32_t value_count = 3;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::TempTest_InnerE e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::TempTest_InnerE *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::TempTest_InnerE> : public ::shark::TempTest_InnerETrait {};
     template <> struct IsSharkEnum< ::shark::TempTest_InnerE> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::SharkType
     template <>
-    struct EnumTraitImpl<::shark::SharkType> {
-        using underlying = uint8_t;
-        static constexpr ::shark::SharkType enum_min = ::shark::SharkType::UNKNOWN;
-        static constexpr ::shark::SharkType enum_max = ::shark::SharkType::SINT64;
-        static constexpr uint32_t value_count = 24;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::SharkType e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return value >= 0 && value <= 255;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return value <= 255u;
-        }
-    };
-
+    struct EnumTraitImpl<::shark::SharkType> : public ::shark::SharkTypeTrait {};
     template <> struct IsSharkEnum< ::shark::SharkType> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::SharkCppType
     template <>
-    struct EnumTraitImpl<::shark::SharkCppType> {
-        using underlying = uint8_t;
-        static constexpr ::shark::SharkCppType enum_min = ::shark::SharkCppType::BOOL;
-        static constexpr ::shark::SharkCppType enum_max = ::shark::SharkCppType::STRING;
-        static constexpr uint32_t value_count = 16;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::SharkCppType e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return value >= 0 && value <= 255;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return value <= 255u;
-        }
-    };
-
+    struct EnumTraitImpl<::shark::SharkCppType> : public ::shark::SharkCppTypeTrait {};
     template <> struct IsSharkEnum< ::shark::SharkCppType> : ::std::true_type {};
+
 
 SHARK_NAMESPACE_CLOSE
 // ===================================================================
@@ -382,7 +331,8 @@ class SHARK_EXPORT TempTest final :
 
     // nested types ----------------------------------------------------
 
-    typedef TempTest_InnerE InnerE;
+    using InnerE = TempTest_InnerE;
+    using InnerETrait = TempTest_InnerETrait;
 
     // accessors -------------------------------------------------------
 
@@ -464,7 +414,7 @@ inline ::shark::TempTest_InnerE TempTest::ee() const {
 }
 inline void TempTest::_internal_set_ee(::shark::TempTest_InnerE value) {
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.ee_ = static_cast<int>(::shark::EnumTrait<::shark::TempTest_InnerE>::to_underlying(value));
+  _impl_.ee_ = static_cast<int>(::shark::TempTest_InnerETrait::to_underlying(value));
 }
 inline void TempTest::set_ee(::shark::TempTest_InnerE value) {
   _internal_set_ee(value);

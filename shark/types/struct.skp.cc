@@ -603,7 +603,7 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::NullValue>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::NullValueTrait::fits_wire(val))) {
                         _internal_set_null_value(static_cast<::shark::NullValue>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -1047,30 +1047,6 @@ void ListValue::InternalSwap(ListValue* other) {
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
 
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::NullValue>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2fstruct_2eshark);
-    return file_level_enum_descriptors_shark_2ftypes_2fstruct_2eshark[0];
-}
-bool EnumTraitImpl<::shark::NullValue>::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::NullValue>::enum_name(
-   ::shark::NullValue enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::NullValue>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::NullValue>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::NullValue>(
-    descriptor(), name, value);
-}
 template<> SHARK_NOINLINE ::shark::Struct_FieldsEntry_DoNotUse*
 Arena::CreateMaybeMessage< ::shark::Struct_FieldsEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Struct_FieldsEntry_DoNotUse >(arena);

@@ -193,8 +193,10 @@ namespace shark::compiler::cpp {
             format("static constexpr bool has_descriptor = $1$;\n", (has_des ? "true" : "false"));
 
             if (has_des) {
-                format("static const EnumDescriptor* descriptor();\n");
+                format("static const ::$proto_ns$::EnumDescriptor* descriptor();\n");
             }
+
+            format("static $underlying$ to_underlying($classname$ value) { return static_cast<$underlying$>(value); }\n");
 
             format("static bool is_valid(int64_t value);\n");
 
@@ -205,7 +207,7 @@ namespace shark::compiler::cpp {
             format("\n\n");
 
             format(
-              "static constexpr bool fits_underlying(int value) {\n"
+              "static constexpr bool fits_underlying(int64_t value) {\n"
               "     return $1$;\n"
               "}\n"
               "static constexpr bool fits_wire(::uint64_t value) {\n"
@@ -219,10 +221,10 @@ namespace shark::compiler::cpp {
 
         }
 
-        format("////////////////////////////////////////////////////////////////////\n");
-        format("/// enum traits\n");
         {
             if (descriptor_->options().enable_operator()) {
+                format("////////////////////////////////////////////////////////////////////\n");
+                format("/// enum operators\n");
                 format(
                     "constexpr $classname$ operator|($classname$ lhs, $classname$ rhs) {\n"
                     "  return static_cast<$classname$>(static_cast<$underlying$>("
@@ -260,48 +262,20 @@ namespace shark::compiler::cpp {
         bool has_des = HasDescriptorMethods(descriptor_->file(), options_);
         Formatter format(printer, variables_);
         format.Indent();
+        format("////////////////////////////////////////////////////////////\n");
+        format("/// enum $classtype$\n");
         format("template <>\n");
-        format("struct EnumTraitImpl<$classtype$> {\n");
-        format.Indent();
-        format("using underlying = $underlying$;\n");
-        format("static constexpr $classtype$ enum_min = $classtype$::$1$;\n", EnumValueName(min_value_));
-        format("static constexpr $classtype$ enum_max = $classtype$::$1$;\n", EnumValueName(max_value_));
-        format("static constexpr uint32_t value_count = $1$;\n", descriptor_->value_count());
-        format("static constexpr bool has_descriptor = $1$;\n", (has_des ? "true" : "false"));
-
-        if (has_des) {
-            format("static const EnumDescriptor* descriptor();\n");
-        }
-
-        format("static bool is_valid(int64_t value);\n");
-
-        format("static const std::string& enum_name($classtype$ e);\n");
-
-        format("static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, $classtype$ *e);\n");
-
-        format("\n\n");
-
-        format(
-          "static constexpr bool fits_underlying(int value) {\n"
-          "     return $1$;\n"
-          "}\n"
-          "static constexpr bool fits_wire(::uint64_t value) {\n"
-          "     return $2$;\n"
-          "}\n",
-          FitsIntExpression(descriptor_),
-          fits_wire_expression(descriptor_, classname_));
+        format("struct EnumTraitImpl<$classtype$> : public $classtype$Trait {};\n");
+        format("template <> struct IsSharkEnum< $classtype$> : ::std::true_type {};\n\n");
 
         format.Outdent();
-        format("};\n\n");
 
-        format("template <> struct IsSharkEnum< $classtype$> : ::std::true_type {};\n");
-
-        format.Outdent();
     }
 
     void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
         Formatter format(printer, variables_);
-        format("typedef $classname$ $resolved_name$;\n");
+        format("using $resolved_name$ = $classname$;\n");
+        format("using $resolved_name$Trait = $classname$Trait;\n");
     }
 
     void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
@@ -471,6 +445,7 @@ namespace shark::compiler::cpp {
 
     void EnumGenerator::generate_template_methods(int idx, io::Printer* printer) {
         Formatter format(printer, variables_);
+        /*
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
 
             format("const ::$proto_ns$::EnumDescriptor* EnumTraitImpl<$classtype$>::descriptor() {\n"
@@ -583,7 +558,7 @@ namespace shark::compiler::cpp {
             format("const std::string& EnumTraitImpl<$classtype$>::enum_name(\n"
                 "   $classtype$ enum_t_value) {\n"
                 "  return ::$proto_ns$::internal::NameOfEnum(\n"
-                "    EnumTrait<$classtype$>::descriptor(),\n"
+                "    $classtype$Trait::descriptor(),\n"
                 "    static_cast<$underlying$>(enum_t_value));\n");
             format("}\n");
         } else {
@@ -631,6 +606,7 @@ namespace shark::compiler::cpp {
                 "}\n",
                 descriptor_->value_count());
         }
+        */
     }
 
 } // namespace shark::compiler::cpp

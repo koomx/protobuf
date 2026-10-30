@@ -300,7 +300,7 @@ const char* TempTest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx)
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::TempTest_InnerE>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::TempTest_InnerETrait::fits_wire(val))) {
                         _internal_set_ee(static_cast<::shark::TempTest_InnerE>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -460,118 +460,6 @@ void TempTest::InternalSwap(TempTest* other) {
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
 
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::TempTest_InnerE>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-    return file_level_enum_descriptors_shark_2fmeta_2eshark[0];
-}
-bool EnumTraitImpl<::shark::TempTest_InnerE>::is_valid(int64_t value) {
-  switch (value) {
-    case -1:
-    case 0:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::TempTest_InnerE>::enum_name(
-   ::shark::TempTest_InnerE enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::TempTest_InnerE>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::TempTest_InnerE>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::TempTest_InnerE* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::TempTest_InnerE>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::SharkType>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-    return file_level_enum_descriptors_shark_2fmeta_2eshark[1];
-}
-bool EnumTraitImpl<::shark::SharkType>::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 60:
-    case 61:
-    case 62:
-    case 63:
-    case 64:
-    case 65:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::SharkType>::enum_name(
-   ::shark::SharkType enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::SharkType>::descriptor(),
-    static_cast<uint8_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::SharkType>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::SharkType>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::SharkCppType>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-    return file_level_enum_descriptors_shark_2fmeta_2eshark[2];
-}
-bool EnumTraitImpl<::shark::SharkCppType>::is_valid(int64_t value) {
-  switch (value) {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::SharkCppType>::enum_name(
-   ::shark::SharkCppType enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::SharkCppType>::descriptor(),
-    static_cast<uint8_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::SharkCppType>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::SharkCppType>(
-    descriptor(), name, value);
-}
 template<> SHARK_NOINLINE ::shark::TempTest*
 Arena::CreateMaybeMessage< ::shark::TempTest >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::TempTest >(arena);

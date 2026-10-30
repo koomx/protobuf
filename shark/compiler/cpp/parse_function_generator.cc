@@ -353,7 +353,7 @@ TailCallTableInfo::TailCallTableInfo(
       if (IsEnumClass(enum_type)) {
         entry.is_enum_range = false;
         aux_entries.push_back(
-            StrCat("::shark::EnumTrait<", QualifiedClassName(enum_type, options), ">::fits_underlying"));
+            StrCat(QualifiedClassName(enum_type, options), "Trait::fits_underlying"));
         continue;
       }
       GOOGLE_CHECK_GT(enum_type->value_count(), 0) << enum_type->DebugString();
@@ -1248,7 +1248,7 @@ void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
       format(
           "ptr = "
           "::$proto_ns$::internal::Packed$1$Parser<$unknown_fields_type$>("
-          "$msg$_internal_mutable_$name$(), ptr, ctx, ::shark::EnumTrait<$2$>::$3$, "
+          "$msg$_internal_mutable_$name$(), ptr, ctx, $2$Trait::$3$, "
           "&$msg$_internal_metadata_, $4$);\n",
           DeclaredTypeMethodName(field->type()), enum_type,
           IsEnumClass(field->enum_type()) ? "fits_underlying" : "is_valid",
@@ -1279,7 +1279,7 @@ void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
             format(
                 "auto object = "
                 "::$proto_ns$::internal::InitEnumParseWrapper<"
-                "$unknown_fields_type$>(&$msg$$field$, ::shark::EnumTrait<$1$>::$2$, "
+                "$unknown_fields_type$>(&$msg$$field$, $1$Trait::$2$, "
                 "$3$, &$msg$_internal_metadata_);\n"
                 "ptr = ctx->ParseMessage(&object, ptr);\n",
                 QualifiedClassName(val->enum_type(), options_),
@@ -1402,10 +1402,10 @@ void ParseFunctionGenerator::GenerateFieldBody(
             "$uint64$ val = ::$proto_ns$::internal::ReadVarint64(&ptr);\n"
             "CHK_(ptr);\n");
         if (IsEnumClass(field->enum_type())) {
-          format("if (SHARK_PREDICT_TRUE(::shark::EnumTrait<$enum_type$>::fits_wire(val))) {\n");
+          format("if (SHARK_PREDICT_TRUE($enum_type$Trait::fits_wire(val))) {\n");
           format.Indent();
         } else if (!HasPreservingUnknownEnumSemantics(field)) {
-          format("if (SHARK_PREDICT_TRUE(::shark::EnumTrait<$enum_type$>::is_valid(val))) {\n");
+          format("if (SHARK_PREDICT_TRUE($enum_type$Trait::is_valid(val))) {\n");
           format.Indent();
         }
         format("$msg$_internal_$put_field$(static_cast<$enum_type$>(val));\n");

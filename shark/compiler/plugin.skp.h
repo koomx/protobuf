@@ -91,13 +91,14 @@ struct CodeGeneratorResponse_FeatureTrait {
     static constexpr CodeGeneratorResponse_Feature enum_max = CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
     static constexpr uint32_t value_count = 2;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(CodeGeneratorResponse_Feature value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(CodeGeneratorResponse_Feature e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, CodeGeneratorResponse_Feature *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -105,35 +106,17 @@ struct CodeGeneratorResponse_FeatureTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 }  // namespace compiler
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
 
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::compiler::CodeGeneratorResponse_Feature
     template <>
-    struct EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature> {
-        using underlying = int32_t;
-        static constexpr ::shark::compiler::CodeGeneratorResponse_Feature enum_min = ::shark::compiler::CodeGeneratorResponse_Feature::FEATURE_NONE;
-        static constexpr ::shark::compiler::CodeGeneratorResponse_Feature enum_max = ::shark::compiler::CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
-        static constexpr uint32_t value_count = 2;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::compiler::CodeGeneratorResponse_Feature e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature> : public ::shark::compiler::CodeGeneratorResponse_FeatureTrait {};
     template <> struct IsSharkEnum< ::shark::compiler::CodeGeneratorResponse_Feature> : ::std::true_type {};
+
 
 SHARK_NAMESPACE_CLOSE
 // ===================================================================
@@ -933,7 +916,8 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
 
     typedef CodeGeneratorResponse_File File;
 
-    typedef CodeGeneratorResponse_Feature Feature;
+    using Feature = CodeGeneratorResponse_Feature;
+    using FeatureTrait = CodeGeneratorResponse_FeatureTrait;
 
     // accessors -------------------------------------------------------
 

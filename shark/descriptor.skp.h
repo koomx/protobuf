@@ -194,13 +194,14 @@ struct FieldDescriptorProto_TypeTrait {
     static constexpr FieldDescriptorProto_Type enum_max = FieldDescriptorProto_Type::TYPE_SINT64;
     static constexpr uint32_t value_count = 23;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(FieldDescriptorProto_Type value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(FieldDescriptorProto_Type e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Type *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -208,8 +209,6 @@ struct FieldDescriptorProto_TypeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // inner enum Label
 // enum class FieldDescriptorProto_Label : int32_t {
 enum class FieldDescriptorProto_Label : int32_t {
@@ -225,13 +224,14 @@ struct FieldDescriptorProto_LabelTrait {
     static constexpr FieldDescriptorProto_Label enum_max = FieldDescriptorProto_Label::LABEL_REPEATED;
     static constexpr uint32_t value_count = 3;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(FieldDescriptorProto_Label value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(FieldDescriptorProto_Label e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Label *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -239,8 +239,6 @@ struct FieldDescriptorProto_LabelTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // inner enum OptimizeMode
 // enum class FileOptions_OptimizeMode : int32_t {
 enum class FileOptions_OptimizeMode : int32_t {
@@ -256,13 +254,14 @@ struct FileOptions_OptimizeModeTrait {
     static constexpr FileOptions_OptimizeMode enum_max = FileOptions_OptimizeMode::LITE_RUNTIME;
     static constexpr uint32_t value_count = 3;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(FileOptions_OptimizeMode value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(FileOptions_OptimizeMode e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FileOptions_OptimizeMode *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -270,8 +269,6 @@ struct FileOptions_OptimizeModeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // inner enum CType
 // enum class FieldOptions_CType : int32_t {
 enum class FieldOptions_CType : int32_t {
@@ -287,13 +284,14 @@ struct FieldOptions_CTypeTrait {
     static constexpr FieldOptions_CType enum_max = FieldOptions_CType::STRING_PIECE;
     static constexpr uint32_t value_count = 3;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(FieldOptions_CType value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(FieldOptions_CType e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FieldOptions_CType *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -301,8 +299,6 @@ struct FieldOptions_CTypeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // inner enum JSType
 // enum class FieldOptions_JSType : int32_t {
 enum class FieldOptions_JSType : int32_t {
@@ -318,13 +314,14 @@ struct FieldOptions_JSTypeTrait {
     static constexpr FieldOptions_JSType enum_max = FieldOptions_JSType::JS_NUMBER;
     static constexpr uint32_t value_count = 3;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(FieldOptions_JSType value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(FieldOptions_JSType e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FieldOptions_JSType *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -332,8 +329,6 @@ struct FieldOptions_JSTypeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // inner enum IdempotencyLevel
 // enum class MethodOptions_IdempotencyLevel : int32_t {
 enum class MethodOptions_IdempotencyLevel : int32_t {
@@ -349,13 +344,14 @@ struct MethodOptions_IdempotencyLevelTrait {
     static constexpr MethodOptions_IdempotencyLevel enum_max = MethodOptions_IdempotencyLevel::IDEMPOTENT;
     static constexpr uint32_t value_count = 3;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(MethodOptions_IdempotencyLevel value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(MethodOptions_IdempotencyLevel e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, MethodOptions_IdempotencyLevel *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -363,8 +359,6 @@ struct MethodOptions_IdempotencyLevelTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 // global enum EnumUnderlyingType
 // enum class EnumUnderlyingType : int32_t {
 enum class EnumUnderlyingType : int32_t {
@@ -384,13 +378,14 @@ struct EnumUnderlyingTypeTrait {
     static constexpr EnumUnderlyingType enum_max = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
     static constexpr uint32_t value_count = 7;
     static constexpr bool has_descriptor = true;
-    static const EnumDescriptor* descriptor();
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(EnumUnderlyingType value) { return static_cast<int32_t>(value); }
     static bool is_valid(int64_t value);
     static const std::string& enum_name(EnumUnderlyingType e);
     static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, EnumUnderlyingType *e);
 
 
-    static constexpr bool fits_underlying(int value) {
+    static constexpr bool fits_underlying(int64_t value) {
          return true;
     }
     static constexpr bool fits_wire(::uint64_t value) {
@@ -398,166 +393,52 @@ struct EnumUnderlyingTypeTrait {
     }
 };
 
-////////////////////////////////////////////////////////////////////
-/// enum traits
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
 
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::FieldDescriptorProto_Type
     template <>
-    struct EnumTraitImpl<::shark::FieldDescriptorProto_Type> {
-        using underlying = int32_t;
-        static constexpr ::shark::FieldDescriptorProto_Type enum_min = ::shark::FieldDescriptorProto_Type::TYPE_BOOL;
-        static constexpr ::shark::FieldDescriptorProto_Type enum_max = ::shark::FieldDescriptorProto_Type::TYPE_SINT64;
-        static constexpr uint32_t value_count = 23;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::FieldDescriptorProto_Type e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Type *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::FieldDescriptorProto_Type> : public ::shark::FieldDescriptorProto_TypeTrait {};
     template <> struct IsSharkEnum< ::shark::FieldDescriptorProto_Type> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::FieldDescriptorProto_Label
     template <>
-    struct EnumTraitImpl<::shark::FieldDescriptorProto_Label> {
-        using underlying = int32_t;
-        static constexpr ::shark::FieldDescriptorProto_Label enum_min = ::shark::FieldDescriptorProto_Label::LABEL_OPTIONAL;
-        static constexpr ::shark::FieldDescriptorProto_Label enum_max = ::shark::FieldDescriptorProto_Label::LABEL_REPEATED;
-        static constexpr uint32_t value_count = 3;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::FieldDescriptorProto_Label e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Label *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::FieldDescriptorProto_Label> : public ::shark::FieldDescriptorProto_LabelTrait {};
     template <> struct IsSharkEnum< ::shark::FieldDescriptorProto_Label> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::FileOptions_OptimizeMode
     template <>
-    struct EnumTraitImpl<::shark::FileOptions_OptimizeMode> {
-        using underlying = int32_t;
-        static constexpr ::shark::FileOptions_OptimizeMode enum_min = ::shark::FileOptions_OptimizeMode::SPEED;
-        static constexpr ::shark::FileOptions_OptimizeMode enum_max = ::shark::FileOptions_OptimizeMode::LITE_RUNTIME;
-        static constexpr uint32_t value_count = 3;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::FileOptions_OptimizeMode e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FileOptions_OptimizeMode *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::FileOptions_OptimizeMode> : public ::shark::FileOptions_OptimizeModeTrait {};
     template <> struct IsSharkEnum< ::shark::FileOptions_OptimizeMode> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::FieldOptions_CType
     template <>
-    struct EnumTraitImpl<::shark::FieldOptions_CType> {
-        using underlying = int32_t;
-        static constexpr ::shark::FieldOptions_CType enum_min = ::shark::FieldOptions_CType::STRING;
-        static constexpr ::shark::FieldOptions_CType enum_max = ::shark::FieldOptions_CType::STRING_PIECE;
-        static constexpr uint32_t value_count = 3;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::FieldOptions_CType e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_CType *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::FieldOptions_CType> : public ::shark::FieldOptions_CTypeTrait {};
     template <> struct IsSharkEnum< ::shark::FieldOptions_CType> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::FieldOptions_JSType
     template <>
-    struct EnumTraitImpl<::shark::FieldOptions_JSType> {
-        using underlying = int32_t;
-        static constexpr ::shark::FieldOptions_JSType enum_min = ::shark::FieldOptions_JSType::JS_NORMAL;
-        static constexpr ::shark::FieldOptions_JSType enum_max = ::shark::FieldOptions_JSType::JS_NUMBER;
-        static constexpr uint32_t value_count = 3;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::FieldOptions_JSType e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_JSType *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::FieldOptions_JSType> : public ::shark::FieldOptions_JSTypeTrait {};
     template <> struct IsSharkEnum< ::shark::FieldOptions_JSType> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::MethodOptions_IdempotencyLevel
     template <>
-    struct EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel> {
-        using underlying = int32_t;
-        static constexpr ::shark::MethodOptions_IdempotencyLevel enum_min = ::shark::MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
-        static constexpr ::shark::MethodOptions_IdempotencyLevel enum_max = ::shark::MethodOptions_IdempotencyLevel::IDEMPOTENT;
-        static constexpr uint32_t value_count = 3;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::MethodOptions_IdempotencyLevel e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::MethodOptions_IdempotencyLevel *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel> : public ::shark::MethodOptions_IdempotencyLevelTrait {};
     template <> struct IsSharkEnum< ::shark::MethodOptions_IdempotencyLevel> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::EnumUnderlyingType
     template <>
-    struct EnumTraitImpl<::shark::EnumUnderlyingType> {
-        using underlying = int32_t;
-        static constexpr ::shark::EnumUnderlyingType enum_min = ::shark::EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED;
-        static constexpr ::shark::EnumUnderlyingType enum_max = ::shark::EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
-        static constexpr uint32_t value_count = 7;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::EnumUnderlyingType e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::EnumUnderlyingType *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
+    struct EnumTraitImpl<::shark::EnumUnderlyingType> : public ::shark::EnumUnderlyingTypeTrait {};
     template <> struct IsSharkEnum< ::shark::EnumUnderlyingType> : ::std::true_type {};
+
 
 SHARK_NAMESPACE_CLOSE
 // ===================================================================
@@ -2331,9 +2212,11 @@ class SHARK_EXPORT FieldDescriptorProto final :
 
     // nested types ----------------------------------------------------
 
-    typedef FieldDescriptorProto_Type Type;
+    using Type = FieldDescriptorProto_Type;
+    using TypeTrait = FieldDescriptorProto_TypeTrait;
 
-    typedef FieldDescriptorProto_Label Label;
+    using Label = FieldDescriptorProto_Label;
+    using LabelTrait = FieldDescriptorProto_LabelTrait;
 
     // accessors -------------------------------------------------------
 
@@ -3948,7 +3831,8 @@ class SHARK_EXPORT FileOptions final :
 
     // nested types ----------------------------------------------------
 
-    typedef FileOptions_OptimizeMode OptimizeMode;
+    using OptimizeMode = FileOptions_OptimizeMode;
+    using OptimizeModeTrait = FileOptions_OptimizeModeTrait;
 
     // accessors -------------------------------------------------------
 
@@ -4819,9 +4703,11 @@ class SHARK_EXPORT FieldOptions final :
 
     // nested types ----------------------------------------------------
 
-    typedef FieldOptions_CType CType;
+    using CType = FieldOptions_CType;
+    using CTypeTrait = FieldOptions_CTypeTrait;
 
-    typedef FieldOptions_JSType JSType;
+    using JSType = FieldOptions_JSType;
+    using JSTypeTrait = FieldOptions_JSTypeTrait;
 
     // accessors -------------------------------------------------------
 
@@ -6802,7 +6688,8 @@ class SHARK_EXPORT MethodOptions final :
 
     // nested types ----------------------------------------------------
 
-    typedef MethodOptions_IdempotencyLevel IdempotencyLevel;
+    using IdempotencyLevel = MethodOptions_IdempotencyLevel;
+    using IdempotencyLevelTrait = MethodOptions_IdempotencyLevelTrait;
 
     // accessors -------------------------------------------------------
 
@@ -9992,7 +9879,7 @@ inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::label() const {
 }
 inline void FieldDescriptorProto::_internal_set_label(::shark::FieldDescriptorProto_Label value) {
   _impl_._has_bits_[0] |= 0x00000200u;
-  _impl_.label_ = static_cast<int>(::shark::EnumTrait<::shark::FieldDescriptorProto_Label>::to_underlying(value));
+  _impl_.label_ = static_cast<int>(::shark::FieldDescriptorProto_LabelTrait::to_underlying(value));
 }
 inline void FieldDescriptorProto::set_label(::shark::FieldDescriptorProto_Label value) {
   _internal_set_label(value);
@@ -10020,7 +9907,7 @@ inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::type() const {
 }
 inline void FieldDescriptorProto::_internal_set_type(::shark::FieldDescriptorProto_Type value) {
   _impl_._has_bits_[0] |= 0x00000400u;
-  _impl_.type_ = static_cast<int>(::shark::EnumTrait<::shark::FieldDescriptorProto_Type>::to_underlying(value));
+  _impl_.type_ = static_cast<int>(::shark::FieldDescriptorProto_TypeTrait::to_underlying(value));
 }
 inline void FieldDescriptorProto::set_type(::shark::FieldDescriptorProto_Type value) {
   _internal_set_type(value);
@@ -11755,7 +11642,7 @@ inline ::shark::FileOptions_OptimizeMode FileOptions::optimize_for() const {
 }
 inline void FileOptions::_internal_set_optimize_for(::shark::FileOptions_OptimizeMode value) {
   _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.optimize_for_ = static_cast<int>(::shark::EnumTrait<::shark::FileOptions_OptimizeMode>::to_underlying(value));
+  _impl_.optimize_for_ = static_cast<int>(::shark::FileOptions_OptimizeModeTrait::to_underlying(value));
 }
 inline void FileOptions::set_optimize_for(::shark::FileOptions_OptimizeMode value) {
   _internal_set_optimize_for(value);
@@ -12163,7 +12050,7 @@ inline ::shark::FieldOptions_CType FieldOptions::ctype() const {
 }
 inline void FieldOptions::_internal_set_ctype(::shark::FieldOptions_CType value) {
   _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.ctype_ = static_cast<int>(::shark::EnumTrait<::shark::FieldOptions_CType>::to_underlying(value));
+  _impl_.ctype_ = static_cast<int>(::shark::FieldOptions_CTypeTrait::to_underlying(value));
 }
 inline void FieldOptions::set_ctype(::shark::FieldOptions_CType value) {
   _internal_set_ctype(value);
@@ -12219,7 +12106,7 @@ inline ::shark::FieldOptions_JSType FieldOptions::jstype() const {
 }
 inline void FieldOptions::_internal_set_jstype(::shark::FieldOptions_JSType value) {
   _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.jstype_ = static_cast<int>(::shark::EnumTrait<::shark::FieldOptions_JSType>::to_underlying(value));
+  _impl_.jstype_ = static_cast<int>(::shark::FieldOptions_JSTypeTrait::to_underlying(value));
 }
 inline void FieldOptions::set_jstype(::shark::FieldOptions_JSType value) {
   _internal_set_jstype(value);
@@ -12531,7 +12418,7 @@ inline ::shark::EnumUnderlyingType EnumOptions::underlying_type() const {
 }
 inline void EnumOptions::_internal_set_underlying_type(::shark::EnumUnderlyingType value) {
   _impl_._has_bits_[0] |= 0x00000008u;
-  _impl_.underlying_type_ = static_cast<int>(::shark::EnumTrait<::shark::EnumUnderlyingType>::to_underlying(value));
+  _impl_.underlying_type_ = static_cast<int>(::shark::EnumUnderlyingTypeTrait::to_underlying(value));
 }
 inline void EnumOptions::set_underlying_type(::shark::EnumUnderlyingType value) {
   _internal_set_underlying_type(value);
@@ -12775,7 +12662,7 @@ inline ::shark::MethodOptions_IdempotencyLevel MethodOptions::idempotency_level(
 }
 inline void MethodOptions::_internal_set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value) {
   _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.idempotency_level_ = static_cast<int>(::shark::EnumTrait<::shark::MethodOptions_IdempotencyLevel>::to_underlying(value));
+  _impl_.idempotency_level_ = static_cast<int>(::shark::MethodOptions_IdempotencyLevelTrait::to_underlying(value));
 }
 inline void MethodOptions::set_idempotency_level(::shark::MethodOptions_IdempotencyLevel value) {
   _internal_set_idempotency_level(value);

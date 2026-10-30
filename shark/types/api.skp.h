@@ -1173,7 +1173,7 @@ inline ::shark::Syntax Api::syntax() const {
 }
 inline void Api::_internal_set_syntax(::shark::Syntax value) {
   _impl_._has_bits_[0] |= 0x00000008u;
-  _impl_.syntax_ = static_cast<int>(::shark::EnumTrait<::shark::Syntax>::to_underlying(value));
+  _impl_.syntax_ = static_cast<int>(::shark::SyntaxTrait::to_underlying(value));
 }
 inline void Api::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
@@ -1502,7 +1502,7 @@ inline ::shark::Syntax Method::syntax() const {
 }
 inline void Method::_internal_set_syntax(::shark::Syntax value) {
   _impl_._has_bits_[0] |= 0x00000020u;
-  _impl_.syntax_ = static_cast<int>(::shark::EnumTrait<::shark::Syntax>::to_underlying(value));
+  _impl_.syntax_ = static_cast<int>(::shark::SyntaxTrait::to_underlying(value));
 }
 inline void Method::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);

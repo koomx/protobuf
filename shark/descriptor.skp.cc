@@ -3762,7 +3762,7 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldDescriptorProto_Label>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_LabelTrait::fits_wire(val))) {
                         _internal_set_label(static_cast<::shark::FieldDescriptorProto_Label>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(4, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -3775,7 +3775,7 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldDescriptorProto_Type>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_TypeTrait::fits_wire(val))) {
                         _internal_set_type(static_cast<::shark::FieldDescriptorProto_Type>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(5, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -6289,7 +6289,7 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FileOptions_OptimizeMode>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::FileOptions_OptimizeModeTrait::fits_wire(val))) {
                         _internal_set_optimize_for(static_cast<::shark::FileOptions_OptimizeMode>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(9, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -7072,7 +7072,7 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldOptions_CType>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::FieldOptions_CTypeTrait::fits_wire(val))) {
                         _internal_set_ctype(static_cast<::shark::FieldOptions_CType>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -7112,7 +7112,7 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldOptions_JSType>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::FieldOptions_JSTypeTrait::fits_wire(val))) {
                         _internal_set_jstype(static_cast<::shark::FieldOptions_JSType>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(6, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -7740,7 +7740,7 @@ const char* EnumOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::EnumUnderlyingType>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumUnderlyingTypeTrait::fits_wire(val))) {
                         _internal_set_underlying_type(static_cast<::shark::EnumUnderlyingType>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(7, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -8567,7 +8567,7 @@ const char* MethodOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext*
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::MethodOptions_IdempotencyLevel>::fits_wire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::MethodOptions_IdempotencyLevelTrait::fits_wire(val))) {
                         _internal_set_idempotency_level(static_cast<::shark::MethodOptions_IdempotencyLevel>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(34, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -10624,212 +10624,6 @@ void GeneratedCodeInfo::InternalSwap(GeneratedCodeInfo* other) {
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
 
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldDescriptorProto_Type>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[0];
-}
-bool EnumTraitImpl<::shark::FieldDescriptorProto_Type>::is_valid(int64_t value) {
-  switch (value) {
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-    case 7:
-    case 8:
-    case 9:
-    case 10:
-    case 11:
-    case 12:
-    case 13:
-    case 14:
-    case 15:
-    case 16:
-    case 17:
-    case 18:
-    case 19:
-    case 20:
-    case 21:
-    case 22:
-    case 23:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::FieldDescriptorProto_Type>::enum_name(
-   ::shark::FieldDescriptorProto_Type enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::FieldDescriptorProto_Type>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::FieldDescriptorProto_Type>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Type* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::FieldDescriptorProto_Type>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldDescriptorProto_Label>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[1];
-}
-bool EnumTraitImpl<::shark::FieldDescriptorProto_Label>::is_valid(int64_t value) {
-  switch (value) {
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::FieldDescriptorProto_Label>::enum_name(
-   ::shark::FieldDescriptorProto_Label enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::FieldDescriptorProto_Label>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::FieldDescriptorProto_Label>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Label* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::FieldDescriptorProto_Label>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FileOptions_OptimizeMode>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[2];
-}
-bool EnumTraitImpl<::shark::FileOptions_OptimizeMode>::is_valid(int64_t value) {
-  switch (value) {
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::FileOptions_OptimizeMode>::enum_name(
-   ::shark::FileOptions_OptimizeMode enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::FileOptions_OptimizeMode>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::FileOptions_OptimizeMode>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FileOptions_OptimizeMode* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::FileOptions_OptimizeMode>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldOptions_CType>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[3];
-}
-bool EnumTraitImpl<::shark::FieldOptions_CType>::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::FieldOptions_CType>::enum_name(
-   ::shark::FieldOptions_CType enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::FieldOptions_CType>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::FieldOptions_CType>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_CType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::FieldOptions_CType>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldOptions_JSType>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[4];
-}
-bool EnumTraitImpl<::shark::FieldOptions_JSType>::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::FieldOptions_JSType>::enum_name(
-   ::shark::FieldOptions_JSType enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::FieldOptions_JSType>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::FieldOptions_JSType>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_JSType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::FieldOptions_JSType>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[5];
-}
-bool EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel>::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel>::enum_name(
-   ::shark::MethodOptions_IdempotencyLevel enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::MethodOptions_IdempotencyLevel>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::MethodOptions_IdempotencyLevel* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::MethodOptions_IdempotencyLevel>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::EnumUnderlyingType>::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
-    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[6];
-}
-bool EnumTraitImpl<::shark::EnumUnderlyingType>::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-    case 4:
-    case 5:
-    case 6:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& EnumTraitImpl<::shark::EnumUnderlyingType>::enum_name(
-   ::shark::EnumUnderlyingType enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumTrait<::shark::EnumUnderlyingType>::descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool EnumTraitImpl<::shark::EnumUnderlyingType>::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::EnumUnderlyingType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::EnumUnderlyingType>(
-    descriptor(), name, value);
-}
 template<> SHARK_NOINLINE ::shark::FileDescriptorSet*
 Arena::CreateMaybeMessage< ::shark::FileDescriptorSet >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::FileDescriptorSet >(arena);

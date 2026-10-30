@@ -5518,9 +5518,9 @@ namespace shark {
         // Some compilers do not allow static_cast directly between two enum types,
         // so we must cast to int first.
         result->type_ = static_cast<uint8_t>(
-            EnumTrait<FieldDescriptorProto_Type>::to_underlying(proto.type()));
+            FieldDescriptorProto_TypeTrait::to_underlying(proto.type()));
         result->label_ = static_cast<uint8_t>(
-            EnumTrait<FieldDescriptorProto_Label>::to_underlying(proto.label()));
+            FieldDescriptorProto_LabelTrait::to_underlying(proto.label()));
 
         if (static_cast<FieldLabel>(result->label_) == FieldLabel::REQUIRED) {
             // An extension cannot have a required field (b/13365836).
@@ -7100,8 +7100,8 @@ namespace shark {
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Illegal jstype for int64, uint64, sint64, fixed64 "
                 "or sfixed64 field: "
-                    + EnumTrait<FieldOptions_JSType>::descriptor()
-                        ->value(EnumTrait<FieldOptions_JSType>::to_underlying(jstype))
+                    + FieldOptions_JSTypeTrait::descriptor()
+                        ->value(FieldOptions_JSTypeTrait::to_underlying(jstype))
                         ->name());
             break;
 
