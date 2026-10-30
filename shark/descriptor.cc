@@ -2702,7 +2702,7 @@ namespace shark {
         // so we must cast to int first.
         proto->set_label(static_cast<FieldDescriptorProto::Label>(
             static_cast<int>(label())));
-        proto->set_type(static_cast<FieldDescriptorProto::Type>(
+        proto->set_type(static_cast<SharkType>(
             static_cast<int>(type())));
 
         if (is_extension()) {
@@ -4881,7 +4881,7 @@ namespace shark {
                 alloc.PlanArray<FieldOptions>(1);
             alloc.PlanFieldNames(field.name(),
                 field.has_json_name() ? &field.json_name() : nullptr);
-            if (field.has_default_value() && field.has_type() && (field.type() == FieldDescriptorProto::Type::TYPE_STRING || field.type() == FieldDescriptorProto::Type::TYPE_BYTES)) {
+            if (field.has_default_value() && field.has_type() && (field.type() == SharkType::STRING || field.type() == SharkType::BYTES)) {
                 // For the default string value.
                 alloc.PlanArray<std::string>(1);
             }
@@ -5517,8 +5517,7 @@ namespace shark {
 
         // Some compilers do not allow static_cast directly between two enum types,
         // so we must cast to int first.
-        result->type_ = static_cast<uint8_t>(
-            FieldDescriptorProto_TypeTrait::to_underlying(proto.type()));
+        result->type_ = static_cast<uint8_t>(SharkTypeTrait::to_underlying(proto.type()));
         result->label_ = static_cast<uint8_t>(
             FieldDescriptorProto_LabelTrait::to_underlying(proto.label()));
 
@@ -6323,7 +6322,7 @@ namespace shark {
             // Assume we are expecting a message type unless the proto contains some
             // evidence that it expects an enum type.  This only makes a difference if
             // we end up creating a placeholder.
-            bool expecting_enum = (proto.type() == FieldDescriptorProto::Type::TYPE_ENUM) || proto.has_default_value();
+            bool expecting_enum = (proto.type() == SharkType::ENUM) || proto.has_default_value();
 
             // In case of weak fields we force building the dependency. We need to know
             // if the type exist or not. If it doesn't exist we substitute Empty which

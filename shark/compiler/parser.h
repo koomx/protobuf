@@ -451,7 +451,7 @@ class SHARK_EXPORT Parser {
 
   // Parse a type name and fill in "type" (if it is a primitive) or
   // "type_name" (if it is not) with the type parsed.
-  bool ParseType(FieldDescriptorProto::Type* type, std::string* type_name);
+  bool ParseType(SharkType* type, std::string* type_name);
   // Parse a user-defined type and fill in "type_name" with the name.
   // If a primitive type is named, it is treated as an error.
   bool ParseUserDefinedType(std::string* type_name);
@@ -508,8 +508,8 @@ class SHARK_EXPORT Parser {
     // Whether the field is a map field.
     bool is_map_field;
     // The types of the key and value if they are primitive types.
-    FieldDescriptorProto::Type key_type;
-    FieldDescriptorProto::Type value_type;
+    SharkType key_type;
+    SharkType value_type;
     // Or the type names string if the types are customized types.
     std::string key_type_name;
     std::string value_type_name;

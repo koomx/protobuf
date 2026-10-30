@@ -31,6 +31,7 @@
 #include <shark/extension_set.h>  // IWYU pragma: export
 #include <shark/generated/generated_enum_reflection.h>
 #include <shark/unknown_field_set.h>
+#include <shark/meta.skp.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 #define SHARK_INTERNAL_EXPORT_shark_2fdescriptor_2eshark SHARK_EXPORT
@@ -158,56 +159,6 @@ template<> SHARK_EXPORT ::shark::UninterpretedOption* Arena::CreateMaybeMessage<
 template<> SHARK_EXPORT ::shark::UninterpretedOption_NamePart* Arena::CreateMaybeMessage<::shark::UninterpretedOption_NamePart>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
-
-// inner enum Type
-// enum class FieldDescriptorProto_Type : int32_t {
-enum class FieldDescriptorProto_Type : int32_t {
-    TYPE_BOOL = 1,
-    TYPE_INT8 = 2,
-    TYPE_UINT8 = 3,
-    TYPE_INT16 = 4,
-    TYPE_UINT16 = 5,
-    TYPE_INT32 = 6,
-    TYPE_UINT32 = 7,
-    TYPE_INT64 = 8,
-    TYPE_UINT64 = 9,
-    TYPE_FLOAT = 10,
-    TYPE_FLOAT16 = 11,
-    TYPE_FLOAT8 = 12,
-    TYPE_DOUBLE = 13,
-    TYPE_ENUM = 14,
-    TYPE_MESSAGE = 15,
-    TYPE_STRING = 16,
-    TYPE_BYTES = 17,
-    TYPE_FIXED32 = 18,
-    TYPE_FIXED64 = 19,
-    TYPE_SFIXED32 = 20,
-    TYPE_SFIXED64 = 21,
-    TYPE_SINT32 = 22,
-    TYPE_SINT64 = 23
-};
-////////////////////////////////////////////////////////////////////
-/// enum traits
-struct FieldDescriptorProto_TypeTrait {
-    using underlying = int32_t;
-    static constexpr FieldDescriptorProto_Type enum_min = FieldDescriptorProto_Type::TYPE_BOOL;
-    static constexpr FieldDescriptorProto_Type enum_max = FieldDescriptorProto_Type::TYPE_SINT64;
-    static constexpr uint32_t value_count = 23;
-    static constexpr bool has_descriptor = true;
-    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
-    static int32_t to_underlying(FieldDescriptorProto_Type value) { return static_cast<int32_t>(value); }
-    static bool is_valid(int64_t value);
-    static const std::string& enum_name(FieldDescriptorProto_Type e);
-    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Type *e);
-
-
-    static constexpr bool fits_underlying(int64_t value) {
-         return true;
-    }
-    static constexpr bool fits_wire(::uint64_t value) {
-         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-    }
-};
 
 // inner enum Label
 // enum class FieldDescriptorProto_Label : int32_t {
@@ -396,12 +347,6 @@ struct EnumUnderlyingTypeTrait {
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
-
-    ////////////////////////////////////////////////////////////
-    /// enum ::shark::FieldDescriptorProto_Type
-    template <>
-    struct EnumTraitImpl<::shark::FieldDescriptorProto_Type> : public ::shark::FieldDescriptorProto_TypeTrait {};
-    template <> struct IsSharkEnum< ::shark::FieldDescriptorProto_Type> : ::std::true_type {};
 
     ////////////////////////////////////////////////////////////
     /// enum ::shark::FieldDescriptorProto_Label
@@ -2212,9 +2157,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
 
     // nested types ----------------------------------------------------
 
-    using Type = FieldDescriptorProto_Type;
-    using TypeTrait = FieldDescriptorProto_TypeTrait;
-
     using Label = FieldDescriptorProto_Label;
     using LabelTrait = FieldDescriptorProto_LabelTrait;
 
@@ -2228,10 +2170,10 @@ class SHARK_EXPORT FieldDescriptorProto final :
       kJsonNameFieldNumber = 10,
       kOptionsFieldNumber = 8,
       kNumberFieldNumber = 3,
+      kTypeFieldNumber = 5,
       kOneofIndexFieldNumber = 9,
       kProto3OptionalFieldNumber = 17,
       kLabelFieldNumber = 4,
-      kTypeFieldNumber = 5,
     };
     // optional string name = 1;
     bool has_name() const;
@@ -2354,6 +2296,19 @@ class SHARK_EXPORT FieldDescriptorProto final :
     void _internal_set_number(int32_t value);
     public:
 
+    // optional .shark.SharkType type = 5;
+    bool has_type() const;
+    private:
+    bool _internal_has_type() const;
+    public:
+    void clear_type();
+    ::shark::SharkType type() const;
+    void set_type(::shark::SharkType value);
+    private:
+    ::shark::SharkType _internal_type() const;
+    void _internal_set_type(::shark::SharkType value);
+    public:
+
     // optional int32 oneof_index = 9;
     bool has_oneof_index() const;
     private:
@@ -2393,19 +2348,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
     void _internal_set_label(::shark::FieldDescriptorProto_Label value);
     public:
 
-    // optional .shark.FieldDescriptorProto.Type type = 5;
-    bool has_type() const;
-    private:
-    bool _internal_has_type() const;
-    public:
-    void clear_type();
-    ::shark::FieldDescriptorProto_Type type() const;
-    void set_type(::shark::FieldDescriptorProto_Type value);
-    private:
-    ::shark::FieldDescriptorProto_Type _internal_type() const;
-    void _internal_set_type(::shark::FieldDescriptorProto_Type value);
-    public:
-
     // @@protoc_insertion_point(class_scope:shark.FieldDescriptorProto)
  private:
     class _Internal;
@@ -2423,10 +2365,10 @@ class SHARK_EXPORT FieldDescriptorProto final :
         ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr json_name_;
         ::shark::FieldOptions* options_;
         int32_t number_;
+        int type_;
         int32_t oneof_index_;
         bool proto3_optional_;
         int label_;
-        int type_;
     };
     union { Impl_ _impl_; };
     friend struct ::TableStruct_shark_2fdescriptor_2eshark;
@@ -9860,7 +9802,7 @@ inline void FieldDescriptorProto::set_number(int32_t value) {
 
 // optional .shark.FieldDescriptorProto.Label label = 4;
 inline bool FieldDescriptorProto::_internal_has_label() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
   return value;
 }
 inline bool FieldDescriptorProto::has_label() const {
@@ -9868,7 +9810,7 @@ inline bool FieldDescriptorProto::has_label() const {
 }
 inline void FieldDescriptorProto::clear_label() {
     _impl_.label_ = 1;
-    _impl_._has_bits_[0] &= ~0x00000200u;
+    _impl_._has_bits_[0] &= ~0x00000400u;
 }
 inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::_internal_label() const {
   return static_cast<::shark::FieldDescriptorProto_Label>(static_cast<int32_t>(_impl_.label_));
@@ -9878,7 +9820,7 @@ inline ::shark::FieldDescriptorProto_Label FieldDescriptorProto::label() const {
   return _internal_label();
 }
 inline void FieldDescriptorProto::_internal_set_label(::shark::FieldDescriptorProto_Label value) {
-  _impl_._has_bits_[0] |= 0x00000200u;
+  _impl_._has_bits_[0] |= 0x00000400u;
   _impl_.label_ = static_cast<int>(::shark::FieldDescriptorProto_LabelTrait::to_underlying(value));
 }
 inline void FieldDescriptorProto::set_label(::shark::FieldDescriptorProto_Label value) {
@@ -9886,30 +9828,30 @@ inline void FieldDescriptorProto::set_label(::shark::FieldDescriptorProto_Label 
   // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.label)
 }
 
-// optional .shark.FieldDescriptorProto.Type type = 5;
+// optional .shark.SharkType type = 5;
 inline bool FieldDescriptorProto::_internal_has_type() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000400u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
   return value;
 }
 inline bool FieldDescriptorProto::has_type() const {
   return _internal_has_type();
 }
 inline void FieldDescriptorProto::clear_type() {
-    _impl_.type_ = 1;
-    _impl_._has_bits_[0] &= ~0x00000400u;
+    _impl_.type_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000080u;
 }
-inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::_internal_type() const {
-  return static_cast<::shark::FieldDescriptorProto_Type>(static_cast<int32_t>(_impl_.type_));
+inline ::shark::SharkType FieldDescriptorProto::_internal_type() const {
+  return static_cast<::shark::SharkType>(static_cast<uint8_t>(_impl_.type_));
 }
-inline ::shark::FieldDescriptorProto_Type FieldDescriptorProto::type() const {
+inline ::shark::SharkType FieldDescriptorProto::type() const {
   // @@protoc_insertion_point(field_get:shark.FieldDescriptorProto.type)
   return _internal_type();
 }
-inline void FieldDescriptorProto::_internal_set_type(::shark::FieldDescriptorProto_Type value) {
-  _impl_._has_bits_[0] |= 0x00000400u;
-  _impl_.type_ = static_cast<int>(::shark::FieldDescriptorProto_TypeTrait::to_underlying(value));
+inline void FieldDescriptorProto::_internal_set_type(::shark::SharkType value) {
+  _impl_._has_bits_[0] |= 0x00000080u;
+  _impl_.type_ = static_cast<int>(::shark::SharkTypeTrait::to_underlying(value));
 }
-inline void FieldDescriptorProto::set_type(::shark::FieldDescriptorProto_Type value) {
+inline void FieldDescriptorProto::set_type(::shark::SharkType value) {
   _internal_set_type(value);
   // @@protoc_insertion_point(field_set:shark.FieldDescriptorProto.type)
 }
@@ -10120,7 +10062,7 @@ inline void FieldDescriptorProto::set_allocated_default_value(std::string* defau
 
 // optional int32 oneof_index = 9;
 inline bool FieldDescriptorProto::_internal_has_oneof_index() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000080u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
   return value;
 }
 inline bool FieldDescriptorProto::has_oneof_index() const {
@@ -10128,7 +10070,7 @@ inline bool FieldDescriptorProto::has_oneof_index() const {
 }
 inline void FieldDescriptorProto::clear_oneof_index() {
     _impl_.oneof_index_ = 0;
-    _impl_._has_bits_[0] &= ~0x00000080u;
+    _impl_._has_bits_[0] &= ~0x00000100u;
 }
 inline int32_t FieldDescriptorProto::_internal_oneof_index() const {
   return _impl_.oneof_index_;
@@ -10138,7 +10080,7 @@ inline int32_t FieldDescriptorProto::oneof_index() const {
   return _internal_oneof_index();
 }
 inline void FieldDescriptorProto::_internal_set_oneof_index(int32_t value) {
-  _impl_._has_bits_[0] |= 0x00000080u;
+  _impl_._has_bits_[0] |= 0x00000100u;
   _impl_.oneof_index_ = value;
 }
 inline void FieldDescriptorProto::set_oneof_index(int32_t value) {
@@ -10306,7 +10248,7 @@ inline void FieldDescriptorProto::set_allocated_options(::shark::FieldOptions* o
 
 // optional bool proto3_optional = 17;
 inline bool FieldDescriptorProto::_internal_has_proto3_optional() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000100u) != 0;
+  bool value = (_impl_._has_bits_[0] & 0x00000200u) != 0;
   return value;
 }
 inline bool FieldDescriptorProto::has_proto3_optional() const {
@@ -10314,7 +10256,7 @@ inline bool FieldDescriptorProto::has_proto3_optional() const {
 }
 inline void FieldDescriptorProto::clear_proto3_optional() {
     _impl_.proto3_optional_ = false;
-    _impl_._has_bits_[0] &= ~0x00000100u;
+    _impl_._has_bits_[0] &= ~0x00000200u;
 }
 inline bool FieldDescriptorProto::_internal_proto3_optional() const {
   return _impl_.proto3_optional_;
@@ -10324,7 +10266,7 @@ inline bool FieldDescriptorProto::proto3_optional() const {
   return _internal_proto3_optional();
 }
 inline void FieldDescriptorProto::_internal_set_proto3_optional(bool value) {
-  _impl_._has_bits_[0] |= 0x00000100u;
+  _impl_._has_bits_[0] |= 0x00000200u;
   _impl_.proto3_optional_ = value;
 }
 inline void FieldDescriptorProto::set_proto3_optional(bool value) {

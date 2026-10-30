@@ -112,8 +112,8 @@ void SetPrimitiveVariables(const FieldDescriptor* descriptor,
   if (fixed_size != -1) {
     (*variables)["fixed_size"] = StrCat(fixed_size);
   }
-  (*variables)["wire_format_field_type"] = FieldDescriptorProto_TypeTrait::enum_name(
-      static_cast<FieldDescriptorProto_Type>(descriptor->type()));
+  (*variables)["wire_format_field_type"] = SharkTypeTrait::enum_name(
+      static_cast<SharkType>(descriptor->type()));
   (*variables)["full_name"] = descriptor->full_name();
 }
 

@@ -218,7 +218,7 @@ std::string PrimitiveTypeName(const Options& options,
                               FieldCppType type);
 
 // Get the declared type name in CamelCase format, as is used e.g. for the
-// methods of WireFormat.  For example, TYPE_INT32 becomes "Int32".
+// methods of WireFormat.  For example, INT32 becomes "Int32".
 const char* DeclaredTypeMethodName(FieldType type);
 
 // Return the code that evaluates to the number when compiled.

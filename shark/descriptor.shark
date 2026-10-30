@@ -41,6 +41,8 @@ syntax = "proto2";
 
 package shark;
 
+import "shark/meta.shark";
+
 option go_package = "google.golang.org/protobuf/types/descriptorpb";
 option cc_enable_arenas = true;
 
@@ -132,6 +134,7 @@ message ExtensionRangeOptions {
 
 // Describes a field within a message.
 message FieldDescriptorProto {
+  /*
   enum Type {
     // 0 is reserved for errors.
     TYPE_BOOL = 1;
@@ -159,7 +162,7 @@ message FieldDescriptorProto {
     TYPE_SINT32 = 22;
     TYPE_SINT64 = 23;
   }
-
+*/
   enum Label {
     // 0 is reserved for errors
     LABEL_OPTIONAL = 1;
@@ -173,7 +176,7 @@ message FieldDescriptorProto {
 
   // If type_name is set, this need not be set.  If both this and type_name
   // are set, this must be one of TYPE_ENUM or TYPE_MESSAGE.
-  optional Type type = 5;
+  optional SharkType type = 5;
 
   // For message and enum types, this is the name of the type.  If the name
   // starts with a '.', it is fully-qualified.  Otherwise, C++-like scoping

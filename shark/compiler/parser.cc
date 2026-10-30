@@ -59,31 +59,31 @@ using internal::WireFormat;
 
 namespace {
 
-typedef std::unordered_map<std::string, FieldDescriptorProto::Type> TypeNameMap;
+typedef std::unordered_map<std::string, SharkType> TypeNameMap;
 
 const TypeNameMap& GetTypeNameTable() {
   static auto* table = new auto([]() {
     TypeNameMap result;
 
-    result["double"] = FieldDescriptorProto_Type::TYPE_DOUBLE;
-    result["float"] = FieldDescriptorProto_Type::TYPE_FLOAT;
-    result["uint64"] = FieldDescriptorProto_Type::TYPE_UINT64;
-    result["fixed64"] = FieldDescriptorProto_Type::TYPE_FIXED64;
-    result["fixed32"] = FieldDescriptorProto_Type::TYPE_FIXED32;
-    result["bool"] = FieldDescriptorProto_Type::TYPE_BOOL;
-    result["string"] = FieldDescriptorProto_Type::TYPE_STRING;
-    result["bytes"] = FieldDescriptorProto_Type::TYPE_BYTES;
-    result["uint32"] = FieldDescriptorProto_Type::TYPE_UINT32;
-    result["sfixed32"] = FieldDescriptorProto_Type::TYPE_SFIXED32;
-    result["sfixed64"] = FieldDescriptorProto_Type::TYPE_SFIXED64;
-    result["int32"] = FieldDescriptorProto_Type::TYPE_INT32;
-    result["int64"] = FieldDescriptorProto_Type::TYPE_INT64;
-    result["sint32"] = FieldDescriptorProto_Type::TYPE_SINT32;
-    result["sint64"] = FieldDescriptorProto_Type::TYPE_SINT64;
-    result["int8"] = FieldDescriptorProto_Type::TYPE_INT8;
-    result["uint8"] = FieldDescriptorProto_Type::TYPE_UINT8;
-    result["int16"] = FieldDescriptorProto_Type::TYPE_INT16;
-    result["uint16"] = FieldDescriptorProto_Type::TYPE_UINT16;
+    result["double"] = SharkType::DOUBLE;
+    result["float"] = SharkType::FLOAT;
+    result["uint64"] = SharkType::UINT64;
+    result["fixed64"] = SharkType::FIXED64;
+    result["fixed32"] = SharkType::FIXED32;
+    result["bool"] = SharkType::BOOL;
+    result["string"] = SharkType::STRING;
+    result["bytes"] = SharkType::BYTES;
+    result["uint32"] = SharkType::UINT32;
+    result["sfixed32"] = SharkType::SFIXED32;
+    result["sfixed64"] = SharkType::SFIXED64;
+    result["int32"] = SharkType::INT32;
+    result["int64"] = SharkType::INT64;
+    result["sint32"] = SharkType::SINT32;
+    result["sint64"] = SharkType::SINT64;
+    result["int8"] = SharkType::INT8;
+    result["uint8"] = SharkType::UINT8;
+    result["int16"] = SharkType::INT16;
+    result["uint16"] = SharkType::UINT16;
 
     return result;
   }());
@@ -933,7 +933,7 @@ bool Parser::ParseMessageFieldNoLabel(
     location.RecordLegacyLocation(field, DescriptorPool::ErrorCollector::TYPE);
 
     bool type_parsed = false;
-    FieldDescriptorProto::Type type = FieldDescriptorProto_Type::TYPE_INT32;
+    auto type = SharkType::INT32;
     std::string type_name;
 
     // list<T> is a repeated field of type T. The field type stays T.
@@ -1137,11 +1137,11 @@ void Parser::GenerateMapEntry(const MapField& map_field,
     if (option.name_size() == 1 &&
         option.name(0).name_part() == "enforce_utf8" &&
         !option.name(0).is_extension()) {
-      if (key_field->type() == FieldDescriptorProto_Type::TYPE_STRING) {
+      if (key_field->type() == SharkType::STRING) {
         key_field->mutable_options()->add_uninterpreted_option()->CopyFrom(
             option);
       }
-      if (value_field->type() == FieldDescriptorProto_Type::TYPE_STRING) {
+      if (value_field->type() == SharkType::STRING) {
         value_field->mutable_options()->add_uninterpreted_option()->CopyFrom(
             option);
       }
@@ -1211,22 +1211,22 @@ bool Parser::ParseDefaultAssignment(
   }
 
   switch (field->type()) {
-    case FieldDescriptorProto_Type::TYPE_INT32:
-    case FieldDescriptorProto_Type::TYPE_INT64:
-    case FieldDescriptorProto_Type::TYPE_SINT32:
-    case FieldDescriptorProto_Type::TYPE_SINT64:
-    case FieldDescriptorProto_Type::TYPE_SFIXED32:
-    case FieldDescriptorProto_Type::TYPE_SFIXED64:
-    case FieldDescriptorProto_Type::TYPE_INT8:
-    case FieldDescriptorProto_Type::TYPE_INT16: {
+    case SharkType::INT32:
+    case SharkType::INT64:
+    case SharkType::SINT32:
+    case SharkType::SINT64:
+    case SharkType::SFIXED32:
+    case SharkType::SFIXED64:
+    case SharkType::INT8:
+    case SharkType::INT16: {
       uint64_t max_value = std::numeric_limits<int64_t>::max();
-      if (field->type() == FieldDescriptorProto_Type::TYPE_INT32 ||
-          field->type() == FieldDescriptorProto_Type::TYPE_SINT32 ||
-          field->type() == FieldDescriptorProto_Type::TYPE_SFIXED32) {
+      if (field->type() == SharkType::INT32 ||
+          field->type() == SharkType::SINT32 ||
+          field->type() == SharkType::SFIXED32) {
         max_value = std::numeric_limits<int32_t>::max();
-      } else if (field->type() == FieldDescriptorProto_Type::TYPE_INT8) {
+      } else if (field->type() == SharkType::INT8) {
         max_value = std::numeric_limits<int8_t>::max();
-      } else if (field->type() == FieldDescriptorProto_Type::TYPE_INT16) {
+      } else if (field->type() == SharkType::INT16) {
         max_value = std::numeric_limits<int16_t>::max();
       }
 
@@ -1245,19 +1245,19 @@ bool Parser::ParseDefaultAssignment(
       break;
     }
 
-    case FieldDescriptorProto_Type::TYPE_UINT32:
-    case FieldDescriptorProto_Type::TYPE_UINT64:
-    case FieldDescriptorProto_Type::TYPE_FIXED32:
-    case FieldDescriptorProto_Type::TYPE_FIXED64:
-    case FieldDescriptorProto_Type::TYPE_UINT8:
-    case FieldDescriptorProto_Type::TYPE_UINT16: {
+    case SharkType::UINT32:
+    case SharkType::UINT64:
+    case SharkType::FIXED32:
+    case SharkType::FIXED64:
+    case SharkType::UINT8:
+    case SharkType::UINT16: {
       uint64_t max_value = std::numeric_limits<uint64_t>::max();
-      if (field->type() == FieldDescriptorProto_Type::TYPE_UINT32 ||
-          field->type() == FieldDescriptorProto_Type::TYPE_FIXED32) {
+      if (field->type() == SharkType::UINT32 ||
+          field->type() == SharkType::FIXED32) {
         max_value = std::numeric_limits<uint32_t>::max();
-      } else if (field->type() == FieldDescriptorProto_Type::TYPE_UINT8) {
+      } else if (field->type() == SharkType::UINT8) {
         max_value = std::numeric_limits<uint8_t>::max();
-      } else if (field->type() == FieldDescriptorProto_Type::TYPE_UINT16) {
+      } else if (field->type() == SharkType::UINT16) {
         max_value = std::numeric_limits<uint16_t>::max();
       }
 
@@ -1274,8 +1274,8 @@ bool Parser::ParseDefaultAssignment(
       break;
     }
 
-    case FieldDescriptorProto_Type::TYPE_FLOAT:
-    case FieldDescriptorProto_Type::TYPE_DOUBLE:
+    case SharkType::FLOAT:
+    case SharkType::DOUBLE:
       // These types can be negative.
       if (TryConsume("-")) {
         default_value->append("-");
@@ -1288,7 +1288,7 @@ bool Parser::ParseDefaultAssignment(
       default_value->append(SimpleDtoa(value));
       break;
 
-    case FieldDescriptorProto_Type::TYPE_BOOL:
+    case SharkType::BOOL:
       if (TryConsume("true")) {
         default_value->assign("true");
       } else if (TryConsume("false")) {
@@ -1299,7 +1299,7 @@ bool Parser::ParseDefaultAssignment(
       }
       break;
 
-    case FieldDescriptorProto_Type::TYPE_STRING:
+    case SharkType::STRING:
       // Note: When file option java_string_check_utf8 is true, if a
       // non-string representation (eg byte[]) is later supported, it must
       // be checked for UTF-8-ness.
@@ -1308,18 +1308,18 @@ bool Parser::ParseDefaultAssignment(
                        "value."));
       break;
 
-    case FieldDescriptorProto_Type::TYPE_BYTES:
+    case SharkType::BYTES:
       DO(ConsumeString(default_value, "Expected string."));
       *default_value = CEscape(*default_value);
       break;
 
-    case FieldDescriptorProto_Type::TYPE_ENUM:
+    case SharkType::ENUM:
       DO(ConsumeIdentifier(default_value,
                            "Expected enum identifier for field "
                            "default value."));
       break;
 
-    case FieldDescriptorProto_Type::TYPE_MESSAGE:
+    case SharkType::MESSAGE:
       AddError("Messages can't have default values.");
       return false;
   }
@@ -2339,7 +2339,7 @@ bool Parser::ParseLabel(FieldDescriptorProto::Label* label,
   return true;
 }
 
-bool Parser::ParseType(FieldDescriptorProto::Type* type,
+bool Parser::ParseType(SharkType* type,
                        std::string* type_name) {
   const std::string& text = input_->current().text;
   if (text == "float16" || text == "float8") {
