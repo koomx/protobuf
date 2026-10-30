@@ -2700,7 +2700,7 @@ namespace shark {
         }
         // Some compilers do not allow static_cast directly between two enum types,
         // so we must cast to int first.
-        proto->set_label(static_cast<FieldDescriptorProto::Label>(
+        proto->set_label(static_cast<FieldCardinality>(
             static_cast<int>(label())));
         proto->set_type(static_cast<SharkType>(
             static_cast<int>(type())));
@@ -5519,7 +5519,7 @@ namespace shark {
         // so we must cast to int first.
         result->type_ = static_cast<uint8_t>(SharkTypeTrait::to_underlying(proto.type()));
         result->label_ = static_cast<uint8_t>(
-            FieldDescriptorProto_LabelTrait::to_underlying(proto.label()));
+            FieldCardinalityTrait::to_underlying(proto.label()));
 
         if (static_cast<FieldLabel>(result->label_) == FieldLabel::REQUIRED) {
             // An extension cannot have a required field (b/13365836).
@@ -6314,7 +6314,7 @@ namespace shark {
                 // It can only happen if you manually construct a FileDescriptorProto
                 // that is incorrect.
                 AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
-                    "Fields of oneofs must themselves have label LABEL_OPTIONAL.");
+                    "Fields of oneofs must themselves have label CARDINALITY_OPTIONAL.");
             }
         }
 

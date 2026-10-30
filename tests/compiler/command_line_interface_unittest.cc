@@ -705,7 +705,7 @@ namespace shark {
                 extension_option->set_name("unknown_option");
                 extension_option->set_extendee(".shark.MessageOptions");
                 extension_option->set_number(1111);
-                extension_option->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+                extension_option->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
                 extension_option->set_type(SharkType::INT64);
 
                 file_descriptor_proto = file_descriptor_set.add_file();

@@ -46,11 +46,11 @@ schema 文件里标了 `[deprecated = true]` 的字段，生成的访问器继�
 
 日期：2026-10-26
 
-只改写法。字段类型仍是元素自己的类型，`label` 仍是 `LABEL_REPEATED`，wire type 不变。不定义字段类型 `LIST`，编号 10 继续空着。`map` 这一节不动。
+只改写法。字段类型仍是元素自己的类型，`label` 仍是 `CARDINALITY_REPEATED`，wire type 不变。不定义字段类型 `LIST`，编号 10 继续空着。`map` 这一节不动。
 
 | 步骤 | 内容 | 状态 | 完成效果 |
 | --- | --- | --- | --- |
-| 1 | `shark/compiler/parser.cc` 接受 `list<T>`，字段类型写成 `T`，`label` 写成 `LABEL_REPEATED`。前面的 `optional`、`required` 接受并忽略。`repeated` 不再是标签。`oneof` 里不能写 `list<T>`。`map` 的解析不改 | 完成 | `list<int32> x = 1;`、`optional list<int32> x = 1;`、`required list<int32> x = 1;` 都是 repeated int32。`oneof` 里的 `list<T>` 报 `List fields are not allowed in oneofs.` |
+| 1 | `shark/compiler/parser.cc` 接受 `list<T>`，字段类型写成 `T`，`label` 写成 `CARDINALITY_REPEATED`。前面的 `optional`、`required` 接受并忽略。`repeated` 不再是标签。`oneof` 里不能写 `list<T>`。`map` 的解析不改 | 完成 | `list<int32> x = 1;`、`optional list<int32> x = 1;`、`required list<int32> x = 1;` 都是 repeated int32。`oneof` 里的 `list<T>` 报 `List fields are not allowed in oneofs.` |
 | 2 | `FieldDescriptor::DebugString` 把 repeated 字段打成 `list<T>`，不再打 `repeated` | 完成 | 非 map 的 repeated 字段输出 `list<类型> 名字 = 编号` |
 | 3 | `.shark` 里的 `repeated T` 改成 `list<T>`。`descriptor.skp`、`plugin.skp`、`type.skp` 用当前 `sharkc` 重新生成。测试里的源码字符串一起改 | 完成 | `ctest` 6 项通过 |
 
@@ -73,7 +73,7 @@ schema 文件里标了 `[deprecated = true]` 的字段，生成的访问器继�
 
 未定：
 
-- `list<T>` 解析之后，字段类型是否写成 `LIST`。`label` 是否还保留 `LABEL_REPEATED`。
+- `list<T>` 解析之后，字段类型是否写成 `LIST`。`label` 是否还保留 `CARDINALITY_REPEATED`。
 - `map` 现在也是 `is_repeated()` 为真，类型仍是 message。改成看 `LIST` 之后，map 用什么判断。
 - `LIST` 的 wire type 是否仍是元素自己的 wire type，还是另有编码。
 - `is_repeated()` 是删除，还是改成 `type() == LIST` 的别名。

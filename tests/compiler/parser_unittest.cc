@@ -155,7 +155,7 @@ namespace shark {
                     "syntax: 'proto2' "
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32 number:1 }"
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32 number:1 }"
                     "}");
             }
 
@@ -180,7 +180,7 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32 number:1 }"
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32 number:1 }"
                     "}");
             }
 
@@ -205,7 +205,7 @@ namespace shark {
                     "syntax: 'proto2' "
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32 number:1 }"
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32 number:1 }"
                     "}");
                 EXPECT_EQ("proto2", parser_->GetSyntaxIdentifier());
             }
@@ -221,7 +221,7 @@ namespace shark {
                     "syntax: 'proto2' "
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32 number:1 }"
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32 number:1 }"
                     "}");
                 EXPECT_EQ("proto2", parser_->GetSyntaxIdentifier());
             }
@@ -236,9 +236,9 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32 number:15 }"
-                    "  field { name:\"bar\" label:LABEL_OPTIONAL type:INT32 number:34 }"
-                    "  field { name:\"baz\" label:LABEL_REPEATED type:INT32 number:3  }"
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32 number:15 }"
+                    "  field { name:\"bar\" label:CARDINALITY_OPTIONAL type:INT32 number:34 }"
+                    "  field { name:\"baz\" label:CARDINALITY_REPEATED type:INT32 number:3  }"
                     "}");
             }
 
@@ -264,35 +264,35 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32    number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32    number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT64    number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT64    number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:UINT32   number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:UINT32   number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:UINT64   number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:UINT64   number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:SINT32   number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:SINT32   number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:SINT64   number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:SINT64   number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:FIXED32  number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:FIXED32  number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:FIXED64  number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:FIXED64  number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:SFIXED32 number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:SFIXED32 number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:SFIXED64 number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:SFIXED64 number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:FLOAT    number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:FLOAT    number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:DOUBLE   number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:DOUBLE   number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:STRING   number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:STRING   number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:BYTES    number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:BYTES    number:1 "
                     "}"
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:BOOL     number:1 "
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:BOOL     number:1 "
                     "}"
                     "}");
             }
@@ -331,7 +331,7 @@ namespace shark {
                     "  required double foo = 1 [default= 0xabcd];\n"
                     "}\n",
 
-#define ETC "name:\"foo\" label:LABEL_REQUIRED number:1"
+#define ETC "name:\"foo\" label:CARDINALITY_REQUIRED number:1"
                     "message_type {"
                     "  name: \"TestMessage\""
                     "  field { type:INT32   default_value:\"1\"         " ETC
@@ -410,7 +410,7 @@ namespace shark {
                     "message_type {"
                     "  name: \"TestMessage\""
                     "  field {\n"
-                    "    name: \"foo\" label: LABEL_OPTIONAL type:STRING number: 1"
+                    "    name: \"foo\" label: CARDINALITY_OPTIONAL type:STRING number: 1"
                     "    json_name: \"@type\"\n"
                     "  }\n"
                     "}\n");
@@ -426,7 +426,7 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name: \"foo\" label: LABEL_OPTIONAL type:STRING number: "
+                    "  field { name: \"foo\" label: CARDINALITY_OPTIONAL type:STRING number: "
                     "1"
                     "          options { uninterpreted_option: { name { name_part: \"ctype\" "
                     "                                                   is_extension: false "
@@ -475,11 +475,11 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"a\" label:LABEL_OPTIONAL type:INT32 number:1 "
+                    "  field { name:\"a\" label:CARDINALITY_OPTIONAL type:INT32 number:1 "
                     "          oneof_index:0 }"
-                    "  field { name:\"b\" label:LABEL_OPTIONAL type:STRING number:2 "
+                    "  field { name:\"b\" label:CARDINALITY_OPTIONAL type:STRING number:2 "
                     "          oneof_index:0 }"
-                    "  field { name:\"c\" label:LABEL_OPTIONAL type_name:\"TestMessage\" "
+                    "  field { name:\"c\" label:CARDINALITY_OPTIONAL type_name:\"TestMessage\" "
                     "          number:3 oneof_index:0 }"
                     "  oneof_decl {"
                     "    name: \"foo\""
@@ -502,13 +502,13 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"a\" label:LABEL_OPTIONAL type:INT32 number:1 "
+                    "  field { name:\"a\" label:CARDINALITY_OPTIONAL type:INT32 number:1 "
                     "          oneof_index:0 }"
-                    "  field { name:\"b\" label:LABEL_OPTIONAL type:STRING number:2 "
+                    "  field { name:\"b\" label:CARDINALITY_OPTIONAL type:STRING number:2 "
                     "          oneof_index:0 }"
-                    "  field { name:\"c\" label:LABEL_OPTIONAL type:INT32 number:3 "
+                    "  field { name:\"c\" label:CARDINALITY_OPTIONAL type:INT32 number:3 "
                     "          oneof_index:1 }"
-                    "  field { name:\"d\" label:LABEL_OPTIONAL type:STRING number:4 "
+                    "  field { name:\"d\" label:CARDINALITY_OPTIONAL type:STRING number:4 "
                     "          oneof_index:1 }"
                     "  oneof_decl {"
                     "    name: \"foo\""
@@ -531,11 +531,11 @@ namespace shark {
                     "  nested_type {"
                     "    name: \"PrimitiveTypeMapEntry\""
                     "    field { "
-                    "       name: \"key\" number: 1 label:LABEL_OPTIONAL"
+                    "       name: \"key\" number: 1 label:CARDINALITY_OPTIONAL"
                     "       type:INT32"
                     "    }"
                     "    field { "
-                    "       name: \"value\" number: 2 label:LABEL_OPTIONAL"
+                    "       name: \"value\" number: 2 label:CARDINALITY_OPTIONAL"
                     "       type:STRING"
                     "    }"
                     "    options { map_entry: true }"
@@ -543,24 +543,24 @@ namespace shark {
                     "  nested_type {"
                     "    name: \"CompositeTypeMapEntry\""
                     "    field { "
-                    "       name: \"key\" number: 1 label:LABEL_OPTIONAL"
+                    "       name: \"key\" number: 1 label:CARDINALITY_OPTIONAL"
                     "       type_name: \"KeyType\""
                     "    }"
                     "    field { "
-                    "       name: \"value\" number: 2 label:LABEL_OPTIONAL"
+                    "       name: \"value\" number: 2 label:CARDINALITY_OPTIONAL"
                     "       type_name: \"ValueType\""
                     "    }"
                     "    options { map_entry: true }"
                     "  }"
                     "  field {"
                     "    name: \"primitive_type_map\""
-                    "    label: LABEL_REPEATED"
+                    "    label: CARDINALITY_REPEATED"
                     "    type_name: \"PrimitiveTypeMapEntry\""
                     "    number: 1"
                     "  }"
                     "  field {"
                     "    name: \"composite_type_map\""
-                    "    label: LABEL_REPEATED"
+                    "    label: CARDINALITY_REPEATED"
                     "    type_name: \"CompositeTypeMapEntry\""
                     "    number: 2"
                     "  }"
@@ -577,7 +577,7 @@ namespace shark {
                     "message_type {"
                     "  name: \"TestMessage\""
                     "  nested_type { name: \"Nested\" }"
-                    "  field { name:\"test_nested\" label:LABEL_OPTIONAL number:1"
+                    "  field { name:\"test_nested\" label:CARDINALITY_OPTIONAL number:1"
                     "          type_name: \"Nested\" }"
                     "}");
             }
@@ -595,7 +595,7 @@ namespace shark {
                     "    name: \"NestedEnum\""
                     "    options { underlying_type: ENUM_UNDERLYING_TYPE_INT32 }"
                     "  }"
-                    "  field { name:\"test_enum\" label:LABEL_OPTIONAL number:1"
+                    "  field { name:\"test_enum\" label:CARDINALITY_OPTIONAL number:1"
                     "          type_name: \"NestedEnum\" }"
                     "}");
             }
@@ -609,7 +609,7 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  field { name:\"foo\" label:LABEL_REQUIRED type:INT32 number:1 }"
+                    "  field { name:\"foo\" label:CARDINALITY_REQUIRED type:INT32 number:1 }"
                     "  reserved_range { start:2   end:3         }"
                     "  reserved_range { start:15  end:16        }"
                     "  reserved_range { start:9   end:12        }"
@@ -813,9 +813,9 @@ namespace shark {
                     "extend Extendee1 { optional int32 foo = 12; }\n"
                     "extend Extendee2 { list<TestMessage> bar = 22; }\n",
 
-                    "extension { name:\"foo\" label:LABEL_OPTIONAL type:INT32 number:12"
+                    "extension { name:\"foo\" label:CARDINALITY_OPTIONAL type:INT32 number:12"
                     "            extendee: \"Extendee1\" } "
-                    "extension { name:\"bar\" label:LABEL_REPEATED number:22"
+                    "extension { name:\"bar\" label:CARDINALITY_REPEATED number:22"
                     "            type_name:\"TestMessage\" extendee: \"Extendee2\" }");
             }
 
@@ -828,10 +828,10 @@ namespace shark {
 
                     "message_type {"
                     "  name: \"TestMessage\""
-                    "  extension { name:\"foo\" label:LABEL_OPTIONAL type:INT32 "
+                    "  extension { name:\"foo\" label:CARDINALITY_OPTIONAL type:INT32 "
                     "number:12"
                     "              extendee: \"Extendee1\" }"
-                    "  extension { name:\"bar\" label:LABEL_REPEATED number:22"
+                    "  extension { name:\"bar\" label:CARDINALITY_REPEATED number:22"
                     "              type_name:\"TestMessage\" extendee: \"Extendee2\" }"
                     "}");
             }
@@ -843,9 +843,9 @@ namespace shark {
                     "  list<TestMessage> bar = 22;\n"
                     "}\n",
 
-                    "extension { name:\"foo\" label:LABEL_OPTIONAL type:INT32 number:12"
+                    "extension { name:\"foo\" label:CARDINALITY_OPTIONAL type:INT32 number:12"
                     "            extendee: \"Extendee1\" } "
-                    "extension { name:\"bar\" label:LABEL_REPEATED number:22"
+                    "extension { name:\"bar\" label:CARDINALITY_REPEATED number:22"
                     "            type_name:\"TestMessage\" extendee: \"Extendee1\" }");
             }
 
@@ -1665,13 +1665,13 @@ namespace shark {
                 FieldDescriptorProto* field(message->add_field());
                 field->set_name("foo");
                 field->set_number(1);
-                field->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+                field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
                 field->set_type(SharkType::INT32);
 
                 FieldDescriptorProto* extension(other_file.add_extension());
                 extension->set_name("bar");
                 extension->set_number(7672757);
-                extension->set_label(FieldDescriptorProto_Label::LABEL_OPTIONAL);
+                extension->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
                 extension->set_type(SharkType::MESSAGE);
                 extension->set_type_name("Bar");
                 extension->set_extendee("shark.FileOptions");

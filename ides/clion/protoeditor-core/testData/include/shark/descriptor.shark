@@ -162,9 +162,9 @@ message FieldDescriptorProto {
 
   enum Label {
     // 0 is reserved for errors
-    LABEL_OPTIONAL = 1;
-    LABEL_REQUIRED = 2;
-    LABEL_REPEATED = 3;
+    CARDINALITY_OPTIONAL = 1;
+    CARDINALITY_REQUIRED = 2;
+    CARDINALITY_REPEATED = 3;
   }
 
   optional string name = 1;
