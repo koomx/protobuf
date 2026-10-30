@@ -324,6 +324,7 @@ void Timestamp::InternalSwap(Timestamp* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::Timestamp*
 Arena::CreateMaybeMessage< ::shark::Timestamp >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Timestamp >(arena);

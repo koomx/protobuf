@@ -1035,6 +1035,20 @@ void ListValue::InternalSwap(ListValue* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::NullValue>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2fstruct_2eshark);
+    return file_level_enum_descriptors_shark_2ftypes_2fstruct_2eshark[0];
+}
+bool EnumTraitImpl<::shark::NullValue>::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+      return true;
+    default:
+      return false;
+  }
+}
+
 template<> SHARK_NOINLINE ::shark::Struct_FieldsEntry_DoNotUse*
 Arena::CreateMaybeMessage< ::shark::Struct_FieldsEntry_DoNotUse >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Struct_FieldsEntry_DoNotUse >(arena);

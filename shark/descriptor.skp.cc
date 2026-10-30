@@ -10546,6 +10546,136 @@ void GeneratedCodeInfo::InternalSwap(GeneratedCodeInfo* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldDescriptorProto_Type>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[0];
+}
+bool EnumTraitImpl<::shark::FieldDescriptorProto_Type>::is_valid(int64_t value) {
+  switch (value) {
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+    case 7:
+    case 8:
+    case 9:
+    case 10:
+    case 11:
+    case 12:
+    case 13:
+    case 14:
+    case 15:
+    case 16:
+    case 17:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldDescriptorProto_Label>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[1];
+}
+bool EnumTraitImpl<::shark::FieldDescriptorProto_Label>::is_valid(int64_t value) {
+  switch (value) {
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FileOptions_OptimizeMode>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[2];
+}
+bool EnumTraitImpl<::shark::FileOptions_OptimizeMode>::is_valid(int64_t value) {
+  switch (value) {
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldOptions_CType>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[3];
+}
+bool EnumTraitImpl<::shark::FieldOptions_CType>::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::FieldOptions_JSType>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[4];
+}
+bool EnumTraitImpl<::shark::FieldOptions_JSType>::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[5];
+}
+bool EnumTraitImpl<::shark::MethodOptions_IdempotencyLevel>::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::EnumUnderlyingType>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fdescriptor_2eshark);
+    return file_level_enum_descriptors_shark_2fdescriptor_2eshark[6];
+}
+bool EnumTraitImpl<::shark::EnumUnderlyingType>::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+    case 4:
+    case 5:
+    case 6:
+      return true;
+    default:
+      return false;
+  }
+}
+
 template<> SHARK_NOINLINE ::shark::FileDescriptorSet*
 Arena::CreateMaybeMessage< ::shark::FileDescriptorSet >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::FileDescriptorSet >(arena);

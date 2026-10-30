@@ -694,13 +694,25 @@ namespace shark::compiler::cpp {
                 GenerateReflectionInitializationCode(printer);
             }
         }
+        {
+            NamespaceOpener ns(Namespace(file_, options_), format);
 
-        NamespaceOpener ns(Namespace(file_, options_), format);
-
-        // Generate enums.
-        for (int i = 0; i < enum_generators_.size(); i++) {
-            enum_generators_[i]->GenerateMethods(i, printer);
+            // Generate enums.
+            for (int i = 0; i < enum_generators_.size(); i++) {
+                enum_generators_[i]->GenerateMethods(i, printer);
+            }
         }
+
+        {
+            NamespaceOpener proto_ns(ProtobufNamespace(options_), format);
+            format("\n");
+
+            // Generate enums.
+            for (int i = 0; i < enum_generators_.size(); i++) {
+                enum_generators_[i]->generate_template_methods(i, printer);
+            }
+        }
+
     }
 
     void FileGenerator::GenerateSource(io::Printer* printer) {
@@ -772,6 +784,13 @@ namespace shark::compiler::cpp {
 
         {
             NamespaceOpener proto_ns(ProtobufNamespace(options_), format);
+            format("\n");
+
+            // Generate enums.
+            for (int i = 0; i < enum_generators_.size(); i++) {
+                enum_generators_[i]->generate_template_methods(i, printer);
+            }
+
             for (int i = 0; i < message_generators_.size(); i++) {
                 message_generators_[i]->GenerateSourceInProto2Namespace(printer);
             }

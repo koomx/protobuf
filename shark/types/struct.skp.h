@@ -1201,17 +1201,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::NullValue enum_max = ::shark::NullValue::NULL_VALUE;
         static constexpr uint32_t value_count = 1;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::NullValue_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::NullValue e) {
             return ::shark::NullValue_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue *e) {
             return ::shark::NullValue_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::NullValue_IsValid(value);
         }
     };
 

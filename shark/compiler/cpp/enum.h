@@ -80,6 +80,7 @@ namespace shark {
                 // Goes in the .cc file. EnumDescriptors are stored in an array, idx is
                 // the index in this array that corresponds with this enum.
                 void GenerateMethods(int idx, io::Printer* printer);
+                void generate_template_methods(int idx, io::Printer* printer);
 
             private:
                 const EnumDescriptor* descriptor_;

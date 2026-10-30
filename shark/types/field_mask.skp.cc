@@ -274,6 +274,7 @@ void FieldMask::InternalSwap(FieldMask* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::FieldMask*
 Arena::CreateMaybeMessage< ::shark::FieldMask >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::FieldMask >(arena);

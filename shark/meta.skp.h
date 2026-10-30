@@ -170,17 +170,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::SharkType enum_max = ::shark::SharkType::SINT64;
         static constexpr uint32_t value_count = 24;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::SharkType_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::SharkType e) {
             return ::shark::SharkType_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType *e) {
             return ::shark::SharkType_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::SharkType_IsValid(value);
         }
     };
 
@@ -192,17 +188,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::SharkCppType enum_max = ::shark::SharkCppType::STRING;
         static constexpr uint32_t value_count = 16;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::SharkCppType_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::SharkCppType e) {
             return ::shark::SharkCppType_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType *e) {
             return ::shark::SharkCppType_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::SharkCppType_IsValid(value);
         }
     };
 

@@ -1890,17 +1890,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::compiler::CodeGeneratorResponse_Feature enum_max = ::shark::compiler::CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
         static constexpr uint32_t value_count = 2;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::compiler::CodeGeneratorResponse_Feature_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::compiler::CodeGeneratorResponse_Feature e) {
             return ::shark::compiler::CodeGeneratorResponse_Feature_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature *e) {
             return ::shark::compiler::CodeGeneratorResponse_Feature_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::compiler::CodeGeneratorResponse_Feature_IsValid(value);
         }
     };
 

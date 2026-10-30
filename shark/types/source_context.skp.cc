@@ -304,6 +304,7 @@ void SourceContext::InternalSwap(SourceContext* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::SourceContext*
 Arena::CreateMaybeMessage< ::shark::SourceContext >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::SourceContext >(arena);

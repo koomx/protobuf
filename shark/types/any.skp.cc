@@ -384,6 +384,7 @@ void Any::InternalSwap(Any* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::Any*
 Arena::CreateMaybeMessage< ::shark::Any >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Any >(arena);

@@ -324,6 +324,7 @@ void Duration::InternalSwap(Duration* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::Duration*
 Arena::CreateMaybeMessage< ::shark::Duration >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Duration >(arena);

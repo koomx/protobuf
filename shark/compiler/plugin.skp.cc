@@ -1580,6 +1580,21 @@ void CodeGeneratorResponse::InternalSwap(CodeGeneratorResponse* other) {
 }  // namespace compiler
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature>::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fcompiler_2fplugin_2eshark);
+    return file_level_enum_descriptors_shark_2fcompiler_2fplugin_2eshark[0];
+}
+bool EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature>::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
 template<> SHARK_NOINLINE ::shark::compiler::Version*
 Arena::CreateMaybeMessage< ::shark::compiler::Version >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::compiler::Version >(arena);

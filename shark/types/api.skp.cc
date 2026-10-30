@@ -1433,6 +1433,7 @@ void Mixin::InternalSwap(Mixin* other) {
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::Api*
 Arena::CreateMaybeMessage< ::shark::Api >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Api >(arena);

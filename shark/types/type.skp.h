@@ -2831,17 +2831,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::Field_Kind enum_max = ::shark::Field_Kind::TYPE_SINT64;
         static constexpr uint32_t value_count = 24;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::Field_Kind_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::Field_Kind e) {
             return ::shark::Field_Kind_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Kind *e) {
             return ::shark::Field_Kind_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::Field_Kind_IsValid(value);
         }
     };
 
@@ -2853,17 +2849,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::Field_Cardinality enum_max = ::shark::Field_Cardinality::CARDINALITY_REPEATED;
         static constexpr uint32_t value_count = 4;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::Field_Cardinality_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::Field_Cardinality e) {
             return ::shark::Field_Cardinality_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality *e) {
             return ::shark::Field_Cardinality_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::Field_Cardinality_IsValid(value);
         }
     };
 
@@ -2875,17 +2867,13 @@ SHARK_NAMESPACE_OPEN
         static constexpr ::shark::Syntax enum_max = ::shark::Syntax::SYNTAX_PROTO3;
         static constexpr uint32_t value_count = 2;
         static constexpr bool has_descriptor = true;
-        static inline const EnumDescriptor* descriptor() {
-            return ::shark::Syntax_descriptor();
-        }
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
         static inline const std::string& enum_name(::shark::Syntax e) {
             return ::shark::Syntax_Name(e);
         }
         static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax *e) {
             return ::shark::Syntax_Parse(name, e);
-        }
-        static inline bool is_valid(int64_t value) {
-            return ::shark::Syntax_IsValid(value);
         }
     };
 

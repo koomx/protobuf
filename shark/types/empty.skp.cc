@@ -118,6 +118,7 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*Empty::GetClassData() const { ret
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
+
 template<> SHARK_NOINLINE ::shark::Empty*
 Arena::CreateMaybeMessage< ::shark::Empty >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::Empty >(arena);
