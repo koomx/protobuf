@@ -148,29 +148,30 @@ static const ::_pb::Message* const file_default_instances[] = {
 const char descriptor_table_protodef_shark_2ftypes_2fapi_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
     "\n\025shark/types/api.shark\022\005shark\032 shark/ty"
     "pes/source_context.shark\032\026shark/types/ty"
-    "pe.shark\"\317\001\n\003Api\022\014\n\004name\030\001 \001(\020\022\036\n\007method"
-    "s\030\002 \003(\0172\r.shark.Method\022\036\n\007options\030\003 \003(\0172"
-    "\r.shark.Option\022\017\n\007version\030\004 \001(\020\022,\n\016sourc"
-    "e_context\030\005 \001(\0172\024.shark.SourceContext\022\034\n"
-    "\006mixins\030\006 \003(\0172\014.shark.Mixin\022\035\n\006syntax\030\007 "
-    "\001(\0162\r.shark.Syntax\"\301\001\n\006Method\022\014\n\004name\030\001 "
-    "\001(\020\022\030\n\020request_type_url\030\002 \001(\020\022\031\n\021request"
-    "_streaming\030\003 \001(\001\022\031\n\021response_type_url\030\004 "
-    "\001(\020\022\032\n\022response_streaming\030\005 \001(\001\022\036\n\007optio"
-    "ns\030\006 \003(\0172\r.shark.Option\022\035\n\006syntax\030\007 \001(\0162"
-    "\r.shark.Syntax\"#\n\005Mixin\022\014\n\004name\030\001 \001(\020\022\014\n"
-    "\004root\030\002 \001(\020B.Z,google.golang.org/protobu"
-    "f/types/known/apipb"
+    "pe.shark\032\020shark/meta.shark\"\317\001\n\003Api\022\014\n\004na"
+    "me\030\001 \001(\020\022\036\n\007methods\030\002 \003(\0172\r.shark.Method"
+    "\022\036\n\007options\030\003 \003(\0172\r.shark.Option\022\017\n\007vers"
+    "ion\030\004 \001(\020\022,\n\016source_context\030\005 \001(\0172\024.shar"
+    "k.SourceContext\022\034\n\006mixins\030\006 \003(\0172\014.shark."
+    "Mixin\022\035\n\006syntax\030\007 \001(\0162\r.shark.Syntax\"\301\001\n"
+    "\006Method\022\014\n\004name\030\001 \001(\020\022\030\n\020request_type_ur"
+    "l\030\002 \001(\020\022\031\n\021request_streaming\030\003 \001(\001\022\031\n\021re"
+    "sponse_type_url\030\004 \001(\020\022\032\n\022response_stream"
+    "ing\030\005 \001(\001\022\036\n\007options\030\006 \003(\0172\r.shark.Optio"
+    "n\022\035\n\006syntax\030\007 \001(\0162\r.shark.Syntax\"#\n\005Mixi"
+    "n\022\014\n\004name\030\001 \001(\020\022\014\n\004root\030\002 \001(\020B.Z,google."
+    "golang.org/protobuf/types/known/apipb"
     ;
-static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2fapi_2eshark_deps[2] = {
+static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2fapi_2eshark_deps[3] = {
+  &::descriptor_table_shark_2fmeta_2eshark,
   &::descriptor_table_shark_2ftypes_2fsource_5fcontext_2eshark,
   &::descriptor_table_shark_2ftypes_2ftype_2eshark,
 };
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fapi_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fapi_2eshark = {
-    false, false, 579, descriptor_table_protodef_shark_2ftypes_2fapi_2eshark,
+    false, false, 597, descriptor_table_protodef_shark_2ftypes_2fapi_2eshark,
     "shark/types/api.shark",
-    &descriptor_table_shark_2ftypes_2fapi_2eshark_once, descriptor_table_shark_2ftypes_2fapi_2eshark_deps, 2, 3,
+    &descriptor_table_shark_2ftypes_2fapi_2eshark_once, descriptor_table_shark_2ftypes_2fapi_2eshark_deps, 3, 3,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2fapi_2eshark::offsets,
     file_level_metadata_shark_2ftypes_2fapi_2eshark, file_level_enum_descriptors_shark_2ftypes_2fapi_2eshark,
     file_level_service_descriptors_shark_2ftypes_2fapi_2eshark,

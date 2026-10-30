@@ -114,7 +114,7 @@ struct OptionDefaultTypeInternal {
 SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 OptionDefaultTypeInternal _Option_default_instance_;
 }  // namespace shark
 static ::_pb::Metadata file_level_metadata_shark_2ftypes_2ftype_2eshark[5];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark[2];
+static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark = nullptr;
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2ftype_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2ftype_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
@@ -225,26 +225,21 @@ const char descriptor_table_protodef_shark_2ftypes_2ftype_2eshark[] SHARK_SECTIO
     "\016\n\006oneofs\030\003 \003(\020\022\036\n\007options\030\004 \003(\0172\r.shark"
     ".Option\022,\n\016source_context\030\005 \001(\0172\024.shark."
     "SourceContext\022\035\n\006syntax\030\006 \001(\0162\r.shark.Sy"
-    "ntax\"\357\002\n\005Field\022\036\n\004kind\030\001 \001(\0162\020.shark.Sha"
-    "rkType\022-\n\013cardinality\030\002 \001(\0162\030.shark.Fiel"
-    "d.Cardinality\022\016\n\006number\030\003 \001(\006\022\014\n\004name\030\004 "
-    "\001(\020\022\020\n\010type_url\030\006 \001(\020\022\023\n\013oneof_index\030\007 \001"
-    "(\006\022\016\n\006packed\030\010 \001(\001\022\036\n\007options\030\t \003(\0172\r.sh"
-    "ark.Option\022\021\n\tjson_name\030\n \001(\020\022\025\n\rdefault"
-    "_value\030\013 \001(\020\"x\n\013Cardinality\022\027\n\023CARDINALI"
-    "TY_UNKNOWN\020\000\022\030\n\024CARDINALITY_OPTIONAL\020\001\022\030"
-    "\n\024CARDINALITY_REQUIRED\020\002\022\030\n\024CARDINALITY_"
-    "REPEATED\020\003\032\0028\005\"\246\001\n\004Enum\022\014\n\004name\030\001 \001(\020\022#\n"
-    "\tenumvalue\030\002 \003(\0172\020.shark.EnumValue\022\036\n\007op"
-    "tions\030\003 \003(\0172\r.shark.Option\022,\n\016source_con"
-    "text\030\004 \001(\0172\024.shark.SourceContext\022\035\n\006synt"
-    "ax\030\005 \001(\0162\r.shark.Syntax\"I\n\tEnumValue\022\014\n\004"
-    "name\030\001 \001(\020\022\016\n\006number\030\002 \001(\006\022\036\n\007options\030\003 "
-    "\003(\0172\r.shark.Option\"1\n\006Option\022\014\n\004name\030\001 \001"
-    "(\020\022\031\n\005value\030\002 \001(\0172\n.shark.Any*2\n\006Syntax\022"
-    "\021\n\rSYNTAX_PROTO2\020\000\022\021\n\rSYNTAX_PROTO3\020\001\032\0028"
-    "\005B2Z-google.golang.org/protobuf/types/kn"
-    "own/typepb\370\001\001"
+    "ntax\"\364\001\n\005Field\022\036\n\004kind\030\001 \001(\0162\020.shark.Sha"
+    "rkType\022,\n\013cardinality\030\002 \001(\0162\027.shark.Fiel"
+    "dCardinality\022\016\n\006number\030\003 \001(\006\022\014\n\004name\030\004 \001"
+    "(\020\022\020\n\010type_url\030\006 \001(\020\022\023\n\013oneof_index\030\007 \001("
+    "\006\022\016\n\006packed\030\010 \001(\001\022\036\n\007options\030\t \003(\0172\r.sha"
+    "rk.Option\022\021\n\tjson_name\030\n \001(\020\022\025\n\rdefault_"
+    "value\030\013 \001(\020\"\246\001\n\004Enum\022\014\n\004name\030\001 \001(\020\022#\n\ten"
+    "umvalue\030\002 \003(\0172\020.shark.EnumValue\022\036\n\007optio"
+    "ns\030\003 \003(\0172\r.shark.Option\022,\n\016source_contex"
+    "t\030\004 \001(\0172\024.shark.SourceContext\022\035\n\006syntax\030"
+    "\005 \001(\0162\r.shark.Syntax\"I\n\tEnumValue\022\014\n\004nam"
+    "e\030\001 \001(\020\022\016\n\006number\030\002 \001(\006\022\036\n\007options\030\003 \003(\017"
+    "2\r.shark.Option\"1\n\006Option\022\014\n\004name\030\001 \001(\020\022"
+    "\031\n\005value\030\002 \001(\0172\n.shark.AnyB2Z-google.gol"
+    "ang.org/protobuf/types/known/typepb\370\001\001"
     ;
 static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2ftype_2eshark_deps[3] = {
   &::descriptor_table_shark_2fmeta_2eshark,
@@ -253,7 +248,7 @@ static const ::_pbi::DescriptorTable* const descriptor_table_shark_2ftypes_2ftyp
 };
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2ftype_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ftype_2eshark = {
-    false, false, 1053, descriptor_table_protodef_shark_2ftypes_2ftype_2eshark,
+    false, false, 878, descriptor_table_protodef_shark_2ftypes_2ftype_2eshark,
     "shark/types/type.shark",
     &descriptor_table_shark_2ftypes_2ftype_2eshark_once, descriptor_table_shark_2ftypes_2ftype_2eshark_deps, 3, 5,
     schemas, file_default_instances, TableStruct_shark_2ftypes_2ftype_2eshark::offsets,
@@ -267,58 +262,6 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ftyp
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2ftypes_2ftype_2eshark(&descriptor_table_shark_2ftypes_2ftype_2eshark);
 namespace shark {
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::Field_CardinalityTrait::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2ftype_2eshark);
-    return file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark[0];
-}
-bool ::shark::Field_CardinalityTrait::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-    case 2:
-    case 3:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& ::shark::Field_CardinalityTrait::enum_name(
-   ::shark::Field_Cardinality enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool ::shark::Field_CardinalityTrait::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::Field_Cardinality>(
-    descriptor(), name, value);
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::SyntaxTrait::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2ftype_2eshark);
-    return file_level_enum_descriptors_shark_2ftypes_2ftype_2eshark[1];
-}
-bool ::shark::SyntaxTrait::is_valid(int64_t value) {
-  switch (value) {
-    case 0:
-    case 1:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& ::shark::SyntaxTrait::enum_name(
-   ::shark::Syntax enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool ::shark::SyntaxTrait::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::Syntax>(
-    descriptor(), name, value);
-}
 
 // ===================================================================
 
@@ -953,13 +896,13 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 } else
                   goto handle_unusual;
                 continue;
-            // optional .shark.Field.Cardinality cardinality = 2;
+            // optional .shark.FieldCardinality cardinality = 2;
             case 2:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::Field_CardinalityTrait::fits_wire(val))) {
-                        _internal_set_cardinality(static_cast<::shark::Field_Cardinality>(val));
+                    if (SHARK_PREDICT_TRUE(::shark::FieldCardinalityTrait::fits_wire(val))) {
+                        _internal_set_cardinality(static_cast<::shark::FieldCardinality>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(2, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
                     }
@@ -1092,7 +1035,7 @@ uint8_t* Field::_InternalSerialize(
           1, this->_impl_.kind_, target);
     }
 
-    // optional .shark.Field.Cardinality cardinality = 2;
+    // optional .shark.FieldCardinality cardinality = 2;
     if (cached_has_bits & 0x00000020u) {
         target = stream->EnsureSpace(target);
         target = ::_pbi::WireFormatLite::WriteEnumToArray(
@@ -1224,7 +1167,7 @@ size_t Field::ByteSizeLong() const {
               ::_pbi::WireFormatLite::EnumSize(this->_impl_.kind_);
         }
 
-        // optional .shark.Field.Cardinality cardinality = 2;
+        // optional .shark.FieldCardinality cardinality = 2;
         if (cached_has_bits & 0x00000020u) {
             total_size += 1 +
               ::_pbi::WireFormatLite::EnumSize(this->_impl_.cardinality_);

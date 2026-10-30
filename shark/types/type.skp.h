@@ -29,7 +29,6 @@
 #include <shark/message.h>
 #include <shark/repeated_field.h>  // IWYU pragma: export
 #include <shark/extension_set.h>  // IWYU pragma: export
-#include <shark/generated/generated_enum_reflection.h>
 #include <shark/unknown_field_set.h>
 #include <shark/meta.skp.h>
 #include <shark/types/any.skp.h>
@@ -74,84 +73,7 @@ template<> ::shark::Type* Arena::CreateMaybeMessage<::shark::Type>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
-// inner enum Cardinality
-// enum class Field_Cardinality : int32_t {
-enum class Field_Cardinality : int32_t {
-    CARDINALITY_UNKNOWN = 0,
-    CARDINALITY_OPTIONAL = 1,
-    CARDINALITY_REQUIRED = 2,
-    CARDINALITY_REPEATED = 3
-};
-////////////////////////////////////////////////////////////////////
-/// enum traits
-struct Field_CardinalityTrait {
-    using underlying = int32_t;
-    static constexpr Field_Cardinality enum_min = Field_Cardinality::CARDINALITY_UNKNOWN;
-    static constexpr Field_Cardinality enum_max = Field_Cardinality::CARDINALITY_REPEATED;
-    static constexpr uint32_t value_count = 4;
-    static constexpr bool has_descriptor = true;
-    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
-    static int32_t to_underlying(Field_Cardinality value) { return static_cast<int32_t>(value); }
-    static bool is_valid(int64_t value);
-    static const std::string& enum_name(Field_Cardinality e);
-    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Cardinality *e);
-
-
-    static constexpr bool fits_underlying(int64_t value) {
-         return true;
-    }
-    static constexpr bool fits_wire(::uint64_t value) {
-         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-    }
-};
-
-// global enum Syntax
-// enum class Syntax : int32_t {
-enum class Syntax : int32_t {
-    SYNTAX_PROTO2 = 0,
-    SYNTAX_PROTO3 = 1
-};
-////////////////////////////////////////////////////////////////////
-/// enum traits
-struct SyntaxTrait {
-    using underlying = int32_t;
-    static constexpr Syntax enum_min = Syntax::SYNTAX_PROTO2;
-    static constexpr Syntax enum_max = Syntax::SYNTAX_PROTO3;
-    static constexpr uint32_t value_count = 2;
-    static constexpr bool has_descriptor = true;
-    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
-    static int32_t to_underlying(Syntax value) { return static_cast<int32_t>(value); }
-    static bool is_valid(int64_t value);
-    static const std::string& enum_name(Syntax e);
-    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Syntax *e);
-
-
-    static constexpr bool fits_underlying(int64_t value) {
-         return true;
-    }
-    static constexpr bool fits_wire(::uint64_t value) {
-         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-    }
-};
-
 }  // namespace shark
-
-SHARK_NAMESPACE_OPEN
-
-    ////////////////////////////////////////////////////////////
-    /// enum ::shark::Field_Cardinality
-    template <>
-    struct EnumTraitImpl<::shark::Field_Cardinality> : public ::shark::Field_CardinalityTrait {};
-    template <> struct IsSharkEnum< ::shark::Field_Cardinality> : ::std::true_type {};
-
-    ////////////////////////////////////////////////////////////
-    /// enum ::shark::Syntax
-    template <>
-    struct EnumTraitImpl<::shark::Syntax> : public ::shark::SyntaxTrait {};
-    template <> struct IsSharkEnum< ::shark::Syntax> : ::std::true_type {};
-
-
-SHARK_NAMESPACE_CLOSE
 // ===================================================================
 namespace shark {
 
@@ -546,9 +468,6 @@ class Field final :
 
     // nested types ----------------------------------------------------
 
-    using Cardinality = Field_Cardinality;
-    using CardinalityTrait = Field_CardinalityTrait;
-
     // accessors -------------------------------------------------------
 
     enum : int {
@@ -666,17 +585,17 @@ class Field final :
     void _internal_set_kind(::shark::SharkType value);
     public:
 
-    // optional .shark.Field.Cardinality cardinality = 2;
+    // optional .shark.FieldCardinality cardinality = 2;
     bool has_cardinality() const;
     private:
     bool _internal_has_cardinality() const;
     public:
     void clear_cardinality();
-    ::shark::Field_Cardinality cardinality() const;
-    void set_cardinality(::shark::Field_Cardinality value);
+    ::shark::FieldCardinality cardinality() const;
+    void set_cardinality(::shark::FieldCardinality value);
     private:
-    ::shark::Field_Cardinality _internal_cardinality() const;
-    void _internal_set_cardinality(::shark::Field_Cardinality value);
+    ::shark::FieldCardinality _internal_cardinality() const;
+    void _internal_set_cardinality(::shark::FieldCardinality value);
     public:
 
     // optional int32 number = 3;
@@ -1748,7 +1667,7 @@ inline void Field::set_kind(::shark::SharkType value) {
   // @@protoc_insertion_point(field_set:shark.Field.kind)
 }
 
-// optional .shark.Field.Cardinality cardinality = 2;
+// optional .shark.FieldCardinality cardinality = 2;
 inline bool Field::_internal_has_cardinality() const {
   bool value = (_impl_._has_bits_[0] & 0x00000020u) != 0;
   return value;
@@ -1760,18 +1679,18 @@ inline void Field::clear_cardinality() {
     _impl_.cardinality_ = 0;
     _impl_._has_bits_[0] &= ~0x00000020u;
 }
-inline ::shark::Field_Cardinality Field::_internal_cardinality() const {
-  return static_cast<::shark::Field_Cardinality>(static_cast<int32_t>(_impl_.cardinality_));
+inline ::shark::FieldCardinality Field::_internal_cardinality() const {
+  return static_cast<::shark::FieldCardinality>(static_cast<int32_t>(_impl_.cardinality_));
 }
-inline ::shark::Field_Cardinality Field::cardinality() const {
+inline ::shark::FieldCardinality Field::cardinality() const {
   // @@protoc_insertion_point(field_get:shark.Field.cardinality)
   return _internal_cardinality();
 }
-inline void Field::_internal_set_cardinality(::shark::Field_Cardinality value) {
+inline void Field::_internal_set_cardinality(::shark::FieldCardinality value) {
   _impl_._has_bits_[0] |= 0x00000020u;
-  _impl_.cardinality_ = static_cast<int>(::shark::Field_CardinalityTrait::to_underlying(value));
+  _impl_.cardinality_ = static_cast<int>(::shark::FieldCardinalityTrait::to_underlying(value));
 }
-inline void Field::set_cardinality(::shark::Field_Cardinality value) {
+inline void Field::set_cardinality(::shark::FieldCardinality value) {
   _internal_set_cardinality(value);
   // @@protoc_insertion_point(field_set:shark.Field.cardinality)
 }

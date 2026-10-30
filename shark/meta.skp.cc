@@ -22,7 +22,7 @@ namespace _pbi = _pb::internal;
 
 namespace shark {
 }  // namespace shark
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fmeta_2eshark[2];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fmeta_2eshark[4];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fmeta_2eshark = nullptr;
 const uint32_t TableStruct_shark_2fmeta_2eshark::offsets[1] = {};
 static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
@@ -42,11 +42,15 @@ const char descriptor_table_protodef_shark_2fmeta_2eshark[] SHARK_SECTION_VARIAB
     "\t\n\005INT32\020\006\022\n\n\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UIN"
     "T64\020\t\022\t\n\005FLOAT\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020"
     "\014\022\n\n\006DOUBLE\020\r\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006"
-    "STRING\020\020\032\0028\002"
+    "STRING\020\020\032\0028\002*}\n\020FieldCardinality\022\027\n\023CARD"
+    "INALITY_UNKNOWN\020\000\022\030\n\024CARDINALITY_OPTIONA"
+    "L\020\001\022\030\n\024CARDINALITY_REQUIRED\020\002\022\030\n\024CARDINA"
+    "LITY_REPEATED\020\003\032\0028\005*2\n\006Syntax\022\021\n\rSYNTAX_"
+    "PROTO2\020\000\022\021\n\rSYNTAX_PROTO3\020\001\032\0028\005"
     ;
 static ::_pbi::once_flag descriptor_table_shark_2fmeta_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fmeta_2eshark = {
-    false, false, 532, descriptor_table_protodef_shark_2fmeta_2eshark,
+    false, false, 711, descriptor_table_protodef_shark_2fmeta_2eshark,
     "shark/meta.shark",
     &descriptor_table_shark_2fmeta_2eshark_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_shark_2fmeta_2eshark::offsets,
@@ -144,6 +148,58 @@ const std::string& ::shark::SharkCppTypeTrait::enum_name(
 bool ::shark::SharkCppTypeTrait::enum_parse(
     ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType* value) {
   return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::SharkCppType>(
+    descriptor(), name, value);
+}
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::FieldCardinalityTrait::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
+    return file_level_enum_descriptors_shark_2fmeta_2eshark[2];
+}
+bool ::shark::FieldCardinalityTrait::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+    case 2:
+    case 3:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const std::string& ::shark::FieldCardinalityTrait::enum_name(
+   ::shark::FieldCardinality enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    descriptor(),
+    static_cast<int32_t>(enum_t_value));
+}
+bool ::shark::FieldCardinalityTrait::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldCardinality* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::FieldCardinality>(
+    descriptor(), name, value);
+}
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::SyntaxTrait::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
+    return file_level_enum_descriptors_shark_2fmeta_2eshark[3];
+}
+bool ::shark::SyntaxTrait::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const std::string& ::shark::SyntaxTrait::enum_name(
+   ::shark::Syntax enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    descriptor(),
+    static_cast<int32_t>(enum_t_value));
+}
+bool ::shark::SyntaxTrait::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::Syntax>(
     descriptor(), name, value);
 }
 

@@ -1364,7 +1364,7 @@ void ProtoStreamObjectWriter::PopOneElement() {
 bool ProtoStreamObjectWriter::IsMap(const shark::Field& field) {
   if (field.type_url().empty() ||
       field.kind() != shark::SharkType::MESSAGE ||
-      field.cardinality() != shark::Field_Cardinality::CARDINALITY_REPEATED) {
+      field.cardinality() != shark::FieldCardinality::CARDINALITY_REPEATED) {
     return false;
   }
   const shark::Type* field_type =

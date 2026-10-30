@@ -32,6 +32,7 @@
 #include <shark/unknown_field_set.h>
 #include <shark/types/source_context.skp.h>
 #include <shark/types/type.skp.h>
+#include <shark/meta.skp.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 #define SHARK_INTERNAL_EXPORT_shark_2ftypes_2fapi_2eshark

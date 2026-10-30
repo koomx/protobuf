@@ -364,7 +364,7 @@ void DefaultValueObjectWriter::Node::PopulateChildren(
     }
 
     if (!is_map &&
-        field.cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED) {
+        field.cardinality() == shark::FieldCardinality::CARDINALITY_REPEATED) {
       kind = LIST;
     }
 

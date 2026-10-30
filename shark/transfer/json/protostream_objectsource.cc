@@ -210,7 +210,7 @@ util::Status ProtoStreamObjectSource::WriteMessage(
       continue;
     }
 
-    if (field->cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED) {
+    if (field->cardinality() == shark::FieldCardinality::CARDINALITY_REPEATED) {
       if (IsMap(*field)) {
         ow->StartObject(field_name);
         ASSIGN_OR_RETURN(tag, RenderMap(field, field_name, tag, ow));
@@ -1083,7 +1083,7 @@ const shark::Field* FindFieldByNumber(
 // TODO(skarvaje): Replace FieldDescriptor by implementing IsTypePackable()
 // using tech Field.
 bool IsPackable(const shark::Field& field) {
-  return field.cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED &&
+  return field.cardinality() == shark::FieldCardinality::CARDINALITY_REPEATED &&
          FieldDescriptor::IsTypePackable(
              static_cast<FieldType>(field.kind()));
 }

@@ -34,6 +34,7 @@ package shark;
 
 import "shark/types/source_context.shark";
 import "shark/types/type.shark";
+import "shark/meta.shark";
 
 option go_package = "google.golang.org/protobuf/types/known/apipb";
 

@@ -141,6 +141,66 @@ struct SharkCppTypeTrait {
     }
 };
 
+// global enum FieldCardinality
+// enum class FieldCardinality : int32_t {
+enum class FieldCardinality : int32_t {
+    CARDINALITY_UNKNOWN = 0,
+    CARDINALITY_OPTIONAL = 1,
+    CARDINALITY_REQUIRED = 2,
+    CARDINALITY_REPEATED = 3
+};
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct FieldCardinalityTrait {
+    using underlying = int32_t;
+    static constexpr FieldCardinality enum_min = FieldCardinality::CARDINALITY_UNKNOWN;
+    static constexpr FieldCardinality enum_max = FieldCardinality::CARDINALITY_REPEATED;
+    static constexpr uint32_t value_count = 4;
+    static constexpr bool has_descriptor = true;
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(FieldCardinality value) { return static_cast<int32_t>(value); }
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(FieldCardinality e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, FieldCardinality *e);
+
+
+    static constexpr bool fits_underlying(int64_t value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
+// global enum Syntax
+// enum class Syntax : int32_t {
+enum class Syntax : int32_t {
+    SYNTAX_PROTO2 = 0,
+    SYNTAX_PROTO3 = 1
+};
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct SyntaxTrait {
+    using underlying = int32_t;
+    static constexpr Syntax enum_min = Syntax::SYNTAX_PROTO2;
+    static constexpr Syntax enum_max = Syntax::SYNTAX_PROTO3;
+    static constexpr uint32_t value_count = 2;
+    static constexpr bool has_descriptor = true;
+    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
+    static int32_t to_underlying(Syntax value) { return static_cast<int32_t>(value); }
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(Syntax e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Syntax *e);
+
+
+    static constexpr bool fits_underlying(int64_t value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
@@ -156,6 +216,18 @@ SHARK_NAMESPACE_OPEN
     template <>
     struct EnumTraitImpl<::shark::SharkCppType> : public ::shark::SharkCppTypeTrait {};
     template <> struct IsSharkEnum< ::shark::SharkCppType> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::FieldCardinality
+    template <>
+    struct EnumTraitImpl<::shark::FieldCardinality> : public ::shark::FieldCardinalityTrait {};
+    template <> struct IsSharkEnum< ::shark::FieldCardinality> : ::std::true_type {};
+
+    ////////////////////////////////////////////////////////////
+    /// enum ::shark::Syntax
+    template <>
+    struct EnumTraitImpl<::shark::Syntax> : public ::shark::SyntaxTrait {};
+    template <> struct IsSharkEnum< ::shark::Syntax> : ::std::true_type {};
 
 
 SHARK_NAMESPACE_CLOSE

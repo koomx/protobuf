@@ -361,7 +361,7 @@ bool IsValidBoolString(StringPiece bool_string) {
 
 bool IsMap(const shark::Field& field,
            const shark::Type& type) {
-  return field.cardinality() == shark::Field_Cardinality::CARDINALITY_REPEATED &&
+  return field.cardinality() == shark::FieldCardinality::CARDINALITY_REPEATED &&
          (GetBoolOptionOrDefault(type.options(), "map_entry", false) ||
           GetBoolOptionOrDefault(type.options(),
                                  "shark.MessageOptions.map_entry",
