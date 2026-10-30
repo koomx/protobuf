@@ -82,7 +82,6 @@ inline bool SharkType_FitsUnderlying(int value) {
 inline bool SharkType_FitsWire(::uint64_t value) {
   return value <= 255u;
 }
-SHARK_EXPORT bool SharkType_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkType_descriptor();
 template<typename T>
 inline const std::string& SharkType_Name(T enum_t_value) {
@@ -125,7 +124,6 @@ inline bool SharkCppType_FitsUnderlying(int value) {
 inline bool SharkCppType_FitsWire(::uint64_t value) {
   return value <= 255u;
 }
-SHARK_EXPORT bool SharkCppType_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkCppType_descriptor();
 template<typename T>
 inline const std::string& SharkCppType_Name(T enum_t_value) {

@@ -165,15 +165,6 @@ const ::SHARK_NAMESPACE_ID::EnumDescriptor* NullValue_descriptor() {
   ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2fstruct_2eshark);
   return file_level_enum_descriptors_shark_2ftypes_2fstruct_2eshark[0];
 }
-bool NullValue_IsValid(int value) {
-  switch (value) {
-    case 0:
-      return true;
-    default:
-      return false;
-  }
-}
-
 
 // ===================================================================
 

@@ -193,7 +193,6 @@ inline bool FieldDescriptorProto_Type_FitsUnderlying(int value) {
 inline bool FieldDescriptorProto_Type_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Type_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool FieldDescriptorProto_Type_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Type_descriptor();
 template<typename T>
 inline const std::string& FieldDescriptorProto_Type_Name(T enum_t_value) {
@@ -223,7 +222,6 @@ inline bool FieldDescriptorProto_Label_FitsUnderlying(int value) {
 inline bool FieldDescriptorProto_Label_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Label_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool FieldDescriptorProto_Label_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Label_descriptor();
 template<typename T>
 inline const std::string& FieldDescriptorProto_Label_Name(T enum_t_value) {
@@ -253,7 +251,6 @@ inline bool FileOptions_OptimizeMode_FitsUnderlying(int value) {
 inline bool FileOptions_OptimizeMode_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FileOptions_OptimizeMode_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool FileOptions_OptimizeMode_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FileOptions_OptimizeMode_descriptor();
 template<typename T>
 inline const std::string& FileOptions_OptimizeMode_Name(T enum_t_value) {
@@ -283,7 +280,6 @@ inline bool FieldOptions_CType_FitsUnderlying(int value) {
 inline bool FieldOptions_CType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_CType_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool FieldOptions_CType_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_CType_descriptor();
 template<typename T>
 inline const std::string& FieldOptions_CType_Name(T enum_t_value) {
@@ -313,7 +309,6 @@ inline bool FieldOptions_JSType_FitsUnderlying(int value) {
 inline bool FieldOptions_JSType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_JSType_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool FieldOptions_JSType_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_JSType_descriptor();
 template<typename T>
 inline const std::string& FieldOptions_JSType_Name(T enum_t_value) {
@@ -343,7 +338,6 @@ inline bool MethodOptions_IdempotencyLevel_FitsUnderlying(int value) {
 inline bool MethodOptions_IdempotencyLevel_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && MethodOptions_IdempotencyLevel_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool MethodOptions_IdempotencyLevel_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* MethodOptions_IdempotencyLevel_descriptor();
 template<typename T>
 inline const std::string& MethodOptions_IdempotencyLevel_Name(T enum_t_value) {
@@ -377,7 +371,6 @@ inline bool EnumUnderlyingType_FitsUnderlying(int value) {
 inline bool EnumUnderlyingType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && EnumUnderlyingType_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT bool EnumUnderlyingType_IsValid(int value);
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumUnderlyingType_descriptor();
 template<typename T>
 inline const std::string& EnumUnderlyingType_Name(T enum_t_value) {
@@ -2164,9 +2157,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
     // nested types ----------------------------------------------------
 
     typedef FieldDescriptorProto_Type Type;
-    static inline bool Type_IsValid(int value) {
-      return FieldDescriptorProto_Type_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Type_descriptor() {
       return FieldDescriptorProto_Type_descriptor();
@@ -2184,9 +2174,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
     }
 
     typedef FieldDescriptorProto_Label Label;
-    static inline bool Label_IsValid(int value) {
-      return FieldDescriptorProto_Label_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Label_descriptor() {
       return FieldDescriptorProto_Label_descriptor();
@@ -3817,9 +3804,6 @@ class SHARK_EXPORT FileOptions final :
     // nested types ----------------------------------------------------
 
     typedef FileOptions_OptimizeMode OptimizeMode;
-    static inline bool OptimizeMode_IsValid(int value) {
-      return FileOptions_OptimizeMode_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     OptimizeMode_descriptor() {
       return FileOptions_OptimizeMode_descriptor();
@@ -4706,9 +4690,6 @@ class SHARK_EXPORT FieldOptions final :
     // nested types ----------------------------------------------------
 
     typedef FieldOptions_CType CType;
-    static inline bool CType_IsValid(int value) {
-      return FieldOptions_CType_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     CType_descriptor() {
       return FieldOptions_CType_descriptor();
@@ -4726,9 +4707,6 @@ class SHARK_EXPORT FieldOptions final :
     }
 
     typedef FieldOptions_JSType JSType;
-    static inline bool JSType_IsValid(int value) {
-      return FieldOptions_JSType_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     JSType_descriptor() {
       return FieldOptions_JSType_descriptor();
@@ -6725,9 +6703,6 @@ class SHARK_EXPORT MethodOptions final :
     // nested types ----------------------------------------------------
 
     typedef MethodOptions_IdempotencyLevel IdempotencyLevel;
-    static inline bool IdempotencyLevel_IsValid(int value) {
-      return MethodOptions_IdempotencyLevel_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     IdempotencyLevel_descriptor() {
       return MethodOptions_IdempotencyLevel_descriptor();

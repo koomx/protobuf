@@ -211,23 +211,6 @@ namespace shark::compiler::cpp {
                     "}\n");
             }
         }
-        format(
-            "$dllexport_decl $bool $classname$_IsValid(int value);\n");
-        /*
-        format(
-            "$dllexport_decl $bool $classname$_IsValid(int value);\n"
-            "constexpr $classname$ ${1$$prefix$$short_name$_MIN$}$ = "
-            "$classname$::$2$;\n"
-            "constexpr $classname$ ${1$$prefix$$short_name$_MAX$}$ = "
-            "$classname$::$3$;\n",
-            descriptor_, EnumValueName(min_value_), EnumValueName(max_value_));
-
-        if (generate_array_size_) {
-            format(
-                "constexpr int ${1$$prefix$$short_name$_ARRAYSIZE$}$ = "
-                "$classname$_to_underlying($prefix$$short_name$_MAX) + 1;\n\n",
-                descriptor_);
-        }*/
 
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
             format(
@@ -321,10 +304,6 @@ namespace shark::compiler::cpp {
     void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
         Formatter format(printer, variables_);
         format("typedef $classname$ $resolved_name$;\n");
-        format(
-            "static inline bool $nested_name$_IsValid(int value) {\n"
-            "  return $classname$_IsValid(value);\n"
-            "}\n");
 
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
             format(
@@ -362,32 +341,7 @@ namespace shark::compiler::cpp {
                 idx);
         }
 
-        format(
-            "bool $classname$_IsValid(int value) {\n"
-            "  switch (value) {\n");
 
-        // Multiple values may have the same number.  Make sure we only cover
-        // each number once by first constructing a set containing all valid
-        // numbers, then printing a case statement for each element.
-
-        std::set<int> numbers;
-        for (int j = 0; j < descriptor_->value_count(); j++) {
-            const EnumValueDescriptor* value = descriptor_->value(j);
-            numbers.insert(value->number());
-        }
-
-        for (std::set<int>::iterator iter = numbers.begin(); iter != numbers.end();
-            ++iter) {
-            format("    case $1$:\n", Int32ToString(*iter));
-        }
-
-        format(
-            "      return true;\n"
-            "    default:\n"
-            "      return false;\n"
-            "  }\n"
-            "}\n"
-            "\n");
 
         if (!HasDescriptorMethods(descriptor_->file(), options_)) {
             // In lite mode (where descriptors are unavailable), we generate separate

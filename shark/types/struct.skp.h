@@ -82,7 +82,6 @@ inline bool NullValue_FitsUnderlying(int value) {
 inline bool NullValue_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && NullValue_FitsUnderlying(static_cast<int>(value));
 }
-bool NullValue_IsValid(int value);
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* NullValue_descriptor();
 template<typename T>
 inline const std::string& NullValue_Name(T enum_t_value) {

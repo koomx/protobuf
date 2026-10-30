@@ -108,7 +108,6 @@ inline bool Field_Kind_FitsUnderlying(int value) {
 inline bool Field_Kind_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Kind_FitsUnderlying(static_cast<int>(value));
 }
-bool Field_Kind_IsValid(int value);
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor();
 template<typename T>
 inline const std::string& Field_Kind_Name(T enum_t_value) {
@@ -139,7 +138,6 @@ inline bool Field_Cardinality_FitsUnderlying(int value) {
 inline bool Field_Cardinality_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Cardinality_FitsUnderlying(static_cast<int>(value));
 }
-bool Field_Cardinality_IsValid(int value);
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor();
 template<typename T>
 inline const std::string& Field_Cardinality_Name(T enum_t_value) {
@@ -168,7 +166,6 @@ inline bool Syntax_FitsUnderlying(int value) {
 inline bool Syntax_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Syntax_FitsUnderlying(static_cast<int>(value));
 }
-bool Syntax_IsValid(int value);
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor();
 template<typename T>
 inline const std::string& Syntax_Name(T enum_t_value) {
@@ -578,9 +575,6 @@ class Field final :
     // nested types ----------------------------------------------------
 
     typedef Field_Kind Kind;
-    static inline bool Kind_IsValid(int value) {
-      return Field_Kind_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Kind_descriptor() {
       return Field_Kind_descriptor();
@@ -598,9 +592,6 @@ class Field final :
     }
 
     typedef Field_Cardinality Cardinality;
-    static inline bool Cardinality_IsValid(int value) {
-      return Field_Cardinality_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Cardinality_descriptor() {
       return Field_Cardinality_descriptor();

@@ -90,7 +90,6 @@ inline bool CodeGeneratorResponse_Feature_FitsUnderlying(int value) {
 inline bool CodeGeneratorResponse_Feature_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && CodeGeneratorResponse_Feature_FitsUnderlying(static_cast<int>(value));
 }
-PROTOC_EXPORT bool CodeGeneratorResponse_Feature_IsValid(int value);
 PROTOC_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* CodeGeneratorResponse_Feature_descriptor();
 template<typename T>
 inline const std::string& CodeGeneratorResponse_Feature_Name(T enum_t_value) {
@@ -902,9 +901,6 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
     typedef CodeGeneratorResponse_File File;
 
     typedef CodeGeneratorResponse_Feature Feature;
-    static inline bool Feature_IsValid(int value) {
-      return CodeGeneratorResponse_Feature_IsValid(value);
-    }
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Feature_descriptor() {
       return CodeGeneratorResponse_Feature_descriptor();
