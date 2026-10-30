@@ -297,7 +297,7 @@ std::unordered_set<const shark::Field*> GetRequiredFields(
   std::unordered_set<const shark::Field*> required;
   for (int i = 0; i < type.fields_size(); i++) {
     const shark::Field& field = type.fields(i);
-    if (field.cardinality() == shark::FieldCardinality::CARDINALITY_REQUIRED) {
+    if (field.cardinality() == shark::FieldCardinality::REQUIRED) {
       required.insert(&field);
     }
   }
@@ -404,7 +404,7 @@ ProtoWriter::ProtoElement* ProtoWriter::ProtoElement::pop() {
 void ProtoWriter::ProtoElement::RegisterField(
     const shark::Field* field) {
   if (!required_fields_.empty() &&
-      field->cardinality() == shark::FieldCardinality::CARDINALITY_REQUIRED) {
+      field->cardinality() == shark::FieldCardinality::REQUIRED) {
     required_fields_.erase(field);
   }
 }
@@ -601,7 +601,7 @@ bool ProtoWriter::ValidOneof(const shark::Field& field,
 }
 
 bool ProtoWriter::IsRepeated(const shark::Field& field) {
-  return field.cardinality() == shark::FieldCardinality::CARDINALITY_REPEATED;
+  return field.cardinality() == shark::FieldCardinality::REPEATED;
 }
 
 ProtoWriter* ProtoWriter::StartObjectField(const shark::Field& field,

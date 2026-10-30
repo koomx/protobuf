@@ -6314,7 +6314,7 @@ namespace shark {
                 // It can only happen if you manually construct a FileDescriptorProto
                 // that is incorrect.
                 AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::NAME,
-                    "Fields of oneofs must themselves have label CARDINALITY_OPTIONAL.");
+                    "Fields of oneofs must themselves have label OPTIONAL.");
             }
         }
 

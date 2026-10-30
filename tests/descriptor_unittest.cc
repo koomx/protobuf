@@ -324,7 +324,7 @@ namespace shark {
                 AddEnumValue(AddEnum(&foo_file, "FooEnum"), "FOO_ENUM_VALUE", 1);
                 AddService(&foo_file, "FooService");
                 AddExtension(&foo_file, "FooMessage", "foo_extension", 1,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
 
                 FileDescriptorProto bar_file;
@@ -335,7 +335,7 @@ namespace shark {
                 AddEnumValue(AddEnum(&bar_file, "BarEnum"), "BAR_ENUM_VALUE", 1);
                 AddService(&bar_file, "BarService");
                 AddExtension(&bar_file, "bar_package.BarMessage", "bar_extension", 1,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
 
                 FileDescriptorProto baz_file;
@@ -657,15 +657,15 @@ namespace shark {
                 AddEmptyEnum(&foo_file, "TestEnum");
 
                 DescriptorProto* message = AddMessage(&foo_file, "TestMessage");
-                AddField(message, "foo", 1, FieldCardinality::CARDINALITY_REQUIRED,
+                AddField(message, "foo", 1, FieldCardinality::REQUIRED,
                     SharkType::STRING);
-                AddField(message, "bar", 6, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message, "bar", 6, FieldCardinality::OPTIONAL,
                     SharkType::ENUM)
                     ->set_type_name("TestEnum");
-                AddField(message, "baz", 500000000, FieldCardinality::CARDINALITY_REPEATED,
+                AddField(message, "baz", 500000000, FieldCardinality::REPEATED,
                     SharkType::MESSAGE)
                     ->set_type_name("TestForeign");
-                AddField(message, "moo", 15, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message, "moo", 15, FieldCardinality::OPTIONAL,
                     SharkType::MESSAGE)
                     ->set_type_name("TestForeign");
 
@@ -674,11 +674,11 @@ namespace shark {
                 bar_file.set_package("corge.grault");
 
                 DescriptorProto* message2 = AddMessage(&bar_file, "TestMessage2");
-                AddField(message2, "foo", 1, FieldCardinality::CARDINALITY_REQUIRED,
+                AddField(message2, "foo", 1, FieldCardinality::REQUIRED,
                     SharkType::STRING);
-                AddField(message2, "bar", 2, FieldCardinality::CARDINALITY_REQUIRED,
+                AddField(message2, "bar", 2, FieldCardinality::REQUIRED,
                     SharkType::STRING);
-                AddField(message2, "mooo", 6, FieldCardinality::CARDINALITY_REQUIRED,
+                AddField(message2, "mooo", 6, FieldCardinality::REQUIRED,
                     SharkType::STRING);
 
                 FileDescriptorProto map_file;
@@ -686,14 +686,14 @@ namespace shark {
                 DescriptorProto* message3 = AddMessage(&map_file, "TestMessage3");
 
                 DescriptorProto* entry = AddNestedMessage(message3, "MapInt32Int32Entry");
-                AddField(entry, "key", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(entry, "key", 1, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(entry, "value", 2, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(entry, "value", 2, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 entry->mutable_options()->set_map_entry(true);
 
                 AddField(message3, "map_int32_int32", 1,
-                    FieldCardinality::CARDINALITY_REPEATED,
+                    FieldCardinality::REPEATED,
                     SharkType::MESSAGE)
                     ->set_type_name("MapInt32Int32Entry");
 
@@ -701,20 +701,20 @@ namespace shark {
                 json_file.set_name("json.shark");
                 json_file.set_syntax("proto2");
                 DescriptorProto* message4 = AddMessage(&json_file, "TestMessage4");
-                AddField(message4, "field_name1", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "field_name1", 1, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message4, "fieldName2", 2, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "fieldName2", 2, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message4, "FieldName3", 3, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "FieldName3", 3, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message4, "_field_name4", 4, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "_field_name4", 4, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message4, "FIELD_NAME5", 5, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "FIELD_NAME5", 5, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message4, "field_name6", 6, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "field_name6", 6, FieldCardinality::OPTIONAL,
                     SharkType::INT32)
                     ->set_json_name("@type");
-                AddField(message4, "fieldname7", 7, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message4, "fieldname7", 7, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
 
                 // Build the descriptors and get the pointers.
@@ -854,7 +854,7 @@ namespace shark {
             FileDescriptorProto proto;
             proto.set_name("file");
             auto* message = AddMessage(&proto, "Name1");
-            auto* field = AddField(message, "Name2", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+            auto* field = AddField(message, "Name2", 1, FieldCardinality::OPTIONAL,
                 SharkType::INT32);
             field->set_json_name("Name1.Name2");
             auto* file = pool_.BuildFile(proto);
@@ -1130,17 +1130,17 @@ namespace shark {
                 oneof_message->add_oneof_decl()->set_name("foo");
                 oneof_message->add_oneof_decl()->set_name("bar");
 
-                AddField(oneof_message, "a", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(oneof_message, "a", 1, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(oneof_message, "b", 2, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(oneof_message, "b", 2, FieldCardinality::OPTIONAL,
                     SharkType::STRING);
                 oneof_message->mutable_field(1)->set_oneof_index(0);
-                AddField(oneof_message, "c", 3, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(oneof_message, "c", 3, FieldCardinality::OPTIONAL,
                     SharkType::MESSAGE);
                 oneof_message->mutable_field(2)->set_oneof_index(0);
                 oneof_message->mutable_field(2)->set_type_name("TestOneof");
 
-                AddField(oneof_message, "d", 4, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(oneof_message, "d", 4, FieldCardinality::OPTIONAL,
                     SharkType::FLOAT);
                 oneof_message->mutable_field(3)->set_oneof_index(1);
 
@@ -1205,49 +1205,49 @@ namespace shark {
                 AddExtensionRange(AddMessage(&file, "ExtendableMessage"), 1, 1000);
 
                 DescriptorProto* message = AddMessage(&file, "TestMessage");
-                AddField(message, "foo_foo", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message, "foo_foo", 1, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message, "FooBar", 2, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message, "FooBar", 2, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
-                AddField(message, "fooBaz", 3, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(message, "fooBaz", 3, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddField(message, "fooFoo", 4, // Camel-case conflict with foo_foo.
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddField(message, "foobar", 5, // Lower-case conflict with FooBar.
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
 
                 AddNestedExtension(message, "ExtendableMessage", "bar_foo", 1,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddNestedExtension(message, "ExtendableMessage", "BarBar", 2,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddNestedExtension(message, "ExtendableMessage", "BarBaz", 3,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddNestedExtension(message, "ExtendableMessage", "barFoo", 4, // Conflict
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddNestedExtension(message, "ExtendableMessage", "barbar", 5, // Conflict
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
 
                 AddExtension(&file, "ExtendableMessage", "baz_foo", 11,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddExtension(&file, "ExtendableMessage", "BazBar", 12,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddExtension(&file, "ExtendableMessage", "BazBaz", 13,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddExtension(&file, "ExtendableMessage", "bazFoo", 14, // Conflict
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddExtension(&file, "ExtendableMessage", "bazbar", 15, // Conflict
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
 
                 file_ = pool_.BuildFile(file);
@@ -1931,22 +1931,22 @@ namespace shark {
                 AddExtensionRange(foo, 30, 40);
 
                 AddExtension(&foo_file, "Foo", "foo_int32", 10,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddExtension(&foo_file, "Foo", "foo_enum", 19,
-                    FieldCardinality::CARDINALITY_REPEATED,
+                    FieldCardinality::REPEATED,
                     SharkType::ENUM)
                     ->set_type_name("Baz");
 
                 DescriptorProto* bar = AddMessage(&foo_file, "Bar");
-                AddField(bar, "non_ext_int32", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+                AddField(bar, "non_ext_int32", 1, FieldCardinality::OPTIONAL,
                     SharkType::INT32);
                 AddNestedExtension(bar, "Foo", "foo_message", 30,
-                    FieldCardinality::CARDINALITY_OPTIONAL,
+                    FieldCardinality::OPTIONAL,
                     SharkType::MESSAGE)
                     ->set_type_name("Moo");
                 AddNestedExtension(bar, "Foo", "foo_group", 39,
-                    FieldCardinality::CARDINALITY_REPEATED,
+                    FieldCardinality::REPEATED,
                     SharkType::MESSAGE)
                     ->set_type_name("Moo");
 
@@ -2116,7 +2116,7 @@ namespace shark {
             file_proto.set_name("foo.shark");
             file_proto.add_dependency("shark/descriptor.shark");
             AddExtension(&file_proto, "shark.FieldOptions", "option1", 1000,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::INT32);
             ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
             // Add "bar.shark":
@@ -2128,7 +2128,7 @@ namespace shark {
             file_proto.set_name("bar.shark");
             file_proto.add_dependency("shark/descriptor.shark");
             AddExtension(&file_proto, "shark.FieldOptions", "option2", 1000,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::INT32);
             // Currently we only generate a warning for conflicting extension numbers.
             // TODO(xiaofeng): Change it to an error.
@@ -2431,7 +2431,7 @@ namespace shark {
 
                 DescriptorProto* message = AddMessage(&file_proto, "TestMessage");
                 FieldDescriptorProto* field = AddField(
-                    message, "foo", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+                    message, "foo", 1, FieldCardinality::OPTIONAL,
                     static_cast<SharkType>(static_cast<int>(type)));
 
                 if (type == FieldType::MESSAGE) {
@@ -2653,7 +2653,7 @@ namespace shark {
             DescriptorProto* message_proto = AddMessage(&file_proto, "TestMessage");
 
             typedef FieldDescriptorProto FD; // avoid ugly line wrapping
-            const FieldCardinality label = FieldCardinality::CARDINALITY_OPTIONAL;
+            const FieldCardinality label = FieldCardinality::OPTIONAL;
 
             // Create fields of every CPP type with default values.
             AddField(message_proto, "int32", 1, label, SharkType::INT32)
@@ -2768,9 +2768,9 @@ namespace shark {
             file_proto.set_name("foo.shark");
 
             DescriptorProto* message_proto = AddMessage(&file_proto, "TestMessage");
-            AddField(message_proto, "foo", 1, FieldCardinality::CARDINALITY_OPTIONAL,
+            AddField(message_proto, "foo", 1, FieldCardinality::OPTIONAL,
                 SharkType::INT32);
-            FieldDescriptorProto* bar_proto = AddField(message_proto, "bar", 2, FieldCardinality::CARDINALITY_OPTIONAL,
+            FieldDescriptorProto* bar_proto = AddField(message_proto, "bar", 2, FieldCardinality::OPTIONAL,
                 SharkType::INT32);
 
             FieldOptions* options = bar_proto->mutable_options();
@@ -2828,9 +2828,9 @@ namespace shark {
                     "dependency: 'baz.shark'"
                     "message_type {"
                     "  name: 'Foo'"
-                    "  field { name:'bar' number:1 label:CARDINALITY_OPTIONAL type_name:'Bar' }"
-                    "  field { name:'baz' number:2 label:CARDINALITY_OPTIONAL type_name:'Baz' }"
-                    "  field { name:'moo' number:3 label:CARDINALITY_OPTIONAL"
+                    "  field { name:'bar' number:1 label:OPTIONAL type_name:'Bar' }"
+                    "  field { name:'baz' number:2 label:OPTIONAL type_name:'Baz' }"
+                    "  field { name:'moo' number:3 label:OPTIONAL"
                     "    type_name: '.corge.Moo'"
                     "    type:ENUM"
                     "    options {"
@@ -2985,7 +2985,7 @@ namespace shark {
             ASSERT_TRUE(TextFormat::ParseFromString(
                 "name: 'extension.shark'"
                 "extension { extendee: 'UnknownType' name:'some_extension' number:123"
-                "            label:CARDINALITY_OPTIONAL type:INT32 }",
+                "            label:OPTIONAL type:INT32 }",
                 &extension_proto));
             const FileDescriptor* file = BuildFile(extension_proto);
 
@@ -3013,7 +3013,7 @@ namespace shark {
                 "  extendee: \"shark.FileOptions\" "
                 "  name: \"some_option\" "
                 "  number: 123456 "
-                "  label: CARDINALITY_OPTIONAL "
+                "  label: OPTIONAL "
                 "  type:INT32 "
                 "} "
                 "options { "
@@ -3071,10 +3071,10 @@ namespace shark {
                 "message_type: {  "
                 "  name: \"Mooo\"  "
                 "  field { "
-                "    name:'moo' number:1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "    name:'moo' number:1 label:OPTIONAL type:INT32 "
                 "  }"
                 "  field { "
-                "    name:'mooo' number:1 label:CARDINALITY_OPTIONAL type:INT64 "
+                "    name:'mooo' number:1 label:OPTIONAL type:INT64 "
                 "  }"
                 "}",
                 &undeclared_dep_proto));
@@ -3098,7 +3098,7 @@ namespace shark {
                 "message_type: { "
                 "  name: \"Corge\" "
                 "  field { "
-                "    name:'mooo' number:1 label: CARDINALITY_OPTIONAL "
+                "    name:'mooo' number:1 label: OPTIONAL "
                 "    type_name:'undeclared.Mooo' type:MESSAGE "
                 "  }"
                 "}",
@@ -3798,14 +3798,14 @@ namespace shark {
                 // generated pool with custom descriptor pools when dealing with
                 // custom options.
                 "  number: 7736974 "
-                "  label: CARDINALITY_OPTIONAL "
+                "  label: OPTIONAL "
                 "  type:INT32 "
                 "}"
                 "extension { "
                 "  name: \"cc_option2\" "
                 "  extendee: \".shark.FileOptions\" "
                 "  number: 7736975 "
-                "  label: CARDINALITY_OPTIONAL "
+                "  label: OPTIONAL "
                 "  type:INT32 "
                 "}",
                 &file_proto));
@@ -3968,7 +3968,7 @@ namespace shark {
                 "package: \"foo\""
                 "message_type { "
                 "  name: '\\000\\001\\013.Bar' "
-                "  field { name: \"foo\" number:  9 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"foo\" number:  9 label:OPTIONAL type:INT32 "
                 "} "
                 "}",
                 STATIC_STR("bar.shark: foo.\0\x1\v.Bar: NAME: \"\0\x1\v.Bar\" is not a "
@@ -4043,7 +4043,7 @@ namespace shark {
                 "package: 'outer.bar' "
                 "message_type { "
                 "  name: 'Bar' "
-                "  field { name:'bar' number:1 label:CARDINALITY_OPTIONAL type_name:'foo.Foo' }"
+                "  field { name:'bar' number:1 label:OPTIONAL type_name:'foo.Foo' }"
                 "}",
 
                 "bar.shark: baz.shark: IMPORT: Import \"baz.shark\" has not been "
@@ -4076,13 +4076,13 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name: \"foo\" number:  9 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"foo\" number:  9 label:OPTIONAL type:INT32 "
                 "}"
-                "  field { name: \"bar\" number: 10 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"bar\" number: 10 label:OPTIONAL type:INT32 "
                 "}"
-                "  field { name: \"baz\" number: 19 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"baz\" number: 19 label:OPTIONAL type:INT32 "
                 "}"
-                "  field { name: \"moo\" number: 20 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"moo\" number: 20 label:OPTIONAL type:INT32 "
                 "}"
                 "  extension_range { start: 10 end: 20 }"
                 "}",
@@ -4115,7 +4115,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name: \"foo\" number: 15 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"foo\" number: 15 label:OPTIONAL type:INT32 "
                 "}"
                 "  reserved_range { start: 10 end: 20 }"
                 "}",
@@ -4165,11 +4165,11 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name: \"foo\" number: 15 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"foo\" number: 15 label:OPTIONAL type:INT32 "
                 "}"
-                "  field { name: \"bar\" number: 16 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"bar\" number: 16 label:OPTIONAL type:INT32 "
                 "}"
-                "  field { name: \"baz\" number: 17 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"baz\" number: 17 label:OPTIONAL type:INT32 "
                 "}"
                 "  reserved_name: \"foo\""
                 "  reserved_name: \"bar\""
@@ -4403,29 +4403,29 @@ namespace shark {
                 "  name: \"Foo\""
 
                 // Invalid number.
-                "  field { name: \"foo\" number: 1 label: CARDINALITY_OPTIONAL type:INT32"
+                "  field { name: \"foo\" number: 1 label: OPTIONAL type:INT32"
                 "          default_value: \"abc\" }"
 
                 // Empty default value.
-                "  field { name: \"bar\" number: 2 label: CARDINALITY_OPTIONAL type:INT32"
+                "  field { name: \"bar\" number: 2 label: OPTIONAL type:INT32"
                 "          default_value: \"\" }"
 
                 // Invalid boolean.
-                "  field { name: \"baz\" number: 3 label: CARDINALITY_OPTIONAL type:BOOL"
+                "  field { name: \"baz\" number: 3 label: OPTIONAL type:BOOL"
                 "          default_value: \"abc\" }"
 
                 // Messages can't have defaults.
-                "  field { name: \"moo\" number: 4 label: CARDINALITY_OPTIONAL type: "
+                "  field { name: \"moo\" number: 4 label: OPTIONAL type: "
                 "MESSAGE"
                 "          default_value: \"abc\" type_name: \"Foo\" }"
 
                 // Same thing, but we don't know that this field has message type until
                 // we look up the type name.
-                "  field { name: \"mooo\" number: 5 label: CARDINALITY_OPTIONAL"
+                "  field { name: \"mooo\" number: 5 label: OPTIONAL"
                 "          default_value: \"abc\" type_name: \"Foo\" }"
 
                 // Repeateds can't have defaults.
-                "  field { name: \"corge\" number: 6 label: CARDINALITY_REPEATED type: "
+                "  field { name: \"corge\" number: 6 label: REPEATED type: "
                 "INT32"
                 "          default_value: \"1\" }"
                 "}",
@@ -4449,7 +4449,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name: \"foo\" number: -1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name: \"foo\" number: -1 label:OPTIONAL type:INT32 "
                 "}"
                 "}",
 
@@ -4463,7 +4463,7 @@ namespace shark {
                 "message_type {"
                 "  name: \"Foo\""
                 "  field { name: \"foo\" number: 0x70000000 "
-                "          label:CARDINALITY_OPTIONAL type:INT32 }"
+                "          label:OPTIONAL type:INT32 }"
                 "}",
 
                 "foo.shark: Foo.foo: NUMBER: Field numbers cannot be greater than "
@@ -4476,13 +4476,13 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field {name:\"foo\" number: 18999 label:CARDINALITY_OPTIONAL "
+                "  field {name:\"foo\" number: 18999 label:OPTIONAL "
                 "type:INT32 }"
-                "  field {name:\"bar\" number: 19000 label:CARDINALITY_OPTIONAL "
+                "  field {name:\"bar\" number: 19000 label:OPTIONAL "
                 "type:INT32 }"
-                "  field {name:\"baz\" number: 19999 label:CARDINALITY_OPTIONAL "
+                "  field {name:\"baz\" number: 19999 label:OPTIONAL "
                 "type:INT32 }"
-                "  field {name:\"moo\" number: 20000 label:CARDINALITY_OPTIONAL "
+                "  field {name:\"moo\" number: 20000 label:OPTIONAL "
                 "type:INT32 }"
                 "}",
 
@@ -4498,7 +4498,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  extension { name: \"foo\" number: 1 label: CARDINALITY_OPTIONAL"
+                "  extension { name: \"foo\" number: 1 label: OPTIONAL"
                 "              type_name: \"Foo\" }"
                 "}",
 
@@ -4515,7 +4515,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name: \"foo\" number: 1 label: CARDINALITY_OPTIONAL"
+                "  field { name: \"foo\" number: 1 label: OPTIONAL"
                 "          type_name: \"Foo\" extendee: \"Bar\" }"
                 "}",
 
@@ -4528,9 +4528,9 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:INT32 "
                 "          oneof_index: 1 }"
-                "  field { name:\"dummy\" number:2 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"dummy\" number:2 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
                 "  oneof_decl { name:\"bar\" }"
                 "}",
@@ -4544,9 +4544,9 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:INT32 "
                 "          oneof_index: -1 }"
-                "  field { name:\"dummy\" number:2 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"dummy\" number:2 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
                 "  oneof_decl { name:\"bar\" }"
                 "}",
@@ -4562,10 +4562,10 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo1\" number: 1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"foo1\" number: 1 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
-                "  field { name:\"bar\" number: 2 label:CARDINALITY_OPTIONAL type:INT32 }"
-                "  field { name:\"foo2\" number: 3 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"bar\" number: 2 label:OPTIONAL type:INT32 }"
+                "  field { name:\"foo2\" number: 3 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
                 "  oneof_decl { name:\"foos\" }"
                 "}",
@@ -4579,13 +4579,13 @@ namespace shark {
                 "name: \"foo2.shark\" "
                 "message_type {"
                 "  name: \"Foo2\""
-                "  field { name:\"foo1\" number: 1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"foo1\" number: 1 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
-                "  field { name:\"bar1\" number: 2 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"bar1\" number: 2 label:OPTIONAL type:INT32 "
                 "          oneof_index: 1 }"
-                "  field { name:\"foo2\" number: 3 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"foo2\" number: 3 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
-                "  field { name:\"bar2\" number: 4 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"bar2\" number: 4 label:OPTIONAL type:INT32 "
                 "          oneof_index: 1 }"
                 "  oneof_decl { name:\"foos\" }"
                 "  oneof_decl { name:\"bars\" }"
@@ -4602,12 +4602,12 @@ namespace shark {
                 "name: \"foo3.shark\" "
                 "message_type {"
                 "  name: \"Foo3\""
-                "  field { name:\"foo1\" number: 1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"foo1\" number: 1 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
-                "  field { name:\"bar1\" number: 2 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"bar1\" number: 2 label:OPTIONAL type:INT32 "
                 "          oneof_index: 1 }"
-                "  field { name:\"baz\" number: 3 label:CARDINALITY_OPTIONAL type:INT32 }"
-                "  field { name:\"foo2\" number: 4 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:\"baz\" number: 3 label:OPTIONAL type:INT32 }"
+                "  field { name:\"foo2\" number: 4 label:OPTIONAL type:INT32 "
                 "          oneof_index: 0 }"
                 "  oneof_decl { name:\"foos\" }"
                 "  oneof_decl { name:\"bars\" }"
@@ -4622,8 +4622,8 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name: \"foo\" number: 1 label:CARDINALITY_OPTIONAL type:INT32 }"
-                "  field { name: \"bar\" number: 1 label:CARDINALITY_OPTIONAL type:INT32 }"
+                "  field { name: \"foo\" number: 1 label:OPTIONAL type:INT32 }"
+                "  field { name: \"bar\" number: 1 label:OPTIONAL type:INT32 }"
                 "}",
 
                 "foo.shark: Foo.bar: NUMBER: Field number 1 has already been used in "
@@ -4640,7 +4640,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  extension { name:\"foo\" number:4 label:CARDINALITY_OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:4 label:OPTIONAL type:INT32"
                 "              extendee: \"MessageSet\" }"
                 "}",
 
@@ -4658,7 +4658,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  extension { name:\"foo\" number:4 label:CARDINALITY_REPEATED "
+                "  extension { name:\"foo\" number:4 label:REPEATED "
                 "type:MESSAGE"
                 "              type_name: \"Foo\" extendee: \"MessageSet\" }"
                 "}",
@@ -4673,7 +4673,7 @@ namespace shark {
                 "message_type {"
                 "  name: \"Foo\""
                 "  options { message_set_wire_format: true }"
-                "  field { name: \"foo\" number: 1 label:CARDINALITY_OPTIONAL type:INT32 }"
+                "  field { name: \"foo\" number: 1 label:OPTIONAL type:INT32 }"
                 "}",
 
                 "foo.shark: Foo.foo: NAME: MessageSets cannot have fields, only "
@@ -4727,9 +4727,9 @@ namespace shark {
                 // value for the field).
                 "message_type {"
                 "  name: \"Bar\""
-                "  field { name: \"foo\" number: 1 label:CARDINALITY_OPTIONAL "
+                "  field { name: \"foo\" number: 1 label:OPTIONAL "
                 "type_name:\"Foo\" }"
-                "  field { name: \"bar\" number: 2 label:CARDINALITY_OPTIONAL "
+                "  field { name: \"bar\" number: 2 label:OPTIONAL "
                 "type_name:\"Foo\" "
                 "          default_value: \"NO_SUCH_VALUE\" }"
                 "}",
@@ -4744,7 +4744,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  extension { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "              extendee: \"Bar\" }"
                 "}",
 
@@ -4757,7 +4757,7 @@ namespace shark {
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } }"
                 "message_type {"
                 "  name: \"Foo\""
-                "  extension { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "              extendee: \"Bar\" }"
                 "}",
 
@@ -4772,7 +4772,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  extension { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:INT32"
+                "  extension { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "              extendee: \"Bar\" }"
                 "}",
 
@@ -4792,7 +4792,7 @@ namespace shark {
                 "  extension {"
                 "    name:\"foo\""
                 "    number:1000"
-                "    label:CARDINALITY_REQUIRED"
+                "    label:REQUIRED"
                 "    type:INT32"
                 "    extendee: \"Bar\""
                 "  }"
@@ -4806,7 +4806,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}",
 
                 "foo.shark: Foo.foo: TYPE: \"Bar\" is not defined.\n");
@@ -4821,7 +4821,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"int\" "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"int\" "
                 "          default_value:\"1\" }"
                 "}",
 
@@ -4835,7 +4835,7 @@ namespace shark {
                 "  name: \"Foo\""
                 "  nested_type { name:\"Baz\" }"
                 "  field { name:\"foo\" number:1"
-                "          label:CARDINALITY_OPTIONAL"
+                "          label:OPTIONAL"
                 "          type_name:\"Foo.Baz.Bar\" }"
                 "}",
 
@@ -4851,7 +4851,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}",
                 "foo.shark: Foo.foo: TYPE: \"Bar\" seems to be defined in \"bar.shark\", "
                 "which is not imported by \"foo.shark\".  To use it here, please add the "
@@ -4886,7 +4886,7 @@ namespace shark {
                 "dependency: \"forward.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}",
                 "foo.shark: Foo.foo: TYPE: \"Bar\" seems to be defined in \"bar.shark\", "
                 "which is not imported by \"foo.shark\".  To use it here, please add the "
@@ -4924,7 +4924,7 @@ namespace shark {
                 "dependency: \"forward.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}");
         }
 
@@ -4965,7 +4965,7 @@ namespace shark {
                 "dependency: \"forward2.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}");
         }
 
@@ -5008,7 +5008,7 @@ namespace shark {
                 "dependency: \"forward2.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}",
                 "foo.shark: Foo.foo: TYPE: \"Bar\" seems to be defined in \"bar.shark\", "
                 "which is not imported by \"foo.shark\".  To use it here, please add the "
@@ -5039,7 +5039,7 @@ namespace shark {
                 "message_type {"
                 "  name: \"Foo\""
                 "  nested_type { name: \"Bar\" }"
-                "  field { name:\"baz\" number:1 label:CARDINALITY_OPTIONAL"
+                "  field { name:\"baz\" number:1 label:OPTIONAL"
                 "          type_name:\"Bar.Baz\" }"
                 "}",
 
@@ -5062,7 +5062,7 @@ namespace shark {
                 "message_type {"
                 "  name: \"Foo\""
                 "  field { name: \"Bar\" number:1 type:BYTES } "
-                "  field { name:\"baz\" number:2 label:CARDINALITY_OPTIONAL"
+                "  field { name:\"baz\" number:2 label:OPTIONAL"
                 "          type_name:\"Bar.Baz\" }"
                 "}");
         }
@@ -5103,7 +5103,7 @@ namespace shark {
                 "dependency: \"bar.shark\" "
                 "message_type { "
                 "  name: \"Baz\" "
-                "  field { name:\"moo\" number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:\"moo\" number:1 label:OPTIONAL "
                 "          type_name:\"bar.Bar\" }"
                 "}");
         }
@@ -5113,9 +5113,9 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:\"foo\" number:1 label:OPTIONAL "
                 "          type_name:\".Foo.bar\" }"
-                "  field { name:\"bar\" number:2 label:CARDINALITY_OPTIONAL type:INT32 }"
+                "  field { name:\"bar\" number:2 label:OPTIONAL type:INT32 }"
                 "}",
 
                 "foo.shark: Foo.foo: TYPE: \".Foo.bar\" is not a type.\n");
@@ -5127,10 +5127,10 @@ namespace shark {
                 "message_type {"
                 "  nested_type {"
                 "    name: \"Bar\""
-                "    field { name:\"Baz\" number:2 label:CARDINALITY_OPTIONAL type:INT32 }"
+                "    field { name:\"Baz\" number:2 label:OPTIONAL type:INT32 }"
                 "  }"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:\"foo\" number:1 label:OPTIONAL "
                 "          type_name:\"Bar.Baz\" }"
                 "}",
                 "foo.shark: Foo.foo: TYPE: \"Bar.Baz\" is not a type.\n");
@@ -5144,7 +5144,7 @@ namespace shark {
                 "}"
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"Bar\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\" }"
+                "  field { name:\"Bar\" number:1 label:OPTIONAL type_name:\"Bar\" }"
                 "}");
         }
 
@@ -5154,7 +5154,7 @@ namespace shark {
                 "message_type { name: \"Bar\" } "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:ENUM"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:ENUM"
                 "          type_name:\"Bar\" }"
                 "}",
 
@@ -5167,7 +5167,7 @@ namespace shark {
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } } "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:MESSAGE"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:MESSAGE"
                 "          type_name:\"Bar\" }"
                 "}",
 
@@ -5180,7 +5180,7 @@ namespace shark {
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } } "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\""
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\""
                 "          default_value:\"NO_SUCH_VALUE\" }"
                 "}",
 
@@ -5194,7 +5194,7 @@ namespace shark {
                 "enum_type { name: \"Bar\" value { name:\"DUMMY\" number:0 } } "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type_name:\"Bar\""
+                "  field { name:\"foo\" number:1 label:OPTIONAL type_name:\"Bar\""
                 "          default_value:\"0\" }"
                 "}",
 
@@ -5207,7 +5207,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:INT32"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:INT32"
                 "          type_name:\"Foo\" }"
                 "}",
 
@@ -5219,7 +5219,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:MESSAGE }"
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:MESSAGE }"
                 "}",
 
                 "foo.shark: Foo.foo: TYPE: Field with message or enum type missing "
@@ -5242,13 +5242,13 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"Foo\""
-                "  field { name:\"foo\" number:1 label:CARDINALITY_REPEATED type:INT32 "
+                "  field { name:\"foo\" number:1 label:REPEATED type:INT32 "
                 "          oneof_index:0 }"
                 "  oneof_decl { name:\"bar\" }"
                 "}",
 
                 "foo.shark: Foo.foo: NAME: Fields of oneofs must themselves have label "
-                "CARDINALITY_OPTIONAL.\n");
+                "OPTIONAL.\n");
         }
 
         TEST_F(ValidationErrorTest, InputTypeNotDefined) {
@@ -5306,17 +5306,17 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {\n"
                 "  name: \"Foo\""
-                "  field { name:\"packed_string\" number:1 label:CARDINALITY_REPEATED "
+                "  field { name:\"packed_string\" number:1 label:REPEATED "
                 "          type:STRING "
                 "          options { uninterpreted_option {"
                 "            name { name_part: \"packed\" is_extension: false }"
                 "            identifier_value: \"true\" }}}\n"
-                "  field { name:\"packed_message\" number:3 label:CARDINALITY_REPEATED "
+                "  field { name:\"packed_message\" number:3 label:REPEATED "
                 "          type_name: \"Foo\""
                 "          options { uninterpreted_option {"
                 "            name { name_part: \"packed\" is_extension: false }"
                 "            identifier_value: \"true\" }}}\n"
-                "  field { name:\"optional_int32\" number: 4 label: CARDINALITY_OPTIONAL "
+                "  field { name:\"optional_int32\" number: 4 label: OPTIONAL "
                 "          type:INT32 "
                 "          options { uninterpreted_option {"
                 "            name { name_part: \"packed\" is_extension: false }"
@@ -5336,7 +5336,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type { "
                 "  name: \"TestMessage\" "
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:STRING "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:STRING "
                 "          options { uninterpreted_option { name { name_part: \"ctype\" "
                 "                                                  is_extension: false }"
                 "                                           positive_int_value: 1 }"
@@ -5353,7 +5353,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type { "
                 "  name: \"TestMessage\" "
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:STRING "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:STRING "
                 "          options { uninterpreted_option { name { name_part: \"ctype\" "
                 "                                                  is_extension: false }"
                 "                                           name { name_part: \"foo\" "
@@ -5372,7 +5372,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type { "
                 "  name: \"TestMessage\" "
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:UINT32 "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:UINT32 "
                 "          options { uninterpreted_option { name { name_part: \"ctype\" "
                 "                                                  is_extension: false }"
                 "                                           identifier_value: \"CORD\" }"
@@ -5392,7 +5392,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type { "
                 "  name: \"TestMessage\" "
-                "  field { name:\"foo\" number:1 label:CARDINALITY_OPTIONAL type:BOOL "
+                "  field { name:\"foo\" number:1 label:OPTIONAL type:BOOL "
                 "          options { uninterpreted_option { "
                 "                      name { name_part: \"uninterpreted_option\" "
                 "                             is_extension: false }"
@@ -5413,9 +5413,9 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
                 "message_type: { name: \"Bar\" field: { "
-                "  name: \"foo\" number: 1 label: CARDINALITY_OPTIONAL type:INT32 } "
+                "  name: \"foo\" number: 1 label: OPTIONAL type:INT32 } "
                 "} "
-                "extension { name: \"bar\" number: 7672757 label: CARDINALITY_REPEATED "
+                "extension { name: \"bar\" number: 7672757 label: REPEATED "
                 "            type:MESSAGE type_name: \"Bar\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"bar\" "
@@ -5452,9 +5452,9 @@ namespace shark {
                 "package: \"baz\" "
                 "dependency: \"shark/descriptor.shark\" "
                 "message_type: { name: \"Bar\" field: { "
-                "  name: \"foo\" number: 1 label: CARDINALITY_OPTIONAL type:INT32 } "
+                "  name: \"foo\" number: 1 label: OPTIONAL type:INT32 } "
                 "} "
-                "extension { name: \"bar\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"bar\" number: 7672757 label: OPTIONAL "
                 "            type:MESSAGE type_name: \"Bar\" "
                 "            extendee: \"shark.FileOptions\" }");
 
@@ -5496,9 +5496,9 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo1\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo1\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FieldOptions\" }"
-                "extension { name: \"foo2\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo2\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FieldOptions\" }",
 
                 "foo.shark: foo2: NUMBER: Extension number 7672757 has already been used "
@@ -5511,7 +5511,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5528,7 +5528,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5545,7 +5545,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5561,7 +5561,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT64 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5579,7 +5579,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:INT64 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5595,7 +5595,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:UINT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5611,7 +5611,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:UINT32 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5627,7 +5627,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:UINT64 extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5643,7 +5643,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:FLOAT extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5659,7 +5659,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:DOUBLE extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5675,7 +5675,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:BOOL extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5693,7 +5693,7 @@ namespace shark {
                 "dependency: \"shark/descriptor.shark\" "
                 "enum_type { name: \"FooEnum\" value { name: \"BAR\" number: 1 } "
                 "                              value { name: \"BAZ\" number: 2 } }"
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:ENUM type_name: \"FooEnum\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5712,7 +5712,7 @@ namespace shark {
                 "dependency: \"shark/descriptor.shark\" "
                 "enum_type { name: \"FooEnum\" value { name: \"BAR\" number: 1 } "
                 "                              value { name: \"BAZ\" number: 2 } }"
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:ENUM type_name: \"FooEnum\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5733,7 +5733,7 @@ namespace shark {
                 "                               value { name: \"BAZ\" number: 2 } }"
                 "enum_type { name: \"FooEnum2\" value { name: \"MOO\" number: 1 } "
                 "                               value { name: \"MOOO\" number: 2 } }"
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:ENUM type_name: \"FooEnum1\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5749,7 +5749,7 @@ namespace shark {
             BuildFileWithErrors(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:STRING extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
                 "                                        is_extension: true } "
@@ -5771,7 +5771,7 @@ namespace shark {
                 "extension {"
                 "  name: \"value\""
                 "  number: 10"
-                "  label: CARDINALITY_OPTIONAL"
+                "  label: OPTIONAL"
                 "  type:INT32"
                 "  extendee: \"foo.Foo\""
                 "  json_name: \"myName\""
@@ -5786,13 +5786,13 @@ namespace shark {
             BuildFile(
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"option1\" number: 1000 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"option1\" number: 1000 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }");
 
             BuildFileWithWarnings(
                 "name: \"bar.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
-                "extension { name: \"option2\" number: 1000 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"option2\" number: 1000 label: OPTIONAL "
                 "            type:INT32 extendee: \"shark.FileOptions\" }",
                 "bar.shark: option2: NUMBER: Extension number 1000 has already been used "
                 "in \"shark.FileOptions\" by extension \"option1\" defined in "
@@ -5807,7 +5807,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "dependency: \"shark/descriptor.shark\" "
                 "message_type { name: \"Foo\" } "
-                "extension { name: \"foo\" number: 7672757 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"foo\" number: 7672757 label: OPTIONAL "
                 "            type:MESSAGE type_name: \"Foo\" "
                 "            extendee: \"shark.FileOptions\" }"
                 "options { uninterpreted_option { name { name_part: \"foo\" "
@@ -5871,7 +5871,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "dependency: \"bar.shark\" "
                 "options { optimize_for: LITE_RUNTIME } "
-                "extension { name: \"ext\" number: 123 label: CARDINALITY_OPTIONAL "
+                "extension { name: \"ext\" number: 123 label: OPTIONAL "
                 "            type:INT32 extendee: \"Bar\" }",
 
                 "foo.shark: ext: EXTENDEE: Extensions to non-lite types can only be "
@@ -5909,7 +5909,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"TestMessage\""
-                "  field { name:\"foo\" label:CARDINALITY_OPTIONAL type:INT32 number:1 }"
+                "  field { name:\"foo\" label:OPTIONAL type:INT32 number:1 }"
                 "} "
                 "enum_type {"
                 "  name: \"TestEnum\""
@@ -5934,7 +5934,7 @@ namespace shark {
                 "name: \"foo.shark\" "
                 "message_type {"
                 "  name: \"TestMessage\""
-                "  field { name:\"foo\" label:CARDINALITY_OPTIONAL type:INT32 number:1 }"
+                "  field { name:\"foo\" label:OPTIONAL type:INT32 number:1 }"
                 "} "
                 "enum_type {"
                 "  name: \"TestEnum\""
@@ -6036,7 +6036,7 @@ namespace shark {
                 "public_dependency: 2 "
                 "message_type {"
                 "  name: \"Forward\""
-                "  field { name:\"base\" number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:\"base\" number:1 label:OPTIONAL "
                 "type_name:\"Base\" }"
                 "}",
                 "forward.shark: bar.shark: IMPORT: Import bar.shark is unused.\n");
@@ -6049,17 +6049,17 @@ namespace shark {
                     "message_type { "
                     "  name: 'Foo' "
                     "  field { "
-                    "    name: 'foo_map' number: 1 label:CARDINALITY_REPEATED "
+                    "    name: 'foo_map' number: 1 label:REPEATED "
                     "    type_name: 'FooMapEntry' "
                     "  } "
                     "  nested_type { "
                     "    name: 'FooMapEntry' "
                     "    options {  map_entry: true } "
                     "    field { "
-                    "      name: 'key' number: 1 type:INT32 label:CARDINALITY_OPTIONAL "
+                    "      name: 'key' number: 1 type:INT32 label:OPTIONAL "
                     "    } "
                     "    field { "
-                    "      name: 'value' number: 2 type:INT32 label:CARDINALITY_OPTIONAL "
+                    "      name: 'value' number: 2 type:INT32 label:OPTIONAL "
                     "    } "
                     "  } "
                     "} "
@@ -6133,7 +6133,7 @@ namespace shark {
             TextFormat::MergeFromString(
                 "field { "
                 "  name: 'other_field' "
-                "  label: CARDINALITY_OPTIONAL "
+                "  label: OPTIONAL "
                 "  type:INT32 "
                 "  number: 3 "
                 "} ",
@@ -6155,7 +6155,7 @@ namespace shark {
             FileDescriptorProto file_proto;
             FillValidMapEntry(&file_proto);
             file_proto.mutable_message_type(0)->mutable_field(0)->set_label(
-                FieldCardinality::CARDINALITY_OPTIONAL);
+                FieldCardinality::OPTIONAL);
             BuildFileWithErrors(file_proto.DebugString(), kMapEntryErrorMessage);
         }
 
@@ -6183,7 +6183,7 @@ namespace shark {
             FillValidMapEntry(&file_proto);
             FieldDescriptorProto* key = file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
                 0);
-            key->set_label(FieldCardinality::CARDINALITY_REQUIRED);
+            key->set_label(FieldCardinality::REQUIRED);
             BuildFileWithErrors(file_proto.DebugString(), kMapEntryErrorMessage);
         }
 
@@ -6210,7 +6210,7 @@ namespace shark {
             FillValidMapEntry(&file_proto);
             FieldDescriptorProto* value = file_proto.mutable_message_type(0)->mutable_nested_type(0)->mutable_field(
                 1);
-            value->set_label(FieldCardinality::CARDINALITY_REQUIRED);
+            value->set_label(FieldCardinality::REQUIRED);
             BuildFileWithErrors(file_proto.DebugString(), kMapEntryErrorMessage);
         }
 
@@ -6291,7 +6291,7 @@ namespace shark {
                 "field { "
                 "  name: 'FooMapEntry' "
                 "  type:INT32 "
-                "  label: CARDINALITY_OPTIONAL "
+                "  label: OPTIONAL "
                 "  number: 100 "
                 "}",
                 file_proto.mutable_message_type(0));
@@ -6350,7 +6350,7 @@ namespace shark {
                 "name: 'foo.shark' "
                 "message_type { "
                 "  name: 'Foo' "
-                "  field { name:'foo' number:1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:'foo' number:1 label:OPTIONAL type:INT32 "
                 "          proto3_optional: true } "
                 "}",
                 "foo.shark: Foo.foo: OTHER: proto3_optional is not supported.\n");
@@ -6459,7 +6459,7 @@ namespace shark {
                 "field { "
                 "  name: 'int_field' "
                 "  type:INT32 "
-                "  label: CARDINALITY_OPTIONAL "
+                "  label: OPTIONAL "
                 "  oneof_index: 0 "
                 "  number: 100 "
                 "} ",
@@ -6484,17 +6484,17 @@ namespace shark {
                 "message_type {"
                 "  name: 'Foo' "
                 "  field { "
-                "    name: 'foo_map' number: 1 label:CARDINALITY_REPEATED "
+                "    name: 'foo_map' number: 1 label:REPEATED "
                 "    type_name: 'FooMapEntry' "
                 "  } "
                 "  nested_type { "
                 "    name: 'FooMapEntry' "
                 "    options {  map_entry: true } "
                 "    field { "
-                "      name: 'key' number: 1 type:INT32 label:CARDINALITY_OPTIONAL "
+                "      name: 'key' number: 1 type:INT32 label:OPTIONAL "
                 "    } "
                 "    field { "
-                "      name: 'value' number: 2 type_name:\"Bar\" label:CARDINALITY_OPTIONAL "
+                "      name: 'value' number: 2 type_name:\"Bar\" label:OPTIONAL "
                 "    } "
                 "  } "
                 "}",
@@ -6509,7 +6509,7 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type { "
                 "  name: 'Foo' "
-                "  field { name:'foo' number:1 label:CARDINALITY_REQUIRED type:INT32 } "
+                "  field { name:'foo' number:1 label:REQUIRED type:INT32 } "
                 "}");
 
             // applied to nested types as well.
@@ -6521,7 +6521,7 @@ namespace shark {
                 "  name: 'Foo' "
                 "  nested_type { "
                 "    name : 'Bar' "
-                "    field { name:'bar' number:1 label:CARDINALITY_REQUIRED type:INT32 } "
+                "    field { name:'bar' number:1 label:REQUIRED type:INT32 } "
                 "  } "
                 "}");
 
@@ -6532,8 +6532,8 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type { "
                 "  name: 'Foo' "
-                "  field { name:'foo' number:1 label:CARDINALITY_OPTIONAL type:INT32 } "
-                "  field { name:'bar' number:2 label:CARDINALITY_REPEATED type:INT32 } "
+                "  field { name:'foo' number:1 label:OPTIONAL type:INT32 } "
+                "  field { name:'bar' number:2 label:REPEATED type:INT32 } "
                 "}");
         }
 
@@ -6544,7 +6544,7 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type { "
                 "  name: 'Foo' "
-                "  field { name:'foo' number:1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "  field { name:'foo' number:1 label:OPTIONAL type:INT32 "
                 "          default_value: '1' }"
                 "}");
 
@@ -6556,7 +6556,7 @@ namespace shark {
                 "  name: 'Foo' "
                 "  nested_type { "
                 "    name : 'Bar' "
-                "    field { name:'bar' number:1 label:CARDINALITY_OPTIONAL type:INT32 "
+                "    field { name:'bar' number:1 label:OPTIONAL type:INT32 "
                 "            default_value: '1' }"
                 "  } "
                 "}");
@@ -6569,7 +6569,7 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type { "
                 "  name: 'Foo' "
-                "  field { name:'foo' number:1 label:CARDINALITY_OPTIONAL type:INT32 } "
+                "  field { name:'foo' number:1 label:OPTIONAL type:INT32 } "
                 "  extension_range { start:10 end:100 } "
                 "}");
 
@@ -6581,7 +6581,7 @@ namespace shark {
                 "  name: 'Foo' "
                 "  nested_type { "
                 "    name : 'Bar' "
-                "    field { name:'bar' number:1 label:CARDINALITY_OPTIONAL type:INT32 } "
+                "    field { name:'bar' number:1 label:OPTIONAL type:INT32 } "
                 "    extension_range { start:10 end:100 } "
                 "  } "
                 "}");
@@ -6649,7 +6649,7 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type { "
                 "  name: 'Foo' "
-                "    field { name:'bar' number:1 label:CARDINALITY_OPTIONAL type:ENUM "
+                "    field { name:'bar' number:1 label:OPTIONAL type:ENUM "
                 "            type_name: 'foo.FooEnum' }"
                 "}");
         }
@@ -6700,31 +6700,31 @@ namespace shark {
             file_proto.set_syntax("proto2");
             file_proto.add_dependency("shark/descriptor.shark");
             AddExtension(&file_proto, "shark.FileOptions", "test_file_opt", 1001,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::STRING);
             AddExtension(&file_proto, "shark.MessageOptions", "test_msg_opt", 1001,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::STRING);
             AddExtension(&file_proto, "shark.FieldOptions", "test_field_opt", 1003,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::STRING);
             AddExtension(&file_proto, "shark.EnumOptions", "test_enum_opt", 1004,
-                FieldCardinality::CARDINALITY_REPEATED,
+                FieldCardinality::REPEATED,
                 SharkType::INT32);
             AddExtension(&file_proto, "shark.EnumValueOptions", "test_enumval_opt", 1005,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::INT32);
             AddExtension(&file_proto, "shark.ServiceOptions", "test_svc_opt", 1006,
-                FieldCardinality::CARDINALITY_REPEATED,
+                FieldCardinality::REPEATED,
                 SharkType::INT32);
             AddExtension(&file_proto, "shark.MethodOptions", "test_method_opt", 1007,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::STRING);
             AddExtension(&file_proto, "shark.OneofOptions", "test_oneof_opt", 1008,
-                FieldCardinality::CARDINALITY_OPTIONAL,
+                FieldCardinality::OPTIONAL,
                 SharkType::STRING);
             AddExtension(&file_proto, "shark.ExtensionRangeOptions", "test_ext_opt",
-                1009, FieldCardinality::CARDINALITY_OPTIONAL,
+                1009, FieldCardinality::OPTIONAL,
                 SharkType::STRING);
             ASSERT_TRUE(pool.BuildFile(file_proto) != nullptr);
 
@@ -6740,7 +6740,7 @@ namespace shark {
                 "syntax: 'proto2' "
                 "dependency: 'shark.shark' "
                 "extension { "
-                "  name: 'bar' number: 1 label: CARDINALITY_OPTIONAL type:INT32 "
+                "  name: 'bar' number: 1 label: OPTIONAL type:INT32 "
                 "  extendee: 'Container' "
                 "}");
         }
@@ -6753,8 +6753,8 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type {"
                 "  name: 'Foo'"
-                "  field { name:'name' number:1 label:CARDINALITY_OPTIONAL type:INT32 }"
-                "  field { name:'Name' number:2 label:CARDINALITY_OPTIONAL type:INT32 }"
+                "  field { name:'name' number:1 label:OPTIONAL type:INT32 }"
+                "  field { name:'Name' number:2 label:OPTIONAL type:INT32 }"
                 "}");
             BuildFile(
                 "name: 'bar.shark' "
@@ -6762,8 +6762,8 @@ namespace shark {
                 "syntax: 'proto2' "
                 "message_type {"
                 "  name: 'Foo'"
-                "  field { name:'ab' number:1 label:CARDINALITY_OPTIONAL type:INT32 }"
-                "  field { name:'_a__b_' number:2 label:CARDINALITY_OPTIONAL type:INT32 }"
+                "  field { name:'ab' number:1 label:OPTIONAL type:INT32 }"
+                "  field { name:'_a__b_' number:2 label:OPTIONAL type:INT32 }"
                 "}");
         }
 
@@ -6780,7 +6780,7 @@ namespace shark {
                 "dependency: 'bar.shark' "
                 "message_type {"
                 "  name: 'Foo'"
-                "  extension { name:'foo' number:1 label:CARDINALITY_OPTIONAL type:INT32"
+                "  extension { name:'foo' number:1 label:OPTIONAL type:INT32"
                 "              extendee: 'Baz' }"
                 "}",
 
@@ -6840,14 +6840,14 @@ namespace shark {
                     "dependency: 'foo.shark' "
                     "message_type { name:'Bar' } "
                     "extension { name:'foo_ext' extendee: '.Foo' number:5 "
-                    "            label:CARDINALITY_OPTIONAL type:INT32 } ");
+                    "            label:OPTIONAL type:INT32 } ");
                 // Baz has an undeclared dependency on Foo.
                 AddToDatabase(
                     &database_,
                     "name: 'baz.shark' "
                     "message_type { "
                     "  name:'Baz' "
-                    "  field { name:'foo' number:1 label:CARDINALITY_OPTIONAL type_name:'Foo' } "
+                    "  field { name:'foo' number:1 label:OPTIONAL type_name:'Foo' } "
                     "}");
             }
 
@@ -7269,7 +7269,7 @@ namespace shark {
                         FieldDescriptorProto* field = message->add_field();
                         field->set_name(strings::Substitute("field$0", i));
                         field->set_number(i);
-                        field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
+                        field->set_label(FieldCardinality::OPTIONAL);
                         field->set_type(SharkType::MESSAGE);
                         field->set_type_name(strings::Substitute("Message$0", i));
                     }
@@ -8012,7 +8012,7 @@ namespace shark {
                                                                           "  name:'"
                     + std::string(message_name) + "' "
                                                   "  field { name:'a' number:1 "
-                                                  "  label:CARDINALITY_OPTIONAL "
+                                                  "  label:OPTIONAL "
                                                   "  type_name:'int32' } "
                                                   "}");
             }
@@ -8041,7 +8041,7 @@ namespace shark {
                 "dependency: 'bar.shark' "
                 "message_type { "
                 "  name:'Foo' "
-                "  field { name:'bar' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'bar' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Bar' } "
                 "}");
             AddSimpleMessageProtoFileToDb("bar", "Bar");
@@ -8082,9 +8082,9 @@ namespace shark {
                 "dependency: 'enum2.shark' "
                 "message_type { "
                 "  name:'Lazy' "
-                "  field { name:'enum1' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'enum1' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Enum1' } "
-                "  field { name:'enum2' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'enum2' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Enum2' } "
                 "}");
             AddSimpleEnumProtoFileToDb("enum1", "Enum1", "ENUM1");
@@ -8121,13 +8121,13 @@ namespace shark {
                 "dependency: 'enum2.shark' "
                 "message_type { "
                 "  name:'Lazy' "
-                "  field { name:'message1' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'message1' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Message1' } "
-                "  field { name:'message2' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'message2' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Message2' } "
-                "  field { name:'enum1' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'enum1' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Enum1' } "
-                "  field { name:'enum2' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'enum2' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Enum2' } "
                 "}");
             AddSimpleMessageProtoFileToDb("message1", "Message1");
@@ -8179,7 +8179,7 @@ namespace shark {
                 "dependency: 'bar.shark' "
                 "dependency: 'baz.shark' "
                 "extension { extendee: '.sharkbuf_unittest.Bar' name:'bar' number:11"
-                "            label:CARDINALITY_OPTIONAL type_name:'.sharkbuf_unittest.Baz' }");
+                "            label:OPTIONAL type_name:'.sharkbuf_unittest.Baz' }");
             ParseProtoAndAddToDb(
                 "name: 'bar.shark' "
                 "package: 'sharkbuf_unittest' "
@@ -8298,7 +8298,7 @@ namespace shark {
                 "dependency: 'bar.shark' "
                 "message_type { "
                 "  name:'Foo' "
-                "  field { name:'bar' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'bar' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Bar' } "
                 "}");
             ParseProtoAndAddToDb(
@@ -8307,7 +8307,7 @@ namespace shark {
                 "dependency: 'baz.shark' "
                 "message_type { "
                 "  name:'Bar' "
-                "  field { name:'baz' number:1 label:CARDINALITY_OPTIONAL "
+                "  field { name:'baz' number:1 label:OPTIONAL "
                 "type_name:'.sharkbuf_unittest.Baz' } "
                 "}");
             AddSimpleMessageProtoFileToDb("baz", "Baz");

@@ -67,13 +67,13 @@ enum class SharkCppType : uint8 {
 // Whether a field is optional, required, or repeated.
 enum FieldCardinality {
   // For fields with unknown cardinality.
-  CARDINALITY_UNKNOWN = 0;
+  UNKNOWN = 0;
   // For optional fields.
-  CARDINALITY_OPTIONAL = 1;
+  OPTIONAL = 1;
   // For required fields. Proto2 syntax only.
-  CARDINALITY_REQUIRED = 2;
+  REQUIRED = 2;
   // For list<fields>.
-  CARDINALITY_REPEATED = 3;
+  REPEATED = 3;
 }
 
 // The syntax in which a protocol buffer element is defined.

@@ -247,13 +247,13 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     field->set_kind(static_cast<SharkType>(descriptor->type()));
     switch (descriptor->label()) {
       case FieldLabel::OPTIONAL:
-        field->set_cardinality(FieldCardinality::CARDINALITY_OPTIONAL);
+        field->set_cardinality(FieldCardinality::OPTIONAL);
         break;
       case FieldLabel::REPEATED:
-        field->set_cardinality(FieldCardinality::CARDINALITY_REPEATED);
+        field->set_cardinality(FieldCardinality::REPEATED);
         break;
       case FieldLabel::REQUIRED:
-        field->set_cardinality(FieldCardinality::CARDINALITY_REQUIRED);
+        field->set_cardinality(FieldCardinality::REQUIRED);
         break;
     }
     field->set_number(descriptor->number());

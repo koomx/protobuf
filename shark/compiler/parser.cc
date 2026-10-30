@@ -953,7 +953,7 @@ bool Parser::ParseMessageFieldNoLabel(
         DO(Consume(">"));
         location.StartAt(type_start);
         location.EndAt(type_end);
-        field->set_label(FieldCardinality::CARDINALITY_REPEATED);
+        field->set_label(FieldCardinality::REPEATED);
         {
           LocationRecorder label_location(
               field_location, FieldDescriptorProto::kLabelFieldNumber);
@@ -983,13 +983,13 @@ bool Parser::ParseMessageFieldNoLabel(
     if (!map_field.is_map_field) {
       // Handle the case where no explicit label is given for a non-map field.
       if (!list_field && !field->has_label() && DefaultToOptionalFields()) {
-        field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
+        field->set_label(FieldCardinality::OPTIONAL);
       }
       if (!field->has_label()) {
         AddError("Expected \"required\" or \"optional\".");
         // We can actually reasonably recover here by just assuming the user
         // forgot the label altogether.
-        field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
+        field->set_label(FieldCardinality::OPTIONAL);
       }
 
       // Handle the case where the actual type is a message or enum named
@@ -1073,7 +1073,7 @@ bool Parser::ParseMapType(MapField* map_field, FieldDescriptorProto* field,
     AddError("Map fields are not allowed to be extensions.");
     return false;
   }
-  field->set_label(FieldCardinality::CARDINALITY_REPEATED);
+  field->set_label(FieldCardinality::REPEATED);
   DO(Consume("<"));
   DO(ParseType(&map_field->key_type, &map_field->key_type_name));
   DO(Consume(","));
@@ -1095,7 +1095,7 @@ void Parser::GenerateMapEntry(const MapField& map_field,
   entry->mutable_options()->set_map_entry(true);
   FieldDescriptorProto* key_field = entry->add_field();
   key_field->set_name("key");
-  key_field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
+  key_field->set_label(FieldCardinality::OPTIONAL);
   key_field->set_number(1);
   if (map_field.key_type_name.empty()) {
     key_field->set_type(map_field.key_type);
@@ -1104,7 +1104,7 @@ void Parser::GenerateMapEntry(const MapField& map_field,
   }
   FieldDescriptorProto* value_field = entry->add_field();
   value_field->set_name("value");
-  value_field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
+  value_field->set_label(FieldCardinality::OPTIONAL);
   value_field->set_number(2);
   if (map_field.value_type_name.empty()) {
     value_field->set_type(map_field.value_type);
@@ -1922,7 +1922,7 @@ bool Parser::ParseOneof(OneofDescriptorProto* oneof_decl,
                                     containing_type->field_size());
 
     FieldDescriptorProto* field = containing_type->add_field();
-    field->set_label(FieldCardinality::CARDINALITY_OPTIONAL);
+    field->set_label(FieldCardinality::OPTIONAL);
     field->set_oneof_index(oneof_index);
 
     if (!ParseMessageFieldNoLabel(field, containing_type->mutable_nested_type(),
@@ -2331,10 +2331,10 @@ bool Parser::ParseLabel(FieldCardinality* label,
   LocationRecorder location(field_location,
                             FieldDescriptorProto::kLabelFieldNumber);
   if (TryConsume("optional")) {
-    *label = FieldCardinality::CARDINALITY_OPTIONAL;
+    *label = FieldCardinality::OPTIONAL;
   } else {
     Consume("required");
-    *label = FieldCardinality::CARDINALITY_REQUIRED;
+    *label = FieldCardinality::REQUIRED;
   }
   return true;
 }

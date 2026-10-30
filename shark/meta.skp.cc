@@ -42,15 +42,14 @@ const char descriptor_table_protodef_shark_2fmeta_2eshark[] SHARK_SECTION_VARIAB
     "\t\n\005INT32\020\006\022\n\n\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UIN"
     "T64\020\t\022\t\n\005FLOAT\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020"
     "\014\022\n\n\006DOUBLE\020\r\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006"
-    "STRING\020\020\032\0028\002*}\n\020FieldCardinality\022\027\n\023CARD"
-    "INALITY_UNKNOWN\020\000\022\030\n\024CARDINALITY_OPTIONA"
-    "L\020\001\022\030\n\024CARDINALITY_REQUIRED\020\002\022\030\n\024CARDINA"
-    "LITY_REPEATED\020\003\032\0028\005*2\n\006Syntax\022\021\n\rSYNTAX_"
-    "PROTO2\020\000\022\021\n\rSYNTAX_PROTO3\020\001\032\0028\005"
+    "STRING\020\020\032\0028\002*M\n\020FieldCardinality\022\013\n\007UNKN"
+    "OWN\020\000\022\014\n\010OPTIONAL\020\001\022\014\n\010REQUIRED\020\002\022\014\n\010REP"
+    "EATED\020\003\032\0028\005*2\n\006Syntax\022\021\n\rSYNTAX_PROTO2\020\000"
+    "\022\021\n\rSYNTAX_PROTO3\020\001\032\0028\005"
     ;
 static ::_pbi::once_flag descriptor_table_shark_2fmeta_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fmeta_2eshark = {
-    false, false, 711, descriptor_table_protodef_shark_2fmeta_2eshark,
+    false, false, 663, descriptor_table_protodef_shark_2fmeta_2eshark,
     "shark/meta.shark",
     &descriptor_table_shark_2fmeta_2eshark_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_shark_2fmeta_2eshark::offsets,

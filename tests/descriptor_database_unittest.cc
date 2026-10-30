@@ -318,7 +318,7 @@ TEST_P(DescriptorDatabaseTest, FindFileContainingExtension) {
       "message_type { "
       "  name: \"Foo\" "
       "  extension_range { start: 1 end: 1000 } "
-      "  extension { name:\"qux\" label:CARDINALITY_OPTIONAL type:INT32 "
+      "  extension { name:\"qux\" label:OPTIONAL type:INT32 "
       "number:5 "
       "              extendee: \".Foo\" }"
       "}");
@@ -388,7 +388,7 @@ TEST_P(DescriptorDatabaseTest, FindAllExtensionNumbers) {
       "message_type { "
       "  name: \"Foo\" "
       "  extension_range { start: 1 end: 1000 } "
-      "  extension { name:\"qux\" label:CARDINALITY_OPTIONAL type:INT32 "
+      "  extension { name:\"qux\" label:OPTIONAL type:INT32 "
       "number:5 "
       "              extendee: \".Foo\" }"
       "}");
@@ -463,11 +463,11 @@ TEST_P(DescriptorDatabaseTest, ConflictingTypeError) {
 TEST_P(DescriptorDatabaseTest, ConflictingExtensionError) {
   AddToDatabase(
       "name: \"foo.shark\" "
-      "extension { name:\"foo\" label:CARDINALITY_OPTIONAL type:INT32 number:5 "
+      "extension { name:\"foo\" label:OPTIONAL type:INT32 number:5 "
       "            extendee: \".Foo\" }");
   AddToDatabaseWithError(
       "name: \"bar.shark\" "
-      "extension { name:\"bar\" label:CARDINALITY_OPTIONAL type:INT32 number:5 "
+      "extension { name:\"bar\" label:OPTIONAL type:INT32 number:5 "
       "            extendee: \".Foo\" }");
 }
 
@@ -585,13 +585,13 @@ class MergedDescriptorDatabaseTest : public testing::Test {
         "name: \"foo.shark\" "
         "message_type { name:\"Foo\" extension_range { start: 1 end: 100 } } "
         "extension { name:\"foo_ext\" extendee: \".Foo\" number:3 "
-        "            label:CARDINALITY_OPTIONAL type:INT32 } ");
+        "            label:OPTIONAL type:INT32 } ");
     AddToDatabase(
         &database2_,
         "name: \"bar.shark\" "
         "message_type { name:\"Bar\" extension_range { start: 1 end: 100 } } "
         "extension { name:\"bar_ext\" extendee: \".Bar\" number:5 "
-        "            label:CARDINALITY_OPTIONAL type:INT32 } ");
+        "            label:OPTIONAL type:INT32 } ");
 
     // baz.shark exists in both pools, with different definitions.
     AddToDatabase(
@@ -600,16 +600,16 @@ class MergedDescriptorDatabaseTest : public testing::Test {
         "message_type { name:\"Baz\" extension_range { start: 1 end: 100 } } "
         "message_type { name:\"FromPool1\" } "
         "extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
-        "            label:CARDINALITY_OPTIONAL type:INT32 } "
+        "            label:OPTIONAL type:INT32 } "
         "extension { name:\"database1_only_ext\" extendee: \".Baz\" number:13 "
-        "            label:CARDINALITY_OPTIONAL type:INT32 } ");
+        "            label:OPTIONAL type:INT32 } ");
     AddToDatabase(
         &database2_,
         "name: \"baz.shark\" "
         "message_type { name:\"Baz\" extension_range { start: 1 end: 100 } } "
         "message_type { name:\"FromPool2\" } "
         "extension { name:\"baz_ext\" extendee: \".Baz\" number:12 "
-        "            label:CARDINALITY_OPTIONAL type:INT32 } ");
+        "            label:OPTIONAL type:INT32 } ");
   }
 
   SimpleDescriptorDatabase database1_;

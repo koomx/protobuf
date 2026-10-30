@@ -144,17 +144,17 @@ struct SharkCppTypeTrait {
 // global enum FieldCardinality
 // enum class FieldCardinality : int32_t {
 enum class FieldCardinality : int32_t {
-    CARDINALITY_UNKNOWN = 0,
-    CARDINALITY_OPTIONAL = 1,
-    CARDINALITY_REQUIRED = 2,
-    CARDINALITY_REPEATED = 3
+    UNKNOWN = 0,
+    OPTIONAL = 1,
+    REQUIRED = 2,
+    REPEATED = 3
 };
 ////////////////////////////////////////////////////////////////////
 /// enum traits
 struct FieldCardinalityTrait {
     using underlying = int32_t;
-    static constexpr FieldCardinality enum_min = FieldCardinality::CARDINALITY_UNKNOWN;
-    static constexpr FieldCardinality enum_max = FieldCardinality::CARDINALITY_REPEATED;
+    static constexpr FieldCardinality enum_min = FieldCardinality::UNKNOWN;
+    static constexpr FieldCardinality enum_max = FieldCardinality::REPEATED;
     static constexpr uint32_t value_count = 4;
     static constexpr bool has_descriptor = true;
     static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
