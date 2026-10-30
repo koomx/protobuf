@@ -938,7 +938,7 @@ TEST(ExtensionSetTest, RepeatedFields) {
   unittest::TestAllTypes::NestedMessage nested_message;
   nested_message.set_bb(42);
   unittest::TestAllTypes::NestedEnum nested_enum =
-      unittest::TestAllTypes::NestedEnum_MIN;
+      shark::EnumTrait<unittest::TestAllTypes::NestedEnum>::enum_min;
 
   for (int i = 0; i < 10; ++i) {
     message.AddExtension(unittest::repeated_int32_extension, 1);
@@ -1064,7 +1064,7 @@ TEST(ExtensionSetTest, RepeatedFields) {
                          unittest::repeated_nested_enum_extension)
                      ->end();
        enum_iter != enum_end; ++enum_iter) {
-    *enum_iter = unittest::TestAllTypes::NestedEnum_MAX;
+    *enum_iter = shark::EnumTrait<unittest::TestAllTypes::NestedEnum>::enum_max;
   }
   RepeatedField<unittest::TestAllTypes_NestedEnum>::const_iterator
       enum_const_iter;
@@ -1079,7 +1079,7 @@ TEST(ExtensionSetTest, RepeatedFields) {
                .GetRepeatedExtension(unittest::repeated_nested_enum_extension)
                .end();
        enum_const_iter != enum_const_end; ++enum_const_iter) {
-    ASSERT_EQ(*enum_const_iter, unittest::TestAllTypes::NestedEnum_MAX);
+    ASSERT_EQ(*enum_const_iter, shark::EnumTrait<unittest::TestAllTypes::NestedEnum>::enum_max);
   }
 
   RepeatedPtrField<unittest::TestAllTypes_NestedMessage>::iterator msg_iter;

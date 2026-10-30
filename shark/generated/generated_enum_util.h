@@ -45,10 +45,6 @@
 
 namespace shark {
 
-// This type trait can be used to cause templates to only match proto2 enum
-// types.
-template <typename T>
-struct is_proto_enum : ::std::false_type {};
 
 namespace internal {
 

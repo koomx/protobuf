@@ -74,9 +74,6 @@ namespace shark {
 
     class MapIterator;
 
-    template <typename Enum>
-    struct is_proto_enum;
-
     namespace internal {
         template <typename Derived, typename Key, typename T,
             WireFormatLiteFieldType key_wire_type,

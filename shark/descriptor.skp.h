@@ -194,10 +194,6 @@ inline bool FieldDescriptorProto_Type_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Type_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool FieldDescriptorProto_Type_IsValid(int value);
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MIN = FieldDescriptorProto_Type::TYPE_BOOL;
-constexpr FieldDescriptorProto_Type FieldDescriptorProto_Type_Type_MAX = FieldDescriptorProto_Type::TYPE_SINT64;
-constexpr int FieldDescriptorProto_Type_Type_ARRAYSIZE = FieldDescriptorProto_Type_to_underlying(FieldDescriptorProto_Type_Type_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Type_descriptor();
 template<typename T>
 inline const std::string& FieldDescriptorProto_Type_Name(T enum_t_value) {
@@ -228,10 +224,6 @@ inline bool FieldDescriptorProto_Label_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Label_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool FieldDescriptorProto_Label_IsValid(int value);
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MIN = FieldDescriptorProto_Label::LABEL_OPTIONAL;
-constexpr FieldDescriptorProto_Label FieldDescriptorProto_Label_Label_MAX = FieldDescriptorProto_Label::LABEL_REPEATED;
-constexpr int FieldDescriptorProto_Label_Label_ARRAYSIZE = FieldDescriptorProto_Label_to_underlying(FieldDescriptorProto_Label_Label_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Label_descriptor();
 template<typename T>
 inline const std::string& FieldDescriptorProto_Label_Name(T enum_t_value) {
@@ -262,10 +254,6 @@ inline bool FileOptions_OptimizeMode_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FileOptions_OptimizeMode_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool FileOptions_OptimizeMode_IsValid(int value);
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MIN = FileOptions_OptimizeMode::SPEED;
-constexpr FileOptions_OptimizeMode FileOptions_OptimizeMode_OptimizeMode_MAX = FileOptions_OptimizeMode::LITE_RUNTIME;
-constexpr int FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE = FileOptions_OptimizeMode_to_underlying(FileOptions_OptimizeMode_OptimizeMode_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FileOptions_OptimizeMode_descriptor();
 template<typename T>
 inline const std::string& FileOptions_OptimizeMode_Name(T enum_t_value) {
@@ -296,10 +284,6 @@ inline bool FieldOptions_CType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_CType_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool FieldOptions_CType_IsValid(int value);
-constexpr FieldOptions_CType FieldOptions_CType_CType_MIN = FieldOptions_CType::STRING;
-constexpr FieldOptions_CType FieldOptions_CType_CType_MAX = FieldOptions_CType::STRING_PIECE;
-constexpr int FieldOptions_CType_CType_ARRAYSIZE = FieldOptions_CType_to_underlying(FieldOptions_CType_CType_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_CType_descriptor();
 template<typename T>
 inline const std::string& FieldOptions_CType_Name(T enum_t_value) {
@@ -330,10 +314,6 @@ inline bool FieldOptions_JSType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_JSType_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool FieldOptions_JSType_IsValid(int value);
-constexpr FieldOptions_JSType FieldOptions_JSType_JSType_MIN = FieldOptions_JSType::JS_NORMAL;
-constexpr FieldOptions_JSType FieldOptions_JSType_JSType_MAX = FieldOptions_JSType::JS_NUMBER;
-constexpr int FieldOptions_JSType_JSType_ARRAYSIZE = FieldOptions_JSType_to_underlying(FieldOptions_JSType_JSType_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_JSType_descriptor();
 template<typename T>
 inline const std::string& FieldOptions_JSType_Name(T enum_t_value) {
@@ -364,10 +344,6 @@ inline bool MethodOptions_IdempotencyLevel_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && MethodOptions_IdempotencyLevel_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool MethodOptions_IdempotencyLevel_IsValid(int value);
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN = MethodOptions_IdempotencyLevel::IDEMPOTENCY_UNKNOWN;
-constexpr MethodOptions_IdempotencyLevel MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX = MethodOptions_IdempotencyLevel::IDEMPOTENT;
-constexpr int MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE = MethodOptions_IdempotencyLevel_to_underlying(MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* MethodOptions_IdempotencyLevel_descriptor();
 template<typename T>
 inline const std::string& MethodOptions_IdempotencyLevel_Name(T enum_t_value) {
@@ -402,10 +378,6 @@ inline bool EnumUnderlyingType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && EnumUnderlyingType_FitsUnderlying(static_cast<int>(value));
 }
 SHARK_EXPORT bool EnumUnderlyingType_IsValid(int value);
-constexpr EnumUnderlyingType EnumUnderlyingType_MIN = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED;
-constexpr EnumUnderlyingType EnumUnderlyingType_MAX = EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32;
-constexpr int EnumUnderlyingType_ARRAYSIZE = EnumUnderlyingType_to_underlying(EnumUnderlyingType_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumUnderlyingType_descriptor();
 template<typename T>
 inline const std::string& EnumUnderlyingType_Name(T enum_t_value) {
@@ -2195,12 +2167,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
     static inline bool Type_IsValid(int value) {
       return FieldDescriptorProto_Type_IsValid(value);
     }
-    static constexpr Type Type_MIN =
-      FieldDescriptorProto_Type_Type_MIN;
-    static constexpr Type Type_MAX =
-      FieldDescriptorProto_Type_Type_MAX;
-    static constexpr int Type_ARRAYSIZE =
-      FieldDescriptorProto_Type_Type_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Type_descriptor() {
       return FieldDescriptorProto_Type_descriptor();
@@ -2221,12 +2187,6 @@ class SHARK_EXPORT FieldDescriptorProto final :
     static inline bool Label_IsValid(int value) {
       return FieldDescriptorProto_Label_IsValid(value);
     }
-    static constexpr Label Label_MIN =
-      FieldDescriptorProto_Label_Label_MIN;
-    static constexpr Label Label_MAX =
-      FieldDescriptorProto_Label_Label_MAX;
-    static constexpr int Label_ARRAYSIZE =
-      FieldDescriptorProto_Label_Label_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Label_descriptor() {
       return FieldDescriptorProto_Label_descriptor();
@@ -3860,12 +3820,6 @@ class SHARK_EXPORT FileOptions final :
     static inline bool OptimizeMode_IsValid(int value) {
       return FileOptions_OptimizeMode_IsValid(value);
     }
-    static constexpr OptimizeMode OptimizeMode_MIN =
-      FileOptions_OptimizeMode_OptimizeMode_MIN;
-    static constexpr OptimizeMode OptimizeMode_MAX =
-      FileOptions_OptimizeMode_OptimizeMode_MAX;
-    static constexpr int OptimizeMode_ARRAYSIZE =
-      FileOptions_OptimizeMode_OptimizeMode_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     OptimizeMode_descriptor() {
       return FileOptions_OptimizeMode_descriptor();
@@ -4755,12 +4709,6 @@ class SHARK_EXPORT FieldOptions final :
     static inline bool CType_IsValid(int value) {
       return FieldOptions_CType_IsValid(value);
     }
-    static constexpr CType CType_MIN =
-      FieldOptions_CType_CType_MIN;
-    static constexpr CType CType_MAX =
-      FieldOptions_CType_CType_MAX;
-    static constexpr int CType_ARRAYSIZE =
-      FieldOptions_CType_CType_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     CType_descriptor() {
       return FieldOptions_CType_descriptor();
@@ -4781,12 +4729,6 @@ class SHARK_EXPORT FieldOptions final :
     static inline bool JSType_IsValid(int value) {
       return FieldOptions_JSType_IsValid(value);
     }
-    static constexpr JSType JSType_MIN =
-      FieldOptions_JSType_JSType_MIN;
-    static constexpr JSType JSType_MAX =
-      FieldOptions_JSType_JSType_MAX;
-    static constexpr int JSType_ARRAYSIZE =
-      FieldOptions_JSType_JSType_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     JSType_descriptor() {
       return FieldOptions_JSType_descriptor();
@@ -6786,12 +6728,6 @@ class SHARK_EXPORT MethodOptions final :
     static inline bool IdempotencyLevel_IsValid(int value) {
       return MethodOptions_IdempotencyLevel_IsValid(value);
     }
-    static constexpr IdempotencyLevel IdempotencyLevel_MIN =
-      MethodOptions_IdempotencyLevel_IdempotencyLevel_MIN;
-    static constexpr IdempotencyLevel IdempotencyLevel_MAX =
-      MethodOptions_IdempotencyLevel_IdempotencyLevel_MAX;
-    static constexpr int IdempotencyLevel_ARRAYSIZE =
-      MethodOptions_IdempotencyLevel_IdempotencyLevel_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     IdempotencyLevel_descriptor() {
       return MethodOptions_IdempotencyLevel_descriptor();

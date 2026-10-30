@@ -83,10 +83,6 @@ inline bool SharkType_FitsWire(::uint64_t value) {
   return value <= 255u;
 }
 SHARK_EXPORT bool SharkType_IsValid(int value);
-constexpr SharkType SharkType_MIN = SharkType::UNKNOWN;
-constexpr SharkType SharkType_MAX = SharkType::SINT64;
-constexpr int SharkType_ARRAYSIZE = SharkType_to_underlying(SharkType_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkType_descriptor();
 template<typename T>
 inline const std::string& SharkType_Name(T enum_t_value) {
@@ -130,10 +126,6 @@ inline bool SharkCppType_FitsWire(::uint64_t value) {
   return value <= 255u;
 }
 SHARK_EXPORT bool SharkCppType_IsValid(int value);
-constexpr SharkCppType SharkCppType_MIN = SharkCppType::BOOL;
-constexpr SharkCppType SharkCppType_MAX = SharkCppType::STRING;
-constexpr int SharkCppType_ARRAYSIZE = SharkCppType_to_underlying(SharkCppType_MAX) + 1;
-
 SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkCppType_descriptor();
 template<typename T>
 inline const std::string& SharkCppType_Name(T enum_t_value) {

@@ -388,26 +388,26 @@ TEST(Printer, AnnotateIndent) {
     printer.Print("\n");
   }
   buffer[output.ByteCount()] = '\0';
-  EXPECT_STREQ("0\n  4,\n  9\n  d\n\n", buffer);
+  EXPECT_STREQ("0\n    4,\n    9\n    d\n\n", buffer);
   ASSERT_EQ(3, info.annotation_size());
   const GeneratedCodeInfo::Annotation* foo = &info.annotation(0);
   ASSERT_EQ(1, foo->path_size());
   EXPECT_EQ(44, foo->path(0));
   EXPECT_EQ("path", foo->source_file());
-  EXPECT_EQ(4, foo->begin());
-  EXPECT_EQ(5, foo->end());
+  EXPECT_EQ(6, foo->begin());
+  EXPECT_EQ(7, foo->end());
   const GeneratedCodeInfo::Annotation* bar = &info.annotation(1);
   ASSERT_EQ(1, bar->path_size());
   EXPECT_EQ(99, bar->path(0));
   EXPECT_EQ("path", bar->source_file());
-  EXPECT_EQ(9, bar->begin());
-  EXPECT_EQ(10, bar->end());
+  EXPECT_EQ(13, bar->begin());
+  EXPECT_EQ(14, bar->end());
   const GeneratedCodeInfo::Annotation* braces = &info.annotation(2);
   ASSERT_EQ(1, braces->path_size());
   EXPECT_EQ(1313, braces->path(0));
   EXPECT_EQ("path", braces->source_file());
-  EXPECT_EQ(13, braces->begin());
-  EXPECT_EQ(14, braces->end());
+  EXPECT_EQ(19, braces->begin());
+  EXPECT_EQ(20, braces->end());
 }
 
 TEST(Printer, AnnotateIndentNewline) {
@@ -427,14 +427,14 @@ TEST(Printer, AnnotateIndentNewline) {
     printer.Print("\n");
   }
   buffer[output.ByteCount()] = '\0';
-  EXPECT_STREQ("\nz  C\n\n", buffer);
+  EXPECT_STREQ("\nz    C\n\n", buffer);
   ASSERT_EQ(1, info.annotation_size());
   const GeneratedCodeInfo::Annotation* ab = &info.annotation(0);
   ASSERT_EQ(1, ab->path_size());
   EXPECT_EQ(0, ab->path(0));
   EXPECT_EQ("path", ab->source_file());
   EXPECT_EQ(0, ab->begin());
-  EXPECT_EQ(4, ab->end());
+  EXPECT_EQ(6, ab->end());
 }
 
 TEST(Printer, Indenting) {
@@ -475,17 +475,7 @@ TEST(Printer, Indenting) {
     buffer[output.ByteCount()] = '\0';
 
     EXPECT_STREQ(
-        "This is not indented.\n"
-        "  This is indented\n"
-        "  And so is this\n"
-        "But this is not.  And this is still the same line.\n"
-        "  But this is indented.\n"
-        "  RawBit has indent at start\n"
-        "but not after a raw newline\n"
-        "Note that a newline in a variable will break indenting, as we see\n"
-        "here.\n"
-        "    And this is double-indented\n"
-        "Back to normal.",
+        "This is not indented.\n    This is indented\n    And so is this\nBut this is not.  And this is still the same line.\n    But this is indented.\n    RawBit has indent at start\nbut not after a raw newline\nNote that a newline in a variable will break indenting, as we see\nhere.\n        And this is double-indented\nBack to normal.",
         buffer);
   }
 }
@@ -653,7 +643,7 @@ TEST(Printer, FormatInternal) {
       printer.FormatInternal(args, vars, "$empty $\n\n$1$ $foo $$2$\n$baz$");
       printer.Outdent();
     }
-    EXPECT_EQ("\n\n  arg1 bar arg2\n  bla", s);
+    EXPECT_EQ("\n\n    arg1 bar arg2\n    bla", s);
   }
   {
     // Annotations should respect indentation.
@@ -672,14 +662,14 @@ TEST(Printer, FormatInternal) {
       printer.FormatInternal(args, vars, "$empty $\n\n${1$$2$$}$ $3$\n$baz$");
       printer.Outdent();
     }
-    EXPECT_EQ("\n\n  arg1 arg2\n  bla", s);
+    EXPECT_EQ("\n\n    arg1 arg2\n    bla", s);
     ASSERT_EQ(1, info.annotation_size());
     const GeneratedCodeInfo::Annotation* arg1 = &info.annotation(0);
     ASSERT_EQ(1, arg1->path_size());
     EXPECT_EQ(33, arg1->path(0));
     EXPECT_EQ("file.shark", arg1->source_file());
-    EXPECT_EQ(4, arg1->begin());
-    EXPECT_EQ(8, arg1->end());
+    EXPECT_EQ(6, arg1->begin());
+    EXPECT_EQ(10, arg1->end());
   }
 #ifdef SHARK_HAS_DEATH_TEST
   // Death tests in case of illegal format strings.

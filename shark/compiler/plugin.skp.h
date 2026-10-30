@@ -91,10 +91,6 @@ inline bool CodeGeneratorResponse_Feature_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && CodeGeneratorResponse_Feature_FitsUnderlying(static_cast<int>(value));
 }
 PROTOC_EXPORT bool CodeGeneratorResponse_Feature_IsValid(int value);
-constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_Feature_MIN = CodeGeneratorResponse_Feature::FEATURE_NONE;
-constexpr CodeGeneratorResponse_Feature CodeGeneratorResponse_Feature_Feature_MAX = CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
-constexpr int CodeGeneratorResponse_Feature_Feature_ARRAYSIZE = CodeGeneratorResponse_Feature_to_underlying(CodeGeneratorResponse_Feature_Feature_MAX) + 1;
-
 PROTOC_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* CodeGeneratorResponse_Feature_descriptor();
 template<typename T>
 inline const std::string& CodeGeneratorResponse_Feature_Name(T enum_t_value) {
@@ -909,12 +905,6 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
     static inline bool Feature_IsValid(int value) {
       return CodeGeneratorResponse_Feature_IsValid(value);
     }
-    static constexpr Feature Feature_MIN =
-      CodeGeneratorResponse_Feature_Feature_MIN;
-    static constexpr Feature Feature_MAX =
-      CodeGeneratorResponse_Feature_Feature_MAX;
-    static constexpr int Feature_ARRAYSIZE =
-      CodeGeneratorResponse_Feature_Feature_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Feature_descriptor() {
       return CodeGeneratorResponse_Feature_descriptor();

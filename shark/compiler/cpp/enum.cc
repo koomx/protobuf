@@ -211,7 +211,9 @@ namespace shark::compiler::cpp {
                     "}\n");
             }
         }
-
+        format(
+            "$dllexport_decl $bool $classname$_IsValid(int value);\n");
+        /*
         format(
             "$dllexport_decl $bool $classname$_IsValid(int value);\n"
             "constexpr $classname$ ${1$$prefix$$short_name$_MIN$}$ = "
@@ -225,7 +227,7 @@ namespace shark::compiler::cpp {
                 "constexpr int ${1$$prefix$$short_name$_ARRAYSIZE$}$ = "
                 "$classname$_to_underlying($prefix$$short_name$_MAX) + 1;\n\n",
                 descriptor_);
-        }
+        }*/
 
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
             format(
@@ -326,7 +328,11 @@ namespace shark::compiler::cpp {
     void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
         Formatter format(printer, variables_);
         format("typedef $classname$ $resolved_name$;\n");
-
+        format(
+            "static inline bool $nested_name$_IsValid(int value) {\n"
+            "  return $classname$_IsValid(value);\n"
+            "}\n");
+        /*
         format(
             "static inline bool $nested_name$_IsValid(int value) {\n"
             "  return $classname$_IsValid(value);\n"
@@ -342,7 +348,7 @@ namespace shark::compiler::cpp {
                 "  $classname$_$nested_name$_ARRAYSIZE;\n",
                 descriptor_);
         }
-
+        */
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
             format(
                 "static inline const ::$proto_ns$::EnumDescriptor*\n"

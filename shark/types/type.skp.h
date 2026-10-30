@@ -109,10 +109,6 @@ inline bool Field_Kind_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Kind_FitsUnderlying(static_cast<int>(value));
 }
 bool Field_Kind_IsValid(int value);
-constexpr Field_Kind Field_Kind_Kind_MIN = Field_Kind::TYPE_UNKNOWN;
-constexpr Field_Kind Field_Kind_Kind_MAX = Field_Kind::TYPE_SINT64;
-constexpr int Field_Kind_Kind_ARRAYSIZE = Field_Kind_to_underlying(Field_Kind_Kind_MAX) + 1;
-
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor();
 template<typename T>
 inline const std::string& Field_Kind_Name(T enum_t_value) {
@@ -144,10 +140,6 @@ inline bool Field_Cardinality_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Cardinality_FitsUnderlying(static_cast<int>(value));
 }
 bool Field_Cardinality_IsValid(int value);
-constexpr Field_Cardinality Field_Cardinality_Cardinality_MIN = Field_Cardinality::CARDINALITY_UNKNOWN;
-constexpr Field_Cardinality Field_Cardinality_Cardinality_MAX = Field_Cardinality::CARDINALITY_REPEATED;
-constexpr int Field_Cardinality_Cardinality_ARRAYSIZE = Field_Cardinality_to_underlying(Field_Cardinality_Cardinality_MAX) + 1;
-
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor();
 template<typename T>
 inline const std::string& Field_Cardinality_Name(T enum_t_value) {
@@ -177,10 +169,6 @@ inline bool Syntax_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Syntax_FitsUnderlying(static_cast<int>(value));
 }
 bool Syntax_IsValid(int value);
-constexpr Syntax Syntax_MIN = Syntax::SYNTAX_PROTO2;
-constexpr Syntax Syntax_MAX = Syntax::SYNTAX_PROTO3;
-constexpr int Syntax_ARRAYSIZE = Syntax_to_underlying(Syntax_MAX) + 1;
-
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor();
 template<typename T>
 inline const std::string& Syntax_Name(T enum_t_value) {
@@ -593,12 +581,6 @@ class Field final :
     static inline bool Kind_IsValid(int value) {
       return Field_Kind_IsValid(value);
     }
-    static constexpr Kind Kind_MIN =
-      Field_Kind_Kind_MIN;
-    static constexpr Kind Kind_MAX =
-      Field_Kind_Kind_MAX;
-    static constexpr int Kind_ARRAYSIZE =
-      Field_Kind_Kind_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Kind_descriptor() {
       return Field_Kind_descriptor();
@@ -619,12 +601,6 @@ class Field final :
     static inline bool Cardinality_IsValid(int value) {
       return Field_Cardinality_IsValid(value);
     }
-    static constexpr Cardinality Cardinality_MIN =
-      Field_Cardinality_Cardinality_MIN;
-    static constexpr Cardinality Cardinality_MAX =
-      Field_Cardinality_Cardinality_MAX;
-    static constexpr int Cardinality_ARRAYSIZE =
-      Field_Cardinality_Cardinality_ARRAYSIZE;
     static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
     Cardinality_descriptor() {
       return Field_Cardinality_descriptor();

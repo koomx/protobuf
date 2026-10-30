@@ -1034,36 +1034,36 @@ TEST(GENERATED_ENUM_TEST_NAME, IsValidValue) {
 
 TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
   EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::NEG,
-            UNITTEST::TestAllTypes::NestedEnum_MIN);
+            shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::enum_min);
   EXPECT_EQ(UNITTEST::TestAllTypes_NestedEnum::BAZ,
-            UNITTEST::TestAllTypes::NestedEnum_MAX);
-  EXPECT_EQ(4, UNITTEST::TestAllTypes::NestedEnum_ARRAYSIZE);
+            shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::enum_max);
+  EXPECT_EQ(4, shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::underlying_max + 1);
 
-  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, UNITTEST::ForeignEnum_MIN);
-  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ, UNITTEST::ForeignEnum_MAX);
-  EXPECT_EQ(7, UNITTEST::ForeignEnum_ARRAYSIZE);
+  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_FOO, shark::EnumTrait<UNITTEST::ForeignEnum>::enum_min);
+  EXPECT_EQ(UNITTEST::ForeignEnum::FOREIGN_BAZ, shark::EnumTrait<UNITTEST::ForeignEnum>::enum_max);
+  EXPECT_EQ(7, shark::EnumTrait<UNITTEST::ForeignEnum>::underlying_max + 1);
 
-  EXPECT_EQ(1, UNITTEST::TestEnumWithDupValue_MIN);
-  EXPECT_EQ(3, UNITTEST::TestEnumWithDupValue_MAX);
-  EXPECT_EQ(4, UNITTEST::TestEnumWithDupValue_ARRAYSIZE);
+  EXPECT_EQ(1, shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_min);
+  EXPECT_EQ(3, shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_max);
+  EXPECT_EQ(4, (shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::underlying_max + 1));
 
-  EXPECT_EQ(UNITTEST::TestSparseEnum::SPARSE_E, UNITTEST::TestSparseEnum_MIN);
-  EXPECT_EQ(UNITTEST::TestSparseEnum::SPARSE_C, UNITTEST::TestSparseEnum_MAX);
-  EXPECT_EQ(12589235, UNITTEST::TestSparseEnum_ARRAYSIZE);
+  EXPECT_EQ(UNITTEST::TestSparseEnum::SPARSE_E, shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_min);
+  EXPECT_EQ(UNITTEST::TestSparseEnum::SPARSE_C, shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_max);
+  EXPECT_EQ(12589235, shark::EnumTrait<UNITTEST::TestSparseEnum>::underlying_max + 1);
 
   // Make sure we can take the address of _MIN, _MAX and _ARRAYSIZE.
-  EXPECT_NE(nullptr, &UNITTEST::TestAllTypes::NestedEnum_MIN);
-  EXPECT_NE(nullptr, &UNITTEST::TestAllTypes::NestedEnum_MAX);
-  EXPECT_NE(nullptr, &UNITTEST::TestAllTypes::NestedEnum_ARRAYSIZE);
+  EXPECT_NE(nullptr, &shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::enum_min);
+  EXPECT_NE(nullptr, &shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::enum_max);
+  EXPECT_NE(nullptr, &shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::underlying_max);
 
-  EXPECT_NE(nullptr, &UNITTEST::ForeignEnum_MIN);
-  EXPECT_NE(nullptr, &UNITTEST::ForeignEnum_MAX);
-  EXPECT_NE(nullptr, &UNITTEST::ForeignEnum_ARRAYSIZE);
+  EXPECT_NE(nullptr, &shark::EnumTrait<UNITTEST::ForeignEnum>::enum_min);
+  EXPECT_NE(nullptr, &shark::EnumTrait<UNITTEST::ForeignEnum>::enum_max);
+  EXPECT_NE(nullptr, &shark::EnumTrait<UNITTEST::ForeignEnum>::underlying_max);
 
   // Make sure we can use _MIN and _MAX as switch cases.
   switch (UNITTEST::TestSparseEnum::SPARSE_A) {
-    case UNITTEST::TestSparseEnum_MIN:
-    case UNITTEST::TestSparseEnum_MAX:
+    case shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_min:
+    case shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_max:
       break;
     default:
       break;
@@ -1111,13 +1111,13 @@ enum NonProtoEnum {
 };
 
 TEST(GENERATED_ENUM_TEST_NAME, IsProtoEnumTypeTrait) {
-  EXPECT_TRUE(is_proto_enum<UNITTEST::TestAllTypes::NestedEnum>::value);
-  EXPECT_TRUE(is_proto_enum<UNITTEST::ForeignEnum>::value);
-  EXPECT_TRUE(is_proto_enum<UNITTEST::TestEnumWithDupValue>::value);
-  EXPECT_TRUE(is_proto_enum<UNITTEST::TestSparseEnum>::value);
+  EXPECT_TRUE(IsSharkEnum<UNITTEST::TestAllTypes::NestedEnum>::value);
+  EXPECT_TRUE(IsSharkEnum<UNITTEST::ForeignEnum>::value);
+  EXPECT_TRUE(IsSharkEnum<UNITTEST::TestEnumWithDupValue>::value);
+  EXPECT_TRUE(IsSharkEnum<UNITTEST::TestSparseEnum>::value);
 
-  EXPECT_FALSE(is_proto_enum<int>::value);
-  EXPECT_FALSE(is_proto_enum<NonProtoEnum>::value);
+  EXPECT_FALSE(IsSharkEnum<int>::value);
+  EXPECT_FALSE(IsSharkEnum<NonProtoEnum>::value);
 }
 
 #endif  // SHARK_TEST_NO_DESCRIPTORS
