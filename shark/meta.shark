@@ -63,3 +63,13 @@ enum class SharkCppType : uint8 {
   MESSAGE = 15;
   STRING = 16; // STRING, BYTES
 };
+
+message TempTest {
+  enum InnerE {
+    E = 0;
+    A = -1;
+    B = 2;
+  }
+  optional InnerE ee = 1;
+  optional int16 ff = 2;
+}

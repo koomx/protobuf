@@ -77,10 +77,36 @@ SHARK_NAMESPACE_CLOSE
 namespace shark {
 namespace compiler {
 
+// inner enum Feature
+// enum class CodeGeneratorResponse_Feature : int32_t {
 enum class CodeGeneratorResponse_Feature : int32_t {
     FEATURE_NONE = 0,
     FEATURE_PROTO3_OPTIONAL = 1
 };
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct CodeGeneratorResponse_FeatureTrait {
+    using underlying = int32_t;
+    static constexpr CodeGeneratorResponse_Feature enum_min = CodeGeneratorResponse_Feature::FEATURE_NONE;
+    static constexpr CodeGeneratorResponse_Feature enum_max = CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
+    static constexpr uint32_t value_count = 2;
+    static constexpr bool has_descriptor = true;
+    static const EnumDescriptor* descriptor();
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(CodeGeneratorResponse_Feature e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, CodeGeneratorResponse_Feature *e);
+
+
+    static constexpr bool fits_underlying(int value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
+////////////////////////////////////////////////////////////////////
+/// enum traits
 }  // namespace compiler
 }  // namespace shark
 

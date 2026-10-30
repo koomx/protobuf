@@ -73,6 +73,8 @@ template<> ::shark::Type* Arena::CreateMaybeMessage<::shark::Type>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+// inner enum Kind
+// enum class Field_Kind : int32_t {
 enum class Field_Kind : int32_t {
     TYPE_UNKNOWN = 0,
     TYPE_BOOL = 1,
@@ -99,16 +101,92 @@ enum class Field_Kind : int32_t {
     TYPE_SINT32 = 22,
     TYPE_SINT64 = 23
 };
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct Field_KindTrait {
+    using underlying = int32_t;
+    static constexpr Field_Kind enum_min = Field_Kind::TYPE_UNKNOWN;
+    static constexpr Field_Kind enum_max = Field_Kind::TYPE_SINT64;
+    static constexpr uint32_t value_count = 24;
+    static constexpr bool has_descriptor = true;
+    static const EnumDescriptor* descriptor();
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(Field_Kind e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Kind *e);
+
+
+    static constexpr bool fits_underlying(int value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
+////////////////////////////////////////////////////////////////////
+/// enum traits
+// inner enum Cardinality
+// enum class Field_Cardinality : int32_t {
 enum class Field_Cardinality : int32_t {
     CARDINALITY_UNKNOWN = 0,
     CARDINALITY_OPTIONAL = 1,
     CARDINALITY_REQUIRED = 2,
     CARDINALITY_REPEATED = 3
 };
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct Field_CardinalityTrait {
+    using underlying = int32_t;
+    static constexpr Field_Cardinality enum_min = Field_Cardinality::CARDINALITY_UNKNOWN;
+    static constexpr Field_Cardinality enum_max = Field_Cardinality::CARDINALITY_REPEATED;
+    static constexpr uint32_t value_count = 4;
+    static constexpr bool has_descriptor = true;
+    static const EnumDescriptor* descriptor();
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(Field_Cardinality e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Cardinality *e);
+
+
+    static constexpr bool fits_underlying(int value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
+////////////////////////////////////////////////////////////////////
+/// enum traits
+// global enum Syntax
+// enum class Syntax : int32_t {
 enum class Syntax : int32_t {
     SYNTAX_PROTO2 = 0,
     SYNTAX_PROTO3 = 1
 };
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct SyntaxTrait {
+    using underlying = int32_t;
+    static constexpr Syntax enum_min = Syntax::SYNTAX_PROTO2;
+    static constexpr Syntax enum_max = Syntax::SYNTAX_PROTO3;
+    static constexpr uint32_t value_count = 2;
+    static constexpr bool has_descriptor = true;
+    static const EnumDescriptor* descriptor();
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(Syntax e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Syntax *e);
+
+
+    static constexpr bool fits_underlying(int value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
+////////////////////////////////////////////////////////////////////
+/// enum traits
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN

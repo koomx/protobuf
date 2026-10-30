@@ -62,7 +62,7 @@ namespace shark {
                 // Generate header code defining the enum.  This code should be placed
                 // within the enum's package namespace, but NOT within any class, even for
                 // nested enums.
-                void GenerateDefinition(io::Printer* printer);
+                void GenerateDefinition(io::Printer* printer, bool inner = false);
 
                 // Generate specialization of EnumTraitImpl<MyEnum>().
                 // Precondition: in shark namespace.
@@ -93,6 +93,7 @@ namespace shark {
 
                 const EnumValueDescriptor* min_value_;
                 const EnumValueDescriptor* max_value_;
+                bool inner_ = false;
 
                 friend class FileGenerator;
                 GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(EnumGenerator);

@@ -204,6 +204,31 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fcom
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fcompiler_2fplugin_2eshark(&descriptor_table_shark_2fcompiler_2fplugin_2eshark);
 namespace shark {
 namespace compiler {
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::compiler::CodeGeneratorResponse_FeatureTrait::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fcompiler_2fplugin_2eshark);
+    return file_level_enum_descriptors_shark_2fcompiler_2fplugin_2eshark[0];
+}
+bool ::shark::compiler::CodeGeneratorResponse_FeatureTrait::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+    case 1:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const std::string& ::shark::compiler::CodeGeneratorResponse_FeatureTrait::enum_name(
+   ::shark::compiler::CodeGeneratorResponse_Feature enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    descriptor(),
+    static_cast<int32_t>(enum_t_value));
+}
+bool ::shark::compiler::CodeGeneratorResponse_FeatureTrait::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::compiler::CodeGeneratorResponse_Feature>(
+    descriptor(), name, value);
+}
 
 // ===================================================================
 

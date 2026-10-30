@@ -161,6 +161,30 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2ftyp
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2ftypes_2fstruct_2eshark(&descriptor_table_shark_2ftypes_2fstruct_2eshark);
 namespace shark {
+const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::NullValueTrait::descriptor() {
+    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2ftypes_2fstruct_2eshark);
+    return file_level_enum_descriptors_shark_2ftypes_2fstruct_2eshark[0];
+}
+bool ::shark::NullValueTrait::is_valid(int64_t value) {
+  switch (value) {
+    case 0:
+      return true;
+    default:
+      return false;
+  }
+}
+
+const std::string& ::shark::NullValueTrait::enum_name(
+   ::shark::NullValue enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    descriptor(),
+    static_cast<int32_t>(enum_t_value));
+}
+bool ::shark::NullValueTrait::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::NullValue>(
+    descriptor(), name, value);
+}
 
 // ===================================================================
 

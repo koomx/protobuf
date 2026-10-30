@@ -70,9 +70,35 @@ template<> ::shark::Value* Arena::CreateMaybeMessage<::shark::Value>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+// global enum NullValue
+// enum class NullValue : int32_t {
 enum class NullValue : int32_t {
     NULL_VALUE = 0
 };
+////////////////////////////////////////////////////////////////////
+/// enum traits
+struct NullValueTrait {
+    using underlying = int32_t;
+    static constexpr NullValue enum_min = NullValue::NULL_VALUE;
+    static constexpr NullValue enum_max = NullValue::NULL_VALUE;
+    static constexpr uint32_t value_count = 1;
+    static constexpr bool has_descriptor = true;
+    static const EnumDescriptor* descriptor();
+    static bool is_valid(int64_t value);
+    static const std::string& enum_name(NullValue e);
+    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, NullValue *e);
+
+
+    static constexpr bool fits_underlying(int value) {
+         return true;
+    }
+    static constexpr bool fits_wire(::uint64_t value) {
+         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+    }
+};
+
+////////////////////////////////////////////////////////////////////
+/// enum traits
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
