@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -58,175 +59,175 @@ namespace shark {
 class Duration final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Duration) */ {
  public:
-  inline Duration() : Duration(nullptr) {}
-  ~Duration() override;
-  explicit constexpr Duration(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Duration() : Duration(nullptr) {}
+    ~Duration() override;
+    explicit constexpr Duration(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Duration(const Duration& from);
-  Duration(Duration&& from) noexcept
-    : Duration() {
-    *this = ::std::move(from);
-  }
+    Duration(const Duration& from);
+    Duration(Duration&& from) noexcept
+      : Duration() {
+      *this = ::std::move(from);
+    }
 
-  inline Duration& operator=(const Duration& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Duration& operator=(Duration&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Duration& operator=(const Duration& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Duration& operator=(Duration&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Duration& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Duration* internal_default_instance() {
-    return reinterpret_cast<const Duration*>(
-               &_Duration_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Duration& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Duration* internal_default_instance() {
+      return reinterpret_cast<const Duration*>(
+                 &_Duration_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      0;
 
-  friend void swap(Duration& a, Duration& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Duration* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Duration& a, Duration& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Duration* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Duration* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Duration* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Duration* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Duration>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Duration& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Duration& from) {
-    Duration::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Duration* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Duration>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Duration& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Duration& from) {
+      Duration::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Duration* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Duration* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Duration";
-  }
-  protected:
-  explicit Duration(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Duration";
+    }
+    protected:
+    explicit Duration(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kSecondsFieldNumber = 1,
-    kNanosFieldNumber = 2,
-  };
-  // optional int64 seconds = 1;
-  bool has_seconds() const;
-  private:
-  bool _internal_has_seconds() const;
-  public:
-  void clear_seconds();
-  int64_t seconds() const;
-  void set_seconds(int64_t value);
-  private:
-  int64_t _internal_seconds() const;
-  void _internal_set_seconds(int64_t value);
-  public:
+    enum : int {
+      kSecondsFieldNumber = 1,
+      kNanosFieldNumber = 2,
+    };
+    // optional int64 seconds = 1;
+    bool has_seconds() const;
+    private:
+    bool _internal_has_seconds() const;
+    public:
+    void clear_seconds();
+    int64_t seconds() const;
+    void set_seconds(int64_t value);
+    private:
+    int64_t _internal_seconds() const;
+    void _internal_set_seconds(int64_t value);
+    public:
 
-  // optional int32 nanos = 2;
-  bool has_nanos() const;
-  private:
-  bool _internal_has_nanos() const;
-  public:
-  void clear_nanos();
-  int32_t nanos() const;
-  void set_nanos(int32_t value);
-  private:
-  int32_t _internal_nanos() const;
-  void _internal_set_nanos(int32_t value);
-  public:
+    // optional int32 nanos = 2;
+    bool has_nanos() const;
+    private:
+    bool _internal_has_nanos() const;
+    public:
+    void clear_nanos();
+    int32_t nanos() const;
+    void set_nanos(int32_t value);
+    private:
+    int32_t _internal_nanos() const;
+    void _internal_set_nanos(int32_t value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Duration)
+    // @@protoc_insertion_point(class_scope:shark.Duration)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    int64_t seconds_;
-    int32_t nanos_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fduration_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        int64_t seconds_;
+        int32_t nanos_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fduration_2eshark;
 };
 // ===================================================================
 
@@ -248,8 +249,8 @@ inline bool Duration::has_seconds() const {
   return _internal_has_seconds();
 }
 inline void Duration::clear_seconds() {
-  _impl_.seconds_ = int64_t{0};
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.seconds_ = int64_t{0};
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline int64_t Duration::_internal_seconds() const {
   return _impl_.seconds_;
@@ -276,8 +277,8 @@ inline bool Duration::has_nanos() const {
   return _internal_has_nanos();
 }
 inline void Duration::clear_nanos() {
-  _impl_.nanos_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.nanos_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t Duration::_internal_nanos() const {
   return _impl_.nanos_;

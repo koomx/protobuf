@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -70,7 +71,7 @@ SHARK_NAMESPACE_CLOSE
 namespace shark {
 
 enum class NullValue : int32_t {
-  NULL_VALUE = 0
+    NULL_VALUE = 0
 };
 constexpr int32_t NullValue_to_underlying(NullValue value) {
   return static_cast<int32_t>(value);
@@ -138,610 +139,610 @@ public:
 class Struct final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Struct) */ {
  public:
-  inline Struct() : Struct(nullptr) {}
-  ~Struct() override;
-  explicit constexpr Struct(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Struct() : Struct(nullptr) {}
+    ~Struct() override;
+    explicit constexpr Struct(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Struct(const Struct& from);
-  Struct(Struct&& from) noexcept
-    : Struct() {
-    *this = ::std::move(from);
-  }
+    Struct(const Struct& from);
+    Struct(Struct&& from) noexcept
+      : Struct() {
+      *this = ::std::move(from);
+    }
 
-  inline Struct& operator=(const Struct& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Struct& operator=(Struct&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Struct& operator=(const Struct& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Struct& operator=(Struct&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Struct& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Struct* internal_default_instance() {
-    return reinterpret_cast<const Struct*>(
-               &_Struct_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Struct& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Struct* internal_default_instance() {
+      return reinterpret_cast<const Struct*>(
+                 &_Struct_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      1;
 
-  friend void swap(Struct& a, Struct& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Struct* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Struct& a, Struct& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Struct* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Struct* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Struct* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Struct* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Struct>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Struct& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Struct& from) {
-    Struct::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Struct* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Struct>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Struct& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Struct& from) {
+      Struct::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Struct* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Struct* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Struct";
-  }
-  protected:
-  explicit Struct(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  private:
-  static void ArenaDtor(void* object);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Struct";
+    }
+    protected:
+    explicit Struct(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    private:
+    static void ArenaDtor(void* object);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kFieldsFieldNumber = 1,
-  };
-  // map<string, .shark.Value> fields = 1;
-  int fields_size() const;
-  private:
-  int _internal_fields_size() const;
-  public:
-  void clear_fields();
-  private:
-  const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
-      _internal_fields() const;
-  ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
-      _internal_mutable_fields();
-  public:
-  const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
-      fields() const;
-  ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
-      mutable_fields();
+    enum : int {
+      kFieldsFieldNumber = 1,
+    };
+    // map<string, .shark.Value> fields = 1;
+    int fields_size() const;
+    private:
+    int _internal_fields_size() const;
+    public:
+    void clear_fields();
+    private:
+    const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
+        _internal_fields() const;
+    ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
+        _internal_mutable_fields();
+    public:
+    const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
+        fields() const;
+    ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >*
+        mutable_fields();
 
-  // @@protoc_insertion_point(class_scope:shark.Struct)
+    // @@protoc_insertion_point(class_scope:shark.Struct)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::MapField<
-        Struct_FieldsEntry_DoNotUse,
-        std::string, ::shark::Value,
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_STRING,
-        ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_MESSAGE> fields_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fstruct_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::MapField<
+            Struct_FieldsEntry_DoNotUse,
+            std::string, ::shark::Value,
+            ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_STRING,
+            ::SHARK_NAMESPACE_ID::internal::WireFormatLiteFieldType::TYPE_MESSAGE> fields_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fstruct_2eshark;
 };
 // -------------------------------------------------------------------
 
 class Value final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Value) */ {
  public:
-  inline Value() : Value(nullptr) {}
-  ~Value() override;
-  explicit constexpr Value(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Value() : Value(nullptr) {}
+    ~Value() override;
+    explicit constexpr Value(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Value(const Value& from);
-  Value(Value&& from) noexcept
-    : Value() {
-    *this = ::std::move(from);
-  }
+    Value(const Value& from);
+    Value(Value&& from) noexcept
+      : Value() {
+      *this = ::std::move(from);
+    }
 
-  inline Value& operator=(const Value& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Value& operator=(Value&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Value& operator=(const Value& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Value& operator=(Value&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Value& default_instance() {
-    return *internal_default_instance();
-  }
-  enum KindCase {
-    kNullValue = 1,
-    kNumberValue = 2,
-    kStringValue = 3,
-    kBoolValue = 4,
-    kStructValue = 5,
-    kListValue = 6,
-    KIND_NOT_SET = 0,
-  };
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Value& default_instance() {
+      return *internal_default_instance();
+    }
+    enum KindCase {
+        kNullValue = 1,
+        kNumberValue = 2,
+        kStringValue = 3,
+        kBoolValue = 4,
+        kStructValue = 5,
+        kListValue = 6,
+        KIND_NOT_SET = 0,
+    };
 
-  static inline const Value* internal_default_instance() {
-    return reinterpret_cast<const Value*>(
-               &_Value_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
+    static inline const Value* internal_default_instance() {
+      return reinterpret_cast<const Value*>(
+                 &_Value_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      2;
 
-  friend void swap(Value& a, Value& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Value* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Value& a, Value& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Value* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Value* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Value* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Value* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Value>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Value& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Value& from) {
-    Value::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Value* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Value>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Value& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Value& from) {
+      Value::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Value* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Value* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Value";
-  }
-  protected:
-  explicit Value(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Value";
+    }
+    protected:
+    explicit Value(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kNullValueFieldNumber = 1,
-    kNumberValueFieldNumber = 2,
-    kStringValueFieldNumber = 3,
-    kBoolValueFieldNumber = 4,
-    kStructValueFieldNumber = 5,
-    kListValueFieldNumber = 6,
-  };
-  // .shark.NullValue null_value = 1;
-  bool has_null_value() const;
-  private:
-  bool _internal_has_null_value() const;
-  public:
-  void clear_null_value();
-  ::shark::NullValue null_value() const;
-  void set_null_value(::shark::NullValue value);
-  private:
-  ::shark::NullValue _internal_null_value() const;
-  void _internal_set_null_value(::shark::NullValue value);
-  public:
+    enum : int {
+      kNullValueFieldNumber = 1,
+      kNumberValueFieldNumber = 2,
+      kStringValueFieldNumber = 3,
+      kBoolValueFieldNumber = 4,
+      kStructValueFieldNumber = 5,
+      kListValueFieldNumber = 6,
+    };
+    // .shark.NullValue null_value = 1;
+    bool has_null_value() const;
+    private:
+    bool _internal_has_null_value() const;
+    public:
+    void clear_null_value();
+    ::shark::NullValue null_value() const;
+    void set_null_value(::shark::NullValue value);
+    private:
+    ::shark::NullValue _internal_null_value() const;
+    void _internal_set_null_value(::shark::NullValue value);
+    public:
 
-  // double number_value = 2;
-  bool has_number_value() const;
-  private:
-  bool _internal_has_number_value() const;
-  public:
-  void clear_number_value();
-  double number_value() const;
-  void set_number_value(double value);
-  private:
-  double _internal_number_value() const;
-  void _internal_set_number_value(double value);
-  public:
+    // double number_value = 2;
+    bool has_number_value() const;
+    private:
+    bool _internal_has_number_value() const;
+    public:
+    void clear_number_value();
+    double number_value() const;
+    void set_number_value(double value);
+    private:
+    double _internal_number_value() const;
+    void _internal_set_number_value(double value);
+    public:
 
-  // string string_value = 3;
-  bool has_string_value() const;
-  private:
-  bool _internal_has_string_value() const;
-  public:
-  void clear_string_value();
-  const std::string& string_value() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_string_value(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_string_value();
-  [[nodiscard]] std::string* release_string_value();
-  void set_allocated_string_value(std::string* string_value);
-  private:
-  const std::string& _internal_string_value() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_string_value(const std::string& value);
-  std::string* _internal_mutable_string_value();
-  public:
+    // string string_value = 3;
+    bool has_string_value() const;
+    private:
+    bool _internal_has_string_value() const;
+    public:
+    void clear_string_value();
+    const std::string& string_value() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_string_value(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_string_value();
+    [[nodiscard]] std::string* release_string_value();
+    void set_allocated_string_value(std::string* string_value);
+    private:
+    const std::string& _internal_string_value() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_string_value(const std::string& value);
+    std::string* _internal_mutable_string_value();
+    public:
 
-  // bool bool_value = 4;
-  bool has_bool_value() const;
-  private:
-  bool _internal_has_bool_value() const;
-  public:
-  void clear_bool_value();
-  bool bool_value() const;
-  void set_bool_value(bool value);
-  private:
-  bool _internal_bool_value() const;
-  void _internal_set_bool_value(bool value);
-  public:
+    // bool bool_value = 4;
+    bool has_bool_value() const;
+    private:
+    bool _internal_has_bool_value() const;
+    public:
+    void clear_bool_value();
+    bool bool_value() const;
+    void set_bool_value(bool value);
+    private:
+    bool _internal_bool_value() const;
+    void _internal_set_bool_value(bool value);
+    public:
 
-  // .shark.Struct struct_value = 5;
-  bool has_struct_value() const;
-  private:
-  bool _internal_has_struct_value() const;
-  public:
-  void clear_struct_value();
-  const ::shark::Struct& struct_value() const;
-  [[nodiscard]] ::shark::Struct* release_struct_value();
-  ::shark::Struct* mutable_struct_value();
-  void set_allocated_struct_value(::shark::Struct* struct_value);
-  private:
-  const ::shark::Struct& _internal_struct_value() const;
-  ::shark::Struct* _internal_mutable_struct_value();
-  public:
-  void unsafe_arena_set_allocated_struct_value(
-      ::shark::Struct* struct_value);
-  ::shark::Struct* unsafe_arena_release_struct_value();
+    // .shark.Struct struct_value = 5;
+    bool has_struct_value() const;
+    private:
+    bool _internal_has_struct_value() const;
+    public:
+    void clear_struct_value();
+    const ::shark::Struct& struct_value() const;
+    [[nodiscard]] ::shark::Struct* release_struct_value();
+    ::shark::Struct* mutable_struct_value();
+    void set_allocated_struct_value(::shark::Struct* struct_value);
+    private:
+    const ::shark::Struct& _internal_struct_value() const;
+    ::shark::Struct* _internal_mutable_struct_value();
+    public:
+    void unsafe_arena_set_allocated_struct_value(
+        ::shark::Struct* struct_value);
+    ::shark::Struct* unsafe_arena_release_struct_value();
 
-  // .shark.ListValue list_value = 6;
-  bool has_list_value() const;
-  private:
-  bool _internal_has_list_value() const;
-  public:
-  void clear_list_value();
-  const ::shark::ListValue& list_value() const;
-  [[nodiscard]] ::shark::ListValue* release_list_value();
-  ::shark::ListValue* mutable_list_value();
-  void set_allocated_list_value(::shark::ListValue* list_value);
-  private:
-  const ::shark::ListValue& _internal_list_value() const;
-  ::shark::ListValue* _internal_mutable_list_value();
-  public:
-  void unsafe_arena_set_allocated_list_value(
-      ::shark::ListValue* list_value);
-  ::shark::ListValue* unsafe_arena_release_list_value();
+    // .shark.ListValue list_value = 6;
+    bool has_list_value() const;
+    private:
+    bool _internal_has_list_value() const;
+    public:
+    void clear_list_value();
+    const ::shark::ListValue& list_value() const;
+    [[nodiscard]] ::shark::ListValue* release_list_value();
+    ::shark::ListValue* mutable_list_value();
+    void set_allocated_list_value(::shark::ListValue* list_value);
+    private:
+    const ::shark::ListValue& _internal_list_value() const;
+    ::shark::ListValue* _internal_mutable_list_value();
+    public:
+    void unsafe_arena_set_allocated_list_value(
+        ::shark::ListValue* list_value);
+    ::shark::ListValue* unsafe_arena_release_list_value();
 
-  void clear_kind();
-  KindCase kind_case() const;
-  // @@protoc_insertion_point(class_scope:shark.Value)
+    void clear_kind();
+    KindCase kind_case() const;
+    // @@protoc_insertion_point(class_scope:shark.Value)
  private:
-  class _Internal;
-  void set_has_null_value();
-  void set_has_number_value();
-  void set_has_string_value();
-  void set_has_bool_value();
-  void set_has_struct_value();
-  void set_has_list_value();
+    class _Internal;
+    void set_has_null_value();
+    void set_has_number_value();
+    void set_has_string_value();
+    void set_has_bool_value();
+    void set_has_struct_value();
+    void set_has_list_value();
 
-  inline bool has_kind() const;
-  inline void clear_has_kind();
+    inline bool has_kind() const;
+    inline void clear_has_kind();
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    union KindUnion {
-      constexpr KindUnion() : _constinit_{} {}
-        ::SHARK_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
-      int null_value_;
-      double number_value_;
-      ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr string_value_;
-      bool bool_value_;
-      ::shark::Struct* struct_value_;
-      ::shark::ListValue* list_value_;
-    } kind_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    uint32_t _oneof_case_[1];
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        union KindUnion {
+            constexpr KindUnion() : _constinit_{} {}
+              ::SHARK_NAMESPACE_ID::internal::ConstantInitialized _constinit_;
+            int null_value_;
+            double number_value_;
+            ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr string_value_;
+            bool bool_value_;
+            ::shark::Struct* struct_value_;
+            ::shark::ListValue* list_value_;
+        } kind_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        uint32_t _oneof_case_[1];
 
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fstruct_2eshark;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fstruct_2eshark;
 };
 // -------------------------------------------------------------------
 
 class ListValue final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.ListValue) */ {
  public:
-  inline ListValue() : ListValue(nullptr) {}
-  ~ListValue() override;
-  explicit constexpr ListValue(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline ListValue() : ListValue(nullptr) {}
+    ~ListValue() override;
+    explicit constexpr ListValue(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  ListValue(const ListValue& from);
-  ListValue(ListValue&& from) noexcept
-    : ListValue() {
-    *this = ::std::move(from);
-  }
+    ListValue(const ListValue& from);
+    ListValue(ListValue&& from) noexcept
+      : ListValue() {
+      *this = ::std::move(from);
+    }
 
-  inline ListValue& operator=(const ListValue& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline ListValue& operator=(ListValue&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline ListValue& operator=(const ListValue& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline ListValue& operator=(ListValue&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const ListValue& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const ListValue* internal_default_instance() {
-    return reinterpret_cast<const ListValue*>(
-               &_ListValue_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    3;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const ListValue& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const ListValue* internal_default_instance() {
+      return reinterpret_cast<const ListValue*>(
+                 &_ListValue_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      3;
 
-  friend void swap(ListValue& a, ListValue& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(ListValue* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(ListValue& a, ListValue& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(ListValue* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(ListValue* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(ListValue* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  ListValue* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<ListValue>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const ListValue& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const ListValue& from) {
-    ListValue::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    ListValue* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<ListValue>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const ListValue& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const ListValue& from) {
+      ListValue::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(ListValue* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(ListValue* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.ListValue";
-  }
-  protected:
-  explicit ListValue(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.ListValue";
+    }
+    protected:
+    explicit ListValue(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kValuesFieldNumber = 1,
-  };
-  // list<.shark.Value> values = 1;
-  int values_size() const;
-  private:
-  int _internal_values_size() const;
-  public:
-  void clear_values();
-  ::shark::Value* mutable_values(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >*
-      mutable_values();
-  private:
-  const ::shark::Value& _internal_values(int index) const;
-  ::shark::Value* _internal_add_values();
-  public:
-  const ::shark::Value& values(int index) const;
-  ::shark::Value* add_values();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >&
-      values() const;
+    enum : int {
+      kValuesFieldNumber = 1,
+    };
+    // list<.shark.Value> values = 1;
+    int values_size() const;
+    private:
+    int _internal_values_size() const;
+    public:
+    void clear_values();
+    ::shark::Value* mutable_values(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >*
+        mutable_values();
+    private:
+    const ::shark::Value& _internal_values(int index) const;
+    ::shark::Value* _internal_add_values();
+    public:
+    const ::shark::Value& values(int index) const;
+    ::shark::Value* add_values();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value >&
+        values() const;
 
-  // @@protoc_insertion_point(class_scope:shark.ListValue)
+    // @@protoc_insertion_point(class_scope:shark.ListValue)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value > values_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fstruct_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Value > values_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fstruct_2eshark;
 };
 // ===================================================================
 
@@ -764,7 +765,7 @@ inline int Struct::fields_size() const {
   return _internal_fields_size();
 }
 inline void Struct::clear_fields() {
-  _impl_.fields_.Clear();
+    _impl_.fields_.Clear();
 }
 inline const ::SHARK_NAMESPACE_ID::Map< std::string, ::shark::Value >&
 Struct::_internal_fields() const {
@@ -800,10 +801,10 @@ inline void Value::set_has_null_value() {
   _impl_._oneof_case_[0] = kNullValue;
 }
 inline void Value::clear_null_value() {
-  if (_internal_has_null_value()) {
-    _impl_.kind_.null_value_ = 0;
-    clear_has_kind();
-  }
+    if (_internal_has_null_value()) {
+        _impl_.kind_.null_value_ = 0;
+        clear_has_kind();
+    }
 }
 inline ::shark::NullValue Value::_internal_null_value() const {
   if (_internal_has_null_value()) {
@@ -838,10 +839,10 @@ inline void Value::set_has_number_value() {
   _impl_._oneof_case_[0] = kNumberValue;
 }
 inline void Value::clear_number_value() {
-  if (_internal_has_number_value()) {
-    _impl_.kind_.number_value_ = 0;
-    clear_has_kind();
-  }
+    if (_internal_has_number_value()) {
+        _impl_.kind_.number_value_ = 0;
+        clear_has_kind();
+    }
 }
 inline double Value::_internal_number_value() const {
   if (_internal_has_number_value()) {
@@ -876,10 +877,10 @@ inline void Value::set_has_string_value() {
   _impl_._oneof_case_[0] = kStringValue;
 }
 inline void Value::clear_string_value() {
-  if (_internal_has_string_value()) {
-    _impl_.kind_.string_value_.Destroy();
-    clear_has_kind();
-  }
+    if (_internal_has_string_value()) {
+        _impl_.kind_.string_value_.Destroy();
+        clear_has_kind();
+    }
 }
 inline const std::string& Value::string_value() const {
   // @@protoc_insertion_point(field_get:shark.Value.string_value)
@@ -953,10 +954,10 @@ inline void Value::set_has_bool_value() {
   _impl_._oneof_case_[0] = kBoolValue;
 }
 inline void Value::clear_bool_value() {
-  if (_internal_has_bool_value()) {
-    _impl_.kind_.bool_value_ = false;
-    clear_has_kind();
-  }
+    if (_internal_has_bool_value()) {
+        _impl_.kind_.bool_value_ = false;
+        clear_has_kind();
+    }
 }
 inline bool Value::_internal_bool_value() const {
   if (_internal_has_bool_value()) {
@@ -991,12 +992,12 @@ inline void Value::set_has_struct_value() {
   _impl_._oneof_case_[0] = kStructValue;
 }
 inline void Value::clear_struct_value() {
-  if (_internal_has_struct_value()) {
-    if (GetArenaForAllocation() == nullptr) {
-      delete _impl_.kind_.struct_value_;
+    if (_internal_has_struct_value()) {
+        if (GetArenaForAllocation() == nullptr) {
+          delete _impl_.kind_.struct_value_;
+        }
+        clear_has_kind();
     }
-    clear_has_kind();
-  }
 }
 inline ::shark::Struct* Value::release_struct_value() {
   // @@protoc_insertion_point(field_release:shark.Value.struct_value)
@@ -1065,12 +1066,12 @@ inline void Value::set_has_list_value() {
   _impl_._oneof_case_[0] = kListValue;
 }
 inline void Value::clear_list_value() {
-  if (_internal_has_list_value()) {
-    if (GetArenaForAllocation() == nullptr) {
-      delete _impl_.kind_.list_value_;
+    if (_internal_has_list_value()) {
+        if (GetArenaForAllocation() == nullptr) {
+          delete _impl_.kind_.list_value_;
+        }
+        clear_has_kind();
     }
-    clear_has_kind();
-  }
 }
 inline ::shark::ListValue* Value::release_list_value() {
   // @@protoc_insertion_point(field_release:shark.Value.list_value)
@@ -1149,7 +1150,7 @@ inline int ListValue::values_size() const {
   return _internal_values_size();
 }
 inline void ListValue::clear_values() {
-  _impl_.values_.Clear();
+    _impl_.values_.Clear();
 }
 inline ::shark::Value* ListValue::mutable_values(int index) {
   // @@protoc_insertion_point(field_mutable:shark.ListValue.values)
@@ -1197,11 +1198,28 @@ ListValue::values() const {
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::shark::NullValue> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::NullValue>() {
-  return ::shark::NullValue_descriptor();
-}
+    template <>
+    struct EnumTraitImpl<::shark::NullValue> {
+        using underlying = int32_t;
+        static constexpr ::shark::NullValue enum_min = ::shark::NullValue::NULL_VALUE;
+        static constexpr ::shark::NullValue enum_max = ::shark::NullValue::NULL_VALUE;
+        static constexpr uint32_t value_count = 1;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::NullValue_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::NullValue e) {
+            return ::shark::NullValue_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue *e) {
+            return ::shark::NullValue_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::NullValue_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::NullValue> : ::std::true_type {};
 
 SHARK_NAMESPACE_CLOSE
 

@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -58,170 +59,170 @@ namespace shark {
 class FieldMask final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FieldMask) */ {
  public:
-  inline FieldMask() : FieldMask(nullptr) {}
-  ~FieldMask() override;
-  explicit constexpr FieldMask(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline FieldMask() : FieldMask(nullptr) {}
+    ~FieldMask() override;
+    explicit constexpr FieldMask(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  FieldMask(const FieldMask& from);
-  FieldMask(FieldMask&& from) noexcept
-    : FieldMask() {
-    *this = ::std::move(from);
-  }
+    FieldMask(const FieldMask& from);
+    FieldMask(FieldMask&& from) noexcept
+      : FieldMask() {
+      *this = ::std::move(from);
+    }
 
-  inline FieldMask& operator=(const FieldMask& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline FieldMask& operator=(FieldMask&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline FieldMask& operator=(const FieldMask& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline FieldMask& operator=(FieldMask&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const FieldMask& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const FieldMask* internal_default_instance() {
-    return reinterpret_cast<const FieldMask*>(
-               &_FieldMask_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const FieldMask& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const FieldMask* internal_default_instance() {
+      return reinterpret_cast<const FieldMask*>(
+                 &_FieldMask_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      0;
 
-  friend void swap(FieldMask& a, FieldMask& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(FieldMask* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(FieldMask& a, FieldMask& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(FieldMask* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(FieldMask* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(FieldMask* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  FieldMask* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<FieldMask>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const FieldMask& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const FieldMask& from) {
-    FieldMask::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    FieldMask* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<FieldMask>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const FieldMask& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const FieldMask& from) {
+      FieldMask::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(FieldMask* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(FieldMask* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.FieldMask";
-  }
-  protected:
-  explicit FieldMask(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.FieldMask";
+    }
+    protected:
+    explicit FieldMask(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kPathsFieldNumber = 1,
-  };
-  // list<string> paths = 1;
-  int paths_size() const;
-  private:
-  int _internal_paths_size() const;
-  public:
-  void clear_paths();
-  const std::string& paths(int index) const;
-  std::string* mutable_paths(int index);
-  void set_paths(int index, const std::string& value);
-  void set_paths(int index, std::string&& value);
-  void set_paths(int index, const char* value);
-  void set_paths(int index, const char* value, size_t size);
-  std::string* add_paths();
-  void add_paths(const std::string& value);
-  void add_paths(std::string&& value);
-  void add_paths(const char* value);
-  void add_paths(const char* value, size_t size);
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>& paths() const;
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_paths();
-  private:
-  const std::string& _internal_paths(int index) const;
-  std::string* _internal_add_paths();
-  public:
+    enum : int {
+      kPathsFieldNumber = 1,
+    };
+    // list<string> paths = 1;
+    int paths_size() const;
+    private:
+    int _internal_paths_size() const;
+    public:
+    void clear_paths();
+    const std::string& paths(int index) const;
+    std::string* mutable_paths(int index);
+    void set_paths(int index, const std::string& value);
+    void set_paths(int index, std::string&& value);
+    void set_paths(int index, const char* value);
+    void set_paths(int index, const char* value, size_t size);
+    std::string* add_paths();
+    void add_paths(const std::string& value);
+    void add_paths(std::string&& value);
+    void add_paths(const char* value);
+    void add_paths(const char* value, size_t size);
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>& paths() const;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_paths();
+    private:
+    const std::string& _internal_paths(int index) const;
+    std::string* _internal_add_paths();
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.FieldMask)
+    // @@protoc_insertion_point(class_scope:shark.FieldMask)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> paths_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2ffield_5fmask_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> paths_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2ffield_5fmask_2eshark;
 };
 // ===================================================================
 
@@ -242,7 +243,7 @@ inline int FieldMask::paths_size() const {
   return _internal_paths_size();
 }
 inline void FieldMask::clear_paths() {
-  _impl_.paths_.Clear();
+    _impl_.paths_.Clear();
 }
 inline std::string* FieldMask::add_paths() {
   std::string* _s = _internal_add_paths();

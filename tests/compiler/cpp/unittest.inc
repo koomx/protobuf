@@ -1097,13 +1097,13 @@ TEST(GENERATED_ENUM_TEST_NAME, Parse) {
 
 TEST(GENERATED_ENUM_TEST_NAME, GetEnumDescriptor) {
   EXPECT_EQ(UNITTEST::TestAllTypes::NestedEnum_descriptor(),
-            GetEnumDescriptor<UNITTEST::TestAllTypes::NestedEnum>());
+            EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::descriptor());
   EXPECT_EQ(UNITTEST::ForeignEnum_descriptor(),
-            GetEnumDescriptor<UNITTEST::ForeignEnum>());
+            EnumTrait<UNITTEST::ForeignEnum>::descriptor());
   EXPECT_EQ(UNITTEST::TestEnumWithDupValue_descriptor(),
-            GetEnumDescriptor<UNITTEST::TestEnumWithDupValue>());
+            EnumTrait<UNITTEST::TestEnumWithDupValue>::descriptor());
   EXPECT_EQ(UNITTEST::TestSparseEnum_descriptor(),
-            GetEnumDescriptor<UNITTEST::TestSparseEnum>());
+            EnumTrait<UNITTEST::TestSparseEnum>::descriptor());
 }
 
 enum NonProtoEnum {

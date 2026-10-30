@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -77,8 +78,8 @@ namespace shark {
 namespace compiler {
 
 enum class CodeGeneratorResponse_Feature : int32_t {
-  FEATURE_NONE = 0,
-  FEATURE_PROTO3_OPTIONAL = 1
+    FEATURE_NONE = 0,
+    FEATURE_PROTO3_OPTIONAL = 1
 };
 constexpr int32_t CodeGeneratorResponse_Feature_to_underlying(CodeGeneratorResponse_Feature value) {
   return static_cast<int32_t>(value);
@@ -114,894 +115,894 @@ inline bool CodeGeneratorResponse_Feature_Parse(
 class PROTOC_EXPORT Version final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.compiler.Version) */ {
  public:
-  inline Version() : Version(nullptr) {}
-  ~Version() override;
-  explicit constexpr Version(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Version() : Version(nullptr) {}
+    ~Version() override;
+    explicit constexpr Version(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Version(const Version& from);
-  Version(Version&& from) noexcept
-    : Version() {
-    *this = ::std::move(from);
-  }
+    Version(const Version& from);
+    Version(Version&& from) noexcept
+      : Version() {
+      *this = ::std::move(from);
+    }
 
-  inline Version& operator=(const Version& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Version& operator=(Version&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Version& operator=(const Version& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Version& operator=(Version&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Version& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Version* internal_default_instance() {
-    return reinterpret_cast<const Version*>(
-               &_Version_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Version& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Version* internal_default_instance() {
+      return reinterpret_cast<const Version*>(
+                 &_Version_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      0;
 
-  friend void swap(Version& a, Version& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Version* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Version& a, Version& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Version* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Version* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Version* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Version* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Version>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Version& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Version& from) {
-    Version::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Version* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Version>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Version& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Version& from) {
+      Version::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Version* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Version* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.compiler.Version";
-  }
-  protected:
-  explicit Version(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.compiler.Version";
+    }
+    protected:
+    explicit Version(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kSuffixFieldNumber = 4,
-    kMajorFieldNumber = 1,
-    kMinorFieldNumber = 2,
-    kPatchFieldNumber = 3,
-  };
-  // optional string suffix = 4;
-  bool has_suffix() const;
-  private:
-  bool _internal_has_suffix() const;
-  public:
-  void clear_suffix();
-  const std::string& suffix() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_suffix(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_suffix();
-  [[nodiscard]] std::string* release_suffix();
-  void set_allocated_suffix(std::string* suffix);
-  private:
-  const std::string& _internal_suffix() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_suffix(const std::string& value);
-  std::string* _internal_mutable_suffix();
-  public:
+    enum : int {
+      kSuffixFieldNumber = 4,
+      kMajorFieldNumber = 1,
+      kMinorFieldNumber = 2,
+      kPatchFieldNumber = 3,
+    };
+    // optional string suffix = 4;
+    bool has_suffix() const;
+    private:
+    bool _internal_has_suffix() const;
+    public:
+    void clear_suffix();
+    const std::string& suffix() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_suffix(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_suffix();
+    [[nodiscard]] std::string* release_suffix();
+    void set_allocated_suffix(std::string* suffix);
+    private:
+    const std::string& _internal_suffix() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_suffix(const std::string& value);
+    std::string* _internal_mutable_suffix();
+    public:
 
-  // optional int32 major = 1;
-  bool has_major() const;
-  private:
-  bool _internal_has_major() const;
-  public:
-  void clear_major();
-  int32_t major() const;
-  void set_major(int32_t value);
-  private:
-  int32_t _internal_major() const;
-  void _internal_set_major(int32_t value);
-  public:
+    // optional int32 major = 1;
+    bool has_major() const;
+    private:
+    bool _internal_has_major() const;
+    public:
+    void clear_major();
+    int32_t major() const;
+    void set_major(int32_t value);
+    private:
+    int32_t _internal_major() const;
+    void _internal_set_major(int32_t value);
+    public:
 
-  // optional int32 minor = 2;
-  bool has_minor() const;
-  private:
-  bool _internal_has_minor() const;
-  public:
-  void clear_minor();
-  int32_t minor() const;
-  void set_minor(int32_t value);
-  private:
-  int32_t _internal_minor() const;
-  void _internal_set_minor(int32_t value);
-  public:
+    // optional int32 minor = 2;
+    bool has_minor() const;
+    private:
+    bool _internal_has_minor() const;
+    public:
+    void clear_minor();
+    int32_t minor() const;
+    void set_minor(int32_t value);
+    private:
+    int32_t _internal_minor() const;
+    void _internal_set_minor(int32_t value);
+    public:
 
-  // optional int32 patch = 3;
-  bool has_patch() const;
-  private:
-  bool _internal_has_patch() const;
-  public:
-  void clear_patch();
-  int32_t patch() const;
-  void set_patch(int32_t value);
-  private:
-  int32_t _internal_patch() const;
-  void _internal_set_patch(int32_t value);
-  public:
+    // optional int32 patch = 3;
+    bool has_patch() const;
+    private:
+    bool _internal_has_patch() const;
+    public:
+    void clear_patch();
+    int32_t patch() const;
+    void set_patch(int32_t value);
+    private:
+    int32_t _internal_patch() const;
+    void _internal_set_patch(int32_t value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.compiler.Version)
+    // @@protoc_insertion_point(class_scope:shark.compiler.Version)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr suffix_;
-    int32_t major_;
-    int32_t minor_;
-    int32_t patch_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr suffix_;
+        int32_t major_;
+        int32_t minor_;
+        int32_t patch_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
 };
 // -------------------------------------------------------------------
 
 class PROTOC_EXPORT CodeGeneratorRequest final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.compiler.CodeGeneratorRequest) */ {
  public:
-  inline CodeGeneratorRequest() : CodeGeneratorRequest(nullptr) {}
-  ~CodeGeneratorRequest() override;
-  explicit constexpr CodeGeneratorRequest(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline CodeGeneratorRequest() : CodeGeneratorRequest(nullptr) {}
+    ~CodeGeneratorRequest() override;
+    explicit constexpr CodeGeneratorRequest(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  CodeGeneratorRequest(const CodeGeneratorRequest& from);
-  CodeGeneratorRequest(CodeGeneratorRequest&& from) noexcept
-    : CodeGeneratorRequest() {
-    *this = ::std::move(from);
-  }
+    CodeGeneratorRequest(const CodeGeneratorRequest& from);
+    CodeGeneratorRequest(CodeGeneratorRequest&& from) noexcept
+      : CodeGeneratorRequest() {
+      *this = ::std::move(from);
+    }
 
-  inline CodeGeneratorRequest& operator=(const CodeGeneratorRequest& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline CodeGeneratorRequest& operator=(CodeGeneratorRequest&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline CodeGeneratorRequest& operator=(const CodeGeneratorRequest& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline CodeGeneratorRequest& operator=(CodeGeneratorRequest&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const CodeGeneratorRequest& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const CodeGeneratorRequest* internal_default_instance() {
-    return reinterpret_cast<const CodeGeneratorRequest*>(
-               &_CodeGeneratorRequest_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const CodeGeneratorRequest& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const CodeGeneratorRequest* internal_default_instance() {
+      return reinterpret_cast<const CodeGeneratorRequest*>(
+                 &_CodeGeneratorRequest_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      1;
 
-  friend void swap(CodeGeneratorRequest& a, CodeGeneratorRequest& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(CodeGeneratorRequest* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(CodeGeneratorRequest& a, CodeGeneratorRequest& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(CodeGeneratorRequest* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(CodeGeneratorRequest* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(CodeGeneratorRequest* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  CodeGeneratorRequest* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<CodeGeneratorRequest>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const CodeGeneratorRequest& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const CodeGeneratorRequest& from) {
-    CodeGeneratorRequest::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    CodeGeneratorRequest* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<CodeGeneratorRequest>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const CodeGeneratorRequest& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const CodeGeneratorRequest& from) {
+      CodeGeneratorRequest::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(CodeGeneratorRequest* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(CodeGeneratorRequest* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.compiler.CodeGeneratorRequest";
-  }
-  protected:
-  explicit CodeGeneratorRequest(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.compiler.CodeGeneratorRequest";
+    }
+    protected:
+    explicit CodeGeneratorRequest(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kFileToGenerateFieldNumber = 1,
-    kProtoFileFieldNumber = 15,
-    kParameterFieldNumber = 2,
-    kCompilerVersionFieldNumber = 3,
-  };
-  // list<string> file_to_generate = 1;
-  int file_to_generate_size() const;
-  private:
-  int _internal_file_to_generate_size() const;
-  public:
-  void clear_file_to_generate();
-  const std::string& file_to_generate(int index) const;
-  std::string* mutable_file_to_generate(int index);
-  void set_file_to_generate(int index, const std::string& value);
-  void set_file_to_generate(int index, std::string&& value);
-  void set_file_to_generate(int index, const char* value);
-  void set_file_to_generate(int index, const char* value, size_t size);
-  std::string* add_file_to_generate();
-  void add_file_to_generate(const std::string& value);
-  void add_file_to_generate(std::string&& value);
-  void add_file_to_generate(const char* value);
-  void add_file_to_generate(const char* value, size_t size);
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>& file_to_generate() const;
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_file_to_generate();
-  private:
-  const std::string& _internal_file_to_generate(int index) const;
-  std::string* _internal_add_file_to_generate();
-  public:
+    enum : int {
+      kFileToGenerateFieldNumber = 1,
+      kProtoFileFieldNumber = 15,
+      kParameterFieldNumber = 2,
+      kCompilerVersionFieldNumber = 3,
+    };
+    // list<string> file_to_generate = 1;
+    int file_to_generate_size() const;
+    private:
+    int _internal_file_to_generate_size() const;
+    public:
+    void clear_file_to_generate();
+    const std::string& file_to_generate(int index) const;
+    std::string* mutable_file_to_generate(int index);
+    void set_file_to_generate(int index, const std::string& value);
+    void set_file_to_generate(int index, std::string&& value);
+    void set_file_to_generate(int index, const char* value);
+    void set_file_to_generate(int index, const char* value, size_t size);
+    std::string* add_file_to_generate();
+    void add_file_to_generate(const std::string& value);
+    void add_file_to_generate(std::string&& value);
+    void add_file_to_generate(const char* value);
+    void add_file_to_generate(const char* value, size_t size);
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>& file_to_generate() const;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_file_to_generate();
+    private:
+    const std::string& _internal_file_to_generate(int index) const;
+    std::string* _internal_add_file_to_generate();
+    public:
 
-  // list<.shark.FileDescriptorProto> proto_file = 15;
-  int proto_file_size() const;
-  private:
-  int _internal_proto_file_size() const;
-  public:
-  void clear_proto_file();
-  ::shark::FileDescriptorProto* mutable_proto_file(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >*
-      mutable_proto_file();
-  private:
-  const ::shark::FileDescriptorProto& _internal_proto_file(int index) const;
-  ::shark::FileDescriptorProto* _internal_add_proto_file();
-  public:
-  const ::shark::FileDescriptorProto& proto_file(int index) const;
-  ::shark::FileDescriptorProto* add_proto_file();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >&
-      proto_file() const;
+    // list<.shark.FileDescriptorProto> proto_file = 15;
+    int proto_file_size() const;
+    private:
+    int _internal_proto_file_size() const;
+    public:
+    void clear_proto_file();
+    ::shark::FileDescriptorProto* mutable_proto_file(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >*
+        mutable_proto_file();
+    private:
+    const ::shark::FileDescriptorProto& _internal_proto_file(int index) const;
+    ::shark::FileDescriptorProto* _internal_add_proto_file();
+    public:
+    const ::shark::FileDescriptorProto& proto_file(int index) const;
+    ::shark::FileDescriptorProto* add_proto_file();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto >&
+        proto_file() const;
 
-  // optional string parameter = 2;
-  bool has_parameter() const;
-  private:
-  bool _internal_has_parameter() const;
-  public:
-  void clear_parameter();
-  const std::string& parameter() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_parameter(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_parameter();
-  [[nodiscard]] std::string* release_parameter();
-  void set_allocated_parameter(std::string* parameter);
-  private:
-  const std::string& _internal_parameter() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_parameter(const std::string& value);
-  std::string* _internal_mutable_parameter();
-  public:
+    // optional string parameter = 2;
+    bool has_parameter() const;
+    private:
+    bool _internal_has_parameter() const;
+    public:
+    void clear_parameter();
+    const std::string& parameter() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_parameter(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_parameter();
+    [[nodiscard]] std::string* release_parameter();
+    void set_allocated_parameter(std::string* parameter);
+    private:
+    const std::string& _internal_parameter() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_parameter(const std::string& value);
+    std::string* _internal_mutable_parameter();
+    public:
 
-  // optional .shark.compiler.Version compiler_version = 3;
-  bool has_compiler_version() const;
-  private:
-  bool _internal_has_compiler_version() const;
-  public:
-  void clear_compiler_version();
-  const ::shark::compiler::Version& compiler_version() const;
-  [[nodiscard]] ::shark::compiler::Version* release_compiler_version();
-  ::shark::compiler::Version* mutable_compiler_version();
-  void set_allocated_compiler_version(::shark::compiler::Version* compiler_version);
-  private:
-  const ::shark::compiler::Version& _internal_compiler_version() const;
-  ::shark::compiler::Version* _internal_mutable_compiler_version();
-  public:
-  void unsafe_arena_set_allocated_compiler_version(
-      ::shark::compiler::Version* compiler_version);
-  ::shark::compiler::Version* unsafe_arena_release_compiler_version();
+    // optional .shark.compiler.Version compiler_version = 3;
+    bool has_compiler_version() const;
+    private:
+    bool _internal_has_compiler_version() const;
+    public:
+    void clear_compiler_version();
+    const ::shark::compiler::Version& compiler_version() const;
+    [[nodiscard]] ::shark::compiler::Version* release_compiler_version();
+    ::shark::compiler::Version* mutable_compiler_version();
+    void set_allocated_compiler_version(::shark::compiler::Version* compiler_version);
+    private:
+    const ::shark::compiler::Version& _internal_compiler_version() const;
+    ::shark::compiler::Version* _internal_mutable_compiler_version();
+    public:
+    void unsafe_arena_set_allocated_compiler_version(
+        ::shark::compiler::Version* compiler_version);
+    ::shark::compiler::Version* unsafe_arena_release_compiler_version();
 
-  // @@protoc_insertion_point(class_scope:shark.compiler.CodeGeneratorRequest)
+    // @@protoc_insertion_point(class_scope:shark.compiler.CodeGeneratorRequest)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> file_to_generate_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto > proto_file_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr parameter_;
-    ::shark::compiler::Version* compiler_version_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> file_to_generate_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::FileDescriptorProto > proto_file_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr parameter_;
+        ::shark::compiler::Version* compiler_version_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
 };
 // -------------------------------------------------------------------
 
 class PROTOC_EXPORT CodeGeneratorResponse_File final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.compiler.CodeGeneratorResponse.File) */ {
  public:
-  inline CodeGeneratorResponse_File() : CodeGeneratorResponse_File(nullptr) {}
-  ~CodeGeneratorResponse_File() override;
-  explicit constexpr CodeGeneratorResponse_File(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline CodeGeneratorResponse_File() : CodeGeneratorResponse_File(nullptr) {}
+    ~CodeGeneratorResponse_File() override;
+    explicit constexpr CodeGeneratorResponse_File(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  CodeGeneratorResponse_File(const CodeGeneratorResponse_File& from);
-  CodeGeneratorResponse_File(CodeGeneratorResponse_File&& from) noexcept
-    : CodeGeneratorResponse_File() {
-    *this = ::std::move(from);
-  }
+    CodeGeneratorResponse_File(const CodeGeneratorResponse_File& from);
+    CodeGeneratorResponse_File(CodeGeneratorResponse_File&& from) noexcept
+      : CodeGeneratorResponse_File() {
+      *this = ::std::move(from);
+    }
 
-  inline CodeGeneratorResponse_File& operator=(const CodeGeneratorResponse_File& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline CodeGeneratorResponse_File& operator=(CodeGeneratorResponse_File&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline CodeGeneratorResponse_File& operator=(const CodeGeneratorResponse_File& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline CodeGeneratorResponse_File& operator=(CodeGeneratorResponse_File&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const CodeGeneratorResponse_File& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const CodeGeneratorResponse_File* internal_default_instance() {
-    return reinterpret_cast<const CodeGeneratorResponse_File*>(
-               &_CodeGeneratorResponse_File_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const CodeGeneratorResponse_File& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const CodeGeneratorResponse_File* internal_default_instance() {
+      return reinterpret_cast<const CodeGeneratorResponse_File*>(
+                 &_CodeGeneratorResponse_File_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      2;
 
-  friend void swap(CodeGeneratorResponse_File& a, CodeGeneratorResponse_File& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(CodeGeneratorResponse_File* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(CodeGeneratorResponse_File& a, CodeGeneratorResponse_File& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(CodeGeneratorResponse_File* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(CodeGeneratorResponse_File* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(CodeGeneratorResponse_File* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  CodeGeneratorResponse_File* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<CodeGeneratorResponse_File>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const CodeGeneratorResponse_File& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const CodeGeneratorResponse_File& from) {
-    CodeGeneratorResponse_File::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    CodeGeneratorResponse_File* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<CodeGeneratorResponse_File>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const CodeGeneratorResponse_File& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const CodeGeneratorResponse_File& from) {
+      CodeGeneratorResponse_File::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(CodeGeneratorResponse_File* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(CodeGeneratorResponse_File* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.compiler.CodeGeneratorResponse.File";
-  }
-  protected:
-  explicit CodeGeneratorResponse_File(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.compiler.CodeGeneratorResponse.File";
+    }
+    protected:
+    explicit CodeGeneratorResponse_File(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kNameFieldNumber = 1,
-    kInsertionPointFieldNumber = 2,
-    kContentFieldNumber = 15,
-    kGeneratedCodeInfoFieldNumber = 16,
-  };
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    enum : int {
+      kNameFieldNumber = 1,
+      kInsertionPointFieldNumber = 2,
+      kContentFieldNumber = 15,
+      kGeneratedCodeInfoFieldNumber = 16,
+    };
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional string insertion_point = 2;
-  bool has_insertion_point() const;
-  private:
-  bool _internal_has_insertion_point() const;
-  public:
-  void clear_insertion_point();
-  const std::string& insertion_point() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_insertion_point(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_insertion_point();
-  [[nodiscard]] std::string* release_insertion_point();
-  void set_allocated_insertion_point(std::string* insertion_point);
-  private:
-  const std::string& _internal_insertion_point() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_insertion_point(const std::string& value);
-  std::string* _internal_mutable_insertion_point();
-  public:
+    // optional string insertion_point = 2;
+    bool has_insertion_point() const;
+    private:
+    bool _internal_has_insertion_point() const;
+    public:
+    void clear_insertion_point();
+    const std::string& insertion_point() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_insertion_point(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_insertion_point();
+    [[nodiscard]] std::string* release_insertion_point();
+    void set_allocated_insertion_point(std::string* insertion_point);
+    private:
+    const std::string& _internal_insertion_point() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_insertion_point(const std::string& value);
+    std::string* _internal_mutable_insertion_point();
+    public:
 
-  // optional string content = 15;
-  bool has_content() const;
-  private:
-  bool _internal_has_content() const;
-  public:
-  void clear_content();
-  const std::string& content() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_content(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_content();
-  [[nodiscard]] std::string* release_content();
-  void set_allocated_content(std::string* content);
-  private:
-  const std::string& _internal_content() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_content(const std::string& value);
-  std::string* _internal_mutable_content();
-  public:
+    // optional string content = 15;
+    bool has_content() const;
+    private:
+    bool _internal_has_content() const;
+    public:
+    void clear_content();
+    const std::string& content() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_content(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_content();
+    [[nodiscard]] std::string* release_content();
+    void set_allocated_content(std::string* content);
+    private:
+    const std::string& _internal_content() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_content(const std::string& value);
+    std::string* _internal_mutable_content();
+    public:
 
-  // optional .shark.GeneratedCodeInfo generated_code_info = 16;
-  bool has_generated_code_info() const;
-  private:
-  bool _internal_has_generated_code_info() const;
-  public:
-  void clear_generated_code_info();
-  const ::shark::GeneratedCodeInfo& generated_code_info() const;
-  [[nodiscard]] ::shark::GeneratedCodeInfo* release_generated_code_info();
-  ::shark::GeneratedCodeInfo* mutable_generated_code_info();
-  void set_allocated_generated_code_info(::shark::GeneratedCodeInfo* generated_code_info);
-  private:
-  const ::shark::GeneratedCodeInfo& _internal_generated_code_info() const;
-  ::shark::GeneratedCodeInfo* _internal_mutable_generated_code_info();
-  public:
-  void unsafe_arena_set_allocated_generated_code_info(
-      ::shark::GeneratedCodeInfo* generated_code_info);
-  ::shark::GeneratedCodeInfo* unsafe_arena_release_generated_code_info();
+    // optional .shark.GeneratedCodeInfo generated_code_info = 16;
+    bool has_generated_code_info() const;
+    private:
+    bool _internal_has_generated_code_info() const;
+    public:
+    void clear_generated_code_info();
+    const ::shark::GeneratedCodeInfo& generated_code_info() const;
+    [[nodiscard]] ::shark::GeneratedCodeInfo* release_generated_code_info();
+    ::shark::GeneratedCodeInfo* mutable_generated_code_info();
+    void set_allocated_generated_code_info(::shark::GeneratedCodeInfo* generated_code_info);
+    private:
+    const ::shark::GeneratedCodeInfo& _internal_generated_code_info() const;
+    ::shark::GeneratedCodeInfo* _internal_mutable_generated_code_info();
+    public:
+    void unsafe_arena_set_allocated_generated_code_info(
+        ::shark::GeneratedCodeInfo* generated_code_info);
+    ::shark::GeneratedCodeInfo* unsafe_arena_release_generated_code_info();
 
-  // @@protoc_insertion_point(class_scope:shark.compiler.CodeGeneratorResponse.File)
+    // @@protoc_insertion_point(class_scope:shark.compiler.CodeGeneratorResponse.File)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr insertion_point_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr content_;
-    ::shark::GeneratedCodeInfo* generated_code_info_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr insertion_point_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr content_;
+        ::shark::GeneratedCodeInfo* generated_code_info_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
 };
 // -------------------------------------------------------------------
 
 class PROTOC_EXPORT CodeGeneratorResponse final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.compiler.CodeGeneratorResponse) */ {
  public:
-  inline CodeGeneratorResponse() : CodeGeneratorResponse(nullptr) {}
-  ~CodeGeneratorResponse() override;
-  explicit constexpr CodeGeneratorResponse(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline CodeGeneratorResponse() : CodeGeneratorResponse(nullptr) {}
+    ~CodeGeneratorResponse() override;
+    explicit constexpr CodeGeneratorResponse(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  CodeGeneratorResponse(const CodeGeneratorResponse& from);
-  CodeGeneratorResponse(CodeGeneratorResponse&& from) noexcept
-    : CodeGeneratorResponse() {
-    *this = ::std::move(from);
-  }
+    CodeGeneratorResponse(const CodeGeneratorResponse& from);
+    CodeGeneratorResponse(CodeGeneratorResponse&& from) noexcept
+      : CodeGeneratorResponse() {
+      *this = ::std::move(from);
+    }
 
-  inline CodeGeneratorResponse& operator=(const CodeGeneratorResponse& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline CodeGeneratorResponse& operator=(CodeGeneratorResponse&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline CodeGeneratorResponse& operator=(const CodeGeneratorResponse& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline CodeGeneratorResponse& operator=(CodeGeneratorResponse&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const CodeGeneratorResponse& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const CodeGeneratorResponse* internal_default_instance() {
-    return reinterpret_cast<const CodeGeneratorResponse*>(
-               &_CodeGeneratorResponse_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    3;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const CodeGeneratorResponse& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const CodeGeneratorResponse* internal_default_instance() {
+      return reinterpret_cast<const CodeGeneratorResponse*>(
+                 &_CodeGeneratorResponse_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      3;
 
-  friend void swap(CodeGeneratorResponse& a, CodeGeneratorResponse& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(CodeGeneratorResponse* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(CodeGeneratorResponse& a, CodeGeneratorResponse& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(CodeGeneratorResponse* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(CodeGeneratorResponse* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(CodeGeneratorResponse* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  CodeGeneratorResponse* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<CodeGeneratorResponse>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const CodeGeneratorResponse& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const CodeGeneratorResponse& from) {
-    CodeGeneratorResponse::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    CodeGeneratorResponse* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<CodeGeneratorResponse>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const CodeGeneratorResponse& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const CodeGeneratorResponse& from) {
+      CodeGeneratorResponse::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(CodeGeneratorResponse* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(CodeGeneratorResponse* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.compiler.CodeGeneratorResponse";
-  }
-  protected:
-  explicit CodeGeneratorResponse(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.compiler.CodeGeneratorResponse";
+    }
+    protected:
+    explicit CodeGeneratorResponse(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  typedef CodeGeneratorResponse_File File;
+    typedef CodeGeneratorResponse_File File;
 
-  typedef CodeGeneratorResponse_Feature Feature;
-  static inline bool Feature_IsValid(int value) {
-    return CodeGeneratorResponse_Feature_IsValid(value);
-  }
-  static constexpr Feature Feature_MIN =
-    CodeGeneratorResponse_Feature_Feature_MIN;
-  static constexpr Feature Feature_MAX =
-    CodeGeneratorResponse_Feature_Feature_MAX;
-  static constexpr int Feature_ARRAYSIZE =
-    CodeGeneratorResponse_Feature_Feature_ARRAYSIZE;
-  static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-  Feature_descriptor() {
-    return CodeGeneratorResponse_Feature_descriptor();
-  }
-  template<typename T>
-  static inline const std::string& Feature_Name(T enum_t_value) {
-    static_assert(::std::is_same<T, Feature>::value ||
-      ::std::is_integral<T>::value,
-      "Incorrect type passed to function Feature_Name.");
-    return CodeGeneratorResponse_Feature_Name(enum_t_value);
-  }
-  static inline bool Feature_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-      Feature* value) {
-    return CodeGeneratorResponse_Feature_Parse(name, value);
-  }
+    typedef CodeGeneratorResponse_Feature Feature;
+    static inline bool Feature_IsValid(int value) {
+      return CodeGeneratorResponse_Feature_IsValid(value);
+    }
+    static constexpr Feature Feature_MIN =
+      CodeGeneratorResponse_Feature_Feature_MIN;
+    static constexpr Feature Feature_MAX =
+      CodeGeneratorResponse_Feature_Feature_MAX;
+    static constexpr int Feature_ARRAYSIZE =
+      CodeGeneratorResponse_Feature_Feature_ARRAYSIZE;
+    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
+    Feature_descriptor() {
+      return CodeGeneratorResponse_Feature_descriptor();
+    }
+    template<typename T>
+    static inline const std::string& Feature_Name(T enum_t_value) {
+      static_assert(::std::is_same<T, Feature>::value ||
+        ::std::is_integral<T>::value,
+        "Incorrect type passed to function Feature_Name.");
+      return CodeGeneratorResponse_Feature_Name(enum_t_value);
+    }
+    static inline bool Feature_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
+        Feature* value) {
+      return CodeGeneratorResponse_Feature_Parse(name, value);
+    }
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kFileFieldNumber = 15,
-    kErrorFieldNumber = 1,
-    kSupportedFeaturesFieldNumber = 2,
-  };
-  // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
-  int file_size() const;
-  private:
-  int _internal_file_size() const;
-  public:
-  void clear_file();
-  ::shark::compiler::CodeGeneratorResponse_File* mutable_file(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::compiler::CodeGeneratorResponse_File >*
-      mutable_file();
-  private:
-  const ::shark::compiler::CodeGeneratorResponse_File& _internal_file(int index) const;
-  ::shark::compiler::CodeGeneratorResponse_File* _internal_add_file();
-  public:
-  const ::shark::compiler::CodeGeneratorResponse_File& file(int index) const;
-  ::shark::compiler::CodeGeneratorResponse_File* add_file();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::compiler::CodeGeneratorResponse_File >&
-      file() const;
+    enum : int {
+      kFileFieldNumber = 15,
+      kErrorFieldNumber = 1,
+      kSupportedFeaturesFieldNumber = 2,
+    };
+    // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
+    int file_size() const;
+    private:
+    int _internal_file_size() const;
+    public:
+    void clear_file();
+    ::shark::compiler::CodeGeneratorResponse_File* mutable_file(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::compiler::CodeGeneratorResponse_File >*
+        mutable_file();
+    private:
+    const ::shark::compiler::CodeGeneratorResponse_File& _internal_file(int index) const;
+    ::shark::compiler::CodeGeneratorResponse_File* _internal_add_file();
+    public:
+    const ::shark::compiler::CodeGeneratorResponse_File& file(int index) const;
+    ::shark::compiler::CodeGeneratorResponse_File* add_file();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::compiler::CodeGeneratorResponse_File >&
+        file() const;
 
-  // optional string error = 1;
-  bool has_error() const;
-  private:
-  bool _internal_has_error() const;
-  public:
-  void clear_error();
-  const std::string& error() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_error(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_error();
-  [[nodiscard]] std::string* release_error();
-  void set_allocated_error(std::string* error);
-  private:
-  const std::string& _internal_error() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_error(const std::string& value);
-  std::string* _internal_mutable_error();
-  public:
+    // optional string error = 1;
+    bool has_error() const;
+    private:
+    bool _internal_has_error() const;
+    public:
+    void clear_error();
+    const std::string& error() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_error(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_error();
+    [[nodiscard]] std::string* release_error();
+    void set_allocated_error(std::string* error);
+    private:
+    const std::string& _internal_error() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_error(const std::string& value);
+    std::string* _internal_mutable_error();
+    public:
 
-  // optional uint64 supported_features = 2;
-  bool has_supported_features() const;
-  private:
-  bool _internal_has_supported_features() const;
-  public:
-  void clear_supported_features();
-  uint64_t supported_features() const;
-  void set_supported_features(uint64_t value);
-  private:
-  uint64_t _internal_supported_features() const;
-  void _internal_set_supported_features(uint64_t value);
-  public:
+    // optional uint64 supported_features = 2;
+    bool has_supported_features() const;
+    private:
+    bool _internal_has_supported_features() const;
+    public:
+    void clear_supported_features();
+    uint64_t supported_features() const;
+    void set_supported_features(uint64_t value);
+    private:
+    uint64_t _internal_supported_features() const;
+    void _internal_set_supported_features(uint64_t value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.compiler.CodeGeneratorResponse)
+    // @@protoc_insertion_point(class_scope:shark.compiler.CodeGeneratorResponse)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::compiler::CodeGeneratorResponse_File > file_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr error_;
-    uint64_t supported_features_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::compiler::CodeGeneratorResponse_File > file_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr error_;
+        uint64_t supported_features_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2fcompiler_2fplugin_2eshark;
 };
 // ===================================================================
 
@@ -1023,8 +1024,8 @@ inline bool Version::has_major() const {
   return _internal_has_major();
 }
 inline void Version::clear_major() {
-  _impl_.major_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.major_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t Version::_internal_major() const {
   return _impl_.major_;
@@ -1051,8 +1052,8 @@ inline bool Version::has_minor() const {
   return _internal_has_minor();
 }
 inline void Version::clear_minor() {
-  _impl_.minor_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_.minor_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline int32_t Version::_internal_minor() const {
   return _impl_.minor_;
@@ -1079,8 +1080,8 @@ inline bool Version::has_patch() const {
   return _internal_has_patch();
 }
 inline void Version::clear_patch() {
-  _impl_.patch_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_.patch_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline int32_t Version::_internal_patch() const {
   return _impl_.patch_;
@@ -1107,8 +1108,8 @@ inline bool Version::has_suffix() const {
   return _internal_has_suffix();
 }
 inline void Version::clear_suffix() {
-  _impl_.suffix_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.suffix_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Version::suffix() const {
   // @@protoc_insertion_point(field_get:shark.compiler.Version.suffix)
@@ -1178,7 +1179,7 @@ inline int CodeGeneratorRequest::file_to_generate_size() const {
   return _internal_file_to_generate_size();
 }
 inline void CodeGeneratorRequest::clear_file_to_generate() {
-  _impl_.file_to_generate_.Clear();
+    _impl_.file_to_generate_.Clear();
 }
 inline std::string* CodeGeneratorRequest::add_file_to_generate() {
   std::string* _s = _internal_add_file_to_generate();
@@ -1254,8 +1255,8 @@ inline bool CodeGeneratorRequest::has_parameter() const {
   return _internal_has_parameter();
 }
 inline void CodeGeneratorRequest::clear_parameter() {
-  _impl_.parameter_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.parameter_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& CodeGeneratorRequest::parameter() const {
   // @@protoc_insertion_point(field_get:shark.compiler.CodeGeneratorRequest.parameter)
@@ -1360,8 +1361,8 @@ inline bool CodeGeneratorRequest::has_compiler_version() const {
   return _internal_has_compiler_version();
 }
 inline void CodeGeneratorRequest::clear_compiler_version() {
-  if (_impl_.compiler_version_ != nullptr) _impl_.compiler_version_->Clear();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    if (_impl_.compiler_version_ != nullptr) _impl_.compiler_version_->Clear();
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const ::shark::compiler::Version& CodeGeneratorRequest::_internal_compiler_version() const {
   const ::shark::compiler::Version* p = _impl_.compiler_version_;
@@ -1453,8 +1454,8 @@ inline bool CodeGeneratorResponse_File::has_name() const {
   return _internal_has_name();
 }
 inline void CodeGeneratorResponse_File::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& CodeGeneratorResponse_File::name() const {
   // @@protoc_insertion_point(field_get:shark.compiler.CodeGeneratorResponse.File.name)
@@ -1521,8 +1522,8 @@ inline bool CodeGeneratorResponse_File::has_insertion_point() const {
   return _internal_has_insertion_point();
 }
 inline void CodeGeneratorResponse_File::clear_insertion_point() {
-  _impl_.insertion_point_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.insertion_point_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& CodeGeneratorResponse_File::insertion_point() const {
   // @@protoc_insertion_point(field_get:shark.compiler.CodeGeneratorResponse.File.insertion_point)
@@ -1589,8 +1590,8 @@ inline bool CodeGeneratorResponse_File::has_content() const {
   return _internal_has_content();
 }
 inline void CodeGeneratorResponse_File::clear_content() {
-  _impl_.content_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_.content_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& CodeGeneratorResponse_File::content() const {
   // @@protoc_insertion_point(field_get:shark.compiler.CodeGeneratorResponse.File.content)
@@ -1748,8 +1749,8 @@ inline bool CodeGeneratorResponse::has_error() const {
   return _internal_has_error();
 }
 inline void CodeGeneratorResponse::clear_error() {
-  _impl_.error_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.error_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& CodeGeneratorResponse::error() const {
   // @@protoc_insertion_point(field_get:shark.compiler.CodeGeneratorResponse.error)
@@ -1816,8 +1817,8 @@ inline bool CodeGeneratorResponse::has_supported_features() const {
   return _internal_has_supported_features();
 }
 inline void CodeGeneratorResponse::clear_supported_features() {
-  _impl_.supported_features_ = uint64_t{0u};
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.supported_features_ = uint64_t{0u};
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline uint64_t CodeGeneratorResponse::_internal_supported_features() const {
   return _impl_.supported_features_;
@@ -1843,7 +1844,7 @@ inline int CodeGeneratorResponse::file_size() const {
   return _internal_file_size();
 }
 inline void CodeGeneratorResponse::clear_file() {
-  _impl_.file_.Clear();
+    _impl_.file_.Clear();
 }
 inline ::shark::compiler::CodeGeneratorResponse_File* CodeGeneratorResponse::mutable_file(int index) {
   // @@protoc_insertion_point(field_mutable:shark.compiler.CodeGeneratorResponse.file)
@@ -1892,11 +1893,28 @@ CodeGeneratorResponse::file() const {
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::shark::compiler::CodeGeneratorResponse_Feature> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::compiler::CodeGeneratorResponse_Feature>() {
-  return ::shark::compiler::CodeGeneratorResponse_Feature_descriptor();
-}
+    template <>
+    struct EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature> {
+        using underlying = int32_t;
+        static constexpr ::shark::compiler::CodeGeneratorResponse_Feature enum_min = ::shark::compiler::CodeGeneratorResponse_Feature::FEATURE_NONE;
+        static constexpr ::shark::compiler::CodeGeneratorResponse_Feature enum_max = ::shark::compiler::CodeGeneratorResponse_Feature::FEATURE_PROTO3_OPTIONAL;
+        static constexpr uint32_t value_count = 2;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::compiler::CodeGeneratorResponse_Feature_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::compiler::CodeGeneratorResponse_Feature e) {
+            return ::shark::compiler::CodeGeneratorResponse_Feature_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature *e) {
+            return ::shark::compiler::CodeGeneratorResponse_Feature_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::compiler::CodeGeneratorResponse_Feature_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::compiler::CodeGeneratorResponse_Feature> : ::std::true_type {};
 
 SHARK_NAMESPACE_CLOSE
 

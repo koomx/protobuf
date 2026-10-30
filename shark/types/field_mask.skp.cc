@@ -23,8 +23,8 @@ namespace _pbi = _pb::internal;
 namespace shark {
 constexpr FieldMask::FieldMask(
     ::_pbi::ConstantInitialized): _impl_{
-    /*decltype(_impl_.paths_)*/{}
-  , /*decltype(_impl_._cached_size_)*/{}} {}
+      /*decltype(_impl_.paths_)*/{}
+    , /*decltype(_impl_._cached_size_)*/{}} {}
 struct FieldMaskDefaultTypeInternal {
   constexpr FieldMaskDefaultTypeInternal()
       : _instance(::_pbi::ConstantInitialized{}) {}
@@ -40,28 +40,28 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2ffield_5fmask_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2ffield_5fmask_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::shark::FieldMask, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
-  SHARK_FIELD_OFFSET(::shark::FieldMask, _impl_.paths_),
+    ~0u,  // no _has_bits_
+    SHARK_FIELD_OFFSET(::shark::FieldMask, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
+    SHARK_FIELD_OFFSET(::shark::FieldMask, _impl_.paths_),
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::shark::FieldMask)},
+    { 0, -1, -1, sizeof(::shark::FieldMask)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::shark::_FieldMask_default_instance_._instance,
+    &::shark::_FieldMask_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2ftypes_2ffield_5fmask_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\034shark/types/field_mask.shark\022\005shark\"\032\n"
-  "\tFieldMask\022\r\n\005paths\030\001 \003(\020B7Z2google.gola"
-  "ng.org/protobuf/types/known/fieldmaskpb\370"
-  "\001\001"
-  ;
+    "\n\034shark/types/field_mask.shark\022\005shark\"\032\n"
+    "\tFieldMask\022\r\n\005paths\030\001 \003(\020B7Z2google.gola"
+    "ng.org/protobuf/types/known/fieldmaskpb\370"
+    "\001\001"
+    ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2ffield_5fmask_2eshark = {
     false, false, 122, descriptor_table_protodef_shark_2ftypes_2ffield_5fmask_2eshark,
@@ -93,12 +93,12 @@ FieldMask::FieldMask(::SHARK_NAMESPACE_ID::Arena* arena,
 }
 FieldMask::FieldMask(const FieldMask& from)
   : ::SHARK_NAMESPACE_ID::Message() {
-  FieldMask* const _this = this; (void)_this;
-  new (&_impl_) Impl_{
-      decltype(_impl_.paths_){from._impl_.paths_}
-    , /*decltype(_impl_._cached_size_)*/{}};
+    FieldMask* const _this = this; (void)_this;
+    new (&_impl_) Impl_{
+          decltype(_impl_.paths_){from._impl_.paths_}
+        , /*decltype(_impl_._cached_size_)*/{}};
 
-  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+    _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:shark.FieldMask)
 }
 
@@ -106,10 +106,10 @@ inline void FieldMask::SharedCtor(
     ::_pb::Arena* arena, bool is_message_owned) {
   (void)arena;
   (void)is_message_owned;
-  new (&_impl_) Impl_{
-      decltype(_impl_.paths_){arena}
-    , /*decltype(_impl_._cached_size_)*/{}
-  };
+    new (&_impl_) Impl_{
+          decltype(_impl_.paths_){arena}
+        , /*decltype(_impl_._cached_size_)*/{}
+    };
 }
 
 FieldMask::~FieldMask() {
@@ -122,8 +122,8 @@ FieldMask::~FieldMask() {
 }
 
 inline void FieldMask::SharedDtor() {
-  GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-  _impl_.paths_.~RepeatedPtrField();
+    GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
+    _impl_.paths_.~RepeatedPtrField();
 }
 
 void FieldMask::SetCachedSize(int size) const {
@@ -132,52 +132,52 @@ void FieldMask::SetCachedSize(int size) const {
 
 void FieldMask::Clear() {
 // @@protoc_insertion_point(message_clear_start:shark.FieldMask)
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+    uint32_t cached_has_bits = 0;
+    // Prevent compiler warnings about cached_has_bits being unused
+    (void) cached_has_bits;
 
-  _impl_.paths_.Clear();
-  _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    _impl_.paths_.Clear();
+    _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
 }
 
 const char* FieldMask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
 #define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
-  while (!ctx->Done(&ptr)) {
-    uint32_t tag;
-    ptr = ::_pbi::ReadTag(ptr, &tag);
-    switch (tag >> 3) {
-      // list<string> paths = 1;
-      case 1:
-        if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
-          ptr -= 1;
-          do {
-            ptr += 1;
-            auto str = _internal_add_paths();
-            ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
-            CHK_(ptr);
-            #ifndef NDEBUG
-            ::_pbi::VerifyUTF8(str, "shark.FieldMask.paths");
-            #endif  // !NDEBUG
-            if (!ctx->DataAvailable(ptr)) break;
-          } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
-        } else
-          goto handle_unusual;
-        continue;
-      default:
-        goto handle_unusual;
-    }  // switch
-  handle_unusual:
-    if ((tag == 0) || ((tag & 7) == 4)) {
-      CHK_(ptr);
-      ctx->SetLastTag(tag);
-      goto message_done;
-    }
-    ptr = UnknownFieldParse(
-        tag,
-        _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
-        ptr, ctx);
-    CHK_(ptr != nullptr);
-  }  // while
+    while (!ctx->Done(&ptr)) {
+        uint32_t tag;
+        ptr = ::_pbi::ReadTag(ptr, &tag);
+        switch (tag >> 3) {
+            // list<string> paths = 1;
+            case 1:
+                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
+                    ptr -= 1;
+                    do {
+                      ptr += 1;
+                        auto str = _internal_add_paths();
+                        ptr = ::_pbi::InlineGreedyStringParser(str, ptr, ctx);
+                        CHK_(ptr);
+                        #ifndef NDEBUG
+                        ::_pbi::VerifyUTF8(str, "shark.FieldMask.paths");
+                        #endif  // !NDEBUG
+                      if (!ctx->DataAvailable(ptr)) break;
+                    } while (::SHARK_NAMESPACE_ID::internal::ExpectTag<10>(ptr));
+                } else
+                  goto handle_unusual;
+                continue;
+            default:
+              goto handle_unusual;
+        }  // switch
+    handle_unusual:
+        if ((tag == 0) || ((tag & 7) == 4)) {
+          CHK_(ptr);
+          ctx->SetLastTag(tag);
+          goto message_done;
+        }
+        ptr = UnknownFieldParse(
+            tag,
+            _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
+            ptr, ctx);
+        CHK_(ptr != nullptr);
+    }  // while
 message_done:
   return ptr;
 failure:
@@ -188,45 +188,45 @@ failure:
 
 uint8_t* FieldMask::_InternalSerialize(
     uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-  // @@protoc_insertion_point(serialize_to_array_start:shark.FieldMask)
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
+    // @@protoc_insertion_point(serialize_to_array_start:shark.FieldMask)
+    uint32_t cached_has_bits = 0;
+    (void) cached_has_bits;
 
-  // list<string> paths = 1;
-  for (int i = 0, n = this->_internal_paths_size(); i < n; i++) {
-    const auto& s = this->_internal_paths(i);
-    ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
-      s.data(), static_cast<int>(s.length()),
-      ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
-      "shark.FieldMask.paths");
-    target = stream->WriteString(1, s, target);
-  }
+    // list<string> paths = 1;
+    for (int i = 0, n = this->_internal_paths_size(); i < n; i++) {
+      const auto& s = this->_internal_paths(i);
+        ::SHARK_NAMESPACE_ID::internal::WireFormat::VerifyUTF8StringNamedField(
+            s.data(), static_cast<int>(s.length()),
+            ::SHARK_NAMESPACE_ID::internal::WireFormat::SERIALIZE,
+            "shark.FieldMask.paths");
+      target = stream->WriteString(1, s, target);
+    }
 
-  if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-    target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-        _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-  }
-  // @@protoc_insertion_point(serialize_to_array_end:shark.FieldMask)
+    if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
+        target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
+            _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
+    }
+    // @@protoc_insertion_point(serialize_to_array_end:shark.FieldMask)
   return target;
 }
 
 size_t FieldMask::ByteSizeLong() const {
 // @@protoc_insertion_point(message_byte_size_start:shark.FieldMask)
-  size_t total_size = 0;
+    size_t total_size = 0;
 
-  uint32_t cached_has_bits = 0;
-  // Prevent compiler warnings about cached_has_bits being unused
-  (void) cached_has_bits;
+    uint32_t cached_has_bits = 0;
+    // Prevent compiler warnings about cached_has_bits being unused
+    (void) cached_has_bits;
 
-  // list<string> paths = 1;
-  total_size += 1 *
-      ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.paths_.size());
-  for (int i = 0, n = _impl_.paths_.size(); i < n; i++) {
-    total_size += ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
-      _impl_.paths_.Get(i));
-  }
+    // list<string> paths = 1;
+    total_size += 1 *
+        ::SHARK_NAMESPACE_ID::internal::FromIntSize(_impl_.paths_.size());
+    for (int i = 0, n = _impl_.paths_.size(); i < n; i++) {
+      total_size += ::SHARK_NAMESPACE_ID::internal::WireFormatLite::StringSize(
+        _impl_.paths_.Get(i));
+    }
 
-  return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
+    return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
 }
 
 const ::SHARK_NAMESPACE_ID::Message::ClassData FieldMask::_class_data_ = {
@@ -239,20 +239,20 @@ const ::SHARK_NAMESPACE_ID::Message::ClassData*FieldMask::GetClassData() const {
 void FieldMask::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
   auto* const _this = static_cast<FieldMask*>(&to_msg);
   auto& from = static_cast<const FieldMask&>(from_msg);
-  // @@protoc_insertion_point(class_specific_merge_from_start:shark.FieldMask)
-  GOOGLE_DCHECK_NE(&from, _this);
-  uint32_t cached_has_bits = 0;
-  (void) cached_has_bits;
+    // @@protoc_insertion_point(class_specific_merge_from_start:shark.FieldMask)
+    GOOGLE_DCHECK_NE(&from, _this);
+    uint32_t cached_has_bits = 0;
+    (void) cached_has_bits;
 
-  _this->_impl_.paths_.MergeFrom(from._impl_.paths_);
-  _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+    _this->_impl_.paths_.MergeFrom(from._impl_.paths_);
+    _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
 }
 
 void FieldMask::CopyFrom(const FieldMask& from) {
 // @@protoc_insertion_point(class_specific_copy_from_start:shark.FieldMask)
-  if (&from == this) return;
-  Clear();
-  MergeFrom(from);
+    if (&from == this) return;
+    Clear();
+    MergeFrom(from);
 }
 
 bool FieldMask::IsInitialized() const {
@@ -260,9 +260,9 @@ bool FieldMask::IsInitialized() const {
 }
 
 void FieldMask::InternalSwap(FieldMask* other) {
-  using std::swap;
-  _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-  _impl_.paths_.InternalSwap(&other->_impl_.paths_);
+    using std::swap;
+    _internal_metadata_.InternalSwap(&other->_internal_metadata_);
+    _impl_.paths_.InternalSwap(&other->_impl_.paths_);
 }
 
 ::SHARK_NAMESPACE_ID::Metadata FieldMask::GetMetadata() const {

@@ -65,6 +65,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/once.h>
+#include <shark/enum_traits.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

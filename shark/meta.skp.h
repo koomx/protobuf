@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -47,30 +48,30 @@ SHARK_NAMESPACE_CLOSE
 namespace shark {
 
 enum class SharkType : uint8_t {
-  UNKNOWN = 0,
-  BOOL = 1,
-  INT8 = 2,
-  UINT8 = 3,
-  INT16 = 4,
-  UINT16 = 5,
-  INT32 = 6,
-  UINT32 = 7,
-  INT64 = 8,
-  UINT64 = 9,
-  FLOAT = 10,
-  FLOAT16 = 11,
-  FLOAT8 = 12,
-  DOUBLE = 13,
-  ENUM = 14,
-  MESSAGE = 15,
-  STRING = 16,
-  BYTES = 17,
-  FIXED32 = 60,
-  FIXED64 = 61,
-  SFIXED32 = 62,
-  SFIXED64 = 63,
-  SINT32 = 64,
-  SINT64 = 65
+    UNKNOWN = 0,
+    BOOL = 1,
+    INT8 = 2,
+    UINT8 = 3,
+    INT16 = 4,
+    UINT16 = 5,
+    INT32 = 6,
+    UINT32 = 7,
+    INT64 = 8,
+    UINT64 = 9,
+    FLOAT = 10,
+    FLOAT16 = 11,
+    FLOAT8 = 12,
+    DOUBLE = 13,
+    ENUM = 14,
+    MESSAGE = 15,
+    STRING = 16,
+    BYTES = 17,
+    FIXED32 = 60,
+    FIXED64 = 61,
+    SFIXED32 = 62,
+    SFIXED64 = 63,
+    SINT32 = 64,
+    SINT64 = 65
 };
 constexpr uint8_t SharkType_to_underlying(SharkType value) {
   return static_cast<uint8_t>(value);
@@ -102,22 +103,22 @@ inline bool SharkType_Parse(
     SharkType_descriptor(), name, value);
 }
 enum class SharkCppType : uint8_t {
-  BOOL = 1,
-  INT8 = 2,
-  UINT8 = 3,
-  INT16 = 4,
-  UINT16 = 5,
-  INT32 = 6,
-  UINT32 = 7,
-  INT64 = 8,
-  UINT64 = 9,
-  FLOAT = 10,
-  FLOAT16 = 11,
-  FLOAT8 = 12,
-  DOUBLE = 13,
-  ENUM = 14,
-  MESSAGE = 15,
-  STRING = 16
+    BOOL = 1,
+    INT8 = 2,
+    UINT8 = 3,
+    INT16 = 4,
+    UINT16 = 5,
+    INT32 = 6,
+    UINT32 = 7,
+    INT64 = 8,
+    UINT64 = 9,
+    FLOAT = 10,
+    FLOAT16 = 11,
+    FLOAT8 = 12,
+    DOUBLE = 13,
+    ENUM = 14,
+    MESSAGE = 15,
+    STRING = 16
 };
 constexpr uint8_t SharkCppType_to_underlying(SharkCppType value) {
   return static_cast<uint8_t>(value);
@@ -170,16 +171,50 @@ inline bool SharkCppType_Parse(
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::shark::SharkType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::SharkType>() {
-  return ::shark::SharkType_descriptor();
-}
-template <> struct is_proto_enum< ::shark::SharkCppType> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::SharkCppType>() {
-  return ::shark::SharkCppType_descriptor();
-}
+    template <>
+    struct EnumTraitImpl<::shark::SharkType> {
+        using underlying = uint8_t;
+        static constexpr ::shark::SharkType enum_min = ::shark::SharkType::UNKNOWN;
+        static constexpr ::shark::SharkType enum_max = ::shark::SharkType::SINT64;
+        static constexpr uint32_t value_count = 24;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::SharkType_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::SharkType e) {
+            return ::shark::SharkType_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType *e) {
+            return ::shark::SharkType_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::SharkType_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::SharkType> : ::std::true_type {};
+    template <>
+    struct EnumTraitImpl<::shark::SharkCppType> {
+        using underlying = uint8_t;
+        static constexpr ::shark::SharkCppType enum_min = ::shark::SharkCppType::BOOL;
+        static constexpr ::shark::SharkCppType enum_max = ::shark::SharkCppType::STRING;
+        static constexpr uint32_t value_count = 16;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::SharkCppType_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::SharkCppType e) {
+            return ::shark::SharkCppType_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType *e) {
+            return ::shark::SharkCppType_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::SharkCppType_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::SharkCppType> : ::std::true_type {};
 
 SHARK_NAMESPACE_CLOSE
 

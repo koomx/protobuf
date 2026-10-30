@@ -184,7 +184,7 @@ void Printer::Print(const std::map<std::string, std::string>& variables,
   WriteRaw(text + pos, size - pos);
 }
 
-void Printer::Indent() { indent_ += "  "; }
+void Printer::Indent() { indent_ += "    "; }
 
 void Printer::Outdent() {
   if (indent_.empty()) {
@@ -192,7 +192,7 @@ void Printer::Outdent() {
     return;
   }
 
-  indent_.resize(indent_.size() - 2);
+  indent_.resize(indent_.size() - 4);
 }
 
 void Printer::PrintRaw(const std::string& data) {

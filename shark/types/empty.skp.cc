@@ -38,26 +38,26 @@ static constexpr ::_pb::EnumDescriptor const** file_level_enum_descriptors_shark
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2ftypes_2fempty_2eshark = nullptr;
 
 const uint32_t TableStruct_shark_2ftypes_2fempty_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  ~0u,  // no _has_bits_
-  SHARK_FIELD_OFFSET(::shark::Empty, _internal_metadata_),
-  ~0u,  // no _extensions_
-  ~0u,  // no _oneof_case_
-  ~0u,  // no _weak_field_map_
-  ~0u,  // no _inlined_string_donated_
+    ~0u,  // no _has_bits_
+    SHARK_FIELD_OFFSET(::shark::Empty, _internal_metadata_),
+    ~0u,  // no _extensions_
+    ~0u,  // no _oneof_case_
+    ~0u,  // no _weak_field_map_
+    ~0u,  // no _inlined_string_donated_
 };
 static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-  { 0, -1, -1, sizeof(::shark::Empty)},
+    { 0, -1, -1, sizeof(::shark::Empty)},
 };
 
 static const ::_pb::Message* const file_default_instances[] = {
-  &::shark::_Empty_default_instance_._instance,
+    &::shark::_Empty_default_instance_._instance,
 };
 
 const char descriptor_table_protodef_shark_2ftypes_2fempty_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-  "\n\027shark/types/empty.shark\022\005shark\"\007\n\005Empt"
-  "yB3Z.google.golang.org/protobuf/types/kn"
-  "own/emptypb\370\001\001"
-  ;
+    "\n\027shark/types/empty.shark\022\005shark\"\007\n\005Empt"
+    "yB3Z.google.golang.org/protobuf/types/kn"
+    "own/emptypb\370\001\001"
+    ;
 static ::_pbi::once_flag descriptor_table_shark_2ftypes_2fempty_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2ftypes_2fempty_2eshark = {
     false, false, 94, descriptor_table_protodef_shark_2ftypes_2fempty_2eshark,
@@ -88,8 +88,8 @@ Empty::Empty(::SHARK_NAMESPACE_ID::Arena* arena,
 }
 Empty::Empty(const Empty& from)
   : ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase() {
-  Empty* const _this = this; (void)_this;
-  _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
+    Empty* const _this = this; (void)_this;
+    _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
   // @@protoc_insertion_point(copy_constructor:shark.Empty)
 }
 

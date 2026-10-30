@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -73,30 +74,30 @@ SHARK_NAMESPACE_CLOSE
 namespace shark {
 
 enum class Field_Kind : int32_t {
-  TYPE_UNKNOWN = 0,
-  TYPE_BOOL = 1,
-  TYPE_INT8 = 2,
-  TYPE_UINT8 = 3,
-  TYPE_INT16 = 4,
-  TYPE_UINT16 = 5,
-  TYPE_INT32 = 6,
-  TYPE_UINT32 = 7,
-  TYPE_INT64 = 8,
-  TYPE_UINT64 = 9,
-  TYPE_FLOAT = 10,
-  TYPE_FLOAT16 = 11,
-  TYPE_FLOAT8 = 12,
-  TYPE_DOUBLE = 13,
-  TYPE_ENUM = 14,
-  TYPE_MESSAGE = 15,
-  TYPE_STRING = 16,
-  TYPE_BYTES = 17,
-  TYPE_FIXED32 = 18,
-  TYPE_FIXED64 = 19,
-  TYPE_SFIXED32 = 20,
-  TYPE_SFIXED64 = 21,
-  TYPE_SINT32 = 22,
-  TYPE_SINT64 = 23
+    TYPE_UNKNOWN = 0,
+    TYPE_BOOL = 1,
+    TYPE_INT8 = 2,
+    TYPE_UINT8 = 3,
+    TYPE_INT16 = 4,
+    TYPE_UINT16 = 5,
+    TYPE_INT32 = 6,
+    TYPE_UINT32 = 7,
+    TYPE_INT64 = 8,
+    TYPE_UINT64 = 9,
+    TYPE_FLOAT = 10,
+    TYPE_FLOAT16 = 11,
+    TYPE_FLOAT8 = 12,
+    TYPE_DOUBLE = 13,
+    TYPE_ENUM = 14,
+    TYPE_MESSAGE = 15,
+    TYPE_STRING = 16,
+    TYPE_BYTES = 17,
+    TYPE_FIXED32 = 18,
+    TYPE_FIXED64 = 19,
+    TYPE_SFIXED32 = 20,
+    TYPE_SFIXED64 = 21,
+    TYPE_SINT32 = 22,
+    TYPE_SINT64 = 23
 };
 constexpr int32_t Field_Kind_to_underlying(Field_Kind value) {
   return static_cast<int32_t>(value);
@@ -128,10 +129,10 @@ inline bool Field_Kind_Parse(
     Field_Kind_descriptor(), name, value);
 }
 enum class Field_Cardinality : int32_t {
-  CARDINALITY_UNKNOWN = 0,
-  CARDINALITY_OPTIONAL = 1,
-  CARDINALITY_REQUIRED = 2,
-  CARDINALITY_REPEATED = 3
+    CARDINALITY_UNKNOWN = 0,
+    CARDINALITY_OPTIONAL = 1,
+    CARDINALITY_REQUIRED = 2,
+    CARDINALITY_REPEATED = 3
 };
 constexpr int32_t Field_Cardinality_to_underlying(Field_Cardinality value) {
   return static_cast<int32_t>(value);
@@ -163,8 +164,8 @@ inline bool Field_Cardinality_Parse(
     Field_Cardinality_descriptor(), name, value);
 }
 enum class Syntax : int32_t {
-  SYNTAX_PROTO2 = 0,
-  SYNTAX_PROTO3 = 1
+    SYNTAX_PROTO2 = 0,
+    SYNTAX_PROTO3 = 1
 };
 constexpr int32_t Syntax_to_underlying(Syntax value) {
   return static_cast<int32_t>(value);
@@ -200,1263 +201,1263 @@ inline bool Syntax_Parse(
 class Type final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Type) */ {
  public:
-  inline Type() : Type(nullptr) {}
-  ~Type() override;
-  explicit constexpr Type(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Type() : Type(nullptr) {}
+    ~Type() override;
+    explicit constexpr Type(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Type(const Type& from);
-  Type(Type&& from) noexcept
-    : Type() {
-    *this = ::std::move(from);
-  }
+    Type(const Type& from);
+    Type(Type&& from) noexcept
+      : Type() {
+      *this = ::std::move(from);
+    }
 
-  inline Type& operator=(const Type& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Type& operator=(Type&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Type& operator=(const Type& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Type& operator=(Type&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Type& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Type* internal_default_instance() {
-    return reinterpret_cast<const Type*>(
-               &_Type_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Type& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Type* internal_default_instance() {
+      return reinterpret_cast<const Type*>(
+                 &_Type_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      0;
 
-  friend void swap(Type& a, Type& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Type* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Type& a, Type& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Type* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Type* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Type* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Type* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Type>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Type& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Type& from) {
-    Type::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Type* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Type>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Type& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Type& from) {
+      Type::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Type* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Type* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Type";
-  }
-  protected:
-  explicit Type(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Type";
+    }
+    protected:
+    explicit Type(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kFieldsFieldNumber = 2,
-    kOneofsFieldNumber = 3,
-    kOptionsFieldNumber = 4,
-    kNameFieldNumber = 1,
-    kSourceContextFieldNumber = 5,
-    kSyntaxFieldNumber = 6,
-  };
-  // list<.shark.Field> fields = 2;
-  int fields_size() const;
-  private:
-  int _internal_fields_size() const;
-  public:
-  void clear_fields();
-  ::shark::Field* mutable_fields(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >*
-      mutable_fields();
-  private:
-  const ::shark::Field& _internal_fields(int index) const;
-  ::shark::Field* _internal_add_fields();
-  public:
-  const ::shark::Field& fields(int index) const;
-  ::shark::Field* add_fields();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >&
-      fields() const;
+    enum : int {
+      kFieldsFieldNumber = 2,
+      kOneofsFieldNumber = 3,
+      kOptionsFieldNumber = 4,
+      kNameFieldNumber = 1,
+      kSourceContextFieldNumber = 5,
+      kSyntaxFieldNumber = 6,
+    };
+    // list<.shark.Field> fields = 2;
+    int fields_size() const;
+    private:
+    int _internal_fields_size() const;
+    public:
+    void clear_fields();
+    ::shark::Field* mutable_fields(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >*
+        mutable_fields();
+    private:
+    const ::shark::Field& _internal_fields(int index) const;
+    ::shark::Field* _internal_add_fields();
+    public:
+    const ::shark::Field& fields(int index) const;
+    ::shark::Field* add_fields();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field >&
+        fields() const;
 
-  // list<string> oneofs = 3;
-  int oneofs_size() const;
-  private:
-  int _internal_oneofs_size() const;
-  public:
-  void clear_oneofs();
-  const std::string& oneofs(int index) const;
-  std::string* mutable_oneofs(int index);
-  void set_oneofs(int index, const std::string& value);
-  void set_oneofs(int index, std::string&& value);
-  void set_oneofs(int index, const char* value);
-  void set_oneofs(int index, const char* value, size_t size);
-  std::string* add_oneofs();
-  void add_oneofs(const std::string& value);
-  void add_oneofs(std::string&& value);
-  void add_oneofs(const char* value);
-  void add_oneofs(const char* value, size_t size);
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>& oneofs() const;
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_oneofs();
-  private:
-  const std::string& _internal_oneofs(int index) const;
-  std::string* _internal_add_oneofs();
-  public:
+    // list<string> oneofs = 3;
+    int oneofs_size() const;
+    private:
+    int _internal_oneofs_size() const;
+    public:
+    void clear_oneofs();
+    const std::string& oneofs(int index) const;
+    std::string* mutable_oneofs(int index);
+    void set_oneofs(int index, const std::string& value);
+    void set_oneofs(int index, std::string&& value);
+    void set_oneofs(int index, const char* value);
+    void set_oneofs(int index, const char* value, size_t size);
+    std::string* add_oneofs();
+    void add_oneofs(const std::string& value);
+    void add_oneofs(std::string&& value);
+    void add_oneofs(const char* value);
+    void add_oneofs(const char* value, size_t size);
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>& oneofs() const;
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string>* mutable_oneofs();
+    private:
+    const std::string& _internal_oneofs(int index) const;
+    std::string* _internal_add_oneofs();
+    public:
 
-  // list<.shark.Option> options = 4;
-  int options_size() const;
-  private:
-  int _internal_options_size() const;
-  public:
-  void clear_options();
-  ::shark::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-      mutable_options();
-  private:
-  const ::shark::Option& _internal_options(int index) const;
-  ::shark::Option* _internal_add_options();
-  public:
-  const ::shark::Option& options(int index) const;
-  ::shark::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-      options() const;
+    // list<.shark.Option> options = 4;
+    int options_size() const;
+    private:
+    int _internal_options_size() const;
+    public:
+    void clear_options();
+    ::shark::Option* mutable_options(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_options();
+    private:
+    const ::shark::Option& _internal_options(int index) const;
+    ::shark::Option* _internal_add_options();
+    public:
+    const ::shark::Option& options(int index) const;
+    ::shark::Option* add_options();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        options() const;
 
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional .shark.SourceContext source_context = 5;
-  bool has_source_context() const;
-  private:
-  bool _internal_has_source_context() const;
-  public:
-  void clear_source_context();
-  const ::shark::SourceContext& source_context() const;
-  [[nodiscard]] ::shark::SourceContext* release_source_context();
-  ::shark::SourceContext* mutable_source_context();
-  void set_allocated_source_context(::shark::SourceContext* source_context);
-  private:
-  const ::shark::SourceContext& _internal_source_context() const;
-  ::shark::SourceContext* _internal_mutable_source_context();
-  public:
-  void unsafe_arena_set_allocated_source_context(
-      ::shark::SourceContext* source_context);
-  ::shark::SourceContext* unsafe_arena_release_source_context();
+    // optional .shark.SourceContext source_context = 5;
+    bool has_source_context() const;
+    private:
+    bool _internal_has_source_context() const;
+    public:
+    void clear_source_context();
+    const ::shark::SourceContext& source_context() const;
+    [[nodiscard]] ::shark::SourceContext* release_source_context();
+    ::shark::SourceContext* mutable_source_context();
+    void set_allocated_source_context(::shark::SourceContext* source_context);
+    private:
+    const ::shark::SourceContext& _internal_source_context() const;
+    ::shark::SourceContext* _internal_mutable_source_context();
+    public:
+    void unsafe_arena_set_allocated_source_context(
+        ::shark::SourceContext* source_context);
+    ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // optional .shark.Syntax syntax = 6;
-  bool has_syntax() const;
-  private:
-  bool _internal_has_syntax() const;
-  public:
-  void clear_syntax();
-  ::shark::Syntax syntax() const;
-  void set_syntax(::shark::Syntax value);
-  private:
-  ::shark::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::shark::Syntax value);
-  public:
+    // optional .shark.Syntax syntax = 6;
+    bool has_syntax() const;
+    private:
+    bool _internal_has_syntax() const;
+    public:
+    void clear_syntax();
+    ::shark::Syntax syntax() const;
+    void set_syntax(::shark::Syntax value);
+    private:
+    ::shark::Syntax _internal_syntax() const;
+    void _internal_set_syntax(::shark::Syntax value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Type)
+    // @@protoc_insertion_point(class_scope:shark.Type)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field > fields_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> oneofs_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::shark::SourceContext* source_context_;
-    int syntax_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Field > fields_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField<std::string> oneofs_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::shark::SourceContext* source_context_;
+        int syntax_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
 };
 // -------------------------------------------------------------------
 
 class Field final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Field) */ {
  public:
-  inline Field() : Field(nullptr) {}
-  ~Field() override;
-  explicit constexpr Field(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Field() : Field(nullptr) {}
+    ~Field() override;
+    explicit constexpr Field(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Field(const Field& from);
-  Field(Field&& from) noexcept
-    : Field() {
-    *this = ::std::move(from);
-  }
+    Field(const Field& from);
+    Field(Field&& from) noexcept
+      : Field() {
+      *this = ::std::move(from);
+    }
 
-  inline Field& operator=(const Field& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Field& operator=(Field&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Field& operator=(const Field& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Field& operator=(Field&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Field& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Field* internal_default_instance() {
-    return reinterpret_cast<const Field*>(
-               &_Field_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Field& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Field* internal_default_instance() {
+      return reinterpret_cast<const Field*>(
+                 &_Field_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      1;
 
-  friend void swap(Field& a, Field& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Field* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Field& a, Field& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Field* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Field* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Field* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Field* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Field>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Field& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Field& from) {
-    Field::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Field* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Field>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Field& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Field& from) {
+      Field::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Field* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Field* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Field";
-  }
-  protected:
-  explicit Field(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Field";
+    }
+    protected:
+    explicit Field(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  typedef Field_Kind Kind;
-  static inline bool Kind_IsValid(int value) {
-    return Field_Kind_IsValid(value);
-  }
-  static constexpr Kind Kind_MIN =
-    Field_Kind_Kind_MIN;
-  static constexpr Kind Kind_MAX =
-    Field_Kind_Kind_MAX;
-  static constexpr int Kind_ARRAYSIZE =
-    Field_Kind_Kind_ARRAYSIZE;
-  static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-  Kind_descriptor() {
-    return Field_Kind_descriptor();
-  }
-  template<typename T>
-  static inline const std::string& Kind_Name(T enum_t_value) {
-    static_assert(::std::is_same<T, Kind>::value ||
-      ::std::is_integral<T>::value,
-      "Incorrect type passed to function Kind_Name.");
-    return Field_Kind_Name(enum_t_value);
-  }
-  static inline bool Kind_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-      Kind* value) {
-    return Field_Kind_Parse(name, value);
-  }
+    typedef Field_Kind Kind;
+    static inline bool Kind_IsValid(int value) {
+      return Field_Kind_IsValid(value);
+    }
+    static constexpr Kind Kind_MIN =
+      Field_Kind_Kind_MIN;
+    static constexpr Kind Kind_MAX =
+      Field_Kind_Kind_MAX;
+    static constexpr int Kind_ARRAYSIZE =
+      Field_Kind_Kind_ARRAYSIZE;
+    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
+    Kind_descriptor() {
+      return Field_Kind_descriptor();
+    }
+    template<typename T>
+    static inline const std::string& Kind_Name(T enum_t_value) {
+      static_assert(::std::is_same<T, Kind>::value ||
+        ::std::is_integral<T>::value,
+        "Incorrect type passed to function Kind_Name.");
+      return Field_Kind_Name(enum_t_value);
+    }
+    static inline bool Kind_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
+        Kind* value) {
+      return Field_Kind_Parse(name, value);
+    }
 
-  typedef Field_Cardinality Cardinality;
-  static inline bool Cardinality_IsValid(int value) {
-    return Field_Cardinality_IsValid(value);
-  }
-  static constexpr Cardinality Cardinality_MIN =
-    Field_Cardinality_Cardinality_MIN;
-  static constexpr Cardinality Cardinality_MAX =
-    Field_Cardinality_Cardinality_MAX;
-  static constexpr int Cardinality_ARRAYSIZE =
-    Field_Cardinality_Cardinality_ARRAYSIZE;
-  static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-  Cardinality_descriptor() {
-    return Field_Cardinality_descriptor();
-  }
-  template<typename T>
-  static inline const std::string& Cardinality_Name(T enum_t_value) {
-    static_assert(::std::is_same<T, Cardinality>::value ||
-      ::std::is_integral<T>::value,
-      "Incorrect type passed to function Cardinality_Name.");
-    return Field_Cardinality_Name(enum_t_value);
-  }
-  static inline bool Cardinality_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-      Cardinality* value) {
-    return Field_Cardinality_Parse(name, value);
-  }
+    typedef Field_Cardinality Cardinality;
+    static inline bool Cardinality_IsValid(int value) {
+      return Field_Cardinality_IsValid(value);
+    }
+    static constexpr Cardinality Cardinality_MIN =
+      Field_Cardinality_Cardinality_MIN;
+    static constexpr Cardinality Cardinality_MAX =
+      Field_Cardinality_Cardinality_MAX;
+    static constexpr int Cardinality_ARRAYSIZE =
+      Field_Cardinality_Cardinality_ARRAYSIZE;
+    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
+    Cardinality_descriptor() {
+      return Field_Cardinality_descriptor();
+    }
+    template<typename T>
+    static inline const std::string& Cardinality_Name(T enum_t_value) {
+      static_assert(::std::is_same<T, Cardinality>::value ||
+        ::std::is_integral<T>::value,
+        "Incorrect type passed to function Cardinality_Name.");
+      return Field_Cardinality_Name(enum_t_value);
+    }
+    static inline bool Cardinality_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
+        Cardinality* value) {
+      return Field_Cardinality_Parse(name, value);
+    }
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kOptionsFieldNumber = 9,
-    kNameFieldNumber = 4,
-    kTypeUrlFieldNumber = 6,
-    kJsonNameFieldNumber = 10,
-    kDefaultValueFieldNumber = 11,
-    kKindFieldNumber = 1,
-    kCardinalityFieldNumber = 2,
-    kNumberFieldNumber = 3,
-    kOneofIndexFieldNumber = 7,
-    kPackedFieldNumber = 8,
-  };
-  // list<.shark.Option> options = 9;
-  int options_size() const;
-  private:
-  int _internal_options_size() const;
-  public:
-  void clear_options();
-  ::shark::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-      mutable_options();
-  private:
-  const ::shark::Option& _internal_options(int index) const;
-  ::shark::Option* _internal_add_options();
-  public:
-  const ::shark::Option& options(int index) const;
-  ::shark::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-      options() const;
+    enum : int {
+      kOptionsFieldNumber = 9,
+      kNameFieldNumber = 4,
+      kTypeUrlFieldNumber = 6,
+      kJsonNameFieldNumber = 10,
+      kDefaultValueFieldNumber = 11,
+      kKindFieldNumber = 1,
+      kCardinalityFieldNumber = 2,
+      kNumberFieldNumber = 3,
+      kOneofIndexFieldNumber = 7,
+      kPackedFieldNumber = 8,
+    };
+    // list<.shark.Option> options = 9;
+    int options_size() const;
+    private:
+    int _internal_options_size() const;
+    public:
+    void clear_options();
+    ::shark::Option* mutable_options(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_options();
+    private:
+    const ::shark::Option& _internal_options(int index) const;
+    ::shark::Option* _internal_add_options();
+    public:
+    const ::shark::Option& options(int index) const;
+    ::shark::Option* add_options();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        options() const;
 
-  // optional string name = 4;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    // optional string name = 4;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional string type_url = 6;
-  bool has_type_url() const;
-  private:
-  bool _internal_has_type_url() const;
-  public:
-  void clear_type_url();
-  const std::string& type_url() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_type_url(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_type_url();
-  [[nodiscard]] std::string* release_type_url();
-  void set_allocated_type_url(std::string* type_url);
-  private:
-  const std::string& _internal_type_url() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_type_url(const std::string& value);
-  std::string* _internal_mutable_type_url();
-  public:
+    // optional string type_url = 6;
+    bool has_type_url() const;
+    private:
+    bool _internal_has_type_url() const;
+    public:
+    void clear_type_url();
+    const std::string& type_url() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_type_url(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_type_url();
+    [[nodiscard]] std::string* release_type_url();
+    void set_allocated_type_url(std::string* type_url);
+    private:
+    const std::string& _internal_type_url() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_type_url(const std::string& value);
+    std::string* _internal_mutable_type_url();
+    public:
 
-  // optional string json_name = 10;
-  bool has_json_name() const;
-  private:
-  bool _internal_has_json_name() const;
-  public:
-  void clear_json_name();
-  const std::string& json_name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_json_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_json_name();
-  [[nodiscard]] std::string* release_json_name();
-  void set_allocated_json_name(std::string* json_name);
-  private:
-  const std::string& _internal_json_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_json_name(const std::string& value);
-  std::string* _internal_mutable_json_name();
-  public:
+    // optional string json_name = 10;
+    bool has_json_name() const;
+    private:
+    bool _internal_has_json_name() const;
+    public:
+    void clear_json_name();
+    const std::string& json_name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_json_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_json_name();
+    [[nodiscard]] std::string* release_json_name();
+    void set_allocated_json_name(std::string* json_name);
+    private:
+    const std::string& _internal_json_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_json_name(const std::string& value);
+    std::string* _internal_mutable_json_name();
+    public:
 
-  // optional string default_value = 11;
-  bool has_default_value() const;
-  private:
-  bool _internal_has_default_value() const;
-  public:
-  void clear_default_value();
-  const std::string& default_value() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_default_value(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_default_value();
-  [[nodiscard]] std::string* release_default_value();
-  void set_allocated_default_value(std::string* default_value);
-  private:
-  const std::string& _internal_default_value() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_default_value(const std::string& value);
-  std::string* _internal_mutable_default_value();
-  public:
+    // optional string default_value = 11;
+    bool has_default_value() const;
+    private:
+    bool _internal_has_default_value() const;
+    public:
+    void clear_default_value();
+    const std::string& default_value() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_default_value(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_default_value();
+    [[nodiscard]] std::string* release_default_value();
+    void set_allocated_default_value(std::string* default_value);
+    private:
+    const std::string& _internal_default_value() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_default_value(const std::string& value);
+    std::string* _internal_mutable_default_value();
+    public:
 
-  // optional .shark.Field.Kind kind = 1;
-  bool has_kind() const;
-  private:
-  bool _internal_has_kind() const;
-  public:
-  void clear_kind();
-  ::shark::Field_Kind kind() const;
-  void set_kind(::shark::Field_Kind value);
-  private:
-  ::shark::Field_Kind _internal_kind() const;
-  void _internal_set_kind(::shark::Field_Kind value);
-  public:
+    // optional .shark.Field.Kind kind = 1;
+    bool has_kind() const;
+    private:
+    bool _internal_has_kind() const;
+    public:
+    void clear_kind();
+    ::shark::Field_Kind kind() const;
+    void set_kind(::shark::Field_Kind value);
+    private:
+    ::shark::Field_Kind _internal_kind() const;
+    void _internal_set_kind(::shark::Field_Kind value);
+    public:
 
-  // optional .shark.Field.Cardinality cardinality = 2;
-  bool has_cardinality() const;
-  private:
-  bool _internal_has_cardinality() const;
-  public:
-  void clear_cardinality();
-  ::shark::Field_Cardinality cardinality() const;
-  void set_cardinality(::shark::Field_Cardinality value);
-  private:
-  ::shark::Field_Cardinality _internal_cardinality() const;
-  void _internal_set_cardinality(::shark::Field_Cardinality value);
-  public:
+    // optional .shark.Field.Cardinality cardinality = 2;
+    bool has_cardinality() const;
+    private:
+    bool _internal_has_cardinality() const;
+    public:
+    void clear_cardinality();
+    ::shark::Field_Cardinality cardinality() const;
+    void set_cardinality(::shark::Field_Cardinality value);
+    private:
+    ::shark::Field_Cardinality _internal_cardinality() const;
+    void _internal_set_cardinality(::shark::Field_Cardinality value);
+    public:
 
-  // optional int32 number = 3;
-  bool has_number() const;
-  private:
-  bool _internal_has_number() const;
-  public:
-  void clear_number();
-  int32_t number() const;
-  void set_number(int32_t value);
-  private:
-  int32_t _internal_number() const;
-  void _internal_set_number(int32_t value);
-  public:
+    // optional int32 number = 3;
+    bool has_number() const;
+    private:
+    bool _internal_has_number() const;
+    public:
+    void clear_number();
+    int32_t number() const;
+    void set_number(int32_t value);
+    private:
+    int32_t _internal_number() const;
+    void _internal_set_number(int32_t value);
+    public:
 
-  // optional int32 oneof_index = 7;
-  bool has_oneof_index() const;
-  private:
-  bool _internal_has_oneof_index() const;
-  public:
-  void clear_oneof_index();
-  int32_t oneof_index() const;
-  void set_oneof_index(int32_t value);
-  private:
-  int32_t _internal_oneof_index() const;
-  void _internal_set_oneof_index(int32_t value);
-  public:
+    // optional int32 oneof_index = 7;
+    bool has_oneof_index() const;
+    private:
+    bool _internal_has_oneof_index() const;
+    public:
+    void clear_oneof_index();
+    int32_t oneof_index() const;
+    void set_oneof_index(int32_t value);
+    private:
+    int32_t _internal_oneof_index() const;
+    void _internal_set_oneof_index(int32_t value);
+    public:
 
-  // optional bool packed = 8;
-  bool has_packed() const;
-  private:
-  bool _internal_has_packed() const;
-  public:
-  void clear_packed();
-  bool packed() const;
-  void set_packed(bool value);
-  private:
-  bool _internal_packed() const;
-  void _internal_set_packed(bool value);
-  public:
+    // optional bool packed = 8;
+    bool has_packed() const;
+    private:
+    bool _internal_has_packed() const;
+    public:
+    void clear_packed();
+    bool packed() const;
+    void set_packed(bool value);
+    private:
+    bool _internal_packed() const;
+    void _internal_set_packed(bool value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Field)
+    // @@protoc_insertion_point(class_scope:shark.Field)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr type_url_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr json_name_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr default_value_;
-    int kind_;
-    int cardinality_;
-    int32_t number_;
-    int32_t oneof_index_;
-    bool packed_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr type_url_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr json_name_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr default_value_;
+        int kind_;
+        int cardinality_;
+        int32_t number_;
+        int32_t oneof_index_;
+        bool packed_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
 };
 // -------------------------------------------------------------------
 
 class Enum final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Enum) */ {
  public:
-  inline Enum() : Enum(nullptr) {}
-  ~Enum() override;
-  explicit constexpr Enum(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Enum() : Enum(nullptr) {}
+    ~Enum() override;
+    explicit constexpr Enum(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Enum(const Enum& from);
-  Enum(Enum&& from) noexcept
-    : Enum() {
-    *this = ::std::move(from);
-  }
+    Enum(const Enum& from);
+    Enum(Enum&& from) noexcept
+      : Enum() {
+      *this = ::std::move(from);
+    }
 
-  inline Enum& operator=(const Enum& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Enum& operator=(Enum&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Enum& operator=(const Enum& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Enum& operator=(Enum&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Enum& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Enum* internal_default_instance() {
-    return reinterpret_cast<const Enum*>(
-               &_Enum_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Enum& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Enum* internal_default_instance() {
+      return reinterpret_cast<const Enum*>(
+                 &_Enum_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      2;
 
-  friend void swap(Enum& a, Enum& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Enum* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Enum& a, Enum& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Enum* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Enum* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Enum* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Enum* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Enum>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Enum& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Enum& from) {
-    Enum::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Enum* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Enum>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Enum& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Enum& from) {
+      Enum::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Enum* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Enum* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Enum";
-  }
-  protected:
-  explicit Enum(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Enum";
+    }
+    protected:
+    explicit Enum(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kEnumvalueFieldNumber = 2,
-    kOptionsFieldNumber = 3,
-    kNameFieldNumber = 1,
-    kSourceContextFieldNumber = 4,
-    kSyntaxFieldNumber = 5,
-  };
-  // list<.shark.EnumValue> enumvalue = 2;
-  int enumvalue_size() const;
-  private:
-  int _internal_enumvalue_size() const;
-  public:
-  void clear_enumvalue();
-  ::shark::EnumValue* mutable_enumvalue(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >*
-      mutable_enumvalue();
-  private:
-  const ::shark::EnumValue& _internal_enumvalue(int index) const;
-  ::shark::EnumValue* _internal_add_enumvalue();
-  public:
-  const ::shark::EnumValue& enumvalue(int index) const;
-  ::shark::EnumValue* add_enumvalue();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >&
-      enumvalue() const;
+    enum : int {
+      kEnumvalueFieldNumber = 2,
+      kOptionsFieldNumber = 3,
+      kNameFieldNumber = 1,
+      kSourceContextFieldNumber = 4,
+      kSyntaxFieldNumber = 5,
+    };
+    // list<.shark.EnumValue> enumvalue = 2;
+    int enumvalue_size() const;
+    private:
+    int _internal_enumvalue_size() const;
+    public:
+    void clear_enumvalue();
+    ::shark::EnumValue* mutable_enumvalue(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >*
+        mutable_enumvalue();
+    private:
+    const ::shark::EnumValue& _internal_enumvalue(int index) const;
+    ::shark::EnumValue* _internal_add_enumvalue();
+    public:
+    const ::shark::EnumValue& enumvalue(int index) const;
+    ::shark::EnumValue* add_enumvalue();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue >&
+        enumvalue() const;
 
-  // list<.shark.Option> options = 3;
-  int options_size() const;
-  private:
-  int _internal_options_size() const;
-  public:
-  void clear_options();
-  ::shark::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-      mutable_options();
-  private:
-  const ::shark::Option& _internal_options(int index) const;
-  ::shark::Option* _internal_add_options();
-  public:
-  const ::shark::Option& options(int index) const;
-  ::shark::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-      options() const;
+    // list<.shark.Option> options = 3;
+    int options_size() const;
+    private:
+    int _internal_options_size() const;
+    public:
+    void clear_options();
+    ::shark::Option* mutable_options(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_options();
+    private:
+    const ::shark::Option& _internal_options(int index) const;
+    ::shark::Option* _internal_add_options();
+    public:
+    const ::shark::Option& options(int index) const;
+    ::shark::Option* add_options();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        options() const;
 
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional .shark.SourceContext source_context = 4;
-  bool has_source_context() const;
-  private:
-  bool _internal_has_source_context() const;
-  public:
-  void clear_source_context();
-  const ::shark::SourceContext& source_context() const;
-  [[nodiscard]] ::shark::SourceContext* release_source_context();
-  ::shark::SourceContext* mutable_source_context();
-  void set_allocated_source_context(::shark::SourceContext* source_context);
-  private:
-  const ::shark::SourceContext& _internal_source_context() const;
-  ::shark::SourceContext* _internal_mutable_source_context();
-  public:
-  void unsafe_arena_set_allocated_source_context(
-      ::shark::SourceContext* source_context);
-  ::shark::SourceContext* unsafe_arena_release_source_context();
+    // optional .shark.SourceContext source_context = 4;
+    bool has_source_context() const;
+    private:
+    bool _internal_has_source_context() const;
+    public:
+    void clear_source_context();
+    const ::shark::SourceContext& source_context() const;
+    [[nodiscard]] ::shark::SourceContext* release_source_context();
+    ::shark::SourceContext* mutable_source_context();
+    void set_allocated_source_context(::shark::SourceContext* source_context);
+    private:
+    const ::shark::SourceContext& _internal_source_context() const;
+    ::shark::SourceContext* _internal_mutable_source_context();
+    public:
+    void unsafe_arena_set_allocated_source_context(
+        ::shark::SourceContext* source_context);
+    ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // optional .shark.Syntax syntax = 5;
-  bool has_syntax() const;
-  private:
-  bool _internal_has_syntax() const;
-  public:
-  void clear_syntax();
-  ::shark::Syntax syntax() const;
-  void set_syntax(::shark::Syntax value);
-  private:
-  ::shark::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::shark::Syntax value);
-  public:
+    // optional .shark.Syntax syntax = 5;
+    bool has_syntax() const;
+    private:
+    bool _internal_has_syntax() const;
+    public:
+    void clear_syntax();
+    ::shark::Syntax syntax() const;
+    void set_syntax(::shark::Syntax value);
+    private:
+    ::shark::Syntax _internal_syntax() const;
+    void _internal_set_syntax(::shark::Syntax value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Enum)
+    // @@protoc_insertion_point(class_scope:shark.Enum)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue > enumvalue_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::shark::SourceContext* source_context_;
-    int syntax_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::EnumValue > enumvalue_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::shark::SourceContext* source_context_;
+        int syntax_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
 };
 // -------------------------------------------------------------------
 
 class EnumValue final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.EnumValue) */ {
  public:
-  inline EnumValue() : EnumValue(nullptr) {}
-  ~EnumValue() override;
-  explicit constexpr EnumValue(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline EnumValue() : EnumValue(nullptr) {}
+    ~EnumValue() override;
+    explicit constexpr EnumValue(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  EnumValue(const EnumValue& from);
-  EnumValue(EnumValue&& from) noexcept
-    : EnumValue() {
-    *this = ::std::move(from);
-  }
+    EnumValue(const EnumValue& from);
+    EnumValue(EnumValue&& from) noexcept
+      : EnumValue() {
+      *this = ::std::move(from);
+    }
 
-  inline EnumValue& operator=(const EnumValue& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline EnumValue& operator=(EnumValue&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline EnumValue& operator=(const EnumValue& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline EnumValue& operator=(EnumValue&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const EnumValue& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const EnumValue* internal_default_instance() {
-    return reinterpret_cast<const EnumValue*>(
-               &_EnumValue_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    3;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const EnumValue& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const EnumValue* internal_default_instance() {
+      return reinterpret_cast<const EnumValue*>(
+                 &_EnumValue_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      3;
 
-  friend void swap(EnumValue& a, EnumValue& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(EnumValue* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(EnumValue& a, EnumValue& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(EnumValue* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(EnumValue* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(EnumValue* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  EnumValue* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<EnumValue>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const EnumValue& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const EnumValue& from) {
-    EnumValue::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    EnumValue* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<EnumValue>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const EnumValue& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const EnumValue& from) {
+      EnumValue::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(EnumValue* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(EnumValue* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.EnumValue";
-  }
-  protected:
-  explicit EnumValue(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.EnumValue";
+    }
+    protected:
+    explicit EnumValue(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kOptionsFieldNumber = 3,
-    kNameFieldNumber = 1,
-    kNumberFieldNumber = 2,
-  };
-  // list<.shark.Option> options = 3;
-  int options_size() const;
-  private:
-  int _internal_options_size() const;
-  public:
-  void clear_options();
-  ::shark::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-      mutable_options();
-  private:
-  const ::shark::Option& _internal_options(int index) const;
-  ::shark::Option* _internal_add_options();
-  public:
-  const ::shark::Option& options(int index) const;
-  ::shark::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-      options() const;
+    enum : int {
+      kOptionsFieldNumber = 3,
+      kNameFieldNumber = 1,
+      kNumberFieldNumber = 2,
+    };
+    // list<.shark.Option> options = 3;
+    int options_size() const;
+    private:
+    int _internal_options_size() const;
+    public:
+    void clear_options();
+    ::shark::Option* mutable_options(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_options();
+    private:
+    const ::shark::Option& _internal_options(int index) const;
+    ::shark::Option* _internal_add_options();
+    public:
+    const ::shark::Option& options(int index) const;
+    ::shark::Option* add_options();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        options() const;
 
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional int32 number = 2;
-  bool has_number() const;
-  private:
-  bool _internal_has_number() const;
-  public:
-  void clear_number();
-  int32_t number() const;
-  void set_number(int32_t value);
-  private:
-  int32_t _internal_number() const;
-  void _internal_set_number(int32_t value);
-  public:
+    // optional int32 number = 2;
+    bool has_number() const;
+    private:
+    bool _internal_has_number() const;
+    public:
+    void clear_number();
+    int32_t number() const;
+    void set_number(int32_t value);
+    private:
+    int32_t _internal_number() const;
+    void _internal_set_number(int32_t value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.EnumValue)
+    // @@protoc_insertion_point(class_scope:shark.EnumValue)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    int32_t number_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        int32_t number_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
 };
 // -------------------------------------------------------------------
 
 class Option final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Option) */ {
  public:
-  inline Option() : Option(nullptr) {}
-  ~Option() override;
-  explicit constexpr Option(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Option() : Option(nullptr) {}
+    ~Option() override;
+    explicit constexpr Option(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Option(const Option& from);
-  Option(Option&& from) noexcept
-    : Option() {
-    *this = ::std::move(from);
-  }
+    Option(const Option& from);
+    Option(Option&& from) noexcept
+      : Option() {
+      *this = ::std::move(from);
+    }
 
-  inline Option& operator=(const Option& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Option& operator=(Option&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Option& operator=(const Option& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Option& operator=(Option&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Option& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Option* internal_default_instance() {
-    return reinterpret_cast<const Option*>(
-               &_Option_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    4;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Option& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Option* internal_default_instance() {
+      return reinterpret_cast<const Option*>(
+                 &_Option_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      4;
 
-  friend void swap(Option& a, Option& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Option* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Option& a, Option& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Option* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Option* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Option* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Option* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Option>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Option& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Option& from) {
-    Option::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Option* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Option>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Option& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Option& from) {
+      Option::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Option* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Option* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Option";
-  }
-  protected:
-  explicit Option(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Option";
+    }
+    protected:
+    explicit Option(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kNameFieldNumber = 1,
-    kValueFieldNumber = 2,
-  };
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    enum : int {
+      kNameFieldNumber = 1,
+      kValueFieldNumber = 2,
+    };
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional .shark.Any value = 2;
-  bool has_value() const;
-  private:
-  bool _internal_has_value() const;
-  public:
-  void clear_value();
-  const ::shark::Any& value() const;
-  [[nodiscard]] ::shark::Any* release_value();
-  ::shark::Any* mutable_value();
-  void set_allocated_value(::shark::Any* value);
-  private:
-  const ::shark::Any& _internal_value() const;
-  ::shark::Any* _internal_mutable_value();
-  public:
-  void unsafe_arena_set_allocated_value(
-      ::shark::Any* value);
-  ::shark::Any* unsafe_arena_release_value();
+    // optional .shark.Any value = 2;
+    bool has_value() const;
+    private:
+    bool _internal_has_value() const;
+    public:
+    void clear_value();
+    const ::shark::Any& value() const;
+    [[nodiscard]] ::shark::Any* release_value();
+    ::shark::Any* mutable_value();
+    void set_allocated_value(::shark::Any* value);
+    private:
+    const ::shark::Any& _internal_value() const;
+    ::shark::Any* _internal_mutable_value();
+    public:
+    void unsafe_arena_set_allocated_value(
+        ::shark::Any* value);
+    ::shark::Any* unsafe_arena_release_value();
 
-  // @@protoc_insertion_point(class_scope:shark.Option)
+    // @@protoc_insertion_point(class_scope:shark.Option)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::shark::Any* value_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::shark::Any* value_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2ftype_2eshark;
 };
 // ===================================================================
 
@@ -1478,8 +1479,8 @@ inline bool Type::has_name() const {
   return _internal_has_name();
 }
 inline void Type::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Type::name() const {
   // @@protoc_insertion_point(field_get:shark.Type.name)
@@ -1545,7 +1546,7 @@ inline int Type::fields_size() const {
   return _internal_fields_size();
 }
 inline void Type::clear_fields() {
-  _impl_.fields_.Clear();
+    _impl_.fields_.Clear();
 }
 inline ::shark::Field* Type::mutable_fields(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Type.fields)
@@ -1585,7 +1586,7 @@ inline int Type::oneofs_size() const {
   return _internal_oneofs_size();
 }
 inline void Type::clear_oneofs() {
-  _impl_.oneofs_.Clear();
+    _impl_.oneofs_.Clear();
 }
 inline std::string* Type::add_oneofs() {
   std::string* _s = _internal_add_oneofs();
@@ -1660,7 +1661,7 @@ inline int Type::options_size() const {
   return _internal_options_size();
 }
 inline void Type::clear_options() {
-  _impl_.options_.Clear();
+    _impl_.options_.Clear();
 }
 inline ::shark::Option* Type::mutable_options(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Type.options)
@@ -1788,8 +1789,8 @@ inline bool Type::has_syntax() const {
   return _internal_has_syntax();
 }
 inline void Type::clear_syntax() {
-  _impl_.syntax_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_.syntax_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline ::shark::Syntax Type::_internal_syntax() const {
   return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
@@ -1820,8 +1821,8 @@ inline bool Field::has_kind() const {
   return _internal_has_kind();
 }
 inline void Field::clear_kind() {
-  _impl_.kind_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000010u;
+    _impl_.kind_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline ::shark::Field_Kind Field::_internal_kind() const {
   return static_cast<::shark::Field_Kind>(static_cast<int32_t>(_impl_.kind_));
@@ -1848,8 +1849,8 @@ inline bool Field::has_cardinality() const {
   return _internal_has_cardinality();
 }
 inline void Field::clear_cardinality() {
-  _impl_.cardinality_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000020u;
+    _impl_.cardinality_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000020u;
 }
 inline ::shark::Field_Cardinality Field::_internal_cardinality() const {
   return static_cast<::shark::Field_Cardinality>(static_cast<int32_t>(_impl_.cardinality_));
@@ -1876,8 +1877,8 @@ inline bool Field::has_number() const {
   return _internal_has_number();
 }
 inline void Field::clear_number() {
-  _impl_.number_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000040u;
+    _impl_.number_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000040u;
 }
 inline int32_t Field::_internal_number() const {
   return _impl_.number_;
@@ -1904,8 +1905,8 @@ inline bool Field::has_name() const {
   return _internal_has_name();
 }
 inline void Field::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Field::name() const {
   // @@protoc_insertion_point(field_get:shark.Field.name)
@@ -1972,8 +1973,8 @@ inline bool Field::has_type_url() const {
   return _internal_has_type_url();
 }
 inline void Field::clear_type_url() {
-  _impl_.type_url_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.type_url_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& Field::type_url() const {
   // @@protoc_insertion_point(field_get:shark.Field.type_url)
@@ -2040,8 +2041,8 @@ inline bool Field::has_oneof_index() const {
   return _internal_has_oneof_index();
 }
 inline void Field::clear_oneof_index() {
-  _impl_.oneof_index_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000080u;
+    _impl_.oneof_index_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000080u;
 }
 inline int32_t Field::_internal_oneof_index() const {
   return _impl_.oneof_index_;
@@ -2068,8 +2069,8 @@ inline bool Field::has_packed() const {
   return _internal_has_packed();
 }
 inline void Field::clear_packed() {
-  _impl_.packed_ = false;
-  _impl_._has_bits_[0] &= ~0x00000100u;
+    _impl_.packed_ = false;
+    _impl_._has_bits_[0] &= ~0x00000100u;
 }
 inline bool Field::_internal_packed() const {
   return _impl_.packed_;
@@ -2095,7 +2096,7 @@ inline int Field::options_size() const {
   return _internal_options_size();
 }
 inline void Field::clear_options() {
-  _impl_.options_.Clear();
+    _impl_.options_.Clear();
 }
 inline ::shark::Option* Field::mutable_options(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Field.options)
@@ -2136,8 +2137,8 @@ inline bool Field::has_json_name() const {
   return _internal_has_json_name();
 }
 inline void Field::clear_json_name() {
-  _impl_.json_name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_.json_name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& Field::json_name() const {
   // @@protoc_insertion_point(field_get:shark.Field.json_name)
@@ -2204,8 +2205,8 @@ inline bool Field::has_default_value() const {
   return _internal_has_default_value();
 }
 inline void Field::clear_default_value() {
-  _impl_.default_value_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_.default_value_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline const std::string& Field::default_value() const {
   // @@protoc_insertion_point(field_get:shark.Field.default_value)
@@ -2276,8 +2277,8 @@ inline bool Enum::has_name() const {
   return _internal_has_name();
 }
 inline void Enum::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Enum::name() const {
   // @@protoc_insertion_point(field_get:shark.Enum.name)
@@ -2343,7 +2344,7 @@ inline int Enum::enumvalue_size() const {
   return _internal_enumvalue_size();
 }
 inline void Enum::clear_enumvalue() {
-  _impl_.enumvalue_.Clear();
+    _impl_.enumvalue_.Clear();
 }
 inline ::shark::EnumValue* Enum::mutable_enumvalue(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Enum.enumvalue)
@@ -2383,7 +2384,7 @@ inline int Enum::options_size() const {
   return _internal_options_size();
 }
 inline void Enum::clear_options() {
-  _impl_.options_.Clear();
+    _impl_.options_.Clear();
 }
 inline ::shark::Option* Enum::mutable_options(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Enum.options)
@@ -2511,8 +2512,8 @@ inline bool Enum::has_syntax() const {
   return _internal_has_syntax();
 }
 inline void Enum::clear_syntax() {
-  _impl_.syntax_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_.syntax_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline ::shark::Syntax Enum::_internal_syntax() const {
   return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
@@ -2543,8 +2544,8 @@ inline bool EnumValue::has_name() const {
   return _internal_has_name();
 }
 inline void EnumValue::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& EnumValue::name() const {
   // @@protoc_insertion_point(field_get:shark.EnumValue.name)
@@ -2611,8 +2612,8 @@ inline bool EnumValue::has_number() const {
   return _internal_has_number();
 }
 inline void EnumValue::clear_number() {
-  _impl_.number_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.number_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline int32_t EnumValue::_internal_number() const {
   return _impl_.number_;
@@ -2638,7 +2639,7 @@ inline int EnumValue::options_size() const {
   return _internal_options_size();
 }
 inline void EnumValue::clear_options() {
-  _impl_.options_.Clear();
+    _impl_.options_.Clear();
 }
 inline ::shark::Option* EnumValue::mutable_options(int index) {
   // @@protoc_insertion_point(field_mutable:shark.EnumValue.options)
@@ -2683,8 +2684,8 @@ inline bool Option::has_name() const {
   return _internal_has_name();
 }
 inline void Option::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Option::name() const {
   // @@protoc_insertion_point(field_get:shark.Option.name)
@@ -2847,21 +2848,72 @@ inline void Option::set_allocated_value(::shark::Any* value) {
 
 SHARK_NAMESPACE_OPEN
 
-template <> struct is_proto_enum< ::shark::Field_Kind> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::Field_Kind>() {
-  return ::shark::Field_Kind_descriptor();
-}
-template <> struct is_proto_enum< ::shark::Field_Cardinality> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::Field_Cardinality>() {
-  return ::shark::Field_Cardinality_descriptor();
-}
-template <> struct is_proto_enum< ::shark::Syntax> : ::std::true_type {};
-template <>
-inline const EnumDescriptor* GetEnumDescriptor< ::shark::Syntax>() {
-  return ::shark::Syntax_descriptor();
-}
+    template <>
+    struct EnumTraitImpl<::shark::Field_Kind> {
+        using underlying = int32_t;
+        static constexpr ::shark::Field_Kind enum_min = ::shark::Field_Kind::TYPE_UNKNOWN;
+        static constexpr ::shark::Field_Kind enum_max = ::shark::Field_Kind::TYPE_SINT64;
+        static constexpr uint32_t value_count = 24;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::Field_Kind_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::Field_Kind e) {
+            return ::shark::Field_Kind_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Kind *e) {
+            return ::shark::Field_Kind_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::Field_Kind_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::Field_Kind> : ::std::true_type {};
+    template <>
+    struct EnumTraitImpl<::shark::Field_Cardinality> {
+        using underlying = int32_t;
+        static constexpr ::shark::Field_Cardinality enum_min = ::shark::Field_Cardinality::CARDINALITY_UNKNOWN;
+        static constexpr ::shark::Field_Cardinality enum_max = ::shark::Field_Cardinality::CARDINALITY_REPEATED;
+        static constexpr uint32_t value_count = 4;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::Field_Cardinality_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::Field_Cardinality e) {
+            return ::shark::Field_Cardinality_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality *e) {
+            return ::shark::Field_Cardinality_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::Field_Cardinality_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::Field_Cardinality> : ::std::true_type {};
+    template <>
+    struct EnumTraitImpl<::shark::Syntax> {
+        using underlying = int32_t;
+        static constexpr ::shark::Syntax enum_min = ::shark::Syntax::SYNTAX_PROTO2;
+        static constexpr ::shark::Syntax enum_max = ::shark::Syntax::SYNTAX_PROTO3;
+        static constexpr uint32_t value_count = 2;
+        static constexpr bool has_descriptor = true;
+        static inline const EnumDescriptor* descriptor() {
+            return ::shark::Syntax_descriptor();
+        }
+        static inline const std::string& enum_name(::shark::Syntax e) {
+            return ::shark::Syntax_Name(e);
+        }
+        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax *e) {
+            return ::shark::Syntax_Parse(name, e);
+        }
+        static inline bool is_valid(int64_t value) {
+            return ::shark::Syntax_IsValid(value);
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::Syntax> : ::std::true_type {};
 
 SHARK_NAMESPACE_CLOSE
 

@@ -21,6 +21,7 @@
 #include <shark/port_undef.inc>
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
+#include <shark/enum_traits.h>
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
@@ -68,735 +69,735 @@ namespace shark {
 class Api final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Api) */ {
  public:
-  inline Api() : Api(nullptr) {}
-  ~Api() override;
-  explicit constexpr Api(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Api() : Api(nullptr) {}
+    ~Api() override;
+    explicit constexpr Api(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Api(const Api& from);
-  Api(Api&& from) noexcept
-    : Api() {
-    *this = ::std::move(from);
-  }
+    Api(const Api& from);
+    Api(Api&& from) noexcept
+      : Api() {
+      *this = ::std::move(from);
+    }
 
-  inline Api& operator=(const Api& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Api& operator=(Api&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Api& operator=(const Api& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Api& operator=(Api&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Api& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Api* internal_default_instance() {
-    return reinterpret_cast<const Api*>(
-               &_Api_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    0;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Api& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Api* internal_default_instance() {
+      return reinterpret_cast<const Api*>(
+                 &_Api_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      0;
 
-  friend void swap(Api& a, Api& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Api* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Api& a, Api& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Api* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Api* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Api* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Api* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Api>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Api& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Api& from) {
-    Api::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Api* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Api>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Api& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Api& from) {
+      Api::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Api* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Api* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Api";
-  }
-  protected:
-  explicit Api(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Api";
+    }
+    protected:
+    explicit Api(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kMethodsFieldNumber = 2,
-    kOptionsFieldNumber = 3,
-    kMixinsFieldNumber = 6,
-    kNameFieldNumber = 1,
-    kVersionFieldNumber = 4,
-    kSourceContextFieldNumber = 5,
-    kSyntaxFieldNumber = 7,
-  };
-  // list<.shark.Method> methods = 2;
-  int methods_size() const;
-  private:
-  int _internal_methods_size() const;
-  public:
-  void clear_methods();
-  ::shark::Method* mutable_methods(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >*
-      mutable_methods();
-  private:
-  const ::shark::Method& _internal_methods(int index) const;
-  ::shark::Method* _internal_add_methods();
-  public:
-  const ::shark::Method& methods(int index) const;
-  ::shark::Method* add_methods();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >&
-      methods() const;
+    enum : int {
+      kMethodsFieldNumber = 2,
+      kOptionsFieldNumber = 3,
+      kMixinsFieldNumber = 6,
+      kNameFieldNumber = 1,
+      kVersionFieldNumber = 4,
+      kSourceContextFieldNumber = 5,
+      kSyntaxFieldNumber = 7,
+    };
+    // list<.shark.Method> methods = 2;
+    int methods_size() const;
+    private:
+    int _internal_methods_size() const;
+    public:
+    void clear_methods();
+    ::shark::Method* mutable_methods(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >*
+        mutable_methods();
+    private:
+    const ::shark::Method& _internal_methods(int index) const;
+    ::shark::Method* _internal_add_methods();
+    public:
+    const ::shark::Method& methods(int index) const;
+    ::shark::Method* add_methods();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method >&
+        methods() const;
 
-  // list<.shark.Option> options = 3;
-  int options_size() const;
-  private:
-  int _internal_options_size() const;
-  public:
-  void clear_options();
-  ::shark::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-      mutable_options();
-  private:
-  const ::shark::Option& _internal_options(int index) const;
-  ::shark::Option* _internal_add_options();
-  public:
-  const ::shark::Option& options(int index) const;
-  ::shark::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-      options() const;
+    // list<.shark.Option> options = 3;
+    int options_size() const;
+    private:
+    int _internal_options_size() const;
+    public:
+    void clear_options();
+    ::shark::Option* mutable_options(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_options();
+    private:
+    const ::shark::Option& _internal_options(int index) const;
+    ::shark::Option* _internal_add_options();
+    public:
+    const ::shark::Option& options(int index) const;
+    ::shark::Option* add_options();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        options() const;
 
-  // list<.shark.Mixin> mixins = 6;
-  int mixins_size() const;
-  private:
-  int _internal_mixins_size() const;
-  public:
-  void clear_mixins();
-  ::shark::Mixin* mutable_mixins(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >*
-      mutable_mixins();
-  private:
-  const ::shark::Mixin& _internal_mixins(int index) const;
-  ::shark::Mixin* _internal_add_mixins();
-  public:
-  const ::shark::Mixin& mixins(int index) const;
-  ::shark::Mixin* add_mixins();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >&
-      mixins() const;
+    // list<.shark.Mixin> mixins = 6;
+    int mixins_size() const;
+    private:
+    int _internal_mixins_size() const;
+    public:
+    void clear_mixins();
+    ::shark::Mixin* mutable_mixins(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >*
+        mutable_mixins();
+    private:
+    const ::shark::Mixin& _internal_mixins(int index) const;
+    ::shark::Mixin* _internal_add_mixins();
+    public:
+    const ::shark::Mixin& mixins(int index) const;
+    ::shark::Mixin* add_mixins();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin >&
+        mixins() const;
 
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional string version = 4;
-  bool has_version() const;
-  private:
-  bool _internal_has_version() const;
-  public:
-  void clear_version();
-  const std::string& version() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_version(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_version();
-  [[nodiscard]] std::string* release_version();
-  void set_allocated_version(std::string* version);
-  private:
-  const std::string& _internal_version() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_version(const std::string& value);
-  std::string* _internal_mutable_version();
-  public:
+    // optional string version = 4;
+    bool has_version() const;
+    private:
+    bool _internal_has_version() const;
+    public:
+    void clear_version();
+    const std::string& version() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_version(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_version();
+    [[nodiscard]] std::string* release_version();
+    void set_allocated_version(std::string* version);
+    private:
+    const std::string& _internal_version() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_version(const std::string& value);
+    std::string* _internal_mutable_version();
+    public:
 
-  // optional .shark.SourceContext source_context = 5;
-  bool has_source_context() const;
-  private:
-  bool _internal_has_source_context() const;
-  public:
-  void clear_source_context();
-  const ::shark::SourceContext& source_context() const;
-  [[nodiscard]] ::shark::SourceContext* release_source_context();
-  ::shark::SourceContext* mutable_source_context();
-  void set_allocated_source_context(::shark::SourceContext* source_context);
-  private:
-  const ::shark::SourceContext& _internal_source_context() const;
-  ::shark::SourceContext* _internal_mutable_source_context();
-  public:
-  void unsafe_arena_set_allocated_source_context(
-      ::shark::SourceContext* source_context);
-  ::shark::SourceContext* unsafe_arena_release_source_context();
+    // optional .shark.SourceContext source_context = 5;
+    bool has_source_context() const;
+    private:
+    bool _internal_has_source_context() const;
+    public:
+    void clear_source_context();
+    const ::shark::SourceContext& source_context() const;
+    [[nodiscard]] ::shark::SourceContext* release_source_context();
+    ::shark::SourceContext* mutable_source_context();
+    void set_allocated_source_context(::shark::SourceContext* source_context);
+    private:
+    const ::shark::SourceContext& _internal_source_context() const;
+    ::shark::SourceContext* _internal_mutable_source_context();
+    public:
+    void unsafe_arena_set_allocated_source_context(
+        ::shark::SourceContext* source_context);
+    ::shark::SourceContext* unsafe_arena_release_source_context();
 
-  // optional .shark.Syntax syntax = 7;
-  bool has_syntax() const;
-  private:
-  bool _internal_has_syntax() const;
-  public:
-  void clear_syntax();
-  ::shark::Syntax syntax() const;
-  void set_syntax(::shark::Syntax value);
-  private:
-  ::shark::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::shark::Syntax value);
-  public:
+    // optional .shark.Syntax syntax = 7;
+    bool has_syntax() const;
+    private:
+    bool _internal_has_syntax() const;
+    public:
+    void clear_syntax();
+    ::shark::Syntax syntax() const;
+    void set_syntax(::shark::Syntax value);
+    private:
+    ::shark::Syntax _internal_syntax() const;
+    void _internal_set_syntax(::shark::Syntax value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Api)
+    // @@protoc_insertion_point(class_scope:shark.Api)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method > methods_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin > mixins_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr version_;
-    ::shark::SourceContext* source_context_;
-    int syntax_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fapi_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Method > methods_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Mixin > mixins_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr version_;
+        ::shark::SourceContext* source_context_;
+        int syntax_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fapi_2eshark;
 };
 // -------------------------------------------------------------------
 
 class Method final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Method) */ {
  public:
-  inline Method() : Method(nullptr) {}
-  ~Method() override;
-  explicit constexpr Method(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Method() : Method(nullptr) {}
+    ~Method() override;
+    explicit constexpr Method(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Method(const Method& from);
-  Method(Method&& from) noexcept
-    : Method() {
-    *this = ::std::move(from);
-  }
+    Method(const Method& from);
+    Method(Method&& from) noexcept
+      : Method() {
+      *this = ::std::move(from);
+    }
 
-  inline Method& operator=(const Method& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Method& operator=(Method&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Method& operator=(const Method& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Method& operator=(Method&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Method& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Method* internal_default_instance() {
-    return reinterpret_cast<const Method*>(
-               &_Method_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    1;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Method& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Method* internal_default_instance() {
+      return reinterpret_cast<const Method*>(
+                 &_Method_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      1;
 
-  friend void swap(Method& a, Method& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Method* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Method& a, Method& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Method* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Method* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Method* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Method* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Method>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Method& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Method& from) {
-    Method::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Method* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Method>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Method& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Method& from) {
+      Method::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Method* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Method* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Method";
-  }
-  protected:
-  explicit Method(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Method";
+    }
+    protected:
+    explicit Method(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kOptionsFieldNumber = 6,
-    kNameFieldNumber = 1,
-    kRequestTypeUrlFieldNumber = 2,
-    kResponseTypeUrlFieldNumber = 4,
-    kRequestStreamingFieldNumber = 3,
-    kResponseStreamingFieldNumber = 5,
-    kSyntaxFieldNumber = 7,
-  };
-  // list<.shark.Option> options = 6;
-  int options_size() const;
-  private:
-  int _internal_options_size() const;
-  public:
-  void clear_options();
-  ::shark::Option* mutable_options(int index);
-  ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
-      mutable_options();
-  private:
-  const ::shark::Option& _internal_options(int index) const;
-  ::shark::Option* _internal_add_options();
-  public:
-  const ::shark::Option& options(int index) const;
-  ::shark::Option* add_options();
-  const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
-      options() const;
+    enum : int {
+      kOptionsFieldNumber = 6,
+      kNameFieldNumber = 1,
+      kRequestTypeUrlFieldNumber = 2,
+      kResponseTypeUrlFieldNumber = 4,
+      kRequestStreamingFieldNumber = 3,
+      kResponseStreamingFieldNumber = 5,
+      kSyntaxFieldNumber = 7,
+    };
+    // list<.shark.Option> options = 6;
+    int options_size() const;
+    private:
+    int _internal_options_size() const;
+    public:
+    void clear_options();
+    ::shark::Option* mutable_options(int index);
+    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >*
+        mutable_options();
+    private:
+    const ::shark::Option& _internal_options(int index) const;
+    ::shark::Option* _internal_add_options();
+    public:
+    const ::shark::Option& options(int index) const;
+    ::shark::Option* add_options();
+    const ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option >&
+        options() const;
 
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional string request_type_url = 2;
-  bool has_request_type_url() const;
-  private:
-  bool _internal_has_request_type_url() const;
-  public:
-  void clear_request_type_url();
-  const std::string& request_type_url() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_request_type_url(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_request_type_url();
-  [[nodiscard]] std::string* release_request_type_url();
-  void set_allocated_request_type_url(std::string* request_type_url);
-  private:
-  const std::string& _internal_request_type_url() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_request_type_url(const std::string& value);
-  std::string* _internal_mutable_request_type_url();
-  public:
+    // optional string request_type_url = 2;
+    bool has_request_type_url() const;
+    private:
+    bool _internal_has_request_type_url() const;
+    public:
+    void clear_request_type_url();
+    const std::string& request_type_url() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_request_type_url(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_request_type_url();
+    [[nodiscard]] std::string* release_request_type_url();
+    void set_allocated_request_type_url(std::string* request_type_url);
+    private:
+    const std::string& _internal_request_type_url() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_request_type_url(const std::string& value);
+    std::string* _internal_mutable_request_type_url();
+    public:
 
-  // optional string response_type_url = 4;
-  bool has_response_type_url() const;
-  private:
-  bool _internal_has_response_type_url() const;
-  public:
-  void clear_response_type_url();
-  const std::string& response_type_url() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_response_type_url(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_response_type_url();
-  [[nodiscard]] std::string* release_response_type_url();
-  void set_allocated_response_type_url(std::string* response_type_url);
-  private:
-  const std::string& _internal_response_type_url() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_response_type_url(const std::string& value);
-  std::string* _internal_mutable_response_type_url();
-  public:
+    // optional string response_type_url = 4;
+    bool has_response_type_url() const;
+    private:
+    bool _internal_has_response_type_url() const;
+    public:
+    void clear_response_type_url();
+    const std::string& response_type_url() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_response_type_url(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_response_type_url();
+    [[nodiscard]] std::string* release_response_type_url();
+    void set_allocated_response_type_url(std::string* response_type_url);
+    private:
+    const std::string& _internal_response_type_url() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_response_type_url(const std::string& value);
+    std::string* _internal_mutable_response_type_url();
+    public:
 
-  // optional bool request_streaming = 3;
-  bool has_request_streaming() const;
-  private:
-  bool _internal_has_request_streaming() const;
-  public:
-  void clear_request_streaming();
-  bool request_streaming() const;
-  void set_request_streaming(bool value);
-  private:
-  bool _internal_request_streaming() const;
-  void _internal_set_request_streaming(bool value);
-  public:
+    // optional bool request_streaming = 3;
+    bool has_request_streaming() const;
+    private:
+    bool _internal_has_request_streaming() const;
+    public:
+    void clear_request_streaming();
+    bool request_streaming() const;
+    void set_request_streaming(bool value);
+    private:
+    bool _internal_request_streaming() const;
+    void _internal_set_request_streaming(bool value);
+    public:
 
-  // optional bool response_streaming = 5;
-  bool has_response_streaming() const;
-  private:
-  bool _internal_has_response_streaming() const;
-  public:
-  void clear_response_streaming();
-  bool response_streaming() const;
-  void set_response_streaming(bool value);
-  private:
-  bool _internal_response_streaming() const;
-  void _internal_set_response_streaming(bool value);
-  public:
+    // optional bool response_streaming = 5;
+    bool has_response_streaming() const;
+    private:
+    bool _internal_has_response_streaming() const;
+    public:
+    void clear_response_streaming();
+    bool response_streaming() const;
+    void set_response_streaming(bool value);
+    private:
+    bool _internal_response_streaming() const;
+    void _internal_set_response_streaming(bool value);
+    public:
 
-  // optional .shark.Syntax syntax = 7;
-  bool has_syntax() const;
-  private:
-  bool _internal_has_syntax() const;
-  public:
-  void clear_syntax();
-  ::shark::Syntax syntax() const;
-  void set_syntax(::shark::Syntax value);
-  private:
-  ::shark::Syntax _internal_syntax() const;
-  void _internal_set_syntax(::shark::Syntax value);
-  public:
+    // optional .shark.Syntax syntax = 7;
+    bool has_syntax() const;
+    private:
+    bool _internal_has_syntax() const;
+    public:
+    void clear_syntax();
+    ::shark::Syntax syntax() const;
+    void set_syntax(::shark::Syntax value);
+    private:
+    ::shark::Syntax _internal_syntax() const;
+    void _internal_set_syntax(::shark::Syntax value);
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Method)
+    // @@protoc_insertion_point(class_scope:shark.Method)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr request_type_url_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr response_type_url_;
-    bool request_streaming_;
-    bool response_streaming_;
-    int syntax_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fapi_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::RepeatedPtrField< ::shark::Option > options_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr request_type_url_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr response_type_url_;
+        bool request_streaming_;
+        bool response_streaming_;
+        int syntax_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fapi_2eshark;
 };
 // -------------------------------------------------------------------
 
 class Mixin final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Mixin) */ {
  public:
-  inline Mixin() : Mixin(nullptr) {}
-  ~Mixin() override;
-  explicit constexpr Mixin(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
+    inline Mixin() : Mixin(nullptr) {}
+    ~Mixin() override;
+    explicit constexpr Mixin(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-  Mixin(const Mixin& from);
-  Mixin(Mixin&& from) noexcept
-    : Mixin() {
-    *this = ::std::move(from);
-  }
+    Mixin(const Mixin& from);
+    Mixin(Mixin&& from) noexcept
+      : Mixin() {
+      *this = ::std::move(from);
+    }
 
-  inline Mixin& operator=(const Mixin& from) {
-    CopyFrom(from);
-    return *this;
-  }
-  inline Mixin& operator=(Mixin&& from) noexcept {
-    if (this == &from) return *this;
-    if (GetOwningArena() == from.GetOwningArena()
-  #ifdef SHARK_FORCE_COPY_IN_MOVE
-        && GetOwningArena() != nullptr
-  #endif  // !SHARK_FORCE_COPY_IN_MOVE
-    ) {
-      InternalSwap(&from);
-    } else {
+    inline Mixin& operator=(const Mixin& from) {
       CopyFrom(from);
+      return *this;
     }
-    return *this;
-  }
+    inline Mixin& operator=(Mixin&& from) noexcept {
+      if (this == &from) return *this;
+      if (GetOwningArena() == from.GetOwningArena()
+    #ifdef SHARK_FORCE_COPY_IN_MOVE
+          && GetOwningArena() != nullptr
+    #endif  // !SHARK_FORCE_COPY_IN_MOVE
+      ) {
+        InternalSwap(&from);
+      } else {
+        CopyFrom(from);
+      }
+      return *this;
+    }
 
-  inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-    return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-  }
-  inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-    return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-  }
+    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
+      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
+    }
+    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
+      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
+    }
 
-  static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-    return GetDescriptor();
-  }
-  static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-    return default_instance().GetMetadata().descriptor;
-  }
-  static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-    return default_instance().GetMetadata().reflection;
-  }
-  static const Mixin& default_instance() {
-    return *internal_default_instance();
-  }
-  static inline const Mixin* internal_default_instance() {
-    return reinterpret_cast<const Mixin*>(
-               &_Mixin_default_instance_);
-  }
-  static constexpr int kIndexInFileMessages =
-    2;
+    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
+      return GetDescriptor();
+    }
+    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
+      return default_instance().GetMetadata().descriptor;
+    }
+    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
+      return default_instance().GetMetadata().reflection;
+    }
+    static const Mixin& default_instance() {
+      return *internal_default_instance();
+    }
+    static inline const Mixin* internal_default_instance() {
+      return reinterpret_cast<const Mixin*>(
+                 &_Mixin_default_instance_);
+    }
+    static constexpr int kIndexInFileMessages =
+      2;
 
-  friend void swap(Mixin& a, Mixin& b) {
-    a.Swap(&b);
-  }
-  inline void Swap(Mixin* other) {
-    if (other == this) return;
-  #ifdef SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() != nullptr &&
-        GetOwningArena() == other->GetOwningArena()) {
-   #else  // SHARK_FORCE_COPY_IN_SWAP
-    if (GetOwningArena() == other->GetOwningArena()) {
-  #endif  // !SHARK_FORCE_COPY_IN_SWAP
+    friend void swap(Mixin& a, Mixin& b) {
+      a.Swap(&b);
+    }
+    inline void Swap(Mixin* other) {
+      if (other == this) return;
+    #ifdef SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() != nullptr &&
+          GetOwningArena() == other->GetOwningArena()) {
+     #else  // SHARK_FORCE_COPY_IN_SWAP
+      if (GetOwningArena() == other->GetOwningArena()) {
+    #endif  // !SHARK_FORCE_COPY_IN_SWAP
+        InternalSwap(other);
+      } else {
+        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
+      }
+    }
+    void UnsafeArenaSwap(Mixin* other) {
+      if (other == this) return;
+      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
       InternalSwap(other);
-    } else {
-      ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
     }
-  }
-  void UnsafeArenaSwap(Mixin* other) {
-    if (other == this) return;
-    GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-    InternalSwap(other);
-  }
 
-  // implements Message ----------------------------------------------
+    // implements Message ----------------------------------------------
 
-  Mixin* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-    return CreateMaybeMessage<Mixin>(arena);
-  }
-  using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-  void CopyFrom(const Mixin& from);
-  using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-  void MergeFrom( const Mixin& from) {
-    Mixin::MergeImpl(*this, from);
-  }
-  private:
-  static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-  public:
-  SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-  bool IsInitialized() const final;
+    Mixin* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
+      return CreateMaybeMessage<Mixin>(arena);
+    }
+    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
+    void CopyFrom(const Mixin& from);
+    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
+    void MergeFrom( const Mixin& from) {
+      Mixin::MergeImpl(*this, from);
+    }
+    private:
+    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
+    public:
+    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
+    bool IsInitialized() const final;
 
-  size_t ByteSizeLong() const final;
-  const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-  uint8_t* _InternalSerialize(
-      uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-  int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
+    size_t ByteSizeLong() const final;
+    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
+    uint8_t* _InternalSerialize(
+        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
+    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
 
-  private:
-  void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-  void SharedDtor();
-  void SetCachedSize(int size) const final;
-  void InternalSwap(Mixin* other);
+    private:
+    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
+    void SharedDtor();
+    void SetCachedSize(int size) const final;
+    void InternalSwap(Mixin* other);
 
-  private:
-  friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-  static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-    return "shark.Mixin";
-  }
-  protected:
-  explicit Mixin(::SHARK_NAMESPACE_ID::Arena* arena,
-                       bool is_message_owned = false);
-  public:
+    private:
+    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
+    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
+      return "shark.Mixin";
+    }
+    protected:
+    explicit Mixin(::SHARK_NAMESPACE_ID::Arena* arena,
+                         bool is_message_owned = false);
+    public:
 
-  static const ClassData _class_data_;
-  const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
+    static const ClassData _class_data_;
+    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
 
-  ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
+    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
 
-  // nested types ----------------------------------------------------
+    // nested types ----------------------------------------------------
 
-  // accessors -------------------------------------------------------
+    // accessors -------------------------------------------------------
 
-  enum : int {
-    kNameFieldNumber = 1,
-    kRootFieldNumber = 2,
-  };
-  // optional string name = 1;
-  bool has_name() const;
-  private:
-  bool _internal_has_name() const;
-  public:
-  void clear_name();
-  const std::string& name() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_name(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_name();
-  [[nodiscard]] std::string* release_name();
-  void set_allocated_name(std::string* name);
-  private:
-  const std::string& _internal_name() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
-  std::string* _internal_mutable_name();
-  public:
+    enum : int {
+      kNameFieldNumber = 1,
+      kRootFieldNumber = 2,
+    };
+    // optional string name = 1;
+    bool has_name() const;
+    private:
+    bool _internal_has_name() const;
+    public:
+    void clear_name();
+    const std::string& name() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_name(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_name();
+    [[nodiscard]] std::string* release_name();
+    void set_allocated_name(std::string* name);
+    private:
+    const std::string& _internal_name() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_name(const std::string& value);
+    std::string* _internal_mutable_name();
+    public:
 
-  // optional string root = 2;
-  bool has_root() const;
-  private:
-  bool _internal_has_root() const;
-  public:
-  void clear_root();
-  const std::string& root() const;
-  template <typename ArgT0 = const std::string&, typename... ArgT>
-  void set_root(ArgT0&& arg0, ArgT... args);
-  std::string* mutable_root();
-  [[nodiscard]] std::string* release_root();
-  void set_allocated_root(std::string* root);
-  private:
-  const std::string& _internal_root() const;
-  inline SHARK_ALWAYS_INLINE void _internal_set_root(const std::string& value);
-  std::string* _internal_mutable_root();
-  public:
+    // optional string root = 2;
+    bool has_root() const;
+    private:
+    bool _internal_has_root() const;
+    public:
+    void clear_root();
+    const std::string& root() const;
+    template <typename ArgT0 = const std::string&, typename... ArgT>
+    void set_root(ArgT0&& arg0, ArgT... args);
+    std::string* mutable_root();
+    [[nodiscard]] std::string* release_root();
+    void set_allocated_root(std::string* root);
+    private:
+    const std::string& _internal_root() const;
+    inline SHARK_ALWAYS_INLINE void _internal_set_root(const std::string& value);
+    std::string* _internal_mutable_root();
+    public:
 
-  // @@protoc_insertion_point(class_scope:shark.Mixin)
+    // @@protoc_insertion_point(class_scope:shark.Mixin)
  private:
-  class _Internal;
+    class _Internal;
 
-  template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-  typedef void InternalArenaConstructable_;
-  typedef void DestructorSkippable_;
-  struct Impl_ {
-    ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-    mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
-    ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr root_;
-  };
-  union { Impl_ _impl_; };
-  friend struct ::TableStruct_shark_2ftypes_2fapi_2eshark;
+    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
+    typedef void InternalArenaConstructable_;
+    typedef void DestructorSkippable_;
+    struct Impl_ {
+        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
+        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr name_;
+        ::SHARK_NAMESPACE_ID::internal::ArenaStringPtr root_;
+    };
+    union { Impl_ _impl_; };
+    friend struct ::TableStruct_shark_2ftypes_2fapi_2eshark;
 };
 // ===================================================================
 
@@ -818,8 +819,8 @@ inline bool Api::has_name() const {
   return _internal_has_name();
 }
 inline void Api::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Api::name() const {
   // @@protoc_insertion_point(field_get:shark.Api.name)
@@ -885,7 +886,7 @@ inline int Api::methods_size() const {
   return _internal_methods_size();
 }
 inline void Api::clear_methods() {
-  _impl_.methods_.Clear();
+    _impl_.methods_.Clear();
 }
 inline ::shark::Method* Api::mutable_methods(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Api.methods)
@@ -963,8 +964,8 @@ inline bool Api::has_version() const {
   return _internal_has_version();
 }
 inline void Api::clear_version() {
-  _impl_.version_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.version_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& Api::version() const {
   // @@protoc_insertion_point(field_get:shark.Api.version)
@@ -1117,7 +1118,7 @@ inline int Api::mixins_size() const {
   return _internal_mixins_size();
 }
 inline void Api::clear_mixins() {
-  _impl_.mixins_.Clear();
+    _impl_.mixins_.Clear();
 }
 inline ::shark::Mixin* Api::mutable_mixins(int index) {
   // @@protoc_insertion_point(field_mutable:shark.Api.mixins)
@@ -1158,8 +1159,8 @@ inline bool Api::has_syntax() const {
   return _internal_has_syntax();
 }
 inline void Api::clear_syntax() {
-  _impl_.syntax_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_.syntax_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline ::shark::Syntax Api::_internal_syntax() const {
   return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
@@ -1190,8 +1191,8 @@ inline bool Method::has_name() const {
   return _internal_has_name();
 }
 inline void Method::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Method::name() const {
   // @@protoc_insertion_point(field_get:shark.Method.name)
@@ -1258,8 +1259,8 @@ inline bool Method::has_request_type_url() const {
   return _internal_has_request_type_url();
 }
 inline void Method::clear_request_type_url() {
-  _impl_.request_type_url_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.request_type_url_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& Method::request_type_url() const {
   // @@protoc_insertion_point(field_get:shark.Method.request_type_url)
@@ -1326,8 +1327,8 @@ inline bool Method::has_request_streaming() const {
   return _internal_has_request_streaming();
 }
 inline void Method::clear_request_streaming() {
-  _impl_.request_streaming_ = false;
-  _impl_._has_bits_[0] &= ~0x00000008u;
+    _impl_.request_streaming_ = false;
+    _impl_._has_bits_[0] &= ~0x00000008u;
 }
 inline bool Method::_internal_request_streaming() const {
   return _impl_.request_streaming_;
@@ -1354,8 +1355,8 @@ inline bool Method::has_response_type_url() const {
   return _internal_has_response_type_url();
 }
 inline void Method::clear_response_type_url() {
-  _impl_.response_type_url_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000004u;
+    _impl_.response_type_url_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000004u;
 }
 inline const std::string& Method::response_type_url() const {
   // @@protoc_insertion_point(field_get:shark.Method.response_type_url)
@@ -1422,8 +1423,8 @@ inline bool Method::has_response_streaming() const {
   return _internal_has_response_streaming();
 }
 inline void Method::clear_response_streaming() {
-  _impl_.response_streaming_ = false;
-  _impl_._has_bits_[0] &= ~0x00000010u;
+    _impl_.response_streaming_ = false;
+    _impl_._has_bits_[0] &= ~0x00000010u;
 }
 inline bool Method::_internal_response_streaming() const {
   return _impl_.response_streaming_;
@@ -1487,8 +1488,8 @@ inline bool Method::has_syntax() const {
   return _internal_has_syntax();
 }
 inline void Method::clear_syntax() {
-  _impl_.syntax_ = 0;
-  _impl_._has_bits_[0] &= ~0x00000020u;
+    _impl_.syntax_ = 0;
+    _impl_._has_bits_[0] &= ~0x00000020u;
 }
 inline ::shark::Syntax Method::_internal_syntax() const {
   return static_cast<::shark::Syntax>(static_cast<int32_t>(_impl_.syntax_));
@@ -1519,8 +1520,8 @@ inline bool Mixin::has_name() const {
   return _internal_has_name();
 }
 inline void Mixin::clear_name() {
-  _impl_.name_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000001u;
+    _impl_.name_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000001u;
 }
 inline const std::string& Mixin::name() const {
   // @@protoc_insertion_point(field_get:shark.Mixin.name)
@@ -1587,8 +1588,8 @@ inline bool Mixin::has_root() const {
   return _internal_has_root();
 }
 inline void Mixin::clear_root() {
-  _impl_.root_.ClearToEmpty();
-  _impl_._has_bits_[0] &= ~0x00000002u;
+    _impl_.root_.ClearToEmpty();
+    _impl_._has_bits_[0] &= ~0x00000002u;
 }
 inline const std::string& Mixin::root() const {
   // @@protoc_insertion_point(field_get:shark.Mixin.root)
