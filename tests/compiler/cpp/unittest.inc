@@ -1016,20 +1016,20 @@ TEST(GENERATED_ENUM_TEST_NAME, EnumValuesAsSwitchCases) {
 
 TEST(GENERATED_ENUM_TEST_NAME, IsValidValue) {
   // Test enum IsValidValue.
-  EXPECT_TRUE(UNITTEST::TestAllTypes::NestedEnum_IsValid(1));
-  EXPECT_TRUE(UNITTEST::TestAllTypes::NestedEnum_IsValid(2));
-  EXPECT_TRUE(UNITTEST::TestAllTypes::NestedEnum_IsValid(3));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::is_valid(1));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::is_valid(2));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::is_valid(3));
 
-  EXPECT_FALSE(UNITTEST::TestAllTypes::NestedEnum_IsValid(0));
-  EXPECT_FALSE(UNITTEST::TestAllTypes::NestedEnum_IsValid(4));
+  EXPECT_FALSE(shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::is_valid(0));
+  EXPECT_FALSE(shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::is_valid(4));
 
   // Make sure it also works when there are dups.
-  EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_IsValid(1));
-  EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_IsValid(2));
-  EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_IsValid(3));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::is_valid(1));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::is_valid(2));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::is_valid(3));
 
-  EXPECT_FALSE(UNITTEST::TestEnumWithDupValue_IsValid(0));
-  EXPECT_FALSE(UNITTEST::TestEnumWithDupValue_IsValid(4));
+  EXPECT_FALSE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::is_valid(0));
+  EXPECT_FALSE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::is_valid(4));
 }
 
 TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
@@ -1074,35 +1074,35 @@ TEST(GENERATED_ENUM_TEST_NAME, MinAndMax) {
 
 TEST(GENERATED_ENUM_TEST_NAME, Name) {
   // "Names" in the presence of dup values map to the first alias.
-  EXPECT_EQ("FOO1", UNITTEST::TestEnumWithDupValue_Name(UNITTEST::TestEnumWithDupValue::FOO1));
-  EXPECT_EQ("FOO1", UNITTEST::TestEnumWithDupValue_Name(UNITTEST::TestEnumWithDupValue::FOO2));
+  EXPECT_EQ("FOO1", shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_name(UNITTEST::TestEnumWithDupValue::FOO1));
+  EXPECT_EQ("FOO1", shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_name(UNITTEST::TestEnumWithDupValue::FOO2));
 
-  EXPECT_EQ("SPARSE_A", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_A));
-  EXPECT_EQ("SPARSE_B", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_B));
-  EXPECT_EQ("SPARSE_C", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_C));
-  EXPECT_EQ("SPARSE_D", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_D));
-  EXPECT_EQ("SPARSE_E", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_E));
-  EXPECT_EQ("SPARSE_F", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_F));
-  EXPECT_EQ("SPARSE_G", UNITTEST::TestSparseEnum_Name(UNITTEST::TestSparseEnum::SPARSE_G));
+  EXPECT_EQ("SPARSE_A", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_A));
+  EXPECT_EQ("SPARSE_B", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_B));
+  EXPECT_EQ("SPARSE_C", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_C));
+  EXPECT_EQ("SPARSE_D", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_D));
+  EXPECT_EQ("SPARSE_E", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_E));
+  EXPECT_EQ("SPARSE_F", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_F));
+  EXPECT_EQ("SPARSE_G", shark::EnumTrait<UNITTEST::TestSparseEnum>::enum_name(UNITTEST::TestSparseEnum::SPARSE_G));
 }
 
 TEST(GENERATED_ENUM_TEST_NAME, Parse) {
   UNITTEST::TestEnumWithDupValue dup_value = UNITTEST::TestEnumWithDupValue::FOO1;
-  EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_Parse("FOO1", &dup_value));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_parse("FOO1", &dup_value));
   EXPECT_EQ(UNITTEST::TestEnumWithDupValue::FOO1, dup_value);
-  EXPECT_TRUE(UNITTEST::TestEnumWithDupValue_Parse("FOO2", &dup_value));
+  EXPECT_TRUE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_parse("FOO2", &dup_value));
   EXPECT_EQ(UNITTEST::TestEnumWithDupValue::FOO2, dup_value);
-  EXPECT_FALSE(UNITTEST::TestEnumWithDupValue_Parse("FOO", &dup_value));
+  EXPECT_FALSE(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::enum_parse("FOO", &dup_value));
 }
 
 TEST(GENERATED_ENUM_TEST_NAME, GetEnumDescriptor) {
-  EXPECT_EQ(UNITTEST::TestAllTypes::NestedEnum_descriptor(),
+  EXPECT_EQ(shark::EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::descriptor(),
             EnumTrait<UNITTEST::TestAllTypes::NestedEnum>::descriptor());
-  EXPECT_EQ(UNITTEST::ForeignEnum_descriptor(),
+  EXPECT_EQ(shark::EnumTrait<UNITTEST::ForeignEnum>::descriptor(),
             EnumTrait<UNITTEST::ForeignEnum>::descriptor());
-  EXPECT_EQ(UNITTEST::TestEnumWithDupValue_descriptor(),
+  EXPECT_EQ(shark::EnumTrait<UNITTEST::TestEnumWithDupValue>::descriptor(),
             EnumTrait<UNITTEST::TestEnumWithDupValue>::descriptor());
-  EXPECT_EQ(UNITTEST::TestSparseEnum_descriptor(),
+  EXPECT_EQ(shark::EnumTrait<UNITTEST::TestSparseEnum>::descriptor(),
             EnumTrait<UNITTEST::TestSparseEnum>::descriptor());
 }
 

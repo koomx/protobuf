@@ -73,16 +73,36 @@ namespace shark {
 enum class NullValue : int32_t {
     NULL_VALUE = 0
 };
-constexpr int32_t NullValue_to_underlying(NullValue value) {
-  return static_cast<int32_t>(value);
-}
-inline bool NullValue_FitsUnderlying(int value) {
-  return true;
-}
-inline bool NullValue_FitsWire(::uint64_t value) {
-  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && NullValue_FitsUnderlying(static_cast<int>(value));
-}
+}  // namespace shark
+
+SHARK_NAMESPACE_OPEN
+
+    template <>
+    struct EnumTraitImpl<::shark::NullValue> {
+        using underlying = int32_t;
+        static constexpr ::shark::NullValue enum_min = ::shark::NullValue::NULL_VALUE;
+        static constexpr ::shark::NullValue enum_max = ::shark::NullValue::NULL_VALUE;
+        static constexpr uint32_t value_count = 1;
+        static constexpr bool has_descriptor = true;
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
+        static const std::string& enum_name(::shark::NullValue e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
+        }
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::NullValue> : ::std::true_type {};
+
+SHARK_NAMESPACE_CLOSE
 // ===================================================================
+namespace shark {
 
 class Struct_FieldsEntry_DoNotUse : public ::SHARK_NAMESPACE_ID::internal::MapEntry<Struct_FieldsEntry_DoNotUse, 
     std::string, ::shark::Value,
@@ -801,7 +821,7 @@ inline void Value::_internal_set_null_value(::shark::NullValue value) {
     clear_kind();
     set_has_null_value();
   }
-  _impl_.kind_.null_value_ = static_cast<int>(::shark::NullValue_to_underlying(value));
+  _impl_.kind_.null_value_ = static_cast<int>(::shark::EnumTrait<::shark::NullValue>::to_underlying(value));
 }
 inline void Value::set_null_value(::shark::NullValue value) {
   _internal_set_null_value(value);
@@ -1175,33 +1195,6 @@ ListValue::values() const {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace shark
-
-SHARK_NAMESPACE_OPEN
-
-    template <>
-    struct EnumTraitImpl<::shark::NullValue> {
-        using underlying = int32_t;
-        static constexpr ::shark::NullValue enum_min = ::shark::NullValue::NULL_VALUE;
-        static constexpr ::shark::NullValue enum_max = ::shark::NullValue::NULL_VALUE;
-        static constexpr uint32_t value_count = 1;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::NullValue e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
-    template <> struct IsSharkEnum< ::shark::NullValue> : ::std::true_type {};
-
-SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 

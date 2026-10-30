@@ -336,7 +336,7 @@ namespace shark::internal {
 
             template <typename UnknownType>
             const char* ParseWithEnumValidation(const char* ptr, ParseContext* ctx,
-                bool (*is_valid)(int),
+                bool (*is_valid)(int64_t),
                 uint32_t field_num,
                 InternalMetadata* metadata) {
                 auto entry = NewEntry();

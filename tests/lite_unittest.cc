@@ -1146,96 +1146,96 @@ TEST(Lite, DebugString) {
 }
 
 TEST(Lite, EnumValueToName) {
-  EXPECT_EQ("FOREIGN_LITE_FOO", sharkbuf_unittest::ForeignEnumLite_Name(
+  EXPECT_EQ("FOREIGN_LITE_FOO", shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_name(
                                     sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_FOO));
-  EXPECT_EQ("FOREIGN_LITE_BAR", sharkbuf_unittest::ForeignEnumLite_Name(
+  EXPECT_EQ("FOREIGN_LITE_BAR", shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_name(
                                     sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAR));
-  EXPECT_EQ("FOREIGN_LITE_BAZ", sharkbuf_unittest::ForeignEnumLite_Name(
+  EXPECT_EQ("FOREIGN_LITE_BAZ", shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_name(
                                     sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAZ));
-  EXPECT_EQ("", sharkbuf_unittest::ForeignEnumLite_Name(0));
-  EXPECT_EQ("", sharkbuf_unittest::ForeignEnumLite_Name(999));
+  EXPECT_EQ("", shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_name(0));
+  EXPECT_EQ("", shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_name(999));
 }
 
 TEST(Lite, NestedEnumValueToName) {
-  EXPECT_EQ("FOO", sharkbuf_unittest::TestAllTypesLite::NestedEnum_Name(
+  EXPECT_EQ("FOO", shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_name(
                        sharkbuf_unittest::TestAllTypesLite_NestedEnum::FOO));
-  EXPECT_EQ("BAR", sharkbuf_unittest::TestAllTypesLite::NestedEnum_Name(
+  EXPECT_EQ("BAR", shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_name(
                        sharkbuf_unittest::TestAllTypesLite_NestedEnum::BAR));
-  EXPECT_EQ("BAZ", sharkbuf_unittest::TestAllTypesLite::NestedEnum_Name(
+  EXPECT_EQ("BAZ", shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_name(
                        sharkbuf_unittest::TestAllTypesLite_NestedEnum::BAZ));
-  EXPECT_EQ("", sharkbuf_unittest::TestAllTypesLite::NestedEnum_Name(0));
-  EXPECT_EQ("", sharkbuf_unittest::TestAllTypesLite::NestedEnum_Name(999));
+  EXPECT_EQ("", shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_name(0));
+  EXPECT_EQ("", shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_name(999));
 }
 
 TEST(Lite, EnumNameToValue) {
   sharkbuf_unittest::ForeignEnumLite value;
 
   ASSERT_TRUE(
-      sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_FOO", &value));
+      shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_parse("FOREIGN_LITE_FOO", &value));
   EXPECT_EQ(sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_FOO, value);
 
   ASSERT_TRUE(
-      sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_BAR", &value));
+      shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_parse("FOREIGN_LITE_BAR", &value));
   EXPECT_EQ(sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAR, value);
 
   ASSERT_TRUE(
-      sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_BAZ", &value));
+      shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_parse("FOREIGN_LITE_BAZ", &value));
   EXPECT_EQ(sharkbuf_unittest::ForeignEnumLite::FOREIGN_LITE_BAZ, value);
 
   // Non-existent values
-  EXPECT_FALSE(sharkbuf_unittest::ForeignEnumLite_Parse("E", &value));
+  EXPECT_FALSE(shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_parse("E", &value));
   EXPECT_FALSE(
-      sharkbuf_unittest::ForeignEnumLite_Parse("FOREIGN_LITE_C", &value));
-  EXPECT_FALSE(sharkbuf_unittest::ForeignEnumLite_Parse("G", &value));
+      shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_parse("FOREIGN_LITE_C", &value));
+  EXPECT_FALSE(shark::EnumTrait<sharkbuf_unittest::ForeignEnumLite>::enum_parse("G", &value));
 }
 
 TEST(Lite, NestedEnumNameToValue) {
   sharkbuf_unittest::TestAllTypesLite::NestedEnum value;
 
   ASSERT_TRUE(
-      sharkbuf_unittest::TestAllTypesLite::NestedEnum_Parse("FOO", &value));
+      shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_parse("FOO", &value));
   EXPECT_EQ(sharkbuf_unittest::TestAllTypesLite_NestedEnum::FOO, value);
 
   ASSERT_TRUE(
-      sharkbuf_unittest::TestAllTypesLite::NestedEnum_Parse("BAR", &value));
+      shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_parse("BAR", &value));
   EXPECT_EQ(sharkbuf_unittest::TestAllTypesLite_NestedEnum::BAR, value);
 
   ASSERT_TRUE(
-      sharkbuf_unittest::TestAllTypesLite::NestedEnum_Parse("BAZ", &value));
+      shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_parse("BAZ", &value));
   EXPECT_EQ(sharkbuf_unittest::TestAllTypesLite_NestedEnum::BAZ, value);
 
   // Non-existent values
   EXPECT_FALSE(
-      sharkbuf_unittest::TestAllTypesLite::NestedEnum_Parse("A", &value));
+      shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_parse("A", &value));
   EXPECT_FALSE(
-      sharkbuf_unittest::TestAllTypesLite::NestedEnum_Parse("C", &value));
+      shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_parse("C", &value));
   EXPECT_FALSE(
-      sharkbuf_unittest::TestAllTypesLite::NestedEnum_Parse("G", &value));
+      shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_parse("G", &value));
 }
 
 TEST(Lite, AliasedEnum) {
   // Enums with allow_alias = true can have multiple entries with the same
   // value.
-  EXPECT_EQ("FOO1", sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Name(
+  EXPECT_EQ("FOO1", shark::EnumTrait<sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite>::enum_name(
                         sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::FOO1));
-  EXPECT_EQ("FOO1", sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Name(
+  EXPECT_EQ("FOO1", shark::EnumTrait<sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite>::enum_name(
                         sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::FOO2));
-  EXPECT_EQ("BAR1", sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Name(
+  EXPECT_EQ("BAR1", shark::EnumTrait<sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite>::enum_name(
                         sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::BAR1));
-  EXPECT_EQ("BAR1", sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Name(
+  EXPECT_EQ("BAR1", shark::EnumTrait<sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite>::enum_name(
                         sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::BAR2));
-  EXPECT_EQ("BAZ", sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Name(
+  EXPECT_EQ("BAZ", shark::EnumTrait<sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite>::enum_name(
                        sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::BAZ));
-  EXPECT_EQ("", sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Name(999));
+  EXPECT_EQ("", shark::EnumTrait<sharkbuf_unittest::TestAllTypesLite::NestedEnum>::enum_name(999));
 
   sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite value;
   ASSERT_TRUE(
-      sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Parse("FOO1", &value));
+      shark::EnumTrait<sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite>::enum_parse("FOO1", &value));
   EXPECT_EQ(sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::FOO1, value);
 
   value = static_cast<sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite>(0);
   ASSERT_TRUE(
-      sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite_Parse("FOO2", &value));
+      shark::EnumTrait<sharkbuf_unittest::DupEnum::TestEnumWithDupValueLite>::enum_parse("FOO2", &value));
   EXPECT_EQ(sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::FOO2, value);
 }
 

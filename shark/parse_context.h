@@ -980,7 +980,7 @@ template <typename UnknownFieldsT, typename T>
 template <typename T>
 [[nodiscard]] const char* PackedEnumParser(void* object, const char* ptr,
                                                 ParseContext* ctx,
-                                                bool (*is_valid)(int),
+                                                bool (*is_valid)(int64_t),
                                                 InternalMetadata* metadata,
                                                 int field_num) {
   return ctx->ReadPackedVarint(

@@ -681,7 +681,7 @@ namespace shark {
             }
             template <typename UnknownType>
             const char* ParseWithEnumValidation(const char* ptr, ParseContext* ctx,
-                bool (*is_valid)(int), uint32_t field_num,
+                bool (*is_valid)(int64_t), uint32_t field_num,
                 InternalMetadata* metadata) {
                 return impl_.template ParseWithEnumValidation<UnknownType>(
                     ptr, ctx, is_valid, field_num, metadata);

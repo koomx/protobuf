@@ -120,7 +120,7 @@ namespace shark::internal {
 
         template <typename UnknownType>
         const char* ParseWithEnumValidation(const char* ptr, ParseContext* ctx,
-            bool (*is_valid)(int), uint32_t field_num,
+            bool (*is_valid)(int64_t), uint32_t field_num,
             InternalMetadata* metadata) {
             typename Derived::template Parser<MapFieldLite, Map<Key, T>> parser(this);
             return parser.template ParseWithEnumValidation<UnknownType>(
@@ -146,7 +146,7 @@ namespace shark::internal {
                 ptr, ctx, is_valid, field_num, metadata);
         }
         T* map_field;
-        bool (*is_valid)(int);
+        bool (*is_valid)(int64_t);
         uint32_t field_num;
         InternalMetadata* metadata;
     };
@@ -156,7 +156,7 @@ namespace shark::internal {
     // generated code
     template <typename UnknownType, typename T>
     EnumParseWrapper<UnknownType, T> InitEnumParseWrapper(
-        T* map_field, bool (*is_valid)(int), uint32_t field_num,
+        T* map_field, bool (*is_valid)(int64_t), uint32_t field_num,
         InternalMetadata* metadata) {
         return EnumParseWrapper<UnknownType, T> { map_field, is_valid, field_num,
             metadata };

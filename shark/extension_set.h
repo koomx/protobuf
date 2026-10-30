@@ -91,7 +91,7 @@ typedef uint8_t FieldTypeUint8;
 // A function which, given an integer value, returns true if the number
 // matches one of the defined values for the corresponding enum type.  This
 // is used with RegisterEnumExtension, below.
-typedef bool EnumValidityFunc(int number);
+typedef bool EnumValidityFunc(int64_t number);
 
 // Version of the above which takes an argument.  This is needed to deal with
 // extensions that are not compiled in.
@@ -504,10 +504,10 @@ class SHARK_EXPORT ExtensionSet {
   template <typename Type>
   friend class RepeatedPrimitiveTypeTraits;
 
-  template <typename Type, bool IsValid(int)>
+  template <typename Type, bool IsValid(int64_t)>
   friend class EnumTypeTraits;
 
-  template <typename Type, bool IsValid(int)>
+  template <typename Type, bool IsValid(int64_t)>
   friend class RepeatedEnumTypeTraits;
 
   friend class shark::Reflection;
@@ -1250,7 +1250,7 @@ class SHARK_EXPORT RepeatedStringTypeTraits {
 
 // ExtensionSet represents enums using integers internally, so we have to
 // static_cast around.
-template <typename Type, bool IsValid(int)>
+template <typename Type, bool IsValid(int64_t)>
 class EnumTypeTraits {
  public:
   typedef Type ConstType;
@@ -1280,7 +1280,7 @@ class EnumTypeTraits {
   }
 };
 
-template <typename Type, bool IsValid(int)>
+template <typename Type, bool IsValid(int64_t)>
 class RepeatedEnumTypeTraits {
  public:
   typedef Type ConstType;

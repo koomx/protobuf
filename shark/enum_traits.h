@@ -182,6 +182,12 @@ namespace shark {
             return EnumTraitImpl<E>::enum_name(enum_t_value);
         }
 
+        template<typename T>
+        static inline const std::string& enum_name(T enum_t_value) {
+            static_assert(std::is_integral_v<T> || std::is_enum_v<T>,"must be integer or enum");
+            return EnumTraitImpl<E>::enum_name(static_cast<E>(enum_t_value));
+        }
+
         static inline bool enum_parse(ConstStringParam name, enum_type* value) {
             return EnumTraitImpl<E>::enum_parse(name, value);
         }

@@ -579,7 +579,7 @@ const char* Value::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::NullValue_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::NullValue>::fits_wire(val))) {
                         _internal_set_null_value(static_cast<::shark::NullValue>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());

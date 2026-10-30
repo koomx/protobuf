@@ -478,7 +478,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::Syntax_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::Syntax>::fits_wire(val))) {
                         _internal_set_syntax(static_cast<::shark::Syntax>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(6, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -902,7 +902,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::Field_Kind_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::Field_Kind>::fits_wire(val))) {
                         _internal_set_kind(static_cast<::shark::Field_Kind>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -915,7 +915,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::Field_Cardinality_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::Field_Cardinality>::fits_wire(val))) {
                         _internal_set_cardinality(static_cast<::shark::Field_Cardinality>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(2, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -1484,7 +1484,7 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::Syntax_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::Syntax>::fits_wire(val))) {
                         _internal_set_syntax(static_cast<::shark::Syntax>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(5, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());

@@ -59,7 +59,7 @@ void SetEnumVariables(const FieldDescriptor* descriptor,
   if (IsEnumClass(descriptor->enum_type())) {
     (*variables)["underlying"] = EnumUnderlyingCppType(descriptor->enum_type());
     (*variables)["enum_store"] =
-        "static_cast<int>(" + (*variables)["type"] + "_to_underlying(value))";
+        "static_cast<int>(::shark::EnumTrait<" + (*variables)["type"] + ">::to_underlying(value))";
     (*variables)["enum_load_field"] =
         "static_cast<" + (*variables)["type"] + ">(static_cast<" +
         (*variables)["underlying"] + ">(" + (*variables)["field"] + "))";
@@ -420,7 +420,7 @@ void RepeatedEnumFieldGenerator::GenerateSerializeWithCachedSizesToArray(
         "for (int i = 0, n = this->_internal_$name$_size(); i < n; i++) {\n"
         "  target = stream->EnsureSpace(target);\n"
         "  target = ::_pbi::WireFormatLite::WriteEnumToArray(\n"
-        "      $number$, $type$_to_underlying(this->_internal_$name$(i)), "
+        "      $number$, ::shark::EnumTrait<$type$>::to_underlying(this->_internal_$name$(i)), "
         "target);\n"
         "}\n");
   } else {
@@ -447,7 +447,7 @@ void RepeatedEnumFieldGenerator::GenerateByteSize(io::Printer* printer) const {
       "    $1$(this->_internal_$name$(static_cast<int>(i))));\n"
       "}\n",
       IsEnumClass(descriptor_->enum_type())
-          ? variables_.at("type") + "_to_underlying"
+          ? "::shark::EnumTrait<" +variables_.at("type") + ">::to_underlying"
           : "");
 
   if (descriptor_->is_packed()) {

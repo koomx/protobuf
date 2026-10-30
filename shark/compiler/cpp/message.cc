@@ -251,7 +251,7 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
           "if (raw_$name$ != 0) {\n");
     } else if (field->cpp_type() == FieldCppType::ENUM) {
       format(
-          "if ($1$_to_underlying($prefix$_internal_$name$()) != 0) {\n",
+          "if (shark::EnumTrait<$1$>::to_underlying($prefix$_internal_$name$()) != 0) {\n",
           QualifiedClassName(field->enum_type()));
     } else {
       format("if ($prefix$_internal_$name$() != 0) {\n");

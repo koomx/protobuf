@@ -86,7 +86,9 @@ template<> ::shark::UInt64Value* Arena::CreateMaybeMessage<::shark::UInt64Value>
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+}  // namespace shark
 // ===================================================================
+namespace shark {
 
 class DoubleValue final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.DoubleValue) */ {

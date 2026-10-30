@@ -54,7 +54,9 @@ template<> ::shark::Timestamp* Arena::CreateMaybeMessage<::shark::Timestamp>(Are
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+}  // namespace shark
 // ===================================================================
+namespace shark {
 
 class Timestamp final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Timestamp) */ {

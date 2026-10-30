@@ -54,7 +54,9 @@ template<> ::shark::FieldMask* Arena::CreateMaybeMessage<::shark::FieldMask>(Are
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+}  // namespace shark
 // ===================================================================
+namespace shark {
 
 class FieldMask final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.FieldMask) */ {

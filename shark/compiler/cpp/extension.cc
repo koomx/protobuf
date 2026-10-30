@@ -57,10 +57,10 @@ ExtensionGenerator::ExtensionGenerator(const FieldDescriptor* descriptor,
       type_traits_.append("EnumTypeTraits< ");
       type_traits_.append(ClassName(descriptor_->enum_type(), true));
       type_traits_.append(", ");
-      type_traits_.append(ClassName(descriptor_->enum_type(), true));
+      type_traits_.append("::shark::EnumTrait<" + ClassName(descriptor_->enum_type(), true));
       type_traits_.append(IsEnumClass(descriptor_->enum_type())
-                              ? "_FitsUnderlying>"
-                              : "_IsValid>");
+                              ? ">::fits_underlying>"
+                              : ">::is_valid>");
       break;
     case FieldCppType::STRING:
       type_traits_.append("StringTypeTraits");

@@ -2785,7 +2785,7 @@ const void* Reflection::GetRawRepeatedField(const Message& message,
     ReportReflectionUsageTypeError(descriptor_, field, "GetRawRepeatedField",
                                    cpptype);
   if (ctype >= 0)
-    GOOGLE_CHECK_EQ(FieldOptions_CType_to_underlying(field->options().ctype()),
+    GOOGLE_CHECK_EQ(EnumTrait<FieldOptions_CType>::to_underlying(field->options().ctype()),
                     ctype)
         << "subtype mismatch";
   if (desc != nullptr)
@@ -3231,7 +3231,7 @@ void* Reflection::MutableRawRepeatedString(Message* message,
   (void)is_string;  // Parameter is used by Google-internal code.
   return MutableRawRepeatedField(message, field,
                                  FieldCppType::STRING,
-                                 FieldOptions_CType_to_underlying(
+                                 EnumTrait<FieldOptions_CType>::to_underlying(
                                      FieldOptions::CType::STRING),
                                  nullptr);
 }

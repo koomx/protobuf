@@ -55,7 +55,9 @@ template<> ::shark::Empty* Arena::CreateMaybeMessage<::shark::Empty>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+}  // namespace shark
 // ===================================================================
+namespace shark {
 
 class Empty final :
     public ::SHARK_NAMESPACE_ID::internal::ZeroFieldsBase /* @@protoc_insertion_point(class_definition:shark.Empty) */ {

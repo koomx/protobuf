@@ -73,15 +73,6 @@ enum class SharkType : uint8_t {
     SINT32 = 64,
     SINT64 = 65
 };
-constexpr uint8_t SharkType_to_underlying(SharkType value) {
-  return static_cast<uint8_t>(value);
-}
-inline bool SharkType_FitsUnderlying(int value) {
-  return value >= 0 && value <= 255;
-}
-inline bool SharkType_FitsWire(::uint64_t value) {
-  return value <= 255u;
-}
 enum class SharkCppType : uint8_t {
     BOOL = 1,
     INT8 = 2,
@@ -100,33 +91,6 @@ enum class SharkCppType : uint8_t {
     MESSAGE = 15,
     STRING = 16
 };
-constexpr uint8_t SharkCppType_to_underlying(SharkCppType value) {
-  return static_cast<uint8_t>(value);
-}
-inline bool SharkCppType_FitsUnderlying(int value) {
-  return value >= 0 && value <= 255;
-}
-inline bool SharkCppType_FitsWire(::uint64_t value) {
-  return value <= 255u;
-}
-// ===================================================================
-
-
-// ===================================================================
-
-
-// ===================================================================
-
-#ifdef __GNUC__
-  #pragma GCC diagnostic push
-  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
-#endif  // __GNUC__
-#ifdef __GNUC__
-  #pragma GCC diagnostic pop
-#endif  // __GNUC__
-
-// @@protoc_insertion_point(namespace_scope)
-
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
@@ -177,6 +141,26 @@ SHARK_NAMESPACE_OPEN
     template <> struct IsSharkEnum< ::shark::SharkCppType> : ::std::true_type {};
 
 SHARK_NAMESPACE_CLOSE
+// ===================================================================
+namespace shark {
+
+
+// ===================================================================
+
+
+// ===================================================================
+
+#ifdef __GNUC__
+  #pragma GCC diagnostic push
+  #pragma GCC diagnostic ignored "-Wstrict-aliasing"
+#endif  // __GNUC__
+#ifdef __GNUC__
+  #pragma GCC diagnostic pop
+#endif  // __GNUC__
+
+// @@protoc_insertion_point(namespace_scope)
+
+}  // namespace shark
 
 // @@protoc_insertion_point(global_scope)
 

@@ -208,8 +208,15 @@ namespace shark::compiler::cpp {
             format("\n");
 
             GenerateEnumDefinitions(printer);
+        }
 
-            format(kThickSeparator);
+        // We need to specialize some templates in the shark namespace:
+        GenerateProto2NamespaceEnumSpecializations(printer);
+
+        format(kThickSeparator);
+        {
+
+            NamespaceOpener ns(Namespace(file_, options_), format);
             format("\n");
 
             GenerateMessageDefinitions(printer);
@@ -234,8 +241,6 @@ namespace shark::compiler::cpp {
                 "\n");
         }
 
-        // We need to specialize some templates in the shark namespace:
-        GenerateProto2NamespaceEnumSpecializations(printer);
 
         format(
             "\n"

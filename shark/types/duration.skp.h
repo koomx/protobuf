@@ -54,7 +54,9 @@ template<> ::shark::Duration* Arena::CreateMaybeMessage<::shark::Duration>(Arena
 SHARK_NAMESPACE_CLOSE
 namespace shark {
 
+}  // namespace shark
 // ===================================================================
+namespace shark {
 
 class Duration final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Duration) */ {

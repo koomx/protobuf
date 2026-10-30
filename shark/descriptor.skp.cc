@@ -3556,7 +3556,7 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 32)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_Label_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldDescriptorProto_Label>::fits_wire(val))) {
                         _internal_set_label(static_cast<::shark::FieldDescriptorProto_Label>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(4, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -3569,7 +3569,7 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 40)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::FieldDescriptorProto_Type_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldDescriptorProto_Type>::fits_wire(val))) {
                         _internal_set_type(static_cast<::shark::FieldDescriptorProto_Type>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(5, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -6083,7 +6083,7 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 72)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::FileOptions_OptimizeMode_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FileOptions_OptimizeMode>::fits_wire(val))) {
                         _internal_set_optimize_for(static_cast<::shark::FileOptions_OptimizeMode>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(9, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -6866,7 +6866,7 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::FieldOptions_CType_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldOptions_CType>::fits_wire(val))) {
                         _internal_set_ctype(static_cast<::shark::FieldOptions_CType>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -6906,7 +6906,7 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 48)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::FieldOptions_JSType_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::FieldOptions_JSType>::fits_wire(val))) {
                         _internal_set_jstype(static_cast<::shark::FieldOptions_JSType>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(6, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -7534,7 +7534,7 @@ const char* EnumOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 56)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::EnumUnderlyingType_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::EnumUnderlyingType>::fits_wire(val))) {
                         _internal_set_underlying_type(static_cast<::shark::EnumUnderlyingType>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(7, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
@@ -8361,7 +8361,7 @@ const char* MethodOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext*
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
                     uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
                     CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::MethodOptions_IdempotencyLevel_FitsWire(val))) {
+                    if (SHARK_PREDICT_TRUE(::shark::EnumTrait<::shark::MethodOptions_IdempotencyLevel>::fits_wire(val))) {
                         _internal_set_idempotency_level(static_cast<::shark::MethodOptions_IdempotencyLevel>(val));
                     } else {
                       ::SHARK_NAMESPACE_ID::internal::WriteVarint(34, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());

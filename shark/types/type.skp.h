@@ -99,44 +99,90 @@ enum class Field_Kind : int32_t {
     TYPE_SINT32 = 22,
     TYPE_SINT64 = 23
 };
-constexpr int32_t Field_Kind_to_underlying(Field_Kind value) {
-  return static_cast<int32_t>(value);
-}
-inline bool Field_Kind_FitsUnderlying(int value) {
-  return true;
-}
-inline bool Field_Kind_FitsWire(::uint64_t value) {
-  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Kind_FitsUnderlying(static_cast<int>(value));
-}
 enum class Field_Cardinality : int32_t {
     CARDINALITY_UNKNOWN = 0,
     CARDINALITY_OPTIONAL = 1,
     CARDINALITY_REQUIRED = 2,
     CARDINALITY_REPEATED = 3
 };
-constexpr int32_t Field_Cardinality_to_underlying(Field_Cardinality value) {
-  return static_cast<int32_t>(value);
-}
-inline bool Field_Cardinality_FitsUnderlying(int value) {
-  return true;
-}
-inline bool Field_Cardinality_FitsWire(::uint64_t value) {
-  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Cardinality_FitsUnderlying(static_cast<int>(value));
-}
 enum class Syntax : int32_t {
     SYNTAX_PROTO2 = 0,
     SYNTAX_PROTO3 = 1
 };
-constexpr int32_t Syntax_to_underlying(Syntax value) {
-  return static_cast<int32_t>(value);
-}
-inline bool Syntax_FitsUnderlying(int value) {
-  return true;
-}
-inline bool Syntax_FitsWire(::uint64_t value) {
-  return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Syntax_FitsUnderlying(static_cast<int>(value));
-}
+}  // namespace shark
+
+SHARK_NAMESPACE_OPEN
+
+    template <>
+    struct EnumTraitImpl<::shark::Field_Kind> {
+        using underlying = int32_t;
+        static constexpr ::shark::Field_Kind enum_min = ::shark::Field_Kind::TYPE_UNKNOWN;
+        static constexpr ::shark::Field_Kind enum_max = ::shark::Field_Kind::TYPE_SINT64;
+        static constexpr uint32_t value_count = 24;
+        static constexpr bool has_descriptor = true;
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
+        static const std::string& enum_name(::shark::Field_Kind e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Kind *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
+        }
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::Field_Kind> : ::std::true_type {};
+    template <>
+    struct EnumTraitImpl<::shark::Field_Cardinality> {
+        using underlying = int32_t;
+        static constexpr ::shark::Field_Cardinality enum_min = ::shark::Field_Cardinality::CARDINALITY_UNKNOWN;
+        static constexpr ::shark::Field_Cardinality enum_max = ::shark::Field_Cardinality::CARDINALITY_REPEATED;
+        static constexpr uint32_t value_count = 4;
+        static constexpr bool has_descriptor = true;
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
+        static const std::string& enum_name(::shark::Field_Cardinality e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
+        }
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::Field_Cardinality> : ::std::true_type {};
+    template <>
+    struct EnumTraitImpl<::shark::Syntax> {
+        using underlying = int32_t;
+        static constexpr ::shark::Syntax enum_min = ::shark::Syntax::SYNTAX_PROTO2;
+        static constexpr ::shark::Syntax enum_max = ::shark::Syntax::SYNTAX_PROTO3;
+        static constexpr uint32_t value_count = 2;
+        static constexpr bool has_descriptor = true;
+        static const EnumDescriptor* descriptor();
+        static bool is_valid(int64_t value);
+        static const std::string& enum_name(::shark::Syntax e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
+        }
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
+        }
+    };
+
+    template <> struct IsSharkEnum< ::shark::Syntax> : ::std::true_type {};
+
+SHARK_NAMESPACE_CLOSE
 // ===================================================================
+namespace shark {
 
 class Type final :
     public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.Type) */ {
@@ -1693,7 +1739,7 @@ inline ::shark::Syntax Type::syntax() const {
 }
 inline void Type::_internal_set_syntax(::shark::Syntax value) {
   _impl_._has_bits_[0] |= 0x00000004u;
-  _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
+  _impl_.syntax_ = static_cast<int>(::shark::EnumTrait<::shark::Syntax>::to_underlying(value));
 }
 inline void Type::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
@@ -1725,7 +1771,7 @@ inline ::shark::Field_Kind Field::kind() const {
 }
 inline void Field::_internal_set_kind(::shark::Field_Kind value) {
   _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.kind_ = static_cast<int>(::shark::Field_Kind_to_underlying(value));
+  _impl_.kind_ = static_cast<int>(::shark::EnumTrait<::shark::Field_Kind>::to_underlying(value));
 }
 inline void Field::set_kind(::shark::Field_Kind value) {
   _internal_set_kind(value);
@@ -1753,7 +1799,7 @@ inline ::shark::Field_Cardinality Field::cardinality() const {
 }
 inline void Field::_internal_set_cardinality(::shark::Field_Cardinality value) {
   _impl_._has_bits_[0] |= 0x00000020u;
-  _impl_.cardinality_ = static_cast<int>(::shark::Field_Cardinality_to_underlying(value));
+  _impl_.cardinality_ = static_cast<int>(::shark::EnumTrait<::shark::Field_Cardinality>::to_underlying(value));
 }
 inline void Field::set_cardinality(::shark::Field_Cardinality value) {
   _internal_set_cardinality(value);
@@ -2416,7 +2462,7 @@ inline ::shark::Syntax Enum::syntax() const {
 }
 inline void Enum::_internal_set_syntax(::shark::Syntax value) {
   _impl_._has_bits_[0] |= 0x00000004u;
-  _impl_.syntax_ = static_cast<int>(::shark::Syntax_to_underlying(value));
+  _impl_.syntax_ = static_cast<int>(::shark::EnumTrait<::shark::Syntax>::to_underlying(value));
 }
 inline void Enum::set_syntax(::shark::Syntax value) {
   _internal_set_syntax(value);
@@ -2737,77 +2783,6 @@ inline void Option::set_allocated_value(::shark::Any* value) {
 // @@protoc_insertion_point(namespace_scope)
 
 }  // namespace shark
-
-SHARK_NAMESPACE_OPEN
-
-    template <>
-    struct EnumTraitImpl<::shark::Field_Kind> {
-        using underlying = int32_t;
-        static constexpr ::shark::Field_Kind enum_min = ::shark::Field_Kind::TYPE_UNKNOWN;
-        static constexpr ::shark::Field_Kind enum_max = ::shark::Field_Kind::TYPE_SINT64;
-        static constexpr uint32_t value_count = 24;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::Field_Kind e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Kind *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
-    template <> struct IsSharkEnum< ::shark::Field_Kind> : ::std::true_type {};
-    template <>
-    struct EnumTraitImpl<::shark::Field_Cardinality> {
-        using underlying = int32_t;
-        static constexpr ::shark::Field_Cardinality enum_min = ::shark::Field_Cardinality::CARDINALITY_UNKNOWN;
-        static constexpr ::shark::Field_Cardinality enum_max = ::shark::Field_Cardinality::CARDINALITY_REPEATED;
-        static constexpr uint32_t value_count = 4;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::Field_Cardinality e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
-    template <> struct IsSharkEnum< ::shark::Field_Cardinality> : ::std::true_type {};
-    template <>
-    struct EnumTraitImpl<::shark::Syntax> {
-        using underlying = int32_t;
-        static constexpr ::shark::Syntax enum_min = ::shark::Syntax::SYNTAX_PROTO2;
-        static constexpr ::shark::Syntax enum_max = ::shark::Syntax::SYNTAX_PROTO3;
-        static constexpr uint32_t value_count = 2;
-        static constexpr bool has_descriptor = true;
-        static const EnumDescriptor* descriptor();
-        static bool is_valid(int64_t value);
-        static const std::string& enum_name(::shark::Syntax e);
-        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax *e);
-
-
-        static constexpr bool fits_underlying(int value) {
-             return true;
-        }
-        static constexpr bool fits_wire(::uint64_t value) {
-             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-        }
-    };
-
-    template <> struct IsSharkEnum< ::shark::Syntax> : ::std::true_type {};
-
-SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)
 
