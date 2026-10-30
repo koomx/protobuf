@@ -82,21 +82,6 @@ inline bool NullValue_FitsUnderlying(int value) {
 inline bool NullValue_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && NullValue_FitsUnderlying(static_cast<int>(value));
 }
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* NullValue_descriptor();
-template<typename T>
-inline const std::string& NullValue_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, NullValue>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function NullValue_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    NullValue_descriptor(),
-    NullValue_to_underlying(static_cast<NullValue>(enum_t_value)));
-}
-inline bool NullValue_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, NullValue* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<NullValue>(
-    NullValue_descriptor(), name, value);
-}
 // ===================================================================
 
 class Struct_FieldsEntry_DoNotUse : public ::SHARK_NAMESPACE_ID::internal::MapEntry<Struct_FieldsEntry_DoNotUse, 
@@ -1202,11 +1187,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::NullValue e) {
-            return ::shark::NullValue_Name(e);
+        static const std::string& enum_name(::shark::NullValue e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::NullValue *e) {
-            return ::shark::NullValue_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 

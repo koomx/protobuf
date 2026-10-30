@@ -7100,7 +7100,7 @@ namespace shark {
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Illegal jstype for int64, uint64, sint64, fixed64 "
                 "or sfixed64 field: "
-                    + FieldOptions_JSType_descriptor()
+                    + EnumTrait<FieldOptions_JSType>::descriptor()
                         ->value(FieldOptions_JSType_to_underlying(jstype))
                         ->name());
             break;

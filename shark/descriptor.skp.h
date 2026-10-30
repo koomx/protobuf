@@ -193,21 +193,6 @@ inline bool FieldDescriptorProto_Type_FitsUnderlying(int value) {
 inline bool FieldDescriptorProto_Type_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Type_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Type_descriptor();
-template<typename T>
-inline const std::string& FieldDescriptorProto_Type_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, FieldDescriptorProto_Type>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function FieldDescriptorProto_Type_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldDescriptorProto_Type_descriptor(),
-    FieldDescriptorProto_Type_to_underlying(static_cast<FieldDescriptorProto_Type>(enum_t_value)));
-}
-inline bool FieldDescriptorProto_Type_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Type* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldDescriptorProto_Type>(
-    FieldDescriptorProto_Type_descriptor(), name, value);
-}
 enum class FieldDescriptorProto_Label : int32_t {
     LABEL_OPTIONAL = 1,
     LABEL_REQUIRED = 2,
@@ -221,21 +206,6 @@ inline bool FieldDescriptorProto_Label_FitsUnderlying(int value) {
 }
 inline bool FieldDescriptorProto_Label_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldDescriptorProto_Label_FitsUnderlying(static_cast<int>(value));
-}
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldDescriptorProto_Label_descriptor();
-template<typename T>
-inline const std::string& FieldDescriptorProto_Label_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, FieldDescriptorProto_Label>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function FieldDescriptorProto_Label_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldDescriptorProto_Label_descriptor(),
-    FieldDescriptorProto_Label_to_underlying(static_cast<FieldDescriptorProto_Label>(enum_t_value)));
-}
-inline bool FieldDescriptorProto_Label_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldDescriptorProto_Label* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldDescriptorProto_Label>(
-    FieldDescriptorProto_Label_descriptor(), name, value);
 }
 enum class FileOptions_OptimizeMode : int32_t {
     SPEED = 1,
@@ -251,21 +221,6 @@ inline bool FileOptions_OptimizeMode_FitsUnderlying(int value) {
 inline bool FileOptions_OptimizeMode_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FileOptions_OptimizeMode_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FileOptions_OptimizeMode_descriptor();
-template<typename T>
-inline const std::string& FileOptions_OptimizeMode_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, FileOptions_OptimizeMode>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function FileOptions_OptimizeMode_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FileOptions_OptimizeMode_descriptor(),
-    FileOptions_OptimizeMode_to_underlying(static_cast<FileOptions_OptimizeMode>(enum_t_value)));
-}
-inline bool FileOptions_OptimizeMode_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, FileOptions_OptimizeMode* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FileOptions_OptimizeMode>(
-    FileOptions_OptimizeMode_descriptor(), name, value);
-}
 enum class FieldOptions_CType : int32_t {
     STRING = 0,
     CORD = 1,
@@ -279,21 +234,6 @@ inline bool FieldOptions_CType_FitsUnderlying(int value) {
 }
 inline bool FieldOptions_CType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_CType_FitsUnderlying(static_cast<int>(value));
-}
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_CType_descriptor();
-template<typename T>
-inline const std::string& FieldOptions_CType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, FieldOptions_CType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function FieldOptions_CType_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldOptions_CType_descriptor(),
-    FieldOptions_CType_to_underlying(static_cast<FieldOptions_CType>(enum_t_value)));
-}
-inline bool FieldOptions_CType_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldOptions_CType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldOptions_CType>(
-    FieldOptions_CType_descriptor(), name, value);
 }
 enum class FieldOptions_JSType : int32_t {
     JS_NORMAL = 0,
@@ -309,21 +249,6 @@ inline bool FieldOptions_JSType_FitsUnderlying(int value) {
 inline bool FieldOptions_JSType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && FieldOptions_JSType_FitsUnderlying(static_cast<int>(value));
 }
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* FieldOptions_JSType_descriptor();
-template<typename T>
-inline const std::string& FieldOptions_JSType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, FieldOptions_JSType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function FieldOptions_JSType_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    FieldOptions_JSType_descriptor(),
-    FieldOptions_JSType_to_underlying(static_cast<FieldOptions_JSType>(enum_t_value)));
-}
-inline bool FieldOptions_JSType_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, FieldOptions_JSType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<FieldOptions_JSType>(
-    FieldOptions_JSType_descriptor(), name, value);
-}
 enum class MethodOptions_IdempotencyLevel : int32_t {
     IDEMPOTENCY_UNKNOWN = 0,
     NO_SIDE_EFFECTS = 1,
@@ -337,21 +262,6 @@ inline bool MethodOptions_IdempotencyLevel_FitsUnderlying(int value) {
 }
 inline bool MethodOptions_IdempotencyLevel_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && MethodOptions_IdempotencyLevel_FitsUnderlying(static_cast<int>(value));
-}
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* MethodOptions_IdempotencyLevel_descriptor();
-template<typename T>
-inline const std::string& MethodOptions_IdempotencyLevel_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, MethodOptions_IdempotencyLevel>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function MethodOptions_IdempotencyLevel_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    MethodOptions_IdempotencyLevel_descriptor(),
-    MethodOptions_IdempotencyLevel_to_underlying(static_cast<MethodOptions_IdempotencyLevel>(enum_t_value)));
-}
-inline bool MethodOptions_IdempotencyLevel_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, MethodOptions_IdempotencyLevel* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<MethodOptions_IdempotencyLevel>(
-    MethodOptions_IdempotencyLevel_descriptor(), name, value);
 }
 enum class EnumUnderlyingType : int32_t {
     ENUM_UNDERLYING_TYPE_UNSPECIFIED = 0,
@@ -370,21 +280,6 @@ inline bool EnumUnderlyingType_FitsUnderlying(int value) {
 }
 inline bool EnumUnderlyingType_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && EnumUnderlyingType_FitsUnderlying(static_cast<int>(value));
-}
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumUnderlyingType_descriptor();
-template<typename T>
-inline const std::string& EnumUnderlyingType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, EnumUnderlyingType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function EnumUnderlyingType_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    EnumUnderlyingType_descriptor(),
-    EnumUnderlyingType_to_underlying(static_cast<EnumUnderlyingType>(enum_t_value)));
-}
-inline bool EnumUnderlyingType_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, EnumUnderlyingType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<EnumUnderlyingType>(
-    EnumUnderlyingType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -2157,38 +2052,8 @@ class SHARK_EXPORT FieldDescriptorProto final :
     // nested types ----------------------------------------------------
 
     typedef FieldDescriptorProto_Type Type;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    Type_descriptor() {
-      return FieldDescriptorProto_Type_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& Type_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, Type>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function Type_Name.");
-      return FieldDescriptorProto_Type_Name(enum_t_value);
-    }
-    static inline bool Type_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        Type* value) {
-      return FieldDescriptorProto_Type_Parse(name, value);
-    }
 
     typedef FieldDescriptorProto_Label Label;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    Label_descriptor() {
-      return FieldDescriptorProto_Label_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& Label_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, Label>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function Label_Name.");
-      return FieldDescriptorProto_Label_Name(enum_t_value);
-    }
-    static inline bool Label_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        Label* value) {
-      return FieldDescriptorProto_Label_Parse(name, value);
-    }
 
     // accessors -------------------------------------------------------
 
@@ -3804,21 +3669,6 @@ class SHARK_EXPORT FileOptions final :
     // nested types ----------------------------------------------------
 
     typedef FileOptions_OptimizeMode OptimizeMode;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    OptimizeMode_descriptor() {
-      return FileOptions_OptimizeMode_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& OptimizeMode_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, OptimizeMode>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function OptimizeMode_Name.");
-      return FileOptions_OptimizeMode_Name(enum_t_value);
-    }
-    static inline bool OptimizeMode_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        OptimizeMode* value) {
-      return FileOptions_OptimizeMode_Parse(name, value);
-    }
 
     // accessors -------------------------------------------------------
 
@@ -4690,38 +4540,8 @@ class SHARK_EXPORT FieldOptions final :
     // nested types ----------------------------------------------------
 
     typedef FieldOptions_CType CType;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    CType_descriptor() {
-      return FieldOptions_CType_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& CType_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, CType>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function CType_Name.");
-      return FieldOptions_CType_Name(enum_t_value);
-    }
-    static inline bool CType_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        CType* value) {
-      return FieldOptions_CType_Parse(name, value);
-    }
 
     typedef FieldOptions_JSType JSType;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    JSType_descriptor() {
-      return FieldOptions_JSType_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& JSType_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, JSType>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function JSType_Name.");
-      return FieldOptions_JSType_Name(enum_t_value);
-    }
-    static inline bool JSType_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        JSType* value) {
-      return FieldOptions_JSType_Parse(name, value);
-    }
 
     // accessors -------------------------------------------------------
 
@@ -6703,21 +6523,6 @@ class SHARK_EXPORT MethodOptions final :
     // nested types ----------------------------------------------------
 
     typedef MethodOptions_IdempotencyLevel IdempotencyLevel;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    IdempotencyLevel_descriptor() {
-      return MethodOptions_IdempotencyLevel_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& IdempotencyLevel_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, IdempotencyLevel>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function IdempotencyLevel_Name.");
-      return MethodOptions_IdempotencyLevel_Name(enum_t_value);
-    }
-    static inline bool IdempotencyLevel_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        IdempotencyLevel* value) {
-      return MethodOptions_IdempotencyLevel_Parse(name, value);
-    }
 
     // accessors -------------------------------------------------------
 
@@ -13812,11 +13617,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::FieldDescriptorProto_Type e) {
-            return ::shark::FieldDescriptorProto_Type_Name(e);
+        static const std::string& enum_name(::shark::FieldDescriptorProto_Type e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Type *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Type *e) {
-            return ::shark::FieldDescriptorProto_Type_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -13830,11 +13639,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::FieldDescriptorProto_Label e) {
-            return ::shark::FieldDescriptorProto_Label_Name(e);
+        static const std::string& enum_name(::shark::FieldDescriptorProto_Label e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Label *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldDescriptorProto_Label *e) {
-            return ::shark::FieldDescriptorProto_Label_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -13848,11 +13661,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::FileOptions_OptimizeMode e) {
-            return ::shark::FileOptions_OptimizeMode_Name(e);
+        static const std::string& enum_name(::shark::FileOptions_OptimizeMode e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FileOptions_OptimizeMode *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FileOptions_OptimizeMode *e) {
-            return ::shark::FileOptions_OptimizeMode_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -13866,11 +13683,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::FieldOptions_CType e) {
-            return ::shark::FieldOptions_CType_Name(e);
+        static const std::string& enum_name(::shark::FieldOptions_CType e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_CType *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_CType *e) {
-            return ::shark::FieldOptions_CType_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -13884,11 +13705,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::FieldOptions_JSType e) {
-            return ::shark::FieldOptions_JSType_Name(e);
+        static const std::string& enum_name(::shark::FieldOptions_JSType e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_JSType *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::FieldOptions_JSType *e) {
-            return ::shark::FieldOptions_JSType_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -13902,11 +13727,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::MethodOptions_IdempotencyLevel e) {
-            return ::shark::MethodOptions_IdempotencyLevel_Name(e);
+        static const std::string& enum_name(::shark::MethodOptions_IdempotencyLevel e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::MethodOptions_IdempotencyLevel *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::MethodOptions_IdempotencyLevel *e) {
-            return ::shark::MethodOptions_IdempotencyLevel_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -13920,11 +13749,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::EnumUnderlyingType e) {
-            return ::shark::EnumUnderlyingType_Name(e);
+        static const std::string& enum_name(::shark::EnumUnderlyingType e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::EnumUnderlyingType *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::EnumUnderlyingType *e) {
-            return ::shark::EnumUnderlyingType_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 

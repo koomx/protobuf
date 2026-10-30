@@ -82,21 +82,6 @@ inline bool SharkType_FitsUnderlying(int value) {
 inline bool SharkType_FitsWire(::uint64_t value) {
   return value <= 255u;
 }
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkType_descriptor();
-template<typename T>
-inline const std::string& SharkType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, SharkType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function SharkType_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    SharkType_descriptor(),
-    SharkType_to_underlying(static_cast<SharkType>(enum_t_value)));
-}
-inline bool SharkType_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, SharkType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<SharkType>(
-    SharkType_descriptor(), name, value);
-}
 enum class SharkCppType : uint8_t {
     BOOL = 1,
     INT8 = 2,
@@ -123,21 +108,6 @@ inline bool SharkCppType_FitsUnderlying(int value) {
 }
 inline bool SharkCppType_FitsWire(::uint64_t value) {
   return value <= 255u;
-}
-SHARK_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkCppType_descriptor();
-template<typename T>
-inline const std::string& SharkCppType_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, SharkCppType>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function SharkCppType_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    SharkCppType_descriptor(),
-    SharkCppType_to_underlying(static_cast<SharkCppType>(enum_t_value)));
-}
-inline bool SharkCppType_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, SharkCppType* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<SharkCppType>(
-    SharkCppType_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -170,11 +140,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::SharkType e) {
-            return ::shark::SharkType_Name(e);
+        static const std::string& enum_name(::shark::SharkType e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return value >= 0 && value <= 255;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType *e) {
-            return ::shark::SharkType_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return value <= 255u;
         }
     };
 
@@ -188,11 +162,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::SharkCppType e) {
-            return ::shark::SharkCppType_Name(e);
+        static const std::string& enum_name(::shark::SharkCppType e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return value >= 0 && value <= 255;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType *e) {
-            return ::shark::SharkCppType_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return value <= 255u;
         }
     };
 

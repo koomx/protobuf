@@ -129,6 +129,26 @@ namespace shark::compiler::cpp {
             }
         }
 
+        std::string fits_wire_expression(const EnumDescriptor* descriptor,
+            const std::string& classname) {
+            switch (descriptor->options().underlying_type()) {
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT8:
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT16:
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_INT32:
+                return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value))";
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT8:
+                return "value <= 255u";
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT16:
+                return "value <= 65535u";
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UINT32:
+                return "value <= 0xffffffffu";
+            case EnumUnderlyingType::ENUM_UNDERLYING_TYPE_UNSPECIFIED:
+            default:
+                return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value))";
+            }
+        }
+
+
     } // namespace
 
     void EnumGenerator::GenerateDefinition(io::Printer* printer) {
@@ -186,19 +206,19 @@ namespace shark::compiler::cpp {
                 format(
                     "constexpr $classname$ operator|($classname$ lhs, $classname$ rhs) {\n"
                     "  return static_cast<$classname$>(static_cast<$underlying$>("
-                    "$classname$_to_underlying(lhs) | $classname$_to_underlying(rhs)));\n"
+                    "static_cast<$underlying$>(lhs) | static_cast<$underlying$>(rhs)));\n"
                     "}\n"
                     "constexpr $classname$ operator&($classname$ lhs, $classname$ rhs) {\n"
                     "  return static_cast<$classname$>(static_cast<$underlying$>("
-                    "$classname$_to_underlying(lhs) & $classname$_to_underlying(rhs)));\n"
+                    "static_cast<$underlying$>(lhs) & static_cast<$underlying$>(rhs)));\n"
                     "}\n"
                     "constexpr $classname$ operator^($classname$ lhs, $classname$ rhs) {\n"
                     "  return static_cast<$classname$>(static_cast<$underlying$>("
-                    "$classname$_to_underlying(lhs) ^ $classname$_to_underlying(rhs)));\n"
+                    "static_cast<$underlying$>(lhs) ^ static_cast<$underlying$>(rhs)));\n"
                     "}\n"
                     "constexpr $classname$ operator~($classname$ value) {\n"
                     "  return static_cast<$classname$>(static_cast<$underlying$>("
-                    "~$classname$_to_underlying(value)));\n"
+                    "~static_cast<$underlying$>(value)));\n"
                     "}\n"
                     "constexpr $classname$& operator|=($classname$& lhs, $classname$ rhs) {\n"
                     "  return lhs = lhs | rhs;\n"
@@ -212,51 +232,6 @@ namespace shark::compiler::cpp {
             }
         }
 
-        if (HasDescriptorMethods(descriptor_->file(), options_)) {
-            format(
-                "$dllexport_decl $const ::$proto_ns$::EnumDescriptor* "
-                "$classname$_descriptor();\n");
-        }
-
-        // The _Name and _Parse functions. The lite implementation is table-based, so
-        // we make sure to keep the tables hidden in the .cc file.
-        if (!HasDescriptorMethods(descriptor_->file(), options_)) {
-            format("const std::string& $classname$_Name($classname$ value);\n");
-        }
-        // The _Name() function accepts the enum type itself but also any integral
-        // type.
-        format(
-            "template<typename T>\n"
-            "inline const std::string& $classname$_Name(T enum_t_value) {\n"
-            "  static_assert(::std::is_same<T, $classname$>::value ||\n"
-            "    ::std::is_integral<T>::value,\n"
-            "    \"Incorrect type passed to function $classname$_Name.\");\n");
-        if (HasDescriptorMethods(descriptor_->file(), options_)) {
-            format(
-                "  return ::$proto_ns$::internal::NameOfEnum(\n"
-                "    $classname$_descriptor(),\n"
-                "    $classname$_to_underlying(static_cast<$classname$>(enum_t_value)));\n");
-        } else {
-            format(
-                "  return $classname$_Name(static_cast<$classname$>(enum_t_value));\n");
-        }
-        format("}\n");
-
-        if (HasDescriptorMethods(descriptor_->file(), options_)) {
-            format(
-                "inline bool $classname$_Parse(\n"
-                "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
-                "value) "
-                "{\n"
-                "  return ::$proto_ns$::internal::ParseNamedEnum<$classname$>(\n"
-                "    $classname$_descriptor(), name, value);\n"
-                "}\n");
-        } else {
-            format(
-                "bool $classname$_Parse(\n"
-                "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
-                "value);\n");
-        }
     }
 
     void EnumGenerator::GenerateGetEnumDescriptorSpecializations(
@@ -280,18 +255,21 @@ namespace shark::compiler::cpp {
 
         format("static bool is_valid(int64_t value);\n");
 
-        format("static inline const std::string& enum_name($classtype$ e) {\n");
-        format.Indent();
-        format("return $classtype$_Name(e);\n");
-        format.Outdent();
-        format("}\n");
+        format("static const std::string& enum_name($classtype$ e);\n");
 
-        format("static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, $classtype$ *e) {\n");
-        format.Indent();
-        format("return $classtype$_Parse(name, e);\n");
-        format.Outdent();
-        format("}\n");
+        format("static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, $classtype$ *e);\n");
 
+        format("\n\n");
+
+        format(
+          "static constexpr bool fits_underlying(int value) {\n"
+          "     return $1$;\n"
+          "}\n"
+          "static constexpr bool fits_wire(::uint64_t value) {\n"
+          "     return $2$;\n"
+          "}\n",
+          FitsIntExpression(descriptor_),
+          fits_wire_expression(descriptor_, classname_));
 
         format.Outdent();
         format("};\n\n");
@@ -304,144 +282,10 @@ namespace shark::compiler::cpp {
     void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
         Formatter format(printer, variables_);
         format("typedef $classname$ $resolved_name$;\n");
-
-        if (HasDescriptorMethods(descriptor_->file(), options_)) {
-            format(
-                "static inline const ::$proto_ns$::EnumDescriptor*\n"
-                "$nested_name$_descriptor() {\n"
-                "  return $classname$_descriptor();\n"
-                "}\n");
-        }
-
-        format(
-            "template<typename T>\n"
-            "static inline const std::string& $nested_name$_Name(T enum_t_value) {\n"
-            "  static_assert(::std::is_same<T, $resolved_name$>::value ||\n"
-            "    ::std::is_integral<T>::value,\n"
-            "    \"Incorrect type passed to function $nested_name$_Name.\");\n"
-            "  return $classname$_Name(enum_t_value);\n"
-            "}\n");
-        format(
-            "static inline bool "
-            "$nested_name$_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,\n"
-            "    $resolved_name$* value) {\n"
-            "  return $classname$_Parse(name, value);\n"
-            "}\n");
     }
 
     void EnumGenerator::GenerateMethods(int idx, io::Printer* printer) {
         Formatter format(printer, variables_);
-        if (HasDescriptorMethods(descriptor_->file(), options_)) {
-
-            format(
-                "const ::$proto_ns$::EnumDescriptor* $classname$_descriptor() {\n"
-                "  ::$proto_ns$::internal::AssignDescriptors(&$desc_table$);\n"
-                "  return $file_level_enum_descriptors$[$1$];\n"
-                "}\n",
-                idx);
-        }
-
-
-
-        if (!HasDescriptorMethods(descriptor_->file(), options_)) {
-            // In lite mode (where descriptors are unavailable), we generate separate
-            // tables for mapping between enum names and numbers. The _entries table
-            // contains the bulk of the data and is sorted by name, while
-            // _entries_by_number is sorted by number and just contains pointers into
-            // _entries. The two tables allow mapping from name to number and number to
-            // name, both in time logarithmic in the number of enum entries. This could
-            // probably be made faster, but for now the tables are intended to be simple
-            // and compact.
-            //
-            // Enums with allow_alias = true support multiple entries with the same
-            // numerical value. In cases where there are multiple names for the same
-            // number, we treat the first name appearing in the .shark file as the
-            // canonical one.
-            std::map<std::string, int> name_to_number;
-            std::map<int, std::string> number_to_canonical_name;
-            for (int i = 0; i < descriptor_->value_count(); i++) {
-                const EnumValueDescriptor* value = descriptor_->value(i);
-                name_to_number.emplace(value->name(), value->number());
-                // The same number may appear with multiple names, so we use emplace() to
-                // let the first name win.
-                number_to_canonical_name.emplace(value->number(), value->name());
-            }
-
-            format(
-                "static ::$proto_ns$::internal::ExplicitlyConstructed<std::string> "
-                "$classname$_strings[$1$] = {};\n\n",
-                CountUniqueValues(descriptor_));
-
-            // We concatenate all the names for a given enum into one big string
-            // literal. If instead we store an array of string literals, the linker
-            // seems to put all enum strings for a given .shark file in the same
-            // section, which hinders its ability to strip out unused strings.
-            format("static const char $classname$_names[] =");
-            for (const auto& p : name_to_number) {
-                format("\n  \"$1$\"", p.first);
-            }
-            format(";\n\n");
-
-            format(
-                "static const ::$proto_ns$::internal::EnumEntry $classname$_entries[] "
-                "= {\n");
-            int i = 0;
-            std::map<int, int> number_to_index;
-            int data_index = 0;
-            for (const auto& p : name_to_number) {
-                format("  { {$classname$_names + $1$, $2$}, $3$ },\n", data_index,
-                    p.first.size(), p.second);
-                if (number_to_canonical_name[p.second] == p.first) {
-                    number_to_index.emplace(p.second, i);
-                }
-                ++i;
-                data_index += p.first.size();
-            }
-
-            format(
-                "};\n"
-                "\n"
-                "static const int $classname$_entries_by_number[] = {\n");
-            for (const auto& p : number_to_index) {
-                format("  $1$, // $2$ -> $3$\n", p.second, p.first,
-                    number_to_canonical_name[p.first]);
-            }
-            format(
-                "};\n"
-                "\n");
-
-            format(
-                "const std::string& $classname$_Name(\n"
-                "    $classname$ value) {\n"
-                "  static const bool dummy =\n"
-                "      ::$proto_ns$::internal::InitializeEnumStrings(\n"
-                "          $classname$_entries,\n"
-                "          $classname$_entries_by_number,\n"
-                "          $1$, $classname$_strings);\n"
-                "  (void) dummy;\n"
-                "  int idx = ::$proto_ns$::internal::LookUpEnumName(\n"
-                "      $classname$_entries,\n"
-                "      $classname$_entries_by_number,\n"
-                "      $1$, $classname$_to_underlying(value));\n"
-                "  return idx == -1 ? ::$proto_ns$::internal::GetEmptyString() :\n"
-                "                     $classname$_strings[idx].get();\n"
-                "}\n",
-                CountUniqueValues(descriptor_));
-            format(
-                "bool $classname$_Parse(\n"
-                "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
-                "value) "
-                "{\n"
-                "  int int_value;\n"
-                "  bool success = ::$proto_ns$::internal::LookUpEnumValue(\n"
-                "      $classname$_entries, $1$, name, &int_value);\n"
-                "  if (success) {\n"
-                "    *value = static_cast<$classname$>(int_value);\n"
-                "  }\n"
-                "  return success;\n"
-                "}\n",
-                descriptor_->value_count());
-        }
     }
 
 
@@ -483,7 +327,8 @@ namespace shark::compiler::cpp {
             "}\n"
             "\n");
 
-        /*
+        ////////////////////////////////////////////////
+        ///
         if (!HasDescriptorMethods(descriptor_->file(), options_)) {
             // In lite mode (where descriptors are unavailable), we generate separate
             // tables for mapping between enum names and numbers. The _entries table
@@ -550,10 +395,21 @@ namespace shark::compiler::cpp {
             format(
                 "};\n"
                 "\n");
+        }
 
+        ////////////////////////////////////////////////
+        ///
+        if (HasDescriptorMethods(descriptor_->file(), options_)) {
+            format("const std::string& EnumTraitImpl<$classtype$>::enum_name(\n"
+                "   $classtype$ enum_t_value) {\n"
+                "  return ::$proto_ns$::internal::NameOfEnum(\n"
+                "    EnumTrait<$classtype$>::descriptor(),\n"
+                "    static_cast<$underlying$>(enum_t_value));\n");
+            format("}\n");
+        } else {
             format(
-                "const std::string& $classname$_Name(\n"
-                "    $classname$ value) {\n"
+                "const std::string& EnumTraitImpl<$classtype$>::enum_name(\n"
+                "    $classtype$ value) {\n"
                 "  static const bool dummy =\n"
                 "      ::$proto_ns$::internal::InitializeEnumStrings(\n"
                 "          $classname$_entries,\n"
@@ -563,26 +419,38 @@ namespace shark::compiler::cpp {
                 "  int idx = ::$proto_ns$::internal::LookUpEnumName(\n"
                 "      $classname$_entries,\n"
                 "      $classname$_entries_by_number,\n"
-                "      $1$, $classname$_to_underlying(value));\n"
+                "      $1$, static_cast<$underlying$>(value));\n"
                 "  return idx == -1 ? ::$proto_ns$::internal::GetEmptyString() :\n"
                 "                     $classname$_strings[idx].get();\n"
                 "}\n",
                 CountUniqueValues(descriptor_));
+        }
+
+        if (HasDescriptorMethods(descriptor_->file(), options_)) {
             format(
-                "bool $classname$_Parse(\n"
-                "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classname$* "
+                "bool EnumTraitImpl<$classtype$>::enum_parse(\n"
+                "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classtype$* "
+                "value) "
+                "{\n"
+                "  return ::$proto_ns$::internal::ParseNamedEnum<$classtype$>(\n"
+                "    descriptor(), name, value);\n"
+                "}\n");
+        } else {
+            format(
+                "bool EnumTraitImpl<$classtype$>::enum_parse(\n"
+                "    ::SHARK_NAMESPACE_ID::ConstStringParam name, $classtype$* "
                 "value) "
                 "{\n"
                 "  int int_value;\n"
                 "  bool success = ::$proto_ns$::internal::LookUpEnumValue(\n"
                 "      $classname$_entries, $1$, name, &int_value);\n"
                 "  if (success) {\n"
-                "    *value = static_cast<$classname$>(int_value);\n"
+                "    *value = static_cast<$classtype$>(int_value);\n"
                 "  }\n"
                 "  return success;\n"
                 "}\n",
                 descriptor_->value_count());
-        }*/
+        }
     }
 
 } // namespace shark::compiler::cpp

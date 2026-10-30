@@ -90,21 +90,6 @@ inline bool CodeGeneratorResponse_Feature_FitsUnderlying(int value) {
 inline bool CodeGeneratorResponse_Feature_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && CodeGeneratorResponse_Feature_FitsUnderlying(static_cast<int>(value));
 }
-PROTOC_EXPORT const ::SHARK_NAMESPACE_ID::EnumDescriptor* CodeGeneratorResponse_Feature_descriptor();
-template<typename T>
-inline const std::string& CodeGeneratorResponse_Feature_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, CodeGeneratorResponse_Feature>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function CodeGeneratorResponse_Feature_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    CodeGeneratorResponse_Feature_descriptor(),
-    CodeGeneratorResponse_Feature_to_underlying(static_cast<CodeGeneratorResponse_Feature>(enum_t_value)));
-}
-inline bool CodeGeneratorResponse_Feature_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, CodeGeneratorResponse_Feature* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<CodeGeneratorResponse_Feature>(
-    CodeGeneratorResponse_Feature_descriptor(), name, value);
-}
 // ===================================================================
 
 class PROTOC_EXPORT Version final :
@@ -901,21 +886,6 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
     typedef CodeGeneratorResponse_File File;
 
     typedef CodeGeneratorResponse_Feature Feature;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    Feature_descriptor() {
-      return CodeGeneratorResponse_Feature_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& Feature_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, Feature>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function Feature_Name.");
-      return CodeGeneratorResponse_Feature_Name(enum_t_value);
-    }
-    static inline bool Feature_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        Feature* value) {
-      return CodeGeneratorResponse_Feature_Parse(name, value);
-    }
 
     // accessors -------------------------------------------------------
 
@@ -1888,11 +1858,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::compiler::CodeGeneratorResponse_Feature e) {
-            return ::shark::compiler::CodeGeneratorResponse_Feature_Name(e);
+        static const std::string& enum_name(::shark::compiler::CodeGeneratorResponse_Feature e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature *e) {
-            return ::shark::compiler::CodeGeneratorResponse_Feature_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 

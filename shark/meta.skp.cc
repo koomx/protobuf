@@ -60,14 +60,6 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fmet
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fmeta_2eshark(&descriptor_table_shark_2fmeta_2eshark);
 namespace shark {
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkType_descriptor() {
-  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-  return file_level_enum_descriptors_shark_2fmeta_2eshark[0];
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* SharkCppType_descriptor() {
-  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-  return file_level_enum_descriptors_shark_2fmeta_2eshark[1];
-}
 
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
@@ -109,6 +101,17 @@ bool EnumTraitImpl<::shark::SharkType>::is_valid(int64_t value) {
   }
 }
 
+const std::string& EnumTraitImpl<::shark::SharkType>::enum_name(
+   ::shark::SharkType enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    EnumTrait<::shark::SharkType>::descriptor(),
+    static_cast<uint8_t>(enum_t_value));
+}
+bool EnumTraitImpl<::shark::SharkType>::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkType* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::SharkType>(
+    descriptor(), name, value);
+}
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* EnumTraitImpl<::shark::SharkCppType>::descriptor() {
     ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
     return file_level_enum_descriptors_shark_2fmeta_2eshark[1];
@@ -137,6 +140,17 @@ bool EnumTraitImpl<::shark::SharkCppType>::is_valid(int64_t value) {
   }
 }
 
+const std::string& EnumTraitImpl<::shark::SharkCppType>::enum_name(
+   ::shark::SharkCppType enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    EnumTrait<::shark::SharkCppType>::descriptor(),
+    static_cast<uint8_t>(enum_t_value));
+}
+bool EnumTraitImpl<::shark::SharkCppType>::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::SharkCppType* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::SharkCppType>(
+    descriptor(), name, value);
+}
 SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)

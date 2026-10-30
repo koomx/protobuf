@@ -204,10 +204,6 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fcom
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fcompiler_2fplugin_2eshark(&descriptor_table_shark_2fcompiler_2fplugin_2eshark);
 namespace shark {
 namespace compiler {
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* CodeGeneratorResponse_Feature_descriptor() {
-  ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fcompiler_2fplugin_2eshark);
-  return file_level_enum_descriptors_shark_2fcompiler_2fplugin_2eshark[0];
-}
 
 // ===================================================================
 
@@ -1585,6 +1581,17 @@ bool EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature>::is_valid(i
   }
 }
 
+const std::string& EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature>::enum_name(
+   ::shark::compiler::CodeGeneratorResponse_Feature enum_t_value) {
+  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
+    EnumTrait<::shark::compiler::CodeGeneratorResponse_Feature>::descriptor(),
+    static_cast<int32_t>(enum_t_value));
+}
+bool EnumTraitImpl<::shark::compiler::CodeGeneratorResponse_Feature>::enum_parse(
+    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::compiler::CodeGeneratorResponse_Feature* value) {
+  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::compiler::CodeGeneratorResponse_Feature>(
+    descriptor(), name, value);
+}
 template<> SHARK_NOINLINE ::shark::compiler::Version*
 Arena::CreateMaybeMessage< ::shark::compiler::Version >(Arena* arena) {
   return Arena::CreateMessageInternal< ::shark::compiler::Version >(arena);

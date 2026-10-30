@@ -108,21 +108,6 @@ inline bool Field_Kind_FitsUnderlying(int value) {
 inline bool Field_Kind_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Kind_FitsUnderlying(static_cast<int>(value));
 }
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Kind_descriptor();
-template<typename T>
-inline const std::string& Field_Kind_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, Field_Kind>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function Field_Kind_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    Field_Kind_descriptor(),
-    Field_Kind_to_underlying(static_cast<Field_Kind>(enum_t_value)));
-}
-inline bool Field_Kind_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Kind* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<Field_Kind>(
-    Field_Kind_descriptor(), name, value);
-}
 enum class Field_Cardinality : int32_t {
     CARDINALITY_UNKNOWN = 0,
     CARDINALITY_OPTIONAL = 1,
@@ -138,21 +123,6 @@ inline bool Field_Cardinality_FitsUnderlying(int value) {
 inline bool Field_Cardinality_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Field_Cardinality_FitsUnderlying(static_cast<int>(value));
 }
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* Field_Cardinality_descriptor();
-template<typename T>
-inline const std::string& Field_Cardinality_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, Field_Cardinality>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function Field_Cardinality_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    Field_Cardinality_descriptor(),
-    Field_Cardinality_to_underlying(static_cast<Field_Cardinality>(enum_t_value)));
-}
-inline bool Field_Cardinality_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Cardinality* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<Field_Cardinality>(
-    Field_Cardinality_descriptor(), name, value);
-}
 enum class Syntax : int32_t {
     SYNTAX_PROTO2 = 0,
     SYNTAX_PROTO3 = 1
@@ -165,21 +135,6 @@ inline bool Syntax_FitsUnderlying(int value) {
 }
 inline bool Syntax_FitsWire(::uint64_t value) {
   return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && Syntax_FitsUnderlying(static_cast<int>(value));
-}
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* Syntax_descriptor();
-template<typename T>
-inline const std::string& Syntax_Name(T enum_t_value) {
-  static_assert(::std::is_same<T, Syntax>::value ||
-    ::std::is_integral<T>::value,
-    "Incorrect type passed to function Syntax_Name.");
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    Syntax_descriptor(),
-    Syntax_to_underlying(static_cast<Syntax>(enum_t_value)));
-}
-inline bool Syntax_Parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, Syntax* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<Syntax>(
-    Syntax_descriptor(), name, value);
 }
 // ===================================================================
 
@@ -575,38 +530,8 @@ class Field final :
     // nested types ----------------------------------------------------
 
     typedef Field_Kind Kind;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    Kind_descriptor() {
-      return Field_Kind_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& Kind_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, Kind>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function Kind_Name.");
-      return Field_Kind_Name(enum_t_value);
-    }
-    static inline bool Kind_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        Kind* value) {
-      return Field_Kind_Parse(name, value);
-    }
 
     typedef Field_Cardinality Cardinality;
-    static inline const ::SHARK_NAMESPACE_ID::EnumDescriptor*
-    Cardinality_descriptor() {
-      return Field_Cardinality_descriptor();
-    }
-    template<typename T>
-    static inline const std::string& Cardinality_Name(T enum_t_value) {
-      static_assert(::std::is_same<T, Cardinality>::value ||
-        ::std::is_integral<T>::value,
-        "Incorrect type passed to function Cardinality_Name.");
-      return Field_Cardinality_Name(enum_t_value);
-    }
-    static inline bool Cardinality_Parse(::SHARK_NAMESPACE_ID::ConstStringParam name,
-        Cardinality* value) {
-      return Field_Cardinality_Parse(name, value);
-    }
 
     // accessors -------------------------------------------------------
 
@@ -2824,11 +2749,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::Field_Kind e) {
-            return ::shark::Field_Kind_Name(e);
+        static const std::string& enum_name(::shark::Field_Kind e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Kind *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Kind *e) {
-            return ::shark::Field_Kind_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -2842,11 +2771,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::Field_Cardinality e) {
-            return ::shark::Field_Cardinality_Name(e);
+        static const std::string& enum_name(::shark::Field_Cardinality e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Field_Cardinality *e) {
-            return ::shark::Field_Cardinality_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 
@@ -2860,11 +2793,15 @@ SHARK_NAMESPACE_OPEN
         static constexpr bool has_descriptor = true;
         static const EnumDescriptor* descriptor();
         static bool is_valid(int64_t value);
-        static inline const std::string& enum_name(::shark::Syntax e) {
-            return ::shark::Syntax_Name(e);
+        static const std::string& enum_name(::shark::Syntax e);
+        static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax *e);
+
+
+        static constexpr bool fits_underlying(int value) {
+             return true;
         }
-        static inline bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::Syntax *e) {
-            return ::shark::Syntax_Parse(name, e);
+        static constexpr bool fits_wire(::uint64_t value) {
+             return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
         }
     };
 

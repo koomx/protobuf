@@ -112,7 +112,7 @@ void SetPrimitiveVariables(const FieldDescriptor* descriptor,
   if (fixed_size != -1) {
     (*variables)["fixed_size"] = StrCat(fixed_size);
   }
-  (*variables)["wire_format_field_type"] = FieldDescriptorProto_Type_Name(
+  (*variables)["wire_format_field_type"] = EnumTrait<FieldDescriptorProto_Type>::enum_name(
       static_cast<FieldDescriptorProto_Type>(descriptor->type()));
   (*variables)["full_name"] = descriptor->full_name();
 }

@@ -742,7 +742,7 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
       element_.reset(new ProtoElement(element_.release(), &field, type, false));
     }
     InvalidValue(field.type_url().empty()
-                     ? shark::Field_Kind_Name(field.kind())
+                     ? shark::EnumTrait<Field_Kind>::enum_name(field.kind())
                      : field.type_url(),
                  status.message());
     element_.reset(element()->pop());

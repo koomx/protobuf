@@ -167,12 +167,11 @@ namespace shark {
         static constexpr bool has_descriptor = EnumTraitImpl<E>::has_descriptor;
 
         static constexpr bool fits_underlying(int64_t value) {
-            return value <= std::numeric_limits<underlying>::max() &&
-                value >= std::numeric_limits<underlying>::min();
+            return EnumTraitImpl<E>::fits_underlying(value);
         }
 
         static constexpr bool fits_wire(::uint64_t value) {
-            return value <= std::numeric_limits<underlying>::max();
+            return EnumTraitImpl<E>::fits_wire(value);
         }
 
         static constexpr underlying to_underlying(enum_type value) {
