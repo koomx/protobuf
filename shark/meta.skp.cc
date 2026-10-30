@@ -21,71 +21,36 @@ namespace _pb = ::SHARK_NAMESPACE_ID;
 namespace _pbi = _pb::internal;
 
 namespace shark {
-constexpr TempTest::TempTest(
-    ::_pbi::ConstantInitialized): _impl_{
-      /*decltype(_impl_._has_bits_)*/{}
-    , /*decltype(_impl_._cached_size_)*/{}
-    , /*decltype(_impl_.ee_)*/0
-    , /*decltype(_impl_.ff_)*/static_cast<int16_t>(0)} {}
-struct TempTestDefaultTypeInternal {
-  constexpr TempTestDefaultTypeInternal()
-      : _instance(::_pbi::ConstantInitialized{}) {}
-  ~TempTestDefaultTypeInternal() {}
-  union {
-    TempTest _instance;
-  };
-};
-SHARK_ATTRIBUTE_NO_DESTROY SHARK_CONSTINIT SHARK_ATTRIBUTE_INIT_PRIORITY1 TempTestDefaultTypeInternal _TempTest_default_instance_;
 }  // namespace shark
-static ::_pb::Metadata file_level_metadata_shark_2fmeta_2eshark[1];
-static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fmeta_2eshark[3];
+static const ::_pb::EnumDescriptor* file_level_enum_descriptors_shark_2fmeta_2eshark[2];
 static constexpr ::_pb::ServiceDescriptor const** file_level_service_descriptors_shark_2fmeta_2eshark = nullptr;
-
-const uint32_t TableStruct_shark_2fmeta_2eshark::offsets[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-    SHARK_FIELD_OFFSET(::shark::TempTest, _impl_._has_bits_),
-    SHARK_FIELD_OFFSET(::shark::TempTest, _internal_metadata_),
-    ~0u,  // no _extensions_
-    ~0u,  // no _oneof_case_
-    ~0u,  // no _weak_field_map_
-    ~0u,  // no _inlined_string_donated_
-    SHARK_FIELD_OFFSET(::shark::TempTest, _impl_.ee_),
-    SHARK_FIELD_OFFSET(::shark::TempTest, _impl_.ff_),
-    0,
-    1,
-};
-static const ::_pbi::MigrationSchema schemas[] SHARK_SECTION_VARIABLE(protodesc_cold) = {
-    { 0, 8, -1, sizeof(::shark::TempTest)},
-};
-
-static const ::_pb::Message* const file_default_instances[] = {
-    &::shark::_TempTest_default_instance_._instance,
-};
+const uint32_t TableStruct_shark_2fmeta_2eshark::offsets[1] = {};
+static constexpr ::_pbi::MigrationSchema* schemas = nullptr;
+static constexpr ::_pb::Message* const* file_default_instances = nullptr;
 
 const char descriptor_table_protodef_shark_2fmeta_2eshark[] SHARK_SECTION_VARIABLE(protodesc_cold) =
-    "\n\020shark/meta.shark\022\005shark\"f\n\010TempTest\022\"\n"
-    "\002ee\030\001 \001(\0162\026.shark.TempTest.InnerE\022\n\n\002ff\030"
-    "\002 \001(\004\"*\n\006InnerE\022\005\n\001E\020\000\022\016\n\001A\020\377\377\377\377\377\377\377\377\377\001\022\005"
-    "\n\001B\020\002\032\0028\005*\254\002\n\tSharkType\022\013\n\007UNKNOWN\020\000\022\010\n\004"
-    "BOOL\020\001\022\010\n\004INT8\020\002\022\t\n\005UINT8\020\003\022\t\n\005INT16\020\004\022\n"
-    "\n\006UINT16\020\005\022\t\n\005INT32\020\006\022\n\n\006UINT32\020\007\022\t\n\005INT"
-    "64\020\010\022\n\n\006UINT64\020\t\022\t\n\005FLOAT\020\n\022\013\n\007FLOAT16\020\013"
-    "\022\n\n\006FLOAT8\020\014\022\n\n\006DOUBLE\020\r\022\010\n\004ENUM\020\016\022\013\n\007ME"
-    "SSAGE\020\017\022\n\n\006STRING\020\020\022\t\n\005BYTES\020\021\022\013\n\007FIXED3"
-    "2\020<\022\013\n\007FIXED64\020=\022\014\n\010SFIXED32\020>\022\014\n\010SFIXED"
-    "64\020\?\022\n\n\006SINT32\020@\022\n\n\006SINT64\020A\032\0028\002*\311\001\n\014Sha"
-    "rkCppType\022\010\n\004BOOL\020\001\022\010\n\004INT8\020\002\022\t\n\005UINT8\020\003"
-    "\022\t\n\005INT16\020\004\022\n\n\006UINT16\020\005\022\t\n\005INT32\020\006\022\n\n\006UI"
-    "NT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UINT64\020\t\022\t\n\005FLOAT\020\n"
-    "\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020\014\022\n\n\006DOUBLE\020\r\022\010\n"
-    "\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006STRING\020\020\032\0028\002"
+    "\n\020shark/meta.shark\022\005shark*\254\002\n\tSharkType\022"
+    "\013\n\007UNKNOWN\020\000\022\010\n\004BOOL\020\001\022\010\n\004INT8\020\002\022\t\n\005UINT"
+    "8\020\003\022\t\n\005INT16\020\004\022\n\n\006UINT16\020\005\022\t\n\005INT32\020\006\022\n\n"
+    "\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UINT64\020\t\022\t\n\005FLOA"
+    "T\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020\014\022\n\n\006DOUBLE\020\r"
+    "\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006STRING\020\020\022\t\n\005B"
+    "YTES\020\021\022\013\n\007FIXED32\020\022\022\013\n\007FIXED64\020\023\022\014\n\010SFIX"
+    "ED32\020\024\022\014\n\010SFIXED64\020\025\022\n\n\006SINT32\020\026\022\n\n\006SINT"
+    "64\020\027\032\0028\002*\311\001\n\014SharkCppType\022\010\n\004BOOL\020\001\022\010\n\004I"
+    "NT8\020\002\022\t\n\005UINT8\020\003\022\t\n\005INT16\020\004\022\n\n\006UINT16\020\005\022"
+    "\t\n\005INT32\020\006\022\n\n\006UINT32\020\007\022\t\n\005INT64\020\010\022\n\n\006UIN"
+    "T64\020\t\022\t\n\005FLOAT\020\n\022\013\n\007FLOAT16\020\013\022\n\n\006FLOAT8\020"
+    "\014\022\n\n\006DOUBLE\020\r\022\010\n\004ENUM\020\016\022\013\n\007MESSAGE\020\017\022\n\n\006"
+    "STRING\020\020\032\0028\002"
     ;
 static ::_pbi::once_flag descriptor_table_shark_2fmeta_2eshark_once;
 const ::_pbi::DescriptorTable descriptor_table_shark_2fmeta_2eshark = {
-    false, false, 636, descriptor_table_protodef_shark_2fmeta_2eshark,
+    false, false, 532, descriptor_table_protodef_shark_2fmeta_2eshark,
     "shark/meta.shark",
-    &descriptor_table_shark_2fmeta_2eshark_once, nullptr, 0, 1,
+    &descriptor_table_shark_2fmeta_2eshark_once, nullptr, 0, 0,
     schemas, file_default_instances, TableStruct_shark_2fmeta_2eshark::offsets,
-    file_level_metadata_shark_2fmeta_2eshark, file_level_enum_descriptors_shark_2fmeta_2eshark,
+    nullptr, file_level_enum_descriptors_shark_2fmeta_2eshark,
     file_level_service_descriptors_shark_2fmeta_2eshark,
 };
 SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fmeta_2eshark_getter() {
@@ -95,35 +60,9 @@ SHARK_ATTRIBUTE_WEAK const ::_pbi::DescriptorTable* descriptor_table_shark_2fmet
 // Force running AddDescriptors() at dynamic initialization time.
 SHARK_ATTRIBUTE_INIT_PRIORITY2 static ::_pbi::AddDescriptorsRunner dynamic_init_dummy_shark_2fmeta_2eshark(&descriptor_table_shark_2fmeta_2eshark);
 namespace shark {
-const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::TempTest_InnerETrait::descriptor() {
-    ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-    return file_level_enum_descriptors_shark_2fmeta_2eshark[0];
-}
-bool ::shark::TempTest_InnerETrait::is_valid(int64_t value) {
-  switch (value) {
-    case -1:
-    case 0:
-    case 2:
-      return true;
-    default:
-      return false;
-  }
-}
-
-const std::string& ::shark::TempTest_InnerETrait::enum_name(
-   ::shark::TempTest_InnerE enum_t_value) {
-  return ::SHARK_NAMESPACE_ID::internal::NameOfEnum(
-    descriptor(),
-    static_cast<int32_t>(enum_t_value));
-}
-bool ::shark::TempTest_InnerETrait::enum_parse(
-    ::SHARK_NAMESPACE_ID::ConstStringParam name, ::shark::TempTest_InnerE* value) {
-  return ::SHARK_NAMESPACE_ID::internal::ParseNamedEnum<::shark::TempTest_InnerE>(
-    descriptor(), name, value);
-}
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::SharkTypeTrait::descriptor() {
     ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-    return file_level_enum_descriptors_shark_2fmeta_2eshark[1];
+    return file_level_enum_descriptors_shark_2fmeta_2eshark[0];
 }
 bool ::shark::SharkTypeTrait::is_valid(int64_t value) {
   switch (value) {
@@ -145,12 +84,12 @@ bool ::shark::SharkTypeTrait::is_valid(int64_t value) {
     case 15:
     case 16:
     case 17:
-    case 60:
-    case 61:
-    case 62:
-    case 63:
-    case 64:
-    case 65:
+    case 18:
+    case 19:
+    case 20:
+    case 21:
+    case 22:
+    case 23:
       return true;
     default:
       return false;
@@ -170,7 +109,7 @@ bool ::shark::SharkTypeTrait::enum_parse(
 }
 const ::SHARK_NAMESPACE_ID::EnumDescriptor* ::shark::SharkCppTypeTrait::descriptor() {
     ::SHARK_NAMESPACE_ID::internal::AssignDescriptors(&descriptor_table_shark_2fmeta_2eshark);
-    return file_level_enum_descriptors_shark_2fmeta_2eshark[2];
+    return file_level_enum_descriptors_shark_2fmeta_2eshark[1];
 }
 bool ::shark::SharkCppTypeTrait::is_valid(int64_t value) {
   switch (value) {
@@ -208,262 +147,10 @@ bool ::shark::SharkCppTypeTrait::enum_parse(
     descriptor(), name, value);
 }
 
-// ===================================================================
-
-class TempTest::_Internal {
- public:
-    using HasBits = decltype(std::declval<TempTest>()._impl_._has_bits_);
-    static void set_has_ee(HasBits* has_bits) {
-      (*has_bits)[0] |= 1u;
-    }
-    static void set_has_ff(HasBits* has_bits) {
-      (*has_bits)[0] |= 2u;
-    }
-};
-
-TempTest::TempTest(::SHARK_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned)
-  : ::SHARK_NAMESPACE_ID::Message(arena, is_message_owned) {
-  SharedCtor(arena, is_message_owned);
-  // @@protoc_insertion_point(arena_constructor:shark.TempTest)
-}
-TempTest::TempTest(const TempTest& from)
-  : ::SHARK_NAMESPACE_ID::Message() {
-    TempTest* const _this = this; (void)_this;
-    new (&_impl_) Impl_{
-          decltype(_impl_._has_bits_){from._impl_._has_bits_}
-        , /*decltype(_impl_._cached_size_)*/{}
-        , decltype(_impl_.ee_){}
-        , decltype(_impl_.ff_){}};
-
-    _internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-    ::memcpy(&_impl_.ee_, &from._impl_.ee_,
-      static_cast<size_t>(reinterpret_cast<char*>(&_impl_.ff_) -
-      reinterpret_cast<char*>(&_impl_.ee_)) + sizeof(_impl_.ff_));
-  // @@protoc_insertion_point(copy_constructor:shark.TempTest)
-}
-
-inline void TempTest::SharedCtor(
-    ::_pb::Arena* arena, bool is_message_owned) {
-  (void)arena;
-  (void)is_message_owned;
-    new (&_impl_) Impl_{
-          decltype(_impl_._has_bits_){}
-        , /*decltype(_impl_._cached_size_)*/{}
-        , decltype(_impl_.ee_){0}
-        , decltype(_impl_.ff_){static_cast<int16_t>(0)}
-    };
-}
-
-TempTest::~TempTest() {
-  // @@protoc_insertion_point(destructor:shark.TempTest)
-  if (auto *arena = _internal_metadata_.DeleteReturnArena<::SHARK_NAMESPACE_ID::UnknownFieldSet>()) {
-  (void)arena;
-    return;
-  }
-  SharedDtor();
-}
-
-inline void TempTest::SharedDtor() {
-    GOOGLE_DCHECK(GetArenaForAllocation() == nullptr);
-}
-
-void TempTest::SetCachedSize(int size) const {
-  _impl_._cached_size_.Set(size);
-}
-
-void TempTest::Clear() {
-// @@protoc_insertion_point(message_clear_start:shark.TempTest)
-    uint32_t cached_has_bits = 0;
-    // Prevent compiler warnings about cached_has_bits being unused
-    (void) cached_has_bits;
-
-    cached_has_bits = _impl_._has_bits_[0];
-    if (cached_has_bits & 0x00000003u) {
-        ::memset(&_impl_.ee_, 0, static_cast<size_t>(
-            reinterpret_cast<char*>(&_impl_.ff_) -
-            reinterpret_cast<char*>(&_impl_.ee_)) + sizeof(_impl_.ff_));
-    }
-    _impl_._has_bits_.Clear();
-    _internal_metadata_.Clear<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-}
-
-const char* TempTest::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
-#define CHK_(x) if (SHARK_PREDICT_FALSE(!(x))) goto failure
-    _Internal::HasBits has_bits{};
-    while (!ctx->Done(&ptr)) {
-        uint32_t tag;
-        ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
-            // optional .shark.TempTest.InnerE ee = 1;
-            case 1:
-                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
-                    uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                    CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(::shark::TempTest_InnerETrait::fits_wire(val))) {
-                        _internal_set_ee(static_cast<::shark::TempTest_InnerE>(val));
-                    } else {
-                      ::SHARK_NAMESPACE_ID::internal::WriteVarint(1, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
-                    }
-                } else
-                  goto handle_unusual;
-                continue;
-            // optional int16 ff = 2;
-            case 2:
-                if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 16)) {
-                    uint64_t val = ::SHARK_NAMESPACE_ID::internal::ReadVarint64(&ptr);
-                    CHK_(ptr);
-                    if (SHARK_PREDICT_TRUE(static_cast<int64_t>(val) >= -32768 && static_cast<int64_t>(val) <= 32767)) {
-                        _Internal::set_has_ff(&has_bits);
-                        _impl_.ff_ = static_cast<int16_t>(val);
-                    } else {
-                      ::SHARK_NAMESPACE_ID::internal::WriteVarint(2, val, _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>());
-                    }
-                } else
-                  goto handle_unusual;
-                continue;
-            default:
-              goto handle_unusual;
-        }  // switch
-    handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
-          CHK_(ptr);
-          ctx->SetLastTag(tag);
-          goto message_done;
-        }
-        ptr = UnknownFieldParse(
-            tag,
-            _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(),
-            ptr, ctx);
-        CHK_(ptr != nullptr);
-    }  // while
-message_done:
-  _impl_._has_bits_.Or(has_bits);
-  return ptr;
-failure:
-  ptr = nullptr;
-  goto message_done;
-#undef CHK_
-}
-
-uint8_t* TempTest::_InternalSerialize(
-    uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const {
-    // @@protoc_insertion_point(serialize_to_array_start:shark.TempTest)
-    uint32_t cached_has_bits = 0;
-    (void) cached_has_bits;
-
-    cached_has_bits = _impl_._has_bits_[0];
-    // optional .shark.TempTest.InnerE ee = 1;
-    if (cached_has_bits & 0x00000001u) {
-        target = stream->EnsureSpace(target);
-        target = ::_pbi::WireFormatLite::WriteEnumToArray(
-          1, this->_impl_.ee_, target);
-    }
-
-    // optional int16 ff = 2;
-    if (cached_has_bits & 0x00000002u) {
-        target = stream->EnsureSpace(target);
-        target = ::_pbi::WireFormatLite::WriteInt16ToArray(2, this->_internal_ff(), target);
-    }
-
-    if (SHARK_PREDICT_FALSE(_internal_metadata_.have_unknown_fields())) {
-        target = ::_pbi::WireFormat::InternalSerializeUnknownFieldsToArray(
-            _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance), target, stream);
-    }
-    // @@protoc_insertion_point(serialize_to_array_end:shark.TempTest)
-  return target;
-}
-
-size_t TempTest::ByteSizeLong() const {
-// @@protoc_insertion_point(message_byte_size_start:shark.TempTest)
-    size_t total_size = 0;
-
-    uint32_t cached_has_bits = 0;
-    // Prevent compiler warnings about cached_has_bits being unused
-    (void) cached_has_bits;
-
-    cached_has_bits = _impl_._has_bits_[0];
-    if (cached_has_bits & 0x00000003u) {
-        // optional .shark.TempTest.InnerE ee = 1;
-        if (cached_has_bits & 0x00000001u) {
-            total_size += 1 +
-              ::_pbi::WireFormatLite::EnumSize(this->_impl_.ee_);
-        }
-
-        // optional int16 ff = 2;
-        if (cached_has_bits & 0x00000002u) {
-            total_size += ::_pbi::WireFormatLite::Int16SizePlusOne(this->_internal_ff());
-        }
-
-    }
-    return MaybeComputeUnknownFieldsSize(total_size, &_impl_._cached_size_);
-}
-
-const ::SHARK_NAMESPACE_ID::Message::ClassData TempTest::_class_data_ = {
-    ::SHARK_NAMESPACE_ID::Message::CopyWithSourceCheck,
-    TempTest::MergeImpl
-};
-const ::SHARK_NAMESPACE_ID::Message::ClassData*TempTest::GetClassData() const { return &_class_data_; }
-
-
-void TempTest::MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg) {
-  auto* const _this = static_cast<TempTest*>(&to_msg);
-  auto& from = static_cast<const TempTest&>(from_msg);
-    // @@protoc_insertion_point(class_specific_merge_from_start:shark.TempTest)
-    GOOGLE_DCHECK_NE(&from, _this);
-    uint32_t cached_has_bits = 0;
-    (void) cached_has_bits;
-
-    cached_has_bits = from._impl_._has_bits_[0];
-    if (cached_has_bits & 0x00000003u) {
-        if (cached_has_bits & 0x00000001u) {
-            _this->_impl_.ee_ = from._impl_.ee_;
-        }
-        if (cached_has_bits & 0x00000002u) {
-            _this->_impl_.ff_ = from._impl_.ff_;
-        }
-        _this->_impl_._has_bits_[0] |= cached_has_bits;
-    }
-    _this->_internal_metadata_.MergeFrom<::SHARK_NAMESPACE_ID::UnknownFieldSet>(from._internal_metadata_);
-}
-
-void TempTest::CopyFrom(const TempTest& from) {
-// @@protoc_insertion_point(class_specific_copy_from_start:shark.TempTest)
-    if (&from == this) return;
-    Clear();
-    MergeFrom(from);
-}
-
-bool TempTest::IsInitialized() const {
-  return true;
-}
-
-void TempTest::InternalSwap(TempTest* other) {
-    using std::swap;
-    _internal_metadata_.InternalSwap(&other->_internal_metadata_);
-    swap(_impl_._has_bits_[0], other->_impl_._has_bits_[0]);
-    ::SHARK_NAMESPACE_ID::internal::memswap<
-        SHARK_FIELD_OFFSET(TempTest, _impl_.ff_)
-        + sizeof(TempTest::_impl_.ff_)
-        - SHARK_FIELD_OFFSET(TempTest, _impl_.ee_)>(
-            reinterpret_cast<char*>(&_impl_.ee_),
-            reinterpret_cast<char*>(&other->_impl_.ee_));
-}
-
-::SHARK_NAMESPACE_ID::Metadata TempTest::GetMetadata() const {
-  return ::_pbi::AssignDescriptors(
-      &descriptor_table_shark_2fmeta_2eshark_getter, &descriptor_table_shark_2fmeta_2eshark_once,
-      file_level_metadata_shark_2fmeta_2eshark[0]);
-}
-
 // @@protoc_insertion_point(namespace_scope)
 }  // namespace shark
 SHARK_NAMESPACE_OPEN
 
-template<> SHARK_NOINLINE ::shark::TempTest*
-Arena::CreateMaybeMessage< ::shark::TempTest >(Arena* arena) {
-  return Arena::CreateMessageInternal< ::shark::TempTest >(arena);
-}
 SHARK_NAMESPACE_CLOSE
 
 // @@protoc_insertion_point(global_scope)

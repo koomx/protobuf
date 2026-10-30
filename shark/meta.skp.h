@@ -26,11 +26,9 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/generated/generated_message_reflection.h>
-#include <shark/message.h>
 #include <shark/repeated_field.h>  // IWYU pragma: export
 #include <shark/extension_set.h>  // IWYU pragma: export
 #include <shark/generated/generated_enum_reflection.h>
-#include <shark/unknown_field_set.h>
 // @@protoc_insertion_point(includes)
 #include <shark/port_def.inc>
 #define SHARK_INTERNAL_EXPORT_shark_2fmeta_2eshark SHARK_EXPORT
@@ -45,45 +43,9 @@ struct SHARK_EXPORT TableStruct_shark_2fmeta_2eshark {
   static const uint32_t offsets[];
 };
 SHARK_EXPORT extern const ::SHARK_NAMESPACE_ID::internal::DescriptorTable descriptor_table_shark_2fmeta_2eshark;
-namespace shark {
-class TempTest;
-struct TempTestDefaultTypeInternal;
-SHARK_EXPORT extern TempTestDefaultTypeInternal _TempTest_default_instance_;
-}  // namespace shark
 SHARK_NAMESPACE_OPEN
-template<> SHARK_EXPORT ::shark::TempTest* Arena::CreateMaybeMessage<::shark::TempTest>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
-
-// inner enum InnerE
-// enum class TempTest_InnerE : int32_t {
-enum class TempTest_InnerE : int32_t {
-    E = 0,
-    A = -1,
-    B = 2
-};
-////////////////////////////////////////////////////////////////////
-/// enum traits
-struct TempTest_InnerETrait {
-    using underlying = int32_t;
-    static constexpr TempTest_InnerE enum_min = TempTest_InnerE::A;
-    static constexpr TempTest_InnerE enum_max = TempTest_InnerE::B;
-    static constexpr uint32_t value_count = 3;
-    static constexpr bool has_descriptor = true;
-    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
-    static int32_t to_underlying(TempTest_InnerE value) { return static_cast<int32_t>(value); }
-    static bool is_valid(int64_t value);
-    static const std::string& enum_name(TempTest_InnerE e);
-    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, TempTest_InnerE *e);
-
-
-    static constexpr bool fits_underlying(int64_t value) {
-         return true;
-    }
-    static constexpr bool fits_wire(::uint64_t value) {
-         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-    }
-};
 
 // global enum SharkType
 // enum class SharkType : uint8_t {
@@ -106,12 +68,12 @@ enum class SharkType : uint8_t {
     MESSAGE = 15,
     STRING = 16,
     BYTES = 17,
-    FIXED32 = 60,
-    FIXED64 = 61,
-    SFIXED32 = 62,
-    SFIXED64 = 63,
-    SINT32 = 64,
-    SINT64 = 65
+    FIXED32 = 18,
+    FIXED64 = 19,
+    SFIXED32 = 20,
+    SFIXED64 = 21,
+    SINT32 = 22,
+    SINT64 = 23
 };
 ////////////////////////////////////////////////////////////////////
 /// enum traits
@@ -184,12 +146,6 @@ struct SharkCppTypeTrait {
 SHARK_NAMESPACE_OPEN
 
     ////////////////////////////////////////////////////////////
-    /// enum ::shark::TempTest_InnerE
-    template <>
-    struct EnumTraitImpl<::shark::TempTest_InnerE> : public ::shark::TempTest_InnerETrait {};
-    template <> struct IsSharkEnum< ::shark::TempTest_InnerE> : ::std::true_type {};
-
-    ////////////////////////////////////////////////////////////
     /// enum ::shark::SharkType
     template <>
     struct EnumTraitImpl<::shark::SharkType> : public ::shark::SharkTypeTrait {};
@@ -206,182 +162,7 @@ SHARK_NAMESPACE_CLOSE
 // ===================================================================
 namespace shark {
 
-class SHARK_EXPORT TempTest final :
-    public ::SHARK_NAMESPACE_ID::Message /* @@protoc_insertion_point(class_definition:shark.TempTest) */ {
- public:
-    inline TempTest() : TempTest(nullptr) {}
-    ~TempTest() override;
-    explicit constexpr TempTest(::SHARK_NAMESPACE_ID::internal::ConstantInitialized);
 
-    TempTest(const TempTest& from);
-    TempTest(TempTest&& from) noexcept
-      : TempTest() {
-      *this = ::std::move(from);
-    }
-
-    inline TempTest& operator=(const TempTest& from) {
-      CopyFrom(from);
-      return *this;
-    }
-    inline TempTest& operator=(TempTest&& from) noexcept {
-      if (this == &from) return *this;
-      if (GetOwningArena() == from.GetOwningArena()
-    #ifdef SHARK_FORCE_COPY_IN_MOVE
-          && GetOwningArena() != nullptr
-    #endif  // !SHARK_FORCE_COPY_IN_MOVE
-      ) {
-        InternalSwap(&from);
-      } else {
-        CopyFrom(from);
-      }
-      return *this;
-    }
-
-    inline const ::SHARK_NAMESPACE_ID::UnknownFieldSet& unknown_fields() const {
-      return _internal_metadata_.unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>(::SHARK_NAMESPACE_ID::UnknownFieldSet::default_instance);
-    }
-    inline ::SHARK_NAMESPACE_ID::UnknownFieldSet* mutable_unknown_fields() {
-      return _internal_metadata_.mutable_unknown_fields<::SHARK_NAMESPACE_ID::UnknownFieldSet>();
-    }
-
-    static const ::SHARK_NAMESPACE_ID::Descriptor* descriptor() {
-      return GetDescriptor();
-    }
-    static const ::SHARK_NAMESPACE_ID::Descriptor* GetDescriptor() {
-      return default_instance().GetMetadata().descriptor;
-    }
-    static const ::SHARK_NAMESPACE_ID::Reflection* GetReflection() {
-      return default_instance().GetMetadata().reflection;
-    }
-    static const TempTest& default_instance() {
-      return *internal_default_instance();
-    }
-    static inline const TempTest* internal_default_instance() {
-      return reinterpret_cast<const TempTest*>(
-                 &_TempTest_default_instance_);
-    }
-    static constexpr int kIndexInFileMessages =
-      0;
-
-    friend void swap(TempTest& a, TempTest& b) {
-      a.Swap(&b);
-    }
-    inline void Swap(TempTest* other) {
-      if (other == this) return;
-    #ifdef SHARK_FORCE_COPY_IN_SWAP
-      if (GetOwningArena() != nullptr &&
-          GetOwningArena() == other->GetOwningArena()) {
-     #else  // SHARK_FORCE_COPY_IN_SWAP
-      if (GetOwningArena() == other->GetOwningArena()) {
-    #endif  // !SHARK_FORCE_COPY_IN_SWAP
-        InternalSwap(other);
-      } else {
-        ::SHARK_NAMESPACE_ID::internal::GenericSwap(this, other);
-      }
-    }
-    void UnsafeArenaSwap(TempTest* other) {
-      if (other == this) return;
-      GOOGLE_DCHECK(GetOwningArena() == other->GetOwningArena());
-      InternalSwap(other);
-    }
-
-    // implements Message ----------------------------------------------
-
-    TempTest* New(::SHARK_NAMESPACE_ID::Arena* arena = nullptr) const final {
-      return CreateMaybeMessage<TempTest>(arena);
-    }
-    using ::SHARK_NAMESPACE_ID::Message::CopyFrom;
-    void CopyFrom(const TempTest& from);
-    using ::SHARK_NAMESPACE_ID::Message::MergeFrom;
-    void MergeFrom( const TempTest& from) {
-      TempTest::MergeImpl(*this, from);
-    }
-    private:
-    static void MergeImpl(::SHARK_NAMESPACE_ID::Message& to_msg, const ::SHARK_NAMESPACE_ID::Message& from_msg);
-    public:
-    SHARK_ATTRIBUTE_REINITIALIZES void Clear() final;
-    bool IsInitialized() const final;
-
-    size_t ByteSizeLong() const final;
-    const char* _InternalParse(const char* ptr, ::SHARK_NAMESPACE_ID::internal::ParseContext* ctx) final;
-    uint8_t* _InternalSerialize(
-        uint8_t* target, ::SHARK_NAMESPACE_ID::io::EpsCopyOutputStream* stream) const final;
-    int GetCachedSize() const final { return _impl_._cached_size_.Get(); }
-
-    private:
-    void SharedCtor(::SHARK_NAMESPACE_ID::Arena* arena, bool is_message_owned);
-    void SharedDtor();
-    void SetCachedSize(int size) const final;
-    void InternalSwap(TempTest* other);
-
-    private:
-    friend class ::SHARK_NAMESPACE_ID::internal::AnyMetadata;
-    static ::SHARK_NAMESPACE_ID::StringPiece FullMessageName() {
-      return "shark.TempTest";
-    }
-    protected:
-    explicit TempTest(::SHARK_NAMESPACE_ID::Arena* arena,
-                         bool is_message_owned = false);
-    public:
-
-    static const ClassData _class_data_;
-    const ::SHARK_NAMESPACE_ID::Message::ClassData*GetClassData() const final;
-
-    ::SHARK_NAMESPACE_ID::Metadata GetMetadata() const final;
-
-    // nested types ----------------------------------------------------
-
-    using InnerE = TempTest_InnerE;
-    using InnerETrait = TempTest_InnerETrait;
-
-    // accessors -------------------------------------------------------
-
-    enum : int {
-      kEeFieldNumber = 1,
-      kFfFieldNumber = 2,
-    };
-    // optional .shark.TempTest.InnerE ee = 1;
-    bool has_ee() const;
-    private:
-    bool _internal_has_ee() const;
-    public:
-    void clear_ee();
-    ::shark::TempTest_InnerE ee() const;
-    void set_ee(::shark::TempTest_InnerE value);
-    private:
-    ::shark::TempTest_InnerE _internal_ee() const;
-    void _internal_set_ee(::shark::TempTest_InnerE value);
-    public:
-
-    // optional int16 ff = 2;
-    bool has_ff() const;
-    private:
-    bool _internal_has_ff() const;
-    public:
-    void clear_ff();
-    int16_t ff() const;
-    void set_ff(int16_t value);
-    private:
-    int16_t _internal_ff() const;
-    void _internal_set_ff(int16_t value);
-    public:
-
-    // @@protoc_insertion_point(class_scope:shark.TempTest)
- private:
-    class _Internal;
-
-    template <typename T> friend class ::SHARK_NAMESPACE_ID::Arena::InternalHelper;
-    typedef void InternalArenaConstructable_;
-    typedef void DestructorSkippable_;
-    struct Impl_ {
-        ::SHARK_NAMESPACE_ID::internal::HasBits<1> _has_bits_;
-        mutable ::SHARK_NAMESPACE_ID::internal::CachedSize _cached_size_;
-        int ee_;
-        int16_t ff_;
-    };
-    union { Impl_ _impl_; };
-    friend struct ::TableStruct_shark_2fmeta_2eshark;
-};
 // ===================================================================
 
 
@@ -391,64 +172,6 @@ class SHARK_EXPORT TempTest final :
   #pragma GCC diagnostic push
   #pragma GCC diagnostic ignored "-Wstrict-aliasing"
 #endif  // __GNUC__
-// TempTest
-
-// optional .shark.TempTest.InnerE ee = 1;
-inline bool TempTest::_internal_has_ee() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000001u) != 0;
-  return value;
-}
-inline bool TempTest::has_ee() const {
-  return _internal_has_ee();
-}
-inline void TempTest::clear_ee() {
-    _impl_.ee_ = 0;
-    _impl_._has_bits_[0] &= ~0x00000001u;
-}
-inline ::shark::TempTest_InnerE TempTest::_internal_ee() const {
-  return static_cast<::shark::TempTest_InnerE>(static_cast<int32_t>(_impl_.ee_));
-}
-inline ::shark::TempTest_InnerE TempTest::ee() const {
-  // @@protoc_insertion_point(field_get:shark.TempTest.ee)
-  return _internal_ee();
-}
-inline void TempTest::_internal_set_ee(::shark::TempTest_InnerE value) {
-  _impl_._has_bits_[0] |= 0x00000001u;
-  _impl_.ee_ = static_cast<int>(::shark::TempTest_InnerETrait::to_underlying(value));
-}
-inline void TempTest::set_ee(::shark::TempTest_InnerE value) {
-  _internal_set_ee(value);
-  // @@protoc_insertion_point(field_set:shark.TempTest.ee)
-}
-
-// optional int16 ff = 2;
-inline bool TempTest::_internal_has_ff() const {
-  bool value = (_impl_._has_bits_[0] & 0x00000002u) != 0;
-  return value;
-}
-inline bool TempTest::has_ff() const {
-  return _internal_has_ff();
-}
-inline void TempTest::clear_ff() {
-    _impl_.ff_ = static_cast<int16_t>(0);
-    _impl_._has_bits_[0] &= ~0x00000002u;
-}
-inline int16_t TempTest::_internal_ff() const {
-  return _impl_.ff_;
-}
-inline int16_t TempTest::ff() const {
-  // @@protoc_insertion_point(field_get:shark.TempTest.ff)
-  return _internal_ff();
-}
-inline void TempTest::_internal_set_ff(int16_t value) {
-  _impl_._has_bits_[0] |= 0x00000002u;
-  _impl_.ff_ = value;
-}
-inline void TempTest::set_ff(int16_t value) {
-  _internal_set_ff(value);
-  // @@protoc_insertion_point(field_set:shark.TempTest.ff)
-}
-
 #ifdef __GNUC__
   #pragma GCC diagnostic pop
 #endif  // __GNUC__

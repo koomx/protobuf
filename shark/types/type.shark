@@ -32,6 +32,7 @@ syntax = "proto2";
 
 package shark;
 
+import "shark/meta.shark";
 import "shark/types/any.shark";
 import "shark/types/source_context.shark";
 
@@ -57,6 +58,7 @@ message Type {
 // A single field of a message type.
 message Field {
   // Basic field types.
+  /*
   enum Kind {
     TYPE_UNKNOWN = 0;
     TYPE_BOOL = 1;
@@ -83,6 +85,8 @@ message Field {
     TYPE_SINT32 = 22;
     TYPE_SINT64 = 23;
   }
+  */
+
 
   // Whether a field is optional, required, or repeated.
   enum Cardinality {
@@ -97,7 +101,7 @@ message Field {
   }
 
   // The field type.
-  optional Kind kind = 1;
+  optional SharkType kind = 1;
   // The field cardinality.
   optional Cardinality cardinality = 2;
   // The field number.

@@ -538,16 +538,16 @@ TEST_P(ProtoStreamObjectWriterTest, InfinityInputTest) {
 
   ResetTypeInfo(Primitive::descriptor());
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_INT32"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("INT32"),
                                       StringPiece("\"Infinity\"")))
       .With(Args<0>(HasObjectLocation("i32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_UINT32"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
                                       StringPiece("\"Infinity\"")))
       .With(Args<0>(HasObjectLocation("u32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_SFIXED64"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("SFIXED64"),
                                       StringPiece("\"-Infinity\"")))
       .With(Args<0>(HasObjectLocation("sf64")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_BOOL"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("BOOL"),
                                       StringPiece("\"Infinity\"")))
       .With(Args<0>(HasObjectLocation("bool")));
 
@@ -571,16 +571,16 @@ TEST_P(ProtoStreamObjectWriterTest, NaNInputTest) {
 
   ResetTypeInfo(Primitive::descriptor());
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_INT32"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("INT32"),
                                       StringPiece("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("i32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_UINT32"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
                                       StringPiece("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("u32")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_SFIXED64"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("SFIXED64"),
                                       StringPiece("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("sf64")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_BOOL"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("BOOL"),
                                       StringPiece("\"NaN\"")))
       .With(Args<0>(HasObjectLocation("bool")));
 
@@ -1061,7 +1061,7 @@ TEST_P(ProtoStreamObjectWriterTest, MissingRequiredField) {
 TEST_P(ProtoStreamObjectWriterTest, InvalidFieldValueAtRoot) {
   Book empty;
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_UINT32"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
                                       StringPiece("\"garbage\"")))
       .With(Args<0>(HasObjectLocation("length")));
   ow_->StartObject("")->RenderString("length", "garbage")->EndObject();
@@ -1072,10 +1072,10 @@ TEST_P(ProtoStreamObjectWriterTest, MultipleInvalidFieldValues) {
   Book expected;
   expected.set_title("My Title");
 
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_UINT32"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("UINT32"),
                                       StringPiece("\"-400\"")))
       .With(Args<0>(HasObjectLocation("length")));
-  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("TYPE_INT64"),
+  EXPECT_CALL(listener_, InvalidValue(_, StringPiece("INT64"),
                                       StringPiece("\"3.14\"")))
       .With(Args<0>(HasObjectLocation("published")));
   ow_->StartObject("")

@@ -275,7 +275,7 @@ const shark::Type* DefaultValueObjectWriter::Node::GetMapValueType(
     if (sub_field.number() != 2) {
       continue;
     }
-    if (sub_field.kind() != shark::Field_Kind::TYPE_MESSAGE) {
+    if (sub_field.kind() != shark::SharkType::MESSAGE) {
       // This map's value type is not a message type. We don't need to
       // get the field_type in this case.
       break;
@@ -341,7 +341,7 @@ void DefaultValueObjectWriter::Node::PopulateChildren(
     bool is_map = false;
     NodeKind kind = PRIMITIVE;
 
-    if (field.kind() == shark::Field_Kind::TYPE_MESSAGE) {
+    if (field.kind() == shark::SharkType::MESSAGE) {
       kind = OBJECT;
       util::StatusOr<const shark::Type*> found_result =
           typeinfo->ResolveTypeUrl(field.type_url());
@@ -443,53 +443,53 @@ DataPiece DefaultValueObjectWriter::CreateDefaultDataPieceForField(
     const shark::Field& field, const TypeInfo* typeinfo,
     bool use_ints_for_enums) {
   switch (field.kind()) {
-    case shark::Field_Kind::TYPE_DOUBLE: {
+    case shark::SharkType::DOUBLE: {
       return DataPiece(ConvertTo<double>(
           field.default_value(), &DataPiece::ToDouble, static_cast<double>(0)));
     }
-    case shark::Field_Kind::TYPE_FLOAT: {
+    case shark::SharkType::FLOAT: {
       return DataPiece(ConvertTo<float>(
           field.default_value(), &DataPiece::ToFloat, static_cast<float>(0)));
     }
-    case shark::Field_Kind::TYPE_INT64:
-    case shark::Field_Kind::TYPE_SINT64:
-    case shark::Field_Kind::TYPE_SFIXED64: {
+    case shark::SharkType::INT64:
+    case shark::SharkType::SINT64:
+    case shark::SharkType::SFIXED64: {
       return DataPiece(ConvertTo<int64_t>(
           field.default_value(), &DataPiece::ToInt64, static_cast<int64_t>(0)));
     }
-    case shark::Field_Kind::TYPE_UINT64:
-    case shark::Field_Kind::TYPE_FIXED64: {
+    case shark::SharkType::UINT64:
+    case shark::SharkType::FIXED64: {
       return DataPiece(ConvertTo<uint64_t>(field.default_value(),
                                            &DataPiece::ToUint64,
                                            static_cast<uint64_t>(0)));
     }
-    case shark::Field_Kind::TYPE_INT32:
-    case shark::Field_Kind::TYPE_INT8:
-    case shark::Field_Kind::TYPE_INT16:
-    case shark::Field_Kind::TYPE_SINT32:
-    case shark::Field_Kind::TYPE_SFIXED32: {
+    case shark::SharkType::INT32:
+    case shark::SharkType::INT8:
+    case shark::SharkType::INT16:
+    case shark::SharkType::SINT32:
+    case shark::SharkType::SFIXED32: {
       return DataPiece(ConvertTo<int32_t>(
           field.default_value(), &DataPiece::ToInt32, static_cast<int32_t>(0)));
     }
-    case shark::Field_Kind::TYPE_BOOL: {
+    case shark::SharkType::BOOL: {
       return DataPiece(
           ConvertTo<bool>(field.default_value(), &DataPiece::ToBool, false));
     }
-    case shark::Field_Kind::TYPE_STRING: {
+    case shark::SharkType::STRING: {
       return DataPiece(field.default_value(), true);
     }
-    case shark::Field_Kind::TYPE_BYTES: {
+    case shark::SharkType::BYTES: {
       return DataPiece(field.default_value(), false, true);
     }
-    case shark::Field_Kind::TYPE_UINT32:
-    case shark::Field_Kind::TYPE_UINT8:
-    case shark::Field_Kind::TYPE_UINT16:
-    case shark::Field_Kind::TYPE_FIXED32: {
+    case shark::SharkType::UINT32:
+    case shark::SharkType::UINT8:
+    case shark::SharkType::UINT16:
+    case shark::SharkType::FIXED32: {
       return DataPiece(ConvertTo<uint32_t>(field.default_value(),
                                            &DataPiece::ToUint32,
                                            static_cast<uint32_t>(0)));
     }
-    case shark::Field_Kind::TYPE_ENUM: {
+    case shark::SharkType::ENUM: {
       return FindEnumDefault(field, typeinfo, use_ints_for_enums);
     }
     default: {

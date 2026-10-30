@@ -37,12 +37,12 @@ enum class SharkType : uint8 {
   STRING = 16;
   BYTES = 17;
 
-  FIXED32 = 60;
-  FIXED64 = 61;
-  SFIXED32 = 62;
-  SFIXED64 = 63;
-  SINT32 = 64;
-  SINT64 = 65;
+  FIXED32 = 18;
+  FIXED64 = 19;
+  SFIXED32 = 20;
+  SFIXED64 = 21;
+  SINT32 = 22;
+  SINT64 = 23;
 }
 
 enum class SharkCppType : uint8 {
@@ -63,13 +63,3 @@ enum class SharkCppType : uint8 {
   MESSAGE = 15;
   STRING = 16; // STRING, BYTES
 };
-
-message TempTest {
-  enum InnerE {
-    E = 0;
-    A = -1;
-    B = 2;
-  }
-  optional InnerE ee = 1;
-  optional int16 ff = 2;
-}

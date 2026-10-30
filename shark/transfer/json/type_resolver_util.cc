@@ -244,7 +244,7 @@ class DescriptorPoolTypeResolver : public TypeResolver {
   }
 
   void ConvertFieldDescriptor(const FieldDescriptor* descriptor, Field* field) {
-    field->set_kind(static_cast<Field::Kind>(descriptor->type()));
+    field->set_kind(static_cast<SharkType>(descriptor->type()));
     switch (descriptor->label()) {
       case FieldLabel::OPTIONAL:
         field->set_cardinality(Field_Cardinality::CARDINALITY_OPTIONAL);

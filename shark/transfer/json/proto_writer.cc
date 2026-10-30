@@ -335,7 +335,7 @@ ProtoWriter::ProtoElement::ProtoElement(ProtoWriter::ProtoElement* parent,
       proto3_(type.syntax() == shark::Syntax::SYNTAX_PROTO3),
       type_(type),
       size_index_(!is_list &&
-                          field->kind() == shark::Field_Kind::TYPE_MESSAGE
+                          field->kind() == shark::SharkType::MESSAGE
                       ? ow_->size_insert_.size()
                       : -1),
       array_index_(is_list ? 0 : -1),
@@ -350,7 +350,7 @@ ProtoWriter::ProtoElement::ProtoElement(ProtoWriter::ProtoElement* parent,
       this->parent()->RegisterField(field);
     }
 
-    if (field->kind() == shark::Field_Kind::TYPE_MESSAGE) {
+    if (field->kind() == shark::SharkType::MESSAGE) {
       if (!proto3_) {
         required_fields_ = GetRequiredFields(type_);
       }
@@ -648,84 +648,84 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
   }
 
   switch (field.kind()) {
-    case shark::Field_Kind::TYPE_INT32: {
+    case shark::SharkType::INT32: {
       status = WriteInt32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_INT8: {
+    case shark::SharkType::INT8: {
       status = WriteRangedInt32(field.number(), data, stream_.get(), -128, 127);
       break;
     }
-    case shark::Field_Kind::TYPE_INT16: {
+    case shark::SharkType::INT16: {
       status = WriteRangedInt32(field.number(), data, stream_.get(), -32768,
                                 32767);
       break;
     }
-    case shark::Field_Kind::TYPE_SFIXED32: {
+    case shark::SharkType::SFIXED32: {
       status = WriteSFixed32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_SINT32: {
+    case shark::SharkType::SINT32: {
       status = WriteSInt32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_FIXED32: {
+    case shark::SharkType::FIXED32: {
       status = WriteFixed32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_UINT32: {
+    case shark::SharkType::UINT32: {
       status = WriteUInt32(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_UINT8: {
+    case shark::SharkType::UINT8: {
       status = WriteRangedUInt32(field.number(), data, stream_.get(), 255);
       break;
     }
-    case shark::Field_Kind::TYPE_UINT16: {
+    case shark::SharkType::UINT16: {
       status = WriteRangedUInt32(field.number(), data, stream_.get(), 65535);
       break;
     }
-    case shark::Field_Kind::TYPE_INT64: {
+    case shark::SharkType::INT64: {
       status = WriteInt64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_SFIXED64: {
+    case shark::SharkType::SFIXED64: {
       status = WriteSFixed64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_SINT64: {
+    case shark::SharkType::SINT64: {
       status = WriteSInt64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_FIXED64: {
+    case shark::SharkType::FIXED64: {
       status = WriteFixed64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_UINT64: {
+    case shark::SharkType::UINT64: {
       status = WriteUInt64(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_DOUBLE: {
+    case shark::SharkType::DOUBLE: {
       status = WriteDouble(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_FLOAT: {
+    case shark::SharkType::FLOAT: {
       status = WriteFloat(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_BOOL: {
+    case shark::SharkType::BOOL: {
       status = WriteBool(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_BYTES: {
+    case shark::SharkType::BYTES: {
       status = WriteBytes(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_STRING: {
+    case shark::SharkType::STRING: {
       status = WriteString(field.number(), data, stream_.get());
       break;
     }
-    case shark::Field_Kind::TYPE_ENUM: {
+    case shark::SharkType::ENUM: {
       status = WriteEnum(
           field.number(), data, typeinfo_->GetEnumByTypeUrl(field.type_url()),
           stream_.get(), use_lower_camel_for_enums_,
@@ -742,7 +742,7 @@ ProtoWriter* ProtoWriter::RenderPrimitiveField(
       element_.reset(new ProtoElement(element_.release(), &field, type, false));
     }
     InvalidValue(field.type_url().empty()
-                     ? Field_KindTrait::enum_name(field.kind())
+                     ? SharkTypeTrait::enum_name(field.kind())
                      : field.type_url(),
                  status.message());
     element_.reset(element()->pop());
@@ -801,7 +801,7 @@ const shark::Field* ProtoWriter::Lookup(
 
 const shark::Type* ProtoWriter::LookupType(
     const shark::Field* field) {
-  return (field->kind() == shark::Field_Kind::TYPE_MESSAGE
+  return (field->kind() == shark::SharkType::MESSAGE
               ? typeinfo_->GetTypeByTypeUrl(field->type_url())
               : &element_->type());
 }

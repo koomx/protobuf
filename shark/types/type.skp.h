@@ -31,6 +31,7 @@
 #include <shark/extension_set.h>  // IWYU pragma: export
 #include <shark/generated/generated_enum_reflection.h>
 #include <shark/unknown_field_set.h>
+#include <shark/meta.skp.h>
 #include <shark/types/any.skp.h>
 #include <shark/types/source_context.skp.h>
 // @@protoc_insertion_point(includes)
@@ -72,57 +73,6 @@ template<> ::shark::Option* Arena::CreateMaybeMessage<::shark::Option>(Arena*);
 template<> ::shark::Type* Arena::CreateMaybeMessage<::shark::Type>(Arena*);
 SHARK_NAMESPACE_CLOSE
 namespace shark {
-
-// inner enum Kind
-// enum class Field_Kind : int32_t {
-enum class Field_Kind : int32_t {
-    TYPE_UNKNOWN = 0,
-    TYPE_BOOL = 1,
-    TYPE_INT8 = 2,
-    TYPE_UINT8 = 3,
-    TYPE_INT16 = 4,
-    TYPE_UINT16 = 5,
-    TYPE_INT32 = 6,
-    TYPE_UINT32 = 7,
-    TYPE_INT64 = 8,
-    TYPE_UINT64 = 9,
-    TYPE_FLOAT = 10,
-    TYPE_FLOAT16 = 11,
-    TYPE_FLOAT8 = 12,
-    TYPE_DOUBLE = 13,
-    TYPE_ENUM = 14,
-    TYPE_MESSAGE = 15,
-    TYPE_STRING = 16,
-    TYPE_BYTES = 17,
-    TYPE_FIXED32 = 18,
-    TYPE_FIXED64 = 19,
-    TYPE_SFIXED32 = 20,
-    TYPE_SFIXED64 = 21,
-    TYPE_SINT32 = 22,
-    TYPE_SINT64 = 23
-};
-////////////////////////////////////////////////////////////////////
-/// enum traits
-struct Field_KindTrait {
-    using underlying = int32_t;
-    static constexpr Field_Kind enum_min = Field_Kind::TYPE_UNKNOWN;
-    static constexpr Field_Kind enum_max = Field_Kind::TYPE_SINT64;
-    static constexpr uint32_t value_count = 24;
-    static constexpr bool has_descriptor = true;
-    static const ::SHARK_NAMESPACE_ID::EnumDescriptor* descriptor();
-    static int32_t to_underlying(Field_Kind value) { return static_cast<int32_t>(value); }
-    static bool is_valid(int64_t value);
-    static const std::string& enum_name(Field_Kind e);
-    static bool enum_parse(::SHARK_NAMESPACE_ID::ConstStringParam name, Field_Kind *e);
-
-
-    static constexpr bool fits_underlying(int64_t value) {
-         return true;
-    }
-    static constexpr bool fits_wire(::uint64_t value) {
-         return (value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value));
-    }
-};
 
 // inner enum Cardinality
 // enum class Field_Cardinality : int32_t {
@@ -187,12 +137,6 @@ struct SyntaxTrait {
 }  // namespace shark
 
 SHARK_NAMESPACE_OPEN
-
-    ////////////////////////////////////////////////////////////
-    /// enum ::shark::Field_Kind
-    template <>
-    struct EnumTraitImpl<::shark::Field_Kind> : public ::shark::Field_KindTrait {};
-    template <> struct IsSharkEnum< ::shark::Field_Kind> : ::std::true_type {};
 
     ////////////////////////////////////////////////////////////
     /// enum ::shark::Field_Cardinality
@@ -602,9 +546,6 @@ class Field final :
 
     // nested types ----------------------------------------------------
 
-    using Kind = Field_Kind;
-    using KindTrait = Field_KindTrait;
-
     using Cardinality = Field_Cardinality;
     using CardinalityTrait = Field_CardinalityTrait;
 
@@ -712,17 +653,17 @@ class Field final :
     std::string* _internal_mutable_default_value();
     public:
 
-    // optional .shark.Field.Kind kind = 1;
+    // optional .shark.SharkType kind = 1;
     bool has_kind() const;
     private:
     bool _internal_has_kind() const;
     public:
     void clear_kind();
-    ::shark::Field_Kind kind() const;
-    void set_kind(::shark::Field_Kind value);
+    ::shark::SharkType kind() const;
+    void set_kind(::shark::SharkType value);
     private:
-    ::shark::Field_Kind _internal_kind() const;
-    void _internal_set_kind(::shark::Field_Kind value);
+    ::shark::SharkType _internal_kind() const;
+    void _internal_set_kind(::shark::SharkType value);
     public:
 
     // optional .shark.Field.Cardinality cardinality = 2;
@@ -1779,7 +1720,7 @@ inline void Type::set_syntax(::shark::Syntax value) {
 
 // Field
 
-// optional .shark.Field.Kind kind = 1;
+// optional .shark.SharkType kind = 1;
 inline bool Field::_internal_has_kind() const {
   bool value = (_impl_._has_bits_[0] & 0x00000010u) != 0;
   return value;
@@ -1791,18 +1732,18 @@ inline void Field::clear_kind() {
     _impl_.kind_ = 0;
     _impl_._has_bits_[0] &= ~0x00000010u;
 }
-inline ::shark::Field_Kind Field::_internal_kind() const {
-  return static_cast<::shark::Field_Kind>(static_cast<int32_t>(_impl_.kind_));
+inline ::shark::SharkType Field::_internal_kind() const {
+  return static_cast<::shark::SharkType>(static_cast<uint8_t>(_impl_.kind_));
 }
-inline ::shark::Field_Kind Field::kind() const {
+inline ::shark::SharkType Field::kind() const {
   // @@protoc_insertion_point(field_get:shark.Field.kind)
   return _internal_kind();
 }
-inline void Field::_internal_set_kind(::shark::Field_Kind value) {
+inline void Field::_internal_set_kind(::shark::SharkType value) {
   _impl_._has_bits_[0] |= 0x00000010u;
-  _impl_.kind_ = static_cast<int>(::shark::Field_KindTrait::to_underlying(value));
+  _impl_.kind_ = static_cast<int>(::shark::SharkTypeTrait::to_underlying(value));
 }
-inline void Field::set_kind(::shark::Field_Kind value) {
+inline void Field::set_kind(::shark::SharkType value) {
   _internal_set_kind(value);
   // @@protoc_insertion_point(field_set:shark.Field.kind)
 }
