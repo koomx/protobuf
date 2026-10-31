@@ -30,8 +30,8 @@
 
 #pragma once
 
-#include <shark/stubs/common.h>
 #include <shark/port.h>
+#include <shark/stubs/common.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -42,70 +42,72 @@
 
 namespace shark::internal {
 
-template <size_t doublewords>
-class HasBits {
- public:
-  SHARK_NDEBUG_INLINE constexpr HasBits() : has_bits_{} {}
+    template <size_t doublewords>
+    class HasBits {
+    public:
+        SHARK_NDEBUG_INLINE constexpr HasBits()
+            : has_bits_ { } { }
 
-  SHARK_NDEBUG_INLINE void Clear() {
-    memset(has_bits_, 0, sizeof(has_bits_));
-  }
+        SHARK_NDEBUG_INLINE void Clear() {
+            memset(has_bits_, 0, sizeof(has_bits_));
+        }
 
-  SHARK_NDEBUG_INLINE uint32_t& operator[](int index) {
-    return has_bits_[index];
-  }
+        SHARK_NDEBUG_INLINE uint32_t& operator[](int index) {
+            return has_bits_[index];
+        }
 
-  SHARK_NDEBUG_INLINE const uint32_t& operator[](int index) const {
-    return has_bits_[index];
-  }
+        SHARK_NDEBUG_INLINE const uint32_t& operator[](int index) const {
+            return has_bits_[index];
+        }
 
-  bool operator==(const HasBits<doublewords>& rhs) const {
-    return memcmp(has_bits_, rhs.has_bits_, sizeof(has_bits_)) == 0;
-  }
+        bool operator==(const HasBits<doublewords>& rhs) const {
+            return memcmp(has_bits_, rhs.has_bits_, sizeof(has_bits_)) == 0;
+        }
 
-  bool operator!=(const HasBits<doublewords>& rhs) const {
-    return !(*this == rhs);
-  }
+        bool operator!=(const HasBits<doublewords>& rhs) const {
+            return !(*this == rhs);
+        }
 
-  void Or(const HasBits<doublewords>& rhs) {
-    for (size_t i = 0; i < doublewords; i++) has_bits_[i] |= rhs[i];
-  }
+        void Or(const HasBits<doublewords>& rhs) {
+            for (size_t i = 0; i < doublewords; i++)
+                has_bits_[i] |= rhs[i];
+        }
 
-  bool empty() const;
+        bool empty() const;
 
- private:
-  uint32_t has_bits_[doublewords];
-};
+    private:
+        uint32_t has_bits_[doublewords];
+    };
 
-template <>
-inline bool HasBits<1>::empty() const {
-  return !has_bits_[0];
-}
+    template <>
+    inline bool HasBits<1>::empty() const {
+        return !has_bits_[0];
+    }
 
-template <>
-inline bool HasBits<2>::empty() const {
-  return !(has_bits_[0] | has_bits_[1]);
-}
+    template <>
+    inline bool HasBits<2>::empty() const {
+        return !(has_bits_[0] | has_bits_[1]);
+    }
 
-template <>
-inline bool HasBits<3>::empty() const {
-  return !(has_bits_[0] | has_bits_[1] | has_bits_[2]);
-}
+    template <>
+    inline bool HasBits<3>::empty() const {
+        return !(has_bits_[0] | has_bits_[1] | has_bits_[2]);
+    }
 
-template <>
-inline bool HasBits<4>::empty() const {
-  return !(has_bits_[0] | has_bits_[1] | has_bits_[2] | has_bits_[3]);
-}
+    template <>
+    inline bool HasBits<4>::empty() const {
+        return !(has_bits_[0] | has_bits_[1] | has_bits_[2] | has_bits_[3]);
+    }
 
-template <size_t doublewords>
-inline bool HasBits<doublewords>::empty() const {
-  for (size_t i = 0; i < doublewords; ++i) {
-    if (has_bits_[i]) return false;
-  }
-  return true;
-}
+    template <size_t doublewords>
+    inline bool HasBits<doublewords>::empty() const {
+        for (size_t i = 0; i < doublewords; ++i) {
+            if (has_bits_[i])
+                return false;
+        }
+        return true;
+    }
 
-}  // namespace shark::internal
+} // namespace shark::internal
 
 #include <shark/port_undef.inc>
-
