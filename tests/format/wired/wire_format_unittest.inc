@@ -65,12 +65,12 @@ TEST(WireFormatTest, EnumsInSync) {
   EXPECT_EQ(implicit_cast<int>(kMaxFieldType),
             implicit_cast<int>(WireFormatLite::MAX_FIELD_TYPE));
   EXPECT_EQ(implicit_cast<int>(kMaxFieldCppType),
-            implicit_cast<int>(SharkFieldCppType::MAX_CPPTYPE));
+            static_cast<int>(SharkFieldCppType::MAX));
 
   for (int i = 1; i <= WireFormatLite::MAX_FIELD_TYPE; i++) {
     EXPECT_EQ(static_cast<int>(FieldDescriptor::TypeToCppType(
                   static_cast<::shark::SharkFieldType>(i))),
-              implicit_cast<int>(WireFormatLite::FieldTypeToCppType(
+              static_cast<int>(WireFormatLite::FieldTypeToCppType(
                   static_cast<SharkFieldType>(i))));
   }
 }

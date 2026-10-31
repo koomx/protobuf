@@ -612,30 +612,23 @@ namespace shark {
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);
 
-    // Whether a field is optional, required, or repeated. 0 is reserved for errors.
-    enum class FieldLabel : int {
-        OPTIONAL = 1,
-        REQUIRED = 2,
-        REPEATED = 3,
-    };
-
-    constexpr int kMaxFieldType = 23;
-    constexpr int kMaxFieldCppType = 16;
-    constexpr int kMaxFieldLabel = 3;
+    inline constexpr int kMaxFieldType = static_cast<int> (SharkFieldType::MAX);
+    inline constexpr int kMaxFieldCppType = static_cast<int> (SharkFieldCppType::MAX);
+    inline constexpr int kMaxFieldLabel = static_cast<int> (FieldLabel::MAX);
 
     class SHARK_EXPORT FieldDescriptor : private internal::SymbolBase {
     public:
         typedef FieldDescriptorProto Proto;
 
         // Valid field numbers are positive integers up to kMaxNumber.
-        static const int kMaxNumber = (1 << 29) - 1;
+        static constexpr int kMaxNumber = (1 << 29) - 1;
 
         // First field number reserved for the protocol buffer library implementation.
         // Users may not declare fields that use reserved numbers.
-        static const int kFirstReservedNumber = 19000;
+        static constexpr int kFirstReservedNumber = 19000;
         // Last field number reserved for the protocol buffer library implementation.
         // Users may not declare fields that use reserved numbers.
-        static const int kLastReservedNumber = 19999;
+        static constexpr int kLastReservedNumber = 19999;
 
         const std::string& name() const; // Name of this field within the message.
         const std::string& full_name() const; // Fully-qualified name of the field.
@@ -1508,15 +1501,8 @@ namespace shark {
         // descriptor.shark, and any available extensions of that message.
         const FileOptions& options() const;
 
-        // Syntax of this file.
-        enum Syntax {
-            SYNTAX_UNKNOWN = 0,
-            SYNTAX_PROTO2 = 2,
-            // Reserved. Do not reuse 3. Building a file with this syntax fails.
-            SYNTAX_PROTO3 = 3,
-        };
-        Syntax syntax() const;
-        static const char* SyntaxName(Syntax syntax);
+        SyntaxEdition syntax() const;
+        static const char* SyntaxName(SyntaxEdition syntax);
 
         // Find a top-level message type by name (not full_name).  Returns nullptr if
         // not found.
@@ -1585,7 +1571,7 @@ namespace shark {
         // aren't called during the process of building the file.
         bool finished_building_;
         // Actually a `Syntax` but stored as uint8_t to save space.
-        uint8_t syntax_;
+        SyntaxEdition syntax_;
         // This one is here to fill the padding.
         int extension_count_;
 
@@ -2256,7 +2242,7 @@ namespace shark {
     }
 
     inline bool FieldDescriptor::has_optional_keyword() const {
-        return proto3_optional_ || (file()->syntax() == FileDescriptor::SYNTAX_PROTO2 && is_optional() && !containing_oneof());
+        return proto3_optional_ || (file()->syntax() == SyntaxEdition::SYNTAX_PROTO2 && is_optional() && !containing_oneof());
     }
 
     inline const OneofDescriptor* FieldDescriptor::real_containing_oneof() const {
@@ -2267,7 +2253,7 @@ namespace shark {
     inline bool FieldDescriptor::has_presence() const {
         if (is_repeated())
             return false;
-        return cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE || containing_oneof() || file()->syntax() == FileDescriptor::SYNTAX_PROTO2;
+        return cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE || containing_oneof() || file()->syntax() == SyntaxEdition::SYNTAX_PROTO2;
     }
 
     // To save space, index() is computed by looking at the descriptor's position
@@ -2367,8 +2353,8 @@ namespace shark {
         return dependency(weak_dependencies_[index]);
     }
 
-    inline FileDescriptor::Syntax FileDescriptor::syntax() const {
-        return static_cast<Syntax>(syntax_);
+    inline SyntaxEdition FileDescriptor::syntax() const {
+        return static_cast<SyntaxEdition>(syntax_);
     }
 
 } // namespace shark

@@ -70,29 +70,29 @@ namespace shark {
             WireFormatLite::kFieldTypeToCppTypeMap[MAX_FIELD_TYPE + 1] = {
                 static_cast<SharkFieldCppType>(0), // 0 is reserved for errors
 
-                CPPTYPE_BOOL, // TYPE_BOOL
-                CPPTYPE_INT8, // TYPE_INT8
-                CPPTYPE_UINT8, // TYPE_UINT8
-                CPPTYPE_INT16, // TYPE_INT16
-                CPPTYPE_UINT16, // TYPE_UINT16
-                CPPTYPE_INT32, // TYPE_INT32
-                CPPTYPE_UINT32, // TYPE_UINT32
-                CPPTYPE_INT64, // TYPE_INT64
-                CPPTYPE_UINT64, // TYPE_UINT64
-                CPPTYPE_FLOAT, // TYPE_FLOAT
-                CPPTYPE_FLOAT16, // TYPE_FLOAT16
-                CPPTYPE_FLOAT8, // TYPE_FLOAT8
-                CPPTYPE_DOUBLE, // TYPE_DOUBLE
-                CPPTYPE_ENUM, // TYPE_ENUM
-                CPPTYPE_MESSAGE, // TYPE_MESSAGE
-                CPPTYPE_STRING, // TYPE_STRING
-                CPPTYPE_STRING, // TYPE_BYTES
-                CPPTYPE_UINT32, // TYPE_FIXED32
-                CPPTYPE_UINT64, // TYPE_FIXED64
-                CPPTYPE_INT32, // TYPE_SFIXED32
-                CPPTYPE_INT64, // TYPE_SFIXED64
-                CPPTYPE_INT32, // TYPE_SINT32
-                CPPTYPE_INT64, // TYPE_SINT64
+                SharkFieldCppType::CPPTYPE_BOOL, // TYPE_BOOL
+                SharkFieldCppType::CPPTYPE_INT8, // TYPE_INT8
+                SharkFieldCppType::CPPTYPE_UINT8, // TYPE_UINT8
+                SharkFieldCppType::CPPTYPE_INT16, // TYPE_INT16
+                SharkFieldCppType::CPPTYPE_UINT16, // TYPE_UINT16
+                SharkFieldCppType::CPPTYPE_INT32, // TYPE_INT32
+                SharkFieldCppType::CPPTYPE_UINT32, // TYPE_UINT32
+                SharkFieldCppType::CPPTYPE_INT64, // TYPE_INT64
+                SharkFieldCppType::CPPTYPE_UINT64, // TYPE_UINT64
+                SharkFieldCppType::CPPTYPE_FLOAT, // TYPE_FLOAT
+                SharkFieldCppType::CPPTYPE_FLOAT16, // TYPE_FLOAT16
+                SharkFieldCppType::CPPTYPE_FLOAT8, // TYPE_FLOAT8
+                SharkFieldCppType::CPPTYPE_DOUBLE, // TYPE_DOUBLE
+                SharkFieldCppType::CPPTYPE_ENUM, // TYPE_ENUM
+                SharkFieldCppType::CPPTYPE_MESSAGE, // TYPE_MESSAGE
+                SharkFieldCppType::CPPTYPE_STRING, // TYPE_STRING
+                SharkFieldCppType::CPPTYPE_STRING, // TYPE_BYTES
+                SharkFieldCppType::CPPTYPE_UINT32, // TYPE_FIXED32
+                SharkFieldCppType::CPPTYPE_UINT64, // TYPE_FIXED64
+                SharkFieldCppType::CPPTYPE_INT32, // TYPE_SFIXED32
+                SharkFieldCppType::CPPTYPE_INT64, // TYPE_SFIXED64
+                SharkFieldCppType::CPPTYPE_INT32, // TYPE_SINT32
+                SharkFieldCppType::CPPTYPE_INT64, // TYPE_SINT64
             };
 
         const WireFormatLite::WireType

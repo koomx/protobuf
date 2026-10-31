@@ -32,94 +32,122 @@
 
 #include <algorithm>
 
-#include <shark/stubs/strutil.h>
 #include <shark/compiler/code_generator.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
+#include <shark/stubs/strutil.h>
 
 namespace shark::compiler::python {
 
-// Returns the Python module name expected for a given .shark filename.
-std::string ModuleName(const std::string& filename) {
-  std::string basename = StripProto(filename);
-  ReplaceCharacters(&basename, "-", '_');
-  ReplaceCharacters(&basename, "/", '.');
-  return basename + "_pb2";
-}
-
-std::string StrippedModuleName(const std::string& filename) {
-  std::string module_name = ModuleName(filename);
-  return module_name;
-}
-
-// Keywords reserved by the Python language.
-const char* const kKeywords[] = {
-    "False",  "None",     "True",  "and",    "as",       "assert",
-    "async",  "await",    "break", "class",  "continue", "def",
-    "del",    "elif",     "else",  "except", "finally",  "for",
-    "from",   "global",   "if",    "import", "in",       "is",
-    "lambda", "nonlocal", "not",   "or",     "pass",     "raise",
-    "return", "try",      "while", "with",   "yield",
-};
-const char* const* kKeywordsEnd =
-    kKeywords + (sizeof(kKeywords) / sizeof(kKeywords[0]));
-
-bool ContainsPythonKeyword(const std::string& module_name) {
-  std::vector<std::string> tokens = Split(module_name, ".");
-  for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
-    if (std::find(kKeywords, kKeywordsEnd, tokens[i]) != kKeywordsEnd) {
-      return true;
+    // Returns the Python module name expected for a given .shark filename.
+    std::string ModuleName(const std::string& filename) {
+        std::string basename = StripProto(filename);
+        ReplaceCharacters(&basename, "-", '_');
+        ReplaceCharacters(&basename, "/", '.');
+        return basename + "_pb2";
     }
-  }
-  return false;
-}
 
-bool IsPythonKeyword(const std::string& name) {
-  return (std::find(kKeywords, kKeywordsEnd, name) != kKeywordsEnd);
-}
-
-std::string ResolveKeyword(const std::string& name) {
-  if (IsPythonKeyword(name)) {
-    return "globals()['" + name + "']";
-  }
-  return name;
-}
-
-std::string GetFileName(const FileDescriptor* file_des,
-                        const std::string& suffix) {
-  std::string module_name = ModuleName(file_des->name());
-  std::string filename = module_name;
-  ReplaceCharacters(&filename, ".", '/');
-  filename += suffix;
-  return filename;
-}
-
-bool HasGenericServices(const FileDescriptor* file) {
-  return file->service_count() > 0 && file->options().py_generic_services();
-}
-
-template <typename DescriptorT>
-std::string NamePrefixedWithNestedTypes(const DescriptorT& descriptor,
-                                        const std::string& separator) {
-  std::string name = descriptor.name();
-  const Descriptor* parent = descriptor.containing_type();
-  if (parent != nullptr) {
-    std::string prefix = NamePrefixedWithNestedTypes(*parent, separator);
-    if (separator == "." && IsPythonKeyword(name)) {
-      return "getattr(" + prefix + ", '" + name + "')";
-    } else {
-      return prefix + separator + name;
+    std::string StrippedModuleName(const std::string& filename) {
+        std::string module_name = ModuleName(filename);
+        return module_name;
     }
-  }
-  if (separator == ".") {
-    name = ResolveKeyword(name);
-  }
-  return name;
-}
 
-template std::string NamePrefixedWithNestedTypes<Descriptor>(
-    const Descriptor& descriptor, const std::string& separator);
-template std::string NamePrefixedWithNestedTypes<EnumDescriptor>(
-    const EnumDescriptor& descriptor, const std::string& separator);
+    // Keywords reserved by the Python language.
+    const char* const kKeywords[] = {
+        "False",
+        "None",
+        "True",
+        "and",
+        "as",
+        "assert",
+        "async",
+        "await",
+        "break",
+        "class",
+        "continue",
+        "def",
+        "del",
+        "elif",
+        "else",
+        "except",
+        "finally",
+        "for",
+        "from",
+        "global",
+        "if",
+        "import",
+        "in",
+        "is",
+        "lambda",
+        "nonlocal",
+        "not",
+        "or",
+        "pass",
+        "raise",
+        "return",
+        "try",
+        "while",
+        "with",
+        "yield",
+    };
+    const char* const* kKeywordsEnd = kKeywords + (sizeof(kKeywords) / sizeof(kKeywords[0]));
 
-}  // namespace shark::compiler::python
+    bool ContainsPythonKeyword(const std::string& module_name) {
+        std::vector<std::string> tokens = Split(module_name, ".");
+        for (int i = 0; i < static_cast<int>(tokens.size()); ++i) {
+            if (std::find(kKeywords, kKeywordsEnd, tokens[i]) != kKeywordsEnd) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    bool IsPythonKeyword(const std::string& name) {
+        return (std::find(kKeywords, kKeywordsEnd, name) != kKeywordsEnd);
+    }
+
+    std::string ResolveKeyword(const std::string& name) {
+        if (IsPythonKeyword(name)) {
+            return "globals()['" + name + "']";
+        }
+        return name;
+    }
+
+    std::string GetFileName(const FileDescriptor* file_des,
+        const std::string& suffix) {
+        std::string module_name = ModuleName(file_des->name());
+        std::string filename = module_name;
+        ReplaceCharacters(&filename, ".", '/');
+        filename += suffix;
+        return filename;
+    }
+
+    bool HasGenericServices(const FileDescriptor* file) {
+        return file->service_count() > 0 && file->options().py_generic_services();
+    }
+
+    template <typename DescriptorT>
+    std::string NamePrefixedWithNestedTypes(const DescriptorT& descriptor,
+        const std::string& separator) {
+        std::string name = descriptor.name();
+        const Descriptor* parent = descriptor.containing_type();
+        if (parent != nullptr) {
+            std::string prefix = NamePrefixedWithNestedTypes(*parent, separator);
+            if (separator == "." && IsPythonKeyword(name)) {
+                return "getattr(" + prefix + ", '" + name + "')";
+            } else {
+                return prefix + separator + name;
+            }
+        }
+        if (separator == ".") {
+            name = ResolveKeyword(name);
+        }
+        return name;
+    }
+
+    template std::string NamePrefixedWithNestedTypes<Descriptor>(
+        const Descriptor& descriptor, const std::string& separator);
+    template std::string NamePrefixedWithNestedTypes<EnumDescriptor>(
+        const EnumDescriptor& descriptor, const std::string& separator);
+
+} // namespace shark::compiler::python

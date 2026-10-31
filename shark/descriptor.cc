@@ -896,13 +896,13 @@ namespace shark {
         "repeated", // FieldLabel::REPEATED
     };
 
-    const char* FileDescriptor::SyntaxName(FileDescriptor::Syntax syntax) {
+    const char* FileDescriptor::SyntaxName(SyntaxEdition syntax) {
         switch (syntax) {
-        case SYNTAX_PROTO2:
+        case SyntaxEdition::SYNTAX_PROTO2:
             return "proto2";
-        case SYNTAX_PROTO3:
+        case SyntaxEdition::SYNTAX_PROTO3:
             return "proto3";
-        case SYNTAX_UNKNOWN:
+        case SyntaxEdition::SYNTAX_UNKNOWN:
             return "unknown";
         }
         GOOGLE_LOG(FATAL) << "can't reach here.";
@@ -910,12 +910,6 @@ namespace shark {
     }
 
     static const char* const kNonLinkedWeakMessageReplacementName = "shark.Empty";
-
-#if !defined(_MSC_VER) || (_MSC_VER >= 1900 && _MSC_VER < 1912)
-    const int FieldDescriptor::kMaxNumber;
-    const int FieldDescriptor::kFirstReservedNumber;
-    const int FieldDescriptor::kLastReservedNumber;
-#endif
 
     namespace {
 
@@ -2586,7 +2580,7 @@ namespace shark {
         if (!package().empty())
             proto->set_package(package());
         // TODO(liujisi): Also populate when syntax="proto2".
-        if (syntax() == SYNTAX_PROTO3)
+        if (syntax() == SyntaxEdition::SYNTAX_PROTO3)
             proto->set_syntax(SyntaxName(syntax()));
 
         for (int i = 0; i < dependency_count(); i++) {
@@ -4573,7 +4567,7 @@ namespace shark {
         placeholder->tables_ = &FileDescriptorTables::GetEmptyInstance();
         placeholder->source_code_info_ = &SourceCodeInfo::default_instance();
         placeholder->is_placeholder_ = true;
-        placeholder->syntax_ = FileDescriptor::SYNTAX_UNKNOWN;
+        placeholder->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
         placeholder->finished_building_ = true;
         // All other fields are zero or nullptr.
 
@@ -4822,7 +4816,7 @@ namespace shark {
         existing_file->CopyTo(&existing_proto);
         // TODO(liujisi): Remove it when CopyTo supports copying syntax params when
         // syntax="proto2".
-        if (existing_file->syntax() == FileDescriptor::SYNTAX_PROTO2 && proto.has_syntax()) {
+        if (existing_file->syntax() == SyntaxEdition::SYNTAX_PROTO2 && proto.has_syntax()) {
             existing_proto.set_syntax(
                 existing_file->SyntaxName(existing_file->syntax()));
         }
@@ -5068,13 +5062,13 @@ namespace shark {
         // TODO(liujisi): Report error when the syntax is empty after all the protos
         // have added the syntax statement.
         if (proto.syntax().empty() || proto.syntax() == "proto2") {
-            file_->syntax_ = FileDescriptor::SYNTAX_PROTO2;
+            file_->syntax_ = SyntaxEdition::SYNTAX_PROTO2;
         } else if (proto.syntax() == "proto3") {
-            file_->syntax_ = FileDescriptor::SYNTAX_UNKNOWN;
+            file_->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
             AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "syntax \"proto3\" is not supported.");
         } else {
-            file_->syntax_ = FileDescriptor::SYNTAX_UNKNOWN;
+            file_->syntax_ = SyntaxEdition::SYNTAX_UNKNOWN;
             AddError(proto.name(), proto, DescriptorPool::ErrorCollector::OTHER,
                 "Unrecognized syntax: " + proto.syntax());
         }
@@ -5896,7 +5890,7 @@ namespace shark {
                                                                                                                                  "assign the same numeric value to both enums.";
                 // There are proto2 enums out there with conflicting names, so to preserve
                 // compatibility we issue only a warning for proto2.
-                if (result->file()->syntax() == FileDescriptor::SYNTAX_PROTO2) {
+                if (result->file()->syntax() == SyntaxEdition::SYNTAX_PROTO2) {
                     AddWarning(value->full_name(), proto.value(i),
                         DescriptorPool::ErrorCollector::NAME, error_message);
                 } else {
@@ -6795,7 +6789,7 @@ namespace shark {
                 DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                 "Explicit default values are not allowed in proto3.");
         }
-        if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM && field->enum_type() && field->enum_type()->file()->syntax() != FileDescriptor::SYNTAX_PROTO3 && field->enum_type()->file()->syntax() != FileDescriptor::SYNTAX_UNKNOWN) {
+        if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM && field->enum_type() && field->enum_type()->file()->syntax() != SyntaxEdition::SYNTAX_PROTO3 && field->enum_type()->file()->syntax() != SyntaxEdition::SYNTAX_UNKNOWN) {
             // Proto3 messages can only use Proto3 enum types; otherwise we can't
             // guarantee that the default value is zero.
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,

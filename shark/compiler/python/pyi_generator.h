@@ -38,79 +38,78 @@
 #include <set>
 #include <string>
 
-#include <shark/stubs/mutex.h>
 #include <shark/compiler/code_generator.h>
+#include <shark/stubs/mutex.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
 
 namespace shark {
-class Descriptor;
-class EnumDescriptor;
-class FieldDescriptor;
-class MethodDescriptor;
-class ServiceDescriptor;
+    class Descriptor;
+    class EnumDescriptor;
+    class FieldDescriptor;
+    class MethodDescriptor;
+    class ServiceDescriptor;
 
-namespace io {
-class Printer;
-}
+    namespace io {
+        class Printer;
+    }
 
-namespace compiler {
-namespace python {
+    namespace compiler {
+        namespace python {
 
-class PROTOC_EXPORT PyiGenerator : public shark::compiler::CodeGenerator {
- public:
-  PyiGenerator();
-  ~PyiGenerator() override;
+            class PROTOC_EXPORT PyiGenerator : public shark::compiler::CodeGenerator {
+            public:
+                PyiGenerator();
+                ~PyiGenerator() override;
 
-  // CodeGenerator methods.
-  uint64_t GetSupportedFeatures() const override {
-    // Code generators must explicitly support proto3 optional.
-    return CodeGenerator::FEATURE_PROTO3_OPTIONAL;
-  }
-  bool Generate(const FileDescriptor* file, const std::string& parameter,
-                GeneratorContext* generator_context,
-                std::string* error) const override;
+                // CodeGenerator methods.
+                uint64_t GetSupportedFeatures() const override {
+                    // Code generators must explicitly support proto3 optional.
+                    return CodeGenerator::FEATURE_PROTO3_OPTIONAL;
+                }
+                bool Generate(const FileDescriptor* file, const std::string& parameter,
+                    GeneratorContext* generator_context,
+                    std::string* error) const override;
 
- private:
-  void PrintImportForDescriptor(const FileDescriptor& desc,
-                                std::map<std::string, std::string>* import_map,
-                                std::set<std::string>* seen_aliases) const;
-  void PrintImports(std::map<std::string, std::string>* item_map,
+            private:
+                void PrintImportForDescriptor(const FileDescriptor& desc,
+                    std::map<std::string, std::string>* import_map,
+                    std::set<std::string>* seen_aliases) const;
+                void PrintImports(std::map<std::string, std::string>* item_map,
                     std::map<std::string, std::string>* import_map) const;
-  void PrintEnum(const EnumDescriptor& enum_descriptor) const;
-  void AddEnumValue(const EnumDescriptor& enum_descriptor,
+                void PrintEnum(const EnumDescriptor& enum_descriptor) const;
+                void AddEnumValue(const EnumDescriptor& enum_descriptor,
                     std::map<std::string, std::string>* item_map,
                     const std::map<std::string, std::string>& import_map) const;
-  void PrintTopLevelEnums() const;
-  template <typename DescriptorT>
-  void AddExtensions(const DescriptorT& descriptor,
-                     std::map<std::string, std::string>* item_map) const;
-  void PrintMessages(
-      const std::map<std::string, std::string>& import_map) const;
-  void PrintMessage(const Descriptor& message_descriptor, bool is_nested,
+                void PrintTopLevelEnums() const;
+                template <typename DescriptorT>
+                void AddExtensions(const DescriptorT& descriptor,
+                    std::map<std::string, std::string>* item_map) const;
+                void PrintMessages(
                     const std::map<std::string, std::string>& import_map) const;
-  void PrintServices() const;
-  void PrintItemMap(const std::map<std::string, std::string>& item_map) const;
-  std::string GetFieldType(
-      const FieldDescriptor& field_des, const Descriptor& containing_des,
-      const std::map<std::string, std::string>& import_map) const;
-  template <typename DescriptorT>
-  std::string ModuleLevelName(
-      const DescriptorT& descriptor,
-      const std::map<std::string, std::string>& import_map) const;
+                void PrintMessage(const Descriptor& message_descriptor, bool is_nested,
+                    const std::map<std::string, std::string>& import_map) const;
+                void PrintServices() const;
+                void PrintItemMap(const std::map<std::string, std::string>& item_map) const;
+                std::string GetFieldType(
+                    const FieldDescriptor& field_des, const Descriptor& containing_des,
+                    const std::map<std::string, std::string>& import_map) const;
+                template <typename DescriptorT>
+                std::string ModuleLevelName(
+                    const DescriptorT& descriptor,
+                    const std::map<std::string, std::string>& import_map) const;
 
-  // Very coarse-grained lock to ensure that Generate() is reentrant.
-  // Guards file_ and printer_.
-  mutable Mutex mutex_;
-  mutable const FileDescriptor* file_;  // Set in Generate().  Under mutex_.
-  mutable io::Printer* printer_;        // Set in Generate().  Under mutex_.
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(PyiGenerator);
-};
+                // Very coarse-grained lock to ensure that Generate() is reentrant.
+                // Guards file_ and printer_.
+                mutable Mutex mutex_;
+                mutable const FileDescriptor* file_; // Set in Generate().  Under mutex_.
+                mutable io::Printer* printer_; // Set in Generate().  Under mutex_.
+                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(PyiGenerator);
+            };
 
-}  // namespace python
-}  // namespace compiler
-}  // namespace shark
+        } // namespace python
+    } // namespace compiler
+} // namespace shark
 
 #include <shark/port_undef.inc>
-

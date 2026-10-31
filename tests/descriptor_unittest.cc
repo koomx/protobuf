@@ -515,7 +515,7 @@ namespace shark {
             proto_syntax3.set_syntax("proto3");
 
             EXPECT_TRUE(pool_.BuildFile(proto_syntax3) == nullptr);
-            EXPECT_EQ(3, static_cast<int>(FileDescriptor::SYNTAX_PROTO3));
+            EXPECT_EQ(3, static_cast<int>(SyntaxEdition::SYNTAX_PROTO3));
         }
 
         TEST_F(FileDescriptorTest, Syntax) {
@@ -538,7 +538,7 @@ namespace shark {
                 proto.set_syntax("proto3");
                 DescriptorPool pool;
                 EXPECT_TRUE(pool.BuildFile(proto) == nullptr);
-                EXPECT_EQ(3, static_cast<int>(FileDescriptor::SYNTAX_PROTO3));
+                EXPECT_EQ(3, static_cast<int>(SyntaxEdition::SYNTAX_PROTO3));
             }
         }
 

@@ -36,19 +36,17 @@
 
 namespace shark::compiler::python {
 
+    std::string ModuleName(const std::string& filename);
+    std::string StrippedModuleName(const std::string& filename);
+    bool ContainsPythonKeyword(const std::string& module_name);
+    bool IsPythonKeyword(const std::string& name);
+    std::string ResolveKeyword(const std::string& name);
+    std::string GetFileName(const FileDescriptor* file_des,
+        const std::string& suffix);
+    bool HasGenericServices(const FileDescriptor* file);
 
-std::string ModuleName(const std::string& filename);
-std::string StrippedModuleName(const std::string& filename);
-bool ContainsPythonKeyword(const std::string& module_name);
-bool IsPythonKeyword(const std::string& name);
-std::string ResolveKeyword(const std::string& name);
-std::string GetFileName(const FileDescriptor* file_des,
-                        const std::string& suffix);
-bool HasGenericServices(const FileDescriptor* file);
+    template <typename DescriptorT>
+    std::string NamePrefixedWithNestedTypes(const DescriptorT& descriptor,
+        const std::string& separator);
 
-template <typename DescriptorT>
-std::string NamePrefixedWithNestedTypes(const DescriptorT& descriptor,
-                                        const std::string& separator);
-
-}  // namespace shark::compiler::python
-
+} // namespace shark::compiler::python

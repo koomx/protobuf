@@ -943,7 +943,7 @@ bool ContainsProto3Optional(const Descriptor* desc) {
 }
 
 bool ContainsProto3Optional(const FileDescriptor* file) {
-  if (file->syntax() == FileDescriptor::SYNTAX_PROTO3) {
+  if (file->syntax() == SyntaxEdition::SYNTAX_PROTO3) {
     for (int i = 0; i < file->message_type_count(); i++) {
       if (ContainsProto3Optional(file->message_type(i))) {
         return true;

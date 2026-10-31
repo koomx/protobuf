@@ -59,10 +59,11 @@ namespace shark {
         SFIXED64 = 21,
         SINT32 = 22,
         SINT64 = 23,
+        MAX = 23
     };
 
     // Lite alternative to SharkFieldCppType.  Must be kept in sync.
-    enum SharkFieldCppType {
+    enum class SharkFieldCppType : uint8_t {
         CPPTYPE_BOOL = 1,
         CPPTYPE_INT8 = 2,
         CPPTYPE_UINT8 = 3,
@@ -79,8 +80,25 @@ namespace shark {
         CPPTYPE_ENUM = 14,
         CPPTYPE_MESSAGE = 15,
         CPPTYPE_STRING = 16,
-        MAX_CPPTYPE = 16,
+        MAX = 16,
     };
 
+    // Whether a field is optional, required, or repeated. 0 is reserved for errors.
+    enum class FieldLabel : uint8_t {
+        UNKNOWN = 0,
+        OPTIONAL = 1,
+        REQUIRED = 2,
+        REPEATED = 3,
+        MAX = 3,
+    };
+
+    // Syntax of this file.
+    enum class SyntaxEdition : uint8_t {
+        SYNTAX_UNKNOWN = 0,
+        SYNTAX_PROTO2 = 2,
+        // Reserved. Do not reuse 3. Building a file with this syntax fails.
+        SYNTAX_PROTO3 = 3,
+        MAX = 3
+    };
 
 }  // namespace shark
