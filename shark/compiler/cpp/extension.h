@@ -37,52 +37,52 @@
 #include <map>
 #include <string>
 
-#include <shark/stubs/common.h>
 #include <shark/compiler/cpp/options.h>
+#include <shark/stubs/common.h>
 
 namespace shark {
-class FieldDescriptor;  // descriptor.h
-namespace io {
-class Printer;  // printer.h
-}
-}  // namespace shark
+    class FieldDescriptor; // descriptor.h
+    namespace io {
+        class Printer; // printer.h
+    }
+} // namespace shark
 
 namespace shark {
-namespace compiler {
-namespace cpp {
+    namespace compiler {
+        namespace cpp {
 
-class MessageSCCAnalyzer;
+            class MessageSCCAnalyzer;
 
-// Generates code for an extension, which may be within the scope of some
-// message or may be at file scope.  This is much simpler than FieldGenerator
-// since extensions are just simple identifiers with interesting types.
-class ExtensionGenerator {
- public:
-  // See generator.cc for the meaning of dllexport_decl.
-  explicit ExtensionGenerator(const FieldDescriptor* descriptor,
-                              const Options& options,
-                              MessageSCCAnalyzer* scc_analyzer);
-  ~ExtensionGenerator();
+            // Generates code for an extension, which may be within the scope of some
+            // message or may be at file scope.  This is much simpler than FieldGenerator
+            // since extensions are just simple identifiers with interesting types.
+            class ExtensionGenerator {
+            public:
+                // See generator.cc for the meaning of dllexport_decl.
+                explicit ExtensionGenerator(const FieldDescriptor* descriptor,
+                    const Options& options,
+                    MessageSCCAnalyzer* scc_analyzer);
+                ~ExtensionGenerator();
 
-  // Header stuff.
-  void GenerateDeclaration(io::Printer* printer) const;
+                // Header stuff.
+                void GenerateDeclaration(io::Printer* printer) const;
 
-  // Source file stuff.
-  void GenerateDefinition(io::Printer* printer);
+                // Source file stuff.
+                void GenerateDefinition(io::Printer* printer);
 
-  bool IsScoped() const;
+                bool IsScoped() const;
 
- private:
-  const FieldDescriptor* descriptor_;
-  std::string type_traits_;
-  Options options_;
-  MessageSCCAnalyzer* scc_analyzer_;
+            private:
+                const FieldDescriptor* descriptor_;
+                std::string type_traits_;
+                Options options_;
+                MessageSCCAnalyzer* scc_analyzer_;
 
-  std::map<std::string, std::string> variables_;
+                std::map<std::string, std::string> variables_;
 
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ExtensionGenerator);
-};
+                GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(ExtensionGenerator);
+            };
 
-}  // namespace cpp
-}  // namespace compiler
-}  // namespace shark
+        } // namespace cpp
+    } // namespace compiler
+} // namespace shark

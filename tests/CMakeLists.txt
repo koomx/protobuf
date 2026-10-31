@@ -68,9 +68,9 @@ kmcmake_cc_library(
         test_util_lite.cc
         test_util.cc
         reflection_tester.cc
-        testing/file.cc
-        testing/googletest.cc
-        ../shark/compiler/mock_code_generator.cc
+        gtest/file.cc
+        gtest/googletest.cc
+        compiler/mock_code_generator.cc
         ${tests_proto_files}
         ${lite_test_proto_files}
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
@@ -236,8 +236,8 @@ kmcmake_cc_binary(
         NAME test_plugin
         SOURCES
         compiler/test_plugin.cc
-        testing/file.cc
-        ../shark/compiler/mock_code_generator.cc
+        gtest/file.cc
+        compiler/mock_code_generator.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS
         ${PROJECT_NAME}::sharkc-lib_static

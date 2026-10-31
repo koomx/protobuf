@@ -37,7 +37,7 @@
 
 #include <string>
 
-#include <shark/compiler/mock_code_generator.h>
+#include <tests/compiler/mock_code_generator.h>
 #include <shark/compiler/plugin.h>
 
 namespace shark::compiler {

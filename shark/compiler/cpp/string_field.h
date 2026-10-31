@@ -41,88 +41,87 @@
 
 namespace shark::compiler::cpp {
 
-class StringFieldGenerator : public FieldGenerator {
- public:
-  StringFieldGenerator(const FieldDescriptor* descriptor,
-                       const Options& options);
-  ~StringFieldGenerator() override;
+    class StringFieldGenerator : public FieldGenerator {
+    public:
+        StringFieldGenerator(const FieldDescriptor* descriptor,
+            const Options& options);
+        ~StringFieldGenerator() override;
 
-  // implements FieldGenerator ---------------------------------------
-  void GeneratePrivateMembers(io::Printer* printer) const override;
-  void GenerateStaticMembers(io::Printer* printer) const override;
-  void GenerateAccessorDeclarations(io::Printer* printer) const override;
-  void GenerateInlineAccessorDefinitions(io::Printer* printer) const override;
-  void GenerateNonInlineAccessorDefinitions(
-      io::Printer* printer) const override;
-  void GenerateClearingCode(io::Printer* printer) const override;
-  void GenerateMessageClearingCode(io::Printer* printer) const override;
-  void GenerateMergingCode(io::Printer* printer) const override;
-  void GenerateSwappingCode(io::Printer* printer) const override;
-  void GenerateConstructorCode(io::Printer* printer) const override;
-  void GenerateCreateSplitMessageCode(io::Printer* printer) const override;
-  void GenerateCopyConstructorCode(io::Printer* printer) const override;
-  void GenerateDestructorCode(io::Printer* printer) const override;
-  void GenerateArenaDestructorCode(io::Printer* printer) const override;
-  void GenerateSerializeWithCachedSizesToArray(
-      io::Printer* printer) const override;
-  void GenerateByteSize(io::Printer* printer) const override;
-  void GenerateConstexprAggregateInitializer(
-      io::Printer* printer) const override;
-  void GenerateAggregateInitializer(io::Printer* printer) const override;
-  void GenerateCopyAggregateInitializer(io::Printer* printer) const override;
-  bool IsInlined() const override { return inlined_; }
-  ArenaDtorNeeds NeedsArenaDestructor() const override;
+        // implements FieldGenerator ---------------------------------------
+        void GeneratePrivateMembers(io::Printer* printer) const override;
+        void GenerateStaticMembers(io::Printer* printer) const override;
+        void GenerateAccessorDeclarations(io::Printer* printer) const override;
+        void GenerateInlineAccessorDefinitions(io::Printer* printer) const override;
+        void GenerateNonInlineAccessorDefinitions(
+            io::Printer* printer) const override;
+        void GenerateClearingCode(io::Printer* printer) const override;
+        void GenerateMessageClearingCode(io::Printer* printer) const override;
+        void GenerateMergingCode(io::Printer* printer) const override;
+        void GenerateSwappingCode(io::Printer* printer) const override;
+        void GenerateConstructorCode(io::Printer* printer) const override;
+        void GenerateCreateSplitMessageCode(io::Printer* printer) const override;
+        void GenerateCopyConstructorCode(io::Printer* printer) const override;
+        void GenerateDestructorCode(io::Printer* printer) const override;
+        void GenerateArenaDestructorCode(io::Printer* printer) const override;
+        void GenerateSerializeWithCachedSizesToArray(
+            io::Printer* printer) const override;
+        void GenerateByteSize(io::Printer* printer) const override;
+        void GenerateConstexprAggregateInitializer(
+            io::Printer* printer) const override;
+        void GenerateAggregateInitializer(io::Printer* printer) const override;
+        void GenerateCopyAggregateInitializer(io::Printer* printer) const override;
+        bool IsInlined() const override { return inlined_; }
+        ArenaDtorNeeds NeedsArenaDestructor() const override;
 
- private:
-  bool inlined_;
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringFieldGenerator);
-};
+    private:
+        bool inlined_;
+        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringFieldGenerator);
+    };
 
-class StringOneofFieldGenerator : public StringFieldGenerator {
- public:
-  StringOneofFieldGenerator(const FieldDescriptor* descriptor,
-                            const Options& options);
-  ~StringOneofFieldGenerator() override;
+    class StringOneofFieldGenerator : public StringFieldGenerator {
+    public:
+        StringOneofFieldGenerator(const FieldDescriptor* descriptor,
+            const Options& options);
+        ~StringOneofFieldGenerator() override;
 
-  // implements FieldGenerator ---------------------------------------
-  void GenerateInlineAccessorDefinitions(io::Printer* printer) const override;
-  void GenerateClearingCode(io::Printer* printer) const override;
+        // implements FieldGenerator ---------------------------------------
+        void GenerateInlineAccessorDefinitions(io::Printer* printer) const override;
+        void GenerateClearingCode(io::Printer* printer) const override;
 
-  // StringFieldGenerator, from which we inherit, overrides this so we need to
-  // override it as well.
-  void GenerateMessageClearingCode(io::Printer* printer) const override;
-  void GenerateSwappingCode(io::Printer* printer) const override;
-  void GenerateConstructorCode(io::Printer* printer) const override;
+        // StringFieldGenerator, from which we inherit, overrides this so we need to
+        // override it as well.
+        void GenerateMessageClearingCode(io::Printer* printer) const override;
+        void GenerateSwappingCode(io::Printer* printer) const override;
+        void GenerateConstructorCode(io::Printer* printer) const override;
 
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringOneofFieldGenerator);
-};
+    private:
+        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(StringOneofFieldGenerator);
+    };
 
-class RepeatedStringFieldGenerator : public FieldGenerator {
- public:
-  RepeatedStringFieldGenerator(const FieldDescriptor* descriptor,
-                               const Options& options);
-  ~RepeatedStringFieldGenerator() override;
+    class RepeatedStringFieldGenerator : public FieldGenerator {
+    public:
+        RepeatedStringFieldGenerator(const FieldDescriptor* descriptor,
+            const Options& options);
+        ~RepeatedStringFieldGenerator() override;
 
-  // implements FieldGenerator ---------------------------------------
-  void GeneratePrivateMembers(io::Printer* printer) const override;
-  void GenerateAccessorDeclarations(io::Printer* printer) const override;
-  void GenerateInlineAccessorDefinitions(io::Printer* printer) const override;
-  void GenerateClearingCode(io::Printer* printer) const override;
-  void GenerateMergingCode(io::Printer* printer) const override;
-  void GenerateSwappingCode(io::Printer* printer) const override;
-  void GenerateConstructorCode(io::Printer* printer) const override {}
-  void GenerateCopyConstructorCode(io::Printer*  /*printer*/) const override {
-    GOOGLE_CHECK(!ShouldSplit(descriptor_, options_));
-  }
-  void GenerateDestructorCode(io::Printer* printer) const override;
-  void GenerateSerializeWithCachedSizesToArray(
-      io::Printer* printer) const override;
-  void GenerateByteSize(io::Printer* printer) const override;
+        // implements FieldGenerator ---------------------------------------
+        void GeneratePrivateMembers(io::Printer* printer) const override;
+        void GenerateAccessorDeclarations(io::Printer* printer) const override;
+        void GenerateInlineAccessorDefinitions(io::Printer* printer) const override;
+        void GenerateClearingCode(io::Printer* printer) const override;
+        void GenerateMergingCode(io::Printer* printer) const override;
+        void GenerateSwappingCode(io::Printer* printer) const override;
+        void GenerateConstructorCode(io::Printer* printer) const override { }
+        void GenerateCopyConstructorCode(io::Printer* /*printer*/) const override {
+            GOOGLE_CHECK(!ShouldSplit(descriptor_, options_));
+        }
+        void GenerateDestructorCode(io::Printer* printer) const override;
+        void GenerateSerializeWithCachedSizesToArray(
+            io::Printer* printer) const override;
+        void GenerateByteSize(io::Printer* printer) const override;
 
- private:
-  GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(RepeatedStringFieldGenerator);
-};
+    private:
+        GOOGLE_DISALLOW_EVIL_CONSTRUCTORS(RepeatedStringFieldGenerator);
+    };
 
-}  // namespace shark::compiler::cpp
-
+} // namespace shark::compiler::cpp

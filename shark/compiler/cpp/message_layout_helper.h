@@ -34,23 +34,22 @@
 
 #pragma once
 
-#include <shark/descriptor.h>
 #include <shark/compiler/cpp/options.h>
+#include <shark/descriptor.h>
 
 namespace shark::compiler::cpp {
 
-class MessageSCCAnalyzer;
+    class MessageSCCAnalyzer;
 
-// Provides an abstract interface to optimize message layout
-// by rearranging the fields of a message.
-class MessageLayoutHelper {
- public:
-  virtual ~MessageLayoutHelper() {}
+    // Provides an abstract interface to optimize message layout
+    // by rearranging the fields of a message.
+    class MessageLayoutHelper {
+    public:
+        virtual ~MessageLayoutHelper() { }
 
-  virtual void OptimizeLayout(std::vector<const FieldDescriptor*>* fields,
-                              const Options& options,
-                              MessageSCCAnalyzer* scc_analyzer) = 0;
-};
+        virtual void OptimizeLayout(std::vector<const FieldDescriptor*>* fields,
+            const Options& options,
+            MessageSCCAnalyzer* scc_analyzer) = 0;
+    };
 
-}  // namespace shark::compiler::cpp
-
+} // namespace shark::compiler::cpp

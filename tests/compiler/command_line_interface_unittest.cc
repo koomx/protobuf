@@ -48,7 +48,7 @@
 #include <gtest/gtest.h>
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/command_line_interface.h>
-#include <shark/compiler/mock_code_generator.h>
+#include <tests/compiler/mock_code_generator.h>
 #include <shark/compiler/subprocess.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>

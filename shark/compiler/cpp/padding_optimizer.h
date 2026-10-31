@@ -38,20 +38,19 @@
 
 namespace shark::compiler::cpp {
 
-// Rearranges the fields of a message to minimize padding.
-// Fields are grouped by the type and the size.
-// For example, grouping four boolean fields and one int32
-// field results in zero padding overhead. See OptimizeLayout's
-// comment for details.
-class PaddingOptimizer : public MessageLayoutHelper {
- public:
-  PaddingOptimizer() {}
-  ~PaddingOptimizer() override {}
+    // Rearranges the fields of a message to minimize padding.
+    // Fields are grouped by the type and the size.
+    // For example, grouping four boolean fields and one int32
+    // field results in zero padding overhead. See OptimizeLayout's
+    // comment for details.
+    class PaddingOptimizer : public MessageLayoutHelper {
+    public:
+        PaddingOptimizer() { }
+        ~PaddingOptimizer() override { }
 
-  void OptimizeLayout(std::vector<const FieldDescriptor*>* fields,
-                      const Options& options,
-                      MessageSCCAnalyzer* scc_analyzer) override;
-};
+        void OptimizeLayout(std::vector<const FieldDescriptor*>* fields,
+            const Options& options,
+            MessageSCCAnalyzer* scc_analyzer) override;
+    };
 
-}  // namespace shark::compiler::cpp
-
+} // namespace shark::compiler::cpp

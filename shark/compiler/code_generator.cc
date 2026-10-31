@@ -34,100 +34,99 @@
 
 #include <shark/compiler/code_generator.h>
 
-#include <shark/stubs/logging.h>
-#include <shark/stubs/common.h>
 #include <shark/compiler/plugin.skp.h>
 #include <shark/descriptor.h>
+#include <shark/stubs/common.h>
+#include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
 
 namespace shark::compiler {
 
-CodeGenerator::~CodeGenerator() {}
+    CodeGenerator::~CodeGenerator() { }
 
-bool CodeGenerator::GenerateAll(const std::vector<const FileDescriptor*>& files,
-                                const std::string& parameter,
-                                GeneratorContext* generator_context,
-                                std::string* error) const {
-  // Default implementation is just to call the per file method, and prefix any
-  // error string with the file to provide context.
-  bool succeeded = true;
-  for (int i = 0; i < files.size(); i++) {
-    const FileDescriptor* file = files[i];
-    succeeded = Generate(file, parameter, generator_context, error);
-    if (!succeeded && error && error->empty()) {
-      *error =
-          "Code generator returned false but provided no error "
-          "description.";
+    bool CodeGenerator::GenerateAll(const std::vector<const FileDescriptor*>& files,
+        const std::string& parameter,
+        GeneratorContext* generator_context,
+        std::string* error) const {
+        // Default implementation is just to call the per file method, and prefix any
+        // error string with the file to provide context.
+        bool succeeded = true;
+        for (int i = 0; i < files.size(); i++) {
+            const FileDescriptor* file = files[i];
+            succeeded = Generate(file, parameter, generator_context, error);
+            if (!succeeded && error && error->empty()) {
+                *error = "Code generator returned false but provided no error "
+                         "description.";
+            }
+            if (error && !error->empty()) {
+                *error = file->name() + ": " + *error;
+                break;
+            }
+            if (!succeeded) {
+                break;
+            }
+        }
+        return succeeded;
     }
-    if (error && !error->empty()) {
-      *error = file->name() + ": " + *error;
-      break;
+
+    GeneratorContext::~GeneratorContext() { }
+
+    io::ZeroCopyOutputStream* GeneratorContext::OpenForAppend(
+        const std::string& filename) {
+        return nullptr;
     }
-    if (!succeeded) {
-      break;
+
+    io::ZeroCopyOutputStream* GeneratorContext::OpenForInsert(
+        const std::string& filename, const std::string& insertion_point) {
+        GOOGLE_LOG(FATAL) << "This GeneratorContext does not support insertion.";
+        return nullptr; // make compiler happy
     }
-  }
-  return succeeded;
-}
 
-GeneratorContext::~GeneratorContext() {}
-
-io::ZeroCopyOutputStream* GeneratorContext::OpenForAppend(
-    const std::string& filename) {
-  return nullptr;
-}
-
-io::ZeroCopyOutputStream* GeneratorContext::OpenForInsert(
-    const std::string& filename, const std::string& insertion_point) {
-  GOOGLE_LOG(FATAL) << "This GeneratorContext does not support insertion.";
-  return nullptr;  // make compiler happy
-}
-
-io::ZeroCopyOutputStream* GeneratorContext::OpenForInsertWithGeneratedCodeInfo(
-    const std::string& filename, const std::string& insertion_point,
-    const shark::GeneratedCodeInfo& /*info*/) {
-  return OpenForInsert(filename, insertion_point);
-}
-
-void GeneratorContext::ListParsedFiles(
-    std::vector<const FileDescriptor*>* output) {
-  GOOGLE_LOG(FATAL) << "This GeneratorContext does not support ListParsedFiles";
-}
-
-void GeneratorContext::GetCompilerVersion(Version* version) const {
-  version->set_major(SHARK_VERSION / 1000000);
-  version->set_minor(SHARK_VERSION / 1000 % 1000);
-  version->set_patch(SHARK_VERSION % 1000);
-  version->set_suffix(SHARK_VERSION_SUFFIX);
-}
-
-// Parses a set of comma-delimited name/value pairs.
-void ParseGeneratorParameter(
-    const std::string& text,
-    std::vector<std::pair<std::string, std::string> >* output) {
-  std::vector<std::string> parts = Split(text, ",", true);
-
-  for (int i = 0; i < parts.size(); i++) {
-    std::string::size_type equals_pos = parts[i].find_first_of('=');
-    std::pair<std::string, std::string> value;
-    if (equals_pos == std::string::npos) {
-      value.first = parts[i];
-      value.second = "";
-    } else {
-      value.first = parts[i].substr(0, equals_pos);
-      value.second = parts[i].substr(equals_pos + 1);
+    io::ZeroCopyOutputStream* GeneratorContext::OpenForInsertWithGeneratedCodeInfo(
+        const std::string& filename, const std::string& insertion_point,
+        const shark::GeneratedCodeInfo& /*info*/) {
+        return OpenForInsert(filename, insertion_point);
     }
-    output->push_back(value);
-  }
-}
 
-// Strips ".shark" or ".protodevel" from the end of a filename.
-std::string StripProto(const std::string& filename) {
-  if (HasSuffixString(filename, ".protodevel")) {
-    return StripSuffixString(filename, ".protodevel");
-  } else {
-    return StripSuffixString(filename, ".shark");
-  }
-}
+    void GeneratorContext::ListParsedFiles(
+        std::vector<const FileDescriptor*>* output) {
+        GOOGLE_LOG(FATAL) << "This GeneratorContext does not support ListParsedFiles";
+    }
 
-}  // namespace shark::compiler
+    void GeneratorContext::GetCompilerVersion(Version* version) const {
+        version->set_major(SHARK_VERSION / 1000000);
+        version->set_minor(SHARK_VERSION / 1000 % 1000);
+        version->set_patch(SHARK_VERSION % 1000);
+        version->set_suffix(SHARK_VERSION_SUFFIX);
+    }
+
+    // Parses a set of comma-delimited name/value pairs.
+    void ParseGeneratorParameter(
+        const std::string& text,
+        std::vector<std::pair<std::string, std::string>>* output) {
+        std::vector<std::string> parts = Split(text, ",", true);
+
+        for (int i = 0; i < parts.size(); i++) {
+            std::string::size_type equals_pos = parts[i].find_first_of('=');
+            std::pair<std::string, std::string> value;
+            if (equals_pos == std::string::npos) {
+                value.first = parts[i];
+                value.second = "";
+            } else {
+                value.first = parts[i].substr(0, equals_pos);
+                value.second = parts[i].substr(equals_pos + 1);
+            }
+            output->push_back(value);
+        }
+    }
+
+    // Strips ".shark" or ".protodevel" from the end of a filename.
+    std::string StripProto(const std::string& filename) {
+        if (HasSuffixString(filename, ".protodevel")) {
+            return StripSuffixString(filename, ".protodevel");
+        } else {
+            return StripSuffixString(filename, ".shark");
+        }
+    }
+
+} // namespace shark::compiler

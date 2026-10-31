@@ -28,8 +28,8 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <shark/compiler/cpp/generator.h>
 #include <shark/compiler/command_line_interface.h>
+#include <shark/compiler/cpp/generator.h>
 #include <shark/compiler/python/generator.h>
 #include <shark/compiler/python/pyi_generator.h>
 
@@ -38,35 +38,35 @@
 
 namespace shark::compiler {
 
-int ProtobufMain(int argc, char* argv[]) {
+    int ProtobufMain(int argc, char* argv[]) {
 
-  CommandLineInterface cli;
-  cli.AllowPlugins("sharkc-");
+        CommandLineInterface cli;
+        cli.AllowPlugins("sharkc-");
 
-  // Proto2 C++
-  cpp::CppGenerator cpp_generator;
-  cli.RegisterGenerator("--cpp_out", "--cpp_opt", &cpp_generator,
-                        "Generate C++ header and source.");
+        // Proto2 C++
+        cpp::CppGenerator cpp_generator;
+        cli.RegisterGenerator("--cpp_out", "--cpp_opt", &cpp_generator,
+            "Generate C++ header and source.");
 
 #ifdef SHARK_RUNTIME_INCLUDE_BASE
-  cpp_generator.set_opensource_runtime(true);
-  cpp_generator.set_runtime_include_base(SHARK_RUNTIME_INCLUDE_BASE);
+        cpp_generator.set_opensource_runtime(true);
+        cpp_generator.set_runtime_include_base(SHARK_RUNTIME_INCLUDE_BASE);
 #endif
 
-  // Proto2 Python
-  python::Generator py_generator;
-  cli.RegisterGenerator("--python_out", "--python_opt", &py_generator,
-                        "Generate Python source file.");
-  // Python pyi
-  python::PyiGenerator pyi_generator;
-  cli.RegisterGenerator("--pyi_out", &pyi_generator,
-                        "Generate python pyi stub.");
+        // Proto2 Python
+        python::Generator py_generator;
+        cli.RegisterGenerator("--python_out", "--python_opt", &py_generator,
+            "Generate Python source file.");
+        // Python pyi
+        python::PyiGenerator pyi_generator;
+        cli.RegisterGenerator("--pyi_out", &pyi_generator,
+            "Generate python pyi stub.");
 
-  return cli.Run(argc, argv);
-}
+        return cli.Run(argc, argv);
+    }
 
-}  // namespace shark::compiler
+} // namespace shark::compiler
 
 int main(int argc, char* argv[]) {
-  return SHARK_NAMESPACE_ID::compiler::ProtobufMain(argc, argv);
+    return SHARK_NAMESPACE_ID::compiler::ProtobufMain(argc, argv);
 }

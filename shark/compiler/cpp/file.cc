@@ -241,7 +241,6 @@ namespace shark::compiler::cpp {
                 "\n");
         }
 
-
         format(
             "\n"
             "// @@protoc_insertion_point(global_scope)\n"
@@ -717,7 +716,6 @@ namespace shark::compiler::cpp {
                 enum_generators_[i]->generate_template_methods(i, printer);
             }
         }
-
     }
 
     void FileGenerator::GenerateSource(io::Printer* printer) {

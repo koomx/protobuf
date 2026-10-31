@@ -113,7 +113,6 @@ namespace shark::compiler::cpp {
             }
         }
 
-
         std::string fits_wire_expression(const EnumDescriptor* descriptor,
             const std::string& classname) {
             switch (descriptor->options().underlying_type()) {
@@ -132,7 +131,6 @@ namespace shark::compiler::cpp {
                 return "(value <= 2147483647u || (value >> 32) == 0xffffffffu) && fits_underlying(static_cast<int64_t>(value))";
             }
         }
-
 
     } // namespace
 
@@ -156,7 +154,7 @@ namespace shark::compiler::cpp {
             auto format_value = format;
             format_value.
 
-            Set("name", EnumValueName(descriptor_->value(i)));
+                Set("name", EnumValueName(descriptor_->value(i)));
             // In C++, an value of -2147483648 gets interpreted as the negative of
             // 2147483648, and since 2147483648 can't fit in an integer, this produces a
             // compiler warning.  This works around that issue.
@@ -207,18 +205,17 @@ namespace shark::compiler::cpp {
             format("\n\n");
 
             format(
-              "static constexpr bool fits_underlying(int64_t value) {\n"
-              "     return $1$;\n"
-              "}\n"
-              "static constexpr bool fits_wire(::uint64_t value) {\n"
-              "     return $2$;\n"
-              "}\n",
-              FitsIntExpression(descriptor_),
-              fits_wire_expression(descriptor_, classname_));
+                "static constexpr bool fits_underlying(int64_t value) {\n"
+                "     return $1$;\n"
+                "}\n"
+                "static constexpr bool fits_wire(::uint64_t value) {\n"
+                "     return $2$;\n"
+                "}\n",
+                FitsIntExpression(descriptor_),
+                fits_wire_expression(descriptor_, classname_));
 
             format.Outdent();
             format("};\n\n");
-
         }
 
         {
@@ -253,7 +250,6 @@ namespace shark::compiler::cpp {
                     "}\n");
             }
         }
-
     }
 
     void EnumGenerator::GenerateGetEnumDescriptorSpecializations(
@@ -269,7 +265,6 @@ namespace shark::compiler::cpp {
         format("template <> struct IsSharkEnum< $classtype$> : ::std::true_type {};\n\n");
 
         format.Outdent();
-
     }
 
     void EnumGenerator::GenerateSymbolImports(io::Printer* printer) const {
@@ -283,9 +278,9 @@ namespace shark::compiler::cpp {
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
 
             format("const ::$proto_ns$::EnumDescriptor* $classtype$Trait::descriptor() {\n"
-                "    ::$proto_ns$::internal::AssignDescriptors(&$desc_table$);\n"
-                "    return $file_level_enum_descriptors$[$1$];\n"
-                "}\n",
+                   "    ::$proto_ns$::internal::AssignDescriptors(&$desc_table$);\n"
+                   "    return $file_level_enum_descriptors$[$1$];\n"
+                   "}\n",
                 idx);
         }
 
@@ -306,7 +301,7 @@ namespace shark::compiler::cpp {
         for (std::set<int>::iterator iter = numbers.begin(); iter != numbers.end();
             ++iter) {
             format("    case $1$:\n", Int32ToString(*iter));
-            }
+        }
 
         format(
             "      return true;\n"
@@ -390,10 +385,10 @@ namespace shark::compiler::cpp {
         ///
         if (HasDescriptorMethods(descriptor_->file(), options_)) {
             format("const std::string& $classtype$Trait::enum_name(\n"
-                "   $classtype$ enum_t_value) {\n"
-                "  return ::$proto_ns$::internal::NameOfEnum(\n"
-                "    descriptor(),\n"
-                "    static_cast<$underlying$>(enum_t_value));\n");
+                   "   $classtype$ enum_t_value) {\n"
+                   "  return ::$proto_ns$::internal::NameOfEnum(\n"
+                   "    descriptor(),\n"
+                   "    static_cast<$underlying$>(enum_t_value));\n");
             format("}\n");
         } else {
             format(
@@ -441,7 +436,6 @@ namespace shark::compiler::cpp {
                 descriptor_->value_count());
         }
     }
-
 
     void EnumGenerator::generate_template_methods(int idx, io::Printer* printer) {
         Formatter format(printer, variables_);
