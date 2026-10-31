@@ -39,7 +39,7 @@
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/descriptor.skp.h>
 #include <shark/message.h>
-#include <shark/transfer/json/mock_error_listener.h>
+#include <tests/transfer/json/mock_error_listener.h>
 #include <tests/transfer/json/testdata/anys.skp.h>
 #include <tests/transfer/json/testdata/books.skp.h>
 #include <tests/transfer/json/testdata/field_mask.skp.h>

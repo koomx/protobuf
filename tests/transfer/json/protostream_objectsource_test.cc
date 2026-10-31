@@ -38,7 +38,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/descriptor.h>
-#include <shark/transfer/json/expecting_objectwriter.h>
+#include <tests/transfer/json/expecting_objectwriter.h>
 #include <tests/transfer/json/testdata/anys.skp.h>
 #include <tests/transfer/json/testdata/books.skp.h>
 #include <tests/transfer/json/testdata/field_mask.skp.h>

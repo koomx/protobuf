@@ -30,7 +30,7 @@
 
 #include <shark/transfer/json/default_value_objectwriter.h>
 
-#include <shark/transfer/json/expecting_objectwriter.h>
+#include <tests/transfer/json/expecting_objectwriter.h>
 #include <tests/transfer/json/testdata/default_value_test.skp.h>
 #include <shark/transfer/json/constants.h>
 #include <tests/transfer/json/type_info_test_helper.h>
