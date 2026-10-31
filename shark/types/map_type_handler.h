@@ -82,12 +82,12 @@ namespace shark::internal {
     };
 
     // Define constants for given wire field type
-    template <WireFormatLiteFieldType field_type, typename Type>
+    template <SharkFieldType field_type, typename Type>
     class MapWireFieldTypeTraits { };
 
 #define TYPE_TRAITS(FieldType, CType, WireFormatType, IsMessage, IsEnum)                             \
     template <typename Type>                                                                         \
-    class MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_##FieldType, Type> {                  \
+    class MapWireFieldTypeTraits<SharkFieldType::FieldType, Type> {                  \
     public:                                                                                          \
         static const bool kIsMessage = IsMessage;                                                    \
         static const bool kIsEnum = IsEnum;                                                          \
@@ -120,26 +120,26 @@ namespace shark::internal {
 
 #undef TYPE_TRAITS
 
-    template <WireFormatLiteFieldType field_type, typename Type>
+    template <SharkFieldType field_type, typename Type>
     class MapTypeHandler { };
 
     template <typename Type>
-    class MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type> {
+    class MapTypeHandler<SharkFieldType::MESSAGE, Type> {
     public:
         // Enum type cannot be used for MapTypeHandler::Read. Define a type which will
         // replace Enum with int.
-        typedef typename MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_MESSAGE,
+        typedef typename MapWireFieldTypeTraits<SharkFieldType::MESSAGE,
             Type>::MapEntryAccessorType
             MapEntryAccessorType;
         // Internal stored type in MapEntryLite for given wire field type.
-        typedef typename MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_MESSAGE,
+        typedef typename MapWireFieldTypeTraits<SharkFieldType::MESSAGE,
             Type>::TypeOnMemory TypeOnMemory;
         // Corresponding wire type for field type.
-        static constexpr WireFormatLite::WireType kWireType = MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::kWireType;
+        static constexpr WireFormatLite::WireType kWireType = MapWireFieldTypeTraits<SharkFieldType::MESSAGE, Type>::kWireType;
         // Whether wire type is for message.
-        static constexpr bool kIsMessage = MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::kIsMessage;
+        static constexpr bool kIsMessage = MapWireFieldTypeTraits<SharkFieldType::MESSAGE, Type>::kIsMessage;
         // Whether wire type is for enum.
-        static constexpr bool kIsEnum = MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::kIsEnum;
+        static constexpr bool kIsEnum = MapWireFieldTypeTraits<SharkFieldType::MESSAGE, Type>::kIsEnum;
 
         // Functions used in parsing and serialization. ===================
         static inline size_t ByteSize(const MapEntryAccessorType& value);
@@ -172,18 +172,18 @@ namespace shark::internal {
 
 #define MAP_HANDLER(FieldType)                                                                                              \
     template <typename Type>                                                                                                \
-    class MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type> {                                                 \
+    class MapTypeHandler<SharkFieldType::FieldType, Type> {                                                 \
     public:                                                                                                                 \
-        typedef typename MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_##FieldType,                                  \
+        typedef typename MapWireFieldTypeTraits<SharkFieldType::FieldType,                                  \
             Type>::MapEntryAccessorType                                                                                     \
             MapEntryAccessorType;                                                                                           \
-        typedef typename MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_##FieldType,                                  \
+        typedef typename MapWireFieldTypeTraits<SharkFieldType::FieldType,                                  \
             Type>::TypeOnMemory TypeOnMemory;                                                                               \
-        static const WireFormatLite::WireType kWireType = MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_##FieldType, \
+        static const WireFormatLite::WireType kWireType = MapWireFieldTypeTraits<SharkFieldType::FieldType, \
             Type>::kWireType;                                                                                               \
-        static const bool kIsMessage = MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_##FieldType,                    \
+        static const bool kIsMessage = MapWireFieldTypeTraits<SharkFieldType::FieldType,                    \
             Type>::kIsMessage;                                                                                              \
-        static const bool kIsEnum = MapWireFieldTypeTraits<WireFormatLiteFieldType::TYPE_##FieldType,                       \
+        static const bool kIsEnum = MapWireFieldTypeTraits<SharkFieldType::FieldType,                       \
             Type>::kIsEnum;                                                                                                 \
         static inline int ByteSize(const MapEntryAccessorType& value);                                                      \
         static inline int GetCachedSize(const MapEntryAccessorType& value);                                                 \
@@ -232,14 +232,14 @@ namespace shark::internal {
 #undef MAP_HANDLER
 
     template <typename Type>
-    inline size_t MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::ByteSize(
+    inline size_t MapTypeHandler<SharkFieldType::MESSAGE, Type>::ByteSize(
         const MapEntryAccessorType& value) {
         return WireFormatLite::MessageSizeNoVirtual(value);
     }
 
 #define SHARK_BYTE_SIZE(FieldType, DeclaredType)                                          \
     template <typename Type>                                                              \
-    inline int MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::ByteSize( \
+    inline int MapTypeHandler<SharkFieldType::FieldType, Type>::ByteSize( \
         const MapEntryAccessorType& value) {                                              \
         return static_cast<int>(WireFormatLite::DeclaredType##Size(value));               \
     }
@@ -262,7 +262,7 @@ namespace shark::internal {
 
 #define FIXED_BYTE_SIZE(FieldType, DeclaredType)                                          \
     template <typename Type>                                                              \
-    inline int MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::ByteSize( \
+    inline int MapTypeHandler<SharkFieldType::FieldType, Type>::ByteSize( \
         const MapEntryAccessorType& /* value */) {                                        \
         return WireFormatLite::k##DeclaredType##Size;                                     \
     }
@@ -278,7 +278,7 @@ namespace shark::internal {
 #undef FIXED_BYTE_SIZE
 
     template <typename Type>
-    inline int MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::GetCachedSize(
+    inline int MapTypeHandler<SharkFieldType::MESSAGE, Type>::GetCachedSize(
         const MapEntryAccessorType& value) {
         return static_cast<int>(WireFormatLite::LengthDelimitedSize(
             static_cast<size_t>(value.GetCachedSize())));
@@ -287,7 +287,7 @@ namespace shark::internal {
 #define GET_CACHED_SIZE(FieldType, DeclaredType)                                    \
     template <typename Type>                                                        \
     inline int                                                                      \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::GetCachedSize( \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::GetCachedSize( \
         const MapEntryAccessorType& value) {                                        \
         return static_cast<int>(WireFormatLite::DeclaredType##Size(value));         \
     }
@@ -311,7 +311,7 @@ namespace shark::internal {
 #define GET_FIXED_CACHED_SIZE(FieldType, DeclaredType)                              \
     template <typename Type>                                                        \
     inline int                                                                      \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::GetCachedSize( \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::GetCachedSize( \
         const MapEntryAccessorType& /* value */) {                                  \
         return WireFormatLite::k##DeclaredType##Size;                               \
     }
@@ -327,7 +327,7 @@ namespace shark::internal {
 #undef GET_FIXED_CACHED_SIZE
 
     template <typename Type>
-    inline uint8_t* MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::Write(
+    inline uint8_t* MapTypeHandler<SharkFieldType::MESSAGE, Type>::Write(
         int field, const MapEntryAccessorType& value, uint8_t* ptr,
         io::EpsCopyOutputStream* stream) {
         ptr = stream->EnsureSpace(ptr);
@@ -338,7 +338,7 @@ namespace shark::internal {
 #define WRITE_METHOD(FieldType, DeclaredType)                               \
     template <typename Type>                                                \
     inline uint8_t*                                                         \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Write( \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::Write( \
         int field, const MapEntryAccessorType& value, uint8_t* ptr,         \
         io::EpsCopyOutputStream* stream) {                                  \
         ptr = stream->EnsureSpace(ptr);                                     \
@@ -352,7 +352,7 @@ namespace shark::internal {
 #define WRITE_METHOD(FieldType, DeclaredType)                                   \
     template <typename Type>                                                    \
     inline uint8_t*                                                             \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Write(     \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::Write(     \
         int field, const MapEntryAccessorType& value, uint8_t* ptr,             \
         io::EpsCopyOutputStream* stream) {                                      \
         ptr = stream->EnsureSpace(ptr);                                         \
@@ -381,31 +381,31 @@ namespace shark::internal {
 #undef WRITE_METHOD
 
     template <typename Type>
-    inline bool MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::Read(
+    inline bool MapTypeHandler<SharkFieldType::MESSAGE, Type>::Read(
         io::CodedInputStream* input, MapEntryAccessorType* value) {
         return WireFormatLite::ReadMessageNoVirtual(input, value);
     }
 
     template <typename Type>
-    inline bool MapTypeHandler<WireFormatLiteFieldType::TYPE_STRING, Type>::Read(
+    inline bool MapTypeHandler<SharkFieldType::STRING, Type>::Read(
         io::CodedInputStream* input, MapEntryAccessorType* value) {
         return WireFormatLite::ReadString(input, value);
     }
 
     template <typename Type>
-    inline bool MapTypeHandler<WireFormatLiteFieldType::TYPE_BYTES, Type>::Read(
+    inline bool MapTypeHandler<SharkFieldType::BYTES, Type>::Read(
         io::CodedInputStream* input, MapEntryAccessorType* value) {
         return WireFormatLite::ReadBytes(input, value);
     }
 
     template <typename Type>
-    const char* MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::Read(
+    const char* MapTypeHandler<SharkFieldType::MESSAGE, Type>::Read(
         const char* ptr, ParseContext* ctx, MapEntryAccessorType* value) {
         return ctx->ParseMessage(value, ptr);
     }
 
     template <typename Type>
-    const char* MapTypeHandler<WireFormatLiteFieldType::TYPE_STRING, Type>::Read(
+    const char* MapTypeHandler<SharkFieldType::STRING, Type>::Read(
         const char* ptr, ParseContext* ctx, MapEntryAccessorType* value) {
         int size = ReadSize(&ptr);
         SHARK_PARSER_ASSERT(ptr);
@@ -413,7 +413,7 @@ namespace shark::internal {
     }
 
     template <typename Type>
-    const char* MapTypeHandler<WireFormatLiteFieldType::TYPE_BYTES, Type>::Read(
+    const char* MapTypeHandler<SharkFieldType::BYTES, Type>::Read(
         const char* ptr, ParseContext* ctx, MapEntryAccessorType* value) {
         int size = ReadSize(&ptr);
         SHARK_PARSER_ASSERT(ptr);
@@ -504,14 +504,14 @@ namespace shark::internal {
 
 #define READ_METHOD(FieldType)                                                         \
     template <typename Type>                                                           \
-    inline bool MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Read( \
+    inline bool MapTypeHandler<SharkFieldType::FieldType, Type>::Read( \
         io::CodedInputStream* input, MapEntryAccessorType* value) {                    \
         return WireFormatLite::ReadPrimitive<TypeOnMemory,                             \
-            WireFormatLiteFieldType::TYPE_##FieldType>(                                \
+            SharkFieldType::FieldType>(                                \
             input, value);                                                             \
     }                                                                                  \
     template <typename Type>                                                           \
-    const char* MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Read( \
+    const char* MapTypeHandler<SharkFieldType::FieldType, Type>::Read( \
         const char* begin, ParseContext* ctx, MapEntryAccessorType* value) {           \
         (void)ctx;                                                                     \
         return Read##FieldType(begin, value);                                          \
@@ -542,43 +542,43 @@ namespace shark::internal {
 
     template <typename Type>
     inline const Type&
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::GetExternalReference(
+    MapTypeHandler<SharkFieldType::MESSAGE, Type>::GetExternalReference(
         const Type* value) {
         return *value;
     }
 
     template <typename Type>
-    inline size_t MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE,
+    inline size_t MapTypeHandler<SharkFieldType::MESSAGE,
         Type>::SpaceUsedInMapEntryLong(const Type* value) {
         return value->SpaceUsedLong();
     }
 
     template <typename Type>
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::Clear(
+    inline void MapTypeHandler<SharkFieldType::MESSAGE, Type>::Clear(
         Type** value, Arena* /* arena */) {
         if (*value != nullptr)
             (*value)->Clear();
     }
     template <typename Type>
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::Merge(
+    inline void MapTypeHandler<SharkFieldType::MESSAGE, Type>::Merge(
         const Type& from, Type** to, Arena* /* arena */) {
         (*to)->MergeFrom(from);
     }
 
     template <typename Type>
-    void MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::DeleteNoArena(
+    void MapTypeHandler<SharkFieldType::MESSAGE, Type>::DeleteNoArena(
         const Type* ptr) {
         delete ptr;
     }
 
     template <typename Type>
-    constexpr auto MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::Constinit()
+    constexpr auto MapTypeHandler<SharkFieldType::MESSAGE, Type>::Constinit()
         -> TypeOnMemory {
         return nullptr;
     }
 
     template <typename Type>
-    inline Type* MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::EnsureMutable(
+    inline Type* MapTypeHandler<SharkFieldType::MESSAGE, Type>::EnsureMutable(
         Type** value, Arena* arena) {
         if (*value == nullptr) {
             *value = MapArenaMessageCreator<
@@ -590,13 +590,13 @@ namespace shark::internal {
 
     template <typename Type>
     inline const Type&
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::DefaultIfNotInitialized(
+    MapTypeHandler<SharkFieldType::MESSAGE, Type>::DefaultIfNotInitialized(
         const Type* value) {
         return value != nullptr ? *value : *Type::internal_default_instance();
     }
 
     template <typename Type>
-    inline bool MapTypeHandler<WireFormatLiteFieldType::TYPE_MESSAGE, Type>::IsInitialized(
+    inline bool MapTypeHandler<SharkFieldType::MESSAGE, Type>::IsInitialized(
         Type* value) {
         return value ? value->IsInitialized() : false;
     }
@@ -605,57 +605,57 @@ namespace shark::internal {
 
 #define STRING_OR_BYTES_HANDLER_FUNCTIONS(FieldType)                                     \
     template <typename Type>                                                             \
-    inline const typename MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,      \
+    inline const typename MapTypeHandler<SharkFieldType::FieldType,      \
         Type>::MapEntryAccessorType&                                                     \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,                            \
+    MapTypeHandler<SharkFieldType::FieldType,                            \
         Type>::GetExternalReference(const TypeOnMemory& value) {                         \
         return value.Get();                                                              \
     }                                                                                    \
     template <typename Type>                                                             \
     inline size_t                                                                        \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,                            \
+    MapTypeHandler<SharkFieldType::FieldType,                            \
         Type>::SpaceUsedInMapEntryLong(const TypeOnMemory& value) {                      \
         return sizeof(value);                                                            \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Clear(  \
+    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Clear(  \
         TypeOnMemory* value, Arena* /* arena */) {                                       \
         value->ClearToEmpty();                                                           \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Merge(  \
+    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Merge(  \
         const MapEntryAccessorType& from, TypeOnMemory* to, Arena* arena) {              \
         to->Set(from, arena);                                                            \
     }                                                                                    \
     template <typename Type>                                                             \
-    void MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::DeleteNoArena( \
+    void MapTypeHandler<SharkFieldType::FieldType, Type>::DeleteNoArena( \
         TypeOnMemory& value) {                                                           \
         value.Destroy();                                                                 \
     }                                                                                    \
     template <typename Type>                                                             \
     constexpr auto                                                                       \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Constinit()         \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::Constinit()         \
         -> TypeOnMemory {                                                                \
         return TypeOnMemory(&internal::fixed_address_empty_string,                       \
             ConstantInitialized { });                                                    \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline typename MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,            \
+    inline typename MapTypeHandler<SharkFieldType::FieldType,            \
         Type>::MapEntryAccessorType*                                                     \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::EnsureMutable(      \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::EnsureMutable(      \
         TypeOnMemory* value, Arena* arena) {                                             \
         return value->Mutable(arena);                                                    \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline const typename MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,      \
+    inline const typename MapTypeHandler<SharkFieldType::FieldType,      \
         Type>::MapEntryAccessorType&                                                     \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,                            \
+    MapTypeHandler<SharkFieldType::FieldType,                            \
         Type>::DefaultIfNotInitialized(const TypeOnMemory& value) {                      \
         return value.Get();                                                              \
     }                                                                                    \
     template <typename Type>                                                             \
     inline bool                                                                          \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::IsInitialized(      \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::IsInitialized(      \
         const TypeOnMemory& /* value */) {                                               \
         return true;                                                                     \
     }
@@ -665,54 +665,54 @@ namespace shark::internal {
 
 #define PRIMITIVE_HANDLER_FUNCTIONS(FieldType)                                          \
     template <typename Type>                                                            \
-    inline const typename MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,     \
+    inline const typename MapTypeHandler<SharkFieldType::FieldType,     \
         Type>::MapEntryAccessorType&                                                    \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,                           \
+    MapTypeHandler<SharkFieldType::FieldType,                           \
         Type>::GetExternalReference(const TypeOnMemory& value) {                        \
         return value;                                                                   \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline size_t MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::     \
+    inline size_t MapTypeHandler<SharkFieldType::FieldType, Type>::     \
         SpaceUsedInMapEntryLong(const TypeOnMemory& /* value */) {                      \
         return 0;                                                                       \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Clear( \
+    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Clear( \
         TypeOnMemory* value, Arena* /* arena */) {                                      \
         *value = 0;                                                                     \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Merge( \
+    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Merge( \
         const MapEntryAccessorType& from, TypeOnMemory* to,                             \
         Arena* /* arena */) {                                                           \
         *to = from;                                                                     \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline void MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,               \
+    inline void MapTypeHandler<SharkFieldType::FieldType,               \
         Type>::DeleteNoArena(TypeOnMemory& /* x */) { }                                 \
     template <typename Type>                                                            \
     constexpr auto                                                                      \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::Constinit()        \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::Constinit()        \
         -> TypeOnMemory {                                                               \
         return 0;                                                                       \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline typename MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,           \
+    inline typename MapTypeHandler<SharkFieldType::FieldType,           \
         Type>::MapEntryAccessorType*                                                    \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::EnsureMutable(     \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::EnsureMutable(     \
         TypeOnMemory* value, Arena* /* arena */) {                                      \
         return value;                                                                   \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline const typename MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,     \
+    inline const typename MapTypeHandler<SharkFieldType::FieldType,     \
         Type>::MapEntryAccessorType&                                                    \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType,                           \
+    MapTypeHandler<SharkFieldType::FieldType,                           \
         Type>::DefaultIfNotInitialized(const TypeOnMemory& value) {                     \
         return value;                                                                   \
     }                                                                                   \
     template <typename Type>                                                            \
     inline bool                                                                         \
-    MapTypeHandler<WireFormatLiteFieldType::TYPE_##FieldType, Type>::IsInitialized(     \
+    MapTypeHandler<SharkFieldType::FieldType, Type>::IsInitialized(     \
         const TypeOnMemory& /* value */) {                                              \
         return true;                                                                    \
     }
@@ -753,8 +753,8 @@ namespace shark::internal {
     //
     // Does not contain any representation (this class is not intended to be
     // instantiated).
-    template <typename Key, typename Value, WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+    template <typename Key, typename Value, SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     struct MapEntryFuncs {
         typedef MapTypeHandler<kKeyFieldType, Key> KeyTypeHandler;
         typedef MapTypeHandler<kValueFieldType, Value> ValueTypeHandler;

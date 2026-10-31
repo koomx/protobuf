@@ -361,7 +361,7 @@ namespace shark {
             for (int i = 0; i < kNestingDepth - 1; ++i) {
                 lengths.push_back(
                     internal::WireFormatLite::TagSize(
-                        kUnknownFieldNumber, internal::WireFormatLiteFieldType::TYPE_BYTES)
+                        kUnknownFieldNumber, SharkFieldType::BYTES)
                     + internal::WireFormatLite::LengthDelimitedSize(lengths.back()));
             }
             std::string serialized;

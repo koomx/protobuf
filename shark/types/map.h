@@ -76,13 +76,13 @@ namespace shark {
 
     namespace internal {
         template <typename Derived, typename Key, typename T,
-            WireFormatLiteFieldType key_wire_type,
-            WireFormatLiteFieldType value_wire_type>
+            SharkFieldType key_wire_type,
+            SharkFieldType value_wire_type>
         class MapFieldLite;
 
         template <typename Derived, typename Key, typename T,
-            WireFormatLiteFieldType key_wire_type,
-            WireFormatLiteFieldType value_wire_type>
+            SharkFieldType key_wire_type,
+            SharkFieldType value_wire_type>
         class MapField;
 
         template <typename Key, typename T>
@@ -1452,8 +1452,8 @@ namespace shark {
         using InternalArenaConstructable_ = void;
         using DestructorSkippable_ = void;
         template <typename Derived, typename K, typename V,
-            internal::WireFormatLiteFieldType key_wire_type,
-            internal::WireFormatLiteFieldType value_wire_type>
+            SharkFieldType key_wire_type,
+            SharkFieldType value_wire_type>
         friend class internal::MapFieldLite;
     };
 

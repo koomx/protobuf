@@ -157,7 +157,7 @@ namespace shark::internal {
         io::CodedInputStream::Limit limit = input->PushLimit(length);
         while (input->BytesUntilLimit() > 0) {
             int value;
-            if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
+            if (!WireFormatLite::ReadPrimitive<int, SharkFieldType::ENUM>(
                     input, &value)) {
                 return false;
             }
@@ -396,7 +396,7 @@ namespace shark::internal {
         while (input->BytesUntilLimit() > 0) {                              \
             CPPTYPE value;                                                  \
             if (!WireFormatLite::ReadPrimitive<CPPTYPE,                     \
-                    WireFormatLiteFieldType::TYPE_##TYPE>(input,            \
+                    SharkFieldType::TYPE>(input,            \
                     &value))                                                \
                 return false;                                               \
             message_reflection->Add##CPPTYPE_METHOD(message, field, value); \
@@ -459,7 +459,7 @@ namespace shark::internal {
             case ::shark::FieldType::ENUM: {
                 while (input->BytesUntilLimit() > 0) {
                     int value;
-                    if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
+                    if (!WireFormatLite::ReadPrimitive<int, SharkFieldType::ENUM>(
                             input, &value))
                         return false;
                     const EnumValueDescriptor* enum_value = field->enum_type()->FindValueByNumber(value);
@@ -491,7 +491,7 @@ namespace shark::internal {
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                                         \
     case ::shark::FieldType::TYPE: {                                                       \
         CPPTYPE value;                                                                     \
-        if (!WireFormatLite::ReadPrimitive<CPPTYPE, WireFormatLiteFieldType::TYPE_##TYPE>( \
+        if (!WireFormatLite::ReadPrimitive<CPPTYPE, SharkFieldType::TYPE>( \
                 input, &value))                                                            \
             return false;                                                                  \
         if (field->is_repeated()) {                                                        \
@@ -556,7 +556,7 @@ namespace shark::internal {
 
             case ::shark::FieldType::ENUM: {
                 int value;
-                if (!WireFormatLite::ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(
+                if (!WireFormatLite::ReadPrimitive<int, SharkFieldType::ENUM>(
                         input, &value))
                     return false;
                 if (field->is_repeated()) {

@@ -107,11 +107,11 @@ const T& Get(const void* ptr) {
 // WireFormatLite has a very inconvenient interface with respect to template
 // meta-programming. This class wraps the different named functions into
 // a single Serialize / SerializeToArray interface.
-template <WireFormatLiteFieldType type>
+template <SharkFieldType type>
 struct PrimitiveTypeHelper;
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_BOOL> {
+struct PrimitiveTypeHelper<SharkFieldType::BOOL> {
   typedef bool Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteBoolNoTag(Get<bool>(ptr), output);
@@ -122,7 +122,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_BOOL> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT8> {
+struct PrimitiveTypeHelper<SharkFieldType::INT8> {
   typedef int8_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteInt32NoTag(Get<Type>(ptr), output);
@@ -132,7 +132,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT8> {
   }
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT8> {
+struct PrimitiveTypeHelper<SharkFieldType::UINT8> {
   typedef uint8_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteUInt32NoTag(Get<Type>(ptr), output);
@@ -142,7 +142,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT8> {
   }
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT16> {
+struct PrimitiveTypeHelper<SharkFieldType::INT16> {
   typedef int16_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteInt32NoTag(Get<Type>(ptr), output);
@@ -152,7 +152,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT16> {
   }
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT16> {
+struct PrimitiveTypeHelper<SharkFieldType::UINT16> {
   typedef uint16_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteUInt32NoTag(Get<Type>(ptr), output);
@@ -163,7 +163,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT16> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT32> {
+struct PrimitiveTypeHelper<SharkFieldType::INT32> {
   typedef int32_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteInt32NoTag(Get<int32_t>(ptr), output);
@@ -174,7 +174,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT32> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_SINT32> {
+struct PrimitiveTypeHelper<SharkFieldType::SINT32> {
   typedef int32_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteSInt32NoTag(Get<int32_t>(ptr), output);
@@ -185,7 +185,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_SINT32> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT32> {
+struct PrimitiveTypeHelper<SharkFieldType::UINT32> {
   typedef uint32_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteUInt32NoTag(Get<uint32_t>(ptr), output);
@@ -195,7 +195,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT32> {
   }
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT64> {
+struct PrimitiveTypeHelper<SharkFieldType::INT64> {
   typedef int64_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteInt64NoTag(Get<int64_t>(ptr), output);
@@ -206,7 +206,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT64> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_SINT64> {
+struct PrimitiveTypeHelper<SharkFieldType::SINT64> {
   typedef int64_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteSInt64NoTag(Get<int64_t>(ptr), output);
@@ -216,7 +216,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_SINT64> {
   }
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT64> {
+struct PrimitiveTypeHelper<SharkFieldType::UINT64> {
   typedef uint64_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteUInt64NoTag(Get<uint64_t>(ptr), output);
@@ -227,7 +227,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_UINT64> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED32> {
+struct PrimitiveTypeHelper<SharkFieldType::FIXED32> {
   typedef uint32_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteFixed32NoTag(Get<uint32_t>(ptr), output);
@@ -238,7 +238,7 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED32> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED64> {
+struct PrimitiveTypeHelper<SharkFieldType::FIXED64> {
   typedef uint64_t Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     WireFormatLite::WriteFixed64NoTag(Get<uint64_t>(ptr), output);
@@ -249,32 +249,32 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED64> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_ENUM>
-    : PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_INT32> {};
+struct PrimitiveTypeHelper<SharkFieldType::ENUM>
+    : PrimitiveTypeHelper<SharkFieldType::INT32> {};
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_SFIXED32>
-    : PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED32> {
+struct PrimitiveTypeHelper<SharkFieldType::SFIXED32>
+    : PrimitiveTypeHelper<SharkFieldType::FIXED32> {
   typedef int32_t Type;
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_SFIXED64>
-    : PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED64> {
+struct PrimitiveTypeHelper<SharkFieldType::SFIXED64>
+    : PrimitiveTypeHelper<SharkFieldType::FIXED64> {
   typedef int64_t Type;
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FLOAT>
-    : PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED32> {
+struct PrimitiveTypeHelper<SharkFieldType::FLOAT>
+    : PrimitiveTypeHelper<SharkFieldType::FIXED32> {
   typedef float Type;
 };
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_DOUBLE>
-    : PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_FIXED64> {
+struct PrimitiveTypeHelper<SharkFieldType::DOUBLE>
+    : PrimitiveTypeHelper<SharkFieldType::FIXED64> {
   typedef double Type;
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_STRING> {
+struct PrimitiveTypeHelper<SharkFieldType::STRING> {
   typedef std::string Type;
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     const Type& value = *static_cast<const Type*>(ptr);
@@ -288,32 +288,32 @@ struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_STRING> {
 };
 
 template <>
-struct PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_BYTES>
-    : PrimitiveTypeHelper<WireFormatLiteFieldType::TYPE_STRING> {};
+struct PrimitiveTypeHelper<SharkFieldType::BYTES>
+    : PrimitiveTypeHelper<SharkFieldType::STRING> {};
 
 // We want to serialize to both CodedOutputStream and directly into byte arrays
 // without duplicating the code. In fact we might want extra output channels in
 // the future.
-template <typename O, WireFormatLiteFieldType type>
+template <typename O, SharkFieldType type>
 struct OutputHelper;
 
-template <WireFormatLiteFieldType type, typename O>
+template <SharkFieldType type, typename O>
 void SerializeTo(const void* ptr, O* output) {
   OutputHelper<O, type>::Serialize(ptr, output);
 }
 
 template <typename O>
 void WriteTagTo(uint32_t tag, O* output) {
-  SerializeTo<WireFormatLiteFieldType::TYPE_UINT32>(&tag, output);
+  SerializeTo<SharkFieldType::UINT32>(&tag, output);
 }
 
 template <typename O>
 void WriteLengthTo(uint32_t length, O* output) {
-  SerializeTo<WireFormatLiteFieldType::TYPE_UINT32>(&length, output);
+  SerializeTo<SharkFieldType::UINT32>(&length, output);
 }
 
 // Specialization for coded output stream
-template <WireFormatLiteFieldType type>
+template <SharkFieldType type>
 struct OutputHelper<io::CodedOutputStream, type> {
   static void Serialize(const void* ptr, io::CodedOutputStream* output) {
     PrimitiveTypeHelper<type>::Serialize(ptr, output);
@@ -326,7 +326,7 @@ struct ArrayOutput {
   bool is_deterministic;
 };
 
-template <WireFormatLiteFieldType type>
+template <SharkFieldType type>
 struct OutputHelper<ArrayOutput, type> {
   static void Serialize(const void* ptr, ArrayOutput* output) {
     output->ptr = PrimitiveTypeHelper<type>::SerializeToArray(ptr, output->ptr);
@@ -363,24 +363,24 @@ void SerializeNotImplemented(int field) {
 #define SERIALIZE_TABLE_OP(type, type_class) \
   ((type - 1) + static_cast<int>(type_class) * FieldMetadata::kNumTypes)
 
-template <WireFormatLiteFieldType type>
+template <SharkFieldType type>
 bool IsNull(const void* ptr) {
   return *static_cast<const typename PrimitiveTypeHelper<type>::Type*>(ptr) ==
          0;
 }
 
 template <>
-bool IsNull<WireFormatLiteFieldType::TYPE_STRING>(const void* ptr) {
+bool IsNull<SharkFieldType::STRING>(const void* ptr) {
   return static_cast<const ArenaStringPtr*>(ptr)->Get().size() == 0;
 }
 
 template <>
-bool IsNull<WireFormatLiteFieldType::TYPE_BYTES>(const void* ptr) {
+bool IsNull<SharkFieldType::BYTES>(const void* ptr) {
   return static_cast<const ArenaStringPtr*>(ptr)->Get().size() == 0;
 }
 
 template <>
-bool IsNull<WireFormatLiteFieldType::TYPE_MESSAGE>(const void* ptr) {
+bool IsNull<SharkFieldType::MESSAGE>(const void* ptr) {
   return Get<const MessageLite*>(ptr) == nullptr;
 }
 

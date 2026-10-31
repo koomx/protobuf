@@ -291,9 +291,9 @@ void CollectMapInfo(const Options& options, const Descriptor* descriptor,
       vars["val_cpp"] = PrimitiveTypeName(options, val->cpp_type());
   }
   vars["key_wire_type"] =
-      "TYPE_" + ToUpper(DeclaredTypeMethodName(key->type()));
+      ToUpper(DeclaredTypeMethodName(key->type()));
   vars["val_wire_type"] =
-      "TYPE_" + ToUpper(DeclaredTypeMethodName(val->type()));
+      ToUpper(DeclaredTypeMethodName(val->type()));
 }
 
 // Does the given field have a private (internal helper only) has_$name$()
@@ -1298,13 +1298,13 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "class $classname$ : public "
         "::$proto_ns$::internal::MapEntry$lite$<$classname$, \n"
         "    $key_cpp$, $val_cpp$,\n"
-        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$key_wire_type$,\n"
-        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$val_wire_type$> {\n"
+        "    ::$proto_ns$::SharkFieldType::$key_wire_type$,\n"
+        "    ::$proto_ns$::SharkFieldType::$val_wire_type$> {\n"
         "public:\n"
         "  typedef ::$proto_ns$::internal::MapEntry$lite$<$classname$, \n"
         "    $key_cpp$, $val_cpp$,\n"
-        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$key_wire_type$,\n"
-        "    ::$proto_ns$::internal::WireFormatLiteFieldType::$val_wire_type$> "
+        "    ::$proto_ns$::SharkFieldType::$key_wire_type$,\n"
+        "    ::$proto_ns$::SharkFieldType::$val_wire_type$> "
         "SuperType;\n"
         "  $classname$();\n"
         "  explicit constexpr $classname$(\n"

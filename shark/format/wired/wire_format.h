@@ -329,7 +329,7 @@ namespace shark::internal {
     inline WireFormatLite::WireType WireFormat::WireTypeForFieldType(
         ::shark::FieldType type) {
         return WireFormatLite::WireTypeForFieldType(
-            static_cast<WireFormatLiteFieldType>(static_cast<int>(type)));
+            static_cast<SharkFieldType>(static_cast<int>(type)));
     }
 
     inline uint32_t WireFormat::MakeTag(const FieldDescriptor* field) {
@@ -340,7 +340,7 @@ namespace shark::internal {
         ::shark::FieldType type) {
         return WireFormatLite::TagSize(
             field_number,
-            static_cast<WireFormatLiteFieldType>(static_cast<int>(type)));
+            static_cast<SharkFieldType>(static_cast<int>(type)));
     }
 
     inline void WireFormat::VerifyUTF8String(const char* data, int size,

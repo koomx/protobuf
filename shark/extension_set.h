@@ -82,7 +82,7 @@ namespace internal {
 
 class InternalMetadata;
 
-// Used to store values of type WireFormatLiteFieldType without having to
+// Used to store values of type SharkFieldType without having to
 // #include wire_format_lite.h.  Also, ensures that we use only one byte to
 // store these values, which is important to keep the layout of
 // ExtensionSet::Extension small.
@@ -801,7 +801,7 @@ class SHARK_EXPORT ExtensionSet {
 
     GOOGLE_DCHECK(extension->type > 0 &&
            extension->type <= WireFormatLite::MAX_FIELD_TYPE);
-    auto real_type = static_cast<WireFormatLiteFieldType>(extension->type);
+    auto real_type = static_cast<SharkFieldType>(extension->type);
 
     WireFormatLite::WireType expected_wire_type =
         WireFormatLite::WireTypeForFieldType(real_type);

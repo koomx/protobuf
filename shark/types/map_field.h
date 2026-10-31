@@ -599,8 +599,8 @@ namespace shark {
         // internal generated message implementation only. Users should never use this
         // directly.
         template <typename Derived, typename Key, typename T,
-            WireFormatLiteFieldType kKeyFieldType,
-            WireFormatLiteFieldType kValueFieldType>
+            SharkFieldType kKeyFieldType,
+            SharkFieldType kValueFieldType>
         class MapField : public TypeDefinedMapFieldBase<Key, T> {
             // Provide utilities to parse/serialize key/value.  Provide utilities to
             // manipulate internal stored type.
@@ -706,8 +706,8 @@ namespace shark {
         };
 
         template <typename Derived, typename Key, typename T,
-            WireFormatLiteFieldType key_wire_type,
-            WireFormatLiteFieldType value_wire_type>
+            SharkFieldType key_wire_type,
+            SharkFieldType value_wire_type>
         bool AllAreInitialized(
             const MapField<Derived, Key, T, key_wire_type, value_wire_type>& field) {
             const auto& t = field.GetMap();
@@ -720,8 +720,8 @@ namespace shark {
         }
 
         template <typename T, typename Key, typename Value,
-            WireFormatLiteFieldType kKeyFieldType,
-            WireFormatLiteFieldType kValueFieldType>
+            SharkFieldType kKeyFieldType,
+            SharkFieldType kValueFieldType>
         struct MapEntryToMapField<
             MapEntry<T, Key, Value, kKeyFieldType, kValueFieldType>> {
             typedef MapField<T, Key, Value, kKeyFieldType, kValueFieldType> MapFieldType;
@@ -854,8 +854,8 @@ namespace shark {
 
     private:
         template <typename Derived, typename K, typename V,
-            internal::WireFormatLiteFieldType key_wire_type,
-            internal::WireFormatLiteFieldType value_wire_type>
+            SharkFieldType key_wire_type,
+            SharkFieldType value_wire_type>
         friend class internal::MapField;
         template <typename K, typename V>
         friend class internal::TypeDefinedMapFieldBase;
@@ -1018,8 +1018,8 @@ namespace shark {
         friend class internal::TypeDefinedMapFieldBase;
         friend class internal::DynamicMapField;
         template <typename Derived, typename Key, typename T,
-            internal::WireFormatLiteFieldType kKeyFieldType,
-            internal::WireFormatLiteFieldType kValueFieldType>
+            SharkFieldType kKeyFieldType,
+            SharkFieldType kValueFieldType>
         friend class internal::MapField;
 
         // reinterpret_cast from heap-allocated Map<...>::iterator*. MapIterator owns

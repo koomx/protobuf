@@ -56,8 +56,8 @@ namespace shark::internal {
     // internal generated message implementation only. Users should never use this
     // directly.
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType key_wire_type,
-        WireFormatLiteFieldType value_wire_type>
+        SharkFieldType key_wire_type,
+        SharkFieldType value_wire_type>
     class MapFieldLite {
         // Define message type for internal repeated field.
         typedef Derived EntryType;
@@ -167,8 +167,8 @@ namespace shark::internal {
     // protobuf compiler from ever having to emit loops in IsInitialized() methods.
     // We want the C++ compiler to inline this or not as it sees fit.
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType key_wire_type,
-        WireFormatLiteFieldType value_wire_type>
+        SharkFieldType key_wire_type,
+        SharkFieldType value_wire_type>
     bool AllAreInitialized(const MapFieldLite<Derived, Key, T, key_wire_type,
         value_wire_type>& field) {
         const auto& t = field.GetMap();
@@ -184,8 +184,8 @@ namespace shark::internal {
     struct MapEntryToMapField : MapEntryToMapField<typename MEntry::SuperType> { };
 
     template <typename T, typename Key, typename Value,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     struct MapEntryToMapField<
         MapEntryLite<T, Key, Value, kKeyFieldType, kValueFieldType>> {
         typedef MapFieldLite<

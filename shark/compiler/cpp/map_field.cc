@@ -59,9 +59,9 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
       (*variables)["val_cpp"] = PrimitiveTypeName(options, val->cpp_type());
   }
   (*variables)["key_wire_type"] =
-      "TYPE_" + ToUpper(DeclaredTypeMethodName(key->type()));
+      ToUpper(DeclaredTypeMethodName(key->type()));
   (*variables)["val_wire_type"] =
-      "TYPE_" + ToUpper(DeclaredTypeMethodName(val->type()));
+      ToUpper(DeclaredTypeMethodName(val->type()));
   (*variables)["map_classname"] = ClassName(descriptor->message_type(), false);
   (*variables)["number"] = StrCat(descriptor->number());
   (*variables)["tag"] = StrCat(internal::WireFormat::MakeTag(descriptor));
@@ -90,8 +90,8 @@ void MapFieldGenerator::GeneratePrivateMembers(io::Printer* printer) const {
       "::$proto_ns$::internal::MapField$lite$<\n"
       "    $map_classname$,\n"
       "    $key_cpp$, $val_cpp$,\n"
-      "    ::$proto_ns$::internal::WireFormatLiteFieldType::$key_wire_type$,\n"
-      "    ::$proto_ns$::internal::WireFormatLiteFieldType::$val_wire_type$> "
+      "    ::$proto_ns$::SharkFieldType::$key_wire_type$,\n"
+      "    ::$proto_ns$::SharkFieldType::$val_wire_type$> "
       "$name$_;\n");
 }
 

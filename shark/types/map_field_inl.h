@@ -192,16 +192,16 @@ namespace shark::internal {
     // ----------------------------------------------------------------------
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     int MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::size() const {
         MapFieldBase::SyncMapWithRepeatedField();
         return static_cast<int>(impl_.GetMap().size());
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::Clear() {
         if (this->MapFieldBase::repeated_field_ != nullptr) {
             RepeatedPtrField<EntryType>* repeated_field = reinterpret_cast<RepeatedPtrField<EntryType>*>(
@@ -217,8 +217,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType,
         kValueFieldType>::SetMapIteratorValue(MapIterator* map_iter)
         const {
@@ -231,8 +231,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::ContainsMapKey(
         const MapKey& map_key) const {
         const Map<Key, T>& map = impl_.GetMap();
@@ -242,8 +242,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     bool MapField<Derived, Key, T, kKeyFieldType,
         kValueFieldType>::InsertOrLookupMapValue(const MapKey& map_key,
         MapValueRef* val) {
@@ -263,8 +263,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::LookupMapValue(
         const MapKey& map_key, MapValueConstRef* val) const {
         const Map<Key, T>& map = GetMap();
@@ -280,8 +280,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     bool MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::DeleteMapValue(
         const MapKey& map_key) {
         const Key& key = UnwrapMapKey<Key>(map_key);
@@ -289,8 +289,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::MergeFrom(
         const MapFieldBase& other) {
         MapFieldBase::SyncMapWithRepeatedField();
@@ -301,8 +301,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::Swap(
         MapFieldBase* other) {
         MapFieldBase::Swap(other);
@@ -311,16 +311,16 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType,
         kValueFieldType>::UnsafeShallowSwap(MapFieldBase* other) {
         InternalSwap(down_cast<MapField*>(other));
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType, kValueFieldType>::InternalSwap(
         MapField* other) {
         MapFieldBase::InternalSwap(other);
@@ -328,8 +328,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType,
         kValueFieldType>::SyncRepeatedFieldWithMapNoLock() const {
         if (this->MapFieldBase::repeated_field_ == nullptr) {
@@ -362,8 +362,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     void MapField<Derived, Key, T, kKeyFieldType,
         kValueFieldType>::SyncMapWithRepeatedFieldNoLock() const {
         Map<Key, T>* map = const_cast<MapField*>(this)->impl_.MutableMap();
@@ -383,8 +383,8 @@ namespace shark::internal {
     }
 
     template <typename Derived, typename Key, typename T,
-        WireFormatLiteFieldType kKeyFieldType,
-        WireFormatLiteFieldType kValueFieldType>
+        SharkFieldType kKeyFieldType,
+        SharkFieldType kValueFieldType>
     size_t MapField<Derived, Key, T, kKeyFieldType,
         kValueFieldType>::SpaceUsedExcludingSelfNoLock() const {
         size_t size = 0;

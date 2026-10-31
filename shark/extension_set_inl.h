@@ -41,32 +41,32 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
     int number, bool was_packed_on_wire, const ExtensionInfo& extension,
     InternalMetadata* metadata, const char* ptr, internal::ParseContext* ctx) {
   if (was_packed_on_wire) {
-    switch (static_cast<WireFormatLiteFieldType>(extension.type)) {
+    switch (static_cast<SharkFieldType>(extension.type)) {
 #define HANDLE_TYPE(UPPERCASE, CPP_CAMELCASE)                                \
-  case WireFormatLiteFieldType::TYPE_##UPPERCASE:                                     \
+  case SharkFieldType::UPPERCASE:                                     \
     return internal::Packed##CPP_CAMELCASE##Parser(                          \
         MutableRawRepeatedField(number, extension.type, extension.is_packed, \
                                 extension.descriptor),                       \
         ptr, ctx);
       HANDLE_TYPE(INT32, Int32);
-      case WireFormatLiteFieldType::TYPE_INT8:
+      case SharkFieldType::INT8:
         return internal::PackedNarrowVarintParser<T, int8_t>(
             MutableRawRepeatedField(number, extension.type, extension.is_packed,
                                     extension.descriptor),
             ptr, ctx, metadata, number);
-      case WireFormatLiteFieldType::TYPE_INT16:
+      case SharkFieldType::INT16:
         return internal::PackedNarrowVarintParser<T, int16_t>(
             MutableRawRepeatedField(number, extension.type, extension.is_packed,
                                     extension.descriptor),
             ptr, ctx, metadata, number);
       HANDLE_TYPE(INT64, Int64);
       HANDLE_TYPE(UINT32, UInt32);
-      case WireFormatLiteFieldType::TYPE_UINT8:
+      case SharkFieldType::UINT8:
         return internal::PackedNarrowVarintParser<T, uint8_t>(
             MutableRawRepeatedField(number, extension.type, extension.is_packed,
                                     extension.descriptor),
             ptr, ctx, metadata, number);
-      case WireFormatLiteFieldType::TYPE_UINT16:
+      case SharkFieldType::UINT16:
         return internal::PackedNarrowVarintParser<T, uint16_t>(
             MutableRawRepeatedField(number, extension.type, extension.is_packed,
                                     extension.descriptor),
@@ -83,43 +83,43 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       HANDLE_TYPE(BOOL, Bool);
 #undef HANDLE_TYPE
 
-      case WireFormatLiteFieldType::TYPE_ENUM:
+      case SharkFieldType::ENUM:
         return internal::PackedEnumParserArg<T>(
             MutableRawRepeatedField(number, extension.type, extension.is_packed,
                                     extension.descriptor),
             ptr, ctx, extension.enum_validity_check.func,
             extension.enum_validity_check.arg, metadata, number);
-      case WireFormatLiteFieldType::TYPE_STRING:
-      case WireFormatLiteFieldType::TYPE_BYTES:
-      case WireFormatLiteFieldType::TYPE_MESSAGE:
+      case SharkFieldType::STRING:
+      case SharkFieldType::BYTES:
+      case SharkFieldType::MESSAGE:
         GOOGLE_LOG(FATAL) << "Non-primitive types can't be packed.";
         break;
     }
   } else {
-    switch (static_cast<WireFormatLiteFieldType>(extension.type)) {
+    switch (static_cast<SharkFieldType>(extension.type)) {
 #define HANDLE_VARINT_TYPE(UPPERCASE, CPP_CAMELCASE)                        \
-  case WireFormatLiteFieldType::TYPE_##UPPERCASE: {                                  \
+  case SharkFieldType::UPPERCASE: {                                  \
     uint64_t value;                                                         \
     ptr = VarintParse(ptr, &value);                                         \
     SHARK_PARSER_ASSERT(ptr);                                    \
     if (extension.is_repeated) {                                            \
-      Add##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_##UPPERCASE),          \
+      Add##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(SharkFieldType::UPPERCASE),          \
                          extension.is_packed, value, extension.descriptor); \
     } else {                                                                \
-      Set##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_##UPPERCASE), value,   \
+      Set##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(SharkFieldType::UPPERCASE), value,   \
                          extension.descriptor);                             \
     }                                                                       \
   } break
 
       HANDLE_VARINT_TYPE(INT32, Int32);
-      case WireFormatLiteFieldType::TYPE_INT8:
-      case WireFormatLiteFieldType::TYPE_INT16: {
+      case SharkFieldType::INT8:
+      case SharkFieldType::INT16: {
         uint64_t raw;
         ptr = VarintParse(ptr, &raw);
         SHARK_PARSER_ASSERT(ptr);
         const int64_t signed_value = static_cast<int64_t>(raw);
         const bool is_int8 =
-            extension.type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_INT8);
+            extension.type == static_cast<FieldTypeUint8>(SharkFieldType::INT8);
         const bool fits = is_int8 ? signed_value >= -128 && signed_value <= 127
                                   : signed_value >= -32768 && signed_value <= 32767;
         if (!fits) {
@@ -143,13 +143,13 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       }
       HANDLE_VARINT_TYPE(INT64, Int64);
       HANDLE_VARINT_TYPE(UINT32, UInt32);
-      case WireFormatLiteFieldType::TYPE_UINT8:
-      case WireFormatLiteFieldType::TYPE_UINT16: {
+      case SharkFieldType::UINT8:
+      case SharkFieldType::UINT16: {
         uint64_t raw;
         ptr = VarintParse(ptr, &raw);
         SHARK_PARSER_ASSERT(ptr);
         const bool is_uint8 =
-            extension.type == static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_UINT8);
+            extension.type == static_cast<FieldTypeUint8>(SharkFieldType::UINT8);
         const bool fits = is_uint8 ? raw <= 255 : raw <= 65535;
         if (!fits) {
           WriteVarint(number, raw, metadata->mutable_unknown_fields<T>());
@@ -174,16 +174,16 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       HANDLE_VARINT_TYPE(BOOL, Bool);
 #undef HANDLE_VARINT_TYPE
 #define HANDLE_SVARINT_TYPE(UPPERCASE, CPP_CAMELCASE, SIZE)                 \
-  case WireFormatLiteFieldType::TYPE_##UPPERCASE: {                                  \
+  case SharkFieldType::UPPERCASE: {                                  \
     uint64_t val;                                                           \
     ptr = VarintParse(ptr, &val);                                           \
     SHARK_PARSER_ASSERT(ptr);                                    \
     auto value = WireFormatLite::ZigZagDecode##SIZE(val);                   \
     if (extension.is_repeated) {                                            \
-      Add##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_##UPPERCASE),          \
+      Add##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(SharkFieldType::UPPERCASE),          \
                          extension.is_packed, value, extension.descriptor); \
     } else {                                                                \
-      Set##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_##UPPERCASE), value,   \
+      Set##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(SharkFieldType::UPPERCASE), value,   \
                          extension.descriptor);                             \
     }                                                                       \
   } break
@@ -192,14 +192,14 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       HANDLE_SVARINT_TYPE(SINT64, Int64, 64);
 #undef HANDLE_SVARINT_TYPE
 #define HANDLE_FIXED_TYPE(UPPERCASE, CPP_CAMELCASE, CPPTYPE)                \
-  case WireFormatLiteFieldType::TYPE_##UPPERCASE: {                                  \
+  case SharkFieldType::UPPERCASE: {                                  \
     auto value = UnalignedLoad<CPPTYPE>(ptr);                               \
     ptr += sizeof(CPPTYPE);                                                 \
     if (extension.is_repeated) {                                            \
-      Add##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_##UPPERCASE),          \
+      Add##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(SharkFieldType::UPPERCASE),          \
                          extension.is_packed, value, extension.descriptor); \
     } else {                                                                \
-      Set##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_##UPPERCASE), value,   \
+      Set##CPP_CAMELCASE(number, static_cast<FieldTypeUint8>(SharkFieldType::UPPERCASE), value,   \
                          extension.descriptor);                             \
     }                                                                       \
   } break
@@ -212,7 +212,7 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
       HANDLE_FIXED_TYPE(DOUBLE, Double, double);
 #undef HANDLE_FIXED_TYPE
 
-      case WireFormatLiteFieldType::TYPE_ENUM: {
+      case SharkFieldType::ENUM: {
         uint64_t val;
         ptr = VarintParse(ptr, &val);
         SHARK_PARSER_ASSERT(ptr);
@@ -222,35 +222,35 @@ const char* ExtensionSet::ParseFieldWithExtensionInfo(
                 extension.enum_validity_check.arg, value)) {
           WriteVarint(number, val, metadata->mutable_unknown_fields<T>());
         } else if (extension.is_repeated) {
-          AddEnum(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_ENUM), extension.is_packed, value,
+          AddEnum(number, static_cast<FieldTypeUint8>(SharkFieldType::ENUM), extension.is_packed, value,
                   extension.descriptor);
         } else {
-          SetEnum(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_ENUM), value,
+          SetEnum(number, static_cast<FieldTypeUint8>(SharkFieldType::ENUM), value,
                   extension.descriptor);
         }
         break;
       }
 
-      case WireFormatLiteFieldType::TYPE_BYTES:
-      case WireFormatLiteFieldType::TYPE_STRING: {
+      case SharkFieldType::BYTES:
+      case SharkFieldType::STRING: {
         std::string* value =
             extension.is_repeated
-                ? AddString(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_STRING),
+                ? AddString(number, static_cast<FieldTypeUint8>(SharkFieldType::STRING),
                             extension.descriptor)
-                : MutableString(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_STRING),
+                : MutableString(number, static_cast<FieldTypeUint8>(SharkFieldType::STRING),
                                 extension.descriptor);
         int size = ReadSize(&ptr);
         SHARK_PARSER_ASSERT(ptr);
         return ctx->ReadString(ptr, size, value);
       }
 
-      case WireFormatLiteFieldType::TYPE_MESSAGE: {
+      case SharkFieldType::MESSAGE: {
         MessageLite* value =
             extension.is_repeated
-                ? AddMessage(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE),
+                ? AddMessage(number, static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE),
                              *extension.message_info.sharktype,
                              extension.descriptor)
-                : MutableMessage(number, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE),
+                : MutableMessage(number, static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE),
                                  *extension.message_info.sharktype,
                                  extension.descriptor);
         return ctx->ParseMessage(value, ptr);
@@ -293,10 +293,10 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
         } else {
           MessageLite* value =
               extension.is_repeated
-                  ? AddMessage(type_id, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE),
+                  ? AddMessage(type_id, static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE),
                                *extension.message_info.sharktype,
                                extension.descriptor)
-                  : MutableMessage(type_id, static_cast<FieldTypeUint8>(WireFormatLiteFieldType::TYPE_MESSAGE),
+                  : MutableMessage(type_id, static_cast<FieldTypeUint8>(SharkFieldType::MESSAGE),
                                    *extension.message_info.sharktype,
                                    extension.descriptor);
 

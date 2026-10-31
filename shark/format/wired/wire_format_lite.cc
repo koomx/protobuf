@@ -66,9 +66,9 @@ namespace shark {
             + io::CodedOutputStream::StaticVarintSize32<
                 WireFormatLite::kMessageSetMessageTag>::value;
 
-        const WireFormatLite::CppType
+        const SharkFieldCppType
             WireFormatLite::kFieldTypeToCppTypeMap[MAX_FIELD_TYPE + 1] = {
-                static_cast<CppType>(0), // 0 is reserved for errors
+                static_cast<SharkFieldCppType>(0), // 0 is reserved for errors
 
                 CPPTYPE_BOOL, // TYPE_BOOL
                 CPPTYPE_INT8, // TYPE_INT8
@@ -272,7 +272,7 @@ namespace shark {
             io::CodedInputStream::Limit limit = input->PushLimit(length);
             while (input->BytesUntilLimit() > 0) {
                 int value;
-                if (!ReadPrimitive<int, WireFormatLiteFieldType::TYPE_ENUM>(input, &value)) {
+                if (!ReadPrimitive<int, SharkFieldType::ENUM>(input, &value)) {
                     return false;
                 }
                 if (is_valid == nullptr || is_valid(value)) {

@@ -157,7 +157,7 @@ const shark::Field* ProtoStreamObjectSource::FindAndVerifyField(
   if (field != nullptr) {
     WireFormatLite::WireType expected_type =
         WireFormatLite::WireTypeForFieldType(
-            static_cast<internal::WireFormatLiteFieldType>(field->kind()));
+            static_cast<SharkFieldType>(field->kind()));
     WireFormatLite::WireType actual_type = WireFormatLite::GetTagWireType(tag);
     if (actual_type != expected_type &&
         (!IsPackable(*field) ||

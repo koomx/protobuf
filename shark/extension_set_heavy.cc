@@ -109,9 +109,9 @@ inline ::shark::FieldCppType cpp_type(FieldTypeUint8 type) {
   return FieldDescriptor::TypeToCppType(static_cast<::shark::FieldType>(type));
 }
 
-inline WireFormatLiteFieldType field_type(FieldTypeUint8 type) {
+inline SharkFieldType field_type(FieldTypeUint8 type) {
   GOOGLE_DCHECK(type > 0 && type <= WireFormatLite::MAX_FIELD_TYPE);
-  return static_cast<WireFormatLiteFieldType>(type);
+  return static_cast<SharkFieldType>(type);
 }
 
 #define GOOGLE_DCHECK_TYPE(EXTENSION, LABEL, CPPTYPE)                         \
