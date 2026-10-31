@@ -177,7 +177,7 @@ TEST_F(ImporterTest, ImportNested) {
   ASSERT_EQ(1, foo->message_type_count());
   ASSERT_EQ(1, bar->message_type_count());
   ASSERT_EQ(1, foo->message_type(0)->field_count());
-  ASSERT_EQ(FieldType::MESSAGE,
+  ASSERT_EQ(SharkFieldType::MESSAGE,
             foo->message_type(0)->field(0)->type());
   EXPECT_EQ(bar->message_type(0),
             foo->message_type(0)->field(0)->message_type());

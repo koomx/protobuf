@@ -127,15 +127,15 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
   }
 
   switch (field.cpp_type()) {
-    case FieldCppType::INT32:
+    case SharkFieldCppType::CPPTYPE_INT32:
       return StrCat(field.default_value_int32());
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       return StrCat(field.default_value_uint32());
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       return StrCat(field.default_value_int64());
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       return StrCat(field.default_value_uint64());
-    case FieldCppType::DOUBLE: {
+    case SharkFieldCppType::CPPTYPE_DOUBLE: {
       double value = field.default_value_double();
       if (value == std::numeric_limits<double>::infinity()) {
         // Python pre-2.6 on Windows does not parse "inf" correctly.  However,
@@ -151,7 +151,7 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
         return "float(" + SimpleDtoa(value) + ")";
       }
     }
-    case FieldCppType::FLOAT: {
+    case SharkFieldCppType::CPPTYPE_FLOAT: {
       float value = field.default_value_float();
       if (value == std::numeric_limits<float>::infinity()) {
         // Python pre-2.6 on Windows does not parse "inf" correctly.  However,
@@ -167,22 +167,22 @@ std::string StringifyDefaultValue(const FieldDescriptor& field) {
         return "float(" + SimpleFtoa(value) + ")";
       }
     }
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       return field.default_value_bool() ? "True" : "False";
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       return StrCat(field.default_value_enum()->number());
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       return "b\"" + CEscape(field.default_value_string()) +
-             (field.type() != FieldType::STRING
+             (field.type() != SharkFieldType::STRING
                   ? "\""
                   : "\".decode('utf-8')");
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return "None";
-    case FieldCppType::INT8:
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return StrCat(field.default_value_int32());
-    case FieldCppType::UINT8:
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return StrCat(field.default_value_uint32());
   }
   // (We could add a default case above but then we wouldn't get the nice

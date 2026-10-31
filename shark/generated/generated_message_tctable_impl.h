@@ -61,7 +61,7 @@ namespace internal {
 //     +-----------------------+-----------------------+
 //     |15        ..          8|7         ..          0|
 //     +-----------------------+-----------------------+
-//     :  .  :  .  :  .  :  .  :  .  :  .  : 3|========| [3] FieldType
+//     :  .  :  .  :  .  :  .  :  .  :  .  : 3|========| [3] SharkFieldType
 //     :     :     :     :     :     : 5|=====|  :     : [2] FieldCardinality
 //     :  .  :  .  :  .  :  . 8|========|  :  .  :  .  : [3] FieldRep
 //     :     :     :   10|=====|     :     :     :     : [2] TransformValidation
@@ -95,7 +95,7 @@ static_assert(kFkMap < (1 << kFkBits), "too many types");
 
 // Cardinality (2 bits):
 // These values determine how many values a field can have and its presence.
-// Packed fields are represented in FieldType.
+// Packed fields are represented in SharkFieldType.
 enum Cardinality : uint16_t {
   kFcShift    = kFkShift + kFkBits,
   kFcBits     = 2,
@@ -108,7 +108,7 @@ enum Cardinality : uint16_t {
 };
 
 // Field representation (3 bits):
-// These values are the specific refinements of storage classes in FieldType.
+// These values are the specific refinements of storage classes in SharkFieldType.
 enum FieldRep : uint16_t {
   kRepShift    = kFcShift + kFcBits,
   kRepBits     = 3,
@@ -179,7 +179,7 @@ static_assert(kFmtShift + kFmtBits == 12, "number of bits changed");
 static_assert(kFmtShift + kFmtBits <= 16, "too many bits");
 
 // Convenience aliases (16 bits, with format):
-enum FieldType : uint16_t {
+enum SharkFieldType : uint16_t {
   // Numeric types:
   kBool            = kFkVarint | kRep8Bits,
 
@@ -489,15 +489,15 @@ class SHARK_EXPORT TcParser final {
   static inline const char* PackedFixed(SHARK_TC_PARAM_DECL);
 
   // Implementations for fast varint field parsing functions:
-  template <typename FieldType, typename TagType, bool zigzag = false>
+  template <typename SharkFieldType, typename TagType, bool zigzag = false>
   static inline const char* SingularVarint(SHARK_TC_PARAM_DECL);
-  template <typename FieldType, typename TagType, bool zigzag = false>
+  template <typename SharkFieldType, typename TagType, bool zigzag = false>
   static inline const char* RepeatedVarint(SHARK_TC_PARAM_DECL);
-  template <typename FieldType, typename TagType, bool zigzag = false>
+  template <typename SharkFieldType, typename TagType, bool zigzag = false>
   static inline const char* PackedVarint(SHARK_TC_PARAM_DECL);
 
   // Helper for ints > 127:
-  template <typename FieldType, typename TagType, bool zigzag = false>
+  template <typename SharkFieldType, typename TagType, bool zigzag = false>
   static const char* SingularVarBigint(SHARK_TC_PARAM_DECL);
 
   // Implementations for fast enum field parsing functions:

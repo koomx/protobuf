@@ -141,9 +141,9 @@ void PaddingOptimizer::OptimizeLayout(
     Family f = OTHER;
     if (field->is_repeated()) {
       f = REPEATED;
-    } else if (field->cpp_type() == FieldCppType::STRING) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
       f = STRING;
-    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       f = MESSAGE;
       if (IsLazy(field, options, scc_analyzer)) {
         f = LAZY_MESSAGE;

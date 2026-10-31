@@ -190,7 +190,7 @@ struct alignas(uint64_t) TcParseTableBase {
     uint32_t offset;     // offset in the message object
     int32_t has_idx;     // has-bit index
     uint16_t aux_idx;    // index for `field_aux`.
-    uint16_t type_card;  // `FieldType` and `Cardinality` (see _impl.h)
+    uint16_t type_card;  // `SharkFieldType` and `Cardinality` (see _impl.h)
   };
 
   // Returns a begin iterator (pointer) to the start of the field entries array.

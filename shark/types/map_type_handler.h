@@ -85,9 +85,9 @@ namespace shark::internal {
     template <SharkFieldType field_type, typename Type>
     class MapWireFieldTypeTraits { };
 
-#define TYPE_TRAITS(FieldType, CType, WireFormatType, IsMessage, IsEnum)                             \
+#define TYPE_TRAITS(TYPE, CType, WireFormatType, IsMessage, IsEnum)                             \
     template <typename Type>                                                                         \
-    class MapWireFieldTypeTraits<SharkFieldType::FieldType, Type> {                  \
+    class MapWireFieldTypeTraits<SharkFieldType::TYPE, Type> {                  \
     public:                                                                                          \
         static const bool kIsMessage = IsMessage;                                                    \
         static const bool kIsEnum = IsEnum;                                                          \
@@ -170,20 +170,20 @@ namespace shark::internal {
         static inline bool IsInitialized(Type* value);
     };
 
-#define MAP_HANDLER(FieldType)                                                                                              \
+#define MAP_HANDLER(TYPE)                                                                                              \
     template <typename Type>                                                                                                \
-    class MapTypeHandler<SharkFieldType::FieldType, Type> {                                                 \
+    class MapTypeHandler<SharkFieldType::TYPE, Type> {                                                 \
     public:                                                                                                                 \
-        typedef typename MapWireFieldTypeTraits<SharkFieldType::FieldType,                                  \
+        typedef typename MapWireFieldTypeTraits<SharkFieldType::TYPE,                                  \
             Type>::MapEntryAccessorType                                                                                     \
             MapEntryAccessorType;                                                                                           \
-        typedef typename MapWireFieldTypeTraits<SharkFieldType::FieldType,                                  \
+        typedef typename MapWireFieldTypeTraits<SharkFieldType::TYPE,                                  \
             Type>::TypeOnMemory TypeOnMemory;                                                                               \
-        static const WireFormatLite::WireType kWireType = MapWireFieldTypeTraits<SharkFieldType::FieldType, \
+        static const WireFormatLite::WireType kWireType = MapWireFieldTypeTraits<SharkFieldType::TYPE, \
             Type>::kWireType;                                                                                               \
-        static const bool kIsMessage = MapWireFieldTypeTraits<SharkFieldType::FieldType,                    \
+        static const bool kIsMessage = MapWireFieldTypeTraits<SharkFieldType::TYPE,                    \
             Type>::kIsMessage;                                                                                              \
-        static const bool kIsEnum = MapWireFieldTypeTraits<SharkFieldType::FieldType,                       \
+        static const bool kIsEnum = MapWireFieldTypeTraits<SharkFieldType::TYPE,                       \
             Type>::kIsEnum;                                                                                                 \
         static inline int ByteSize(const MapEntryAccessorType& value);                                                      \
         static inline int GetCachedSize(const MapEntryAccessorType& value);                                                 \
@@ -237,9 +237,9 @@ namespace shark::internal {
         return WireFormatLite::MessageSizeNoVirtual(value);
     }
 
-#define SHARK_BYTE_SIZE(FieldType, DeclaredType)                                          \
+#define SHARK_BYTE_SIZE(TYPE, DeclaredType)                                          \
     template <typename Type>                                                              \
-    inline int MapTypeHandler<SharkFieldType::FieldType, Type>::ByteSize( \
+    inline int MapTypeHandler<SharkFieldType::TYPE, Type>::ByteSize( \
         const MapEntryAccessorType& value) {                                              \
         return static_cast<int>(WireFormatLite::DeclaredType##Size(value));               \
     }
@@ -260,9 +260,9 @@ namespace shark::internal {
 
 #undef SHARK_BYTE_SIZE
 
-#define FIXED_BYTE_SIZE(FieldType, DeclaredType)                                          \
+#define FIXED_BYTE_SIZE(TYPE, DeclaredType)                                          \
     template <typename Type>                                                              \
-    inline int MapTypeHandler<SharkFieldType::FieldType, Type>::ByteSize( \
+    inline int MapTypeHandler<SharkFieldType::TYPE, Type>::ByteSize( \
         const MapEntryAccessorType& /* value */) {                                        \
         return WireFormatLite::k##DeclaredType##Size;                                     \
     }
@@ -284,10 +284,10 @@ namespace shark::internal {
             static_cast<size_t>(value.GetCachedSize())));
     }
 
-#define GET_CACHED_SIZE(FieldType, DeclaredType)                                    \
+#define GET_CACHED_SIZE(TYPE, DeclaredType)                                    \
     template <typename Type>                                                        \
     inline int                                                                      \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::GetCachedSize( \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::GetCachedSize( \
         const MapEntryAccessorType& value) {                                        \
         return static_cast<int>(WireFormatLite::DeclaredType##Size(value));         \
     }
@@ -308,10 +308,10 @@ namespace shark::internal {
 
 #undef GET_CACHED_SIZE
 
-#define GET_FIXED_CACHED_SIZE(FieldType, DeclaredType)                              \
+#define GET_FIXED_CACHED_SIZE(TYPE, DeclaredType)                              \
     template <typename Type>                                                        \
     inline int                                                                      \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::GetCachedSize( \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::GetCachedSize( \
         const MapEntryAccessorType& /* value */) {                                  \
         return WireFormatLite::k##DeclaredType##Size;                               \
     }
@@ -335,10 +335,10 @@ namespace shark::internal {
             field, value, value.GetCachedSize(), ptr, stream);
     }
 
-#define WRITE_METHOD(FieldType, DeclaredType)                               \
+#define WRITE_METHOD(TYPE, DeclaredType)                               \
     template <typename Type>                                                \
     inline uint8_t*                                                         \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::Write( \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::Write( \
         int field, const MapEntryAccessorType& value, uint8_t* ptr,         \
         io::EpsCopyOutputStream* stream) {                                  \
         ptr = stream->EnsureSpace(ptr);                                     \
@@ -349,10 +349,10 @@ namespace shark::internal {
     WRITE_METHOD(BYTES, Bytes)
 
 #undef WRITE_METHOD
-#define WRITE_METHOD(FieldType, DeclaredType)                                   \
+#define WRITE_METHOD(TYPE, DeclaredType)                                   \
     template <typename Type>                                                    \
     inline uint8_t*                                                             \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::Write(     \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::Write(     \
         int field, const MapEntryAccessorType& value, uint8_t* ptr,             \
         io::EpsCopyOutputStream* stream) {                                      \
         ptr = stream->EnsureSpace(ptr);                                         \
@@ -502,19 +502,19 @@ namespace shark::internal {
         return ReadUnaligned(ptr, value);
     }
 
-#define READ_METHOD(FieldType)                                                         \
+#define READ_METHOD(TYPE)                                                         \
     template <typename Type>                                                           \
-    inline bool MapTypeHandler<SharkFieldType::FieldType, Type>::Read( \
+    inline bool MapTypeHandler<SharkFieldType::TYPE, Type>::Read( \
         io::CodedInputStream* input, MapEntryAccessorType* value) {                    \
         return WireFormatLite::ReadPrimitive<TypeOnMemory,                             \
-            SharkFieldType::FieldType>(                                \
+            SharkFieldType::TYPE>(                                \
             input, value);                                                             \
     }                                                                                  \
     template <typename Type>                                                           \
-    const char* MapTypeHandler<SharkFieldType::FieldType, Type>::Read( \
+    const char* MapTypeHandler<SharkFieldType::TYPE, Type>::Read( \
         const char* begin, ParseContext* ctx, MapEntryAccessorType* value) {           \
         (void)ctx;                                                                     \
-        return Read##FieldType(begin, value);                                          \
+        return Read##TYPE(begin, value);                                          \
     }
 
     READ_METHOD(INT64)
@@ -603,59 +603,59 @@ namespace shark::internal {
 
     // Definition for string/bytes handler
 
-#define STRING_OR_BYTES_HANDLER_FUNCTIONS(FieldType)                                     \
+#define STRING_OR_BYTES_HANDLER_FUNCTIONS(TYPE)                                     \
     template <typename Type>                                                             \
-    inline const typename MapTypeHandler<SharkFieldType::FieldType,      \
+    inline const typename MapTypeHandler<SharkFieldType::TYPE,      \
         Type>::MapEntryAccessorType&                                                     \
-    MapTypeHandler<SharkFieldType::FieldType,                            \
+    MapTypeHandler<SharkFieldType::TYPE,                            \
         Type>::GetExternalReference(const TypeOnMemory& value) {                         \
         return value.Get();                                                              \
     }                                                                                    \
     template <typename Type>                                                             \
     inline size_t                                                                        \
-    MapTypeHandler<SharkFieldType::FieldType,                            \
+    MapTypeHandler<SharkFieldType::TYPE,                            \
         Type>::SpaceUsedInMapEntryLong(const TypeOnMemory& value) {                      \
         return sizeof(value);                                                            \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Clear(  \
+    inline void MapTypeHandler<SharkFieldType::TYPE, Type>::Clear(  \
         TypeOnMemory* value, Arena* /* arena */) {                                       \
         value->ClearToEmpty();                                                           \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Merge(  \
+    inline void MapTypeHandler<SharkFieldType::TYPE, Type>::Merge(  \
         const MapEntryAccessorType& from, TypeOnMemory* to, Arena* arena) {              \
         to->Set(from, arena);                                                            \
     }                                                                                    \
     template <typename Type>                                                             \
-    void MapTypeHandler<SharkFieldType::FieldType, Type>::DeleteNoArena( \
+    void MapTypeHandler<SharkFieldType::TYPE, Type>::DeleteNoArena( \
         TypeOnMemory& value) {                                                           \
         value.Destroy();                                                                 \
     }                                                                                    \
     template <typename Type>                                                             \
     constexpr auto                                                                       \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::Constinit()         \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::Constinit()         \
         -> TypeOnMemory {                                                                \
         return TypeOnMemory(&internal::fixed_address_empty_string,                       \
             ConstantInitialized { });                                                    \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline typename MapTypeHandler<SharkFieldType::FieldType,            \
+    inline typename MapTypeHandler<SharkFieldType::TYPE,            \
         Type>::MapEntryAccessorType*                                                     \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::EnsureMutable(      \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::EnsureMutable(      \
         TypeOnMemory* value, Arena* arena) {                                             \
         return value->Mutable(arena);                                                    \
     }                                                                                    \
     template <typename Type>                                                             \
-    inline const typename MapTypeHandler<SharkFieldType::FieldType,      \
+    inline const typename MapTypeHandler<SharkFieldType::TYPE,      \
         Type>::MapEntryAccessorType&                                                     \
-    MapTypeHandler<SharkFieldType::FieldType,                            \
+    MapTypeHandler<SharkFieldType::TYPE,                            \
         Type>::DefaultIfNotInitialized(const TypeOnMemory& value) {                      \
         return value.Get();                                                              \
     }                                                                                    \
     template <typename Type>                                                             \
     inline bool                                                                          \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::IsInitialized(      \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::IsInitialized(      \
         const TypeOnMemory& /* value */) {                                               \
         return true;                                                                     \
     }
@@ -663,56 +663,56 @@ namespace shark::internal {
     STRING_OR_BYTES_HANDLER_FUNCTIONS(BYTES)
 #undef STRING_OR_BYTES_HANDLER_FUNCTIONS
 
-#define PRIMITIVE_HANDLER_FUNCTIONS(FieldType)                                          \
+#define PRIMITIVE_HANDLER_FUNCTIONS(TYPE)                                          \
     template <typename Type>                                                            \
-    inline const typename MapTypeHandler<SharkFieldType::FieldType,     \
+    inline const typename MapTypeHandler<SharkFieldType::TYPE,     \
         Type>::MapEntryAccessorType&                                                    \
-    MapTypeHandler<SharkFieldType::FieldType,                           \
+    MapTypeHandler<SharkFieldType::TYPE,                           \
         Type>::GetExternalReference(const TypeOnMemory& value) {                        \
         return value;                                                                   \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline size_t MapTypeHandler<SharkFieldType::FieldType, Type>::     \
+    inline size_t MapTypeHandler<SharkFieldType::TYPE, Type>::     \
         SpaceUsedInMapEntryLong(const TypeOnMemory& /* value */) {                      \
         return 0;                                                                       \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Clear( \
+    inline void MapTypeHandler<SharkFieldType::TYPE, Type>::Clear( \
         TypeOnMemory* value, Arena* /* arena */) {                                      \
         *value = 0;                                                                     \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline void MapTypeHandler<SharkFieldType::FieldType, Type>::Merge( \
+    inline void MapTypeHandler<SharkFieldType::TYPE, Type>::Merge( \
         const MapEntryAccessorType& from, TypeOnMemory* to,                             \
         Arena* /* arena */) {                                                           \
         *to = from;                                                                     \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline void MapTypeHandler<SharkFieldType::FieldType,               \
+    inline void MapTypeHandler<SharkFieldType::TYPE,               \
         Type>::DeleteNoArena(TypeOnMemory& /* x */) { }                                 \
     template <typename Type>                                                            \
     constexpr auto                                                                      \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::Constinit()        \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::Constinit()        \
         -> TypeOnMemory {                                                               \
         return 0;                                                                       \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline typename MapTypeHandler<SharkFieldType::FieldType,           \
+    inline typename MapTypeHandler<SharkFieldType::TYPE,           \
         Type>::MapEntryAccessorType*                                                    \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::EnsureMutable(     \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::EnsureMutable(     \
         TypeOnMemory* value, Arena* /* arena */) {                                      \
         return value;                                                                   \
     }                                                                                   \
     template <typename Type>                                                            \
-    inline const typename MapTypeHandler<SharkFieldType::FieldType,     \
+    inline const typename MapTypeHandler<SharkFieldType::TYPE,     \
         Type>::MapEntryAccessorType&                                                    \
-    MapTypeHandler<SharkFieldType::FieldType,                           \
+    MapTypeHandler<SharkFieldType::TYPE,                           \
         Type>::DefaultIfNotInitialized(const TypeOnMemory& value) {                     \
         return value;                                                                   \
     }                                                                                   \
     template <typename Type>                                                            \
     inline bool                                                                         \
-    MapTypeHandler<SharkFieldType::FieldType, Type>::IsInitialized(     \
+    MapTypeHandler<SharkFieldType::TYPE, Type>::IsInitialized(     \
         const TypeOnMemory& /* value */) {                                              \
         return true;                                                                    \
     }

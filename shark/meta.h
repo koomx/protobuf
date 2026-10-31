@@ -15,7 +15,23 @@
 
 #pragma once
 
+#include <cstdint>
+
 namespace shark {
+
+
+    // Describes a single field of a message.  To get the descriptor for a given
+    // field, first get the Descriptor for the message in which it is defined,
+    // then call Descriptor::FindFieldByName().  To get a FieldDescriptor for
+    // an extension, do one of the following:
+    // - Get the Descriptor or FileDescriptor for its containing scope, then
+    //   call Descriptor::FindExtensionByName() or
+    //   FileDescriptor::FindExtensionByName().
+    // - Given a DescriptorPool, call DescriptorPool::FindExtensionByNumber() or
+    //   DescriptorPool::FindExtensionByPrintableName().
+    // Use DescriptorPool to construct your own descriptors.
+    // Field type. 0 is reserved for errors. Numbers are the descriptor values.
+
 
     // Wire-format field type. Numbers match SharkType. Kept separate so the lite
     // runtime does not depend on the descriptor.
@@ -45,7 +61,7 @@ namespace shark {
         SINT64 = 23,
     };
 
-    // Lite alternative to FieldCppType.  Must be kept in sync.
+    // Lite alternative to SharkFieldCppType.  Must be kept in sync.
     enum SharkFieldCppType {
         CPPTYPE_BOOL = 1,
         CPPTYPE_INT8 = 2,

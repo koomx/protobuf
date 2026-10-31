@@ -92,7 +92,7 @@ namespace shark::internal {
         // field).  Each tag is encoded as a varint.  The lower bits of the tag
         // identify its wire type, which specifies the format of the data to follow.
         // The rest of the bits contain the field number.  Each type of field (as
-        // declared by FieldType, in descriptor.h) maps to one of
+        // declared by SharkFieldType, in descriptor.h) maps to one of
         // these wire types.  Immediately following each tag is the field's value,
         // encoded in the format specified by the wire type.  Because the tag
         // identifies the encoding of this data, it is possible to skip
@@ -110,7 +110,7 @@ namespace shark::internal {
         // Helper method to get the CppType for a particular Type.
         static SharkFieldCppType FieldTypeToCppType(SharkFieldType type);
 
-        // Given a FieldType return its WireType
+        // Given a SharkFieldType return its WireType
         static inline WireFormatLite::WireType WireTypeForFieldType(
             SharkFieldType type) {
             return kWireTypeForFieldType[static_cast<int>(type)];
@@ -208,7 +208,7 @@ namespace shark::internal {
         // read the tag to determine what field to read.
 
         // For primitive fields, we just use a templatized routine parameterized by
-        // the represented type and the FieldType. These are specialized with the
+        // the represented type and the SharkFieldType. These are specialized with the
         // appropriate definition for each declared type.
         template <typename CType, SharkFieldType DeclaredType>
         SHARK_NDEBUG_INLINE static bool ReadPrimitive(io::CodedInputStream* input,

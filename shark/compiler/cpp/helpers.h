@@ -213,13 +213,13 @@ std::string FieldMessageTypeName(const FieldDescriptor* field,
                                  const Options& options);
 
 // Get the C++ type name for a primitive type (e.g. "double", "::shark::int32", etc.).
-const char* PrimitiveTypeName(FieldCppType type);
+const char* PrimitiveTypeName(SharkFieldCppType type);
 std::string PrimitiveTypeName(const Options& options,
-                              FieldCppType type);
+                              SharkFieldCppType type);
 
 // Get the declared type name in CamelCase format, as is used e.g. for the
 // methods of WireFormat.  For example, INT32 becomes "Int32".
-const char* DeclaredTypeMethodName(FieldType type);
+const char* DeclaredTypeMethodName(SharkFieldType type);
 
 // Return the code that evaluates to the number when compiled.
 std::string Int32ToString(int number);
@@ -328,18 +328,18 @@ FieldOptions::CType EffectiveStringCType(const FieldDescriptor* field,
                                          const Options& options);
 
 inline bool IsCord(const FieldDescriptor* field, const Options& options) {
-  return field->cpp_type() == FieldCppType::STRING &&
+  return field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING &&
          EffectiveStringCType(field, options) == FieldOptions_CType::CORD;
 }
 
 inline bool IsString(const FieldDescriptor* field, const Options& options) {
-  return field->cpp_type() == FieldCppType::STRING &&
+  return field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING &&
          EffectiveStringCType(field, options) == FieldOptions_CType::STRING;
 }
 
 inline bool IsStringPiece(const FieldDescriptor* field,
                           const Options& options) {
-  return field->cpp_type() == FieldCppType::STRING &&
+  return field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING &&
          EffectiveStringCType(field, options) == FieldOptions_CType::STRING_PIECE;
 }
 
@@ -464,7 +464,7 @@ inline bool IsEnumClass(const EnumDescriptor*) {
 const char* EnumUnderlyingCppType(const EnumDescriptor* enum_descriptor);
 
 inline bool IsCrossFileMessage(const FieldDescriptor* field) {
-  return field->type() == FieldType::MESSAGE &&
+  return field->type() == SharkFieldType::MESSAGE &&
          field->message_type()->file() != field->file();
 }
 

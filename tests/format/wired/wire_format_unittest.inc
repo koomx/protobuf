@@ -60,7 +60,7 @@ namespace {
 
 TEST(WireFormatTest, EnumsInSync) {
   // Verify that SharkFieldType and SharkFieldCppType match
-  // FieldType and FieldCppType.
+  // SharkFieldType and SharkFieldCppType.
 
   EXPECT_EQ(implicit_cast<int>(kMaxFieldType),
             implicit_cast<int>(WireFormatLite::MAX_FIELD_TYPE));
@@ -69,7 +69,7 @@ TEST(WireFormatTest, EnumsInSync) {
 
   for (int i = 1; i <= WireFormatLite::MAX_FIELD_TYPE; i++) {
     EXPECT_EQ(static_cast<int>(FieldDescriptor::TypeToCppType(
-                  static_cast<::shark::FieldType>(i))),
+                  static_cast<::shark::SharkFieldType>(i))),
               implicit_cast<int>(WireFormatLite::FieldTypeToCppType(
                   static_cast<SharkFieldType>(i))));
   }

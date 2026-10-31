@@ -480,7 +480,7 @@ namespace shark {
     template <>                                                  \
     struct PrimitiveTraits<type> {                               \
         static const bool is_primitive = true;                   \
-        static const FieldCppType cpp_type = FieldCppType::TYPE; \
+        static const SharkFieldCppType cpp_type = SharkFieldCppType::CPPTYPE_##TYPE; \
     };
         DEFINE_PRIMITIVE(INT32, int32_t)
         DEFINE_PRIMITIVE(UINT32, uint32_t)
@@ -499,7 +499,7 @@ namespace shark {
             typedef T AccessorValueType;
             typedef T IteratorValueType;
             typedef T* IteratorPointerType;
-            static constexpr FieldCppType cpp_type = PrimitiveTraits<T>::cpp_type;
+            static constexpr SharkFieldCppType cpp_type = PrimitiveTraits<T>::cpp_type;
             static const Descriptor* GetMessageFieldDescriptor() { return nullptr; }
         };
 
@@ -512,7 +512,7 @@ namespace shark {
             typedef int32_t AccessorValueType;
             typedef T IteratorValueType;
             typedef int32_t* IteratorPointerType;
-            static constexpr FieldCppType cpp_type = FieldCppType::ENUM;
+            static constexpr SharkFieldCppType cpp_type = SharkFieldCppType::CPPTYPE_ENUM;
             static const Descriptor* GetMessageFieldDescriptor() { return nullptr; }
         };
 
@@ -524,7 +524,7 @@ namespace shark {
             typedef std::string AccessorValueType;
             typedef const std::string IteratorValueType;
             typedef const std::string* IteratorPointerType;
-            static constexpr FieldCppType cpp_type = FieldCppType::STRING;
+            static constexpr SharkFieldCppType cpp_type = SharkFieldCppType::CPPTYPE_STRING;
             static const Descriptor* GetMessageFieldDescriptor() { return nullptr; }
         };
 
@@ -547,7 +547,7 @@ namespace shark {
             typedef Message AccessorValueType;
             typedef const T& IteratorValueType;
             typedef const T* IteratorPointerType;
-            static constexpr FieldCppType cpp_type = FieldCppType::MESSAGE;
+            static constexpr SharkFieldCppType cpp_type = SharkFieldCppType::CPPTYPE_MESSAGE;
             static const Descriptor* GetMessageFieldDescriptor() {
                 return MessageDescriptorGetter<T>::get();
             }

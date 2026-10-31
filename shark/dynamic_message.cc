@@ -131,38 +131,38 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
   typedef FieldDescriptor FD;  // avoid line wrapping
   if (field->label() == FieldLabel::REPEATED) {
     switch (field->cpp_type()) {
-      case FieldCppType::INT32:
+      case SharkFieldCppType::CPPTYPE_INT32:
         return sizeof(RepeatedField<int32_t>);
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         return sizeof(RepeatedField<int8_t>);
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         return sizeof(RepeatedField<int16_t>);
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         return sizeof(RepeatedField<uint8_t>);
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         return sizeof(RepeatedField<uint16_t>);
-      case FieldCppType::INT64:
+      case SharkFieldCppType::CPPTYPE_INT64:
         return sizeof(RepeatedField<int64_t>);
-      case FieldCppType::UINT32:
+      case SharkFieldCppType::CPPTYPE_UINT32:
         return sizeof(RepeatedField<uint32_t>);
-      case FieldCppType::UINT64:
+      case SharkFieldCppType::CPPTYPE_UINT64:
         return sizeof(RepeatedField<uint64_t>);
-      case FieldCppType::DOUBLE:
+      case SharkFieldCppType::CPPTYPE_DOUBLE:
         return sizeof(RepeatedField<double>);
-      case FieldCppType::FLOAT:
+      case SharkFieldCppType::CPPTYPE_FLOAT:
         return sizeof(RepeatedField<float>);
-      case FieldCppType::BOOL:
+      case SharkFieldCppType::CPPTYPE_BOOL:
         return sizeof(RepeatedField<bool>);
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return sizeof(RepeatedField<int>);
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         if (IsMapFieldInApi(field)) {
           return sizeof(DynamicMapField);
         } else {
           return sizeof(RepeatedPtrField<Message>);
         }
 
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions_CType::STRING:
@@ -172,35 +172,35 @@ int FieldSpaceUsed(const FieldDescriptor* field) {
     }
   } else {
     switch (field->cpp_type()) {
-      case FieldCppType::INT32:
+      case SharkFieldCppType::CPPTYPE_INT32:
         return sizeof(int32_t);
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         return sizeof(int8_t);
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         return sizeof(int16_t);
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         return sizeof(uint8_t);
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         return sizeof(uint16_t);
-      case FieldCppType::INT64:
+      case SharkFieldCppType::CPPTYPE_INT64:
         return sizeof(int64_t);
-      case FieldCppType::UINT32:
+      case SharkFieldCppType::CPPTYPE_UINT32:
         return sizeof(uint32_t);
-      case FieldCppType::UINT64:
+      case SharkFieldCppType::CPPTYPE_UINT64:
         return sizeof(uint64_t);
-      case FieldCppType::DOUBLE:
+      case SharkFieldCppType::CPPTYPE_DOUBLE:
         return sizeof(double);
-      case FieldCppType::FLOAT:
+      case SharkFieldCppType::CPPTYPE_FLOAT:
         return sizeof(float);
-      case FieldCppType::BOOL:
+      case SharkFieldCppType::CPPTYPE_BOOL:
         return sizeof(bool);
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return sizeof(int);
 
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         return sizeof(Message*);
 
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions_CType::STRING:
@@ -401,7 +401,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
     }
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)                                  \
-  case FieldCppType::CPPTYPE:                          \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                          \
     if (!field->is_repeated()) {                                    \
       new (field_ptr) TYPE(field->default_value_##TYPE());          \
     } else {                                                        \
@@ -410,28 +410,28 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
     break;
 
       HANDLE_TYPE(INT32, int32_t);
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         if (!field->is_repeated()) {
           new (field_ptr) int8_t(static_cast<int8_t>(field->default_value_int32()));
         } else {
           new (field_ptr) RepeatedField<int8_t>(GetArenaForAllocation());
         }
         break;
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         if (!field->is_repeated()) {
           new (field_ptr) int16_t(static_cast<int16_t>(field->default_value_int32()));
         } else {
           new (field_ptr) RepeatedField<int16_t>(GetArenaForAllocation());
         }
         break;
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         if (!field->is_repeated()) {
           new (field_ptr) uint8_t(static_cast<uint8_t>(field->default_value_uint32()));
         } else {
           new (field_ptr) RepeatedField<uint8_t>(GetArenaForAllocation());
         }
         break;
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         if (!field->is_repeated()) {
           new (field_ptr) uint16_t(static_cast<uint16_t>(field->default_value_uint32()));
         } else {
@@ -446,7 +446,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
       HANDLE_TYPE(BOOL, bool);
 #undef HANDLE_TYPE
 
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         if (!field->is_repeated()) {
           new (field_ptr) int{field->default_value_enum()->number()};
         } else {
@@ -454,7 +454,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
         }
         break;
 
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions_CType::STRING:
@@ -469,7 +469,7 @@ void DynamicMessage::SharedCtor(bool lock_factory) {
         }
         break;
 
-      case FieldCppType::MESSAGE: {
+      case SharkFieldCppType::CPPTYPE_MESSAGE: {
         if (!field->is_repeated()) {
           new (field_ptr) Message*(nullptr);
         } else {
@@ -557,7 +557,7 @@ DynamicMessage::~DynamicMessage() {
       void* field_ptr = MutableOneofCaseRaw(field->containing_oneof()->index());
       if (*(reinterpret_cast<const int32_t*>(field_ptr)) == field->number()) {
         field_ptr = MutableOneofFieldRaw(field);
-        if (field->cpp_type() == FieldCppType::STRING) {
+        if (field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
           switch (field->options().ctype()) {
             default:
             case FieldOptions_CType::STRING: {
@@ -565,7 +565,7 @@ DynamicMessage::~DynamicMessage() {
               break;
             }
           }
-        } else if (field->cpp_type() == FieldCppType::MESSAGE) {
+        } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
             delete *reinterpret_cast<Message**>(field_ptr);
         }
       }
@@ -576,7 +576,7 @@ DynamicMessage::~DynamicMessage() {
     if (field->is_repeated()) {
       switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                  \
-  case FieldCppType::UPPERCASE:               \
+  case SharkFieldCppType::CPPTYPE_##UPPERCASE:               \
     reinterpret_cast<RepeatedField<LOWERCASE>*>(field_ptr) \
         ->~RepeatedField<LOWERCASE>();                     \
     break
@@ -595,7 +595,7 @@ DynamicMessage::~DynamicMessage() {
         HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-        case FieldCppType::STRING:
+        case SharkFieldCppType::CPPTYPE_STRING:
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions_CType::STRING:
@@ -605,7 +605,7 @@ DynamicMessage::~DynamicMessage() {
           }
           break;
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
           if (IsMapFieldInApi(field)) {
             reinterpret_cast<DynamicMapField*>(field_ptr)->~DynamicMapField();
           } else {
@@ -615,7 +615,7 @@ DynamicMessage::~DynamicMessage() {
           break;
       }
 
-    } else if (field->cpp_type() == FieldCppType::STRING) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
       switch (field->options().ctype()) {
         default:  // TODO(kenton):  Support other string reps.
         case FieldOptions_CType::STRING: {
@@ -623,7 +623,7 @@ DynamicMessage::~DynamicMessage() {
           break;
         }
       }
-    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
           if (!is_prototype()) {
         Message* message = *reinterpret_cast<Message**>(field_ptr);
         if (message != nullptr) {
@@ -644,7 +644,7 @@ void DynamicMessage::CrossLinkPrototypes() {
   // Cross-link default messages.
   for (int i = 0; i < descriptor->field_count(); i++) {
     const FieldDescriptor* field = descriptor->field(i);
-    if (field->cpp_type() == FieldCppType::MESSAGE &&
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE &&
         !field->options().weak() && !InRealOneof(field) &&
         !field->is_repeated()) {
       void* field_ptr = MutableRaw(i);

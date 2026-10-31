@@ -271,8 +271,8 @@ TEST(NarrowIntReflectTest, DynamicMapSortsNarrowKeys) {
     const FieldDescriptor* key =
         field->message_type()->FindFieldByName("key");
     for (const Message* entry : sorted) {
-      if (key->cpp_type() == FieldCppType::UINT8 ||
-          key->cpp_type() == FieldCppType::UINT16) {
+      if (key->cpp_type() == SharkFieldCppType::CPPTYPE_UINT8 ||
+          key->cpp_type() == SharkFieldCppType::CPPTYPE_UINT16) {
         keys.push_back(
             static_cast<int32_t>(entry->GetReflection()->GetUInt32(*entry, key)));
       } else {
@@ -291,16 +291,16 @@ TEST(NarrowIntReflectTest, DynamicMapSortsNarrowKeys) {
 TEST(NarrowIntReflectTest, MapKeyKeepsNarrowType) {
   MapKey key;
   key.SetInt8Value(-5);
-  EXPECT_EQ(FieldCppType::INT8, key.type());
+  EXPECT_EQ(SharkFieldCppType::CPPTYPE_INT8, key.type());
   EXPECT_EQ(-5, key.GetInt32Value());
 
   MapKey copy;
   copy.CopyFrom(key);
-  EXPECT_EQ(FieldCppType::INT8, copy.type());
+  EXPECT_EQ(SharkFieldCppType::CPPTYPE_INT8, copy.type());
   EXPECT_TRUE(key == copy);
 
   key.SetUInt16Value(40000);
-  EXPECT_EQ(FieldCppType::UINT16, key.type());
+  EXPECT_EQ(SharkFieldCppType::CPPTYPE_UINT16, key.type());
   EXPECT_EQ(40000u, key.GetUInt32Value());
 }
 

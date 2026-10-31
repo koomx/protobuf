@@ -344,7 +344,7 @@ const internal::RepeatedFieldAccessor* Reflection::RepeatedFieldAccessor(
   GOOGLE_CHECK(field->is_repeated());
   switch (field->cpp_type()) {
 #define HANDLE_PRIMITIVE_TYPE(TYPE, type) \
-  case FieldCppType::TYPE:   \
+  case SharkFieldCppType::CPPTYPE_##TYPE:   \
     return GetSingleton<internal::RepeatedFieldPrimitiveAccessor<type> >();
     HANDLE_PRIMITIVE_TYPE(INT32, int32_t)
     HANDLE_PRIMITIVE_TYPE(INT8, int8_t)
@@ -359,14 +359,14 @@ const internal::RepeatedFieldAccessor* Reflection::RepeatedFieldAccessor(
     HANDLE_PRIMITIVE_TYPE(BOOL, bool)
     HANDLE_PRIMITIVE_TYPE(ENUM, int32_t)
 #undef HANDLE_PRIMITIVE_TYPE
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       switch (field->options().ctype()) {
         default:
         case FieldOptions_CType::STRING:
           return GetSingleton<internal::RepeatedPtrFieldStringAccessor>();
       }
       break;
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       if (field->is_map()) {
         return GetSingleton<internal::MapFieldAccessor>();
       } else {

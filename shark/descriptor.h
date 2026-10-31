@@ -61,6 +61,7 @@
 #include <vector>
 
 #include <shark/port.h>
+#include <shark/meta.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>
@@ -70,10 +71,10 @@
 // Must be included last.
 #include <shark/port_def.inc>
 
-// FieldType::BOOL is defined in the MacOS's ConditionalMacros.h.
+// SharkFieldType::BOOL is defined in the MacOS's ConditionalMacros.h.
 #ifdef TYPE_BOOL
 #undef TYPE_BOOL
-#endif // FieldType::BOOL
+#endif // SharkFieldType::BOOL
 
 #ifdef SWIG
 #define SHARK_EXPORT
@@ -611,64 +612,6 @@ namespace shark {
 
     SHARK_INTERNAL_CHECK_CLASS_SIZE(Descriptor, 136);
 
-    // Describes a single field of a message.  To get the descriptor for a given
-    // field, first get the Descriptor for the message in which it is defined,
-    // then call Descriptor::FindFieldByName().  To get a FieldDescriptor for
-    // an extension, do one of the following:
-    // - Get the Descriptor or FileDescriptor for its containing scope, then
-    //   call Descriptor::FindExtensionByName() or
-    //   FileDescriptor::FindExtensionByName().
-    // - Given a DescriptorPool, call DescriptorPool::FindExtensionByNumber() or
-    //   DescriptorPool::FindExtensionByPrintableName().
-    // Use DescriptorPool to construct your own descriptors.
-    // Field type. 0 is reserved for errors. Numbers are the descriptor values.
-    enum class FieldType : int {
-        BOOL = 1, // bool, varint on the wire.
-        INT8 = 2, // int8, stored as int8_t, 32-bit varint on the wire.
-        UINT8 = 3, // uint8, stored as uint8_t, 32-bit varint on the wire.
-        INT16 = 4, // int16, stored as int16_t, 32-bit varint on the wire.
-        UINT16 = 5, // uint16, stored as uint16_t, 32-bit varint on the wire.
-        INT32 = 6, // int32, varint on the wire. Negative numbers take 10 bytes.
-        UINT32 = 7, // uint32, varint on the wire.
-        INT64 = 8, // int64, varint on the wire. Negative numbers take 10 bytes.
-        UINT64 = 9, // uint64, varint on the wire.
-        FLOAT = 10, // float, exactly four bytes on the wire.
-        FLOAT16 = 11, // Not supported. The parser rejects this name.
-        FLOAT8 = 12, // Not supported. The parser rejects this name.
-        DOUBLE = 13, // double, exactly eight bytes on the wire.
-        ENUM = 14, // Enum, varint on the wire.
-        MESSAGE = 15, // Length-delimited message.
-        STRING = 16, // UTF-8 text.
-        BYTES = 17, // Arbitrary byte array.
-        FIXED32 = 18, // uint32, exactly four bytes on the wire.
-        FIXED64 = 19, // uint64, exactly eight bytes on the wire.
-        SFIXED32 = 20, // int32, exactly four bytes on the wire.
-        SFIXED64 = 21, // int64, exactly eight bytes on the wire.
-        SINT32 = 22, // int32, ZigZag-encoded varint on the wire.
-        SINT64 = 23, // int64, ZigZag-encoded varint on the wire.
-    };
-
-    // C++ type used to represent a field. Each FieldType maps to one FieldCppType.
-    // 0 is reserved for errors.
-    enum class FieldCppType : int {
-        BOOL = 1,
-        INT8 = 2,
-        UINT8 = 3,
-        INT16 = 4,
-        UINT16 = 5,
-        INT32 = 6, // INT32, SINT32, SFIXED32
-        UINT32 = 7, // UINT32, FIXED32
-        INT64 = 8, // INT64, SINT64, SFIXED64
-        UINT64 = 9, // UINT64, FIXED64
-        FLOAT = 10,
-        FLOAT16 = 11,
-        FLOAT8 = 12,
-        DOUBLE = 13,
-        ENUM = 14,
-        MESSAGE = 15,
-        STRING = 16, // STRING, BYTES
-    };
-
     // Whether a field is optional, required, or repeated. 0 is reserved for errors.
     enum class FieldLabel : int {
         OPTIONAL = 1,
@@ -720,9 +663,9 @@ namespace shark {
         // when parsing formats which prefer to use camel-case naming style.
         const std::string& camelcase_name() const;
 
-        FieldType type() const; // Declared type of this field.
+        SharkFieldType type() const; // Declared type of this field.
         const char* type_name() const; // Name of the declared type.
-        FieldCppType cpp_type() const; // C++ type of this field.
+        SharkFieldCppType cpp_type() const; // C++ type of this field.
         const char* cpp_type_name() const; // Name of the C++ type.
         FieldLabel label() const; // optional/required/repeated
 
@@ -733,7 +676,7 @@ namespace shark {
                                   //               IsTypePackable(type())
         bool is_packed() const; // shorthand for is_packable() &&
                                 //               options().packed()
-        bool is_map() const; // shorthand for type() == FieldType::MESSAGE &&
+        bool is_map() const; // shorthand for type() == SharkFieldType::MESSAGE &&
                              // message_type()->options().map_entry()
 
         // Returns true if this field was syntactically written with "optional" in the
@@ -760,37 +703,37 @@ namespace shark {
         // file.
         bool has_json_name() const;
 
-        // Get the field default value if cpp_type() == FieldCppType::INT32.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::INT32.  If no
         // explicit default was defined, the default is 0.
         int32_t default_value_int32_t() const;
         int32_t default_value_int32() const { return default_value_int32_t(); }
-        // Get the field default value if cpp_type() == FieldCppType::INT64.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::INT64.  If no
         // explicit default was defined, the default is 0.
         int64_t default_value_int64_t() const;
         int64_t default_value_int64() const { return default_value_int64_t(); }
-        // Get the field default value if cpp_type() == FieldCppType::UINT32.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::UINT32.  If no
         // explicit default was defined, the default is 0.
         uint32_t default_value_uint32_t() const;
         uint32_t default_value_uint32() const { return default_value_uint32_t(); }
-        // Get the field default value if cpp_type() == FieldCppType::UINT64.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::UINT64.  If no
         // explicit default was defined, the default is 0.
         uint64_t default_value_uint64_t() const;
         uint64_t default_value_uint64() const { return default_value_uint64_t(); }
-        // Get the field default value if cpp_type() == FieldCppType::FLOAT.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::FLOAT.  If no
         // explicit default was defined, the default is 0.0.
         float default_value_float() const;
-        // Get the field default value if cpp_type() == FieldCppType::DOUBLE.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::DOUBLE.  If no
         // explicit default was defined, the default is 0.0.
         double default_value_double() const;
-        // Get the field default value if cpp_type() == FieldCppType::BOOL.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::BOOL.  If no
         // explicit default was defined, the default is false.
         bool default_value_bool() const;
-        // Get the field default value if cpp_type() == FieldCppType::ENUM.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::ENUM.  If no
         // explicit default was defined, the default is the first value defined
         // in the enum type (all enum types are required to have at least one value).
         // This never returns nullptr.
         const EnumValueDescriptor* default_value_enum() const;
-        // Get the field default value if cpp_type() == FieldCppType::STRING.  If no
+        // Get the field default value if cpp_type() == SharkFieldCppType::STRING.  If no
         // explicit default was defined, the default is the empty string.
         const std::string& default_value_string() const;
 
@@ -816,10 +759,10 @@ namespace shark {
         // assert-fail).
         const Descriptor* extension_scope() const;
 
-        // If type is FieldType::MESSAGE or FieldType::GROUP, returns a descriptor for the
+        // If type is SharkFieldType::MESSAGE or SharkFieldType::GROUP, returns a descriptor for the
         // message or the group type.  Otherwise, returns null.
         const Descriptor* message_type() const;
-        // If type is FieldType::ENUM, returns a descriptor for the enum.  Otherwise,
+        // If type is SharkFieldType::ENUM, returns a descriptor for the enum.  Otherwise,
         // returns null.
         const EnumDescriptor* enum_type() const;
 
@@ -839,14 +782,14 @@ namespace shark {
         // See Descriptor::DebugStringWithOptions().
         std::string DebugStringWithOptions(const DebugStringOptions& options) const;
 
-        static FieldCppType TypeToCppType(FieldType type);
+        static SharkFieldCppType TypeToCppType(SharkFieldType type);
 
-        static const char* TypeName(FieldType type);
+        static const char* TypeName(SharkFieldType type);
 
-        static const char* CppTypeName(FieldCppType cpp_type);
+        static const char* CppTypeName(SharkFieldCppType cpp_type);
 
         // Return true iff [packed = true] is valid for fields of this type.
-        static inline bool IsTypePackable(FieldType field_type);
+        static inline bool IsTypePackable(SharkFieldType field_type);
 
         // Returns full_name() except if the field is a MessageSet extension,
         // in which case it returns the full_name() of the containing message type
@@ -888,7 +831,7 @@ namespace shark {
 
         // formats the default value appropriately and returns it as a string.
         // Must have a default value to call this. If quote_string_type is true, then
-        // types of FieldCppType::STRING will be surrounded by quotes and CEscaped.
+        // types of SharkFieldCppType::STRING will be surrounded by quotes and CEscaped.
         std::string DefaultValueAsString(bool quote_string_type) const;
 
         // Helper function that returns the field type name for DebugString.
@@ -964,7 +907,7 @@ namespace shark {
             mutable std::atomic<const Message*> default_generated_instance_;
         };
 
-        static const FieldCppType kTypeToCppTypeMap[kMaxFieldType + 1];
+        static const SharkFieldCppType kTypeToCppTypeMap[kMaxFieldType + 1];
 
         static const char* const kTypeToName[kMaxFieldType + 1];
 
@@ -2285,11 +2228,11 @@ namespace shark {
         return static_cast<FieldLabel>(label_);
     }
 
-    inline FieldType FieldDescriptor::type() const {
+    inline SharkFieldType FieldDescriptor::type() const {
         if (type_once_) {
             internal::call_once(*type_once_, &FieldDescriptor::TypeOnceInit, this);
         }
-        return static_cast<FieldType>(type_);
+        return static_cast<SharkFieldType>(type_);
     }
 
     inline bool FieldDescriptor::is_required() const {
@@ -2309,7 +2252,7 @@ namespace shark {
     }
 
     inline bool FieldDescriptor::is_map() const {
-        return type() == FieldType::MESSAGE && is_map_message_type();
+        return type() == SharkFieldType::MESSAGE && is_map_message_type();
     }
 
     inline bool FieldDescriptor::has_optional_keyword() const {
@@ -2324,7 +2267,7 @@ namespace shark {
     inline bool FieldDescriptor::has_presence() const {
         if (is_repeated())
             return false;
-        return cpp_type() == FieldCppType::MESSAGE || containing_oneof() || file()->syntax() == FileDescriptor::SYNTAX_PROTO2;
+        return cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE || containing_oneof() || file()->syntax() == FileDescriptor::SYNTAX_PROTO2;
     }
 
     // To save space, index() is computed by looking at the descriptor's position
@@ -2391,7 +2334,7 @@ namespace shark {
         return kTypeToName[static_cast<int>(type())];
     }
 
-    inline FieldCppType FieldDescriptor::cpp_type() const {
+    inline SharkFieldCppType FieldDescriptor::cpp_type() const {
         return kTypeToCppTypeMap[static_cast<int>(type())];
     }
 
@@ -2399,20 +2342,20 @@ namespace shark {
         return kCppTypeToName[static_cast<int>(kTypeToCppTypeMap[static_cast<int>(type())])];
     }
 
-    inline FieldCppType FieldDescriptor::TypeToCppType(FieldType type) {
+    inline SharkFieldCppType FieldDescriptor::TypeToCppType(SharkFieldType type) {
         return kTypeToCppTypeMap[static_cast<int>(type)];
     }
 
-    inline const char* FieldDescriptor::TypeName(FieldType type) {
+    inline const char* FieldDescriptor::TypeName(SharkFieldType type) {
         return kTypeToName[static_cast<int>(type)];
     }
 
-    inline const char* FieldDescriptor::CppTypeName(FieldCppType cpp_type) {
+    inline const char* FieldDescriptor::CppTypeName(SharkFieldCppType cpp_type) {
         return kCppTypeToName[static_cast<int>(cpp_type)];
     }
 
-    inline bool FieldDescriptor::IsTypePackable(FieldType field_type) {
-        return (field_type != FieldType::STRING && field_type != FieldType::MESSAGE && field_type != FieldType::BYTES);
+    inline bool FieldDescriptor::IsTypePackable(SharkFieldType field_type) {
+        return (field_type != SharkFieldType::STRING && field_type != SharkFieldType::MESSAGE && field_type != SharkFieldType::BYTES);
     }
 
     inline const FileDescriptor* FileDescriptor::public_dependency(

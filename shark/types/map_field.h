@@ -88,13 +88,13 @@ namespace shark {
         }
 
         ~MapKey() {
-            if (type_ == FieldCppType::STRING) {
+            if (type_ == SharkFieldCppType::CPPTYPE_STRING) {
                 val_.string_value_.Destruct();
             }
         }
 
-        FieldCppType type() const {
-            if (type_ == FieldCppType()) {
+        SharkFieldCppType type() const {
+            if (type_ == SharkFieldCppType()) {
                 GOOGLE_LOG(FATAL) << "Protocol Buffer map usage error:\n"
                                   << "MapKey::type MapKey is not initialized. "
                                   << "Call set methods to initialize MapKey.";
@@ -103,76 +103,76 @@ namespace shark {
         }
 
         void SetInt64Value(int64_t value) {
-            SetType(FieldCppType::INT64);
+            SetType(SharkFieldCppType::CPPTYPE_INT64);
             val_.int64_value_ = value;
         }
         void SetUInt64Value(uint64_t value) {
-            SetType(FieldCppType::UINT64);
+            SetType(SharkFieldCppType::CPPTYPE_UINT64);
             val_.uint64_value_ = value;
         }
         void SetInt32Value(int32_t value) {
-            SetType(FieldCppType::INT32);
+            SetType(SharkFieldCppType::CPPTYPE_INT32);
             val_.int32_value_ = value;
         }
         void SetInt8Value(int8_t value) {
-            SetType(FieldCppType::INT8);
+            SetType(SharkFieldCppType::CPPTYPE_INT8);
             val_.int8_value_ = value;
         }
         void SetInt16Value(int16_t value) {
-            SetType(FieldCppType::INT16);
+            SetType(SharkFieldCppType::CPPTYPE_INT16);
             val_.int16_value_ = value;
         }
         void SetUInt8Value(uint8_t value) {
-            SetType(FieldCppType::UINT8);
+            SetType(SharkFieldCppType::CPPTYPE_UINT8);
             val_.uint8_value_ = value;
         }
         void SetUInt16Value(uint16_t value) {
-            SetType(FieldCppType::UINT16);
+            SetType(SharkFieldCppType::CPPTYPE_UINT16);
             val_.uint16_value_ = value;
         }
         void SetUInt32Value(uint32_t value) {
-            SetType(FieldCppType::UINT32);
+            SetType(SharkFieldCppType::CPPTYPE_UINT32);
             val_.uint32_value_ = value;
         }
         void SetBoolValue(bool value) {
-            SetType(FieldCppType::BOOL);
+            SetType(SharkFieldCppType::CPPTYPE_BOOL);
             val_.bool_value_ = value;
         }
         void SetStringValue(std::string val) {
-            SetType(FieldCppType::STRING);
+            SetType(SharkFieldCppType::CPPTYPE_STRING);
             *val_.string_value_.get_mutable() = std::move(val);
         }
 
         int64_t GetInt64Value() const {
-            TYPE_CHECK(FieldCppType::INT64, "MapKey::GetInt64Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_INT64, "MapKey::GetInt64Value");
             return val_.int64_value_;
         }
         uint64_t GetUInt64Value() const {
-            TYPE_CHECK(FieldCppType::UINT64, "MapKey::GetUInt64Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_UINT64, "MapKey::GetUInt64Value");
             return val_.uint64_value_;
         }
         int32_t GetInt32Value() const {
-            if (type_ == FieldCppType::INT8)
+            if (type_ == SharkFieldCppType::CPPTYPE_INT8)
                 return val_.int8_value_;
-            if (type_ == FieldCppType::INT16)
+            if (type_ == SharkFieldCppType::CPPTYPE_INT16)
                 return val_.int16_value_;
-            TYPE_CHECK(FieldCppType::INT32, "MapKey::GetInt32Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_INT32, "MapKey::GetInt32Value");
             return val_.int32_value_;
         }
         uint32_t GetUInt32Value() const {
-            if (type_ == FieldCppType::UINT8)
+            if (type_ == SharkFieldCppType::CPPTYPE_UINT8)
                 return val_.uint8_value_;
-            if (type_ == FieldCppType::UINT16)
+            if (type_ == SharkFieldCppType::CPPTYPE_UINT16)
                 return val_.uint16_value_;
-            TYPE_CHECK(FieldCppType::UINT32, "MapKey::GetUInt32Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_UINT32, "MapKey::GetUInt32Value");
             return val_.uint32_value_;
         }
         bool GetBoolValue() const {
-            TYPE_CHECK(FieldCppType::BOOL, "MapKey::GetBoolValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_BOOL, "MapKey::GetBoolValue");
             return val_.bool_value_;
         }
         const std::string& GetStringValue() const {
-            TYPE_CHECK(FieldCppType::STRING, "MapKey::GetStringValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_STRING, "MapKey::GetStringValue");
             return val_.string_value_.get();
         }
 
@@ -183,31 +183,31 @@ namespace shark {
                 GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
             }
             switch (type()) {
-            case FieldCppType::DOUBLE:
-            case FieldCppType::FLOAT:
-            case FieldCppType::ENUM:
-            case FieldCppType::MESSAGE:
+            case SharkFieldCppType::CPPTYPE_DOUBLE:
+            case SharkFieldCppType::CPPTYPE_FLOAT:
+            case SharkFieldCppType::CPPTYPE_ENUM:
+            case SharkFieldCppType::CPPTYPE_MESSAGE:
                 GOOGLE_LOG(FATAL) << "Unsupported";
                 return false;
-            case FieldCppType::STRING:
+            case SharkFieldCppType::CPPTYPE_STRING:
                 return val_.string_value_.get() < other.val_.string_value_.get();
-            case FieldCppType::INT64:
+            case SharkFieldCppType::CPPTYPE_INT64:
                 return val_.int64_value_ < other.val_.int64_value_;
-            case FieldCppType::INT8:
+            case SharkFieldCppType::CPPTYPE_INT8:
                 return val_.int8_value_ < other.val_.int8_value_;
-            case FieldCppType::INT16:
+            case SharkFieldCppType::CPPTYPE_INT16:
                 return val_.int16_value_ < other.val_.int16_value_;
-            case FieldCppType::INT32:
+            case SharkFieldCppType::CPPTYPE_INT32:
                 return val_.int32_value_ < other.val_.int32_value_;
-            case FieldCppType::UINT64:
+            case SharkFieldCppType::CPPTYPE_UINT64:
                 return val_.uint64_value_ < other.val_.uint64_value_;
-            case FieldCppType::UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT8:
                 return val_.uint8_value_ < other.val_.uint8_value_;
-            case FieldCppType::UINT16:
+            case SharkFieldCppType::CPPTYPE_UINT16:
                 return val_.uint16_value_ < other.val_.uint16_value_;
-            case FieldCppType::UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT32:
                 return val_.uint32_value_ < other.val_.uint32_value_;
-            case FieldCppType::BOOL:
+            case SharkFieldCppType::CPPTYPE_BOOL:
                 return val_.bool_value_ < other.val_.bool_value_;
             }
             return false;
@@ -219,31 +219,31 @@ namespace shark {
                 GOOGLE_LOG(FATAL) << "Unsupported: type mismatch";
             }
             switch (type()) {
-            case FieldCppType::DOUBLE:
-            case FieldCppType::FLOAT:
-            case FieldCppType::ENUM:
-            case FieldCppType::MESSAGE:
+            case SharkFieldCppType::CPPTYPE_DOUBLE:
+            case SharkFieldCppType::CPPTYPE_FLOAT:
+            case SharkFieldCppType::CPPTYPE_ENUM:
+            case SharkFieldCppType::CPPTYPE_MESSAGE:
                 GOOGLE_LOG(FATAL) << "Unsupported";
                 break;
-            case FieldCppType::STRING:
+            case SharkFieldCppType::CPPTYPE_STRING:
                 return val_.string_value_.get() == other.val_.string_value_.get();
-            case FieldCppType::INT64:
+            case SharkFieldCppType::CPPTYPE_INT64:
                 return val_.int64_value_ == other.val_.int64_value_;
-            case FieldCppType::INT8:
+            case SharkFieldCppType::CPPTYPE_INT8:
                 return val_.int8_value_ == other.val_.int8_value_;
-            case FieldCppType::INT16:
+            case SharkFieldCppType::CPPTYPE_INT16:
                 return val_.int16_value_ == other.val_.int16_value_;
-            case FieldCppType::INT32:
+            case SharkFieldCppType::CPPTYPE_INT32:
                 return val_.int32_value_ == other.val_.int32_value_;
-            case FieldCppType::UINT64:
+            case SharkFieldCppType::CPPTYPE_UINT64:
                 return val_.uint64_value_ == other.val_.uint64_value_;
-            case FieldCppType::UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT8:
                 return val_.uint8_value_ == other.val_.uint8_value_;
-            case FieldCppType::UINT16:
+            case SharkFieldCppType::CPPTYPE_UINT16:
                 return val_.uint16_value_ == other.val_.uint16_value_;
-            case FieldCppType::UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT32:
                 return val_.uint32_value_ == other.val_.uint32_value_;
-            case FieldCppType::BOOL:
+            case SharkFieldCppType::CPPTYPE_BOOL:
                 return val_.bool_value_ == other.val_.bool_value_;
             }
             GOOGLE_LOG(FATAL) << "Can't get here.";
@@ -253,40 +253,40 @@ namespace shark {
         void CopyFrom(const MapKey& other) {
             SetType(other.type());
             switch (type_) {
-            case FieldCppType::DOUBLE:
-            case FieldCppType::FLOAT:
-            case FieldCppType::ENUM:
-            case FieldCppType::MESSAGE:
+            case SharkFieldCppType::CPPTYPE_DOUBLE:
+            case SharkFieldCppType::CPPTYPE_FLOAT:
+            case SharkFieldCppType::CPPTYPE_ENUM:
+            case SharkFieldCppType::CPPTYPE_MESSAGE:
                 GOOGLE_LOG(FATAL) << "Unsupported";
                 break;
-            case FieldCppType::STRING:
+            case SharkFieldCppType::CPPTYPE_STRING:
                 *val_.string_value_.get_mutable() = other.val_.string_value_.get();
                 break;
-            case FieldCppType::INT64:
+            case SharkFieldCppType::CPPTYPE_INT64:
                 val_.int64_value_ = other.val_.int64_value_;
                 break;
-            case FieldCppType::INT8:
+            case SharkFieldCppType::CPPTYPE_INT8:
                 val_.int8_value_ = other.val_.int8_value_;
                 break;
-            case FieldCppType::INT16:
+            case SharkFieldCppType::CPPTYPE_INT16:
                 val_.int16_value_ = other.val_.int16_value_;
                 break;
-            case FieldCppType::INT32:
+            case SharkFieldCppType::CPPTYPE_INT32:
                 val_.int32_value_ = other.val_.int32_value_;
                 break;
-            case FieldCppType::UINT64:
+            case SharkFieldCppType::CPPTYPE_UINT64:
                 val_.uint64_value_ = other.val_.uint64_value_;
                 break;
-            case FieldCppType::UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT8:
                 val_.uint8_value_ = other.val_.uint8_value_;
                 break;
-            case FieldCppType::UINT16:
+            case SharkFieldCppType::CPPTYPE_UINT16:
                 val_.uint16_value_ = other.val_.uint16_value_;
                 break;
-            case FieldCppType::UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT32:
                 val_.uint32_value_ = other.val_.uint32_value_;
                 break;
-            case FieldCppType::BOOL:
+            case SharkFieldCppType::CPPTYPE_BOOL:
                 val_.bool_value_ = other.val_.bool_value_;
                 break;
             }
@@ -312,21 +312,21 @@ namespace shark {
             bool bool_value_;
         } val_;
 
-        void SetType(FieldCppType type) {
+        void SetType(SharkFieldCppType type) {
             if (type_ == type)
                 return;
-            if (type_ == FieldCppType::STRING) {
+            if (type_ == SharkFieldCppType::CPPTYPE_STRING) {
                 val_.string_value_.Destruct();
             }
             type_ = type;
-            if (type_ == FieldCppType::STRING) {
+            if (type_ == SharkFieldCppType::CPPTYPE_STRING) {
                 val_.string_value_.DefaultConstruct();
             }
         }
 
-        // type_ is 0 or a valid FieldCppType.
+        // type_ is 0 or a valid SharkFieldCppType.
         // Use "CppType()" to indicate zero.
-        FieldCppType type_;
+        SharkFieldCppType type_;
     };
 
 } // namespace shark
@@ -335,35 +335,35 @@ namespace std {
     struct hash<::SHARK_NAMESPACE_ID::MapKey> {
         size_t operator()(const ::SHARK_NAMESPACE_ID::MapKey& map_key) const {
             switch (map_key.type()) {
-            case ::SHARK_NAMESPACE_ID::FieldCppType::DOUBLE:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::FLOAT:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::ENUM:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::MESSAGE:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_DOUBLE:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_FLOAT:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_ENUM:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_MESSAGE:
                 GOOGLE_LOG(FATAL) << "Unsupported";
                 break;
-            case ::SHARK_NAMESPACE_ID::FieldCppType::STRING:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_STRING:
                 return hash<std::string>()(map_key.GetStringValue());
-            case ::SHARK_NAMESPACE_ID::FieldCppType::INT64: {
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_INT64: {
                 auto value = map_key.GetInt64Value();
                 return hash<decltype(value)>()(value);
             }
-            case ::SHARK_NAMESPACE_ID::FieldCppType::INT8:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::INT16:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::INT32: {
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_INT8:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_INT16:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_INT32: {
                 auto value = map_key.GetInt32Value();
                 return hash<decltype(value)>()(value);
             }
-            case ::SHARK_NAMESPACE_ID::FieldCppType::UINT64: {
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_UINT64: {
                 auto value = map_key.GetUInt64Value();
                 return hash<decltype(value)>()(map_key.GetUInt64Value());
             }
-            case ::SHARK_NAMESPACE_ID::FieldCppType::UINT8:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::UINT16:
-            case ::SHARK_NAMESPACE_ID::FieldCppType::UINT32: {
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_UINT8:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_UINT16:
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_UINT32: {
                 auto value = map_key.GetUInt32Value();
                 return hash<decltype(value)>()(value);
             }
-            case ::SHARK_NAMESPACE_ID::FieldCppType::BOOL: {
+            case ::SHARK_NAMESPACE_ID::SharkFieldCppType::CPPTYPE_BOOL: {
                 return hash<bool>()(map_key.GetBoolValue());
             }
             }
@@ -776,61 +776,61 @@ namespace shark {
             , type_() { }
 
         int64_t GetInt64Value() const {
-            TYPE_CHECK(FieldCppType::INT64,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_INT64,
                 "MapValueConstRef::GetInt64Value");
             return *reinterpret_cast<int64_t*>(data_);
         }
         uint64_t GetUInt64Value() const {
-            TYPE_CHECK(FieldCppType::UINT64,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_UINT64,
                 "MapValueConstRef::GetUInt64Value");
             return *reinterpret_cast<uint64_t*>(data_);
         }
         int32_t GetInt32Value() const {
-            if (type_ == FieldCppType::INT8) {
+            if (type_ == SharkFieldCppType::CPPTYPE_INT8) {
                 return *reinterpret_cast<int8_t*>(data_);
             }
-            if (type_ == FieldCppType::INT16) {
+            if (type_ == SharkFieldCppType::CPPTYPE_INT16) {
                 return *reinterpret_cast<int16_t*>(data_);
             }
-            TYPE_CHECK(FieldCppType::INT32, "MapValueConstRef::GetInt32Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_INT32, "MapValueConstRef::GetInt32Value");
             return *reinterpret_cast<int32_t*>(data_);
         }
         uint32_t GetUInt32Value() const {
-            if (type_ == FieldCppType::UINT8) {
+            if (type_ == SharkFieldCppType::CPPTYPE_UINT8) {
                 return *reinterpret_cast<uint8_t*>(data_);
             }
-            if (type_ == FieldCppType::UINT16) {
+            if (type_ == SharkFieldCppType::CPPTYPE_UINT16) {
                 return *reinterpret_cast<uint16_t*>(data_);
             }
-            TYPE_CHECK(FieldCppType::UINT32, "MapValueConstRef::GetUInt32Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_UINT32, "MapValueConstRef::GetUInt32Value");
             return *reinterpret_cast<uint32_t*>(data_);
         }
         bool GetBoolValue() const {
-            TYPE_CHECK(FieldCppType::BOOL, "MapValueConstRef::GetBoolValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_BOOL, "MapValueConstRef::GetBoolValue");
             return *reinterpret_cast<bool*>(data_);
         }
         int GetEnumValue() const {
-            TYPE_CHECK(FieldCppType::ENUM, "MapValueConstRef::GetEnumValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_ENUM, "MapValueConstRef::GetEnumValue");
             return *reinterpret_cast<int*>(data_);
         }
         const std::string& GetStringValue() const {
-            TYPE_CHECK(FieldCppType::STRING,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_STRING,
                 "MapValueConstRef::GetStringValue");
             return *reinterpret_cast<std::string*>(data_);
         }
         float GetFloatValue() const {
-            TYPE_CHECK(FieldCppType::FLOAT,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_FLOAT,
                 "MapValueConstRef::GetFloatValue");
             return *reinterpret_cast<float*>(data_);
         }
         double GetDoubleValue() const {
-            TYPE_CHECK(FieldCppType::DOUBLE,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_DOUBLE,
                 "MapValueConstRef::GetDoubleValue");
             return *reinterpret_cast<double*>(data_);
         }
 
         const Message& GetMessageValue() const {
-            TYPE_CHECK(FieldCppType::MESSAGE,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_MESSAGE,
                 "MapValueConstRef::GetMessageValue");
             return *reinterpret_cast<Message*>(data_);
         }
@@ -839,12 +839,12 @@ namespace shark {
         // data_ point to a map value. MapValueConstRef does not
         // own this value.
         void* data_;
-        // type_ is 0 or a valid FieldCppType.
+        // type_ is 0 or a valid SharkFieldCppType.
         // Use "CppType()" to indicate zero.
-        FieldCppType type_;
+        SharkFieldCppType type_;
 
-        FieldCppType type() const {
-            if (type_ == FieldCppType() || data_ == nullptr) {
+        SharkFieldCppType type() const {
+            if (type_ == SharkFieldCppType() || data_ == nullptr) {
                 GOOGLE_LOG(FATAL)
                     << "Protocol Buffer map usage error:\n"
                     << "MapValueConstRef::type MapValueConstRef is not initialized.";
@@ -863,7 +863,7 @@ namespace shark {
         friend class Reflection;
         friend class internal::DynamicMapField;
 
-        void SetType(FieldCppType type) { type_ = type; }
+        void SetType(SharkFieldCppType type) { type_ = type; }
         void SetValue(const void* val) { data_ = const_cast<void*>(val); }
         void CopyFrom(const MapValueConstRef& other) {
             type_ = other.type_;
@@ -878,61 +878,61 @@ namespace shark {
         MapValueRef() { }
 
         void SetInt64Value(int64_t value) {
-            TYPE_CHECK(FieldCppType::INT64, "MapValueRef::SetInt64Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_INT64, "MapValueRef::SetInt64Value");
             *reinterpret_cast<int64_t*>(data_) = value;
         }
         void SetUInt64Value(uint64_t value) {
-            TYPE_CHECK(FieldCppType::UINT64, "MapValueRef::SetUInt64Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_UINT64, "MapValueRef::SetUInt64Value");
             *reinterpret_cast<uint64_t*>(data_) = value;
         }
         void SetInt32Value(int32_t value) {
-            if (type_ == FieldCppType::INT8) {
+            if (type_ == SharkFieldCppType::CPPTYPE_INT8) {
                 *reinterpret_cast<int8_t*>(data_) = static_cast<int8_t>(value);
                 return;
             }
-            if (type_ == FieldCppType::INT16) {
+            if (type_ == SharkFieldCppType::CPPTYPE_INT16) {
                 *reinterpret_cast<int16_t*>(data_) = static_cast<int16_t>(value);
                 return;
             }
-            TYPE_CHECK(FieldCppType::INT32, "MapValueRef::SetInt32Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_INT32, "MapValueRef::SetInt32Value");
             *reinterpret_cast<int32_t*>(data_) = value;
         }
         void SetUInt32Value(uint32_t value) {
-            if (type_ == FieldCppType::UINT8) {
+            if (type_ == SharkFieldCppType::CPPTYPE_UINT8) {
                 *reinterpret_cast<uint8_t*>(data_) = static_cast<uint8_t>(value);
                 return;
             }
-            if (type_ == FieldCppType::UINT16) {
+            if (type_ == SharkFieldCppType::CPPTYPE_UINT16) {
                 *reinterpret_cast<uint16_t*>(data_) = static_cast<uint16_t>(value);
                 return;
             }
-            TYPE_CHECK(FieldCppType::UINT32, "MapValueRef::SetUInt32Value");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_UINT32, "MapValueRef::SetUInt32Value");
             *reinterpret_cast<uint32_t*>(data_) = value;
         }
         void SetBoolValue(bool value) {
-            TYPE_CHECK(FieldCppType::BOOL, "MapValueRef::SetBoolValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_BOOL, "MapValueRef::SetBoolValue");
             *reinterpret_cast<bool*>(data_) = value;
         }
         // TODO(jieluo) - Checks that enum is member.
         void SetEnumValue(int value) {
-            TYPE_CHECK(FieldCppType::ENUM, "MapValueRef::SetEnumValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_ENUM, "MapValueRef::SetEnumValue");
             *reinterpret_cast<int*>(data_) = value;
         }
         void SetStringValue(const std::string& value) {
-            TYPE_CHECK(FieldCppType::STRING, "MapValueRef::SetStringValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_STRING, "MapValueRef::SetStringValue");
             *reinterpret_cast<std::string*>(data_) = value;
         }
         void SetFloatValue(float value) {
-            TYPE_CHECK(FieldCppType::FLOAT, "MapValueRef::SetFloatValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_FLOAT, "MapValueRef::SetFloatValue");
             *reinterpret_cast<float*>(data_) = value;
         }
         void SetDoubleValue(double value) {
-            TYPE_CHECK(FieldCppType::DOUBLE, "MapValueRef::SetDoubleValue");
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_DOUBLE, "MapValueRef::SetDoubleValue");
             *reinterpret_cast<double*>(data_) = value;
         }
 
         Message* MutableMessageValue() {
-            TYPE_CHECK(FieldCppType::MESSAGE,
+            TYPE_CHECK(SharkFieldCppType::CPPTYPE_MESSAGE,
                 "MapValueRef::MutableMessageValue");
             return reinterpret_cast<Message*>(data_);
         }
@@ -944,7 +944,7 @@ namespace shark {
         void DeleteData() {
             switch (type_) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)             \
-    case FieldCppType::CPPTYPE: {              \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {              \
         delete reinterpret_cast<TYPE*>(data_); \
         break;                                 \
     }

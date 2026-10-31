@@ -810,82 +810,82 @@ namespace shark {
         const internal::SymbolBase* ptr_;
     };
 
-    const FieldCppType
+    const SharkFieldCppType
         FieldDescriptor::kTypeToCppTypeMap[kMaxFieldType + 1] = {
-            static_cast<FieldCppType>(0), // 0 is reserved for errors
+            static_cast<SharkFieldCppType>(0), // 0 is reserved for errors
 
-            FieldCppType::BOOL, // FieldType::BOOL
-            FieldCppType::INT8, // FieldType::INT8
-            FieldCppType::UINT8, // FieldType::UINT8
-            FieldCppType::INT16, // FieldType::INT16
-            FieldCppType::UINT16, // FieldType::UINT16
-            FieldCppType::INT32, // FieldType::INT32
-            FieldCppType::UINT32, // FieldType::UINT32
-            FieldCppType::INT64, // FieldType::INT64
-            FieldCppType::UINT64, // FieldType::UINT64
-            FieldCppType::FLOAT, // FieldType::FLOAT
-            FieldCppType::FLOAT16, // FieldType::FLOAT16
-            FieldCppType::FLOAT8, // FieldType::FLOAT8
-            FieldCppType::DOUBLE, // FieldType::DOUBLE
-            FieldCppType::ENUM, // FieldType::ENUM
-            FieldCppType::MESSAGE, // FieldType::MESSAGE
-            FieldCppType::STRING, // FieldType::STRING
-            FieldCppType::STRING, // FieldType::BYTES
-            FieldCppType::UINT32, // FieldType::FIXED32
-            FieldCppType::UINT64, // FieldType::FIXED64
-            FieldCppType::INT32, // FieldType::SFIXED32
-            FieldCppType::INT64, // FieldType::SFIXED64
-            FieldCppType::INT32, // FieldType::SINT32
-            FieldCppType::INT64, // FieldType::SINT64
+            SharkFieldCppType::CPPTYPE_BOOL, // SharkFieldType::BOOL
+            SharkFieldCppType::CPPTYPE_INT8, // SharkFieldType::INT8
+            SharkFieldCppType::CPPTYPE_UINT8, // SharkFieldType::UINT8
+            SharkFieldCppType::CPPTYPE_INT16, // SharkFieldType::INT16
+            SharkFieldCppType::CPPTYPE_UINT16, // SharkFieldType::UINT16
+            SharkFieldCppType::CPPTYPE_INT32, // SharkFieldType::INT32
+            SharkFieldCppType::CPPTYPE_UINT32, // SharkFieldType::UINT32
+            SharkFieldCppType::CPPTYPE_INT64, // SharkFieldType::INT64
+            SharkFieldCppType::CPPTYPE_UINT64, // SharkFieldType::UINT64
+            SharkFieldCppType::CPPTYPE_FLOAT, // SharkFieldType::FLOAT
+            SharkFieldCppType::CPPTYPE_FLOAT16, // SharkFieldType::FLOAT16
+            SharkFieldCppType::CPPTYPE_FLOAT8, // SharkFieldType::FLOAT8
+            SharkFieldCppType::CPPTYPE_DOUBLE, // SharkFieldType::DOUBLE
+            SharkFieldCppType::CPPTYPE_ENUM, // SharkFieldType::ENUM
+            SharkFieldCppType::CPPTYPE_MESSAGE, // SharkFieldType::MESSAGE
+            SharkFieldCppType::CPPTYPE_STRING, // SharkFieldType::STRING
+            SharkFieldCppType::CPPTYPE_STRING, // SharkFieldType::BYTES
+            SharkFieldCppType::CPPTYPE_UINT32, // SharkFieldType::FIXED32
+            SharkFieldCppType::CPPTYPE_UINT64, // SharkFieldType::FIXED64
+            SharkFieldCppType::CPPTYPE_INT32, // SharkFieldType::SFIXED32
+            SharkFieldCppType::CPPTYPE_INT64, // SharkFieldType::SFIXED64
+            SharkFieldCppType::CPPTYPE_INT32, // SharkFieldType::SINT32
+            SharkFieldCppType::CPPTYPE_INT64, // SharkFieldType::SINT64
         };
 
     const char* const FieldDescriptor::kTypeToName[kMaxFieldType + 1] = {
         "ERROR", // 0 is reserved for errors
 
-        "bool", // FieldType::BOOL
-        "int8", // FieldType::INT8
-        "uint8", // FieldType::UINT8
-        "int16", // FieldType::INT16
-        "uint16", // FieldType::UINT16
-        "int32", // FieldType::INT32
-        "uint32", // FieldType::UINT32
-        "int64", // FieldType::INT64
-        "uint64", // FieldType::UINT64
-        "float", // FieldType::FLOAT
-        "float16", // FieldType::FLOAT16
-        "float8", // FieldType::FLOAT8
-        "double", // FieldType::DOUBLE
-        "enum", // FieldType::ENUM
-        "message", // FieldType::MESSAGE
-        "string", // FieldType::STRING
-        "bytes", // FieldType::BYTES
-        "fixed32", // FieldType::FIXED32
-        "fixed64", // FieldType::FIXED64
-        "sfixed32", // FieldType::SFIXED32
-        "sfixed64", // FieldType::SFIXED64
-        "sint32", // FieldType::SINT32
-        "sint64", // FieldType::SINT64
+        "bool", // SharkFieldType::BOOL
+        "int8", // SharkFieldType::INT8
+        "uint8", // SharkFieldType::UINT8
+        "int16", // SharkFieldType::INT16
+        "uint16", // SharkFieldType::UINT16
+        "int32", // SharkFieldType::INT32
+        "uint32", // SharkFieldType::UINT32
+        "int64", // SharkFieldType::INT64
+        "uint64", // SharkFieldType::UINT64
+        "float", // SharkFieldType::FLOAT
+        "float16", // SharkFieldType::FLOAT16
+        "float8", // SharkFieldType::FLOAT8
+        "double", // SharkFieldType::DOUBLE
+        "enum", // SharkFieldType::ENUM
+        "message", // SharkFieldType::MESSAGE
+        "string", // SharkFieldType::STRING
+        "bytes", // SharkFieldType::BYTES
+        "fixed32", // SharkFieldType::FIXED32
+        "fixed64", // SharkFieldType::FIXED64
+        "sfixed32", // SharkFieldType::SFIXED32
+        "sfixed64", // SharkFieldType::SFIXED64
+        "sint32", // SharkFieldType::SINT32
+        "sint64", // SharkFieldType::SINT64
     };
 
     const char* const FieldDescriptor::kCppTypeToName[kMaxFieldCppType + 1] = {
         "ERROR", // 0 is reserved for errors
 
-        "bool", // FieldCppType::BOOL
-        "int8", // FieldCppType::INT8
-        "uint8", // FieldCppType::UINT8
-        "int16", // FieldCppType::INT16
-        "uint16", // FieldCppType::UINT16
-        "int32", // FieldCppType::INT32
-        "uint32", // FieldCppType::UINT32
-        "int64", // FieldCppType::INT64
-        "uint64", // FieldCppType::UINT64
-        "float", // FieldCppType::FLOAT
-        "float16", // FieldCppType::FLOAT16
-        "float8", // FieldCppType::FLOAT8
-        "double", // FieldCppType::DOUBLE
-        "enum", // FieldCppType::ENUM
-        "message", // FieldCppType::MESSAGE
-        "string", // FieldCppType::STRING
+        "bool", // SharkFieldCppType::CPPTYPE_BOOL
+        "int8", // SharkFieldCppType::CPPTYPE_INT8
+        "uint8", // SharkFieldCppType::CPPTYPE_UINT8
+        "int16", // SharkFieldCppType::CPPTYPE_INT16
+        "uint16", // SharkFieldCppType::CPPTYPE_UINT16
+        "int32", // SharkFieldCppType::CPPTYPE_INT32
+        "uint32", // SharkFieldCppType::CPPTYPE_UINT32
+        "int64", // SharkFieldCppType::CPPTYPE_INT64
+        "uint64", // SharkFieldCppType::CPPTYPE_UINT64
+        "float", // SharkFieldCppType::CPPTYPE_FLOAT
+        "float16", // SharkFieldCppType::CPPTYPE_FLOAT16
+        "float8", // SharkFieldCppType::CPPTYPE_FLOAT8
+        "double", // SharkFieldCppType::CPPTYPE_DOUBLE
+        "enum", // SharkFieldCppType::CPPTYPE_ENUM
+        "message", // SharkFieldCppType::CPPTYPE_MESSAGE
+        "string", // SharkFieldCppType::CPPTYPE_STRING
     };
 
     const char* const FieldDescriptor::kLabelToName[kMaxFieldLabel + 1] = {
@@ -2177,7 +2177,7 @@ namespace shark {
                 const int type_extension_count = type->extension_count();
                 for (int i = 0; i < type_extension_count; i++) {
                     const FieldDescriptor* extension = type->extension(i);
-                    if (extension->containing_type() == extendee && extension->type() == FieldType::MESSAGE && extension->is_optional() && extension->message_type() == type) {
+                    if (extension->containing_type() == extendee && extension->type() == SharkFieldType::MESSAGE && extension->is_optional() && extension->message_type() == type) {
                         // Found it.
                         return extension;
                     }
@@ -2540,38 +2540,38 @@ namespace shark {
         bool quote_string_type) const {
         GOOGLE_CHECK(has_default_value()) << "No default value";
         switch (cpp_type()) {
-        case FieldCppType::INT32:
-        case FieldCppType::INT8:
-        case FieldCppType::INT16:
+        case SharkFieldCppType::CPPTYPE_INT32:
+        case SharkFieldCppType::CPPTYPE_INT8:
+        case SharkFieldCppType::CPPTYPE_INT16:
             return StrCat(default_value_int32_t());
-        case FieldCppType::UINT8:
-        case FieldCppType::UINT16:
+        case SharkFieldCppType::CPPTYPE_UINT8:
+        case SharkFieldCppType::CPPTYPE_UINT16:
             return StrCat(default_value_uint32_t());
-        case FieldCppType::INT64:
+        case SharkFieldCppType::CPPTYPE_INT64:
             return StrCat(default_value_int64_t());
-        case FieldCppType::UINT32:
+        case SharkFieldCppType::CPPTYPE_UINT32:
             return StrCat(default_value_uint32_t());
-        case FieldCppType::UINT64:
+        case SharkFieldCppType::CPPTYPE_UINT64:
             return StrCat(default_value_uint64_t());
-        case FieldCppType::FLOAT:
+        case SharkFieldCppType::CPPTYPE_FLOAT:
             return SimpleFtoa(default_value_float());
-        case FieldCppType::DOUBLE:
+        case SharkFieldCppType::CPPTYPE_DOUBLE:
             return SimpleDtoa(default_value_double());
-        case FieldCppType::BOOL:
+        case SharkFieldCppType::CPPTYPE_BOOL:
             return default_value_bool() ? "true" : "false";
-        case FieldCppType::STRING:
+        case SharkFieldCppType::CPPTYPE_STRING:
             if (quote_string_type) {
                 return "\"" + CEscape(default_value_string()) + "\"";
             } else {
-                if (type() == FieldType::BYTES) {
+                if (type() == SharkFieldType::BYTES) {
                     return CEscape(default_value_string());
                 } else {
                     return default_value_string();
                 }
             }
-        case FieldCppType::ENUM:
+        case SharkFieldCppType::CPPTYPE_ENUM:
             return default_value_enum()->name();
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
             GOOGLE_LOG(DFATAL) << "Messages can't have default values!";
             break;
         }
@@ -2712,7 +2712,7 @@ namespace shark {
             proto->mutable_extendee()->append(containing_type()->full_name());
         }
 
-        if (cpp_type() == FieldCppType::MESSAGE) {
+        if (cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
             if (message_type()->is_placeholder_) {
                 // We don't actually know if the type is a message type.  It could be
                 // an enum.
@@ -2723,7 +2723,7 @@ namespace shark {
                 proto->set_type_name(".");
             }
             proto->mutable_type_name()->append(message_type()->full_name());
-        } else if (cpp_type() == FieldCppType::ENUM) {
+        } else if (cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {
             if (!enum_type()->is_unqualified_placeholder_) {
                 proto->set_type_name(".");
             }
@@ -2840,7 +2840,7 @@ namespace shark {
                 }
                 for (int j = 0; j < count; j++) {
                     std::string fieldval;
-                    if (field->cpp_type() == FieldCppType::MESSAGE) {
+                    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
                         std::string tmp;
                         TextFormat::Printer printer;
                         printer.SetExpandAny(true);
@@ -3205,9 +3205,9 @@ namespace shark {
     // The field type string used in FieldDescriptor::DebugString()
     std::string FieldDescriptor::FieldTypeNameDebugString() const {
         switch (type()) {
-        case FieldType::MESSAGE:
+        case SharkFieldType::MESSAGE:
             return "." + message_type()->full_name();
-        case FieldType::ENUM:
+        case SharkFieldType::ENUM:
             return "." + enum_type()->full_name();
         default:
             return kTypeToName[static_cast<int>(type())];
@@ -3979,20 +3979,20 @@ namespace shark {
             bool SetOptionValue(const FieldDescriptor* option_field,
                 UnknownFieldSet* unknown_fields);
 
-            // Parses an aggregate value for a FieldCppType::MESSAGE option and
+            // Parses an aggregate value for a SharkFieldCppType::CPPTYPE_MESSAGE option and
             // saves it into *unknown_fields.
             bool SetAggregateOption(const FieldDescriptor* option_field,
                 UnknownFieldSet* unknown_fields);
 
             // Convenience functions to set an int field the right way, depending on
             // its wire type (a single int CppType can represent multiple wire types).
-            void SetInt32(int number, int32_t value, FieldType type,
+            void SetInt32(int number, int32_t value, SharkFieldType type,
                 UnknownFieldSet* unknown_fields);
-            void SetInt64(int number, int64_t value, FieldType type,
+            void SetInt64(int number, int64_t value, SharkFieldType type,
                 UnknownFieldSet* unknown_fields);
-            void SetUInt32(int number, uint32_t value, FieldType type,
+            void SetUInt32(int number, uint32_t value, SharkFieldType type,
                 UnknownFieldSet* unknown_fields);
-            void SetUInt64(int number, uint64_t value, FieldType type,
+            void SetUInt64(int number, uint64_t value, SharkFieldType type,
                 UnknownFieldSet* unknown_fields);
 
             // A helper function that adds an error at the specified location of the
@@ -5551,25 +5551,25 @@ namespace shark {
             if (proto.has_default_value()) {
                 char* end_pos = nullptr;
                 switch (result->cpp_type()) {
-                case FieldCppType::INT32:
-                case FieldCppType::INT8:
-                case FieldCppType::INT16:
+                case SharkFieldCppType::CPPTYPE_INT32:
+                case SharkFieldCppType::CPPTYPE_INT8:
+                case SharkFieldCppType::CPPTYPE_INT16:
                     result->default_value_int32_t_ = strtol(proto.default_value().c_str(), &end_pos, 0);
                     break;
-                case FieldCppType::UINT8:
-                case FieldCppType::UINT16:
+                case SharkFieldCppType::CPPTYPE_UINT8:
+                case SharkFieldCppType::CPPTYPE_UINT16:
                     result->default_value_uint32_t_ = strtoul(proto.default_value().c_str(), &end_pos, 0);
                     break;
-                case FieldCppType::INT64:
+                case SharkFieldCppType::CPPTYPE_INT64:
                     result->default_value_int64_t_ = strto64(proto.default_value().c_str(), &end_pos, 0);
                     break;
-                case FieldCppType::UINT32:
+                case SharkFieldCppType::CPPTYPE_UINT32:
                     result->default_value_uint32_t_ = strtoul(proto.default_value().c_str(), &end_pos, 0);
                     break;
-                case FieldCppType::UINT64:
+                case SharkFieldCppType::CPPTYPE_UINT64:
                     result->default_value_uint64_t_ = strtou64(proto.default_value().c_str(), &end_pos, 0);
                     break;
-                case FieldCppType::FLOAT:
+                case SharkFieldCppType::CPPTYPE_FLOAT:
                     if (proto.default_value() == "inf") {
                         result->default_value_float_ = std::numeric_limits<float>::infinity();
                     } else if (proto.default_value() == "-inf") {
@@ -5581,7 +5581,7 @@ namespace shark {
                             io::NoLocaleStrtod(proto.default_value().c_str(), &end_pos));
                     }
                     break;
-                case FieldCppType::DOUBLE:
+                case SharkFieldCppType::CPPTYPE_DOUBLE:
                     if (proto.default_value() == "inf") {
                         result->default_value_double_ = std::numeric_limits<double>::infinity();
                     } else if (proto.default_value() == "-inf") {
@@ -5592,7 +5592,7 @@ namespace shark {
                         result->default_value_double_ = io::NoLocaleStrtod(proto.default_value().c_str(), &end_pos);
                     }
                     break;
-                case FieldCppType::BOOL:
+                case SharkFieldCppType::CPPTYPE_BOOL:
                     if (proto.default_value() == "true") {
                         result->default_value_bool_ = true;
                     } else if (proto.default_value() == "false") {
@@ -5603,19 +5603,19 @@ namespace shark {
                             "Boolean default must be true or false.");
                     }
                     break;
-                case FieldCppType::ENUM:
+                case SharkFieldCppType::CPPTYPE_ENUM:
                     // This will be filled in when cross-linking.
                     result->default_value_enum_ = nullptr;
                     break;
-                case FieldCppType::STRING:
-                    if (result->type() == FieldType::BYTES) {
+                case SharkFieldCppType::CPPTYPE_STRING:
+                    if (result->type() == SharkFieldType::BYTES) {
                         result->default_value_string_ = alloc.AllocateStrings(
                             UnescapeCEscapeString(proto.default_value()));
                     } else {
                         result->default_value_string_ = alloc.AllocateStrings(proto.default_value());
                     }
                     break;
-                case FieldCppType::MESSAGE:
+                case SharkFieldCppType::CPPTYPE_MESSAGE:
                     AddError(result->full_name(), proto,
                         DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                         "Messages can't have default values.");
@@ -5637,41 +5637,41 @@ namespace shark {
             } else {
                 // No explicit default value
                 switch (result->cpp_type()) {
-                case FieldCppType::INT32:
-                case FieldCppType::INT8:
-                case FieldCppType::INT16:
+                case SharkFieldCppType::CPPTYPE_INT32:
+                case SharkFieldCppType::CPPTYPE_INT8:
+                case SharkFieldCppType::CPPTYPE_INT16:
                     result->default_value_int32_t_ = 0;
                     break;
-                case FieldCppType::UINT8:
-                case FieldCppType::UINT16:
+                case SharkFieldCppType::CPPTYPE_UINT8:
+                case SharkFieldCppType::CPPTYPE_UINT16:
                     result->default_value_uint32_t_ = 0;
                     break;
-                case FieldCppType::INT64:
+                case SharkFieldCppType::CPPTYPE_INT64:
                     result->default_value_int64_t_ = 0;
                     break;
-                case FieldCppType::UINT32:
+                case SharkFieldCppType::CPPTYPE_UINT32:
                     result->default_value_uint32_t_ = 0;
                     break;
-                case FieldCppType::UINT64:
+                case SharkFieldCppType::CPPTYPE_UINT64:
                     result->default_value_uint64_t_ = 0;
                     break;
-                case FieldCppType::FLOAT:
+                case SharkFieldCppType::CPPTYPE_FLOAT:
                     result->default_value_float_ = 0.0f;
                     break;
-                case FieldCppType::DOUBLE:
+                case SharkFieldCppType::CPPTYPE_DOUBLE:
                     result->default_value_double_ = 0.0;
                     break;
-                case FieldCppType::BOOL:
+                case SharkFieldCppType::CPPTYPE_BOOL:
                     result->default_value_bool_ = false;
                     break;
-                case FieldCppType::ENUM:
+                case SharkFieldCppType::CPPTYPE_ENUM:
                     // This will be filled in when cross-linking.
                     result->default_value_enum_ = nullptr;
                     break;
-                case FieldCppType::STRING:
+                case SharkFieldCppType::CPPTYPE_STRING:
                     result->default_value_string_ = &internal::GetEmptyString();
                     break;
-                case FieldCppType::MESSAGE:
+                case SharkFieldCppType::CPPTYPE_MESSAGE:
                     result->default_generated_instance_ = nullptr;
                     break;
                 }
@@ -6383,9 +6383,9 @@ namespace shark {
             if (!proto.has_type()) {
                 // Choose field type based on symbol.
                 if (type.type() == Symbol::MESSAGE) {
-                    field->type_ = static_cast<uint8_t>(FieldType::MESSAGE);
+                    field->type_ = static_cast<uint8_t>(SharkFieldType::MESSAGE);
                 } else if (type.type() == Symbol::ENUM) {
-                    field->type_ = static_cast<uint8_t>(FieldType::ENUM);
+                    field->type_ = static_cast<uint8_t>(SharkFieldType::ENUM);
                 } else {
                     AddError(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
@@ -6394,7 +6394,7 @@ namespace shark {
                 }
             }
 
-            if (field->cpp_type() == FieldCppType::MESSAGE) {
+            if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
                 field->type_descriptor_.message_type = type.descriptor();
                 if (field->type_descriptor_.message_type == nullptr) {
                     AddError(field->full_name(), proto,
@@ -6408,7 +6408,7 @@ namespace shark {
                         DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                         "Messages can't have default values.");
                 }
-            } else if (field->cpp_type() == FieldCppType::ENUM) {
+            } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {
                 field->type_descriptor_.enum_type = type.enum_descriptor();
                 if (field->type_descriptor_.enum_type == nullptr) {
                     AddError(field->full_name(), proto,
@@ -6464,7 +6464,7 @@ namespace shark {
                     "Field with primitive type has type_name.");
             }
         } else {
-            if (field->cpp_type() == FieldCppType::MESSAGE || field->cpp_type() == FieldCppType::ENUM) {
+            if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE || field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {
                 AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "Field with message or enum type missing type_name.");
             }
@@ -6795,7 +6795,7 @@ namespace shark {
                 DescriptorPool::ErrorCollector::DEFAULT_VALUE,
                 "Explicit default values are not allowed in proto3.");
         }
-        if (field->cpp_type() == FieldCppType::ENUM && field->enum_type() && field->enum_type()->file()->syntax() != FileDescriptor::SYNTAX_PROTO3 && field->enum_type()->file()->syntax() != FileDescriptor::SYNTAX_UNKNOWN) {
+        if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM && field->enum_type() && field->enum_type()->file()->syntax() != FileDescriptor::SYNTAX_PROTO3 && field->enum_type()->file()->syntax() != FileDescriptor::SYNTAX_UNKNOWN) {
             // Proto3 messages can only use Proto3 enum types; otherwise we can't
             // guarantee that the default value is zero.
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
@@ -6843,7 +6843,7 @@ namespace shark {
         }
         // Only message type fields may be lazy.
         if (field->options().lazy() || field->options().unverified_lazy()) {
-            if (field->type() != FieldType::MESSAGE) {
+            if (field->type() != SharkFieldType::MESSAGE) {
                 AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "[lazy = true] can only be specified for submessage fields.");
             }
@@ -6860,7 +6860,7 @@ namespace shark {
         //   avoid reading from it.
         if (field->containing_type_ != nullptr && &field->containing_type()->options() != &MessageOptions::default_instance() && field->containing_type()->options().message_set_wire_format()) {
             if (field->is_extension()) {
-                if (!field->is_optional() || field->type() != FieldType::MESSAGE) {
+                if (!field->is_optional() || field->type() != SharkFieldType::MESSAGE) {
                     AddError(field->full_name(), proto,
                         DescriptorPool::ErrorCollector::TYPE,
                         "Extensions of MessageSets must be optional messages.");
@@ -6984,41 +6984,41 @@ namespace shark {
 
         // Check key types are legal.
         switch (key->type()) {
-        case FieldType::ENUM:
+        case SharkFieldType::ENUM:
             AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Key in map fields cannot be enum types.");
             break;
-        case FieldType::FLOAT:
-        case FieldType::DOUBLE:
-        case FieldType::MESSAGE:
-        case FieldType::BYTES:
+        case SharkFieldType::FLOAT:
+        case SharkFieldType::DOUBLE:
+        case SharkFieldType::MESSAGE:
+        case SharkFieldType::BYTES:
             AddError(
                 field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                 "Key in map fields cannot be float/double, bytes or message types.");
             break;
-        case FieldType::BOOL:
-        case FieldType::INT32:
-        case FieldType::INT8:
-        case FieldType::INT16:
-        case FieldType::INT64:
-        case FieldType::SINT32:
-        case FieldType::SINT64:
-        case FieldType::STRING:
-        case FieldType::UINT32:
-        case FieldType::UINT8:
-        case FieldType::UINT16:
-        case FieldType::UINT64:
-        case FieldType::FIXED32:
-        case FieldType::FIXED64:
-        case FieldType::SFIXED32:
-        case FieldType::SFIXED64:
+        case SharkFieldType::BOOL:
+        case SharkFieldType::INT32:
+        case SharkFieldType::INT8:
+        case SharkFieldType::INT16:
+        case SharkFieldType::INT64:
+        case SharkFieldType::SINT32:
+        case SharkFieldType::SINT64:
+        case SharkFieldType::STRING:
+        case SharkFieldType::UINT32:
+        case SharkFieldType::UINT8:
+        case SharkFieldType::UINT16:
+        case SharkFieldType::UINT64:
+        case SharkFieldType::FIXED32:
+        case SharkFieldType::FIXED64:
+        case SharkFieldType::SFIXED32:
+        case SharkFieldType::SFIXED64:
             // Legal cases
             break;
             // Do not add a default, so that the compiler will complain when new types
             // are added.
         }
 
-        if (value->type() == FieldType::ENUM) {
+        if (value->type() == SharkFieldType::ENUM) {
             if (value->enum_type()->value(0)->number() != 0) {
                 AddError(field->full_name(), proto, DescriptorPool::ErrorCollector::TYPE,
                     "Enum value in map must define 0 as the first value.");
@@ -7088,11 +7088,11 @@ namespace shark {
         switch (field->type()) {
         // Integral 64-bit types may be represented as JavaScript numbers or
         // strings.
-        case FieldType::UINT64:
-        case FieldType::INT64:
-        case FieldType::SINT64:
-        case FieldType::FIXED64:
-        case FieldType::SFIXED64:
+        case SharkFieldType::UINT64:
+        case SharkFieldType::INT64:
+        case SharkFieldType::SINT64:
+        case SharkFieldType::FIXED64:
+        case SharkFieldType::SFIXED64:
             if (jstype == FieldOptions::JSType::JS_STRING || jstype == FieldOptions::JSType::JS_NUMBER) {
                 return;
             }
@@ -7314,7 +7314,7 @@ namespace shark {
                 dest_path.push_back(field->number());
 
                 if (i < uninterpreted_option_->name_size() - 1) {
-                    if (field->cpp_type() != FieldCppType::MESSAGE) {
+                    if (field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) {
                         return AddNameError("Option \"" + debug_msg_name + "\" is an atomic type, not a message.");
                     } else if (field->is_repeated()) {
                         return AddNameError("Option field \"" + debug_msg_name + "\" is a repeated message. Repeated message "
@@ -7355,7 +7355,7 @@ namespace shark {
             std::unique_ptr<UnknownFieldSet> parent_unknown_fields(
                 new UnknownFieldSet());
             switch ((*iter)->type()) {
-            case FieldType::MESSAGE: {
+            case SharkFieldType::MESSAGE: {
                 std::string* outstr = parent_unknown_fields->AddLengthDelimited((*iter)->number());
                 GOOGLE_CHECK(unknown_fields->SerializeToString(outstr))
                     << "Unexpected failure while serializing option submessage "
@@ -7364,7 +7364,7 @@ namespace shark {
             }
 
             default:
-                GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::MESSAGE: "
+                GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_MESSAGE: "
                                   << static_cast<int>((*iter)->type());
                 return false;
             }
@@ -7510,10 +7510,10 @@ namespace shark {
         for (int i = 0; i < unknown_fields.field_count(); i++) {
             if (unknown_fields.field(i).number() == (*intermediate_fields_iter)->number()) {
                 const UnknownField* unknown_field = &unknown_fields.field(i);
-                FieldType type = (*intermediate_fields_iter)->type();
+                SharkFieldType type = (*intermediate_fields_iter)->type();
                 // Recurse into the next submessage.
                 switch (type) {
-                case FieldType::MESSAGE:
+                case SharkFieldType::MESSAGE:
                     if (unknown_field->type() == UnknownField::TYPE_LENGTH_DELIMITED) {
                         UnknownFieldSet intermediate_unknown_fields;
                         if (intermediate_unknown_fields.ParseFromString(
@@ -7528,7 +7528,7 @@ namespace shark {
                     break;
 
                 default:
-                    GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::MESSAGE: " << static_cast<int>(type);
+                    GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_MESSAGE: " << static_cast<int>(type);
                     return false;
                 }
             }
@@ -7540,7 +7540,7 @@ namespace shark {
         const FieldDescriptor* option_field, UnknownFieldSet* unknown_fields) {
         // We switch on the CppType to validate.
         switch (option_field->cpp_type()) {
-        case FieldCppType::INT32:
+        case SharkFieldCppType::CPPTYPE_INT32:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > static_cast<uint64_t>(std::numeric_limits<int32_t>::max())) {
                     return AddValueError("Value out of range for int32 option \"" + option_field->full_name() + "\".");
@@ -7562,7 +7562,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::INT8:
+        case SharkFieldCppType::CPPTYPE_INT8:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 127) {
                     return AddValueError("Value out of range for int8 option \"" + option_field->full_name() + "\".");
@@ -7578,7 +7578,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::INT16:
+        case SharkFieldCppType::CPPTYPE_INT16:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 32767) {
                     return AddValueError("Value out of range for int16 option \"" + option_field->full_name() + "\".");
@@ -7594,7 +7594,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::INT64:
+        case SharkFieldCppType::CPPTYPE_INT64:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > static_cast<uint64_t>(std::numeric_limits<int64_t>::max())) {
                     return AddValueError("Value out of range for int64 option \"" + option_field->full_name() + "\".");
@@ -7612,7 +7612,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::UINT32:
+        case SharkFieldCppType::CPPTYPE_UINT32:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > std::numeric_limits<uint32_t>::max()) {
                     return AddValueError("Value out of range for uint32 option \"" + option_field->name() + "\".");
@@ -7629,7 +7629,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::UINT8:
+        case SharkFieldCppType::CPPTYPE_UINT8:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 255) {
                     return AddValueError("Value out of range for uint8 option \"" + option_field->full_name() + "\".");
@@ -7642,7 +7642,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::UINT16:
+        case SharkFieldCppType::CPPTYPE_UINT16:
             if (uninterpreted_option_->has_positive_int_value()) {
                 if (uninterpreted_option_->positive_int_value() > 65535) {
                     return AddValueError("Value out of range for uint16 option \"" + option_field->full_name() + "\".");
@@ -7655,7 +7655,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::UINT64:
+        case SharkFieldCppType::CPPTYPE_UINT64:
             if (uninterpreted_option_->has_positive_int_value()) {
                 SetUInt64(option_field->number(),
                     uninterpreted_option_->positive_int_value(),
@@ -7668,7 +7668,7 @@ namespace shark {
             }
             break;
 
-        case FieldCppType::FLOAT: {
+        case SharkFieldCppType::CPPTYPE_FLOAT: {
             float value;
             if (uninterpreted_option_->has_double_value()) {
                 value = uninterpreted_option_->double_value();
@@ -7684,7 +7684,7 @@ namespace shark {
             break;
         }
 
-        case FieldCppType::DOUBLE: {
+        case SharkFieldCppType::CPPTYPE_DOUBLE: {
             double value;
             if (uninterpreted_option_->has_double_value()) {
                 value = uninterpreted_option_->double_value();
@@ -7700,7 +7700,7 @@ namespace shark {
             break;
         }
 
-        case FieldCppType::BOOL:
+        case SharkFieldCppType::CPPTYPE_BOOL:
             uint64_t value;
             if (!uninterpreted_option_->has_identifier_value()) {
                 return AddValueError(
@@ -7721,7 +7721,7 @@ namespace shark {
             unknown_fields->AddVarint(option_field->number(), value);
             break;
 
-        case FieldCppType::ENUM: {
+        case SharkFieldCppType::CPPTYPE_ENUM: {
             if (!uninterpreted_option_->has_identifier_value()) {
                 return AddValueError(
                     "Value must be identifier for enum-valued option "
@@ -7772,7 +7772,7 @@ namespace shark {
             break;
         }
 
-        case FieldCppType::STRING:
+        case SharkFieldCppType::CPPTYPE_STRING:
             if (!uninterpreted_option_->has_string_value()) {
                 return AddValueError(
                     "Value must be quoted string for string option "
@@ -7784,7 +7784,7 @@ namespace shark {
                 uninterpreted_option_->string_value());
             break;
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
             if (!SetAggregateOption(option_field, unknown_fields)) {
                 return false;
             }
@@ -7825,7 +7825,7 @@ namespace shark {
                 // extension, if one exists.
                 for (int i = 0; i < foreign_type->extension_count(); i++) {
                     const FieldDescriptor* extension = foreign_type->extension(i);
-                    if (extension->containing_type() == descriptor && extension->type() == FieldType::MESSAGE && extension->is_optional() && extension->message_type() == foreign_type) {
+                    if (extension->containing_type() == descriptor && extension->type() == SharkFieldType::MESSAGE && extension->is_optional() && extension->message_type() == foreign_type) {
                         // Found it.
                         return extension;
                     }
@@ -7894,88 +7894,88 @@ namespace shark {
     }
 
     void DescriptorBuilder::OptionInterpreter::SetInt32(
-        int number, int32_t value, FieldType type,
+        int number, int32_t value, SharkFieldType type,
         UnknownFieldSet* unknown_fields) {
         switch (type) {
-        case FieldType::INT32:
-        case FieldType::INT8:
-        case FieldType::INT16:
+        case SharkFieldType::INT32:
+        case SharkFieldType::INT8:
+        case SharkFieldType::INT16:
             unknown_fields->AddVarint(
                 number, static_cast<uint64_t>(static_cast<int64_t>(value)));
             break;
 
-        case FieldType::SFIXED32:
+        case SharkFieldType::SFIXED32:
             unknown_fields->AddFixed32(number, static_cast<uint32_t>(value));
             break;
 
-        case FieldType::SINT32:
+        case SharkFieldType::SINT32:
             unknown_fields->AddVarint(
                 number, internal::WireFormatLite::ZigZagEncode32(value));
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::INT32: " << static_cast<int>(type);
+            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_INT32: " << static_cast<int>(type);
             break;
         }
     }
 
     void DescriptorBuilder::OptionInterpreter::SetInt64(
-        int number, int64_t value, FieldType type,
+        int number, int64_t value, SharkFieldType type,
         UnknownFieldSet* unknown_fields) {
         switch (type) {
-        case FieldType::INT64:
+        case SharkFieldType::INT64:
             unknown_fields->AddVarint(number, static_cast<uint64_t>(value));
             break;
 
-        case FieldType::SFIXED64:
+        case SharkFieldType::SFIXED64:
             unknown_fields->AddFixed64(number, static_cast<uint64_t>(value));
             break;
 
-        case FieldType::SINT64:
+        case SharkFieldType::SINT64:
             unknown_fields->AddVarint(
                 number, internal::WireFormatLite::ZigZagEncode64(value));
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::INT64: " << static_cast<int>(type);
+            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_INT64: " << static_cast<int>(type);
             break;
         }
     }
 
     void DescriptorBuilder::OptionInterpreter::SetUInt32(
-        int number, uint32_t value, FieldType type,
+        int number, uint32_t value, SharkFieldType type,
         UnknownFieldSet* unknown_fields) {
         switch (type) {
-        case FieldType::UINT32:
-        case FieldType::UINT8:
-        case FieldType::UINT16:
+        case SharkFieldType::UINT32:
+        case SharkFieldType::UINT8:
+        case SharkFieldType::UINT16:
             unknown_fields->AddVarint(number, static_cast<uint64_t>(value));
             break;
 
-        case FieldType::FIXED32:
+        case SharkFieldType::FIXED32:
             unknown_fields->AddFixed32(number, static_cast<uint32_t>(value));
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::UINT32: " << static_cast<int>(type);
+            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_UINT32: " << static_cast<int>(type);
             break;
         }
     }
 
     void DescriptorBuilder::OptionInterpreter::SetUInt64(
-        int number, uint64_t value, FieldType type,
+        int number, uint64_t value, SharkFieldType type,
         UnknownFieldSet* unknown_fields) {
         switch (type) {
-        case FieldType::UINT64:
+        case SharkFieldType::UINT64:
             unknown_fields->AddVarint(number, value);
             break;
 
-        case FieldType::FIXED64:
+        case SharkFieldType::FIXED64:
             unknown_fields->AddFixed64(number, value);
             break;
 
         default:
-            GOOGLE_LOG(FATAL) << "Invalid wire type for FieldCppType::UINT64: " << static_cast<int>(type);
+            GOOGLE_LOG(FATAL) << "Invalid wire type for SharkFieldCppType::CPPTYPE_UINT64: " << static_cast<int>(type);
             break;
         }
     }
@@ -8022,12 +8022,12 @@ namespace shark {
         const char* lazy_type_name = reinterpret_cast<const char*>(type_once_ + 1);
         const char* lazy_default_value_enum_name = lazy_type_name + strlen(lazy_type_name) + 1;
         Symbol result = file()->pool()->CrossLinkOnDemandHelper(
-            lazy_type_name, static_cast<FieldType>(type_) == FieldType::ENUM);
+            lazy_type_name, static_cast<SharkFieldType>(type_) == SharkFieldType::ENUM);
         if (result.type() == Symbol::MESSAGE) {
-            type_ = static_cast<uint8_t>(FieldType::MESSAGE);
+            type_ = static_cast<uint8_t>(SharkFieldType::MESSAGE);
             type_descriptor_.message_type = result.descriptor();
         } else if (result.type() == Symbol::ENUM) {
-            type_ = static_cast<uint8_t>(FieldType::ENUM);
+            type_ = static_cast<uint8_t>(SharkFieldType::ENUM);
             enum_type = type_descriptor_.enum_type = result.enum_descriptor();
         }
 
@@ -8067,7 +8067,7 @@ namespace shark {
         if (type_once_) {
             internal::call_once(*type_once_, FieldDescriptor::TypeOnceInit, this);
         }
-        return static_cast<FieldType>(type_) == FieldType::MESSAGE
+        return static_cast<SharkFieldType>(type_) == SharkFieldType::MESSAGE
             ? type_descriptor_.message_type
             : nullptr;
     }
@@ -8076,7 +8076,7 @@ namespace shark {
         if (type_once_) {
             internal::call_once(*type_once_, FieldDescriptor::TypeOnceInit, this);
         }
-        return static_cast<FieldType>(type_) == FieldType::ENUM ? type_descriptor_.enum_type : nullptr;
+        return static_cast<SharkFieldType>(type_) == SharkFieldType::ENUM ? type_descriptor_.enum_type : nullptr;
     }
 
     const EnumValueDescriptor* FieldDescriptor::default_value_enum() const {
@@ -8087,7 +8087,7 @@ namespace shark {
     }
 
     const std::string& FieldDescriptor::PrintableNameForExtension() const {
-        const bool is_message_set_extension = is_extension() && containing_type()->options().message_set_wire_format() && type() == FieldType::MESSAGE && is_optional() && extension_scope() == message_type();
+        const bool is_message_set_extension = is_extension() && containing_type()->options().message_set_wire_format() && type() == SharkFieldType::MESSAGE && is_optional() && extension_scope() == message_type();
         return is_message_set_extension ? message_type()->full_name() : full_name();
     }
 

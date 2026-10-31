@@ -49,10 +49,10 @@ void SetMessageVariables(const FieldDescriptor* descriptor,
   const FieldDescriptor* val = descriptor->message_type()->map_value();
   (*variables)["key_cpp"] = PrimitiveTypeName(options, key->cpp_type());
   switch (val->cpp_type()) {
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       (*variables)["val_cpp"] = FieldMessageTypeName(val, options);
       break;
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       (*variables)["val_cpp"] = ClassName(val->enum_type(), true);
       break;
     default:
@@ -191,8 +191,8 @@ void MapFieldGenerator::GenerateSerializeWithCachedSizesToArray(
   format.Indent();
   const FieldDescriptor* key_field = descriptor_->message_type()->map_key();
   const FieldDescriptor* value_field = descriptor_->message_type()->map_value();
-  const bool string_key = key_field->type() == FieldType::STRING;
-  const bool string_value = value_field->type() == FieldType::STRING;
+  const bool string_key = key_field->type() == SharkFieldType::STRING;
+  const bool string_value = value_field->type() == SharkFieldType::STRING;
 
   format(
       "using MapType = ::_pb::Map<$key_cpp$, $val_cpp$>;\n"

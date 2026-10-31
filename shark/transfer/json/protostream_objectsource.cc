@@ -1085,7 +1085,7 @@ const shark::Field* FindFieldByNumber(
 bool IsPackable(const shark::Field& field) {
   return field.cardinality() == shark::FieldCardinality::REPEATED &&
          FieldDescriptor::IsTypePackable(
-             static_cast<FieldType>(field.kind()));
+             static_cast<SharkFieldType>(field.kind()));
 }
 
 // TODO(skarvaje): Speed this up by not doing a linear scan.

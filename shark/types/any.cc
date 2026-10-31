@@ -68,9 +68,9 @@ bool GetAnyFieldDescriptors(const Message& message,
   *type_url_field = descriptor->FindFieldByNumber(1);
   *value_field = descriptor->FindFieldByNumber(2);
   return (*type_url_field != nullptr &&
-          (*type_url_field)->type() == FieldType::STRING &&
+          (*type_url_field)->type() == SharkFieldType::STRING &&
           *value_field != nullptr &&
-          (*value_field)->type() == FieldType::BYTES);
+          (*value_field)->type() == SharkFieldType::BYTES);
 }
 
 }  // namespace shark::internal

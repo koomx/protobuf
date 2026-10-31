@@ -342,7 +342,7 @@ namespace shark::internal {
             // We store unknown MessageSet extensions as groups.
             return SkipMessageSetField(
                 input, field_number, message_reflection->MutableUnknownFields(message));
-        } else if (field->is_repeated() || field->type() != ::shark::FieldType::MESSAGE) {
+        } else if (field->is_repeated() || field->type() != ::shark::SharkFieldType::MESSAGE) {
             // This shouldn't happen as we only allow optional message extensions to
             // MessageSet.
             GOOGLE_LOG(ERROR) << "Extensions of MessageSets must be optional messages.";
@@ -392,7 +392,7 @@ namespace shark::internal {
 
             switch (field->type()) {
 #define HANDLE_PACKED_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                   \
-    case ::shark::FieldType::TYPE: {                                        \
+    case ::shark::SharkFieldType::TYPE: {                                        \
         while (input->BytesUntilLimit() > 0) {                              \
             CPPTYPE value;                                                  \
             if (!WireFormatLite::ReadPrimitive<CPPTYPE,                     \
@@ -405,15 +405,15 @@ namespace shark::internal {
     }
 
                 HANDLE_PACKED_TYPE(INT32, int32_t, Int32)
-            case ::shark::FieldType::INT8:
-            case ::shark::FieldType::INT16: {
+            case ::shark::SharkFieldType::INT8:
+            case ::shark::SharkFieldType::INT16: {
                 while (input->BytesUntilLimit() > 0) {
                     uint32_t temp;
                     if (!input->ReadVarint32(&temp))
                         return false;
                     int32_t value = static_cast<int32_t>(temp);
-                    int32_t limit = field->type() == ::shark::FieldType::INT8 ? 127 : 32767;
-                    int32_t min = field->type() == ::shark::FieldType::INT8 ? -128 : -32768;
+                    int32_t limit = field->type() == ::shark::SharkFieldType::INT8 ? 127 : 32767;
+                    int32_t min = field->type() == ::shark::SharkFieldType::INT8 ? -128 : -32768;
                     if (value < min || value > limit) {
                         message_reflection->MutableUnknownFields(message)->AddVarint(
                             field->number(), static_cast<uint64_t>(temp));
@@ -423,13 +423,13 @@ namespace shark::internal {
                 }
                 break;
             }
-            case ::shark::FieldType::UINT8:
-            case ::shark::FieldType::UINT16: {
+            case ::shark::SharkFieldType::UINT8:
+            case ::shark::SharkFieldType::UINT16: {
                 while (input->BytesUntilLimit() > 0) {
                     uint32_t value;
                     if (!input->ReadVarint32(&value))
                         return false;
-                    uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+                    uint32_t limit = field->type() == ::shark::SharkFieldType::UINT8 ? 255 : 65535;
                     if (value > limit) {
                         message_reflection->MutableUnknownFields(message)->AddVarint(
                             field->number(), value);
@@ -456,7 +456,7 @@ namespace shark::internal {
                 HANDLE_PACKED_TYPE(BOOL, bool, Bool)
 #undef HANDLE_PACKED_TYPE
 
-            case ::shark::FieldType::ENUM: {
+            case ::shark::SharkFieldType::ENUM: {
                 while (input->BytesUntilLimit() > 0) {
                     int value;
                     if (!WireFormatLite::ReadPrimitive<int, SharkFieldType::ENUM>(
@@ -475,9 +475,9 @@ namespace shark::internal {
                 break;
             }
 
-            case ::shark::FieldType::STRING:
-            case ::shark::FieldType::MESSAGE:
-            case ::shark::FieldType::BYTES:
+            case ::shark::SharkFieldType::STRING:
+            case ::shark::SharkFieldType::MESSAGE:
+            case ::shark::SharkFieldType::BYTES:
                 // Can't have packed fields of these types: these should be caught by
                 // the protocol compiler.
                 return false;
@@ -489,7 +489,7 @@ namespace shark::internal {
             // Non-packed value (value_format == NORMAL_FORMAT)
             switch (field->type()) {
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                                         \
-    case ::shark::FieldType::TYPE: {                                                       \
+    case ::shark::SharkFieldType::TYPE: {                                                       \
         CPPTYPE value;                                                                     \
         if (!WireFormatLite::ReadPrimitive<CPPTYPE, SharkFieldType::TYPE>( \
                 input, &value))                                                            \
@@ -503,14 +503,14 @@ namespace shark::internal {
     }
 
                 HANDLE_TYPE(INT32, int32_t, Int32)
-            case ::shark::FieldType::INT8:
-            case ::shark::FieldType::INT16: {
+            case ::shark::SharkFieldType::INT8:
+            case ::shark::SharkFieldType::INT16: {
                 uint32_t temp;
                 if (!input->ReadVarint32(&temp))
                     return false;
                 int32_t value = static_cast<int32_t>(temp);
-                int32_t limit = field->type() == ::shark::FieldType::INT8 ? 127 : 32767;
-                int32_t min = field->type() == ::shark::FieldType::INT8 ? -128 : -32768;
+                int32_t limit = field->type() == ::shark::SharkFieldType::INT8 ? 127 : 32767;
+                int32_t min = field->type() == ::shark::SharkFieldType::INT8 ? -128 : -32768;
                 if (value < min || value > limit) {
                     message_reflection->MutableUnknownFields(message)->AddVarint(
                         field->number(), static_cast<uint64_t>(temp));
@@ -521,12 +521,12 @@ namespace shark::internal {
                 }
                 break;
             }
-            case ::shark::FieldType::UINT8:
-            case ::shark::FieldType::UINT16: {
+            case ::shark::SharkFieldType::UINT8:
+            case ::shark::SharkFieldType::UINT16: {
                 uint32_t value;
                 if (!input->ReadVarint32(&value))
                     return false;
-                uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+                uint32_t limit = field->type() == ::shark::SharkFieldType::UINT8 ? 255 : 65535;
                 if (value > limit) {
                     message_reflection->MutableUnknownFields(message)->AddVarint(
                         field->number(), value);
@@ -554,7 +554,7 @@ namespace shark::internal {
                 HANDLE_TYPE(BOOL, bool, Bool)
 #undef HANDLE_TYPE
 
-            case ::shark::FieldType::ENUM: {
+            case ::shark::SharkFieldType::ENUM: {
                 int value;
                 if (!WireFormatLite::ReadPrimitive<int, SharkFieldType::ENUM>(
                         input, &value))
@@ -568,7 +568,7 @@ namespace shark::internal {
             }
 
             // Handle strings separately so that we can optimize the ctype=CORD case.
-            case ::shark::FieldType::STRING: {
+            case ::shark::SharkFieldType::STRING: {
                 bool strict_utf8_check = StrictUtf8Check(field);
                 std::string value;
                 if (!WireFormatLite::ReadString(input, &value))
@@ -591,7 +591,7 @@ namespace shark::internal {
                 break;
             }
 
-            case ::shark::FieldType::BYTES: {
+            case ::shark::SharkFieldType::BYTES: {
                 std::string value;
                 if (!WireFormatLite::ReadBytes(input, &value))
                     return false;
@@ -603,7 +603,7 @@ namespace shark::internal {
                 break;
             }
 
-            case ::shark::FieldType::MESSAGE: {
+            case ::shark::SharkFieldType::MESSAGE: {
                 Message* sub_message;
                 if (field->is_repeated()) {
                     sub_message = message_reflection->AddMessage(
@@ -807,7 +807,7 @@ namespace shark::internal {
             if (field->is_packable() && WireFormatLite::GetTagWireType(tag) == WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
                 switch (field->type()) {
 #define HANDLE_PACKED_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)                       \
-    case ::shark::FieldType::TYPE: {                                            \
+    case ::shark::SharkFieldType::TYPE: {                                            \
         ptr = internal::Packed##CPPTYPE_METHOD##Parser(                         \
             reflection->MutableRepeatedFieldInternal<CPPTYPE>(msg, field), ptr, \
             ctx);                                                               \
@@ -815,7 +815,7 @@ namespace shark::internal {
     }
 
                     HANDLE_PACKED_TYPE(INT32, int32_t, Int32)
-                case ::shark::FieldType::INT8: {
+                case ::shark::SharkFieldType::INT8: {
                     return ctx->ReadPackedVarint(
                         ptr, [msg, field, reflection](uint64_t raw) {
                             int32_t value = static_cast<int32_t>(static_cast<uint32_t>(raw));
@@ -827,7 +827,7 @@ namespace shark::internal {
                             }
                         });
                 }
-                case ::shark::FieldType::INT16: {
+                case ::shark::SharkFieldType::INT16: {
                     return ctx->ReadPackedVarint(
                         ptr, [msg, field, reflection](uint64_t raw) {
                             int32_t value = static_cast<int32_t>(static_cast<uint32_t>(raw));
@@ -839,9 +839,9 @@ namespace shark::internal {
                             }
                         });
                 }
-                case ::shark::FieldType::UINT8:
-                case ::shark::FieldType::UINT16: {
-                    uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+                case ::shark::SharkFieldType::UINT8:
+                case ::shark::SharkFieldType::UINT16: {
+                    uint32_t limit = field->type() == ::shark::SharkFieldType::UINT8 ? 255 : 65535;
                     return ctx->ReadPackedVarint(
                         ptr, [msg, field, reflection, limit](uint64_t raw) {
                             uint32_t value = static_cast<uint32_t>(raw);
@@ -870,7 +870,7 @@ namespace shark::internal {
                     HANDLE_PACKED_TYPE(BOOL, bool, Bool)
 #undef HANDLE_PACKED_TYPE
 
-                case ::shark::FieldType::ENUM: {
+                case ::shark::SharkFieldType::ENUM: {
                     auto rep_enum = reflection->MutableRepeatedFieldInternal<int>(msg, field);
                     return ctx->ReadPackedVarint(
                         ptr, [rep_enum, field, reflection, msg](uint64_t val) {
@@ -883,9 +883,9 @@ namespace shark::internal {
                         });
                 }
 
-                case ::shark::FieldType::STRING:
-                case ::shark::FieldType::MESSAGE:
-                case ::shark::FieldType::BYTES:
+                case ::shark::SharkFieldType::STRING:
+                case ::shark::SharkFieldType::MESSAGE:
+                case ::shark::SharkFieldType::BYTES:
                     GOOGLE_LOG(FATAL) << "Can't reach";
                     return nullptr;
                 }
@@ -901,7 +901,7 @@ namespace shark::internal {
         bool strict_utf8_check = false;
         switch (field->type()) {
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)              \
-    case ::shark::FieldType::TYPE: {                            \
+    case ::shark::SharkFieldType::TYPE: {                            \
         CPPTYPE value;                                          \
         ptr = VarintParse(ptr, &value);                         \
         if (ptr == nullptr)                                     \
@@ -916,15 +916,15 @@ namespace shark::internal {
 
             HANDLE_TYPE(BOOL, uint64_t, Bool)
             HANDLE_TYPE(INT32, uint32_t, Int32)
-        case ::shark::FieldType::INT8:
-        case ::shark::FieldType::INT16: {
+        case ::shark::SharkFieldType::INT8:
+        case ::shark::SharkFieldType::INT16: {
             uint32_t temp;
             ptr = VarintParse(ptr, &temp);
             if (ptr == nullptr)
                 return nullptr;
             int32_t value = static_cast<int32_t>(temp);
-            int32_t limit = field->type() == ::shark::FieldType::INT8 ? 127 : 32767;
-            int32_t min = field->type() == ::shark::FieldType::INT8 ? -128 : -32768;
+            int32_t limit = field->type() == ::shark::SharkFieldType::INT8 ? 127 : 32767;
+            int32_t min = field->type() == ::shark::SharkFieldType::INT8 ? -128 : -32768;
             if (value < min || value > limit) {
                 WriteVarint(field->number(), temp, reflection->MutableUnknownFields(msg));
             } else if (field->is_repeated()) {
@@ -934,13 +934,13 @@ namespace shark::internal {
             }
             return ptr;
         }
-        case ::shark::FieldType::UINT8:
-        case ::shark::FieldType::UINT16: {
+        case ::shark::SharkFieldType::UINT8:
+        case ::shark::SharkFieldType::UINT16: {
             uint32_t value;
             ptr = VarintParse(ptr, &value);
             if (ptr == nullptr)
                 return nullptr;
-            uint32_t limit = field->type() == ::shark::FieldType::UINT8 ? 255 : 65535;
+            uint32_t limit = field->type() == ::shark::SharkFieldType::UINT8 ? 255 : 65535;
             if (value > limit) {
                 WriteVarint(field->number(), value, reflection->MutableUnknownFields(msg));
             } else if (field->is_repeated()) {
@@ -954,7 +954,7 @@ namespace shark::internal {
             HANDLE_TYPE(UINT32, uint32_t, UInt32)
             HANDLE_TYPE(UINT64, uint64_t, UInt64)
 
-        case ::shark::FieldType::SINT32: {
+        case ::shark::SharkFieldType::SINT32: {
             int32_t value = ReadVarintZigZag32(&ptr);
             if (ptr == nullptr)
                 return nullptr;
@@ -965,7 +965,7 @@ namespace shark::internal {
             }
             return ptr;
         }
-        case ::shark::FieldType::SINT64: {
+        case ::shark::SharkFieldType::SINT64: {
             int64_t value = ReadVarintZigZag64(&ptr);
             if (ptr == nullptr)
                 return nullptr;
@@ -978,7 +978,7 @@ namespace shark::internal {
         }
 #undef HANDLE_TYPE
 #define HANDLE_TYPE(TYPE, CPPTYPE, CPPTYPE_METHOD)              \
-    case ::shark::FieldType::TYPE: {                            \
+    case ::shark::SharkFieldType::TYPE: {                            \
         CPPTYPE value;                                          \
         value = UnalignedLoad<CPPTYPE>(ptr);                    \
         ptr += sizeof(CPPTYPE);                                 \
@@ -1000,7 +1000,7 @@ namespace shark::internal {
 
 #undef HANDLE_TYPE
 
-        case ::shark::FieldType::ENUM: {
+        case ::shark::SharkFieldType::ENUM: {
             uint32_t value;
             ptr = VarintParse(ptr, &value);
             if (ptr == nullptr)
@@ -1014,11 +1014,11 @@ namespace shark::internal {
         }
 
         // Handle strings separately so that we can optimize the ctype=CORD case.
-        case ::shark::FieldType::STRING:
+        case ::shark::SharkFieldType::STRING:
             utf8_check = true;
             strict_utf8_check = StrictUtf8Check(field);
             [[fallthrough]];
-        case ::shark::FieldType::BYTES: {
+        case ::shark::SharkFieldType::BYTES: {
             int size = ReadSize(&ptr);
             if (ptr == nullptr)
                 return nullptr;
@@ -1046,7 +1046,7 @@ namespace shark::internal {
             return ptr;
         }
 
-        case ::shark::FieldType::MESSAGE: {
+        case ::shark::SharkFieldType::MESSAGE: {
             Message* sub_message;
             if (field->is_repeated()) {
                 sub_message = reflection->AddMessage(msg, field, ctx->data().factory);
@@ -1098,15 +1098,15 @@ namespace shark::internal {
         io::EpsCopyOutputStream* stream) {
         target = stream->EnsureSpace(target);
         switch (field->type()) {
-        case ::shark::FieldType::DOUBLE:
-        case ::shark::FieldType::FLOAT:
-        case ::shark::FieldType::MESSAGE:
-        case ::shark::FieldType::BYTES:
-        case ::shark::FieldType::ENUM:
+        case ::shark::SharkFieldType::DOUBLE:
+        case ::shark::SharkFieldType::FLOAT:
+        case ::shark::SharkFieldType::MESSAGE:
+        case ::shark::SharkFieldType::BYTES:
+        case ::shark::SharkFieldType::ENUM:
             GOOGLE_LOG(FATAL) << "Unsupported";
             break;
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType)           \
-    case ::shark::FieldType::kType:                              \
+    case ::shark::SharkFieldType::kType:                              \
         target = WireFormatLite::Write##CamelFieldType##ToArray( \
             1, value.Get##CamelCppType##Value(), target);        \
         break;
@@ -1126,7 +1126,7 @@ namespace shark::internal {
             CASE_TYPE(SINT32, SInt32, Int32)
             CASE_TYPE(SINT64, SInt64, Int64)
 #undef CASE_TYPE
-        case ::shark::FieldType::STRING:
+        case ::shark::SharkFieldType::STRING:
             target = stream->WriteString(1, value.GetStringValue(), target);
             break;
         }
@@ -1139,7 +1139,7 @@ namespace shark::internal {
         target = stream->EnsureSpace(target);
         switch (field->type()) {
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType)           \
-    case ::shark::FieldType::kType:                              \
+    case ::shark::SharkFieldType::kType:                              \
         target = WireFormatLite::Write##CamelFieldType##ToArray( \
             2, value.Get##CamelCppType##Value(), target);        \
         break;
@@ -1162,11 +1162,11 @@ namespace shark::internal {
             CASE_TYPE(DOUBLE, Double, Double)
             CASE_TYPE(FLOAT, Float, Float)
 #undef CASE_TYPE
-        case ::shark::FieldType::STRING:
-        case ::shark::FieldType::BYTES:
+        case ::shark::SharkFieldType::STRING:
+        case ::shark::SharkFieldType::BYTES:
             target = stream->WriteString(2, value.GetStringValue(), target);
             break;
-        case ::shark::FieldType::MESSAGE: {
+        case ::shark::SharkFieldType::MESSAGE: {
             auto& msg = value.GetMessageValue();
             target = WireFormatLite::InternalWriteMessage(2, msg, msg.GetCachedSize(),
                 target, stream);
@@ -1198,7 +1198,7 @@ namespace shark::internal {
                 GOOGLE_DCHECK(a.type() == b.type());
                 switch (a.type()) {
 #define CASE_TYPE(kCpp, CamelCppType)                                       \
-    case ::shark::FieldCppType::kCpp: {                                     \
+    case ::shark::SharkFieldCppType::CPPTYPE_##kCpp: {                                     \
         return a.Get##CamelCppType##Value() < b.Get##CamelCppType##Value(); \
     }
                     CASE_TYPE(STRING, String)
@@ -1247,7 +1247,7 @@ namespace shark::internal {
         io::EpsCopyOutputStream* stream) {
         const Reflection* message_reflection = message.GetReflection();
 
-        if (field->is_extension() && field->containing_type()->options().message_set_wire_format() && field->cpp_type() == ::shark::FieldCppType::MESSAGE && !field->is_repeated()) {
+        if (field->is_extension() && field->containing_type()->options().message_set_wire_format() && field->cpp_type() == ::shark::SharkFieldCppType::CPPTYPE_MESSAGE && !field->is_repeated()) {
             return InternalSerializeMessageSetItem(field, message, target, stream);
         }
 
@@ -1312,7 +1312,7 @@ namespace shark::internal {
             target = stream->EnsureSpace(target);
             switch (field->type()) {
 #define HANDLE_PRIMITIVE_TYPE(TYPE, CPPTYPE, TYPE_METHOD, CPPTYPE_METHOD)               \
-    case ::shark::FieldType::TYPE: {                                                    \
+    case ::shark::SharkFieldType::TYPE: {                                                    \
         auto r = message_reflection->GetRepeatedFieldInternal<CPPTYPE>(message, field); \
         target = stream->Write##TYPE_METHOD##Packed(                                    \
             field->number(), r, FieldDataOnlyByteSize(field, message), target);         \
@@ -1333,7 +1333,7 @@ namespace shark::internal {
 
 #undef HANDLE_PRIMITIVE_TYPE
 #define HANDLE_PRIMITIVE_TYPE(TYPE, CPPTYPE, TYPE_METHOD, CPPTYPE_METHOD)               \
-    case ::shark::FieldType::TYPE: {                                                    \
+    case ::shark::SharkFieldType::TYPE: {                                                    \
         auto r = message_reflection->GetRepeatedFieldInternal<CPPTYPE>(message, field); \
         target = stream->WriteFixedPacked(field->number(), r, target);                  \
         break;                                                                          \
@@ -1369,7 +1369,7 @@ namespace shark::internal {
             target = stream->EnsureSpace(target);
             switch (field->type()) {
 #define HANDLE_PRIMITIVE_TYPE(TYPE, CPPTYPE, TYPE_METHOD, CPPTYPE_METHOD)     \
-    case ::shark::FieldType::TYPE: {                                          \
+    case ::shark::SharkFieldType::TYPE: {                                          \
         const CPPTYPE value = field->is_repeated()                            \
             ? message_reflection->GetRepeated##CPPTYPE_METHOD(message, field, \
                   j)                                                          \
@@ -1401,13 +1401,13 @@ namespace shark::internal {
                 HANDLE_PRIMITIVE_TYPE(BOOL, bool, Bool, Bool)
 #undef HANDLE_PRIMITIVE_TYPE
 
-            case ::shark::FieldType::MESSAGE: {
+            case ::shark::SharkFieldType::MESSAGE: {
                 auto* msg = get_message_from_field(field, j);
                 target = WireFormatLite::InternalWriteMessage(
                     field->number(), *msg, msg->GetCachedSize(), target, stream);
             } break;
 
-            case ::shark::FieldType::ENUM: {
+            case ::shark::SharkFieldType::ENUM: {
                 const EnumValueDescriptor* value = field->is_repeated()
                     ? message_reflection->GetRepeatedEnum(message, field, j)
                     : message_reflection->GetEnum(message, field);
@@ -1418,7 +1418,7 @@ namespace shark::internal {
 
             // Handle strings separately so that we can get string references
             // instead of copying.
-            case ::shark::FieldType::STRING: {
+            case ::shark::SharkFieldType::STRING: {
                 bool strict_utf8_check = StrictUtf8Check(field);
                 std::string scratch;
                 const std::string& value = field->is_repeated()
@@ -1438,7 +1438,7 @@ namespace shark::internal {
                 break;
             }
 
-            case ::shark::FieldType::BYTES: {
+            case ::shark::SharkFieldType::BYTES: {
                 std::string scratch;
                 const std::string& value = field->is_repeated()
                     ? message_reflection->GetRepeatedStringReference(message, field,
@@ -1507,7 +1507,7 @@ namespace shark::internal {
         const Message& message) {
         const Reflection* message_reflection = message.GetReflection();
 
-        if (field->is_extension() && field->containing_type()->options().message_set_wire_format() && field->cpp_type() == ::shark::FieldCppType::MESSAGE && !field->is_repeated()) {
+        if (field->is_extension() && field->containing_type()->options().message_set_wire_format() && field->cpp_type() == ::shark::SharkFieldCppType::CPPTYPE_MESSAGE && !field->is_repeated()) {
             return MessageSetItemByteSize(field, message);
         }
 
@@ -1537,7 +1537,7 @@ namespace shark::internal {
                 // Packed fields get serialized like a string, not their native type.
                 // Technically this doesn't really matter; the size only changes if it's
                 // a GROUP
-                our_size += TagSize(field->number(), ::shark::FieldType::STRING);
+                our_size += TagSize(field->number(), ::shark::SharkFieldType::STRING);
                 our_size += io::CodedOutputStream::VarintSize32(data_size);
             }
         } else {
@@ -1550,20 +1550,20 @@ namespace shark::internal {
         const MapKey& value) {
         GOOGLE_DCHECK_EQ(FieldDescriptor::TypeToCppType(field->type()), value.type());
         switch (field->type()) {
-        case ::shark::FieldType::DOUBLE:
-        case ::shark::FieldType::FLOAT:
-        case ::shark::FieldType::MESSAGE:
-        case ::shark::FieldType::BYTES:
-        case ::shark::FieldType::ENUM:
+        case ::shark::SharkFieldType::DOUBLE:
+        case ::shark::SharkFieldType::FLOAT:
+        case ::shark::SharkFieldType::MESSAGE:
+        case ::shark::SharkFieldType::BYTES:
+        case ::shark::SharkFieldType::ENUM:
             GOOGLE_LOG(FATAL) << "Unsupported";
             return 0;
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType) \
-    case ::shark::FieldType::kType:                    \
+    case ::shark::SharkFieldType::kType:                    \
         return WireFormatLite::CamelFieldType##Size(   \
             value.Get##CamelCppType##Value());
 
 #define FIXED_CASE_TYPE(kType, CamelFieldType) \
-    case ::shark::FieldType::kType:            \
+    case ::shark::SharkFieldType::kType:            \
         return WireFormatLite::k##CamelFieldType##Size;
 
             CASE_TYPE(INT8, Int32, Int32);
@@ -1594,12 +1594,12 @@ namespace shark::internal {
         const MapValueConstRef& value) {
         switch (field->type()) {
 #define CASE_TYPE(kType, CamelFieldType, CamelCppType) \
-    case ::shark::FieldType::kType:                    \
+    case ::shark::SharkFieldType::kType:                    \
         return WireFormatLite::CamelFieldType##Size(   \
             value.Get##CamelCppType##Value());
 
 #define FIXED_CASE_TYPE(kType, CamelFieldType) \
-    case ::shark::FieldType::kType:            \
+    case ::shark::SharkFieldType::kType:            \
         return WireFormatLite::k##CamelFieldType##Size;
 
             CASE_TYPE(INT8, Int32, Int32);
@@ -1667,7 +1667,7 @@ namespace shark::internal {
 
         switch (field->type()) {
 #define HANDLE_TYPE(TYPE, TYPE_METHOD, CPPTYPE_METHOD)                              \
-    case ::shark::FieldType::TYPE:                                                  \
+    case ::shark::SharkFieldType::TYPE:                                                  \
         if (field->is_repeated()) {                                                 \
             for (size_t j = 0; j < count; j++) {                                    \
                 data_size += WireFormatLite::TYPE_METHOD##Size(                     \
@@ -1681,7 +1681,7 @@ namespace shark::internal {
         break;
 
 #define HANDLE_FIXED_TYPE(TYPE, TYPE_METHOD)                       \
-    case ::shark::FieldType::TYPE:                                 \
+    case ::shark::SharkFieldType::TYPE:                                 \
         data_size += count * WireFormatLite::k##TYPE_METHOD##Size; \
         break;
 
@@ -1710,7 +1710,7 @@ namespace shark::internal {
 #undef HANDLE_TYPE
 #undef HANDLE_FIXED_TYPE
 
-        case ::shark::FieldType::ENUM: {
+        case ::shark::SharkFieldType::ENUM: {
             if (field->is_repeated()) {
                 for (size_t j = 0; j < count; j++) {
                     data_size += WireFormatLite::EnumSize(
@@ -1725,8 +1725,8 @@ namespace shark::internal {
 
         // Handle strings separately so that we can get string references
         // instead of copying.
-        case ::shark::FieldType::STRING:
-        case ::shark::FieldType::BYTES: {
+        case ::shark::SharkFieldType::STRING:
+        case ::shark::SharkFieldType::BYTES: {
             for (size_t j = 0; j < count; j++) {
                 std::string scratch;
                 const std::string& value = field->is_repeated()

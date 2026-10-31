@@ -161,71 +161,71 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     out->set_name(field->is_extension() ? field->full_name() : field->name());
     Any* value = out->mutable_value();
     switch (field->cpp_type()) {
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         value->PackFrom(
             field->is_repeated()
                 ? reflection->GetRepeatedMessage(options, field, index)
                 : reflection->GetMessage(options, field));
         return;
-      case FieldCppType::DOUBLE:
+      case SharkFieldCppType::CPPTYPE_DOUBLE:
         value->PackFrom(WrapValue<DoubleValue>(
             field->is_repeated()
                 ? reflection->GetRepeatedDouble(options, field, index)
                 : reflection->GetDouble(options, field)));
         return;
-      case FieldCppType::FLOAT:
+      case SharkFieldCppType::CPPTYPE_FLOAT:
         value->PackFrom(WrapValue<FloatValue>(
             field->is_repeated()
                 ? reflection->GetRepeatedFloat(options, field, index)
                 : reflection->GetFloat(options, field)));
         return;
-      case FieldCppType::INT64:
+      case SharkFieldCppType::CPPTYPE_INT64:
         value->PackFrom(WrapValue<Int64Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedInt64(options, field, index)
                 : reflection->GetInt64(options, field)));
         return;
-      case FieldCppType::UINT64:
+      case SharkFieldCppType::CPPTYPE_UINT64:
         value->PackFrom(WrapValue<UInt64Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedUInt64(options, field, index)
                 : reflection->GetUInt64(options, field)));
         return;
-      case FieldCppType::INT32:
-      case FieldCppType::INT8:
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT32:
+      case SharkFieldCppType::CPPTYPE_INT8:
+      case SharkFieldCppType::CPPTYPE_INT16:
         value->PackFrom(WrapValue<Int32Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedInt32(options, field, index)
                 : reflection->GetInt32(options, field)));
         return;
-      case FieldCppType::UINT32:
-      case FieldCppType::UINT8:
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT32:
+      case SharkFieldCppType::CPPTYPE_UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         value->PackFrom(WrapValue<UInt32Value>(
             field->is_repeated()
                 ? reflection->GetRepeatedUInt32(options, field, index)
                 : reflection->GetUInt32(options, field)));
         return;
-      case FieldCppType::BOOL:
+      case SharkFieldCppType::CPPTYPE_BOOL:
         value->PackFrom(WrapValue<BoolValue>(
             field->is_repeated()
                 ? reflection->GetRepeatedBool(options, field, index)
                 : reflection->GetBool(options, field)));
         return;
-      case FieldCppType::STRING: {
+      case SharkFieldCppType::CPPTYPE_STRING: {
         const std::string& val =
             field->is_repeated()
                 ? reflection->GetRepeatedString(options, field, index)
                 : reflection->GetString(options, field);
-        if (field->type() == FieldType::STRING) {
+        if (field->type() == SharkFieldType::STRING) {
           value->PackFrom(WrapValue<StringValue>(val));
         } else {
           value->PackFrom(WrapValue<BytesValue>(val));
         }
         return;
       }
-      case FieldCppType::ENUM: {
+      case SharkFieldCppType::CPPTYPE_ENUM: {
         const EnumValueDescriptor* val =
             field->is_repeated()
                 ? reflection->GetRepeatedEnum(options, field, index)
@@ -262,9 +262,9 @@ class DescriptorPoolTypeResolver : public TypeResolver {
     if (descriptor->has_default_value()) {
       field->set_default_value(DefaultValueAsString(descriptor));
     }
-    if (descriptor->type() == FieldType::MESSAGE) {
+    if (descriptor->type() == SharkFieldType::MESSAGE) {
       field->set_type_url(GetTypeUrl(descriptor->message_type()));
-    } else if (descriptor->type() == FieldType::ENUM) {
+    } else if (descriptor->type() == SharkFieldType::ENUM) {
       field->set_type_url(GetTypeUrl(descriptor->enum_type()));
     }
     if (descriptor->containing_oneof() != NULL) {
@@ -317,42 +317,42 @@ class DescriptorPoolTypeResolver : public TypeResolver {
 
   std::string DefaultValueAsString(const FieldDescriptor* descriptor) {
     switch (descriptor->cpp_type()) {
-      case FieldCppType::INT32:
-      case FieldCppType::INT8:
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT32:
+      case SharkFieldCppType::CPPTYPE_INT8:
+      case SharkFieldCppType::CPPTYPE_INT16:
         return StrCat(descriptor->default_value_int32());
         break;
-      case FieldCppType::INT64:
+      case SharkFieldCppType::CPPTYPE_INT64:
         return StrCat(descriptor->default_value_int64());
         break;
-      case FieldCppType::UINT32:
-      case FieldCppType::UINT8:
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT32:
+      case SharkFieldCppType::CPPTYPE_UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         return StrCat(descriptor->default_value_uint32());
         break;
-      case FieldCppType::UINT64:
+      case SharkFieldCppType::CPPTYPE_UINT64:
         return StrCat(descriptor->default_value_uint64());
         break;
-      case FieldCppType::FLOAT:
+      case SharkFieldCppType::CPPTYPE_FLOAT:
         return SimpleFtoa(descriptor->default_value_float());
         break;
-      case FieldCppType::DOUBLE:
+      case SharkFieldCppType::CPPTYPE_DOUBLE:
         return SimpleDtoa(descriptor->default_value_double());
         break;
-      case FieldCppType::BOOL:
+      case SharkFieldCppType::CPPTYPE_BOOL:
         return descriptor->default_value_bool() ? "true" : "false";
         break;
-      case FieldCppType::STRING:
-        if (descriptor->type() == FieldType::BYTES) {
+      case SharkFieldCppType::CPPTYPE_STRING:
+        if (descriptor->type() == SharkFieldType::BYTES) {
           return CEscape(descriptor->default_value_string());
         } else {
           return descriptor->default_value_string();
         }
         break;
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return descriptor->default_value_enum()->name();
         break;
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         GOOGLE_LOG(DFATAL) << "Messages can't have default values!";
         break;
     }

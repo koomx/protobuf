@@ -411,7 +411,7 @@ void MessageDifferencer::TreatAsSmartList(const FieldDescriptor* field) {
 
 void MessageDifferencer::TreatAsMap(const FieldDescriptor* field,
                                     const FieldDescriptor* key) {
-  GOOGLE_CHECK_EQ(FieldCppType::MESSAGE, field->cpp_type())
+  GOOGLE_CHECK_EQ(SharkFieldCppType::CPPTYPE_MESSAGE, field->cpp_type())
       << "Field has to be message type.  Field name is: " << field->full_name();
   GOOGLE_CHECK(key->containing_type() == field->message_type())
       << key->full_name()
@@ -445,7 +445,7 @@ void MessageDifferencer::TreatAsMapWithMultipleFieldPathsAsKey(
     const std::vector<std::vector<const FieldDescriptor*> >& key_field_paths) {
   GOOGLE_CHECK(field->is_repeated())
       << "Field must be repeated: " << field->full_name();
-  GOOGLE_CHECK_EQ(FieldCppType::MESSAGE, field->cpp_type())
+  GOOGLE_CHECK_EQ(SharkFieldCppType::CPPTYPE_MESSAGE, field->cpp_type())
       << "Field has to be message type.  Field name is: " << field->full_name();
   for (const auto& key_field_path : key_field_paths) {
     for (size_t j = 0; j < key_field_path.size(); ++j) {
@@ -457,7 +457,7 @@ void MessageDifferencer::TreatAsMapWithMultipleFieldPathsAsKey(
           << " must be a direct subfield within the field: "
           << parent_field->full_name();
       if (j != 0) {
-        GOOGLE_CHECK_EQ(FieldCppType::MESSAGE, parent_field->cpp_type())
+        GOOGLE_CHECK_EQ(SharkFieldCppType::CPPTYPE_MESSAGE, parent_field->cpp_type())
             << parent_field->full_name() << " has to be of type message.";
         GOOGLE_CHECK(!parent_field->is_repeated())
             << parent_field->full_name() << " cannot be a repeated field.";
@@ -934,7 +934,7 @@ bool MessageDifferencer::IsMatch(
     const Message* message2, const std::vector<SpecificField>& parent_fields,
     Reporter* reporter, int index1, int index2) {
   std::vector<SpecificField> current_parent_fields(parent_fields);
-  if (repeated_field->cpp_type() != FieldCppType::MESSAGE) {
+  if (repeated_field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) {
     return CompareFieldValueUsingParentFields(*message1, *message2,
                                               repeated_field, index1, index2,
                                               &current_parent_fields);
@@ -1011,7 +1011,7 @@ bool MessageDifferencer::CompareMapFieldByMapReflection(
   const FieldDescriptor* val_des = map_field->message_type()->map_value();
   switch (val_des->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, METHOD, COMPAREMETHOD)                           \
-  case FieldCppType::CPPTYPE: {                                  \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                                  \
     for (MapIterator it = reflection1->MapBegin(                              \
                          const_cast<Message*>(&message1), map_field),         \
                      it_end = reflection1->MapEnd(                            \
@@ -1041,7 +1041,7 @@ bool MessageDifferencer::CompareMapFieldByMapReflection(
     HANDLE_TYPE(STRING, StringValue, String);
     HANDLE_TYPE(ENUM, EnumValue, Int32);
 #undef HANDLE_TYPE
-    case FieldCppType::MESSAGE: {
+    case SharkFieldCppType::CPPTYPE_MESSAGE: {
       for (MapIterator it = reflection1->MapBegin(
                const_cast<Message*>(&message1), map_field);
            it !=
@@ -1284,7 +1284,7 @@ bool MessageDifferencer::CompareFieldValueUsingParentFields(
   FieldComparator::ComparisonResult result = GetFieldComparisonResult(
       message1, message2, field, index1, index2, &field_context);
 
-  if (field->cpp_type() == FieldCppType::MESSAGE &&
+  if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE &&
       result == FieldComparator::RECURSE) {
     // Get the nested messages and compare them using one of the Compare
     // methods.
@@ -1866,7 +1866,7 @@ bool MessageDifferencer::MatchRepeatedFieldIndices(
           if (match) {
             num_diffs_list1[i] = 0;
           } else if (repeated_field->cpp_type() ==
-                     FieldCppType::MESSAGE) {
+                     SharkFieldCppType::CPPTYPE_MESSAGE) {
             // Replace with the one with fewer diffs.
             const int32_t num_diffs = num_diffs_reporter.GetNumDiffs();
             if (num_diffs < num_diffs_list1[i]) {
@@ -2011,7 +2011,7 @@ void MessageDifferencer::StreamReporter::PrintValue(
   if (field != NULL) {
     std::string output;
     int index = left_side ? specific_field.index : specific_field.new_index;
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       const Reflection* reflection = message.GetReflection();
       const Message& field_message =
           field->is_repeated()
@@ -2021,7 +2021,7 @@ void MessageDifferencer::StreamReporter::PrintValue(
 
       if (field->is_map() && message1_ != nullptr && message2_ != nullptr) {
         fd = field_message.GetDescriptor()->field(1);
-        if (fd->cpp_type() == FieldCppType::MESSAGE) {
+        if (fd->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
           output = PrintShortTextFormat(
               field_message.GetReflection()->GetMessage(field_message, fd));
         } else {
@@ -2034,7 +2034,7 @@ void MessageDifferencer::StreamReporter::PrintValue(
         printer_->Print("{ }");
       } else {
         if ((fd != nullptr) &&
-            (fd->cpp_type() != FieldCppType::MESSAGE)) {
+            (fd->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE)) {
           printer_->PrintRaw(output);
         } else {
           printer_->Print("{ $name$ }", "name", output);
@@ -2099,7 +2099,7 @@ void MessageDifferencer::StreamReporter::PrintMapKey(
   if (found_message != nullptr) {
     // NB: the map key is always the first field
     const FieldDescriptor* fd = found_message->GetDescriptor()->field(0);
-    if (fd->cpp_type() == FieldCppType::STRING) {
+    if (fd->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
       // Not using PrintFieldValueToString for strings to avoid extra
       // characters
       key_string = found_message->GetReflection()->GetString(
@@ -2140,7 +2140,7 @@ void MessageDifferencer::StreamReporter::ReportModified(
   if (!report_modified_aggregates_ && field_path.back().field == NULL) {
   } else if (!report_modified_aggregates_) {
     if (field_path.back().field->cpp_type() ==
-        FieldCppType::MESSAGE) {
+        SharkFieldCppType::CPPTYPE_MESSAGE) {
       // Any changes to the subfields have already been printed.
       return;
     }

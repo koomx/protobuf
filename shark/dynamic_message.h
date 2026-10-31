@@ -176,36 +176,36 @@ class SHARK_EXPORT DynamicMapSorter {
     bool operator()(const Message* a, const Message* b) {
       const Reflection* reflection = a->GetReflection();
       switch (field_->cpp_type()) {
-        case FieldCppType::BOOL: {
+        case SharkFieldCppType::CPPTYPE_BOOL: {
           bool first = reflection->GetBool(*a, field_);
           bool second = reflection->GetBool(*b, field_);
           return first < second;
         }
-        case FieldCppType::INT32:
-        case FieldCppType::INT8:
-        case FieldCppType::INT16: {
+        case SharkFieldCppType::CPPTYPE_INT32:
+        case SharkFieldCppType::CPPTYPE_INT8:
+        case SharkFieldCppType::CPPTYPE_INT16: {
           int32_t first = reflection->GetInt32(*a, field_);
           int32_t second = reflection->GetInt32(*b, field_);
           return first < second;
         }
-        case FieldCppType::INT64: {
+        case SharkFieldCppType::CPPTYPE_INT64: {
           int64_t first = reflection->GetInt64(*a, field_);
           int64_t second = reflection->GetInt64(*b, field_);
           return first < second;
         }
-        case FieldCppType::UINT32:
-        case FieldCppType::UINT8:
-        case FieldCppType::UINT16: {
+        case SharkFieldCppType::CPPTYPE_UINT32:
+        case SharkFieldCppType::CPPTYPE_UINT8:
+        case SharkFieldCppType::CPPTYPE_UINT16: {
           uint32_t first = reflection->GetUInt32(*a, field_);
           uint32_t second = reflection->GetUInt32(*b, field_);
           return first < second;
         }
-        case FieldCppType::UINT64: {
+        case SharkFieldCppType::CPPTYPE_UINT64: {
           uint64_t first = reflection->GetUInt64(*a, field_);
           uint64_t second = reflection->GetUInt64(*b, field_);
           return first < second;
         }
-        case FieldCppType::STRING: {
+        case SharkFieldCppType::CPPTYPE_STRING: {
           std::string first = reflection->GetString(*a, field_);
           std::string second = reflection->GetString(*b, field_);
           return first < second;

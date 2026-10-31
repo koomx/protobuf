@@ -73,21 +73,21 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
   }                                                                           \
   break;  // Make sure no fall-through is introduced.
 
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       COMPARE_FIELD(Bool);
-    case FieldCppType::DOUBLE:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
       COMPARE_FIELD(Double);
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       COMPARE_FIELD(Enum);
-    case FieldCppType::FLOAT:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
       COMPARE_FIELD(Float);
-    case FieldCppType::INT32:
-    case FieldCppType::INT8:
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT32:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
       COMPARE_FIELD(Int32);
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       COMPARE_FIELD(Int64);
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       if (field->is_repeated()) {
         // Allocate scratch strings to store the result if a conversion is
         // needed.
@@ -110,16 +110,16 @@ FieldComparator::ComparisonResult SimpleFieldComparator::SimpleCompare(
             reflection_2->GetStringReference(message_2, field, &scratch2)));
       }
       break;
-    case FieldCppType::UINT32:
-    case FieldCppType::UINT8:
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       COMPARE_FIELD(UInt32);
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       COMPARE_FIELD(UInt64);
 
 #undef COMPARE_FIELD
 
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return RECURSE;
 
     default:
@@ -145,8 +145,8 @@ void SimpleFieldComparator::SetDefaultFractionAndMargin(double fraction,
 void SimpleFieldComparator::SetFractionAndMargin(const FieldDescriptor* field,
                                                  double fraction,
                                                  double margin) {
-  GOOGLE_CHECK(FieldCppType::FLOAT == field->cpp_type() ||
-        FieldCppType::DOUBLE == field->cpp_type())
+  GOOGLE_CHECK(SharkFieldCppType::CPPTYPE_FLOAT == field->cpp_type() ||
+        SharkFieldCppType::CPPTYPE_DOUBLE == field->cpp_type())
       << "Field has to be float or double type. Field name is: "
       << field->full_name();
   map_tolerance_[field] = Tolerance(fraction, margin);

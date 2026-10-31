@@ -149,20 +149,20 @@ struct ExtensionRangeSorter {
 bool IsPOD(const FieldDescriptor* field) {
   if (field->is_repeated() || field->is_extension()) return false;
   switch (field->cpp_type()) {
-    case FieldCppType::ENUM:
-    case FieldCppType::INT32:
-    case FieldCppType::INT64:
-    case FieldCppType::UINT32:
-    case FieldCppType::UINT64:
-    case FieldCppType::FLOAT:
-    case FieldCppType::DOUBLE:
-    case FieldCppType::BOOL:
-    case FieldCppType::INT8:
-    case FieldCppType::UINT8:
-    case FieldCppType::INT16:
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_ENUM:
+    case SharkFieldCppType::CPPTYPE_INT32:
+    case SharkFieldCppType::CPPTYPE_INT64:
+    case SharkFieldCppType::CPPTYPE_UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT64:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
+    case SharkFieldCppType::CPPTYPE_BOOL:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return true;
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       return false;
     default:
       return false;
@@ -182,7 +182,7 @@ bool CanBeManipulatedAsRawBytes(const FieldDescriptor* field,
   // this in Clear, as we need to potentially delete the existing value.
   ret =
       ret || (!field->is_repeated() && !IsLazy(field, options, scc_analyzer) &&
-              field->cpp_type() == FieldCppType::MESSAGE);
+              field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE);
   return ret;
 }
 
@@ -228,12 +228,12 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
   // Merge and serialize semantics: primitive fields are merged/serialized only
   // if non-zero (numeric) or non-empty (string).
   if (!field->is_repeated() && !field->containing_oneof()) {
-    if (field->cpp_type() == FieldCppType::STRING) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
       format("if (!$prefix$_internal_$name$().empty()) {\n");
-    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       // Message fields still have has_$name$() methods.
       format("if ($prefix$_internal_has_$name$()) {\n");
-    } else if (field->cpp_type() == FieldCppType::FLOAT) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_FLOAT) {
       format(
           "static_assert(sizeof(uint32_t) == sizeof(float), \"Code assumes "
           "uint32_t and float are the same size.\");\n"
@@ -241,7 +241,7 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
           "uint32_t raw_$name$;\n"
           "memcpy(&raw_$name$, &tmp_$name$, sizeof(tmp_$name$));\n"
           "if (raw_$name$ != 0) {\n");
-    } else if (field->cpp_type() == FieldCppType::DOUBLE) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_DOUBLE) {
       format(
           "static_assert(sizeof(uint64_t) == sizeof(double), \"Code assumes "
           "uint64_t and double are the same size.\");\n"
@@ -249,7 +249,7 @@ bool EmitFieldNonDefaultCondition(io::Printer* printer,
           "uint64_t raw_$name$;\n"
           "memcpy(&raw_$name$, &tmp_$name$, sizeof(tmp_$name$));\n"
           "if (raw_$name$ != 0) {\n");
-    } else if (field->cpp_type() == FieldCppType::ENUM) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM) {
       format(
           "if ($1$Trait::to_underlying($prefix$_internal_$name$()) != 0) {\n",
           QualifiedClassName(field->enum_type()));
@@ -281,10 +281,10 @@ void CollectMapInfo(const Options& options, const Descriptor* descriptor,
   const FieldDescriptor* val = descriptor->map_value();
   vars["key_cpp"] = PrimitiveTypeName(options, key->cpp_type());
   switch (val->cpp_type()) {
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       vars["val_cpp"] = FieldMessageTypeName(val, options);
       break;
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       vars["val_cpp"] = ClassName(val->enum_type(), true);
       break;
     default:
@@ -1079,7 +1079,7 @@ void MessageGenerator::GenerateSingularFieldHasBits(
         "  bool value = "
         "($has_bits$[$has_array_index$] & 0x$has_mask$u) != 0;\n");
 
-    if (field->cpp_type() == FieldCppType::MESSAGE &&
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE &&
         !IsLazy(field, options_, scc_analyzer_)) {
       // We maintain the invariant that for a submessage x, has_x() returning
       // true implies that x_ is not null. By giving this information to the
@@ -1094,7 +1094,7 @@ void MessageGenerator::GenerateSingularFieldHasBits(
         "$annotate_has$"
         "  return _internal_has_$name$();\n"
         "}\n");
-  } else if (field->cpp_type() == FieldCppType::MESSAGE) {
+  } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
     // Message fields have a has_$name$() method.
     if (IsLazy(field, options_, scc_analyzer_)) {
       format(
@@ -1315,7 +1315,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
         "reinterpret_cast<const "
         "$classname$*>(&_$classname$_default_instance_); }\n");
     auto utf8_check = GetUtf8CheckMode(descriptor_->field(0), options_);
-    if (descriptor_->field(0)->type() == FieldType::STRING &&
+    if (descriptor_->field(0)->type() == SharkFieldType::STRING &&
         utf8_check != Utf8CheckMode::kNone) {
       if (utf8_check == Utf8CheckMode::kStrict) {
         format(
@@ -1344,7 +1344,7 @@ void MessageGenerator::GenerateClassDefinition(io::Printer* printer) {
     } else {
       format("  static bool ValidateKey(void*) { return true; }\n");
     }
-    if (descriptor_->field(1)->type() == FieldType::STRING &&
+    if (descriptor_->field(1)->type() == SharkFieldType::STRING &&
         utf8_check != Utf8CheckMode::kNone) {
       if (utf8_check == Utf8CheckMode::kStrict) {
         format(
@@ -3148,8 +3148,8 @@ void MessageGenerator::GenerateClear(io::Printer* printer) {
       // TODO(kenton):  Let the CppFieldGenerator decide this somehow.
       bool have_enclosing_if =
           HasBitIndex(field) != kNoHasbit &&
-          (field->cpp_type() == FieldCppType::MESSAGE ||
-           field->cpp_type() == FieldCppType::STRING);
+          (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE ||
+           field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING);
 
       if (have_enclosing_if) {
         PrintPresenceCheck(format, field, has_bit_indices_, printer,
@@ -4411,7 +4411,7 @@ void MessageGenerator::GenerateIsInitialized(io::Printer* printer) {
   for (auto oneof : OneOfRange(descriptor_)) {
     bool has_required_fields = false;
     for (auto field : FieldRange(oneof)) {
-      if (field->cpp_type() == FieldCppType::MESSAGE &&
+      if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE &&
           !ShouldIgnoreRequiredFieldCheck(field, options_) &&
           scc_analyzer_->HasRequiredFields(field->message_type())) {
         has_required_fields = true;

@@ -77,13 +77,13 @@ namespace shark::internal {
         static inline WireFormatLite::WireType WireTypeForField(
             const FieldDescriptor* field);
 
-        // Given a FieldType return its WireType
+        // Given a SharkFieldType return its WireType
         static inline WireFormatLite::WireType WireTypeForFieldType(
-            ::shark::FieldType type);
+            ::shark::SharkFieldType type);
 
         // Compute the byte size of a tag.  For groups, this includes both the start
         // and end tags.
-        static inline size_t TagSize(int field_number, ::shark::FieldType type);
+        static inline size_t TagSize(int field_number, ::shark::SharkFieldType type);
 
         // These procedures can be used to implement the methods of Message which
         // handle parsing and serialization of the protocol buffer wire format
@@ -327,7 +327,7 @@ namespace shark::internal {
     }
 
     inline WireFormatLite::WireType WireFormat::WireTypeForFieldType(
-        ::shark::FieldType type) {
+        ::shark::SharkFieldType type) {
         return WireFormatLite::WireTypeForFieldType(
             static_cast<SharkFieldType>(static_cast<int>(type)));
     }
@@ -337,7 +337,7 @@ namespace shark::internal {
     }
 
     inline size_t WireFormat::TagSize(int field_number,
-        ::shark::FieldType type) {
+        ::shark::SharkFieldType type) {
         return WireFormatLite::TagSize(
             field_number,
             static_cast<SharkFieldType>(static_cast<int>(type)));

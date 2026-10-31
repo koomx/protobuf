@@ -1107,7 +1107,7 @@ inline void TestUtil::ReflectionTester::ReleaseLastRepeatedsViaReflection(
   for (int i = 0; i < output.size(); ++i) {
     const FieldDescriptor* field = output[i];
     if (!field->is_repeated()) continue;
-    if (field->cpp_type() != FieldCppType::MESSAGE) continue;
+    if (field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) continue;
 
     Message* released = reflection->ReleaseLast(message, field);
     if (!field->is_extension() || expect_extensions_notnull) {
@@ -1142,7 +1142,7 @@ inline void TestUtil::ReflectionTester::
   for (int i = 0; i < fields.size(); ++i) {
     const FieldDescriptor* field = fields[i];
     if (!field->is_optional() ||
-        field->cpp_type() != FieldCppType::MESSAGE)
+        field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE)
       continue;
 
     reflection->SetAllocatedMessage(message, nullptr, field);
@@ -1162,7 +1162,7 @@ inline void TestUtil::ReflectionTester::
   for (int i = 0; i < fields.size(); ++i) {
     const FieldDescriptor* field = fields[i];
     if (!field->is_optional() ||
-        field->cpp_type() != FieldCppType::MESSAGE)
+        field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE)
       continue;
 
     Message* sub_message = from_reflection->ReleaseMessage(from_message, field);

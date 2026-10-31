@@ -90,7 +90,7 @@ bool IsFieldEligibleForFastParsing(
   int aux_idx = entry.aux_idx;
 
   switch (field->type()) {
-    case FieldType::ENUM:
+    case SharkFieldType::ENUM:
       // If enum values are not validated at parse time, then this field can be
       // handled on the fast path like an int32.
       if (HasPreservingUnknownEnumSemantics(field)) {
@@ -102,8 +102,8 @@ bool IsFieldEligibleForFastParsing(
       break;
 
       // Some bytes fields can be handled on fast path.
-    case FieldType::STRING:
-    case FieldType::BYTES:
+    case SharkFieldType::STRING:
+    case SharkFieldType::BYTES:
       if (field->options().ctype() != FieldOptions_CType::STRING) {
         return false;
       }
@@ -116,10 +116,10 @@ bool IsFieldEligibleForFastParsing(
       }
       break;
 
-    case FieldType::INT8:
-    case FieldType::UINT8:
-    case FieldType::INT16:
-    case FieldType::UINT16:
+    case SharkFieldType::INT8:
+    case SharkFieldType::UINT8:
+    case SharkFieldType::INT16:
+    case SharkFieldType::UINT16:
       // Repeated and packed values can be wider than the type. The generated
       // fallback records those in the unknown fields. The fast path only
       // accepts a one-byte varint, which always fits.
@@ -219,25 +219,25 @@ std::vector<const FieldDescriptor*> FilterMiniParsedFields(
   for (const auto* field : fields) {
     bool handled = false;
     switch (field->type()) {
-      case FieldType::DOUBLE:
-      case FieldType::FLOAT:
-      case FieldType::FIXED32:
-      case FieldType::SFIXED32:
-      case FieldType::FIXED64:
-      case FieldType::SFIXED64:
-      case FieldType::BOOL:
-      case FieldType::UINT32:
-      case FieldType::SINT32:
-      case FieldType::INT32:
-      case FieldType::UINT64:
-      case FieldType::SINT64:
-      case FieldType::INT64:
+      case SharkFieldType::DOUBLE:
+      case SharkFieldType::FLOAT:
+      case SharkFieldType::FIXED32:
+      case SharkFieldType::SFIXED32:
+      case SharkFieldType::FIXED64:
+      case SharkFieldType::SFIXED64:
+      case SharkFieldType::BOOL:
+      case SharkFieldType::UINT32:
+      case SharkFieldType::SINT32:
+      case SharkFieldType::INT32:
+      case SharkFieldType::UINT64:
+      case SharkFieldType::SINT64:
+      case SharkFieldType::INT64:
         // These are handled by MiniParse, so we don't need any generated
         // fallback code.
         handled = true;
         break;
 
-      case FieldType::ENUM:
+      case SharkFieldType::ENUM:
         if (field->is_repeated() && !HasPreservingUnknownEnumSemantics(field)) {
           // TODO(b/206890171): handle packed repeated closed enums
           // Non-packed repeated can be handled using tables, but we still
@@ -250,8 +250,8 @@ std::vector<const FieldDescriptor*> FilterMiniParsedFields(
         }
         break;
 
-      case FieldType::BYTES:
-      case FieldType::STRING:
+      case SharkFieldType::BYTES:
+      case SharkFieldType::STRING:
         if (IsStringInlined(field, options)) {
           // TODO(b/198211897): support InilnedStringField.
           handled = false;
@@ -260,7 +260,7 @@ std::vector<const FieldDescriptor*> FilterMiniParsedFields(
         }
         break;
 
-      case FieldType::MESSAGE:
+      case SharkFieldType::MESSAGE:
         // TODO(b/210762816): support remaining field types.
         if (field->is_map() || IsWeak(field, options) ||
             IsImplicitWeakField(field, options, scc_analyzer) ||
@@ -316,7 +316,7 @@ TailCallTableInfo::TailCallTableInfo(
         {field, (HasHasbit(field) ? has_bit_indices[field->index()] : -1)});
     auto& entry = field_entries.back();
 
-    if (field->type() == FieldType::MESSAGE) {
+    if (field->type() == SharkFieldType::MESSAGE) {
       // Message-typed fields have a FieldAux with the default instance pointer.
       if (field->is_map()) {
         // TODO(b/205904770): generate aux entries for maps
@@ -334,7 +334,7 @@ TailCallTableInfo::TailCallTableInfo(
             "reinterpret_cast<const ", QualifiedClassName(field_type, options),
             "*>(&", QualifiedDefaultInstanceName(field_type, options), ")"));
       }
-    } else if (field->type() == FieldType::ENUM &&
+    } else if (field->type() == SharkFieldType::ENUM &&
                (IsEnumClass(field->enum_type()) ||
                 !HasPreservingUnknownEnumSemantics(field))) {
       // Enum fields which preserve unknown values (proto3 behavior) are
@@ -380,8 +380,8 @@ TailCallTableInfo::TailCallTableInfo(
         aux_entries.push_back(
             StrCat(QualifiedClassName(enum_type, options), "_IsValid"));
       }
-    } else if ((field->type() == FieldType::STRING ||
-                field->type() == FieldType::BYTES) &&
+    } else if ((field->type() == SharkFieldType::STRING ||
+                field->type() == SharkFieldType::BYTES) &&
                IsStringInlined(field, options)) {
       GOOGLE_CHECK(!field->is_repeated());
       // Inlined strings have an extra marker to represent their donation state.
@@ -947,28 +947,28 @@ static void FormatFieldKind(Formatter& format,
     format("Packed");
   }
   switch (field->type()) {
-    case FieldType::DOUBLE:
+    case SharkFieldType::DOUBLE:
       format("Double");
       break;
-    case FieldType::FLOAT:
+    case SharkFieldType::FLOAT:
       format("Float");
       break;
-    case FieldType::FIXED32:
+    case SharkFieldType::FIXED32:
       format("Fixed32");
       break;
-    case FieldType::SFIXED32:
+    case SharkFieldType::SFIXED32:
       format("SFixed32");
       break;
-    case FieldType::FIXED64:
+    case SharkFieldType::FIXED64:
       format("Fixed64");
       break;
-    case FieldType::SFIXED64:
+    case SharkFieldType::SFIXED64:
       format("SFixed64");
       break;
-    case FieldType::BOOL:
+    case SharkFieldType::BOOL:
       format("Bool");
       break;
-    case FieldType::ENUM:
+    case SharkFieldType::ENUM:
       if (HasPreservingUnknownEnumSemantics(field)) {
         // No validation is required.
         format("OpenEnum");
@@ -980,35 +980,35 @@ static void FormatFieldKind(Formatter& format,
         format("Enum");
       }
       break;
-    case FieldType::UINT32:
+    case SharkFieldType::UINT32:
       format("UInt32");
       break;
-    case FieldType::SINT32:
+    case SharkFieldType::SINT32:
       format("SInt32");
       break;
-    case FieldType::INT32:
-    case FieldType::INT8:
-    case FieldType::INT16:
+    case SharkFieldType::INT32:
+    case SharkFieldType::INT8:
+    case SharkFieldType::INT16:
       format("Int32");
       break;
-    case FieldType::UINT8:
-    case FieldType::UINT16:
+    case SharkFieldType::UINT8:
+    case SharkFieldType::UINT16:
       format("UInt32");
       break;
-    case FieldType::UINT64:
+    case SharkFieldType::UINT64:
       format("UInt64");
       break;
-    case FieldType::SINT64:
+    case SharkFieldType::SINT64:
       format("SInt64");
       break;
-    case FieldType::INT64:
+    case SharkFieldType::INT64:
       format("Int64");
       break;
 
-    case FieldType::BYTES:
+    case SharkFieldType::BYTES:
       format("Bytes");
       break;
-    case FieldType::STRING: {
+    case SharkFieldType::STRING: {
       auto mode = GetUtf8CheckMode(field, options);
       switch (mode) {
         case Utf8CheckMode::kStrict:
@@ -1028,7 +1028,7 @@ static void FormatFieldKind(Formatter& format,
       break;
     }
 
-    case FieldType::MESSAGE:
+    case SharkFieldType::MESSAGE:
       if (field->is_map()) {
         format("Map");
       } else {
@@ -1043,8 +1043,8 @@ static void FormatFieldKind(Formatter& format,
   }
 
   // Fill in extra information about string and bytes field representations.
-  if (field->type() == FieldType::BYTES ||
-      field->type() == FieldType::STRING) {
+  if (field->type() == SharkFieldType::BYTES ||
+      field->type() == SharkFieldType::STRING) {
     if (field->is_repeated()) {
       format(" | ::_fl::kRepSString");
     } else {
@@ -1233,15 +1233,15 @@ void ParseFunctionGenerator::GenerateStrings(Formatter& format,
 void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
                                                  const FieldDescriptor* field) {
   if (field->is_packable()) {
-    if (field->type() == FieldType::INT8 || field->type() == FieldType::UINT8 ||
-        field->type() == FieldType::INT16 ||
-        field->type() == FieldType::UINT16) {
+    if (field->type() == SharkFieldType::INT8 || field->type() == SharkFieldType::UINT8 ||
+        field->type() == SharkFieldType::INT16 ||
+        field->type() == SharkFieldType::UINT16) {
       format(
           "ptr = ::$proto_ns$::internal::PackedNarrowVarintParser<"
           "$unknown_fields_type$, $1$>($msg$_internal_mutable_$name$(), ptr, "
           "ctx, &$msg$_internal_metadata_, $2$);\n",
           PrimitiveTypeName(options_, field->cpp_type()), field->number());
-    } else if (field->type() == FieldType::ENUM &&
+    } else if (field->type() == SharkFieldType::ENUM &&
         (IsEnumClass(field->enum_type()) ||
          !HasPreservingUnknownEnumSemantics(field))) {
       std::string enum_type = QualifiedClassName(field->enum_type(), options_);
@@ -1263,17 +1263,17 @@ void ParseFunctionGenerator::GenerateLengthDelim(Formatter& format,
   } else {
     auto field_type = field->type();
     switch (field_type) {
-      case FieldType::STRING:
+      case SharkFieldType::STRING:
         GenerateStrings(format, field, true /* utf8 */);
         break;
-      case FieldType::BYTES:
+      case SharkFieldType::BYTES:
         GenerateStrings(format, field, false /* utf8 */);
         break;
-      case FieldType::MESSAGE: {
+      case SharkFieldType::MESSAGE: {
         if (field->is_map()) {
           const FieldDescriptor* val = field->message_type()->map_value();
           GOOGLE_CHECK(val);
-          if (val->type() == FieldType::ENUM &&
+          if (val->type() == SharkFieldType::ENUM &&
               (IsEnumClass(val->enum_type()) ||
                !HasPreservingUnknownEnumSemantics(field))) {
             format(
@@ -1395,7 +1395,7 @@ void ParseFunctionGenerator::GenerateFieldBody(
   switch (wiretype) {
     case WireFormatLite::WIRETYPE_VARINT: {
       std::string type = PrimitiveTypeName(options_, field->cpp_type());
-      if (field->type() == FieldType::ENUM) {
+      if (field->type() == SharkFieldType::ENUM) {
         format.Set("enum_type",
                    QualifiedClassName(field->enum_type(), options_));
         format(
@@ -1420,18 +1420,18 @@ void ParseFunctionGenerator::GenerateFieldBody(
               "}\n",
               field->number());
         }
-      } else if (field->type() == FieldType::INT8 ||
-                 field->type() == FieldType::UINT8 ||
-                 field->type() == FieldType::INT16 ||
-                 field->type() == FieldType::UINT16) {
+      } else if (field->type() == SharkFieldType::INT8 ||
+                 field->type() == SharkFieldType::UINT8 ||
+                 field->type() == SharkFieldType::INT16 ||
+                 field->type() == SharkFieldType::UINT16) {
         const char* fits = "val <= 255";
-        if (field->type() == FieldType::INT8) {
+        if (field->type() == SharkFieldType::INT8) {
           fits = "static_cast<int64_t>(val) >= -128 && "
                  "static_cast<int64_t>(val) <= 127";
-        } else if (field->type() == FieldType::INT16) {
+        } else if (field->type() == SharkFieldType::INT16) {
           fits = "static_cast<int64_t>(val) >= -32768 && "
                  "static_cast<int64_t>(val) <= 32767";
-        } else if (field->type() == FieldType::UINT16) {
+        } else if (field->type() == SharkFieldType::UINT16) {
           fits = "val <= 65535";
         }
         format(
@@ -1457,14 +1457,14 @@ void ParseFunctionGenerator::GenerateFieldBody(
             "}\n",
             field->number());
       } else {
-        std::string size = (field->type() == FieldType::INT32 ||
-                            field->type() == FieldType::SINT32 ||
-                            field->type() == FieldType::UINT32)
+        std::string size = (field->type() == SharkFieldType::INT32 ||
+                            field->type() == SharkFieldType::SINT32 ||
+                            field->type() == SharkFieldType::UINT32)
                                ? "32"
                                : "64";
         std::string zigzag;
-        if ((field->type() == FieldType::SINT32 ||
-             field->type() == FieldType::SINT64)) {
+        if ((field->type() == SharkFieldType::SINT32 ||
+             field->type() == SharkFieldType::SINT64)) {
           zigzag = "ZigZag";
         }
         if (field->is_repeated() || field->real_containing_oneof()) {
@@ -1678,43 +1678,43 @@ std::string FieldParseFunctionName(
   std::string name = "::_pbi::TcParser::Fast";
 
   switch (field->type()) {
-    case FieldType::FIXED32:
-    case FieldType::SFIXED32:
-    case FieldType::FLOAT:
+    case SharkFieldType::FIXED32:
+    case SharkFieldType::SFIXED32:
+    case SharkFieldType::FLOAT:
       name.append("F32");
       break;
 
-    case FieldType::FIXED64:
-    case FieldType::SFIXED64:
-    case FieldType::DOUBLE:
+    case SharkFieldType::FIXED64:
+    case SharkFieldType::SFIXED64:
+    case SharkFieldType::DOUBLE:
       name.append("F64");
       break;
 
-    case FieldType::BOOL:
+    case SharkFieldType::BOOL:
       name.append("V8");
       break;
-    case FieldType::INT32:
-    case FieldType::UINT32:
+    case SharkFieldType::INT32:
+    case SharkFieldType::UINT32:
       name.append("V32");
       break;
-    case FieldType::INT8:
+    case SharkFieldType::INT8:
       name.append("N8");
       break;
-    case FieldType::UINT8:
+    case SharkFieldType::UINT8:
       name.append("U8");
       break;
-    case FieldType::INT16:
+    case SharkFieldType::INT16:
       name.append("N16");
       break;
-    case FieldType::UINT16:
+    case SharkFieldType::UINT16:
       name.append("U16");
       break;
-    case FieldType::INT64:
-    case FieldType::UINT64:
+    case SharkFieldType::INT64:
+    case SharkFieldType::UINT64:
       name.append("V64");
       break;
 
-    case FieldType::ENUM:
+    case SharkFieldType::ENUM:
       if (HasPreservingUnknownEnumSemantics(field)) {
         name.append("V32");
         break;
@@ -1726,20 +1726,20 @@ std::string FieldParseFunctionName(
       name.append(entry.is_enum_range ? "Er" : "Ev");
       break;
 
-    case FieldType::SINT32:
+    case SharkFieldType::SINT32:
       name.append("Z32");
       break;
-    case FieldType::SINT64:
+    case SharkFieldType::SINT64:
       name.append("Z64");
       break;
 
-    case FieldType::BYTES:
+    case SharkFieldType::BYTES:
       name.append("B");
       if (IsStringInlined(field, options)) {
         name.append("i");
       }
       break;
-    case FieldType::STRING:
+    case SharkFieldType::STRING:
       switch (GetUtf8CheckMode(field, options)) {
         case Utf8CheckMode::kNone:
           name.append("B");
@@ -1760,7 +1760,7 @@ std::string FieldParseFunctionName(
       }
       break;
 
-    case FieldType::MESSAGE:
+    case SharkFieldType::MESSAGE:
       name.append("M");
       break;
 

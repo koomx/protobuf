@@ -268,7 +268,7 @@ namespace shark::internal {
         // default value.
         switch (val_des->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)                               \
-    case FieldCppType::CPPTYPE: {                                \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                                \
         TYPE* value = Arena::Create<TYPE>(MapFieldBase::arena_); \
         map_val->SetValue(value);                                \
         break;                                                   \
@@ -287,7 +287,7 @@ namespace shark::internal {
             HANDLE_TYPE(STRING, std::string);
             HANDLE_TYPE(ENUM, int32_t);
 #undef HANDLE_TYPE
-        case FieldCppType::MESSAGE: {
+        case SharkFieldCppType::CPPTYPE_MESSAGE: {
             const Message& message = default_entry_->GetReflection()->GetMessage(*default_entry_, val_des);
             Message* value = message.New(MapFieldBase::arena_);
             map_val->SetValue(value);
@@ -380,47 +380,47 @@ namespace shark::internal {
             // Copy map value
             const FieldDescriptor* field_descriptor = default_entry_->GetDescriptor()->map_value();
             switch (field_descriptor->cpp_type()) {
-            case FieldCppType::INT32:
-            case FieldCppType::INT8:
-            case FieldCppType::INT16: {
+            case SharkFieldCppType::CPPTYPE_INT32:
+            case SharkFieldCppType::CPPTYPE_INT8:
+            case SharkFieldCppType::CPPTYPE_INT16: {
                 map_val->SetInt32Value(other_it->second.GetInt32Value());
                 break;
             }
-            case FieldCppType::INT64: {
+            case SharkFieldCppType::CPPTYPE_INT64: {
                 map_val->SetInt64Value(other_it->second.GetInt64Value());
                 break;
             }
-            case FieldCppType::UINT32:
-            case FieldCppType::UINT8:
-            case FieldCppType::UINT16: {
+            case SharkFieldCppType::CPPTYPE_UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT16: {
                 map_val->SetUInt32Value(other_it->second.GetUInt32Value());
                 break;
             }
-            case FieldCppType::UINT64: {
+            case SharkFieldCppType::CPPTYPE_UINT64: {
                 map_val->SetUInt64Value(other_it->second.GetUInt64Value());
                 break;
             }
-            case FieldCppType::FLOAT: {
+            case SharkFieldCppType::CPPTYPE_FLOAT: {
                 map_val->SetFloatValue(other_it->second.GetFloatValue());
                 break;
             }
-            case FieldCppType::DOUBLE: {
+            case SharkFieldCppType::CPPTYPE_DOUBLE: {
                 map_val->SetDoubleValue(other_it->second.GetDoubleValue());
                 break;
             }
-            case FieldCppType::BOOL: {
+            case SharkFieldCppType::CPPTYPE_BOOL: {
                 map_val->SetBoolValue(other_it->second.GetBoolValue());
                 break;
             }
-            case FieldCppType::STRING: {
+            case SharkFieldCppType::CPPTYPE_STRING: {
                 map_val->SetStringValue(other_it->second.GetStringValue());
                 break;
             }
-            case FieldCppType::ENUM: {
+            case SharkFieldCppType::CPPTYPE_ENUM: {
                 map_val->SetEnumValue(other_it->second.GetEnumValue());
                 break;
             }
-            case FieldCppType::MESSAGE: {
+            case SharkFieldCppType::CPPTYPE_MESSAGE: {
                 map_val->MutableMessageValue()->CopyFrom(
                     other_it->second.GetMessageValue());
                 break;
@@ -456,69 +456,69 @@ namespace shark::internal {
             MapFieldBase::repeated_field_->AddAllocated(new_entry);
             const MapKey& map_key = it->first;
             switch (key_des->cpp_type()) {
-            case FieldCppType::STRING:
+            case SharkFieldCppType::CPPTYPE_STRING:
                 reflection->SetString(new_entry, key_des, map_key.GetStringValue());
                 break;
-            case FieldCppType::INT64:
+            case SharkFieldCppType::CPPTYPE_INT64:
                 reflection->SetInt64(new_entry, key_des, map_key.GetInt64Value());
                 break;
-            case FieldCppType::INT32:
-            case FieldCppType::INT8:
-            case FieldCppType::INT16:
+            case SharkFieldCppType::CPPTYPE_INT32:
+            case SharkFieldCppType::CPPTYPE_INT8:
+            case SharkFieldCppType::CPPTYPE_INT16:
                 reflection->SetInt32(new_entry, key_des, map_key.GetInt32Value());
                 break;
-            case FieldCppType::UINT64:
+            case SharkFieldCppType::CPPTYPE_UINT64:
                 reflection->SetUInt64(new_entry, key_des, map_key.GetUInt64Value());
                 break;
-            case FieldCppType::UINT32:
-            case FieldCppType::UINT8:
-            case FieldCppType::UINT16:
+            case SharkFieldCppType::CPPTYPE_UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT16:
                 reflection->SetUInt32(new_entry, key_des, map_key.GetUInt32Value());
                 break;
-            case FieldCppType::BOOL:
+            case SharkFieldCppType::CPPTYPE_BOOL:
                 reflection->SetBool(new_entry, key_des, map_key.GetBoolValue());
                 break;
-            case FieldCppType::DOUBLE:
-            case FieldCppType::FLOAT:
-            case FieldCppType::ENUM:
-            case FieldCppType::MESSAGE:
+            case SharkFieldCppType::CPPTYPE_DOUBLE:
+            case SharkFieldCppType::CPPTYPE_FLOAT:
+            case SharkFieldCppType::CPPTYPE_ENUM:
+            case SharkFieldCppType::CPPTYPE_MESSAGE:
                 GOOGLE_LOG(FATAL) << "Can't get here.";
                 break;
             }
             const MapValueRef& map_val = it->second;
             switch (val_des->cpp_type()) {
-            case FieldCppType::STRING:
+            case SharkFieldCppType::CPPTYPE_STRING:
                 reflection->SetString(new_entry, val_des, map_val.GetStringValue());
                 break;
-            case FieldCppType::INT64:
+            case SharkFieldCppType::CPPTYPE_INT64:
                 reflection->SetInt64(new_entry, val_des, map_val.GetInt64Value());
                 break;
-            case FieldCppType::INT32:
-            case FieldCppType::INT8:
-            case FieldCppType::INT16:
+            case SharkFieldCppType::CPPTYPE_INT32:
+            case SharkFieldCppType::CPPTYPE_INT8:
+            case SharkFieldCppType::CPPTYPE_INT16:
                 reflection->SetInt32(new_entry, val_des, map_val.GetInt32Value());
                 break;
-            case FieldCppType::UINT64:
+            case SharkFieldCppType::CPPTYPE_UINT64:
                 reflection->SetUInt64(new_entry, val_des, map_val.GetUInt64Value());
                 break;
-            case FieldCppType::UINT32:
-            case FieldCppType::UINT8:
-            case FieldCppType::UINT16:
+            case SharkFieldCppType::CPPTYPE_UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT16:
                 reflection->SetUInt32(new_entry, val_des, map_val.GetUInt32Value());
                 break;
-            case FieldCppType::BOOL:
+            case SharkFieldCppType::CPPTYPE_BOOL:
                 reflection->SetBool(new_entry, val_des, map_val.GetBoolValue());
                 break;
-            case FieldCppType::DOUBLE:
+            case SharkFieldCppType::CPPTYPE_DOUBLE:
                 reflection->SetDouble(new_entry, val_des, map_val.GetDoubleValue());
                 break;
-            case FieldCppType::FLOAT:
+            case SharkFieldCppType::CPPTYPE_FLOAT:
                 reflection->SetFloat(new_entry, val_des, map_val.GetFloatValue());
                 break;
-            case FieldCppType::ENUM:
+            case SharkFieldCppType::CPPTYPE_ENUM:
                 reflection->SetEnumValue(new_entry, val_des, map_val.GetEnumValue());
                 break;
-            case FieldCppType::MESSAGE: {
+            case SharkFieldCppType::CPPTYPE_MESSAGE: {
                 const Message& message = map_val.GetMessageValue();
                 reflection->MutableMessage(new_entry, val_des)->CopyFrom(message);
                 break;
@@ -546,44 +546,44 @@ namespace shark::internal {
             // MapKey type will be set later.
             MapKey map_key;
             switch (key_des->cpp_type()) {
-            case FieldCppType::STRING:
+            case SharkFieldCppType::CPPTYPE_STRING:
                 map_key.SetStringValue(reflection->GetString(*it, key_des));
                 break;
-            case FieldCppType::INT64:
+            case SharkFieldCppType::CPPTYPE_INT64:
                 map_key.SetInt64Value(reflection->GetInt64(*it, key_des));
                 break;
-            case FieldCppType::INT32:
+            case SharkFieldCppType::CPPTYPE_INT32:
                 map_key.SetInt32Value(reflection->GetInt32(*it, key_des));
                 break;
-            case FieldCppType::INT8:
+            case SharkFieldCppType::CPPTYPE_INT8:
                 map_key.SetInt8Value(
                     static_cast<int8_t>(reflection->GetInt32(*it, key_des)));
                 break;
-            case FieldCppType::INT16:
+            case SharkFieldCppType::CPPTYPE_INT16:
                 map_key.SetInt16Value(
                     static_cast<int16_t>(reflection->GetInt32(*it, key_des)));
                 break;
-            case FieldCppType::UINT64:
+            case SharkFieldCppType::CPPTYPE_UINT64:
                 map_key.SetUInt64Value(reflection->GetUInt64(*it, key_des));
                 break;
-            case FieldCppType::UINT32:
+            case SharkFieldCppType::CPPTYPE_UINT32:
                 map_key.SetUInt32Value(reflection->GetUInt32(*it, key_des));
                 break;
-            case FieldCppType::UINT8:
+            case SharkFieldCppType::CPPTYPE_UINT8:
                 map_key.SetUInt8Value(
                     static_cast<uint8_t>(reflection->GetUInt32(*it, key_des)));
                 break;
-            case FieldCppType::UINT16:
+            case SharkFieldCppType::CPPTYPE_UINT16:
                 map_key.SetUInt16Value(
                     static_cast<uint16_t>(reflection->GetUInt32(*it, key_des)));
                 break;
-            case FieldCppType::BOOL:
+            case SharkFieldCppType::CPPTYPE_BOOL:
                 map_key.SetBoolValue(reflection->GetBool(*it, key_des));
                 break;
-            case FieldCppType::DOUBLE:
-            case FieldCppType::FLOAT:
-            case FieldCppType::ENUM:
-            case FieldCppType::MESSAGE:
+            case SharkFieldCppType::CPPTYPE_DOUBLE:
+            case SharkFieldCppType::CPPTYPE_FLOAT:
+            case SharkFieldCppType::CPPTYPE_ENUM:
+            case SharkFieldCppType::CPPTYPE_MESSAGE:
                 GOOGLE_LOG(FATAL) << "Can't get here.";
                 break;
             }
@@ -600,7 +600,7 @@ namespace shark::internal {
             map_val.SetType(val_des->cpp_type());
             switch (val_des->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE, METHOD)                       \
-    case FieldCppType::CPPTYPE: {                                \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {                                \
         TYPE* value = Arena::Create<TYPE>(MapFieldBase::arena_); \
         *value = reflection->Get##METHOD(*it, val_des);          \
         map_val.SetValue(value);                                 \
@@ -620,7 +620,7 @@ namespace shark::internal {
                 HANDLE_TYPE(STRING, std::string, String);
                 HANDLE_TYPE(ENUM, int32_t, EnumValue);
 #undef HANDLE_TYPE
-            case FieldCppType::MESSAGE: {
+            case SharkFieldCppType::CPPTYPE_MESSAGE: {
                 const Message& message = reflection->GetMessage(*it, val_des);
                 Message* value = message.New(MapFieldBase::arena_);
                 value->CopyFrom(message);
@@ -643,13 +643,13 @@ namespace shark::internal {
             size += sizeof(it->first) * map_size;
             size += sizeof(it->second) * map_size;
             // If key is string, add the allocated space.
-            if (it->first.type() == FieldCppType::STRING) {
+            if (it->first.type() == SharkFieldCppType::CPPTYPE_STRING) {
                 size += sizeof(std::string) * map_size;
             }
             // Add the allocated space in MapValueRef.
             switch (it->second.type()) {
 #define HANDLE_TYPE(CPPTYPE, TYPE)       \
-    case FieldCppType::CPPTYPE: {        \
+    case SharkFieldCppType::CPPTYPE_##CPPTYPE: {        \
         size += sizeof(TYPE) * map_size; \
         break;                           \
     }
@@ -667,7 +667,7 @@ namespace shark::internal {
                 HANDLE_TYPE(STRING, std::string);
                 HANDLE_TYPE(ENUM, int32_t);
 #undef HANDLE_TYPE
-            case FieldCppType::MESSAGE: {
+            case SharkFieldCppType::CPPTYPE_MESSAGE: {
                 while (it != map_.end()) {
                     const Message& message = it->second.GetMessageValue();
                     size += message.GetReflection()->SpaceUsedLong(message);

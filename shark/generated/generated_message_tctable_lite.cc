@@ -704,9 +704,9 @@ inline SHARK_ALWAYS_INLINE const char* ParseVarint(const char* p,
   }
 }
 
-template <typename FieldType, bool zigzag = false>
-inline FieldType ZigZagDecodeHelper(uint64_t value) {
-  return static_cast<FieldType>(value);
+template <typename SharkFieldType, bool zigzag = false>
+inline SharkFieldType ZigZagDecodeHelper(uint64_t value) {
+  return static_cast<SharkFieldType>(value);
 }
 
 template <>
@@ -730,7 +730,7 @@ bool EnumIsValidAux(int32_t val, uint16_t xform_val,
 
 }  // namespace
 
-template <typename FieldType, typename TagType, bool zigzag>
+template <typename SharkFieldType, typename TagType, bool zigzag>
 SHARK_ALWAYS_INLINE const char* TcParser::SingularVarint(
     SHARK_TC_PARAM_DECL) {
   if (SHARK_PREDICT_FALSE(data.coded_tag<TagType>() != 0)) {
@@ -743,16 +743,16 @@ SHARK_ALWAYS_INLINE const char* TcParser::SingularVarint(
   // registers to the stack, so we turn the integer-greater-than-128
   // case into a separate routine.
   if (SHARK_PREDICT_FALSE(static_cast<int8_t>(*ptr) < 0)) {
-    SHARK_MUSTTAIL return SingularVarBigint<FieldType, TagType, zigzag>(
+    SHARK_MUSTTAIL return SingularVarBigint<SharkFieldType, TagType, zigzag>(
         SHARK_TC_PARAM_PASS);
   }
 
-  RefAt<FieldType>(msg, data.offset()) =
-      ZigZagDecodeHelper<FieldType, zigzag>(static_cast<uint8_t>(*ptr++));
+  RefAt<SharkFieldType>(msg, data.offset()) =
+      ZigZagDecodeHelper<SharkFieldType, zigzag>(static_cast<uint8_t>(*ptr++));
   SHARK_MUSTTAIL return ToTagDispatch(SHARK_TC_PARAM_PASS);
 }
 
-template <typename FieldType, typename TagType, bool zigzag>
+template <typename SharkFieldType, typename TagType, bool zigzag>
 SHARK_NOINLINE const char* TcParser::SingularVarBigint(
     SHARK_TC_PARAM_DECL) {
   // For some reason clang wants to save 5 registers to the stack here,
@@ -780,8 +780,8 @@ SHARK_NOINLINE const char* TcParser::SingularVarBigint(
   if (SHARK_PREDICT_FALSE(ptr == nullptr)) {
     return Error(SHARK_TC_PARAM_PASS);
   }
-  RefAt<FieldType>(msg, data.offset()) =
-      ZigZagDecodeHelper<FieldType, zigzag>(tmp);
+  RefAt<SharkFieldType>(msg, data.offset()) =
+      ZigZagDecodeHelper<SharkFieldType, zigzag>(tmp);
   SHARK_MUSTTAIL return ToTagDispatch(SHARK_TC_PARAM_PASS);
 }
 
@@ -852,19 +852,19 @@ const char* TcParser::FastZ64S2(SHARK_TC_PARAM_DECL) {
       SHARK_TC_PARAM_PASS);
 }
 
-template <typename FieldType, typename TagType, bool zigzag>
+template <typename SharkFieldType, typename TagType, bool zigzag>
 SHARK_ALWAYS_INLINE const char* TcParser::RepeatedVarint(
     SHARK_TC_PARAM_DECL) {
   if (SHARK_PREDICT_FALSE(data.coded_tag<TagType>() != 0)) {
     // Try parsing as non-packed repeated:
     InvertPacked<WireFormatLite::WIRETYPE_VARINT>(data);
     if (data.coded_tag<TagType>() == 0) {
-      return PackedVarint<FieldType, TagType, zigzag>(SHARK_TC_PARAM_PASS);
+      return PackedVarint<SharkFieldType, TagType, zigzag>(SHARK_TC_PARAM_PASS);
     } else {
       SHARK_MUSTTAIL return MiniParse(SHARK_TC_PARAM_PASS);
     }
   }
-  auto& field = RefAt<RepeatedField<FieldType>>(msg, data.offset());
+  auto& field = RefAt<RepeatedField<SharkFieldType>>(msg, data.offset());
   auto expected_tag = UnalignedLoad<TagType>(ptr);
   do {
     ptr += sizeof(TagType);
@@ -873,7 +873,7 @@ SHARK_ALWAYS_INLINE const char* TcParser::RepeatedVarint(
     if (ptr == nullptr) {
       return Error(SHARK_TC_PARAM_PASS);
     }
-    field.Add(ZigZagDecodeHelper<FieldType, zigzag>(tmp));
+    field.Add(ZigZagDecodeHelper<SharkFieldType, zigzag>(tmp));
     if (!ctx->DataAvailable(ptr)) {
       break;
     }
@@ -924,12 +924,12 @@ const char* TcParser::FastZ64R2(SHARK_TC_PARAM_DECL) {
 }
 
 // See comment on PackedFixed for why this is not SHARK_ALWAYS_INLINE.
-template <typename FieldType, typename TagType, bool zigzag>
+template <typename SharkFieldType, typename TagType, bool zigzag>
 const char* TcParser::PackedVarint(SHARK_TC_PARAM_DECL) {
   if (SHARK_PREDICT_FALSE(data.coded_tag<TagType>() != 0)) {
     InvertPacked<WireFormatLite::WIRETYPE_VARINT>(data);
     if (data.coded_tag<TagType>() == 0) {
-      return RepeatedVarint<FieldType, TagType, zigzag>(SHARK_TC_PARAM_PASS);
+      return RepeatedVarint<SharkFieldType, TagType, zigzag>(SHARK_TC_PARAM_PASS);
     } else {
       SHARK_MUSTTAIL return MiniParse(SHARK_TC_PARAM_PASS);
     }
@@ -938,11 +938,11 @@ const char* TcParser::PackedVarint(SHARK_TC_PARAM_DECL) {
   // Since ctx->ReadPackedVarint does not use TailCall or Return, sync any
   // pending hasbits now:
   SyncHasbits(msg, hasbits, table);
-  auto* field = &RefAt<RepeatedField<FieldType>>(msg, data.offset());
+  auto* field = &RefAt<RepeatedField<SharkFieldType>>(msg, data.offset());
   return ctx->ReadPackedVarint(ptr, [field](uint64_t varint) {
-    FieldType val;
+    SharkFieldType val;
     if (zigzag) {
-      if (sizeof(FieldType) == 8) {
+      if (sizeof(SharkFieldType) == 8) {
         val = WireFormatLite::ZigZagDecode64(varint);
       } else {
         val = WireFormatLite::ZigZagDecode32(varint);

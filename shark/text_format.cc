@@ -321,7 +321,7 @@ class TextFormat::Parser::ParserImpl {
 
   bool ParseField(const FieldDescriptor* field, Message* output) {
     bool suc;
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       suc = ConsumeFieldMessage(output, output->GetReflection(), field);
     } else {
       suc = ConsumeFieldValue(output, output->GetReflection(), field);
@@ -569,7 +569,7 @@ class TextFormat::Parser::ParserImpl {
     }
 
     // Perform special handling for embedded message types.
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       // ':' is optional here.
       bool consumed_semicolon = TryConsumeBeforeWhitespace(":");
       if (consumed_semicolon) {
@@ -597,7 +597,7 @@ class TextFormat::Parser::ParserImpl {
       if (!TryConsume("]")) {
         // "foo: []" is treated as empty.
         while (true) {
-          if (field->cpp_type() == FieldCppType::MESSAGE) {
+          if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
             // Perform special handling for embedded message types.
             DO(ConsumeFieldMessage(message, reflection, field));
           } else {
@@ -609,7 +609,7 @@ class TextFormat::Parser::ParserImpl {
           DO(Consume(","));
         }
       }
-    } else if (field->cpp_type() == FieldCppType::MESSAGE) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       DO(ConsumeFieldMessage(message, reflection, field));
     } else {
       DO(ConsumeFieldValue(message, reflection, field));
@@ -742,84 +742,84 @@ class TextFormat::Parser::ParserImpl {
   }
 
     switch (field->cpp_type()) {
-      case FieldCppType::INT8: {
+      case SharkFieldCppType::CPPTYPE_INT8: {
         int64_t value;
         DO(ConsumeSignedInteger(&value, 127));
         SET_FIELD(Int32, static_cast<int32_t>(value));
         break;
       }
 
-      case FieldCppType::INT16: {
+      case SharkFieldCppType::CPPTYPE_INT16: {
         int64_t value;
         DO(ConsumeSignedInteger(&value, 32767));
         SET_FIELD(Int32, static_cast<int32_t>(value));
         break;
       }
 
-      case FieldCppType::INT32: {
+      case SharkFieldCppType::CPPTYPE_INT32: {
         int64_t value;
         DO(ConsumeSignedInteger(&value, kint32max));
         SET_FIELD(Int32, static_cast<int32_t>(value));
         break;
       }
 
-      case FieldCppType::UINT8: {
+      case SharkFieldCppType::CPPTYPE_UINT8: {
         uint64_t value;
         DO(ConsumeUnsignedInteger(&value, 255));
         SET_FIELD(UInt32, static_cast<uint32_t>(value));
         break;
       }
 
-      case FieldCppType::UINT16: {
+      case SharkFieldCppType::CPPTYPE_UINT16: {
         uint64_t value;
         DO(ConsumeUnsignedInteger(&value, 65535));
         SET_FIELD(UInt32, static_cast<uint32_t>(value));
         break;
       }
 
-      case FieldCppType::UINT32: {
+      case SharkFieldCppType::CPPTYPE_UINT32: {
         uint64_t value;
         DO(ConsumeUnsignedInteger(&value, kuint32max));
         SET_FIELD(UInt32, static_cast<uint32_t>(value));
         break;
       }
 
-      case FieldCppType::INT64: {
+      case SharkFieldCppType::CPPTYPE_INT64: {
         int64_t value;
         DO(ConsumeSignedInteger(&value, kint64max));
         SET_FIELD(Int64, value);
         break;
       }
 
-      case FieldCppType::UINT64: {
+      case SharkFieldCppType::CPPTYPE_UINT64: {
         uint64_t value;
         DO(ConsumeUnsignedInteger(&value, kuint64max));
         SET_FIELD(UInt64, value);
         break;
       }
 
-      case FieldCppType::FLOAT: {
+      case SharkFieldCppType::CPPTYPE_FLOAT: {
         double value;
         DO(ConsumeDouble(&value));
         SET_FIELD(Float, io::SafeDoubleToFloat(value));
         break;
       }
 
-      case FieldCppType::DOUBLE: {
+      case SharkFieldCppType::CPPTYPE_DOUBLE: {
         double value;
         DO(ConsumeDouble(&value));
         SET_FIELD(Double, value);
         break;
       }
 
-      case FieldCppType::STRING: {
+      case SharkFieldCppType::CPPTYPE_STRING: {
         std::string value;
         DO(ConsumeString(&value));
         SET_FIELD(String, std::move(value));
         break;
       }
 
-      case FieldCppType::BOOL: {
+      case SharkFieldCppType::CPPTYPE_BOOL: {
         if (LookingAtType(io::Tokenizer::TYPE_INTEGER)) {
           uint64_t value;
           DO(ConsumeUnsignedInteger(&value, 1));
@@ -840,7 +840,7 @@ class TextFormat::Parser::ParserImpl {
         break;
       }
 
-      case FieldCppType::ENUM: {
+      case SharkFieldCppType::CPPTYPE_ENUM: {
         std::string value;
         int64_t int_value = kint64max;
         const EnumDescriptor* enum_type = field->enum_type();
@@ -886,7 +886,7 @@ class TextFormat::Parser::ParserImpl {
         break;
       }
 
-      case FieldCppType::MESSAGE: {
+      case SharkFieldCppType::CPPTYPE_MESSAGE: {
         // We should never get here. Put here instead of a default
         // so that if new types are added, we get a nice compiler warning.
         GOOGLE_LOG(FATAL) << "Reached an unintended state: CPPTYPE_MESSAGE";
@@ -2074,36 +2074,36 @@ class MapEntryMessageComparator {
   bool operator()(const Message* a, const Message* b) {
     const Reflection* reflection = a->GetReflection();
     switch (field_->cpp_type()) {
-      case FieldCppType::BOOL: {
+      case SharkFieldCppType::CPPTYPE_BOOL: {
         bool first = reflection->GetBool(*a, field_);
         bool second = reflection->GetBool(*b, field_);
         return first < second;
       }
-      case FieldCppType::INT8:
-      case FieldCppType::INT16:
-      case FieldCppType::INT32: {
+      case SharkFieldCppType::CPPTYPE_INT8:
+      case SharkFieldCppType::CPPTYPE_INT16:
+      case SharkFieldCppType::CPPTYPE_INT32: {
         int32_t first = reflection->GetInt32(*a, field_);
         int32_t second = reflection->GetInt32(*b, field_);
         return first < second;
       }
-      case FieldCppType::INT64: {
+      case SharkFieldCppType::CPPTYPE_INT64: {
         int64_t first = reflection->GetInt64(*a, field_);
         int64_t second = reflection->GetInt64(*b, field_);
         return first < second;
       }
-      case FieldCppType::UINT8:
-      case FieldCppType::UINT16:
-      case FieldCppType::UINT32: {
+      case SharkFieldCppType::CPPTYPE_UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT32: {
         uint32_t first = reflection->GetUInt32(*a, field_);
         uint32_t second = reflection->GetUInt32(*b, field_);
         return first < second;
       }
-      case FieldCppType::UINT64: {
+      case SharkFieldCppType::CPPTYPE_UINT64: {
         uint64_t first = reflection->GetUInt64(*a, field_);
         uint64_t second = reflection->GetUInt64(*b, field_);
         return first < second;
       }
-      case FieldCppType::STRING: {
+      case SharkFieldCppType::CPPTYPE_STRING: {
         std::string first = reflection->GetString(*a, field_);
         std::string second = reflection->GetString(*b, field_);
         return first < second;
@@ -2176,32 +2176,32 @@ void MapFieldPrinterHelper::CopyKey(const MapKey& key, Message* message,
                                     const FieldDescriptor* field_desc) {
   const Reflection* reflection = message->GetReflection();
   switch (field_desc->cpp_type()) {
-    case FieldCppType::DOUBLE:
-    case FieldCppType::FLOAT:
-    case FieldCppType::ENUM:
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
+    case SharkFieldCppType::CPPTYPE_ENUM:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       GOOGLE_LOG(ERROR) << "Not supported.";
       break;
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       reflection->SetString(message, field_desc, key.GetStringValue());
       return;
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       reflection->SetInt64(message, field_desc, key.GetInt64Value());
       return;
-    case FieldCppType::INT8:
-    case FieldCppType::INT16:
-    case FieldCppType::INT32:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
+    case SharkFieldCppType::CPPTYPE_INT32:
       reflection->SetInt32(message, field_desc, key.GetInt32Value());
       return;
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       reflection->SetUInt64(message, field_desc, key.GetUInt64Value());
       return;
-    case FieldCppType::UINT8:
-    case FieldCppType::UINT16:
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       reflection->SetUInt32(message, field_desc, key.GetUInt32Value());
       return;
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       reflection->SetBool(message, field_desc, key.GetBoolValue());
       return;
   }
@@ -2212,41 +2212,41 @@ void MapFieldPrinterHelper::CopyValue(const MapValueRef& value,
                                       const FieldDescriptor* field_desc) {
   const Reflection* reflection = message->GetReflection();
   switch (field_desc->cpp_type()) {
-    case FieldCppType::DOUBLE:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
       reflection->SetDouble(message, field_desc, value.GetDoubleValue());
       return;
-    case FieldCppType::FLOAT:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
       reflection->SetFloat(message, field_desc, value.GetFloatValue());
       return;
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       reflection->SetEnumValue(message, field_desc, value.GetEnumValue());
       return;
-    case FieldCppType::MESSAGE: {
+    case SharkFieldCppType::CPPTYPE_MESSAGE: {
       Message* sub_message = value.GetMessageValue().New();
       sub_message->CopyFrom(value.GetMessageValue());
       reflection->SetAllocatedMessage(message, sub_message, field_desc);
       return;
     }
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       reflection->SetString(message, field_desc, value.GetStringValue());
       return;
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       reflection->SetInt64(message, field_desc, value.GetInt64Value());
       return;
-    case FieldCppType::INT8:
-    case FieldCppType::INT16:
-    case FieldCppType::INT32:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
+    case SharkFieldCppType::CPPTYPE_INT32:
       reflection->SetInt32(message, field_desc, value.GetInt32Value());
       return;
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       reflection->SetUInt64(message, field_desc, value.GetUInt64Value());
       return;
-    case FieldCppType::UINT8:
-    case FieldCppType::UINT16:
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       reflection->SetUInt32(message, field_desc, value.GetUInt32Value());
       return;
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       reflection->SetBool(message, field_desc, value.GetBoolValue());
       return;
   }
@@ -2258,8 +2258,8 @@ void TextFormat::Printer::PrintField(const Message& message,
                                      const FieldDescriptor* field,
                                      TextGenerator* generator) const {
   if (use_short_repeated_primitives_ && field->is_repeated() &&
-      field->cpp_type() != FieldCppType::STRING &&
-      field->cpp_type() != FieldCppType::MESSAGE) {
+      field->cpp_type() != SharkFieldCppType::CPPTYPE_STRING &&
+      field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) {
     PrintShortRepeatedField(message, reflection, field, generator);
     return;
   }
@@ -2286,7 +2286,7 @@ void TextFormat::Printer::PrintField(const Message& message,
 
     PrintFieldName(message, field_index, count, reflection, field, generator);
 
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       const FastFieldValuePrinter* printer = GetFieldPrinter(field);
       const Message& sub_message =
           field->is_repeated()
@@ -2370,7 +2370,7 @@ void TextFormat::Printer::PrintFieldValue(const Message& message,
 
   switch (field->cpp_type()) {
 #define OUTPUT_FIELD(CPPTYPE, METHOD)                                \
-  case FieldCppType::CPPTYPE:                           \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                           \
     printer->Print##METHOD(                                          \
         field->is_repeated()                                         \
             ? reflection->GetRepeated##METHOD(message, field, index) \
@@ -2391,7 +2391,7 @@ void TextFormat::Printer::PrintFieldValue(const Message& message,
     OUTPUT_FIELD(BOOL, Bool);
 #undef OUTPUT_FIELD
 
-    case FieldCppType::STRING: {
+    case SharkFieldCppType::CPPTYPE_STRING: {
       std::string scratch;
       const std::string& value =
           field->is_repeated()
@@ -2407,16 +2407,16 @@ void TextFormat::Printer::PrintFieldValue(const Message& message,
                           "...<truncated>...";
         value_to_print = &truncated_value;
       }
-      if (field->type() == FieldType::STRING) {
+      if (field->type() == SharkFieldType::STRING) {
         printer->PrintString(*value_to_print, generator);
       } else {
-        GOOGLE_DCHECK_EQ(field->type(), FieldType::BYTES);
+        GOOGLE_DCHECK_EQ(field->type(), SharkFieldType::BYTES);
         printer->PrintBytes(*value_to_print, generator);
       }
       break;
     }
 
-    case FieldCppType::ENUM: {
+    case SharkFieldCppType::CPPTYPE_ENUM: {
       int enum_value =
           field->is_repeated()
               ? reflection->GetRepeatedEnumValue(message, field, index)
@@ -2437,7 +2437,7 @@ void TextFormat::Printer::PrintFieldValue(const Message& message,
       break;
     }
 
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       Print(field->is_repeated()
                 ? reflection->GetRepeatedMessage(message, field, index)
                 : reflection->GetMessage(message, field),

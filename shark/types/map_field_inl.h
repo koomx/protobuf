@@ -185,7 +185,7 @@ namespace shark::internal {
         // MapValueRef::type() fails when containing data is null. However, if
         // this_iter points to MapEnd, data can be null.
         this_iter->value_.SetType(
-            static_cast<FieldCppType>(that_iter.value_.type_));
+            static_cast<SharkFieldCppType>(that_iter.value_.type_));
         SetMapIteratorValue(this_iter);
     }
 

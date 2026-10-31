@@ -161,7 +161,7 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
   std::string prepared_add_template;
   // TODO(b/190614678): Support fields with type Message or Map.
   if (descriptor->is_repeated() && !descriptor->is_map()) {
-    if (descriptor->type() != FieldType::MESSAGE) {
+    if (descriptor->type() != SharkFieldType::MESSAGE) {
       prepared_template = strings::Substitute("&$0.Get(index)", field_member);
       prepared_add_template =
           strings::Substitute("&$0.Get($0.size() - 1)", field_member);
@@ -171,10 +171,10 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     }
   } else if (descriptor->is_map()) {
     prepared_template = "nullptr";
-  } else if (descriptor->type() == FieldType::MESSAGE &&
+  } else if (descriptor->type() == SharkFieldType::MESSAGE &&
              !IsExplicitLazy(descriptor)) {
     prepared_template = "nullptr";
-  } else if (descriptor->cpp_type() == FieldCppType::STRING) {
+  } else if (descriptor->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
     if (oneof_member) {
       prepared_template = GenerateTemplateForOneofString(
           descriptor, (*variables)["proto_ns"], field_member);
@@ -186,7 +186,7 @@ void AddAccessorAnnotations(const FieldDescriptor* descriptor,
     prepared_template = StrCat("&", field_member);
   }
   if (descriptor->is_repeated() && !descriptor->is_map() &&
-      descriptor->type() != FieldType::MESSAGE) {
+      descriptor->type() != SharkFieldType::MESSAGE) {
     prepared_flat_template = StrCat("&", field_member);
   } else {
     prepared_flat_template = prepared_template;
@@ -363,38 +363,38 @@ FieldGenerator* FieldGeneratorMap::MakeGenerator(
 
   if (field->is_repeated()) {
     switch (field->cpp_type()) {
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         if (field->is_map()) {
           return new MapFieldGenerator(field, options, scc_analyzer);
         } else {
           return new RepeatedMessageFieldGenerator(field, options,
                                                    scc_analyzer);
         }
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         return new RepeatedStringFieldGenerator(field, options);
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return new RepeatedEnumFieldGenerator(field, options);
       default:
         return new RepeatedPrimitiveFieldGenerator(field, options);
     }
   } else if (field->real_containing_oneof()) {
     switch (field->cpp_type()) {
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         return new MessageOneofFieldGenerator(field, options, scc_analyzer);
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         return new StringOneofFieldGenerator(field, options);
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return new EnumOneofFieldGenerator(field, options);
       default:
         return new PrimitiveOneofFieldGenerator(field, options);
     }
   } else {
     switch (field->cpp_type()) {
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         return new MessageFieldGenerator(field, options, scc_analyzer);
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         return new StringFieldGenerator(field, options);
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return new EnumFieldGenerator(field, options);
       default:
         return new PrimitiveFieldGenerator(field, options);

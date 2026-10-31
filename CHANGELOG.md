@@ -2,7 +2,7 @@
 
 新任务加在最上面，一节一件事。步骤做完后，把状态改成完成，并写上实际结果。未做的步骤保持未做。
 
-## 重排 FieldType 和 FieldCppType
+## 重排 SharkFieldType 和 SharkFieldCppType
 
 日期：2026-10-26
 
@@ -10,7 +10,7 @@
 
 | 步骤 | 内容 | 状态 | 完成效果 |
 | --- | --- | --- | --- |
-| 1 | `FieldType`：1 BOOL，2 INT8，3 UINT8，4 INT16，5 UINT16，6 INT32，7 UINT32，8 INT64，9 UINT64，10 FLOAT，11 FLOAT16，12 FLOAT8，13 DOUBLE，14 ENUM，15 MESSAGE，16 STRING，17 BYTES，18 FIXED32，19 FIXED64，20 SFIXED32，21 SFIXED64，22 SINT32，23 SINT64。`FieldCppType` 同样排到 STRING = 16，那六个字段类型仍映射到原有的 cpp 类型。`descriptor.shark`、`type.shark` 和 IDE 副本用同一套编号。索引表按新编号重排。解析器拒绝 `float16`、`float8` | 完成 | `kMaxFieldType` 是 23，`kMaxFieldCppType` 是 16。`float` 仍是 4 字节定长，`double` 仍是 8 字节定长 |
+| 1 | `SharkFieldType`：1 BOOL，2 INT8，3 UINT8，4 INT16，5 UINT16，6 INT32，7 UINT32，8 INT64，9 UINT64，10 FLOAT，11 FLOAT16，12 FLOAT8，13 DOUBLE，14 ENUM，15 MESSAGE，16 STRING，17 BYTES，18 FIXED32，19 FIXED64，20 SFIXED32，21 SFIXED64，22 SINT32，23 SINT64。`SharkFieldCppType` 同样排到 STRING = 16，那六个字段类型仍映射到原有的 cpp 类型。`descriptor.shark`、`type.shark` 和 IDE 副本用同一套编号。索引表按新编号重排。解析器拒绝 `float16`、`float8` | 完成 | `kMaxFieldType` 是 23，`kMaxFieldCppType` 是 16。`float` 仍是 4 字节定长，`double` 仍是 8 字节定长 |
 | 2 | 库里的 `.skp` 按新编号重新生成 | 完成 | `sharkc` 已用新编号重新生成 `descriptor.skp`、`plugin.skp`、`shark/types/*.skp` |
 | 3 | 编译测试并跑 `ctest` | 完成 | 测试已通过 |
 
@@ -94,12 +94,12 @@ schema 文件里标了 `[deprecated = true]` 的字段，生成的访问器继�
 
 日期：2026-10-26
 
-schema 不再接受 group 字段。`optional group`、`required group`、`repeated group` 都不能再声明。`TYPE_GROUP` 和 `FieldType::GROUP` 删掉。编号 10 留空，不分配给其他类型，这一节不定义 `LIST`。旧描述符里的 10 按不认识的枚举值处理。这一节不改 `list` 语法，也不改 `repeated`。
+schema 不再接受 group 字段。`optional group`、`required group`、`repeated group` 都不能再声明。`TYPE_GROUP` 和 `SharkFieldType::GROUP` 删掉。编号 10 留空，不分配给其他类型，这一节不定义 `LIST`。旧描述符里的 10 按不认识的枚举值处理。这一节不改 `list` 语法，也不改 `repeated`。
 
 | 步骤 | 内容 | 状态 | 完成效果 |
 | --- | --- | --- | --- |
 | 1 | `shark/compiler/parser.cc` 的类型表去掉 `"group"`。`group` 不单独报错，和其它不在类型表里的名字一样走 `ParseUserDefinedType`。不读 `{ ... }`，不生成嵌套消息，不把字段名改成小写。删掉 `Group names must start with a capital letter` 和 `Missing group body`。`ParseType` 的 `TYPE_GROUP` 分支删掉 | 完成 | 类型表没有 `"group"`。`optional group bar = 1;` 和 `optional xxx bar = 1;` 一样，建描述符时再报 `"group" is not defined.` |
-| 2 | `shark/descriptor.shark` 的 `FieldDescriptorProto.Type`、`shark/descriptor.h` 的 `FieldType`、`shark/format/wired/wire_format_lite.h` 的 `SharkFieldType`、`shark/types/type.shark` 的 `Field.Kind` 去掉 group。编号 10 不写新名字。`ides/vscode` 和 `ides/clion` 里这两份 schema 的副本一起改。用 `sharkc` 重新生成 `descriptor.skp` 和 `type.skp`，不手改生成文件里的描述符字节 | 完成 | 四处枚举都没有 group。编号 10 空着。IDE 副本已改。`descriptor.skp`、`type.skp` 由 `sharkc` 重新生成 |
+| 2 | `shark/descriptor.shark` 的 `FieldDescriptorProto.Type`、`shark/descriptor.h` 的 `SharkFieldType`、`shark/format/wired/wire_format_lite.h` 的 `SharkFieldType`、`shark/types/type.shark` 的 `Field.Kind` 去掉 group。编号 10 不写新名字。`ides/vscode` 和 `ides/clion` 里这两份 schema 的副本一起改。用 `sharkc` 重新生成 `descriptor.skp` 和 `type.skp`，不手改生成文件里的描述符字节 | 完成 | 四处枚举都没有 group。编号 10 空着。IDE 副本已改。`descriptor.skp`、`type.skp` 由 `sharkc` 重新生成 |
 | 3 | `descriptor.cc` 的 `kTypeToName`、`kFieldTypeToCppTypeMap` 在下标 10 不再写 `"group"` 或 message。`DebugString` 不再把 group 的嵌套类型从消息体里拿掉，也不再把字段打成 `group Name = N { ... }`。建描述符时不为类型值 10 写单独错误 | 完成 | 下标 10 的名字是 `"ERROR"`，cpp 类型是 0。没有单独的类型值 10 错误 |
 | 4 | 下面 `.shark` 里的 `optional group`、`required group`、`repeated group` 整段删掉，包括声明体。其余字段不动：`tests/unittest.shark`、`tests/unittest_lite.shark`、`tests/unittest_custom_options.shark`、`tests/unittest_mset.shark`、`tests/test_messages_proto2.shark`、`tests/util/message_differencer_unittest.shark`、`tests/transfer/json/json_format.shark`、`tests/transfer/json/testdata/books.shark`、`benchmark/google_size.shark`、`benchmark/datasets/google_message2/benchmark_message2.shark`、`benchmark/datasets/google_message3/benchmark_message3.shark`、`benchmark_message3_1.shark` 到 `benchmark_message3_6.shark`、`benchmark/datasets/google_message4/benchmark_message4.shark`、`benchmark_message4_1.shark` | 完成 | 这些文件里的 group 声明已删。`oneof` 里的 `group` 同样删掉，否则 `sharkc` 编不过。`tests` 和 `benchmark` 下的 `.shark` 已用当前 `sharkc` 编过 |
 | 5 | 只覆盖 group 的测试删掉：`parser_unittest.cc` 的 `ParseMessageTest.Group`、`ParseErrorTest.DefaultValueForGroup`、`GroupNotCapitalized`、`GroupMissingBody`、`SourceInfoTest.Groups`；`unknown_field_set_unittest.cc` 的 `UnknownFieldSetTest.Group`；text format 数据里的 `OptionalGroup`、`RepeatedGroup` 段。`message_unittest.inc`、`wire_format_unittest.inc`、`generated_message_reflection_unittest.cc`、`dynamic_message_unittest.cc`、`extension_set_unittest.cc`、`reflection_ops_unittest.cc`、`message_differencer_unittest.cc`、`text_format_unittest.cc`、`descriptor_unittest.cc` 里还测别的行为的，只去掉 group 字段和对应断言 | 完成 | 列出的 group 测试已删。MessageSet 只按 type id 和 length-delimited message 配对，不再用 start/end group。`ctest` 6 项全部通过 |

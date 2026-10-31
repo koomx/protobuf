@@ -1719,7 +1719,7 @@ class ParentSavingFieldComparator : public util::FieldComparator {
                            int index_2,
                            const util::FieldContext* field_context) override {
     if (field_context) parent_fields_ = *(field_context->parent_fields());
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       return RECURSE;
     } else {
       return SAME;

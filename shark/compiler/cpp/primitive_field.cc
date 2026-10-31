@@ -47,47 +47,47 @@ namespace {
 
 // For encodings with fixed sizes, returns that size in bytes.  Otherwise
 // returns -1.
-int FixedSize(FieldType type) {
+int FixedSize(SharkFieldType type) {
   switch (type) {
-    case FieldType::INT32:
-    case FieldType::INT8:
-    case FieldType::UINT8:
-    case FieldType::INT16:
-    case FieldType::UINT16:
+    case SharkFieldType::INT32:
+    case SharkFieldType::INT8:
+    case SharkFieldType::UINT8:
+    case SharkFieldType::INT16:
+    case SharkFieldType::UINT16:
       return -1;
-    case FieldType::INT64:
+    case SharkFieldType::INT64:
       return -1;
-    case FieldType::UINT32:
+    case SharkFieldType::UINT32:
       return -1;
-    case FieldType::UINT64:
+    case SharkFieldType::UINT64:
       return -1;
-    case FieldType::SINT32:
+    case SharkFieldType::SINT32:
       return -1;
-    case FieldType::SINT64:
+    case SharkFieldType::SINT64:
       return -1;
-    case FieldType::FIXED32:
+    case SharkFieldType::FIXED32:
       return WireFormatLite::kFixed32Size;
-    case FieldType::FIXED64:
+    case SharkFieldType::FIXED64:
       return WireFormatLite::kFixed64Size;
-    case FieldType::SFIXED32:
+    case SharkFieldType::SFIXED32:
       return WireFormatLite::kSFixed32Size;
-    case FieldType::SFIXED64:
+    case SharkFieldType::SFIXED64:
       return WireFormatLite::kSFixed64Size;
-    case FieldType::FLOAT:
+    case SharkFieldType::FLOAT:
       return WireFormatLite::kFloatSize;
-    case FieldType::DOUBLE:
+    case SharkFieldType::DOUBLE:
       return WireFormatLite::kDoubleSize;
 
-    case FieldType::BOOL:
+    case SharkFieldType::BOOL:
       return WireFormatLite::kBoolSize;
-    case FieldType::ENUM:
+    case SharkFieldType::ENUM:
       return -1;
 
-    case FieldType::STRING:
+    case SharkFieldType::STRING:
       return -1;
-    case FieldType::BYTES:
+    case SharkFieldType::BYTES:
       return -1;
-    case FieldType::MESSAGE:
+    case SharkFieldType::MESSAGE:
       return -1;
 
       // No default because we want the compiler to complain if any new

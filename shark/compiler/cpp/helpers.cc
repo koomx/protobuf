@@ -291,7 +291,7 @@ void SetUnknownFieldsVariable(const Descriptor* descriptor,
         unknown_fields_type + "::default_instance)";
   } else {
     unknown_fields_type =
-        PrimitiveTypeName(options, FieldCppType::STRING);
+        PrimitiveTypeName(options, SharkFieldCppType::CPPTYPE_STRING);
     (*variables)["unknown_fields"] = "_internal_metadata_.unknown_fields<" +
                                      unknown_fields_type + ">(::" + proto_ns +
                                      "::internal::GetEmptyString)";
@@ -338,26 +338,26 @@ const char kThinSeparator[] =
 bool CanInitializeByZeroing(const FieldDescriptor* field) {
   if (field->is_repeated() || field->is_extension()) return false;
   switch (field->cpp_type()) {
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       return field->default_value_enum()->number() == 0;
-    case FieldCppType::INT32:
-    case FieldCppType::INT8:
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT32:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return field->default_value_int32() == 0;
-    case FieldCppType::UINT8:
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return field->default_value_uint32() == 0;
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       return field->default_value_int64() == 0;
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       return field->default_value_uint32() == 0;
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       return field->default_value_uint64() == 0;
-    case FieldCppType::FLOAT:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
       return field->default_value_float() == 0;
-    case FieldCppType::DOUBLE:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
       return field->default_value_double() == 0;
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       return field->default_value_bool() == false;
     default:
       return false;
@@ -567,28 +567,28 @@ int EstimateAlignmentSize(const FieldDescriptor* field) {
   if (field == nullptr) return 0;
   if (field->is_repeated()) return 8;
   switch (field->cpp_type()) {
-    case FieldCppType::BOOL:
-    case FieldCppType::INT8:
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_BOOL:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       return 1;
-    case FieldCppType::INT16:
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       // The padding optimizer only groups 1-, 4-, and 8-byte fields. Two-byte
       // fields are ordered with the 4-byte group; the compiler still aligns
       // the real int16_t member.
       return 4;
 
-    case FieldCppType::INT32:
-    case FieldCppType::UINT32:
-    case FieldCppType::ENUM:
-    case FieldCppType::FLOAT:
+    case SharkFieldCppType::CPPTYPE_INT32:
+    case SharkFieldCppType::CPPTYPE_UINT32:
+    case SharkFieldCppType::CPPTYPE_ENUM:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
       return 4;
 
-    case FieldCppType::INT64:
-    case FieldCppType::UINT64:
-    case FieldCppType::DOUBLE:
-    case FieldCppType::STRING:
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_INT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
+    case SharkFieldCppType::CPPTYPE_STRING:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return 8;
   }
   GOOGLE_LOG(FATAL) << "Can't get here.";
@@ -626,35 +626,35 @@ std::string StripProto(const std::string& filename) {
   return compiler::StripProto(filename);
 }
 
-const char* PrimitiveTypeName(FieldCppType type) {
+const char* PrimitiveTypeName(SharkFieldCppType type) {
   switch (type) {
-    case FieldCppType::INT32:
+    case SharkFieldCppType::CPPTYPE_INT32:
       return "int32_t";
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       return "int8_t";
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       return "uint8_t";
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return "int16_t";
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return "uint16_t";
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       return "int64_t";
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       return "uint32_t";
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       return "uint64_t";
-    case FieldCppType::DOUBLE:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
       return "double";
-    case FieldCppType::FLOAT:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
       return "float";
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       return "bool";
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       return "int";
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       return "std::string";
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return nullptr;
 
       // No default because we want the compiler to complain if any new
@@ -666,35 +666,35 @@ const char* PrimitiveTypeName(FieldCppType type) {
 }
 
 std::string PrimitiveTypeName(const Options& options,
-                              FieldCppType type) {
+                              SharkFieldCppType type) {
   switch (type) {
-    case FieldCppType::INT32:
+    case SharkFieldCppType::CPPTYPE_INT32:
       return IntTypeName(options, "int32");
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       return "int8_t";
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       return "uint8_t";
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return "int16_t";
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return "uint16_t";
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       return IntTypeName(options, "int64");
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       return IntTypeName(options, "uint32");
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       return IntTypeName(options, "uint64");
-    case FieldCppType::DOUBLE:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
       return "double";
-    case FieldCppType::FLOAT:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
       return "float";
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       return "bool";
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       return "int";
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       return "std::string";
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return "";
 
       // No default because we want the compiler to complain if any new
@@ -705,51 +705,51 @@ std::string PrimitiveTypeName(const Options& options,
   return "";
 }
 
-const char* DeclaredTypeMethodName(FieldType type) {
+const char* DeclaredTypeMethodName(SharkFieldType type) {
   switch (type) {
-    case FieldType::INT32:
+    case SharkFieldType::INT32:
       return "Int32";
-    case FieldType::INT64:
+    case SharkFieldType::INT64:
       return "Int64";
-    case FieldType::UINT32:
+    case SharkFieldType::UINT32:
       return "UInt32";
-    case FieldType::UINT64:
+    case SharkFieldType::UINT64:
       return "UInt64";
-    case FieldType::SINT32:
+    case SharkFieldType::SINT32:
       return "SInt32";
-    case FieldType::SINT64:
+    case SharkFieldType::SINT64:
       return "SInt64";
-    case FieldType::INT8:
+    case SharkFieldType::INT8:
       return "Int8";
-    case FieldType::UINT8:
+    case SharkFieldType::UINT8:
       return "UInt8";
-    case FieldType::INT16:
+    case SharkFieldType::INT16:
       return "Int16";
-    case FieldType::UINT16:
+    case SharkFieldType::UINT16:
       return "UInt16";
-    case FieldType::FIXED32:
+    case SharkFieldType::FIXED32:
       return "Fixed32";
-    case FieldType::FIXED64:
+    case SharkFieldType::FIXED64:
       return "Fixed64";
-    case FieldType::SFIXED32:
+    case SharkFieldType::SFIXED32:
       return "SFixed32";
-    case FieldType::SFIXED64:
+    case SharkFieldType::SFIXED64:
       return "SFixed64";
-    case FieldType::FLOAT:
+    case SharkFieldType::FLOAT:
       return "Float";
-    case FieldType::DOUBLE:
+    case SharkFieldType::DOUBLE:
       return "Double";
 
-    case FieldType::BOOL:
+    case SharkFieldType::BOOL:
       return "Bool";
-    case FieldType::ENUM:
+    case SharkFieldType::ENUM:
       return "Enum";
 
-    case FieldType::STRING:
+    case SharkFieldType::STRING:
       return "String";
-    case FieldType::BYTES:
+    case SharkFieldType::BYTES:
       return "Bytes";
-    case FieldType::MESSAGE:
+    case SharkFieldType::MESSAGE:
       return "Message";
 
       // No default because we want the compiler to complain if any new
@@ -788,23 +788,23 @@ std::string DefaultValue(const FieldDescriptor* field) {
 
 std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
   switch (field->cpp_type()) {
-    case FieldCppType::INT32:
+    case SharkFieldCppType::CPPTYPE_INT32:
       return Int32ToString(field->default_value_int32());
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       return StrCat("static_cast<int8_t>(", field->default_value_int32(), ")");
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return StrCat("static_cast<int16_t>(", field->default_value_int32(), ")");
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       return StrCat("static_cast<uint8_t>(", field->default_value_uint32(), "u)");
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return StrCat("static_cast<uint16_t>(", field->default_value_uint32(), "u)");
-    case FieldCppType::UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT32:
       return StrCat(field->default_value_uint32()) + "u";
-    case FieldCppType::INT64:
+    case SharkFieldCppType::CPPTYPE_INT64:
       return Int64ToString(field->default_value_int64());
-    case FieldCppType::UINT64:
+    case SharkFieldCppType::CPPTYPE_UINT64:
       return UInt64ToString(field->default_value_uint64());
-    case FieldCppType::DOUBLE: {
+    case SharkFieldCppType::CPPTYPE_DOUBLE: {
       double value = field->default_value_double();
       if (value == std::numeric_limits<double>::infinity()) {
         return "std::numeric_limits<double>::infinity()";
@@ -816,7 +816,7 @@ std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
         return SimpleDtoa(value);
       }
     }
-    case FieldCppType::FLOAT: {
+    case SharkFieldCppType::CPPTYPE_FLOAT: {
       float value = field->default_value_float();
       if (value == std::numeric_limits<float>::infinity()) {
         return "std::numeric_limits<float>::infinity()";
@@ -835,19 +835,19 @@ std::string DefaultValue(const Options& options, const FieldDescriptor* field) {
         return float_value;
       }
     }
-    case FieldCppType::BOOL:
+    case SharkFieldCppType::CPPTYPE_BOOL:
       return field->default_value_bool() ? "true" : "false";
-    case FieldCppType::ENUM:
+    case SharkFieldCppType::CPPTYPE_ENUM:
       // Lazy:  Generate a static_cast because we don't have a helper function
       //   that constructs the full name of an enum value.
       return strings::Substitute(
           "static_cast< $0 >($1)", ClassName(field->enum_type(), true),
           Int32ToString(field->default_value_enum()->number()));
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       return "\"" +
              EscapeTrigraphs(CEscape(field->default_value_string())) +
              "\"";
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return "*" + FieldMessageTypeName(field, options) +
              "::internal_default_instance()";
   }
@@ -982,7 +982,7 @@ bool HasRepeatedFields(const FileDescriptor* file) {
 
 static bool IsStringPieceField(const FieldDescriptor* field,
                                const Options& options) {
-  return field->cpp_type() == FieldCppType::STRING &&
+  return field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING &&
          EffectiveStringCType(field, options) == FieldOptions_CType::STRING_PIECE;
 }
 
@@ -1005,7 +1005,7 @@ bool HasStringPieceFields(const FileDescriptor* file, const Options& options) {
 }
 
 static bool IsCordField(const FieldDescriptor* field, const Options& options) {
-  return field->cpp_type() == FieldCppType::STRING &&
+  return field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING &&
          EffectiveStringCType(field, options) == FieldOptions_CType::CORD;
 }
 
@@ -1109,21 +1109,21 @@ VerifySimpleType ShouldVerifySimple(const Descriptor* descriptor) {
 
 bool IsStringOrMessage(const FieldDescriptor* field) {
   switch (field->cpp_type()) {
-    case FieldCppType::INT32:
-    case FieldCppType::INT64:
-    case FieldCppType::UINT32:
-    case FieldCppType::UINT64:
-    case FieldCppType::DOUBLE:
-    case FieldCppType::FLOAT:
-    case FieldCppType::BOOL:
-    case FieldCppType::ENUM:
-    case FieldCppType::INT8:
-    case FieldCppType::UINT8:
-    case FieldCppType::INT16:
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_INT32:
+    case SharkFieldCppType::CPPTYPE_INT64:
+    case SharkFieldCppType::CPPTYPE_UINT32:
+    case SharkFieldCppType::CPPTYPE_UINT64:
+    case SharkFieldCppType::CPPTYPE_DOUBLE:
+    case SharkFieldCppType::CPPTYPE_FLOAT:
+    case SharkFieldCppType::CPPTYPE_BOOL:
+    case SharkFieldCppType::CPPTYPE_ENUM:
+    case SharkFieldCppType::CPPTYPE_INT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
+    case SharkFieldCppType::CPPTYPE_INT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return false;
-    case FieldCppType::STRING:
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_STRING:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       return true;
   }
 
@@ -1133,7 +1133,7 @@ bool IsStringOrMessage(const FieldDescriptor* field) {
 
 FieldOptions::CType EffectiveStringCType(const FieldDescriptor* field,
                                          const Options& options) {
-  GOOGLE_DCHECK(field->cpp_type() == FieldCppType::STRING);
+  GOOGLE_DCHECK(field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING);
   if (options.opensource_runtime) {
     // Open-source protobuf release only supports STRING ctype.
     return FieldOptions_CType::STRING;
@@ -1281,7 +1281,7 @@ bool UsingImplicitWeakFields(const FileDescriptor* file,
 bool IsImplicitWeakField(const FieldDescriptor* field, const Options& options,
                          MessageSCCAnalyzer* scc_analyzer) {
   return UsingImplicitWeakFields(field->file(), options) &&
-         field->type() == FieldType::MESSAGE &&
+         field->type() == SharkFieldType::MESSAGE &&
          !field->is_required() && !field->is_map() && !field->is_extension() &&
          !IsWellKnownMessage(field->message_type()->file()) &&
          field->message_type()->file()->name() !=
@@ -1312,14 +1312,14 @@ MessageAnalysis MessageSCCAnalyzer::GetSCCAnalysis(const SCC* scc) {
         result.contains_weak = true;
       }
       switch (field->type()) {
-        case FieldType::STRING:
-        case FieldType::BYTES: {
+        case SharkFieldType::STRING:
+        case SharkFieldType::BYTES: {
           if (field->options().ctype() == FieldOptions_CType::CORD) {
             result.contains_cord = true;
           }
           break;
         }
-        case FieldType::MESSAGE: {
+        case SharkFieldType::MESSAGE: {
           const SCC* child = analyzer_.GetSCC(field->message_type());
           if (child != scc) {
             MessageAnalysis analysis = GetSCCAnalysis(child);
@@ -1641,7 +1641,7 @@ bool EnableMessageOwnedArenaTrial(const Descriptor* desc,
 bool HasMessageFieldOrExtension(const Descriptor* desc) {
   if (desc->extension_range_count() > 0) return true;
   for (const auto* f : FieldRange(desc)) {
-    if (f->cpp_type() == FieldCppType::MESSAGE) return true;
+    if (f->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) return true;
   }
   return false;
 }

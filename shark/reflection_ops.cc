@@ -104,7 +104,7 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
       for (int j = 0; j < count; j++) {
         switch (field->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, METHOD)                                      \
-  case FieldCppType::CPPTYPE:                                \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                                \
     to_reflection->Add##METHOD(                                           \
         to, field, from_reflection->GetRepeated##METHOD(from, field, j)); \
     break;
@@ -124,7 +124,7 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
           HANDLE_TYPE(ENUM, Enum);
 #undef HANDLE_TYPE
 
-          case FieldCppType::MESSAGE:
+          case SharkFieldCppType::CPPTYPE_MESSAGE:
             const Message& from_child =
                 from_reflection->GetRepeatedMessage(from, field, j);
             if (from_reflection == to_reflection) {
@@ -141,7 +141,7 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
     } else {
       switch (field->cpp_type()) {
 #define HANDLE_TYPE(CPPTYPE, METHOD)                                       \
-  case FieldCppType::CPPTYPE:                                 \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                                 \
     to_reflection->Set##METHOD(to, field,                                  \
                                from_reflection->Get##METHOD(from, field)); \
     break;
@@ -161,7 +161,7 @@ void ReflectionOps::Merge(const Message& from, Message* to) {
         HANDLE_TYPE(ENUM, Enum);
 #undef HANDLE_TYPE
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
           const Message& from_child = from_reflection->GetMessage(from, field);
           if (from_reflection == to_reflection) {
             to_reflection
@@ -216,11 +216,11 @@ bool ReflectionOps::IsInitialized(const Message& message, bool check_fields,
 
     if (check_descendants) {
       for (const FieldDescriptor* field = begin; field != end; ++field) {
-        if (field->cpp_type() == FieldCppType::MESSAGE) {
+        if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
           const Descriptor* message_type = field->message_type();
           if (SHARK_PREDICT_FALSE(message_type->options().map_entry())) {
             if (message_type->field(1)->cpp_type() ==
-                FieldCppType::MESSAGE) {
+                SharkFieldCppType::CPPTYPE_MESSAGE) {
               const MapFieldBase* map_field =
                   reflection->GetMapData(message, field);
               if (map_field->IsMapValid()) {
@@ -280,11 +280,11 @@ bool ReflectionOps::IsInitialized(const Message& message) {
   // stripped.
   reflection->ListFieldsOmitStripped(message, &fields);
   for (const FieldDescriptor* field : fields) {
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
 
       if (field->is_map()) {
         const FieldDescriptor* value_field = field->message_type()->field(1);
-        if (value_field->cpp_type() == FieldCppType::MESSAGE) {
+        if (value_field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
           const MapFieldBase* map_field =
               reflection->GetMapData(message, field);
           if (map_field->IsMapValid()) {
@@ -325,7 +325,7 @@ bool ReflectionOps::IsInitialized(const Message& message) {
 
 static bool IsMapValueMessageTyped(const FieldDescriptor* map_field) {
   return map_field->message_type()->field(1)->cpp_type() ==
-         FieldCppType::MESSAGE;
+         SharkFieldCppType::CPPTYPE_MESSAGE;
 }
 
 void ReflectionOps::DiscardUnknownFields(Message* message) {
@@ -339,7 +339,7 @@ void ReflectionOps::DiscardUnknownFields(Message* message) {
   reflection->ListFields(*message, &fields);
   for (const FieldDescriptor* field : fields) {
     // Skip over non-message fields.
-    if (field->cpp_type() != FieldCppType::MESSAGE) {
+    if (field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) {
       continue;
     }
     // Discard the unknown fields in maps that contain message values.
@@ -409,7 +409,7 @@ void ReflectionOps::FindInitializationErrors(const Message& message,
   std::vector<const FieldDescriptor*> fields;
   reflection->ListFieldsOmitStripped(message, &fields);
   for (const FieldDescriptor* field : fields) {
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
 
       if (field->is_repeated()) {
         int size = reflection->FieldSize(message, field);

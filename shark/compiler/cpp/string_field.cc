@@ -73,9 +73,9 @@ void SetStringVariables(const FieldDescriptor* descriptor,
   }
 
   (*variables)["pointer_type"] =
-      descriptor->type() == FieldType::BYTES ? "void" : "char";
+      descriptor->type() == SharkFieldType::BYTES ? "void" : "char";
   (*variables)["setter"] =
-      descriptor->type() == FieldType::BYTES ? "SetBytes" : "Set";
+      descriptor->type() == SharkFieldType::BYTES ? "SetBytes" : "Set";
   (*variables)["null_check"] = (*variables)["DCHK"] + "(value != nullptr);\n";
   // NOTE: Escaped here to unblock proto1->proto2 migration.
   // TODO(liujisi): Extend this to apply for other conflicting methods.
@@ -524,7 +524,7 @@ void StringFieldGenerator::GenerateArenaDestructorCode(
 void StringFieldGenerator::GenerateSerializeWithCachedSizesToArray(
     io::Printer* printer) const {
   Formatter format(printer, variables_);
-  if (descriptor_->type() == FieldType::STRING) {
+  if (descriptor_->type() == SharkFieldType::STRING) {
     GenerateUtf8CheckCodeForString(
         descriptor_, options_, false,
         "this->_internal_$name$().data(), "
@@ -924,7 +924,7 @@ void RepeatedStringFieldGenerator::GenerateSerializeWithCachedSizesToArray(
       "  const auto& s = this->_internal_$name$(i);\n");
   // format("for (const std::string& s : this->$name$()) {\n");
   format.Indent();
-  if (descriptor_->type() == FieldType::STRING) {
+  if (descriptor_->type() == SharkFieldType::STRING) {
     GenerateUtf8CheckCodeForString(descriptor_, options_, false,
                                    "s.data(), static_cast<int>(s.length()),\n",
                                    format);

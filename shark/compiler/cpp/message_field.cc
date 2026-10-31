@@ -463,7 +463,7 @@ void MessageFieldGenerator::GenerateSerializeWithCachedSizesToArray(
   GOOGLE_CHECK(!IsFieldStripped(descriptor_, options_));
 
   Formatter format(printer, variables_);
-  if (descriptor_->type() == FieldType::MESSAGE) {
+  if (descriptor_->type() == SharkFieldType::MESSAGE) {
     format(
         "target = ::$proto_ns$::internal::WireFormatLite::\n"
         "  InternalWrite$declared_type$($number$, _Internal::$name$(this),\n"
@@ -882,7 +882,7 @@ void RepeatedMessageFieldGenerator::GenerateSerializeWithCachedSizesToArray(
     format(
         "for (auto it = this->$field$.pointer_begin(),\n"
         "          end = this->$field$.pointer_end(); it < end; ++it) {\n");
-    if (descriptor_->type() == FieldType::MESSAGE) {
+    if (descriptor_->type() == SharkFieldType::MESSAGE) {
       format(
           "  target = ::$proto_ns$::internal::WireFormatLite::\n"
           "    InternalWrite$declared_type$($number$, "
@@ -900,7 +900,7 @@ void RepeatedMessageFieldGenerator::GenerateSerializeWithCachedSizesToArray(
         "for (unsigned i = 0,\n"
         "    n = static_cast<unsigned>(this->_internal_$name$_size());"
         " i < n; i++) {\n");
-    if (descriptor_->type() == FieldType::MESSAGE) {
+    if (descriptor_->type() == SharkFieldType::MESSAGE) {
       format(
           "  const auto& repfield = this->_internal_$name$(i);\n"
           "  target = ::$proto_ns$::internal::WireFormatLite::\n"

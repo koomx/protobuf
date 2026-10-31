@@ -145,7 +145,7 @@ const char* cpptype_names_[kMaxFieldCppType + 1] = {
 
 static void ReportReflectionUsageTypeError(
     const Descriptor* descriptor, const FieldDescriptor* field,
-    const char* method, FieldCppType expected_type) {
+    const char* method, SharkFieldCppType expected_type) {
   GOOGLE_LOG(FATAL)
       << "Protocol Buffer reflection usage error:\n"
          "  Method      : shark::Reflection::"
@@ -201,9 +201,9 @@ inline void CheckInvalidAccess(const internal::ReflectionSchema& schema,
   USAGE_CHECK((A) != (B), METHOD, ERROR_DESCRIPTION)
 
 #define USAGE_CHECK_TYPE(METHOD, CPPTYPE)                      \
-  if (field->cpp_type() != FieldCppType::CPPTYPE) \
+  if (field->cpp_type() != SharkFieldCppType::CPPTYPE_##CPPTYPE) \
   ReportReflectionUsageTypeError(descriptor_, field, #METHOD,  \
-                                 FieldCppType::CPPTYPE)
+                                 SharkFieldCppType::CPPTYPE_##CPPTYPE)
 
 #define USAGE_CHECK_ENUM_VALUE(METHOD)     \
   if (value->type() != field->enum_type()) \
@@ -267,7 +267,7 @@ bool Reflection::IsLazilyVerifiedLazyField(const FieldDescriptor* field) const {
 
 bool Reflection::IsEagerlyVerifiedLazyField(
     const FieldDescriptor* field) const {
-  return (field->type() == FieldType::MESSAGE &&
+  return (field->type() == SharkFieldType::MESSAGE &&
           schema_.IsEagerlyVerifiedLazyField(field));
 }
 
@@ -298,7 +298,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
     if (field->is_repeated()) {
       switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                           \
-  case FieldCppType::UPPERCASE:                        \
+  case SharkFieldCppType::CPPTYPE_##UPPERCASE:                        \
     total_size += GetRaw<RepeatedField<LOWERCASE> >(message, field) \
                       .SpaceUsedExcludingSelfLong();                \
     break
@@ -317,7 +317,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-        case FieldCppType::STRING:
+        case SharkFieldCppType::CPPTYPE_STRING:
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::CType::STRING:
@@ -328,7 +328,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
           }
           break;
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
           if (IsMapFieldInApi(field)) {
             total_size += GetRaw<internal::MapFieldBase>(message, field)
                               .SpaceUsedExcludingSelfLong();
@@ -347,22 +347,22 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
         continue;
       }
       switch (field->cpp_type()) {
-        case FieldCppType::INT8:
-        case FieldCppType::INT16:
-        case FieldCppType::UINT8:
-        case FieldCppType::UINT16:
-        case FieldCppType::INT32:
-        case FieldCppType::INT64:
-        case FieldCppType::UINT32:
-        case FieldCppType::UINT64:
-        case FieldCppType::DOUBLE:
-        case FieldCppType::FLOAT:
-        case FieldCppType::BOOL:
-        case FieldCppType::ENUM:
+        case SharkFieldCppType::CPPTYPE_INT8:
+        case SharkFieldCppType::CPPTYPE_INT16:
+        case SharkFieldCppType::CPPTYPE_UINT8:
+        case SharkFieldCppType::CPPTYPE_UINT16:
+        case SharkFieldCppType::CPPTYPE_INT32:
+        case SharkFieldCppType::CPPTYPE_INT64:
+        case SharkFieldCppType::CPPTYPE_UINT32:
+        case SharkFieldCppType::CPPTYPE_UINT64:
+        case SharkFieldCppType::CPPTYPE_DOUBLE:
+        case SharkFieldCppType::CPPTYPE_FLOAT:
+        case SharkFieldCppType::CPPTYPE_BOOL:
+        case SharkFieldCppType::CPPTYPE_ENUM:
           // Field is inline, so we've already counted it.
           break;
 
-        case FieldCppType::STRING: {
+        case SharkFieldCppType::CPPTYPE_STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::CType::STRING:
@@ -389,7 +389,7 @@ size_t Reflection::SpaceUsedLong(const Message& message) const {
           break;
         }
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
           if (schema_.IsDefaultInstance(message)) {
             // For singular fields, the prototype just stores a pointer to the
             // external type's prototype, so there is no extra memory usage.
@@ -413,42 +413,42 @@ struct OneofFieldMover {
   template <typename FromType, typename ToType>
   void operator()(const FieldDescriptor* field, FromType* from, ToType* to) {
     switch (field->cpp_type()) {
-      case FieldCppType::INT8:
-      case FieldCppType::INT16:
-      case FieldCppType::INT32:
+      case SharkFieldCppType::CPPTYPE_INT8:
+      case SharkFieldCppType::CPPTYPE_INT16:
+      case SharkFieldCppType::CPPTYPE_INT32:
         to->SetInt32(from->GetInt32());
         break;
-      case FieldCppType::INT64:
+      case SharkFieldCppType::CPPTYPE_INT64:
         to->SetInt64(from->GetInt64());
         break;
-      case FieldCppType::UINT8:
-      case FieldCppType::UINT16:
-      case FieldCppType::UINT32:
+      case SharkFieldCppType::CPPTYPE_UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT32:
         to->SetUint32(from->GetUint32());
         break;
-      case FieldCppType::UINT64:
+      case SharkFieldCppType::CPPTYPE_UINT64:
         to->SetUint64(from->GetUint64());
         break;
-      case FieldCppType::FLOAT:
+      case SharkFieldCppType::CPPTYPE_FLOAT:
         to->SetFloat(from->GetFloat());
         break;
-      case FieldCppType::DOUBLE:
+      case SharkFieldCppType::CPPTYPE_DOUBLE:
         to->SetDouble(from->GetDouble());
         break;
-      case FieldCppType::BOOL:
+      case SharkFieldCppType::CPPTYPE_BOOL:
         to->SetBool(from->GetBool());
         break;
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         to->SetEnum(from->GetEnum());
         break;
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         if (!unsafe_shallow_swap) {
           to->SetMessage(from->GetMessage());
         } else {
           to->UnsafeSetMessage(from->UnsafeGetMessage());
         }
         break;
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         if (!unsafe_shallow_swap) {
           to->SetString(from->GetString());
           break;
@@ -702,7 +702,7 @@ void SwapFieldHelper::SwapNonMessageNonStringField(
     const FieldDescriptor* field) {
   switch (field->cpp_type()) {
 #define SWAP_VALUES(CPPTYPE, TYPE)               \
-  case FieldCppType::CPPTYPE:       \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:       \
     std::swap(*r->MutableRaw<TYPE>(lhs, field),  \
               *r->MutableRaw<TYPE>(rhs, field)); \
     break;
@@ -732,7 +732,7 @@ void Reflection::SwapField(Message* message1, Message* message2,
   if (field->is_repeated()) {
     switch (field->cpp_type()) {
 #define SWAP_ARRAYS(CPPTYPE, TYPE)                                 \
-  case FieldCppType::CPPTYPE:                         \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                         \
     MutableRaw<RepeatedField<TYPE> >(message1, field)              \
         ->Swap(MutableRaw<RepeatedField<TYPE> >(message2, field)); \
     break;
@@ -751,11 +751,11 @@ void Reflection::SwapField(Message* message1, Message* message2,
       SWAP_ARRAYS(ENUM, int);
 #undef SWAP_ARRAYS
 
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         internal::SwapFieldHelper::SwapRepeatedStringField<false>(
             this, message1, message2, field);
         break;
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         internal::SwapFieldHelper::SwapRepeatedMessageField<false>(
             this, message1, message2, field);
         break;
@@ -765,12 +765,12 @@ void Reflection::SwapField(Message* message1, Message* message2,
     }
   } else {
     switch (field->cpp_type()) {
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         internal::SwapFieldHelper::SwapMessageField<false>(this, message1,
                                                            message2, field);
         break;
 
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         internal::SwapFieldHelper::SwapStringField<false>(this, message1,
                                                           message2, field);
         break;
@@ -784,10 +784,10 @@ void Reflection::SwapField(Message* message1, Message* message2,
 void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
                                         const FieldDescriptor* field) const {
   if (!field->is_repeated()) {
-    if (field->cpp_type() == FieldCppType::MESSAGE) {
+    if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
       internal::SwapFieldHelper::SwapMessageField<true>(this, message1,
                                                         message2, field);
-    } else if (field->cpp_type() == FieldCppType::STRING) {
+    } else if (field->cpp_type() == SharkFieldCppType::CPPTYPE_STRING) {
       internal::SwapFieldHelper::SwapStringField<true>(this, message1, message2,
                                                        field);
     } else {
@@ -799,7 +799,7 @@ void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
 
   switch (field->cpp_type()) {
 #define SHALLOW_SWAP_ARRAYS(CPPTYPE, TYPE)                                \
-  case FieldCppType::CPPTYPE:                                \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                                \
     MutableRaw<RepeatedField<TYPE>>(message1, field)                      \
         ->InternalSwap(MutableRaw<RepeatedField<TYPE>>(message2, field)); \
     break;
@@ -818,11 +818,11 @@ void Reflection::UnsafeShallowSwapField(Message* message1, Message* message2,
     SHALLOW_SWAP_ARRAYS(ENUM, int);
 #undef SHALLOW_SWAP_ARRAYS
 
-    case FieldCppType::STRING:
+    case SharkFieldCppType::CPPTYPE_STRING:
       internal::SwapFieldHelper::SwapRepeatedStringField<true>(this, message1,
                                                                message2, field);
       break;
-    case FieldCppType::MESSAGE:
+    case SharkFieldCppType::CPPTYPE_MESSAGE:
       internal::SwapFieldHelper::SwapRepeatedMessageField<true>(
           this, message1, message2, field);
       break;
@@ -1210,7 +1210,7 @@ int Reflection::FieldSize(const Message& message,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)    \
-  case FieldCppType::UPPERCASE: \
+  case SharkFieldCppType::CPPTYPE_##UPPERCASE: \
     return GetRaw<RepeatedField<LOWERCASE> >(message, field).size()
 
       HANDLE_TYPE(INT8, int8_t);
@@ -1227,8 +1227,8 @@ int Reflection::FieldSize(const Message& message,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldCppType::STRING:
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_STRING:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         if (IsMapFieldInApi(field)) {
           const internal::MapFieldBase& map =
               GetRaw<MapFieldBase>(message, field);
@@ -1267,25 +1267,25 @@ void Reflection::ClearField(Message* message,
       // We need to set the field back to its default value.
       switch (field->cpp_type()) {
 #define CLEAR_TYPE(CPPTYPE, TYPE)                                      \
-  case FieldCppType::CPPTYPE:                             \
+  case SharkFieldCppType::CPPTYPE_##CPPTYPE:                             \
     *MutableRaw<TYPE>(message, field) = field->default_value_##TYPE(); \
     break;
 
-        case FieldCppType::INT8:
+        case SharkFieldCppType::CPPTYPE_INT8:
           *MutableRaw<int8_t>(message, field) =
               static_cast<int8_t>(field->default_value_int32());
           break;
-        case FieldCppType::INT16:
+        case SharkFieldCppType::CPPTYPE_INT16:
           *MutableRaw<int16_t>(message, field) =
               static_cast<int16_t>(field->default_value_int32());
           break;
         CLEAR_TYPE(INT32, int32_t);
         CLEAR_TYPE(INT64, int64_t);
-        case FieldCppType::UINT8:
+        case SharkFieldCppType::CPPTYPE_UINT8:
           *MutableRaw<uint8_t>(message, field) =
               static_cast<uint8_t>(field->default_value_uint32());
           break;
-        case FieldCppType::UINT16:
+        case SharkFieldCppType::CPPTYPE_UINT16:
           *MutableRaw<uint16_t>(message, field) =
               static_cast<uint16_t>(field->default_value_uint32());
           break;
@@ -1296,12 +1296,12 @@ void Reflection::ClearField(Message* message,
         CLEAR_TYPE(BOOL, bool);
 #undef CLEAR_TYPE
 
-        case FieldCppType::ENUM:
+        case SharkFieldCppType::CPPTYPE_ENUM:
           *MutableRaw<int>(message, field) =
               field->default_value_enum()->number();
           break;
 
-        case FieldCppType::STRING: {
+        case SharkFieldCppType::CPPTYPE_STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::CType::STRING:
@@ -1319,7 +1319,7 @@ void Reflection::ClearField(Message* message,
           break;
         }
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
           if (schema_.HasBitIndex(field) == static_cast<uint32_t>(-1)) {
             // Proto3 does not have has-bits and we need to set a message field
             // to nullptr in order to indicate its un-presence.
@@ -1336,7 +1336,7 @@ void Reflection::ClearField(Message* message,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                           \
-  case FieldCppType::UPPERCASE:                        \
+  case SharkFieldCppType::CPPTYPE_##UPPERCASE:                        \
     MutableRaw<RepeatedField<LOWERCASE> >(message, field)->Clear(); \
     break
 
@@ -1354,7 +1354,7 @@ void Reflection::ClearField(Message* message,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldCppType::STRING: {
+      case SharkFieldCppType::CPPTYPE_STRING: {
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::CType::STRING:
@@ -1364,7 +1364,7 @@ void Reflection::ClearField(Message* message,
         break;
       }
 
-      case FieldCppType::MESSAGE: {
+      case SharkFieldCppType::CPPTYPE_MESSAGE: {
         if (IsMapFieldInApi(field)) {
           MutableRaw<MapFieldBase>(message, field)->Clear();
         } else {
@@ -1390,7 +1390,7 @@ void Reflection::RemoveLast(Message* message,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                                \
-  case FieldCppType::UPPERCASE:                             \
+  case SharkFieldCppType::CPPTYPE_##UPPERCASE:                             \
     MutableRaw<RepeatedField<LOWERCASE> >(message, field)->RemoveLast(); \
     break
 
@@ -1408,7 +1408,7 @@ void Reflection::RemoveLast(Message* message,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         switch (field->options().ctype()) {
           default:  // TODO(kenton):  Support other string reps.
           case FieldOptions::CType::STRING:
@@ -1418,7 +1418,7 @@ void Reflection::RemoveLast(Message* message,
         }
         break;
 
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         if (IsMapFieldInApi(field)) {
           MutableRaw<MapFieldBase>(message, field)
               ->MutableRepeatedField()
@@ -1489,7 +1489,7 @@ void Reflection::SwapElements(Message* message, const FieldDescriptor* field,
   } else {
     switch (field->cpp_type()) {
 #define HANDLE_TYPE(UPPERCASE, LOWERCASE)                 \
-  case FieldCppType::UPPERCASE:              \
+  case SharkFieldCppType::CPPTYPE_##UPPERCASE:              \
     MutableRaw<RepeatedField<LOWERCASE> >(message, field) \
         ->SwapElements(index1, index2);                   \
     break
@@ -1508,8 +1508,8 @@ void Reflection::SwapElements(Message* message, const FieldDescriptor* field,
       HANDLE_TYPE(ENUM, int);
 #undef HANDLE_TYPE
 
-      case FieldCppType::STRING:
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_STRING:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         if (IsMapFieldInApi(field)) {
           MutableRaw<MapFieldBase>(message, field)
               ->MutableRepeatedField()
@@ -1691,13 +1691,13 @@ DEFINE_PRIMITIVE_ACCESSORS(Bool, bool, bool, BOOL)
 #undef DEFINE_PRIMITIVE_ACCESSORS
 
 namespace {
-bool IsInt32Family(FieldCppType type) {
-  return type == FieldCppType::INT32 || type == FieldCppType::INT8 ||
-         type == FieldCppType::INT16;
+bool IsInt32Family(SharkFieldCppType type) {
+  return type == SharkFieldCppType::CPPTYPE_INT32 || type == SharkFieldCppType::CPPTYPE_INT8 ||
+         type == SharkFieldCppType::CPPTYPE_INT16;
 }
-bool IsUInt32Family(FieldCppType type) {
-  return type == FieldCppType::UINT32 || type == FieldCppType::UINT8 ||
-         type == FieldCppType::UINT16;
+bool IsUInt32Family(SharkFieldCppType type) {
+  return type == SharkFieldCppType::CPPTYPE_UINT32 || type == SharkFieldCppType::CPPTYPE_UINT8 ||
+         type == SharkFieldCppType::CPPTYPE_UINT16;
 }
 }  // namespace
 
@@ -1707,14 +1707,14 @@ int32_t Reflection::GetInt32(const Message& message,
   USAGE_CHECK_SINGULAR(GetInt32);
   if (!IsInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "GetInt32",
-                                   FieldCppType::INT32);
+                                   SharkFieldCppType::CPPTYPE_INT32);
   }
   if (field->is_extension()) {
     switch (field->cpp_type()) {
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         return GetExtensionSet(message).GetInt8(
             field->number(), static_cast<int8_t>(field->default_value_int32()));
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         return GetExtensionSet(message).GetInt16(
             field->number(),
             static_cast<int16_t>(field->default_value_int32()));
@@ -1726,9 +1726,9 @@ int32_t Reflection::GetInt32(const Message& message,
     return field->default_value_int32();
   }
   switch (field->cpp_type()) {
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       return GetField<int8_t>(message, field);
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return GetField<int16_t>(message, field);
     default:
       return GetField<int32_t>(message, field);
@@ -1741,18 +1741,18 @@ void Reflection::SetInt32(Message* message, const FieldDescriptor* field,
   USAGE_CHECK_SINGULAR(SetInt32);
   if (!IsInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "SetInt32",
-                                   FieldCppType::INT32);
+                                   SharkFieldCppType::CPPTYPE_INT32);
   }
   if (field->is_extension()) {
     const int type_number = static_cast<int>(field->type());
     switch (field->cpp_type()) {
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         if (value >= -128 && value <= 127) {
           MutableExtensionSet(message)->SetInt8(
               field->number(), type_number, static_cast<int8_t>(value), field);
         }
         return;
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         if (value >= -32768 && value <= 32767) {
           MutableExtensionSet(message)->SetInt16(
               field->number(), type_number, static_cast<int16_t>(value), field);
@@ -1765,11 +1765,11 @@ void Reflection::SetInt32(Message* message, const FieldDescriptor* field,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       if (value < -128 || value > 127) return;
       SetField<int8_t>(message, field, static_cast<int8_t>(value));
       break;
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       SetField<int16_t>(message, field, static_cast<int16_t>(value));
       break;
     default:
@@ -1785,13 +1785,13 @@ int32_t Reflection::GetRepeatedInt32(const Message& message,
   USAGE_CHECK_REPEATED(GetRepeatedInt32);
   if (!IsInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "GetRepeatedInt32",
-                                   FieldCppType::INT32);
+                                   SharkFieldCppType::CPPTYPE_INT32);
   }
   if (field->is_extension()) {
     switch (field->cpp_type()) {
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         return GetExtensionSet(message).GetRepeatedInt8(field->number(), index);
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         return GetExtensionSet(message).GetRepeatedInt16(field->number(),
                                                          index);
       default:
@@ -1800,9 +1800,9 @@ int32_t Reflection::GetRepeatedInt32(const Message& message,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       return GetRepeatedField<int8_t>(message, field, index);
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       return GetRepeatedField<int16_t>(message, field, index);
     default:
       return GetRepeatedField<int32_t>(message, field, index);
@@ -1816,17 +1816,17 @@ void Reflection::SetRepeatedInt32(Message* message,
   USAGE_CHECK_REPEATED(SetRepeatedInt32);
   if (!IsInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "SetRepeatedInt32",
-                                   FieldCppType::INT32);
+                                   SharkFieldCppType::CPPTYPE_INT32);
   }
   if (field->is_extension()) {
     switch (field->cpp_type()) {
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         if (value >= -128 && value <= 127) {
           MutableExtensionSet(message)->SetRepeatedInt8(
               field->number(), index, static_cast<int8_t>(value));
         }
         return;
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         if (value >= -32768 && value <= 32767) {
           MutableExtensionSet(message)->SetRepeatedInt16(
               field->number(), index, static_cast<int16_t>(value));
@@ -1839,12 +1839,12 @@ void Reflection::SetRepeatedInt32(Message* message,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       if (value < -128 || value > 127) return;
       SetRepeatedField<int8_t>(message, field, index,
                                static_cast<int8_t>(value));
       break;
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       SetRepeatedField<int16_t>(message, field, index,
                                 static_cast<int16_t>(value));
       break;
@@ -1860,19 +1860,19 @@ void Reflection::AddInt32(Message* message, const FieldDescriptor* field,
   USAGE_CHECK_REPEATED(AddInt32);
   if (!IsInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "AddInt32",
-                                   FieldCppType::INT32);
+                                   SharkFieldCppType::CPPTYPE_INT32);
   }
   if (field->is_extension()) {
     const int type_number = static_cast<int>(field->type());
     switch (field->cpp_type()) {
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         if (value >= -128 && value <= 127) {
           MutableExtensionSet(message)->AddInt8(
               field->number(), type_number, field->options().packed(),
               static_cast<int8_t>(value), field);
         }
         return;
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         if (value >= -32768 && value <= 32767) {
           MutableExtensionSet(message)->AddInt16(
               field->number(), type_number, field->options().packed(),
@@ -1887,11 +1887,11 @@ void Reflection::AddInt32(Message* message, const FieldDescriptor* field,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::INT8:
+    case SharkFieldCppType::CPPTYPE_INT8:
       if (value < -128 || value > 127) return;
       AddField<int8_t>(message, field, static_cast<int8_t>(value));
       break;
-    case FieldCppType::INT16:
+    case SharkFieldCppType::CPPTYPE_INT16:
       AddField<int16_t>(message, field, static_cast<int16_t>(value));
       break;
     default:
@@ -1906,15 +1906,15 @@ uint32_t Reflection::GetUInt32(const Message& message,
   USAGE_CHECK_SINGULAR(GetUInt32);
   if (!IsUInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "GetUInt32",
-                                   FieldCppType::UINT32);
+                                   SharkFieldCppType::CPPTYPE_UINT32);
   }
   if (field->is_extension()) {
     switch (field->cpp_type()) {
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         return GetExtensionSet(message).GetUInt8(
             field->number(),
             static_cast<uint8_t>(field->default_value_uint32()));
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         return GetExtensionSet(message).GetUInt16(
             field->number(),
             static_cast<uint16_t>(field->default_value_uint32()));
@@ -1926,9 +1926,9 @@ uint32_t Reflection::GetUInt32(const Message& message,
     return field->default_value_uint32();
   }
   switch (field->cpp_type()) {
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       return GetField<uint8_t>(message, field);
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return GetField<uint16_t>(message, field);
     default:
       return GetField<uint32_t>(message, field);
@@ -1941,18 +1941,18 @@ void Reflection::SetUInt32(Message* message, const FieldDescriptor* field,
   USAGE_CHECK_SINGULAR(SetUInt32);
   if (!IsUInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "SetUInt32",
-                                   FieldCppType::UINT32);
+                                   SharkFieldCppType::CPPTYPE_UINT32);
   }
   if (field->is_extension()) {
     const int type_number = static_cast<int>(field->type());
     switch (field->cpp_type()) {
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         if (value <= 255) {
           MutableExtensionSet(message)->SetUInt8(
               field->number(), type_number, static_cast<uint8_t>(value), field);
         }
         return;
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         if (value <= 65535) {
           MutableExtensionSet(message)->SetUInt16(
               field->number(), type_number, static_cast<uint16_t>(value),
@@ -1966,11 +1966,11 @@ void Reflection::SetUInt32(Message* message, const FieldDescriptor* field,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       if (value > 255) return;
       SetField<uint8_t>(message, field, static_cast<uint8_t>(value));
       break;
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       SetField<uint16_t>(message, field, static_cast<uint16_t>(value));
       break;
     default:
@@ -1986,14 +1986,14 @@ uint32_t Reflection::GetRepeatedUInt32(const Message& message,
   USAGE_CHECK_REPEATED(GetRepeatedUInt32);
   if (!IsUInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "GetRepeatedUInt32",
-                                   FieldCppType::UINT32);
+                                   SharkFieldCppType::CPPTYPE_UINT32);
   }
   if (field->is_extension()) {
     switch (field->cpp_type()) {
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         return GetExtensionSet(message).GetRepeatedUInt8(field->number(),
                                                          index);
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         return GetExtensionSet(message).GetRepeatedUInt16(field->number(),
                                                           index);
       default:
@@ -2002,9 +2002,9 @@ uint32_t Reflection::GetRepeatedUInt32(const Message& message,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       return GetRepeatedField<uint8_t>(message, field, index);
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       return GetRepeatedField<uint16_t>(message, field, index);
     default:
       return GetRepeatedField<uint32_t>(message, field, index);
@@ -2018,17 +2018,17 @@ void Reflection::SetRepeatedUInt32(Message* message,
   USAGE_CHECK_REPEATED(SetRepeatedUInt32);
   if (!IsUInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "SetRepeatedUInt32",
-                                   FieldCppType::UINT32);
+                                   SharkFieldCppType::CPPTYPE_UINT32);
   }
   if (field->is_extension()) {
     switch (field->cpp_type()) {
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         if (value <= 255) {
           MutableExtensionSet(message)->SetRepeatedUInt8(
               field->number(), index, static_cast<uint8_t>(value));
         }
         return;
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         if (value <= 65535) {
           MutableExtensionSet(message)->SetRepeatedUInt16(
               field->number(), index, static_cast<uint16_t>(value));
@@ -2041,12 +2041,12 @@ void Reflection::SetRepeatedUInt32(Message* message,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       if (value > 255) return;
       SetRepeatedField<uint8_t>(message, field, index,
                                 static_cast<uint8_t>(value));
       break;
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       SetRepeatedField<uint16_t>(message, field, index,
                                  static_cast<uint16_t>(value));
       break;
@@ -2062,19 +2062,19 @@ void Reflection::AddUInt32(Message* message, const FieldDescriptor* field,
   USAGE_CHECK_REPEATED(AddUInt32);
   if (!IsUInt32Family(field->cpp_type())) {
     ReportReflectionUsageTypeError(descriptor_, field, "AddUInt32",
-                                   FieldCppType::UINT32);
+                                   SharkFieldCppType::CPPTYPE_UINT32);
   }
   if (field->is_extension()) {
     const int type_number = static_cast<int>(field->type());
     switch (field->cpp_type()) {
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         if (value <= 255) {
           MutableExtensionSet(message)->AddUInt8(
               field->number(), type_number, field->options().packed(),
               static_cast<uint8_t>(value), field);
         }
         return;
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         if (value <= 65535) {
           MutableExtensionSet(message)->AddUInt16(
               field->number(), type_number, field->options().packed(),
@@ -2089,11 +2089,11 @@ void Reflection::AddUInt32(Message* message, const FieldDescriptor* field,
     }
   }
   switch (field->cpp_type()) {
-    case FieldCppType::UINT8:
+    case SharkFieldCppType::CPPTYPE_UINT8:
       if (value > 255) return;
       AddField<uint8_t>(message, field, static_cast<uint8_t>(value));
       break;
-    case FieldCppType::UINT16:
+    case SharkFieldCppType::CPPTYPE_UINT16:
       AddField<uint16_t>(message, field, static_cast<uint16_t>(value));
       break;
     default:
@@ -2748,7 +2748,7 @@ void Reflection::UnsafeArenaAddAllocatedMessage(Message* message,
 
 void* Reflection::MutableRawRepeatedField(Message* message,
                                           const FieldDescriptor* field,
-                                          FieldCppType cpptype,
+                                          SharkFieldCppType cpptype,
                                           int ctype,
                                           const Descriptor* desc) const {
   (void)ctype;  // Parameter is used by Google-internal code.
@@ -2756,8 +2756,8 @@ void* Reflection::MutableRawRepeatedField(Message* message,
   CheckInvalidAccess(schema_, field);
 
   if (field->cpp_type() != cpptype &&
-      (field->cpp_type() != FieldCppType::ENUM ||
-       cpptype != FieldCppType::INT32))
+      (field->cpp_type() != SharkFieldCppType::CPPTYPE_ENUM ||
+       cpptype != SharkFieldCppType::CPPTYPE_INT32))
     ReportReflectionUsageTypeError(descriptor_, field,
                                    "MutableRawRepeatedField", cpptype);
   if (desc != nullptr)
@@ -2777,7 +2777,7 @@ void* Reflection::MutableRawRepeatedField(Message* message,
 
 const void* Reflection::GetRawRepeatedField(const Message& message,
                                             const FieldDescriptor* field,
-                                            FieldCppType cpptype,
+                                            SharkFieldCppType cpptype,
                                             int ctype,
                                             const Descriptor* desc) const {
   USAGE_CHECK_REPEATED("GetRawRepeatedField");
@@ -3032,7 +3032,7 @@ bool Reflection::HasBit(const Message& message,
 
   // proto3: no has-bits. All fields present except messages, which are
   // present only if their message-field pointer is non-null.
-  if (field->cpp_type() == FieldCppType::MESSAGE) {
+  if (field->cpp_type() == SharkFieldCppType::CPPTYPE_MESSAGE) {
     return !schema_.IsDefaultInstance(message) &&
            GetRaw<const Message*>(message, field) != nullptr;
   } else {
@@ -3047,7 +3047,7 @@ bool Reflection::HasBit(const Message& message,
     // require presence as "present on wire", and reflection-based merge
     // (which uses HasField()) needs to be consistent with this.
     switch (field->cpp_type()) {
-      case FieldCppType::STRING:
+      case SharkFieldCppType::CPPTYPE_STRING:
         switch (field->options().ctype()) {
           default: {
             if (IsInlined(field)) {
@@ -3060,35 +3060,35 @@ bool Reflection::HasBit(const Message& message,
           }
         }
         return false;
-      case FieldCppType::BOOL:
+      case SharkFieldCppType::CPPTYPE_BOOL:
         return GetRaw<bool>(message, field) != false;
-      case FieldCppType::INT8:
+      case SharkFieldCppType::CPPTYPE_INT8:
         return GetRaw<int8_t>(message, field) != 0;
-      case FieldCppType::INT16:
+      case SharkFieldCppType::CPPTYPE_INT16:
         return GetRaw<int16_t>(message, field) != 0;
-      case FieldCppType::UINT8:
+      case SharkFieldCppType::CPPTYPE_UINT8:
         return GetRaw<uint8_t>(message, field) != 0;
-      case FieldCppType::UINT16:
+      case SharkFieldCppType::CPPTYPE_UINT16:
         return GetRaw<uint16_t>(message, field) != 0;
-      case FieldCppType::INT32:
+      case SharkFieldCppType::CPPTYPE_INT32:
         return GetRaw<int32_t>(message, field) != 0;
-      case FieldCppType::INT64:
+      case SharkFieldCppType::CPPTYPE_INT64:
         return GetRaw<int64_t>(message, field) != 0;
-      case FieldCppType::UINT32:
+      case SharkFieldCppType::CPPTYPE_UINT32:
         return GetRaw<uint32_t>(message, field) != 0;
-      case FieldCppType::UINT64:
+      case SharkFieldCppType::CPPTYPE_UINT64:
         return GetRaw<uint64_t>(message, field) != 0;
-      case FieldCppType::FLOAT:
+      case SharkFieldCppType::CPPTYPE_FLOAT:
         static_assert(sizeof(uint32_t) == sizeof(float),
                       "Code assumes uint32_t and float are the same size.");
         return GetRaw<uint32_t>(message, field) != 0;
-      case FieldCppType::DOUBLE:
+      case SharkFieldCppType::CPPTYPE_DOUBLE:
         static_assert(sizeof(uint64_t) == sizeof(double),
                       "Code assumes uint64_t and double are the same size.");
         return GetRaw<uint64_t>(message, field) != 0;
-      case FieldCppType::ENUM:
+      case SharkFieldCppType::CPPTYPE_ENUM:
         return GetRaw<int>(message, field) != 0;
-      case FieldCppType::MESSAGE:
+      case SharkFieldCppType::CPPTYPE_MESSAGE:
         // handled above; avoid warning
         break;
     }
@@ -3167,7 +3167,7 @@ void Reflection::ClearOneof(Message* message,
     const FieldDescriptor* field = descriptor_->FindFieldByNumber(oneof_case);
     if (message->GetArenaForAllocation() == nullptr) {
       switch (field->cpp_type()) {
-        case FieldCppType::STRING: {
+        case SharkFieldCppType::CPPTYPE_STRING: {
           switch (field->options().ctype()) {
             default:  // TODO(kenton):  Support other string reps.
             case FieldOptions::CType::STRING: {
@@ -3182,7 +3182,7 @@ void Reflection::ClearOneof(Message* message,
           break;
         }
 
-        case FieldCppType::MESSAGE:
+        case SharkFieldCppType::CPPTYPE_MESSAGE:
           delete *MutableRaw<Message*>(message, field);
           break;
         default:
@@ -3210,17 +3210,17 @@ void Reflection::ClearOneof(Message* message,
         MutableRawRepeatedField(message, field, CPPTYPE, CTYPE, nullptr)); \
   }
 
-HANDLE_TYPE(int32_t, FieldCppType::INT32, -1);
-HANDLE_TYPE(int8_t, FieldCppType::INT8, -1);
-HANDLE_TYPE(int16_t, FieldCppType::INT16, -1);
-HANDLE_TYPE(uint8_t, FieldCppType::UINT8, -1);
-HANDLE_TYPE(uint16_t, FieldCppType::UINT16, -1);
-HANDLE_TYPE(int64_t, FieldCppType::INT64, -1);
-HANDLE_TYPE(uint32_t, FieldCppType::UINT32, -1);
-HANDLE_TYPE(uint64_t, FieldCppType::UINT64, -1);
-HANDLE_TYPE(float, FieldCppType::FLOAT, -1);
-HANDLE_TYPE(double, FieldCppType::DOUBLE, -1);
-HANDLE_TYPE(bool, FieldCppType::BOOL, -1);
+HANDLE_TYPE(int32_t, SharkFieldCppType::CPPTYPE_INT32, -1);
+HANDLE_TYPE(int8_t, SharkFieldCppType::CPPTYPE_INT8, -1);
+HANDLE_TYPE(int16_t, SharkFieldCppType::CPPTYPE_INT16, -1);
+HANDLE_TYPE(uint8_t, SharkFieldCppType::CPPTYPE_UINT8, -1);
+HANDLE_TYPE(uint16_t, SharkFieldCppType::CPPTYPE_UINT16, -1);
+HANDLE_TYPE(int64_t, SharkFieldCppType::CPPTYPE_INT64, -1);
+HANDLE_TYPE(uint32_t, SharkFieldCppType::CPPTYPE_UINT32, -1);
+HANDLE_TYPE(uint64_t, SharkFieldCppType::CPPTYPE_UINT64, -1);
+HANDLE_TYPE(float, SharkFieldCppType::CPPTYPE_FLOAT, -1);
+HANDLE_TYPE(double, SharkFieldCppType::CPPTYPE_DOUBLE, -1);
+HANDLE_TYPE(bool, SharkFieldCppType::CPPTYPE_BOOL, -1);
 
 
 #undef HANDLE_TYPE
@@ -3230,7 +3230,7 @@ void* Reflection::MutableRawRepeatedString(Message* message,
                                            bool is_string) const {
   (void)is_string;  // Parameter is used by Google-internal code.
   return MutableRawRepeatedField(message, field,
-                                 FieldCppType::STRING,
+                                 SharkFieldCppType::CPPTYPE_STRING,
                                  FieldOptions_CTypeTrait::to_underlying(
                                      FieldOptions::CType::STRING),
                                  nullptr);
@@ -3314,12 +3314,12 @@ MessageFactory* Reflection::GetMessageFactory() const {
 
 void* Reflection::RepeatedFieldData(Message* message,
                                     const FieldDescriptor* field,
-                                    FieldCppType cpp_type,
+                                    SharkFieldCppType cpp_type,
                                     const Descriptor* message_type) const {
   GOOGLE_CHECK(field->is_repeated());
   GOOGLE_CHECK(field->cpp_type() == cpp_type ||
-        (field->cpp_type() == FieldCppType::ENUM &&
-         cpp_type == FieldCppType::INT32))
+        (field->cpp_type() == SharkFieldCppType::CPPTYPE_ENUM &&
+         cpp_type == SharkFieldCppType::CPPTYPE_INT32))
       << "The type parameter T in RepeatedFieldRef<T> API doesn't match "
       << "the actual field type (for enums T should be the generated enum "
       << "type or int32_t).";
@@ -3602,7 +3602,7 @@ bool IsDescendant(Message& root, const Message& message) {
 
   for (const auto* field : fields) {
     // Skip non-message fields.
-    if (field->cpp_type() != FieldCppType::MESSAGE) continue;
+    if (field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) continue;
 
     // Optional messages.
     if (!field->is_repeated()) {
@@ -3631,7 +3631,7 @@ bool IsDescendant(Message& root, const Message& message) {
     constexpr int kValIdx = 1;
     const FieldDescriptor* val_field = field->message_type()->field(kValIdx);
     // Skip map fields whose value type is not message.
-    if (val_field->cpp_type() != FieldCppType::MESSAGE) continue;
+    if (val_field->cpp_type() != SharkFieldCppType::CPPTYPE_MESSAGE) continue;
 
     MapIterator end = reflection->MapEnd(&root, field);
     for (auto iter = reflection->MapBegin(&root, field); iter != end; ++iter) {
