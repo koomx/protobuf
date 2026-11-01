@@ -30,7 +30,7 @@
 
 // Author: kenton@google.com (Kenton Varda)
 
-#include <shark/compiler/mock_code_generator.h>
+#include <tests/compiler/mock_code_generator.h>
 
 #include <stdlib.h>
 
@@ -51,7 +51,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/stubs/substitute.h>
 #include <shark/text_format.h>
-#include <tests/testing/file.h>
+#include <tests/gtest/file.h>
 
 #ifdef major
 #undef major

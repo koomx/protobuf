@@ -135,6 +135,10 @@ namespace shark {
             // Defined in helpers.h
             class Formatter;
         } // namespace cpp
+        namespace cc {
+            // Defined in helpers.h
+            class Formatter;
+        } // namespace cpp
     } // namespace compiler
 
     namespace descriptor_unittest {
@@ -534,6 +538,7 @@ namespace shark {
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
         friend class compiler::cpp::Formatter;
+        friend class compiler::cc::Formatter;
 
         // Fill the json_name field of FieldDescriptorProto.
         void CopyJsonNameTo(DescriptorProto* proto) const;
@@ -813,6 +818,7 @@ namespace shark {
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
         friend class compiler::cpp::Formatter;
+        friend class compiler::cc::Formatter;
         friend class Reflection;
 
         // Fill the json_name field of FieldDescriptorProto.
@@ -970,6 +976,7 @@ namespace shark {
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
         friend class compiler::cpp::Formatter;
+        friend class compiler::cc::Formatter;
 
         // See Descriptor::DebugString().
         void DebugString(int depth, std::string* contents,
@@ -1101,6 +1108,7 @@ namespace shark {
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
         friend class compiler::cpp::Formatter;
+        friend class compiler::cc::Formatter;
 
         // Allow access to FindValueByNumberCreatingIfUnknown.
         friend class descriptor_unittest::DescriptorTest;
@@ -1226,6 +1234,7 @@ namespace shark {
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
         friend class compiler::cpp::Formatter;
+        friend class compiler::cc::Formatter;
 
         // See Descriptor::DebugString().
         void DebugString(int depth, std::string* contents,
@@ -1310,6 +1319,7 @@ namespace shark {
         // Allows access to GetLocationPath for annotations.
         friend class io::Printer;
         friend class compiler::cpp::Formatter;
+        friend class compiler::cc::Formatter;
 
         // See Descriptor::DebugString().
         void DebugString(std::string* contents,

@@ -26,7 +26,7 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/generated/generated_message_reflection.h>
-#include <shark/repeated_field.h>  // IWYU pragma: export
+#include <shark/types/repeated_field.h>  // IWYU pragma: export
 #include <shark/extension_set.h>  // IWYU pragma: export
 #include <shark/generated/generated_enum_reflection.h>
 // @@protoc_insertion_point(includes)

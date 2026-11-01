@@ -44,7 +44,7 @@
 #include <tests/unittest_custom_options.skp.h>
 #include <tests/transfer/json/json_format_proto3.skp.h>
 #include <shark/transfer/json/type_resolver.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::util {

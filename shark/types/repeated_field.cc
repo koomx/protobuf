@@ -32,38 +32,37 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 
 #include <algorithm>
 
-#include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
+#include <shark/stubs/logging.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
 
 namespace shark {
 
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<bool>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<int32_t>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<uint32_t>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<int64_t>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<uint64_t>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<float>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<double>;
+    template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedPtrField<std::string>;
 
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<bool>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<int32_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<uint32_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<int64_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<uint64_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<float>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedField<double>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedPtrField<std::string>;
+    namespace internal {
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<bool>;
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<int32_t>;
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<uint32_t>;
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<int64_t>;
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<uint64_t>;
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<float>;
+        template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<double>;
+    } // namespace internal
 
-namespace internal {
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<bool>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<int32_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<uint32_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<int64_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<uint64_t>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<float>;
-template class SHARK_EXPORT_TEMPLATE_DEFINE RepeatedIterator<double>;
-}  // namespace internal
-
-}  // namespace shark
+} // namespace shark
 
 #include <shark/port_undef.inc>

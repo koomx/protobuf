@@ -31,8 +31,8 @@
 // Author: kenton@google.com (Kenton Varda)
 // emulates google3/testing/base/public/googletest.cc
 
-#include <tests/testing/googletest.h>
-#include <tests/testing/file.h>
+#include <tests/gtest/googletest.h>
+#include <tests/gtest/file.h>
 #include <shark/io/io_win32.h>
 #include <shark/stubs/strutil.h>
 #include <sys/stat.h>

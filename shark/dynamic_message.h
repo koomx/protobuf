@@ -47,7 +47,7 @@
 #include <shark/stubs/mutex.h>
 #include <shark/message.h>
 #include <shark/reflection.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

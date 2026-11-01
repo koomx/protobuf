@@ -1209,7 +1209,7 @@ namespace shark::compiler::cpp {
         }
         if (options_.opensource_runtime) {
             // Open-source relies on unconditional includes of these.
-            IncludeFileAndExport("net/proto2/public/repeated_field.h", printer);
+            IncludeFileAndExport("net/proto2/public/types/repeated_field.h", printer);
             IncludeFileAndExport("net/proto2/public/extension_set.h", printer);
         } else {
             // Google3 includes these files only when they are necessary.
@@ -1217,7 +1217,7 @@ namespace shark::compiler::cpp {
                 IncludeFileAndExport("net/proto2/public/extension_set.h", printer);
             }
             if (HasRepeatedFields(file_)) {
-                IncludeFileAndExport("net/proto2/public/repeated_field.h", printer);
+                IncludeFileAndExport("net/proto2/public/types/repeated_field.h", printer);
             }
             if (HasStringPieceFields(file_, options_)) {
                 IncludeFile("net/proto2/public/string_piece_field_support.h", printer);

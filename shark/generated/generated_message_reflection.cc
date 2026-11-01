@@ -49,7 +49,7 @@
 #include <shark/generated/inlined_string_field.h>
 #include <shark/types/map_field.h>
 #include <shark/types/map_field_inl.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/unknown_field_set.h>
 
 

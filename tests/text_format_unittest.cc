@@ -53,8 +53,8 @@
 #include <tests/format/wired/unittest_mset_wire_format.skp.h>
 #include <tests/test_util.h>
 #include <tests/test_util2.h>
-#include <tests/testing/file.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/file.h>
+#include <tests/gtest/googletest.h>
 #include <tests/types/map_unittest.skp.h>
 #include <tests/unittest.skp.h>
 #include <tests/unittest_mset.skp.h>

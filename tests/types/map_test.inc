@@ -48,10 +48,10 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/testing/file.h>
+#include <tests/gtest/file.h>
 #include <shark/descriptor.skp.h>
 #include <gmock/gmock.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/substitute.h>

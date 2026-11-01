@@ -53,7 +53,7 @@
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/message.h>
 #include <shark/message_lite.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <tests/test_util.h>
 #include <shark/unknown_field_set.h>
 #include <shark/format/wired/wire_format_lite.h>

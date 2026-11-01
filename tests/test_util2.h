@@ -32,7 +32,7 @@
 
 #include <shark/stubs/strutil.h>
 
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/util/message_differencer.h>

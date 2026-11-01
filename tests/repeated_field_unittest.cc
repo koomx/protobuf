@@ -35,7 +35,7 @@
 // TODO(kenton):  Improve this unittest to bring it up to the standards of
 //   other proto2 unittests.
 
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 
 #include <algorithm>
 #include <cstdlib>
@@ -52,7 +52,7 @@
 #include <tests/unittest.skp.h>
 #include <shark/stubs/strutil.h>
 #include <gmock/gmock.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/stl_util.h>
 

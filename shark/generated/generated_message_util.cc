@@ -44,7 +44,7 @@
 #include <shark/extension_set.h>
 #include <shark/message_lite.h>
 #include <shark/generated/metadata_lite.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/format/wired/wire_format_lite.h>
 
 // Must be included last

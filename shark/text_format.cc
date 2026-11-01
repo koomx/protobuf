@@ -57,7 +57,7 @@
 #include <shark/io/strtod.h>
 #include <shark/types/map_field.h>
 #include <shark/message.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/unknown_field_set.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/map_util.h>

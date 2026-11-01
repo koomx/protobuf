@@ -49,7 +49,7 @@
 #include <tests/unittest.skp.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/gtest_enum.h>
 #include <tests/test_util.h>

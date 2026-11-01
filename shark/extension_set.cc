@@ -46,7 +46,7 @@
 #include <shark/message_lite.h>
 #include <shark/parse_context.h>
 #include <shark/port.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/map_util.h>

@@ -60,8 +60,8 @@
 #include <shark/stubs/substitute.h>
 #include <shark/types/any.skp.h>
 #include <tests/test_util2.h>
-#include <tests/testing/file.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/file.h>
+#include <tests/gtest/googletest.h>
 #include <tests/unittest.skp.h>
 #include <tests/unittest_custom_options.skp.h>
 

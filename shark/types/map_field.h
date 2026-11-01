@@ -39,7 +39,7 @@
 #include <shark/generated/generated_message_util.h>
 #include <shark/message.h>
 #include <shark/port.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/stubs/mutex.h>
 #include <shark/types/map_entry.h>
 #include <shark/types/map_field_lite.h>

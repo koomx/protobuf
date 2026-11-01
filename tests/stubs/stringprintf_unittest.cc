@@ -31,7 +31,7 @@
 // from google3/base/stringprintf_unittest.cc
 
 #include <shark/stubs/stringprintf.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 
 #include <array>

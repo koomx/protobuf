@@ -82,7 +82,7 @@
 #include <shark/types/map_field_inl.h>
 #include <shark/types/map_type_handler.h>
 #include <shark/reflection_ops.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/format/wired/wire_format.h>
 
 // Must be included last.

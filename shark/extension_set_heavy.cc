@@ -45,7 +45,7 @@
 #include <shark/message.h>
 #include <shark/message_lite.h>
 #include <shark/parse_context.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/unknown_field_set.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>

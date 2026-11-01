@@ -41,7 +41,7 @@
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <gmock/gmock.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/logging.h>

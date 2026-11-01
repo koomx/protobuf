@@ -38,7 +38,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
 
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark {

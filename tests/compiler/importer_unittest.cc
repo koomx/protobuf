@@ -39,12 +39,12 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/testing/file.h>
-#include <tests/testing/file.h>
-#include <tests/testing/file.h>
+#include <tests/gtest/file.h>
+#include <tests/gtest/file.h>
+#include <tests/gtest/file.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/substitute.h>
 #include <shark/stubs/map_util.h>

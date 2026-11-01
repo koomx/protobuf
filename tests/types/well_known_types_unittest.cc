@@ -30,7 +30,7 @@
 #include <tests/types/unittest_well_known_types.skp.h>
 
 #include <shark/stubs/common.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/stl_util.h>
 

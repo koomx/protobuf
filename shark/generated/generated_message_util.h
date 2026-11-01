@@ -52,7 +52,7 @@
 #include <shark/has_bits.h>
 #include <shark/generated/implicit_weak_message.h>
 #include <shark/message_lite.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/casts.h>
 

@@ -56,7 +56,7 @@
 #include <tests/util/message_differencer_unittest.skp.h>
 #include <shark/util/field_comparator.h>
 #include <shark/util/message_differencer.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark {

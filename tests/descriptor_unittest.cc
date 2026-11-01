@@ -55,7 +55,7 @@
 #include <shark/stubs/substitute.h>
 #include <shark/text_format.h>
 #include <shark/types/any.skp.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <tests/unittest.skp.h>
 #include <tests/unittest_custom_options.skp.h>
 #include <tests/unittest_lazy_dependencies.skp.h>

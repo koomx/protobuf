@@ -133,7 +133,7 @@ kmcmake_cc_test(
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS
         ${PROJECT_NAME}::shark-test-common_static
-        ${PROJECT_NAME}::sharkc-lib_static
+        ${PROJECT_NAME}::sharkc_static
         ${PROJECT_NAME}::shark_static
         GTest::gmock_main
 )
@@ -147,7 +147,7 @@ kmcmake_cc_test(
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS
         ${PROJECT_NAME}::shark-test-common_static
-        ${PROJECT_NAME}::sharkc-lib_static
+        ${PROJECT_NAME}::sharkc_static
         ${PROJECT_NAME}::shark_static
         GTest::gmock_main
 )
@@ -240,7 +240,7 @@ kmcmake_cc_binary(
         compiler/mock_code_generator.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS
-        ${PROJECT_NAME}::sharkc-lib_static
+        ${PROJECT_NAME}::sharkc_static
         ${PROJECT_NAME}::shark_static
         GTest::gmock
 )

@@ -47,7 +47,7 @@
 #include <shark/extension_set.h>
 #include <shark/text_format.h>
 #include <shark/format/wired/wire_format.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/test_util.h>
 #include <tests/test_util2.h>

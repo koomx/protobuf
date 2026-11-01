@@ -32,7 +32,7 @@
 
 #include <shark/types/map_field.h>
 #include <shark/reflection.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 
 namespace shark::internal {
 // A base class for RepeatedFieldAccessor implementations that can support

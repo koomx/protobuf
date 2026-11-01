@@ -38,7 +38,7 @@
 #include <shark/stubs/common.h>
 #include <tests/unittest.skp.h>
 #include <shark/descriptor.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 #include <tests/test_util.h>
 

@@ -35,7 +35,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/arena.h>
 #include <shark/message_lite.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

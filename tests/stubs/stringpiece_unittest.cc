@@ -35,7 +35,7 @@
 #include <utility>
 #include <vector>
 
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <shark/stubs/hash.h>
 #include <gtest/gtest.h>
 

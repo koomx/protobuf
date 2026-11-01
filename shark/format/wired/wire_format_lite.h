@@ -46,7 +46,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/message_lite.h>
 #include <shark/port.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>

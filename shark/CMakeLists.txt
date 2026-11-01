@@ -30,6 +30,8 @@ kmcmake_cc_library(
         NAMESPACE ${PROJECT_NAME}
         SOURCES
         types/any_lite.cc
+        types/repeated_field.cc
+        types/repeated_ptr_field.cc
         arena.cc
         arenastring.cc
         arenaz_sampler.cc
@@ -48,8 +50,6 @@ kmcmake_cc_library(
         types/map.cc
         message_lite.cc
         parse_context.cc
-        repeated_field.cc
-        repeated_ptr_field.cc
         stubs/bytestream.cc
         stubs/common.cc
         stubs/int128.cc
@@ -99,6 +99,7 @@ kmcmake_cc_library(
         text_format.cc
         types/timestamp.skp.cc
         types/type.skp.cc
+        types/wrappers.skp.cc
         unknown_field_set.cc
         util/delimited_message_util.cc
         util/field_comparator.cc
@@ -121,13 +122,12 @@ kmcmake_cc_library(
         util/time_util.cc
         transfer/json/type_resolver_util.cc
         format/wired/wire_format.cc
-        types/wrappers.skp.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
         LINKS ${PROJECT_NAME}::shark-lite_static ${KMCMAKE_DEPS_LINK}
 )
 kmcmake_cc_library(
         PUBLIC
-        NAME sharkc-lib
+        NAME sharkc
         NAMESPACE ${PROJECT_NAME}
         SOURCES
         compiler/code_generator.cc
@@ -147,6 +147,23 @@ kmcmake_cc_library(
         compiler/cpp/primitive_field.cc
         compiler/cpp/service.cc
         compiler/cpp/string_field.cc
+        #################################################
+        compiler/cc/enum.cc
+        compiler/cc/enum_field.cc
+        compiler/cc/extension.cc
+        compiler/cc/field.cc
+        compiler/cc/file.cc
+        compiler/cc/generator.cc
+        compiler/cc/helpers.cc
+        compiler/cc/map_field.cc
+        compiler/cc/message.cc
+        compiler/cc/message_field.cc
+        compiler/cc/padding_optimizer.cc
+        compiler/cc/parse_function_generator.cc
+        compiler/cc/primitive_field.cc
+        compiler/cc/service.cc
+        compiler/cc/string_field.cc
+        ######################################
         compiler/plugin.cc
         compiler/plugin.skp.cc
         compiler/python/generator.cc
@@ -162,5 +179,5 @@ kmcmake_cc_binary(
         NAME sharkc
         SOURCES compiler/main.cc
         CXXOPTS ${KMCMAKE_CXX_OPTIONS}
-        LINKS ${PROJECT_NAME}::sharkc-lib_static ${KMCMAKE_DEPS_LINK}
+        LINKS ${PROJECT_NAME}::sharkc_static ${KMCMAKE_DEPS_LINK}
 )

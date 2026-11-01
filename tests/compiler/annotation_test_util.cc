@@ -33,15 +33,15 @@
 #include <cstdint>
 #include <memory>
 
-#include <tests/testing/file.h>
-#include <tests/testing/file.h>
+#include <tests/gtest/file.h>
+#include <tests/gtest/file.h>
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/command_line_interface.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/descriptor.skp.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::compiler::annotation_test_util {

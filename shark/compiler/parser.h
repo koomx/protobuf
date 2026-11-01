@@ -44,7 +44,7 @@
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/io/tokenizer.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

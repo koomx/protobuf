@@ -45,7 +45,7 @@
 #include <shark/descriptor.h>
 #include <shark/text_format.h>
 #include <gmock/gmock.h>
-#include <tests/testing/googletest.h>
+#include <tests/gtest/googletest.h>
 #include <gtest/gtest.h>
 
 

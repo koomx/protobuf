@@ -36,7 +36,7 @@
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/message_lite.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/stubs/strutil.h>
 
 // Must be included last.

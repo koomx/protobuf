@@ -39,7 +39,7 @@
 #include <shark/stubs/logging.h>
 #include <shark/types/any.skp.h>
 #include <shark/types/type.skp.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/statusor.h>
 #include <shark/stubs/status.h>

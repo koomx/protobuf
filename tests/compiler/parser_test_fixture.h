@@ -52,7 +52,7 @@
 #include <shark/descriptor.skp.h>
 #include <shark/io/tokenizer.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/repeated_field.h>
+#include <shark/types/repeated_field.h>
 #include <shark/stubs/map_util.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
