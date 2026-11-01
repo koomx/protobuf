@@ -342,7 +342,7 @@ const char* Version::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional int32 major = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
@@ -386,7 +386,7 @@ const char* Version::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) 
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -674,7 +674,7 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // list<string> file_to_generate = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -729,7 +729,7 @@ const char* CodeGeneratorRequest::_InternalParse(const char* ptr, ::_pbi::ParseC
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -1061,7 +1061,7 @@ const char* CodeGeneratorResponse_File::_InternalParse(const char* ptr, ::_pbi::
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional string name = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -1110,7 +1110,7 @@ const char* CodeGeneratorResponse_File::_InternalParse(const char* ptr, ::_pbi::
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -1396,7 +1396,7 @@ const char* CodeGeneratorResponse::_InternalParse(const char* ptr, ::_pbi::Parse
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional string error = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -1435,7 +1435,7 @@ const char* CodeGeneratorResponse::_InternalParse(const char* ptr, ::_pbi::Parse
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;

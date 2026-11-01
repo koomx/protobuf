@@ -395,7 +395,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional string name = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -476,7 +476,7 @@ const char* Type::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -882,7 +882,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional .shark.SharkType kind = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 8)) {
@@ -1001,7 +1001,7 @@ const char* Field::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -1418,7 +1418,7 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional string name = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -1482,7 +1482,7 @@ const char* Enum::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -1776,7 +1776,7 @@ const char* EnumValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional string name = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -1815,7 +1815,7 @@ const char* EnumValue::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -2080,7 +2080,7 @@ const char* Option::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
     while (!ctx->Done(&ptr)) {
         uint32_t tag;
         ptr = ::_pbi::ReadTag(ptr, &tag);
-        switch (tag >> 3) {
+        switch (::_pbi::field_number(tag)) {
             // optional string name = 1;
             case 1:
                 if (SHARK_PREDICT_TRUE(static_cast<uint8_t>(tag) == 10)) {
@@ -2105,7 +2105,7 @@ const char* Option::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx) {
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || ((tag & 7) == 4)) {
+        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;

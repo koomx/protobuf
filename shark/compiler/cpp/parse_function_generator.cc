@@ -185,7 +185,7 @@ namespace shark::compiler::cpp {
                 //         idx (table_size_log2=5)
                 // This means that any field number that does not fit in the lower 4 bits
                 // will always have the top bit of its table index asserted.
-                const uint32_t fast_idx = (tag >> 3) & idx_mask;
+                const uint32_t fast_idx = shark::internal::field_number(tag) & idx_mask;
 
                 TailCallTableInfo::FastFieldInfo& info = result[fast_idx];
                 if (info.field != nullptr) {
@@ -1540,7 +1540,7 @@ namespace shark::compiler::cpp {
 
         // Unusual/extension/unknown case:
         format(
-            "if ((tag == 0) || ((tag & 7) == 4)) {\n"
+            "if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {\n"
             "  CHK_(ptr);\n"
             "  ctx->SetLastTag(tag);\n"
             "  goto message_done;\n"
@@ -1586,7 +1586,7 @@ namespace shark::compiler::cpp {
 
     void ParseFunctionGenerator::GenerateFieldSwitch(
         Formatter& format, const std::vector<const FieldDescriptor*>& fields) {
-        format("switch (tag >> 3) {\n");
+        format("switch (::_pbi::field_number(tag)) {\n");
         format.Indent();
 
         for (const auto* field : fields) {

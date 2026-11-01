@@ -48,6 +48,7 @@
 #include <shark/port.h>
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/strutil.h>
+#include <shark/format/wired/wire_tag.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -563,30 +564,6 @@ namespace shark {
             return VarintParseSlow(p, res, out);
         }
 
-        // Used for tags, could read up to 5 bytes which must be available.
-        // Caller must ensure its safe to call.
-
-        SHARK_EXPORT
-        std::pair<const char*, uint32_t> ReadTagFallback(const char* p, uint32_t res);
-
-        // Same as ParseVarint but only accept 5 bytes at most.
-        inline const char* ReadTag(const char* p, uint32_t* out,
-            uint32_t /*max_tag*/ = 0) {
-            uint32_t res = static_cast<uint8_t>(p[0]);
-            if (res < 128) {
-                *out = res;
-                return p + 1;
-            }
-            uint32_t second = static_cast<uint8_t>(p[1]);
-            res += (second - 1) << 7;
-            if (second < 128) {
-                *out = res;
-                return p + 2;
-            }
-            auto tmp = ReadTagFallback(p, res);
-            *out = tmp.second;
-            return tmp.first;
-        }
 
         // As above, but optimized to consume very few registers while still being fast,
         // ReadTagInlined is useful for callers that don't mind the extra code but would

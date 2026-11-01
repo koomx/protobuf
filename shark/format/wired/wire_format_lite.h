@@ -102,6 +102,8 @@ namespace shark::internal {
             WIRETYPE_VARINT = 0,
             WIRETYPE_FIXED64 = 1,
             WIRETYPE_LENGTH_DELIMITED = 2,
+            //WIRETYPE_START_GROUP = 3,
+            //WIRETYPE_END_GROUP = 4,
             WIRETYPE_FIXED32 = 5,
         };
 

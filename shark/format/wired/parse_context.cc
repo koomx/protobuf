@@ -346,17 +346,6 @@ namespace shark::internal {
         return { nullptr, 0 };
     }
 
-    std::pair<const char*, uint32_t> ReadTagFallback(const char* p, uint32_t res) {
-        for (std::uint32_t i = 2; i < 5; i++) {
-            uint32_t byte = static_cast<uint8_t>(p[i]);
-            res += (byte - 1) << (7 * i);
-            if (SHARK_PREDICT_TRUE(byte < 128)) {
-                return { p + i + 1, res };
-            }
-        }
-        return { nullptr, 0 };
-    }
-
     std::pair<const char*, int32_t> ReadSizeFallback(const char* p, uint32_t res) {
         for (std::uint32_t i = 1; i < 4; i++) {
             uint32_t byte = static_cast<uint8_t>(p[i]);
