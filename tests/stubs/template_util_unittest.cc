@@ -37,7 +37,7 @@
 
 #include <shark/stubs/template_util.h>
 
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace GOOGLE_NAMESPACE = shark::internal;

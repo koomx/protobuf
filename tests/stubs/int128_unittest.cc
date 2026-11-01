@@ -34,7 +34,7 @@
 #include <sstream>
 #include <utility>
 
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 #include <shark/port_def.inc>

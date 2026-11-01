@@ -62,8 +62,8 @@
 #include <memory>
 #include <sstream>
 
-#include <tests/gtest/file.h>
-#include <tests/test_util2.h>
+#include <tests/common/file.h>
+#include <tests/common/test_util2.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/io_win32.h>
 #include <shark/io/zero_copy_stream_impl.h>
@@ -74,8 +74,8 @@
 
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <tests/gtest/file.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/file.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::io {

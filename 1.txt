@@ -1,0 +1,304 @@
+tests
+├── CMakeLists.txt
+├── common
+│   ├── CMakeLists.txt
+│   ├── arena_test_util.cc
+│   ├── arena_test_util.h
+│   ├── compiler
+│   │   ├── annotation_test_util.cc
+│   │   ├── annotation_test_util.h
+│   │   ├── mock_code_generator.cc
+│   │   └── mock_code_generator.h
+│   ├── file.cc
+│   ├── file.h
+│   ├── googletest.cc
+│   ├── googletest.h
+│   ├── gtest_enum.h
+│   ├── json
+│   │   ├── expecting_objectwriter.h
+│   │   ├── mock_error_listener.h
+│   │   ├── type_info_test_helper.cc
+│   │   └── type_info_test_helper.h
+│   ├── lib
+│   │   ├── CMakeLists.txt
+│   │   ├── reflection_tester.cc
+│   │   └── reflection_tester.h
+│   ├── test_util.cc
+│   ├── test_util.h
+│   ├── test_util.inc
+│   ├── test_util2.h
+│   ├── test_util_lite.cc
+│   ├── test_util_lite.h
+│   └── types
+│       ├── map_lite_test_util.cc
+│       ├── map_lite_test_util.h
+│       └── map_test_util_impl.h
+├── compiler
+│   ├── CMakeLists.txt
+│   ├── command_line_interface_unittest.cc
+│   ├── cpp
+│   │   ├── CMakeLists.txt
+│   │   ├── bootstrap_unittest.cc
+│   │   ├── message_size_unittest.cc
+│   │   ├── metadata_test.cc
+│   │   ├── move_unittest.cc
+│   │   ├── plugin_unittest.cc
+│   │   ├── unittest.cc
+│   │   ├── unittest.h
+│   │   └── unittest.inc
+│   ├── importer_unittest.cc
+│   ├── parser_enum_test.cc
+│   ├── parser_test_fixture.h
+│   ├── parser_unittest.cc
+│   ├── python
+│   │   ├── CMakeLists.txt
+│   │   └── plugin_unittest.cc
+│   ├── test_plugin.cc
+│   └── zip_output_unittest.sh
+├── config.h
+├── config.h.in
+├── format
+│   ├── CMakeLists.txt
+│   ├── text_format_unittest.cc
+│   └── wired
+│       ├── CMakeLists.txt
+│       ├── fixed_tag_unittest.cc
+│       ├── wire_format_unittest.cc
+│       └── wire_format_unittest.inc
+├── generated
+│   ├── generated_message_reflection_unittest.cc
+│   ├── generated_message_tctable_lite_test.cc
+│   └── inlined_string_field_unittest.cc
+├── gtest
+│   ├── zcgunzip.cc
+│   └── zcgzip.cc
+├── io
+│   ├── CMakeLists.txt
+│   ├── coded_stream_unittest.cc
+│   ├── gzip_stream_unittest.sh
+│   ├── io_win32_unittest.cc
+│   ├── printer_unittest.cc
+│   ├── tokenizer_unittest.cc
+│   └── zero_copy_stream_unittest.cc
+├── kmcmake_cpp_test_sk.cmake
+├── lib
+│   ├── CMakeLists.txt
+│   ├── descriptor_database_unittest.cc
+│   ├── descriptor_unittest.cc
+│   ├── drop_unknown_fields_test.cc
+│   ├── dynamic_message_unittest.cc
+│   ├── extension_set_test.cc
+│   ├── lite_test.cc
+│   ├── message_unittest.cc
+│   ├── message_unittest.inc
+│   ├── reflection_ops_unittest.cc
+│   └── unknown_field_set_unittest.cc
+├── memory
+│   ├── CMakeLists.txt
+│   ├── arena_unittest.cc
+│   ├── arenastring_unittest.cc
+│   ├── arenaz_sampler_test.cc
+│   └── lite_arena_test.cc
+├── sk
+│   ├── CMakeLists.txt
+│   ├── compiler
+│   │   ├── CMakeLists.txt
+│   │   ├── test_bad_identifiers.shark
+│   │   ├── test_bad_identifiers.skp.cc
+│   │   ├── test_bad_identifiers.skp.h
+│   │   ├── test_large_enum_value.shark
+│   │   ├── test_large_enum_value.skp.cc
+│   │   ├── test_large_enum_value.skp.h
+│   │   ├── unittest_embed_optimize_for.shark
+│   │   ├── unittest_embed_optimize_for.skp.cc
+│   │   ├── unittest_embed_optimize_for.skp.h
+│   │   ├── unittest_enormous_descriptor.shark
+│   │   ├── unittest_enormous_descriptor.skp.cc
+│   │   ├── unittest_enormous_descriptor.skp.h
+│   │   ├── unittest_no_generic_services.shark
+│   │   ├── unittest_no_generic_services.skp.cc
+│   │   ├── unittest_no_generic_services.skp.h
+│   │   ├── unittest_optimize_for.shark
+│   │   ├── unittest_optimize_for.skp.cc
+│   │   └── unittest_optimize_for.skp.h
+│   ├── format
+│   │   ├── CMakeLists.txt
+│   │   └── wire
+│   │       ├── CMakeLists.txt
+│   │       ├── unittest_mset_wire_format.shark
+│   │       ├── unittest_mset_wire_format.skp.cc
+│   │       └── unittest_mset_wire_format.skp.h
+│   ├── lib
+│   │   ├── CMakeLists.txt
+│   │   ├── unittest_custom_options.shark
+│   │   ├── unittest_custom_options.skp.cc
+│   │   ├── unittest_custom_options.skp.h
+│   │   ├── unittest_drop_unknown_fields.shark
+│   │   ├── unittest_drop_unknown_fields.skp.cc
+│   │   ├── unittest_drop_unknown_fields.skp.h
+│   │   ├── unittest_lazy_dependencies.shark
+│   │   ├── unittest_lazy_dependencies.skp.cc
+│   │   ├── unittest_lazy_dependencies.skp.h
+│   │   ├── unittest_lazy_dependencies_custom_option.shark
+│   │   ├── unittest_lazy_dependencies_custom_option.skp.cc
+│   │   ├── unittest_lazy_dependencies_custom_option.skp.h
+│   │   ├── unittest_lazy_dependencies_enum.shark
+│   │   ├── unittest_lazy_dependencies_enum.skp.cc
+│   │   └── unittest_lazy_dependencies_enum.skp.h
+│   ├── memory
+│   │   ├── CMakeLists.txt
+│   │   ├── unittest_arena.shark
+│   │   ├── unittest_arena.skp.cc
+│   │   └── unittest_arena.skp.h
+│   ├── transfer
+│   │   ├── CMakeLists.txt
+│   │   └── json
+│   │       ├── CMakeLists.txt
+│   │       ├── anys.shark
+│   │       ├── anys.skp.cc
+│   │       ├── anys.skp.h
+│   │       ├── books.shark
+│   │       ├── books.skp.cc
+│   │       ├── books.skp.h
+│   │       ├── default_value.shark
+│   │       ├── default_value.skp.cc
+│   │       ├── default_value.skp.h
+│   │       ├── default_value_test.shark
+│   │       ├── default_value_test.skp.cc
+│   │       ├── default_value_test.skp.h
+│   │       ├── field_mask.shark
+│   │       ├── field_mask.skp.cc
+│   │       ├── field_mask.skp.h
+│   │       ├── json_format.shark
+│   │       ├── json_format.skp.cc
+│   │       ├── json_format.skp.h
+│   │       ├── json_format_proto3.shark
+│   │       ├── json_format_proto3.skp.cc
+│   │       ├── json_format_proto3.skp.h
+│   │       ├── maps.shark
+│   │       ├── maps.skp.cc
+│   │       ├── maps.skp.h
+│   │       ├── oneofs.shark
+│   │       ├── oneofs.skp.cc
+│   │       ├── oneofs.skp.h
+│   │       ├── struct.shark
+│   │       ├── struct.skp.cc
+│   │       ├── struct.skp.h
+│   │       ├── timestamp_duration.shark
+│   │       ├── timestamp_duration.skp.cc
+│   │       ├── timestamp_duration.skp.h
+│   │       ├── wrappers.shark
+│   │       ├── wrappers.skp.cc
+│   │       └── wrappers.skp.h
+│   ├── types
+│   │   ├── CMakeLists.txt
+│   │   ├── any_test.shark
+│   │   ├── any_test.skp.cc
+│   │   ├── any_test.skp.h
+│   │   ├── map_lite_unittest.shark
+│   │   ├── map_lite_unittest.skp.cc
+│   │   ├── map_lite_unittest.skp.h
+│   │   ├── map_proto2_unittest.shark
+│   │   ├── map_proto2_unittest.skp.cc
+│   │   ├── map_proto2_unittest.skp.h
+│   │   ├── map_unittest.shark
+│   │   ├── map_unittest.skp.cc
+│   │   ├── map_unittest.skp.h
+│   │   ├── narrow_int.shark
+│   │   ├── narrow_int.skp.cc
+│   │   ├── narrow_int.skp.h
+│   │   ├── unittest_empty.shark
+│   │   ├── unittest_empty.skp.cc
+│   │   ├── unittest_empty.skp.h
+│   │   ├── unittest_well_known_types.shark
+│   │   ├── unittest_well_known_types.skp.cc
+│   │   └── unittest_well_known_types.skp.h
+│   ├── unittest.shark
+│   ├── unittest.skp.cc
+│   ├── unittest.skp.h
+│   ├── unittest_import.shark
+│   ├── unittest_import.skp.cc
+│   ├── unittest_import.skp.h
+│   ├── unittest_import_lite.shark
+│   ├── unittest_import_lite.skp.cc
+│   ├── unittest_import_lite.skp.h
+│   ├── unittest_import_public.shark
+│   ├── unittest_import_public.skp.cc
+│   ├── unittest_import_public.skp.h
+│   ├── unittest_import_public_lite.shark
+│   ├── unittest_import_public_lite.skp.cc
+│   ├── unittest_import_public_lite.skp.h
+│   ├── unittest_lite.shark
+│   ├── unittest_lite.skp.cc
+│   ├── unittest_lite.skp.h
+│   ├── unittest_lite_imports_nonlite.shark
+│   ├── unittest_lite_imports_nonlite.skp.cc
+│   ├── unittest_lite_imports_nonlite.skp.h
+│   ├── unittest_mset.shark
+│   ├── unittest_mset.skp.cc
+│   ├── unittest_mset.skp.h
+│   └── util
+│       ├── CMakeLists.txt
+│       ├── message_differencer_unittest.shark
+│       ├── message_differencer_unittest.skp.cc
+│       └── message_differencer_unittest.skp.h
+├── stubs
+│   ├── CMakeLists.txt
+│   ├── bytestream_unittest.cc
+│   ├── common_unittest.cc
+│   ├── int128_unittest.cc
+│   ├── status_test.cc
+│   ├── statusor_test.cc
+│   ├── stringpiece_unittest.cc
+│   ├── stringprintf_unittest.cc
+│   ├── structurally_valid_unittest.cc
+│   ├── strutil_unittest.cc
+│   ├── template_util_unittest.cc
+│   └── time_test.cc
+├── test_messages_proto2.shark
+├── testdata
+│   ├── bad_utf8_string
+│   ├── golden_message
+│   ├── golden_message_maps
+│   ├── golden_message_oneof_implemented
+│   ├── golden_packed_fields_message
+│   ├── map_test_data.txt
+│   ├── text_format_unittest_data.txt
+│   ├── text_format_unittest_data_oneof_implemented.txt
+│   ├── text_format_unittest_data_pointy.txt
+│   ├── text_format_unittest_data_pointy_oneof.txt
+│   ├── text_format_unittest_extensions_data.txt
+│   └── text_format_unittest_extensions_data_pointy.txt
+├── transfer
+│   ├── CMakeLists.txt
+│   └── json
+│       ├── CMakeLists.txt
+│       ├── default_value_objectwriter_test.cc
+│       ├── json_objectwriter_test.cc
+│       ├── json_stream_parser_test.cc
+│       ├── json_util_test.cc
+│       ├── protostream_objectsource_test.cc
+│       ├── protostream_objectwriter_test.cc
+│       └── type_resolver_util_test.cc
+├── types
+│   ├── CMakeLists.txt
+│   ├── any_test.cc
+│   ├── map_field_test.cc
+│   ├── map_test.cc
+│   ├── map_test.inc
+│   ├── map_test_util.h
+│   ├── map_test_util.inc
+│   ├── narrow_int_reflect_test.cc
+│   ├── narrow_int_test.cc
+│   ├── repeated_field_reflection_unittest.cc
+│   ├── repeated_field_unittest.cc
+│   └── well_known_types_unittest.cc
+└── util
+    ├── CMakeLists.txt
+    ├── delimited_message_util_test.cc
+    ├── field_comparator_test.cc
+    ├── field_mask_util_test.cc
+    ├── message_differencer_unittest.cc
+    └── time_util_test.cc
+
+32 directories, 270 files

@@ -34,7 +34,7 @@
 
 #include <limits>
 
-#include <tests/unittest.skp.h>
+#include <tests/sk/unittest.skp.h>
 #include <shark/descriptor.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/mathutil.h>

@@ -30,8 +30,8 @@
 
 #pragma once
 
-#include <tests/types/map_unittest.skp.h>
-#include <tests/reflection_tester.h>
+#include <tests/sk/types/map_unittest.skp.h>
+#include <tests/common/lib/reflection_tester.h>
 
 #define UNITTEST ::sharkbuf_unittest
 #define BRIDGE_UNITTEST ::shark::bridge_unittest

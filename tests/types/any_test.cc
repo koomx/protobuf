@@ -28,8 +28,8 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <tests/types/any_test.skp.h>
-#include <tests/unittest.skp.h>
+#include <tests/sk/types/any_test.skp.h>
+#include <tests/sk/unittest.skp.h>
 #include <gtest/gtest.h>
 
 

@@ -48,7 +48,7 @@
 #include <gtest/gtest.h>
 #include <shark/compiler/code_generator.h>
 #include <shark/compiler/command_line_interface.h>
-#include <tests/compiler/mock_code_generator.h>
+#include <tests/common/compiler/mock_code_generator.h>
 #include <shark/compiler/subprocess.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
@@ -59,11 +59,11 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
 #include <shark/types/any.skp.h>
-#include <tests/test_util2.h>
-#include <tests/gtest/file.h>
-#include <tests/gtest/googletest.h>
-#include <tests/unittest.skp.h>
-#include <tests/unittest_custom_options.skp.h>
+#include <tests/common/test_util2.h>
+#include <tests/common/file.h>
+#include <tests/common/googletest.h>
+#include <tests/sk/unittest.skp.h>
+#include <tests/sk/lib/unittest_custom_options.skp.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
@@ -2680,7 +2680,7 @@ namespace shark {
                 std::string args;
                 if (GetParam() != DESCRIPTOR_SET_IN) {
                     args.append(
-                        TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark"));
+                        TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark"));
                 }
                 EXPECT_TRUE(Run(args + " --encode=sharkbuf_unittest.TestAllTypes"));
                 ExpectStdoutMatchesBinaryFile(TestUtil::GetTestDataPath(
@@ -2692,7 +2692,7 @@ namespace shark {
                 RedirectStdinFromFile(TestUtil::GetTestDataPath(
                     "net/proto2/internal/testdata/golden_message_oneof_implemented"));
                 EXPECT_TRUE(
-                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") + " --decode=sharkbuf_unittest.TestAllTypes"));
+                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark") + " --decode=sharkbuf_unittest.TestAllTypes"));
                 ExpectStdoutMatchesTextFile(TestUtil::GetTestDataPath(
                     "net/proto2/internal/"
                     "testdata/text_format_unittest_data_oneof_implemented.txt"));
@@ -2702,7 +2702,7 @@ namespace shark {
             TEST_P(EncodeDecodeTest, Partial) {
                 RedirectStdinFromText("");
                 EXPECT_TRUE(
-                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") + " --encode=sharkbuf_unittest.TestRequired"));
+                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark") + " --encode=sharkbuf_unittest.TestRequired"));
                 ExpectStdoutMatchesText("");
                 ExpectStderrMatchesText(
                     "warning:  Input message is missing required fields:  a, b, c\n");
@@ -2725,7 +2725,7 @@ namespace shark {
 
             TEST_P(EncodeDecodeTest, UnknownType) {
                 EXPECT_FALSE(
-                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") + " --encode=NoSuchType"));
+                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark") + " --encode=NoSuchType"));
                 ExpectStdoutMatchesText("");
                 ExpectStderrMatchesText("Type not defined: NoSuchType\n");
             }
@@ -2746,7 +2746,7 @@ namespace shark {
                 std::string args;
                 if (GetParam() != DESCRIPTOR_SET_IN) {
                     args.append(
-                        TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark"));
+                        TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark"));
                 }
                 EXPECT_TRUE(Run(
                     args + " --encode=sharkbuf_unittest.TestAllTypes --deterministic_output"));
@@ -2759,7 +2759,7 @@ namespace shark {
                 RedirectStdinFromFile(TestUtil::GetTestDataPath(
                     "net/proto2/internal/testdata/golden_message_oneof_implemented"));
                 EXPECT_FALSE(
-                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark") + " --decode=sharkbuf_unittest.TestAllTypes --deterministic_output"));
+                    Run(TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark") + " --decode=sharkbuf_unittest.TestAllTypes --deterministic_output"));
                 ExpectStderrMatchesText(
                     "Can only use --deterministic_output with --encode.\n");
             }

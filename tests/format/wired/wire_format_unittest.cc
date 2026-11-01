@@ -34,11 +34,11 @@
 
 #include <shark/format/wired/wire_format.h>
 
-#include <tests/unittest.skp.h>
-#include <tests/unittest_mset.skp.h>
-#include <tests/format/wired/unittest_mset_wire_format.skp.h>
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
+#include <tests/sk/format/wire/unittest_mset_wire_format.skp.h>
+#include <tests/sk/unittest.skp.h>
+#include <tests/sk/unittest_mset.skp.h>
 
 #define UNITTEST ::sharkbuf_unittest
 #define UNITTEST_IMPORT ::sharkbuf_unittest_import
@@ -47,7 +47,7 @@
 
 // Must include after defining UNITTEST, etc.
 // clang-format off
-#include <tests/test_util.inc>
+#include <tests/common/test_util.inc>
 #include <tests/format/wired/wire_format_unittest.inc>
 // clang-format on
 
@@ -55,10 +55,9 @@
 #include <shark/port_def.inc>
 
 namespace shark::internal {
-namespace {
+    namespace {
 
-
-}  // namespace
-}  // namespace shark::internal
+    } // namespace
+} // namespace shark::internal
 
 #include <shark/port_undef.inc>

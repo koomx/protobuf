@@ -41,10 +41,10 @@
 
 #include <shark/types/any.skp.h>
 #include <tests/compiler/parser_test_fixture.h>
-#include <tests/test_util2.h>
-#include <tests/gtest/googletest.h>
-#include <tests/unittest.skp.h>
-#include <tests/unittest_custom_options.skp.h>
+#include <tests/common/test_util2.h>
+#include <tests/common/googletest.h>
+#include <tests/sk/unittest.skp.h>
+#include <tests/sk/lib/unittest_custom_options.skp.h>
 
 namespace shark {
     namespace compiler {
@@ -1777,7 +1777,7 @@ namespace shark {
                 // need to link to a FileDecriptor, then output back to a proto. We'll
                 // also need to give it the same name as the original.
                 parsed.set_name(
-                    TestUtil::MaybeTranslatePath("net/proto2/internal/unittest.shark"));
+                    TestUtil::MaybeTranslatePath("net/proto2/internal/sk/unittest.shark"));
                 // We need the imported dependency before we can build our parsed proto
                 const FileDescriptor* public_import = sharkbuf_unittest_import::PublicImportMessage::descriptor()->file();
                 FileDescriptorProto public_import_proto;

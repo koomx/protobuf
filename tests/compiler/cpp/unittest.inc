@@ -54,11 +54,11 @@
 #ifndef _MSC_VER
 // We exclude this large proto because it's too large for
 // visual studio to compile (report internal errors).
-#include <tests/unittest_enormous_descriptor.skp.h>
+#include <tests/sk/compiler/unittest_enormous_descriptor.skp.h>
 #endif
 #include <shark/compiler/cpp/helpers.h>
-#include <tests/compiler/cpp/test_bad_identifiers.skp.h>
-#include <tests/unittest_no_generic_services.skp.h>
+#include <tests/sk/compiler/test_bad_identifiers.skp.h>
+#include <tests/sk/compiler/unittest_no_generic_services.skp.h>
 #include <shark/descriptor.skp.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
@@ -67,14 +67,14 @@
 #include <shark/compiler/importer.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <tests/test_util2.h>
+#include <tests/common/test_util2.h>
 
 #include <shark/stubs/callback.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
-#include <tests/gtest_enum.h>
+#include <tests/common/gtest_enum.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/substitute.h>
 #include <shark/stubs/stl_util.h>

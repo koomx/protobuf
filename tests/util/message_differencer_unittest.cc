@@ -44,19 +44,19 @@
 #include <shark/stubs/strutil.h>
 
 #include <shark/stubs/logging.h>
-#include <tests/types/any_test.skp.h>
+#include <tests/sk/types/any_test.skp.h>
 #include <tests/types/map_test_util.h>
-#include <tests/types/map_unittest.skp.h>
-#include <tests/test_util.h>
-#include <tests/unittest.skp.h>
+#include <tests/sk/types/map_unittest.skp.h>
+#include <tests/common/test_util.h>
+#include <tests/sk/unittest.skp.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/text_format.h>
 #include <shark/format/wired/wire_format.h>
-#include <tests/util/message_differencer_unittest.skp.h>
+#include <tests/sk/util/message_differencer_unittest.skp.h>
 #include <shark/util/field_comparator.h>
 #include <shark/util/message_differencer.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark {

@@ -29,7 +29,7 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/descriptor.h>
-#include <tests/types/map_test_util_impl.h>
+#include <tests/common/types/map_test_util_impl.h>
 #include <shark/message.h>
 
 namespace shark {

@@ -46,10 +46,10 @@
 
 #include <tests/compiler/cpp/unittest.h>
 
-#include <tests/unittest.skp.h>
-#include <tests/unittest_embed_optimize_for.skp.h>
-#include <tests/unittest_optimize_for.skp.h>
-#include <tests/test_util.h>
+#include <tests/sk/unittest.skp.h>
+#include <tests/sk/compiler/unittest_embed_optimize_for.skp.h>
+#include <tests/sk/compiler/unittest_optimize_for.skp.h>
+#include <tests/common/test_util.h>
 
 #define MESSAGE_TEST_NAME MessageTest
 #define GENERATED_DESCRIPTOR_TEST_NAME GeneratedDescriptorTest
@@ -59,7 +59,7 @@
 #define HELPERS_TEST_NAME HelpersTest
 #define DESCRIPTOR_INIT_TEST_NAME DescriptorInitializationTest
 
-#define UNITTEST_PROTO_PATH "net/proto2/internal/unittest.shark"
+#define UNITTEST_PROTO_PATH "net/proto2/internal/sk/unittest.shark"
 #define UNITTEST ::sharkbuf_unittest
 #define UNITTEST_IMPORT ::sharkbuf_unittest_import
 

@@ -38,18 +38,18 @@
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/descriptor.h>
-#include <tests/transfer/json/expecting_objectwriter.h>
-#include <tests/transfer/json/testdata/anys.skp.h>
-#include <tests/transfer/json/testdata/books.skp.h>
-#include <tests/transfer/json/testdata/field_mask.skp.h>
-#include <tests/transfer/json/testdata/maps.skp.h>
-#include <tests/transfer/json/testdata/struct.skp.h>
-#include <tests/transfer/json/testdata/timestamp_duration.skp.h>
+#include <tests/common/json/expecting_objectwriter.h>
+#include <tests/sk/transfer/json/anys.skp.h>
+#include <tests/sk/transfer/json/books.skp.h>
+#include <tests/sk/transfer/json/field_mask.skp.h>
+#include <tests/sk/transfer/json/maps.skp.h>
+#include <tests/sk/transfer/json/struct.skp.h>
+#include <tests/sk/transfer/json/timestamp_duration.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/status.h>
 #include <shark/transfer/json/constants.h>
-#include <tests/transfer/json/type_info_test_helper.h>
+#include <tests/common/json/type_info_test_helper.h>
 
 
 namespace shark::util::converter {

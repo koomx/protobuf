@@ -44,15 +44,15 @@
 
 #include <map>
 
-#include <tests/gtest/file.h>
-#include <tests/gtest/file.h>
+#include <tests/common/file.h>
+#include <tests/common/file.h>
 #include <shark/compiler/cpp/generator.h>
 #include <shark/compiler/importer.h>
-#include <tests/test_util2.h>
+#include <tests/common/test_util2.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>
 #include <shark/stubs/strutil.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/substitute.h>
 #include <shark/compiler/cpp/helpers.h>

@@ -28,10 +28,10 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <tests/types/map_proto2_unittest.skp.h>
-#include <tests/types/map_unittest.skp.h>
-#include <tests/reflection_tester.h>
-#include <tests/test_util2.h>
+#include <tests/sk/types/map_proto2_unittest.skp.h>
+#include <tests/sk/types/map_unittest.skp.h>
+#include <tests/common/lib/reflection_tester.h>
+#include <tests/common/test_util2.h>
 
 
 #define BRIDGE_UNITTEST ::shark::bridge_unittest
@@ -41,7 +41,7 @@
 
 // Must include after defining UNITTEST, etc.
 // clang-format off
-#include <tests/test_util.inc>
+#include <tests/common/test_util.inc>
 #include <tests/types/map_test_util.inc>
 #include <tests/types/map_test.inc>
 // clang-format on

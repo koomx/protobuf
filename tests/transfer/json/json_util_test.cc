@@ -34,9 +34,9 @@
 #include <list>
 #include <string>
 
-#include <tests/transfer/json/testdata/maps.skp.h>
-#include <tests/transfer/json/json_format.skp.h>
-#include <tests/transfer/json/json_format_proto3.skp.h>
+#include <tests/sk/transfer/json/maps.skp.h>
+#include <tests/sk/transfer/json/json_format.skp.h>
+#include <tests/sk/transfer/json/json_format_proto3.skp.h>
 #include <gtest/gtest.h>
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
@@ -44,6 +44,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/transfer/json/type_resolver.h>
 #include <shark/transfer/json/type_resolver_util.h>
+#include <tests/common/gtest_enum.h>
 
 namespace shark::util {
 namespace {

@@ -44,7 +44,7 @@
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::io {

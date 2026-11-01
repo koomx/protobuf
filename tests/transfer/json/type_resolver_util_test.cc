@@ -38,13 +38,13 @@
 
 #include <shark/types/type.skp.h>
 #include <shark/types/wrappers.skp.h>
-#include <tests/types/map_unittest.skp.h>
-#include <tests/test_util.h>
-#include <tests/unittest.skp.h>
-#include <tests/unittest_custom_options.skp.h>
-#include <tests/transfer/json/json_format_proto3.skp.h>
+#include <tests/sk/types/map_unittest.skp.h>
+#include <tests/common/test_util.h>
+#include <tests/sk/unittest.skp.h>
+#include <tests/sk/lib/unittest_custom_options.skp.h>
+#include <tests/sk/transfer/json/json_format_proto3.skp.h>
 #include <shark/transfer/json/type_resolver.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::util {

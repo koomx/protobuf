@@ -35,9 +35,9 @@
 
 #include <sstream>
 
-#include <tests/test_util.h>
-#include <tests/unittest.skp.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/test_util.h>
+#include <tests/sk/unittest.skp.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::util {

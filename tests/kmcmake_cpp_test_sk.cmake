@@ -80,7 +80,6 @@ function(kmcmake_cpp_test_sk)
             "${list_args}"
     )
 
-    set(PROTOC_FLAGS "-I${PROTOBUF_INCLUDE_DIRS}")
     set(INCLUDE_FLAGS "-I${PROJECT_SOURCE_DIR}")
     foreach (INC ${KMCMAKE_CC_PROTO_INCLUDES})
         if(NOT "${INC}" STREQUAL "")

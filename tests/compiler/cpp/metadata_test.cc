@@ -30,14 +30,14 @@
 
 #include <memory>
 
-#include <tests/gtest/file.h>
-#include <tests/gtest/file.h>
+#include <tests/common/file.h>
+#include <tests/common/file.h>
 #include <shark/compiler/cpp/generator.h>
 #include <shark/compiler/command_line_interface.h>
 #include <shark/descriptor.skp.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
-#include <tests/compiler/annotation_test_util.h>
+#include <tests/common/compiler/annotation_test_util.h>
 #include <shark/compiler/cpp/helpers.h>
 
 namespace shark::compiler::cpp {

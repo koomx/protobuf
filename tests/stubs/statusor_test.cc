@@ -33,7 +33,7 @@
 #include <errno.h>
 #include <memory>
 
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::util {

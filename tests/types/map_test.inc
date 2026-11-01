@@ -48,14 +48,14 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/gtest/file.h>
+#include <tests/common/file.h>
 #include <shark/descriptor.skp.h>
 #include <gmock/gmock.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/substitute.h>
-#include <tests/arena_test_util.h>
+#include <tests/common/arena_test_util.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor_database.h>
 #include <shark/dynamic_message.h>
@@ -67,7 +67,7 @@
 #include <shark/message.h>
 #include <shark/reflection.h>
 #include <shark/reflection_ops.h>
-#include <tests/test_util2.h>
+#include <tests/common/test_util2.h>
 #include <shark/text_format.h>
 #include <shark/util/message_differencer.h>
 #include <shark/util/time_util.h>

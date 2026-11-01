@@ -35,8 +35,8 @@
 #include <vector>
 
 #include <shark/types/field_mask.skp.h>
-#include <tests/test_util.h>
-#include <tests/unittest.skp.h>
+#include <tests/common/test_util.h>
+#include <tests/sk/unittest.skp.h>
 #include <gtest/gtest.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>

@@ -29,8 +29,8 @@
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 #include <shark/stubs/common.h>
-#include <tests/test_util.h>
-#include <tests/unittest.skp.h>
+#include <tests/common/test_util.h>
+#include <tests/sk/unittest.skp.h>
 #include <gtest/gtest.h>
 
 #if LANG_CXX11

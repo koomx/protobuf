@@ -35,7 +35,7 @@
 #include <locale.h>
 
 #include <shark/stubs/stl_util.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 #ifdef _WIN32

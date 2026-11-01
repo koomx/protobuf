@@ -34,15 +34,15 @@
 
 #include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
-#include <tests/types/map_unittest.skp.h>
-#include <tests/unittest.skp.h>
+#include <tests/sk/types/map_unittest.skp.h>
+#include <tests/sk/unittest.skp.h>
 #include <shark/arena.h>
 #include <shark/types/map.h>
 #include <shark/types/map_field_inl.h>
 #include <shark/message.h>
 #include <shark/types/repeated_field.h>
 #include <gtest/gtest.h>
-#include <tests/arena_test_util.h>
+#include <tests/common/arena_test_util.h>
 #include <tests/types/map_test_util.h>
 
 // Must be included last.

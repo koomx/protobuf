@@ -33,14 +33,14 @@
 #include <memory>
 #include <string>
 
-#include <tests/gtest/file.h>
-#include <tests/gtest/file.h>
+#include <tests/common/file.h>
+#include <tests/common/file.h>
 #include <shark/compiler/command_line_interface.h>
 #include <shark/compiler/python/generator.h>
 #include <shark/io/printer.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/stubs/strutil.h>
-#include <tests/gtest/googletest.h>
+#include <tests/common/googletest.h>
 #include <gtest/gtest.h>
 
 namespace shark::compiler::python {
