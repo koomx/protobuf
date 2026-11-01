@@ -185,9 +185,8 @@ class SourceContext final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFileNameFieldNumber = 1,
-    };
+    static constexpr int  kFileNameFieldNumber = 1;
+
     // optional string file_name = 1;
     bool has_file_name() const;
     private:

@@ -31,9 +31,9 @@
 #include <cstdint>
 
 #include <shark/extension_set.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/generated/generated_message_tctable_impl.h>
 #include <shark/message.h>
-#include <shark/format/wired/parse_context.h>
 #include <shark/unknown_field_set.h>
 
 // clang-format off

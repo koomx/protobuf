@@ -480,9 +480,8 @@ class SHARK_EXPORT FileDescriptorSet final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFileFieldNumber = 1,
-    };
+    static constexpr int  kFileFieldNumber = 1;
+
     // list<.shark.FileDescriptorProto> file = 1;
     int file_size() const;
     private:
@@ -644,20 +643,19 @@ class SHARK_EXPORT FileDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kDependencyFieldNumber = 3,
-      kMessageTypeFieldNumber = 4,
-      kEnumTypeFieldNumber = 5,
-      kServiceFieldNumber = 6,
-      kExtensionFieldNumber = 7,
-      kPublicDependencyFieldNumber = 10,
-      kWeakDependencyFieldNumber = 11,
-      kNameFieldNumber = 1,
-      kPackageFieldNumber = 2,
-      kSyntaxFieldNumber = 12,
-      kOptionsFieldNumber = 8,
-      kSourceCodeInfoFieldNumber = 9,
-    };
+    static constexpr int  kDependencyFieldNumber = 3;
+    static constexpr int  kMessageTypeFieldNumber = 4;
+    static constexpr int  kEnumTypeFieldNumber = 5;
+    static constexpr int  kServiceFieldNumber = 6;
+    static constexpr int  kExtensionFieldNumber = 7;
+    static constexpr int  kPublicDependencyFieldNumber = 10;
+    static constexpr int  kWeakDependencyFieldNumber = 11;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kPackageFieldNumber = 2;
+    static constexpr int  kSyntaxFieldNumber = 12;
+    static constexpr int  kOptionsFieldNumber = 8;
+    static constexpr int  kSourceCodeInfoFieldNumber = 9;
+
     // list<string> dependency = 3;
     int dependency_size() const;
     private:
@@ -1043,11 +1041,10 @@ class SHARK_EXPORT DescriptorProto_ExtensionRange final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kOptionsFieldNumber = 3,
-      kStartFieldNumber = 1,
-      kEndFieldNumber = 2,
-    };
+    static constexpr int  kOptionsFieldNumber = 3;
+    static constexpr int  kStartFieldNumber = 1;
+    static constexpr int  kEndFieldNumber = 2;
+
     // optional .shark.ExtensionRangeOptions options = 3;
     bool has_options() const;
     private:
@@ -1238,10 +1235,9 @@ class SHARK_EXPORT DescriptorProto_ReservedRange final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kStartFieldNumber = 1,
-      kEndFieldNumber = 2,
-    };
+    static constexpr int  kStartFieldNumber = 1;
+    static constexpr int  kEndFieldNumber = 2;
+
     // optional int32 start = 1;
     bool has_start() const;
     private:
@@ -1416,18 +1412,17 @@ class SHARK_EXPORT DescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFieldFieldNumber = 2,
-      kNestedTypeFieldNumber = 3,
-      kEnumTypeFieldNumber = 4,
-      kExtensionRangeFieldNumber = 5,
-      kExtensionFieldNumber = 6,
-      kOneofDeclFieldNumber = 8,
-      kReservedRangeFieldNumber = 9,
-      kReservedNameFieldNumber = 10,
-      kNameFieldNumber = 1,
-      kOptionsFieldNumber = 7,
-    };
+    static constexpr int  kFieldFieldNumber = 2;
+    static constexpr int  kNestedTypeFieldNumber = 3;
+    static constexpr int  kEnumTypeFieldNumber = 4;
+    static constexpr int  kExtensionRangeFieldNumber = 5;
+    static constexpr int  kExtensionFieldNumber = 6;
+    static constexpr int  kOneofDeclFieldNumber = 8;
+    static constexpr int  kReservedRangeFieldNumber = 9;
+    static constexpr int  kReservedNameFieldNumber = 10;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kOptionsFieldNumber = 7;
+
     // list<.shark.FieldDescriptorProto> field = 2;
     int field_size() const;
     private:
@@ -1767,9 +1762,8 @@ class SHARK_EXPORT ExtensionRangeOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -2123,19 +2117,18 @@ class SHARK_EXPORT FieldDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kExtendeeFieldNumber = 2,
-      kTypeNameFieldNumber = 6,
-      kDefaultValueFieldNumber = 7,
-      kJsonNameFieldNumber = 10,
-      kOptionsFieldNumber = 8,
-      kNumberFieldNumber = 3,
-      kLabelFieldNumber = 4,
-      kTypeFieldNumber = 5,
-      kOneofIndexFieldNumber = 9,
-      kProto3OptionalFieldNumber = 17,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kExtendeeFieldNumber = 2;
+    static constexpr int  kTypeNameFieldNumber = 6;
+    static constexpr int  kDefaultValueFieldNumber = 7;
+    static constexpr int  kJsonNameFieldNumber = 10;
+    static constexpr int  kOptionsFieldNumber = 8;
+    static constexpr int  kNumberFieldNumber = 3;
+    static constexpr int  kLabelFieldNumber = 4;
+    static constexpr int  kTypeFieldNumber = 5;
+    static constexpr int  kOneofIndexFieldNumber = 9;
+    static constexpr int  kProto3OptionalFieldNumber = 17;
+
     // optional string name = 1;
     bool has_name() const;
     private:
@@ -2463,10 +2456,9 @@ class SHARK_EXPORT OneofDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kOptionsFieldNumber = 2,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kOptionsFieldNumber = 2;
+
     // optional string name = 1;
     bool has_name() const;
     private:
@@ -2648,10 +2640,9 @@ class SHARK_EXPORT EnumDescriptorProto_EnumReservedRange final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kStartFieldNumber = 1,
-      kEndFieldNumber = 2,
-    };
+    static constexpr int  kStartFieldNumber = 1;
+    static constexpr int  kEndFieldNumber = 2;
+
     // optional int32 start = 1;
     bool has_start() const;
     private:
@@ -2825,13 +2816,12 @@ class SHARK_EXPORT EnumDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 2,
-      kReservedRangeFieldNumber = 4,
-      kReservedNameFieldNumber = 5,
-      kNameFieldNumber = 1,
-      kOptionsFieldNumber = 3,
-    };
+    static constexpr int  kValueFieldNumber = 2;
+    static constexpr int  kReservedRangeFieldNumber = 4;
+    static constexpr int  kReservedNameFieldNumber = 5;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kOptionsFieldNumber = 3;
+
     // list<.shark.EnumValueDescriptorProto> value = 2;
     int value_size() const;
     private:
@@ -3076,11 +3066,10 @@ class SHARK_EXPORT EnumValueDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kOptionsFieldNumber = 3,
-      kNumberFieldNumber = 2,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kOptionsFieldNumber = 3;
+    static constexpr int  kNumberFieldNumber = 2;
+
     // optional string name = 1;
     bool has_name() const;
     private:
@@ -3276,11 +3265,10 @@ class SHARK_EXPORT ServiceDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kMethodFieldNumber = 2,
-      kNameFieldNumber = 1,
-      kOptionsFieldNumber = 3,
-    };
+    static constexpr int  kMethodFieldNumber = 2;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kOptionsFieldNumber = 3;
+
     // list<.shark.MethodDescriptorProto> method = 2;
     int method_size() const;
     private:
@@ -3481,14 +3469,13 @@ class SHARK_EXPORT MethodDescriptorProto final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kInputTypeFieldNumber = 2,
-      kOutputTypeFieldNumber = 3,
-      kOptionsFieldNumber = 4,
-      kClientStreamingFieldNumber = 5,
-      kServerStreamingFieldNumber = 6,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kInputTypeFieldNumber = 2;
+    static constexpr int  kOutputTypeFieldNumber = 3;
+    static constexpr int  kOptionsFieldNumber = 4;
+    static constexpr int  kClientStreamingFieldNumber = 5;
+    static constexpr int  kServerStreamingFieldNumber = 6;
+
     // optional string name = 1;
     bool has_name() const;
     private:
@@ -3739,15 +3726,14 @@ class SHARK_EXPORT FileOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kGoPackageFieldNumber = 11,
-      kCcGenericServicesFieldNumber = 16,
-      kPyGenericServicesFieldNumber = 18,
-      kDeprecatedFieldNumber = 23,
-      kOptimizeForFieldNumber = 9,
-      kCcEnableArenasFieldNumber = 31,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kGoPackageFieldNumber = 11;
+    static constexpr int  kCcGenericServicesFieldNumber = 16;
+    static constexpr int  kPyGenericServicesFieldNumber = 18;
+    static constexpr int  kDeprecatedFieldNumber = 23;
+    static constexpr int  kOptimizeForFieldNumber = 9;
+    static constexpr int  kCcEnableArenasFieldNumber = 31;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -4191,13 +4177,12 @@ class SHARK_EXPORT MessageOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kMessageSetWireFormatFieldNumber = 1,
-      kNoStandardDescriptorAccessorFieldNumber = 2,
-      kDeprecatedFieldNumber = 3,
-      kMapEntryFieldNumber = 7,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kMessageSetWireFormatFieldNumber = 1;
+    static constexpr int  kNoStandardDescriptorAccessorFieldNumber = 2;
+    static constexpr int  kDeprecatedFieldNumber = 3;
+    static constexpr int  kMapEntryFieldNumber = 7;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -4614,16 +4599,15 @@ class SHARK_EXPORT FieldOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kCtypeFieldNumber = 1,
-      kJstypeFieldNumber = 6,
-      kPackedFieldNumber = 2,
-      kLazyFieldNumber = 5,
-      kUnverifiedLazyFieldNumber = 15,
-      kDeprecatedFieldNumber = 3,
-      kWeakFieldNumber = 10,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kCtypeFieldNumber = 1;
+    static constexpr int  kJstypeFieldNumber = 6;
+    static constexpr int  kPackedFieldNumber = 2;
+    static constexpr int  kLazyFieldNumber = 5;
+    static constexpr int  kUnverifiedLazyFieldNumber = 15;
+    static constexpr int  kDeprecatedFieldNumber = 3;
+    static constexpr int  kWeakFieldNumber = 10;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -5076,9 +5060,8 @@ class SHARK_EXPORT OneofOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -5432,13 +5415,12 @@ class SHARK_EXPORT EnumOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kAllowAliasFieldNumber = 2,
-      kDeprecatedFieldNumber = 3,
-      kEnableOperatorFieldNumber = 6,
-      kUnderlyingTypeFieldNumber = 7,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kAllowAliasFieldNumber = 2;
+    static constexpr int  kDeprecatedFieldNumber = 3;
+    static constexpr int  kEnableOperatorFieldNumber = 6;
+    static constexpr int  kUnderlyingTypeFieldNumber = 7;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -5849,10 +5831,9 @@ class SHARK_EXPORT EnumValueOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kDeprecatedFieldNumber = 1,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kDeprecatedFieldNumber = 1;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -6221,10 +6202,9 @@ class SHARK_EXPORT ServiceOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kDeprecatedFieldNumber = 33,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kDeprecatedFieldNumber = 33;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -6596,11 +6576,10 @@ class SHARK_EXPORT MethodOptions final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kUninterpretedOptionFieldNumber = 999,
-      kDeprecatedFieldNumber = 33,
-      kIdempotencyLevelFieldNumber = 34,
-    };
+    static constexpr int  kUninterpretedOptionFieldNumber = 999;
+    static constexpr int  kDeprecatedFieldNumber = 33;
+    static constexpr int  kIdempotencyLevelFieldNumber = 34;
+
     // list<.shark.UninterpretedOption> uninterpreted_option = 999;
     int uninterpreted_option_size() const;
     private:
@@ -6983,10 +6962,9 @@ class SHARK_EXPORT UninterpretedOption_NamePart final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNamePartFieldNumber = 1,
-      kIsExtensionFieldNumber = 2,
-    };
+    static constexpr int  kNamePartFieldNumber = 1;
+    static constexpr int  kIsExtensionFieldNumber = 2;
+
     // required string name_part = 1;
     bool has_name_part() const;
     private:
@@ -7168,15 +7146,14 @@ class SHARK_EXPORT UninterpretedOption final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 2,
-      kIdentifierValueFieldNumber = 3,
-      kStringValueFieldNumber = 7,
-      kAggregateValueFieldNumber = 8,
-      kPositiveIntValueFieldNumber = 4,
-      kNegativeIntValueFieldNumber = 5,
-      kDoubleValueFieldNumber = 6,
-    };
+    static constexpr int  kNameFieldNumber = 2;
+    static constexpr int  kIdentifierValueFieldNumber = 3;
+    static constexpr int  kStringValueFieldNumber = 7;
+    static constexpr int  kAggregateValueFieldNumber = 8;
+    static constexpr int  kPositiveIntValueFieldNumber = 4;
+    static constexpr int  kNegativeIntValueFieldNumber = 5;
+    static constexpr int  kDoubleValueFieldNumber = 6;
+
     // list<.shark.UninterpretedOption.NamePart> name = 2;
     int name_size() const;
     private:
@@ -7438,13 +7415,12 @@ class SHARK_EXPORT SourceCodeInfo_Location final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kPathFieldNumber = 1,
-      kSpanFieldNumber = 2,
-      kLeadingDetachedCommentsFieldNumber = 6,
-      kLeadingCommentsFieldNumber = 3,
-      kTrailingCommentsFieldNumber = 4,
-    };
+    static constexpr int  kPathFieldNumber = 1;
+    static constexpr int  kSpanFieldNumber = 2;
+    static constexpr int  kLeadingDetachedCommentsFieldNumber = 6;
+    static constexpr int  kLeadingCommentsFieldNumber = 3;
+    static constexpr int  kTrailingCommentsFieldNumber = 4;
+
     // list<int32> path = 1 [packed = true];
     int path_size() const;
     private:
@@ -7701,9 +7677,8 @@ class SHARK_EXPORT SourceCodeInfo final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kLocationFieldNumber = 1,
-    };
+    static constexpr int  kLocationFieldNumber = 1;
+
     // list<.shark.SourceCodeInfo.Location> location = 1;
     int location_size() const;
     private:
@@ -7865,12 +7840,11 @@ class SHARK_EXPORT GeneratedCodeInfo_Annotation final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kPathFieldNumber = 1,
-      kSourceFileFieldNumber = 2,
-      kBeginFieldNumber = 3,
-      kEndFieldNumber = 4,
-    };
+    static constexpr int  kPathFieldNumber = 1;
+    static constexpr int  kSourceFileFieldNumber = 2;
+    static constexpr int  kBeginFieldNumber = 3;
+    static constexpr int  kEndFieldNumber = 4;
+
     // list<int32> path = 1 [packed = true];
     int path_size() const;
     private:
@@ -8087,9 +8061,8 @@ class SHARK_EXPORT GeneratedCodeInfo final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kAnnotationFieldNumber = 1,
-    };
+    static constexpr int  kAnnotationFieldNumber = 1;
+
     // list<.shark.GeneratedCodeInfo.Annotation> annotation = 1;
     int annotation_size() const;
     private:

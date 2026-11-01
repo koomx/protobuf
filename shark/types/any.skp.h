@@ -229,10 +229,9 @@ class Any final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kTypeUrlFieldNumber = 1,
-      kValueFieldNumber = 2,
-    };
+    static constexpr int  kTypeUrlFieldNumber = 1;
+    static constexpr int  kValueFieldNumber = 2;
+
     // optional string type_url = 1;
     bool has_type_url() const;
     private:

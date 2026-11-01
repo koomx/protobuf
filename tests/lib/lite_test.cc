@@ -35,20 +35,20 @@
 #include <string>
 
 #include <gtest/gtest.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/format/wired/parse_context.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/strutil.h>
 #include <tests/common/arena_test_util.h>
 #include <tests/common/test_util_lite.h>
 #include <tests/common/types/map_lite_test_util.h>
-#include <tests/sk/unittest_lite.skp.h>
 #include <tests/sk/types/map_lite_unittest.skp.h>
+#include <tests/sk/unittest_lite.skp.h>
 
 namespace shark {
 

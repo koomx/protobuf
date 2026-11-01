@@ -35,21 +35,20 @@
 // Contains methods defined in extension_set.h which cannot be part of the
 // lite library because they use descriptors or reflection.
 
-#include <shark/stubs/casts.h>
-#include <shark/io/coded_stream.h>
 #include <shark/arena.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/extension_set.h>
 #include <shark/extension_set_inl.h>
-#include <shark/message.h>
-#include <shark/message_lite.h>
-#include <shark/format/wired/parse_context.h>
-#include <shark/types/repeated_field.h>
-#include <shark/unknown_field_set.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>
-
+#include <shark/io/coded_stream.h>
+#include <shark/message.h>
+#include <shark/message_lite.h>
+#include <shark/stubs/casts.h>
+#include <shark/types/repeated_field.h>
+#include <shark/unknown_field_set.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

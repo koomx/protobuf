@@ -204,14 +204,13 @@ class Type final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFieldsFieldNumber = 2,
-      kOneofsFieldNumber = 3,
-      kOptionsFieldNumber = 4,
-      kNameFieldNumber = 1,
-      kSourceContextFieldNumber = 5,
-      kSyntaxFieldNumber = 6,
-    };
+    static constexpr int  kFieldsFieldNumber = 2;
+    static constexpr int  kOneofsFieldNumber = 3;
+    static constexpr int  kOptionsFieldNumber = 4;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kSourceContextFieldNumber = 5;
+    static constexpr int  kSyntaxFieldNumber = 6;
+
     // list<.shark.Field> fields = 2;
     int fields_size() const;
     private:
@@ -470,18 +469,17 @@ class Field final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kOptionsFieldNumber = 9,
-      kNameFieldNumber = 4,
-      kTypeUrlFieldNumber = 6,
-      kJsonNameFieldNumber = 10,
-      kDefaultValueFieldNumber = 11,
-      kKindFieldNumber = 1,
-      kCardinalityFieldNumber = 2,
-      kNumberFieldNumber = 3,
-      kOneofIndexFieldNumber = 7,
-      kPackedFieldNumber = 8,
-    };
+    static constexpr int  kOptionsFieldNumber = 9;
+    static constexpr int  kNameFieldNumber = 4;
+    static constexpr int  kTypeUrlFieldNumber = 6;
+    static constexpr int  kJsonNameFieldNumber = 10;
+    static constexpr int  kDefaultValueFieldNumber = 11;
+    static constexpr int  kKindFieldNumber = 1;
+    static constexpr int  kCardinalityFieldNumber = 2;
+    static constexpr int  kNumberFieldNumber = 3;
+    static constexpr int  kOneofIndexFieldNumber = 7;
+    static constexpr int  kPackedFieldNumber = 8;
+
     // list<.shark.Option> options = 9;
     int options_size() const;
     private:
@@ -790,13 +788,12 @@ class Enum final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kEnumvalueFieldNumber = 2,
-      kOptionsFieldNumber = 3,
-      kNameFieldNumber = 1,
-      kSourceContextFieldNumber = 4,
-      kSyntaxFieldNumber = 5,
-    };
+    static constexpr int  kEnumvalueFieldNumber = 2;
+    static constexpr int  kOptionsFieldNumber = 3;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kSourceContextFieldNumber = 4;
+    static constexpr int  kSyntaxFieldNumber = 5;
+
     // list<.shark.EnumValue> enumvalue = 2;
     int enumvalue_size() const;
     private:
@@ -1030,11 +1027,10 @@ class EnumValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kOptionsFieldNumber = 3,
-      kNameFieldNumber = 1,
-      kNumberFieldNumber = 2,
-    };
+    static constexpr int  kOptionsFieldNumber = 3;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kNumberFieldNumber = 2;
+
     // list<.shark.Option> options = 3;
     int options_size() const;
     private:
@@ -1230,10 +1226,9 @@ class Option final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kValueFieldNumber = 2,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kValueFieldNumber = 2;
+
     // optional string name = 1;
     bool has_name() const;
     private:

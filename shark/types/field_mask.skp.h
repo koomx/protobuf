@@ -185,9 +185,8 @@ class FieldMask final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kPathsFieldNumber = 1,
-    };
+    static constexpr int  kPathsFieldNumber = 1;
+
     // list<string> paths = 1;
     int paths_size() const;
     private:

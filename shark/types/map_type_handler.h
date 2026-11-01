@@ -34,9 +34,9 @@
 
 #include <shark/arena.h>
 #include <shark/arenastring.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
-#include <shark/format/wired/parse_context.h>
 
 #ifdef SWIG
 #error "You cannot SWIG proto headers"

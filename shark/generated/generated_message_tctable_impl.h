@@ -33,13 +33,13 @@
 #include <cstdint>
 #include <type_traits>
 
-#include <shark/port.h>
 #include <shark/extension_set.h>
-#include <shark/generated/generated_message_tctable_decl.h>
-#include <shark/message_lite.h>
-#include <shark/generated/metadata_lite.h>
-#include <shark/format/wired/parse_context.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/format/wired/wire_format_lite.h>
+#include <shark/generated/generated_message_tctable_decl.h>
+#include <shark/generated/metadata_lite.h>
+#include <shark/message_lite.h>
+#include <shark/port.h>
 
 // Must come last:
 #include <shark/port_def.inc>

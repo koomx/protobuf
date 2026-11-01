@@ -275,9 +275,8 @@ class Struct final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFieldsFieldNumber = 1,
-    };
+    static constexpr int  kFieldsFieldNumber = 1;
+
     // map<string, .shark.Value> fields = 1;
     int fields_size() const;
     private:
@@ -452,14 +451,13 @@ class Value final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNullValueFieldNumber = 1,
-      kNumberValueFieldNumber = 2,
-      kStringValueFieldNumber = 3,
-      kBoolValueFieldNumber = 4,
-      kStructValueFieldNumber = 5,
-      kListValueFieldNumber = 6,
-    };
+    static constexpr int  kNullValueFieldNumber = 1;
+    static constexpr int  kNumberValueFieldNumber = 2;
+    static constexpr int  kStringValueFieldNumber = 3;
+    static constexpr int  kBoolValueFieldNumber = 4;
+    static constexpr int  kStructValueFieldNumber = 5;
+    static constexpr int  kListValueFieldNumber = 6;
+
     // .shark.NullValue null_value = 1;
     bool has_null_value() const;
     private:
@@ -718,9 +716,8 @@ class ListValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValuesFieldNumber = 1,
-    };
+    static constexpr int  kValuesFieldNumber = 1;
+
     // list<.shark.Value> values = 1;
     int values_size() const;
     private:

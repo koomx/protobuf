@@ -40,16 +40,16 @@
 
 #include <shark/arena.h>
 #include <shark/extension_set_inl.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/generated/metadata_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
 #include <shark/message_lite.h>
-#include <shark/format/wired/parse_context.h>
 #include <shark/port.h>
-#include <shark/types/repeated_field.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/map_util.h>
+#include <shark/types/repeated_field.h>
 
 // clang-format off
 #include <shark/port_def.inc>  // must be last.

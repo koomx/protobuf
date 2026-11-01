@@ -756,16 +756,15 @@ namespace shark {
                 }
 
                 if (!ordered_fields.empty()) {
-                    format("enum : int {\n");
                     for (auto field : ordered_fields) {
                         Formatter::SaveState save(&format);
 
                         std::map<std::string, std::string> vars;
                         SetCommonFieldVariables(field, &vars, options_);
                         format.AddMap(vars);
-                        format("  ${1$$2$$}$ = $number$,\n", field, FieldConstantName(field));
+                        format("static constexpr int  ${1$$2$$}$ = $number$;\n", field, FieldConstantName(field));
                     }
-                    format("};\n");
+                    format("\n");
                 }
                 for (auto field : ordered_fields) {
                     PrintFieldComment(format, field);

@@ -30,9 +30,9 @@
 
 #include <shark/generated/implicit_weak_message.h>
 
-#include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/format/wired/parse_context.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/format/wired/wire_format_lite.h>
+#include <shark/io/zero_copy_stream_impl_lite.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

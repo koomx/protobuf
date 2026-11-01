@@ -31,8 +31,8 @@
 #pragma once
 
 #include <shark/extension_set.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/generated/metadata_lite.h>
-#include <shark/format/wired/parse_context.h>
 
 namespace shark::internal {
 

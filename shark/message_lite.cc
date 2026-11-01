@@ -40,18 +40,18 @@
 #include <string>
 
 #include <shark/arena.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/format/wired/parse_context.h>
-#include <shark/types/repeated_field.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>
 #include <shark/stubs/stl_util.h>
 #include <shark/stubs/strutil.h>
+#include <shark/types/repeated_field.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

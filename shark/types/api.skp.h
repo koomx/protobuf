@@ -196,15 +196,14 @@ class Api final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kMethodsFieldNumber = 2,
-      kOptionsFieldNumber = 3,
-      kMixinsFieldNumber = 6,
-      kNameFieldNumber = 1,
-      kVersionFieldNumber = 4,
-      kSourceContextFieldNumber = 5,
-      kSyntaxFieldNumber = 7,
-    };
+    static constexpr int  kMethodsFieldNumber = 2;
+    static constexpr int  kOptionsFieldNumber = 3;
+    static constexpr int  kMixinsFieldNumber = 6;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kVersionFieldNumber = 4;
+    static constexpr int  kSourceContextFieldNumber = 5;
+    static constexpr int  kSyntaxFieldNumber = 7;
+
     // list<.shark.Method> methods = 2;
     int methods_size() const;
     private:
@@ -476,15 +475,14 @@ class Method final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kOptionsFieldNumber = 6,
-      kNameFieldNumber = 1,
-      kRequestTypeUrlFieldNumber = 2,
-      kResponseTypeUrlFieldNumber = 4,
-      kRequestStreamingFieldNumber = 3,
-      kResponseStreamingFieldNumber = 5,
-      kSyntaxFieldNumber = 7,
-    };
+    static constexpr int  kOptionsFieldNumber = 6;
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kRequestTypeUrlFieldNumber = 2;
+    static constexpr int  kResponseTypeUrlFieldNumber = 4;
+    static constexpr int  kRequestStreamingFieldNumber = 3;
+    static constexpr int  kResponseStreamingFieldNumber = 5;
+    static constexpr int  kSyntaxFieldNumber = 7;
+
     // list<.shark.Option> options = 6;
     int options_size() const;
     private:
@@ -746,10 +744,9 @@ class Mixin final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kRootFieldNumber = 2,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kRootFieldNumber = 2;
+
     // optional string name = 1;
     bool has_name() const;
     private:

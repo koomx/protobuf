@@ -32,9 +32,9 @@
 
 #include <shark/arena.h>
 #include <shark/arenastring.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/message_lite.h>
-#include <shark/format/wired/parse_context.h>
 
 // clang-format off
 #include <shark/port_def.inc>

@@ -185,10 +185,9 @@ class Timestamp final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kSecondsFieldNumber = 1,
-      kNanosFieldNumber = 2,
-    };
+    static constexpr int  kSecondsFieldNumber = 1;
+    static constexpr int  kNanosFieldNumber = 2;
+
     // optional int64 seconds = 1;
     bool has_seconds() const;
     private:

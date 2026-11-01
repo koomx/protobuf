@@ -43,13 +43,13 @@
 #include <string>
 #include <vector>
 
-#include <shark/stubs/common.h>
-#include <shark/stubs/logging.h>
+#include <shark/format/wired/wire_context.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl_lite.h>
-#include <shark/port.h>
 #include <shark/message_lite.h>
-#include <shark/format/wired/parse_context.h>
+#include <shark/port.h>
+#include <shark/stubs/common.h>
+#include <shark/stubs/logging.h>
 
 // Must be included last.
 #include <shark/port_def.inc>

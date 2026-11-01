@@ -217,9 +217,8 @@ class DoubleValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional double value = 1;
     bool has_value() const;
     private:
@@ -377,9 +376,8 @@ class FloatValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional float value = 1;
     bool has_value() const;
     private:
@@ -537,9 +535,8 @@ class Int64Value final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional int64 value = 1;
     bool has_value() const;
     private:
@@ -697,9 +694,8 @@ class UInt64Value final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional uint64 value = 1;
     bool has_value() const;
     private:
@@ -857,9 +853,8 @@ class Int32Value final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional int32 value = 1;
     bool has_value() const;
     private:
@@ -1017,9 +1012,8 @@ class UInt32Value final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional uint32 value = 1;
     bool has_value() const;
     private:
@@ -1177,9 +1171,8 @@ class BoolValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional bool value = 1;
     bool has_value() const;
     private:
@@ -1337,9 +1330,8 @@ class StringValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional string value = 1;
     bool has_value() const;
     private:
@@ -1502,9 +1494,8 @@ class BytesValue final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kValueFieldNumber = 1,
-    };
+    static constexpr int  kValueFieldNumber = 1;
+
     // optional bytes value = 1;
     bool has_value() const;
     private:

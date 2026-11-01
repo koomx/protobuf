@@ -250,12 +250,11 @@ class PROTOC_EXPORT Version final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kSuffixFieldNumber = 4,
-      kMajorFieldNumber = 1,
-      kMinorFieldNumber = 2,
-      kPatchFieldNumber = 3,
-    };
+    static constexpr int  kSuffixFieldNumber = 4;
+    static constexpr int  kMajorFieldNumber = 1;
+    static constexpr int  kMinorFieldNumber = 2;
+    static constexpr int  kPatchFieldNumber = 3;
+
     // optional string suffix = 4;
     bool has_suffix() const;
     private:
@@ -460,12 +459,11 @@ class PROTOC_EXPORT CodeGeneratorRequest final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFileToGenerateFieldNumber = 1,
-      kProtoFileFieldNumber = 15,
-      kParameterFieldNumber = 2,
-      kCompilerVersionFieldNumber = 3,
-    };
+    static constexpr int  kFileToGenerateFieldNumber = 1;
+    static constexpr int  kProtoFileFieldNumber = 15;
+    static constexpr int  kParameterFieldNumber = 2;
+    static constexpr int  kCompilerVersionFieldNumber = 3;
+
     // list<string> file_to_generate = 1;
     int file_to_generate_size() const;
     private:
@@ -691,12 +689,11 @@ class PROTOC_EXPORT CodeGeneratorResponse_File final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kNameFieldNumber = 1,
-      kInsertionPointFieldNumber = 2,
-      kContentFieldNumber = 15,
-      kGeneratedCodeInfoFieldNumber = 16,
-    };
+    static constexpr int  kNameFieldNumber = 1;
+    static constexpr int  kInsertionPointFieldNumber = 2;
+    static constexpr int  kContentFieldNumber = 15;
+    static constexpr int  kGeneratedCodeInfoFieldNumber = 16;
+
     // optional string name = 1;
     bool has_name() const;
     private:
@@ -921,11 +918,10 @@ class PROTOC_EXPORT CodeGeneratorResponse final :
 
     // accessors -------------------------------------------------------
 
-    enum : int {
-      kFileFieldNumber = 15,
-      kErrorFieldNumber = 1,
-      kSupportedFeaturesFieldNumber = 2,
-    };
+    static constexpr int  kFileFieldNumber = 15;
+    static constexpr int  kErrorFieldNumber = 1;
+    static constexpr int  kSupportedFeaturesFieldNumber = 2;
+
     // list<.shark.compiler.CodeGeneratorResponse.File> file = 15;
     int file_size() const;
     private:

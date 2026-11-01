@@ -34,7 +34,7 @@ kmcmake_cc_library(
         arenaz_sampler.cc
         extension_set.cc
         message_lite.cc
-        format/wired/parse_context.cc
+        format/wired/wire_context.cc
         format/wired/wire_format_lite.cc
         format/wired/wire_tag.cc
         generated/generated_enum_util.cc
