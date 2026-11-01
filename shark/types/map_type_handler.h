@@ -758,10 +758,9 @@ namespace shark::internal {
     struct MapEntryFuncs {
         typedef MapTypeHandler<kKeyFieldType, Key> KeyTypeHandler;
         typedef MapTypeHandler<kValueFieldType, Value> ValueTypeHandler;
-        enum : int {
-            kKeyFieldNumber = 1,
-            kValueFieldNumber = 2
-        };
+
+        static constexpr int kKeyFieldNumber = 1;
+        static constexpr int kValueFieldNumber = 2;
 
         static uint8_t* InternalSerialize(int field_number, const Key& key,
             const Value& value, uint8_t* ptr,

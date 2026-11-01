@@ -161,10 +161,9 @@ namespace shark::internal {
         }
 
     private:
-        enum : uintptr_t {
-            kUserOwnedInitialBlock = 1,
-            kRecordAllocs = 2,
-        };
+
+        static constexpr uintptr_t kUserOwnedInitialBlock = 1;
+        static constexpr uintptr_t kRecordAllocs = 2;
 
         static constexpr uintptr_t kTagsMask = 7;
         static constexpr uintptr_t kPtrMask = ~kTagsMask;
@@ -530,7 +529,8 @@ namespace shark::internal {
         // Unique for each arena. Changes on Reset().
         uint64_t tag_and_id_ = 0;
         // The LSB of tag_and_id_ indicates if the arena is message-owned.
-        enum : uint64_t { kMessageOwnedArena = 1 };
+
+        static constexpr uint64_t kMessageOwnedArena = 1;
 
         TaggedAllocationPolicyPtr alloc_policy_; // Tagged pointer to AllocPolicy.
 
