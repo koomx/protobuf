@@ -334,7 +334,7 @@ const char* ExtensionSet::ParseMessageSetItemTmpl(
       }
     } else {
       ptr = ReadTag(ptr - 1, &tag);
-      if (tag == 0 || internal::wire_type(tag) == WIRE_TYPE_END_GROUP) {
+      if (tag == 0) {
         ctx->SetLastTag(tag);
         return ptr;
       }

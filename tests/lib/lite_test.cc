@@ -1102,36 +1102,6 @@ namespace shark {
             "\202\1\15\10\1\200\200\200\200\200\200\200\200\200\200\1"));
     }
 
-    TEST(Lite, CorrectEnding) {
-        sharkbuf_unittest::TestAllTypesLite msg;
-        {
-            // All proto wireformat parsers should act the same on parsing data in as
-            // much as it concerns the parsing, ie. not the interpretation of the data.
-            // TestAllTypesLite is not a group inside another message. So in practice
-            // will not encounter an end-group tag. However the parser should behave
-            // like any wire format parser should.
-            static const char kWireFormat[] = "\204\1";
-            io::CodedInputStream cis(reinterpret_cast<const uint8_t*>(kWireFormat), 2);
-            // The old CodedInputStream parser got an optimization (ReadTagNoLastTag)
-            // for non-group messages (like TestAllTypesLite) which made it not accept
-            // end-group. This is not a real big deal, but I think going forward its
-            // good to have all parse loops behave 'exactly' the same.
-            EXPECT_TRUE(msg.MergePartialFromCodedStream(&cis));
-            EXPECT_FALSE(cis.ConsumedEntireMessage());
-            EXPECT_TRUE(cis.LastTagWas(132));
-        }
-        {
-            // This is an incomplete end-group tag. This should be a genuine parse
-            // failure.
-            static const char kWireFormat[] = "\214";
-            io::CodedInputStream cis(reinterpret_cast<const uint8_t*>(kWireFormat), 1);
-            // Unfortunately the old parser detects a parse error in ReadTag and returns
-            // 0 (as it states 0 is an invalid tag). However 0 is not an invalid tag
-            // as it can be used to terminate the stream, so this returns true.
-            EXPECT_FALSE(msg.MergePartialFromCodedStream(&cis));
-        }
-    }
-
     TEST(Lite, DebugString) {
         sharkbuf_unittest::TestAllTypesLite message1, message2;
         EXPECT_TRUE(HasPrefixString(message1.DebugString(), "MessageLite at 0x"));
@@ -1230,86 +1200,5 @@ namespace shark {
         EXPECT_EQ(sharkbuf_unittest::DupEnum_TestEnumWithDupValueLite::FOO2, value);
     }
 
-    TEST(Lite, CodedInputStreamRollback) {
-        {
-            sharkbuf_unittest::TestAllTypesLite m;
-            m.set_optional_bytes(std::string(30, 'a'));
-            std::string serialized = m.SerializeAsString();
-            serialized += '\014';
-            serialized += std::string(3, ' ');
-            io::ArrayInputStream is(serialized.data(), serialized.size(),
-                serialized.size() - 6);
-            {
-                io::CodedInputStream cis(&is);
-                m.Clear();
-                m.MergePartialFromCodedStream(&cis);
-                EXPECT_TRUE(cis.LastTagWas(12));
-                EXPECT_FALSE(cis.ConsumedEntireMessage());
-                // Should leave is with 3 spaces;
-            }
-            const void* data;
-            int size;
-            ASSERT_TRUE(is.Next(&data, &size));
-            ASSERT_EQ(size, 3);
-            EXPECT_EQ(memcmp(data, "   ", 3), 0);
-        }
-        {
-            sharkbuf_unittest::TestPackedTypesLite m;
-            constexpr int kCount = 30;
-            for (int i = 0; i < kCount; i++)
-                m.add_packed_fixed32(i);
-            std::string serialized = m.SerializeAsString();
-            serialized += '\014';
-            serialized += std::string(3, ' ');
-            // Buffer breaks in middle of a fixed32.
-            io::ArrayInputStream is(serialized.data(), serialized.size(),
-                serialized.size() - 7);
-            {
-                io::CodedInputStream cis(&is);
-                m.Clear();
-                m.MergePartialFromCodedStream(&cis);
-                EXPECT_TRUE(cis.LastTagWas(12));
-                EXPECT_FALSE(cis.ConsumedEntireMessage());
-                // Should leave is with 3 spaces;
-            }
-            ASSERT_EQ(m.packed_fixed32_size(), kCount);
-            for (int i = 0; i < kCount; i++)
-                EXPECT_EQ(m.packed_fixed32(i), i);
-            const void* data;
-            int size;
-            ASSERT_TRUE(is.Next(&data, &size));
-            ASSERT_EQ(size, 3);
-            EXPECT_EQ(memcmp(data, "   ", 3), 0);
-        }
-        {
-            sharkbuf_unittest::TestPackedTypesLite m;
-            constexpr int kCount = 30;
-            // Make sure we output 2 byte varints
-            for (int i = 0; i < kCount; i++)
-                m.add_packed_fixed32(128 + i);
-            std::string serialized = m.SerializeAsString();
-            serialized += '\014';
-            serialized += std::string(3, ' ');
-            // Buffer breaks in middle of a 2 byte varint.
-            io::ArrayInputStream is(serialized.data(), serialized.size(),
-                serialized.size() - 5);
-            {
-                io::CodedInputStream cis(&is);
-                m.Clear();
-                m.MergePartialFromCodedStream(&cis);
-                EXPECT_TRUE(cis.LastTagWas(12));
-                EXPECT_FALSE(cis.ConsumedEntireMessage());
-                // Should leave is with 3 spaces;
-            }
-            ASSERT_EQ(m.packed_fixed32_size(), kCount);
-            for (int i = 0; i < kCount; i++)
-                EXPECT_EQ(m.packed_fixed32(i), i + 128);
-            const void* data;
-            int size;
-            ASSERT_TRUE(is.Next(&data, &size));
-            ASSERT_EQ(size, 3);
-            EXPECT_EQ(memcmp(data, "   ", 3), 0);
-        }
-    }
 
 } // namespace shark

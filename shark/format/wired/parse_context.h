@@ -919,7 +919,7 @@ namespace shark {
                 uint32_t tag;
                 ptr = ReadTag(ptr, &tag);
                 SHARK_PARSER_ASSERT(ptr != nullptr);
-                if (tag == 0 || internal::wire_type(tag) == WIRE_TYPE_END_GROUP) {
+                if (tag == 0) {
                     ctx->SetLastTag(tag);
                     return ptr;
                 }

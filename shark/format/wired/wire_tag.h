@@ -61,15 +61,7 @@ namespace shark::internal {
         return tag & 7;
     }
 
-    /*
-    *   enum WireType {
-    WIRETYPE_VARINT = 0,
-    WIRETYPE_FIXED64 = 1,
-    WIRETYPE_LENGTH_DELIMITED = 2,
-    //WIRETYPE_START_GROUP = 3,
-    //WIRETYPE_END_GROUP = 4,
-    WIRETYPE_FIXED32 = 5,
-    };*/
+
     static constexpr uint32_t WIRE_TYPE_VARINT = 0u;
     static constexpr uint32_t WIRE_TYPE_FIXED64 = 1u;
     static constexpr uint32_t WIRE_TYPE_LENGTH_DELIMITED = 2u;

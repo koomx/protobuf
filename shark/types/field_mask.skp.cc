@@ -167,7 +167,7 @@ const char* FieldMask::_InternalParse(const char* ptr, ::_pbi::ParseContext* ctx
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;

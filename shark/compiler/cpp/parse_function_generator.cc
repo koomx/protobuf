@@ -1540,7 +1540,7 @@ namespace shark::compiler::cpp {
 
         // Unusual/extension/unknown case:
         format(
-            "if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {\n"
+            "if (tag == 0) {\n"
             "  CHK_(ptr);\n"
             "  ctx->SetLastTag(tag);\n"
             "  goto message_done;\n"

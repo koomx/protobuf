@@ -1315,7 +1315,7 @@ const char* FileDescriptorSet::_InternalParse(const char* ptr, ::_pbi::ParseCont
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -1773,7 +1773,7 @@ const char* FileDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -2250,7 +2250,7 @@ const char* DescriptorProto_ExtensionRange::_InternalParse(const char* ptr, ::_p
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -2508,7 +2508,7 @@ const char* DescriptorProto_ReservedRange::_InternalParse(const char* ptr, ::_pb
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -2910,7 +2910,7 @@ const char* DescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseContex
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -3291,7 +3291,7 @@ const char* ExtensionRangeOptions::_InternalParse(const char* ptr, ::_pbi::Parse
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -3768,7 +3768,7 @@ const char* FieldDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -4224,7 +4224,7 @@ const char* OneofDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseC
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -4474,7 +4474,7 @@ const char* EnumDescriptorProto_EnumReservedRange::_InternalParse(const char* pt
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -4791,7 +4791,7 @@ const char* EnumDescriptorProto::_InternalParse(const char* ptr, ::_pbi::ParseCo
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -5138,7 +5138,7 @@ const char* EnumValueDescriptorProto::_InternalParse(const char* ptr, ::_pbi::Pa
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -5450,7 +5450,7 @@ const char* ServiceDescriptorProto::_InternalParse(const char* ptr, ::_pbi::Pars
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -5844,7 +5844,7 @@ const char* MethodDescriptorProto::_InternalParse(const char* ptr, ::_pbi::Parse
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -6279,7 +6279,7 @@ const char* FileOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -6671,7 +6671,7 @@ const char* MessageOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -7072,7 +7072,7 @@ const char* FieldOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -7399,7 +7399,7 @@ const char* OneofOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* 
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -7682,7 +7682,7 @@ const char* EnumOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext* c
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -7986,7 +7986,7 @@ const char* EnumValueOptions::_InternalParse(const char* ptr, ::_pbi::ParseConte
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -8235,7 +8235,7 @@ const char* ServiceOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -8509,7 +8509,7 @@ const char* MethodOptions::_InternalParse(const char* ptr, ::_pbi::ParseContext*
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -8800,7 +8800,7 @@ const char* UninterpretedOption_NamePart::_InternalParse(const char* ptr, ::_pbi
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -9189,7 +9189,7 @@ const char* UninterpretedOption::_InternalParse(const char* ptr, ::_pbi::ParseCo
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -9616,7 +9616,7 @@ const char* SourceCodeInfo_Location::_InternalParse(const char* ptr, ::_pbi::Par
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -9913,7 +9913,7 @@ const char* SourceCodeInfo::_InternalParse(const char* ptr, ::_pbi::ParseContext
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -10173,7 +10173,7 @@ const char* GeneratedCodeInfo_Annotation::_InternalParse(const char* ptr, ::_pbi
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
@@ -10436,7 +10436,7 @@ const char* GeneratedCodeInfo::_InternalParse(const char* ptr, ::_pbi::ParseCont
               goto handle_unusual;
         }  // switch
     handle_unusual:
-        if ((tag == 0) || (::_pbi::wire_type(tag) == ::_pbi::WIRE_TYPE_END_GROUP)) {
+        if (tag == 0) {
           CHK_(ptr);
           ctx->SetLastTag(tag);
           goto message_done;
