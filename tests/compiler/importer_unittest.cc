@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/compiler/importer.h>
+#include <shark/importer.h>
 
 #include <memory>
 #include <unordered_map>

@@ -38,7 +38,7 @@
 #include <shark/arena.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/message.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 
 // Must come last:
 #include <shark/port_def.inc>

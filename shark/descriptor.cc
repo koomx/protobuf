@@ -59,6 +59,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/port.h>
 #include <shark/stubs/casts.h>
+#include <shark/stubs/string_util.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/hash.h>
 #include <shark/stubs/logging.h>
@@ -68,7 +69,7 @@
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 #include <shark/unknown_field_set.h>
 
 #undef PACKAGE // autoheader #defines this.  :(
@@ -80,58 +81,6 @@ namespace shark {
 
     namespace {
         const int kPackageLimit = 100;
-
-        // Note:  I distrust ctype.h due to locales.
-        char ToUpper(char ch) {
-            return (ch >= 'a' && ch <= 'z') ? (ch - 'a' + 'A') : ch;
-        }
-
-        char ToLower(char ch) {
-            return (ch >= 'A' && ch <= 'Z') ? (ch - 'A' + 'a') : ch;
-        }
-
-        std::string ToCamelCase(const std::string& input, bool lower_first) {
-            bool capitalize_next = !lower_first;
-            std::string result;
-            result.reserve(input.size());
-
-            for (char character : input) {
-                if (character == '_') {
-                    capitalize_next = true;
-                } else if (capitalize_next) {
-                    result.push_back(ToUpper(character));
-                    capitalize_next = false;
-                } else {
-                    result.push_back(character);
-                }
-            }
-
-            // Lower-case the first letter.
-            if (lower_first && !result.empty()) {
-                result[0] = ToLower(result[0]);
-            }
-
-            return result;
-        }
-
-        std::string ToJsonName(const std::string& input) {
-            bool capitalize_next = false;
-            std::string result;
-            result.reserve(input.size());
-
-            for (char character : input) {
-                if (character == '_') {
-                    capitalize_next = true;
-                } else if (capitalize_next) {
-                    result.push_back(ToUpper(character));
-                    capitalize_next = false;
-                } else {
-                    result.push_back(character);
-                }
-            }
-
-            return result;
-        }
 
         // Backport of fold expressions for the comma operator to C++11.
         // Usage:  Fold({expr...});

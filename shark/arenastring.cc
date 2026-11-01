@@ -33,7 +33,7 @@
 #include <cstddef>
 #include <shark/io/coded_stream.h>
 #include <shark/message_lite.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/mutex.h>

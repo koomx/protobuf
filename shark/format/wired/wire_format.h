@@ -44,7 +44,7 @@
 #include <shark/generated/metadata_lite.h>
 #include <shark/io/coded_stream.h>
 #include <shark/message.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/stubs/casts.h>
 #include <shark/stubs/common.h>
 

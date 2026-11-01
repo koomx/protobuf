@@ -53,7 +53,7 @@
 #include <shark/generated/generated_enum_reflection.h>
 #include <shark/types/map_field.h>
 #include <shark/message.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/stringprintf.h>
 #include <shark/util/field_comparator.h>

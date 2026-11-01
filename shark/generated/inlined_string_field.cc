@@ -34,7 +34,7 @@
 #include <shark/arenastring.h>
 #include <shark/generated/generated_message_util.h>
 #include <shark/message_lite.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 
 // clang-format off
 #include <shark/port_def.inc>

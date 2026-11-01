@@ -28,7 +28,7 @@
 // (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
 // OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 
 #include <shark/arenastring.h>
 #include <shark/endian.h>

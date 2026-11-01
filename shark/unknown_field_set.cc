@@ -43,7 +43,7 @@
 #include <shark/extension_set.h>
 #include <shark/generated/generated_message_tctable_decl.h>
 #include <shark/generated/generated_message_tctable_impl.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/format/wired/wire_format.h>
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/stubs/stl_util.h>

@@ -47,7 +47,7 @@
 #include <tests/common/file.h>
 #include <tests/common/file.h>
 #include <shark/compiler/cpp/generator.h>
-#include <shark/compiler/importer.h>
+#include <shark/importer.h>
 #include <tests/common/test_util2.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/descriptor.h>

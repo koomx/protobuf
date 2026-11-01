@@ -64,7 +64,7 @@
 #include <shark/descriptor.h>
 #include <shark/dynamic_message.h>
 #include <shark/compiler/scc.h>
-#include <shark/compiler/importer.h>
+#include <shark/importer.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
 #include <tests/common/test_util2.h>

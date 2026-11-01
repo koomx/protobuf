@@ -50,7 +50,7 @@
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/stubs/substitute.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 #include <tests/common/file.h>
 
 #ifdef major

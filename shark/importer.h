@@ -41,7 +41,7 @@
 #include <utility>
 #include <vector>
 
-#include <shark/compiler/parser.h>
+#include <shark/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor_database.h>
 

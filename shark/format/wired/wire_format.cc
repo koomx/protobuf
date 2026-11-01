@@ -46,7 +46,7 @@
 #include <shark/io/zero_copy_stream_impl.h>
 #include <shark/message.h>
 #include <shark/message_lite.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/stubs/common.h>
 #include <shark/stubs/logging.h>
 #include <shark/types/map_field.h>

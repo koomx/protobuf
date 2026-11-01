@@ -40,8 +40,8 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <shark/compiler/importer.h>
-#include <shark/compiler/parser.h>
+#include <shark/importer.h>
+#include <shark/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor_database.h>
@@ -53,7 +53,7 @@
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 #include <shark/types/any.skp.h>
 #include <tests/common/googletest.h>
 #include <tests/sk/unittest.skp.h>

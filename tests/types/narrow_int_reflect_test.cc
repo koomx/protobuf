@@ -9,7 +9,7 @@
 #include <shark/format/wired/wire_format.h>
 #include <shark/io/coded_stream.h>
 #include <shark/io/zero_copy_stream_impl.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 #include <shark/types/map_field.h>
 #include <shark/util/message_differencer.h>
 

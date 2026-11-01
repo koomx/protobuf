@@ -38,7 +38,7 @@
 #include <shark/generated/generated_message_tctable_decl.h>
 #include <shark/message_lite.h>
 #include <shark/generated/metadata_lite.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/format/wired/wire_format_lite.h>
 
 // Must come last:

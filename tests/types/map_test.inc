@@ -68,7 +68,7 @@
 #include <shark/reflection.h>
 #include <shark/reflection_ops.h>
 #include <tests/common/test_util2.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 #include <shark/util/message_differencer.h>
 #include <shark/util/time_util.h>
 #include <shark/format/wired/wire_format.h>

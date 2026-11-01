@@ -34,7 +34,7 @@
 //
 // Recursive descent FTW.
 
-#include <shark/compiler/parser.h>
+#include <shark/parser.h>
 
 #include <float.h>
 

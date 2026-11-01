@@ -36,7 +36,7 @@
 #include <shark/generated/generated_message_tctable_impl.h>
 #include <shark/generated/inlined_string_field.h>
 #include <shark/message_lite.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/format/wired/wire_format_lite.h>
 
 // clang-format off

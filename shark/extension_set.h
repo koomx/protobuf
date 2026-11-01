@@ -46,7 +46,7 @@
 
 #include <shark/format/wired/wire_format_lite.h>
 #include <shark/io/coded_stream.h>
-#include <shark/parse_context.h>
+#include <shark/format/wired/parse_context.h>
 #include <shark/port.h>
 #include <shark/types/repeated_field.h>
 #include <shark/stubs/common.h>

@@ -66,7 +66,7 @@
 #endif
 
 #include <shark/compiler/code_generator.h>
-#include <shark/compiler/importer.h>
+#include <shark/importer.h>
 #include <shark/compiler/plugin.skp.h>
 #include <shark/compiler/subprocess.h>
 #include <shark/compiler/zip_writer.h>
@@ -83,7 +83,7 @@
 #include <shark/stubs/stringprintf.h>
 #include <shark/stubs/strutil.h>
 #include <shark/stubs/substitute.h>
-#include <shark/text_format.h>
+#include <shark/format/text/text_format.h>
 
 // Must be included last.
 #include <shark/port_def.inc>
