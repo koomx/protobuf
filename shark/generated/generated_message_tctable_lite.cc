@@ -1374,7 +1374,7 @@ const char* TcParser::MpFixed(SHARK_TC_PARAM_DECL) {
   }
   // Check for mismatched wiretype:
   const uint16_t rep = type_card & field_layout::kRepMask;
-  const uint32_t decoded_wiretype = data.tag() & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(data.tag());
   if (rep == field_layout::kRep64Bits) {
     if (decoded_wiretype != WireFormatLite::WIRETYPE_FIXED64) {
       SHARK_MUSTTAIL return table->fallback(SHARK_TC_PARAM_PASS);
@@ -1405,7 +1405,7 @@ const char* TcParser::MpFixed(SHARK_TC_PARAM_DECL) {
 const char* TcParser::MpRepeatedFixed(SHARK_TC_PARAM_DECL) {
   const auto& entry = RefAt<FieldEntry>(table, data.entry_offset());
   const uint32_t decoded_tag = data.tag();
-  const uint32_t decoded_wiretype = decoded_tag & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(decoded_tag);
 
   // Check for packed repeated fallback:
   if (decoded_wiretype == WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1453,7 +1453,7 @@ const char* TcParser::MpRepeatedFixed(SHARK_TC_PARAM_DECL) {
 const char* TcParser::MpPackedFixed(SHARK_TC_PARAM_DECL) {
   const auto& entry = RefAt<FieldEntry>(table, data.entry_offset());
   const uint16_t type_card = entry.type_card;
-  const uint32_t decoded_wiretype = data.tag() & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(data.tag());
 
   // Check for non-packed repeated fallback:
   if (decoded_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1491,7 +1491,7 @@ const char* TcParser::MpVarint(SHARK_TC_PARAM_DECL) {
     SHARK_MUSTTAIL return MpRepeatedVarint(SHARK_TC_PARAM_PASS);
   }
   // Check for wire type mismatch:
-  if ((data.tag() & 7) != WireFormatLite::WIRETYPE_VARINT) {
+  if (internal::wire_type(data.tag()) != WireFormatLite::WIRETYPE_VARINT) {
     SHARK_MUSTTAIL return table->fallback(SHARK_TC_PARAM_PASS);
   }
   const uint16_t xform_val = type_card & field_layout::kTvMask;
@@ -1545,7 +1545,7 @@ const char* TcParser::MpRepeatedVarint(SHARK_TC_PARAM_DECL) {
   const auto& entry = RefAt<FieldEntry>(table, data.entry_offset());
   auto type_card = entry.type_card;
   const uint32_t decoded_tag = data.tag();
-  auto decoded_wiretype = decoded_tag & 7;
+  auto decoded_wiretype = internal::wire_type(decoded_tag);
 
   // Check for packed repeated fallback:
   if (decoded_wiretype == WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1613,7 +1613,7 @@ const char* TcParser::MpRepeatedVarint(SHARK_TC_PARAM_DECL) {
 const char* TcParser::MpPackedVarint(SHARK_TC_PARAM_DECL) {
   const auto& entry = RefAt<FieldEntry>(table, data.entry_offset());
   auto type_card = entry.type_card;
-  auto decoded_wiretype = data.tag() & 7;
+  auto decoded_wiretype = internal::wire_type(data.tag());
 
   // Check for non-packed repeated fallback:
   if (decoded_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
@@ -1680,7 +1680,7 @@ const char* TcParser::MpString(SHARK_TC_PARAM_DECL) {
   const auto& entry = RefAt<FieldEntry>(table, data.entry_offset());
   const uint16_t type_card = entry.type_card;
   const uint16_t card = type_card & field_layout::kFcMask;
-  const uint32_t decoded_wiretype = data.tag() & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(data.tag());
 
   if (decoded_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
     SHARK_MUSTTAIL return table->fallback(SHARK_TC_PARAM_PASS);
@@ -1736,7 +1736,7 @@ const char* TcParser::MpRepeatedString(SHARK_TC_PARAM_DECL) {
   const auto& entry = RefAt<FieldEntry>(table, data.entry_offset());
   const uint16_t type_card = entry.type_card;
   const uint32_t decoded_tag = data.tag();
-  const uint32_t decoded_wiretype = decoded_tag & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(decoded_tag);
 
   if (decoded_wiretype != WireFormatLite::WIRETYPE_LENGTH_DELIMITED) {
     SHARK_MUSTTAIL return table->fallback(SHARK_TC_PARAM_PASS);
@@ -1785,7 +1785,7 @@ const char* TcParser::MpMessage(SHARK_TC_PARAM_DECL) {
   }
 
   const uint32_t decoded_tag = data.tag();
-  const uint32_t decoded_wiretype = decoded_tag & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(decoded_tag);
   const uint16_t rep = type_card & field_layout::kRepMask;
 
   // Validate wiretype:
@@ -1826,7 +1826,7 @@ const char* TcParser::MpRepeatedMessage(SHARK_TC_PARAM_DECL) {
   GOOGLE_DCHECK_EQ(type_card & field_layout::kFcMask,
             static_cast<uint16_t>(field_layout::kFcRepeated));
   const uint32_t decoded_tag = data.tag();
-  const uint32_t decoded_wiretype = decoded_tag & 7;
+  const uint32_t decoded_wiretype = internal::wire_type(decoded_tag);
   const uint16_t rep = type_card & field_layout::kRepMask;
 
   // Validate wiretype:

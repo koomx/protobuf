@@ -880,7 +880,7 @@ namespace shark {
             uint32_t number = tag >> 3;
             SHARK_PARSER_ASSERT(number != 0);
             using WireType = internal::WireFormatLite::WireType;
-            switch (tag & 7) {
+            switch (internal::wire_type(tag)) {
             case WireType::WIRETYPE_VARINT: {
                 uint64_t value;
                 ptr = VarintParse(ptr, &value);
@@ -919,7 +919,7 @@ namespace shark {
                 uint32_t tag;
                 ptr = ReadTag(ptr, &tag);
                 SHARK_PARSER_ASSERT(ptr != nullptr);
-                if (tag == 0 || (tag & 7) == 4) {
+                if (tag == 0 || internal::wire_type(tag) == WIRE_TYPE_END_GROUP) {
                     ctx->SetLastTag(tag);
                     return ptr;
                 }

@@ -1266,7 +1266,7 @@ namespace shark::internal {
         int number = tag >> 3;
         bool was_packed_on_wire;
         ExtensionInfo extension;
-        if (!FindExtensionInfoFromFieldNumber(tag & 7, number, &finder, &extension,
+        if (!FindExtensionInfoFromFieldNumber(internal::wire_type(tag), number, &finder, &extension,
                 &was_packed_on_wire)) {
             return UnknownFieldParse(
                 tag, metadata->mutable_unknown_fields<std::string>(), ptr, ctx);

@@ -62,7 +62,7 @@ namespace shark::internal {
                 // this function.
                 if (tag == 0)
                     return true;
-                switch (tag & 7) {
+                switch (internal::wire_type(tag)) {
                 case 0: { // Varint
                     uint64_t val;
                     ptr = VarintParse(ptr, &val);

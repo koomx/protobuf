@@ -67,7 +67,7 @@ const char* ZeroFieldsBase::_InternalParse(const char* ptr,
   while (!ctx->Done(&ptr)) {
     uint32_t tag;
     ptr = internal::ReadTag(ptr, &tag);
-    if ((tag == 0) || ((tag & 7) == 4)) {
+    if ((tag == 0) || (internal::wire_type(tag) == internal::WIRE_TYPE_END_GROUP)) {
       CHK_(ptr);
       ctx->SetLastTag(tag);
       goto message_done;

@@ -328,7 +328,7 @@ const char* ExtensionSet::ParseField(uint64_t tag, const char* ptr,
   int number = tag >> 3;
   bool was_packed_on_wire;
   ExtensionInfo extension;
-  if (!FindExtension(tag & 7, number, containing_type, ctx, &extension,
+  if (!FindExtension(internal::wire_type(tag), number, containing_type, ctx, &extension,
                      &was_packed_on_wire)) {
     return UnknownFieldParse(
         tag, metadata->mutable_unknown_fields<UnknownFieldSet>(), ptr, ctx);
