@@ -2007,144 +2007,341 @@ namespace shark {
 
 // inline methods ====================================================
 
-// These macros makes this repetitive code more readable.
-#define SHARK_DEFINE_ACCESSOR(CLASS, FIELD, TYPE) \
-    inline TYPE CLASS::FIELD() const {            \
-        return FIELD##_;                          \
+
+    inline const std::string& Descriptor::name() const { return all_names_[0]; }
+    inline const std::string& Descriptor::full_name() const { return all_names_[1]; }
+
+    inline const FileDescriptor* Descriptor::file() const { return file_; }
+
+    inline const Descriptor* Descriptor::containing_type() const { return containing_type_; }
+
+    inline int Descriptor::field_count() const { return field_count_; }
+
+    inline int Descriptor::oneof_decl_count() const { return oneof_decl_count_; }
+
+    inline int Descriptor::real_oneof_decl_count() const { return real_oneof_decl_count_; }
+
+
+    inline int Descriptor::nested_type_count() const { return nested_type_count_; }
+
+    inline int Descriptor::enum_type_count() const { return enum_type_count_; }
+
+    inline const FieldDescriptor* Descriptor::field(int index) const { return fields_ + index; }
+
+    inline const OneofDescriptor* Descriptor::oneof_decl(int index) const {
+        return oneof_decls_ + index;
     }
 
-// Strings fields are stored as pointers but returned as const references.
-#define SHARK_DEFINE_STRING_ACCESSOR(CLASS, FIELD)   \
-    inline const std::string& CLASS::FIELD() const { \
-        return *FIELD##_;                            \
+    inline const Descriptor* Descriptor::nested_type(int index) const {
+        return nested_types_ + index;
     }
 
-// Name and full name are stored in a single array to save space.
-#define SHARK_DEFINE_NAME_ACCESSOR(CLASS)                \
-    inline const std::string& CLASS::name() const {      \
-        return all_names_[0];                            \
-    }                                                    \
-    inline const std::string& CLASS::full_name() const { \
-        return all_names_[1];                            \
+    inline const EnumDescriptor* Descriptor::enum_type(int index) const {
+        return enum_types_ + index;
     }
 
-// Arrays take an index parameter, obviously.
-#define SHARK_DEFINE_ARRAY_ACCESSOR(CLASS, FIELD, TYPE) \
-    inline TYPE CLASS::FIELD(int index) const {         \
-        return FIELD##s_ + index;                       \
+    inline int Descriptor::extension_range_count() const {
+        return extension_range_count_;
     }
 
-#define SHARK_DEFINE_OPTIONS_ACCESSOR(CLASS, TYPE) \
-    inline const TYPE& CLASS::options() const {    \
-        return *options_;                          \
+    inline int Descriptor::extension_count() const {
+        return extension_count_;
     }
 
-    SHARK_DEFINE_NAME_ACCESSOR(Descriptor)
-    SHARK_DEFINE_ACCESSOR(Descriptor, file, const FileDescriptor*)
-    SHARK_DEFINE_ACCESSOR(Descriptor, containing_type, const Descriptor*)
+    inline const Descriptor::ExtensionRange* Descriptor::extension_range(int index) const {
+        return extension_ranges_ + index;
+    }
 
-    SHARK_DEFINE_ACCESSOR(Descriptor, field_count, int)
-    SHARK_DEFINE_ACCESSOR(Descriptor, oneof_decl_count, int)
-    SHARK_DEFINE_ACCESSOR(Descriptor, real_oneof_decl_count, int)
-    SHARK_DEFINE_ACCESSOR(Descriptor, nested_type_count, int)
-    SHARK_DEFINE_ACCESSOR(Descriptor, enum_type_count, int)
+    inline const FieldDescriptor* Descriptor::extension(int index) const {
+        return extensions_ + index;
+    }
 
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, field, const FieldDescriptor*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, oneof_decl, const OneofDescriptor*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, nested_type, const Descriptor*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, enum_type, const EnumDescriptor*)
+    inline int Descriptor::reserved_range_count() const {
+        return reserved_range_count_;
+    }
 
-    SHARK_DEFINE_ACCESSOR(Descriptor, extension_range_count, int)
-    SHARK_DEFINE_ACCESSOR(Descriptor, extension_count, int)
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, extension_range,
-        const Descriptor::ExtensionRange*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, extension, const FieldDescriptor*)
+    inline const Descriptor::ReservedRange* Descriptor::reserved_range(int index) const {
+        return reserved_ranges_ + index;
+    }
 
-    SHARK_DEFINE_ACCESSOR(Descriptor, reserved_range_count, int)
-    SHARK_DEFINE_ARRAY_ACCESSOR(Descriptor, reserved_range,
-        const Descriptor::ReservedRange*)
-    SHARK_DEFINE_ACCESSOR(Descriptor, reserved_name_count, int)
+    inline int Descriptor::reserved_name_count() const {
+        return reserved_name_count_;
+    }
 
-    SHARK_DEFINE_OPTIONS_ACCESSOR(Descriptor, MessageOptions)
-    SHARK_DEFINE_ACCESSOR(Descriptor, is_placeholder, bool)
 
-    SHARK_DEFINE_NAME_ACCESSOR(FieldDescriptor)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, file, const FileDescriptor*)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, number, int)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, is_extension, bool)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, containing_type, const Descriptor*)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(FieldDescriptor, FieldOptions)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, has_default_value, bool)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, has_json_name, bool)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_int32_t, int32_t)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_int64_t, int64_t)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_uint32_t, uint32_t)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_uint64_t, uint64_t)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_float, float)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_double, double)
-    SHARK_DEFINE_ACCESSOR(FieldDescriptor, default_value_bool, bool)
-    SHARK_DEFINE_STRING_ACCESSOR(FieldDescriptor, default_value_string)
+    inline const MessageOptions& Descriptor::options() const { return *options_; }
 
-    SHARK_DEFINE_NAME_ACCESSOR(OneofDescriptor)
-    SHARK_DEFINE_ACCESSOR(OneofDescriptor, containing_type, const Descriptor*)
-    SHARK_DEFINE_ACCESSOR(OneofDescriptor, field_count, int)
-    SHARK_DEFINE_ARRAY_ACCESSOR(OneofDescriptor, field, const FieldDescriptor*)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(OneofDescriptor, OneofOptions)
+    inline bool Descriptor::is_placeholder() const {
+        return is_placeholder_;
+    }
 
-    SHARK_DEFINE_NAME_ACCESSOR(EnumDescriptor)
-    SHARK_DEFINE_ACCESSOR(EnumDescriptor, file, const FileDescriptor*)
-    SHARK_DEFINE_ACCESSOR(EnumDescriptor, containing_type, const Descriptor*)
-    SHARK_DEFINE_ACCESSOR(EnumDescriptor, value_count, int)
-    SHARK_DEFINE_ARRAY_ACCESSOR(EnumDescriptor, value,
-        const EnumValueDescriptor*)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(EnumDescriptor, EnumOptions)
-    SHARK_DEFINE_ACCESSOR(EnumDescriptor, is_placeholder, bool)
-    SHARK_DEFINE_ACCESSOR(EnumDescriptor, reserved_range_count, int)
-    SHARK_DEFINE_ARRAY_ACCESSOR(EnumDescriptor, reserved_range,
-        const EnumDescriptor::ReservedRange*)
-    SHARK_DEFINE_ACCESSOR(EnumDescriptor, reserved_name_count, int)
+    inline const std::string& FieldDescriptor::name() const { return all_names_[0]; }
+    inline const std::string& FieldDescriptor::full_name() const { return all_names_[1]; }
 
-    SHARK_DEFINE_NAME_ACCESSOR(EnumValueDescriptor)
-    SHARK_DEFINE_ACCESSOR(EnumValueDescriptor, number, int)
-    SHARK_DEFINE_ACCESSOR(EnumValueDescriptor, type, const EnumDescriptor*)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(EnumValueDescriptor, EnumValueOptions)
+    inline const FileDescriptor* FieldDescriptor::file() const {
+        return file_;
+    }
 
-    SHARK_DEFINE_NAME_ACCESSOR(ServiceDescriptor)
-    SHARK_DEFINE_ACCESSOR(ServiceDescriptor, file, const FileDescriptor*)
-    SHARK_DEFINE_ACCESSOR(ServiceDescriptor, method_count, int)
-    SHARK_DEFINE_ARRAY_ACCESSOR(ServiceDescriptor, method,
-        const MethodDescriptor*)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(ServiceDescriptor, ServiceOptions)
+    inline int FieldDescriptor::number() const {
+        return number_;
+    }
 
-    SHARK_DEFINE_NAME_ACCESSOR(MethodDescriptor)
-    SHARK_DEFINE_ACCESSOR(MethodDescriptor, service, const ServiceDescriptor*)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(MethodDescriptor, MethodOptions)
-    SHARK_DEFINE_ACCESSOR(MethodDescriptor, client_streaming, bool)
-    SHARK_DEFINE_ACCESSOR(MethodDescriptor, server_streaming, bool)
+    inline bool FieldDescriptor::is_extension() const {
+        return is_extension_;
+    }
 
-    SHARK_DEFINE_STRING_ACCESSOR(FileDescriptor, name)
-    SHARK_DEFINE_STRING_ACCESSOR(FileDescriptor, package)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, pool, const DescriptorPool*)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, dependency_count, int)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, public_dependency_count, int)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, weak_dependency_count, int)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, message_type_count, int)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, enum_type_count, int)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, service_count, int)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, extension_count, int)
-    SHARK_DEFINE_OPTIONS_ACCESSOR(FileDescriptor, FileOptions)
-    SHARK_DEFINE_ACCESSOR(FileDescriptor, is_placeholder, bool)
+    inline const Descriptor* FieldDescriptor::containing_type() const {
+        return containing_type_;
+    }
 
-    SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, message_type, const Descriptor*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, enum_type, const EnumDescriptor*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, service,
-        const ServiceDescriptor*)
-    SHARK_DEFINE_ARRAY_ACCESSOR(FileDescriptor, extension,
-        const FieldDescriptor*)
+    inline const FieldOptions& FieldDescriptor::options() const {
+        return *options_;
+    }
 
-#undef SHARK_DEFINE_ACCESSOR
-#undef SHARK_DEFINE_STRING_ACCESSOR
-#undef SHARK_DEFINE_ARRAY_ACCESSOR
+    inline bool FieldDescriptor::has_default_value() const {
+        return has_default_value_;
+    }
+
+    inline bool FieldDescriptor::has_json_name() const {
+        return has_json_name_;
+    }
+
+    inline int32_t FieldDescriptor::default_value_int32_t() const {
+        return default_value_int32_t_;
+    }
+
+    inline int64_t FieldDescriptor::default_value_int64_t() const {
+        return default_value_int64_t_;
+    }
+
+    inline uint32_t FieldDescriptor::default_value_uint32_t() const {
+        return default_value_uint32_t_;
+    }
+
+    inline uint64_t FieldDescriptor::default_value_uint64_t() const {
+        return default_value_uint64_t_;
+    }
+
+    inline float FieldDescriptor::default_value_float() const {
+        return default_value_float_;
+    }
+
+    inline double FieldDescriptor::default_value_double() const {
+        return default_value_double_;
+    }
+
+    inline bool FieldDescriptor::default_value_bool() const {
+        return default_value_bool_;
+    }
+
+    inline const std::string& FieldDescriptor::default_value_string() const {
+        return *default_value_string_;
+    }
+
+    inline const std::string& OneofDescriptor::name() const {
+        return all_names_[0];
+    }
+
+    inline const std::string& OneofDescriptor::full_name() const {
+        return all_names_[1];
+    }
+
+    inline const Descriptor* OneofDescriptor::containing_type() const {
+        return containing_type_;
+    }
+
+    inline int OneofDescriptor::field_count() const {
+        return field_count_;
+    }
+
+    inline const FieldDescriptor* OneofDescriptor::field(int index) const {
+        return fields_ + index;
+    }
+
+    inline const OneofOptions& OneofDescriptor::options() const {
+        return *options_;
+    }
+
+    inline const std::string& EnumDescriptor::name() const {
+        return all_names_[0];
+    }
+
+    inline const std::string& EnumDescriptor::full_name() const {
+        return all_names_[1];
+    }
+
+    inline const FileDescriptor* EnumDescriptor::file() const {
+        return file_;
+    }
+
+    inline const Descriptor* EnumDescriptor::containing_type() const {
+        return containing_type_;
+    }
+
+    inline int EnumDescriptor::value_count() const {
+        return value_count_;
+    }
+
+    inline const EnumValueDescriptor* EnumDescriptor::value(int index) const {
+        return values_ + index;
+    }
+
+
+    inline const EnumOptions& EnumDescriptor::options() const {
+        return *options_;
+    }
+
+
+    inline bool EnumDescriptor::is_placeholder() const {
+        return is_placeholder_;
+    }
+
+    inline int EnumDescriptor::reserved_range_count() const {
+        return reserved_range_count_;
+    }
+
+    inline const EnumDescriptor::ReservedRange* EnumDescriptor::reserved_range(int index) const {
+        return reserved_ranges_ + index;
+    }
+
+    inline int EnumDescriptor::reserved_name_count() const {
+        return reserved_name_count_;
+    }
+
+    inline const std::string& EnumValueDescriptor::name() const {
+        return all_names_[0];
+    }
+
+    inline const std::string& EnumValueDescriptor::full_name() const {
+        return all_names_[1];
+    }
+
+    inline int EnumValueDescriptor::number() const {
+        return number_;
+    }
+
+    inline const EnumDescriptor* EnumValueDescriptor::type() const {
+        return type_;
+    }
+
+    inline const EnumValueOptions& EnumValueDescriptor::options() const {
+        return *options_;
+    }
+
+    inline const std::string& ServiceDescriptor::name() const {
+        return all_names_[0];
+    }
+
+    inline const std::string& ServiceDescriptor::full_name() const {
+        return all_names_[1];
+    }
+
+    inline const FileDescriptor* ServiceDescriptor::file() const {
+        return file_;
+    }
+
+    inline int ServiceDescriptor::method_count() const {
+        return method_count_;
+    }
+
+
+    inline const MethodDescriptor* ServiceDescriptor::method(int index) const {
+        return methods_ + index;
+    }
+
+    inline const ServiceOptions& ServiceDescriptor::options() const {
+        return *options_;
+    }
+
+    inline const std::string& MethodDescriptor::name() const {
+        return all_names_[0];
+    }
+
+    inline const std::string& MethodDescriptor::full_name() const {
+        return all_names_[1];
+    }
+
+    inline const ServiceDescriptor* MethodDescriptor::service() const {
+        return service_;
+    }
+
+    inline const MethodOptions& MethodDescriptor::options() const {
+        return *options_;
+    }
+
+    inline bool MethodDescriptor::client_streaming() const {
+        return client_streaming_;
+    }
+
+    inline bool MethodDescriptor::server_streaming() const {
+        return server_streaming_;
+    }
+
+
+    inline const std::string& FileDescriptor::name() const {
+        return *name_;
+    }
+
+    inline const std::string& FileDescriptor::package() const {
+        return *package_;
+    }
+
+    inline const DescriptorPool* FileDescriptor::pool() const {
+        return pool_;
+    }
+
+    inline int FileDescriptor::dependency_count() const {
+        return dependency_count_;
+    }
+
+    inline int FileDescriptor::public_dependency_count() const {
+        return public_dependency_count_;
+    }
+
+    inline int FileDescriptor::weak_dependency_count() const {
+        return weak_dependency_count_;
+    }
+
+    inline int FileDescriptor::message_type_count() const {
+        return message_type_count_;
+    }
+
+    inline int FileDescriptor::enum_type_count() const {
+        return enum_type_count_;
+    }
+
+    inline int FileDescriptor::service_count() const {
+        return service_count_;
+    }
+
+    inline int FileDescriptor::extension_count() const {
+        return extension_count_;
+    }
+
+    inline const FileOptions& FileDescriptor::options() const {
+        return *options_;
+    }
+
+    inline bool FileDescriptor::is_placeholder() const {
+        return is_placeholder_;
+    }
+
+    inline const Descriptor* FileDescriptor::message_type(int index) const {
+        return message_types_ + index;
+    }
+
+    inline const EnumDescriptor* FileDescriptor::enum_type(int index) const {
+        return enum_types_ + index;
+    }
+
+    inline const ServiceDescriptor* FileDescriptor::service(int index) const {
+        return services_ + index;
+    }
+
+    inline const FieldDescriptor* FileDescriptor::extension(int index) const {
+        return extensions_ + index;
+    }
+
 
     // A few accessors differ from the macros...
 
@@ -2169,8 +2366,6 @@ namespace shark {
         return false;
     }
 
-    // Can't use SHARK_DEFINE_ARRAY_ACCESSOR because reserved_names_ is actually
-    // an array of pointers rather than the usual array of objects.
     inline const std::string& Descriptor::reserved_name(int index) const {
         return *reserved_names_[index];
     }
@@ -2188,8 +2383,6 @@ namespace shark {
         return false;
     }
 
-    // Can't use SHARK_DEFINE_ARRAY_ACCESSOR because reserved_names_ is actually
-    // an array of pointers rather than the usual array of objects.
     inline const std::string& EnumDescriptor::reserved_name(int index) const {
         return *reserved_names_[index];
     }
