@@ -66,7 +66,7 @@
 #endif
 
 #include <shark/compiler/code_generator.h>
-#include <shark/importer.h>
+#include <shark/parser/importer.h>
 #include <shark/compiler/plugin.skp.h>
 #include <shark/compiler/subprocess.h>
 #include <shark/compiler/zip_writer.h>

@@ -81,8 +81,8 @@ kmcmake_cc_library(
         service.cc
         unknown_field_set.cc
         extension_set_heavy.cc
-        importer.cc
-        parser.cc
+        parser/importer.cc
+        parser/parser.cc
         format/wired/wire_format.cc
         format/text/text_format.cc
         generated/generated_message_bases.cc

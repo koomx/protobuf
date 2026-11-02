@@ -32,7 +32,7 @@
 //  Based on original Protocol Buffers design by
 //  Sanjay Ghemawat, Jeff Dean, and others.
 
-#include <shark/parser.h>
+#include <shark/parser/parser.h>
 
 #include <algorithm>
 #include <map>

@@ -47,7 +47,7 @@
 
 #include <gtest/gtest.h>
 
-#include <shark/parser.h>
+#include <shark/parser/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/io/tokenizer.h>

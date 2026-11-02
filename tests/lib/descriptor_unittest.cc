@@ -40,8 +40,8 @@
 
 #include <gmock/gmock.h>
 #include <gtest/gtest.h>
-#include <shark/importer.h>
-#include <shark/parser.h>
+#include <shark/parser/importer.h>
+#include <shark/parser/parser.h>
 #include <shark/descriptor.h>
 #include <shark/descriptor.skp.h>
 #include <shark/descriptor_database.h>
