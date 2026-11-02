@@ -36,8 +36,8 @@
 
 namespace shark {
 
-Service::~Service() {}
-RpcChannel::~RpcChannel() {}
-RpcController::~RpcController() {}
+    Service::~Service() { }
+    RpcChannel::~RpcChannel() { }
+    RpcController::~RpcController() { }
 
-}  // namespace shark
+} // namespace shark
