@@ -852,7 +852,7 @@ namespace shark {
         bool is_oneof_ : 1;
 
         // Actually a `Label` but stored as uint8_t to save space.
-        uint8_t label_ : 2;
+        uint8_t label_ ;
 
         // Actually a `Type`, but stored as uint8_t to save space.
         mutable uint8_t type_;
