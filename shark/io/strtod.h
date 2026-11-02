@@ -36,14 +36,13 @@
 
 namespace shark::io {
 
-// A locale-independent version of the standard strtod(), which always
-// uses a dot as the decimal separator.
-double NoLocaleStrtod(const char* str, char** endptr);
+    // A locale-independent version of the standard strtod(), which always
+    // uses a dot as the decimal separator.
+    double NoLocaleStrtod(const char* str, char** endptr);
 
-// Casts a double value to a float value. If the value is outside of the
-// representable range of float, it will be converted to positive or negative
-// infinity.
-float SafeDoubleToFloat(double value);
+    // Casts a double value to a float value. If the value is outside of the
+    // representable range of float, it will be converted to positive or negative
+    // infinity.
+    float SafeDoubleToFloat(double value);
 
-}  // namespace shark::io
-
+} // namespace shark::io

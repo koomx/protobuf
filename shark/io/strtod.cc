@@ -35,44 +35,44 @@
 #include <limits>
 #include <string>
 
-#include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
+#include <shark/stubs/logging.h>
 
 #include <shark/stubs/strutil.h>
 
 namespace shark::io {
 
-// This approximately 0x1.ffffffp127, but we don't use 0x1.ffffffp127 because
-// it won't compile in MSVC.
-const double MAX_FLOAT_AS_DOUBLE_ROUNDED = 3.4028235677973366e+38;
+    // This approximately 0x1.ffffffp127, but we don't use 0x1.ffffffp127 because
+    // it won't compile in MSVC.
+    const double MAX_FLOAT_AS_DOUBLE_ROUNDED = 3.4028235677973366e+38;
 
-float SafeDoubleToFloat(double value) {
-  // static_cast<float> on a number larger than float can result in illegal
-  // instruction error, so we need to manually convert it to infinity or max.
-  if (value > std::numeric_limits<float>::max()) {
-    // Max float value is about 3.4028234664E38 when represented as a double.
-    // However, when printing float as text, it will be rounded as
-    // 3.4028235e+38. If we parse the value of 3.4028235e+38 from text and
-    // compare it to 3.4028234664E38, we may think that it is larger, but
-    // actually, any number between these two numbers could only be represented
-    // as the same max float number in float, so we should treat them the same
-    // as max float.
-    if (value <= MAX_FLOAT_AS_DOUBLE_ROUNDED) {
-      return std::numeric_limits<float>::max();
+    float SafeDoubleToFloat(double value) {
+        // static_cast<float> on a number larger than float can result in illegal
+        // instruction error, so we need to manually convert it to infinity or max.
+        if (value > std::numeric_limits<float>::max()) {
+            // Max float value is about 3.4028234664E38 when represented as a double.
+            // However, when printing float as text, it will be rounded as
+            // 3.4028235e+38. If we parse the value of 3.4028235e+38 from text and
+            // compare it to 3.4028234664E38, we may think that it is larger, but
+            // actually, any number between these two numbers could only be represented
+            // as the same max float number in float, so we should treat them the same
+            // as max float.
+            if (value <= MAX_FLOAT_AS_DOUBLE_ROUNDED) {
+                return std::numeric_limits<float>::max();
+            }
+            return std::numeric_limits<float>::infinity();
+        } else if (value < -std::numeric_limits<float>::max()) {
+            if (value >= -MAX_FLOAT_AS_DOUBLE_ROUNDED) {
+                return -std::numeric_limits<float>::max();
+            }
+            return -std::numeric_limits<float>::infinity();
+        } else {
+            return static_cast<float>(value);
+        }
     }
-    return std::numeric_limits<float>::infinity();
-  } else if (value < -std::numeric_limits<float>::max()) {
-    if (value >= -MAX_FLOAT_AS_DOUBLE_ROUNDED) {
-      return -std::numeric_limits<float>::max();
+
+    double NoLocaleStrtod(const char* str, char** endptr) {
+        return shark::internal::NoLocaleStrtod(str, endptr);
     }
-    return -std::numeric_limits<float>::infinity();
-  } else {
-    return static_cast<float>(value);
-  }
-}
 
-double NoLocaleStrtod(const char* str, char** endptr) {
-  return shark::internal::NoLocaleStrtod(str, endptr);
-}
-
-}  // namespace shark::io
+} // namespace shark::io

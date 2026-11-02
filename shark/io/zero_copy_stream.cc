@@ -34,18 +34,17 @@
 
 #include <shark/io/zero_copy_stream.h>
 
-#include <shark/stubs/logging.h>
 #include <shark/stubs/common.h>
+#include <shark/stubs/logging.h>
 
 namespace shark::io {
 
+    bool ZeroCopyOutputStream::WriteAliasedRaw(const void* /* data */,
+        int /* size */) {
+        GOOGLE_LOG(FATAL) << "This ZeroCopyOutputStream doesn't support aliasing. "
+                             "Reaching here usually means a ZeroCopyOutputStream "
+                             "implementation bug.";
+        return false;
+    }
 
-bool ZeroCopyOutputStream::WriteAliasedRaw(const void* /* data */,
-                                           int /* size */) {
-  GOOGLE_LOG(FATAL) << "This ZeroCopyOutputStream doesn't support aliasing. "
-                "Reaching here usually means a ZeroCopyOutputStream "
-                "implementation bug.";
-  return false;
-}
-
-}  // namespace shark::io
+} // namespace shark::io
